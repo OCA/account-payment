@@ -64,7 +64,7 @@ class res_partner_bank(osv.osv):
         return super(res_partner_bank, self).create(cr, uid, vals, context=context)
 
     def write(self, cr, uid, ids, vals, context=None):
-        if 'default_bank' in vals and vals['default_bank'] == True:
+        if 'default_bank'in vals and vals['default_bank'] == True:
             partner_bank = self.pool.get('res.partner.bank').browse(cr, uid, ids)[0]
             partner_id = partner_bank.partner_id.id
             if vals['state']:
@@ -89,7 +89,6 @@ class payment_order(osv.osv):
 
     def _get_type(self, cr, uid, context={}):
         type = context.get('type', 'payable')
-        print "type",type
         return type
 
     def _get_reference(self, cr, uid, context={}):
@@ -103,13 +102,10 @@ class payment_order(osv.osv):
     def _payment_type_name_get(self, cr, uid, ids, field_name, arg, context={}):
         result = {}
         for rec in self.browse(cr, uid, ids, context):
-            result[rec.id] = rec.mode and rec.mode.type.name or ""
-        return result
-
-    def _name_get(self, cr, uid, ids, field_name, arg, context={}):
-        result = {}
-        for rec in self.browse(cr, uid, ids, context):
-            result[rec.id] = rec.reference
+            if rec.mode:
+                result[rec.id] = rec.mode.type.name
+            else:
+                result[rec.id] = ""
         return result
 
     _columns = {
@@ -119,26 +115,11 @@ class payment_order(osv.osv):
             ],'Type', readonly=True, select=True),
         # invisible field to filter payment order lines by payment type
         'payment_type_name': fields.function(_payment_type_name_get, method=True, type="char", size="64", string="Payment type name"),
-        # The field name is necessary to add attachement documents to payment orders
-        'name': fields.function(_name_get, method=True, type="char", size="64", string="Name"),
     }
     _defaults = {
         'type': _get_type,
         'reference': _get_reference,
     }
-
-    def unlink(self, cr, uid, ids):
-        pay_orders = self.read(cr, uid, ids, ['state'])
-        unlink_ids = []
-        for t in pay_orders:
-            if t['state'] in ('draft', 'cancel'):
-                unlink_ids.append(t['id'])
-            else:
-                raise osv.except_osv(_('Invalid action!'), _('You cannot delete payment order(s) which are already confirmed or done!'))
-        result = super(payment_order, self).unlink(cr, uid, unlink_ids, context=context)
-#        osv.osv.unlink(self, cr, uid, unlink_ids)
-        return result
-
 payment_order()
 
 
@@ -157,6 +138,7 @@ class payment_line(osv.osv):
             line = self.pool.get('account.move.line').browse(cr, uid, move_line_id)
             if line.name != '/':
                 res['value']['communication'] = res['value']['communication'] + '. ' + line.name
+        print res
         return res
 
 payment_line()

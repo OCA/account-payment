@@ -78,7 +78,7 @@
         <field name="model">payment.type</field>
         <field name="type">tree</field>
         <field name="arch" type="xml">
-            <tree string="Payment Type">
+            <tree>
                 <field name="name" />
                 <field name="code" />
                 <field name="active" />
@@ -102,7 +102,7 @@
     </record>
 
     <record model="ir.actions.act_window" id="action_payment_type_form">
-        <field name="name">Payment Type</field>
+        <field name="name">Payment type</field>
         <field name="res_model">payment.type</field>
         <field name="view_mode">tree,form</field>
     </record>
@@ -111,15 +111,14 @@
 
 
     <!--****************************** INVOICES ******************************-->
-    <!--Field partner_bank in client invoices has a strange domain: domain="[('partner_id.ref_companies', 'in', [company_id])]"-->
     <record model="ir.ui.view" id="invoice_form3">
         <field name="name">account.invoice.form3.payment_type</field>
         <field name="model">account.invoice</field>
         <field name="type">form</field>
         <field name="inherit_id" ref="account.invoice_form"/>
         <field name="arch" type="xml">
-            <field name="partner_bank" position="replace">
-                <field domain="[('partner_id', '=', partner_id)]" name="partner_bank" on_change="onchange_partner_bank(partner_bank)" select="2"/>
+            <field name="partner_id" position="replace">
+                <field name="partner_id" on_change="onchange_partner_id2(type, partner_id, date_invoice, payment_term, partner_bank)" select="1"/>
             </field>
         </field>
     </record>
@@ -132,6 +131,18 @@
         <field name="arch" type="xml">
             <field name="payment_term" position="after">
                 <field name="payment_type" on_change="onchange_payment_type(payment_type, partner_id)" select="2"/>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="invoice_supplier_form1">
+        <field name="name">account.invoice.supplier.form1</field>
+        <field name="model">account.invoice</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="account.invoice_supplier_form"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="replace">
+                <field name="partner_id" on_change="onchange_partner_id2(type, partner_id, date_invoice, payment_term, partner_bank)" select="1"/>
             </field>
         </field>
     </record>
@@ -272,20 +283,6 @@
          id="menu_action_payments_payable"/>
 
 
-    <!--***************************** BANK STATEMENT *********************************-->
-    <record id="view_bank_statement_form_ext" model="ir.ui.view">
-        <field name="name">account.bank.statement.form.ext</field>
-        <field name="model">account.bank.statement</field>
-        <field name="type">form</field>
-        <field name="inherit_id" ref="account_payment.view_bank_statement_form"/>
-        <field name="arch" type="xml">
-            <button name="%(account_payment.wizard_populate_statement)d" position="replace">
-                <button name="%(wizard_populate_statement_ext)d" string="Import payment lines" type="action"/>
-            </button>
-        </field>
-    </record>
-
-
     <!--***************************** PAYMENT ORDER *********************************-->
     <!-- Filter invoices by payment type. Allow negative payment amounts -->
     <record id="view_payment_order_form_ext1" model="ir.ui.view">
@@ -322,8 +319,7 @@
         <field name="inherit_id" ref="account_payment.view_payment_line_form"/>
         <field name="arch" type="xml">
             <field name="move_line_id" position="replace">
-                <!--<field name="move_line_id" on_change="onchange_move_line(move_line_id,parent.mode,parent.date_prefered,parent.date_planned,currency,company_currency,context)" select="1"/>-->
-                <field name="move_line_id" on_change="onchange_move_line(move_line_id, False, currency, company_currency)" select="1"/>
+                <field name="move_line_id" on_change="onchange_move_line(move_line_id,parent.mode,parent.date_prefered,parent.date_planned,currency,company_currency,context)" select="1"/>
             </field>
         </field>
     </record>
