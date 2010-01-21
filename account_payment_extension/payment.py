@@ -22,6 +22,7 @@
 ##############################################################################
 import netsvc
 from osv import fields, osv
+from tools.translate import _
 
 class payment_type(osv.osv):
     _inherit='payment.type'
