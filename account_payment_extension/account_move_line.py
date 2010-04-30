@@ -28,6 +28,22 @@ class account_move_line(osv.osv):
     _name = 'account.move.line'
     _inherit = 'account.move.line'
 
+    def _invoice(self, cr, uid, ids, name, arg, context=None):
+        return super(account_move_line, self)._invoice(cr, uid, ids, name, arg, context)
+
+    def _invoice_search(self, cr, uid, obj, name, args, context={}):
+        """ Redefinition for searching account move lines without any invoice related ('invoice.id','=',False)"""
+        for x in args:
+            if (x[2] is False) and (x[1] == '=') and (x[0] == 'invoice'):
+                cr.execute('SELECT l.id FROM account_move_line l ' \
+                    'LEFT JOIN account_invoice i ON l.move_id = i.move_id ' \
+                    'WHERE i.id IS NULL', [])
+                res = cr.fetchall()
+                if not len(res):
+                    return [('id', '=', '0')]
+                return [('id', 'in', [x[0] for x in res])]
+        return super(account_move_line, self)._invoice_search(cr, uid, obj, name, args, context=context)
+
     def amount_to_pay(self, cr, uid, ids, name, arg={}, context={}):
         """ Return the amount still to pay regarding all the payment orders
         (excepting cancelled orders). The amount to pay can be negative (Refund invoices)"""
@@ -51,7 +67,7 @@ class account_move_line(osv.osv):
         r=dict(cr.fetchall())
         return r
 
-    def _to_pay_search(self, cr, uid, obj, name, args):
+    def _to_pay_search(self, cr, uid, obj, name, args, context={}):
         if not len(args):
             return []
         line_obj = self.pool.get('account.move.line')
@@ -113,6 +129,8 @@ class account_move_line(osv.osv):
         return [('id','=','0')]
 
     _columns = {
+        'invoice': fields.function(_invoice, method=True, string='Invoice',
+            type='many2one', relation='account.invoice', fnct_search=_invoice_search),
         'received_check': fields.boolean('Received check', help="To write down that a check in paper support has been received, for example."),
         'partner_bank': fields.many2one('res.partner.bank','Bank Account'),
         'amount_to_pay' : fields.function(amount_to_pay, method=True, type='float', string='Amount to pay', fnct_search=_to_pay_search),

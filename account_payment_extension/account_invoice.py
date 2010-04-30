@@ -44,7 +44,9 @@ class account_invoice(osv.osv):
                 result['value']['payment_type'] = payment_type
         return self.onchange_payment_type(cr, uid, ids, payment_type, partner_id, result)
 
-    def onchange_payment_type(self, cr, uid, ids, payment_type, partner_id, result = {'value': {}}):
+    def onchange_payment_type(self, cr, uid, ids, payment_type, partner_id, result = None):
+        if result is None:
+            result = {'value': {}}
         if payment_type and partner_id:
             bank_types = self.pool.get('payment.type').browse(cr, uid, payment_type).suitable_bank_types
             if bank_types: # If the payment type is related with a bank account
