@@ -50,7 +50,7 @@ res_partner()
 class res_partner_bank(osv.osv):
 
     def create(self, cr, uid, vals, context=None):
-        if vals['default_bank'] and vals['partner_id'] and vals['state']:
+        if vals.get('default_bank') and vals.get('partner_id') and vals.get('state'):
             sql = "UPDATE res_partner_bank SET default_bank='0' WHERE partner_id=%i AND default_bank='1' AND state='%s'" % (vals['partner_id'], vals['state'])
             cr.execute(sql)
         return super(res_partner_bank, self).create(cr, uid, vals, context=context)
