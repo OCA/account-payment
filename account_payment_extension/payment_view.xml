@@ -335,7 +335,7 @@
         <field name="priority" eval="16"/>
         <field name="arch" type="xml">
             <tree string="Payments" editable="top"
-                        colors="grey:reconcile_id!=0;blue:amount_to_pay==0;red:date_maturity>time.strftime('%Y-%m-%d')">
+                        colors="grey:reconcile_id!=0;blue:amount_to_pay==0;red:date_maturity&lt;time.strftime('%Y-%m-%d')">
                 <field name="invoice" readonly="1"/>
                 <field name="partner_id" readonly="1"/>
                 <field name="account_id" readonly="1"/>
