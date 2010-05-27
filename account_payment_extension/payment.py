@@ -110,9 +110,9 @@ class payment_order(osv.osv):
             ('receivable','Receivable'),
             ],'Type', readonly=True, select=True),
         # invisible field to filter payment order lines by payment type
-        'payment_type_name': fields.function(_payment_type_name_get, method=True, type="char", size="64", string="Payment type name"),
+        'payment_type_name': fields.function(_payment_type_name_get, method=True, type="char", size=64, string="Payment type name"),
         # The field name is necessary to add attachement documents to payment orders
-        'name': fields.function(_name_get, method=True, type="char", size="64", string="Name"),
+        'name': fields.function(_name_get, method=True, type="char", size=64, string="Name"),
     }
     _defaults = {
         'type': _get_type,
