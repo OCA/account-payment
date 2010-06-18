@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <!--*** Bank statement line types ***********************************-->
+
+        <record id="view_account_bank_statement_line_type_tree" model="ir.ui.view">
+            <field name="name">account.bank.statement.line.type.tree</field>
+            <field name="model">account.bank.statement.line.type</field>
+            <field name="type">tree</field>
+            <field name="arch" type="xml">
+                <tree string="Cash Statement Line Types">
+                    <field name="type"/>
+                    <field name="code"/>
+                    <field name="name"/>
+                    <field name="account_id"/>
+                    <field name="partner_id"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="view_account_bank_statement_line_type_form" model="ir.ui.view">
+            <field name="name">account.bank.statement.line.type.form</field>
+            <field name="model">account.bank.statement.line.type</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Cash Statement Line Type">
+                    <field name="name" colspan="4"/>
+                    <field name="type"/>
+                    <field name="code"/>
+                    <group string="Default values for type" colspan="4">
+                        <field name="account_id"/>
+                        <field name="partner_id"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_account_bank_statement_type" model="ir.actions.act_window">
+            <field name="name">Cash Statement Line Types</field>
+            <field name="res_model">account.bank.statement.line.type</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        
+        <menuitem id="menu_action_account_bank_statement_type"
+            action="action_account_bank_statement_type"
+            parent="account.menu_finance_accounting"
+            sequence="460"/>
+        
+
+
+        <!--*** Cash statements *********************************************-->
+
+        <record id="view_cash_statement_form" model="ir.ui.view">
+            <field name="name">account.cash.statement.form</field>
+            <field name="model">account.bank.statement</field>
+            <field name="type">form</field>
+            <field name="priority" eval="20"/>
+            <field name="arch" type="xml">
+                <form string="Cash Statement">
+                    <field name="name" select="1"/>
+                    <field name="date" select="1" on_change="cash_statement_on_change_date(date)"/>
+                    <field name="journal_id" on_change="onchange_journal_id(journal_id)" select="1"
+                        domain="[('show_in_cash_statements', '=', True)]"/>
+                    <field name="currency"/>
+                    <field name="period_id" select="2" invisible="1"/>
+                    <newline/>
+                    <field name="balance_start"/>
+                    <field name="balance_end_real"/>
+                    <field colspan="4" name="line_ids" nolabel="1">
+                        <tree editable="bottom" string="Cash Statement lines">
+                            <field name="date"/>
+                            <field name="type" invisible="1"/>
+                            <field name="line_type_id"
+                                widget="selection"
+                                on_change="cash_line_on_change_line_type_id(partner_id, type, line_type_id)"/>
+                            <field name="name"/>
+                            <field name="amount"
+                                on_change="cash_line_on_change_amount(line_type_id,amount)"/>
+                            <field name="partner_id"
+                                on_change="cash_line_on_change_partner_id(type,partner_id)"/>
+                            <field name="account_id" invisible="1"
+                                domain="[('journal_id','=',parent.journal_id)]"/>
+                            <field name="ref" invisible="1"/>
+                            <field name="reconcile_id" invisible="1"
+                                context="{'partner_id':partner_id,'amount':amount,'account_id':account_id,'currency_id': parent.currency,'journal_id':parent.journal_id, 'date':date}"/>
+                            <field invisible="1" name="reconcile_amount"/>
+                        </tree>
+                        <form string="Cash Statement lines">
+                            <field name="date"/>
+                            <field name="name"/>
+                            <field name="line_type_id"
+                                widget="selection"
+                                on_change="cash_line_on_change_line_type_id(partner_id, type, line_type_id)"/>
+                            <field name="type" invisible="1"/>
+                            <field name="partner_id"
+                                on_change="cash_line_on_change_partner_id(type,partner_id)"/>
+                            <field name="account_id"
+                                domain="[('journal_id','=',parent.journal_id)]"/>
+                            <field name="amount"
+                                on_change="cash_line_on_change_amount(line_type_id,amount)"/>
+                            <field name="reconcile_id"
+                                context="{'partner_id':partner_id,'amount':amount,'account_id':account_id,'currency_id': parent.currency,'journal_id':parent.journal_id, 'date':date}"/>
+                            <field name="ref"/>
+                            <separator colspan="4" string="Notes"/>
+                            <field colspan="4" name="note" nolabel="1"/>
+                        </form>
+                    </field>
+                    <group col="7" colspan="4">
+                        <field name="state" select="2"/>
+                        <field name="balance_end"/>
+                        <button name="button_dummy" states="draft" string="Calculate" icon="gtk-execute"/>
+                        <button name="button_confirm" states="draft" string="Confirm" type="object" icon="gtk-ok"/>
+                        <button name="button_cancel" states="confirm" string="Cancel" type="object" icon="gtk-cancel"/>
+                    </group>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_cash_statement" model="ir.actions.act_window">
+            <field name="name">Entries by Cash Statements</field>
+            <field name="res_model">account.bank.statement</field>
+            <field name="view_type">form</field>
+            <field name="domain">[('cash_statement','=',True)]</field>
+            <field name="context">{}</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <record id="action_cash_statement_form" model="ir.actions.act_window.view">
+            <field eval="20" name="sequence"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_cash_statement_form"/>
+            <field name="act_window_id" ref="action_cash_statement"/>
+        </record>
+        <record id="action_cash_statement_tree" model="ir.actions.act_window.view">
+            <field eval="10" name="sequence"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="account.view_bank_statement_tree"/>
+            <field name="act_window_id" ref="action_cash_statement"/>
+        </record>
+
+        <menuitem id="menu_action_entries_by_cash_statement"
+            action="action_cash_statement"
+            parent="account.menu_finance_entries"
+            sequence="7"/>
+
+
+    </data>
+</openerp>
