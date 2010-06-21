@@ -175,7 +175,7 @@ class cash_statement_line(osv.osv):
             # Set the account and partner
             #
             if partner_id:
-                account_id = self.on_change_partner_id(cr, uid, line_id, res['type'], partner_id)
+                account_id = self.cash_line_on_change_partner_id(cr, uid, line_id, res['type'], partner_id)
                 res.update(account_id['value'])
             else:
                 res['account_id'] = line_type.account_id and line_type.account_id.id or None
