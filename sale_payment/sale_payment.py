@@ -76,14 +76,12 @@ class stock_picking(osv.osv):
         invoice_obj = self.pool.get('account.invoice')
         sale_obj = self.pool.get('sale.order')
         for picking_id, invoice_id in res.items():
-            #print picking_id, invoice_id
             picking = self.browse(cr, uid, picking_id, context=context)
             partner = picking.address_id.partner_id
             paytype_id = partner.payment_type_customer.id
             result = {'value': {}}
             result['value']['payment_type'] = paytype_id
             invoice_vals = sale_obj.onchange_paytype_id(cr, uid, ids, paytype_id, partner.id, result)['value']
-            #print invoice_vals
             invoice_obj.write(cr, uid, [invoice_id], invoice_vals, context=context)
         return res
 
