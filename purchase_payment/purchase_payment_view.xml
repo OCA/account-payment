@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="purchase_order_form_add_payment_info" model="ir.ui.view">
+            <field name="name">purchase.order.form.add_payment_info</field>
+            <field name="type">form</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_form" />
+            <field name="arch" type="xml">
+                <field name="fiscal_position" position="after">
+                    <field name="payment_term" widget="selection"/>
+                    <field name="payment_type" on_change="onchange_paytype_id(payment_type, partner_id)" select="2"/>
+                    <field name="partner_bank" domain="[('partner_id','=',partner_id)]"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_payment_type_res_partner_form2_add_payment_term_supplier" model="ir.ui.view">
+            <field name="name">res.partner.property.form.add_payment_term_supplier</field>
+            <field name="model">res.partner</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account_payment_extension.view_payment_type_res_partner_form2"/>
+            <field name="arch" type="xml">
+                <field name="payment_type_supplier" position="after">
+                    <field name="property_payment_term_supplier" widget="selection"/>
+                </field>
+            </field>
+        </record>
+        
+    </data>
+</openerp>

@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0-rc1\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2010-04-19 22:26+0000\n"
-"PO-Revision-Date: 2010-06-05 04:19+0000\n"
+"PO-Revision-Date: 2010-07-06 06:35+0000\n"
 "Last-Translator: Jordi Esteve (www.zikzakmedia.com) "
 "<jesteve@zikzakmedia.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-06-06 03:40+0000\n"
+"X-Launchpad-Export-Date: 2010-07-07 03:47+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #. module: account_payment_extension
@@ -73,7 +73,7 @@ msgstr "Nom de model no vàlid en la definició de l'acció."
 #: model:ir.actions.act_window,name:account_payment_extension.action_payments_to_pay
 #: model:ir.ui.menu,name:account_payment_extension.menu_action_payments_to_pay
 msgid "Payments to pay"
-msgstr "Pagaments a pagar"
+msgstr "Efectes pendents de pagament"
 
 #. module: account_payment_extension
 #: wizard_field:populate_payment_ext,search,communication2:0
@@ -89,7 +89,7 @@ msgstr "Tipus"
 #: model:ir.actions.act_window,name:account_payment_extension.action_rec_payment_order_open
 #: model:ir.ui.menu,name:account_payment_extension.menu_action_rec_payment_order_open
 msgid "Rec. payment orders to validate"
-msgstr "Ordre de pag. a cobrar per validar"
+msgstr "Ordres de cobrament per validar"
 
 #. module: account_payment_extension
 #: wizard_button:populate_statement_ext,init,add:0
@@ -212,13 +212,14 @@ msgstr "Importa línies de pagament"
 
 #. module: account_payment_extension
 #: view:account.move.line:0
+#: model:ir.ui.menu,name:account_payment_extension.menu_finance_payments
 msgid "Payments"
 msgstr "Pagaments"
 
 #. module: account_payment_extension
 #: model:ir.actions.act_window,name:account_payment_extension.action_payments_payable
 msgid "Payable payments"
-msgstr "Pagaments a pagar"
+msgstr "Pagaments"
 
 #. module: account_payment_extension
 #: help:res.partner,payment_type_customer:0
@@ -229,7 +230,7 @@ msgstr "Tipus de pagament com a client."
 #: model:ir.actions.act_window,name:account_payment_extension.action_pay_payment_order_tree
 #: model:ir.ui.menu,name:account_payment_extension.menu_action_pay_payment_order_form
 msgid "Pay. payment order"
-msgstr "Ordre de pag. a pagar"
+msgstr "Ordres de pagament"
 
 #. module: account_payment_extension
 #: model:ir.module.module,shortdesc:account_payment_extension.module_meta_information
@@ -246,7 +247,7 @@ msgstr ""
 #. module: account_payment_extension
 #: model:ir.actions.act_window,name:account_payment_extension.action_payments_receivable
 msgid "Receivable payments"
-msgstr "Pagaments a cobrar"
+msgstr "Cobraments"
 
 #. module: account_payment_extension
 #: field:account.invoice,payment_type:0
@@ -270,7 +271,7 @@ msgstr "Descripció del tipus de pagament que es mostrarà a les factures."
 #: model:ir.actions.act_window,name:account_payment_extension.action_rec_payment_order_draft
 #: model:ir.ui.menu,name:account_payment_extension.menu_action_rec_payment_order_draft
 msgid "Draft rec. payment order"
-msgstr "Ordre de pag. a cobrar esborrany"
+msgstr "Ordres de cobrament esborrany"
 
 #. module: account_payment_extension
 #: help:res.partner,payment_type_supplier:0
@@ -300,7 +301,7 @@ msgstr "_Cancel·la"
 #: model:ir.actions.act_window,name:account_payment_extension.action_payments_to_receive
 #: model:ir.ui.menu,name:account_payment_extension.menu_action_payments_to_receive
 msgid "Payments to receive"
-msgstr "Efectes pendents de cobrament"
+msgstr "Pagaments a cobrar"
 
 #. module: account_payment_extension
 #: model:ir.ui.menu,name:account_payment_extension.menu_action_payments_receivable
@@ -311,7 +312,7 @@ msgstr "Tots els efectes de cobrament"
 #: model:ir.actions.act_window,name:account_payment_extension.action_rec_payment_order_tree_new
 #: model:ir.ui.menu,name:account_payment_extension.menu_action_rec_payment_order_form_new
 msgid "New rec. payment order"
-msgstr "Nova ordre de pag. a cobrar"
+msgstr "Nova ordre de cobrament"
 
 #. module: account_payment_extension
 #: model:ir.module.module,description:account_payment_extension.module_meta_information
