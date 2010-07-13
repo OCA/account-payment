@@ -3,7 +3,7 @@
     <data>
 
 
-        <!--*** Extend the journal form *************************************-->
+        <!--*** Extend the bank statement form ******************************-->
 
         <record id="view_bank_statement_form_analytic_1" model="ir.ui.view">
             <field name="name">account.bank.statement.form.add_analytic_1</field>
@@ -11,7 +11,7 @@
             <field name="type">form</field>
             <field name="inherit_id" ref="account.view_bank_statement_form"/>
             <field name="arch" type="xml">
-                <xpath expr="/form/notebook/page/field/tree/field[@name='account_id']" position="after">
+                <xpath expr="//field[@name='line_ids']/tree/field[@name='account_id']" position="after">
                     <field name="analytic_account_id"/>
                 </xpath>
             </field>
@@ -23,7 +23,7 @@
             <field name="type">form</field>
             <field name="inherit_id" ref="account.view_bank_statement_form"/>
             <field name="arch" type="xml">
-                <xpath expr="/form/notebook/page/field/form/field[@name='account_id']" position="after">
+                <xpath expr="//field[@name='line_ids']/form/field[@name='account_id']" position="after">
                     <field name="analytic_account_id"/>
                 </xpath>
             </field>
