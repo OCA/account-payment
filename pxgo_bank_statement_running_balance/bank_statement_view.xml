@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+
+        <!--*** Extend the bank statement form *************************************-->
+
+        <record id="view_bank_statement_form_running_balance_1" model="ir.ui.view">
+            <field name="name">account.bank.statement.form.add_running_balance_1</field>
+            <field name="model">account.bank.statement</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.view_bank_statement_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='line_ids']/tree/field[@name='reconcile_id']" position="after">
+                    <field name="running_balance"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_bank_statement_form_running_balance_2" model="ir.ui.view">
+            <field name="name">account.bank.statement.form.add_running_balance_2</field>
+            <field name="model">account.bank.statement</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.view_bank_statement_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='line_ids']/form/field[@name='reconcile_id']" position="after">
+                    <field name="running_balance"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>
