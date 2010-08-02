@@ -186,7 +186,7 @@ class account_invoice(osv.osv):
         # Recalculate the due date if needed
         #
         if payment_term != partner_payment_term_id:
-            if partner_payment_term:
+            if partner_payment_term_id:
                 to_update = self.onchange_payment_term_date_invoice(cr, uid, ids, partner_payment_term_id, date_invoice)
                 result['value'].update(to_update['value'])
             else:
