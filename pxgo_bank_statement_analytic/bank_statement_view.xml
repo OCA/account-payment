@@ -36,7 +36,7 @@
             <field name="name">account.bank.statement.reconcile.form.add_analytic</field>
             <field name="model">account.bank.statement.reconcile</field>
             <field name="type">form</field>
-            <field name="inherit_id" ref="account.view_bank_statement_form"/>
+            <field name="inherit_id" ref="account.view_bank_statement_reconcile"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='line_new_ids']/tree/field[@name='name']" position="after">
                     <field name="analytic_id"/>
