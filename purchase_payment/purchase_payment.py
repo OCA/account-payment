@@ -165,7 +165,7 @@ class account_invoice(osv.osv):
         """
 
         result = super(account_invoice, self).onchange_partner_id(cr, uid, ids, type, partner_id,
-                            date_invoice=False, payment_term=False, partner_bank_id=False, company_id=False)
+                            date_invoice=False, payment_term=False, partner_bank=False, company_id=False)
 
         #
         # Set the correct payment term
