@@ -14,7 +14,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-09-05 04:56+0000\n"
+"X-Launchpad-Export-Date: 2010-09-29 05:32+0000\n"
 "X-Generator: Launchpad (build Unknown)\n"
 
 #. module: pxgo_bank_statement_running_balance
@@ -35,6 +35,10 @@ msgid ""
 "This makes it easier to find differences and mistakes in long statements.\n"
 "            "
 msgstr ""
+"\n"
+"Afegeix una columna de balanç acumulat a les línies d'extracte bancari.\n"
+"Això permet trobar més fàcilment diferències i errors en extractes llargs.\n"
+"            "
 
 #. module: pxgo_bank_statement_running_balance
 #: constraint:ir.ui.view:0
@@ -52,4 +56,4 @@ msgstr ""
 #. module: pxgo_bank_statement_running_balance
 #: field:account.bank.statement.line,running_balance:0
 msgid "Running Balance"
-msgstr ""
+msgstr "Saldo acumulat"
