@@ -79,47 +79,51 @@
         <field name="type">tree</field>
         <field name="arch" type="xml">
             <tree string="Payment Type">
-                <field name="name" />
-                <field name="code" />
-                <field name="active" />
+                <field name="name"/>
+                <field name="code"/>
+                <field name="active"/>
+                <field name="company_id" groups="base.group_multi_company"/>
             </tree>
         </field>
     </record>
 
-    <record model="ir.ui.view" id="view_payment_type_form_ext">
-        <field name="name">payment.type.form_ext</field>
+    <record model="ir.ui.view" id="view_payment_type_form">
+        <field name="name">payment.type.form</field>
         <field name="model">payment.type</field>
-        <field name="inherit_id" ref="account_payment.view_payment_type_form"/>
         <field name="type">form</field>
         <field name="arch" type="xml">
-            <field name="suitable_bank_types" position="before">
-                <field name="active" select="1" />
-                <newline/>
-                <separator string="Description" colspan="4" />
+            <form string="Payment Type">
+                <field name="name" select="1"/>
+                <field name="code" select="1"/>
+                <field name="active" select="1"/>
+                <field name="company_id" select="1" widget='selection' groups="base.group_multi_company"/>
+                <separator string="Description" colspan="4"/>
                 <field name="note" nolabel="1" colspan="4"/>
-            </field>
+                <separator string="Suitable Bank Types" colspan="4"/>
+                <field name="suitable_bank_types" nolabel="1" colspan="4"/>
+            </form>
         </field>
     </record>
 
-    <record model="ir.actions.act_window" id="action_payment_type_form">
+    <record model="ir.actions.act_window" id="action_payment_type">
         <field name="name">Payment Type</field>
         <field name="res_model">payment.type</field>
         <field name="view_mode">tree,form</field>
     </record>
 
-    <menuitem action="action_payment_type_form" id="menu_action_payment_type_form" parent="account_payment.next_id_44"/>
+    <menuitem action="action_payment_type" id="menu_action_payment_type" parent="account.menu_configuration_misc"/>
 
 
     <!--****************************** INVOICES ******************************-->
-    <!--Field partner_bank in client invoices has a strange domain: domain="[('partner_id.ref_companies', 'in', [company_id])]"-->
+    <!--Field partner_bank_id in client invoices has a strange domain: domain="[('partner_id.ref_companies', 'in', [company_id])]"-->
     <record model="ir.ui.view" id="invoice_form3">
         <field name="name">account.invoice.form3.payment_type</field>
         <field name="model">account.invoice</field>
         <field name="type">form</field>
         <field name="inherit_id" ref="account.invoice_form"/>
         <field name="arch" type="xml">
-            <field name="partner_bank" position="replace">
-                <field domain="[('partner_id', '=', partner_id)]" name="partner_bank" on_change="onchange_partner_bank(partner_bank)" select="2"/>
+            <field name="partner_bank_id" position="replace">
+                <field domain="[('partner_id', '=', partner_id)]" name="partner_bank_id" on_change="onchange_partner_bank(partner_bank_id)"/>
             </field>
         </field>
     </record>
@@ -131,7 +135,7 @@
         <field name="inherit_id" ref="account.invoice_form"/>
         <field name="arch" type="xml">
             <field name="payment_term" position="after">
-                <field name="payment_type" on_change="onchange_payment_type(payment_type, partner_id)" select="2"/>
+                <field name="payment_type" on_change="onchange_payment_type(payment_type, partner_id)"/>
             </field>
         </field>
     </record>
@@ -143,7 +147,7 @@
         <field name="inherit_id" ref="account.invoice_supplier_form"/>
         <field name="arch" type="xml">
             <field name="payment_term" position="after">
-                <field name="payment_type" on_change="onchange_payment_type(payment_type, partner_id)" select="2"/>
+                <field name="payment_type" on_change="onchange_payment_type(payment_type, partner_id)"/>
             </field>
         </field>
     </record>
@@ -157,9 +161,9 @@
         <field name="inherit_id" ref="account_payment.view_move_line_tree_wiz"/>
         <field name="arch" type="xml">
             <field name="currency_id" position="replace">
-                <field groups="base.group_extended" name="currency_id"/>
+                <field name="currency_id" groups="base.group_extended"/>
                 <field name="reconcile_id"/>
-                <field groups="base.group_extended" name="reconcile_partial_id"/>
+                <field name="reconcile_partial_id" groups="base.group_extended"/>
                 <field name="state"/>
                 <field name="payment_type"/>
             </field>
@@ -172,11 +176,14 @@
         <field name="type">form</field>
         <field name="inherit_id" ref="account.view_move_line_form"/>
         <field name="arch" type="xml">
-            <field name="analytic_account_id" position="after">
-                <field name="payment_type" select="1"/>
-                <field name="partner_bank" domain="[('partner_id','=',partner_id)]" select="2"/>
-                <field name="received_check" select="2"/>
-            </field>
+            <separator string="Narration" position="before">
+                <group col="2" colspan="2">
+                    <separator colspan="2" string="Payment"/>
+                    <field name="payment_type" select="1"/>
+                    <field name="partner_bank_id" domain="[('partner_id','=',partner_id)]"/>
+                    <field name="received_check"/>
+                </group>
+            </separator>
         </field>
     </record>
 
@@ -188,8 +195,8 @@
         <field name="type">form</field>
         <field name="inherit_id" ref="account_payment.view_bank_statement_form"/>
         <field name="arch" type="xml">
-            <button name="%(account_payment.wizard_populate_statement)d" position="replace">
-                <button name="%(wizard_populate_statement_ext)d" string="Import payment lines" type="action"/>
+            <button name="%(account_payment.action_account_populate_statement_confirm)d" position="replace">
+                <button name="%(wizard_populate_statement_ext)d" string="Import payment lines" type="action" attrs="{'invisible':[('state','=','confirm')]}" icon="gtk-execute"/>
             </button>
         </field>
     </record>
@@ -203,11 +210,15 @@
         <field name="type">form</field>
         <field name="inherit_id" ref="account_payment.view_payment_order_form"/>
         <field name="arch" type="xml">
-            <button name="%(account_payment.wizard_populate_payment)d" position="replace">
+            <button name="%(account_payment.action_create_payment_order)d" position="replace">
                 <newline/>
                 <field name="payment_type_name" invisible="1"/>
                 <field name="type"/>
-                <button colspan="2" name="%(wizard_populate_payment_ext)d" string="Select invoices to pay/receive payment" type="action" attrs="{'invisible':[('state','=','done')]}"/>
+                <field name="create_account_moves"/>
+                <group colspan="2" col="1" attrs="{'invisible': [('create_account_moves', '=', 'bank-statement')]}">
+                    <field name="period_id" required="True"/>
+                </group>
+                <button colspan="2" name="%(wizard_populate_payment_ext)d" string="Select invoices to pay/receive payment" type="action" attrs="{'invisible':[('state','=','done')]}" icon="gtk-find"/>
             </button>
         </field>
     </record>
@@ -219,7 +230,11 @@
         <field name="inherit_id" ref="account_payment.view_payment_order_form"/>
         <field name="arch" type="xml">
             <field name="move_line_id" position="replace">
+            <group col="6" colspan="4">
                 <field name="move_line_id" on_change="onchange_move_line(move_line_id,parent.mode,parent.date_prefered,parent.date_planned,currency,company_currency,context)" select="1"/>
+                <field name="account_id"/>
+                <field name="payment_move_id"/>
+            </group>
             </field>
         </field>
     </record>
@@ -232,14 +247,18 @@
         <field name="arch" type="xml">
             <field name="move_line_id" position="replace">
                 <!--<field name="move_line_id" on_change="onchange_move_line(move_line_id,parent.mode,parent.date_prefered,parent.date_planned,currency,company_currency,context)" select="1"/>-->
+            <group col="6" colspan="4">
                 <field name="move_line_id" on_change="onchange_move_line(move_line_id, False, currency, company_currency)" select="1"/>
+                <field name="account_id"/>
+                <field name="payment_move_id"/>
+            </group>
             </field>
         </field>
     </record>
 
 
     <!--**************************** PAYABLE PAYMENT ORDER ********************************-->
-    <menuitem id="menu_pay_payments" name="Payable payment orders" parent="account_payment.menu_main"/>
+    <menuitem id="menu_pay_payments" name="Payable payment orders" parent="account_payment.menu_main_payment"/>
 
     <record id="action_pay_payment_order_tree" model="ir.actions.act_window">
         <field name="name">Pay. payment order</field>
@@ -283,7 +302,7 @@
 
 
     <!--**************************** RECEIVABLE PAYMENT ORDER ********************************-->
-    <menuitem id="menu_rec_payments" name="Receivable payment orders" parent="account_payment.menu_main"/>
+    <menuitem id="menu_rec_payments" name="Receivable payment orders" parent="account_payment.menu_main_payment"/>
 
     <record id="action_rec_payment_order_tree" model="ir.actions.act_window">
         <field name="name">Rec. payment order</field>
@@ -343,7 +362,7 @@
                 <field name="credit" readonly="1"/>
                 <field name="amount_to_pay" readonly="1"/>
                 <field name="payment_type" readonly="1"/>
-                <field name="partner_bank" domain="[('partner_id','=',partner_id)]"/>
+                <field name="partner_bank_id" domain="[('partner_id','=',partner_id)]"/>
                 <field name="received_check"/>
                 <field name="date_maturity"/>
                 <field name="move_id" readonly="1"/>
@@ -353,8 +372,23 @@
         </field>
     </record>
 
+    <!-- payment.mode -->
+    <record id="view_payment_mode_form_require_bank_account" model="ir.ui.view">
+        <field name="name">payment.mode.form.require_bank_account</field>
+        <field name="model">payment.mode</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="account_payment.view_payment_mode_form"/>
+        <field name="arch" type="xml">
+            <field name="bank_id" position="before">
+                <field name="require_bank_account"/>
+            </field>
+        </field>
+    </record>
+
+
+
     <!-- Invoice Payments -->
-    <menuitem id="menu_finance_invoice_payments" name="Invoice payments" parent="account_payment.menu_main"/>
+    <menuitem id="menu_finance_invoice_payments" name="Invoice payments" parent="account_payment.menu_main_payment"/>
 
     <record model="ir.actions.act_window" id="action_invoice_payments_to_receive">
         <field name="name">Invoice payments to receive</field>
@@ -413,7 +447,7 @@
          id="menu_action_invoice_payments_payable"/>
 
     <!-- Done Payments -->
-    <menuitem id="menu_finance_payments" name="Done payments" parent="account_payment.menu_main"/>
+    <menuitem id="menu_finance_payments" name="Done payments" parent="account_payment.menu_main_payment"/>
 
     <record model="ir.actions.act_window" id="action_payments_receivable_unreconciled">
         <field name="name">Receivable payments unreconciled</field>

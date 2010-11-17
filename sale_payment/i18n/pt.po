@@ -1,16 +1,16 @@
-# Translation of OpenERP Server.
-# This file contains the translation of the following modules:
-#	* sale_payment
+# Portuguese translation for openobject-addons
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the openobject-addons package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 5.0.0\n"
-"Report-Msgid-Bugs-To: support@openerp.com\n"
+"Project-Id-Version: openobject-addons\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-01-25 00:57+0000\n"
-"PO-Revision-Date: 2010-01-26 11:16+0000\n"
-"Last-Translator: Jordi Esteve (www.zikzakmedia.com) "
-"<jesteve@zikzakmedia.com>\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2010-11-08 12:10+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,28 +20,26 @@ msgstr ""
 #. module: sale_payment
 #: constraint:ir.ui.view:0
 msgid "Invalid XML for View Architecture!"
-msgstr "¡XML inválido para la definición de la vista!"
+msgstr "XML Inválido para a Arquitectura de Vista!"
 
 #. module: sale_payment
 #: field:sale.order,partner_bank:0
 msgid "Bank Account"
-msgstr "Cuenta bancaria"
+msgstr "Conta Bancária"
 
 #. module: sale_payment
 #: field:sale.order,payment_type:0
 msgid "Payment type"
-msgstr "Tipo de pago"
+msgstr "Tipo de Pagamento"
 
 #. module: sale_payment
 #: help:sale.order,partner_bank:0
 msgid ""
 "The bank account to pay to or to be paid from. It will be transferred to the "
 "invoice"
-msgstr ""
-"La cuenta bancaria donde pagar o de donde cobrar. Será transferida a la "
-"factura."
+msgstr "A conta bancária a movimentar será transferida para a factura"
 
 #. module: sale_payment
 #: help:sale.order,payment_type:0
 msgid "The type of payment. It will be transferred to the invoice"
-msgstr "El tipo de pago. Será transferido a la factura."
+msgstr "O tipo de pagamento. Será transferido para a factura"
