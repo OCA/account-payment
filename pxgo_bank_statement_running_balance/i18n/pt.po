@@ -1,15 +1,16 @@
-# Translation of OpenERP Server.
-# This file contains the translation of the following modules:
-#	* pxgo_bank_statement_running_balance
+# Portuguese translation for openobject-addons
+# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# This file is distributed under the same license as the openobject-addons package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 5.2dev\n"
-"Report-Msgid-Bugs-To: support@openerp.com\n"
+"Project-Id-Version: openobject-addons\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-07-13 15:26+0000\n"
-"PO-Revision-Date: 2010-07-29 09:46+0000\n"
-"Last-Translator: Borja López Soilán (Pexego) <borjals@pexego.es>\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2010-11-08 11:37+0000\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,12 +20,12 @@ msgstr ""
 #. module: pxgo_bank_statement_running_balance
 #: model:ir.module.module,shortdesc:pxgo_bank_statement_running_balance.module_meta_information
 msgid "Pexego - Running balance in Bank Statements"
-msgstr "Pexego - Balance acumulado en extractos bancarios"
+msgstr "Pexego - Saldo Corrente em Extratos Bancário"
 
 #. module: pxgo_bank_statement_running_balance
 #: model:ir.model,name:pxgo_bank_statement_running_balance.model_account_bank_statement_line
 msgid "Bank Statement Line"
-msgstr "Línea de extracto bancario"
+msgstr "Linha de Extracto Bancário"
 
 #. module: pxgo_bank_statement_running_balance
 #: model:ir.module.module,description:pxgo_bank_statement_running_balance.module_meta_information
@@ -35,25 +36,26 @@ msgid ""
 "            "
 msgstr ""
 "\n"
-"Añade una columna de balance acumulado a las líneas de extracto bancario.\n"
-"Esto permite encontrar más fácilmente diferencias y errores en extractos "
-"largos.\n"
+"Acrescenta um saldo corrente (ao total corrente) na coluna para a linha do "
+"extrato bancário.\n"
+"Isto tornará mais facil a detecção de diferenças e erros em extratos "
+"extensos.\n"
 "            "
 
 #. module: pxgo_bank_statement_running_balance
 #: constraint:ir.ui.view:0
 msgid "Invalid XML for View Architecture!"
-msgstr "¡XML inválido para la estructura de la vista!"
+msgstr "XML Inválido para a Arquitectura de Vista !"
 
 #. module: pxgo_bank_statement_running_balance
 #: constraint:ir.model:0
 msgid ""
 "The Object name must start with x_ and not contain any special character !"
 msgstr ""
-"¡El nombre del objeto debe empezar con x_ y no contener ningún carácter "
-"especial!"
+"O nome do Objecto deve começar com x_ e não pode conter nenhum carácter "
+"especial !"
 
 #. module: pxgo_bank_statement_running_balance
 #: field:account.bank.statement.line,running_balance:0
 msgid "Running Balance"
-msgstr "Saldo acumulado"
+msgstr "Saldo Corrente"

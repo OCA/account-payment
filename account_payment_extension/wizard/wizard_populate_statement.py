@@ -1,24 +1,24 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
-#    
-#    OpenERP, Open Source Management Solution
-#    Copyright (C) 2004-2009 Tiny SPRL (<http://tiny.be>).
+#
+#    OpenERP, Open Source Management Solution	
+#    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
+#    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
+#    it under the terms of the GNU General Public License as published by
+#    the Free Software Foundation, either version 3 of the License, or
+#    (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
+#    GNU General Public License for more details.
 #
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.     
+#    You should have received a copy of the GNU General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-
 import wizard
 import pooler
 from tools.misc import UpdateableStr
@@ -61,7 +61,6 @@ def _populate_statement(obj, cursor, user, data, context):
     statement_obj = pool.get('account.bank.statement')
     statement_line_obj = pool.get('account.bank.statement.line')
     currency_obj = pool.get('res.currency')
-    statement_reconcile_obj = pool.get('account.bank.statement.reconcile')
 
     statement = statement_obj.browse(cursor, user, data['id'], context=context)
 
@@ -70,18 +69,22 @@ def _populate_statement(obj, cursor, user, data, context):
         ctx['date'] = line.ml_maturity_date
         amount = currency_obj.compute(cursor, user, line.currency.id,
                 statement.currency.id, line.amount_currency, context=ctx)
-        reconcile_id = statement_reconcile_obj.create(cursor, user, {
-            'line_ids': [(6, 0, [line.move_line_id.id])]
-            }, context=context)
+
+#TODO: We have to create a voucher and link it to the bank statement line
+
+#        reconcile_id = statement_reconcile_obj.create(cursor, user, {
+#            'line_ids': [(6, 0, [line.move_line_id.id])]
+#            }, context=context)
         statement_line_obj.create(cursor, user, {
             'name': (line.order_id.reference or '?') +'. '+ line.name,
-            'amount': - amount,
+            # Tipically: type=='payable' => amount>0  type=='receivable' => amount<0
+            'amount': -amount,
             'type': line.order_id.type=='payable' and 'supplier' or 'customer',
             'partner_id': line.partner_id.id,
             'account_id': line.move_line_id.account_id.id,
             'statement_id': statement.id,
             'ref': line.communication,
-            'reconcile_id': reconcile_id,
+#            'reconcile_id': reconcile_id,
             }, context=context)
     return {}
 

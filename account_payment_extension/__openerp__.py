@@ -20,6 +20,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+
 {
     "name" : "Account Payment Extension",
     "version" : "1.1",
@@ -30,7 +31,7 @@
     "description": """Account payment extension.
 
 This module extends the account_payment module with a lot of features:
-    * Extension of payment types: The payment type has a translated name and note that can be shown in the invoices.
+    * Definition of payment types (cash, bank transfer, automatical bank transfer, ...). The payment type has a translatable name and note that can be shown in the invoices.
     * Two default payment types for partners (client and supplier).
     * Automatic selection of payment type in invoices. Now an invoice can have a payment term (30 days, 30/60 days, ...) and a payment type (cash, bank transfer, ...).
     * A default check field in partner bank accounts. The default partner bank accounts are selected in invoices and payments.

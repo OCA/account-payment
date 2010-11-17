@@ -20,6 +20,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+
 import netsvc
 from osv import fields, osv
 
@@ -29,9 +30,9 @@ class account_invoice(osv.osv):
         'payment_type': fields.many2one('payment.type', 'Payment type'),
     }
 
-    def onchange_partner_id(self, cr, uid, ids, type, partner_id, date_invoice=False, payment_term=False, partner_bank=False, company_id=False):
+    def onchange_partner_id(self, cr, uid, ids, type, partner_id, date_invoice=False, payment_term=False, partner_bank_id=False, company_id=False):
         # Copy partner data to invoice, also the new field payment_type
-        result = super(account_invoice, self).onchange_partner_id(cr, uid, ids, type, partner_id, date_invoice, payment_term, partner_bank, company_id)
+        result = super(account_invoice, self).onchange_partner_id(cr, uid, ids, type, partner_id, date_invoice, payment_term, partner_bank_id, company_id)
         payment_type = False
         if partner_id:
             partner_line = self.pool.get('res.partner').browse(cr, uid, partner_id)
@@ -55,9 +56,9 @@ class account_invoice(osv.osv):
                 args = [('partner_id', '=', partner_id), ('default_bank', '=', 1), ('state', 'in', bank_types)]
                 bank_account_id = partner_bank_obj.search(cr, uid, args)
                 if bank_account_id:
-                    result['value']['partner_bank'] = bank_account_id[0]
+                    result['value']['partner_bank_id'] = bank_account_id[0]
                     return result
-        result['value']['partner_bank'] = False
+        result['value']['partner_bank_id'] = False
         return result
 
     def action_move_create(self, cr, uid, ids, *args):
@@ -68,9 +69,9 @@ class account_invoice(osv.osv):
                 for move_line in inv.move_id.line_id:
                     if (move_line.account_id.type == 'receivable' or move_line.account_id.type == 'payable') and move_line.state != 'reconciled' and not move_line.reconcile_id.id:
                         move_line_ids.append(move_line.id)
-                if len(move_line_ids) and inv.partner_bank:
+                if len(move_line_ids) and inv.partner_bank_id:
                     aml_obj = self.pool.get("account.move.line")
-                    aml_obj.write(cr, uid, move_line_ids, {'partner_bank': inv.partner_bank.id})
+                    aml_obj.write(cr, uid, move_line_ids, {'partner_bank_id': inv.partner_bank_id.id})
         return ret
 
 account_invoice()
