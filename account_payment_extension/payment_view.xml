@@ -52,9 +52,10 @@
         <field name="model">res.partner</field>
         <field name="type">form</field>
         <field name="inherit_id" ref="account.view_partner_property_form"/>
+        <field name="priority" eval="20"/>
         <field name="arch" type="xml">
             <field name="property_account_receivable" position="after">
-                <field name="payment_type_customer" />
+                <field name="payment_type_customer" widget="selection"/>
             </field>
         </field>
     </record>
@@ -64,9 +65,10 @@
         <field name="model">res.partner</field>
         <field name="type">form</field>
         <field name="inherit_id" ref="account.view_partner_property_form"/>
+        <field name="priority" eval="20"/>
         <field name="arch" type="xml">
             <field name="property_account_payable" position="after">
-                <field name="payment_type_supplier" />
+                <field name="payment_type_supplier" widget="selection"/>
             </field>
         </field>
     </record>
@@ -112,6 +114,21 @@
     </record>
 
     <menuitem action="action_payment_type" id="menu_action_payment_type" parent="account.menu_configuration_misc"/>
+
+
+    <!--****************************** PAYMENT MODE ******************************-->
+    <record id="view_payment_mode_form_require_bank_account" model="ir.ui.view">
+        <field name="name">payment.mode.form.require_bank_account</field>
+        <field name="model">payment.mode</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="account_payment.view_payment_mode_form"/>
+        <field name="arch" type="xml">
+            <field name="bank_id" position="before">
+                <field name="require_bank_account"/>
+                <field name="type"/>
+            </field>
+        </field>
+    </record>
 
 
     <!--****************************** INVOICES ******************************-->
@@ -211,7 +228,6 @@
         <field name="inherit_id" ref="account_payment.view_payment_order_form"/>
         <field name="arch" type="xml">
             <button name="%(account_payment.action_create_payment_order)d" position="replace">
-                <newline/>
                 <field name="payment_type_name" invisible="1"/>
                 <field name="type"/>
                 <field name="create_account_moves"/>
@@ -231,7 +247,7 @@
         <field name="arch" type="xml">
             <field name="move_line_id" position="replace">
             <group col="6" colspan="4">
-                <field name="move_line_id" on_change="onchange_move_line(move_line_id,parent.mode,parent.date_prefered,parent.date_planned,currency,company_currency,context)" select="1"/>
+                <field name="move_line_id" on_change="onchange_move_line(move_line_id,parent.mode,parent.date_prefered,parent.date_scheduled,currency,company_currency,context)" select="1"/>
                 <field name="account_id"/>
                 <field name="payment_move_id"/>
             </group>
@@ -246,7 +262,7 @@
         <field name="inherit_id" ref="account_payment.view_payment_line_form"/>
         <field name="arch" type="xml">
             <field name="move_line_id" position="replace">
-                <!--<field name="move_line_id" on_change="onchange_move_line(move_line_id,parent.mode,parent.date_prefered,parent.date_planned,currency,company_currency,context)" select="1"/>-->
+                <!--<field name="move_line_id" on_change="onchange_move_line(move_line_id,parent.mode,parent.date_prefered,parent.date_scheduled,currency,company_currency,context)" select="1"/>-->
             <group col="6" colspan="4">
                 <field name="move_line_id" on_change="onchange_move_line(move_line_id, False, currency, company_currency)" select="1"/>
                 <field name="account_id"/>
@@ -258,8 +274,6 @@
 
 
     <!--**************************** PAYABLE PAYMENT ORDER ********************************-->
-    <menuitem id="menu_pay_payments" name="Payable payment orders" parent="account_payment.menu_main_payment"/>
-
     <record id="action_pay_payment_order_tree" model="ir.actions.act_window">
         <field name="name">Pay. payment order</field>
         <field name="res_model">payment.order</field>
@@ -268,42 +282,9 @@
         <field name="domain">[('type','=','payable')]</field>
         <field name="context">{'type':'payable'}</field>
     </record>
-    <menuitem action="action_pay_payment_order_tree" id="menu_action_pay_payment_order_form" parent="menu_pay_payments" sequence="3"/>
-
-    <record id="action_pay_payment_order_draft" model="ir.actions.act_window">
-        <field name="name">Draft pay. payment order</field>
-        <field name="res_model">payment.order</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
-        <field name="domain">[('type','=','payable'),('state','=','draft')]</field>
-        <field name="context">{'type':'payable'}</field>
-    </record>
-    <menuitem action="action_pay_payment_order_draft" id="menu_action_pay_payment_order_draft" parent="menu_action_pay_payment_order_form" sequence="1"/>
-
-    <record id="action_pay_payment_order_open" model="ir.actions.act_window">
-        <field name="name">Pay. payment orders to validate</field>
-        <field name="res_model">payment.order</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
-        <field name="domain">[('type','=','payable'),('state','=','open')]</field>
-        <field name="context">{'type':'payable'}</field>
-    </record>
-    <menuitem action="action_pay_payment_order_open" id="menu_action_pay_payment_order_open" parent="menu_action_pay_payment_order_form" sequence="2"/>
-
-    <record id="action_pay_payment_order_tree_new" model="ir.actions.act_window">
-        <field name="name">New Pay. payment Order</field>
-        <field name="res_model">payment.order</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">form,tree</field>
-        <field name="domain">[('type','=','payable')]</field>
-        <field name="context">{'type':'payable'}</field>
-    </record>
-    <menuitem action="action_pay_payment_order_tree_new" id="menu_action_pay_payment_order_form_new" parent="menu_pay_payments" sequence="3"/>
-
+    <menuitem action="action_pay_payment_order_tree" id="menu_action_pay_payment_order_form" parent="account_payment.menu_main_payment" sequence="1"/>
 
     <!--**************************** RECEIVABLE PAYMENT ORDER ********************************-->
-    <menuitem id="menu_rec_payments" name="Receivable payment orders" parent="account_payment.menu_main_payment"/>
-
     <record id="action_rec_payment_order_tree" model="ir.actions.act_window">
         <field name="name">Rec. payment order</field>
         <field name="res_model">payment.order</field>
@@ -312,46 +293,15 @@
         <field name="domain">[('type','=','receivable')]</field>
         <field name="context">{'type':'receivable'}</field>
     </record>
-    <menuitem action="action_rec_payment_order_tree" id="menu_action_rec_payment_order_form" parent="menu_rec_payments" sequence="3"/>
-
-    <record id="action_rec_payment_order_draft" model="ir.actions.act_window">
-        <field name="name">Draft rec. payment order</field>
-        <field name="res_model">payment.order</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
-        <field name="domain">[('type','=','receivable'),('state','=','draft')]</field>
-        <field name="context">{'type':'receivable'}</field>
-    </record>
-    <menuitem action="action_rec_payment_order_draft" id="menu_action_rec_payment_order_draft" parent="menu_action_rec_payment_order_form" sequence="1"/>
-
-    <record id="action_rec_payment_order_open" model="ir.actions.act_window">
-        <field name="name">Rec. payment orders to validate</field>
-        <field name="res_model">payment.order</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
-        <field name="domain">[('type','=','receivable'),('state','=','open')]</field>
-        <field name="context">{'type':'receivable'}</field>
-    </record>
-    <menuitem action="action_rec_payment_order_open" id="menu_action_rec_payment_order_open" parent="menu_action_rec_payment_order_form" sequence="2"/>
-
-    <record id="action_rec_payment_order_tree_new" model="ir.actions.act_window">
-        <field name="name">New rec. payment order</field>
-        <field name="res_model">payment.order</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">form,tree</field>
-        <field name="domain">[('type','=','receivable')]</field>
-        <field name="context">{'type':'receivable'}</field>
-    </record>
-    <menuitem action="action_rec_payment_order_tree_new" id="menu_action_rec_payment_order_form_new" parent="menu_rec_payments" sequence="3"/>
-
+    <menuitem action="action_rec_payment_order_tree" id="menu_action_rec_payment_order_form" parent="account_payment.menu_main_payment" sequence="2"/>
 
     <!--****************************** PAYMENTS ***********************************-->
-    <record model="ir.ui.view" id="view_payments_tree">
+    <record id="view_payments_tree" model="ir.ui.view">
         <field name="name">Payments</field>
         <field name="model">account.move.line</field>
         <field name="field_parent">partner_id</field>
         <field name="type">tree</field>
-        <field name="priority" eval="16"/>
+        <field name="priority" eval="20"/>
         <field name="arch" type="xml">
             <tree string="Payments" editable="top"
                         colors="grey:reconcile_id!=0;blue:amount_to_pay==0;red:date_maturity&lt;time.strftime('%%Y-%%m-%%d')">
@@ -372,138 +322,53 @@
         </field>
     </record>
 
-    <!-- payment.mode -->
-    <record id="view_payment_mode_form_require_bank_account" model="ir.ui.view">
-        <field name="name">payment.mode.form.require_bank_account</field>
-        <field name="model">payment.mode</field>
-        <field name="type">form</field>
-        <field name="inherit_id" ref="account_payment.view_payment_mode_form"/>
+    <record id="view_payments_filter" model="ir.ui.view">
+        <field name="name">Invoice Payments Select</field>
+        <field name="model">account.move.line</field>
+        <field name="type">search</field>
+        <field name="priority" eval="20"/>
         <field name="arch" type="xml">
-            <field name="bank_id" position="before">
-                <field name="require_bank_account"/>
-            </field>
+            <search string="Search Invoice Payments">
+               <group col='10' colspan='4'>
+                    <filter icon="terp-sale" string="Receive" domain="[('account_id.type','=','receivable')]" help="Receivable payments"/>
+                    <filter icon="terp-purchase" string="Pay" domain="[('account_id.type','=','payable')]" help="Payable payments"/>
+                    <separator orientation="vertical"/>
+                    <filter icon="terp-dolar_ok!" string="Unreconciled" domain="[('reconcile_id','=',False)]" help="Unreconciled payments"/>
+                    <field name="account_id"/>
+                    <field name="partner_id"/>
+                    <field name="invoice"/>
+                    <field name="date_maturity"/>
+                    <newline/>
+                    <field name="amount_to_pay"/>
+                    <field name="payment_type" widget="selection"/>
+                    <field name="partner_bank_id"/>
+                    <field name="received_check"/>
+               </group>
+           </search>
         </field>
     </record>
 
-
-
     <!-- Invoice Payments -->
-    <menuitem id="menu_finance_invoice_payments" name="Invoice payments" parent="account_payment.menu_main_payment"/>
-
-    <record model="ir.actions.act_window" id="action_invoice_payments_to_receive">
-        <field name="name">Invoice payments to receive</field>
+    <record model="ir.actions.act_window" id="action_invoice_payments">
+        <field name="name">Invoice payments</field>
         <field name="res_model">account.move.line</field>
         <field name="view_type">form</field>
-        <field name="limit">500</field>
         <field name="view_id" ref="view_payments_tree"/>
-        <field name="domain">[('account_id.type','=','receivable'), ('invoice','&lt;&gt;',False), ('reconcile_id','=',False)]</field>
+        <field name="search_view_id" ref="view_payments_filter"/>
+        <field name="domain">[('account_id.type','in',['receivable','payable']),('invoice','&lt;&gt;',False)]</field>
     </record>
-    <menuitem
-         name="Invoice payments to receive"
-         parent="menu_finance_invoice_payments"
-         action="action_invoice_payments_to_receive"
-         id="menu_action_invoice_payments_to_receive"/>
-
-    <record model="ir.actions.act_window" id="action_invoice_payments_receivable">
-        <field name="name">Receivable invoice payments</field>
-        <field name="res_model">account.move.line</field>
-        <field name="view_type">form</field>
-        <field name="limit">500</field>
-        <field name="view_id" ref="view_payments_tree"/>
-        <field name="domain">[('account_id.type','=','receivable'), ('invoice','&lt;&gt;',False)]</field>
-    </record>
-    <menuitem
-         name="All received and to receive invoice payments"
-         parent="menu_finance_invoice_payments"
-         action="action_invoice_payments_receivable"
-         id="menu_action_invoice_payments_receivable"/>
-
-    <record model="ir.actions.act_window" id="action_invoice_payments_to_pay">
-        <field name="name">Invoice payments to pay</field>
-        <field name="res_model">account.move.line</field>
-        <field name="view_type">form</field>
-        <field name="limit">500</field>
-        <field name="view_id" ref="view_payments_tree"/>
-        <field name="domain">[('account_id.type','=','payable'), ('invoice','&lt;&gt;',False), ('reconcile_id','=',False)]</field>
-    </record>
-    <menuitem
-         name="Invoice payments to pay"
-         parent="menu_finance_invoice_payments"
-         action="action_invoice_payments_to_pay"
-         id="menu_action_invoice_payments_to_pay"/>
-
-    <record model="ir.actions.act_window" id="action_invoice_payments_payable">
-        <field name="name">Payable invoice payments</field>
-        <field name="res_model">account.move.line</field>
-        <field name="view_type">form</field>
-        <field name="limit">500</field>
-        <field name="view_id" ref="view_payments_tree"/>
-        <field name="domain">[('account_id.type','=','payable'), ('invoice','&lt;&gt;',False)]</field>
-    </record>
-    <menuitem
-         name="All paid and to pay invoice payments"
-         parent="menu_finance_invoice_payments"
-         action="action_invoice_payments_payable"
-         id="menu_action_invoice_payments_payable"/>
+    <menuitem name="Invoice payments" parent="account_payment.menu_main_payment" action="action_invoice_payments" id="menu_action_invoice_payments" sequence="4"/>
 
     <!-- Done Payments -->
-    <menuitem id="menu_finance_payments" name="Done payments" parent="account_payment.menu_main_payment"/>
-
-    <record model="ir.actions.act_window" id="action_payments_receivable_unreconciled">
-        <field name="name">Receivable payments unreconciled</field>
+    <record model="ir.actions.act_window" id="action_done_payments">
+        <field name="name">Done payments</field>
         <field name="res_model">account.move.line</field>
         <field name="view_type">form</field>
-        <field name="limit">500</field>
         <field name="view_id" ref="view_payments_tree"/>
-        <field name="domain">[('account_id.type','=','receivable'), ('invoice','=',False), ('reconcile_id','=',False)]</field>
+        <field name="search_view_id" ref="view_payments_filter"/>
+        <field name="domain">[('account_id.type','in',['receivable','payable']),('invoice','=',False)]</field>
     </record>
-    <menuitem
-         name="Done receivable payments unreconciled"
-         parent="menu_finance_payments"
-         action="action_payments_receivable_unreconciled"
-         id="menu_action_payments_receivable_unreconciled"/>
-
-    <record model="ir.actions.act_window" id="action_payments_receivable">
-        <field name="name">Receivable payments</field>
-        <field name="res_model">account.move.line</field>
-        <field name="view_type">form</field>
-        <field name="limit">500</field>
-        <field name="view_id" ref="view_payments_tree"/>
-        <field name="domain">[('account_id.type','=','receivable'), ('invoice','=',False)]</field>
-    </record>
-    <menuitem
-         name="All done receivable payments"
-         parent="menu_finance_payments"
-         action="action_payments_receivable"
-         id="menu_action_payments_receivable"/>
-
-    <record model="ir.actions.act_window" id="action_payments_payable_unreconciled">
-        <field name="name">Payable payments unreconciled</field>
-        <field name="res_model">account.move.line</field>
-        <field name="view_type">form</field>
-        <field name="limit">500</field>
-        <field name="view_id" ref="view_payments_tree"/>
-        <field name="domain">[('account_id.type','=','payable'), ('invoice','=',False), ('reconcile_id','=',False)]</field>
-    </record>
-    <menuitem
-         name="Done payable payments unreconciled"
-         parent="menu_finance_payments"
-         action="action_payments_payable_unreconciled"
-         id="menu_action_payments_payable_unreconciled"/>
-
-    <record model="ir.actions.act_window" id="action_payments_payable">
-        <field name="name">Payable payments</field>
-        <field name="res_model">account.move.line</field>
-        <field name="view_type">form</field>
-        <field name="limit">500</field>
-        <field name="view_id" ref="view_payments_tree"/>
-        <field name="domain">[('account_id.type','=','payable'), ('invoice','=',False)]</field>
-    </record>
-    <menuitem
-         name="All done payable payments"
-         parent="menu_finance_payments"
-         action="action_payments_payable"
-         id="menu_action_payments_payable"/>
+    <menuitem name="Done payments" parent="account_payment.menu_main_payment" action="action_done_payments" id="menu_action_done_payments" sequence="5"/>
 
 </data>
 </openerp>

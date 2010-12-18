@@ -112,7 +112,7 @@ def create_payment(self, cr, uid, data, context):
         elif payment.date_prefered == 'due':
             date_to_pay = line.date_maturity
         elif payment.date_prefered == 'fixed':
-            date_to_pay = payment.date_planned
+            date_to_pay = payment.date_scheduled
         pool.get('payment.line').create(cr,uid,{
             'move_line_id': line.id,
             'amount_currency': line.amount_to_pay,
