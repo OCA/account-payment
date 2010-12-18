@@ -331,9 +331,9 @@ class payment_line(osv.osv):
         'account_id': fields.many2one('account.account', 'Account'),
     }
 
-    def onchange_move_line(self, cr, uid, ids, move_line_id, payment_type, date_prefered, date_planned, currency=False, company_currency=False, context=None):
+    def onchange_move_line(self, cr, uid, ids, move_line_id, payment_type, date_prefered, date_scheduled, currency=False, company_currency=False, context=None):
         # Adds account.move.line name to the payment line communication
-        res = super(payment_line, self).onchange_move_line(cr, uid, ids, move_line_id, payment_type, date_prefered, date_planned, currency, company_currency, context)
+        res = super(payment_line, self).onchange_move_line(cr, uid, ids, move_line_id, payment_type, date_prefered, date_scheduled, currency, company_currency, context)
         if move_line_id:
             line = self.pool.get('account.move.line').browse(cr, uid, move_line_id)
             if line.name != '/':

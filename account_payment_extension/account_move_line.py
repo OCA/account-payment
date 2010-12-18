@@ -168,6 +168,23 @@ class account_move_line(osv.osv):
                 return super(account_move_line, self).write(cr, uid, ids, vals, context, check, update_check)
         return super(account_move_line, self).write(cr, uid, ids, vals, context, check, update_check=False)
 
+    def fields_view_get(self, cr, uid, view_id=None, view_type='form', context={}, toolbar=False, submenu=False):
+        menus = [
+            self.pool.get('ir.model.data').get_object_reference(cr, uid, 'account_payment_extension', 'menu_action_invoice_payments'),
+            self.pool.get('ir.model.data').get_object_reference(cr, uid, 'account_payment_extension', 'menu_action_done_payments'),
+        ]
+        menus = [m[1] for m in menus]
+        if 'active_id' in context and context['active_id'] in menus:
+            # Use standard views for account.move.line object
+            if view_type == 'search':
+                # Get a specific search view (bug in 6.0RC1, it does not give the search view defined in the action window)
+                view_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'account_payment_extension', 'view_payments_filter')[1]
+            result = super(osv.osv, self).fields_view_get(cr, uid, view_id, view_type, context, toolbar=toolbar, submenu=submenu)
+        else:
+            # Use special views for account.move.line object (for ex. tree view contains user defined fields)
+            result = super(account_move_line, self).fields_view_get(cr, uid, view_id, view_type, context, toolbar=toolbar, submenu=submenu)
+        return result
+
 account_move_line()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -30,17 +30,17 @@ FIELDS = {
         'relation': 'payment.line'},
 }
 
-def _search_entries(obj, cursor, user, data, context):
-    pool = pooler.get_pool(cursor.dbname)
+def _search_entries(obj, cr, uid, data, context):
+    pool = pooler.get_pool(cr.dbname)
     line_obj = pool.get('payment.line')
     statement_obj = pool.get('account.bank.statement')
 
-    statement = statement_obj.browse(cursor, user, data['id'], context=context)
+    statement = statement_obj.browse(cr, uid, data['id'], context=context)
 
-    line_ids = line_obj.search(cursor, user, [
+    line_ids = line_obj.search(cr, uid, [
         ('move_line_id.reconcile_id', '=', False),
         ('order_id.mode.journal.id', '=', statement.journal_id.id)])
-    line_ids.extend(line_obj.search(cursor, user, [
+    line_ids.extend(line_obj.search(cr, uid, [
         ('move_line_id.reconcile_id', '=', False),
         ('order_id.mode', '=', False)]))
 
@@ -51,31 +51,58 @@ def _search_entries(obj, cursor, user, data, context):
 </form>''' % (','.join([str(x) for x in line_ids]))
     return {}
 
-def _populate_statement(obj, cursor, user, data, context):
+def _populate_statement(obj, cr, uid, data, context):
     line_ids = data['form']['lines'][0][2]
     if not line_ids:
         return {}
 
-    pool = pooler.get_pool(cursor.dbname)
+    pool = pooler.get_pool(cr.dbname)
     line_obj = pool.get('payment.line')
     statement_obj = pool.get('account.bank.statement')
     statement_line_obj = pool.get('account.bank.statement.line')
     currency_obj = pool.get('res.currency')
+    move_line_obj = pool.get('account.move.line')
+    voucher_obj = pool.get('account.voucher')
+    voucher_line_obj = pool.get('account.voucher.line')
 
-    statement = statement_obj.browse(cursor, user, data['id'], context=context)
+    statement = statement_obj.browse(cr, uid, data['id'], context=context)
 
-    for line in line_obj.browse(cursor, user, line_ids, context=context):
+    for line in line_obj.browse(cr, uid, line_ids, context=context):
         ctx = context.copy()
         ctx['date'] = line.ml_maturity_date
-        amount = currency_obj.compute(cursor, user, line.currency.id,
+        amount = currency_obj.compute(cr, uid, line.currency.id,
                 statement.currency.id, line.amount_currency, context=ctx)
 
-#TODO: We have to create a voucher and link it to the bank statement line
+        voucher_id = False
+        if line.move_line_id:
+            #We have to create a voucher and link it to the bank statement line
+            context.update({'move_line_ids': [line.move_line_id.id]})
+            result = voucher_obj.onchange_partner_id(cr, uid, [], partner_id=line.move_line_id.partner_id.id, journal_id=statement.journal_id.id, price=abs(amount), currency_id= statement.currency.id, ttype=(amount < 0 and 'payment' or 'receipt'), context=context)
 
-#        reconcile_id = statement_reconcile_obj.create(cursor, user, {
-#            'line_ids': [(6, 0, [line.move_line_id.id])]
-#            }, context=context)
-        statement_line_obj.create(cursor, user, {
+            voucher_res = { 'type':(amount < 0 and 'payment' or 'receipt'),
+                            'name': line.move_line_id.name,
+                            'reference': (line.order_id.reference or '?') +'. '+ line.name,
+                            'partner_id': line.move_line_id.partner_id.id,
+                            'journal_id': statement.journal_id.id,
+                            'account_id': result.get('account_id', statement.journal_id.default_credit_account_id.id), # improve me: statement.journal_id.default_credit_account_id.id
+                            'company_id': statement.company_id.id,
+                            'currency_id': statement.currency.id,
+                            'date': line.date or line.move_line_id.date,
+                            'amount': abs(amount),
+                            'period_id': statement.period_id.id}
+            voucher_id = voucher_obj.create(cr, uid, voucher_res, context=context)
+
+            voucher_line_dict =  {}
+            if result['value']['line_ids']:
+                for line_dict in result['value']['line_ids']:
+                    move_line = move_line_obj.browse(cr, uid, line_dict['move_line_id'], context)
+                    if line.move_line_id.move_id.id == move_line.move_id.id:
+                        voucher_line_dict = line_dict
+            if voucher_line_dict:
+                voucher_line_dict.update({'voucher_id': voucher_id, 'amount': abs(amount)})
+                voucher_line_obj.create(cr, uid, voucher_line_dict, context=context)
+
+        statement_line_obj.create(cr, uid, {
             'name': (line.order_id.reference or '?') +'. '+ line.name,
             # Tipically: type=='payable' => amount>0  type=='receivable' => amount<0
             'amount': -amount,
@@ -84,7 +111,7 @@ def _populate_statement(obj, cursor, user, data, context):
             'account_id': line.move_line_id.account_id.id,
             'statement_id': statement.id,
             'ref': line.communication,
-#            'reconcile_id': reconcile_id,
+            'voucher_id': voucher_id,
             }, context=context)
     return {}
 
