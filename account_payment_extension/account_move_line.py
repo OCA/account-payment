@@ -94,9 +94,9 @@ class account_move_line(osv.osv):
                 if not unreconciled:
                     unreconciled = debt
                 if debt > 0:
-                    debt = min(debt - paid, max(0.0, unreconciled - paid))
+                    debt = min(debt - paid, max(0.0, unreconciled))
                 else:
-                    debt = max(debt - paid, min(0.0, unreconciled - paid))
+                    debt = max(debt - paid, min(0.0, unreconciled))
             result[id] = debt
         return result
 
