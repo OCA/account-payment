@@ -152,7 +152,7 @@
         <field name="inherit_id" ref="account.invoice_form"/>
         <field name="arch" type="xml">
             <field name="payment_term" position="after">
-                <field name="payment_type" on_change="onchange_payment_type(payment_type, partner_id)"/>
+                <field name="payment_type" on_change="onchange_payment_type(payment_type, partner_id)" widget="selection"/>
             </field>
         </field>
     </record>
@@ -164,7 +164,7 @@
         <field name="inherit_id" ref="account.invoice_supplier_form"/>
         <field name="arch" type="xml">
             <field name="payment_term" position="after">
-                <field name="payment_type" on_change="onchange_payment_type(payment_type, partner_id)"/>
+                <field name="payment_type" on_change="onchange_payment_type(payment_type, partner_id)" widget="selection"/>
             </field>
         </field>
     </record>
@@ -196,7 +196,7 @@
             <separator string="Narration" position="before">
                 <group col="2" colspan="2">
                     <separator colspan="2" string="Payment"/>
-                    <field name="payment_type" select="1"/>
+                    <field name="payment_type" select="1" widget="selection"/>
                     <field name="partner_bank_id" domain="[('partner_id','=',partner_id)]"/>
                     <field name="received_check"/>
                 </group>
