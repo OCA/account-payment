@@ -86,7 +86,7 @@ class purchase_order(osv.osv):
             if order.payment_type:
                 vals['payment_type'] = order.payment_type.id
             if order.partner_bank:
-                vals['partner_bank'] = order.partner_bank.id
+                vals['partner_bank_id'] = order.partner_bank.id
         if vals:
             # Write the payment info into the invoice.
             self.pool.get('account.invoice').write(cr, uid, [invoice_id], vals)
@@ -120,7 +120,7 @@ class stock_picking(osv.osv):
                 if order.payment_type:
                     vals['payment_type'] = order.payment_type.id
                 if order.partner_bank:
-                    vals['partner_bank'] = order.partner_bank.id
+                    vals['partner_bank_id'] = order.partner_bank.id
                 if vals:
                     # Write the payment info into the invoice.
                     self.pool.get('account.invoice').write(cr, uid, [invoice_id], vals, context=context)
@@ -165,7 +165,7 @@ class account_invoice(osv.osv):
         """
 
         result = super(account_invoice, self).onchange_partner_id(cr, uid, ids, type, partner_id,
-                            date_invoice=False, payment_term=False, partner_bank=False, company_id=False)
+                            date_invoice=False, payment_term=False, partner_bank_id=False, company_id=False)
 
         #
         # Set the correct payment term
