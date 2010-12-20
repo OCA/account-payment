@@ -11,7 +11,7 @@
         <field name="inherit_id" ref="sale.view_order_form"/>
         <field name="arch" type="xml">
                 <field name="fiscal_position" position="after">
-                    <field name="payment_type" on_change="onchange_paytype_id(payment_type, partner_id)" select="2"/>
+                    <field name="payment_type" on_change="onchange_paytype_id(payment_type, partner_id)" widget="selection" select="2"/>
                     <field name="partner_bank" domain="[('partner_id','=',partner_id)]"/>
                 </field>
         </field>
