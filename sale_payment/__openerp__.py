@@ -22,7 +22,7 @@
 ##############################################################################
 
 {
-    "name" : "Sale Payment Type",
+    "name" : "Sale payment type",
     "version" : "1.0",
     "author" : "Zikzakmedia",
     "website": "www.zikzakmedia.com",

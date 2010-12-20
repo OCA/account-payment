@@ -43,7 +43,9 @@ class sale_order(osv.osv):
 
         return self.onchange_paytype_id(cr, uid, ids, paytype_id, part, result)
 
-    def onchange_paytype_id(self, cr, uid, ids, paytype_id, partner_id, result = {'value': {}}):
+    def onchange_paytype_id(self, cr, uid, ids, paytype_id, partner_id, result = None):
+        if result is None:
+            result = {'value': {}}
         if paytype_id and partner_id:
             paytype = self.pool.get('payment.type').browse(cr, uid, paytype_id)
             if paytype.suitable_bank_types and paytype.active:
@@ -61,7 +63,7 @@ class sale_order(osv.osv):
         """ Redefines _make_invoice to create invoices with payment_type and acc_number from the sale order"""
         inv_id = super(sale_order, self)._make_invoice(cr, uid, order, lines, context)
         inv_obj = self.pool.get('account.invoice')
-        inv_obj.write(cr, uid, [inv_id], {'payment_type':order.payment_type.id, 'partner_bank':order.partner_bank.id}, context=context)
+        inv_obj.write(cr, uid, [inv_id], {'payment_type':order.payment_type.id, 'partner_bank_id':order.partner_bank.id}, context=context)
         return inv_id
 
 sale_order()
@@ -76,15 +78,23 @@ class stock_picking(osv.osv):
         invoice_obj = self.pool.get('account.invoice')
         sale_obj = self.pool.get('sale.order')
         for picking_id, invoice_id in res.items():
-            #print picking_id, invoice_id
             picking = self.browse(cr, uid, picking_id, context=context)
-            partner = picking.address_id.partner_id
-            paytype_id = partner.payment_type_customer.id
-            result = {'value': {}}
-            result['value']['payment_type'] = paytype_id
-            invoice_vals = sale_obj.onchange_paytype_id(cr, uid, ids, paytype_id, partner.id, result)['value']
-            #print invoice_vals
-            invoice_obj.write(cr, uid, [invoice_id], invoice_vals, context=context)
+
+            # Check if the picking comes from a sale
+            if picking.sale_id:
+                # Use the payment options from the order
+                order = picking.sale_id
+                vals = {}
+                if order.payment_term:
+                    vals['payment_term'] = order.payment_term.id
+                if order.payment_type:
+                    vals['payment_type'] = order.payment_type.id
+                if order.partner_bank:
+                    vals['partner_bank_id'] = order.partner_bank.id
+                if vals:
+                    # Write the payment info into the invoice.
+                    invoice_obj.write(cr, uid, [invoice_id], vals, context=context)
+
         return res
 
 stock_picking()
