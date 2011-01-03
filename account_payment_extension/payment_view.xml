@@ -232,7 +232,7 @@
                 <field name="type"/>
                 <field name="create_account_moves"/>
                 <group colspan="2" col="1" attrs="{'invisible': [('create_account_moves', '=', 'bank-statement')]}">
-                    <field name="period_id" required="True"/>
+                    <field name="period_id" attrs="{'required': [('create_account_moves', '!=', 'bank-statement')]}"/>
                 </group>
                 <button colspan="2" name="%(wizard_populate_payment_ext)d" string="Select invoices to pay/receive payment" type="action" attrs="{'invisible':[('state','=','done')]}" icon="gtk-find"/>
             </button>
