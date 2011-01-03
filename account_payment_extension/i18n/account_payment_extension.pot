@@ -453,3 +453,14 @@ msgid "Account payment extension.\n"
 ""
 msgstr ""
 
+#. module: account_payment_extension
+#: wizard_field:populate_payment_ext,init,show_refunds:0
+msgid "Show Refunds"
+msgstr "Show Refunds"
+
+#. module: account_payment_extension
+#: help:populate_payment_ext,init,show_refunds:0
+msgid "Indicates if search should include refunds."
+msgstr "Indicates if search should include refunds."
+
+

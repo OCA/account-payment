@@ -7,17 +7,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0-rc1\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2010-12-17 20:52+0000\n"
-"PO-Revision-Date: 2010-12-21 14:26+0000\n"
-"Last-Translator: Jordi Esteve (www.zikzakmedia.com) "
-"<jesteve@zikzakmedia.com>\n"
+"POT-Creation-Date: 2010-12-17 20:52:45+0000\n"
+"PO-Revision-Date: 2010-12-17 22:18+0100\n"
+"Last-Translator: Jordi Esteve (Zikzakmedia) <jesteve@zikzakmedia.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2010-12-23 05:21+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
 "Language: ca\n"
+"Plural-Forms: \n"
+"X-Generator: Lokalize 1.0\n"
 
 #. module: account_payment_extension
 #: selection:payment.order,type:0
@@ -40,12 +39,8 @@ msgstr "Per pagament directe"
 #. module: account_payment_extension
 #: code:addons/account_payment_extension/payment.py:0
 #, python-format
-msgid ""
-"Payment order should create account moves but line with amount %.2f for "
-"partner \"%s\" has no account assigned."
-msgstr ""
-"L'ordre de pagament hauria de crear els assentaments però la línia amb "
-"import %.2f i l'empresa \"%s\" no té cap compte comptable assignat."
+msgid "Payment order should create account moves but line with amount %.2f for partner \"%s\" has no account assigned."
+msgstr "L'ordre de pagament hauria de crear els assentaments però la línia amb import %.2f i l'empresa \"%s\" no té cap compte comptable assignat."
 
 #. module: account_payment_extension
 #: constraint:ir.actions.act_window:0
@@ -65,8 +60,7 @@ msgstr "A pagar"
 #. module: account_payment_extension
 #: code:addons/account_payment_extension/payment.py:0
 #, python-format
-msgid ""
-"You cannot delete payment order(s) which are already confirmed or done!"
+msgid "You cannot delete payment order(s) which are already confirmed or done!"
 msgstr "No podeu eliminar ordres de pagament confirmades ni realitzades!"
 
 #. module: account_payment_extension
@@ -203,9 +197,7 @@ msgstr "Tipus de pagament client"
 #. module: account_payment_extension
 #: help:populate_payment_ext,init,amount:0
 msgid "Next step will automatically select payments up to this amount."
-msgstr ""
-"El següent pas seleccionarà automàticament pagaments fins a arribar a aquest "
-"import."
+msgstr "El següent pas seleccionarà automàticament pagaments fins a arribar a aquest import."
 
 #. module: account_payment_extension
 #: wizard_field:populate_payment_ext,search,entries:0
@@ -259,12 +251,8 @@ msgstr "Tipus de banc adequats"
 
 #. module: account_payment_extension
 #: help:payment.mode,require_bank_account:0
-msgid ""
-"Ensure all lines in the payment order have a bank account when proposing "
-"lines to be added in the payment order."
-msgstr ""
-"Assegura que totes les línies tenen compte bancari quan proposa les línies "
-"de pagament per afegir."
+msgid "Ensure all lines in the payment order have a bank account when proposing lines to be added in the payment order."
+msgstr "Assegura que totes les línies tenen compte bancari quan proposa les línies de pagament per afegir."
 
 #. module: account_payment_extension
 #: field:payment.order,name:0
@@ -388,7 +376,7 @@ msgstr "Comptes bancaris"
 #. module: account_payment_extension
 #: field:payment.order,period_id:0
 msgid "Period"
-msgstr "Períde"
+msgstr "Període"
 
 #. module: account_payment_extension
 #: selection:payment.order,create_account_moves:0
@@ -402,11 +390,8 @@ msgstr "Tipus de pagament com a proveïdor."
 
 #. module: account_payment_extension
 #: constraint:ir.model:0
-msgid ""
-"The Object name must start with x_ and not contain any special character !"
-msgstr ""
-"El nom de l'objecte ha de començar amb x_ i no contenir cap caràcter "
-"especial!"
+msgid "The Object name must start with x_ and not contain any special character !"
+msgstr "El nom de l'objecte ha de començar amb x_ i no contenir cap caràcter especial!"
 
 #. module: account_payment_extension
 #: model:ir.model,name:account_payment_extension.model_account_move_line
@@ -415,10 +400,8 @@ msgstr "Apunts"
 
 #. module: account_payment_extension
 #: help:account.move.line,received_check:0
-msgid ""
-"To write down that a check in paper support has been received, for example."
-msgstr ""
-"Serveix per indicar que s'ha rebut un xec en suport paper, per exemple."
+msgid "To write down that a check in paper support has been received, for example."
+msgstr "Serveix per indicar que s'ha rebut un xec en suport paper, per exemple."
 
 #. module: account_payment_extension
 #: model:ir.model,name:account_payment_extension.model_account_invoice
@@ -452,16 +435,8 @@ msgstr "La grandària del camp no pot ser menor que 1!"
 
 #. module: account_payment_extension
 #: help:payment.order,create_account_moves:0
-msgid ""
-"Indicates when account moves should be created for order payment lines. "
-"\"Bank Statement\" will wait until user introduces those payments in bank a "
-"bank statement. \"Direct Payment\" will mark all payment lines as payied "
-"once the order is done."
-msgstr ""
-"Indica quan s'haurien de crear els assentament comptables per les línies de "
-"pagament. \"Per l'extracte bancari\" esperarà fins que l'usuari introdueixi "
-"l'extracte bancari. \"Per pagament directe\" marcarà totes les línies com a "
-"pagades quan es realitzi aquesta ordre."
+msgid "Indicates when account moves should be created for order payment lines. \"Bank Statement\" will wait until user introduces those payments in bank a bank statement. \"Direct Payment\" will mark all payment lines as payied once the order is done."
+msgstr "Indica quan s'haurien de crear els assentament comptables per les línies de pagament. \"Per l'extracte bancari\" esperarà fins que l'usuari introdueixi l'extracte bancari. \"Per pagament directe\" marcarà totes les línies com a pagades quan es realitzi aquesta ordre."
 
 #. module: account_payment_extension
 #: model:ir.module.module,description:account_payment_extension.module_meta_information
@@ -469,151 +444,95 @@ msgid ""
 "Account payment extension.\n"
 "\n"
 "This module extends the account_payment module with a lot of features:\n"
-"    * Extension of payment types: The payment type has a translated name and "
-"note that can be shown in the invoices.\n"
+"    * Extension of payment types: The payment type has a translated name and note that can be shown in the invoices.\n"
 "    * Two default payment types for partners (client and supplier).\n"
-"    * Automatic selection of payment type in invoices. Now an invoice can "
-"have a payment term (30 days, 30/60 days, ...) and a payment type (cash, "
-"bank transfer, ...).\n"
-"    * A default check field in partner bank accounts. The default partner "
-"bank accounts are selected in invoices and payments.\n"
+"    * Automatic selection of payment type in invoices. Now an invoice can have a payment term (30 days, 30/60 days, ...) and a payment type (cash, bank transfer, ...).\n"
+"    * A default check field in partner bank accounts. The default partner bank accounts are selected in invoices and payments.\n"
 "    * New menu/tree/forms to see payments to receive and payments to pay.\n"
-"    * The payments show tree editable fields: Due date, bank account and a "
-"check field (for example to write down if a bank check in paper support has "
-"been received).\n"
-"    * Two types of payment orders: Payable payment orders (from supplier "
-"invoices) and receivable payment orders (from client invoices). So we can "
-"make payment orders to receive the payments of our client invoices. Each "
-"payment order type has its own sequence.\n"
-"    * The payment orders allow negative payment amounts. So we can have "
-"payment orders for supplier invoices (pay money) and refund supplier "
-"invoices (return or receive money). Or for client invoices (receive money) "
-"and refund client invoices (return or pay money).\n"
-"    * Payment orders: Selected invoices are filtered by payment type, the "
-"second message communication can be set at the same time for several "
-"invoices.\n"
+"    * The payments show tree editable fields: Due date, bank account and a check field (for example to write down if a bank check in paper support has been received).\n"
+"    * Two types of payment orders: Payable payment orders (from supplier invoices) and receivable payment orders (from client invoices). So we can make payment orders to receive the payments of our client invoices. Each payment order type has its own sequence.\n"
+"    * The payment orders allow negative payment amounts. So we can have payment orders for supplier invoices (pay money) and refund supplier invoices (return or receive money). Or for client invoices (receive money) and refund client invoices (return or pay money).\n"
+"    * Payment orders: Selected invoices are filtered by payment type, the second message communication can be set at the same time for several invoices.\n"
 "Based on previous work of Pablo Rocandio & Zikzakmedia (version for 4.2).\n"
 msgstr ""
 "Extensió de pagaments comptables (Tresoreria).\n"
 "\n"
 "Aquest mòdul estén el mòdul account_payment amb moltes característiques:\n"
-"    * Extensió dels tipus de pagament: El tipus de pagament té un nom i una "
-"descripció traduïbles per mostrar en les factures.\n"
-"    * Dos tipus de pagament per defecte per a les empreses (client i "
-"proveïdor).\n"
-"    * Selecció automàtica del tipus de pagament en les factures. Ara, una "
-"factura pot tenir un termini de pagament (30 dies, 30/60 dies, ...) i un "
-"tipus de pagament (efectiu, transferència bancària, ...).\n"
-"    * Un camp seleccionable per defecte en els comptes bancaris de les "
-"empreses. Es selecciona el compte bancari per defecte de l'empresa en les "
-"factures i els pagaments.\n"
-"    * Nous menús / llistes / formularis per consultar els pagaments "
-"(efectes) a cobrar i a pagar.\n"
-"    * Els pagaments mostren camps editables a la llista: Data de venciment, "
-"compte bancari i un camp de verificació (per exemple, per indicar que s'ha "
-"rebut un xec bancari en suport paper).\n"
-"    * Dos tipus d'ordres de pagament / cobrament: les ordres de pagament (a "
-"partir de les factures de proveïdor) i les ordres de cobrament (a partir de "
-"les factures de client). Ara es pot fer ordres de cobrament (remeses de "
-"rebuts) per rebre els pagaments de les factures dels nostres clients. Cada "
-"tipus d'ordre de pagament té la seva pròpia seqüència.\n"
-"    * Les ordres de pagament / cobrament permeten quantitats en negatiu. "
-"Podem incloure en les ordres de pagament factures de proveïdor (pagament de "
-"diners) i factures d'abonament de proveïdor (devolució o rebre diners). O "
-"les factures de client (recepció de diners) i les factures d'abonament de "
-"client (devolució o pagament de diners).\n"
-"    * A les ordres de pagament: Les factures seleccionades són filtrades per "
-"tipus de pagament. Es pot indicar el segon missatge de la comunicació de la "
-"remesa al mateix temps per a diverses factures.\n"
+"    * Extensió dels tipus de pagament: El tipus de pagament té un nom i una descripció traduïbles per mostrar en les factures.\n"
+"    * Dos tipus de pagament per defecte per a les empreses (client i proveïdor).\n"
+"    * Selecció automàtica del tipus de pagament en les factures. Ara, una factura pot tenir un termini de pagament (30 dies, 30/60 dies, ...) i un tipus de pagament (efectiu, transferència bancària, ...).\n"
+"    * Un camp seleccionable per defecte en els comptes bancaris de les empreses. Es selecciona el compte bancari per defecte de l'empresa en les factures i els pagaments.\n"
+"    * Nous menús / llistes / formularis per consultar els pagaments (efectes) a cobrar i a pagar.\n"
+"    * Els pagaments mostren camps editables a la llista: Data de venciment, compte bancari i un camp de verificació (per exemple, per indicar que s'ha rebut un xec bancari en suport paper).\n"
+"    * Dos tipus d'ordres de pagament / cobrament: les ordres de pagament (a partir de les factures de proveïdor) i les ordres de cobrament (a partir de les factures de client). Ara es pot fer ordres de cobrament (remeses de rebuts) per rebre els pagaments de les factures dels nostres clients. Cada tipus d'ordre de pagament té la seva pròpia seqüència.\n"
+"    * Les ordres de pagament / cobrament permeten quantitats en negatiu. Podem incloure en les ordres de pagament factures de proveïdor (pagament de diners) i factures d'abonament de proveïdor (devolució o rebre diners). O les factures de client (recepció de diners) i les factures d'abonament de client (devolució o pagament de diners).\n"
+"    * A les ordres de pagament: Les factures seleccionades són filtrades per tipus de pagament. Es pot indicar el segon missatge de la comunicació de la remesa al mateix temps per a diverses factures.\n"
 "Basat en el treball anterior de Pablo Rocandio i Zikzakmedia (versió 4.2).\n"
+
+#. module: account_payment_extension
+#: wizard_field:populate_payment_ext,init,show_refunds:0
+msgid "Show Refunds"
+msgstr "Mostra abonaments"
+
+#. module: account_payment_extension
+#: help:populate_payment_ext,init,show_refunds:0
+msgid "Indicates if search should include refunds."
+msgstr "Indica si la cerca ha d'incloure abonaments."
 
 #~ msgid "Invoice payments to pay"
 #~ msgstr "Efectes pendents de pagament"
-
 #~ msgid "Payable payment orders"
 #~ msgstr "Ordres de pagament"
-
 #~ msgid "Done payable payments unreconciled"
 #~ msgstr "Pagaments realitzats no conciliats"
-
-#~ msgid "Draft pay. payment order"
-#~ msgstr "Ordres de pagament esborrany"
-
-#~ msgid "Receivable invoice payments"
-#~ msgstr "Efectes de cobrament"
-
-#~ msgid "Rec. payment orders to validate"
-#~ msgstr "Ordres de cobrament per validar"
-
-#~ msgid "Pay. payment orders to validate"
-#~ msgstr "Ordres de pagament per validar"
-
-#~ msgid "New Pay. payment Order"
-#~ msgstr "Nova ordre de pagament"
-
-#~ msgid "Receivable payments unreconciled"
-#~ msgstr "Cobraments no conciliats"
-
-#~ msgid "All done payable payments"
-#~ msgstr "Tots els pagaments realitzats"
-
-#~ msgid "Receivable payment orders"
-#~ msgstr "Ordres de cobrament"
-
-#~ msgid "Done receivable payments unreconciled"
-#~ msgstr "Cobraments realitzats no conciliats"
-
-#~ msgid "Payable payments"
-#~ msgstr "Pagaments"
-
-#~ msgid "Account Payment Extension"
-#~ msgstr "Extensió de pagaments comptables (Tresoreria)"
-
-#~ msgid "All done receivable payments"
-#~ msgstr "Tots els cobraments realitzats"
-
-#~ msgid "Receivable payments"
-#~ msgstr "Cobraments"
-
-#~ msgid "Payable payments unreconciled"
-#~ msgstr "Pagaments no conciliats"
-
-#~ msgid "Draft rec. payment order"
-#~ msgstr "Ordres de cobrament esborrany"
-
-#~ msgid "New rec. payment order"
-#~ msgstr "Nova ordre de cobrament"
-
-#~ msgid "Payments to pay"
-#~ msgstr "Efectes pendents de pagament"
-
-#~ msgid "All paid and to pay payments"
-#~ msgstr "Tots els efectes de pagament"
-
-#~ msgid "Payments to receive"
-#~ msgstr "Efectes pendents de cobrament"
-
-#~ msgid "All received and to receive payments"
-#~ msgstr "Tots els efectes de cobrament"
-
-#~ msgid "Payable invoice payments"
-#~ msgstr "Efectes de pagament"
-
 #~ msgid "All received and to receive invoice payments"
 #~ msgstr "Tots els efectes de cobrament"
-
-#~ msgid "All paid and to pay invoice payments"
-#~ msgstr "Tots els efectes de pagament"
-
-#~ msgid "Invoice payments to receive"
-#~ msgstr "Efectes pendents de cobrament"
-
-#~ msgid "Require bank account"
-#~ msgstr "Requereix compte bancari"
-
+#~ msgid "Draft rec. payment order"
+#~ msgstr "Ordres de cobrament esborrany"
+#~ msgid "Draft pay. payment order"
+#~ msgstr "Ordres de pagament esborrany"
+#~ msgid "Receivable invoice payments"
+#~ msgstr "Efectes de cobrament"
+#~ msgid "Rec. payment orders to validate"
+#~ msgstr "Ordres de cobrament per validar"
 #~ msgid ""
 #~ "If your bank allows you to send orders without the bank account info, you "
 #~ "may disable this option"
 #~ msgstr ""
 #~ "Si el vostre banc us permet enviar ordres sense la informació del compte "
 #~ "bancari podeu deshabilitar aquesta opció."
+#~ msgid "Receivable payment orders"
+#~ msgstr "Ordres de cobrament"
+#~ msgid "All paid and to pay invoice payments"
+#~ msgstr "Tots els efectes de pagament"
+#~ msgid "Invoice payments to receive"
+#~ msgstr "Efectes pendents de cobrament"
+#~ msgid "Pay. payment orders to validate"
+#~ msgstr "Ordres de pagament per validar"
+#~ msgid "New Pay. payment Order"
+#~ msgstr "Nova ordre de pagament"
+#~ msgid "Receivable payments unreconciled"
+#~ msgstr "Cobraments no conciliats"
+#~ msgid "All done payable payments"
+#~ msgstr "Tots els pagaments realitzats"
+#~ msgid "Done receivable payments unreconciled"
+#~ msgstr "Cobraments realitzats no conciliats"
+#~ msgid "Payable payments"
+#~ msgstr "Pagaments"
+#~ msgid "Account Payment Extension"
+#~ msgstr "Extensió de pagaments comptables (Tresoreria)"
+#~ msgid "All done receivable payments"
+#~ msgstr "Tots els cobraments realitzats"
+#~ msgid "Payable invoice payments"
+#~ msgstr "Efectes de pagament"
+#~ msgid "Receivable payments"
+#~ msgstr "Cobraments"
+#~ msgid "Payable payments unreconciled"
+#~ msgstr "Pagaments no conciliats"
+#~ msgid "New rec. payment order"
+#~ msgstr "Nova ordre de cobrament"
+#~ msgid "Payments to pay"
+#~ msgstr "Efectes pendents de pagament"
+#~ msgid "Payments to receive"
+#~ msgstr "Efectes pendents de cobrament"
+
