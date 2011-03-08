@@ -222,8 +222,10 @@ class payment_order(osv.osv):
                 else:
                     account_id = order.mode.journal.default_debit_account_id.id
                 acc_cur = ((line.amount<=0) and order.mode.journal.default_debit_account_id) or line.account_id
-
-                amount = self.pool.get('res.currency').compute(cr, uid, currency_id, company_currency_id, line.amount, context=context, account=acc_cur)
+                context.update({
+                    'res.currency.compute.account': acc_cur,
+                })
+                amount = self.pool.get('res.currency').compute(cr, uid, currency_id, company_currency_id, line.amount, context=context)
 
                 val = {
                     'name': line.move_line_id and line.move_line_id.name or '/',
@@ -239,9 +241,9 @@ class payment_order(osv.osv):
                     'currency_id': currency_id,
                 }
                 
-                amount = self.pool.get('res.currency').compute(cr, uid, currency_id, company_currency_id, line.amount, context=context, account=acc_cur)
+                amount = self.pool.get('res.currency').compute(cr, uid, currency_id, company_currency_id, line.amount, context=context)
                 if currency_id <> company_currency_id:
-                    amount_cur = self.pool.get('res.currency').compute(cr, uid, company_currency_id, currency_id, amount, context=context, account=acc_cur)
+                    amount_cur = self.pool.get('res.currency').compute(cr, uid, company_currency_id, currency_id, amount, context=context)
                     val['amount_currency'] = -amount_cur
 
                 if line.account_id and line.account_id.currency_id and line.account_id.currency_id.id <> company_currency_id:
@@ -249,7 +251,7 @@ class payment_order(osv.osv):
                     if company_currency_id == line.account_id.currency_id.id:
                         amount_cur = line.amount
                     else:
-                        amount_cur = self.pool.get('res.currency').compute(cr, uid, company_currency_id, line.account_id.currency_id.id, amount, context=context, account=acc_cur)
+                        amount_cur = self.pool.get('res.currency').compute(cr, uid, company_currency_id, line.account_id.currency_id.id, amount, context=context)
                     val['amount_currency'] = amount_cur
 
                 partner_line_id = self.pool.get('account.move.line').create(cr, uid, val, context, check=False)

@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-08 05:17+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-03-04 05:17+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 "Language: ca\n"
 
 #. module: account_payment_extension
@@ -597,8 +597,14 @@ msgstr "Indica si la cerca ha d'incloure abonaments."
 #~ msgid "Payments to pay"
 #~ msgstr "Efectes pendents de pagament"
 
+#~ msgid "All paid and to pay payments"
+#~ msgstr "Tots els efectes de pagament"
+
 #~ msgid "Payments to receive"
 #~ msgstr "Efectes pendents de cobrament"
+
+#~ msgid "All received and to receive payments"
+#~ msgstr "Tots els efectes de cobrament"
 
 #~ msgid "Payable invoice payments"
 #~ msgstr "Efectes de pagament"
@@ -611,6 +617,9 @@ msgstr "Indica si la cerca ha d'incloure abonaments."
 
 #~ msgid "Invoice payments to receive"
 #~ msgstr "Efectes pendents de cobrament"
+
+#~ msgid "Require bank account"
+#~ msgstr "Requereix compte bancari"
 
 #~ msgid ""
 #~ "If your bank allows you to send orders without the bank account info, you "
