@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-01-08 05:17+0000\n"
-"X-Generator: Launchpad (build Unknown)\n"
+"X-Launchpad-Export-Date: 2011-03-04 05:17+0000\n"
+"X-Generator: Launchpad (build 12351)\n"
 "Language: ca\n"
 
 #. module: account_payment_extension
@@ -590,6 +590,18 @@ msgstr "Indica si la búsqueda debe incluir abonos."
 #~ msgid "New rec. payment order"
 #~ msgstr "Nueva orden de cobro"
 
+#~ msgid "Payments to pay"
+#~ msgstr "Efectos pendientes de pago"
+
+#~ msgid "All paid and to pay payments"
+#~ msgstr "Todos los efectos de pago"
+
+#~ msgid "Payments to receive"
+#~ msgstr "Efectos pendientes de cobro"
+
+#~ msgid "All received and to receive payments"
+#~ msgstr "Todos los efectos de cobro"
+
 #~ msgid "Invoice payments to pay"
 #~ msgstr "Efectos a pagar"
 
@@ -607,6 +619,9 @@ msgstr "Indica si la búsqueda debe incluir abonos."
 
 #~ msgid "Payable invoice payments"
 #~ msgstr "Efectos de pago"
+
+#~ msgid "Require bank account"
+#~ msgstr "Requerir cuenta bancaria"
 
 #~ msgid ""
 #~ "If your bank allows you to send orders without the bank account info, you "
