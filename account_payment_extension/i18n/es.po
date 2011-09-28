@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-04 05:17+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-09-28 05:34+0000\n"
+"X-Generator: Launchpad (build 14049)\n"
 "Language: ca\n"
 
 #. module: account_payment_extension
@@ -148,7 +148,7 @@ msgstr "_Añadir"
 #: code:addons/account_payment_extension/payment.py:0
 #, python-format
 msgid "Error !"
-msgstr "Error !"
+msgstr "¡ Error !"
 
 #. module: account_payment_extension
 #: view:payment.type:0
@@ -312,7 +312,7 @@ msgstr "No conciliado"
 #: code:addons/account_payment_extension/payment.py:0
 #, python-format
 msgid "Error!"
-msgstr "Error!"
+msgstr "¡Error!"
 
 #. module: account_payment_extension
 #: wizard_field:populate_payment_ext,init,amount:0
@@ -589,18 +589,6 @@ msgstr "Indica si la búsqueda debe incluir abonos."
 
 #~ msgid "New rec. payment order"
 #~ msgstr "Nueva orden de cobro"
-
-#~ msgid "Payments to pay"
-#~ msgstr "Efectos pendientes de pago"
-
-#~ msgid "All paid and to pay payments"
-#~ msgstr "Todos los efectos de pago"
-
-#~ msgid "Payments to receive"
-#~ msgstr "Efectos pendientes de cobro"
-
-#~ msgid "All received and to receive payments"
-#~ msgstr "Todos los efectos de cobro"
 
 #~ msgid "Invoice payments to pay"
 #~ msgstr "Efectos a pagar"
