@@ -1,16 +1,16 @@
-# Portuguese translation for openobject-addons
-# Copyright (c) 2010 Rosetta Contributors and Canonical Ltd 2010
+# Finnish translation for openobject-addons
+# Copyright (c) 2011 Rosetta Contributors and Canonical Ltd 2011
 # This file is distributed under the same license as the openobject-addons package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, 2010.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2011.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: openobject-addons\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2009-01-25 00:57+0000\n"
-"PO-Revision-Date: 2010-11-08 12:10+0000\n"
+"PO-Revision-Date: 2011-06-28 07:24+0000\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: Portuguese <pt@li.org>\n"
+"Language-Team: Finnish <fi@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,26 +20,27 @@ msgstr ""
 #. module: sale_payment
 #: constraint:ir.ui.view:0
 msgid "Invalid XML for View Architecture!"
-msgstr "XML Inválido para a Arquitectura de Vista!"
+msgstr "Virheellinen XML näkymä-arkkitehtuurille!"
 
 #. module: sale_payment
 #: field:sale.order,partner_bank:0
 msgid "Bank Account"
-msgstr "Conta Bancária"
+msgstr "Pankkitilinumero"
 
 #. module: sale_payment
 #: field:sale.order,payment_type:0
 msgid "Payment type"
-msgstr "Tipo de Pagamento"
+msgstr "Maksutyyppi"
 
 #. module: sale_payment
 #: help:sale.order,partner_bank:0
 msgid ""
 "The bank account to pay to or to be paid from. It will be transferred to the "
 "invoice"
-msgstr "A conta bancária a movimentar será transferida para a factura"
+msgstr ""
+"Pankkitli johon maksu tulee tai josta maksu suoritetaan. Siirretään laskulle"
 
 #. module: sale_payment
 #: help:sale.order,payment_type:0
 msgid "The type of payment. It will be transferred to the invoice"
-msgstr "O tipo de pagamento. Será transferido para a factura"
+msgstr "Maksun tyyppi. Siirretään laskulle"

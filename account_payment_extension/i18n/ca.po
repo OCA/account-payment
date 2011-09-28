@@ -15,8 +15,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2011-03-04 05:17+0000\n"
-"X-Generator: Launchpad (build 12351)\n"
+"X-Launchpad-Export-Date: 2011-09-28 05:34+0000\n"
+"X-Generator: Launchpad (build 14049)\n"
 "Language: ca\n"
 
 #. module: account_payment_extension
@@ -411,7 +411,7 @@ msgstr ""
 #. module: account_payment_extension
 #: model:ir.model,name:account_payment_extension.model_account_move_line
 msgid "Journal Items"
-msgstr "Apunts"
+msgstr "Anotacions comptables"
 
 #. module: account_payment_extension
 #: help:account.move.line,received_check:0
@@ -593,18 +593,6 @@ msgstr "Indica si la cerca ha d'incloure abonaments."
 
 #~ msgid "New rec. payment order"
 #~ msgstr "Nova ordre de cobrament"
-
-#~ msgid "Payments to pay"
-#~ msgstr "Efectes pendents de pagament"
-
-#~ msgid "All paid and to pay payments"
-#~ msgstr "Tots els efectes de pagament"
-
-#~ msgid "Payments to receive"
-#~ msgstr "Efectes pendents de cobrament"
-
-#~ msgid "All received and to receive payments"
-#~ msgstr "Tots els efectes de cobrament"
 
 #~ msgid "Payable invoice payments"
 #~ msgstr "Efectes de pagament"
