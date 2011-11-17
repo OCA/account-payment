@@ -7,23 +7,25 @@
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
+#    it under the terms of the GNU Affero General Public License as published by
 #    the Free Software Foundation, either version 3 of the License, or
 #    (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
+import time
 import netsvc
 from osv import fields, osv
 from tools.translate import _
+import decimal_precision as dp
 
 class payment_type(osv.osv):
     _name= 'payment.type'
@@ -52,6 +54,8 @@ class payment_mode(osv.osv):
     _columns = {
         'type': fields.many2one('payment.type', 'Payment type', required=True, help='Select the Payment Type for the Payment Mode.'),
         'require_bank_account': fields.boolean('Require Bank Account', help='Ensure all lines in the payment order have a bank account when proposing lines to be added in the payment order.'),
+        'require_received_check': fields.boolean('Require Received Check', help='Ensure all lines in the payment order have the Received Check flag set.'),
+        'require_same_bank_account': fields.boolean('Require the Same Bank Account', help='Ensure all lines in the payment order and the payment mode have the same account number.'),
     }
     _defaults = {
         'require_bank_account': lambda *a: False,
@@ -176,6 +180,25 @@ class payment_order(osv.osv):
         'period_id': _get_period,
     }
 
+    def cancel_from_done(self, cr, uid, ids, context=None):
+        if context is None:
+            context = {}
+
+        #Search for account_moves
+        remove = []
+        for move in self.browse(cr,uid,ids,context):
+            #Search for any line
+            for line in move.line_ids:
+                if line.payment_move_id:
+                    remove += [ line.payment_move_id.id ]
+        
+        self.pool.get('account.move').button_cancel( cr, uid, remove, context=context)
+        self.pool.get('account.move').unlink(cr, uid, remove, context)
+        self.write( cr, uid, ids, {
+            'state':'cancel'
+        },context=context)
+        return True
+
     def unlink(self, cr, uid, ids, context=None):
         pay_orders = self.read(cr, uid, ids, ['state'], context=context)
         unlink_ids = []
@@ -205,10 +228,7 @@ class payment_order(osv.osv):
                 'period_id': order.period_id.id,
             }, context)
 
-            total_amount = 0.0
             for line in order.line_ids:
-                total_amount += line.amount
-
                 if not line.amount:
                     continue
 
@@ -217,15 +237,20 @@ class payment_order(osv.osv):
 
                 currency_id = order.mode.journal.currency and order.mode.journal.currency.id or company_currency_id
 
-                if line.amount >= 0:
+                if line.type == 'payable':
+                    line_amount = line.amount_currency or line.amount
+                else:
+                    line_amount = -line.amount_currency or -line.amount
+                    
+                if line_amount >= 0:
                     account_id = order.mode.journal.default_credit_account_id.id
                 else:
                     account_id = order.mode.journal.default_debit_account_id.id
-                acc_cur = ((line.amount<=0) and order.mode.journal.default_debit_account_id) or line.account_id
-                context.update({
-                    'res.currency.compute.account': acc_cur,
-                })
-                amount = self.pool.get('res.currency').compute(cr, uid, currency_id, company_currency_id, line.amount, context=context)
+                acc_cur = ((line_amount<=0) and order.mode.journal.default_debit_account_id) or line.account_id
+
+                ctx = context.copy()
+                ctx['res.currency.compute.account'] = acc_cur
+                amount = self.pool.get('res.currency').compute(cr, uid, currency_id, company_currency_id, line_amount, context=ctx)
 
                 val = {
                     'name': line.move_line_id and line.move_line_id.name or '/',
@@ -241,17 +266,17 @@ class payment_order(osv.osv):
                     'currency_id': currency_id,
                 }
                 
-                amount = self.pool.get('res.currency').compute(cr, uid, currency_id, company_currency_id, line.amount, context=context)
+                amount = self.pool.get('res.currency').compute(cr, uid, currency_id, company_currency_id, line_amount, context=ctx)
                 if currency_id <> company_currency_id:
-                    amount_cur = self.pool.get('res.currency').compute(cr, uid, company_currency_id, currency_id, amount, context=context)
+                    amount_cur = self.pool.get('res.currency').compute(cr, uid, company_currency_id, currency_id, amount, context=ctx)
                     val['amount_currency'] = -amount_cur
 
                 if line.account_id and line.account_id.currency_id and line.account_id.currency_id.id <> company_currency_id:
                     val['currency_id'] = line.account_id.currency_id.id
                     if company_currency_id == line.account_id.currency_id.id:
-                        amount_cur = line.amount
+                        amount_cur = line_amount
                     else:
-                        amount_cur = self.pool.get('res.currency').compute(cr, uid, company_currency_id, line.account_id.currency_id.id, amount, context=context)
+                        amount_cur = self.pool.get('res.currency').compute(cr, uid, company_currency_id, line.account_id.currency_id.id, amount, context=ctx)
                     val['amount_currency'] = amount_cur
 
                 partner_line_id = self.pool.get('account.move.line').create(cr, uid, val, context, check=False)
@@ -259,8 +284,8 @@ class payment_order(osv.osv):
                 # Fill the secondary amount/currency
                 # if currency is not the same than the company
                 if currency_id <> company_currency_id:
-                    amount_currency = line.amount
-                    move_currency_id = currencty_id
+                    amount_currency = line_amount
+                    move_currency_id = currency_id
                 else:
                     amount_currency = False
                     move_currency_id = False
@@ -327,10 +352,30 @@ class payment_line(osv.osv):
     _name = 'payment.line'
     _inherit = 'payment.line'
 
+    def _auto_init(self, cr, context=None):
+        cr.execute("SELECT column_name FROM information_schema.columns WHERE table_name = 'payment_line' and column_name='type'")
+        if cr.fetchone():
+            update_sign = False
+        else:
+            update_sign = True
+        result = super(payment_line, self)._auto_init(cr, context=context)
+
+        if update_sign:
+            # Ensure related store value of field 'type' is updated in the database.
+            # Note that by forcing the update here we also ensure everything is done in the same transaction.
+            # Because addons/__init__.py will execute a commit just after creating table fields.
+            result.sort()
+            for item in result:
+                item[1](cr, *item[2])
+            # Change sign of 'receivable' payment lines
+            cr.execute("UPDATE payment_line SET amount_currency = -amount_currency WHERE type='receivable'")
+        return result
+
     _columns = {
         'move_line_id': fields.many2one('account.move.line', 'Entry line', domain="[('reconcile_id','=', False), ('amount_to_pay','<>',0), ('account_id.type','=',parent.type),('payment_type','ilike',parent.payment_type_name or '%')]", help='This Entry Line will be referred for the information of the ordering customer.'),
         'payment_move_id': fields.many2one('account.move', 'Payment Move', readonly=True, help='Account move that pays this debt.'),
         'account_id': fields.many2one('account.account', 'Account'),
+        'type': fields.related('order_id','type', type='selection', selection=[('payable','Payable'),('receivable','Receivable')], readonly=True, store=True, string='Type'),
     }
 
     def onchange_move_line(self, cr, uid, ids, move_line_id, payment_type, date_prefered, date_scheduled, currency=False, company_currency=False, context=None):

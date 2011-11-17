@@ -6,16 +6,16 @@
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
+#    it under the terms of the GNU Affero General Public License as published by
 #    the Free Software Foundation, either version 3 of the License, or
 #    (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -70,8 +70,9 @@ def _populate_statement(obj, cr, uid, data, context):
     for line in line_obj.browse(cr, uid, line_ids, context=context):
         ctx = context.copy()
         ctx['date'] = line.ml_maturity_date
+        amount_currency = line.type == 'payment' and line.amount_currency or -line.amount_currency
         amount = currency_obj.compute(cr, uid, line.currency.id,
-                statement.currency.id, line.amount_currency, context=ctx)
+                statement.currency.id, amount_currency, context=ctx)
 
         voucher_id = False
         if line.move_line_id:
@@ -107,7 +108,7 @@ def _populate_statement(obj, cr, uid, data, context):
         statement_line_obj.create(cr, uid, {
             'name': (line.order_id.reference or '?') +'. '+ line.name,
             # Tipically: type=='payable' => amount>0  type=='receivable' => amount<0
-            'amount': -amount,
+            'amount': line.type == 'payable' and amount or -amount,
             'type': line.order_id.type=='payable' and 'supplier' or 'customer',
             'partner_id': line.partner_id.id,
             'account_id': line.move_line_id.account_id.id,
