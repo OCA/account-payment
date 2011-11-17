@@ -7,16 +7,16 @@
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU General Public License as published by
+#    it under the terms of the GNU Affero General Public License as published by
 #    the Free Software Foundation, either version 3 of the License, or
 #    (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
 #    but WITHOUT ANY WARRANTY; without even the implied warranty of
 #    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU General Public License for more details.
+#    GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU General Public License
+#    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
@@ -73,5 +73,62 @@ class account_invoice(osv.osv):
                     aml_obj = self.pool.get("account.move.line")
                     aml_obj.write(cr, uid, move_line_ids, {'partner_bank_id': inv.partner_bank_id.id})
         return ret
+
+    def refund(self, cr, uid, ids, date=None, period_id=None, description=None, journal_id=None):
+        invoices = self.read(cr, uid, ids, ['name', 'type', 'number', 'reference', 'comment', 'date_due', 'partner_id', 'address_contact_id', 'address_invoice_id', 'partner_contact', 'partner_insite', 'partner_ref', 'payment_term', 'account_id', 'currency_id', 'invoice_line', 'tax_line', 'journal_id', 'payment_type'])
+        obj_invoice_line = self.pool.get('account.invoice.line')
+        obj_invoice_tax = self.pool.get('account.invoice.tax')
+        obj_journal = self.pool.get('account.journal')
+        new_ids = []
+        for invoice in invoices:
+            del invoice['id']
+
+            type_dict = {
+                'out_invoice': 'out_refund', # Customer Invoice
+                'in_invoice': 'in_refund',   # Supplier Invoice
+                'out_refund': 'out_invoice', # Customer Refund
+                'in_refund': 'in_invoice',   # Supplier Refund
+            }
+
+            invoice_lines = obj_invoice_line.read(cr, uid, invoice['invoice_line'])
+            invoice_lines = self._refund_cleanup_lines(cr, uid, invoice_lines)
+
+            tax_lines = obj_invoice_tax.read(cr, uid, invoice['tax_line'])
+            tax_lines = filter(lambda l: l['manual'], tax_lines)
+            tax_lines = self._refund_cleanup_lines(cr, uid, tax_lines)
+            if journal_id:
+                refund_journal_ids = [journal_id]
+            elif invoice['type'] == 'in_invoice':
+                refund_journal_ids = obj_journal.search(cr, uid, [('type','=','purchase_refund')])
+            else:
+                refund_journal_ids = obj_journal.search(cr, uid, [('type','=','sale_refund')])
+
+            if not date:
+                date = time.strftime('%Y-%m-%d')
+            invoice.update({
+                'type': type_dict[invoice['type']],
+                'date_invoice': date,
+                'state': 'draft',
+                'number': False,
+                'invoice_line': invoice_lines,
+                'tax_line': tax_lines,
+                'journal_id': refund_journal_ids
+            })
+            if period_id:
+                invoice.update({
+                    'period_id': period_id,
+                })
+            if description:
+                invoice.update({
+                    'name': description,
+                })
+            # take the id part of the tuple returned for many2one fields
+            for field in ('address_contact_id', 'address_invoice_id', 'partner_id',
+                    'account_id', 'currency_id', 'payment_term', 'journal_id', 'payment_type'):
+                invoice[field] = invoice[field] and invoice[field][0]
+            # create the new invoice
+            new_ids.append(self.create(cr, uid, invoice))
+
+        return new_ids
 
 account_invoice()

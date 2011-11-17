@@ -152,7 +152,7 @@
         <field name="inherit_id" ref="account.invoice_form"/>
         <field name="arch" type="xml">
             <field name="payment_term" position="after">
-                <field name="payment_type" on_change="onchange_payment_type(payment_type, partner_id)" widget="selection"/>
+                <field domain="[('company_id', '=', company_id)]" name="payment_type" on_change="onchange_payment_type(payment_type, partner_id)" />
             </field>
         </field>
     </record>
@@ -164,7 +164,7 @@
         <field name="inherit_id" ref="account.invoice_supplier_form"/>
         <field name="arch" type="xml">
             <field name="payment_term" position="after">
-                <field name="payment_type" on_change="onchange_payment_type(payment_type, partner_id)" widget="selection"/>
+                <field domain="[('company_id', '=', company_id)]" name="payment_type" on_change="onchange_payment_type(payment_type, partner_id)" />
             </field>
         </field>
     </record>
@@ -255,6 +255,18 @@
         </field>
     </record>
 
+    <record id="view_payment_order_form_cancel" model="ir.ui.view">
+        <field name="name">payment.order.form.cancel</field>
+        <field name="model">payment.order</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="account_payment.view_payment_order_form"/>
+        <field name="arch" type="xml">
+            <button name="cancel" position="after">
+                <button name="cancel_from_done" states="done" type="object" string="Cancel" icon="gtk-cancel"/>
+            </button>
+        </field>
+    </record>
+
     <record id="view_payment_line_form_ext1" model="ir.ui.view">
         <field name="name">payment.line.ext1</field>
         <field name="model">payment.line</field>
@@ -274,7 +286,7 @@
 
 
     <!--**************************** PAYABLE PAYMENT ORDER ********************************-->
-    <record id="action_pay_payment_order_tree" model="ir.actions.act_window">
+    <record id="account_payment.action_payment_order_tree" model="ir.actions.act_window">
         <field name="name">Pay. payment order</field>
         <field name="res_model">payment.order</field>
         <field name="view_type">form</field>
@@ -282,7 +294,6 @@
         <field name="domain">[('type','=','payable')]</field>
         <field name="context">{'type':'payable'}</field>
     </record>
-    <menuitem action="action_pay_payment_order_tree" id="menu_action_pay_payment_order_form" parent="account_payment.menu_main_payment" sequence="1"/>
 
     <!--**************************** RECEIVABLE PAYMENT ORDER ********************************-->
     <record id="action_rec_payment_order_tree" model="ir.actions.act_window">
@@ -308,9 +319,9 @@
                 <field name="invoice" readonly="1"/>
                 <field name="partner_id" readonly="1"/>
                 <field name="account_id" readonly="1"/>
-                <field name="debit" readonly="1"/>
-                <field name="credit" readonly="1"/>
-                <field name="amount_to_pay" readonly="1"/>
+                <field name="debit" readonly="1" sum="Total Debit"/>
+                <field name="credit" readonly="1" sum="Total Credit"/>
+                <field name="amount_to_pay" readonly="1" sum="Total Amount to Pay"/>
                 <field name="payment_type" readonly="1"/>
                 <field name="partner_bank_id" domain="[('partner_id','=',partner_id)]"/>
                 <field name="received_check"/>
