@@ -7,7 +7,7 @@
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="account.view_partner_property_form"/>
         <field name="arch" type="xml">
-            <field name="sequence" position="after">
+            <field name="acc_number" position="after">
                   <field name="default_bank"/>
             </field>
         </field>
@@ -24,11 +24,11 @@
     </record>
 
     <record model="ir.ui.view" id="view_partner_form3">
-        <field name="name">view.partner.form3 </field>
+        <field name="name">view.partner.form3</field>
         <field name="model">res.partner.bank</field>
         <field name="inherit_id" ref="base.view_partner_bank_form"/>
         <field name="arch" type="xml">
-            <field name="sequence" position="after">
+            <field name="acc_number" position="after">
                 <field name="default_bank"/>
             </field>
         </field>
@@ -39,7 +39,7 @@
         <field name="model">res.partner.bank</field>
         <field name="inherit_id" ref="base.view_partner_bank_tree"/>
         <field name="arch" type="xml">
-            <field name="state" position="before">
+            <field name="partner_id" position="before">
                 <field name="default_bank"/>
             </field>
         </field>
