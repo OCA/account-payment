@@ -193,7 +193,7 @@
         <field name="type">form</field>
         <field name="inherit_id" ref="account.view_move_line_form"/>
         <field name="arch" type="xml">
-            <separator string="Narration" position="before">
+            <separator string="Internal Note" position="before">
                 <group col="2" colspan="2">
                     <separator colspan="2" string="Payment"/>
                     <field name="payment_type" select="1" widget="selection"/>
