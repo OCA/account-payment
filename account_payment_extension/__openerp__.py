@@ -25,7 +25,7 @@
     "name" : "Account Payment Extension",
     "version" : "1.1",
     "author" : "Zikzakmedia SL",
-    "category" : "Generic Modules/Accounting",
+    "category" : "Accounting & Finance",
     "website" : "www.zikzakmedia.com",
     "license" : "AGPL-3",
     "description": """Account payment extension.
