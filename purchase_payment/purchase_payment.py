@@ -69,12 +69,12 @@ class purchase_order(osv.osv):
         result['value']['partner_bank'] = False
         return result
 
-    def action_invoice_create(self, cr, uid, ids, *args):
+    def action_invoice_create(self, cr, uid, ids, context=None):
         """
         Extend the invoice creation action to preset the payment options.
         """
         # Create the invoice as usual.
-        invoice_id = super(purchase_order, self).action_invoice_create(cr, uid, ids, args)
+        invoice_id = super(purchase_order, self).action_invoice_create(cr, uid, ids, context=context)
 
         #
         # Check if the order has payment info.
