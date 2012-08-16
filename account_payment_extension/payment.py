@@ -4,6 +4,8 @@
 #    OpenERP, Open Source Management Solution
 #    Copyright (c) 2008 Zikzakmedia S.L. (http://zikzakmedia.com) All Rights Reserved.
 #                       Jordi Esteve <jesteve@zikzakmedia.com>
+#    AvanzOSC, Avanzed Open Source Consulting 
+#    Copyright (C) 2011-2012 Iker Coranti (www.avanzosc.com). All Rights Reserved
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -33,14 +35,12 @@ class payment_type(osv.osv):
     _columns= {
         'name': fields.char('Name', size=64, required=True, help='Payment Type', translate=True),
         'code': fields.char('Code', size=64, required=True, help='Specify the Code for Payment Type'),
-        'suitable_bank_types': fields.many2many('res.partner.bank.type',
-            'bank_type_payment_type_rel',
-            'pay_type_id','bank_type_id',
-            'Suitable bank types'),
+        'suitable_bank_types': fields.many2many('res.partner.bank.type','bank_type_payment_type_rel','pay_type_id','bank_type_id','Suitable bank types'),
         'active': fields.boolean('Active', select=True),
         'note': fields.text('Description', translate=True, help="Description of the payment type that will be shown in the invoices"),
         'company_id': fields.many2one('res.company', 'Company', required=True),
     }
+    
     _defaults = {
         'active': lambda *a: 1,
         'company_id': lambda self,cr,uid,c: self.pool.get('res.users').browse(cr, uid, uid, c).company_id.id
@@ -66,27 +66,14 @@ payment_mode()
 class res_partner(osv.osv):
     _inherit='res.partner'
     _columns={
-        'payment_type_customer': fields.property(
-            'payment.type',
-            type='many2one',
-            relation='payment.type',
-            string ='Customer Payment Type',
-            method=True,
-            view_load=True,
-            help="Payment type of the customer"),
-        'payment_type_supplier': fields.property(
-            'payment.type',
-            type='many2one',
-            relation='payment.type',
-            string ='Supplier Payment Type',
-            method=True,
-            view_load=True,
-            help="Payment type of the supplier"),
+        'payment_type_customer': fields.property('payment.type', type='many2one', relation='payment.type', string ='Customer Payment Type', method=True, view_load=True, help="Payment type of the customer"),
+        'payment_type_supplier': fields.property('payment.type', type='many2one', relation='payment.type', string ='Supplier Payment Type', method=True, view_load=True, help="Payment type of the supplier"),
     }
 res_partner()
 
 
 class res_partner_bank(osv.osv):
+    _inherit="res.partner.bank"
 
     def create(self, cr, uid, vals, context=None):
         if vals.get('default_bank') and vals.get('partner_id') and vals.get('state'):
@@ -106,7 +93,7 @@ class res_partner_bank(osv.osv):
             cr.execute(sql)
         return super(res_partner_bank, self).write(cr, uid, ids, vals, context=context)
 
-    _inherit="res.partner.bank"
+   
     _columns = {
         'default_bank' : fields.boolean('Default'),
     }

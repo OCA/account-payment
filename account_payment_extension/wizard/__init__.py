@@ -4,6 +4,8 @@
 #    OpenERP, Open Source Management Solution
 #    Copyright (c) 2008 Zikzakmedia S.L. (http://zikzakmedia.com) All Rights Reserved.
 #                       Jordi Esteve <jesteve@zikzakmedia.com>
+#    AvanzOSC, Avanzed Open Source Consulting
+#    Copyright (C) 2011-2012 Iker Coranti (www.avanzosc.com). All Rights Reserved
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -21,8 +23,7 @@
 #
 ##############################################################################
 
-import wizard_payment_order
-import wizard_populate_statement
+import account_payment_order
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 
