@@ -426,14 +426,13 @@ class account_bank_statement_line(osv.osv):
         partner_facade = self.pool.get('res.partner')
         partner = None
 
-        if partner_facade.check_vat_es( vat.replace(' ', '') ):
-            partner_ids = partner_facade.search(cr, uid, [
-                                    ('vat', 'like', '%s' % vat),
-                                    ('active', '=', True),
-                                ], context=context)
-            if len(partner_ids) == 1:
-                # We found a partner with that VAT number
-                partner = partner_facade.browse(cr, uid, partner_ids[0], context)
+        partner_ids = partner_facade.search(cr, uid, [
+                                ('vat', 'like', '%s' % vat),
+                                ('active', '=', True),
+                            ], context=context)
+        if len(partner_ids) == 1:
+            # We found a partner with that VAT number
+            partner = partner_facade.browse(cr, uid, partner_ids[0], context)
         return partner
 
 

@@ -2,11 +2,7 @@
 <openerp>
 <data>
 
-    <!--
-    ========================================================================================================
-        PARTNERS - default bank
-    ========================================================================================================
-    -->
+    <!--************************** PARTNERS - default bank **************************-->
     <record model="ir.ui.view" id="view_partner_form">
         <field name="model">res.partner</field>
         <field name="inherit_id" ref="account.view_partner_property_form"/>
@@ -50,11 +46,7 @@
     </record>
 
 
-    <!--
-    ====================================================================================================
-        PARTNERS - payment type
-    ====================================================================================================
-    -->
+    <!--************************** PARTNERS - payment type **************************-->
     <record model="ir.ui.view" id="view_payment_type_res_partner_form1">
         <field name="name">res.partner.form.payment_type1</field>
         <field name="model">res.partner</field>
@@ -82,11 +74,7 @@
     </record>
 
 
-    <!--
-    =====================================================================================================
-        PAYMENT TYPE
-    =====================================================================================================
-    -->
+    <!--****************************** PAYMENT TYPE ******************************-->
         <record model="ir.ui.view" id="view_payment_type_tree">
         <field name="name">payment.type.tree</field>
         <field name="model">payment.type</field>
@@ -128,11 +116,7 @@
     <menuitem action="action_payment_type" id="menu_action_payment_type" parent="account.menu_configuration_misc"/>
 
 
-    <!--
-    =======================================================================================================
-        PAYMENT MODE
-    =======================================================================================================
-    -->
+    <!--****************************** PAYMENT MODE ******************************-->
     <record id="view_payment_mode_form_require_bank_account" model="ir.ui.view">
         <field name="name">payment.mode.form.require_bank_account</field>
         <field name="model">payment.mode</field>
@@ -147,11 +131,7 @@
     </record>
 
 
-    <!--
-    =================================================================================================
-         INVOICES
-    =================================================================================================
-    -->
+    <!--****************************** INVOICES ******************************-->
     <!--Field partner_bank_id in client invoices has a strange domain: domain="[('partner_id.ref_companies', 'in', [company_id])]"-->
     <record model="ir.ui.view" id="invoice_form3">
         <field name="name">account.invoice.form3.payment_type</field>
@@ -225,12 +205,7 @@
     </record>
 
 
-    <!--
-    ========================================================================================================
-         BANK STATEMENT
-     ========================================================================================================
-
-
+    <!--***************************** BANK STATEMENT *********************************-->
     <record id="view_bank_statement_form_ext" model="ir.ui.view">
         <field name="name">account.bank.statement.form.ext</field>
         <field name="model">account.bank.statement</field>
@@ -238,16 +213,13 @@
         <field name="inherit_id" ref="account_payment.view_bank_statement_form"/>
         <field name="arch" type="xml">
             <button name="%(account_payment.action_account_populate_statement_confirm)d" position="replace">
-                  <button name="%(act_wizard_populate_statement)d" string="Import payment lines" type="action" attrs="{'invisible':[('state','=','confirm')]}" icon="gtk-execute"/>
-			  </button>
+                <button name="%(wizard_populate_statement_ext)d" string="Import payment lines" type="action" attrs="{'invisible':[('state','=','confirm')]}" icon="gtk-execute"/>
+            </button>
         </field>
     </record>
-     -->
-    <!--
-    ====================================================================================================
-         PAYMENT ORDER
-    ====================================================================================================
-    -->
+
+
+    <!--***************************** PAYMENT ORDER *********************************-->
     <!-- Filter invoices by payment type. Allow negative payment amounts -->
     <record id="view_payment_order_form_ext1" model="ir.ui.view">
         <field name="name">payment.order.form.ext1</field>
@@ -262,7 +234,7 @@
                 <group colspan="2" col="1" attrs="{'invisible': [('create_account_moves', '=', 'bank-statement')]}">
                     <field name="period_id" attrs="{'required': [('create_account_moves', '!=', 'bank-statement')]}"/>
                 </group>
-				<button colspan="2" name="%(action_create_payment_extension_order)d" string="Select invoices to pay/receive payment" type="action" attrs="{'invisible':[('state','=','done')]}" icon="gtk-find"/>
+                <button colspan="2" name="%(wizard_populate_payment_ext)d" string="Select invoices to pay/receive payment" type="action" attrs="{'invisible':[('state','=','done')]}" icon="gtk-find"/>
             </button>
         </field>
     </record>
@@ -302,21 +274,18 @@
         <field name="inherit_id" ref="account_payment.view_payment_line_form"/>
         <field name="arch" type="xml">
             <field name="move_line_id" position="replace">
-                <group col="6" colspan="4">
-                    <field name="move_line_id" on_change="onchange_move_line(move_line_id, False, currency, company_currency)" select="1"/>
-                    <field name="account_id"/>
-                    <field name="payment_move_id"/>
-                </group>
+                <!--<field name="move_line_id" on_change="onchange_move_line(move_line_id,parent.mode,parent.date_prefered,parent.date_scheduled,currency,company_currency,context)" select="1"/>-->
+            <group col="6" colspan="4">
+                <field name="move_line_id" on_change="onchange_move_line(move_line_id, False, currency, company_currency)" select="1"/>
+                <field name="account_id"/>
+                <field name="payment_move_id"/>
+            </group>
             </field>
         </field>
     </record>
 
 
-    <!--
-    ====================================================================================================
-        PAYABLE PAYMENT ORDER
-    ====================================================================================================
-    -->
+    <!--**************************** PAYABLE PAYMENT ORDER ********************************-->
     <record id="account_payment.action_payment_order_tree" model="ir.actions.act_window">
         <field name="name">Pay. payment order</field>
         <field name="res_model">payment.order</field>
@@ -326,11 +295,7 @@
         <field name="context">{'type':'payable'}</field>
     </record>
 
-    <!--
-    ======================================================================================================
-        RECEIVABLE PAYMENT ORDER
-    ======================================================================================================
-    -->
+    <!--**************************** RECEIVABLE PAYMENT ORDER ********************************-->
     <record id="action_rec_payment_order_tree" model="ir.actions.act_window">
         <field name="name">Rec. payment order</field>
         <field name="res_model">payment.order</field>
@@ -341,11 +306,7 @@
     </record>
     <menuitem action="action_rec_payment_order_tree" id="menu_action_rec_payment_order_form" parent="account_payment.menu_main_payment" sequence="2"/>
 
-    <!--
-    =========================================================================================
-     PAYMENTS
-    =========================================================================================
-    -->
+    <!--****************************** PAYMENTS ***********************************-->
     <record id="view_payments_tree" model="ir.ui.view">
         <field name="name">Payments</field>
         <field name="model">account.move.line</field>

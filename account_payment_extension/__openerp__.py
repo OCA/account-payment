@@ -4,8 +4,6 @@
 #    OpenERP, Open Source Management Solution
 #    Copyright (c) 2008 Zikzakmedia S.L. (http://zikzakmedia.com) All Rights Reserved.
 #                       Jordi Esteve <jesteve@zikzakmedia.com>
-#    AvanzOSC, Avanzed Open Source Consulting
-#    Copyright (C) 2011-2012 Iker Coranti (www.avanzosc.com). All Rights Reserved
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -52,11 +50,12 @@ Based on previous work of Pablo Rocandio & Zikzakmedia (version for 4.2).
     "init_xml" : [],
     "demo_xml" : [],
     "update_xml" : [
-                    "security/ir.model.access.csv",
-                    "wizard/account_payment_order_view.xml",
-                    "payment_view.xml",
-                    "payment_sequence.xml",
-                    ],
+        'security/ir.model.access.csv',
+        "payment_wizard.xml",
+        "payment_view.xml",
+        "payment_sequence.xml",
+        ],
     "active": False,
     "installable": True,
 }
+
