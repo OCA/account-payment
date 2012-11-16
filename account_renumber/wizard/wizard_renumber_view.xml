@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+	<data>
+	
+	<!-- 
+	===============================================================================================================
+		WIZAR.RENUMBER.VIEW
+	===============================================================================================================
+	-->
+	
+	<!-- FORM -->
+	
+		<record model="ir.ui.view" id="wizard_renumber_view">
+        	<field name="name">wizard.renumber.view</field>
+            <field name="model">wizard.renumber</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+            	<form string="Renumber Account Moves">
+        			<label string="This wizard will help you renumber one or more journals." colspan="4"/>
+        			<label string="Posted moves from those journals will be sorted by date and then assigned sequential numbers using their journal sequence." colspan="4"/>
+        			<label string="" colspan="4"/>
+        			<newline/>
+        			<group string="Journals and periods to consider" colspan="4">
+            			<field name="journal_ids" colspan="4"/>
+            			<field name="period_ids" colspan="4"/>
+        			</group>
+        			<group string="Sequence options" colspan="4">
+            			<field name="number_next"/>
+        			</group>
+        			<group>
+                		<button name="cerrar" type="object" icon='gtk-no' string="Cancelar"/>
+                		<button name="renumber_action" icon='gtk-ok' type="object" string="Renumerar"/>
+    				</group>
+    			</form>
+            </field>
+         </record>
+                  
+     <!-- ACCION -->
+     	
+		<record id="act_wizard_renumber" model="ir.actions.act_window">
+			<field name="name">Renumber Account Moves</field>
+			<field name="type">ir.actions.act_window</field>
+			<field name="res_model">wizard.renumber</field>
+			<field name="view_type">form</field>
+			<field name="view_mode">form</field>
+			<field name="target">new</field>
+		</record>
+		
+	<!-- MENU -->
+	
+		<menuitem id="menu_account_renumber" parent="account.menu_account_end_year_treatments" sequence="-1" action="act_wizard_renumber"/>
+		
+	</data>
+</openerp>
