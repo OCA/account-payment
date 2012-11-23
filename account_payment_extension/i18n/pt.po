@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: openobject-addons\n"
 "Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
 "POT-Creation-Date: 2010-12-17 20:52+0000\n"
-"PO-Revision-Date: 2010-12-09 19:06+0000\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"PO-Revision-Date: 2012-11-22 18:51+0000\n"
+"Last-Translator: Daniel Campos (Avanzosc) <Unknown>\n"
 "Language-Team: Portuguese <pt@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-31 04:49+0000\n"
-"X-Generator: Launchpad (build 16218)\n"
+"X-Launchpad-Export-Date: 2012-11-23 05:27+0000\n"
+"X-Generator: Launchpad (build 16293)\n"
 
 #. module: account_payment_extension
 #: selection:payment.order,type:0
@@ -534,82 +534,3 @@ msgstr ""
 #: help:populate_payment_ext,init,show_refunds:0
 msgid "Indicates if search should include refunds."
 msgstr ""
-
-#~ msgid "Invoice payments to pay"
-#~ msgstr "Factura de pagamento para pagar"
-
-#~ msgid "Payable payment orders"
-#~ msgstr "Ordens de pagamento pagavéis"
-
-#~ msgid "Done payable payments unreconciled"
-#~ msgstr "Concluído pagamento pagavél não reconciliado"
-
-#~ msgid "All received and to receive invoice payments"
-#~ msgstr "Todas as facturas de pagamentos recebidos e para receber"
-
-#~ msgid "Require bank account"
-#~ msgstr "Requerido conta bancária"
-
-#~ msgid "Draft rec. payment order"
-#~ msgstr "Rascunho de ordem de pagamento recebível"
-
-#~ msgid "Draft pay. payment order"
-#~ msgstr "Rascunho de ordem de pagamento pagável"
-
-#~ msgid "Receivable invoice payments"
-#~ msgstr "Factura de pagamentos Recebível"
-
-#~ msgid "Rec. payment orders to validate"
-#~ msgstr "Ordens de pagamento recebível para validar"
-
-#~ msgid ""
-#~ "If your bank allows you to send orders without the bank account info, you "
-#~ "may disable this option"
-#~ msgstr ""
-#~ "Se o seu banco permite enviar ordens sem a informação da conta bancária, "
-#~ "pode desactivar esta opção"
-
-#~ msgid "Receivable payment orders"
-#~ msgstr "Ordens de pagamento recebível"
-
-#~ msgid "All paid and to pay invoice payments"
-#~ msgstr "Todas as facturas de pagamentos pagos e por pagar"
-
-#~ msgid "Invoice payments to receive"
-#~ msgstr "Factura de pagamentos para receber"
-
-#~ msgid "Pay. payment orders to validate"
-#~ msgstr "Ordens de pagamento pagáveis para validar"
-
-#~ msgid "New Pay. payment Order"
-#~ msgstr "Nova Ordem de pagamento pagável"
-
-#~ msgid "Receivable payments unreconciled"
-#~ msgstr "Pagamentos Recebíveis não reconciliados"
-
-#~ msgid "All done payable payments"
-#~ msgstr "todos os pagamentos pagáveis concluidos"
-
-#~ msgid "Done receivable payments unreconciled"
-#~ msgstr "Pagamento recebíveis não reconciliados concluídos"
-
-#~ msgid "Payable payments"
-#~ msgstr "Pagamentos pagáveis"
-
-#~ msgid "Account Payment Extension"
-#~ msgstr "Extensão da Conta de Pagamento"
-
-#~ msgid "All done receivable payments"
-#~ msgstr "Todos os pagamentos recebíveis concluídos"
-
-#~ msgid "Payable invoice payments"
-#~ msgstr "Factura de pagamentos pagáveis"
-
-#~ msgid "Receivable payments"
-#~ msgstr "Pagamentos Recebível"
-
-#~ msgid "Payable payments unreconciled"
-#~ msgstr "Pagamentos pagáveis não reconciliados"
-
-#~ msgid "New rec. payment order"
-#~ msgstr "Nova ordem de pagamento recebível"
