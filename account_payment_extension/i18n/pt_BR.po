@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 6.1beta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2010-12-17 20:52+0000\n"
-"PO-Revision-Date: 2012-01-25 17:18+0000\n"
+"PO-Revision-Date: 2012-11-22 18:51+0000\n"
 "Last-Translator: Renato Lima - http://www.akretion.com "
 "<renatonlima@gmail.com>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-31 04:49+0000\n"
-"X-Generator: Launchpad (build 16218)\n"
+"X-Launchpad-Export-Date: 2012-11-23 05:27+0000\n"
+"X-Generator: Launchpad (build 16293)\n"
 
 #. module: account_payment_extension
 #: selection:payment.order,type:0
@@ -499,9 +499,3 @@ msgstr "Mostrar Devoluções"
 #: help:populate_payment_ext,init,show_refunds:0
 msgid "Indicates if search should include refunds."
 msgstr "Indica se a pesquisa deve incluir devoluções."
-
-#~ msgid "Payable payments"
-#~ msgstr "Payable payments"
-
-#~ msgid "Receivable payments"
-#~ msgstr "Receivable payments"

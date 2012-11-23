@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.10\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2010-12-17 20:52+0000\n"
-"PO-Revision-Date: 2011-01-03 23:25+0000\n"
+"PO-Revision-Date: 2012-11-22 18:31+0000\n"
 "Last-Translator: Jordi Esteve (www.zikzakmedia.com) "
 "<jesteve@zikzakmedia.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-31 04:49+0000\n"
-"X-Generator: Launchpad (build 16218)\n"
+"X-Launchpad-Export-Date: 2012-11-23 05:27+0000\n"
+"X-Generator: Launchpad (build 16293)\n"
 "Language: ca\n"
 
 #. module: account_payment_extension
@@ -538,82 +538,3 @@ msgstr "Mostrar abonos"
 #: help:populate_payment_ext,init,show_refunds:0
 msgid "Indicates if search should include refunds."
 msgstr "Indica si la búsqueda debe incluir abonos."
-
-#~ msgid "Payable payment orders"
-#~ msgstr "Órdenes de pago"
-
-#~ msgid "Done payable payments unreconciled"
-#~ msgstr "Pagos realizados no conciliados"
-
-#~ msgid "Draft pay. payment order"
-#~ msgstr "Órdenes de pago borrador"
-
-#~ msgid "Rec. payment orders to validate"
-#~ msgstr "Órdenes de cobro a validar"
-
-#~ msgid "Pay. payment orders to validate"
-#~ msgstr "Órdenes de pago a validar"
-
-#~ msgid "New Pay. payment Order"
-#~ msgstr "Nueva orden de pago"
-
-#~ msgid "Receivable payments unreconciled"
-#~ msgstr "Cobros no conciliados"
-
-#~ msgid "All done payable payments"
-#~ msgstr "Todos los pagos realizados"
-
-#~ msgid "Receivable payment orders"
-#~ msgstr "Órdenes de cobro"
-
-#~ msgid "Done receivable payments unreconciled"
-#~ msgstr "Cobros realizados no conciliados"
-
-#~ msgid "Payable payments"
-#~ msgstr "Pagos"
-
-#~ msgid "Account Payment Extension"
-#~ msgstr "Extensión de pagos contables (Tesorería)"
-
-#~ msgid "All done receivable payments"
-#~ msgstr "Todos los cobros realizados"
-
-#~ msgid "Receivable payments"
-#~ msgstr "Cobros"
-
-#~ msgid "Payable payments unreconciled"
-#~ msgstr "Pagos no conciliados"
-
-#~ msgid "Draft rec. payment order"
-#~ msgstr "Órdenes de cobro borrador"
-
-#~ msgid "New rec. payment order"
-#~ msgstr "Nueva orden de cobro"
-
-#~ msgid "Invoice payments to pay"
-#~ msgstr "Efectos a pagar"
-
-#~ msgid "All received and to receive invoice payments"
-#~ msgstr "Todos los efectos cobrados y a cobrar"
-
-#~ msgid "Receivable invoice payments"
-#~ msgstr "Efectos a cobrar"
-
-#~ msgid "All paid and to pay invoice payments"
-#~ msgstr "Todos los efectos pagados y a pagar"
-
-#~ msgid "Invoice payments to receive"
-#~ msgstr "Efectos a cobrar"
-
-#~ msgid "Payable invoice payments"
-#~ msgstr "Efectos de pago"
-
-#~ msgid "Require bank account"
-#~ msgstr "Requerir cuenta bancaria"
-
-#~ msgid ""
-#~ "If your bank allows you to send orders without the bank account info, you "
-#~ "may disable this option"
-#~ msgstr ""
-#~ "Si su banco admite enviar órdenes sin información de cuenta bancaria, puede "
-#~ "deshabilitar esta opción."

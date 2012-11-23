@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: OpenERP Server 5.0.0-rc1\n"
 "Report-Msgid-Bugs-To: support@openerp.com\n"
 "POT-Creation-Date: 2010-12-17 20:52+0000\n"
-"PO-Revision-Date: 2011-01-03 23:26+0000\n"
+"PO-Revision-Date: 2012-11-22 18:51+0000\n"
 "Last-Translator: Jordi Esteve (www.zikzakmedia.com) "
 "<jesteve@zikzakmedia.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2012-10-31 04:49+0000\n"
-"X-Generator: Launchpad (build 16218)\n"
+"X-Launchpad-Export-Date: 2012-11-23 05:27+0000\n"
+"X-Generator: Launchpad (build 16293)\n"
 "Language: ca\n"
 
 #. module: account_payment_extension
@@ -536,82 +536,3 @@ msgstr "Mostra abonaments"
 #: help:populate_payment_ext,init,show_refunds:0
 msgid "Indicates if search should include refunds."
 msgstr "Indica si la cerca ha d'incloure abonaments."
-
-#~ msgid "Invoice payments to pay"
-#~ msgstr "Efectes pendents de pagament"
-
-#~ msgid "Payable payment orders"
-#~ msgstr "Ordres de pagament"
-
-#~ msgid "Done payable payments unreconciled"
-#~ msgstr "Pagaments realitzats no conciliats"
-
-#~ msgid "Draft pay. payment order"
-#~ msgstr "Ordres de pagament esborrany"
-
-#~ msgid "Receivable invoice payments"
-#~ msgstr "Efectes de cobrament"
-
-#~ msgid "Rec. payment orders to validate"
-#~ msgstr "Ordres de cobrament per validar"
-
-#~ msgid "Pay. payment orders to validate"
-#~ msgstr "Ordres de pagament per validar"
-
-#~ msgid "New Pay. payment Order"
-#~ msgstr "Nova ordre de pagament"
-
-#~ msgid "Receivable payments unreconciled"
-#~ msgstr "Cobraments no conciliats"
-
-#~ msgid "All done payable payments"
-#~ msgstr "Tots els pagaments realitzats"
-
-#~ msgid "Receivable payment orders"
-#~ msgstr "Ordres de cobrament"
-
-#~ msgid "Done receivable payments unreconciled"
-#~ msgstr "Cobraments realitzats no conciliats"
-
-#~ msgid "Payable payments"
-#~ msgstr "Pagaments"
-
-#~ msgid "Account Payment Extension"
-#~ msgstr "Extensió de pagaments comptables (Tresoreria)"
-
-#~ msgid "All done receivable payments"
-#~ msgstr "Tots els cobraments realitzats"
-
-#~ msgid "Receivable payments"
-#~ msgstr "Cobraments"
-
-#~ msgid "Payable payments unreconciled"
-#~ msgstr "Pagaments no conciliats"
-
-#~ msgid "Draft rec. payment order"
-#~ msgstr "Ordres de cobrament esborrany"
-
-#~ msgid "New rec. payment order"
-#~ msgstr "Nova ordre de cobrament"
-
-#~ msgid "Payable invoice payments"
-#~ msgstr "Efectes de pagament"
-
-#~ msgid "All received and to receive invoice payments"
-#~ msgstr "Tots els efectes de cobrament"
-
-#~ msgid "All paid and to pay invoice payments"
-#~ msgstr "Tots els efectes de pagament"
-
-#~ msgid "Invoice payments to receive"
-#~ msgstr "Efectes pendents de cobrament"
-
-#~ msgid "Require bank account"
-#~ msgstr "Requereix compte bancari"
-
-#~ msgid ""
-#~ "If your bank allows you to send orders without the bank account info, you "
-#~ "may disable this option"
-#~ msgstr ""
-#~ "Si el vostre banc us permet enviar ordres sense la informació del compte "
-#~ "bancari podeu deshabilitar aquesta opció."
