@@ -46,24 +46,6 @@
             <field name="target">new</field>
         </record>
         
-    <!-- FORM SEARCH-->
-
-    <record id="view_payment_order_form_ext1" model="ir.ui.view">
-        <field name="name">payment.order.form.ext1</field>
-        <field name="model">payment.order</field>
-        <field name="type">form</field>
-        <field name="inherit_id" ref="account_payment.view_payment_order_form"/>
-        <field name="arch" type="xml">
-            <button name="%(account_payment.action_create_payment_order)d" position="replace">
-                <field name="payment_type_name" invisible="1"/>
-                <field name="type"/>
-                <field name="create_account_moves"/>
-                <group colspan="2" col="1" attrs="{'invisible': [('create_account_moves', '=', 'bank-statement')]}">
-                    <field name="period_id" attrs="{'required': [('create_account_moves', '!=', 'bank-statement')]}"/>
-                </group>
-                <button colspan="2" name="%(action_create_payment_extension_order)d" string="Select invoices to pay/receive payment" type="action" attrs="{'invisible':[('state','=','done')]}" icon="gtk-find"/>
-            </button>
-        </field>
-    </record>
+    
     </data>
 </openerp>
