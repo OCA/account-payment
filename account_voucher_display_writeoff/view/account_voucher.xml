@@ -11,12 +11,13 @@
                 <field name="account_id" position="after">
                     <field name="payment_option" required="1"/>
                     <field name="writeoff_acc_id"
-                           attrs="{'invisible':[('payment_option','!=','with_writeoff')], 'required':[('payment_option','=','with_writeoff')]}"
-                           domain="[('type','=','other')]"/>
+                           attrs="{'invisible': [('payment_option', '!=', 'with_writeoff')], 'required': [('payment_option', '=', 'with_writeoff')]}"
+                           domain="[('type', '=', 'other')]"/>
                     <field name="comment"
-                           attrs="{'invisible':[('payment_option','!=','with_writeoff')]}"/>
+                           attrs="{'invisible': [('payment_option', '!=', 'with_writeoff')]}"/>
                 </field>
             </field>
         </record>
     </data>
 </openerp>
+
