@@ -21,6 +21,7 @@
 
 from osv import osv, fields
 
+
 class account_voucher(osv.osv):
     """
     Add the voucher's type as a selection criterium for 
@@ -30,12 +31,13 @@ class account_voucher(osv.osv):
     """
     _inherit = 'account.voucher'
     _columns = {
-        'type':fields.selection(
+        'type': fields.selection(
             [
-            ('sale','Sale'),
-            ('purchase','Purchase'),
-            ('payment','Payment'),
-            ('receipt','Receipt'),
-            ],'Default Type', readonly=True, states={'draft':[('readonly',False)]},
+            ('sale', 'Sale'),
+            ('purchase', 'Purchase'),
+            ('payment', 'Payment'),
+            ('receipt', 'Receipt'),
+            ], 'Default Type', readonly=True, states={'draft': [('readonly', False)]},
             change_default=1),
         }
+
