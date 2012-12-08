@@ -19,10 +19,10 @@
 #
 ##############################################################################
 
-from osv import osv, fields
+from openerp.osv import osv, fields
 
 
-class account_voucher(osv.osv):
+class account_voucher(osv.Model):
     """
     Add the voucher's type as a selection criterium for 
     default values by setting change_default to True.
@@ -40,4 +40,3 @@ class account_voucher(osv.osv):
             ], 'Default Type', readonly=True, states={'draft': [('readonly', False)]},
             change_default=1),
         }
-

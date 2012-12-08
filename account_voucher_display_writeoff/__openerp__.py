@@ -47,4 +47,3 @@ depending on lp:827649 for which we are proposing a fix.
     "license": 'AGPL-3',
 }
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
-
