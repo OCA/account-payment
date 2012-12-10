@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_voucher_form" model="ir.ui.view">
+            <field name="name">Voucher form: enable writeoff on sale/purchase vouchers</field>
+            <field name="model">account.voucher</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account_voucher.view_voucher_form"/>
+            <field name="priority" eval="100"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group/field[@name='currency_id']/.." position="inside">
+                    <group col="2" colspan="2">
+                        <separator string="Write-Off" colspan="2"/>
+                        <field name="payment_option" required="1"/>
+                        <field name="writeoff_acc_id"
+                               attrs="{'invisible': [('payment_option', '!=', 'with_writeoff')], 'required': [('payment_option', '=', 'with_writeoff')]}"
+                               domain="[('type', '=', 'other')]"/>
+                        <field name="comment"
+                               attrs="{'invisible': [('payment_option', '!=', 'with_writeoff')]}"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_sale_receipt_form">
+            <field name="name">Voucher form: enable writeoff on sale receipt vouchers</field>
+            <field name="model">account.voucher</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account_voucher.view_sale_receipt_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group/field[@name='paid']/.." position="inside">
+                    <group col="2" colspan="2">
+                        <separator string="Write-Off" colspan="2"/>
+                            <field name="payment_option" required="1"/>
+                            <field name="writeoff_acc_id"
+                                   attrs="{'invisible': [('payment_option', '!=', 'with_writeoff')], 'required': [('payment_option', '=', 'with_writeoff')]}"
+                                   domain="[('type', '=', 'other')]"/>
+                            <field name="comment"
+                                   attrs="{'invisible': [('payment_option', '!=', 'with_writeoff')]}"/>
+                        </group>
+                </xpath>
+            </field>
+        </record>
+
+       <record model="ir.ui.view" id="view_purchase_receipt_form">
+            <field name="name">Voucher form: enable writeoff on purchase receipt vouchers</field>
+            <field name="model">account.voucher</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account_voucher.view_purchase_receipt_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//group/field[@name='paid']/.." position="inside">
+                    <group col="2" colspan="2">
+                        <separator string="Write-Off" colspan="2"/>
+                            <field name="payment_option" required="1"/>
+                            <field name="writeoff_acc_id"
+                                   attrs="{'invisible': [('payment_option', '!=', 'with_writeoff')], 'required': [('payment_option', '=', 'with_writeoff')]}"
+                                   domain="[('type', '=', 'other')]"/>
+                            <field name="comment"
+                                   attrs="{'invisible': [('payment_option', '!=', 'with_writeoff')]}"/>
+                        </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
