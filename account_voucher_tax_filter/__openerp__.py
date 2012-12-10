@@ -25,6 +25,14 @@
     "category": 'Accounting & Finance',
     'complexity': "normal",
     "description": """
+This module adds dynamic filters on sale and purchase vouchers so that
+sale taxes cannot be used on purchase vouchers and vice versa.
+
+This addon is compatible with OpenERP 6.1. In OpenERP 7.0, the tax
+selection has been added to the specific views for sale and purchase taxes.
+For the generic view, the missing filter has been reported as lp:1081097 and
+a solution has been proposed. Note that you should probably avoid using the
+generic view to create sale or purchase vouchers anyway due to lp:1080840
     """,
     'website': 'http://therp.nl',
     'images': [],
