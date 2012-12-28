@@ -153,6 +153,7 @@
     =================================================================================================
     -->
     <!--Field partner_bank_id in client invoices has a strange domain: domain="[('partner_id.ref_companies', 'in', [company_id])]"-->
+    <!--
     <record model="ir.ui.view" id="invoice_form3">
         <field name="name">account.invoice.form3.payment_type</field>
         <field name="model">account.invoice</field>
@@ -188,7 +189,7 @@
             </field>
         </field>
     </record>
-
+    -->
 
     <!--************ account.move.line extension to show additional fields **********-->
     <!--
