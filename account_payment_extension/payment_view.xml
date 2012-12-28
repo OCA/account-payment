@@ -153,7 +153,7 @@
     =================================================================================================
     -->
     <!--Field partner_bank_id in client invoices has a strange domain: domain="[('partner_id.ref_companies', 'in', [company_id])]"-->
-    <!--
+    
     <record model="ir.ui.view" id="invoice_form3">
         <field name="name">account.invoice.form3.payment_type</field>
         <field name="model">account.invoice</field>
@@ -164,15 +164,15 @@
                 <field domain="[('partner_id', '=', partner_id)]" name="partner_bank_id" on_change="onchange_partner_bank(partner_bank_id)"/>
             </field>
         </field>
-    </record>
-
+    </record>   
+    
     <record model="ir.ui.view" id="invoice_form4">
         <field name="name">account.invoice.form4.payment_type</field>
         <field name="model">account.invoice</field>
         <field name="type">form</field>
         <field name="inherit_id" ref="account.invoice_form"/>
         <field name="arch" type="xml">
-            <field name="address_invoice_id" position="after">
+            <field name="fiscal_position" position="after">
                 <field domain="[('company_id', '=', company_id)]" name="payment_type" on_change="onchange_payment_type(payment_type, partner_id)" />
             </field>
         </field>
@@ -184,12 +184,12 @@
         <field name="type">form</field>
         <field name="inherit_id" ref="account.invoice_supplier_form"/>
         <field name="arch" type="xml">
-            <field name="address_invoice_id" position="after">
+            <field name="fiscal_position" position="after">
                 <field domain="[('company_id', '=', company_id)]" name="payment_type" on_change="onchange_payment_type(payment_type, partner_id)" />
             </field>
         </field>
     </record>
-    -->
+   
 
     <!--************ account.move.line extension to show additional fields **********-->
     <!--
