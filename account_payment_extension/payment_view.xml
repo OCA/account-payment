@@ -191,6 +191,7 @@
 
 
     <!--************ account.move.line extension to show additional fields **********-->
+    <!--
     <record model="ir.ui.view" id="payments_move_line_tree">
         <field name="name">account.payments.move.line.tree</field>
         <field name="model">account.move.line</field>
@@ -223,7 +224,7 @@
             </separator>
         </field>
     </record>
-
+	-->
 
     <!--
     ========================================================================================================
@@ -345,7 +346,7 @@
     =========================================================================================
      PAYMENTS
     =========================================================================================
-    -->
+    
     <record id="view_payments_tree" model="ir.ui.view">
         <field name="name">Payments</field>
         <field name="model">account.move.line</field>
@@ -406,8 +407,8 @@
            </search>
         </field>
     </record>
-
-    <!-- Invoice Payments -->
+	-->
+    <!-- Invoice Payments
     <record model="ir.actions.act_window" id="action_invoice_payments">
         <field name="name">Invoice payments</field>
         <field name="res_model">account.move.line</field>
@@ -417,8 +418,8 @@
         <field name="domain">[('account_id.type','in',['receivable','payable']),('invoice','&lt;&gt;',False)]</field>
     </record>
     <menuitem name="Invoice payments" parent="account_payment.menu_main_payment" action="action_invoice_payments" id="menu_action_invoice_payments" sequence="4"/>
-
-    <!-- Done Payments -->
+	-->
+    <!-- Done Payments
     <record model="ir.actions.act_window" id="action_done_payments">
         <field name="name">Done payments</field>
         <field name="res_model">account.move.line</field>
@@ -428,6 +429,6 @@
         <field name="domain">[('account_id.type','in',['receivable','payable']),('invoice','=',False)]</field>
     </record>
     <menuitem name="Done payments" parent="account_payment.menu_main_payment" action="action_done_payments" id="menu_action_done_payments" sequence="5"/>
-
+	-->
 </data>
 </openerp>
