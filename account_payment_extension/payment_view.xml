@@ -127,7 +127,6 @@
 
     <menuitem action="action_payment_type" id="menu_action_payment_type" parent="account.menu_configuration_misc"/>
 
-
     <!--
     =======================================================================================================
         PAYMENT MODE
@@ -145,7 +144,6 @@
             </field>
         </field>
     </record>
-
 
     <!--
     =================================================================================================
@@ -190,7 +188,6 @@
         </field>
     </record>
    
-
     <!--************ account.move.line extension to show additional fields ********** -->
     <record model="ir.ui.view" id="view_move_line_tree_wiz">
         <field name="name">account.move.line.tree</field>
@@ -209,17 +206,6 @@
             </field>
         </field>
     </record>
-
-
-<!--    <record model="ir.ui.view" id="payments_move_line_tree">
-        <field name="name">account.payments.move.line.tree</field>
-        <field name="model">account.move.line</field>
-        <field name="type">tree</field>
-        <field name="inherit_id" ref="account_payment.view_move_line_tree_wiz"/>
-        <field name="arch" type="xml">
-
-        </field>
-    </record>-->
 
     <record model="ir.ui.view" id="payments_move_line_form">
         <field name="name">account.payments.move.line.form</field>
