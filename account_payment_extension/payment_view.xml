@@ -192,7 +192,6 @@
    
 
     <!--************ account.move.line extension to show additional fields **********-->
-    <!--
     <record model="ir.ui.view" id="payments_move_line_tree">
         <field name="name">account.payments.move.line.tree</field>
         <field name="model">account.move.line</field>
@@ -215,17 +214,16 @@
         <field name="type">form</field>
         <field name="inherit_id" ref="account.view_move_line_form"/>
         <field name="arch" type="xml">
-            <separator string="Internal Note" position="before">
-                <group col="2" colspan="2">
-                    <separator colspan="2" string="Payment"/>
+            <field name="narration" position="before">
+        <!--        <group col="2" colspan="2">
+                    <separator colspan="2" string="Payment"/> -->
                     <field name="payment_type" select="1" widget="selection"/>
                     <field name="partner_bank_id" domain="[('partner_id','=',partner_id)]"/>
                     <field name="received_check"/>
-                </group>
-            </separator>
+        <!--        </group> -->
+            </field>
         </field>
     </record>
-	-->
 
     <!--
     ========================================================================================================
@@ -347,7 +345,7 @@
     =========================================================================================
      PAYMENTS
     =========================================================================================
-    
+    -->
     <record id="view_payments_tree" model="ir.ui.view">
         <field name="name">Payments</field>
         <field name="model">account.move.line</field>
@@ -381,35 +379,33 @@
         <field name="priority" eval="20"/>
         <field name="arch" type="xml">
             <search string="Search Invoice Payments">
-               <group col='10' colspan='4'>
                     <filter icon="terp-sale" string="Receive" domain="[('account_id.type','=','receivable')]" help="Receivable payments"/>
                     <filter icon="terp-purchase" string="Pay" domain="[('account_id.type','=','payable')]" help="Payable payments"/>
-                    <separator orientation="vertical"/>
+                    <separator/>
                     <filter icon="terp-dolar_ok!" string="Unreconciled" domain="[('reconcile_id','=',False)]" help="Unreconciled payments"/>
                     <field name="account_id"/>
                     <field name="partner_id"/>
                     <field name="invoice"/>
                     <field name="date_maturity"/>
-                    <newline/>
+                    <separator/>
                     <field name="amount_to_pay"/>
                     <field name="payment_type" widget="selection"/>
                     <field name="partner_bank_id"/>
                     <field name="received_check"/>
-                </group>
-                <newline/>
-                <group expand="0" string="Group By...">
-                    <filter string="Partner" icon="terp-partner" domain="[]" context="{'group_by':'partner_id'}"/>
-                    <filter string="Journal" icon="terp-folder-orange" domain="[]" context="{'group_by':'journal_id'}"/>
-                    <filter string="State" icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'state'}"/>
-                    <separator orientation="vertical"/>
-                    <filter string="Period" icon="terp-go-month" domain="[]" context="{'group_by':'period_id'}"/>
-                    <filter string="Effective date" icon="terp-go-month" domain="[]" context="{'group_by':'date_maturity'}"/>
-                </group>
-           </search>
+                    <group expand="0" string="Group By...">
+                        <filter string="Partner" icon="terp-partner" domain="[]" context="{'group_by':'partner_id'}"/>
+                        <filter string="Journal" icon="terp-folder-orange" domain="[]" context="{'group_by':'journal_id'}"/>
+                        <filter string="State" icon="terp-stock_effects-object-colorize" domain="[]" context="{'group_by':'state'}"/>
+                        <separator/>
+                        <filter string="Period" icon="terp-go-month" domain="[]" context="{'group_by':'period_id'}"/>
+                        <filter string="Effective date" icon="terp-go-month" domain="[]" context="{'group_by':'date_maturity'}"/>
+                    </group>
+            </search>
         </field>
     </record>
-	-->
-    <!-- Invoice Payments
+
+    <!-- Invoice Payments -->
+
     <record model="ir.actions.act_window" id="action_invoice_payments">
         <field name="name">Invoice payments</field>
         <field name="res_model">account.move.line</field>
@@ -418,9 +414,10 @@
         <field name="search_view_id" ref="view_payments_filter"/>
         <field name="domain">[('account_id.type','in',['receivable','payable']),('invoice','&lt;&gt;',False)]</field>
     </record>
+
     <menuitem name="Invoice payments" parent="account_payment.menu_main_payment" action="action_invoice_payments" id="menu_action_invoice_payments" sequence="4"/>
-	-->
-    <!-- Done Payments
+-
+    <!-- Done Payments -->
     <record model="ir.actions.act_window" id="action_done_payments">
         <field name="name">Done payments</field>
         <field name="res_model">account.move.line</field>
@@ -429,7 +426,8 @@
         <field name="search_view_id" ref="view_payments_filter"/>
         <field name="domain">[('account_id.type','in',['receivable','payable']),('invoice','=',False)]</field>
     </record>
+
     <menuitem name="Done payments" parent="account_payment.menu_main_payment" action="action_done_payments" id="menu_action_done_payments" sequence="5"/>
-	-->
+
 </data>
 </openerp>
