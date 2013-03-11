@@ -25,13 +25,57 @@
 
 import netsvc
 from osv import fields, osv
+from tools.translate import _
 
 class account_move_line(osv.osv):
     _name = 'account.move.line'
     _inherit = 'account.move.line'
 
-    def _invoice(self, cr, uid, ids, name, arg, context=None):
-        return super(account_move_line, self)._invoice(cr, uid, ids, name, arg, context)
+    def _invoice(self, cursor, user, ids, name, arg, context=None):
+        invoice_obj = self.pool.get('account.invoice')
+        res = {}
+        for line_id in ids:
+            res[line_id] = False
+        cursor.execute('SELECT l.id, i.id ' \
+                        'FROM account_move_line l, account_invoice i ' \
+                        'WHERE l.move_id = i.move_id ' \
+                        'AND l.id IN %s',
+                        (tuple(ids),))
+        invoice_ids = []
+        
+ 
+        for line_id, invoice_id in cursor.fetchall():
+            res[line_id] = invoice_id
+            invoice_ids.append(invoice_id)
+        invoice_names = {False: ''}
+        for invoice_id, name in invoice_obj.name_get(cursor, user, invoice_ids, context=context):
+            invoice_names[invoice_id] = name
+        for line_id in res.keys():
+            invoice_id = res[line_id]
+            res[line_id] = (invoice_id, invoice_names[invoice_id])
+        
+        for key in res.keys():
+            if res[key][0] == False:   
+            # if there is no a direct invoice related
+                move_line_obj = self.pool.get('account.move.line')
+                line1 = move_line_obj.browse(cursor, user, key)
+                move = self.pool.get('account.move').browse (cursor, user, line1.move_id.id)
+                
+                if move:
+                    for line_in in move.line_id:
+                        if line_in.id <> key and (line_in.reconcile_id or line_in.reconcile_partial_id):
+                            for line_in2 in line_in.reconcile_id.line_id:
+                                if line_in2.id <> line_in.id:
+                                    dict = self._invoice (cursor, user, [line_in2.id], name, arg, context)
+                                    for item in dict.keys():
+                                        res[key] = dict[item] 
+                                    
+        return res
+
+    #===========================================================================
+    # def _invoice(self, cr, uid, ids, name, arg, context=None):
+    #    return super(account_move_line, self)._invoice(cr, uid, ids, name, arg, context)
+    #===========================================================================
 
     def _invoice_search(self, cr, uid, obj, name, args, context={}):
         """ Redefinition for searching account move lines without any invoice related ('invoice.id','=',False)"""
@@ -160,7 +204,7 @@ class account_move_line(osv.osv):
             type='many2one', relation='account.invoice', fnct_search=_invoice_search),
         'received_check': fields.boolean('Received check', help="To write down that a check in paper support has been received, for example."),
         'partner_bank_id': fields.many2one('res.partner.bank','Bank Account'),
-        'amount_to_pay' : fields.function(amount_to_pay, method=True, type='float', string='Amount to pay', fnct_search=_to_pay_search),
+        'amount_to_pay' : fields.function(amount_to_pay, method=True, type='float', string='Amount to pay', fnct_search=_to_pay_search, store=True),
         'payment_type': fields.function(_payment_type_get, fnct_search=_payment_type_search, method=True, type="many2one", relation="payment.type", string="Payment type"),
     }
 
@@ -173,20 +217,92 @@ class account_move_line(osv.osv):
     def fields_view_get(self, cr, uid, view_id=None, view_type='form', context={}, toolbar=False, submenu=False):
         menus = [
             self.pool.get('ir.model.data').get_object_reference(cr, uid, 'account_payment_extension', 'menu_action_invoice_payments'),
-            self.pool.get('ir.model.data').get_object_reference(cr, uid, 'account_payment_extension', 'menu_action_done_payments'),
+            #self.pool.get('ir.model.data').get_object_reference(cr, uid, 'account_payment_extension', 'menu_action_done_payments'),
         ]
+        views = [
+            self.pool.get('ir.model.data').get_object_reference(cr, uid, 'account_payment_extension', 'view_payments_tree'),
+    
+        ]
+        
         menus = [m[1] for m in menus]
-        if 'active_id' in context and context['active_id'] in menus:
-            # Use standard views for account.move.line object
-            if view_type == 'search':
-                # Get a specific search view (bug in 6.0RC1, it does not give the search view defined in the action window)
-                view_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'account_payment_extension', 'view_payments_filter')[1]
+        views = [v[1] for v in views]
+        #=======================================================================
+        # if 'active_id' in context and context['active_id'] in menus:
+        #    # Use standard views for account.move.line object
+        #    if view_type == 'search':
+        #        # Get a specific search view (bug in 6.0RC1, it does not give the search view defined in the action window)
+        #        view_id = self.pool.get('ir.model.data').get_object_reference(cr, uid, 'account_payment_extension', 'view_payments_filter')[1]
+        #    result = super(osv.osv, self).fields_view_get(cr, uid, view_id, view_type, context, toolbar=toolbar, submenu=submenu)
+        # else:
+        #    # Use special views for account.move.line object (for ex. tree view contains user defined fields)
+        #    result = super(account_move_line, self).fields_view_get(cr, uid, view_id, view_type, context, toolbar=toolbar, submenu=submenu)
+        #=======================================================================
+        if view_id in views:
             result = super(osv.osv, self).fields_view_get(cr, uid, view_id, view_type, context, toolbar=toolbar, submenu=submenu)
         else:
-            # Use special views for account.move.line object (for ex. tree view contains user defined fields)
             result = super(account_move_line, self).fields_view_get(cr, uid, view_id, view_type, context, toolbar=toolbar, submenu=submenu)
+            
         return result
-
+        
+    def pay_move_lines(self, cr, uid, ids, context=None):
+        
+        #obj_move = self.pool.get('account.move')
+        amount = 0
+        name = ''
+        ttype = ''
+        invoice_type = ''
+        partner_id = False
+        inv_id = False 
+        several_invoices = False
+        if context is None:
+            context = {}
+        data_line = self.browse(cr, uid,ids, context)
+        for line in data_line:
+            #move_ids.append(line.move_id.id)
+            if not inv_id:
+                inv_id = line.invoice.id
+            if inv_id and (line.invoice.id <> inv_id):
+                several_invoices = True
+            if partner_id and (line.partner_id.id <> partner_id):
+                raise osv.except_osv(_('Warning'), _('The pay entries have to be for the same partner!!!'))
+            else :
+                amount += line.amount_to_pay
+                partner_id = line.partner_id.id
+                name += line.name + '/' 
+        if several_invoices:
+            inv_id = False 
+        if amount > 0:
+            ttype = 'payment'
+            invoice_type = 'in_invoice'
+        else: 
+            amount = -amount
+            ttype = 'receipt'
+            invoice_type = 'out_invoice'
+            
+        print amount
+            
+        return {
+            'name':_("Pay Moves"),
+            'view_mode': 'form',
+            'view_id': False,
+            'view_type': 'form',
+            'res_model': 'account.voucher',
+            'type': 'ir.actions.act_window',
+            'nodestroy': True,
+            'target': 'current',
+            'domain': '[]',
+            'context': {
+                'default_partner_id': partner_id,
+                'default_amount': amount,
+                'default_name': name,
+                'close_after_process': True,
+                'invoice_type': invoice_type,
+                'invoice_id':inv_id,
+                'default_type': ttype ,
+                'type':  ttype ,
+                'move_line_ids': ids
+                }
+        }
 account_move_line()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

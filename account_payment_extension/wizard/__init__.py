@@ -24,6 +24,7 @@
 ##############################################################################
 
 import account_payment_order
+import account_move_line_payment
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
 

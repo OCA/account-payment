@@ -2,6 +2,9 @@
 <openerp>
 <data>
 
+
+   
+        
     <!--
     ========================================================================================================
         PARTNERS - default bank
@@ -190,6 +193,7 @@
         </field>
     </record>
 
+
     <!--************ account.move.line extension to show additional fields **********-->
     <!--
     <record model="ir.ui.view" id="payments_move_line_tree">
@@ -313,6 +317,8 @@
     </record>
 
 
+
+
     <!--
     ====================================================================================================
         PAYABLE PAYMENT ORDER
@@ -346,7 +352,7 @@
     =========================================================================================
      PAYMENTS
     =========================================================================================
-
+    -->
     <record id="view_payments_tree" model="ir.ui.view">
         <field name="name">Payments</field>
         <field name="model">account.move.line</field>
@@ -369,6 +375,9 @@
                 <field name="move_id" readonly="1"/>
                 <field name="reconcile_id" readonly="1"/>
                 <field name="reconcile_partial_id" readonly="1"/>
+		<field name="journal_id" invisible="1"/>
+		<field name="period_id" invisible="1"/>
+               <button name="pay_move_lines" type="object" string="Payment" icon="gtk-go-forward"/>
             </tree>
         </field>
     </record>
@@ -394,8 +403,8 @@
                     <field name="payment_type" widget="selection"/>
                     <field name="partner_bank_id"/>
                     <field name="received_check"/>
-                </group>
-                <newline/>
+               </group>
+               <newline/>
                 <group expand="0" string="Group By...">
                     <filter string="Partner" icon="terp-partner" domain="[]" context="{'group_by':'partner_id'}"/>
                     <filter string="Journal" icon="terp-folder-orange" domain="[]" context="{'group_by':'journal_id'}"/>
@@ -403,12 +412,14 @@
                     <separator orientation="vertical"/>
                     <filter string="Period" icon="terp-go-month" domain="[]" context="{'group_by':'period_id'}"/>
                     <filter string="Effective date" icon="terp-go-month" domain="[]" context="{'group_by':'date_maturity'}"/>
+                    <filter string="Due Date" icon="terp-go-month" domain="[]" context="{'group_by':'date_maturity'}"/>
+
                 </group>
            </search>
         </field>
     </record>
-	-->
-    <!-- Invoice Payments
+
+    <!--Invoice Payments-->
     <record model="ir.actions.act_window" id="action_invoice_payments">
         <field name="name">Invoice payments</field>
         <field name="res_model">account.move.line</field>
@@ -418,7 +429,7 @@
         <field name="domain">[('account_id.type','in',['receivable','payable']),('invoice','&lt;&gt;',False)]</field>
     </record>
     <menuitem name="Invoice payments" parent="account_payment.menu_main_payment" action="action_invoice_payments" id="menu_action_invoice_payments" sequence="4"/>
-	-->
+	
     <!-- Done Payments
     <record model="ir.actions.act_window" id="action_done_payments">
         <field name="name">Done payments</field>

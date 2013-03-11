@@ -52,10 +52,12 @@ Based on previous work of Pablo Rocandio & Zikzakmedia (version for 4.2).
     "init_xml" : [],
     "demo_xml" : [],
     "update_xml" : [
+                    "payment_wizard.xml",
                     "security/ir.model.access.csv",
                     "wizard/account_payment_order_view.xml",
                     "payment_view.xml",
                     "payment_sequence.xml",
+                    "wizard/account_move_line_payment_view.xml",
                     ],
     "active": False,
     "installable": True,
