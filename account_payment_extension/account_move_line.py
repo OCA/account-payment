@@ -64,11 +64,20 @@ class account_move_line(osv.osv):
                 if move:
                     for line_in in move.line_id:
                         if line_in.id <> key and (line_in.reconcile_id or line_in.reconcile_partial_id):
-                            for line_in2 in line_in.reconcile_id.line_id:
-                                if line_in2.id <> line_in.id:
-                                    dict = self._invoice (cursor, user, [line_in2.id], name, arg, context)
-                                    for item in dict.keys():
-                                        res[key] = dict[item] 
+                            if line_in.reconcile_id:
+                                for line_in2 in line_in.reconcile_id.line_id:
+                                    if line_in2.id <> line_in.id:
+                                        dict = self._invoice (cursor, user, [line_in2.id], name, arg, context)
+                                        for item in dict.keys():
+                                            res[key] = dict[item] 
+                            else:
+                                if line_in.reconcile_partial_id:
+                                   for line_in2 in line_in.reconcile_partial_id.line_partial_ids:
+                                       if line_in2.id <> line_in.id:
+                                           dict = self._invoice (cursor, user, [line_in2.id], name, arg, context)
+                                           for item in dict.keys():
+                                               res[key] = dict[item] 
+                                    
                                     
         return res
 
