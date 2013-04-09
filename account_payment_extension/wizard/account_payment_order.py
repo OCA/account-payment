@@ -102,7 +102,7 @@ class payment_order_create(osv.osv_memory):
         line_ids = line_obj.search(cr, uid, domain, order='date_maturity', context=context)
 
         selected_ids = []
-        if amount:
+        if amount > 0.0:
             if payment.mode and payment.mode.require_bank_account:
                 line2bank = pool.get('account.move.line').line2bank(cr, uid, line_ids, payment.mode.id, context)
             else:
