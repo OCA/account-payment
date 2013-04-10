@@ -102,13 +102,13 @@ class payment_order_create(osv.osv_memory):
         line_ids = line_obj.search(cr, uid, domain, order='date_maturity', context=context)
 
         selected_ids = []
-        if amount:
+        if amount > 0.0:
             # If user specified an amount, search what moves match the criteria
             for line in pool.get('account.move.line').browse(cr, uid, line_ids, context):
                 if abs(line.amount_to_pay) <= amount:
                     amount -= abs(line.amount_to_pay)
                     selected_ids.append( line.id )
-        else:
+        elif not amount:
             selected_ids = line_ids
 
         context.update({'line_ids': selected_ids})
