@@ -113,6 +113,8 @@ class payment_order_create(osv.osv_memory):
                 if abs(line.amount_to_pay) <= amount:
                     amount -= abs(line.amount_to_pay)
                     selected_ids.append( line.id )
+        elif not amount:
+            selected_ids = line_ids
 
         context.update({'line_ids': selected_ids})
         model_data_ids = mod_obj.search(cr, uid,[('model', '=', 'ir.ui.view'), ('name', '=', 'view_create_payment_order_lines')], context=context)
