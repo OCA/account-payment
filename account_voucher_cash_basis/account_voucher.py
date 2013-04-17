@@ -21,11 +21,11 @@
 #
 ##############################################################################
 
-from osv import fields, osv
-from tools.translate import _
+from openerp.osv import fields, orm
+from openerp.tools.translate import _
 import decimal_precision as dp
 
-class account_voucher(osv.osv):
+class account_voucher(orm.Model):
     _inherit = "account.voucher"
     
     _columns = {
@@ -41,7 +41,7 @@ class account_voucher(osv.osv):
         amount = currency_obj.round(cr, uid, move.company_id.currency_id, amount)
         # check if balance differs for more than 1 decimal according to account decimal precision
         if  abs(amount * 10 ** dp.get_precision('Account')(cr)[1]) > 1:
-            raise osv.except_osv(_('Error'), _('The generated payment entry is unbalanced for more than 1 decimal'))
+            raise orm.except_orm(_('Error'), _('The generated payment entry is unbalanced for more than 1 decimal'))
         if not currency_obj.is_zero(cr, uid, move.company_id.currency_id, amount):
             for line in move.line_id:
                 # adjust the first move line that's not receivable, payable or liquidity
@@ -115,7 +115,7 @@ class account_voucher(osv.osv):
         if res:
             write_off_per_invoice = voucher.line_total / len(res.keys())
             if not voucher.company_id.allow_distributing_write_off and  len(res.keys()) > 1 and write_off_per_invoice:
-                raise osv.except_osv(_('Error'), _('You are trying to pay with write-off more than one invoice and distributing write-off is not allowed. See company settings.'))
+                raise orm.except_orm(_('Error'), _('You are trying to pay with write-off more than one invoice and distributing write-off is not allowed. See company settings.'))
             if voucher.type == 'payment' or voucher.type == 'purchase':
                 write_off_per_invoice = - write_off_per_invoice
             for inv_id in res:
