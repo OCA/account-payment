@@ -3,7 +3,8 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2011-2012 Domsense s.r.l. (<http://www.domsense.com>).
-#    Copyright (C) 2012 Agile Business Group sagl (<http://www.agilebg.com>)
+#    Copyright (C) 2012-2013 Agile Business Group sagl
+#    (<http://www.agilebg.com>)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -24,7 +25,7 @@
 {
     "name": "Cash basis extensions for vouchers",
     "version": "1.0",
-    'category': 'Generic Modules/Accounting',
+    'category': 'Hidden/Dependency',
     "depends": ["account_voucher"],
     "author": "Agile Business Group",
     "description": """
@@ -36,10 +37,10 @@
     """,
     'website': 'http://www.agilebg.com',
     'init_xml': [],
-    'update_xml': [
+    'data': [
         'company_view.xml',
         ],
-    'demo_xml': [],
+    'demo': [],
     'installable': True,
     'active': False,
 }
