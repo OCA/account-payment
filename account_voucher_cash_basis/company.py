@@ -41,7 +41,8 @@ class account_config_settings(orm.TransientModel):
         'allow_distributing_write_off': fields.related(
             'company_id', 'allow_distributing_write_off',
             type="boolean",
-            string="Allow distributing write-off"),
+            string="Allow distributing write-off",
+            help="If not set, paying several 'cash basis' invoices with same voucher with write-off won't be allowed. If set, write-off will be distributed equally over invoices"),
     }
     
     def onchange_company_id(self, cr, uid, ids, company_id, context=None):
