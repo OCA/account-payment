@@ -430,7 +430,7 @@ class account_bank_statement_line(osv.osv):
         code, number = vat[:2].lower(), vat[2:].replace(' ', '')
         if partner_facade.simple_vat_check( cr, uid, code, number, context):
             partner_ids = partner_facade.search(cr, uid, [
-                                    ('vat', 'like', '%s' % vat),
+                                    ('vat', 'ilike', vat),
                                     ('active', '=', True),
                                 ], context=context)
             if len(partner_ids) == 1:
