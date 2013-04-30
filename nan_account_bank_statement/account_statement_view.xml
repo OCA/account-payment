@@ -31,7 +31,7 @@
 		<field name="type">form</field>
 		<field name="inherit_id" ref="account.view_bank_statement_form"/>
 		<field name="arch" type="xml">
-			<xpath expr="/form/notebook/page[@name='statement_line_ids']/field[@name='line_ids']/form/field[@name='sequence']" position="after">
+			<xpath expr="/form/sheet/notebook/page[@name='statement_line_ids']/field[@name='line_ids']/form/group/field[@name='sequence']" position="after">
 				<field name="search_by"/>
 				<group colspan="2" col="2">
 					<button name="button_reconcile_search"  string="_Search" type="object" icon="gtk-find" attrs="{'invisible': [('voucher_id','!=',False)]}"/>
@@ -46,7 +46,7 @@
 		<field name="type">form</field>
 		<field name="inherit_id" ref="account.view_bank_statement_form"/>
 		<field name="arch" type="xml">
-			<xpath expr="/form/notebook/page[@name='statement_line_ids']/field[@name='line_ids']/tree/field[@name='amount']" position="after">
+			<xpath expr="/form/sheet/notebook/page[@name='statement_line_ids']/field[@name='line_ids']/tree/field[@name='amount']" position="after">
 				<button name="%(action_statement_line_split_wizard)d" string="Split" type="action" icon="terp-stock_effects-object-colorize"/>
 			</xpath>
 		</field>
