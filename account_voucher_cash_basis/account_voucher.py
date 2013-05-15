@@ -104,7 +104,7 @@ class account_voucher(orm.Model):
             cr, uid, voucher.id, context)
         for line in voucher.line_ids:
             if line.amount and line.move_line_id and line.move_line_id.invoice:
-                if not res.has_key(line.move_line_id.invoice.id):
+                if not line.move_line_id.invoice.id in res:
                     res[line.move_line_id.invoice.id] = {
                         'allocated': 0.0,
                         'total': 0.0,
