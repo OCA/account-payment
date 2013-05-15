@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+<!--    account     -->
+
+        <record id="view_account_form" model="ir.ui.view">
+            <field name="name">account.account.form</field>
+            <field name="model">account.account</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.view_account_form"/>
+            <field name="arch" type="xml">
+                  <field position="after" name="child_consol_ids">
+                      <field name="vat_on_payment_related_account_id"/>
+                    </field>
+            </field>
+        </record>
+
+<!--    tax code     -->
+
+        <record id="view_tax_code_form" model="ir.ui.view">
+            <field name="name">account.tax.code.form</field>
+            <field name="model">account.tax.code</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.view_tax_code_form"/>
+            <field name="arch" type="xml">
+                  <field position="after" name="company_id">
+                      <field name="vat_on_payment_related_tax_code_id"/>
+                    </field>
+            </field>
+        </record>
+
+<!--    journal     -->
+
+        <record id="view_account_journal_form" model="ir.ui.view">
+            <field name="name">account.journal.form</field>
+            <field name="model">account.journal</field>
+            <field name="inherit_id" ref="account.view_account_journal_form"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <field name="group_invoice_lines" position="after">
+                    <field name="vat_on_payment_related_journal_id"/>
+                </field>
+            </field>
+        </record>
+
+<!--    invoice     -->
+
+     <record id="invoice_form" model="ir.ui.view">
+            <field name="name">account.invoice.form</field>
+            <field name="model">account.invoice</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.invoice_form"/>
+            <field name="arch" type="xml">
+                <field name="payment_term" position="after">
+                    <field name="vat_on_payment"/>
+                </field>
+            </field>
+        </record>
+     <record id="invoice_supplier_form" model="ir.ui.view">
+            <field name="name">account.invoice.supplier.form</field>
+            <field name="model">account.invoice</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <field name="date_due" position="after">
+                    <field name="vat_on_payment"/>
+                </field>
+            </field>
+        </record>
+        
+<!--    reconcile    
+
+        <record id="view_move_reconcile_form" model="ir.ui.view">
+            <field name="name">account.move.reconcile.form</field>
+            <field name="model">account.move.reconcile</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.view_move_reconcile_form"/>
+            <field name="arch" type="xml">
+                <field name="line_partial_ids" position="after">
+                    <separator string="VAT on payment" colspan="4"/>
+                    <field name="vat_on_payment_shadow_move_id"/>
+                    <field name="vat_on_payment_real_move_id"/>
+                </field>
+            </field>
+        </record>
+         -->
+        
+        <!-- move line -->
+        
+        <record id="view_move_line_form" model="ir.ui.view">
+            <field name="name">account.move.line.form</field>
+            <field name="model">account.move.line</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account.view_move_line_form"/>
+            <field name="arch" type="xml">
+                <field name="reconcile_partial_id" position="after">
+                    <field name="real_payment_move_id" />
+                </field>
+            </field>
+        </record>
+        
+        <!-- voucher -->
+        
+        <record id="view_vendor_receipt_form_shadow_move" model="ir.ui.view">
+            <field name="name">account.voucher.receipt.form.shadow.move</field>
+            <field name="model">account.voucher</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account_voucher.view_vendor_receipt_form"/>
+            <field name="arch" type="xml">
+                <field name="move_ids" position="after">
+                    <field name="shadow_move_id" />
+                </field>
+            </field>
+        </record>
+        
+        <record id="view_vendor_payment_form_shadow_move" model="ir.ui.view">
+            <field name="name">account.voucher.payment.form.shadow.move</field>
+            <field name="model">account.voucher</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="account_voucher.view_vendor_payment_form"/>
+            <field name="arch" type="xml">
+                <field name="move_ids" position="after">
+                    <field name="shadow_move_id" />
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
