@@ -28,6 +28,13 @@ class res_company(osv.osv):
     _inherit = "res.company"
     _columns = {
         'vat_on_payment': fields.boolean('VAT on payment treatment'),
-        'allow_distributing_write_off': fields.boolean('Allow distributing write-off', help="If not set, paying several 'cash basis' invoices with same voucher with write-off won't be allowed. If set, write-off will be distributed equally over invoices"),
         }
     
+class account_config_settings(osv.osv_memory):
+    _inherit = 'account.config.settings'
+    _columns = {
+        'vat_on_payment': fields.related(
+            'company_id', 'vat_on_payment',
+            type='boolean',
+            string="VAT on payment treatment"),
+    }
