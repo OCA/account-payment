@@ -102,17 +102,14 @@ class payment_order_create(osv.osv_memory):
         line_ids = line_obj.search(cr, uid, domain, order='date_maturity', context=context)
 
         selected_ids = []
-        if amount:
-            if payment.mode and payment.mode.require_bank_account:
-                line2bank = pool.get('account.move.line').line2bank(cr, uid, line_ids, payment.mode.id, context)
-            else:
-                line2bank = None
-            # If user specified an amount, search what moves match the criteria taking into account
-            # if payment mode allows bank account to be null.
+        if amount > 0.0:
+            # If user specified an amount, search what moves match the criteria
             for line in pool.get('account.move.line').browse(cr, uid, line_ids, context):
                 if abs(line.amount_to_pay) <= amount:
                     amount -= abs(line.amount_to_pay)
                     selected_ids.append( line.id )
+        elif not amount:
+            selected_ids = line_ids
 
         context.update({'line_ids': selected_ids})
         model_data_ids = mod_obj.search(cr, uid,[('model', '=', 'ir.ui.view'), ('name', '=', 'view_create_payment_order_lines')], context=context)
@@ -139,7 +136,7 @@ class payment_order_create(osv.osv_memory):
             return {'type': 'ir.actions.act_window_close'}
 
         payment = order_obj.browse(cr, uid, context['active_id'], context=context)
-        t = None
+        t = payment.mode and payment.mode.id or None
         line2bank = line_obj.line2bank(cr, uid, line_ids, t, context)
         ## Finally populate the current payment with new lines:
         for line in line_obj.browse(cr, uid, line_ids, context=context):
