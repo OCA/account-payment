@@ -115,8 +115,8 @@ class account_voucher(orm.Model):
                 res[line.move_line_id.invoice.id]['allocated'] += current_amount
                 res[line.move_line_id.invoice.id]['total'] = self.get_invoice_total(line.move_line_id.invoice)
         if res:
-            write_off_per_invoice = voucher.line_total / len(res.keys())
-            if not voucher.company_id.allow_distributing_write_off and  len(res.keys()) > 1 and write_off_per_invoice:
+            write_off_per_invoice = voucher.line_total / len(res)
+            if not voucher.company_id.allow_distributing_write_off and  len(res) > 1 and write_off_per_invoice:
                 raise orm.except_orm(_('Error'), _(
                     'You are trying to pay with write-off more than one invoice and distributing write-off is not allowed. See company settings.'))
             if voucher.type == 'payment' or voucher.type == 'purchase':
