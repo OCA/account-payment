@@ -39,7 +39,8 @@ class voucher_line(orm.Model):
         return res
     
     _columns = {
-        'supplier_invoice_number': fields.function(_get_supplier_invoice_number, type='char', size=64, string="Supplier Invoice Number"),
+        'supplier_invoice_number': fields.function(_get_supplier_invoice_number,
+            type='char', size=64, string="Supplier Invoice Number"),
         }
 
 class voucher(orm.Model):
