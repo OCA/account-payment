@@ -34,7 +34,7 @@ This module adds the supplier invoice number to (Supplier Payment) voucher lines
         'voucher_view.xml',
         ],
     'test' : [
-        'test/sales_payment.yml',
+        'test/purchase_payment.yml',
     ],
     "demo" : [],
     "active": False,
