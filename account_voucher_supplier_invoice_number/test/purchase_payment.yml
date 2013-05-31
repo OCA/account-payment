@@ -1,8 +1,10 @@
 -
   Create an invoice for the partner Seagate with amount 450.0
 -
+  !python {model: account.invoice}: |
+    context.update({'type': 'in_invoice'})
+-
   !record {model: account.invoice, id: account_invoice_0}:
-    type: 'in_invoice'
     account_id: account.a_pay
     company_id: base.main_company
     currency_id: base.EUR
