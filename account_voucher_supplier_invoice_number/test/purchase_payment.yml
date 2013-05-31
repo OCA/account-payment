@@ -8,6 +8,7 @@
     account_id: account.a_pay
     company_id: base.main_company
     currency_id: base.EUR
+    supplier_invoice_number: '2013/003864'
     invoice_line:
       - account_id: account.a_expense
         name: '[PCSC234] PC Assemble SC234'
@@ -50,11 +51,11 @@
     res['value']['line_dr_ids'][0]['amount'] = 450.0
     vals['line_dr_ids'] = [(0,0,i) for i in res['value']['line_dr_ids']]
     id = self.create(cr, uid, vals)
-    voucher_id = self.browse(cr, uid, id)
-    assert (voucher_id.state=='draft'), "Voucher is not in draft state"
+    voucher = self.browse(cr, uid, id)
+    assert (voucher.state=='draft'), "Voucher is not in draft state"
     wf_service = netsvc.LocalService("workflow")
-    wf_service.trg_validate(uid, 'account.voucher', voucher_id.id, 'proforma_voucher', cr)
-
+    wf_service.trg_validate(uid, 'account.voucher', voucher.id, 'proforma_voucher', cr)
+    assert (voucher.line_ids[0].supplier_invoice_number == '2013/003864'), 'wrong supplier_invoice_number'
 -
   Finally i will Confirm the state of the invoice is paid
 -
