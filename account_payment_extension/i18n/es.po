@@ -23,7 +23,7 @@ msgstr "Mensaje extra de la comunicación de pagos"
 #. module: account_payment_extension
 #: field:payment.mode,require_received_check:0
 msgid "Require Received Check"
-msgstr "Requiere cheque recibido"
+msgstr "Requerir cheque recibido"
 
 #. module: account_payment_extension
 #: model:ir.actions.act_window,help:account_payment_extension.action_pay_account_move_line
@@ -90,7 +90,7 @@ msgstr "Cuenta"
 #. module: account_payment_extension
 #: help:payment.mode,require_bank_account:0
 msgid "Ensure all lines in the payment order have a bank account when proposing lines to be added in the payment order."
-msgstr "Asegura que todas las línease propuestas para incluir en la orden tienen cuenta bancaria."
+msgstr "Asegura que todas las líneas propuestas para incluir en la orden tienen cuenta bancaria."
 
 #. module: account_payment_extension
 #: view:account.move.line:0
@@ -111,7 +111,7 @@ msgstr "¡Error!"
 #. module: account_payment_extension
 #: field:payment.order.create,amount:0
 msgid "Amount"
-msgstr "Amount"
+msgstr "Importe"
 
 #. module: account_payment_extension
 #: help:payment.mode,type:0
@@ -136,7 +136,7 @@ msgstr "¡El nombre de la línea de pago debe ser única!"
 #. module: account_payment_extension
 #: constraint:account.move.line:0
 msgid "The date of your Journal Entry is not in the defined period! You should change the date or remove this constraint from the journal."
-msgstr "¡La fecha de su asiento no está en el periodo definido! Usted debería cambiar la fecha o borar este esta restricción del diario."
+msgstr "¡La fecha de su asiento no está en el periodo definido! Debería cambiar la fecha o borrar esta restricción del diario."
 
 #. module: account_payment_extension
 #: code:addons/account_payment_extension/account_move_line.py:276
@@ -219,7 +219,7 @@ msgstr "¡ Error !"
 #. module: account_payment_extension
 #: model:ir.model,name:account_payment_extension.model_account_move_line_payment
 msgid "Pay Account Move Lines"
-msgstr "Pgar/cobrar apuntes"
+msgstr "Pagar/cobrar apuntes"
 
 #. module: account_payment_extension
 #: code:addons/account_payment_extension/account_move_line.py:276
@@ -230,7 +230,7 @@ msgstr "¡Los efectos tienen que ser de la misma empresa!"
 #. module: account_payment_extension
 #: help:payment.order.create,communication2:0
 msgid "The successor message of payment communication."
-msgstr "The successor message of payment communication."
+msgstr "Mensaje del sucesor de la comunicación del pago."
 
 #. module: account_payment_extension
 #: field:payment.line,payment_move_id:0
@@ -245,7 +245,7 @@ msgstr "A cobrar"
 #. module: account_payment_extension
 #: view:account.move.line:0
 msgid "Unreconciled payments"
-msgstr "Unreconciled payments"
+msgstr "Pagos no conciliados"
 
 #. module: account_payment_extension
 #: help:res.partner,payment_type_customer:0
@@ -261,12 +261,12 @@ msgstr "Cambiar efectos"
 #: code:addons/account_payment_extension/account_move_line.py:294
 #, python-format
 msgid "Pay Moves"
-msgstr "Movimientos de Pago/cobro"
+msgstr "Movimientos de pago/cobro"
 
 #. module: account_payment_extension
 #: constraint:account.move.line:0
 msgid "The selected account of your Journal Entry forces to provide a secondary currency. You should remove the secondary currency on the account or select a multi-currency view on the journal."
-msgstr "La cuenta selecionada de su diario obliga a tener una moneda secundaria. Usted debería eliminar la moneda secundaria de la cuenta o asignar una vista de multi-moneda al diario."
+msgstr "La cuenta selecionada de su diario obliga a tener una moneda secundaria. Debería eliminar la moneda secundaria de la cuenta o asignar una vista de multi-moneda al diario."
 
 #. module: account_payment_extension
 #: selection:payment.order,create_account_moves:0
@@ -277,7 +277,7 @@ msgstr "Por pago directo"
 #: code:addons/account_payment_extension/payment.py:196
 #, python-format
 msgid "You cannot delete payment order(s) which are already confirmed or done!"
-msgstr "¡No puede borrar ordenes de pago ya confirmadas o realizadas!"
+msgstr "¡No puede borrar órdenes de pago ya confirmadas o realizadas!"
 
 #. module: account_payment_extension
 #: view:account.move.line:0
@@ -324,7 +324,7 @@ msgstr "Asiento que paga la deuda."
 msgid "\n"
 "Please define BIC/Swift code on bank for bank type IBAN Account to make valid payments"
 msgstr "\n"
-"Por favor especifique el código BIC/Swift en el banco para el tipo  cuenta IBAN para realizar pagos válidos"
+"Por favor especifique el código BIC/Swift en el banco para el tipo de cuenta IBAN para realizar pagos válidos"
 
 #. module: account_payment_extension
 #: field:res.partner.bank,default_bank:0
@@ -335,7 +335,7 @@ msgstr "Por defecto"
 #: code:addons/account_payment_extension/payment.py:196
 #, python-format
 msgid "Invalid action!"
-msgstr "Acción no válida!"
+msgstr "¡Acción no válida!"
 
 #. module: account_payment_extension
 #: model:ir.model,name:account_payment_extension.model_account_move_line
@@ -418,7 +418,7 @@ msgstr "Tipos de banco adecuados"
 #. module: account_payment_extension
 #: help:payment.order,create_account_moves:0
 msgid "Indicates when account moves should be created for order payment lines. \"Bank Statement\" will wait until user introduces those payments in bank a bank statement. \"Direct Payment\" will mark all payment lines as payied once the order is done."
-msgstr "Indica cuando se deben generar los asientos contables para las líneas de la orden de pago. \"Por extracto bancario\" esperará a que el usuario introduzca los pagos en el extracto bancario. \"Por pago directo\" marcará todas las líneas como pagadas cuando se realice la orden."
+msgstr "Indica cuándo se deben generar los asientos contables para las líneas de la orden de pago. \"Por extracto bancario\" esperará a que el usuario introduzca los pagos en el extracto bancario. \"Por pago directo\" marcará todas las líneas como pagadas cuando se realice la orden."
 
 #. module: account_payment_extension
 #: selection:payment.line,type:0
@@ -497,7 +497,7 @@ msgstr "Fecha de efecto"
 #. module: account_payment_extension
 #: model:ir.actions.act_window,name:account_payment_extension.action_create_payment_extension_order
 msgid "Seleccionar facturas a Pagar/Cobrar"
-msgstr "Seleccionar facturas a Pagar/Cobrar"
+msgstr "Seleccionar facturas a pagar/cobrar"
 
 #. module: account_payment_extension
 #: view:account.move.line:0
@@ -512,7 +512,7 @@ msgstr "pago.orden.crear"
 #. module: account_payment_extension
 #: field:payment.mode,require_same_bank_account:0
 msgid "Require the Same Bank Account"
-msgstr "Require the Same Bank Account"
+msgstr "Requerir la misma cuenta bancaria"
 
 #. module: account_payment_extension
 #: view:account.move.line.payment:0
@@ -540,12 +540,12 @@ msgstr "Detalles del banco"
 #. module: account_payment_extension
 #: help:payment.order.create,amount:0
 msgid "Next step will automatically select payments up to this amount as long as account moves have bank account if that is required by the selected payment mode."
-msgstr "El siguiente paso seleccionará automáticamente pagos/cobros hasta esta cantidad siempre que los apuntes tengan cuenta bancaria si esta es requerida en el modo de pago seleccionado."
+msgstr "El siguiente paso seleccionará automáticamente pagos/cobros hasta esta cantidad siempre que los apuntes tengan cuenta bancaria si ésta es requerida en el modo de pago seleccionado."
 
 #. module: account_payment_extension
 #: help:payment.order.create,show_refunds:0
 msgid "Indicates if search should include refunds."
-msgstr "Indica si l abúsqueda debe incluir devoluciones."
+msgstr "Indica si la búsqueda debe incluir devoluciones."
 
 #. module: account_payment_extension
 #: field:account.move.line,received_check:0
