@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.1beta\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2010-12-17 20:52+0000\n"
+"POT-Creation-Date: 2013-05-15 16:13+0000\n"
 "PO-Revision-Date: 2012-11-22 18:51+0000\n"
 "Last-Translator: Renato Lima - http://www.akretion.com "
 "<renatonlima@gmail.com>\n"
@@ -14,73 +14,22 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Launchpad-Export-Date: 2013-05-15 05:52+0000\n"
-"X-Generator: Launchpad (build 16617)\n"
+"X-Launchpad-Export-Date: 2013-06-08 06:11+0000\n"
+"X-Generator: Launchpad (build 16667)\n"
 
 #. module: account_payment_extension
-#: selection:payment.order,type:0
-msgid "Receivable"
-msgstr "Recebível"
-
-#. module: account_payment_extension
-#: model:ir.actions.act_window,name:account_payment_extension.action_payment_type
-#: model:ir.ui.menu,name:account_payment_extension.menu_action_payment_type
-#: view:payment.type:0
-#: help:payment.type,name:0
-msgid "Payment Type"
-msgstr "Tipo de Pagamento"
-
-#. module: account_payment_extension
-#: selection:payment.order,create_account_moves:0
-msgid "Direct Payment"
-msgstr "Pagamento Direto"
-
-#. module: account_payment_extension
-#: code:addons/account_payment_extension/payment.py:0
-#, python-format
-msgid ""
-"Payment order should create account moves but line with amount %.2f for "
-"partner \"%s\" has no account assigned."
-msgstr ""
-"Payment order should create account moves but line with amount %.2f for "
-"partner \"%s\" has no account assigned."
-
-#. module: account_payment_extension
-#: constraint:ir.actions.act_window:0
-msgid "Invalid model name in the action definition."
+#: view:payment.order.create:0
+msgid "Extra message of payment communication"
 msgstr ""
 
 #. module: account_payment_extension
-#: help:payment.type,code:0
-msgid "Specify the Code for Payment Type"
-msgstr "Especifique o código para o tipo de pagamento"
-
-#. module: account_payment_extension
-#: view:account.move.line:0
-msgid "Pay"
-msgstr "Pagar"
-
-#. module: account_payment_extension
-#: code:addons/account_payment_extension/payment.py:0
-#, python-format
-msgid ""
-"You cannot delete payment order(s) which are already confirmed or done!"
+#: field:payment.mode,require_received_check:0
+msgid "Require Received Check"
 msgstr ""
-"You cannot delete payment order(s) which are already confirmed or done!"
 
 #. module: account_payment_extension
-#: model:ir.model,name:account_payment_extension.model_payment_order
-msgid "Payment Order"
-msgstr "Ordem de Pagamento"
-
-#. module: account_payment_extension
-#: view:account.move.line:0
-msgid "Receive"
-msgstr "Receber"
-
-#. module: account_payment_extension
-#: constraint:ir.ui.view:0
-msgid "Invalid XML for View Architecture!"
+#: model:ir.actions.act_window,help:account_payment_extension.action_pay_account_move_line
+msgid "with this wizard ypu can change the state of the selected entries. "
 msgstr ""
 
 #. module: account_payment_extension
@@ -89,71 +38,9 @@ msgid "Require Bank Account"
 msgstr "Require Bank Account"
 
 #. module: account_payment_extension
-#: model:ir.actions.wizard,name:account_payment_extension.wizard_populate_statement_ext
-msgid "Populate Statement with Payment lines"
-msgstr "Populate Statement with Payment lines"
-
-#. module: account_payment_extension
-#: wizard_field:populate_statement_ext,init,lines:0
-msgid "Payment Lines"
-msgstr "Linhas de Pagamento"
-
-#. module: account_payment_extension
-#: model:ir.model,name:account_payment_extension.model_payment_line
-msgid "Payment Line"
-msgstr "Linha de Pagamento"
-
-#. module: account_payment_extension
-#: constraint:ir.ui.menu:0
-msgid "Error ! You can not create recursive Menu."
-msgstr ""
-
-#. module: account_payment_extension
-#: model:ir.model,name:account_payment_extension.model_payment_mode
-msgid "Payment Mode"
-msgstr "Modo de Pagamento"
-
-#. module: account_payment_extension
-#: wizard_field:populate_payment_ext,search,communication2:0
-msgid "Communication 2"
-msgstr "Comunicação 2"
-
-#. module: account_payment_extension
-#: help:payment.type,note:0
-msgid "Description of the payment type that will be shown in the invoices"
-msgstr "Description of the payment type that will be shown in the invoices"
-
-#. module: account_payment_extension
-#: field:payment.order,type:0
-msgid "Type"
-msgstr "Tipo"
-
-#. module: account_payment_extension
 #: view:account.move.line:0
-msgid "Search Invoice Payments"
-msgstr "Pesquisar Pagamento de Documento Fiscal"
-
-#. module: account_payment_extension
-#: view:payment.type:0
-msgid "Suitable Bank Types"
-msgstr "Suitable Bank Types"
-
-#. module: account_payment_extension
-#: wizard_button:populate_statement_ext,init,add:0
-msgid "_Add"
-msgstr "_Adicionar"
-
-#. module: account_payment_extension
-#: code:addons/account_payment_extension/payment.py:0
-#, python-format
-msgid "Error !"
-msgstr "Erro !"
-
-#. module: account_payment_extension
-#: view:payment.type:0
-#: field:payment.type,note:0
-msgid "Description"
-msgstr "Descrição"
+msgid "Group By..."
+msgstr ""
 
 #. module: account_payment_extension
 #: field:payment.type,company_id:0
@@ -161,38 +48,16 @@ msgid "Company"
 msgstr "Empresa"
 
 #. module: account_payment_extension
-#: code:addons/account_payment_extension/payment.py:0
+#: code:addons/account_payment_extension/payment.py:298
 #, python-format
 msgid "Account move line \"%s\" is not valid"
 msgstr "Account move line \"%s\" is not valid"
 
 #. module: account_payment_extension
-#: wizard_button:populate_payment_ext,init,end:0
-#: wizard_button:populate_payment_ext,search,end:0
-#: wizard_button:populate_statement_ext,init,end:0
-msgid "_Cancel"
-msgstr "_Cancelar"
-
-#. module: account_payment_extension
-#: field:payment.order,payment_type_name:0
-msgid "Payment type name"
-msgstr "Nome do Tipo de Pagamento"
-
-#. module: account_payment_extension
-#: model:ir.actions.act_window,name:account_payment_extension.action_rec_payment_order_tree
-#: model:ir.ui.menu,name:account_payment_extension.menu_action_rec_payment_order_form
-msgid "Rec. payment order"
-msgstr "Ordem de Recebimento"
-
-#. module: account_payment_extension
+#: selection:payment.line,type:0
 #: selection:payment.order,type:0
 msgid "Payable"
 msgstr "Pagágel"
-
-#. module: account_payment_extension
-#: model:ir.actions.wizard,name:account_payment_extension.wizard_populate_payment_ext
-msgid "Populate payment to pay"
-msgstr "Povoar Pagamentos para Pagar"
 
 #. module: account_payment_extension
 #: field:res.partner,payment_type_customer:0
@@ -200,39 +65,19 @@ msgid "Customer Payment Type"
 msgstr "Tipo de Pagamento Cliente"
 
 #. module: account_payment_extension
-#: help:populate_payment_ext,init,amount:0
-msgid "Next step will automatically select payments up to this amount."
-msgstr ""
-
-#. module: account_payment_extension
-#: wizard_field:populate_payment_ext,search,entries:0
+#: view:payment.order.create:0
 msgid "Entries"
 msgstr "Lançamentos"
 
 #. module: account_payment_extension
-#: field:payment.type,active:0
-msgid "Active"
-msgstr "Ativo"
-
-#. module: account_payment_extension
-#: view:payment.order:0
-msgid "Select invoices to pay/receive payment"
-msgstr "Documentos Pagar/Receber"
-
-#. module: account_payment_extension
-#: help:payment.line,payment_move_id:0
-msgid "Account move that pays this debt."
-msgstr "Account move that pays this debt."
-
-#. module: account_payment_extension
-#: help:populate_payment_ext,search,communication2:0
-msgid "The successor message of payment communication."
-msgstr "The successor message of payment communication."
+#: view:account.move.line.payment:0
+msgid "Pay Journal Entries"
+msgstr ""
 
 #. module: account_payment_extension
 #: view:account.move.line:0
-msgid "Payment"
-msgstr "Pagamento"
+msgid "Total Credit"
+msgstr ""
 
 #. module: account_payment_extension
 #: field:payment.order,create_account_moves:0
@@ -240,19 +85,9 @@ msgid "Create Account Moves"
 msgstr "Movimentos Contábeis"
 
 #. module: account_payment_extension
-#: field:payment.line,payment_move_id:0
-msgid "Payment Move"
-msgstr "Payment Move"
-
-#. module: account_payment_extension
 #: field:payment.line,account_id:0
 msgid "Account"
 msgstr "Conta Contábil"
-
-#. module: account_payment_extension
-#: field:payment.type,suitable_bank_types:0
-msgid "Suitable bank types"
-msgstr "Suitable bank types"
 
 #. module: account_payment_extension
 #: help:payment.mode,require_bank_account:0
@@ -264,55 +99,23 @@ msgstr ""
 "lines to be added in the payment order."
 
 #. module: account_payment_extension
-#: field:payment.order,name:0
-#: field:payment.type,name:0
-msgid "Name"
-msgstr "Nome"
-
-#. module: account_payment_extension
-#: wizard_field:populate_payment_ext,init,duedate:0
+#: view:account.move.line:0
 msgid "Due Date"
 msgstr "Data de Vencimento"
 
 #. module: account_payment_extension
-#: field:res.partner.bank,default_bank:0
-msgid "Default"
-msgstr "Padrão"
-
-#. module: account_payment_extension
-#: wizard_button:populate_payment_ext,init,search:0
-msgid "_Search"
-msgstr "_Pesquisar"
-
-#. module: account_payment_extension
-#: field:account.move.line,partner_bank_id:0
-msgid "Bank Account"
-msgstr "Conta Bancária"
-
-#. module: account_payment_extension
-#: wizard_button:populate_payment_ext,search,create:0
-msgid "_Add to payment order"
-msgstr "_Adicionar na Ordem de Pagamento"
-
-#. module: account_payment_extension
-#: code:addons/account_payment_extension/payment.py:0
-#, python-format
-msgid "Invalid action!"
-msgstr "Ação Inválida!"
-
-#. module: account_payment_extension
 #: view:account.move.line:0
-msgid "Unreconciled"
-msgstr "Não Conciliado"
+msgid "Total Debit"
+msgstr ""
 
 #. module: account_payment_extension
-#: code:addons/account_payment_extension/payment.py:0
+#: code:addons/account_payment_extension/payment.py:223
 #, python-format
 msgid "Error!"
 msgstr "Erro!"
 
 #. module: account_payment_extension
-#: wizard_field:populate_payment_ext,init,amount:0
+#: field:payment.order.create,amount:0
 msgid "Amount"
 msgstr "Total"
 
@@ -322,14 +125,68 @@ msgid "Select the Payment Type for the Payment Mode."
 msgstr "Select the Payment Type for the Payment Mode."
 
 #. module: account_payment_extension
-#: view:account.bank.statement:0
-msgid "Import payment lines"
-msgstr "Importar Linhas de Pagamento"
+#: sql_constraint:account.move.line:0
+msgid "Wrong credit or debit value in accounting entry !"
+msgstr ""
 
 #. module: account_payment_extension
 #: view:account.move.line:0
-msgid "Payments"
-msgstr "Pagamentos"
+msgid "Payable payments"
+msgstr ""
+
+#. module: account_payment_extension
+#: sql_constraint:payment.line:0
+msgid "The payment line name must be unique!"
+msgstr ""
+
+#. module: account_payment_extension
+#: constraint:account.move.line:0
+msgid ""
+"The date of your Journal Entry is not in the defined period! You should "
+"change the date or remove this constraint from the journal."
+msgstr ""
+
+#. module: account_payment_extension
+#: code:addons/account_payment_extension/account_move_line.py:276
+#, python-format
+msgid "Warning"
+msgstr ""
+
+#. module: account_payment_extension
+#: help:account.move.line,received_check:0
+msgid ""
+"To write down that a check in paper support has been received, for example."
+msgstr ""
+"To write down that a check in paper support has been received, for example."
+
+#. module: account_payment_extension
+#: field:payment.order.create,show_refunds:0
+msgid "Show Refunds"
+msgstr "Mostrar Devoluções"
+
+#. module: account_payment_extension
+#: view:account.move.line:0
+#: model:ir.model,name:account_payment_extension.model_res_partner
+msgid "Partner"
+msgstr "Parceiro"
+
+#. module: account_payment_extension
+#: field:payment.type,suitable_bank_types:0
+msgid "Suitable bank types"
+msgstr "Suitable bank types"
+
+#. module: account_payment_extension
+#: model:ir.actions.act_window,name:account_payment_extension.action_payment_type
+#: model:ir.ui.menu,name:account_payment_extension.menu_action_payment_type
+#: view:payment.type:0
+#: help:payment.type,name:0
+msgid "Payment Type"
+msgstr "Tipo de Pagamento"
+
+#. module: account_payment_extension
+#: model:ir.model,name:account_payment_extension.model_res_partner_bank
+msgid "Bank Accounts"
+msgstr "Contas Bancárias"
 
 #. module: account_payment_extension
 #: field:res.partner,payment_type_supplier:0
@@ -337,14 +194,186 @@ msgid "Supplier Payment Type"
 msgstr "Tipo de Pagamento Fornecedor"
 
 #. module: account_payment_extension
+#: view:account.move.line:0
+msgid "State"
+msgstr ""
+
+#. module: account_payment_extension
+#: model:ir.actions.act_window,name:account_payment_extension.action_rec_payment_order_tree
+#: model:ir.ui.menu,name:account_payment_extension.menu_action_rec_payment_order_form
+msgid "Rec. payment order"
+msgstr "Ordem de Recebimento"
+
+#. module: account_payment_extension
+#: model:ir.model,name:account_payment_extension.model_payment_mode
+msgid "Payment Mode"
+msgstr "Modo de Pagamento"
+
+#. module: account_payment_extension
+#: field:payment.line,type:0
+#: field:payment.order,type:0
+msgid "Type"
+msgstr "Tipo"
+
+#. module: account_payment_extension
+#: help:res.partner,payment_type_supplier:0
+msgid "Payment type of the supplier"
+msgstr "Tipo de Pagamento para o fornecedor"
+
+#. module: account_payment_extension
+#: code:addons/account_payment_extension/payment.py:298
+#, python-format
+msgid "Error !"
+msgstr "Erro !"
+
+#. module: account_payment_extension
+#: model:ir.model,name:account_payment_extension.model_account_move_line_payment
+msgid "Pay Account Move Lines"
+msgstr ""
+
+#. module: account_payment_extension
+#: code:addons/account_payment_extension/account_move_line.py:276
+#, python-format
+msgid "The pay entries have to be for the same partner!!!"
+msgstr ""
+
+#. module: account_payment_extension
+#: help:payment.order.create,communication2:0
+msgid "The successor message of payment communication."
+msgstr "The successor message of payment communication."
+
+#. module: account_payment_extension
+#: field:payment.line,payment_move_id:0
+msgid "Payment Move"
+msgstr "Payment Move"
+
+#. module: account_payment_extension
+#: view:account.move.line:0
+msgid "Receive"
+msgstr "Receber"
+
+#. module: account_payment_extension
+#: view:account.move.line:0
+msgid "Unreconciled payments"
+msgstr ""
+
+#. module: account_payment_extension
 #: help:res.partner,payment_type_customer:0
 msgid "Payment type of the customer"
 msgstr "Tipo de Pagamento Cliente"
 
 #. module: account_payment_extension
-#: model:ir.actions.act_window,name:account_payment_extension.action_pay_payment_order_tree
-#: model:ir.ui.menu,name:account_payment_extension.menu_action_pay_payment_order_form
-msgid "Pay. payment order"
+#: view:account.move.line.payment:0
+msgid "Change payment entries"
+msgstr ""
+
+#. module: account_payment_extension
+#: code:addons/account_payment_extension/account_move_line.py:294
+#, python-format
+msgid "Pay Moves"
+msgstr ""
+
+#. module: account_payment_extension
+#: constraint:account.move.line:0
+msgid ""
+"The selected account of your Journal Entry forces to provide a secondary "
+"currency. You should remove the secondary currency on the account or select "
+"a multi-currency view on the journal."
+msgstr ""
+
+#. module: account_payment_extension
+#: selection:payment.order,create_account_moves:0
+msgid "Direct Payment"
+msgstr "Pagamento Direto"
+
+#. module: account_payment_extension
+#: code:addons/account_payment_extension/payment.py:196
+#, python-format
+msgid ""
+"You cannot delete payment order(s) which are already confirmed or done!"
+msgstr ""
+"You cannot delete payment order(s) which are already confirmed or done!"
+
+#. module: account_payment_extension
+#: view:account.move.line:0
+msgid "Total Amount to Pay"
+msgstr ""
+
+#. module: account_payment_extension
+#: view:account.move.line:0
+msgid "Unreconciled"
+msgstr "Não Conciliado"
+
+#. module: account_payment_extension
+#: model:ir.model,name:account_payment_extension.model_payment_line
+msgid "Payment Line"
+msgstr "Linha de Pagamento"
+
+#. module: account_payment_extension
+#: view:account.move.line:0
+msgid "Search Invoice Payments"
+msgstr "Pesquisar Pagamento de Documento Fiscal"
+
+#. module: account_payment_extension
+#: view:account.move.line.payment:0
+msgid ""
+"Puede cambiar el estado de los efectos comerciales mediante el siguiente "
+"asistente"
+msgstr ""
+
+#. module: account_payment_extension
+#: view:payment.order:0
+msgid "Select invoices to pay/receive payment"
+msgstr "Documentos Pagar/Receber"
+
+#. module: account_payment_extension
+#: field:payment.type,active:0
+msgid "Active"
+msgstr "Ativo"
+
+#. module: account_payment_extension
+#: help:payment.line,payment_move_id:0
+msgid "Account move that pays this debt."
+msgstr "Account move that pays this debt."
+
+#. module: account_payment_extension
+#: constraint:res.partner.bank:0
+msgid ""
+"\n"
+"Please define BIC/Swift code on bank for bank type IBAN Account to make "
+"valid payments"
+msgstr ""
+
+#. module: account_payment_extension
+#: field:res.partner.bank,default_bank:0
+msgid "Default"
+msgstr "Padrão"
+
+#. module: account_payment_extension
+#: code:addons/account_payment_extension/payment.py:196
+#, python-format
+msgid "Invalid action!"
+msgstr "Ação Inválida!"
+
+#. module: account_payment_extension
+#: model:ir.model,name:account_payment_extension.model_account_move_line
+msgid "Journal Items"
+msgstr "Itens do Diário"
+
+#. module: account_payment_extension
+#: help:payment.type,code:0
+msgid "Specify the Code for Payment Type"
+msgstr "Especifique o código para o tipo de pagamento"
+
+#. module: account_payment_extension
+#: help:payment.mode,require_received_check:0
+msgid ""
+"Ensure all lines in the payment order have the Received Check flag set."
+msgstr ""
+
+#. module: account_payment_extension
+#: constraint:account.move.line:0
+msgid "You can not create journal items on an account of type view."
 msgstr ""
 
 #. module: account_payment_extension
@@ -354,18 +383,16 @@ msgid "Invoice payments"
 msgstr "Fluxo de Caixa"
 
 #. module: account_payment_extension
-#: model:ir.actions.act_window,name:account_payment_extension.action_done_payments
-#: model:ir.ui.menu,name:account_payment_extension.menu_action_done_payments
-msgid "Done payments"
-msgstr "Pagamento Concluídos"
+#: help:payment.mode,require_same_bank_account:0
+msgid ""
+"Ensure all lines in the payment order and the payment mode have the same "
+"account number."
+msgstr ""
 
 #. module: account_payment_extension
-#: field:account.invoice,payment_type:0
-#: field:account.move.line,payment_type:0
-#: model:ir.model,name:account_payment_extension.model_payment_type
-#: field:payment.mode,type:0
-msgid "Payment type"
-msgstr "Tipo de Pagamento"
+#: sql_constraint:account.invoice:0
+msgid "Invoice Number must be unique per Company!"
+msgstr ""
 
 #. module: account_payment_extension
 #: field:payment.type,code:0
@@ -373,16 +400,12 @@ msgid "Code"
 msgstr "Código"
 
 #. module: account_payment_extension
-#: view:res.partner:0
-msgid "Bank Details"
-msgstr "Detalhes Bancário"
+#: help:payment.type,note:0
+msgid "Description of the payment type that will be shown in the invoices"
+msgstr "Description of the payment type that will be shown in the invoices"
 
 #. module: account_payment_extension
-#: model:ir.model,name:account_payment_extension.model_res_partner_bank
-msgid "Bank Accounts"
-msgstr "Contas Bancárias"
-
-#. module: account_payment_extension
+#: view:account.move.line:0
 #: field:payment.order,period_id:0
 msgid "Period"
 msgstr "Período"
@@ -393,27 +416,9 @@ msgid "Bank Statement"
 msgstr "Extrato Bancário"
 
 #. module: account_payment_extension
-#: help:res.partner,payment_type_supplier:0
-msgid "Payment type of the supplier"
-msgstr "Tipo de Pagamento para o fornecedor"
-
-#. module: account_payment_extension
-#: constraint:ir.model:0
-msgid ""
-"The Object name must start with x_ and not contain any special character !"
+#: constraint:account.move.line:0
+msgid "You can not create journal items on closed account."
 msgstr ""
-
-#. module: account_payment_extension
-#: model:ir.model,name:account_payment_extension.model_account_move_line
-msgid "Journal Items"
-msgstr "Itens do Diário"
-
-#. module: account_payment_extension
-#: help:account.move.line,received_check:0
-msgid ""
-"To write down that a check in paper support has been received, for example."
-msgstr ""
-"To write down that a check in paper support has been received, for example."
 
 #. module: account_payment_extension
 #: model:ir.model,name:account_payment_extension.model_account_invoice
@@ -421,29 +426,15 @@ msgid "Invoice"
 msgstr "Documento Fiscal"
 
 #. module: account_payment_extension
-#: view:account.move.line:0
-msgid "Narration"
+#: view:account.move.line.payment:0
+#: view:payment.order:0
+msgid "Cancel"
 msgstr ""
 
 #. module: account_payment_extension
-#: model:ir.model,name:account_payment_extension.model_res_partner
-msgid "Partner"
-msgstr "Parceiro"
-
-#. module: account_payment_extension
-#: field:account.move.line,received_check:0
-msgid "Received check"
-msgstr "Received check"
-
-#. module: account_payment_extension
-#: wizard_view:populate_payment_ext,init:0
-msgid "Search Payment lines"
-msgstr "Pesquisar Linhas de Pagamento"
-
-#. module: account_payment_extension
-#: sql_constraint:ir.model.fields:0
-msgid "Size of the field can never be less than 1 !"
-msgstr ""
+#: view:payment.type:0
+msgid "Suitable Bank Types"
+msgstr "Suitable Bank Types"
 
 #. module: account_payment_extension
 #: help:payment.order,create_account_moves:0
@@ -459,43 +450,140 @@ msgstr ""
 "once the order is done."
 
 #. module: account_payment_extension
-#: model:ir.module.module,description:account_payment_extension.module_meta_information
+#: selection:payment.line,type:0
+#: selection:payment.order,type:0
+msgid "Receivable"
+msgstr "Recebível"
+
+#. module: account_payment_extension
+#: code:addons/account_payment_extension/payment.py:223
+#, python-format
 msgid ""
-"Account payment extension.\n"
-"\n"
-"This module extends the account_payment module with a lot of features:\n"
-"    * Extension of payment types: The payment type has a translated name and "
-"note that can be shown in the invoices.\n"
-"    * Two default payment types for partners (client and supplier).\n"
-"    * Automatic selection of payment type in invoices. Now an invoice can "
-"have a payment term (30 days, 30/60 days, ...) and a payment type (cash, "
-"bank transfer, ...).\n"
-"    * A default check field in partner bank accounts. The default partner "
-"bank accounts are selected in invoices and payments.\n"
-"    * New menu/tree/forms to see payments to receive and payments to pay.\n"
-"    * The payments show tree editable fields: Due date, bank account and a "
-"check field (for example to write down if a bank check in paper support has "
-"been received).\n"
-"    * Two types of payment orders: Payable payment orders (from supplier "
-"invoices) and receivable payment orders (from client invoices). So we can "
-"make payment orders to receive the payments of our client invoices. Each "
-"payment order type has its own sequence.\n"
-"    * The payment orders allow negative payment amounts. So we can have "
-"payment orders for supplier invoices (pay money) and refund supplier "
-"invoices (return or receive money). Or for client invoices (receive money) "
-"and refund client invoices (return or pay money).\n"
-"    * Payment orders: Selected invoices are filtered by payment type, the "
-"second message communication can be set at the same time for several "
-"invoices.\n"
-"Based on previous work of Pablo Rocandio & Zikzakmedia (version for 4.2).\n"
+"Payment order should create account moves but line with amount %.2f for "
+"partner \"%s\" has no account assigned."
+msgstr ""
+"Payment order should create account moves but line with amount %.2f for "
+"partner \"%s\" has no account assigned."
+
+#. module: account_payment_extension
+#: constraint:account.move.line:0
+msgid "Company must be the same for its related account and period."
 msgstr ""
 
 #. module: account_payment_extension
-#: wizard_field:populate_payment_ext,init,show_refunds:0
-msgid "Show Refunds"
-msgstr "Mostrar Devoluções"
+#: view:account.move.line:0
+msgid "Pay"
+msgstr "Pagar"
 
 #. module: account_payment_extension
-#: help:populate_payment_ext,init,show_refunds:0
+#: model:ir.model,name:account_payment_extension.model_payment_order
+msgid "Payment Order"
+msgstr "Ordem de Pagamento"
+
+#. module: account_payment_extension
+#: field:payment.order.create,communication2:0
+msgid "Communication 2"
+msgstr "Comunicação 2"
+
+#. module: account_payment_extension
+#: view:payment.type:0
+#: field:payment.type,note:0
+msgid "Description"
+msgstr "Descrição"
+
+#. module: account_payment_extension
+#: view:account.move.line:0
+msgid "Journal"
+msgstr ""
+
+#. module: account_payment_extension
+#: field:payment.order,payment_type_name:0
+msgid "Payment type name"
+msgstr "Nome do Tipo de Pagamento"
+
+#. module: account_payment_extension
+#: view:account.move.line:0
+msgid "Payment"
+msgstr "Pagamento"
+
+#. module: account_payment_extension
+#: field:payment.order,name:0
+#: field:payment.type,name:0
+msgid "Name"
+msgstr "Nome"
+
+#. module: account_payment_extension
+#: field:account.move.line,partner_bank_id:0
+msgid "Bank Account"
+msgstr "Conta Bancária"
+
+#. module: account_payment_extension
+#: model:ir.actions.act_window,name:account_payment_extension.action_pay_account_move_line
+msgid "Change payment"
+msgstr ""
+
+#. module: account_payment_extension
+#: view:account.move.line:0
+msgid "Effective date"
+msgstr ""
+
+#. module: account_payment_extension
+#: model:ir.actions.act_window,name:account_payment_extension.action_create_payment_extension_order
+msgid "Seleccionar facturas a Pagar/Cobrar"
+msgstr ""
+
+#. module: account_payment_extension
+#: view:account.move.line:0
+msgid "Payments"
+msgstr "Pagamentos"
+
+#. module: account_payment_extension
+#: model:ir.model,name:account_payment_extension.model_payment_order_create
+msgid "payment.order.create"
+msgstr ""
+
+#. module: account_payment_extension
+#: field:payment.mode,require_same_bank_account:0
+msgid "Require the Same Bank Account"
+msgstr ""
+
+#. module: account_payment_extension
+#: view:account.move.line.payment:0
+msgid "Approve"
+msgstr ""
+
+#. module: account_payment_extension
+#: view:account.move.line:0
+msgid "Receivable payments"
+msgstr ""
+
+#. module: account_payment_extension
+#: field:account.invoice,payment_type:0
+#: field:account.move.line,payment_type:0
+#: model:ir.model,name:account_payment_extension.model_payment_type
+#: field:payment.mode,type:0
+msgid "Payment type"
+msgstr "Tipo de Pagamento"
+
+#. module: account_payment_extension
+#: view:res.partner:0
+msgid "Bank Details"
+msgstr "Detalhes Bancário"
+
+#. module: account_payment_extension
+#: help:payment.order.create,amount:0
+msgid ""
+"Next step will automatically select payments up to this amount as long as "
+"account moves have bank account if that is required by the selected payment "
+"mode."
+msgstr ""
+
+#. module: account_payment_extension
+#: help:payment.order.create,show_refunds:0
 msgid "Indicates if search should include refunds."
 msgstr "Indica se a pesquisa deve incluir devoluções."
+
+#. module: account_payment_extension
+#: field:account.move.line,received_check:0
+msgid "Received check"
+msgstr "Received check"

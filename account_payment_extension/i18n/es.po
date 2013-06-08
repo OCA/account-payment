@@ -6,14 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 6.1\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-15 16:00+0000\n"
-"PO-Revision-Date: 2013-05-15 16:00+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2013-05-15 16:13+0000\n"
+"PO-Revision-Date: 2013-06-07 18:27+0000\n"
+"Last-Translator: Stefan Rijnhart (Therp) <Unknown>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-06-08 06:11+0000\n"
+"X-Generator: Launchpad (build 16667)\n"
 
 #. module: account_payment_extension
 #: view:payment.order.create:0
@@ -28,7 +29,8 @@ msgstr "Requerir cheque recibido"
 #. module: account_payment_extension
 #: model:ir.actions.act_window,help:account_payment_extension.action_pay_account_move_line
 msgid "with this wizard ypu can change the state of the selected entries. "
-msgstr "Con este asistente puede cambiar el estado de los elementos seleccionados. "
+msgstr ""
+"Con este asistente puede cambiar el estado de los elementos seleccionados. "
 
 #. module: account_payment_extension
 #: field:payment.mode,require_bank_account:0
@@ -89,8 +91,12 @@ msgstr "Cuenta"
 
 #. module: account_payment_extension
 #: help:payment.mode,require_bank_account:0
-msgid "Ensure all lines in the payment order have a bank account when proposing lines to be added in the payment order."
-msgstr "Asegura que todas las líneas propuestas para incluir en la orden tienen cuenta bancaria."
+msgid ""
+"Ensure all lines in the payment order have a bank account when proposing "
+"lines to be added in the payment order."
+msgstr ""
+"Asegura que todas las líneas propuestas para incluir en la orden tienen "
+"cuenta bancaria."
 
 #. module: account_payment_extension
 #: view:account.move.line:0
@@ -135,8 +141,12 @@ msgstr "¡El nombre de la línea de pago debe ser única!"
 
 #. module: account_payment_extension
 #: constraint:account.move.line:0
-msgid "The date of your Journal Entry is not in the defined period! You should change the date or remove this constraint from the journal."
-msgstr "¡La fecha de su asiento no está en el periodo definido! Debería cambiar la fecha o borrar esta restricción del diario."
+msgid ""
+"The date of your Journal Entry is not in the defined period! You should "
+"change the date or remove this constraint from the journal."
+msgstr ""
+"¡La fecha de su asiento no está en el periodo definido! Debería cambiar la "
+"fecha o borrar esta restricción del diario."
 
 #. module: account_payment_extension
 #: code:addons/account_payment_extension/account_move_line.py:276
@@ -146,8 +156,11 @@ msgstr "Aviso"
 
 #. module: account_payment_extension
 #: help:account.move.line,received_check:0
-msgid "To write down that a check in paper support has been received, for example."
-msgstr "Sirve para indicar que se ha recibido un cheque en soporte papel, por ejemplo."
+msgid ""
+"To write down that a check in paper support has been received, for example."
+msgstr ""
+"Sirve para indicar que se ha recibido un cheque en soporte papel, por "
+"ejemplo."
 
 #. module: account_payment_extension
 #: field:payment.order.create,show_refunds:0
@@ -265,8 +278,14 @@ msgstr "Movimientos de pago/cobro"
 
 #. module: account_payment_extension
 #: constraint:account.move.line:0
-msgid "The selected account of your Journal Entry forces to provide a secondary currency. You should remove the secondary currency on the account or select a multi-currency view on the journal."
-msgstr "La cuenta selecionada de su diario obliga a tener una moneda secundaria. Debería eliminar la moneda secundaria de la cuenta o asignar una vista de multi-moneda al diario."
+msgid ""
+"The selected account of your Journal Entry forces to provide a secondary "
+"currency. You should remove the secondary currency on the account or select "
+"a multi-currency view on the journal."
+msgstr ""
+"La cuenta selecionada de su diario obliga a tener una moneda secundaria. "
+"Debería eliminar la moneda secundaria de la cuenta o asignar una vista de "
+"multi-moneda al diario."
 
 #. module: account_payment_extension
 #: selection:payment.order,create_account_moves:0
@@ -276,7 +295,8 @@ msgstr "Por pago directo"
 #. module: account_payment_extension
 #: code:addons/account_payment_extension/payment.py:196
 #, python-format
-msgid "You cannot delete payment order(s) which are already confirmed or done!"
+msgid ""
+"You cannot delete payment order(s) which are already confirmed or done!"
 msgstr "¡No puede borrar órdenes de pago ya confirmadas o realizadas!"
 
 #. module: account_payment_extension
@@ -301,8 +321,12 @@ msgstr "Buscar pagos de facturas"
 
 #. module: account_payment_extension
 #: view:account.move.line.payment:0
-msgid "Puede cambiar el estado de los efectos comerciales mediante el siguiente asistente"
-msgstr "Puede cambiar el estado de los efectos comerciales mediante el siguiente asistente"
+msgid ""
+"Puede cambiar el estado de los efectos comerciales mediante el siguiente "
+"asistente"
+msgstr ""
+"Puede cambiar el estado de los efectos comerciales mediante el siguiente "
+"asistente"
 
 #. module: account_payment_extension
 #: view:payment.order:0
@@ -321,10 +345,14 @@ msgstr "Asiento que paga la deuda."
 
 #. module: account_payment_extension
 #: constraint:res.partner.bank:0
-msgid "\n"
-"Please define BIC/Swift code on bank for bank type IBAN Account to make valid payments"
-msgstr "\n"
-"Por favor especifique el código BIC/Swift en el banco para el tipo de cuenta IBAN para realizar pagos válidos"
+msgid ""
+"\n"
+"Please define BIC/Swift code on bank for bank type IBAN Account to make "
+"valid payments"
+msgstr ""
+"\n"
+"Por favor especifique el código BIC/Swift en el banco para el tipo de cuenta "
+"IBAN para realizar pagos válidos"
 
 #. module: account_payment_extension
 #: field:res.partner.bank,default_bank:0
@@ -349,8 +377,11 @@ msgstr "Indica el código del tipo de pago."
 
 #. module: account_payment_extension
 #: help:payment.mode,require_received_check:0
-msgid "Ensure all lines in the payment order have the Received Check flag set."
-msgstr "Asegúrese de que todos los elementos de la orden de cobro tienen marcado el campo cheque recibido."
+msgid ""
+"Ensure all lines in the payment order have the Received Check flag set."
+msgstr ""
+"Asegúrese de que todos los elementos de la orden de cobro tienen marcado el "
+"campo cheque recibido."
 
 #. module: account_payment_extension
 #: constraint:account.move.line:0
@@ -365,8 +396,12 @@ msgstr "Efectos"
 
 #. module: account_payment_extension
 #: help:payment.mode,require_same_bank_account:0
-msgid "Ensure all lines in the payment order and the payment mode have the same account number."
-msgstr "Asegúrese de que todas las líneas de la orden de cobro tienen el mismo número de cuenta."
+msgid ""
+"Ensure all lines in the payment order and the payment mode have the same "
+"account number."
+msgstr ""
+"Asegúrese de que todas las líneas de la orden de cobro tienen el mismo "
+"número de cuenta."
 
 #. module: account_payment_extension
 #: sql_constraint:account.invoice:0
@@ -417,8 +452,16 @@ msgstr "Tipos de banco adecuados"
 
 #. module: account_payment_extension
 #: help:payment.order,create_account_moves:0
-msgid "Indicates when account moves should be created for order payment lines. \"Bank Statement\" will wait until user introduces those payments in bank a bank statement. \"Direct Payment\" will mark all payment lines as payied once the order is done."
-msgstr "Indica cuándo se deben generar los asientos contables para las líneas de la orden de pago. \"Por extracto bancario\" esperará a que el usuario introduzca los pagos en el extracto bancario. \"Por pago directo\" marcará todas las líneas como pagadas cuando se realice la orden."
+msgid ""
+"Indicates when account moves should be created for order payment lines. "
+"\"Bank Statement\" will wait until user introduces those payments in bank a "
+"bank statement. \"Direct Payment\" will mark all payment lines as payied "
+"once the order is done."
+msgstr ""
+"Indica cuándo se deben generar los asientos contables para las líneas de la "
+"orden de pago. \"Por extracto bancario\" esperará a que el usuario "
+"introduzca los pagos en el extracto bancario. \"Por pago directo\" marcará "
+"todas las líneas como pagadas cuando se realice la orden."
 
 #. module: account_payment_extension
 #: selection:payment.line,type:0
@@ -429,8 +472,12 @@ msgstr "A cobrar"
 #. module: account_payment_extension
 #: code:addons/account_payment_extension/payment.py:223
 #, python-format
-msgid "Payment order should create account moves but line with amount %.2f for partner \"%s\" has no account assigned."
-msgstr "La orden de pago debe generar los asientos pero la línea con importe %.2f y empresa \"%s\" no tiene cuenta asignada."
+msgid ""
+"Payment order should create account moves but line with amount %.2f for "
+"partner \"%s\" has no account assigned."
+msgstr ""
+"La orden de pago debe generar los asientos pero la línea con importe %.2f y "
+"empresa \"%s\" no tiene cuenta asignada."
 
 #. module: account_payment_extension
 #: constraint:account.move.line:0
@@ -539,8 +586,14 @@ msgstr "Detalles del banco"
 
 #. module: account_payment_extension
 #: help:payment.order.create,amount:0
-msgid "Next step will automatically select payments up to this amount as long as account moves have bank account if that is required by the selected payment mode."
-msgstr "El siguiente paso seleccionará automáticamente pagos/cobros hasta esta cantidad siempre que los apuntes tengan cuenta bancaria si ésta es requerida en el modo de pago seleccionado."
+msgid ""
+"Next step will automatically select payments up to this amount as long as "
+"account moves have bank account if that is required by the selected payment "
+"mode."
+msgstr ""
+"El siguiente paso seleccionará automáticamente pagos/cobros hasta esta "
+"cantidad siempre que los apuntes tengan cuenta bancaria si ésta es requerida "
+"en el modo de pago seleccionado."
 
 #. module: account_payment_extension
 #: help:payment.order.create,show_refunds:0
@@ -551,4 +604,3 @@ msgstr "Indica si la búsqueda debe incluir devoluciones."
 #: field:account.move.line,received_check:0
 msgid "Received check"
 msgstr "Cheque recibido"
-
