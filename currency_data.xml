@@ -1,0 +1,274 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="base.USD" model="res.currency">
+            <field name="print_on_check">U.S. dollar</field>
+        </record>
+        
+        <record id="base.EUR" model="res.currency">
+            <field name="print_on_check">European Euro</field>
+        </record>
+        
+        <record id="base.GBP" model="res.currency">
+            <field name="print_on_check">U.K. pound sterling</field>
+        </record>
+        
+        <record id="base.CAD" model="res.currency">
+            <field name="print_on_check">Canadian dollar</field>
+        </record>
+        
+        <record id="base.AUD" model="res.currency">
+            <field name="print_on_check">Australian dollar</field>
+        </record>
+        
+        <record id="base.JPY" model="res.currency">
+            <field name="print_on_check">Japanese yen</field>
+        </record>
+        
+        <record id="base.INR" model="res.currency">
+            <field name="print_on_check">Indian rupee</field>
+        </record>
+        
+        <record id="base.NZD" model="res.currency">
+            <field name="print_on_check">New Zealand dollar</field>
+        </record>
+        
+        <record id="base.CHF" model="res.currency">
+            <field name="print_on_check">Swiss franc</field>
+        </record>
+        
+        <record id="base.ZAR" model="res.currency">
+            <field name="print_on_check">South African rand</field>
+        </record>
+        
+        <record id="base.AED" model="res.currency">
+            <field name="print_on_check">U.A.E. dirham</field>
+        </record>
+        
+        <record id="base.ANG" model="res.currency">
+            <field name="print_on_check">Neth. Antilles florin</field>
+        </record>
+        
+        <record id="base.ARS" model="res.currency">
+            <field name="print_on_check">Argentine peso</field>
+        </record>
+        
+        <record id="base.BBD" model="res.currency">
+            <field name="print_on_check">Barbadian dollar</field>
+        </record>
+        
+        <record id="base.BHD" model="res.currency">
+            <field name="print_on_check">Bahraini dinar</field>
+        </record>
+        
+        <record id="base.BRL" model="res.currency">
+            <field name="print_on_check">Brazilian real</field>
+        </record>
+        
+        <record id="base.BSD" model="res.currency">
+            <field name="print_on_check">Bahamian dollar</field>
+        </record>
+        
+        <record id="base.CLP" model="res.currency">
+            <field name="print_on_check">Chilean peso</field>
+        </record>
+        
+        <record id="base.CNY" model="res.currency">
+            <field name="print_on_check">Chinese renminbi</field>
+        </record>
+        
+        <record id="base.COP" model="res.currency">
+            <field name="print_on_check">Colombian peso</field>
+        </record>
+        
+        <record id="base.CZK" model="res.currency">
+            <field name="print_on_check">Czech Republic koruna</field>
+        </record>
+        
+        <record id="base.DKK" model="res.currency">
+            <field name="print_on_check">Danish krone</field>
+        </record>
+        
+        <record id="base.EGP" model="res.currency">
+            <field name="print_on_check">Egyptian Pound</field>
+        </record>
+        
+        <record id="base.FJD" model="res.currency">
+            <field name="print_on_check">Fiji dollar</field>
+        </record>
+        
+        <record id="base.GHS" model="res.currency">
+            <field name="print_on_check">Ghanaian cedi</field>
+        </record>
+        
+        <record id="base.HKD" model="res.currency">
+            <field name="print_on_check">Hong Kong dollar</field>
+        </record>
+        
+        <record id="base.HNL" model="res.currency">
+            <field name="print_on_check">Honduran lempira</field>
+        </record>
+        
+        <record id="base.HRK" model="res.currency">
+            <field name="print_on_check">Croatian kuna</field>
+        </record>
+        
+        <record id="base.HUF" model="res.currency">
+            <field name="print_on_check">Hungarian forint</field>
+        </record>
+        
+        <record id="base.IDR" model="res.currency">
+            <field name="print_on_check">Indonesian rupiah</field>
+        </record>
+        
+        <record id="base.ILS" model="res.currency">
+            <field name="print_on_check">Israeli new shekel</field>
+        </record>
+        
+        <record id="base.ISK" model="res.currency">
+            <field name="print_on_check">Icelandic krona</field>
+        </record>
+        
+        <record id="base.JMD" model="res.currency">
+            <field name="print_on_check">Jamaican dollar</field>
+        </record>
+        
+        <record id="base.KRW" model="res.currency">
+            <field name="print_on_check">South Korean won</field>
+        </record>
+        
+        <record id="base.LKR" model="res.currency">
+            <field name="print_on_check">Sri Lanka rupee</field>
+        </record>
+        
+        <record id="base.LTL" model="res.currency">
+            <field name="print_on_check">Lithuanian litas</field>
+        </record>
+        
+        <record id="base.LVL" model="res.currency">
+            <field name="print_on_check">Latvian lats</field>
+        </record>
+        
+        <record id="base.MAD" model="res.currency">
+            <field name="print_on_check">Moroccan dirham</field>
+        </record>
+        
+        <record id="base.MMK" model="res.currency">
+            <field name="print_on_check">Myanmar (Burma) kyat</field>
+        </record>
+        
+        <record id="base.MXN" model="res.currency">
+            <field name="print_on_check">Mexican peso</field>
+        </record>
+        
+        <record id="base.MYR" model="res.currency">
+            <field name="print_on_check">Malaysian ringgit</field>
+        </record>
+        
+        <record id="base.MZN" model="res.currency">
+            <field name="print_on_check">Mozambican metical</field>
+        </record>
+        
+        <record id="base.NIO" model="res.currency">
+            <field name="print_on_check">Nicaraguan córdoba</field>
+        </record>
+        
+        <record id="base.NOK" model="res.currency">
+            <field name="print_on_check">Norwegian krone</field>
+        </record>
+        
+        <record id="base.PAB" model="res.currency">
+            <field name="print_on_check">Panamanian balboa</field>
+        </record>
+        
+        <record id="base.PEN" model="res.currency">
+            <field name="print_on_check">Peruvian new sol</field>
+        </record>
+        
+        <record id="base.PHP" model="res.currency">
+            <field name="print_on_check">Philippine peso</field>
+        </record>
+        
+        <record id="base.PKR" model="res.currency">
+            <field name="print_on_check">Pakistan rupee</field>
+        </record>
+        
+        <record id="base.PLN" model="res.currency">
+            <field name="print_on_check">Polish zloty</field>
+        </record>
+        
+        <record id="base.RON" model="res.currency">
+            <field name="print_on_check">Romanian new leu</field>
+        </record>
+        
+        <record id="base.RSD" model="res.currency">
+            <field name="print_on_check">Serbian dinar</field>
+        </record>
+        
+        <record id="base.RUB" model="res.currency">
+            <field name="print_on_check">Russian rouble</field>
+        </record>
+        
+        <record id="base.SAR" model="res.currency">
+            <field name="print_on_check">Saudi riyal</field>
+        </record>
+        
+        <record id="base.SEK" model="res.currency">
+            <field name="print_on_check">Swedish krona</field>
+        </record>
+        
+        <record id="base.SGD" model="res.currency">
+            <field name="print_on_check">Singapore dollar</field>
+        </record>
+        
+        <record id="base.SIT" model="res.currency">
+            <field name="print_on_check">Slovenian tolar</field>
+        </record>
+        
+        <record id="base.SKK" model="res.currency">
+            <field name="print_on_check">Slovak koruna</field>
+        </record>
+        
+        <record id="base.THB" model="res.currency">
+            <field name="print_on_check">Thai baht</field>
+        </record>
+        
+        <record id="base.TND" model="res.currency">
+            <field name="print_on_check">Tunisian dinar</field>
+        </record>
+        
+        <record id="base.TRL" model="res.currency">
+            <field name="print_on_check">Turkish lira</field>
+        </record>
+        
+        <record id="base.TWD" model="res.currency">
+            <field name="print_on_check">Taiwanese new dollar</field>
+        </record>
+        
+        <record id="base.UAH" model="res.currency">
+            <field name="print_on_check">Ukrainian hryvnia</field>
+        </record>
+        
+        <record id="base.VEF" model="res.currency">
+            <field name="print_on_check">Venezuelan bolivar fuerte</field>
+        </record>
+        
+        <record id="base.VND" model="res.currency">
+            <field name="print_on_check">Vietnamese dong</field>
+        </record>
+        
+        <record id="base.XAF" model="res.currency">
+            <field name="print_on_check">CFA franc</field>
+        </record>
+        
+        <record id="base.XCD" model="res.currency">
+            <field name="print_on_check">East Caribbean dollar</field>
+        </record>
+        
+        <record id="base.XPF" model="res.currency">
+            <field name="print_on_check">CFP franc</field>
+        </record>
+        
+    </data>
+</openerp>
