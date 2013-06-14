@@ -61,7 +61,8 @@ class account_voucher(orm.Model):
                     break
         return amount
         
-    def voucher_move_line_create(self, cr, uid, voucher_id, line_total, move_id, company_currency, current_currency, context=None):
+    def voucher_move_line_create(self, cr, uid, voucher_id, line_total,
+        move_id, company_currency, current_currency, context=None):
         res = super(account_voucher,self).voucher_move_line_create(cr, uid, voucher_id, line_total, move_id, company_currency, current_currency, context)
         self.write(cr, uid, voucher_id, {'line_total': res[0]}, context)
         return res
@@ -73,7 +74,15 @@ class account_voucher(orm.Model):
                 res += inv_move_line.debit or inv_move_line.credit # can both be presents?
         return res
         
+    def get_invoice_total_currency(self, invoice):
+        res = 0.0
+        for inv_move_line in invoice.move_id.line_id:
+            if inv_move_line.account_id.type in ('receivable','payable'):
+                res += abs(inv_move_line.amount_currency)
+        return res
+        
     def allocated_amounts_grouped_by_invoice(self, cr, uid, voucher, context=None):
+        import pdb; pdb.set_trace()
         '''
         
         this method builds a dictionary in the following form
@@ -82,12 +91,20 @@ class account_voucher(orm.Model):
             first_invoice_id: {
                 'allocated': 120.0,
                 'total': 120.0,
+                'total_currency': 0.0,
                 'write-off': 20.0,
+                'allocated_currency': 0.0,
+                'foreign_currency_id': False, # int
+                'currency-write-off': 0.0,
                 }
             second_invoice_id: {
                 'allocated': 50.0,
                 'total': 100.0,
+                'total_currency': 0.0,
                 'write-off': 0.0,
+                'allocated_currency': 0.0,
+                'foreign_currency_id': False,
+                'currency-write-off': 0.0,
                 }
         }
         
@@ -108,12 +125,31 @@ class account_voucher(orm.Model):
                     res[line.move_line_id.invoice.id] = {
                         'allocated': 0.0,
                         'total': 0.0,
-                        'write-off': 0.0,}
+                        'total_currency': 0.0,
+                        'write-off': 0.0,
+                        'allocated_currency': 0.0,
+                        'foreign_currency_id': False,
+                        'currency-write-off': 0.0,
+                        }
                 current_amount = line.amount
                 if company_currency != current_currency:
-                    current_amount = super(account_voucher,self)._convert_amount(cr, uid, line.amount, voucher.id, context)
-                res[line.move_line_id.invoice.id]['allocated'] += current_amount
-                res[line.move_line_id.invoice.id]['total'] = self.get_invoice_total(line.move_line_id.invoice)
+                    current_amount = super(account_voucher,self)._convert_amount(
+                        cr, uid, line.amount, voucher.id, context)
+                    res[line.move_line_id.invoice.id][
+                        'allocated_currency'
+                        ] += line.amount
+                    res[line.move_line_id.invoice.id][
+                        'foreign_currency_id'
+                        ] = current_currency
+                    res[line.move_line_id.invoice.id][
+                        'total_currency'
+                        ] = self.get_invoice_total_currency(line.move_line_id.invoice)
+                res[line.move_line_id.invoice.id][
+                    'allocated'
+                    ] += current_amount
+                res[line.move_line_id.invoice.id][
+                    'total'
+                    ] = self.get_invoice_total(line.move_line_id.invoice)
         if res:
             write_off_per_invoice = voucher.line_total / len(res)
             if not voucher.company_id.allow_distributing_write_off and  len(res) > 1 and write_off_per_invoice:
@@ -123,4 +159,10 @@ class account_voucher(orm.Model):
                 write_off_per_invoice = - write_off_per_invoice
             for inv_id in res:
                 res[inv_id]['write-off'] = write_off_per_invoice
+            if company_currency != current_currency:
+                curr_write_off_per_invoice = voucher.writeoff_amount / len(res)
+                if voucher.type == 'payment' or voucher.type == 'purchase':
+                    curr_write_off_per_invoice = - curr_write_off_per_invoice
+                for inv_id in res:
+                    res[inv_id]['currency-write-off'] = curr_write_off_per_invoice
         return res
