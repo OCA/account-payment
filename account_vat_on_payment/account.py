@@ -73,7 +73,26 @@ class account_voucher(osv.osv):
                     for inv_move_line in invoice.move_id.line_id:
                         if inv_move_line.account_id.type != 'receivable' and inv_move_line.account_id.type != 'payable':
                             # compute the VAT or base line proportionally to the paid amount
-                            new_line_amount = currency_obj.round(cr, uid, voucher.company_id.currency_id, ((amounts_by_invoice[invoice.id]['allocated'] + amounts_by_invoice[invoice.id]['write-off']) / amounts_by_invoice[invoice.id]['total']) * (inv_move_line.credit or inv_move_line.debit))
+                            new_line_amount = currency_obj.round(
+                                cr, uid, voucher.company_id.currency_id,
+                                ((amounts_by_invoice[invoice.id]['allocated'] +
+                                amounts_by_invoice[invoice.id]['write-off']) / 
+                                amounts_by_invoice[invoice.id]['total']) *
+                                (inv_move_line.credit or inv_move_line.debit)
+                                )
+                            new_line_amount_curr = False
+                            if (amounts_by_invoice[invoice.id].get('allocated_currency')
+                                and amounts_by_invoice[invoice.id].get('foreign_currency_id')):
+                                for_curr = currency_obj.browse(cr, uid,
+                                    amounts_by_invoice[invoice.id]['foreign_currency_id'],
+                                    context=context)
+                                new_line_amount_curr = currency_obj.round(
+                                    cr, uid, for_curr,
+                                    ((amounts_by_invoice[invoice.id]['allocated_currency'] +
+                                    amounts_by_invoice[invoice.id]['currency-write-off']) / 
+                                    amounts_by_invoice[invoice.id]['total_currency']) *
+                                    (inv_move_line.amount_currency)
+                                    )
                 
                             if not inv_move_line.real_account_id:
                                 raise osv.except_osv(_('Error'), _('We are on a VAT on payment treatment but move line %s does not have a related real account') % inv_move_line.name)
@@ -87,6 +106,9 @@ class account_voucher(osv.osv):
                                 'type': 'real',
                                 'partner_id': inv_move_line.partner_id and inv_move_line.partner_id.id or False
                                 }
+                            if new_line_amount_curr:
+                                vals['amount_currency'] = new_line_amount_curr
+                                vals['currency_id'] = for_curr.id
                             if inv_move_line.tax_code_id:
                                 if not inv_move_line.real_tax_code_id:
                                     raise osv.except_osv(_('Error'), _('We are on a VAT on payment treatment but move line %s does not have a related real tax code') % inv_move_line.name)
