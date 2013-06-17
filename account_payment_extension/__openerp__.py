@@ -6,6 +6,8 @@
 #                       Jordi Esteve <jesteve@zikzakmedia.com>
 #    AvanzOSC, Avanzed Open Source Consulting
 #    Copyright (C) 2011-2012 Iker Coranti (www.avanzosc.com). All Rights Reserved
+#    Copyright (c) 2013 Serv. Tecnol. Avanzados (http://www.serviciosbaeza.com)
+#                       Pedro Manuel Baeza <pedro.baeza@serviciosbaeza.com>
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -25,7 +27,7 @@
 
 {
     "name" : "Account Payment Extension",
-    "version" : "1.1",
+    "version" : "1.2",
     "author" : "Zikzakmedia SL",
     "category" : "Accounting & Finance",
     "website" : "www.zikzakmedia.com",
@@ -56,6 +58,7 @@ Based on previous work of Pablo Rocandio & Zikzakmedia (version for 4.2).
                     "wizard/account_payment_order_view.xml",
                     "payment_view.xml",
                     "payment_sequence.xml",
+                    "wizard/account_move_line_payment_view.xml",
                     ],
     "active": False,
     "installable": True,
