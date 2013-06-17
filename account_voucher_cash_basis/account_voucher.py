@@ -82,7 +82,6 @@ class account_voucher(orm.Model):
         return res
         
     def allocated_amounts_grouped_by_invoice(self, cr, uid, voucher, context=None):
-        import pdb; pdb.set_trace()
         '''
         
         this method builds a dictionary in the following form
