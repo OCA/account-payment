@@ -238,11 +238,17 @@ class payment_order(osv.osv):
                 ctx = context.copy()
                 ctx['res.currency.compute.account'] = acc_cur
                 amount = self.pool.get('res.currency').compute(cr, uid, currency_id, company_currency_id, line_amount, context=ctx)
-
+                move_date = order.date_done
+                if order.date_prefered == 'due':
+                    move_date = line.move_line_id.date_maturity
+                if order.date_prefered == 'fix':
+                    move_date = order.date_scheduled
+                                    
                 val = {
                     'name': line.move_line_id and line.move_line_id.name or '/',
                     'move_id': move_id,
-                    'date': order.date_done,
+                    'date': move_date,
+                    'date_created': order.date_done,
                     'ref': line.move_line_id and line.move_line_id.ref or False,
                     'partner_id': line.partner_id and line.partner_id.id or False,
                     'account_id': line.account_id.id,
