@@ -241,7 +241,7 @@ class payment_order(osv.osv):
                 move_date = order.date_done
                 if order.date_prefered == 'due':
                     move_date = line.move_line_id.date_maturity
-                if order.date_prefered == 'fix':
+                if order.date_prefered == 'fixed':
                     move_date = order.date_scheduled
                                     
                 val = {
@@ -286,7 +286,8 @@ class payment_order(osv.osv):
                 self.pool.get('account.move.line').create(cr, uid, {
                     'name': line.move_line_id and line.move_line_id.name or '/',
                     'move_id': move_id,
-                    'date': order.date_done,
+                    'date': move_date,
+                    'date_created': order.date_done,
                     'ref': line.move_line_id and line.move_line_id.ref or False,
                     'partner_id': line.partner_id and line.partner_id.id or False,
                     'account_id': account_id,
