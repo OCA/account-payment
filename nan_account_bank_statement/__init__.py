@@ -2,6 +2,9 @@
 ##############################################################################
 #
 # Copyright (c) 2009  Àngel Àlvarez - NaN  (http://www.nan-tic.com) All Rights Reserved.
+# AvanzOSC, Advanced Open Source Consulting 
+# Copyright (C) 2011-2012 Iker Coranti (www.avanzosc.com). All Rights Reserved
+# Update to OpenERP 6.1 Iker Coranti
 #
 #
 # WARNING: This program as such is intended to be used by professional

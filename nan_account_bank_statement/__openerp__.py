@@ -40,6 +40,7 @@ This enhances standard bank statements by:
     "depends" : [ 
     	'account',
         'account_voucher',
+        'base_vat',
     ], 
     "category" : "Accounting",
     "init_xml" : [],
