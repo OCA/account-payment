@@ -39,7 +39,7 @@ class account_move_line(osv.osv):
         
         cursor.execute('SELECT l.id, i.id ' \
                        'FROM account_invoice i,account_move_line l ' \
-                       'left join account_move_line r on l.reconcile_id=r.reconcile_id and l.id<>l.id ' \
+                       'left join account_move_line r on l.reconcile_id=r.reconcile_id and l.id<>r.id ' \
                        'left join account_move_line p on l.reconcile_partial_id=p.reconcile_partial_id and l.id<>p.id ' \
                        'where (i.move_id = l.move_id or i.move_id = r.move_id or i.move_id = p.move_id) ' \
                        'AND l.id IN %s',
