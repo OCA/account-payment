@@ -1,0 +1,56 @@
+# Brazilian Portuguese translation for account-payment
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the account-payment package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: account-payment\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2010-06-17 08:45+0000\n"
+"PO-Revision-Date: 2013-07-18 19:59+0000\n"
+"Last-Translator: Claudio de Araujo Santos <Unknown>\n"
+"Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-07-19 06:34+0000\n"
+"X-Generator: Launchpad (build 16696)\n"
+
+#. module: pxgo_bank_statement_analytic
+#: model:ir.module.module,description:pxgo_bank_statement_analytic.module_meta_information
+msgid ""
+"\n"
+"Extends the Bank Statements to add support for analytic accounting.\n"
+"\n"
+"A analytic account field will be added to bank statement lines, allowing\n"
+"the user to directly register small expenses or incomes on analytic "
+"accounts.\n"
+"\n"
+"This may be useful for petty cash management.\n"
+"            "
+msgstr ""
+"\n"
+"Estende os extratos bancários para adicionar suporte para a contabilidade "
+"analítica. \n"
+"Um campo conta analítica serão adicionadas a linhas de extratos bancários, "
+"permitindo que \n"
+"o usuário se registre diretamente pequenas despesas ou rendimentos em contas "
+"analíticas. \n"
+"Isto pode ser útil para a gestão de fundos de maneio.\n"
+"            "
+
+#. module: pxgo_bank_statement_analytic
+#: field:account.bank.statement.line,analytic_account_id:0
+msgid "Analytic Account"
+msgstr "Conta Analítica"
+
+#. module: pxgo_bank_statement_analytic
+#: constraint:ir.ui.view:0
+msgid "Invalid XML for View Architecture!"
+msgstr "XML inválido para a Visão de Arquitetura"
+
+#. module: pxgo_bank_statement_analytic
+#: model:ir.module.module,shortdesc:pxgo_bank_statement_analytic.module_meta_information
+msgid "Pexego - Analytic in Bank Statements"
+msgstr "Pexego - Analise dos Extratos Bancários"

@@ -1,0 +1,134 @@
+# Brazilian Portuguese translation for account-payment
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the account-payment package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: account-payment\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2010-12-20 20:22+0000\n"
+"PO-Revision-Date: 2013-07-18 20:06+0000\n"
+"Last-Translator: Claudio de Araujo Santos <Unknown>\n"
+"Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-07-19 06:34+0000\n"
+"X-Generator: Launchpad (build 16696)\n"
+
+#. module: purchase_payment
+#: model:ir.module.module,shortdesc:purchase_payment.module_meta_information
+msgid "Purchase Payment Type and Terms"
+msgstr "Compra Tipo de Pagamento e TERMOS"
+
+#. module: purchase_payment
+#: model:ir.module.module,description:purchase_payment.module_meta_information
+msgid ""
+"Adds payment info to the purchase process.\n"
+"\n"
+"Adds payment type, terms, and bank account to the purchase orders.\n"
+"\n"
+"Allows to set different default payment terms for purchases (the partners\n"
+"will have payment terms and supplier payment terms).\n"
+"\n"
+"The payment terms, payment type and bank account default values for the\n"
+"purchase will be taken from the partner.\n"
+"\n"
+"Invoices created from purchase orders, or from pickings related to purchase\n"
+"orders, will inherit this payment info from the payment order.\n"
+msgstr ""
+"Adiciona informações de pagamento para o processo de compra. \n"
+"Adiciona tipo de pagamento, termos e conta bancária para as ordens de "
+"compra. \n"
+"Permite definir diferentes condições de pagamento padrão para as compras (os "
+"parceiros \n"
+"terão condições de pagamento e prazos de pagamento a fornecedores). \n"
+"As condições de pagamento, tipo de pagamento e de contas bancárias os "
+"valores padrão para a \n"
+"compra será retirado do parceiro. \n"
+"Faturas criado a partir de ordens de compra ou de colheitas relacionadas com "
+"a compra de \n"
+"ordens, vai herdar esta informação de pagamento da ordem de pagamento.\n"
+
+#. module: purchase_payment
+#: constraint:ir.ui.view:0
+msgid "Invalid XML for View Architecture!"
+msgstr "XML inválido para a Visão Arquitetura!"
+
+#. module: purchase_payment
+#: constraint:ir.model:0
+msgid ""
+"The Object name must start with x_ and not contain any special character !"
+msgstr ""
+"O nome do objeto deve iniciar com x_ e não conter qualquer caractere "
+"especial!"
+
+#. module: purchase_payment
+#: field:purchase.order,partner_bank:0
+msgid "Bank Account"
+msgstr "Conta Bancária"
+
+#. module: purchase_payment
+#: field:purchase.order,payment_term:0
+#: field:res.partner,property_payment_term_supplier:0
+msgid "Payment Term"
+msgstr "Prazo de Pagamento"
+
+#. module: purchase_payment
+#: field:purchase.order,payment_type:0
+msgid "Payment type"
+msgstr "Tipo de Pagamento"
+
+#. module: purchase_payment
+#: model:ir.model,name:purchase_payment.model_purchase_order
+msgid "Purchase Order"
+msgstr "Ordem de Compra"
+
+#. module: purchase_payment
+#: help:res.partner,property_payment_term_supplier:0
+msgid ""
+"This payment term will be used instead of the default one for the current "
+"partner on purchases"
+msgstr ""
+"Este prazo de pagamento será usado ao invés de um padrão para o atual "
+"parceiro nas compras"
+
+#. module: purchase_payment
+#: help:purchase.order,payment_term:0
+msgid "The payment terms. They will be transferred to the invoice."
+msgstr "As condições de pagamento. Eles vão ser transferidos para a factura."
+
+#. module: purchase_payment
+#: model:ir.model,name:purchase_payment.model_account_invoice
+msgid "Invoice"
+msgstr "Invoice"
+
+#. module: purchase_payment
+#: model:ir.model,name:purchase_payment.model_stock_picking
+msgid "Picking List"
+msgstr "lista de opções"
+
+#. module: purchase_payment
+#: help:purchase.order,payment_type:0
+msgid "The type of payment. It will be transferred to the invoice."
+msgstr "O tipo de pagamento. Ele vai ser transferido para a factura."
+
+#. module: purchase_payment
+#: model:ir.model,name:purchase_payment.model_res_partner
+msgid "Partner"
+msgstr "Parceiro"
+
+#. module: purchase_payment
+#: help:purchase.order,partner_bank:0
+msgid ""
+"The bank account to pay to or to be paid from. It will be transferred to the "
+"invoice."
+msgstr ""
+"A conta bancária para pagar ou a ser pago a partir de. Ele vai ser "
+"transferido para a factura."
+
+#. module: purchase_payment
+#: sql_constraint:ir.model.fields:0
+msgid "Size of the field can never be less than 1 !"
+msgstr "Tamanho do campo nunca pode ser inferior a 1!"

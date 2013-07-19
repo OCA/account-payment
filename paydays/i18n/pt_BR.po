@@ -1,0 +1,54 @@
+# Brazilian Portuguese translation for account-payment
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the account-payment package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: account-payment\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2009-09-05 14:26+0000\n"
+"PO-Revision-Date: 2013-07-18 19:34+0000\n"
+"Last-Translator: Claudio de Araujo Santos <Unknown>\n"
+"Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-07-19 06:34+0000\n"
+"X-Generator: Launchpad (build 16696)\n"
+
+#. module: paydays
+#: model:ir.module.module,shortdesc:paydays.module_meta_information
+msgid "Paydays"
+msgstr "Dia de Pagamento"
+
+#. module: paydays
+#: help:account.payment.term,payment_days:0
+msgid ""
+"If a company has more than one payment days in a month you should fill them "
+"in this field and set 'Day of the Month' field in line to zero. For example, "
+"if a company pays the 5th and 20th days of the month you should write '5-20' "
+"here."
+msgstr ""
+"Se uma empresa tem mais de um dia de pagamento em um mês você deve preenchê-"
+"los neste campo e set 'Day of the Month \"campo na linha para zero. Por "
+"exemplo, se uma empresa paga os 5 e 20 dias do mês você deve escrever '5 -20 "
+"'aqui."
+
+#. module: paydays
+#: constraint:ir.ui.view:0
+msgid "Invalid XML for View Architecture!"
+msgstr "XML inválido na visão de Arquitetura!"
+
+#. module: paydays
+#: model:ir.module.module,description:paydays.module_meta_information
+msgid ""
+"This module allows setting more than one payment days in payment terms."
+msgstr ""
+"Este módulo permite a criação de mais de um dia de pagamento em termos de "
+"pagamento."
+
+#. module: paydays
+#: field:account.payment.term,payment_days:0
+msgid "Payment days"
+msgstr "Dia de pagamento"

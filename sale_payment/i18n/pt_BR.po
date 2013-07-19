@@ -1,0 +1,47 @@
+# Brazilian Portuguese translation for account-payment
+# Copyright (c) 2013 Rosetta Contributors and Canonical Ltd 2013
+# This file is distributed under the same license as the account-payment package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2013.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: account-payment\n"
+"Report-Msgid-Bugs-To: FULL NAME <EMAIL@ADDRESS>\n"
+"POT-Creation-Date: 2009-01-25 00:57+0000\n"
+"PO-Revision-Date: 2013-07-18 19:59+0000\n"
+"Last-Translator: Claudio de Araujo Santos <Unknown>\n"
+"Language-Team: Brazilian Portuguese <pt_BR@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2013-07-19 06:34+0000\n"
+"X-Generator: Launchpad (build 16696)\n"
+
+#. module: sale_payment
+#: constraint:ir.ui.view:0
+msgid "Invalid XML for View Architecture!"
+msgstr "XML inválido para Ver Arquitetura!"
+
+#. module: sale_payment
+#: field:sale.order,partner_bank:0
+msgid "Bank Account"
+msgstr "Conta Bancária"
+
+#. module: sale_payment
+#: field:sale.order,payment_type:0
+msgid "Payment type"
+msgstr "Tipo Pagamento"
+
+#. module: sale_payment
+#: help:sale.order,partner_bank:0
+msgid ""
+"The bank account to pay to or to be paid from. It will be transferred to the "
+"invoice"
+msgstr ""
+"A conta bancária para pagar ou a ser pago a partir de. Ele vai ser "
+"transferido para a factura"
+
+#. module: sale_payment
+#: help:sale.order,payment_type:0
+msgid "The type of payment. It will be transferred to the invoice"
+msgstr "O tipo de pagamento. Ele vai ser transferido para a factura"
