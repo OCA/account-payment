@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
     <data>
-    
+
 
 
         <record id="view_create_payment_extension_order" model="ir.ui.view">
             <field name="name">payment.extension.order.create.form</field>
             <field name="model">payment.order.create</field>
-            <field name="type">form</field>
             <field name="inherit_id" ref="account_payment.view_create_payment_order"/>
             <field name="arch" type="xml">
                 <field name="duedate" position="after">
@@ -16,11 +15,11 @@
                 </field>
             </field>
         </record>
-     <!-- FORM LIST-->
+
+        <!-- FORM LIST-->
         <record id="view_create_payment_extension_order_lines" model="ir.ui.view">
             <field name="name">payment.extension.order.create.form</field>
             <field name="model">payment.order.create</field>
-            <field name="type">form</field>
             <field name="inherit_id" ref="account_payment.view_create_payment_order_lines"/>
             <field name="arch" type="xml">
 				<xpath expr="//field[@name='entries']/.." position="replace">
@@ -34,7 +33,6 @@
             </field>
         </record>
 
-    
      <!-- ACCION -->
         <record id="action_create_payment_extension_order" model="ir.actions.act_window">
             <field name="name">Seleccionar facturas a Pagar/Cobrar</field>
@@ -44,8 +42,8 @@
             <field name="view_mode">form</field>
             <field name="view_id" ref="view_create_payment_extension_order"/>
             <field name="target">new</field>
+            <field name="context">{'record_id': active_id}</field>
         </record>
-        
-    
+
     </data>
 </openerp>

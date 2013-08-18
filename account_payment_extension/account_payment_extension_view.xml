@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.ui.view" id="view_payment_type_tree">
+        <field name="name">payment.type.tree</field>
+        <field name="model">payment.type</field>
+        <field name="arch" type="xml">
+            <tree string="Payment Type">
+                <field name="name"/>
+                <field name="code"/>
+                <field name="active"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="view_payment_type_form">
+        <field name="name">payment.type.form</field>
+        <field name="model">payment.type</field>
+        <field name="arch" type="xml">
+            <form string="Payment Type">
+                <field name="name" select="1"/>
+                <field name="code" select="1"/>
+                <field name="active" select="1"/>
+                <field name="company_id" select="1" widget='selection' groups="base.group_multi_company"/>
+                <separator string="Description" colspan="4"/>
+                <field name="note" nolabel="1" colspan="4"/>
+                <separator string="Suitable Bank Types" colspan="4"/>
+                <field name="suitable_bank_types" nolabel="1" colspan="4"/>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="action_payment_type">
+        <field name="name">Payment Type</field>
+        <field name="res_model">payment.type</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem action="action_payment_type" id="menu_action_payment_type" parent="account.menu_configuration_misc"/>
+
+</data>
+</openerp>
