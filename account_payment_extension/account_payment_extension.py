@@ -25,9 +25,27 @@
 #
 ##############################################################################
 
-import account_payment_extension
-import res_partner
-import account_invoice
-import account_move_line
-import account_payment
-import wizard
+from openerp.osv import fields, orm
+
+
+class payment_type(orm.Model):
+    _name = 'payment.type'
+    _description = 'Payment type'
+    _columns = {
+        'name': fields.char('Name', size=64, required=True,
+            help='Payment Type', translate=True),
+        'code': fields.char('Code', size=64, required=True,
+            help='Specify the Code for Payment Type'),
+        'suitable_bank_types': fields.many2many(
+            'res.partner.bank.type', 'bank_type_payment_type_rel',
+            'pay_type_id', 'bank_type_id', 'Suitable bank types'),
+        'active': fields.boolean('Active', select=True),
+        'note': fields.text('Description', translate=True,
+            help="""Description of the payment type that will be shown
+                in the invoices"""),
+        'company_id': fields.many2one('res.company', 'Company', required=True),
+    }
+    _defaults = {
+        'active': lambda *a: 1,
+        'company_id': lambda self, cr, uid, c: self.pool.get('res.users').browse(cr, uid, uid, c).company_id.id
+    }

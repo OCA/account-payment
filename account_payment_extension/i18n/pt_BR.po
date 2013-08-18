@@ -48,7 +48,7 @@ msgstr ""
 #. module: account_payment_extension
 #: constraint:ir.actions.act_window:0
 msgid "Invalid model name in the action definition."
-msgstr ""
+msgstr "Nome do modelo inválido na ação definida"
 
 #. module: account_payment_extension
 #: help:payment.type,code:0
@@ -66,7 +66,7 @@ msgstr "Pagar"
 msgid ""
 "You cannot delete payment order(s) which are already confirmed or done!"
 msgstr ""
-"You cannot delete payment order(s) which are already confirmed or done!"
+"Você não pode excluir ordens de pagamentos que estão confirmadas ou concluídas!"
 
 #. module: account_payment_extension
 #: model:ir.model,name:account_payment_extension.model_payment_order
@@ -81,17 +81,17 @@ msgstr "Receber"
 #. module: account_payment_extension
 #: constraint:ir.ui.view:0
 msgid "Invalid XML for View Architecture!"
-msgstr ""
+msgstr "XML Inválido para Arquitetura da Visão"
 
 #. module: account_payment_extension
 #: field:payment.mode,require_bank_account:0
 msgid "Require Bank Account"
-msgstr "Require Bank Account"
+msgstr "Conta Corrente Requerida"
 
 #. module: account_payment_extension
 #: model:ir.actions.wizard,name:account_payment_extension.wizard_populate_statement_ext
 msgid "Populate Statement with Payment lines"
-msgstr "Populate Statement with Payment lines"
+msgstr "Importar das Linhas de Pagamento"
 
 #. module: account_payment_extension
 #: wizard_field:populate_statement_ext,init,lines:0
@@ -106,7 +106,7 @@ msgstr "Linha de Pagamento"
 #. module: account_payment_extension
 #: constraint:ir.ui.menu:0
 msgid "Error ! You can not create recursive Menu."
-msgstr ""
+msgstr "Erro ! Você não pode criar um menu recursivo."
 
 #. module: account_payment_extension
 #: model:ir.model,name:account_payment_extension.model_payment_mode
@@ -164,7 +164,7 @@ msgstr "Empresa"
 #: code:addons/account_payment_extension/payment.py:0
 #, python-format
 msgid "Account move line \"%s\" is not valid"
-msgstr "Account move line \"%s\" is not valid"
+msgstr "Linha de movimentação contábil \"%s\" não é válida"
 
 #. module: account_payment_extension
 #: wizard_button:populate_payment_ext,init,end:0
@@ -192,7 +192,7 @@ msgstr "Pagágel"
 #. module: account_payment_extension
 #: model:ir.actions.wizard,name:account_payment_extension.wizard_populate_payment_ext
 msgid "Populate payment to pay"
-msgstr "Povoar Pagamentos para Pagar"
+msgstr "Importar Pagamentos para Pagar"
 
 #. module: account_payment_extension
 #: field:res.partner,payment_type_customer:0
@@ -202,7 +202,7 @@ msgstr "Tipo de Pagamento Cliente"
 #. module: account_payment_extension
 #: help:populate_payment_ext,init,amount:0
 msgid "Next step will automatically select payments up to this amount."
-msgstr ""
+msgstr "O próximo passo vai selecionar automaticamente os pagamentos até esse valor."
 
 #. module: account_payment_extension
 #: wizard_field:populate_payment_ext,search,entries:0
@@ -319,7 +319,7 @@ msgstr "Total"
 #. module: account_payment_extension
 #: help:payment.mode,type:0
 msgid "Select the Payment Type for the Payment Mode."
-msgstr "Select the Payment Type for the Payment Mode."
+msgstr "Selecione o Tipo de Pagamento para o Modo de Pagamento."
 
 #. module: account_payment_extension
 #: view:account.bank.statement:0
@@ -339,25 +339,25 @@ msgstr "Tipo de Pagamento Fornecedor"
 #. module: account_payment_extension
 #: help:res.partner,payment_type_customer:0
 msgid "Payment type of the customer"
-msgstr "Tipo de Pagamento Cliente"
+msgstr "Tipo de Pagamento do Cliente"
 
 #. module: account_payment_extension
 #: model:ir.actions.act_window,name:account_payment_extension.action_pay_payment_order_tree
 #: model:ir.ui.menu,name:account_payment_extension.menu_action_pay_payment_order_form
 msgid "Pay. payment order"
-msgstr ""
+msgstr "Ordem de Pagamento"
 
 #. module: account_payment_extension
 #: model:ir.actions.act_window,name:account_payment_extension.action_invoice_payments
 #: model:ir.ui.menu,name:account_payment_extension.menu_action_invoice_payments
 msgid "Invoice payments"
-msgstr "Fluxo de Caixa"
+msgstr "Contas a Pagar/Receber"
 
 #. module: account_payment_extension
 #: model:ir.actions.act_window,name:account_payment_extension.action_done_payments
 #: model:ir.ui.menu,name:account_payment_extension.menu_action_done_payments
 msgid "Done payments"
-msgstr "Pagamento Concluídos"
+msgstr "Baixa de Pagar/Receber"
 
 #. module: account_payment_extension
 #: field:account.invoice,payment_type:0
@@ -402,6 +402,7 @@ msgstr "Tipo de Pagamento para o fornecedor"
 msgid ""
 "The Object name must start with x_ and not contain any special character !"
 msgstr ""
+"O Nome do objeto deve começar com x_ e não deve conter caracteres especiais !"
 
 #. module: account_payment_extension
 #: model:ir.model,name:account_payment_extension.model_account_move_line
@@ -423,7 +424,7 @@ msgstr "Documento Fiscal"
 #. module: account_payment_extension
 #: view:account.move.line:0
 msgid "Narration"
-msgstr ""
+msgstr "Narrativa"
 
 #. module: account_payment_extension
 #: model:ir.model,name:account_payment_extension.model_res_partner
@@ -443,7 +444,7 @@ msgstr "Pesquisar Linhas de Pagamento"
 #. module: account_payment_extension
 #: sql_constraint:ir.model.fields:0
 msgid "Size of the field can never be less than 1 !"
-msgstr ""
+msgstr "O Tamanho do campo numca deve ser menor do que 1!"
 
 #. module: account_payment_extension
 #: help:payment.order,create_account_moves:0

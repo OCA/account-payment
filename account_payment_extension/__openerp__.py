@@ -1,38 +1,43 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution
-#    Copyright (c) 2008 Zikzakmedia S.L. (http://zikzakmedia.com) All Rights Reserved.
-#                       Jordi Esteve <jesteve@zikzakmedia.com>
-#    AvanzOSC, Avanzed Open Source Consulting
-#    Copyright (C) 2011-2012 Iker Coranti (www.avanzosc.com). All Rights Reserved
-#    $Id$
+# OpenERP, Open Source Management Solution
+# Copyright (c) 2008 Zikzakmedia S.L. (http://zikzakmedia.com)
+#                    All Rights Reserved.Jordi Esteve <jesteve@zikzakmedia.com>
+# AvanzOSC, Avanzed Open Source Consulting
+# Copyright (C) 2011-2012 Iker Coranti (www.avanzosc.com). All Rights Reserved
+# Copyright (C) 2013 Akretion Ltda ME (www.akretion.com) All Rights Reserved
+# Renato Lima <renato.lima@akretion.com.br>
+# $Id$
 #
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
+# This program is free software: you can redistribute it and/or modify
+# it under the terms of the GNU Affero General Public License as published by
+# the Free Software Foundation, either version 3 of the License, or
+# (at your option) any later version.
 #
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU Affero General Public License for more details.
 #
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+# You should have received a copy of the GNU Affero General Public License
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
 
 {
-    "name" : "Account Payment Extension",
-    "version" : "1.1",
-    "author" : "Zikzakmedia SL",
-    "category" : "Accounting & Finance",
-    "website" : "www.zikzakmedia.com",
-    "license" : "AGPL-3",
-    "description": """Account payment extension.
+    'name': 'Account Payment Extension',
+    'version': '1.1',
+    'author': 'Zikzakmedia SL',
+    'category': 'Accounting & Finance',
+    'website': 'www.zikzakmedia.com',
+    'license': 'AGPL-3',
+    'description': """
+Account payment extension.
+==========================
 
 This module extends the account_payment module with a lot of features:
+----------------------------------------------------------------------
     * Definition of payment types (cash, bank transfer, automatical bank transfer, ...). The payment type has a translatable name and note that can be shown in the invoices.
     * Two default payment types for partners (client and supplier).
     * Automatic selection of payment type in invoices. Now an invoice can have a payment term (30 days, 30/60 days, ...) and a payment type (cash, bank transfer, ...).
@@ -44,19 +49,22 @@ This module extends the account_payment module with a lot of features:
     * Payment orders: Selected invoices are filtered by payment type, the second message communication can be set at the same time for several invoices.
 Based on previous work of Pablo Rocandio & Zikzakmedia (version for 4.2).
 """,
-    "depends" : [
-        "base",
-        "account",
-        "account_payment",
+    'depends': [
+        'base',
+        'account',
+        'account_payment',
         ],
-    "init_xml" : [],
-    "demo_xml" : [],
-    "update_xml" : [
-                    "security/ir.model.access.csv",
-                    "wizard/account_payment_order_view.xml",
-                    "payment_view.xml",
-                    "payment_sequence.xml",
-                    ],
-    "active": False,
-    "installable": True,
+    'data': [
+        'security/ir.model.access.csv',
+        'wizard/account_payment_order_view.xml',
+        'account_payment_extension_view.xml',
+        'account_payment_sequence.xml',
+        'account_payment_view.xml',
+        'account_invoice_view.xml',
+        'res_partner_view.xml',
+    ],
+    'demo': [],
+    'test': [],
+    'installable': True,
+    'auto_install': False,
 }
