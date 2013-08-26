@@ -23,9 +23,9 @@
 #
 ##############################################################################
 
-from osv import fields, osv
+from openerp.osv import fields, orm
 
-class account_move_line(osv.osv):
+class account_move_line(orm.Model):
         
     def _get_invoice(self, cr, uid, ids, field_name, arg, context=None):
         invoice_pool = self.pool.get('account.invoice')
@@ -33,7 +33,7 @@ class account_move_line(osv.osv):
         for line in self.browse(cr, uid, ids):
             inv_ids = invoice_pool.search(cr, uid, [('move_id', '=', line.move_id.id)])
             if len(inv_ids)>1:
-                raise osv.except_osv(_('Error'), _('Incongruent data: move %s has more than one invoice') % line.move_id.name)
+                raise orm.except_orm(_('Error'), _('Incongruent data: move %s has more than one invoice') % line.move_id.name)
             if inv_ids:
                 res[line.id] = inv_ids[0]
 	    else:
@@ -77,14 +77,15 @@ class account_move_line(osv.osv):
         }
 
     def fields_view_get(self, cr, uid, view_id=None, view_type='form', context={}, toolbar=False, submenu=False):
-        view_payments_tree_id = self.pool.get('ir.model.data').get_object_reference(
-            cr, uid, 'account_due_list', 'view_payments_tree')
-        if view_id == view_payments_tree_id[1]:
+        model_data_obj = self.pool.get('ir.model.data')
+        ids = model_data_obj.search(cr, uid, [('module','=','account_due_list'), ('name','=','view_payments_tree')])
+        if ids:
+            view_payments_tree_id = model_data_obj.get_object_reference(
+                cr, uid, 'account_due_list', 'view_payments_tree')
+        if ids and view_id == view_payments_tree_id[1]:
             # Use due list
-            result = super(osv.osv, self).fields_view_get(cr, uid, view_id, view_type, context, toolbar=toolbar, submenu=submenu)
+            result = super(orm.Model, self).fields_view_get(cr, uid, view_id, view_type, context, toolbar=toolbar, submenu=submenu)
         else:
             # Use special views for account.move.line object (for ex. tree view contains user defined fields)
             result = super(account_move_line, self).fields_view_get(cr, uid, view_id, view_type, context, toolbar=toolbar, submenu=submenu)
         return result
-
-account_move_line()

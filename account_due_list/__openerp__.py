@@ -27,8 +27,7 @@
     'website': 'http://www.agilebg.com',
     'license': 'AGPL-3',
     "depends" : ['account'],
-    "init_xml" : [],
-    "update_xml" : ['payment_view.xml'],
+    "data" : ['payment_view.xml'],
     "demo_xml" : [],
     "active": False,
     "installable": True
