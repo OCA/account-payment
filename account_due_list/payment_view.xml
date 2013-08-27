@@ -61,15 +61,16 @@
 
     <!-- Invoice Payments -->
     <record model="ir.actions.act_window" id="action_invoice_payments">
-        <field name="name">Payments</field>
+        <field name="name">Invoice payments</field>
         <field name="res_model">account.move.line</field>
         <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="view_id" ref="view_payments_tree"/>
         <field name="search_view_id" ref="view_payments_filter"/>
-        <field name="domain">['&amp;','|',('account_id.type','=','payable'),('account_id.type','=','receivable'),'|','|','|',('journal_id.code','=','SAJ'),('journal_id.code','=','EXJ'),('journal_id.code','=','SCNJ'),('journal_id.code','=','ECNJ')]</field>
+        <field name="domain">[('account_id.type','in',['receivable','payable']),('invoice','&lt;&gt;',False)]</field>
     </record>
-    <menuitem name="Payments" parent="account.menu_finance_entries" action="action_invoice_payments" id="menu_action_invoice_payments" sequence="5"/>
+    
+    <menuitem name="Invoice payments" parent="account.menu_finance_entries" action="action_invoice_payments" id="menu_action_invoice_payments" sequence="5"/>
 
 </data>
 </openerp>
