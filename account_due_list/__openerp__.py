@@ -1,8 +1,12 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #    
-#    Copyright (C) 2011 Agile Business Group sagl (<http://www.agilebg.com>)
 #    Copyright (C) 2011 Domsense srl (<http://www.domsense.com>)
+#    Copyright (C) 2013 Agile Business Group sagl (<http://www.agilebg.com>)
+#    @author Jordi Esteve <jesteve@zikzakmedia.com>
+#    @author Lorenzo Battistini <lorenzo.battistini@agilebg.com>
+#    Ported to OpenERP 7.0 by Alex Comba <alex.comba@agilebg.com> and
+#    Bruno Bottacini <bruno.bottacini@dorella.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
@@ -30,6 +34,9 @@
     'license': 'AGPL-3',
     "depends" : [
         'account',
+    ],
+    'conflicts': [
+        'account_payment_extension',
     ],
     "data" : [
         'payment_view.xml',
