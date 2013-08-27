@@ -43,8 +43,8 @@ class account_move_line(orm.Model):
                 )
             if inv_ids:
                 res[line.id] = inv_ids[0]
-        else:
-            res[line.id] = False
+            else:
+                res[line.id] = False
         return res
 
     def _get_day(self, cr, uid, ids, field_name, arg, context=None):
@@ -52,8 +52,8 @@ class account_move_line(orm.Model):
         for line in self.browse(cr, uid, ids):
             if line.date_maturity:
                 res[line.id] = line.date_maturity
-        else:
-            res[line.id] = False
+            else:
+                res[line.id] = False
         return res
 
     def _get_move_lines(self, cr, uid, ids, context=None):
