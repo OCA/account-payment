@@ -200,7 +200,13 @@ class payment_order(osv.osv):
     def set_done(self, cr, uid, ids, context=None):
         result = super(payment_order, self).set_done(cr, uid, ids, context)
 
-        company_currency_id = self.pool.get('res.users').browse(cr, uid, uid, context).company_id.currency_id.id
+        move_obj = self.pool.get('account.move')
+        move_line_obj = self.pool.get('account.move.line')
+        currency_obj = self.pool.get('res.currency')
+        payment_line_obj = self.pool.get('payment.line')
+
+        currency = self.pool.get('res.users').browse(cr, uid, uid, context).company_id.currency_id
+        company_currency_id = currency.id
 
         for order in self.browse(cr, uid, ids, context):
             if order.create_account_moves != 'direct-payment':
@@ -209,12 +215,12 @@ class payment_order(osv.osv):
             # This process creates a simple account move with bank and line accounts and line's amount. At the end
             # it will reconcile or partial reconcile both entries if that is possible.
 
-            move_id = self.pool.get('account.move').create(cr, uid, {
+            move_id = move_obj.create(cr, uid, {
                 'name': '/',
                 'journal_id': order.mode.journal.id,
                 'period_id': order.period_id.id,
             }, context)
-
+           
             for line in order.line_ids:
                 if not line.amount:
                     continue
@@ -237,18 +243,12 @@ class payment_order(osv.osv):
 
                 ctx = context.copy()
                 ctx['res.currency.compute.account'] = acc_cur
-                amount = self.pool.get('res.currency').compute(cr, uid, currency_id, company_currency_id, line_amount, context=ctx)
-                move_date = order.date_done
-                if order.date_prefered == 'due':
-                    move_date = line.move_line_id.date_maturity
-                if order.date_prefered == 'fixed':
-                    move_date = order.date_scheduled
-                                    
+                amount = currency_obj.compute(cr, uid, currency_id, company_currency_id, line_amount, context=ctx)
+
                 val = {
                     'name': line.move_line_id and line.move_line_id.name or '/',
                     'move_id': move_id,
-                    'date': move_date,
-                    'date_created': order.date_done,
+                    'date': order.date_done,
                     'ref': line.move_line_id and line.move_line_id.ref or False,
                     'partner_id': line.partner_id and line.partner_id.id or False,
                     'account_id': line.account_id.id,
@@ -257,11 +257,11 @@ class payment_order(osv.osv):
                     'journal_id': order.mode.journal.id,
                     'period_id': order.period_id.id,
                     'currency_id': currency_id,
+                    'state': 'valid',
                 }
                 
-                amount = self.pool.get('res.currency').compute(cr, uid, currency_id, company_currency_id, line_amount, context=ctx)
                 if currency_id <> company_currency_id:
-                    amount_cur = self.pool.get('res.currency').compute(cr, uid, company_currency_id, currency_id, amount, context=ctx)
+                    amount_cur = currency_obj.compute(cr, uid, company_currency_id, currency_id, amount, context=ctx)
                     val['amount_currency'] = -amount_cur
 
                 if line.account_id and line.account_id.currency_id and line.account_id.currency_id.id <> company_currency_id:
@@ -269,10 +269,10 @@ class payment_order(osv.osv):
                     if company_currency_id == line.account_id.currency_id.id:
                         amount_cur = line_amount
                     else:
-                        amount_cur = self.pool.get('res.currency').compute(cr, uid, company_currency_id, line.account_id.currency_id.id, amount, context=ctx)
+                        amount_cur = currency_obj.compute(cr, uid, company_currency_id, line.account_id.currency_id.id, amount, context=ctx)
                     val['amount_currency'] = amount_cur
 
-                partner_line_id = self.pool.get('account.move.line').create(cr, uid, val, context, check=False)
+                partner_line_id = move_line_obj.create(cr, uid, val, context, check=False)
 
                 # Fill the secondary amount/currency
                 # if currency is not the same than the company
@@ -283,11 +283,10 @@ class payment_order(osv.osv):
                     amount_currency = False
                     move_currency_id = False
 
-                self.pool.get('account.move.line').create(cr, uid, {
+                move_line_obj.create(cr, uid, {
                     'name': line.move_line_id and line.move_line_id.name or '/',
                     'move_id': move_id,
-                    'date': move_date,
-                    'date_created': order.date_done,
+                    'date': order.date_done,
                     'ref': line.move_line_id and line.move_line_id.ref or False,
                     'partner_id': line.partner_id and line.partner_id.id or False,
                     'account_id': account_id,
@@ -297,44 +296,36 @@ class payment_order(osv.osv):
                     'period_id': order.period_id.id,
                     'amount_currency': amount_currency,
                     'currency_id': move_currency_id,
-                }, context)
-
-                aml_ids = [x.id for x in self.pool.get('account.move').browse(cr, uid, move_id, context).line_id]
-                for x in self.pool.get('account.move.line').browse(cr, uid, aml_ids, context):
-                    if x.state <> 'valid':
-                        raise osv.except_osv(_('Error !'), _('Account move line "%s" is not valid') % x.name)
+                    'state': 'valid',
+                }, context, check=False)
 
                 if line.move_line_id and not line.move_line_id.reconcile_id:
                     # If payment line has a related move line, we try to reconcile it with the move we just created.
                     lines_to_reconcile = [
                         partner_line_id,
                     ]
-
                     # Check if payment line move is already partially reconciled and use those moves in that case.
                     if line.move_line_id.reconcile_partial_id:
                         for rline in line.move_line_id.reconcile_partial_id.line_partial_ids:
                             lines_to_reconcile.append( rline.id )
                     else:
                         lines_to_reconcile.append( line.move_line_id.id )
-
                     amount = 0.0
-                    for rline in self.pool.get('account.move.line').browse(cr, uid, lines_to_reconcile, context):
+                    for rline in move_line_obj.browse(cr, uid, lines_to_reconcile, context):
                         amount += rline.debit - rline.credit
-
-                    currency = self.pool.get('res.users').browse(cr, uid, uid, context).company_id.currency_id
-
-                    if self.pool.get('res.currency').is_zero(cr, uid, currency, amount):
-                        self.pool.get('account.move.line').reconcile(cr, uid, lines_to_reconcile, 'payment', context=context)
+        
+                    if currency_obj.is_zero(cr, uid, currency, amount):
+                        move_line_obj.reconcile(cr, uid, lines_to_reconcile, 'payment', context=context)
                     else:
-                        self.pool.get('account.move.line').reconcile_partial(cr, uid, lines_to_reconcile, 'payment', context)
-
-                if order.mode.journal.entry_posted:
-                    self.pool.get('account.move').write(cr, uid, [move_id], {
-                        'state':'posted',
-                    }, context)
-
-                self.pool.get('payment.line').write(cr, uid, [line.id], {
+                        move_line_obj.reconcile_partial(cr, uid, lines_to_reconcile, 'payment', context)
+                # Annotate the move id
+                payment_line_obj.write(cr, uid, [line.id], {
                     'payment_move_id': move_id,
+                }, context)
+            # Post the move
+            if order.mode.journal.entry_posted:
+                move_obj.write(cr, uid, [move_id], {
+                    'state':'posted',
                 }, context)
 
         return result
