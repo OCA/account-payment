@@ -31,7 +31,24 @@ class account_move_line(osv.osv):
     _inherit = 'account.move.line'
 
     def _invoice(self, cr, uid, ids, name, arg, context=None):
-        return super(account_move_line, self)._invoice(cr, uid, ids, name, arg, context)
+        invoice_obj = self.pool.get('account.invoice')
+        res = {}
+        for line_id in ids:
+            res[line_id] = False
+        
+        cursor.execute('SELECT l.id, i.id ' \
+                       'FROM account_invoice i,account_move_line l ' \
+                       'left join account_move_line r on l.reconcile_id=r.reconcile_id and l.id<>r.id ' \
+                       'left join account_move_line p on l.reconcile_partial_id=p.reconcile_partial_id and l.id<>p.id ' \
+                       'where (i.move_id = l.move_id or i.move_id = r.move_id or i.move_id = p.move_id) ' \
+                       'AND l.id IN %s',
+                        (tuple(ids),))
+        invoice_ids = []        
+ 
+        for line_id, invoice_id in cursor.fetchall():
+            name = invoice_obj.name_get(cursor, user, [invoice_id], context=context)
+            res[line_id] = (invoice_id, len(name)>0 and name[0])
+        return res
 
     def _invoice_search(self, cr, uid, obj, name, args, context={}):
         """ Redefinition for searching account move lines without any invoice related ('invoice.id','=',False)"""
