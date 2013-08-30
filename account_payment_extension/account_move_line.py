@@ -36,51 +36,21 @@ class account_move_line(osv.osv):
         res = {}
         for line_id in ids:
             res[line_id] = False
-        cursor.execute('SELECT l.id, i.id ' \
-                        'FROM account_move_line l, account_invoice i ' \
-                        'WHERE l.move_id = i.move_id ' \
-                        'AND l.id IN %s',
-                        (tuple(ids),))
-        invoice_ids = []
         
+        cursor.execute('SELECT l.id, i.id ' \
+                       'FROM account_invoice i,account_move_line l ' \
+                       'left join account_move_line r on l.reconcile_id=r.reconcile_id and l.id<>r.id ' \
+                       'left join account_move_line p on l.reconcile_partial_id=p.reconcile_partial_id and l.id<>p.id ' \
+                       'where (i.move_id = l.move_id or i.move_id = r.move_id or i.move_id = p.move_id) ' \
+                       'AND l.id IN %s',
+                        (tuple(ids),))
+        invoice_ids = []        
  
         for line_id, invoice_id in cursor.fetchall():
-            res[line_id] = invoice_id
-            invoice_ids.append(invoice_id)
-        invoice_names = {False: ''}
-        for invoice_id, name in invoice_obj.name_get(cursor, user, invoice_ids, context=context):
-            invoice_names[invoice_id] = name
-        for line_id in res.keys():
-            invoice_id = res[line_id]
-            res[line_id] = (invoice_id, invoice_names[invoice_id])
-        
-        for key in res.keys():
-            if res[key][0] == False:   
-            # if there is no a direct invoice related
-                move_line_obj = self.pool.get('account.move.line')
-                line1 = move_line_obj.browse(cursor, user, key)
-                move = self.pool.get('account.move').browse (cursor, user, line1.move_id.id)
-                
-                if move:
-                    for line_in in move.line_id:
-                        if line_in.id <> key and (line_in.reconcile_id or line_in.reconcile_partial_id):
-                            if line_in.reconcile_id:
-                                for line_in2 in line_in.reconcile_id.line_id:
-                                    if line_in2.id <> line_in.id:
-                                        dict = self._invoice (cursor, user, [line_in2.id], name, arg, context)
-                                        for item in dict.keys():
-                                            res[key] = dict[item] 
-                            else:
-                                if line_in.reconcile_partial_id:
-                                   for line_in2 in line_in.reconcile_partial_id.line_partial_ids:
-                                       if line_in2.id <> line_in.id:
-                                           dict = self._invoice (cursor, user, [line_in2.id], name, arg, context)
-                                           for item in dict.keys():
-                                               res[key] = dict[item] 
-                                    
-                                    
+            name = invoice_obj.name_get(cursor, user, [invoice_id], context=context)
+            res[line_id] = (invoice_id, len(name)>0 and name[0])
         return res
-
+      
     #===========================================================================
     # def _invoice(self, cr, uid, ids, name, arg, context=None):
     #    return super(account_move_line, self)._invoice(cr, uid, ids, name, arg, context)
