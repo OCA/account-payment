@@ -48,7 +48,7 @@ class account_move_line(osv.osv):
  
         for line_id, invoice_id in cursor.fetchall():
             name = invoice_obj.name_get(cursor, user, [invoice_id], context=context)
-            res[line_id] = (invoice_id, len(name)>0 and name[0])
+            res[line_id] = name and name[0] or False
         return res
       
     #===========================================================================
