@@ -135,7 +135,8 @@ class account_voucher(osv.osv):
                                 else:
                                     vals['tax_amount'] = -new_line_amount
                             lines_to_create.append(vals)
-                            
+
+                context['journal_id'] = voucher.journal_id.vat_on_payment_related_journal_id.id
                 shadow_move_id = move_pool.create(cr, uid, {
                     'journal_id': voucher.journal_id.vat_on_payment_related_journal_id.id,
                     }, context)
@@ -158,7 +159,7 @@ class account_voucher(osv.osv):
                     elif line_to_create['type'] == 'shadow':
                         line_to_create['move_id'] = shadow_move_id
                     del line_to_create['type']
-                
+
                     move_line_pool.create(cr, uid, line_to_create, context)
                     
                 voucher.write({'shadow_move_id': shadow_move_id})
