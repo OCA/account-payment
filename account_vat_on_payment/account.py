@@ -160,8 +160,11 @@ class account_voucher(osv.osv):
                             lines_to_create.append(vals)
 
                 context['journal_id'] = voucher.journal_id.vat_on_payment_related_journal_id.id
+                context['period_id'] = voucher.move_id.period_id.id
                 shadow_move_id = move_pool.create(cr, uid, {
                     'journal_id': voucher.journal_id.vat_on_payment_related_journal_id.id,
+                    'period_id': voucher.move_id.period_id.id,
+                    'date': voucher.move_id.date,
                     }, context)
                 
                 # move the payment move lines to shadow entry
