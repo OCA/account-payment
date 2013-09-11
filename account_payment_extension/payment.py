@@ -256,13 +256,13 @@ class payment_order(osv.osv):
                     'credit': ((amount<0) and -amount) or 0.0,
                     'journal_id': order.mode.journal.id,
                     'period_id': order.period_id.id,
-                    'currency_id': currency_id,
                     'state': 'valid',
                 }
                 
                 if currency_id <> company_currency_id:
                     amount_cur = currency_obj.compute(cr, uid, company_currency_id, currency_id, amount, context=ctx)
                     val['amount_currency'] = -amount_cur
+                    val['currency_id'] = currency_id
 
                 if line.account_id and line.account_id.currency_id and line.account_id.currency_id.id <> company_currency_id:
                     val['currency_id'] = line.account_id.currency_id.id
