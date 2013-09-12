@@ -85,7 +85,7 @@ class payment_order_create(osv.osv_memory):
         amount = data.amount
         payment = order_obj.browse(cr, uid, context.get('active_id'), context=context)
         # Search for move line to pay:
-        domain = [('reconcile_id', '=', False), ('account_id.type', '=', payment.type)]#,('amount_to_pay', '<>', 0)]
+        domain = [('reconcile_id', '=', False), ('account_id.type', '=', payment.type), ('amount_to_pay', '<>', 0)]
         if payment.type =='payable' and not show_refunds:
             domain += [ ('credit','>',0) ]
         elif not show_refunds:
