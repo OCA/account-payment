@@ -32,6 +32,7 @@ class account_move_line(osv.osv):
     _inherit = 'account.move.line'
 
     def _invoice(self, cursor, user, ids, name, arg, context=None):
+        context = context or {}
         invoice_obj = self.pool.get('account.invoice')
         res = {}
         for line_id in ids:
@@ -56,8 +57,9 @@ class account_move_line(osv.osv):
     #    return super(account_move_line, self)._invoice(cr, uid, ids, name, arg, context)
     #===========================================================================
 
-    def _invoice_search(self, cr, uid, obj, name, args, context={}):
+    def _invoice_search(self, cr, uid, obj, name, args, context=None):
         """ Redefinition for searching account move lines without any invoice related ('invoice.id','=',False)"""
+        context = context or {}
         for x in args:
             if (x[2] is False) and (x[1] == '=') and (x[0] == 'invoice'):
                 cr.execute('SELECT l.id FROM account_move_line l ' \
@@ -69,12 +71,12 @@ class account_move_line(osv.osv):
                 return [('id', 'in', [x[0] for x in res])]
         return super(account_move_line, self)._invoice_search(cr, uid, obj, name, args, context=context)
 
-    def amount_to_pay(self, cr, uid, ids, name, arg={}, context={}):
+    def amount_to_pay(self, cr, uid, ids, name, arg={}, context=None):
         """
         Return amount pending to be paid taking into account payment lines and the reconciliation.
         Note that the amount to pay can be due to negative supplier refund invoices or customer invoices.
         """
-
+        context = context or {}
         if not ids:
             return {}
         cr.execute("""SELECT ml.id,
@@ -125,7 +127,8 @@ class account_move_line(osv.osv):
             result[id] = debt
         return result
 
-    def _to_pay_search(self, cr, uid, obj, name, args, context={}):
+    def _to_pay_search(self, cr, uid, obj, name, args, context=None):
+        context = context or {}
         if not len(args):
             return []
         currency = self.pool.get('res.users').browse(cr, uid, uid, context).company_id.currency_id
@@ -142,7 +145,8 @@ class account_move_line(osv.osv):
             return [('id','=',False)]
         return [('id','in',ids)]
 
-    def _payment_type_get(self, cr, uid, ids, field_name, arg, context={}):
+    def _payment_type_get(self, cr, uid, ids, field_name, arg, context=None):
+        context = context or {}
         result = {}
         invoice_obj = self.pool.get('account.invoice')
         for rec in self.browse(cr, uid, ids, context):
@@ -156,14 +160,15 @@ class account_move_line(osv.osv):
                 result[rec.id] = (0,0)
         return result
 
-    def _payment_type_search(self, cr, uid, obj, name, args, context={}):
+    def _payment_type_search(self, cr, uid, obj, name, args, context=None):
+        context = context or {}
         if not len(args):
             return []
         operator = args[0][1]
         value = args[0][2]
         if not value:
             return []
-        if isinstance(value, int) or isinstance(value, long):
+        if isinstance(value, (int, long)):
             ids = [value]
         elif isinstance(value, list):
             ids = value 
@@ -172,7 +177,7 @@ class account_move_line(osv.osv):
         if ids:
             cr.execute('SELECT l.id ' \
                 'FROM account_move_line l, account_invoice i ' \
-                'WHERE l.move_id = i.move_id AND i.payment_type in (%s)' % (','.join(map(str, ids))))
+                'WHERE l.move_id = i.move_id AND i.payment_type in %s', (tuple(ids),))
             res = cr.fetchall()
             if len(res):
                 return [('id', 'in', [x[0] for x in res])]
@@ -188,12 +193,14 @@ class account_move_line(osv.osv):
     }
 
     def write(self, cr, uid, ids, vals, context=None, check=True, update_check=True):
+        context = context or {}
         for key in vals.keys():
             if key not in ['received_check', 'partner_bank_id', 'date_maturity']:
                 return super(account_move_line, self).write(cr, uid, ids, vals, context, check, update_check)
         return super(account_move_line, self).write(cr, uid, ids, vals, context, check, update_check=False)
 
-    def fields_view_get(self, cr, uid, view_id=None, view_type='form', context={}, toolbar=False, submenu=False):
+    def fields_view_get(self, cr, uid, view_id=None, view_type='form', context=None, toolbar=False, submenu=False):
+        context = context or {}
         menus = [
             self.pool.get('ir.model.data').get_object_reference(cr, uid, 'account_payment_extension', 'menu_action_invoice_payments'),
             #self.pool.get('ir.model.data').get_object_reference(cr, uid, 'account_payment_extension', 'menu_action_done_payments'),
@@ -224,7 +231,7 @@ class account_move_line(osv.osv):
         return result
         
     def pay_move_lines(self, cr, uid, ids, context=None):
-        
+        context = context or {}
         #obj_move = self.pool.get('account.move')
         amount = 0
         name = ''
@@ -258,8 +265,6 @@ class account_move_line(osv.osv):
             ttype = 'receipt'
             invoice_type = 'out_invoice'
             
-        print amount
-            
         return {
             'name':_("Pay Moves"),
             'view_mode': 'form',
@@ -280,8 +285,9 @@ class account_move_line(osv.osv):
                 'default_type': ttype ,
                 'type':  ttype ,
                 'move_line_ids': ids
-                }
+            }
         }
+
 account_move_line()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

@@ -64,43 +64,36 @@ class payment_order_create(osv.osv_memory):
 
         @return : default values of fields.
         """
+        context = context or {}
         line_obj = self.pool.get('account.move.line')
         res = super(payment_order_create, self).default_get(cr, uid, fields, context=context)
         if 'entries' in fields:
-            if context and 'line_ids' in context and context['line_ids']:
+            if context.get('line_ids'):
                 res.update({'entries':  context['line_ids']})
 
         return res
 
-    def search_entries(self, cr, uid, ids, context):
+    def search_entries(self, cr, uid, ids, context=None):
+        context = context or {}
         pool = pooler.get_pool(cr.dbname)
         order_obj = self.pool.get('payment.order')
         line_obj = self.pool.get('account.move.line')
         mod_obj = self.pool.get('ir.model.data')
-        if context is None:
-            context = {}
         data = self.browse(cr, uid, ids, context=context)[0]
         search_due_date = data.duedate
         show_refunds = data.show_refunds
         amount = data.amount
-
         payment = order_obj.browse(cr, uid, context.get('active_id'), context=context)
-
         # Search for move line to pay:
-        domain = [('reconcile_id', '=', False),('account_id.type', '=', payment.type),('amount_to_pay', '<>', 0)]
-
+        domain = [('reconcile_id', '=', False), ('account_id.type', '=', payment.type), ('amount_to_pay', '<>', 0)]
         if payment.type =='payable' and not show_refunds:
             domain += [ ('credit','>',0) ]
-
         elif not show_refunds:
-            domain += [ ('debit','>',0) ]
-
+            domain += [('debit', '>', 0)]
         if payment.mode:
-            domain += [ ('payment_type','=',payment.mode.type.id) ]
-
+            domain += [('payment_type', '=', payment.mode.type.id)]
         domain += ['|',('date_maturity','<',search_due_date),('date_maturity','=',False)]
         line_ids = line_obj.search(cr, uid, domain, order='date_maturity', context=context)
-
         selected_ids = []
         if amount > 0.0:
             # If user specified an amount, search what moves match the criteria
@@ -111,11 +104,12 @@ class payment_order_create(osv.osv_memory):
         elif not amount:
             selected_ids = line_ids
 
-        context.update({'line_ids': selected_ids})
+        ctx = context.copy()
+        ctx.update({'line_ids': selected_ids})
         model_data_ids = mod_obj.search(cr, uid,[('model', '=', 'ir.ui.view'), ('name', '=', 'view_create_payment_order_lines')], context=context)
         resource_id = mod_obj.read(cr, uid, model_data_ids, fields=['res_id'], context=context)[0]['res_id']
         return {'name': ('Entrie Lines'),
-                'context': context,
+                'context': ctx,
                 'view_type': 'form',
                 'view_mode': 'form',
                 'res_model': 'payment.order.create',
@@ -125,11 +119,10 @@ class payment_order_create(osv.osv_memory):
         }
 
     def create_payment(self, cr, uid, ids, context=None):
+        context = context or {}
         order_obj = self.pool.get('payment.order')
         line_obj = self.pool.get('account.move.line')
         payment_obj = self.pool.get('payment.line')
-        if context is None:
-            context = {}
         data = self.browse(cr, uid, ids, context=context)[0]
         line_ids = [entry.id for entry in data.entries]
         if not line_ids:
