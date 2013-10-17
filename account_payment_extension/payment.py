@@ -198,23 +198,26 @@ class payment_order(osv.osv):
         return result
 
     def set_done(self, cr, uid, ids, context=None):
-        result = super(payment_order, self).set_done(cr, uid, ids, context)
+        result = super(payment_order, self).set_done(cr, uid, ids,
+                                                     context=context)
 
         move_obj = self.pool.get('account.move')
         move_line_obj = self.pool.get('account.move.line')
         currency_obj = self.pool.get('res.currency')
         payment_line_obj = self.pool.get('payment.line')
+        users_obj = self.pool.get('res.users')
 
-        currency = self.pool.get('res.users').browse(cr, uid, uid, context).company_id.currency_id
+        user = users_obj.browse(cr, uid, uid, context=context)
+        currency = user.company_id.currency_id
         company_currency_id = currency.id
 
         for order in self.browse(cr, uid, ids, context):
             if order.create_account_moves != 'direct-payment':
                 continue
 
-            # This process creates a simple account move with bank and line accounts and line's amount. At the end
-            # it will reconcile or partial reconcile both entries if that is possible.
-
+            # This process creates a simple account move with bank and line 
+            # accounts and line's amount. At the end it will reconcile or 
+            # partial reconcile both entries if that is possible.
             move_id = move_obj.create(cr, uid, {
                 'name': '/',
                 'journal_id': order.mode.journal.id,
@@ -226,9 +229,14 @@ class payment_order(osv.osv):
                     continue
 
                 if not line.account_id:
-                    raise osv.except_osv(_('Error!'), _('Payment order should create account moves but line with amount %.2f for partner "%s" has no account assigned.') % (line.amount, line.partner_id.name ) )
+                    raise osv.except_osv(_('Error!'), _('Payment order should '
+                        'create account moves but line with amount %.2f for '
+                        'partner "%s" has no account assigned.') %(
+                            line.amount, line.partner_id.name))
 
-                currency_id = order.mode.journal.currency and order.mode.journal.currency.id or company_currency_id
+                currency_id = (order.mode.journal.currency and
+                               order.mode.journal.currency.id or
+                               company_currency_id)
 
                 if line.type == 'payable':
                     line_amount = line.amount_currency or line.amount
@@ -239,11 +247,15 @@ class payment_order(osv.osv):
                     account_id = order.mode.journal.default_credit_account_id.id
                 else:
                     account_id = order.mode.journal.default_debit_account_id.id
-                acc_cur = ((line_amount<=0) and order.mode.journal.default_debit_account_id) or line.account_id
+                acc_cur = ((line_amount<=0) and 
+                           order.mode.journal.default_debit_account_id
+                           ) or line.account_id
 
                 ctx = context.copy()
                 ctx['res.currency.compute.account'] = acc_cur
-                amount = currency_obj.compute(cr, uid, currency_id, company_currency_id, line_amount, context=ctx)
+                amount = currency_obj.compute(cr, uid, currency_id,
+                                              company_currency_id, line_amount,
+                                              context=ctx)
 
                 val = {
                     'name': line.move_line_id and line.move_line_id.name or '/',
@@ -261,18 +273,27 @@ class payment_order(osv.osv):
                 }
                 
                 if currency_id <> company_currency_id:
-                    amount_cur = currency_obj.compute(cr, uid, company_currency_id, currency_id, amount, context=ctx)
+                    amount_cur = currency_obj.compute(cr, uid,
+                                                      company_currency_id,
+                                                      currency_id, amount,
+                                                      context=ctx)
                     val['amount_currency'] = -amount_cur
 
-                if line.account_id and line.account_id.currency_id and line.account_id.currency_id.id <> company_currency_id:
+                if line.account_id and line.account_id.currency_id and \
+                        line.account_id.currency_id.id <> company_currency_id:
                     val['currency_id'] = line.account_id.currency_id.id
                     if company_currency_id == line.account_id.currency_id.id:
                         amount_cur = line_amount
                     else:
-                        amount_cur = currency_obj.compute(cr, uid, company_currency_id, line.account_id.currency_id.id, amount, context=ctx)
+                        amount_cur = currency_obj.compute(cr, uid,
+                            company_currency_id,
+                            line.account_id.currency_id.id, amount,
+                            context=ctx)
                     val['amount_currency'] = amount_cur
 
-                partner_line_id = move_line_obj.create(cr, uid, val, context, check=False)
+                partner_line_id = move_line_obj.create(cr, uid, val,
+                                                       context=context,
+                                                       check=False)
 
                 # Fill the secondary amount/currency
                 # if currency is not the same than the company
@@ -297,7 +318,7 @@ class payment_order(osv.osv):
                     'amount_currency': amount_currency,
                     'currency_id': move_currency_id,
                     'state': 'valid',
-                }, context, check=False)
+                }, context=context, check=False)
 
                 if line.move_line_id and not line.move_line_id.reconcile_id:
                     # If payment line has a related move line, we try to reconcile it with the move we just created.
@@ -307,17 +328,23 @@ class payment_order(osv.osv):
                     # Check if payment line move is already partially reconciled and use those moves in that case.
                     if line.move_line_id.reconcile_partial_id:
                         for rline in line.move_line_id.reconcile_partial_id.line_partial_ids:
-                            lines_to_reconcile.append( rline.id )
+                            lines_to_reconcile.append(rline.id)
                     else:
-                        lines_to_reconcile.append( line.move_line_id.id )
+                        lines_to_reconcile.append(line.move_line_id.id)
                     amount = 0.0
-                    for rline in move_line_obj.browse(cr, uid, lines_to_reconcile, context):
+                    for rline in move_line_obj.browse(cr, uid,
+                                                      lines_to_reconcile,
+                                                      context=context):
                         amount += rline.debit - rline.credit
         
                     if currency_obj.is_zero(cr, uid, currency, amount):
-                        move_line_obj.reconcile(cr, uid, lines_to_reconcile, 'payment', context=context)
+                        move_line_obj.reconcile(cr, uid, lines_to_reconcile,
+                                                'payment', context=context)
                     else:
-                        move_line_obj.reconcile_partial(cr, uid, lines_to_reconcile, 'payment', context)
+                        move_line_obj.reconcile_partial(cr, uid,
+                                                        lines_to_reconcile,
+                                                        'payment',
+                                                        context=context)
                 # Annotate the move id
                 payment_line_obj.write(cr, uid, [line.id], {
                     'payment_move_id': move_id,
@@ -326,7 +353,7 @@ class payment_order(osv.osv):
             if order.mode.journal.entry_posted:
                 move_obj.write(cr, uid, [move_id], {
                     'state':'posted',
-                }, context)
+                }, context=context)
 
         return result
 
