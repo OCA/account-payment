@@ -198,8 +198,7 @@ class payment_order(osv.osv):
         return result
 
     def set_done(self, cr, uid, ids, context=None):
-        result = super(payment_order, self).set_done(cr, uid, ids,
-                                                     context=context)
+        result = super(payment_order, self).set_done(cr, uid, ids, context)
 
         move_obj = self.pool.get('account.move')
         move_line_obj = self.pool.get('account.move.line')
