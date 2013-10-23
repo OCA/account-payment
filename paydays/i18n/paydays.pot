@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 5.0.1\n"
-"Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2009-09-05 14:26:09+0000\n"
-"PO-Revision-Date: 2009-09-05 14:26:09+0000\n"
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-10-21 09:23+0000\n"
+"PO-Revision-Date: 2013-10-21 09:23+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,23 +16,18 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: paydays
-#: model:ir.module.module,shortdesc:paydays.module_meta_information
-msgid "Paydays"
-msgstr ""
-
-#. module: paydays
 #: help:account.payment.term,payment_days:0
 msgid "If a company has more than one payment days in a month you should fill them in this field and set 'Day of the Month' field in line to zero. For example, if a company pays the 5th and 20th days of the month you should write '5-20' here."
 msgstr ""
 
 #. module: paydays
-#: constraint:ir.ui.view:0
-msgid "Invalid XML for View Architecture!"
+#: constraint:account.payment.term:0
+msgid "Error: Payment days field format is not valid."
 msgstr ""
 
 #. module: paydays
-#: model:ir.module.module,description:paydays.module_meta_information
-msgid "This module allows setting more than one payment days in payment terms."
+#: model:ir.model,name:paydays.model_account_payment_term
+msgid "Payment Term"
 msgstr ""
 
 #. module: paydays
