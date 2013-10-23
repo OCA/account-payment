@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 5.0.0\n"
-"Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2009-01-25 00:57:54+0000\n"
-"PO-Revision-Date: 2009-01-25 00:57:54+0000\n"
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-10-21 09:25+0000\n"
+"PO-Revision-Date: 2013-10-21 09:25+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,8 +16,8 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: sale_payment
-#: constraint:ir.ui.view:0
-msgid "Invalid XML for View Architecture!"
+#: field:sale.order,payment_type:0
+msgid "Payment type"
 msgstr ""
 
 #. module: sale_payment
@@ -26,8 +26,8 @@ msgid "Bank Account"
 msgstr ""
 
 #. module: sale_payment
-#: field:sale.order,payment_type:0
-msgid "Payment type"
+#: help:sale.order,payment_type:0
+msgid "The type of payment. It will be transferred to the invoice"
 msgstr ""
 
 #. module: sale_payment
@@ -36,7 +36,12 @@ msgid "The bank account to pay to or to be paid from. It will be transferred to 
 msgstr ""
 
 #. module: sale_payment
-#: help:sale.order,payment_type:0
-msgid "The type of payment. It will be transferred to the invoice"
+#: model:ir.model,name:sale_payment.model_stock_picking
+msgid "Picking List"
+msgstr ""
+
+#. module: sale_payment
+#: model:ir.model,name:sale_payment.model_sale_order
+msgid "Sales Order"
 msgstr ""
 
