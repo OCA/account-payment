@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 6.0.0-rc1\n"
-"Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2010-12-20 20:22:04+0000\n"
-"PO-Revision-Date: 2010-12-20 20:22:04+0000\n"
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-10-21 09:25+0000\n"
+"PO-Revision-Date: 2013-10-21 09:25+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,95 +16,58 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: purchase_payment
-#: model:ir.module.module,shortdesc:purchase_payment.module_meta_information
-msgid "Purchase Payment Type and Terms"
+#: field:purchase.order,payment_type:0
+msgid "Payment type"
 msgstr ""
-
-#. module: purchase_payment
-#: model:ir.module.module,description:purchase_payment.module_meta_information
-msgid "Adds payment info to the purchase process.\n"
-"\n"
-"Adds payment type, terms, and bank account to the purchase orders.\n"
-"\n"
-"Allows to set different default payment terms for purchases (the partners\n"
-"will have payment terms and supplier payment terms).\n"
-"\n"
-"The payment terms, payment type and bank account default values for the\n"
-"purchase will be taken from the partner.\n"
-"\n"
-"Invoices created from purchase orders, or from pickings related to purchase\n"
-"orders, will inherit this payment info from the payment order.\n"
-""
-msgstr ""
-
-#. module: purchase_payment
-#: constraint:ir.ui.view:0
-msgid "Invalid XML for View Architecture!"
-msgstr "Invalid XML for View Architecture!"
-
-#. module: purchase_payment
-#: constraint:ir.model:0
-msgid "The Object name must start with x_ and not contain any special character !"
-msgstr "The Object name must start with x_ and not contain any special character !"
 
 #. module: purchase_payment
 #: field:purchase.order,partner_bank:0
 msgid "Bank Account"
-msgstr "Bank Account"
+msgstr ""
 
 #. module: purchase_payment
 #: field:purchase.order,payment_term:0
 #: field:res.partner,property_payment_term_supplier:0
 msgid "Payment Term"
-msgstr "Payment Term"
-
-#. module: purchase_payment
-#: field:purchase.order,payment_type:0
-msgid "Payment type"
-msgstr "Payment type"
+msgstr ""
 
 #. module: purchase_payment
 #: model:ir.model,name:purchase_payment.model_purchase_order
 msgid "Purchase Order"
-msgstr "Purchase Order"
+msgstr ""
 
 #. module: purchase_payment
 #: help:res.partner,property_payment_term_supplier:0
 msgid "This payment term will be used instead of the default one for the current partner on purchases"
-msgstr "This payment term will be used instead of the default one for the current partner on purchases"
+msgstr ""
 
 #. module: purchase_payment
 #: help:purchase.order,payment_term:0
 msgid "The payment terms. They will be transferred to the invoice."
-msgstr "The payment terms. They will be transferred to the invoice."
+msgstr ""
 
 #. module: purchase_payment
 #: model:ir.model,name:purchase_payment.model_account_invoice
 msgid "Invoice"
-msgstr "Invoice"
+msgstr ""
 
 #. module: purchase_payment
 #: model:ir.model,name:purchase_payment.model_stock_picking
 msgid "Picking List"
-msgstr "Picking List"
+msgstr ""
 
 #. module: purchase_payment
 #: help:purchase.order,payment_type:0
 msgid "The type of payment. It will be transferred to the invoice."
-msgstr "The type of payment. It will be transferred to the invoice."
+msgstr ""
 
 #. module: purchase_payment
 #: model:ir.model,name:purchase_payment.model_res_partner
 msgid "Partner"
-msgstr "Partner"
+msgstr ""
 
 #. module: purchase_payment
 #: help:purchase.order,partner_bank:0
 msgid "The bank account to pay to or to be paid from. It will be transferred to the invoice."
-msgstr "The bank account to pay to or to be paid from. It will be transferred to the invoice."
-
-#. module: purchase_payment
-#: sql_constraint:ir.model.fields:0
-msgid "Size of the field can never be less than 1 !"
-msgstr "Size of the field can never be less than 1 !"
+msgstr ""
 
