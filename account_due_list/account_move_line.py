@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (c) 2008 Zikzakmedia S.L. (http://zikzakmedia.com) All Rights Reserved.
+#    Copyright (c) 2008 Zikzakmedia S.L. (http://zikzakmedia.com)
 #                       Jordi Esteve <jesteve@zikzakmedia.com>
 #
 #    Copyright (C) 2011 Domsense srl (<http://www.domsense.com>)
@@ -34,7 +34,8 @@ class account_move_line(orm.Model):
         invoice_pool = self.pool.get('account.invoice')
         res = {}
         for line in self.browse(cr, uid, ids):
-            inv_ids = invoice_pool.search(cr, uid, [('move_id', '=', line.move_id.id)])
+            inv_ids = invoice_pool.search(
+                cr, uid, [('move_id', '=', line.move_id.id)])
             if len(inv_ids) > 1:
                 raise orm.except_orm(
                     _('Error'),
@@ -69,40 +70,91 @@ class account_move_line(orm.Model):
     _inherit = 'account.move.line'
 
     _columns = {
-        'invoice_origin': fields.related('invoice', 'origin', type='char', string='Source Doc', store=False),
-        'invoice_date': fields.related('invoice', 'date_invoice', type='date', string='Invoice Date', store=False),
-        'partner_ref': fields.related('partner_id', 'ref', type='char', string='Partner Ref', store=False),
+        'invoice_origin': fields.related(
+            'invoice',
+            'origin',
+            type='char',
+            string='Source Doc',
+            store=False
+        ),
+        'invoice_date': fields.related(
+            'invoice',
+            'date_invoice',
+            type='date',
+            string='Invoice Date',
+            store=False
+        ),
+        'partner_ref': fields.related(
+            'partner_id',
+            'ref',
+            type='char',
+            string='Partner Ref',
+            store=False
+        ),
         'payment_term_id': fields.related(
-            'invoice', 'payment_term',
-            type='many2one', string='Payment Term', store=False, relation="account.payment.term"),
+            'invoice',
+            'payment_term',
+            type='many2one',
+            string='Payment Term',
+            store=False,
+            relation="account.payment.term"
+        ),
         'stored_invoice_id': fields.function(
-            _get_invoice, method=True,
-            string="Invoice", type="many2one", relation="account.invoice",
+            _get_invoice,
+            method=True,
+            string="Invoice",
+            type="many2one",
+            relation="account.invoice",
             store={
-                'account.move.line': (lambda self, cr, uid, ids, c={}: ids, ['move_id'], 10),
-                'account.invoice': (_get_move_lines, ['move_id'], 10),
+                'account.move.line': (
+                    lambda self, cr, uid, ids, c={}: ids,
+                    ['move_id'],
+                    10
+                ),
+                'account.invoice': (
+                    _get_move_lines,
+                    ['move_id'],
+                    10
+                ),
             }),
         'day': fields.function(
             _get_day, method=True, string="Day", type="char", size=16,
             store={
-                'account.move.line': (lambda self, cr, uid, ids, c={}: ids, ['date_maturity'], 10),
+                'account.move.line': (
+                    lambda self, cr, uid, ids, c={}: ids,
+                    ['date_maturity'],
+                    10
+                ),
             }),
     }
 
-    def fields_view_get(self, cr, uid, view_id=None, view_type='form',
-                        context={}, toolbar=False, submenu=False):
+    def fields_view_get(
+        self, cr, uid, view_id=None, view_type='form',
+        context={}, toolbar=False, submenu=False
+    ):
         model_data_obj = self.pool.get('ir.model.data')
         ids = model_data_obj.search(
-            cr, uid, [('module', '=', 'account_due_list'), ('name', '=', 'view_payments_tree')])
+            cr,
+            uid,
+            [
+                ('module', '=', 'account_due_list'),
+                ('name', '=', 'view_payments_tree')
+            ]
+        )
         if ids:
             view_payments_tree_id = model_data_obj.get_object_reference(
                 cr, uid, 'account_due_list', 'view_payments_tree')
         if ids and view_id == view_payments_tree_id[1]:
             # Use due list
             result = super(orm.Model, self).fields_view_get(
-                cr, uid, view_id, view_type, context, toolbar=toolbar, submenu=submenu)
+                cr, uid, view_id, view_type, context,
+                toolbar=toolbar, submenu=submenu
+            )
         else:
-            # Use special views for account.move.line object (for ex. tree view contains user defined fields)
+            # Use special views for account.move.line object
+            # (for ex. tree view contains user defined fields)
             result = super(account_move_line, self).fields_view_get(
-                cr, uid, view_id, view_type, context, toolbar=toolbar, submenu=submenu)
+                cr, uid, view_id, view_type, context,
+                toolbar=toolbar, submenu=submenu
+            )
         return result
