@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: OpenERP Server 6.0.1\n"
-"Report-Msgid-Bugs-To: support@openerp.com\n"
-"POT-Creation-Date: 2011-03-27 01:57+0000\n"
-"PO-Revision-Date: 2011-03-27 01:57+0000\n"
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-10-21 09:23+0000\n"
+"PO-Revision-Date: 2013-10-21 09:23+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -18,301 +18,280 @@ msgstr ""
 #. module: nan_account_bank_statement
 #: field:account.bank.statement.line,search_by:0
 msgid "Search By"
-msgstr "Search By"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: selection:account.bank.statement.line,search_by:0
 msgid "Invoice Origin"
-msgstr "Invoice Origin"
+msgstr ""
 
 #. module: nan_account_bank_statement
-#: code:addons/nan_account_bank_statement/account_statement.py:654
+#: code:addons/nan_account_bank_statement/account_statement.py:683
 #, python-format
 msgid "Company Check Error"
-msgstr "Company Check Error"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: selection:account.bank.statement.line,search_by:0
 msgid "Payment Order"
-msgstr "Payment Order"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: selection:account.bank.statement.line,search_by:0
 msgid "None"
-msgstr "None"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: view:account.bank.statement.line.data:0
 msgid "Statement Line Data"
-msgstr "Statement Line Data"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: selection:account.bank.statement.line,search_by:0
 msgid "Reference and Amount"
-msgstr "Reference and Amount"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: selection:account.bank.statement.line,search_by:0
 msgid "Vat and Amount"
-msgstr "Vat and Amount"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: help:account.bank.statement.line.rule,sequence:0
 msgid "Rules will be applied in the order defined by this Sequence and will stop in the first matching rule."
-msgstr "Rules will be applied in the order defined by this Sequence and will stop in the first matching rule."
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: field:account.bank.statement.line.data,line_id:0
 msgid "Statement Line"
-msgstr "Statement Line"
+msgstr ""
 
 #. module: nan_account_bank_statement
-#: code:addons/nan_account_bank_statement/account_statement.py:243
+#: code:addons/nan_account_bank_statement/account_statement.py:247
 #, python-format
 msgid "Search by VAT error"
-msgstr "Search by VAT error"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: model:ir.ui.menu,name:nan_account_bank_statement.menu_configuration_bank_statement
 msgid "Bank Statements"
-msgstr "Bank Statements"
+msgstr ""
 
 #. module: nan_account_bank_statement
-#: code:addons/nan_account_bank_statement/account_statement.py:253
+#: code:addons/nan_account_bank_statement/account_statement.py:257
 #, python-format
 msgid "You cannot search by invoice number because it seems this line has not been imported from a bank statement file. The system expected an \"invoice_number\" key in the line with amount %(amount).2f in statement %(statement)s."
-msgstr "You cannot search by invoice number because it seems this line has not been imported from a bank statement file. The system expected an \"invoice_number\" key in the line with amount %(amount).2f in statement %(statement)s."
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: view:account.bank.statement.split.line.wizard:0
 msgid "Split Line Wizard"
-msgstr "Split Line Wizard"
+msgstr ""
 
 #. module: nan_account_bank_statement
-#: code:addons/nan_account_bank_statement/account_statement.py:233
+#: code:addons/nan_account_bank_statement/account_statement.py:237
 #, python-format
 msgid "Search by reference error"
-msgstr "Search by reference error"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: model:ir.model,name:nan_account_bank_statement.model_account_bank_statement_line_data
 msgid "account.bank.statement.line.data"
-msgstr "account.bank.statement.line.data"
-
-#. module: nan_account_bank_statement
-#: model:ir.module.module,shortdesc:nan_account_bank_statement.module_meta_information
-msgid "nan_account_bank_statement"
-msgstr "nan_account_bank_statement"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: field:account.bank.statement.line.rule,company_id:0
 msgid "Company"
-msgstr "Company"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: constraint:account.bank.statement.line.rule:0
 msgid "Company Check Error."
-msgstr "Company Check Error."
-
-#. module: nan_account_bank_statement
-#: model:ir.module.module,description:nan_account_bank_statement.module_meta_information
-msgid "This enhances standard bank statements by:\n"
-"\n"
-"- Adding a new button in statement lines to split the line in two.\n"
-"- Adding key/value information in statement lines which can later be used by other modules for automatically finding move lines to be reconciled."
-msgstr "This enhances standard bank statements by:\n"
-"\n"
-"- Adding a new button in statement lines to split the line in two.\n"
-"- Adding key/value information in statement lines which can later be used by other modules for automatically finding move lines to be reconciled."
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: view:account.bank.statement.line.rule:0
 msgid "Statement Line Rule"
-msgstr "Statement Line Rule"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: selection:account.bank.statement.line,search_by:0
 msgid "Invoice Number"
-msgstr "Invoice Number"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: model:ir.actions.act_window,name:nan_account_bank_statement.action_statement_line_split_wizard
 msgid "action.statement.line.split.wizard"
-msgstr "action.statement.line.split.wizard"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: field:account.bank.statement.line.data,key:0
 #: field:account.bank.statement.line.rule,key:0
 msgid "Key"
-msgstr "Key"
+msgstr ""
 
 #. module: nan_account_bank_statement
-#: code:addons/nan_account_bank_statement/account_statement.py:253
-#: code:addons/nan_account_bank_statement/account_statement.py:263
+#: code:addons/nan_account_bank_statement/account_statement.py:257
+#: code:addons/nan_account_bank_statement/account_statement.py:267
 #, python-format
 msgid "Search by invoice error"
-msgstr "Search by invoice error"
+msgstr ""
 
 #. module: nan_account_bank_statement
-#: code:addons/nan_account_bank_statement/account_statement.py:263
+#: code:addons/nan_account_bank_statement/account_statement.py:267
 #, python-format
 msgid "You cannot search by invoice origin because it seems this line has not been imported from a bank statement file. The system expected an \"invoice_origin\" key in the line with amount %(amount).2f in statement %(statement)s."
-msgstr "You cannot search by invoice origin because it seems this line has not been imported from a bank statement file. The system expected an \"invoice_origin\" key in the line with amount %(amount).2f in statement %(statement)s."
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: field:account.bank.statement.line.rule,account_id:0
 msgid "Account"
-msgstr "Account"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: help:account.bank.statement.line,data_ids:0
 msgid "Data related to the line, usually extracted/imported from a file provided by the bank or another partner."
-msgstr "Data related to the line, usually extracted/imported from a file provided by the bank or another partner."
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: view:account.bank.statement.split.line.wizard:0
 msgid "_Cancel"
-msgstr "_Cancel"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: help:account.bank.statement.line.rule,expression:0
 msgid "If the value of the given Key contains this Expression, Account and Partner will be used for that statement line."
-msgstr "If the value of the given Key contains this Expression, Account and Partner will be used for that statement line."
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: help:account.bank.statement.line.rule,account_id:0
 msgid "Account to be used if expression matches."
-msgstr "Account to be used if expression matches."
+msgstr ""
 
 #. module: nan_account_bank_statement
-#: code:addons/nan_account_bank_statement/account_statement.py:233
+#: code:addons/nan_account_bank_statement/account_statement.py:237
 #, python-format
 msgid "You cannot search by reference because it seems this line has not been imported from a bank statement file. The system expected a \"reference\" key in the line with amount %(amount).2f in statement %(statement)s."
-msgstr "You cannot search by reference because it seems this line has not been imported from a bank statement file. The system expected a \"reference\" key in the line with amount %(amount).2f in statement %(statement)s."
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: view:account.bank.statement:0
 msgid "_Search"
-msgstr "_Search"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: view:account.bank.statement.split.line.wizard:0
 msgid "_Accept"
-msgstr "_Accept"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: model:ir.model,name:nan_account_bank_statement.model_account_bank_statement_line
 msgid "Bank Statement Line"
-msgstr "Bank Statement Line"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: field:account.bank.statement.line.data,value:0
 msgid "Value"
-msgstr "Value"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: help:account.bank.statement.line.rule,partner_id:0
 msgid "Partner to be used if expression matches"
-msgstr "Partner to be used if expression matches"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: view:account.bank.statement:0
 msgid "Split"
-msgstr "Split"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: selection:account.bank.statement.line,search_by:0
 #: field:account.bank.statement.split.line.wizard,amount:0
 msgid "Amount"
-msgstr "Amount"
+msgstr ""
 
 #. module: nan_account_bank_statement
-#: code:addons/nan_account_bank_statement/account_statement.py:243
+#: code:addons/nan_account_bank_statement/account_statement.py:247
 #, python-format
 msgid "You cannot search by VAT because it seems this line has not been imported from a bank statement file. The system expected a \"vat\" key in the line with amount %(amount).2f in statement %(statement)s."
-msgstr "You cannot search by VAT because it seems this line has not been imported from a bank statement file. The system expected a \"vat\" key in the line with amount %(amount).2f in statement %(statement)s."
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: sql_constraint:account.bank.statement.line.data:0
 msgid "Key-value pairs must be unique per statement line."
-msgstr "Key-value pairs must be unique per statement line."
-
-#. module: nan_account_bank_statement
-#: constraint:account.bank.statement.line:0
-msgid "The amount of the voucher must be the same amount as the one on the statement line"
-msgstr "The amount of the voucher must be the same amount as the one on the statement line"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: model:ir.model,name:nan_account_bank_statement.model_account_bank_statement_split_line_wizard
 msgid "account.bank.statement.split.line.wizard"
-msgstr "account.bank.statement.split.line.wizard"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: field:account.bank.statement.line.rule,expression:0
 msgid "Expression"
-msgstr "Expression"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: selection:account.bank.statement.line,search_by:0
 msgid "All"
-msgstr "All"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: field:account.bank.statement.line,data_ids:0
 msgid "Related Data"
-msgstr "Related Data"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: field:account.bank.statement.line.rule,sequence:0
 msgid "Sequence"
-msgstr "Sequence"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: help:account.bank.statement.line.rule,key:0
 msgid "Key in statement line data that should match the given Expression."
-msgstr "Key in statement line data that should match the given Expression."
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: help:account.bank.statement.line.rule,company_id:0
 msgid "Company in which this rule should apply."
-msgstr "Company in which this rule should apply."
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: selection:account.bank.statement.line,search_by:0
 #: model:ir.model,name:nan_account_bank_statement.model_account_bank_statement
 msgid "Bank Statement"
-msgstr "Bank Statement"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: selection:account.bank.statement.line,search_by:0
 #: model:ir.actions.act_window,name:nan_account_bank_statement.action_statement_line_rules
 #: model:ir.ui.menu,name:nan_account_bank_statement.menu_statement_line_rule
 msgid "Statement Line Rules"
-msgstr "Statement Line Rules"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: view:account.bank.statement:0
 msgid "S_plit"
-msgstr "S_plit"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: field:account.bank.statement.line.rule,partner_id:0
 msgid "Partner"
-msgstr "Partner"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: field:account.bank.statement,total_amount:0
 msgid "Total Amount"
-msgstr "Total Amount"
+msgstr ""
 
 #. module: nan_account_bank_statement
 #: model:ir.model,name:nan_account_bank_statement.model_account_bank_statement_line_rule
 msgid "account.bank.statement.line.rule"
-msgstr "account.bank.statement.line.rule"
+msgstr ""
 
 #. module: nan_account_bank_statement
-#: code:addons/nan_account_bank_statement/account_statement.py:654
+#: code:addons/nan_account_bank_statement/account_statement.py:683
 #, python-format
 msgid "Company for account %(account)s does not match rule's company for rule %(rule)s."
-msgstr "Company for account %(account)s does not match rule's company for rule %(rule)s."
+msgstr ""
 
