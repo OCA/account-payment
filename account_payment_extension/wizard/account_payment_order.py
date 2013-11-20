@@ -98,7 +98,7 @@ class payment_order_create(osv.osv_memory):
         if payment.mode:
             domain += [ ('payment_type','=',payment.mode.type.id) ]
 
-        domain += ['|',('date_maturity','<',search_due_date),('date_maturity','=',False)]
+        domain += ['|',('date_maturity','<=',search_due_date),('date_maturity','=',False)]
         line_ids = line_obj.search(cr, uid, domain, order='date_maturity', context=context)
 
         selected_ids = []
