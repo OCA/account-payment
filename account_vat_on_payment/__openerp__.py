@@ -45,7 +45,7 @@ Moreover, three things have to be configured:
 Requirements:
 https://docs.google.com/spreadsheet/ccc?key=0Aodwq17jxF4edDJaZ2dOQkVEN0hodEtfRmpVdlg2Vnc#gid=0
 Howto:
-http://planet.domsense.com/en/2012/10/vat-on-payment-treatment-with-openerp/
+http://planet.agilebg.com/en/2012/10/vat-on-payment-treatment-with-openerp/
     """,
     'website': 'http://www.agilebg.com',
     'init_xml': [],
