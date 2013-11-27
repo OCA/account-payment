@@ -24,12 +24,14 @@
 from osv import fields, osv
 from tools.translate import _
 
+
 class res_company(osv.osv):
     _inherit = "res.company"
     _columns = {
         'vat_on_payment': fields.boolean('VAT on payment treatment'),
         }
-    
+
+
 class account_config_settings(osv.osv_memory):
     _inherit = 'account.config.settings'
     _columns = {

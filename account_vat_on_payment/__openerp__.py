@@ -29,18 +29,23 @@
     "depends": ["account_voucher_cash_basis"],
     "author": "Agile Business Group",
     "description": """
-    See 'account_voucher_cash_basis' description.
-    
-    To activate the VAT on payment behaviour, this module adds a checkbox on invoice form: 'Vat on payment'
-    
-    Moreover, three things have to be configured:
-     - On account object, Related account used for real registrations on a VAT on payment basis
-     - On journal object, Related journal used for shadow registrations on a VAT on payment basis
-     - On tax code object, Related tax code used for real registrations on a VAT on payment basis
-     
-    Requirements: https://docs.google.com/spreadsheet/ccc?key=0Aodwq17jxF4edDJaZ2dOQkVEN0hodEtfRmpVdlg2Vnc#gid=0
-    Howto:
-    http://planet.domsense.com/en/2012/10/vat-on-payment-treatment-with-openerp/
+See 'account_voucher_cash_basis' description.
+
+To activate the VAT on payment behaviour, this module adds a checkbox on
+invoice form: 'Vat on payment'
+
+Moreover, three things have to be configured:
+ - On account object, Related account used for real registrations on a VAT on
+    payment basis
+ - On journal object, Related journal used for shadow registrations on a VAT on
+    payment basis
+ - On tax code object, Related tax code used for real registrations on a VAT on
+    payment basis
+
+Requirements:
+https://docs.google.com/spreadsheet/ccc?key=0Aodwq17jxF4edDJaZ2dOQkVEN0hodEtfRmpVdlg2Vnc#gid=0
+Howto:
+http://planet.domsense.com/en/2012/10/vat-on-payment-treatment-with-openerp/
     """,
     'website': 'http://www.agilebg.com',
     'init_xml': [],
@@ -48,7 +53,7 @@
         'account_view.xml',
         'company_view.xml',
         ],
-    'demo_xml': [], # TODO YAML tests
+    'demo_xml': [],  # TODO YAML tests
     'installable': True,
     'active': False,
 }
