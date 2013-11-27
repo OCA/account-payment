@@ -23,31 +23,35 @@
 
 from osv import fields, osv
 from tools.translate import _
-import decimal_precision as dp
+
 
 class account_voucher(osv.osv):
     _inherit = "account.voucher"
-    
+
     _columns = {
-        'shadow_move_id': fields.many2one('account.move','Shadow Entry', readonly=True),
+        'shadow_move_id': fields.many2one(
+            'account.move', 'Shadow Entry', readonly=True),
         }
-    
+
     def is_vat_on_payment(self, voucher):
-        vat_on_p =0
-        valid_lines =0
+        vat_on_p = 0
+        valid_lines = 0
         if voucher.type in ('payment', 'receipt'):
             for line in voucher.line_ids:
                 if line.amount:
-                    valid_lines +=1
-                    if (line.move_line_id and line.move_line_id.invoice
-                        and line.move_line_id.invoice.vat_on_payment):
-                        vat_on_p +=1
+                    valid_lines += 1
+                    if (
+                        line.move_line_id and line.move_line_id.invoice
+                        and line.move_line_id.invoice.vat_on_paymen
+                    ):
+                        vat_on_p += 1
             if vat_on_p and vat_on_p != valid_lines:
-                raise osv.except_osv(_('Error'),
-                    _("""Can't handle VAT on payment if not every invoice 
+                raise osv.except_osv(
+                    _('Error'),
+                    _("""Can't handle VAT on payment if not every invoice
                     is on a VAT on payment treatment"""))
         return vat_on_p
-    
+
     def action_move_line_create(self, cr, uid, ids, context=None):
         if context is None:
             context = {}
@@ -56,7 +60,7 @@ class account_voucher(osv.osv):
         move_line_pool = self.pool.get('account.move.line')
         move_pool = self.pool.get('account.move')
         currency_obj = self.pool.get('res.currency')
-        res=False
+        res = False
         for voucher in self.browse(cr, uid, ids, context):
             entry_posted = voucher.journal_id.entry_posted
             # disable the 'skip draft state' option because "mixed" entry
@@ -65,7 +69,7 @@ class account_voucher(osv.osv):
             if entry_posted:
                 journal_pool.write(
                     cr, uid, voucher.journal_id.id, {'entry_posted': False})
-            res=super(account_voucher,self).action_move_line_create(
+            res = super(account_voucher, self).action_move_line_create(
                 cr, uid, [voucher.id], context)
             # because 'move_id' has been updated by 'action_move_line_create'
             voucher.refresh()
@@ -74,20 +78,26 @@ class account_voucher(osv.osv):
                     cr, uid, voucher.journal_id.id, {'entry_posted': True})
             if self.is_vat_on_payment(voucher):
                 if not voucher.journal_id.vat_on_payment_related_journal_id:
-                    raise osv.except_osv(_('Error'),
-                        _("""We are on a VAT on payment treatment 
-                        but journal %s does not have a related shadow journal""")
+                    raise osv.except_osv(
+                        _('Error'),
+                        _("""We are on a VAT on payment treatment
+                        but journal %s does not have a related shadow
+                        journal""")
                         % voucher.journal_id.name)
                 lines_to_create = []
                 amounts_by_invoice = super(
-                    account_voucher,self).allocated_amounts_grouped_by_invoice(
-                    cr, uid,voucher, context)
+                    account_voucher, self
+                    ).allocated_amounts_grouped_by_invoice(
+                    cr, uid, voucher, context)
                 for inv_id in amounts_by_invoice:
                     invoice = inv_pool.browse(cr, uid, inv_id, context)
                     for inv_move_line in invoice.move_id.line_id:
-                        if (inv_move_line.account_id.type != 'receivable'
-                            and inv_move_line.account_id.type != 'payable'):
-                            # compute the VAT or base line proportionally to the paid amount
+                        if (
+                            inv_move_line.account_id.type != 'receivable'
+                            and inv_move_line.account_id.type != 'payable'
+                        ):
+                            # compute the VAT or base line proportionally to
+                            # the paid amount
                             new_line_amount = currency_obj.round(
                                 cr, uid, voucher.company_id.currency_id,
                                 (
