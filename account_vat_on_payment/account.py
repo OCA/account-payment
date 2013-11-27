@@ -90,39 +90,73 @@ class account_voucher(osv.osv):
                             # compute the VAT or base line proportionally to the paid amount
                             new_line_amount = currency_obj.round(
                                 cr, uid, voucher.company_id.currency_id,
-                                ((amounts_by_invoice[invoice.id]['allocated'] +
-                                amounts_by_invoice[invoice.id]['write-off']) / 
-                                amounts_by_invoice[invoice.id]['total']) *
+                                (
+                                    (
+                                        amounts_by_invoice[
+                                            invoice.id]['allocated'] +
+                                        amounts_by_invoice[
+                                            invoice.id]['write-off']
+                                    )
+                                    /
+                                    amounts_by_invoice[invoice.id]['total']
+                                )
+                                *
                                 (inv_move_line.credit or inv_move_line.debit)
                                 )
                             new_line_amount_curr = False
-                            if (amounts_by_invoice[invoice.id].get('allocated_currency')
-                                and amounts_by_invoice[invoice.id].get('foreign_currency_id')):
-                                for_curr = currency_obj.browse(cr, uid,
-                                    amounts_by_invoice[invoice.id]['foreign_currency_id'],
+                            if (
+                                amounts_by_invoice[invoice.id].get(
+                                    'allocated_currency')
+                                and amounts_by_invoice[invoice.id].get(
+                                    'foreign_currency_id')
+                            ):
+                                for_curr = currency_obj.browse(
+                                    cr, uid,
+                                    amounts_by_invoice[invoice.id][
+                                        'foreign_currency_id'],
                                     context=context)
                                 new_line_amount_curr = currency_obj.round(
                                     cr, uid, for_curr,
-                                    ((amounts_by_invoice[invoice.id]['allocated_currency'] +
-                                    amounts_by_invoice[invoice.id]['currency-write-off']) / 
-                                    amounts_by_invoice[invoice.id]['total_currency']) *
+                                    (
+                                        (
+                                            amounts_by_invoice[
+                                                invoice.id
+                                            ]['allocated_currency']
+                                            +
+                                            amounts_by_invoice[
+                                                invoice.id
+                                            ]['currency-write-off']
+                                        )
+                                        /
+                                        amounts_by_invoice[
+                                            invoice.id
+                                        ]['total_currency']
+                                    )
+                                    *
                                     (inv_move_line.amount_currency)
                                     )
-                
+
                             if not inv_move_line.real_account_id:
-                                raise osv.except_osv(_('Error'),
-                                    _("""We are on a VAT on payment treatment 
-                                    but move line %s does not have a related real account""")
+                                raise osv.except_osv(
+                                    _('Error'),
+                                    _("""We are on a VAT on payment treatment
+                                    but move line %s does not have a related
+                                    real account""")
                                     % inv_move_line.name)
-                
+
                             # prepare the real move line
                             vals = {
                                 'name': inv_move_line.name,
                                 'account_id': inv_move_line.real_account_id.id,
-                                'credit': inv_move_line.credit and new_line_amount or 0.0,
-                                'debit': inv_move_line.debit and new_line_amount or 0.0,
+                                'credit': (
+                                    inv_move_line.credit
+                                    and new_line_amount or 0.0),
+                                'debit': (
+                                    inv_move_line.debit
+                                    and new_line_amount or 0.0),
                                 'type': 'real',
-                                'partner_id': (inv_move_line.partner_id
+                                'partner_id': (
+                                    inv_move_line.partner_id
                                     and inv_move_line.partner_id.id or False)
                                 }
                             if new_line_amount_curr:
@@ -130,51 +164,70 @@ class account_voucher(osv.osv):
                                 vals['currency_id'] = for_curr.id
                             if inv_move_line.tax_code_id:
                                 if not inv_move_line.real_tax_code_id:
-                                    raise osv.except_osv(_('Error'),
-                                        _("""We are on a VAT on payment treatment 
-                                        but move line %s does not have a related 
-                                        real tax code""") % inv_move_line.name)
-                                vals['tax_code_id'] = inv_move_line.real_tax_code_id.id
+                                    raise osv.except_osv(
+                                        _('Error'),
+                                        _("""We are on a VAT on payment
+                                        treatment but move line %s does not
+                                        have a related real tax code""")
+                                        % inv_move_line.name
+                                    )
+                                vals[
+                                    'tax_code_id'
+                                    ] = inv_move_line.real_tax_code_id.id
                                 if inv_move_line.tax_amount < 0:
                                     vals['tax_amount'] = -new_line_amount
                                 else:
                                     vals['tax_amount'] = new_line_amount
                             lines_to_create.append(vals)
-                    
+
                             # prepare the shadow move line
-                            vals={
+                            vals = {
                                 'name': inv_move_line.name,
                                 'account_id': inv_move_line.account_id.id,
-                                'credit': inv_move_line.debit and new_line_amount or 0.0,
-                                'debit': inv_move_line.credit and new_line_amount or 0.0,
+                                'credit': (
+                                    inv_move_line.debit
+                                    and new_line_amount or 0.0),
+                                'debit': (
+                                    inv_move_line.credit
+                                    and new_line_amount or 0.0),
                                 'type': 'shadow',
-                                'partner_id': (inv_move_line.partner_id
+                                'partner_id': (
+                                    inv_move_line.partner_id
                                     and inv_move_line.partner_id.id or False)
                                 }
                             if inv_move_line.tax_code_id:
-                                vals['tax_code_id'] = inv_move_line.tax_code_id.id
+                                vals[
+                                    'tax_code_id'
+                                    ] = inv_move_line.tax_code_id.id
                                 if inv_move_line.tax_amount < 0:
                                     vals['tax_amount'] = new_line_amount
                                 else:
                                     vals['tax_amount'] = -new_line_amount
                             lines_to_create.append(vals)
 
-                context['journal_id'] = voucher.journal_id.vat_on_payment_related_journal_id.id
+                context['journal_id'] = (
+                    voucher.journal_id.vat_on_payment_related_journal_id.id)
                 context['period_id'] = voucher.move_id.period_id.id
                 shadow_move_id = move_pool.create(cr, uid, {
-                    'journal_id': voucher.journal_id.vat_on_payment_related_journal_id.id,
+                    'journal_id': (
+                        voucher.journal_id.vat_on_payment_related_journal_id.id
+                        ),
                     'period_id': voucher.move_id.period_id.id,
                     'date': voucher.move_id.date,
                     }, context)
-                
+
                 # move the payment move lines to shadow entry
                 for line in voucher.move_ids:
                     if line.account_id.type != 'liquidity':
                         line.write({
                             'move_id': shadow_move_id,
                             }, update_check=False)
-                        # this will allow user to see the real entry from invoice payment tab
-                        if line.account_id.type == 'receivable' or line.account_id.type == 'payable':
+                        # this will allow user to see the real entry from
+                        # invoice payment tab
+                        if (
+                            line.account_id.type == 'receivable'
+                            or line.account_id.type == 'payable'
+                        ):
                             line.write({
                                 'real_payment_move_id': voucher.move_id.id,
                                 })
@@ -187,16 +240,19 @@ class account_voucher(osv.osv):
                     del line_to_create['type']
 
                     move_line_pool.create(cr, uid, line_to_create, context)
-                    
+
                 voucher.write({'shadow_move_id': shadow_move_id})
-                
-                super(account_voucher,self).balance_move(cr, uid, shadow_move_id, context)
-                super(account_voucher,self).balance_move(cr, uid, voucher.move_id.id, context)
-                        
+
+                super(account_voucher, self).balance_move(
+                    cr, uid, shadow_move_id, context)
+                super(account_voucher, self).balance_move(
+                    cr, uid, voucher.move_id.id, context)
+
         return res
-        
+
     def cancel_voucher(self, cr, uid, ids, context=None):
-        res = super(account_voucher,self).cancel_voucher(cr, uid, ids, context)
+        res = super(account_voucher, self).cancel_voucher(
+            cr, uid, ids, context)
         reconcile_pool = self.pool.get('account.move.reconcile')
         move_pool = self.pool.get('account.move')
         for voucher in self.browse(cr, uid, ids, context=context):
@@ -211,20 +267,24 @@ class account_voucher(osv.osv):
                 reconcile_pool.unlink(cr, uid, recs)
 
                 if voucher.shadow_move_id:
-                    move_pool.button_cancel(cr, uid, [voucher.shadow_move_id.id])
+                    move_pool.button_cancel(
+                        cr, uid, [voucher.shadow_move_id.id])
                     move_pool.unlink(cr, uid, [voucher.shadow_move_id.id])
         return res
+
 
 class account_invoice(osv.osv):
 
     def _get_vat_on_payment(self, cr, uid, context=None):
-        return self.pool.get('res.users').browse(cr, uid, uid, context).company_id.vat_on_payment
-        
+        return self.pool.get('res.users').browse(
+            cr, uid, uid, context).company_id.vat_on_payment
+
     def finalize_invoice_move_lines(self, cr, uid, invoice_browse, move_lines):
         """
-        Use shadow accounts for journal entry to be generated, according to account and tax code related records
+        Use shadow accounts for journal entry to be generated, according to
+        account and tax code related records
         """
-        move_lines = super(account_invoice,self).finalize_invoice_move_lines(
+        move_lines = super(account_invoice, self).finalize_invoice_move_lines(
             cr, uid, invoice_browse, move_lines)
         acc_pool = self.pool.get('account.account')
         tax_code_pool = self.pool.get('account.tax.code')
@@ -232,27 +292,40 @@ class account_invoice(osv.osv):
         for line_tup in move_lines:
             if invoice_browse.vat_on_payment:
                 if line_tup[2].get('account_id', False):
-                    account = acc_pool.browse(cr, uid, line_tup[2]['account_id'])
-                    if account.type != 'receivable' and account.type != 'payable':
+                    account = acc_pool.browse(
+                        cr, uid, line_tup[2]['account_id'])
+                    if (
+                        account.type != 'receivable'
+                        and account.type != 'payable'
+                    ):
                         if not account.vat_on_payment_related_account_id:
-                            raise osv.except_osv(_('Error'),
-                                _('''The invoice is \'VAT on payment\' but 
-                                account %s does not have a related shadow account''')
+                            raise osv.except_osv(
+                                _('Error'),
+                                _('''The invoice is \'VAT on payment\' but
+                                account %s does not have a related shadow
+                                account''')
                                 % account.name)
-                        line_tup[2]['real_account_id'] = line_tup[2]['account_id']
-                        line_tup[2]['account_id'] = account.vat_on_payment_related_account_id.id
+                        line_tup[2]['real_account_id'] = line_tup[
+                            2]['account_id']
+                        line_tup[2]['account_id'] = (
+                            account.vat_on_payment_related_account_id.id)
                 if line_tup[2].get('tax_code_id', False):
-                    tax_code = tax_code_pool.browse(cr, uid, line_tup[2]['tax_code_id'])
+                    tax_code = tax_code_pool.browse(
+                        cr, uid, line_tup[2]['tax_code_id'])
                     if not tax_code.vat_on_payment_related_tax_code_id:
-                        raise osv.except_osv(_('Error'),
-                            _('''The invoice is \'VAT on payment\' but 
-                            tax code %s does not have a related shadow tax code''')
+                        raise osv.except_osv(
+                            _('Error'),
+                            _('''The invoice is \'VAT on payment\' but
+                            tax code %s does not have a related shadow
+                            tax code''')
                             % tax_code.name)
-                    line_tup[2]['real_tax_code_id'] = line_tup[2]['tax_code_id']
-                    line_tup[2]['tax_code_id'] = tax_code.vat_on_payment_related_tax_code_id.id
+                    line_tup[2]['real_tax_code_id'] = line_tup[
+                        2]['tax_code_id']
+                    line_tup[2]['tax_code_id'] = (
+                        tax_code.vat_on_payment_related_tax_code_id.id)
             new_move_lines.append(line_tup)
         return new_move_lines
-    
+
     _inherit = "account.invoice"
     _columns = {
         'vat_on_payment': fields.boolean('Vat on payment'),
@@ -261,38 +334,43 @@ class account_invoice(osv.osv):
         'vat_on_payment': _get_vat_on_payment,
         }
 
+
 class account_move_line(osv.osv):
     _inherit = "account.move.line"
     _columns = {
-        'real_payment_move_id': fields.many2one('account.move', 'Real payment entry'),
-        'real_account_id': fields.many2one('account.account','Real account'),
-        'real_tax_code_id': fields.many2one('account.tax.code','Real tax code'),
+        'real_payment_move_id': fields.many2one(
+            'account.move', 'Real payment entry'),
+        'real_account_id': fields.many2one('account.account', 'Real account'),
+        'real_tax_code_id': fields.many2one(
+            'account.tax.code', 'Real tax code'),
         }
+
 
 class account_account(osv.osv):
     _inherit = "account.account"
     _columns = {
         'vat_on_payment_related_account_id': fields.many2one(
             'account.account', 'Shadow Account for VAT on payment',
-            help='''Related account used for real registrations on a 
+            help='''Related account used for real registrations on a
             VAT on payment basis. Set the shadow account here'''),
         }
+
 
 class account_tax_code(osv.osv):
     _inherit = "account.tax.code"
     _columns = {
         'vat_on_payment_related_tax_code_id': fields.many2one(
             'account.tax.code', 'Shadow Tax code for VAT on payment',
-            help='''Related tax code used for real registrations on a 
+            help='''Related tax code used for real registrations on a
             VAT on payment basis. Set the shadow tax code here'''),
         }
+
 
 class account_journal(osv.osv):
     _inherit = "account.journal"
     _columns = {
         'vat_on_payment_related_journal_id': fields.many2one(
             'account.journal', 'Shadow Journal for VAT on payment',
-            help='''Related journal used for shadow registrations on a 
+            help='''Related journal used for shadow registrations on a
             VAT on payment basis. Set the shadow journal here'''),
         }
-
