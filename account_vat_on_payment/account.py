@@ -42,7 +42,7 @@ class account_voucher(osv.osv):
                     valid_lines += 1
                     if (
                         line.move_line_id and line.move_line_id.invoice
-                        and line.move_line_id.invoice.vat_on_paymen
+                        and line.move_line_id.invoice.vat_on_payment
                     ):
                         vat_on_p += 1
             if vat_on_p and vat_on_p != valid_lines:
