@@ -33,9 +33,13 @@ class account_move_line(orm.Model):
     def _get_invoice(self, cr, uid, ids, field_name, arg, context=None):
         invoice_pool = self.pool.get('account.invoice')
         res = {}
-        for line in self.browse(cr, uid, ids):
+        for line in self.browse(cr, uid, ids, context=context):
             inv_ids = invoice_pool.search(
-                cr, uid, [('move_id', '=', line.move_id.id)])
+                cr,
+                uid,
+                [('move_id', '=', line.move_id.id)],
+                context=context
+            )
             if len(inv_ids) > 1:
                 raise orm.except_orm(
                     _('Error'),
@@ -50,7 +54,7 @@ class account_move_line(orm.Model):
 
     def _get_day(self, cr, uid, ids, field_name, arg, context=None):
         res = {}
-        for line in self.browse(cr, uid, ids):
+        for line in self.browse(cr, uid, ids, context=context):
             if line.date_maturity:
                 res[line.id] = line.date_maturity
             else:
@@ -60,7 +64,7 @@ class account_move_line(orm.Model):
     def _get_move_lines(self, cr, uid, ids, context=None):
         invoice_pool = self.pool.get('account.invoice')
         res = []
-        for invoice in invoice_pool.browse(cr, uid, ids):
+        for invoice in invoice_pool.browse(cr, uid, ids, context=context):
             if invoice.move_id:
                 for line in invoice.move_id.line_id:
                     if line.id not in res:
@@ -130,7 +134,7 @@ class account_move_line(orm.Model):
 
     def fields_view_get(
         self, cr, uid, view_id=None, view_type='form',
-        context={}, toolbar=False, submenu=False
+        context=None, toolbar=False, submenu=False
     ):
         model_data_obj = self.pool.get('ir.model.data')
         ids = model_data_obj.search(
@@ -139,7 +143,8 @@ class account_move_line(orm.Model):
             [
                 ('module', '=', 'account_due_list'),
                 ('name', '=', 'view_payments_tree')
-            ]
+            ],
+            context=context
         )
         if ids:
             view_payments_tree_id = model_data_obj.get_object_reference(
