@@ -395,6 +395,12 @@ class payment_line(osv.osv):
             if line.name != '/':
                 res['value']['communication'] = res['value']['communication'] + '. ' + line.name
             res['value']['account_id'] = line.account_id.id
+            if context.get('order_id'):
+                payment_order = self.pool.get('payment.order').browse(
+                    cr, uid, context['order_id'], context=context)
+                if payment_order.type == 'receivable':
+                    res['value']['amount'] *= -1
+                    res['value']['amount_currency'] *= -1
         return res
 
 payment_line()
