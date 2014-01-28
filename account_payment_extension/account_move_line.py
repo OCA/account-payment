@@ -184,6 +184,33 @@ class account_move_line(orm.Model):
                 result = [('id', 'in', [x[0] for x in res])]
         return result
 
+    def _get_move_lines(self, cr, uid, ids, context=None):
+        result = {}
+        line_obj = self.pool['payment.line']
+        for line in line_obj.browse(cr, uid, ids, context=context):
+            result[line.move_line_id.id] = True
+            result[line.payment_move_id.id] = True
+        return result.keys()
+
+    def _get_move_lines_order(self, cr, uid, ids, context=None):
+        result = {}
+        order_obj = self.pool['payment.order']
+        for order in order_obj.browse(cr, uid, ids, context=context):
+            for line in order.line_ids:
+                result[line.move_line_id.id] = True
+                result[line.payment_move_id.id] = True
+        return result.keys()
+
+    def _get_reconcile(self, cr, uid, ids, context=None):
+        result = {}
+        reconcile_obj = self.pool['account.move.reconcile']
+        for reconcile in reconcile_obj.browse(cr, uid, ids, context=context):
+            for line in reconcile.line_id:
+                result[line.id] = True
+            for line in reconcile.line_partial_ids:
+                result[line.id] = True
+        return result.keys()
+
     _columns = {
         'received_check': fields.boolean('Received check',
             help="""To write down that a check in paper support has
@@ -191,7 +218,16 @@ class account_move_line(orm.Model):
         'partner_bank_id': fields.many2one('res.partner.bank', 'Bank Account'),
         'amount_to_pay': fields.function(
             amount_to_pay, method=True, type='float', string='Amount to pay',
-            fnct_search=_to_pay_search),
+            fnct_search=_to_pay_search,
+            store={
+                   'account.move.line': (lambda self, cr, uid, ids, c={}: ids,
+                                         None, 20),
+                   'payment.order': (_get_move_lines_order, ['line_ids'], 20),
+                   'payment.line': (_get_move_lines,
+                        ['type', 'move_line_id', 'payment_move_id'], 20),
+                   'account.move.reconcile': (_get_reconcile,
+                        ['line_id', 'line_partial_ids'], 20)
+                   }),
         'payment_type': fields.function(_payment_type_get,
             type="many2one", relation="payment.type", method=True,
             string="Payment type", fnct_search=_payment_type_search),
