@@ -29,9 +29,9 @@
                 <field name="amount_to_pay"/>
             </field>
             <field name="currency_id" position="replace">
-                <field name="currency_id" groups="base.group_extended"/>
+                <field name="currency_id" groups="base.group_multi_currency"/>
                 <field name="reconcile_id"/>
-                <field name="reconcile_partial_id" groups="base.group_extended"/>
+                <field name="reconcile_partial_id"/>
                 <field name="state"/>
                 <field name="payment_type"/>
             </field>
