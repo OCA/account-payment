@@ -120,27 +120,6 @@ class account_move_line(orm.Model):
             result[move_id] = debt
         return result
 
-    def _to_pay_search(self, cr, uid, obj, name, args, context={}):
-        if not len(args):
-            return []
-        currency = self.pool.get('res.users').browse(
-            cr, uid, uid, context).company_id.currency_id
-
-        # For searching we first discard reconciled moves
-        # because the filter is fast and discards most records quickly.
-        ids = self.pool.get('account.move.line').search(
-            cr, uid, [('reconcile_id', '=', False)], context=context)
-        records = self.pool.get('account.move.line').read(
-            cr, uid, ids, ['id', 'amount_to_pay'], context)
-        ids = []
-        for record in records:
-            if not self.pool.get('res.currency').is_zero(
-                cr, uid, currency, record['amount_to_pay']):
-                ids.append(record['id'])
-        if not ids:
-            return [('id', '=', False)]
-        return [('id', 'in', ids)]
-
     def _payment_type_get(self, cr, uid, ids, field_name, arg, context={}):
         result = {}
         invoice_obj = self.pool.get('account.invoice')
@@ -218,7 +197,6 @@ class account_move_line(orm.Model):
         'partner_bank_id': fields.many2one('res.partner.bank', 'Bank Account'),
         'amount_to_pay': fields.function(
             amount_to_pay, method=True, type='float', string='Amount to pay',
-            fnct_search=_to_pay_search,
             store={
                    'account.move.line': (lambda self, cr, uid, ids, c={}: ids,
                                          None, 20),
