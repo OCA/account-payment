@@ -384,4 +384,10 @@ class payment_line(orm.Model):
             if line.name != '/':
                 result['value']['communication'] = result['value']['communication'] + '. ' + line.name
             result['value']['account_id'] = line.account_id.id
+            if context.get('order_id'):
+                payment_order = self.pool.get('payment.order').browse(
+                    cr, uid, context['order_id'], context=context)
+                if payment_order.type == 'receivable':
+                    result['value']['amount'] *= -1
+                    result['value']['amount_currency'] *= -1
         return result
