@@ -31,9 +31,9 @@ class sale_order(osv.osv):
         'partner_bank': fields.many2one('res.partner.bank','Bank Account', select=True, help='The bank account to pay to or to be paid from. It will be transferred to the invoice'),
     }
 
-    def onchange_partner_id(self, cr, uid, ids, part):
+    def onchange_partner_id(self, cr, uid, ids, part, context=None):
         """Copy partner data in the sale order, including payment_type and acc_number"""
-        result = super(sale_order, self).onchange_partner_id(cr, uid, ids, part)
+        result = super(sale_order, self).onchange_partner_id(cr, uid, ids, part, context=context)
         paytype_id = False
         if part:
             partner = self.pool.get('res.partner').browse(cr, uid, part)
