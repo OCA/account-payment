@@ -316,7 +316,7 @@ class payment_order(orm.Model):
                 }, context)
             # Post the move
             if order.mode.journal.entry_posted:
-                move_obj.post(cr, uid, [move_id], context)
+                move_obj.post(cr, uid, [move_id], context=context)
 
         return result
 
