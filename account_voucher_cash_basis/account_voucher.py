@@ -25,11 +25,21 @@ from openerp.osv import fields, orm
 from openerp.tools.translate import _
 import openerp.addons.decimal_precision as dp
 
+
 class account_voucher(orm.Model):
     _inherit = "account.voucher"
     
     _columns = {
-        'line_total': fields.float('Lines Total', digits_compute=dp.get_precision('Account'), readonly=True),
+        'line_total': fields.float(
+            'Lines Total', digits_compute=dp.get_precision('Account'),
+            readonly=True),
+        # exclude_write_off field will be used by modules like
+        # account_vat_on_payment and l10n_it_withholding_tax
+        'exclude_write_off': fields.boolean(
+            'Exclude write-off from tax on payment',
+            help="""Select this if you want, when closing the invoice, the
+            tax to be computed
+            based on the invoice's totals instead of the paid amount"""),
         }
     
     def balance_move(self, cr, uid, move_id, context=None):

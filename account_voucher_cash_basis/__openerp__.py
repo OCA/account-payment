@@ -48,6 +48,7 @@ cash basis.
     'init_xml': [],
     'data': [
         'company_view.xml',
+        'voucher_view.xml',
         ],
     'demo': [],
     'installable': True,
