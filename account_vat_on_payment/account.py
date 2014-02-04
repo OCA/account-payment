@@ -98,15 +98,26 @@ class account_voucher(osv.osv):
                         ):
                             # compute the VAT or base line proportionally to
                             # the paid amount
+                            if (
+                                voucher.exclude_write_off
+                                and voucher.payment_option == 'with_writeoff'
+                            ):
+                                # avoid including write-off if set in voucher.
+                                # That means: use the invoice's total
+                                # (as we are in 'full reconcile' case)
+                                allocated_amount = amounts_by_invoice[
+                                    invoice.id
+                                    ]['allocated']
+                            else:
+                                allocated_amount = (
+                                    amounts_by_invoice[invoice.id]['allocated']
+                                    +
+                                    amounts_by_invoice[invoice.id]['write-off']
+                                    )
                             new_line_amount = currency_obj.round(
                                 cr, uid, voucher.company_id.currency_id,
                                 (
-                                    (
-                                        amounts_by_invoice[
-                                            invoice.id]['allocated'] +
-                                        amounts_by_invoice[
-                                            invoice.id]['write-off']
-                                    )
+                                    allocated_amount
                                     /
                                     amounts_by_invoice[invoice.id]['total']
                                 )
@@ -125,18 +136,28 @@ class account_voucher(osv.osv):
                                     amounts_by_invoice[invoice.id][
                                         'foreign_currency_id'],
                                     context=context)
+                                if (
+                                    voucher.exclude_write_off
+                                    and
+                                    voucher.payment_option == 'with_writeoff'
+                                ):
+                                    # again
+                                    # avoid including write-off if set in
+                                    # voucher.
+                                    allocated_amount = amounts_by_invoice[
+                                        invoice.id]['allocated_currency']
+                                else:
+                                    allocated_amount = (
+                                        amounts_by_invoice[invoice.id][
+                                            'allocated_currency']
+                                        +
+                                        amounts_by_invoice[invoice.id][
+                                            'currency-write-off']
+                                        )
                                 new_line_amount_curr = currency_obj.round(
                                     cr, uid, for_curr,
                                     (
-                                        (
-                                            amounts_by_invoice[
-                                                invoice.id
-                                            ]['allocated_currency']
-                                            +
-                                            amounts_by_invoice[
-                                                invoice.id
-                                            ]['currency-write-off']
-                                        )
+                                        allocated_amount
                                         /
                                         amounts_by_invoice[
                                             invoice.id
@@ -229,9 +250,18 @@ class account_voucher(osv.osv):
                 # move the payment move lines to shadow entry
                 for line in voucher.move_ids:
                     if line.account_id.type != 'liquidity':
-                        line.write({
-                            'move_id': shadow_move_id,
-                            }, update_check=False)
+                        # If the line is related to write-off and user doesn't
+                        # want to compute the tax including write-off,
+                        # write-off move line must stay on the real move
+                        if not (
+                            voucher.exclude_write_off
+                            and voucher.payment_option == 'with_writeoff'
+                            and line.account_id.id
+                                == voucher.writeoff_acc_id.id
+                        ):
+                            line.write({
+                                'move_id': shadow_move_id,
+                                }, update_check=False)
                         # this will allow user to see the real entry from
                         # invoice payment tab
                         if (
