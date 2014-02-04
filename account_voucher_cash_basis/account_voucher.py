@@ -71,7 +71,7 @@ class account_voucher(orm.Model):
         res = 0.0
         for inv_move_line in invoice.move_id.line_id:
             if inv_move_line.account_id.type in ('receivable','payable'):
-                res += inv_move_line.debit or inv_move_line.credit # can both be presents?
+                res += inv_move_line.debit or inv_move_line.credit
         return res
         
     def get_invoice_total_currency(self, invoice):
@@ -150,6 +150,7 @@ class account_voucher(orm.Model):
                     'total'
                     ] = self.get_invoice_total(line.move_line_id.invoice)
         if res:
+            # we use line_total as it can be != writeoff_amount in case of multi currency
             write_off_per_invoice = voucher.line_total / len(res)
             if not voucher.company_id.allow_distributing_write_off and  len(res) > 1 and write_off_per_invoice:
                 raise orm.except_orm(_('Error'), _(
