@@ -52,6 +52,7 @@ http://planet.agilebg.com/en/2012/10/vat-on-payment-treatment-with-openerp/
     'update_xml': [
         'account_view.xml',
         'company_view.xml',
+        'partner_view.xml',
         ],
     'demo_xml': [],  # TODO YAML tests
     'installable': True,
