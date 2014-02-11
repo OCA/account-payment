@@ -31,8 +31,13 @@ class res_partner(orm.Model):
     _inherit = 'res.partner'
 
     _columns = {
-        # the following field is a selection to force the user to select a value (a required boolean field may easily lead to errors)
-        'default_has_vat_on_payment': fields.selection([('empty', ''), ('true', 'Has VAT on Payment'), ('false', 'No VAT on Payment')], 'VAT on Payment Default Flag', required=True),
+        # the following field is a selection to force the user to select
+        # a value (a required boolean field may easily lead to errors)
+        'default_has_vat_on_payment': fields.selection([
+            ('empty', ''),
+            ('true', 'Has VAT on Payment'),
+            ('false', 'No VAT on Payment')],
+            'VAT on Payment Default Flag', required=True),
     }
 
     _defaults = {
@@ -46,5 +51,7 @@ class res_partner(orm.Model):
         return True
 
     _constraints = [
-        (_check_default_has_vat_on_payment, 'Default value for VAT on Payment flag must be set.', ['default_has_vat_on_payment']),
+        (_check_default_has_vat_on_payment,
+            'Default value for VAT on Payment flag must be set.',
+            ['default_has_vat_on_payment']),
     ]
