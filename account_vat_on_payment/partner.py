@@ -62,5 +62,5 @@ class res_partner(orm.Model):
             context = {}
         if 'default_has_vat_on_payment' not in vals:
             # XML record
-            vals['default_has_vat_on_payment'] = false
+            vals['default_has_vat_on_payment'] = 'false'
         return super(res_partner, self).create(cr, uid, vals, context=context)
