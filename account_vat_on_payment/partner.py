@@ -46,8 +46,9 @@ class res_partner(orm.Model):
 
     def _check_default_has_vat_on_payment(self, cr, uid, ids, context=None):
         for partner_id in self.browse(cr, uid, ids, context=context):
-            if partner_id.default_has_vat_on_payment == 'empty':
-                return False
+            if partner_id.customer or partner_id.supplier:
+                if partner_id.default_has_vat_on_payment == 'empty':
+                    return False
         return True
 
     _constraints = [
@@ -55,3 +56,11 @@ class res_partner(orm.Model):
             'Default value for VAT on Payment flag must be set.',
             ['default_has_vat_on_payment']),
     ]
+
+    def create(self, cr, uid, vals, context=None):
+        if context is None:
+            context = {}
+        if 'default_has_vat_on_payment' not in vals:
+            # XML record
+            vals['default_has_vat_on_payment'] = false
+        return super(res_partner, self).create(cr, uid, vals, context=context)
