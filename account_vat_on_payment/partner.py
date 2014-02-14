@@ -27,40 +27,14 @@ from openerp.osv import fields, orm
 from openerp.tools.translate import _
 
 
-class res_partner(orm.Model):
-    _inherit = 'res.partner'
+class account_fiscal_position(orm.Model):
+    _inherit = 'account.fiscal.position'
 
     _columns = {
-        # the following field is a selection to force the user to select
-        # a value (a required boolean field may easily lead to errors)
-        'default_has_vat_on_payment': fields.selection([
-            ('empty', ''),
-            ('true', 'Has VAT on Payment'),
-            ('false', 'No VAT on Payment')],
-            'VAT on Payment Default Flag', required=True),
+        'default_has_vat_on_payment': fields.boolean(
+            'VAT on Payment Default Flag'),
     }
 
     _defaults = {
-        'default_has_vat_on_payment': lambda *x: 'empty',
+        'default_has_vat_on_payment': lambda *x: False,
     }
-
-    def _check_default_has_vat_on_payment(self, cr, uid, ids, context=None):
-        for partner_id in self.browse(cr, uid, ids, context=context):
-            if partner_id.customer or partner_id.supplier:
-                if partner_id.default_has_vat_on_payment == 'empty':
-                    return False
-        return True
-
-    _constraints = [
-        (_check_default_has_vat_on_payment,
-            'Default value for VAT on Payment flag must be set.',
-            ['default_has_vat_on_payment']),
-    ]
-
-    def create(self, cr, uid, vals, context=None):
-        if context is None:
-            context = {}
-        if 'default_has_vat_on_payment' not in vals:
-            # XML record
-            vals['default_has_vat_on_payment'] = 'false'
-        return super(res_partner, self).create(cr, uid, vals, context=context)

@@ -33,11 +33,11 @@
         <!-- res.partner customizations -->
 
         <record id="view_partner_form" model="ir.ui.view">
-            <field name="name">res.partner.vat.default.view</field>
-            <field name="model">res.partner</field>
-            <field name="inherit_id" ref="account.view_partner_property_form"/>
+            <field name="name">account.fiscal.position.vat.default.view</field>
+            <field name="model">account.fiscal.position</field>
+            <field name="inherit_id" ref="account.view_account_position_form"/>
             <field name="arch" type="xml">
-                <field name="property_account_position" position="after" version="7.0">
+                <field name="active" position="after" version="7.0">
                     <field name="default_has_vat_on_payment" class="oe_inline"/>
                 </field>
             </field>

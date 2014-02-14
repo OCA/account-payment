@@ -366,13 +366,18 @@ class account_invoice(osv.osv):
             new_move_lines.append(line_tup)
         return new_move_lines
 
-    def onchange_partner_id(self, cr, uid, ids, type, partner_id,\
-            date_invoice=False, payment_term=False, partner_bank_id=False, company_id=False):
-        res = super(account_invoice, self).onchange_partner_id(cr, uid, ids, type, partner_id, date_invoice, payment_term, partner_bank_id, company_id)
-        # default value for VAT on Payment is changed every time the customer/supplier is changed
+    def onchange_partner_id(
+            self, cr, uid, ids, type, partner_id, date_invoice=False,
+            payment_term=False, partner_bank_id=False, company_id=False):
+        res = super(account_invoice, self).onchange_partner_id(
+            cr, uid, ids, type, partner_id, date_invoice, payment_term,
+            partner_bank_id, company_id)
+        # default value for VAT on Payment is changed every time the
+        # customer/supplier is changed
         partner_obj = self.pool.get("res.partner")
         for partner_id in partner_obj.browse(cr, uid, [partner_id]):
-            res['value']['vat_on_payment'] = True if partner_id.default_has_vat_on_payment == 'true' else False
+            res['value']['vat_on_payment'] =\
+                partner_id.property_account_position.default_has_vat_on_payment
         return res
 
     _inherit = "account.invoice"
