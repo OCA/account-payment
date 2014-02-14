@@ -375,9 +375,10 @@ class account_invoice(osv.osv):
         # default value for VAT on Payment is changed every time the
         # customer/supplier is changed
         partner_obj = self.pool.get("res.partner")
-        for partner_id in partner_obj.browse(cr, uid, [partner_id]):
-            res['value']['vat_on_payment'] =\
-                partner_id.property_account_position.default_has_vat_on_payment
+        if partner_id:
+            for partner_id in partner_obj.browse(cr, uid, [partner_id]):
+                res['value']['vat_on_payment'] = partner_id\
+                    .property_account_position.default_has_vat_on_payment
         return res
 
     _inherit = "account.invoice"
