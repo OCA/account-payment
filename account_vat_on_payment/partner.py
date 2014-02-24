@@ -34,7 +34,3 @@ class account_fiscal_position(orm.Model):
         'default_has_vat_on_payment': fields.boolean(
             'VAT on Payment Default Flag'),
     }
-
-    _defaults = {
-        'default_has_vat_on_payment': lambda *x: False,
-    }

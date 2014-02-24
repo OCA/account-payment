@@ -376,9 +376,10 @@ class account_invoice(osv.osv):
         # customer/supplier is changed
         partner_obj = self.pool.get("res.partner")
         if partner_id:
-            for partner_id in partner_obj.browse(cr, uid, [partner_id]):
-                res['value']['vat_on_payment'] = partner_id\
-                    .property_account_position.default_has_vat_on_payment
+            p = partner_obj.browse(cr, uid, partner_id)
+            res['value']['vat_on_payment'] = p.property_account_position\
+                and p.property_account_position.default_has_vat_on_payment\
+                or False
         return res
 
     _inherit = "account.invoice"
