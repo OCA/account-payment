@@ -21,11 +21,11 @@
 #
 ##############################################################################
 
-from osv import fields, osv
+from openerp.osv import orm
 from tools.translate import _
 
 
-class account_voucher(osv.osv):
+class account_voucher(orm.Model):
     _inherit = "account.voucher"
 
     _columns = {
@@ -313,7 +313,7 @@ class account_voucher(osv.osv):
         return res
 
 
-class account_invoice(osv.osv):
+class account_invoice(orm.Model):
 
     def _get_vat_on_payment(self, cr, uid, context=None):
         return self.pool.get('res.users').browse(
@@ -391,7 +391,7 @@ class account_invoice(osv.osv):
         }
 
 
-class account_move_line(osv.osv):
+class account_move_line(orm.Model):
     _inherit = "account.move.line"
     _columns = {
         'real_payment_move_id': fields.many2one(
@@ -402,7 +402,7 @@ class account_move_line(osv.osv):
         }
 
 
-class account_account(osv.osv):
+class account_account(orm.Model):
     _inherit = "account.account"
     _columns = {
         'vat_on_payment_related_account_id': fields.many2one(
@@ -412,7 +412,7 @@ class account_account(osv.osv):
         }
 
 
-class account_tax_code(osv.osv):
+class account_tax_code(orm.Model):
     _inherit = "account.tax.code"
     _columns = {
         'vat_on_payment_related_tax_code_id': fields.many2one(
@@ -422,7 +422,7 @@ class account_tax_code(osv.osv):
         }
 
 
-class account_journal(osv.osv):
+class account_journal(orm.Model):
     _inherit = "account.journal"
     _columns = {
         'vat_on_payment_related_journal_id': fields.many2one(
