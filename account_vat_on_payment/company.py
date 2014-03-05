@@ -21,7 +21,7 @@
 #
 ##############################################################################
 
-from openerp.osv import orm
+from openerp.osv import orm, fields
 from tools.translate import _
 
 
