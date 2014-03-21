@@ -58,7 +58,6 @@
         <record model="ir.ui.view" id="view_payment_type_res_partner_form1">
             <field name="name">res.partner.form.payment_type1</field>
             <field name="model">res.partner</field>
-            <field name="type">form</field>
             <field name="inherit_id" ref="account.view_partner_property_form"/>
             <field name="priority" eval="20"/>
             <field name="arch" type="xml">
