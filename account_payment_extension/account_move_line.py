@@ -166,31 +166,31 @@ class account_move_line(osv.osv):
         return [('id','=','0')]
 
     def _get_move_lines(self, cr, uid, ids, context=None):
-        result = {}
-        line_obj = self.pool.get('payment.line')
+        result = set()
+        line_obj = self.pool['payment.line']
         for line in line_obj.browse(cr, uid, ids, context=context):
-            result[line.move_line_id.id] = True
-            result[line.payment_move_id.id] = True
-        return result.keys()
+            result.add(line.move_line_id.id)
+            result.add(line.payment_move_id.id)
+        return list(result)
 
     def _get_move_lines_order(self, cr, uid, ids, context=None):
-        result = {}
-        order_obj = self.pool.get('payment.order')
+        result = set()
+        order_obj = self.pool['payment.order']
         for order in order_obj.browse(cr, uid, ids, context=context):
             for line in order.line_ids:
-                result[line.move_line_id.id] = True
-                result[line.payment_move_id.id] = True
-        return result.keys()
+                result.add(line.move_line_id.id)
+                result.add(line.payment_move_id.id)
+        return list(result)
 
     def _get_reconcile(self, cr, uid, ids, context=None):
-        result = {}
-        reconcile_obj = self.pool.get('account.move.reconcile')
+        result = set()
+        reconcile_obj = self.pool['account.move.reconcile']
         for reconcile in reconcile_obj.browse(cr, uid, ids, context=context):
             for line in reconcile.line_id:
-                result[line.id] = True
+                result.add(line.id)
             for line in reconcile.line_partial_ids:
-                result[line.id] = True
-        return result.keys()
+                result.add(line.id)
+        return list(result)
 
     _columns = {
         'invoice': fields.function(_invoice, method=True, string='Invoice',
@@ -200,8 +200,8 @@ class account_move_line(osv.osv):
         'amount_to_pay' : fields.function(amount_to_pay, method=True,
                 type='float', string='Amount to pay',
                 store={
-                   'account.move.line': (lambda self, cr, uid, ids, c={}: ids,
-                                         None, 20),
+                   'account.move.line': (lambda self, cr, uid, ids,
+                                         context=None: ids, None, 20),
                    'payment.order': (_get_move_lines_order, ['line_ids'], 20),
                    'payment.line': (_get_move_lines,
                         ['type', 'move_line_id', 'payment_move_id'], 20),
