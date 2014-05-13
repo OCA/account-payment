@@ -127,24 +127,6 @@ class account_move_line(osv.osv):
             result[id] = debt
         return result
 
-    def _to_pay_search(self, cr, uid, obj, name, args, context=None):
-        context = context or {}
-        if not len(args):
-            return []
-        currency = self.pool.get('res.users').browse(cr, uid, uid, context).company_id.currency_id
-
-        # For searching we first discard reconciled moves because the filter is fast and discards most records
-        # quickly.
-        ids = self.pool.get('account.move.line').search(cr, uid, [('reconcile_id','=',False)], context=context)
-        records = self.pool.get('account.move.line').read(cr, uid, ids, ['id', 'amount_to_pay'], context)
-        ids = []
-        for record in records:
-            if not self.pool.get('res.currency').is_zero( cr, uid, currency, record['amount_to_pay'] ):
-                ids.append( record['id'] )
-        if not ids:
-            return [('id','=',False)]
-        return [('id','in',ids)]
-
     def _payment_type_get(self, cr, uid, ids, field_name, arg, context=None):
         context = context or {}
         result = {}
@@ -183,13 +165,51 @@ class account_move_line(osv.osv):
                 return [('id', 'in', [x[0] for x in res])]
         return [('id','=','0')]
 
+    def _get_move_lines(self, cr, uid, ids, context=None):
+        result = set()
+        line_obj = self.pool['payment.line']
+        for line in line_obj.browse(cr, uid, ids, context=context):
+            result.add(line.move_line_id.id)
+            result.add(line.payment_move_id.id)
+        return list(result)
+
+    def _get_move_lines_order(self, cr, uid, ids, context=None):
+        result = set()
+        order_obj = self.pool['payment.order']
+        for order in order_obj.browse(cr, uid, ids, context=context):
+            for line in order.line_ids:
+                result.add(line.move_line_id.id)
+                result.add(line.payment_move_id.id)
+        return list(result)
+
+    def _get_reconcile(self, cr, uid, ids, context=None):
+        result = set()
+        reconcile_obj = self.pool['account.move.reconcile']
+        for reconcile in reconcile_obj.browse(cr, uid, ids, context=context):
+            for line in reconcile.line_id:
+                result.add(line.id)
+            for line in reconcile.line_partial_ids:
+                result.add(line.id)
+        return list(result)
+
     _columns = {
         'invoice': fields.function(_invoice, method=True, string='Invoice',
             type='many2one', relation='account.invoice', fnct_search=_invoice_search),
         'received_check': fields.boolean('Received check', help="To write down that a check in paper support has been received, for example."),
         'partner_bank_id': fields.many2one('res.partner.bank','Bank Account'),
-        'amount_to_pay' : fields.function(amount_to_pay, method=True, type='float', string='Amount to pay', fnct_search=_to_pay_search, store=True),
-        'payment_type': fields.function(_payment_type_get, fnct_search=_payment_type_search, method=True, type="many2one", relation="payment.type", string="Payment type"),
+        'amount_to_pay' : fields.function(amount_to_pay, method=True,
+                type='float', string='Amount to pay',
+                store={
+                   'account.move.line': (lambda self, cr, uid, ids,
+                                         context=None: ids, None, 20),
+                   'payment.order': (_get_move_lines_order, ['line_ids'], 20),
+                   'payment.line': (_get_move_lines,
+                        ['type', 'move_line_id', 'payment_move_id'], 20),
+                   'account.move.reconcile': (_get_reconcile,
+                        ['line_id', 'line_partial_ids'], 20)
+                }),
+        'payment_type': fields.function(_payment_type_get, fnct_search=_payment_type_search, method=True, type="many2one", relation="payment.type", string="Payment type")
+
     }
 
     def write(self, cr, uid, ids, vals, context=None, check=True, update_check=True):
