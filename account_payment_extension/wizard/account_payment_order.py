@@ -22,15 +22,9 @@
 #
 ##############################################################################
 
-import time
-from lxml import etree
-from osv import osv, fields
+from openerp.osv import orm, fields
 
-import pooler
-
-
-
-class payment_order_create(osv.osv_memory):
+class payment_order_create(orm.TransientModel):
     """
     Create a payment object with lines corresponding to the account move line
     to pay according to the date provided by the user and the mode-type payment of the order.
@@ -41,17 +35,16 @@ class payment_order_create(osv.osv_memory):
     If a type is given, unsuitable account move lines are ignored.
     """
     _inherit = 'payment.order.create'
-    _description = ''
 
     _columns={
         'communication2':fields.char ('Communication 2',size = 64, help ='The successor message of payment communication.'),
         'amount':fields.float ('Amount', help ='Next step will automatically select payments up to this amount as long as account moves have bank account if that is required by the selected payment mode.'),
         'show_refunds':fields.boolean('Show Refunds', help = 'Indicates if search should include refunds.'),
-              }
+    }
 
     _defaults={
-               'show_refunds': lambda *a: False,
-               }
+        'show_refunds': False,
+    }
 
     def default_get(self, cr, uid, fields, context=None):
         """
@@ -73,10 +66,9 @@ class payment_order_create(osv.osv_memory):
         return res
 
     def search_entries(self, cr, uid, ids, context):
-        pool = pooler.get_pool(cr.dbname)
-        order_obj = self.pool.get('payment.order')
-        line_obj = self.pool.get('account.move.line')
-        mod_obj = self.pool.get('ir.model.data')
+        order_obj = self.pool['payment.order']
+        line_obj = self.pool['account.move.line']
+        mod_obj = self.pool['ir.model.data']
         if context is None:
             context = {}
         data = self.browse(cr, uid, ids, context=context)[0]
@@ -105,7 +97,7 @@ class payment_order_create(osv.osv_memory):
         if amount > 0.0:
             # If user specified an amount, search what moves match the criteria taking into account
             # if payment mode allows bank account to be null.
-            for line in pool.get('account.move.line').browse(cr, uid, line_ids, context):
+            for line in line_obj.browse(cr, uid, line_ids, context=context):
                 if abs(line.amount_to_pay) <= amount:
                     amount -= abs(line.amount_to_pay)
                     selected_ids.append( line.id )
@@ -166,7 +158,5 @@ class payment_order_create(osv.osv_memory):
                     'account_id': line.account_id.id,
                 }, context=context)
         return {'type': 'ir.actions.act_window_close'}
-
-payment_order_create()
 
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:

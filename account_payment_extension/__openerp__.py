@@ -27,7 +27,7 @@
 
 {
     'name': 'Account Payment Extension',
-    'version': '1.1',
+    'version': '1.1.1',
     'author': 'Zikzakmedia SL',
     'category': 'Accounting & Finance',
     'website': 'www.zikzakmedia.com',
