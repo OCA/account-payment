@@ -377,9 +377,10 @@ class account_invoice(orm.Model):
         partner_obj = self.pool.get("res.partner")
         if partner_id:
             p = partner_obj.browse(cr, uid, partner_id)
-            res['value']['vat_on_payment'] = p.property_account_position\
-                and p.property_account_position.default_has_vat_on_payment\
-                or False
+            if p.property_account_position:
+                res['value'][
+                    'vat_on_payment'
+                    ] = p.property_account_position.default_has_vat_on_payment
         return res
 
     _inherit = "account.invoice"
