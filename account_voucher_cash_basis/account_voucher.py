@@ -25,11 +25,21 @@ from openerp.osv import fields, orm
 from openerp.tools.translate import _
 import openerp.addons.decimal_precision as dp
 
+
 class account_voucher(orm.Model):
     _inherit = "account.voucher"
     
     _columns = {
-        'line_total': fields.float('Lines Total', digits_compute=dp.get_precision('Account'), readonly=True),
+        'line_total': fields.float(
+            'Lines Total', digits_compute=dp.get_precision('Account'),
+            readonly=True),
+        # exclude_write_off field will be used by modules like
+        # account_vat_on_payment and l10n_it_withholding_tax
+        'exclude_write_off': fields.boolean(
+            'Exclude write-off from tax on payment',
+            help="""Select this if you want, when closing the invoice, the
+            tax to be computed
+            based on the invoice's totals instead of the paid amount"""),
         }
     
     def balance_move(self, cr, uid, move_id, context=None):
@@ -71,7 +81,7 @@ class account_voucher(orm.Model):
         res = 0.0
         for inv_move_line in invoice.move_id.line_id:
             if inv_move_line.account_id.type in ('receivable','payable'):
-                res += inv_move_line.debit or inv_move_line.credit # can both be presents?
+                res += inv_move_line.debit or inv_move_line.credit
         return res
         
     def get_invoice_total_currency(self, invoice):
@@ -150,6 +160,7 @@ class account_voucher(orm.Model):
                     'total'
                     ] = self.get_invoice_total(line.move_line_id.invoice)
         if res:
+            # we use line_total as it can be != writeoff_amount in case of multi currency
             write_off_per_invoice = voucher.line_total / len(res)
             if not voucher.company_id.allow_distributing_write_off and  len(res) > 1 and write_off_per_invoice:
                 raise orm.except_orm(_('Error'), _(
