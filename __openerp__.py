@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution
-#    Copyright (C) 2013 Savoir-faire Linux (<http://www.savoirfairelinux.com>).
+#    Odoo, Open Source Management Solution
+#    Copyright (C) 2010 - 2014 Savoir-faire Linux
+#    (<http://www.savoirfairelinux.com>).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -19,7 +20,7 @@
 #
 ##############################################################################
 
-# NOTE: The name of the supplied field was initially "display_name", but it seems that OpenERP,
+# NOTE: The name of the supplied field was initially "display_name", but it seems that Odoo,
 # whenever it seems "name" in the field, returns the value for "name". Well...
 
 {
@@ -28,12 +29,19 @@
     'author': 'Savoir-faire Linux',
     'website': 'http://www.savoirfairelinux.com',
     'category': 'Generic Modules/Accounting',
+    "license": "AGPL-3",
     'description': """
 Supply res.currency.print_on_check
 ==================================
 
 This module improves res.currency by adding the "print_on_check" field, which stores the human
 readable name of the currency (US Dollar, Euro, Canadian Dollar, etc.)
+
+Contributors
+------------
+* Joao Alfredo Gama Batista <joao.gama@savoirfairelinux.com>
+* Virgil Dupras <virgil.dupras@savoirfairelinux.com>
+* Sandy Carter <sandy.carter@savoirfairelinux.com>
 """,
     'depends': ['base'],
     'data': [
@@ -43,5 +51,4 @@ readable name of the currency (US Dollar, Euro, Canadian Dollar, etc.)
     'demo': [],
     'test': [],
     'installable': True,
-    'active': False,
 }
