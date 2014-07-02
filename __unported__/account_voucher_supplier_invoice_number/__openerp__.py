@@ -38,5 +38,5 @@ This module adds the supplier invoice number to (Supplier Payment) voucher lines
     ],
     "demo" : [],
     "active": False,
-    "installable": True
+    "installable": False,
 }
