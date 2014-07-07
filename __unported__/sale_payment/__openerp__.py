@@ -2,7 +2,9 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (c) 2010 Pexego S.L. (http://www.pexego.es) All Rights Reserved.
+#    Copyright (c) 2008 Zikzakmedia S.L. (http://zikzakmedia.com) All Rights Reserved.
+#                       Jordi Esteve <jesteve@zikzakmedia.com>
+#    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -18,37 +20,33 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+
 {
-    "name" : "Purchase Payment Type and Terms",
+    "name" : "Sale payment type",
     "version" : "1.0",
-    "author" : "Pexego",
-    "website": "www.pexego.es",
+    "author" : "Zikzakmedia",
+    "website": "www.zikzakmedia.com",
     "license" : "GPL-3",
     "category" : 'Generic Modules/Sales & Purchases',
-    "description": """Adds payment info to the purchase process.
+    "description": """Adds payment type and bank account to sale process.
 
-Adds payment type, terms, and bank account to the purchase orders.
+The sale order inherits payment type and bank account (if the payment type is related to bank accounts) from partner as default. Next, the invoice based on this sale order inherits the payment information from it.
 
-Allows to set different default payment terms for purchases (the partners
-will have payment terms and supplier payment terms).
+Also computes payment type and bank account of invoices created from picking lists (extracted from partner info).
 
-The payment terms, payment type and bank account default values for the
-purchase will be taken from the partner.
-
-Invoices created from purchase orders, or from pickings related to purchase
-orders, will inherit this payment info from the payment order.
+Based on previous work of Readylan (version for 4.2).
 """,
     "depends" : [
-            "account_payment",
-            "account_payment_extension",
-            "purchase",
-            "stock",
+        "account_payment",
+        "account_payment_extension",
+        "sale",
+        "stock",
         ],
     "init_xml" : [],
     "demo_xml" : [],
     "update_xml" : [
-            "purchase_payment_view.xml",
+        "sale_payment_view.xml",
         ],
     "active": False,
-    "installable": True
+    "installable": False,
 }

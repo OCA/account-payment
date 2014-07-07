@@ -41,5 +41,6 @@ generic view to create sale or purchase vouchers anyway due to lp:1080840
         'view/account_voucher.xml',
     ],
     "license": 'AGPL-3',
+    "installable": False,
 }
 # vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
