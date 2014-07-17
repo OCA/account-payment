@@ -1,0 +1,352 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* l10n_es_devolucion_remesas
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-11-14 20:15+0000\n"
+"PO-Revision-Date: 2013-11-14 21:17+0100\n"
+"Last-Translator: Pedro Manuel Baeza <pedro.baeza@serviciosbaeza.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+
+#. module: l10n_es_devolucion_remesas
+#: code:addons/l10n_es_devolucion_remesas/payment_return.py:118
+#, python-format
+msgid "You must complete all invoice references in the payment return."
+msgstr "Debe completar todas las referencias a las facturas en la devolución."
+
+#. module: l10n_es_devolucion_remesas
+#: selection:payment.return,state:0
+msgid "Imported"
+msgstr "Importado"
+
+#. module: l10n_es_devolucion_remesas
+#: model:ir.model,name:l10n_es_devolucion_remesas.model_payment_order_create
+msgid "payment.order.create"
+msgstr "pago.orden.crear"
+
+#. module: l10n_es_devolucion_remesas
+#: selection:payment.return.line,reason:0
+msgid "Sin utilizar"
+msgstr "Sin utilizar"
+
+#. module: l10n_es_devolucion_remesas
+#: view:payment.return:0
+msgid "Confirm"
+msgstr "Confirmar"
+
+#. module: l10n_es_devolucion_remesas
+#: field:payment.return.import_c19_wizard,file_name:0
+msgid "CSB 19 file name"
+msgstr "Nombre del archivo CSB 19"
+
+#. module: l10n_es_devolucion_remesas
+#: view:account.invoice:0
+msgid "Invoices whose payment has been returned"
+msgstr "Facturas cuyo pago haya sido devuelto"
+
+#. module: l10n_es_devolucion_remesas
+#: field:payment.return,state:0
+msgid "State"
+msgstr "Estado"
+
+#. module: l10n_es_devolucion_remesas
+#: selection:payment.return.line,reason:0
+msgid "No domiciliado o cuenta cancelada"
+msgstr "No domiciliado o cuenta cancelada"
+
+#. module: l10n_es_devolucion_remesas
+#: view:payment.return:0
+#: selection:payment.return,state:0
+msgid "Draft"
+msgstr "Borrador"
+
+#. module: l10n_es_devolucion_remesas
+#: model:ir.actions.act_window,name:l10n_es_devolucion_remesas.action_c19_return_file_import_wizard
+msgid "CSB 19 file import"
+msgstr "Importación de archivo CSB 19"
+
+#. module: l10n_es_devolucion_remesas
+#: model:ir.actions.act_window,name:l10n_es_devolucion_remesas.payment_return_action
+#: model:ir.ui.menu,name:l10n_es_devolucion_remesas.payment_return_menu
+#: view:payment.return:0
+msgid "Payment returns"
+msgstr "Devoluciones de cobros"
+
+#. module: l10n_es_devolucion_remesas
+#: view:payment.return.import_c19_wizard:0
+msgid "Import"
+msgstr "Importar"
+
+#. module: l10n_es_devolucion_remesas
+#: code:addons/l10n_es_devolucion_remesas/wizard/wizard_import_csb19.py:182
+#, python-format
+msgid "Record type %s is not valid."
+msgstr "El tipo de registro %s no es válido."
+
+#. module: l10n_es_devolucion_remesas
+#: field:payment.return,move_id:0
+msgid "Reference to the created journal entry"
+msgstr "Referencia al asiento creado"
+
+#. module: l10n_es_devolucion_remesas
+#: selection:payment.return.line,reason:0
+msgid "Por orden del cliente: disconformidad con el importe"
+msgstr "Por orden del cliente: disconformidad con el importe"
+
+#. module: l10n_es_devolucion_remesas
+#: selection:payment.return.line,reason:0
+msgid "Por orden del cliente: error o baja en la domiciliación"
+msgstr "Por orden del cliente: error o baja en la domiciliación"
+
+#. module: l10n_es_devolucion_remesas
+#: selection:payment.return.line,reason:0
+msgid "Incorriente"
+msgstr "Incorriente"
+
+#. module: l10n_es_devolucion_remesas
+#: field:payment.return.line,invoice_id:0
+msgid "Associated invoice"
+msgstr "Factura asociada"
+
+#. module: l10n_es_devolucion_remesas
+#: field:payment.return.line,partner_name:0
+msgid "Partner name"
+msgstr "Nombre del cliente"
+
+#. module: l10n_es_devolucion_remesas
+#: view:payment.return.import_c19_wizard:0
+msgid "CSB 19 file import wizard"
+msgstr "Asistente de importación del archivo CSB 19"
+
+#. module: l10n_es_devolucion_remesas
+#: field:payment.return,company_id:0
+#: help:payment.return,company_id:0
+msgid "Company"
+msgstr "Compañía"
+
+#. module: l10n_es_devolucion_remesas
+#: help:payment.return.line,reconcile_id:0
+msgid "Reference to the reconcile object."
+msgstr "Referencia al objeto de conciliación."
+
+#. module: l10n_es_devolucion_remesas
+#: field:payment.return,lines_id:0
+msgid "unknown"
+msgstr "desconocido"
+
+#. module: l10n_es_devolucion_remesas
+#: field:payment.return.line,reason:0
+msgid "Return reason"
+msgstr "Motivo de la devolución"
+
+#. module: l10n_es_devolucion_remesas
+#: selection:payment.return.line,reason:0
+msgid "Importe a cero"
+msgstr "Importe a cero"
+
+#. module: l10n_es_devolucion_remesas
+#: model:ir.model,name:l10n_es_devolucion_remesas.model_payment_return_line
+#: view:payment.return:0
+msgid "Payment return lines"
+msgstr "Líneas de la devolución"
+
+#. module: l10n_es_devolucion_remesas
+#: model:ir.model,name:l10n_es_devolucion_remesas.model_payment_return_import_c19_wizard
+msgid "payment.return.import_c19_wizard"
+msgstr "payment.return.import_c19_wizard"
+
+#. module: l10n_es_devolucion_remesas
+#: field:payment.return.line,partner_id:0
+msgid "Customer"
+msgstr "Cliente"
+
+#. module: l10n_es_devolucion_remesas
+#: model:ir.model,name:l10n_es_devolucion_remesas.model_payment_return
+#: view:payment.return:0
+#: field:payment.return.line,return_id:0
+msgid "Payment return"
+msgstr "Devolución de cobro"
+
+#. module: l10n_es_devolucion_remesas
+#: code:addons/l10n_es_devolucion_remesas/wizard/wizard_import_csb19.py:235
+#, python-format
+msgid "You can't import files for a done or cancelled return."
+msgstr "No puede importar archivos para una devolución en estado realizada o cancelada."
+
+#. module: l10n_es_devolucion_remesas
+#: model:ir.model,name:l10n_es_devolucion_remesas.model_account_invoice
+msgid "Invoice"
+msgstr "Factura"
+
+#. module: l10n_es_devolucion_remesas
+#: view:payment.return.import_c19_wizard:0
+msgid "CSB 19 payment return file:"
+msgstr "Archivo de devolución CSB 19:"
+
+#. module: l10n_es_devolucion_remesas
+#: view:payment.return:0
+#: field:payment.return,notes:0
+#: field:payment.return.line,notes:0
+msgid "Notes"
+msgstr "Notas"
+
+#. module: l10n_es_devolucion_remesas
+#: field:account.invoice,payment_returned:0
+msgid "Payment returned"
+msgstr "Pago devuelto"
+
+#. module: l10n_es_devolucion_remesas
+#: view:payment.return:0
+msgid "Lines"
+msgstr "Líneas"
+
+#. module: l10n_es_devolucion_remesas
+#: sql_constraint:account.invoice:0
+msgid "Invoice Number must be unique per Company!"
+msgstr "¡El número de factura debe ser único por compañía!"
+
+#. module: l10n_es_devolucion_remesas
+#: help:account.invoice,payment_returned:0
+msgid "Invoice has been included on a payment that has been returned later."
+msgstr "La factura ha sido incluida en un pago que ha sido devuelto más tarde."
+
+#. module: l10n_es_devolucion_remesas
+#: code:addons/l10n_es_devolucion_remesas/payment_return.py:117
+#: code:addons/l10n_es_devolucion_remesas/wizard/wizard_import_csb19.py:235
+#, python-format
+msgid "Error!"
+msgstr "¡Error!"
+
+#. module: l10n_es_devolucion_remesas
+#: field:payment.return.line,amount:0
+msgid "Amount"
+msgstr "Importe"
+
+#. module: l10n_es_devolucion_remesas
+#: field:payment.return.line,concept:0
+msgid "Concept"
+msgstr "Concepto"
+
+#. module: l10n_es_devolucion_remesas
+#: field:payment.order.create,show_returned:0
+msgid "Show returned invoices"
+msgstr "Mostrar facturas devueltas"
+
+#. module: l10n_es_devolucion_remesas
+#: view:account.invoice:0
+msgid "Returned"
+msgstr "Devuelta"
+
+#. module: l10n_es_devolucion_remesas
+#: selection:payment.return,state:0
+msgid "Cancelled"
+msgstr "Cancelada"
+
+#. module: l10n_es_devolucion_remesas
+#: field:payment.return,date:0
+#: field:payment.return.line,date:0
+msgid "Return date"
+msgstr "Fecha de devolución"
+
+#. module: l10n_es_devolucion_remesas
+#: help:payment.return.line,amount:0
+#: help:payment.return.line,concept:0
+#: help:payment.return.line,date:0
+#: help:payment.return.line,partner_name:0
+#: help:payment.return.line,reason:0
+msgid "Readed from imported file. Only for reference."
+msgstr "Leído del archivo importado. Sólo como referencia."
+
+#. module: l10n_es_devolucion_remesas
+#: selection:payment.return.line,reason:0
+msgid "Oficina domiciliataria inexistente"
+msgstr "Oficina domiciliataria inexistente"
+
+#. module: l10n_es_devolucion_remesas
+#: code:addons/l10n_es_devolucion_remesas/wizard/wizard_import_csb19.py:167
+#, python-format
+msgid "Data code %s is not valid."
+msgstr "El código de datos %s no es valido."
+
+#. module: l10n_es_devolucion_remesas
+#: code:addons/l10n_es_devolucion_remesas/payment_return.py:123
+#, python-format
+msgid "Return %s"
+msgstr "Devolución %s"
+
+#. module: l10n_es_devolucion_remesas
+#: field:payment.return.import_c19_wizard,file:0
+msgid "CSB 19 payment return file"
+msgstr "Archivo de devolución CSB 19"
+
+#. module: l10n_es_devolucion_remesas
+#: field:payment.return,journal_id:0
+msgid "Bank journal"
+msgstr "Diario del banco"
+
+#. module: l10n_es_devolucion_remesas
+#: field:payment.return.line,reconcile_id:0
+msgid "Reconcile"
+msgstr "Conciliación"
+
+#. module: l10n_es_devolucion_remesas
+#: field:payment.return,name:0
+msgid "Reference"
+msgstr "Referencia"
+
+#. module: l10n_es_devolucion_remesas
+#: help:payment.order.create,show_returned:0
+msgid "Indicates if search should include invoices whose payment has been returned."
+msgstr "Indica si la búsqueda debe incluir facturas cuyo pago haya sido devuelto."
+
+#. module: l10n_es_devolucion_remesas
+#: help:payment.return,date:0
+msgid "This date will be used as the date for the account entry."
+msgstr "Esta fecha se utilizará como fecha del asiento contable."
+
+#. module: l10n_es_devolucion_remesas
+#: selection:payment.return,state:0
+msgid "Done"
+msgstr "Realizada"
+
+#. module: l10n_es_devolucion_remesas
+#: selection:payment.return.line,reason:0
+msgid "Adeudo duplicado, indebido, erróneo o faltan datos"
+msgstr "Adeudo duplicado, indebido, erróneo o faltan datos"
+
+#. module: l10n_es_devolucion_remesas
+#: selection:payment.return.line,reason:0
+msgid "Aplicación R.D. 338/90, sobre el NIF"
+msgstr "Aplicación R.D. 338/90, sobre el NIF"
+
+#. module: l10n_es_devolucion_remesas
+#: field:payment.return,period_id:0
+msgid "Forced period"
+msgstr "Periodo forzado"
+
+#. module: l10n_es_devolucion_remesas
+#: view:payment.return:0
+#: view:payment.return.import_c19_wizard:0
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: l10n_es_devolucion_remesas
+#: code:addons/l10n_es_devolucion_remesas/wizard/wizard_import_csb19.py:118
+#: code:addons/l10n_es_devolucion_remesas/wizard/wizard_import_csb19.py:120
+#: code:addons/l10n_es_devolucion_remesas/wizard/wizard_import_csb19.py:122
+#: code:addons/l10n_es_devolucion_remesas/wizard/wizard_import_csb19.py:140
+#: code:addons/l10n_es_devolucion_remesas/wizard/wizard_import_csb19.py:142
+#: code:addons/l10n_es_devolucion_remesas/wizard/wizard_import_csb19.py:144
+#: code:addons/l10n_es_devolucion_remesas/wizard/wizard_import_csb19.py:167
+#: code:addons/l10n_es_devolucion_remesas/wizard/wizard_import_csb19.py:182
+#, python-format
+msgid "Error in C19 file"
+msgstr "Error en el archivo C19"
+
