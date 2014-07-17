@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <!-- Paypemt Return-related subtypes for messaging / Chatter -->
+        <record id="mt_payment_return_state_change" model="mail.message.subtype">
+            <field name="name">Status Change</field>
+            <field name="res_model">payment.return</field>
+            <field name="default" eval="False"/>
+            <field name="description">Status changed</field>
+        </record>
+
+    </data>
+</openerp>

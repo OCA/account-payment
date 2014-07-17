@@ -4,15 +4,15 @@
 #    OpenERP, Open Source Management Solution
 #    Copyright (c) 2011-2012 7 i TRIA <http://www.7itria.cat>
 #    Copyright (c) 2011-2012 Avanzosc <http://www.avanzosc.com>
-#    Copyright (c) 2013 Serv. Tecnol. Avanzados (http://www.serviciosbaeza.com)
-#                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com> 
+#    Copyright (c) 2013 Serv. Tecnol. Avanzados <http://www.serviciosbaeza.com>
+#                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
 #    Copyright (c) 2014 initOS GmbH & Co. KG <http://initos.com/>
 #                       Markus Schneider <markus.schneider at initos.com>
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
+#    it under the terms of the GNU Affero General Public License as published
+#    by the Free Software Foundation, either version 3 of the License, or
 #    (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
@@ -26,10 +26,10 @@
 ##############################################################################
 from osv import orm, fields
 from tools.translate import _
-import decimal_precision as dp
 import time
 
-class payment_order_return(orm.Model):
+
+class payment_return(orm.Model):
     _name = "payment.return"
     _inherit = ['mail.thread']
     _description = 'Payment return'
@@ -37,46 +37,39 @@ class payment_order_return(orm.Model):
     _columns = {
         'company_id': fields.many2one('res.company', 'Company', required=True,
                                       help="Company",
-                                      states={
-                                              'done':[('readonly',True)],
-                                              'cancelled':[('readonly',True)]
+                                      states={'done': [('readonly', True)],
+                                              'cancelled': [('readonly', True)]
                                               }),
-        'date' : fields.date('Return date',
-                             help="This date will be used as the date for the "
-                             "account entry.",
-                             states={
-                                     'done':[('readonly',True)],
-                                     'cancelled':[('readonly',True)]
-                                     }),
-        'name' : fields.char("Reference", size=64, required=True,
-                             states={
-                                     'done':[('readonly',True)],
-                                     'cancelled':[('readonly',True)]
-                                     }),
+        'date': fields.date('Return date',
+                            help="This date will be used as the date for the "
+                                 "account entry.",
+                            states={'done': [('readonly', True)],
+                                    'cancelled': [('readonly', True)]
+                                    }),
+        'name': fields.char("Reference", size=64, required=True,
+                            states={'done': [('readonly', True)],
+                                    'cancelled': [('readonly', True)]
+                                    }),
         'period_id': fields.many2one('account.period', 'Forced period',
-                                     states={
-                                             'done':[('readonly',True)],
-                                             'cancelled':[('readonly',True)]
+                                     states={'done': [('readonly', True)],
+                                             'cancelled': [('readonly', True)]
                                              }),
-        'lines_id' : fields.one2many('payment.return.line', 'return_id',
-                                     states={
-                                             'done':[('readonly',True)],
-                                             'cancelled':[('readonly',True)]
-                                             }),
+        'lines_id': fields.one2many('payment.return.line', 'return_id',
+                                    states={'done': [('readonly', True)],
+                                            'cancelled': [('readonly', True)]
+                                            }),
         'journal_id': fields.many2one('account.journal', 'Bank journal',
                                       required=True,
-                                      states={
-                                              'done':[('readonly',True)],
-                                              'cancelled':[('readonly',True)]
+                                      states={'done': [('readonly', True)],
+                                              'cancelled': [('readonly', True)]
                                               }),
         'move_id': fields.many2one('account.move',
                                    'Reference to the created journal entry',
-                                   states={
-                                           'done':[('readonly',True)],
-                                           'cancelled':[('readonly',True)]
+                                   states={'done': [('readonly', True)],
+                                           'cancelled': [('readonly', True)]
                                            }),
-        'notes' : fields.text('Notes'),
-        'state' : fields.selection([
+        'notes': fields.text('Notes'),
+        'state': fields.selection([
             ('draft', 'Draft'),
             ('imported', 'Imported'),
             ('done', 'Done'),
@@ -102,33 +95,34 @@ class payment_order_return(orm.Model):
         attachment_obj = self.pool.get('ir.attachment')
         for id in ids:
             # Remove file attachments (if any)
-            id_at = attachment_obj.search(cr, uid, [
-                        ('res_id', '=', id),
-                        ('res_model', '=', 'payment.return'),
-                    ], context=context)
+            id_at = attachment_obj.search(cr, uid, [('res_id', '=', id),
+                                                    ('res_model', '=',
+                                                     'payment.return'),
+                                                    ], context=context)
             if id_at:
                 attachment_obj.unlink(cr, uid, id_at, context)
-        
-        return super(payment_order_return, self).unlink(cr, uid, ids,
-                                                        context=context)
 
-    def action_confirm(self, cr, uid, ids, *args):
+        return super(payment_return, self).unlink(cr, uid, ids,
+                                                  context=context)
+
+    def action_confirm(self, cr, uid, ids, context=None):
         invoice_obj = self.pool.get('account.invoice')
         move_obj = self.pool.get('account.move')
         move_line_obj = self.pool.get('account.move.line')
         reconcile_obj = self.pool.get('account.move.reconcile')
         return_line_obj = self.pool.get('payment.return.line')
-        for payment_return in self.browse(cr, uid, ids):
+        for payment_return in self.browse(cr, uid, ids, context=context):
             # Check for incomplete lines
             for return_line in payment_return.lines_id:
                 if not return_line.invoice_id:
                     raise orm.except_orm(_('Error!'),
-                        _("You must complete all invoice references in the "
-                          "payment return."))
+                                         _("You must complete all invoice "
+                                           "references in the "
+                                           "payment return."))
 
             move = {
                 'name': '/',
-                'ref': _('Return %s') %payment_return.name,
+                'ref': _('Return %s') % payment_return.name,
                 'journal_id': payment_return.journal_id.id,
                 'date': payment_return.date,
                 'company_id': payment_return.company_id.id,
@@ -137,11 +131,14 @@ class payment_order_return(orm.Model):
             if payment_return.period_id:
                 move['period_id'] = payment_return.period_id.id
             else:
-                move['period_id'] = self.pool.get('account.period').find(cr,
-                    uid, dt=payment_return.date, 
-                    context={'company_id': payment_return.company_id.id})[0]
+                context_move = context.copy()
+                context_move.update({'company_id':
+                                     payment_return.company_id.id})
+                move['period_id'] = self.pool.get('account.period')\
+                    .find(cr, uid, dt=payment_return.date,
+                          context=context_move)[0]
 
-            move_id = move_obj.create(cr, uid, move)
+            move_id = move_obj.create(cr, uid, move, context=context)
 
             for return_line in payment_return.lines_id:
                 invoice = return_line.invoice_id
@@ -156,96 +153,79 @@ class payment_order_return(orm.Model):
                     lines2reconcile = [x.id for x in old_reconcile.line_id]
                     move_line_id = move_line_obj.copy(
                         cr, uid, move_line.id,
-                        {
-                         'move_id': move_id,
-                         'ref': move['ref'],
-                         'date': move['date'],
-                         'period_id': move['period_id'],
-                         'journal_id': move['journal_id'],
-                         'debit': return_line.amount,
-                         'credit': 0,
-                         })
+                        default={
+                            'move_id': move_id,
+                            'ref': move['ref'],
+                            'date': move['date'],
+                            'period_id': move['period_id'],
+                            'journal_id': move['journal_id'],
+                            'debit': return_line.amount,
+                            'credit': 0,
+                            }, context=context)
                     lines2reconcile.append(move_line_id)
-                    bank_move_line_id = move_line_obj.copy(
+                    move_line_obj.copy(
                         cr, uid, move_line_id,
-                        {
-                         'debit': 0,
-                         'credit': return_line.amount,
-                         'account_id': move_line.move_id.journal_id.default_credit_account_id.id,
-                         })
-                # Break old reconcile and make a new one with at least three moves
-                reconcile_obj.unlink(cr, uid, [old_reconcile.id])
-                move_line_obj.reconcile_partial(cr, uid, lines2reconcile)
-                move_line = move_line_obj.browse(cr, uid, move_line_id)
-                return_line_obj.write(cr, uid, return_line.id, 
-                    {'reconcile_id': move_line.reconcile_partial_id.id})
+                        default={
+                            'debit': 0,
+                            'credit': return_line.amount,
+                            'account_id': move_line.move_id.journal_id
+                            .default_credit_account_id.id,
+                            }, context=context)
+                # Break old reconcile and
+                # make a new one with at least three moves
+                reconcile_obj.unlink(cr, uid, [old_reconcile.id],
+                                     context=context)
+                move_line_obj.reconcile_partial(cr, uid, lines2reconcile,
+                                                context=context)
+                move_line = move_line_obj.browse(cr, uid, move_line_id,
+                                                 context=context)
+                return_line_obj.write(cr, uid, return_line.id,
+                                      {'reconcile_id': move_line
+                                       .reconcile_partial_id.id},
+                                      context=context)
                 # Mark invoice as payment refused
                 invoice_obj.write(cr, uid, [invoice.id],
-                                  {'payment_returned': True})
+                                  {'payment_returned': True}, context=context)
 
-            move_obj.button_validate(cr, uid, [move_id])
+            move_obj.button_validate(cr, uid, [move_id], context=context)
             self.write(cr, uid, payment_return.id,
-                       {'state': 'done', 'move_id': move_id})
+                       {'state': 'done', 'move_id': move_id}, context=context)
         return True
 
-    def action_cancel(self, cr, uid, ids, *args):
+    def action_cancel(self, cr, uid, ids, context=None):
         invoice_obj = self.pool.get('account.invoice')
         move_obj = self.pool.get('account.move')
         move_line_obj = self.pool.get('account.move.line')
         reconcile_obj = self.pool.get('account.move.reconcile')
         return_line_obj = self.pool.get('payment.return.line')
-        for payment_return in self.browse(cr, uid, ids):
+        for payment_return in self.browse(cr, uid, ids, context=context):
             if payment_return.move_id:
                 for return_line in payment_return.lines_id:
                     if return_line.reconcile_id:
                         reconcile = return_line.reconcile_id
                         lines2reconcile = [x.id for x in
-                                           reconcile.line_partial_ids if 
-                                           x.move_id<>payment_return.move_id]
-                        reconcile_obj.unlink(cr, uid, [reconcile.id])
-                        move_line_obj.reconcile(cr, uid, lines2reconcile)
-                        return_line_obj.write(cr, uid, return_line.id, 
-                                              {'reconcile_id': False}
+                                           reconcile.line_partial_ids if
+                                           x.move_id != payment_return.move_id]
+                        reconcile_obj.unlink(cr, uid, [reconcile.id],
+                                             context=context)
+                        move_line_obj.reconcile(cr, uid, lines2reconcile,
+                                                context=context)
+                        return_line_obj.write(cr, uid, return_line.id,
+                                              {'reconcile_id': False},
+                                              context=context
                                               )
                     # Remove payment refused flag on invoice
                     invoice_obj.write(cr, uid, [return_line.invoice_id.id],
-                                      {'payment_returned': False})
-                move_obj.button_cancel(cr, uid, [payment_return.move_id.id])
-                move_obj.unlink(cr, uid, [payment_return.move_id.id])
-        self.write(cr, uid, ids, {'state': 'cancelled', 'move_id': False})
+                                      {'payment_returned': False},
+                                      context=context)
+                move_obj.button_cancel(cr, uid, [payment_return.move_id.id],
+                                       context=context)
+                move_obj.unlink(cr, uid, [payment_return.move_id.id],
+                                context=context)
+        self.write(cr, uid, ids, {'state': 'cancelled', 'move_id': False},
+                   context=context)
         return True
 
-    def action_draft(self, cr, uid, ids, *args):
-        self.write(cr, uid, ids, {'state': 'draft'})
+    def action_draft(self, cr, uid, ids, context=None):
+        self.write(cr, uid, ids, {'state': 'draft'}, context=context)
         return True
-
-
-class payment_order_return_line(orm.Model):
-    _name = "payment.return.line"
-    _description = 'Payment return lines'
-    
-    _columns = {
-        'return_id' : fields.many2one('payment.return', 'Payment return', 
-            required=True, ondelete='cascade'),
-        'concept': fields.char('Concept', size=100,
-            help="Readed from imported file. Only for reference."),
-        'reason' : fields.char('Return reason', size=100, 
-            help="Readed from imported file. Only for reference."),
-        'invoice_id': fields.many2one('account.invoice', 'Associated invoice'),
-        'date' : fields.date('Return date',
-            help="Readed from imported file. Only for reference."),
-        'notes' : fields.text('Notes'),
-        'partner_name': fields.char('Partner name', size=100,
-            help="Readed from imported file. Only for reference."),
-        'partner_id': fields.many2one('res.partner', 'Customer', 
-            domain="[('customer', '=', True)]"),
-        'amount': fields.float('Amount',
-            help="Amount customer returns, can be different from invoice amount", 
-            digits_compute= dp.get_precision('Account')),
-        'reconcile_id': fields.many2one('account.move.reconcile', 'Reconcile', 
-            help='Reference to the reconcile object.'),
-    }
-
-    _defaults = {
-        'date': lambda *x: time.strftime('%Y-%m-%d %H:%M:%S'),
-    }
