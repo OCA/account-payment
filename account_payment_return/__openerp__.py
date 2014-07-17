@@ -43,7 +43,6 @@
             'payment_return_data.xml',
             'account_invoice_view.xml',
     ],
-    'demo_xml': [],
+    'demo': [],
     'installable': True,
-    'active': False,
 }
