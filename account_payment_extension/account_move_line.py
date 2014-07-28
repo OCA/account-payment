@@ -22,7 +22,6 @@
 #
 ##############################################################################
 
-import netsvc
 from osv import fields, orm
 from tools.translate import _
 
@@ -236,8 +235,7 @@ class AccountMoveLine(orm.Model):
         return result
 
     def pay_move_lines(self, cr, uid, ids, context=None):
-        context = context or {}
-        #obj_move = self.pool.get('account.move')
+        # obj_move = self.pool.get('account.move')
         amount = 0
         name = ''
         ttype = ''

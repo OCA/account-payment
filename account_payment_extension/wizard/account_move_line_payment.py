@@ -18,8 +18,7 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from osv import fields, orm
-from tools.translate import _
+from osv import orm
 
 
 class AccountMoveLinePayment(orm.TransientModel):
