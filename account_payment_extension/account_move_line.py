@@ -4,7 +4,7 @@
 #    OpenERP, Open Source Management Solution
 #    Copyright (c) 2008 Zikzakmedia S.L. (http://zikzakmedia.com) All Rights Reserved.
 #                       Jordi Esteve <jesteve@zikzakmedia.com>
-#    AvanzOSC, Avanzed Open Source Consulting 
+#    AvanzOSC, Avanzed Open Source Consulting
 #    Copyright (C) 2011-2012 Iker Coranti (www.avanzosc.com). All Rights Reserved
 #    $Id$
 #
@@ -37,7 +37,7 @@ class account_move_line(osv.osv):
         res = {}
         for line_id in ids:
             res[line_id] = False
-        
+
         cursor.execute('SELECT l.id, i.id ' \
                        'FROM account_invoice i,account_move_line l ' \
                        'left join account_move_line r on l.reconcile_id=r.reconcile_id and l.id<>r.id ' \
@@ -45,13 +45,13 @@ class account_move_line(osv.osv):
                        'where (i.move_id = l.move_id or i.move_id = r.move_id or i.move_id = p.move_id) ' \
                        'AND l.id IN %s',
                         (tuple(ids),))
-        invoice_ids = []        
- 
+        invoice_ids = []
+
         for line_id, invoice_id in cursor.fetchall():
             name = invoice_obj.name_get(cursor, user, [invoice_id], context=context)
             res[line_id] = name and name[0] or False
         return res
-      
+
     #===========================================================================
     # def _invoice(self, cr, uid, ids, name, arg, context=None):
     #    return super(account_move_line, self)._invoice(cr, uid, ids, name, arg, context)
@@ -90,9 +90,9 @@ class account_move_line(osv.osv):
                         FROM payment_line pl
                             INNER JOIN payment_order po
                                 ON (pl.order_id = po.id)
-                        WHERE 
+                        WHERE
                             pl.move_line_id = ml.id AND
-                            pl.payment_move_id IS NULL AND 
+                            pl.payment_move_id IS NULL AND
                             po.state != 'cancel'
                     ) AS paid,
                     (
@@ -128,42 +128,25 @@ class account_move_line(osv.osv):
         return result
 
     def _payment_type_get(self, cr, uid, ids, field_name, arg, context=None):
-        context = context or {}
         result = {}
-        invoice_obj = self.pool.get('account.invoice')
+        invoice_obj = self.pool['account.invoice']
         for rec in self.browse(cr, uid, ids, context):
-            result[rec.id] = (0,0)
-            invoice_id = invoice_obj.search(cr, uid, [('move_id', '=', rec.move_id.id)], context=context)
-            if invoice_id:
-                inv = invoice_obj.browse(cr, uid, invoice_id[0], context)
+            result[rec.id] = False
+            invoice_ids = invoice_obj.search(
+                cr, uid, [('move_id', '=', rec.move_id.id)], context=context)
+            if invoice_ids:
+                inv = invoice_obj.browse(cr, uid, invoice_ids[0], context)
                 if inv.payment_type:
-                    result[rec.id] = (inv.payment_type.id, self.pool.get('payment.type').browse(cr, uid, inv.payment_type.id, context).name)
-            else:
-                result[rec.id] = (0,0)
+                    result[rec.id] = inv.payment_type.id
         return result
 
-    def _payment_type_search(self, cr, uid, obj, name, args, context=None):
-        context = context or {}
-        if not len(args):
-            return []
-        operator = args[0][1]
-        value = args[0][2]
-        if not value:
-            return []
-        if isinstance(value, (int, long)):
-            ids = [value]
-        elif isinstance(value, list):
-            ids = value 
-        else:
-            ids = self.pool.get('payment.type').search(cr,uid,[('name','ilike',value)], context=context)
-        if ids:
-            cr.execute('SELECT l.id ' \
-                'FROM account_move_line l, account_invoice i ' \
-                'WHERE l.move_id = i.move_id AND i.payment_type in %s', (tuple(ids),))
-            res = cr.fetchall()
-            if len(res):
-                return [('id', 'in', [x[0] for x in res])]
-        return [('id','=','0')]
+    def _get_move_lines_invoice(self, cr, uid, ids, context=None):
+        result = set()
+        line_obj = self.pool['account.invoice']
+        for invoice in invoice_obj.browse(cr, uid, ids, context=context):
+            if invoice.move_id:
+                result.add(invoice.move_id.id)
+        return list(result)
 
     def _get_move_lines(self, cr, uid, ids, context=None):
         result = set()
@@ -208,7 +191,13 @@ class account_move_line(osv.osv):
                    'account.move.reconcile': (_get_reconcile,
                         ['line_id', 'line_partial_ids'], 20)
                 }),
-        'payment_type': fields.function(_payment_type_get, fnct_search=_payment_type_search, method=True, type="many2one", relation="payment.type", string="Payment type")
+        'payment_type': fields.function(
+            _payment_type_get, method=True, type="many2one",
+            relation="payment.type", string="Payment type",
+            store={
+                   'account.invoice': (_get_move_lines_invoice,
+                                       ['payment_type'], 20),
+            })
 
     }
 
@@ -227,9 +216,9 @@ class account_move_line(osv.osv):
         ]
         views = [
             self.pool.get('ir.model.data').get_object_reference(cr, uid, 'account_payment_extension', 'view_payments_tree'),
-    
+
         ]
-        
+
         menus = [m[1] for m in menus]
         views = [v[1] for v in views]
         #=======================================================================
@@ -247,9 +236,9 @@ class account_move_line(osv.osv):
             result = super(osv.osv, self).fields_view_get(cr, uid, view_id, view_type, context, toolbar=toolbar, submenu=submenu)
         else:
             result = super(account_move_line, self).fields_view_get(cr, uid, view_id, view_type, context, toolbar=toolbar, submenu=submenu)
-            
+
         return result
-        
+
     def pay_move_lines(self, cr, uid, ids, context=None):
         context = context or {}
         #obj_move = self.pool.get('account.move')
@@ -258,7 +247,7 @@ class account_move_line(osv.osv):
         ttype = ''
         invoice_type = ''
         partner_id = False
-        inv_id = False 
+        inv_id = False
         several_invoices = False
         if context is None:
             context = {}
@@ -274,17 +263,17 @@ class account_move_line(osv.osv):
             else :
                 amount += line.amount_to_pay
                 partner_id = line.partner_id.id
-                name += line.name + '/' 
+                name += line.name + '/'
         if several_invoices:
-            inv_id = False 
+            inv_id = False
         if amount > 0:
             ttype = 'payment'
             invoice_type = 'in_invoice'
-        else: 
+        else:
             amount = -amount
             ttype = 'receipt'
             invoice_type = 'out_invoice'
-            
+
         return {
             'name':_("Pay Moves"),
             'view_mode': 'form',
