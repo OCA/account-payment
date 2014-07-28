@@ -43,7 +43,7 @@ class AccountInvoice(orm.Model):
         if partner_id:
             partner_line = self.pool['res.partner'].browse(cr, uid, partner_id)
             if partner_line:
-                if type == 'in_invoice' or type == 'in_refund':
+                if type in ('in_invoice', 'in_refund'):
                     payment_type = partner_line.payment_type_supplier.id
                 else:
                     payment_type = partner_line.payment_type_customer.id
@@ -78,9 +78,8 @@ class AccountInvoice(orm.Model):
             for inv in self.browse(cr, uid, ids):
                 move_line_ids = []
                 for move_line in inv.move_id.line_id:
-                    if (move_line.account_id.type == 'receivable' or
-                            move_line.account_id.type == 'payable') and \
-                            move_line.state != 'reconciled' and \
+                    if move_line.account_id.type in ('receivable', 'payable') \
+                            and move_line.state != 'reconciled' and \
                             not move_line.reconcile_id.id:
                         move_line_ids.append(move_line.id)
                 if len(move_line_ids) and inv.partner_bank_id:
