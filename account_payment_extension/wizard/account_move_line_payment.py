@@ -18,23 +18,17 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from osv import fields, osv
+from osv import fields, orm
 from tools.translate import _
 
 
-class account_move_line_payment(osv.osv_memory):
+class AccountMoveLinePayment(orm.TransientModel):
     _name = "account.move.line.payment"
     _description = "Pay Account Move Lines"
 
     def pay_move_lines(self, cr, uid, ids, context=None):
-        obj_move_line = self.pool.get('account.move.line')
-        if context is None:
-            context = {}
-        res = obj_move_line.pay_move_lines(cr, uid, context['active_ids'], context)
-        res ['nodestroy'] =False
+        obj_move_line = self.pool['account.move.line']
+        res = obj_move_line.pay_move_lines(
+            cr, uid, context['active_ids'], context)
+        res['nodestroy'] = False
         return res
-        
-account_move_line_payment()
-
-# vim:expandtab:smartindent:tabstop=4:softtabstop=4:shiftwidth=4:
-

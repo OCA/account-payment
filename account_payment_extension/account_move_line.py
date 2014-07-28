@@ -26,17 +26,16 @@ import netsvc
 from osv import fields, orm
 from tools.translate import _
 
+
 class AccountMoveLine(orm.Model):
     _name = 'account.move.line'
     _inherit = 'account.move.line'
 
     def _invoice(self, cursor, user, ids, name, arg, context=None):
-        context = context or {}
-        invoice_obj = self.pool.get('account.invoice')
+        invoice_obj = self.pool['account.invoice']
         res = {}
         for line_id in ids:
             res[line_id] = False
-
         cursor.execute(
             'SELECT l.id, i.id '
             'FROM account_invoice i,account_move_line l '
@@ -48,7 +47,6 @@ class AccountMoveLine(orm.Model):
             '    i.move_id = p.move_id) '
             '    AND l.id IN %s',
             (tuple(ids),))
-        invoice_ids = []
         for line_id, invoice_id in cursor.fetchall():
             name = invoice_obj.name_get(cursor, user, [invoice_id],
                                         context=context)
@@ -144,7 +142,7 @@ class AccountMoveLine(orm.Model):
 
     def _get_move_lines_invoice(self, cr, uid, ids, context=None):
         result = set()
-        line_obj = self.pool['account.invoice']
+        invoice_obj = self.pool['account.invoice']
         for invoice in invoice_obj.browse(cr, uid, ids, context=context):
             if invoice.move_id:
                 result.add(invoice.move_id.id)
@@ -185,19 +183,19 @@ class AccountMoveLine(orm.Model):
             'Received check',
             help="To write down that a check in paper support has been "
                  "received, for example."),
-        'partner_bank_id': fields.many2one('res.partner.bank','Bank Account'),
-        'amount_to_pay' : fields.function(
+        'partner_bank_id': fields.many2one('res.partner.bank', 'Bank Account'),
+        'amount_to_pay': fields.function(
             amount_to_pay, method=True,
             type='float', string='Amount to pay',
             store={
-               'account.move.line': (lambda self, cr, uid, ids,
-                                     context=None: ids, None, 20),
-               'payment.order': (_get_move_lines_order, ['line_ids'], 20),
-               'payment.line': (_get_move_lines,
-                                ['type', 'move_line_id', 'payment_move_id'],
-                                20),
-               'account.move.reconcile': (_get_reconcile,
-                                          ['line_id', 'line_partial_ids'], 20)
+                'account.move.line': (lambda self, cr, uid, ids, context=None:
+                                      ids, None, 20),
+                'payment.order': (_get_move_lines_order, ['line_ids'], 20),
+                'payment.line': (_get_move_lines,
+                                 ['type', 'move_line_id', 'payment_move_id'],
+                                 20),
+                'account.move.reconcile': (_get_reconcile,
+                                           ['line_id', 'line_partial_ids'], 20)
             }),
         'payment_type': fields.function(
             _payment_type_get, method=True, type="many2one",
@@ -220,19 +218,11 @@ class AccountMoveLine(orm.Model):
 
     def fields_view_get(self, cr, uid, view_id=None, view_type='form',
                         context=None, toolbar=False, submenu=False):
-        context = context or {}
-        menus = [
-            self.pool['ir.model.data'].get_object_reference(
-                cr, uid, 'account_payment_extension',
-                'menu_action_invoice_payments'),
-        ]
         views = [
             self.pool['ir.model.data'].get_object_reference(
                 cr, uid, 'account_payment_extension', 'view_payments_tree'),
 
         ]
-
-        menus = [m[1] for m in menus]
         views = [v[1] for v in views]
         if view_id in views:
             result = super(orm.Model, self).fields_view_get(
@@ -255,20 +245,18 @@ class AccountMoveLine(orm.Model):
         partner_id = False
         inv_id = False
         several_invoices = False
-        if context is None:
-            context = {}
-        data_line = self.browse(cr, uid,ids, context)
+        data_line = self.browse(cr, uid, ids, context)
         for line in data_line:
-            #move_ids.append(line.move_id.id)
+            # move_ids.append(line.move_id.id)
             if not inv_id:
                 inv_id = line.invoice.id
-            if inv_id and (line.invoice.id <> inv_id):
+            if inv_id and (line.invoice.id != inv_id):
                 several_invoices = True
-            if partner_id and (line.partner_id.id <> partner_id):
+            if partner_id and (line.partner_id.id != partner_id):
                 raise orm.except_orm(
                     _('Warning'),
                     _('The pay entries have to be for the same partner!!!'))
-            else :
+            else:
                 amount += line.amount_to_pay
                 partner_id = line.partner_id.id
                 name += line.name + '/'
@@ -281,9 +269,8 @@ class AccountMoveLine(orm.Model):
             amount = -amount
             ttype = 'receipt'
             invoice_type = 'out_invoice'
-
         return {
-            'name':_("Pay Moves"),
+            'name': _("Pay Moves"),
             'view_mode': 'form',
             'view_id': False,
             'view_type': 'form',
@@ -298,9 +285,9 @@ class AccountMoveLine(orm.Model):
                 'default_name': name,
                 'close_after_process': True,
                 'invoice_type': invoice_type,
-                'invoice_id':inv_id,
-                'default_type': ttype ,
-                'type':  ttype ,
-                'move_line_ids': ids
+                'invoice_id': inv_id,
+                'default_type': ttype,
+                'type': ttype,
+                'move_line_ids': ids,
             }
         }

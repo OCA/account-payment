@@ -78,7 +78,6 @@ class PaymentMode(orm.Model):
     _defaults = {
         'require_bank_account': False,
     }
-payment_mode()
 
 
 class ResPartner(orm.Model):
@@ -405,10 +404,11 @@ class PaymentLine(orm.Model):
     _columns = {
         'move_line_id': fields.many2one(
             'account.move.line', 'Entry line',
-            domain=[('reconcile_id', '=', False),
-                    ('amount_to_pay', '<>', 0),
-                    ('account_id.type', '=', parent.type),
-                    ('payment_type', 'ilike', parent.payment_type_name or '%')],
+            domain="[('reconcile_id', '=', False),"
+                   "('amount_to_pay', '<>', 0),"
+                   "('account_id.type', '=', parent.type),"
+                   "('payment_type', 'ilike', parent.payment_type_name or "
+                   "'%')]",
             help='This Entry Line will be referred for the information of the '
                  'ordering customer.'),
         'payment_move_id': fields.many2one(
