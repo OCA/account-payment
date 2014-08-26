@@ -42,6 +42,11 @@
       'reconcile': True,
       'amount': 60,
       })
+    voucher.write({
+      'payment_option': 'with_writeoff',
+      'writeoff_acc_id': ref('account.income_fx_expense'),
+      'exclude_write_off': False,
+      })
 -
   I confirm the voucher
 -
