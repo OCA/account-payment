@@ -49,5 +49,8 @@
         <record id="account.bank_journal" model="account.journal">
             <field name="vat_on_payment_related_journal_id" ref="shadow_bank_journal"></field>
         </record>
+        <record id="account.bank_journal_usd" model="account.journal">
+            <field name="vat_on_payment_related_journal_id" ref="shadow_bank_journal"></field>
+        </record>
     </data>
 </openerp>

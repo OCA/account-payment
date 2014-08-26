@@ -62,6 +62,7 @@ http://planet.agilebg.com/en/2012/10/vat-on-payment-treatment-with-openerp/
         'test/account_invoice_2.yml',
         'test/account_invoice_3.yml',
         'test/account_invoice_4.yml',
+        'test/account_invoice_5.yml',
         ],
     'installable': True,
     'active': False,

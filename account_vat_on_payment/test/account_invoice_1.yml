@@ -37,14 +37,8 @@
     type_tax_use: all
     tax_code_id: tax_code_received
     account_collected_id: account.iva
-
-
-
-
-
-
 -
-  I create customer invoice 1
+  I create customer invoice 1 - 120 EUR
 -
   !record {model: account.invoice, id: account_invoice_customer_1, view: invoice_form}:
     journal_id: account.sales_journal

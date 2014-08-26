@@ -1,5 +1,5 @@
 -
-  I create customer invoice 4
+  I create customer invoice 4 - 120 EUR
 -
   !record {model: account.invoice, id: account_invoice_customer_4, view: invoice_form}:
     journal_id: account.sales_journal
@@ -64,7 +64,6 @@
         vat_found = True
         assert move_line.credit == 16.67, "VAT move line must be 16.67 credit, %s found" % move_line.credit
       if move_line.account_id.id == ref('account.a_sale'):
-        # 2 times: sales lines are 2
         sales_found = True
         assert move_line.credit == 83.33, "sales move line must be 83.33 credit, %s found" % move_line.credit
     assert bank_found, "No bank move line found"

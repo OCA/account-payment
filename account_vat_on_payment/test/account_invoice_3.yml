@@ -1,5 +1,5 @@
 -
-  I create customer invoice 3
+  I create customer invoice 3 - 230 EUR
 -
   !record {model: account.invoice, id: account_invoice_customer_3, view: invoice_form}:
     journal_id: account.sales_journal
