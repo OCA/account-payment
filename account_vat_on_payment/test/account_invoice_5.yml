@@ -40,7 +40,7 @@
     expense_currency_exchange_account_id: account.income_fx_expense
     income_currency_exchange_account_id: account.income_fx_expense
 -
-  I create customer invoice 5 - 120 USD
+  I create customer invoice 5 - 120 USD - 1 EUR = 2 USD
 -
   !record {model: account.invoice, id: account_invoice_customer_5, view: invoice_form}:
     journal_id: account.sales_journal
@@ -79,7 +79,7 @@
   !context
     'type': 'receipt'
 -
-  I create the Payment for 120 USD
+  I create the Payment for 120 USD - 1 EUR = 4 USD
 -
   !record {model: account.voucher, id: account_voucher_5_a, view: account_voucher.view_vendor_receipt_form}:
     partner_id: base.res_partner_3
