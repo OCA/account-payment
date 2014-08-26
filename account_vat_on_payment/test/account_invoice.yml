@@ -57,6 +57,24 @@
 -
   !workflow {model: account.invoice, action: invoice_open, ref: account_invoice_customer_1}
 -
+  I check the invoice
+-
+  !python {model: account.invoice}: |
+    invoice = self.browse(cr, uid, ref('account_invoice_customer_1'), context=context)
+    credit_found = False
+    vat_found = False
+    sales_found = False
+    for move_line in invoice.move_id.line_id:
+      if move_line.account_id.id == ref('ds'):
+        credit_found = True
+        assert move_line.debit == 120, "Shadow credit must be 120 debit %s found" % move_line.debit
+      if move_line.account_id.id == ref('ivas'):
+        vat_found = True
+        assert move_line.credit == 20, "Shadow VAT must be 20 credit %s found" % move_line.credit
+      if move_line.account_id.id == ref('pss'):
+        sales_found = True
+        assert move_line.credit == 100, "Shadow sales must be 100 credit %s found" % move_line.credit
+-
   I set the context that will be used for the encoding of all the vouchers of this file
 -
   !context
