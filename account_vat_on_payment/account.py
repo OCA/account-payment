@@ -46,7 +46,7 @@ class account_voucher(orm.Model):
                     ):
                         vat_on_p += 1
             if vat_on_p and vat_on_p != valid_lines:
-                raise osv.except_osv(
+                raise orm.except_orm(
                     _('Error'),
                     _("""Can't handle VAT on payment if not every invoice
                     is on a VAT on payment treatment"""))
@@ -78,7 +78,7 @@ class account_voucher(orm.Model):
                     cr, uid, voucher.journal_id.id, {'entry_posted': True})
             if self.is_vat_on_payment(voucher):
                 if not voucher.journal_id.vat_on_payment_related_journal_id:
-                    raise osv.except_osv(
+                    raise orm.except_orm(
                         _('Error'),
                         _("""We are on a VAT on payment treatment
                         but journal %s does not have a related shadow
@@ -168,7 +168,7 @@ class account_voucher(orm.Model):
                                     )
 
                             if not inv_move_line.real_account_id:
-                                raise osv.except_osv(
+                                raise orm.except_orm(
                                     _('Error'),
                                     _("""We are on a VAT on payment treatment
                                     but move line %s does not have a related
@@ -195,7 +195,7 @@ class account_voucher(orm.Model):
                                 vals['currency_id'] = for_curr.id
                             if inv_move_line.tax_code_id:
                                 if not inv_move_line.real_tax_code_id:
-                                    raise osv.except_osv(
+                                    raise orm.except_orm(
                                         _('Error'),
                                         _("""We are on a VAT on payment
                                         treatment but move line %s does not
@@ -339,7 +339,7 @@ class account_invoice(orm.Model):
                         and account.type != 'payable'
                     ):
                         if not account.vat_on_payment_related_account_id:
-                            raise osv.except_osv(
+                            raise orm.except_orm(
                                 _('Error'),
                                 _('''The invoice is \'VAT on payment\' but
                                 account %s does not have a related shadow
@@ -353,7 +353,7 @@ class account_invoice(orm.Model):
                     tax_code = tax_code_pool.browse(
                         cr, uid, line_tup[2]['tax_code_id'])
                     if not tax_code.vat_on_payment_related_tax_code_id:
-                        raise osv.except_osv(
+                        raise orm.except_orm(
                             _('Error'),
                             _('''The invoice is \'VAT on payment\' but
                             tax code %s does not have a related shadow
