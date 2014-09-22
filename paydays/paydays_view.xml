@@ -7,7 +7,9 @@
 	<field name="inherit_id" ref="account.view_payment_term_form"/>
 	<field name="arch" type="xml">
 		<field name="line_ids" position="before">
-			<field name="payment_days" select="1"/>
+			<group>
+				<field name="payment_days" select="1"/>
+			</group>
 		</field>
 	</field>
     </record>
