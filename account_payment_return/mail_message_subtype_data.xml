@@ -2,7 +2,7 @@
 <openerp>
     <data noupdate="1">
 
-        <!-- Paypemt Return-related subtypes for messaging / Chatter -->
+        <!-- Payment Return-related subtypes for messaging / Chatter -->
         <record id="mt_payment_return_state_change" model="mail.message.subtype">
             <field name="name">Status Change</field>
             <field name="res_model">payment.return</field>
