@@ -43,8 +43,8 @@ Moreover, three things have to be configured:
  - On tax code object, Related tax code used for real registrations on a VAT on
     payment basis
 
-Requirements:
-https://docs.google.com/spreadsheet/ccc?key=0Aodwq17jxF4edDJaZ2dOQkVEN0hodEtfRmpVdlg2Vnc#gid=0
+Requirements: http://goo.gl/Nu0wDf
+
 Howto:
 http://planet.agilebg.com/en/2012/10/vat-on-payment-treatment-with-openerp/
     """,
