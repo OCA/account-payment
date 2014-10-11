@@ -55,9 +55,11 @@ class account_move_line(orm.Model):
             res[line_id] = name and name[0] or False
         return res
 
-    def _invoice_search(self, cr, uid, obj, name, args, context={}):
+    def _invoice_search(self, cr, uid, obj, name, args, context=None):
         """ Redefinition for searching account move lines without any invoice
         related ('invoice.id','=',False)"""
+        if context is None:
+            context = {}
         for x in args:
             if (x[2] is False) and (x[1] == '=') and (x[0] == 'invoice'):
                 cr.execute('SELECT l.id FROM account_move_line l '
@@ -71,12 +73,16 @@ class account_move_line(orm.Model):
         return super(account_move_line, self)._invoice_search(
             cr, uid, obj, name, args, context=context)
 
-    def amount_to_pay(self, cr, uid, ids, name, arg={}, context={}):
+    def amount_to_pay(self, cr, uid, ids, name, arg=None, context=None):
         """
         Return amount pending to be paid taking into account payment
         lines and the reconciliation. Note that the amount to pay can be
         due to negative supplier refund invoices or customer invoices.
         """
+        if arg is None:
+            arg = {}
+        if context is None:
+            context = {}
         if not ids:
             return {}
         cr.execute("""SELECT ml.id,
@@ -129,7 +135,9 @@ class account_move_line(orm.Model):
             result[move_id] = debt
         return result
 
-    def _payment_type_get(self, cr, uid, ids, field_name, arg, context={}):
+    def _payment_type_get(self, cr, uid, ids, field_name, arg, context=None):
+        if context is None:
+            context = {}
         result = {}
         invoice_obj = self.pool.get('account.invoice')
         for move_line in self.browse(cr, uid, ids, context):
@@ -145,7 +153,9 @@ class account_move_line(orm.Model):
                             cr, uid, inv.payment_type.id, context).name)
         return result
 
-    def _payment_type_search(self, cr, uid, obj, name, args, context={}):
+    def _payment_type_search(self, cr, uid, obj, name, args, context=None):
+        if context is None:
+            context = {}
         result = [('id', '=', '0')]
         if not len(args):
             return result

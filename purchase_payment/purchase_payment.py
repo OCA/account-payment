@@ -67,12 +67,14 @@ class purchase_order(osv.osv):
             cr, uid, ids, paytype_id, partner_id, result)
 
     def onchange_paytype_id(
-        self, cr, uid, ids, paytype_id, partner_id, result={'value': {}}
+        self, cr, uid, ids, paytype_id, partner_id, result=None
     ):
         """
         Detect changes of the payment type and set the bank account
         accordingly.
         """
+        if result is None:
+            result = {'value': {}}
         if paytype_id and partner_id:
             paytype = self.pool.get('payment.type').browse(cr, uid, paytype_id)
             if paytype.suitable_bank_types and paytype.active:

@@ -68,9 +68,11 @@ class sale_order(osv.osv):
         result['value']['partner_bank'] = False
         return result
 
-    def _make_invoice(self, cr, uid, order, lines, context={}):
+    def _make_invoice(self, cr, uid, order, lines, context=None):
         """ Redefines _make_invoice to create invoices with payment_type and
         acc_number from the sale order"""
+        if context is None:
+            context = {}
         inv_id = super(sale_order, self)._make_invoice(
             cr, uid, order, lines, context)
         inv_obj = self.pool.get('account.invoice')
