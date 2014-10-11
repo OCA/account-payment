@@ -20,11 +20,16 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import account_voucher
-from . import account_invoice
-from . import account_move_line
-from . import account_account
-from . import account_tax_code
-from . import account_journal
-from . import company
-from . import account_fiscal_position
+
+from openerp.osv import orm, fields
+
+
+class account_move_line(orm.Model):
+    _inherit = "account.move.line"
+    _columns = {
+        'real_payment_move_id': fields.many2one(
+            'account.move', 'Real payment entry'),
+        'real_account_id': fields.many2one('account.account', 'Real account'),
+        'real_tax_code_id': fields.many2one(
+            'account.tax.code', 'Real tax code'),
+        }

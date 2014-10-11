@@ -47,12 +47,18 @@ Requirements: http://goo.gl/Nu0wDf
 
 Howto:
 http://planet.agilebg.com/en/2012/10/vat-on-payment-treatment-with-openerp/
-    """,
+Also, see demo and test data
+""",
     'website': 'http://www.agilebg.com',
     'data': [
-        'account_view.xml',
+        'account_account_view.xml',
+        'account_tax_code_view.xml',
+        'account_journal_view.xml',
+        'account_invoice_view.xml',
+        'account_move_line_view.xml',
+        'account_voucher_view.xml',
         'company_view.xml',
-        'partner_view.xml',
+        'account_fiscal_position_view.xml',
         ],
     'demo': [
         'account_demo.xml',

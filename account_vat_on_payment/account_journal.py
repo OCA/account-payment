@@ -20,11 +20,15 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import account_voucher
-from . import account_invoice
-from . import account_move_line
-from . import account_account
-from . import account_tax_code
-from . import account_journal
-from . import company
-from . import account_fiscal_position
+
+from openerp.osv import orm, fields
+
+
+class account_journal(orm.Model):
+    _inherit = "account.journal"
+    _columns = {
+        'vat_on_payment_related_journal_id': fields.many2one(
+            'account.journal', 'Shadow Journal for VAT on payment',
+            help='''Related journal used for shadow registrations on a
+            VAT on payment basis. Set the shadow journal here'''),
+        }

@@ -20,11 +20,15 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import account_voucher
-from . import account_invoice
-from . import account_move_line
-from . import account_account
-from . import account_tax_code
-from . import account_journal
-from . import company
-from . import account_fiscal_position
+
+from openerp.osv import orm, fields
+
+
+class account_tax_code(orm.Model):
+    _inherit = "account.tax.code"
+    _columns = {
+        'vat_on_payment_related_tax_code_id': fields.many2one(
+            'account.tax.code', 'Shadow Tax code for VAT on payment',
+            help='''Related tax code used for real registrations on a
+            VAT on payment basis. Set the shadow tax code here'''),
+        }
