@@ -1,8 +1,7 @@
-##############################################################################
+#
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2009 Albert Cervera i Areny (http://www.nan-tic.com). All Rights Reserved
-#    $Id$
+#    Copyright (C) 2009 Albert Cervera i Areny (http://www.nan-tic.com).
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU General Public License as published by
@@ -17,6 +16,6 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-##############################################################################
+#
 
 import paydays

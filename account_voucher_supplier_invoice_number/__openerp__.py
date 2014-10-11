@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#    
+#
+#
 #    Copyright (C) 2013 Agile Business Group sagl
 #    (<http://www.agilebg.com>)
 #
@@ -17,26 +17,27 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-##############################################################################
+#
 
 {
     'name': "Supplier invoice number in payment vouchers",
     'version': '0.1',
     'category': 'Accounting & Finance',
     'description': """
-This module adds the supplier invoice number to (Supplier Payment) voucher lines. So that it's more easy to find the right invoice we are going to pay.
+This module adds the supplier invoice number to (Supplier Payment) voucher
+lines. So that it's more easy to find the right invoice we are going to pay.
 """,
     'author': 'Agile Business Group',
     'website': 'http://www.agilebg.com',
     'license': 'AGPL-3',
-    "depends" : ['account_voucher'],
-    "data" : [
+    "depends": ['account_voucher'],
+    "data": [
         'voucher_view.xml',
-        ],
-    'test' : [
+    ],
+    'test': [
         'test/purchase_payment.yml',
     ],
-    "demo" : [],
+    "demo": [],
     "active": False,
     "installable": True
 }

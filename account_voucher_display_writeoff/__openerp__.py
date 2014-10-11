@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-##############################################################################
+#
 #
 #    OpenERP, Open Source Management Solution
 #    This module copyright (C) 2012 Therp BV (<http://therp.nl>).
@@ -17,7 +17,7 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-##############################################################################
+#
 {
     "name": "Account voucher display writeoff",
     "version": "1.0r089",
@@ -26,9 +26,9 @@
     'complexity': "normal",
     "description": """
 Display writeoff options on sale or purchase vouchers. Without setting these
-options explicitely, if a payment difference is encountered on vouchers of these
-types, it is booked on the account payable or account receivable which can pose
-problems for automatic reconciliation.
+options explicitely, if a payment difference is encountered on vouchers of
+these types, it is booked on the account payable or account receivable which
+can pose problems for automatic reconciliation.
 
 This addon also enables setting the voucher type as a selection criterium for
 default values, so that you can set different default values for writeoff

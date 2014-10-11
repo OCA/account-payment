@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-##############################################################################
+#
 #
 #    Copyright (C) 2004-2010 Pexego Sistemas Informáticos. All Rights Reserved
 #
@@ -16,7 +16,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-##############################################################################
+#
 """
 Account Journal extensions for the cash statements.
 """
@@ -27,7 +27,9 @@ __authors__ = [
 
 from osv import osv, fields
 
+
 class account_journal(osv.osv):
+
     """
     Extend the account journal to add the show_in_cash_statements field.
     """
@@ -38,7 +40,7 @@ class account_journal(osv.osv):
     }
 
     _defaults = {
-        'show_in_cash_statements': lambda *a : False,
+        'show_in_cash_statements': lambda *a: False,
     }
 
 account_journal()

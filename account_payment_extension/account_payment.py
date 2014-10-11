@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-##############################################################################
+#
 #
 # OpenERP, Open Source Management Solution
 # Copyright (c) 2008 Zikzakmedia S.L. (http://zikzakmedia.com)
@@ -23,7 +23,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-##############################################################################
+#
 
 from openerp.osv import fields, orm
 from openerp.tools.translate import _
@@ -34,15 +34,15 @@ class payment_type(orm.Model):
     _description = 'Payment type'
     _columns = {
         'name': fields.char('Name', size=64, required=True,
-            help='Payment Type', translate=True),
+                            help='Payment Type', translate=True),
         'code': fields.char('Code', size=64, required=True,
-            help='Specify the Code for Payment Type'),
+                            help='Specify the Code for Payment Type'),
         'suitable_bank_types': fields.many2many(
             'res.partner.bank.type', 'bank_type_payment_type_rel',
             'pay_type_id', 'bank_type_id', 'Suitable bank types'),
         'active': fields.boolean('Active', select=True),
         'note': fields.text('Description', translate=True,
-            help="""Description of the payment type that will be shown in
+                            help="""Description of the payment type that will be shown in
                 the invoices"""),
         'company_id': fields.many2one('res.company', 'Company', required=True),
     }
@@ -56,14 +56,15 @@ class payment_type(orm.Model):
 class payment_mode(orm.Model):
     _inherit = 'payment.mode'
     _columns = {
-        'type': fields.many2one('payment.type', 'Payment type', required=True,
+        'type': fields.many2one(
+            'payment.type', 'Payment type', required=True,
             help='Select the Payment Type for the Payment Mode.'),
         'require_bank_account': fields.boolean('Require Bank Account',
-            help="""Ensure all lines in the payment order have a bank
+                                               help="""Ensure all lines in the payment order have a bank
                 account when proposing lines to be added in the
                 payment order."""),
         'require_received_check': fields.boolean('Require Received Check',
-            help="""Ensure all lines in the payment order have the
+                                                 help="""Ensure all lines in the payment order have the
                 Received Check flag set."""),
         'require_same_bank_account': fields.boolean(
             'Require the Same Bank Account', help="""Ensure all lines in the
@@ -106,7 +107,7 @@ class payment_order(orm.Model):
             return False
 
     def _payment_type_name_get(self, cr, uid, ids, field_name,
-                            arg, context=None):
+                               arg, context=None):
         result = {}
         for rec in self.browse(cr, uid, ids, context):
             result[rec.id] = rec.mode and rec.mode.type.name or ""
@@ -122,7 +123,7 @@ class payment_order(orm.Model):
         'type': fields.selection([
             ('payable', 'Payable'),
             ('receivable', 'Receivable'),
-            ], 'Type', readonly=True, select=True),
+        ], 'Type', readonly=True, select=True),
         # invisible field to filter payment order lines by payment type
         'payment_type_name': fields.function(
             _payment_type_name_get, method=True, type="char", size=64,
@@ -133,7 +134,7 @@ class payment_order(orm.Model):
             _name_get, method=True, type="char", size=64, string="Name"),
         'create_account_moves': fields.selection(
             [('bank-statement', 'Bank Statement'),
-            ('direct-payment', 'Direct Payment')], 'Create Account Moves',
+             ('direct-payment', 'Direct Payment')], 'Create Account Moves',
             required=True, states={'done': [('readonly', True)]},
             help="""Indicates when account moves should be created for
             order payment lines. 'Bank Statement' will wait until user
@@ -141,7 +142,7 @@ class payment_order(orm.Model):
             'Direct Payment' will mark all payment lines as payied once
             the order is done."""),
         'period_id': fields.many2one('account.period', 'Period',
-            states={'done': [('readonly', True)]}),
+                                     states={'done': [('readonly', True)]}),
     }
     _defaults = {
         'type': _get_type,
@@ -154,10 +155,10 @@ class payment_order(orm.Model):
         if not context:
             context = {}
 
-        #Search for account_moves
+        # Search for account_moves
         remove = []
         for move in self.browse(cr, uid, ids, context=context):
-            #Search for any line
+            # Search for any line
             for move_line in move.line_ids:
                 if move_line.payment_move_id:
                     remove.append(move_line.payment_move_id.id)
@@ -191,7 +192,8 @@ class payment_order(orm.Model):
         currency_obj = self.pool.get('res.currency')
         payment_line_obj = self.pool.get('payment.line')
 
-        currency = self.pool.get('res.users').browse(cr, uid, uid, context).company_id.currency_id
+        currency = self.pool.get('res.users').browse(
+            cr, uid, uid, context).company_id.currency_id
         company_currency_id = currency.id
 
         for order in self.browse(cr, uid, ids, context):
@@ -218,9 +220,11 @@ class payment_order(orm.Model):
                         _("""Payment order should create account moves
                             but line with amount %.2f for partner "%s" has
                             no account assigned.""") %
-                            (line.amount, line.partner_id.name))
+                        (line.amount, line.partner_id.name))
 
-                currency_id = order.mode.journal.currency and order.mode.journal.currency.id or company_currency_id
+                currency_id = (
+                    order.mode.journal.currency and
+                    order.mode.journal.currency.id or company_currency_id)
 
                 if line.type == 'payable':
                     line_amount = line.amount_currency or line.amount
@@ -228,21 +232,30 @@ class payment_order(orm.Model):
                     line_amount = -line.amount_currency or -line.amount
 
                 if line_amount >= 0:
-                    account_id = order.mode.journal.default_credit_account_id.id
+                    account_id = (
+                        order.mode.journal.default_credit_account_id.id)
                 else:
                     account_id = order.mode.journal.default_debit_account_id.id
-                acc_cur = ((line_amount <= 0) and order.mode.journal.default_debit_account_id) or line.account_id
+                acc_cur = (
+                    (line_amount <= 0) and
+                    order.mode.journal.default_debit_account_id
+                ) or line.account_id
 
                 ctx = context.copy()
                 ctx['res.currency.compute.account'] = acc_cur
-                amount = currency_obj.compute(cr, uid, currency_id, company_currency_id, line_amount, context=ctx)
+                amount = currency_obj.compute(
+                    cr, uid, currency_id, company_currency_id, line_amount,
+                    context=ctx)
 
                 val = {
-                    'name': line.move_line_id and line.move_line_id.name or '/',
+                    'name': (
+                        line.move_line_id and line.move_line_id.name or '/'),
                     'move_id': move_id,
                     'date': order.date_done,
-                    'ref': line.move_line_id and line.move_line_id.ref or False,
-                    'partner_id': line.partner_id and line.partner_id.id or False,
+                    'ref': (
+                        line.move_line_id and line.move_line_id.ref or False),
+                    'partner_id': (
+                        line.partner_id and line.partner_id.id or False),
                     'account_id': line.account_id.id,
                     'debit': ((amount > 0) and amount) or 0.0,
                     'credit': ((amount < 0) and - amount) or 0.0,
@@ -251,24 +264,33 @@ class payment_order(orm.Model):
                     'state': 'valid',
                 }
 
-                if currency_id <> company_currency_id:
-                    amount_cur = currency_obj.compute(cr, uid, company_currency_id, currency_id, amount, context=ctx)
+                if currency_id != company_currency_id:
+                    amount_cur = currency_obj.compute(
+                        cr, uid, company_currency_id, currency_id, amount,
+                        context=ctx)
                     val['amount_currency'] = -amount_cur
                     val['currency_id'] = currency_id
 
-                if line.account_id and line.account_id.currency_id and line.account_id.currency_id.id <> company_currency_id:
+                if (
+                    line.account_id and line.account_id.currency_id and
+                    line.account_id.currency_id.id != company_currency_id
+                ):
                     val['currency_id'] = line.account_id.currency_id.id
                     if company_currency_id == line.account_id.currency_id.id:
                         amount_cur = line_amount
                     else:
-                        amount_cur = currency_obj.compute(cr, uid, company_currency_id, line.account_id.currency_id.id, amount, context=ctx)
+                        amount_cur = currency_obj.compute(
+                            cr, uid, company_currency_id,
+                            line.account_id.currency_id.id, amount,
+                            context=ctx)
                     val['amount_currency'] = amount_cur
 
-                partner_line_id = move_line_obj.create(cr, uid, val, context, check=False)
+                partner_line_id = move_line_obj.create(
+                    cr, uid, val, context, check=False)
 
                 # Fill the secondary amount/currency
                 # if currency is not the same than the company
-                if currency_id <> company_currency_id:
+                if currency_id != company_currency_id:
                     amount_currency = line_amount
                     move_currency_id = currency_id
                 else:
@@ -276,11 +298,14 @@ class payment_order(orm.Model):
                     move_currency_id = False
 
                 move_line_obj.create(cr, uid, {
-                    'name': line.move_line_id and line.move_line_id.name or '/',
+                    'name': (
+                        line.move_line_id and line.move_line_id.name or '/'),
                     'move_id': move_id,
                     'date': order.date_done,
-                    'ref': line.move_line_id and line.move_line_id.ref or False,
-                    'partner_id': line.partner_id and line.partner_id.id or False,
+                    'ref': (
+                        line.move_line_id and line.move_line_id.ref or False),
+                    'partner_id': (
+                        line.partner_id and line.partner_id.id or False),
                     'account_id': account_id,
                     'debit': ((amount < 0) and -amount) or 0.0,
                     'credit': ((amount > 0) and amount) or 0.0,
@@ -292,24 +317,34 @@ class payment_order(orm.Model):
                 }, context, check=False)
 
                 if line.move_line_id and not line.move_line_id.reconcile_id:
-                    # If payment line has a related move line, we try to reconcile it with the move we just created.
+                    # If payment line has a related move line, we try to
+                    # reconcile it with the move we just created.
                     lines_to_reconcile = [
                         partner_line_id,
                     ]
-                    # Check if payment line move is already partially reconciled and use those moves in that case.
+                    # Check if payment line move is already partially
+                    # reconciled and use those moves in that case.
                     if line.move_line_id.reconcile_partial_id:
-                        for rline in line.move_line_id.reconcile_partial_id.line_partial_ids:
-                            lines_to_reconcile.append( rline.id )
+                        for rline in (
+                            line.move_line_id.reconcile_partial_id.
+                            line_partial_ids
+                        ):
+                            lines_to_reconcile.append(rline.id)
                     else:
-                        lines_to_reconcile.append( line.move_line_id.id )
+                        lines_to_reconcile.append(line.move_line_id.id)
                     amount = 0.0
-                    for rline in move_line_obj.browse(cr, uid, lines_to_reconcile, context):
+                    for rline in move_line_obj.browse(
+                        cr, uid, lines_to_reconcile, context
+                    ):
                         amount += rline.debit - rline.credit
 
                     if currency_obj.is_zero(cr, uid, currency, amount):
-                        move_line_obj.reconcile(cr, uid, lines_to_reconcile, 'payment', context=context)
+                        move_line_obj.reconcile(
+                            cr, uid, lines_to_reconcile, 'payment',
+                            context=context)
                     else:
-                        move_line_obj.reconcile_partial(cr, uid, lines_to_reconcile, 'payment', context)
+                        move_line_obj.reconcile_partial(
+                            cr, uid, lines_to_reconcile, 'payment', context)
                 # Annotate the move id
                 payment_line_obj.write(cr, uid, [line.id], {
                     'payment_move_id': move_id,
@@ -357,21 +392,26 @@ class payment_line(orm.Model):
     _columns = {
         'move_line_id': fields.many2one(
             'account.move.line', 'Entry line',
-            domain="[('reconcile_id', '=', False), ('amount_to_pay', '!=', 0), ('account_id.type', '=', parent.type), ('payment_type', 'ilike', parent.payment_type_name or '%')]",
-             help="""This Entry Line will be referred for the information
-                 of the ordering customer."""),
+            domain="[('reconcile_id', '=', False), ('amount_to_pay', '!=', 0),"
+                   " ('account_id.type', '=', parent.type), "
+                   "('payment_type', 'ilike', parent.payment_type_name or "
+                   "'%')]",
+            help="This Entry Line will be referred for the information"
+                 " of the ordering customer."),
         'payment_move_id': fields.many2one(
             'account.move', 'Payment Move', readonly=True,
             help='Account move that pays this debt.'),
         'account_id': fields.many2one('account.account', 'Account'),
-        'type': fields.related('order_id', 'type',
+        'type': fields.related(
+            'order_id', 'type',
             type='selection', readonly=True, store=True, string='Type',
-            selection=[('payable', 'Payable'), ('receivable', 'Receivable')]),
+            selection=[(
+                'payable', 'Payable'), ('receivable', 'Receivable')]),
     }
 
     def onchange_move_line(self, cr, uid, ids, move_line_id, payment_type,
-                        date_prefered, date_scheduled, currency=False,
-                        company_currency=False, context=None):
+                           date_prefered, date_scheduled, currency=False,
+                           company_currency=False, context=None):
         # Adds account.move.line name to the payment line communication
         result = super(payment_line, self).onchange_move_line(
             cr, uid, ids, move_line_id, payment_type, date_prefered,
@@ -380,7 +420,8 @@ class payment_line(orm.Model):
             line = self.pool.get('account.move.line').browse(
                 cr, uid, move_line_id, context=context)
             if line.name != '/':
-                result['value']['communication'] = result['value']['communication'] + '. ' + line.name
+                result['value']['communication'] = result[
+                    'value']['communication'] + '. ' + line.name
             result['value']['account_id'] = line.account_id.id
             if context.get('order_id'):
                 payment_order = self.pool.get('payment.order').browse(

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-##############################################################################
+#
 #
 #    OpenERP, Open Source Management Solution
 #    This module Copyright (C) 2012 Therp BV (<http://therp.nl>).
@@ -17,14 +17,15 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-##############################################################################
+#
 
 from openerp.osv import osv, fields
 
 
 class account_voucher(osv.Model):
+
     """
-    Add the voucher's type as a selection criterium for 
+    Add the voucher's type as a selection criterium for
     default values by setting change_default to True.
     Now you can use appropriate defaults
     for e.g. write off settings per voucher type.
@@ -33,10 +34,11 @@ class account_voucher(osv.Model):
     _columns = {
         'type': fields.selection(
             [
-            ('sale', 'Sale'),
-            ('purchase', 'Purchase'),
-            ('payment', 'Payment'),
-            ('receipt', 'Receipt'),
-            ], 'Default Type', readonly=True, states={'draft': [('readonly', False)]},
+                ('sale', 'Sale'),
+                ('purchase', 'Purchase'),
+                ('payment', 'Payment'),
+                ('receipt', 'Receipt'),
+            ], 'Default Type', readonly=True,
+            states={'draft': [('readonly', False)]},
             change_default=1),
-        }
+    }

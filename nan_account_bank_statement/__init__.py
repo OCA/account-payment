@@ -1,7 +1,7 @@
 # -*- encoding: latin-1 -*-
-##############################################################################
 #
-# Copyright (c) 2009  Àngel Àlvarez - NaN  (http://www.nan-tic.com) All Rights Reserved.
+#
+# Copyright (c) 2009  Àngel Àlvarez - NaN  (http://www.nan-tic.com)
 #
 #
 # WARNING: This program as such is intended to be used by professional
@@ -25,6 +25,6 @@
 # along with this program; if not, write to the Free Software
 # Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #
-##############################################################################
+#
 
 import account_statement

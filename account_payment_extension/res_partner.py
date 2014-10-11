@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-##############################################################################
+#
 #
 # OpenERP, Open Source Management Solution
 # Copyright (c) 2008 Zikzakmedia S.L. (http://zikzakmedia.com)
@@ -23,7 +23,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-##############################################################################
+#
 
 from openerp.osv import orm, fields
 
@@ -47,7 +47,7 @@ class res_partner_bank(orm.Model):
 
     def create(self, cr, uid, vals, context=None):
         if vals.get('default_bank') and vals.get('partner_id') and \
-        vals.get('state'):
+                vals.get('state'):
             sql = """UPDATE res_partner_bank SET
                     default_bank = '0'
                 WHERE
