@@ -30,11 +30,12 @@
 {
     "name": "nan_account_bank_statement",
     "version": "0.1",
-    "description" : """\
+    "description": """
 This enhances standard bank statements by:
 
 - Adding a new button in statement lines to split the line in two.
-- Adding key/value information in statement lines which can later be used by other modules for automatically finding move lines to be reconciled.""",
+- Adding key/value information in statement lines which can later be used by
+  other modules for automatically finding move lines to be reconciled.""",
     "author": "NaN·tic",
     "website": "http://www.NaN-tic.com",
     "depends": [

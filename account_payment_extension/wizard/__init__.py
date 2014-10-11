@@ -2,15 +2,15 @@
 #
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (c) 2008 Zikzakmedia S.L. (http://zikzakmedia.com) All Rights Reserved.
+#    Copyright (c) 2008 Zikzakmedia S.L. (http://zikzakmedia.com).
 #                       Jordi Esteve <jesteve@zikzakmedia.com>
 #    AvanzOSC, Avanzed Open Source Consulting
-#    Copyright (C) 2011-2012 Iker Coranti (www.avanzosc.com). All Rights Reserved
+#    Copyright (C) 2011-2012 Iker Coranti (www.avanzosc.com).
 #    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
+#    it under the terms of the GNU Affero General Public License as published
+#    by the Free Software Foundation, either version 3 of the License, or
 #    (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,

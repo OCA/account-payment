@@ -56,8 +56,9 @@ class payment_type(orm.Model):
 class payment_mode(orm.Model):
     _inherit = 'payment.mode'
     _columns = {
-        'type': fields.many2one('payment.type', 'Payment type', required=True,
-                                help='Select the Payment Type for the Payment Mode.'),
+        'type': fields.many2one(
+            'payment.type', 'Payment type', required=True,
+            help='Select the Payment Type for the Payment Mode.'),
         'require_bank_account': fields.boolean('Require Bank Account',
                                                help="""Ensure all lines in the payment order have a bank
                 account when proposing lines to be added in the
@@ -219,9 +220,11 @@ class payment_order(orm.Model):
                         _("""Payment order should create account moves
                             but line with amount %.2f for partner "%s" has
                             no account assigned.""") %
-                            (line.amount, line.partner_id.name))
+                        (line.amount, line.partner_id.name))
 
-                currency_id = order.mode.journal.currency and order.mode.journal.currency.id or company_currency_id
+                currency_id = (
+                    order.mode.journal.currency and
+                    order.mode.journal.currency.id or company_currency_id)
 
                 if line.type == 'payable':
                     line_amount = line.amount_currency or line.amount
@@ -229,23 +232,30 @@ class payment_order(orm.Model):
                     line_amount = -line.amount_currency or -line.amount
 
                 if line_amount >= 0:
-                    account_id = order.mode.journal.default_credit_account_id.id
+                    account_id = (
+                        order.mode.journal.default_credit_account_id.id)
                 else:
                     account_id = order.mode.journal.default_debit_account_id.id
                 acc_cur = (
-                    (line_amount <= 0) and order.mode.journal.default_debit_account_id) or line.account_id
+                    (line_amount <= 0) and
+                    order.mode.journal.default_debit_account_id
+                ) or line.account_id
 
                 ctx = context.copy()
                 ctx['res.currency.compute.account'] = acc_cur
                 amount = currency_obj.compute(
-                    cr, uid, currency_id, company_currency_id, line_amount, context=ctx)
+                    cr, uid, currency_id, company_currency_id, line_amount,
+                    context=ctx)
 
                 val = {
-                    'name': line.move_line_id and line.move_line_id.name or '/',
+                    'name': (
+                        line.move_line_id and line.move_line_id.name or '/'),
                     'move_id': move_id,
                     'date': order.date_done,
-                    'ref': line.move_line_id and line.move_line_id.ref or False,
-                    'partner_id': line.partner_id and line.partner_id.id or False,
+                    'ref': (
+                        line.move_line_id and line.move_line_id.ref or False),
+                    'partner_id': (
+                        line.partner_id and line.partner_id.id or False),
                     'account_id': line.account_id.id,
                     'debit': ((amount > 0) and amount) or 0.0,
                     'credit': ((amount < 0) and - amount) or 0.0,
@@ -254,19 +264,25 @@ class payment_order(orm.Model):
                     'state': 'valid',
                 }
 
-                if currency_id <> company_currency_id:
+                if currency_id != company_currency_id:
                     amount_cur = currency_obj.compute(
-                        cr, uid, company_currency_id, currency_id, amount, context=ctx)
+                        cr, uid, company_currency_id, currency_id, amount,
+                        context=ctx)
                     val['amount_currency'] = -amount_cur
                     val['currency_id'] = currency_id
 
-                if line.account_id and line.account_id.currency_id and line.account_id.currency_id.id <> company_currency_id:
+                if (
+                    line.account_id and line.account_id.currency_id and
+                    line.account_id.currency_id.id != company_currency_id
+                ):
                     val['currency_id'] = line.account_id.currency_id.id
                     if company_currency_id == line.account_id.currency_id.id:
                         amount_cur = line_amount
                     else:
                         amount_cur = currency_obj.compute(
-                            cr, uid, company_currency_id, line.account_id.currency_id.id, amount, context=ctx)
+                            cr, uid, company_currency_id,
+                            line.account_id.currency_id.id, amount,
+                            context=ctx)
                     val['amount_currency'] = amount_cur
 
                 partner_line_id = move_line_obj.create(
@@ -274,7 +290,7 @@ class payment_order(orm.Model):
 
                 # Fill the secondary amount/currency
                 # if currency is not the same than the company
-                if currency_id <> company_currency_id:
+                if currency_id != company_currency_id:
                     amount_currency = line_amount
                     move_currency_id = currency_id
                 else:
@@ -282,11 +298,14 @@ class payment_order(orm.Model):
                     move_currency_id = False
 
                 move_line_obj.create(cr, uid, {
-                    'name': line.move_line_id and line.move_line_id.name or '/',
+                    'name': (
+                        line.move_line_id and line.move_line_id.name or '/'),
                     'move_id': move_id,
                     'date': order.date_done,
-                    'ref': line.move_line_id and line.move_line_id.ref or False,
-                    'partner_id': line.partner_id and line.partner_id.id or False,
+                    'ref': (
+                        line.move_line_id and line.move_line_id.ref or False),
+                    'partner_id': (
+                        line.partner_id and line.partner_id.id or False),
                     'account_id': account_id,
                     'debit': ((amount < 0) and -amount) or 0.0,
                     'credit': ((amount > 0) and amount) or 0.0,
@@ -306,17 +325,23 @@ class payment_order(orm.Model):
                     # Check if payment line move is already partially
                     # reconciled and use those moves in that case.
                     if line.move_line_id.reconcile_partial_id:
-                        for rline in line.move_line_id.reconcile_partial_id.line_partial_ids:
+                        for rline in (
+                            line.move_line_id.reconcile_partial_id.
+                            line_partial_ids
+                        ):
                             lines_to_reconcile.append(rline.id)
                     else:
                         lines_to_reconcile.append(line.move_line_id.id)
                     amount = 0.0
-                    for rline in move_line_obj.browse(cr, uid, lines_to_reconcile, context):
+                    for rline in move_line_obj.browse(
+                        cr, uid, lines_to_reconcile, context
+                    ):
                         amount += rline.debit - rline.credit
 
                     if currency_obj.is_zero(cr, uid, currency, amount):
                         move_line_obj.reconcile(
-                            cr, uid, lines_to_reconcile, 'payment', context=context)
+                            cr, uid, lines_to_reconcile, 'payment',
+                            context=context)
                     else:
                         move_line_obj.reconcile_partial(
                             cr, uid, lines_to_reconcile, 'payment', context)
@@ -367,17 +392,21 @@ class payment_line(orm.Model):
     _columns = {
         'move_line_id': fields.many2one(
             'account.move.line', 'Entry line',
-            domain="[('reconcile_id', '=', False), ('amount_to_pay', '!=', 0), ('account_id.type', '=', parent.type), ('payment_type', 'ilike', parent.payment_type_name or '%')]",
-             help="""This Entry Line will be referred for the information
-                 of the ordering customer."""),
+            domain="[('reconcile_id', '=', False), ('amount_to_pay', '!=', 0),"
+                   " ('account_id.type', '=', parent.type), "
+                   "('payment_type', 'ilike', parent.payment_type_name or "
+                   "'%')]",
+            help="This Entry Line will be referred for the information"
+                 " of the ordering customer."),
         'payment_move_id': fields.many2one(
             'account.move', 'Payment Move', readonly=True,
             help='Account move that pays this debt.'),
         'account_id': fields.many2one('account.account', 'Account'),
-        'type': fields.related('order_id', 'type',
-                               type='selection', readonly=True, store=True, string='Type',
-                               selection=[(
-                                   'payable', 'Payable'), ('receivable', 'Receivable')]),
+        'type': fields.related(
+            'order_id', 'type',
+            type='selection', readonly=True, store=True, string='Type',
+            selection=[(
+                'payable', 'Payable'), ('receivable', 'Receivable')]),
     }
 
     def onchange_move_line(self, cr, uid, ids, move_line_id, payment_type,

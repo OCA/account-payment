@@ -29,15 +29,18 @@
     "depends": ["account_voucher"],
     "author": "Agile Business Group",
     "description": """
-In some countries, under certain conditions, companies can apply the cash basis.
+In some countries, under certain conditions, companies can apply the cash
+basis.
 The cash basis means businesses may account for VAT as payment comes in from
 their customers.
 It is easier to manage than the normal method, which forces businesses to
-account for VAT based on invoices issued, regardless of whether or not the money has come in.
+account for VAT based on invoices issued, regardless of whether or not the
+money has come in.
 The key advantage to accounting for VAT on a cash basis is the cashflow benefit
 to your business.
 The effect of the cash basis is that you only become liable for VAT when you
-have actually received payment, so you don't have to fund the VAT on your debtors.
+have actually received payment, so you don't have to fund the VAT on your
+debtors.
 This is particularly helpful in a startup situation and in the case of an
 expanding business.
 

@@ -4,12 +4,11 @@
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2004-2008 Tiny SPRL (<http://tiny.be>). All Rights Reserved
 #    AvanzOSC, Avanzed Open Source Consulting
-#    Copyright (C) 2011-2012 Iker Coranti (www.avanzosc.com). All Rights Reserved
-#    $Id$
+#    Copyright (C) 2011-2012 Iker Coranti (www.avanzosc.com).
 #
 #    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published by
-#    the Free Software Foundation, either version 3 of the License, or
+#    it under the terms of the GNU Affero General Public License as published
+#    by the Free Software Foundation, either version 3 of the License, or
 #    (at your option) any later version.
 #
 #    This program is distributed in the hope that it will be useful,
@@ -29,9 +28,11 @@ class payment_order_create(orm.TransientModel):
 
     """
     Create a payment object with lines corresponding to the account move line
-    to pay according to the date provided by the user and the mode-type payment of the order.
+    to pay according to the date provided by the user and the mode-type payment
+    of the order.
     Hypothesis:
-    - Small number of non-reconcilied move line , payment mode and bank account type,
+    - Small number of non-reconcilied move line , payment mode and bank account
+      type,
     - Big number of partner and bank account.
 
     If a type is given, unsuitable account move lines are ignored.
@@ -39,9 +40,17 @@ class payment_order_create(orm.TransientModel):
     _inherit = 'payment.order.create'
 
     _columns = {
-        'communication2': fields.char('Communication 2', size=64, help='The successor message of payment communication.'),
-        'amount': fields.float('Amount', help='Next step will automatically select payments up to this amount as long as account moves have bank account if that is required by the selected payment mode.'),
-        'show_refunds': fields.boolean('Show Refunds', help='Indicates if search should include refunds.'),
+        'communication2': fields.char(
+            'Communication 2', size=64,
+            help='The successor message of payment communication.'),
+        'amount': fields.float(
+            'Amount',
+            help='Next step will automatically select payments up to this '
+                 'amount as long as account moves have bank account if that is'
+                 ' required by the selected payment mode.'),
+        'show_refunds': fields.boolean(
+            'Show Refunds',
+            help='Indicates if search should include refunds.'),
     }
 
     _defaults = {
@@ -59,7 +68,6 @@ class payment_order_create(orm.TransientModel):
 
         @return : default values of fields.
         """
-        line_obj = self.pool.get('account.move.line')
         res = super(payment_order_create, self).default_get(
             cr, uid, fields, context=context)
         if 'entries' in fields:
@@ -84,7 +92,8 @@ class payment_order_create(orm.TransientModel):
 
         # Search for move line to pay:
         domain = [('reconcile_id', '=', False),
-                  ('account_id.type', '=', payment.type), ('amount_to_pay', '<>', 0)]
+                  ('account_id.type', '=', payment.type),
+                  ('amount_to_pay', '<>', 0)]
 
         if payment.type == 'payable' and not show_refunds:
             domain += [('credit', '>', 0)]
@@ -96,13 +105,16 @@ class payment_order_create(orm.TransientModel):
             domain += [('payment_type', '=', payment.mode.type.id)]
 
         domain += [
-            '|', ('date_maturity', '<=', search_due_date), ('date_maturity', '=', False)]
+            '|',
+            ('date_maturity', '<=', search_due_date),
+            ('date_maturity', '=', False)]
         line_ids = line_obj.search(
             cr, uid, domain, order='date_maturity', context=context)
 
         selected_ids = []
         if amount > 0.0:
-            # If user specified an amount, search what moves match the criteria taking into account
+            # If user specified an amount, search what moves match the criteria
+            # taking into account
             # if payment mode allows bank account to be null.
             for line in line_obj.browse(cr, uid, line_ids, context=context):
                 if abs(line.amount_to_pay) <= amount:
@@ -113,9 +125,13 @@ class payment_order_create(orm.TransientModel):
 
         context.update({'line_ids': selected_ids})
         model_data_ids = mod_obj.search(
-            cr, uid, [('model', '=', 'ir.ui.view'), ('name', '=', 'view_create_payment_order_lines')], context=context)
+            cr, uid, [
+                ('model', '=', 'ir.ui.view'),
+                ('name', '=', 'view_create_payment_order_lines')
+                ], context=context)
         resource_id = mod_obj.read(
-            cr, uid, model_data_ids, fields=['res_id'], context=context)[0]['res_id']
+            cr, uid, model_data_ids, fields=['res_id'], context=context
+        )[0]['res_id']
         return {'name': ('Entrie Lines'),
                 'context': context,
                 'view_type': 'form',
@@ -157,15 +173,19 @@ class payment_order_create(orm.TransientModel):
 
             payment_obj.create(cr, uid, {
                 'move_line_id': line.id,
-                    'amount_currency': amount_to_pay,
-                    'bank_id': line2bank.get(line.id),
-                    'order_id': payment.id,
-                    'partner_id': line.partner_id and line.partner_id.id or False,
-                    'communication': (line.ref and line.name != '/' and line.ref + '. ' + line.name) or line.ref or line.name or '/',
-                    'communication2': data.communication2,
-                    'date': date_to_pay,
-                    'currency': line.invoice and line.invoice.currency_id.id or False,
-                    'account_id': line.account_id.id,
+                'amount_currency': amount_to_pay,
+                'bank_id': line2bank.get(line.id),
+                'order_id': payment.id,
+                'partner_id': line.partner_id and line.partner_id.id or False,
+                'communication': (
+                    line.ref and line.name != '/' and line.ref + '. ' +
+                    line.name
+                ) or line.ref or line.name or '/',
+                'communication2': data.communication2,
+                'date': date_to_pay,
+                'currency': (
+                    line.invoice and line.invoice.currency_id.id or False),
+                'account_id': line.account_id.id,
             }, context=context)
         return {'type': 'ir.actions.act_window_close'}
 

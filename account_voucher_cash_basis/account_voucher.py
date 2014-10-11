@@ -54,12 +54,20 @@ class account_voucher(orm.Model):
         # decimal precision
         if abs(amount * 10 ** dp.get_precision('Account')(cr)[1]) > 1:
             raise orm.except_orm(
-                _('Error'), _('The generated payment entry is unbalanced for more than 1 decimal'))
-        if not currency_obj.is_zero(cr, uid, move.company_id.currency_id, amount):
+                _('Error'),
+                _('The generated payment entry is unbalanced for more than 1 '
+                  'decimal'))
+        if not currency_obj.is_zero(
+            cr, uid, move.company_id.currency_id, amount
+        ):
             for line in move.line_id:
                 # adjust the first move line that's not receivable, payable or
                 # liquidity
-                if line.account_id.type != 'receivable' and line.account_id.type != 'payable' and line.account_id.type != 'liquidity':
+                if (
+                    line.account_id.type != 'receivable' and
+                    line.account_id.type != 'payable' and
+                    line.account_id.type != 'liquidity'
+                ):
                     if line.credit:
                         line.write({
                             'credit': line.credit + amount,
@@ -75,10 +83,13 @@ class account_voucher(orm.Model):
                     break
         return amount
 
-    def voucher_move_line_create(self, cr, uid, voucher_id, line_total,
-                                 move_id, company_currency, current_currency, context=None):
+    def voucher_move_line_create(
+        self, cr, uid, voucher_id, line_total,
+        move_id, company_currency, current_currency, context=None
+    ):
         res = super(account_voucher, self).voucher_move_line_create(
-            cr, uid, voucher_id, line_total, move_id, company_currency, current_currency, context)
+            cr, uid, voucher_id, line_total, move_id, company_currency,
+            current_currency, context)
         self.write(cr, uid, voucher_id, {'line_total': res[0]}, context)
         return res
 
@@ -96,7 +107,9 @@ class account_voucher(orm.Model):
                 res += abs(inv_move_line.amount_currency)
         return res
 
-    def allocated_amounts_grouped_by_invoice(self, cr, uid, voucher, context=None):
+    def allocated_amounts_grouped_by_invoice(
+        self, cr, uid, voucher, context=None
+    ):
         '''
 
         this method builds a dictionary in the following form
@@ -124,8 +137,10 @@ class account_voucher(orm.Model):
 
         every amout is expressed in company currency.
 
-        In order to compute cashed amount correctly, write-off will be subtract to reconciled amount.
-        If more than one invoice is paid with this voucher, we distribute write-off equally (if allowed)
+        In order to compute cashed amount correctly, write-off will be
+        subtract to reconciled amount.
+        If more than one invoice is paid with this voucher, we distribute
+        write-off equally (if allowed)
 
         '''
         res = {}
@@ -135,7 +150,7 @@ class account_voucher(orm.Model):
             cr, uid, voucher.id, context)
         for line in voucher.line_ids:
             if line.amount and line.move_line_id and line.move_line_id.invoice:
-                if not line.move_line_id.invoice.id in res:
+                if line.move_line_id.invoice.id not in res:
                     res[line.move_line_id.invoice.id] = {
                         'allocated': 0.0,
                         'total': 0.0,
@@ -147,8 +162,9 @@ class account_voucher(orm.Model):
                     }
                 current_amount = line.amount
                 if company_currency != current_currency:
-                    current_amount = super(account_voucher, self)._convert_amount(
-                        cr, uid, line.amount, voucher.id, context)
+                    current_amount = super(
+                        account_voucher, self)._convert_amount(
+                            cr, uid, line.amount, voucher.id, context)
                     res[line.move_line_id.invoice.id][
                         'allocated_currency'
                     ] += line.amount
@@ -157,7 +173,8 @@ class account_voucher(orm.Model):
                     ] = current_currency
                     res[line.move_line_id.invoice.id][
                         'total_currency'
-                    ] = self.get_invoice_total_currency(line.move_line_id.invoice)
+                    ] = self.get_invoice_total_currency(
+                        line.move_line_id.invoice)
                 res[line.move_line_id.invoice.id][
                     'allocated'
                 ] += current_amount
@@ -168,9 +185,13 @@ class account_voucher(orm.Model):
             # we use line_total as it can be != writeoff_amount in case of
             # multi currency
             write_off_per_invoice = voucher.line_total / len(res)
-            if not voucher.company_id.allow_distributing_write_off and len(res) > 1 and write_off_per_invoice:
+            if not voucher.company_id.allow_distributing_write_off and len(
+                res
+            ) > 1 and write_off_per_invoice:
                 raise orm.except_orm(_('Error'), _(
-                    'You are trying to pay with write-off more than one invoice and distributing write-off is not allowed. See company settings.'))
+                    'You are trying to pay with write-off more than one '
+                    'invoice and distributing write-off is not allowed. '
+                    'See company settings.'))
             if voucher.type == 'payment' or voucher.type == 'purchase':
                 write_off_per_invoice = - write_off_per_invoice
             for inv_id in res:

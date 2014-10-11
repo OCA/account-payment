@@ -47,5 +47,6 @@ class payment_type(orm.Model):
     }
     _defaults = {
         'active': lambda *a: 1,
-        'company_id': lambda self, cr, uid, c: self.pool.get('res.users').browse(cr, uid, uid, c).company_id.id
+        'company_id': lambda self, cr, uid, c: self.pool.get(
+            'res.users').browse(cr, uid, uid, c).company_id.id
     }

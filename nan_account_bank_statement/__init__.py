@@ -1,7 +1,7 @@
 # -*- encoding: latin-1 -*-
 #
 #
-# Copyright (c) 2009  Àngel Àlvarez - NaN  (http://www.nan-tic.com) All Rights Reserved.
+# Copyright (c) 2009  Àngel Àlvarez - NaN  (http://www.nan-tic.com)
 #
 #
 # WARNING: This program as such is intended to be used by professional

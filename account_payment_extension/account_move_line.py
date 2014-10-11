@@ -37,33 +37,39 @@ class account_move_line(orm.Model):
         for line_id in ids:
             res[line_id] = False
 
-        cursor.execute('SELECT l.id, i.id '
-                       'FROM account_invoice i,account_move_line l '
-                       'left join account_move_line r on l.reconcile_id=r.reconcile_id and l.id<>r.id '
-                       'left join account_move_line p on l.reconcile_partial_id=p.reconcile_partial_id and l.id<>p.id '
-                       'where (i.move_id = l.move_id or i.move_id = r.move_id or i.move_id = p.move_id) '
-                       'AND l.id IN %s',
-                       (tuple(ids),))
-        invoice_ids = []
+        cr.execute('SELECT l.id, i.id '
+                   'FROM account_invoice i,account_move_line l '
+                   'left join account_move_line r on '
+                   'l.reconcile_id=r.reconcile_id and l.id<>r.id '
+                   'left join account_move_line p '
+                   'on l.reconcile_partial_id=p.reconcile_partial_id and '
+                   'l.id<>p.id '
+                   'where (i.move_id = l.move_id or i.move_id = r.move_id '
+                   'or i.move_id = p.move_id) '
+                   'AND l.id IN %s',
+                   (tuple(ids),))
 
-        for line_id, invoice_id in cursor.fetchall():
+        for line_id, invoice_id in cr.fetchall():
             name = invoice_obj.name_get(
-                cursor, user, [invoice_id], context=context)
+                cr, uid, [invoice_id], context=context)
             res[line_id] = name and name[0] or False
         return res
 
     def _invoice_search(self, cr, uid, obj, name, args, context={}):
-        """ Redefinition for searching account move lines without any invoice related ('invoice.id','=',False)"""
+        """ Redefinition for searching account move lines without any invoice
+        related ('invoice.id','=',False)"""
         for x in args:
             if (x[2] is False) and (x[1] == '=') and (x[0] == 'invoice'):
                 cr.execute('SELECT l.id FROM account_move_line l '
-                           'LEFT JOIN account_invoice i ON l.move_id = i.move_id '
+                           'LEFT JOIN account_invoice i ON l.move_id = '
+                           'i.move_id '
                            'WHERE i.id IS NULL', [])
                 res = cr.fetchall()
                 if not len(res):
                     return [('id', '=', '0')]
                 return [('id', 'in', [x[0] for x in res])]
-        return super(account_move_line, self)._invoice_search(cr, uid, obj, name, args, context=context)
+        return super(account_move_line, self)._invoice_search(
+            cr, uid, obj, name, args, context=context)
 
     def amount_to_pay(self, cr, uid, ids, name, arg={}, context={}):
         """
@@ -80,7 +86,8 @@ class account_move_line(orm.Model):
                 THEN ml.amount_currency
                 ELSE ml.credit - ml.debit
             END AS debt,
-            (SELECT coalesce(sum(CASE WHEN pl.type='receivable' THEN -amount_currency ELSE amount_currency END),0)
+            (SELECT coalesce(sum(CASE WHEN pl.type='receivable'
+                THEN -amount_currency ELSE amount_currency END),0)
                 FROM payment_line pl
                     INNER JOIN payment_order po
                         ON (pl.order_id = po.id)
@@ -91,7 +98,8 @@ class account_move_line(orm.Model):
             ) AS paid,
             (
                 SELECT
-                    COALESCE( SUM(COALESCE(amrl.credit,0) - COALESCE(amrl.debit,0)), 0 )
+                    COALESCE( SUM(COALESCE(amrl.credit,0) -
+                    COALESCE(amrl.debit,0)), 0 )
                 FROM
                     account_move_reconcile amr,
                     account_move_line amrl
@@ -201,15 +209,18 @@ class account_move_line(orm.Model):
             store={
                 'account.move.line': (lambda self, cr, uid, ids,
                                       context=None: ids, None, 20),
-                   'payment.order': (_get_move_lines_order, ['line_ids'], 20),
-                   'payment.line': (_get_move_lines,
-                                    ['type', 'move_line_id', 'payment_move_id'], 20),
-                   'account.move.reconcile': (_get_reconcile,
-                                              ['line_id', 'line_partial_ids'], 20)
+                'payment.order': (_get_move_lines_order, ['line_ids'], 20),
+                'payment.line': (
+                    _get_move_lines,
+                    ['type', 'move_line_id', 'payment_move_id'], 20),
+                'account.move.reconcile': (
+                    _get_reconcile,
+                    ['line_id', 'line_partial_ids'], 20)
             }),
-        'payment_type': fields.function(_payment_type_get,
-                                        type="many2one", relation="payment.type", method=True,
-                                        string="Payment type", fnct_search=_payment_type_search),
+        'payment_type': fields.function(
+            _payment_type_get,
+            type="many2one", relation="payment.type", method=True,
+            string="Payment type", fnct_search=_payment_type_search),
     }
 
     def write(self, cr, uid, ids, vals, context=None,
