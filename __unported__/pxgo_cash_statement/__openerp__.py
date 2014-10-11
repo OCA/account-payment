@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-##############################################################################
+#
 #
 #    Copyright (C) 2004-2010 Pexego Sistemas Informáticos. All Rights Reserved
 #
@@ -16,13 +16,13 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-##############################################################################
+#
 {
-        "name" : "Pexego - Cash Statements",
-        "version" : "1.0",
-        "author" : "Pexego for Igalia (http://www.igalia.com/)",
-        "website" : "http://www.pexego.es",
-        "category" : "Enterprise Specific Modules",
+    "name": "Pexego - Cash Statements",
+        "version": "1.0",
+        "author": "Pexego for Igalia (http://www.igalia.com/)",
+        "website": "http://www.pexego.es",
+        "category": "Enterprise Specific Modules",
         "description": """
 Module for easier cash management.
 
@@ -34,18 +34,17 @@ statement line), so the user doesn't have to cope with those details
 (even more, if the user introduces an invalid quantity, for example a positive
 amount for a withdrawal, OpenERP will automatically correct the entry).
             """,
-        "depends" : [
-                'base',
+        "depends": [
+            'base',
                 'account',
-            ],
-        "init_xml" : [],
-        "demo_xml" : [],
-        "update_xml" : [
-                'account_journal_view.xml',
+        ],
+        "init_xml": [],
+        "demo_xml": [],
+        "update_xml": [
+            'account_journal_view.xml',
                 'cash_statement_view.xml',
-            ],
+        ],
         "installable": True,
         'active': False
 
 }
- 

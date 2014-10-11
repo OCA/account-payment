@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-##############################################################################
+#
 #
 #    Copyright (C) 2004-2010 Pexego Sistemas Informáticos. All Rights Reserved
 #
@@ -16,7 +16,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-##############################################################################
+#
 """
 Extension of the bank statement lines to add running totals.
 """
@@ -27,12 +27,14 @@ __authors__ = [
 
 from osv import osv, fields
 
+
 class bank_statement_line(osv.osv):
+
     """
     Extend the bank statement lines to add running totals.
     """
     _inherit = 'account.bank.statement.line'
-    
+
     def _get_running_balance(self, cr, uid, ids, name, args, context):
         res = {}
         for line in self.browse(cr, uid, ids, context=context):
@@ -51,4 +53,3 @@ class bank_statement_line(osv.osv):
     }
 
 bank_statement_line()
-

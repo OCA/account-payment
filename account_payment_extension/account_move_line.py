@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-##############################################################################
+#
 #
 # OpenERP, Open Source Management Solution
 # Copyright (c) 2008 Zikzakmedia S.L. (http://zikzakmedia.com)
@@ -23,7 +23,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-##############################################################################
+#
 
 from openerp.osv import fields, orm
 
@@ -36,18 +36,19 @@ class account_move_line(orm.Model):
         res = {}
         for line_id in ids:
             res[line_id] = False
-        
-        cursor.execute('SELECT l.id, i.id ' \
-                       'FROM account_invoice i,account_move_line l ' \
-                       'left join account_move_line r on l.reconcile_id=r.reconcile_id and l.id<>r.id ' \
-                       'left join account_move_line p on l.reconcile_partial_id=p.reconcile_partial_id and l.id<>p.id ' \
-                       'where (i.move_id = l.move_id or i.move_id = r.move_id or i.move_id = p.move_id) ' \
+
+        cursor.execute('SELECT l.id, i.id '
+                       'FROM account_invoice i,account_move_line l '
+                       'left join account_move_line r on l.reconcile_id=r.reconcile_id and l.id<>r.id '
+                       'left join account_move_line p on l.reconcile_partial_id=p.reconcile_partial_id and l.id<>p.id '
+                       'where (i.move_id = l.move_id or i.move_id = r.move_id or i.move_id = p.move_id) '
                        'AND l.id IN %s',
-                        (tuple(ids),))
-        invoice_ids = []        
- 
+                       (tuple(ids),))
+        invoice_ids = []
+
         for line_id, invoice_id in cursor.fetchall():
-            name = invoice_obj.name_get(cursor, user, [invoice_id], context=context)
+            name = invoice_obj.name_get(
+                cursor, user, [invoice_id], context=context)
             res[line_id] = name and name[0] or False
         return res
 
@@ -55,9 +56,9 @@ class account_move_line(orm.Model):
         """ Redefinition for searching account move lines without any invoice related ('invoice.id','=',False)"""
         for x in args:
             if (x[2] is False) and (x[1] == '=') and (x[0] == 'invoice'):
-                cr.execute('SELECT l.id FROM account_move_line l ' \
-                    'LEFT JOIN account_invoice i ON l.move_id = i.move_id ' \
-                    'WHERE i.id IS NULL', [])
+                cr.execute('SELECT l.id FROM account_move_line l '
+                           'LEFT JOIN account_invoice i ON l.move_id = i.move_id '
+                           'WHERE i.id IS NULL', [])
                 res = cr.fetchall()
                 if not len(res):
                     return [('id', '=', '0')]
@@ -192,30 +193,30 @@ class account_move_line(orm.Model):
 
     _columns = {
         'received_check': fields.boolean('Received check',
-            help="""To write down that a check in paper support has
+                                         help="""To write down that a check in paper support has
                 been received, for example."""),
         'partner_bank_id': fields.many2one('res.partner.bank', 'Bank Account'),
         'amount_to_pay': fields.function(
             amount_to_pay, method=True, type='float', string='Amount to pay',
             store={
-                   'account.move.line': (lambda self, cr, uid, ids,
-                                         context=None: ids, None, 20),
+                'account.move.line': (lambda self, cr, uid, ids,
+                                      context=None: ids, None, 20),
                    'payment.order': (_get_move_lines_order, ['line_ids'], 20),
                    'payment.line': (_get_move_lines,
-                        ['type', 'move_line_id', 'payment_move_id'], 20),
+                                    ['type', 'move_line_id', 'payment_move_id'], 20),
                    'account.move.reconcile': (_get_reconcile,
-                        ['line_id', 'line_partial_ids'], 20)
-                   }),
+                                              ['line_id', 'line_partial_ids'], 20)
+            }),
         'payment_type': fields.function(_payment_type_get,
-            type="many2one", relation="payment.type", method=True,
-            string="Payment type", fnct_search=_payment_type_search),
+                                        type="many2one", relation="payment.type", method=True,
+                                        string="Payment type", fnct_search=_payment_type_search),
     }
 
     def write(self, cr, uid, ids, vals, context=None,
-            check=True, update_check=True):
+              check=True, update_check=True):
         for key in list(vals.keys()):
             if key not in ('received_check', 'partner_bank_id',
-            'date_maturity'):
+                           'date_maturity'):
                 return super(account_move_line, self).write(
                     cr, uid, ids, vals, context, check, update_check)
         return super(account_move_line, self).write(

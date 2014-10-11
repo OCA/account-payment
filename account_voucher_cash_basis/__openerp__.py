@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-##############################################################################
+#
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2011-2012 Domsense s.r.l. (<http://www.domsense.com>).
@@ -19,7 +19,7 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-##############################################################################
+#
 
 
 {
@@ -49,7 +49,7 @@ cash basis.
     'data': [
         'company_view.xml',
         'voucher_view.xml',
-        ],
+    ],
     'demo': [],
     'installable': True,
     'active': False,

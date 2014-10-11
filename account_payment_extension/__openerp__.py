@@ -1,5 +1,5 @@
 # -*- encoding: utf-8 -*-
-##############################################################################
+#
 #
 # OpenERP, Open Source Management Solution
 # Copyright (c) 2008 Zikzakmedia S.L. (http://zikzakmedia.com)
@@ -23,7 +23,7 @@
 # You should have received a copy of the GNU Affero General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-##############################################################################
+#
 
 {
     'name': 'Account Payment Extension',
@@ -53,7 +53,7 @@ Based on previous work of Pablo Rocandio & Zikzakmedia (version for 4.2).
         'base',
         'account',
         'account_payment',
-        ],
+    ],
     'data': [
         'security/ir.model.access.csv',
         'wizard/account_payment_order_view.xml',

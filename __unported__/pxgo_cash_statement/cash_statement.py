@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-##############################################################################
+#
 #
 #    Copyright (C) 2004-2010 Pexego Sistemas Informáticos. All Rights Reserved
 #
@@ -16,7 +16,7 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-##############################################################################
+#
 
 __authors__ = [
     "Luis Manuel Angueira Blanco (Pexego) <manuel@pexego.es",
@@ -25,7 +25,9 @@ __authors__ = [
 
 from osv import osv, fields
 
+
 class account_journal(osv.osv):
+
     """
     Extends the account journals to add the show_in_cash_statements field.
     """
@@ -36,13 +38,14 @@ class account_journal(osv.osv):
     }
 
     _defaults = {
-        'show_in_cash_statements': lambda *a : False
+        'show_in_cash_statements': lambda *a: False
     }
 
 account_journal()
 
 
 class cash_statement_line_type(osv.osv):
+
     """
     Cash Statement Line Type.
     """
@@ -62,6 +65,7 @@ cash_statement_line_type()
 
 
 class cash_statement(osv.osv):
+
     """
     Extend the bank statement add the Cash Statements fields and behaviour.
     """
@@ -71,19 +75,20 @@ class cash_statement(osv.osv):
         """
         Get whether it is a cash statement.
         """
-        if not context: context = {}
+        if not context:
+            context = {}
         res = {}
         for statement in self.browse(cr, uid, ids, context=context):
-            res[statement.id] = (statement.journal_id and statement.journal_id.show_in_cash_statements) or False
+            res[statement.id] = (
+                statement.journal_id and statement.journal_id.show_in_cash_statements) or False
         return res
 
-    
     _columns = {
         'cash_statement':  fields.function(_get_cash_statement, method=True, type='boolean', string="Cash Statement",
-                store={
-                    'account.bank.statement': (lambda self, cr, uid, ids, context: ids, ['journal_id'], 10),
-                    'account.journal': (lambda self, cr, uid, ids, context: self.pool.get('account.bank.statement').search(cr, uid, [('journal_id', 'in', ids)], context=context), ['show_in_cash_statements'], 20)
-                }),
+                                           store={
+                                           'account.bank.statement': (lambda self, cr, uid, ids, context: ids, ['journal_id'], 10),
+                                           'account.journal': (lambda self, cr, uid, ids, context: self.pool.get('account.bank.statement').search(cr, uid, [('journal_id', 'in', ids)], context=context), ['show_in_cash_statements'], 20)
+                                           }),
     }
 
     _defaults = {
@@ -95,17 +100,18 @@ class cash_statement(osv.osv):
         """
         res = {}
         if date:
-            periods = self.pool.get('account.period').find(cr, uid, date, context=context)
+            periods = self.pool.get('account.period').find(
+                cr, uid, date, context=context)
             if periods:
                 res['period_id'] = periods[0]
 
-        return { 'value': res }
+        return {'value': res}
 
 cash_statement()
 
 
-
 class cash_statement_line(osv.osv):
+
     """
     Extend the bank statement lines to add the cash-specific fields
     and behaviour.
@@ -113,7 +119,7 @@ class cash_statement_line(osv.osv):
     _inherit = 'account.bank.statement.line'
 
     _columns = {
-        'name': fields.char('Name', size=128, required=True), # Longer description
+        'name': fields.char('Name', size=128, required=True),  # Longer description
         'line_type_id': fields.many2one('account.bank.statement.line.type', 'Type'),
     }
 
@@ -123,31 +129,31 @@ class cash_statement_line(osv.osv):
         be positive.
         """
         if line_type_id:
-            line_type = self.pool.get('account.bank.statement.line.type').browse(cr, uid, line_type_id, context=context)
+            line_type = self.pool.get('account.bank.statement.line.type').browse(
+                cr, uid, line_type_id, context=context)
             if line_type.type == 'out':
                 amount = -abs(amount)
             elif line_type.type == 'in':
                 amount = abs(amount)
 
-        return { 'value': { 'amount': amount } }
-
+        return {'value': {'amount': amount}}
 
     def cash_line_on_change_partner_id(self, cr, uid, ids, type, partner_id):
         """
-        Set the partner account when the partner changes, depending on the 
+        Set the partner account when the partner changes, depending on the
         line type.
         """
         res = {}
-        
+
         if type and partner_id:
-            partner_obj = self.pool.get('res.partner').browse(cr, uid, partner_id)
+            partner_obj = self.pool.get(
+                'res.partner').browse(cr, uid, partner_id)
             if type == 'supplier':
                 res['account_id'] = partner_obj.property_account_payable.id
             elif type == 'customer':
                 res['account_id'] = partner_obj.property_account_receivable.id
-                
-        return { 'value': res }
 
+        return {'value': res}
 
     def cash_line_on_change_line_type_id(self, cr, uid, line_id, partner_id, original_type, line_type_id, context=None):
         """
@@ -156,7 +162,8 @@ class cash_statement_line(osv.osv):
         res = {}
 
         if line_type_id:
-            line_type = self.pool.get('account.bank.statement.line.type').browse(cr, uid, line_type_id)
+            line_type = self.pool.get(
+                'account.bank.statement.line.type').browse(cr, uid, line_type_id)
 
             #
             # Set the type
@@ -175,13 +182,13 @@ class cash_statement_line(osv.osv):
             # Set the account and partner
             #
             if partner_id:
-                account_id = self.cash_line_on_change_partner_id(cr, uid, line_id, res['type'], partner_id)
+                account_id = self.cash_line_on_change_partner_id(
+                    cr, uid, line_id, res['type'], partner_id)
                 res.update(account_id['value'])
             else:
                 res['account_id'] = line_type.account_id and line_type.account_id.id or None
                 res['partner_id'] = line_type.partner_id and line_type.partner_id.id or None
-                
-        return { 'value': res }
+
+        return {'value': res}
 
 cash_statement_line()
-

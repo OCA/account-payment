@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-##############################################################################
+#
 #
 #    Copyright (C) 2004-2010 Pexego Sistemas Informáticos. All Rights Reserved
 #
@@ -16,13 +16,13 @@
 #    You should have received a copy of the GNU General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-##############################################################################
+#
 {
-        "name" : "Pexego - Analytic in Bank Statements",
-        "version" : "1.0",
-        "author" : "Pexego for Igalia (http://www.igalia.com/)",
-        "website" : "http://www.pexego.es",
-        "category" : "Enterprise Specific Modules",
+    "name": "Pexego - Analytic in Bank Statements",
+        "version": "1.0",
+        "author": "Pexego for Igalia (http://www.igalia.com/)",
+        "website": "http://www.pexego.es",
+        "category": "Enterprise Specific Modules",
         "description": """
 Extends the Bank Statements to add support for analytic accounting.
 
@@ -31,18 +31,17 @@ the user to directly register small expenses or incomes on analytic accounts.
 
 This may be useful for petty cash management.
             """,
-        "depends" : [
-                'base',
+        "depends": [
+            'base',
                 'account',
                 #'analytic',
-            ],
-        "init_xml" : [],
-        "demo_xml" : [],
-        "update_xml" : [
-                'bank_statement_view.xml',
-            ],
+        ],
+        "init_xml": [],
+        "demo_xml": [],
+        "update_xml": [
+            'bank_statement_view.xml',
+        ],
         "installable": True,
         'active': False
 
 }
- 
