@@ -57,7 +57,7 @@ Also, see demo and test data
         'account_invoice_view.xml',
         'account_move_line_view.xml',
         'account_voucher_view.xml',
-        'company_view.xml',
+        'account_config_settings_view.xml',
         'account_fiscal_position_view.xml',
         ],
     'demo': [

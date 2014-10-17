@@ -29,13 +29,3 @@ class res_company(orm.Model):
     _columns = {
         'vat_on_payment': fields.boolean('VAT on payment treatment'),
         }
-
-
-class account_config_settings(orm.TransientModel):
-    _inherit = 'account.config.settings'
-    _columns = {
-        'vat_on_payment': fields.related(
-            'company_id', 'vat_on_payment',
-            type='boolean',
-            string="VAT on payment treatment"),
-    }

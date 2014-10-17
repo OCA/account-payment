@@ -1,9 +1,7 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    OpenERP, Open Source Management Solution
-#    Copyright (C) 2011-2012 Domsense s.r.l. (<http://www.domsense.com>).
-#    Copyright (C) 2012-2013 Agile Business Group sagl
+#    Copyright (C) 2014 Agile Business Group sagl
 #    (<http://www.agilebg.com>)
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -20,12 +18,15 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from . import account_voucher
-from . import account_invoice
-from . import account_move_line
-from . import account_account
-from . import account_tax_code
-from . import account_journal
-from . import company
-from . import account_config_settings
-from . import account_fiscal_position
+
+from openerp.osv import orm, fields
+
+
+class account_config_settings(orm.TransientModel):
+    _inherit = 'account.config.settings'
+    _columns = {
+        'vat_on_payment': fields.related(
+            'company_id', 'vat_on_payment',
+            type='boolean',
+            string="VAT on payment treatment"),
+    }
