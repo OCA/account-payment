@@ -48,8 +48,8 @@ class account_voucher(orm.Model):
             if vat_on_p and vat_on_p != valid_lines:
                 raise orm.except_orm(
                     _('Error'),
-                    _("""Can't handle VAT on payment if not every invoice
-                    is on a VAT on payment treatment"""))
+                    _("Can't handle VAT on payment if not every invoice "
+                      "is on a VAT on payment treatment"))
         return vat_on_p
 
     def _compute_new_line_amount(
