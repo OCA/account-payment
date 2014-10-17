@@ -31,6 +31,41 @@ class account_invoice(orm.Model):
         return self.pool.get('res.users').browse(
             cr, uid, uid, context).company_id.vat_on_payment
 
+    def _set_vat_on_payment_account(self, cr, uid, line_tuple, context=None):
+        acc_pool = self.pool.get('account.account')
+        account = acc_pool.browse(
+            cr, uid, line_tuple[2]['account_id'], context=context)
+        if account.type not in ['receivable', 'payable']:
+            if not account.vat_on_payment_related_account_id:
+                raise orm.except_orm(
+                    _('Error'),
+                    _("The invoice is \'VAT on payment\' but "
+                      "account %s does not have a related shadow "
+                      "account")
+                    % account.name)
+            line_tuple[2]['real_account_id'] = line_tuple[
+                2]['account_id']
+            line_tuple[2]['account_id'] = (
+                account.vat_on_payment_related_account_id.id)
+        return line_tuple
+
+    def _set_vat_on_payment_tax_code(self, cr, uid, line_tuple, context=None):
+        tax_code_pool = self.pool.get('account.tax.code')
+        tax_code = tax_code_pool.browse(
+            cr, uid, line_tuple[2]['tax_code_id'], context=context)
+        if not tax_code.vat_on_payment_related_tax_code_id:
+            raise orm.except_orm(
+                _('Error'),
+                _('''The invoice is \'VAT on payment\' but
+                tax code %s does not have a related shadow
+                tax code''')
+                % tax_code.name)
+        line_tuple[2]['real_tax_code_id'] = line_tuple[
+            2]['tax_code_id']
+        line_tuple[2]['tax_code_id'] = (
+            tax_code.vat_on_payment_related_tax_code_id.id)
+        return line_tuple
+
     def finalize_invoice_move_lines(self, cr, uid, invoice_browse, move_lines):
         """
         Use shadow accounts for journal entry to be generated, according to
@@ -38,41 +73,17 @@ class account_invoice(orm.Model):
         """
         move_lines = super(account_invoice, self).finalize_invoice_move_lines(
             cr, uid, invoice_browse, move_lines)
-        acc_pool = self.pool.get('account.account')
-        tax_code_pool = self.pool.get('account.tax.code')
+        context = self.pool['res.users'].context_get(cr, uid)
         new_move_lines = []
-        for line_tup in move_lines:
+        for line_tuple in move_lines:
             if invoice_browse.vat_on_payment:
-                if line_tup[2].get('account_id', False):
-                    account = acc_pool.browse(
-                        cr, uid, line_tup[2]['account_id'])
-                    if account.type not in ['receivable', 'payable']:
-                        if not account.vat_on_payment_related_account_id:
-                            raise orm.except_orm(
-                                _('Error'),
-                                _("The invoice is \'VAT on payment\' but "
-                                  "account %s does not have a related shadow "
-                                  "account")
-                                % account.name)
-                        line_tup[2]['real_account_id'] = line_tup[
-                            2]['account_id']
-                        line_tup[2]['account_id'] = (
-                            account.vat_on_payment_related_account_id.id)
-                if line_tup[2].get('tax_code_id', False):
-                    tax_code = tax_code_pool.browse(
-                        cr, uid, line_tup[2]['tax_code_id'])
-                    if not tax_code.vat_on_payment_related_tax_code_id:
-                        raise orm.except_orm(
-                            _('Error'),
-                            _('''The invoice is \'VAT on payment\' but
-                            tax code %s does not have a related shadow
-                            tax code''')
-                            % tax_code.name)
-                    line_tup[2]['real_tax_code_id'] = line_tup[
-                        2]['tax_code_id']
-                    line_tup[2]['tax_code_id'] = (
-                        tax_code.vat_on_payment_related_tax_code_id.id)
-            new_move_lines.append(line_tup)
+                if line_tuple[2].get('account_id', False):
+                    line_tuple = self._set_vat_on_payment_account(
+                        cr, uid, line_tuple, context=context)
+                if line_tuple[2].get('tax_code_id', False):
+                    line_tuple = self._set_vat_on_payment_tax_code(
+                        cr, uid, line_tuple, context=context)
+            new_move_lines.append(line_tuple)
         return new_move_lines
 
     def onchange_partner_id(
