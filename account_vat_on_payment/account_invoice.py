@@ -84,8 +84,9 @@ class account_invoice(orm.Model):
         # default value for VAT on Payment is changed every time the
         # customer/supplier is changed
         partner_obj = self.pool.get("res.partner")
+        context = self.pool['res.users'].context_get(cr, uid)
         if partner_id:
-            p = partner_obj.browse(cr, uid, partner_id)
+            p = partner_obj.browse(cr, uid, partner_id, context=context)
             if p.property_account_position:
                 res['value'][
                     'vat_on_payment'
