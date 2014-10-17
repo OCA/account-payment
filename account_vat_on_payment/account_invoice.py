@@ -46,16 +46,13 @@ class account_invoice(orm.Model):
                 if line_tup[2].get('account_id', False):
                     account = acc_pool.browse(
                         cr, uid, line_tup[2]['account_id'])
-                    if (
-                        account.type != 'receivable'
-                        and account.type != 'payable'
-                    ):
+                    if account.type not in ['receivable', 'payable']:
                         if not account.vat_on_payment_related_account_id:
                             raise orm.except_orm(
                                 _('Error'),
-                                _('''The invoice is \'VAT on payment\' but
-                                account %s does not have a related shadow
-                                account''')
+                                _("The invoice is \'VAT on payment\' but "
+                                  "account %s does not have a related shadow "
+                                  "account")
                                 % account.name)
                         line_tup[2]['real_account_id'] = line_tup[
                             2]['account_id']
