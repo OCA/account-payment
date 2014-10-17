@@ -225,13 +225,82 @@ class account_voucher(orm.Model):
                         })
         return True
 
+    def _create_vat_on_payment_move(self, cr, uid, voucher, context=None):
+        move_line_pool = self.pool.get('account.move.line')
+        move_pool = self.pool.get('account.move')
+        inv_pool = self.pool.get('account.invoice')
+        if not voucher.journal_id.vat_on_payment_related_journal_id:
+            raise orm.except_orm(
+                _('Error'),
+                _("""We are on a VAT on payment treatment
+                but journal %s does not have a related shadow
+                journal""")
+                % voucher.journal_id.name)
+        lines_to_create = []
+        amounts_by_invoice = super(
+            account_voucher, self
+            ).allocated_amounts_grouped_by_invoice(
+            cr, uid, voucher, context)
+        for inv_id in amounts_by_invoice:
+            invoice = inv_pool.browse(cr, uid, inv_id, context)
+            for inv_move_line in invoice.move_id.line_id:
+                if (
+                    inv_move_line.account_id.type != 'receivable'
+                    and inv_move_line.account_id.type != 'payable'
+                ):
+                    new_line_amount = self._compute_new_line_amount(
+                        cr, uid, voucher, inv_move_line,
+                        amounts_by_invoice, invoice, context=context)
+                    new_line_amount_curr = (
+                        self._compute_new_line_currency_amount(
+                            cr, uid, voucher, inv_move_line,
+                            amounts_by_invoice, invoice,
+                            context=context)
+                    )
+                    foreign_currency_id = amounts_by_invoice[
+                        invoice.id]['foreign_currency_id']
+                    real_vals = self._prepare_real_move_line(
+                        cr, uid, inv_move_line, new_line_amount,
+                        new_line_amount_curr, foreign_currency_id,
+                        context=context)
+                    lines_to_create.append(real_vals)
+
+                    shadow_vals = self._prepare_shadow_move_line(
+                        cr, uid, inv_move_line, new_line_amount,
+                        context=context)
+                    lines_to_create.append(shadow_vals)
+
+        context['journal_id'] = (
+            voucher.journal_id.vat_on_payment_related_journal_id.id)
+        context['period_id'] = voucher.move_id.period_id.id
+        shadow_move_id = move_pool.create(
+            cr, uid, self._prepare_shadow_move(
+                cr, uid, voucher, context=context), context)
+
+        self._move_payment_lines_to_shadow_entry(
+            cr, uid, voucher, shadow_move_id, context=context)
+
+        for line_to_create in lines_to_create:
+            if line_to_create['type'] == 'real':
+                line_to_create['move_id'] = voucher.move_id.id
+            elif line_to_create['type'] == 'shadow':
+                line_to_create['move_id'] = shadow_move_id
+            del line_to_create['type']
+
+            move_line_pool.create(cr, uid, line_to_create, context)
+
+        voucher.write({'shadow_move_id': shadow_move_id})
+
+        super(account_voucher, self).balance_move(
+            cr, uid, shadow_move_id, context)
+        super(account_voucher, self).balance_move(
+            cr, uid, voucher.move_id.id, context)
+        return True
+
     def action_move_line_create(self, cr, uid, ids, context=None):
         if context is None:
             context = {}
-        inv_pool = self.pool.get('account.invoice')
         journal_pool = self.pool.get('account.journal')
-        move_line_pool = self.pool.get('account.move.line')
-        move_pool = self.pool.get('account.move')
         res = False
         for voucher in self.browse(cr, uid, ids, context):
             entry_posted = voucher.journal_id.entry_posted
@@ -249,72 +318,8 @@ class account_voucher(orm.Model):
                 journal_pool.write(
                     cr, uid, voucher.journal_id.id, {'entry_posted': True})
             if self.is_vat_on_payment(voucher):
-                if not voucher.journal_id.vat_on_payment_related_journal_id:
-                    raise orm.except_orm(
-                        _('Error'),
-                        _("""We are on a VAT on payment treatment
-                        but journal %s does not have a related shadow
-                        journal""")
-                        % voucher.journal_id.name)
-                lines_to_create = []
-                amounts_by_invoice = super(
-                    account_voucher, self
-                    ).allocated_amounts_grouped_by_invoice(
-                    cr, uid, voucher, context)
-                for inv_id in amounts_by_invoice:
-                    invoice = inv_pool.browse(cr, uid, inv_id, context)
-                    for inv_move_line in invoice.move_id.line_id:
-                        if (
-                            inv_move_line.account_id.type != 'receivable'
-                            and inv_move_line.account_id.type != 'payable'
-                        ):
-                            new_line_amount = self._compute_new_line_amount(
-                                cr, uid, voucher, inv_move_line,
-                                amounts_by_invoice, invoice, context=context)
-                            new_line_amount_curr = (
-                                self._compute_new_line_currency_amount(
-                                    cr, uid, voucher, inv_move_line,
-                                    amounts_by_invoice, invoice,
-                                    context=context)
-                            )
-                            foreign_currency_id = amounts_by_invoice[
-                                invoice.id]['foreign_currency_id']
-                            real_vals = self._prepare_real_move_line(
-                                cr, uid, inv_move_line, new_line_amount,
-                                new_line_amount_curr, foreign_currency_id,
-                                context=context)
-                            lines_to_create.append(real_vals)
-
-                            shadow_vals = self._prepare_shadow_move_line(
-                                cr, uid, inv_move_line, new_line_amount,
-                                context=context)
-                            lines_to_create.append(shadow_vals)
-
-                context['journal_id'] = (
-                    voucher.journal_id.vat_on_payment_related_journal_id.id)
-                context['period_id'] = voucher.move_id.period_id.id
-                shadow_move_id = move_pool.create(
-                    cr, uid, self._prepare_shadow_move(
-                        cr, uid, voucher, context=context), context)
-
-                self._move_payment_lines_to_shadow_entry(
-                    cr, uid, voucher, shadow_move_id, context=context)
-
-                for line_to_create in lines_to_create:
-                    if line_to_create['type'] == 'real':
-                        line_to_create['move_id'] = voucher.move_id.id
-                    elif line_to_create['type'] == 'shadow':
-                        line_to_create['move_id'] = shadow_move_id
-                    del line_to_create['type']
-
-                    move_line_pool.create(cr, uid, line_to_create, context)
-
-                voucher.write({'shadow_move_id': shadow_move_id})
-
-                super(account_voucher, self).balance_move(
-                    cr, uid, shadow_move_id, context)
-                super(account_voucher, self).balance_move(
-                    cr, uid, voucher.move_id.id, context)
+                self._create_vat_on_payment_move(
+                    cr, uid, voucher, context=context)
 
         return res
 
