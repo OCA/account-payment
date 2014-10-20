@@ -74,7 +74,7 @@ class account_voucher(orm.Model):
     ):
         currency_obj = self.pool.get('res.currency')
         allocated_amount = self._compute_allocated_amount(
-            self, cr, uid, voucher,
+            cr, uid, voucher,
             allocated=amounts_by_invoice[invoice.id]['allocated'],
             write_off=amounts_by_invoice[invoice.id]['write-off'],
             context=context)
@@ -100,7 +100,7 @@ class account_voucher(orm.Model):
                 cr, uid, amounts_by_invoice[invoice.id]['foreign_currency_id'],
                 context=context)
             allocated_amount = self._compute_allocated_amount(
-                self, cr, uid, voucher,
+                cr, uid, voucher,
                 allocated=amounts_by_invoice[invoice.id]['allocated_currency'],
                 write_off=amounts_by_invoice[invoice.id]['currency-write-off'],
                 context=context)
