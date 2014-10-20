@@ -34,10 +34,10 @@
         
         <!-- real COA -->
         <record id="account.a_sale" model="account.account">
-            <field name="vat_on_payment_related_account_id" ref="pss"></field>
+            <field name="vat_on_payment_related_account_id" ref="pss" />
         </record>
         <record id="account.iva" model="account.account">
-            <field name="vat_on_payment_related_account_id" ref="ivas"></field>
+            <field name="vat_on_payment_related_account_id" ref="ivas" />
         </record>
         
         <!-- Journals -->
@@ -47,10 +47,10 @@
             <field name="type">general</field>
         </record>
         <record id="account.bank_journal" model="account.journal">
-            <field name="vat_on_payment_related_journal_id" ref="shadow_bank_journal"></field>
+            <field name="vat_on_payment_related_journal_id" ref="shadow_bank_journal" />
         </record>
         <record id="account.bank_journal_usd" model="account.journal">
-            <field name="vat_on_payment_related_journal_id" ref="shadow_bank_journal"></field>
+            <field name="vat_on_payment_related_journal_id" ref="shadow_bank_journal" />
         </record>
     </data>
 </openerp>

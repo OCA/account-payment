@@ -32,4 +32,4 @@ class account_move_line(orm.Model):
         'real_account_id': fields.many2one('account.account', 'Real account'),
         'real_tax_code_id': fields.many2one(
             'account.tax.code', 'Real tax code'),
-        }
+    }

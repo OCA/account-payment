@@ -39,7 +39,7 @@ class account_invoice(orm.Model):
             if not account.vat_on_payment_related_account_id:
                 raise orm.except_orm(
                     _('Error'),
-                    _("The invoice is \'VAT on payment\' but "
+                    _("The invoice is 'VAT on payment' but "
                       "account %s does not have a related shadow "
                       "account")
                     % account.name)
@@ -56,7 +56,7 @@ class account_invoice(orm.Model):
         if not tax_code.vat_on_payment_related_tax_code_id:
             raise orm.except_orm(
                 _('Error'),
-                _('''The invoice is \'VAT on payment\' but
+                _('''The invoice is 'VAT on payment' but
                 tax code %s does not have a related shadow
                 tax code''')
                 % tax_code.name)
@@ -101,13 +101,13 @@ class account_invoice(orm.Model):
             if p.property_account_position:
                 res['value'][
                     'vat_on_payment'
-                    ] = p.property_account_position.default_has_vat_on_payment
+                ] = p.property_account_position.default_has_vat_on_payment
         return res
 
     _inherit = "account.invoice"
     _columns = {
         'vat_on_payment': fields.boolean('Vat on payment'),
-        }
+    }
     _defaults = {
         'vat_on_payment': _get_vat_on_payment,
-        }
+    }

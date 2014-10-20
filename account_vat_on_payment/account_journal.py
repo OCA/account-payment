@@ -29,6 +29,6 @@ class account_journal(orm.Model):
     _columns = {
         'vat_on_payment_related_journal_id': fields.many2one(
             'account.journal', 'Shadow Journal for VAT on payment',
-            help='''Related journal used for shadow registrations on a
-            VAT on payment basis. Set the shadow journal here'''),
-        }
+            help="Related journal used for shadow registrations on a "
+                 "VAT on payment basis. Set the shadow journal here"),
+    }

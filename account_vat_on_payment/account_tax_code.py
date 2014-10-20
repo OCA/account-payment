@@ -29,6 +29,6 @@ class account_tax_code(orm.Model):
     _columns = {
         'vat_on_payment_related_tax_code_id': fields.many2one(
             'account.tax.code', 'Shadow Tax code for VAT on payment',
-            help='''Related tax code used for real registrations on a
-            VAT on payment basis. Set the shadow tax code here'''),
-        }
+            help="Related tax code used for real registrations on a "
+                 "VAT on payment basis. Set the shadow tax code here"),
+    }

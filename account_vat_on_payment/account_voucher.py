@@ -31,7 +31,7 @@ class account_voucher(orm.Model):
     _columns = {
         'shadow_move_id': fields.many2one(
             'account.move', 'Shadow Entry', readonly=True),
-        }
+    }
 
     def is_vat_on_payment(self, voucher):
         vat_on_p = 0
@@ -52,13 +52,12 @@ class account_voucher(orm.Model):
                       "is on a VAT on payment treatment"))
         return vat_on_p
 
-    def _compute_new_line_amount(
-        self, cr, uid, voucher, inv_move_line, amounts_by_invoice, invoice,
-        context=None
+    def _compute_allocated_amount(
+        self, cr, uid, voucher, allocated=0, write_off=0, context=None
     ):
-        currency_obj = self.pool.get('res.currency')
         # compute the VAT or base line proportionally to
         # the paid amount
+        allocated_amount = allocated + write_off
         if (
             voucher.exclude_write_off
             and voucher.payment_option == 'with_writeoff'
@@ -66,13 +65,19 @@ class account_voucher(orm.Model):
             # avoid including write-off if set in voucher.
             # That means: use the invoice's total
             # (as we are in 'full reconcile' case)
-            allocated_amount = amounts_by_invoice[invoice.id]['allocated']
-        else:
-            allocated_amount = (
-                amounts_by_invoice[invoice.id]['allocated']
-                +
-                amounts_by_invoice[invoice.id]['write-off']
-                )
+            allocated_amount = allocated
+        return allocated_amount
+
+    def _compute_new_line_amount(
+        self, cr, uid, voucher, inv_move_line, amounts_by_invoice, invoice,
+        context=None
+    ):
+        currency_obj = self.pool.get('res.currency')
+        allocated_amount = self._compute_allocated_amount(
+            self, cr, uid, voucher,
+            allocated=amounts_by_invoice[invoice.id]['allocated'],
+            write_off=amounts_by_invoice[invoice.id]['write-off'],
+            context=context)
         new_line_amount = currency_obj.round(
             cr, uid, voucher.company_id.currency_id,
             (allocated_amount / amounts_by_invoice[invoice.id]['total'])
@@ -94,21 +99,11 @@ class account_voucher(orm.Model):
             for_curr = currency_obj.browse(
                 cr, uid, amounts_by_invoice[invoice.id]['foreign_currency_id'],
                 context=context)
-            if (
-                voucher.exclude_write_off
-                and voucher.payment_option == 'with_writeoff'
-            ):
-                # again
-                # avoid including write-off if set in
-                # voucher.
-                allocated_amount = amounts_by_invoice[
-                    invoice.id]['allocated_currency']
-            else:
-                allocated_amount = (
-                    amounts_by_invoice[invoice.id]['allocated_currency']
-                    +
-                    amounts_by_invoice[invoice.id]['currency-write-off']
-                )
+            allocated_amount = self._compute_allocated_amount(
+                self, cr, uid, voucher,
+                allocated=amounts_by_invoice[invoice.id]['allocated_currency'],
+                write_off=amounts_by_invoice[invoice.id]['currency-write-off'],
+                context=context)
             new_line_amount_curr = currency_obj.round(
                 cr, uid, for_curr,
                 (
@@ -127,9 +122,9 @@ class account_voucher(orm.Model):
         if not inv_move_line.real_account_id:
             raise orm.except_orm(
                 _('Error'),
-                _("""We are on a VAT on payment treatment
-                but move line %s does not have a related
-                real account""")
+                _("We are on a VAT on payment treatment "
+                  "but move line %s does not have a related "
+                  "real account")
                 % inv_move_line.name)
         vals = {
             'name': inv_move_line.name,
@@ -140,7 +135,7 @@ class account_voucher(orm.Model):
             'partner_id': (
                 inv_move_line.partner_id
                 and inv_move_line.partner_id.id or False)
-            }
+        }
         if new_line_amount_curr:
             vals['amount_currency'] = new_line_amount_curr
             vals['currency_id'] = foreign_curr_id
@@ -148,9 +143,9 @@ class account_voucher(orm.Model):
             if not inv_move_line.real_tax_code_id:
                 raise orm.except_orm(
                     _('Error'),
-                    _("""We are on a VAT on payment
-                    treatment but move line %s does not
-                    have a related real tax code""")
+                    _("We are on a VAT on payment "
+                      "treatment but move line %s does not "
+                      "have a related real tax code")
                     % inv_move_line.name
                 )
             vals['tax_code_id'] = inv_move_line.real_tax_code_id.id
@@ -177,11 +172,11 @@ class account_voucher(orm.Model):
             'partner_id': (
                 inv_move_line.partner_id
                 and inv_move_line.partner_id.id or False)
-            }
+        }
         if inv_move_line.tax_code_id:
             vals[
                 'tax_code_id'
-                ] = inv_move_line.tax_code_id.id
+            ] = inv_move_line.tax_code_id.id
             if inv_move_line.tax_amount < 0:
                 vals['tax_amount'] = new_line_amount
             else:
@@ -192,10 +187,10 @@ class account_voucher(orm.Model):
         return {
             'journal_id': (
                 voucher.journal_id.vat_on_payment_related_journal_id.id
-                ),
+            ),
             'period_id': voucher.move_id.period_id.id,
             'date': voucher.move_id.date,
-            }
+        }
 
     def _move_payment_lines_to_shadow_entry(
         self, cr, uid, voucher, shadow_move_id, context=None
@@ -213,7 +208,7 @@ class account_voucher(orm.Model):
                 ):
                     line.write({
                         'move_id': shadow_move_id,
-                        }, update_check=False)
+                    }, update_check=False)
                 # this will allow user to see the real entry from
                 # invoice payment tab
                 if (
@@ -222,7 +217,7 @@ class account_voucher(orm.Model):
                 ):
                     line.write({
                         'real_payment_move_id': voucher.move_id.id,
-                        })
+                    })
         return True
 
     def _create_vat_on_payment_move(self, cr, uid, voucher, context=None):
@@ -232,14 +227,14 @@ class account_voucher(orm.Model):
         if not voucher.journal_id.vat_on_payment_related_journal_id:
             raise orm.except_orm(
                 _('Error'),
-                _("""We are on a VAT on payment treatment
-                but journal %s does not have a related shadow
-                journal""")
+                _("We are on a VAT on payment treatment "
+                  "but journal %s does not have a related shadow "
+                  "journal")
                 % voucher.journal_id.name)
         lines_to_create = []
         amounts_by_invoice = super(
             account_voucher, self
-            ).allocated_amounts_grouped_by_invoice(
+        ).allocated_amounts_grouped_by_invoice(
             cr, uid, voucher, context)
         for inv_id in amounts_by_invoice:
             invoice = inv_pool.browse(cr, uid, inv_id, context)

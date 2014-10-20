@@ -29,6 +29,6 @@ class account_account(orm.Model):
     _columns = {
         'vat_on_payment_related_account_id': fields.many2one(
             'account.account', 'Shadow Account for VAT on payment',
-            help='''Related account used for real registrations on a
-            VAT on payment basis. Set the shadow account here'''),
-        }
+            help="Related account used for real registrations on a "
+                 "VAT on payment basis. Set the shadow account here"),
+    }
