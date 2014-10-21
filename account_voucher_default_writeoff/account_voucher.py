@@ -33,9 +33,6 @@ class account_voucher(orm.Model):
         if writeoff_amount != 0.0:
             res = {'value': {'payment_option': 'with_writeoff'}}
         else:
-            res = {'value': {
-                'payment_option': 'without_writeoff',
-                'comment': ''
-            }}
+            res = {'value': {'payment_option': 'without_writeoff'}}
 
         return res
