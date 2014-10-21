@@ -56,9 +56,9 @@ class account_invoice(orm.Model):
         if not tax_code.vat_on_payment_related_tax_code_id:
             raise orm.except_orm(
                 _('Error'),
-                _('''The invoice is 'VAT on payment' but
-                tax code %s does not have a related shadow
-                tax code''')
+                _("The invoice is 'VAT on payment' but "
+                  "tax code %s does not have a related shadow "
+                  "tax code")
                 % tax_code.name)
         line_tuple[2]['real_tax_code_id'] = line_tuple[
             2]['tax_code_id']
