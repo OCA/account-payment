@@ -69,24 +69,29 @@ class payment_return(orm.Model):
                                            'cancelled': [('readonly', True)]
                                            }),
         'notes': fields.text('Notes'),
-        'state': fields.selection([
-            ('draft', 'Draft'),
-            ('imported', 'Imported'),
-            ('done', 'Done'),
-            ('cancelled', 'Cancelled')
-            ], 'State', readonly=True),
+        'state': fields.selection(
+            [
+                ('draft', 'Draft'),
+                ('imported', 'Imported'),
+                ('done', 'Done'),
+                ('cancelled', 'Cancelled')
+            ],
+            'State', readonly=True),
     }
     _track = {
         'state': {
-            'account_payment_return.mt_payment_return_state_change': lambda self, cr, uid, obj, ctx=None: True,
+            'account_payment_return.mt_payment_return_state_change':
+            lambda self, cr, uid, obj, ctx=None: True,
         },
     }
 
     _defaults = {
-        'company_id': lambda s, cr, uid, c: s.pool.get('res.company')._company_default_get(cr, uid, 'account', context=c),
+        'company_id': lambda s, cr, uid, c: s.pool.get(
+            'res.company')._company_default_get(cr, uid, 'account', context=c),
         'state': 'draft',
         'date': lambda *x: time.strftime('%Y-%m-%d %H:%M:%S'),
-        'name': lambda obj, cr, uid, context: obj.pool.get('ir.sequence').next_by_code(cr, uid, 'payment.return'),
+        'name': lambda obj, cr, uid, context: obj.pool.get(
+            'ir.sequence').next_by_code(cr, uid, 'payment.return'),
     }
 
     def unlink(self, cr, uid, ids, context=None):
@@ -161,7 +166,7 @@ class payment_return(orm.Model):
                             'journal_id': move['journal_id'],
                             'debit': return_line.amount,
                             'credit': 0,
-                            }, context=context)
+                        }, context=context)
                     lines2reconcile.append(move_line_id)
                     move_line_obj.copy(
                         cr, uid, move_line_id,
@@ -170,7 +175,7 @@ class payment_return(orm.Model):
                             'credit': return_line.amount,
                             'account_id': move_line.move_id.journal_id
                             .default_credit_account_id.id,
-                            }, context=context)
+                        }, context=context)
                 # Break old reconcile and
                 # make a new one with at least three moves
                 reconcile_obj.unlink(cr, uid, [old_reconcile.id],
