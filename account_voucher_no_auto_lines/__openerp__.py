@@ -28,8 +28,9 @@
 Account Voucher No Auto Lines
 =============================
 
-This module disables the fill of the amount column of voucher lines
-when we select the partner.
+This module allows users to select manually the lines to be payed by
+the voucher. The voucher will no longer try to match the credits/debits
+with the total amount.
 
 Contributors
 ------------
@@ -40,7 +41,7 @@ Contributors
     'depends': [
         'account_voucher',
     ],
-    'data': [],
+    'data': ['account_voucher_view.xml'],
     'installable': True,
     'auto_install': False,
 }
