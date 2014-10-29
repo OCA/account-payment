@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/OCA/account-payment.svg?branch=7.0)](https://travis-ci.org/OCA/account-payment)
+[![Coverage Status](https://coveralls.io/repos/OCA/account-payment/badge.png?branch=7.0)](https://coveralls.io/r/OCA/account-payment?branch=7.0)
+
 OpenERP account payment modules
 ===============================
 
