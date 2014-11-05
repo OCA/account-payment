@@ -4,4 +4,8 @@
 Odoo account payment modules
 ============================
 
-This project includes modules that handle payment related tasks.
+This repository hosts modules for handling requirements related to payment topics:
+* Extend payment orders for direct debit also.
+* Add multiple payment days.
+* Include payment types at partner, sales and purchases levels.
+* Etc.
