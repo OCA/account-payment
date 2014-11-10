@@ -3,8 +3,7 @@
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2011-2012 Domsense s.r.l. (<http://www.domsense.com>).
-#    Copyright (C) 2012-2013 Agile Business Group sagl
-#    (<http://www.agilebg.com>)
+#    Copyright (C) 2014 Agile Business Group sagl (<http://www.agilebg.com>)
 #    Copyright (C) 2014 Develer srl (<http://www.develer.com>)
 #
 #    This program is free software: you can redistribute it and/or modify

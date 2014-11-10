@@ -2,8 +2,7 @@
 ##############################################################################
 #
 #    Copyright (C) 2011-2012 Domsense s.r.l. (<http://www.domsense.com>).
-#    Copyright (C) 2012-2014 Agile Business Group sagl
-#    (<http://www.agilebg.com>)
+#    Copyright (C) 2014 Agile Business Group sagl (<http://www.agilebg.com>)
 #    @authors Lorenzo Battistini <lorenzo.battistini@agilebg.com>
 #             Stefano Sforzi <stefano.sforzi@agilebg.com>
 #
@@ -25,7 +24,7 @@
 
 {
     "name": "VAT on payment",
-    "version": "2.0",
+    "version": "1.0",
     'category': 'Generic Modules/Accounting',
     "depends": ["account_voucher_cash_basis"],
     "author": "Agile Business Group",
@@ -59,10 +58,10 @@ Also, see demo and test data
         'account_voucher_view.xml',
         'account_config_settings_view.xml',
         'account_fiscal_position_view.xml',
-        ],
+    ],
     'demo': [
         'account_demo.xml',
-        ],
+    ],
     'test': [
         'test/account_invoice_1.yml',
         'test/account_invoice_2.yml',
@@ -72,7 +71,7 @@ Also, see demo and test data
         'test/account_invoice_6.yml',
         'test/account_invoice_7.yml',
         'test/account_invoice_8.yml',
-        ],
+    ],
     'installable': True,
     'active': False,
 }
