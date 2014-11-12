@@ -2,9 +2,8 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2012 Domsense s.r.l. (<http://www.domsense.com>).
-#    Copyright (C) 2012-2013 Agile Business Group sagl
-#    (<http://www.agilebg.com>)
+#    Copyright (C) 2011-2012 Domsense s.r.l. (<http://www.domsense.com>).
+#    Copyright (C) 2014 Agile Business Group sagl (<http://www.agilebg.com>)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,5 +19,15 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import account_voucher
-import company
+
+from openerp.osv import orm, fields
+
+
+class account_journal(orm.Model):
+    _inherit = "account.journal"
+    _columns = {
+        'vat_on_payment_related_journal_id': fields.many2one(
+            'account.journal', 'Shadow Journal for VAT on payment',
+            help="Related journal used for shadow registrations on a "
+                 "VAT on payment basis. Set the shadow journal here"),
+    }
