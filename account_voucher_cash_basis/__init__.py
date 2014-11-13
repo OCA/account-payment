@@ -20,5 +20,5 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import account_voucher
-import company
+from . import account_voucher
+from . import company
