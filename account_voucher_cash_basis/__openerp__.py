@@ -27,6 +27,8 @@
     'category': 'Hidden/Dependency',
     "depends": ["account_voucher"],
     "author": "Agile Business Group",
+    "website": "http://www.agilebg.com",
+    "license": "AGPL-3",
     "description": """
 In some countries, under certain conditions, companies can apply the cash
 basis.
@@ -46,13 +48,10 @@ expanding business.
 This module gathers all the basic functionalities that allow to handle the
 cash basis.
     """,
-    'website': 'http://www.agilebg.com',
-    'init_xml': [],
     'data': [
         'company_view.xml',
         'voucher_view.xml',
     ],
     'demo': [],
     'installable': True,
-    'active': False,
 }
