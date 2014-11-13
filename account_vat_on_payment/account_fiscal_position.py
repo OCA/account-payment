@@ -25,7 +25,7 @@
 from openerp.osv import fields, orm
 
 
-class account_fiscal_position(orm.Model):
+class AccountFiscalPosition(orm.Model):
     _inherit = 'account.fiscal.position'
 
     _columns = {
