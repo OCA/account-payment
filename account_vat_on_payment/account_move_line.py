@@ -23,7 +23,7 @@
 from openerp.osv import orm, fields
 
 
-class account_move_line(orm.Model):
+class AccountMoveLine(orm.Model):
     _inherit = "account.move.line"
     _columns = {
         'real_payment_move_id': fields.many2one(
