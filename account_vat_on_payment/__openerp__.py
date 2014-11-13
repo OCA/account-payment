@@ -28,6 +28,8 @@
     'category': 'Generic Modules/Accounting',
     "depends": ["account_voucher_cash_basis"],
     "author": "Agile Business Group",
+    "website": "http://www.agilebg.com",
+    "license": "AGPL-3",
     "description": """
 See 'account_voucher_cash_basis' description.
 
