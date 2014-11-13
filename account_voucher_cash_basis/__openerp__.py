@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
-#
+##############################################################################
 #
 #    OpenERP, Open Source Management Solution
 #    Copyright (C) 2011-2012 Domsense s.r.l. (<http://www.domsense.com>).
-#    Copyright (C) 2012-2013 Agile Business Group sagl
+#    Copyright (C) 2012-2014 Agile Business Group sagl
 #    (<http://www.agilebg.com>)
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -19,9 +19,7 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-#
-
-
+##############################################################################
 {
     "name": "Cash basis extensions for vouchers",
     "version": "1.0",
