@@ -23,7 +23,7 @@
 from openerp.osv import orm, fields
 
 
-class res_company(orm.Model):
+class ResCompany(orm.Model):
     _inherit = "res.company"
     _columns = {
         'vat_on_payment': fields.boolean('VAT on payment treatment'),

@@ -23,7 +23,7 @@
 from openerp.osv import orm, fields
 
 
-class account_tax_code(orm.Model):
+class AccountTaxCode(orm.Model):
     _inherit = "account.tax.code"
     _columns = {
         'vat_on_payment_related_tax_code_id': fields.many2one(

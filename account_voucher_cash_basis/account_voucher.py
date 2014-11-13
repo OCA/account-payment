@@ -26,7 +26,7 @@ from openerp.tools.translate import _
 import openerp.addons.decimal_precision as dp
 
 
-class account_voucher(orm.Model):
+class AccountVoucher(orm.Model):
     _inherit = "account.voucher"
 
     _columns = {
@@ -87,7 +87,7 @@ class account_voucher(orm.Model):
         self, cr, uid, voucher_id, line_total,
         move_id, company_currency, current_currency, context=None
     ):
-        res = super(account_voucher, self).voucher_move_line_create(
+        res = super(AccountVoucher, self).voucher_move_line_create(
             cr, uid, voucher_id, line_total, move_id, company_currency,
             current_currency, context)
         self.write(cr, uid, voucher_id, {'line_total': res[0]}, context)
@@ -144,9 +144,9 @@ class account_voucher(orm.Model):
 
         '''
         res = {}
-        company_currency = super(account_voucher, self)._get_company_currency(
+        company_currency = super(AccountVoucher, self)._get_company_currency(
             cr, uid, voucher.id, context)
-        current_currency = super(account_voucher, self)._get_current_currency(
+        current_currency = super(AccountVoucher, self)._get_current_currency(
             cr, uid, voucher.id, context)
         for line in voucher.line_ids:
             if line.amount and line.move_line_id and line.move_line_id.invoice:
@@ -163,7 +163,7 @@ class account_voucher(orm.Model):
                 current_amount = line.amount
                 if company_currency != current_currency:
                     current_amount = super(
-                        account_voucher, self)._convert_amount(
+                        AccountVoucher, self)._convert_amount(
                             cr, uid, line.amount, voucher.id, context)
                     res[line.move_line_id.invoice.id][
                         'allocated_currency'

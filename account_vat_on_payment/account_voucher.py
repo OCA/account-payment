@@ -24,7 +24,7 @@ from openerp.osv import orm, fields
 from tools.translate import _
 
 
-class account_voucher(orm.Model):
+class AccountVoucher(orm.Model):
     _inherit = "account.voucher"
 
     _columns = {
@@ -232,7 +232,7 @@ class account_voucher(orm.Model):
                 % voucher.journal_id.name)
         lines_to_create = []
         amounts_by_invoice = super(
-            account_voucher, self
+            AccountVoucher, self
         ).allocated_amounts_grouped_by_invoice(
             cr, uid, voucher, context)
         for inv_id in amounts_by_invoice:
@@ -285,9 +285,9 @@ class account_voucher(orm.Model):
 
         voucher.write({'shadow_move_id': shadow_move_id})
 
-        super(account_voucher, self).balance_move(
+        super(AccountVoucher, self).balance_move(
             cr, uid, shadow_move_id, context)
-        super(account_voucher, self).balance_move(
+        super(AccountVoucher, self).balance_move(
             cr, uid, voucher.move_id.id, context)
         return True
 
@@ -304,7 +304,7 @@ class account_voucher(orm.Model):
             if entry_posted:
                 journal_pool.write(
                     cr, uid, voucher.journal_id.id, {'entry_posted': False})
-            res = super(account_voucher, self).action_move_line_create(
+            res = super(AccountVoucher, self).action_move_line_create(
                 cr, uid, [voucher.id], context)
             # because 'move_id' has been updated by 'action_move_line_create'
             voucher.refresh()
@@ -318,7 +318,7 @@ class account_voucher(orm.Model):
         return res
 
     def cancel_voucher(self, cr, uid, ids, context=None):
-        res = super(account_voucher, self).cancel_voucher(
+        res = super(AccountVoucher, self).cancel_voucher(
             cr, uid, ids, context)
         reconcile_pool = self.pool.get('account.move.reconcile')
         move_pool = self.pool.get('account.move')

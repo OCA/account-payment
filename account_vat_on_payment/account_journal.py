@@ -23,7 +23,7 @@
 from openerp.osv import orm, fields
 
 
-class account_journal(orm.Model):
+class AccountJournal(orm.Model):
     _inherit = "account.journal"
     _columns = {
         'vat_on_payment_related_journal_id': fields.many2one(

@@ -24,7 +24,7 @@ from openerp.osv import orm, fields
 from tools.translate import _
 
 
-class account_invoice(orm.Model):
+class AccountInvoice(orm.Model):
 
     def _get_vat_on_payment(self, cr, uid, context=None):
         return self.pool.get('res.users').browse(
@@ -70,7 +70,7 @@ class account_invoice(orm.Model):
         Use shadow accounts for journal entry to be generated, according to
         account and tax code related records
         """
-        move_lines = super(account_invoice, self).finalize_invoice_move_lines(
+        move_lines = super(AccountInvoice, self).finalize_invoice_move_lines(
             cr, uid, invoice_browse, move_lines)
         context = self.pool['res.users'].context_get(cr, uid)
         new_move_lines = []
@@ -88,7 +88,7 @@ class account_invoice(orm.Model):
     def onchange_partner_id(
             self, cr, uid, ids, type, partner_id, date_invoice=False,
             payment_term=False, partner_bank_id=False, company_id=False):
-        res = super(account_invoice, self).onchange_partner_id(
+        res = super(AccountInvoice, self).onchange_partner_id(
             cr, uid, ids, type, partner_id, date_invoice, payment_term,
             partner_bank_id, company_id)
         # default value for VAT on Payment is changed every time the

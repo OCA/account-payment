@@ -21,7 +21,7 @@
 from openerp.osv import orm, fields
 
 
-class account_config_settings(orm.TransientModel):
+class AccountConfigSettings(orm.TransientModel):
     _inherit = 'account.config.settings'
     _columns = {
         'vat_on_payment': fields.related(
