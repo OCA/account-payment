@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+<!--    account     -->
+
+        <record id="view_account_settings_currency_xchange_form" model="ir.ui.view">
+            <field name="name">view_account_settings_currency_xchange_form</field>
+            <field name="model">account.config.settings</field>
+            <field name="inherit_id" ref="account_voucher_cash_basis.view_account_config_settings"/>
+            <field name="arch" type="xml">
+                <xpath expr="/form/group[5]/div" position="inside">
+                    <div>
+                        <field name="vat_on_payment" class="oe_inline"/>
+                        <label for="vat_on_payment"/>
+                    </div>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
