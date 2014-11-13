@@ -86,10 +86,10 @@ class AccountInvoice(orm.Model):
         return new_move_lines
 
     def onchange_partner_id(
-            self, cr, uid, ids, type, partner_id, date_invoice=False,
+            self, cr, uid, ids, inv_type, partner_id, date_invoice=False,
             payment_term=False, partner_bank_id=False, company_id=False):
         res = super(AccountInvoice, self).onchange_partner_id(
-            cr, uid, ids, type, partner_id, date_invoice, payment_term,
+            cr, uid, ids, inv_type, partner_id, date_invoice, payment_term,
             partner_bank_id, company_id)
         # default value for VAT on Payment is changed every time the
         # customer/supplier is changed
