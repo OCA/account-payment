@@ -22,6 +22,7 @@
 
 from openerp.osv import orm, fields
 from openerp.tools.translate import _
+from openerp import api
 
 
 class AccountInvoice(orm.Model):
@@ -85,6 +86,7 @@ class AccountInvoice(orm.Model):
             new_move_lines.append(line_tuple)
         return new_move_lines
 
+    @api.cr_uid_ids
     def onchange_partner_id(
             self, cr, uid, ids, inv_type, partner_id, date_invoice=False,
             payment_term=False, partner_bank_id=False, company_id=False):
