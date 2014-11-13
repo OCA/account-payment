@@ -50,7 +50,6 @@ Howto:
 http://planet.agilebg.com/en/2012/10/vat-on-payment-treatment-with-openerp/
 Also, see demo and test data
 """,
-    'website': 'http://www.agilebg.com',
     'data': [
         'account_account_view.xml',
         'account_tax_code_view.xml',
@@ -75,5 +74,4 @@ Also, see demo and test data
         'test/account_invoice_8.yml',
     ],
     'installable': True,
-    'active': False,
 }
