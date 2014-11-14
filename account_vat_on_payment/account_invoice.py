@@ -66,13 +66,15 @@ class AccountInvoice(orm.Model):
             tax_code.vat_on_payment_related_tax_code_id.id)
         return line_tuple
 
-    def finalize_invoice_move_lines(self, cr, uid, invoice_browse, move_lines):
+    def finalize_invoice_move_lines(self, cr, uid, ids, move_lines, context):
         """
         Use shadow accounts for journal entry to be generated, according to
         account and tax code related records
         """
         move_lines = super(AccountInvoice, self).finalize_invoice_move_lines(
-            cr, uid, invoice_browse, move_lines)
+            cr, uid, ids, move_lines, context)
+        assert len(ids) == 1
+        invoice_browse = self.browse(cr, uid, ids, context=context)
         context = self.pool['res.users'].context_get(cr, uid)
         new_move_lines = []
         for line_tuple in move_lines:
