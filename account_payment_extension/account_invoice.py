@@ -82,7 +82,7 @@ class account_invoice(orm.Model):
                 move_line_ids = []
                 for move_line in inv.move_id.line_id:
                     if (move_line.account_id.type == 'receivable' or
-                       move_line.account_id.type == 'payable') and \
+                        move_line.account_id.type == 'payable') and \
                         move_line.state != 'reconciled' and \
                             not move_line.reconcile_id.id:
                         move_line_ids.append(move_line.id)

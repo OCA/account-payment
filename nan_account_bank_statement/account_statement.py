@@ -269,7 +269,7 @@ class account_bank_statement_line(osv.osv):
                       'amount %(amount).2f in statement %(statement)s.') % {
                         'amount': line.amount,
                         'statement': line.statement_id.name,
-                        })
+                    })
             return []
         return [data['reference']]
 
@@ -284,7 +284,7 @@ class account_bank_statement_line(osv.osv):
                       '%(amount).2f in statement %(statement)s.') % {
                         'amount': line.amount,
                         'statement': line.statement_id.name,
-                        })
+                    })
             return []
         return [data['vat']]
 
@@ -300,7 +300,7 @@ class account_bank_statement_line(osv.osv):
                       '%(statement)s.') % {
                         'amount': line.amount,
                         'statement': line.statement_id.name,
-                        })
+                    })
             return []
         return [data['invoice_number']]
 
@@ -316,7 +316,7 @@ class account_bank_statement_line(osv.osv):
                       '%(statement)s.') % {
                         'amount': line.amount,
                         'statement': line.statement_id.name
-                        })
+                    })
             return []
         return [data['invoice_origin']]
 
@@ -351,7 +351,7 @@ class account_bank_statement_line(osv.osv):
                     _find_entry_to_reconcile_by_line_vat_number_and_amount(
                         cr, uid, line, vat, reconciled_move_line_ids,
                         maturity_date, max_date_diff, context)
-                    )
+                )
                 if move_lines:
                     break
 
@@ -494,30 +494,30 @@ class account_bank_statement_line(osv.osv):
         return (account_receivable_id, account_payable_id)
 
     def _process_rules(self, cr, uid, line, context):
-            ids = self.pool.get('account.bank.statement.line.rule').search(
-                cr, uid, [], context=context)
+        ids = self.pool.get('account.bank.statement.line.rule').search(
+            cr, uid, [], context=context)
 
-            found = False
-            for rule in self.pool.get(
-                'account.bank.statement.line.rule'
-            ).browse(cr, uid, ids, context):
-                if found:
-                    break
-                for data in line.data_ids:
-                    if data.key != rule.key:
-                        continue
-                    if rule.expression not in data.value:
-                        continue
+        found = False
+        for rule in self.pool.get(
+            'account.bank.statement.line.rule'
+        ).browse(cr, uid, ids, context):
+            if found:
+                break
+            for data in line.data_ids:
+                if data.key != rule.key:
+                    continue
+                if rule.expression not in data.value:
+                    continue
 
-                    values = {}
-                    if rule.account_id:
-                        values['account_id'] = rule.account_id.id
-                    if rule.partner_id:
-                        values['partner_id'] = rule.partner_id.id
-                    self.pool.get('account.bank.statement.line').write(
-                        cr, uid, [line.id], values, context)
-                    found = True
-                    break
+                values = {}
+                if rule.account_id:
+                    values['account_id'] = rule.account_id.id
+                if rule.partner_id:
+                    values['partner_id'] = rule.partner_id.id
+                self.pool.get('account.bank.statement.line').write(
+                    cr, uid, [line.id], values, context)
+                found = True
+                break
 
     def _find_partner_by_line_vat_number(self, cr, uid, vat, context=None):
         """

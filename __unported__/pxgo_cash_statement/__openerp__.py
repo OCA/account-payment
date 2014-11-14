@@ -19,11 +19,11 @@
 #
 {
     "name": "Pexego - Cash Statements",
-        "version": "1.0",
-        "author": "Pexego for Igalia (http://www.igalia.com/)",
-        "website": "http://www.pexego.es",
-        "category": "Enterprise Specific Modules",
-        "description": """
+    "version": "1.0",
+    "author": "Pexego for Igalia (http://www.igalia.com/)",
+    "website": "http://www.pexego.es",
+    "category": "Enterprise Specific Modules",
+    "description": """
 Module for easier cash management.
 
 Adds an "Entries by Cash Statement" view of the bank statements that shows only
@@ -34,17 +34,17 @@ statement line), so the user doesn't have to cope with those details
 (even more, if the user introduces an invalid quantity, for example a positive
 amount for a withdrawal, OpenERP will automatically correct the entry).
             """,
-        "depends": [
+    "depends": [
             'base',
-                'account',
-        ],
-        "init_xml": [],
-        "demo_xml": [],
-        "update_xml": [
-            'account_journal_view.xml',
-                'cash_statement_view.xml',
-        ],
-        "installable": True,
-        'active': False
+            'account',
+    ],
+    "init_xml": [],
+    "demo_xml": [],
+    "update_xml": [
+        'account_journal_view.xml',
+        'cash_statement_view.xml',
+    ],
+    "installable": True,
+    'active': False
 
 }

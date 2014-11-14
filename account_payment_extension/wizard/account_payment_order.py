@@ -128,7 +128,7 @@ class payment_order_create(orm.TransientModel):
             cr, uid, [
                 ('model', '=', 'ir.ui.view'),
                 ('name', '=', 'view_create_payment_order_lines')
-                ], context=context)
+            ], context=context)
         resource_id = mod_obj.read(
             cr, uid, model_data_ids, fields=['res_id'], context=context
         )[0]['res_id']

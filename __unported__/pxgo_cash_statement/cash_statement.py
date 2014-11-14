@@ -86,8 +86,8 @@ class cash_statement(osv.osv):
     _columns = {
         'cash_statement':  fields.function(_get_cash_statement, method=True, type='boolean', string="Cash Statement",
                                            store={
-                                           'account.bank.statement': (lambda self, cr, uid, ids, context: ids, ['journal_id'], 10),
-                                           'account.journal': (lambda self, cr, uid, ids, context: self.pool.get('account.bank.statement').search(cr, uid, [('journal_id', 'in', ids)], context=context), ['show_in_cash_statements'], 20)
+                                               'account.bank.statement': (lambda self, cr, uid, ids, context: ids, ['journal_id'], 10),
+                                               'account.journal': (lambda self, cr, uid, ids, context: self.pool.get('account.bank.statement').search(cr, uid, [('journal_id', 'in', ids)], context=context), ['show_in_cash_statements'], 20)
                                            }),
     }
 
@@ -119,7 +119,8 @@ class cash_statement_line(osv.osv):
     _inherit = 'account.bank.statement.line'
 
     _columns = {
-        'name': fields.char('Name', size=128, required=True),  # Longer description
+        # Longer description
+        'name': fields.char('Name', size=128, required=True),
         'line_type_id': fields.many2one('account.bank.statement.line.type', 'Type'),
     }
 

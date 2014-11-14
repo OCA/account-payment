@@ -18,4 +18,4 @@
 #
 #
 
-import paydays
+from . import paydays

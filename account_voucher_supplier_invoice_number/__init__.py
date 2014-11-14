@@ -19,4 +19,4 @@
 #
 #
 
-import voucher
+from . import voucher

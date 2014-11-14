@@ -27,4 +27,4 @@
 #
 #
 
-import account_statement
+from . import account_statement
