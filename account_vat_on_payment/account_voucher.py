@@ -264,15 +264,16 @@ class AccountVoucher(orm.Model):
                         context=context)
                     lines_to_create.append(shadow_vals)
 
-        context['journal_id'] = (
+        ctx = dict(context) or {}
+        ctx['journal_id'] = (
             voucher.journal_id.vat_on_payment_related_journal_id.id)
-        context['period_id'] = voucher.move_id.period_id.id
+        ctx['period_id'] = voucher.move_id.period_id.id
         shadow_move_id = move_pool.create(
             cr, uid, self._prepare_shadow_move(
-                cr, uid, voucher, context=context), context)
+                cr, uid, voucher, context=ctx), ctx)
 
         self._move_payment_lines_to_shadow_entry(
-            cr, uid, voucher, shadow_move_id, context=context)
+            cr, uid, voucher, shadow_move_id, context=ctx)
 
         for line_to_create in lines_to_create:
             if line_to_create['type'] == 'real':
@@ -281,14 +282,14 @@ class AccountVoucher(orm.Model):
                 line_to_create['move_id'] = shadow_move_id
             del line_to_create['type']
 
-            move_line_pool.create(cr, uid, line_to_create, context)
+            move_line_pool.create(cr, uid, line_to_create, ctx)
 
         voucher.write({'shadow_move_id': shadow_move_id})
 
         super(AccountVoucher, self).balance_move(
-            cr, uid, shadow_move_id, context)
+            cr, uid, shadow_move_id, ctx)
         super(AccountVoucher, self).balance_move(
-            cr, uid, voucher.move_id.id, context)
+            cr, uid, voucher.move_id.id, ctx)
         return True
 
     def action_move_line_create(self, cr, uid, ids, context=None):
