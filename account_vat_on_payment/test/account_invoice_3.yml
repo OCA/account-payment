@@ -67,11 +67,11 @@
         assert move_line.debit == 100, "Bank move line must be 100 debit, %s found" % move_line.debit
       if move_line.account_id.id == ref('account.iva'):
         vat_found = True
-        assert move_line.credit == 13.04, "VAT move line must be 13.04 credit, %s found" % move_line.credit
+        assert abs(move_line.credit - 13.04) < 0.01, "VAT move line must be 13.04 credit, %s found" % move_line.credit
       if move_line.account_id.id == ref('account.a_sale'):
         # 2 times: sales lines are 2
         sales_found = True
-        assert move_line.credit == 43.48, "sales move line must be 43.48 credit, %s found" % move_line.credit
+        assert abs(move_line.credit - 43.48) < 0.01, "sales move line must be 43.48 credit, %s found" % move_line.credit
     assert bank_found, "No bank move line found"
     assert sales_found, "No sales move line found"
     assert vat_found, "No VAT move line found"
@@ -105,11 +105,11 @@
         assert move_line.debit == 130, "Bank move line must be 130 debit, %s found" % move_line.debit
       if move_line.account_id.id == ref('account.iva'):
         vat_found = True
-        assert move_line.credit == 16.96, "VAT move line must be 16.96 credit, %s found" % move_line.credit
+        assert abs(move_line.credit - 16.96) < 0.01, "VAT move line must be 16.96 credit, %s found" % move_line.credit
       if move_line.account_id.id == ref('account.a_sale'):
         # 2 times: sales lines are 2
         sales_found = True
-        assert move_line.credit == 56.52, "sales move line must be 56.52 credit, %s found" % move_line.credit
+        assert (move_line.credit - 56.52) < 0.01, "sales move line must be 56.52 credit, %s found" % move_line.credit
     assert bank_found, "No bank move line found"
     assert sales_found, "No sales move line found"
     assert vat_found, "No VAT move line found"

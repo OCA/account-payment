@@ -69,7 +69,7 @@
         assert move_line.credit == 4.17, "VAT move line must be 4.17 credit, %s found" % move_line.credit
       if move_line.account_id.id == ref('account.a_sale'):
         sales_found = True
-        assert move_line.credit == 20.83, "sales move line must be 20.83 credit, %s found" % move_line.credit
+        assert abs(move_line.credit - 20.83) < 0.01, "sales move line must be 20.83 credit, %s found" % move_line.credit
     assert bank_found, "No bank move line found"
     assert sales_found, "No sales move line found"
     assert vat_found, "No VAT move line found"
