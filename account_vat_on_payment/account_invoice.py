@@ -89,10 +89,11 @@ class AccountInvoice(orm.Model):
     @api.cr_uid_ids
     def onchange_partner_id(
             self, cr, uid, ids, inv_type, partner_id, date_invoice=False,
-            payment_term=False, partner_bank_id=False, company_id=False):
+            payment_term=False, partner_bank_id=False, company_id=False,
+            context=False):
         res = super(AccountInvoice, self).onchange_partner_id(
             cr, uid, ids, inv_type, partner_id, date_invoice, payment_term,
-            partner_bank_id, company_id)
+            partner_bank_id, company_id, context)
         # default value for VAT on Payment is changed every time the
         # customer/supplier is changed
         partner_obj = self.pool.get("res.partner")
