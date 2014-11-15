@@ -57,7 +57,7 @@ class payment_order_create(orm.TransientModel):
         'show_refunds': False,
     }
 
-    def default_get(self, cr, uid, fields, context=None):
+    def default_get(self, cr, uid, field_list, context=None):
         """
         This function gets default values
         @param self: The object pointer
@@ -69,8 +69,8 @@ class payment_order_create(orm.TransientModel):
         @return : default values of fields.
         """
         res = super(payment_order_create, self).default_get(
-            cr, uid, fields, context=context)
-        if 'entries' in fields:
+            cr, uid, field_list, context=context)
+        if 'entries' in field_list:
             if context and 'line_ids' in context and context['line_ids']:
                 res.update({'entries':  context['line_ids']})
 
