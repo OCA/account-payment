@@ -19,24 +19,24 @@
 #
 {
     "name": "Pexego - Running balance in Bank Statements",
-        "version": "1.0",
-        "author": "Pexego for Igalia (http://www.igalia.com/)",
-        "website": "http://www.pexego.es",
-        "category": "Enterprise Specific Modules",
-        "description": """
+    "version": "1.0",
+    "author": "Pexego for Igalia (http://www.igalia.com/)",
+    "website": "http://www.pexego.es",
+    "category": "Enterprise Specific Modules",
+    "description": """
 Adds a running balance (running total) column to the bank statement lines.
 This makes it easier to find differences and mistakes in long statements.
             """,
-        "depends": [
+    "depends": [
             'base',
-                'account',
-        ],
-        "init_xml": [],
-        "demo_xml": [],
-        "update_xml": [
-            'bank_statement_view.xml',
-        ],
-        "installable": True,
-        'active': False
+            'account',
+    ],
+    "init_xml": [],
+    "demo_xml": [],
+    "update_xml": [
+        'bank_statement_view.xml',
+    ],
+    "installable": True,
+    'active': False
 
 }

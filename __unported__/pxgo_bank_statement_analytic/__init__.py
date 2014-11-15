@@ -25,4 +25,4 @@ __authors__ = [
     "Borja López Soilán (Pexego) <borjals@pexego.es>"
 ]
 
-import bank_statement
+from . import bank_statement

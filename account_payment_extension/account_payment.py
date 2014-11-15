@@ -409,12 +409,12 @@ class payment_line(orm.Model):
                 'payable', 'Payable'), ('receivable', 'Receivable')]),
     }
 
-    def onchange_move_line(self, cr, uid, ids, move_line_id, payment_type,
+    def onchange_move_line(self, cr, uid, ids, move_line_id, payment_type_,
                            date_prefered, date_scheduled, currency=False,
                            company_currency=False, context=None):
         # Adds account.move.line name to the payment line communication
         result = super(payment_line, self).onchange_move_line(
-            cr, uid, ids, move_line_id, payment_type, date_prefered,
+            cr, uid, ids, move_line_id, payment_type_, date_prefered,
             date_scheduled, currency, company_currency, context)
         if move_line_id:
             line = self.pool.get('account.move.line').browse(
@@ -424,9 +424,9 @@ class payment_line(orm.Model):
                     'value']['communication'] + '. ' + line.name
             result['value']['account_id'] = line.account_id.id
             if context.get('order_id'):
-                payment_order = self.pool.get('payment.order').browse(
+                order_obj = self.pool['payment.order'].browse(
                     cr, uid, context['order_id'], context=context)
-                if payment_order.type == 'receivable':
+                if order_obj.type == 'receivable':
                     result['value']['amount'] *= -1
                     result['value']['amount_currency'] *= -1
         return result

@@ -25,9 +25,9 @@
 #
 #
 
-import account_payment_extension
-import res_partner
-import account_invoice
-import account_move_line
-import account_payment
-import wizard
+from . import account_payment_extension
+from . import res_partner
+from . import account_invoice
+from . import account_move_line
+from . import account_payment
+from . import wizard

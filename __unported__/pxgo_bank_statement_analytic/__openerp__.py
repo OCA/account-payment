@@ -19,11 +19,11 @@
 #
 {
     "name": "Pexego - Analytic in Bank Statements",
-        "version": "1.0",
-        "author": "Pexego for Igalia (http://www.igalia.com/)",
-        "website": "http://www.pexego.es",
-        "category": "Enterprise Specific Modules",
-        "description": """
+    "version": "1.0",
+    "author": "Pexego for Igalia (http://www.igalia.com/)",
+    "website": "http://www.pexego.es",
+    "category": "Enterprise Specific Modules",
+    "description": """
 Extends the Bank Statements to add support for analytic accounting.
 
 A analytic account field will be added to bank statement lines, allowing
@@ -31,17 +31,17 @@ the user to directly register small expenses or incomes on analytic accounts.
 
 This may be useful for petty cash management.
             """,
-        "depends": [
+    "depends": [
             'base',
-                'account',
-                #'analytic',
-        ],
-        "init_xml": [],
-        "demo_xml": [],
-        "update_xml": [
-            'bank_statement_view.xml',
-        ],
-        "installable": True,
-        'active': False
+            'account',
+            #'analytic',
+    ],
+    "init_xml": [],
+    "demo_xml": [],
+    "update_xml": [
+        'bank_statement_view.xml',
+    ],
+    "installable": True,
+    'active': False
 
 }

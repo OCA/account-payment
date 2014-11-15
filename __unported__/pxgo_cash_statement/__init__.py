@@ -26,5 +26,5 @@ __authors__ = [
     "Borja López Soilán (Pexego) <borjals@pexego.es>"
 ]
 
-import account_journal
-import cash_statement
+from . import account_journal
+from . import cash_statement

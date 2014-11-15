@@ -60,7 +60,7 @@ class purchase_order(osv.osv):
             partner_payment_term_id = (
                 partner.property_payment_term_supplier and
                 partner.property_payment_term_supplier.id or False
-                )
+            )
             result['value']['payment_term'] = partner_payment_term_id
 
         return self.onchange_paytype_id(
@@ -210,13 +210,13 @@ class account_invoice(osv.osv):
                 partner_payment_term_id = (
                     partner.property_payment_term_supplier and
                     partner.property_payment_term_supplier.id or False
-                    )
+                )
             else:
                 # Sale invoice
                 partner_payment_term_id = (
                     partner.property_payment_term and
                     partner.property_payment_term.id or False
-                    )
+                )
 
         result['value']['payment_term'] = partner_payment_term_id
 
