@@ -8,7 +8,7 @@ Version 8.0:
 ------------
 You'll find those features in this repository now:
 
- * https://github.com/OCA/banking
+ * https://github.com/OCA/bank-payment
 
 Version 7.0:
 ------------
