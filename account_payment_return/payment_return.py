@@ -111,6 +111,7 @@ class payment_return(orm.Model):
                                                   context=context)
 
     def action_confirm(self, cr, uid, ids, context=None):
+        context = context or {}
         invoice_obj = self.pool.get('account.invoice')
         move_obj = self.pool.get('account.move')
         move_line_obj = self.pool.get('account.move.line')
