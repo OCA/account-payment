@@ -2,11 +2,10 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (c) 2008 Zikzakmedia S.L. (http://zikzakmedia.com) All Rights Reserved.
+#    Copyright (c) 2008 Zikzakmedia S.L. (http://zikzakmedia.com)
 #                       Jordi Esteve <jesteve@zikzakmedia.com>
-#    AvanzOSC, Avanzed Open Source Consulting 
-#    Copyright (C) 2011-2012 Iker Coranti (www.avanzosc.com). All Rights Reserved
-#    $Id$
+#    AvanzOSC, Avanzed Open Source Consulting
+#    Copyright (C) 2011-2012 Iker Coranti (www.avanzosc.com)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published by
@@ -23,7 +22,7 @@
 #
 ##############################################################################
 
-import payment
-import account_invoice
-import account_move_line
-import wizard
+from . import payment
+from . import account_invoice
+from . import account_move_line
+from . import wizard
