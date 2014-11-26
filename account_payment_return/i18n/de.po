@@ -208,7 +208,7 @@ msgstr ""
 #. module: account_payment_return
 #, python-format
 msgid "Return %s"
-msgstr ""
+msgstr "Rücklastschrift %s"
 
 #: field:payment.return,journal_id:0
 #. module: account_payment_return
