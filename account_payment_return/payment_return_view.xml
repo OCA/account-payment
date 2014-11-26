@@ -31,7 +31,7 @@
 	                                    <field name="partner_name" />
 	                                    <field name="partner_id" />
 	                                    <field name="amount" />
-	                                    <field name="invoice_id" domain="[('partner_id', '=', partner_id), ('reconciled', '=', True), ('type', '=', 'out_invoice')]"/>
+	                                    <field name="invoice_id" domain="[('commercial_partner_id', '=', partner_id), ('reconciled', '=', True), ('type', '=', 'out_invoice')]"/>
 	                                </tree>
 	                            </field>
 	                        </page>

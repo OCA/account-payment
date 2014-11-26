@@ -30,7 +30,7 @@
     "name": "Account Payment Return",
     "version": "1.0",
     'license': 'AGPL-3',
-    "depends": ['account'],
+    "depends": ['account_report_company'],
     'author': 'initOS GmbH & Co. KG',
     'website': 'http://www.initos.com',
     "description": """
