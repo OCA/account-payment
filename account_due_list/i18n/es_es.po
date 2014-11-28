@@ -61,7 +61,7 @@ msgstr "Datos incongruentes: mover %s tiene más de una factura"
 #. module: account_due_list
 #: view:account.move.line:0
 msgid "Payable"
-msgstr "Pagadero"
+msgstr "Cuentas por pagar"
 
 #. module: account_due_list
 #: view:account.move.line:0
@@ -108,7 +108,7 @@ msgstr "Pagos de factura"
 #. module: account_due_list
 #: view:account.move.line:0
 msgid "Overdue"
-msgstr "Con restraso"
+msgstr "Vencidas"
 
 #. module: account_due_list
 #: view:account.move.line:0
