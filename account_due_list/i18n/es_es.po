@@ -1,0 +1,152 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+# * account_due_list
+# es_MX.po <federico.cruz.lozano@hotmail.com>, 2014.
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2014-11-28 19:14+0000\n"
+"PO-Revision-Date: 2014-11-28 13:33-0500\n"
+"Last-Translator: es_MX.po <federico.cruz.lozano@hotmail.com>\n"
+"Language-Team: traduccion\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Virtaal 0.7.1\n"
+
+#. module: account_due_list
+#: view:account.move.line:0
+msgid "Receivable"
+msgstr "Cuenta por cobrar"
+
+#. module: account_due_list
+#: view:account.move.line:0
+msgid "Unreconciled payments"
+msgstr "Pagos no conciliados"
+
+#. module: account_due_list
+#: view:account.move.line:0
+msgid "Payable payments"
+msgstr "Pagos por pagar"
+
+#. module: account_due_list
+#: view:account.move.line:0
+msgid "Unreconciled"
+msgstr "No conciliado"
+
+#. module: account_due_list
+#: view:account.move.line:0
+msgid "Group By..."
+msgstr "Grupo por..."
+
+#. module: account_due_list
+#: field:account.move.line,invoice_origin:0
+msgid "Source Doc"
+msgstr "Documento Origen"
+
+#. module: account_due_list
+#: field:account.move.line,invoice_date:0
+msgid "Invoice Date"
+msgstr "Fecha de Factura"
+
+#. module: account_due_list
+#: code:addons/account_due_list/account_move_line.py:46
+#, python-format
+msgid "Incongruent data: move %s has more than one invoice"
+msgstr "Datos incongruentes: mover %s tiene más de una factura"
+
+#. module: account_due_list
+#: view:account.move.line:0
+msgid "Payable"
+msgstr "Pagadero"
+
+#. module: account_due_list
+#: view:account.move.line:0
+msgid "Search Payments"
+msgstr "Buscar Pagos"
+
+#. module: account_due_list
+#: model:ir.model,name:account_due_list.model_account_move_line
+msgid "Journal Items"
+msgstr "Elementos del diario"
+
+#. module: account_due_list
+#: field:account.move.line,day:0
+msgid "Day"
+msgstr "Día"
+
+#. module: account_due_list
+#: view:account.move.line:0
+msgid "Overdue payments"
+msgstr "Pagos Atrasados"
+
+#. module: account_due_list
+#: view:account.move.line:0
+msgid "Total Debit"
+msgstr "Débito total"
+
+#. module: account_due_list
+#: view:account.move.line:0
+msgid "Payments"
+msgstr "Pagos"
+
+#. module: account_due_list
+#: code:addons/account_due_list/account_move_line.py:45
+#, python-format
+msgid "Error"
+msgstr "Error"
+
+#. module: account_due_list
+#: model:ir.actions.act_window,name:account_due_list.action_invoice_payments
+#: model:ir.ui.menu,name:account_due_list.menu_action_invoice_payments
+msgid "Invoice payments"
+msgstr "Pagos de factura"
+
+#. module: account_due_list
+#: view:account.move.line:0
+msgid "Overdue"
+msgstr "Con restraso"
+
+#. module: account_due_list
+#: view:account.move.line:0
+msgid "Receivable payments"
+msgstr "Pagos por cobrar"
+
+#. module: account_due_list
+#: view:account.move.line:0
+msgid "Due date"
+msgstr "Fecha de vencimiento"
+
+#. module: account_due_list
+#: field:account.move.line,payment_term_id:0
+msgid "Payment Term"
+msgstr "Plazo de pago"
+
+#. module: account_due_list
+#: view:account.move.line:0
+msgid "Month"
+msgstr "Mes"
+
+#. module: account_due_list
+#: view:account.move.line:0
+msgid "Total Credit"
+msgstr "Credito total"
+
+#. module: account_due_list
+#: view:account.move.line:0
+#: field:account.move.line,stored_invoice_id:0
+msgid "Invoice"
+msgstr "Factura"
+
+#. module: account_due_list
+#: view:account.move.line:0
+msgid "Partner"
+msgstr "Cliente"
+
+#. module: account_due_list
+#: field:account.move.line,partner_ref:0
+msgid "Partner Ref"
+msgstr "Ref cliente"
