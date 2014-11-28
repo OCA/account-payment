@@ -20,7 +20,7 @@ msgstr ""
 #. module: account_due_list
 #: view:account.move.line:0
 msgid "Receivable"
-msgstr "Cuenta por cobrar"
+msgstr "Cuentas por cobrar"
 
 #. module: account_due_list
 #: view:account.move.line:0
