@@ -44,6 +44,7 @@ Contributors
 * Joao Alfredo Gama Batista <joao.gama@savoirfairelinux.com>
 * Virgil Dupras <virgil.dupras@savoirfairelinux.com>
 * Sandy Carter <sandy.carter@savoirfairelinux.com>
+* Primaco <info@primaco.ca>
 """,
     'depends': ['base'],
     'data': [
