@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.property" id="property_partner_rel_remit">
+            <field name="name">property_partner_rel_remit</field>
+            <field name="fields_id" search="[('model','=','res.company'),
+              ('name','=','property_partner_rel_remit')]"/>
+            <field eval="'res.partner.relation.type,'+str(rel_type_remit_to)" name="value"/>
+        </record>
+
+    </data>
+</openerp>

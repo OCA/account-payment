@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+
+        <record id="view_voucher_filter_customer_pay" model="ir.ui.view">
+            <field name="name">account.voucher.customer.pay.select</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher.view_voucher_filter_customer_pay"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="remit_to"/>
+                </field>
+            </field>
+        </record>
+
+
+        <record id="view_voucher_filter_vendor_pay" model="ir.ui.view">
+            <field name="name">account.voucher.purchase.pay.select</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher.view_voucher_filter_vendor_pay"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="remit_to"/>
+                </field>
+            </field>
+        </record>
+
+        <!-- TODO: merge the 3 voucher form views of this file into a single view -->
+        <!-- Low priority view... If we open a voucher from a m2o, for example. -->
+        <record model="ir.ui.view" id="view_low_priority_payment_form">
+            <field name="name">account.voucher.payment.low.priority.form</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher.view_low_priority_payment_form"/>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="on_change">onchange_partner_id(partner_id, remit_to, journal_id, amount, currency_id, type, date, context)</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="remit_to"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Supplier Payment -->
+        <record model="ir.ui.view" id="view_vendor_payment_form">
+            <field name="name">account.voucher.payment.form</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher.view_vendor_payment_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="on_change">onchange_partner_id(partner_id, remit_to, journal_id, amount, currency_id, type, date, context)</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="remit_to"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Register Payment Form (old Pay Invoice wizard) -->
+        <record model="ir.ui.view" id="view_vendor_receipt_dialog_form">
+            <field name="name">account.voucher.receipt.dialog.form</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher.view_vendor_receipt_dialog_form"/>
+            <field name="priority">30</field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="on_change">onchange_partner_id(partner_id, remit_to, journal_id, amount, currency_id, type, date, context)</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="remit_to"/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <!-- Customer Payment -->
+        <record model="ir.ui.view" id="view_vendor_receipt_form">
+            <field name="name">account.voucher.receipt.form</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher.view_vendor_receipt_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="on_change">onchange_partner_id(partner_id, remit_to, journal_id, amount, currency_id, type, date, context)</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="remit_to"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>
