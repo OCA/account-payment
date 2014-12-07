@@ -66,6 +66,16 @@
         <field name="model">payment.order</field>
         <field name="inherit_id" ref="account_payment.view_payment_order_form"/>
         <field name="arch" type="xml">
+            <field name='line_ids' position="after">
+                <group>
+                    <group class="oe_subtotal_footer oe_right">
+                        <field name="total" widget="monetary"/>
+                    </group>
+                </group>
+            </field>
+            <field name='total' position="replace">
+                <field name="total" invisible="1"/>
+            </field>
             <xpath expr="//field[@name='create_date']" position="replace">
                 <field colspan="4" name="create_date"/>
             </xpath>
