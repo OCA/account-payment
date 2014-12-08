@@ -30,34 +30,31 @@ class account_voucher(osv.osv):
                                     states={'draft': [('readonly', False)]}),
     }
 
+    _defaults = {
+        'remit_to':
+            lambda self, cr, uid, context:
+            context.get('partner_id', False)
+            and self.pool.get('res.partner').address_get(
+                cr, uid, [context['partner_id']], ['remit_to'])['remit_to'],
+    }
+
     def onchange_partner_id(self, cr, uid, ids, partner_id, remit_to,
                             journal_id, amount, currency_id,
                             ttype, date, context=None):
-        journal_pool = self.pool.get('account.journal')
-        rel_pool = self.pool.get('res.partner.relation')
 
         res = super(account_voucher, self).onchange_partner_id(
             cr, uid, ids, partner_id, journal_id, amount,
             currency_id, ttype, date, context=context)
 
-        if partner_id and journal_id:
-            journal = journal_pool.browse(cr, uid, journal_id, context=context)
-            remit_rel_type = journal.company_id and \
-                        journal.company_id.property_partner_rel_remit or False
-            today = fields.date.context_today(self,cr,uid,context=context)
-            remit_rel_ids = rel_pool.search(cr, uid,
-                            [('left_partner_id', '=', partner_id),
-                             ('type_id', '=', remit_rel_type.id),
-                             '|', ('date_start', '<=', today),
-                             ('date_start', '=', False),
-                             '|',
-                             ('date_end', '>=', today),
-                             ('date_end', '=', False)])
-            if remit_rel_ids:
-                remit_rel = rel_pool.browse(cr, uid, remit_rel_ids[0],
-                                            context=context)
-                res['value']['remit_to'] = remit_rel.right_partner_id.id
-            else:
-                res['value']['remit_to'] = partner_id
+        if not partner_id:
+            res['value']['remit_to'] = False
+            return res
 
+        addr = self.pool.get('res.partner').address_get(
+            cr, uid, [partner_id], ['remit_to'])
+
+        if addr:
+            res['value']['remit_to'] = addr['remit_to']
+        else:
+            res['value']['remit_to'] = partner_id
         return res

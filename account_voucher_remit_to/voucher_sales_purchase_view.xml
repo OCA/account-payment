@@ -18,7 +18,7 @@
             <field name="inherit_id" ref="account_voucher.view_voucher_filter_sale"/>
             <field name="arch" type="xml">
                 <field name="partner_id" position="after">
-                    <field name="remit_to"/>
+                    <field name="remit_to" context="{'default_type':'remit_to'}"/>
                 </field>
             </field>
         </record>
@@ -32,7 +32,7 @@
                     <attribute name="on_change">onchange_partner_id(partner_id, remit_to, journal_id, amount, currency_id, type, date, context)</attribute>
                 </xpath>
                 <xpath expr="//field[@name='partner_id']" position="after">
-                    <field name="remit_to"/>
+                    <field name="remit_to" context="{'default_type':'remit_to'}"/>
                 </xpath>
             </field>
         </record>
@@ -46,7 +46,7 @@
                     <attribute name="on_change">onchange_partner_id(partner_id, remit_to, journal_id, amount, currency_id, type, date, context)</attribute>
                 </xpath>
                 <xpath expr="//field[@name='partner_id']" position="after">
-                    <field name="remit_to"/>
+                    <field name="remit_to" context="{'default_type':'remit_to'}"/>
                 </xpath>
             </field>
         </record>

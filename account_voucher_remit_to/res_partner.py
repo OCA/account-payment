@@ -18,23 +18,20 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
+from openerp.osv import osv, fields
 
-from openerp.osv import osv,fields
 
-class res_company(osv.osv):
-    _inherit = "res.company"
+class res_partner(osv.osv):
+    _inherit = "res.partner"
 
     _columns = {
-        'property_partner_rel_remit': fields.property(
-            'res.partner.relation.type',
-            type='many2one',
-            relation='res.partner.relation.type',
-            string="Remit-to relation type",
-            view_load=True,
-            help="This type of relationship will be used, "
-                 "during the preparation of account vouchers "
-                 "to determine the remit-to address."),
+        'type': fields.selection(
+            [('default', 'Default'), ('invoice', 'Invoice'),
+             ('delivery', 'Shipping'), ('contact', 'Contact'),
+             ('other', 'Other'), ('remit_to', 'Remit-to')],
+            'Address Type',
+            help="Used to select automatically the right address "
+                 "according to the context in sales and "
+                 "purchases documents."),
+
     }
-
-res_company()
-

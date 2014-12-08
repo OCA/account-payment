@@ -26,21 +26,16 @@
     "author": "Eficent",
     "website": "www.eficent.com",
     "category": "Accounting",
-    "depends": ["account_voucher", "partner_relations"],
+    "depends": ["account_voucher"],
     "description": """
 Introduction
 ------------
 This module aims to introduce the possibility to assign a remit-to address
 to a partner, that is then used at the time of printing a voucher.
 
-It uses the module 'Partner relations' available in the OCA project "partner-contact".
-
     """,
     "init_xml": [],
-    "update_xml": [    
-        "data/partner_relation_data.xml",
-        "data/company_data.xml",
-        "res_company_view.xml",
+    "update_xml": [
         "account_voucher_view.xml",
         "voucher_payment_receipt_view.xml",
         "voucher_sales_purchase_view.xml",
