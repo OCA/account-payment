@@ -27,7 +27,6 @@ from openerp.osv import fields, orm
 class ResCompany(orm.Model):
     _inherit = "res.company"
     _columns = {
-        'vat_on_payment': fields.boolean('VAT on payment treatment'),
         'allow_distributing_write_off': fields.boolean(
             'Allow distributing write-off',
             help="If not set, paying several 'cash basis' invoices with same "
@@ -39,10 +38,6 @@ class ResCompany(orm.Model):
 class AccountConfigSettings(orm.TransientModel):
     _inherit = 'account.config.settings'
     _columns = {
-        'vat_on_payment': fields.related(
-            'company_id', 'vat_on_payment',
-            type='boolean',
-            string="VAT on payment treatment"),
         'allow_distributing_write_off': fields.related(
             'company_id', 'allow_distributing_write_off',
             type="boolean",
@@ -59,13 +54,11 @@ class AccountConfigSettings(orm.TransientModel):
             company = self.pool.get('res.company').browse(
                 cr, uid, company_id, context=context)
             res['value'].update({
-                'vat_on_payment': company.vat_on_payment,
                 'allow_distributing_write_off': (
                     company.allow_distributing_write_off),
             })
         else:
             res['value'].update({
-                'vat_on_payment': False,
                 'allow_distributing_write_off': False,
             })
         return res

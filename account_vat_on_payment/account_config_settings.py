@@ -29,3 +29,18 @@ class AccountConfigSettings(orm.TransientModel):
             type='boolean',
             string="VAT on payment treatment"),
     }
+
+    def onchange_company_id(self, cr, uid, ids, company_id, context=None):
+        res = super(AccountConfigSettings, self).onchange_company_id(
+            cr, uid, ids, company_id, context=context)
+        if company_id:
+            company = self.pool.get('res.company').browse(
+                cr, uid, company_id, context=context)
+            res['value'].update({
+                'vat_on_payment': company.vat_on_payment,
+            })
+        else:
+            res['value'].update({
+                'vat_on_payment': False,
+            })
+        return res
