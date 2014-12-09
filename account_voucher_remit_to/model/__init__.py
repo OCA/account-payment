@@ -18,25 +18,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-from openerp.osv import fields, osv
-
-
-class account_voucher(osv.osv):
-    _inherit = 'account.voucher'
-
-    def basic_onchange_partner(self, cr, uid, ids, partner_id,
-                               journal_id, ttype, context=None):
-        res = super(account_voucher, self).basic_onchange_partner(
-            cr, uid, ids, partner_id, journal_id, ttype, context=context)
-        partner_pool = self.pool.get('res.partner')
-        partner = partner_pool.browse(cr, uid, partner_id, context=context)
-        ttype = context.get('type', 'bank')
-        if ttype == 'payment' \
-                and partner.supplier_payment_method:
-            res['value']['journal_id'] = \
-                partner.supplier_payment_method.id
-        elif ttype == 'receipt' \
-                and partner.customer_payment_method:
-            res['value']['journal_id'] = \
-                partner.customer_payment_method.id
-        return res
+import res_partner
+import account_voucher
+import account_invoice

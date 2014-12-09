@@ -36,9 +36,9 @@ to a partner, that is then used at the time of printing a voucher.
     """,
     "init_xml": [],
     "update_xml": [
-        "account_voucher_view.xml",
-        "voucher_payment_receipt_view.xml",
-        "voucher_sales_purchase_view.xml",
+        "view/account_voucher_view.xml",
+        "view/voucher_payment_receipt_view.xml",
+        "view/voucher_sales_purchase_view.xml",
     ],
     'demo_xml': [
 
