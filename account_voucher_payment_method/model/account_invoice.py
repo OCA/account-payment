@@ -25,39 +25,17 @@ from openerp.osv import orm, fields
 class account_invoice(orm.Model):
     _inherit = 'account.invoice'
 
-    _columns = {
-        'payment_method_id': fields.many2one(
-            'account.journal', 'Payment Method',
-            help="Payment method used in Payment vouchers."),
-    }
-
-    def onchange_partner_id(
-            self, cr, uid, ids, type, partner_id, date_invoice=False,
-            payment_term=False, partner_bank_id=False, company_id=False):
-        res = super(account_invoice, self).onchange_partner_id(
-            cr, uid, ids, type, partner_id, date_invoice=date_invoice,
-            payment_term=payment_term, partner_bank_id=partner_bank_id,
-            company_id=company_id)
-        if partner_id:
-            partner = self.pool['res.partner'].browse(cr, uid, partner_id)
-            if type in ('in_invoice', 'in_refund'):
-                res['value']['payment_method_id'] = \
-                    partner.supplier_payment_method.id or False
-            elif type in ('out_invoice', 'out_refund'):
-                res['value'].update({
-                    'payment_method_id':
-                    partner.customer_payment_method.id or False,
-                })
-        else:
-            res['value']['payment_method_id'] = False
-        return res
-
     def invoice_pay_customer(self, cr, uid, ids, context=None):
         res = super(account_invoice, self).invoice_pay_customer(
             cr, uid, ids, context=context)
         if res and ids:
             inv = self.browse(cr, uid, ids[0], context=context)
-            if inv.payment_method_id:
-                res['default_type'] = inv.payment_method_id
-                res['type'] = res['default_type']
+            if inv.type in ('in_invoice', 'in_refund') \
+                    and inv.partner_id.supplier_payment_method:
+                res['context']['default_journal_id'] = \
+                    inv.partner_id.supplier_payment_method.id or False
+            elif inv.type in ('out_invoice', 'out_refund') \
+                    and inv.partner_id.customer_payment_method:
+                res['context']['default_journal_id'] = \
+                    inv.partner_id.customer_payment_method.id or False
         return res
