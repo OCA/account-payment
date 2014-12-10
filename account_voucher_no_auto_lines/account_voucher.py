@@ -45,14 +45,65 @@ class account_voucher(orm.Model):
         return res
 
     def onchange_amount(self, cr, uid, ids, *args, **kwargs):
+        """
+        Unsaved lines do not have ids and may look like this
+        [5, False, {...}]
+
+        Already saved lines should have an id defined
+        [6, 455, ...]
+
+        The third value is the data of the line. If the 
+        value is False, then it means that the line didn't
+        change.
+
+        Reference to old ids can't be reused as the base class for
+        voucher.line deletes references to old lines and replace them
+        by "auto lines"... 
+        """
+
+        context = kwargs.get('context', None)
+
+        line_pool = self.pool.get('account.voucher.line')
+
+        def copy_lines():
+            if len(ids) == 0:
+                return [], []
+
+            line_ids = line_pool.search(cr, uid, [('voucher_id', '=', ids[0])])
+            saved_lines = line_pool.read(cr, uid, line_ids)
+
+            line_cr_ids = []
+            line_dr_ids = []
+
+            for line in saved_lines:
+                for key in ['id','reconcile', 'supplier_invoice_number',
+                            'untax_amount', 'company_id',
+                            'account_analytic_id', 'voucher_id',
+                            'partner_id']:
+                    del line[key]
+
+                line['currency_id'] = line['currency_id'][0]
+                line['move_line_id'] = line['move_line_id'][0]
+                line['account_id'] = line['account_id'][0]
+
+                if line.get('type') == 'cr':
+                    line_cr_ids.append(line)
+                else:
+                    line_dr_ids.append(line)
+
+
+            return line_cr_ids, line_dr_ids
+
+
+        if context:
+            line_cr_ids, line_dr_ids  = copy_lines()
 
         res = super(account_voucher, self).onchange_amount(
             cr, uid, ids, *args, **kwargs)
 
-        if 'context' in kwargs and 'line_cr_ids' in kwargs['context']:
-            res['value']['line_cr_ids'] = kwargs['context']['line_cr_ids']
 
-        if 'context' in kwargs and 'line_dr_ids' in kwargs['context']:
-            res['value']['line_dr_ids'] = kwargs['context']['line_dr_ids']
+        if context:
+            res['value']['line_cr_ids'] = line_cr_ids
+            res['value']['line_dr_ids'] = line_dr_ids
 
         return res
