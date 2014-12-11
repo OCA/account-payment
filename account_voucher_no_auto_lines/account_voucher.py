@@ -22,6 +22,35 @@
 
 from openerp.osv import orm
 
+def copy_lines(cr, uid, ids, pool):
+    if len(ids) == 0:
+        return [], []
+
+    line_ids = pool.search(cr, uid, [('voucher_id', '=', ids[0])])
+    saved_lines = pool.read(cr, uid, line_ids)
+
+    line_cr_ids = []
+    line_dr_ids = []
+
+    for line in saved_lines:
+        for key in ['id','reconcile', 'supplier_invoice_number',
+                    'untax_amount', 'company_id',
+                    'account_analytic_id', 'voucher_id',
+                    'partner_id']:
+            if key in line:
+                del line[key]
+
+        for key in ['currency_id', 'move_line_id', 'account_id']:
+            if line[key]:
+                line[key] = line[key][0]
+
+        if line.get('type') == 'cr':
+            line_cr_ids.append(line)
+        else:
+            line_dr_ids.append(line)
+
+    return line_cr_ids, line_dr_ids
+
 
 class account_voucher(orm.Model):
 
@@ -63,44 +92,12 @@ class account_voucher(orm.Model):
 
         context = kwargs.get('context', None)
 
-        line_pool = self.pool.get('account.voucher.line')
-
-        def copy_lines():
-            if len(ids) == 0:
-                return [], []
-
-            line_ids = line_pool.search(cr, uid, [('voucher_id', '=', ids[0])])
-            saved_lines = line_pool.read(cr, uid, line_ids)
-
-            line_cr_ids = []
-            line_dr_ids = []
-
-            for line in saved_lines:
-                for key in ['id','reconcile', 'supplier_invoice_number',
-                            'untax_amount', 'company_id',
-                            'account_analytic_id', 'voucher_id',
-                            'partner_id']:
-                    del line[key]
-
-                line['currency_id'] = line['currency_id'][0]
-                line['move_line_id'] = line['move_line_id'][0]
-                line['account_id'] = line['account_id'][0]
-
-                if line.get('type') == 'cr':
-                    line_cr_ids.append(line)
-                else:
-                    line_dr_ids.append(line)
-
-
-            return line_cr_ids, line_dr_ids
-
-
         if context:
-            line_cr_ids, line_dr_ids  = copy_lines()
+            line_pool = self.pool['account.voucher.line']
+            line_cr_ids, line_dr_ids  = copy_lines(cr, uid, ids, line_pool)
 
         res = super(account_voucher, self).onchange_amount(
             cr, uid, ids, *args, **kwargs)
-
 
         if context:
             res['value']['line_cr_ids'] = line_cr_ids
