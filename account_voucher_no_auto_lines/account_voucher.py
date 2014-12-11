@@ -90,17 +90,13 @@ class account_voucher(orm.Model):
         by "auto lines"... 
         """
 
-        context = kwargs.get('context', None)
-
-        if context:
-            line_pool = self.pool['account.voucher.line']
-            line_cr_ids, line_dr_ids  = copy_lines(cr, uid, ids, line_pool)
+        line_pool = self.pool['account.voucher.line']
+        line_cr_ids, line_dr_ids  = copy_lines(cr, uid, ids, line_pool)
 
         res = super(account_voucher, self).onchange_amount(
             cr, uid, ids, *args, **kwargs)
 
-        if context:
-            res['value']['line_cr_ids'] = line_cr_ids
-            res['value']['line_dr_ids'] = line_dr_ids
+        res['value']['line_cr_ids'] = line_cr_ids
+        res['value']['line_dr_ids'] = line_dr_ids
 
         return res

@@ -87,8 +87,6 @@ class test_account_voucher(common.TransactionCase):
                 voucher.payment_rate_currency_id.id,
                 voucher.company_id.id,
                 context=self.context)
-
-
                         
         voucher = self.model.read(self.cr, self.uid, voucher_id)
 
