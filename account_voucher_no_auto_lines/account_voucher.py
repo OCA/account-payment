@@ -22,31 +22,40 @@
 
 from openerp.osv import orm
 
-def copy_lines(cr, uid, ids, pool):
+excluded_fields = ['move_line_id',
+                   'amount',
+                   'amount_unreconciled',
+                   'account_id',
+                   'date_original',
+                   'name',
+                   'date_due',
+                   'type',
+                   'amount_original',
+                   'currency_id']
+
+def copy_lines(cr, uid, ids, pool, context):
     if len(ids) == 0:
         return [], []
 
-    line_ids = pool.search(cr, uid, [('voucher_id', '=', ids[0])])
-    saved_lines = pool.read(cr, uid, line_ids)
+    line_ids = pool.search(cr, uid, [('voucher_id', '=', ids[0])],
+                           context=context)
+    saved_lines = pool.read(cr, uid, line_ids, excluded_fields, context=context)
 
     line_cr_ids = []
     line_dr_ids = []
 
     for line in saved_lines:
-        for key in ['id','reconcile', 'supplier_invoice_number',
-                    'untax_amount', 'company_id',
-                    'account_analytic_id', 'voucher_id',
-                    'partner_id']:
-            if key in line:
-                del line[key]
+        del line['id']
 
         for key in ['currency_id', 'move_line_id', 'account_id']:
             if line[key]:
                 line[key] = line[key][0]
+            else:
+                del line[key]
 
         if line.get('type') == 'cr':
             line_cr_ids.append(line)
-        else:
+        elif line.get('type') == 'dr':
             line_dr_ids.append(line)
 
     return line_cr_ids, line_dr_ids
@@ -89,9 +98,10 @@ class account_voucher(orm.Model):
         voucher.line deletes references to old lines and replace them
         by "auto lines"... 
         """
+        context = kwargs['context']
 
         line_pool = self.pool['account.voucher.line']
-        line_cr_ids, line_dr_ids  = copy_lines(cr, uid, ids, line_pool)
+        line_cr_ids, line_dr_ids  = copy_lines(cr, uid, ids, line_pool, context)
 
         res = super(account_voucher, self).onchange_amount(
             cr, uid, ids, *args, **kwargs)
