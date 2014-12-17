@@ -98,7 +98,7 @@ class account_voucher(orm.Model):
         voucher.line deletes references to old lines and replace them
         by "auto lines"... 
         """
-        context = kwargs['context']
+        context = kwargs.get('context', {})
 
         line_pool = self.pool['account.voucher.line']
         line_cr_ids, line_dr_ids  = copy_lines(cr, uid, ids, line_pool, context)
