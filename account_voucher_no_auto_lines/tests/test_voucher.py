@@ -2,6 +2,7 @@
 
 from openerp.tests import common
 
+
 class test_account_voucher(common.TransactionCase):
 
     def setUp(self):
@@ -77,17 +78,18 @@ class test_account_voucher(common.TransactionCase):
         voucher = self.model.browse(self.cr, self.uid, voucher_id)
 
         val = voucher.onchange_amount(
-                voucher.amount,
-                voucher.payment_rate,
-                voucher.partner_id.id,
-                voucher.journal_id.id,
-                voucher.currency_id.id,
-                'payment',
-                voucher.date,
-                voucher.payment_rate_currency_id.id,
-                voucher.company_id.id,
-                context=self.context)
-                        
+            voucher.amount,
+            voucher.payment_rate,
+            voucher.partner_id.id,
+            voucher.journal_id.id,
+            voucher.currency_id.id,
+            'payment',
+            voucher.date,
+            voucher.payment_rate_currency_id.id,
+            voucher.company_id.id,
+            context=self.context
+        )
+
         voucher = self.model.read(self.cr, self.uid, voucher_id)
 
         self.assertEqual(voucher['line_cr_ids'], [])

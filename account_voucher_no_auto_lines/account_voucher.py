@@ -33,13 +33,15 @@ excluded_fields = ['move_line_id',
                    'amount_original',
                    'currency_id']
 
+
 def copy_lines(cr, uid, ids, pool, context):
     if len(ids) == 0:
         return [], []
 
     line_ids = pool.search(cr, uid, [('voucher_id', '=', ids[0])],
                            context=context)
-    saved_lines = pool.read(cr, uid, line_ids, excluded_fields, context=context)
+    saved_lines = pool.read(cr, uid, line_ids, excluded_fields,
+                            context=context)
 
     line_cr_ids = []
     line_dr_ids = []
@@ -90,18 +92,19 @@ class account_voucher(orm.Model):
         Already saved lines should have an id defined
         [6, 455, ...]
 
-        The third value is the data of the line. If the 
+        The third value is the data of the line. If the
         value is False, then it means that the line didn't
         change.
 
         Reference to old ids can't be reused as the base class for
         voucher.line deletes references to old lines and replace them
-        by "auto lines"... 
+        by "auto lines"...
         """
         context = kwargs.get('context', {})
 
         line_pool = self.pool['account.voucher.line']
-        line_cr_ids, line_dr_ids  = copy_lines(cr, uid, ids, line_pool, context)
+        line_cr_ids, line_dr_ids = copy_lines(cr, uid, ids, line_pool,
+                                              context)
 
         res = super(account_voucher, self).onchange_amount(
             cr, uid, ids, *args, **kwargs)
