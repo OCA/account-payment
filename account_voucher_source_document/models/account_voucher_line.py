@@ -35,7 +35,7 @@ class account_voucher_line(orm.Model):
             or ''
         )
 
-    def _get_supplier_invoice_number(
+    def _get_document_source(
             self, cr, uid, ids, name, args, context=None):
 
         res = {}
@@ -50,7 +50,7 @@ class account_voucher_line(orm.Model):
 
     _columns = {
         'document_source': fields.function(
-            _get_supplier_invoice_number,
+            _get_document_source,
             type='char',
             size=64,
             string="Document source"

@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
-#    
+#
 #    Copyright (C) 2013 Agile Business Group sagl
 #    (<http://www.agilebg.com>)
 #
@@ -20,11 +20,12 @@
 ##############################################################################
 
 {
-    'name': "Supplier source document in payment vouchers",
+    'name': "Source Document in Customer Payments",
     'version': '0.1',
     'category': 'Accounting & Finance',
-    'description': """This module adds the source document from the customer invoice to the customer payment
-lines. So that it's easier to find the invoices paid when they are imported from an
+    'description': """This module adds the source document from
+the customer invoice to the customer payment lines. So that it's
+easier to find the invoices paid when they are imported from an
 external system.
 """,
     'author': 'Savoir-faire linux',
