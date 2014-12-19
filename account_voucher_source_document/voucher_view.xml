@@ -2,7 +2,7 @@
 <openerp>
 <data>
 
-        <!-- Supplier Payment -->
+        <!-- Customer Payment -->
         <record model="ir.ui.view" id="view_vendor_receipt_form">
             <field name="name">account.voucher.receipt.form</field>
             <field name="model">account.voucher</field>
