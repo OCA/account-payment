@@ -17,7 +17,7 @@
         product_id: product.product_product_3
         uos_id: product.product_uom_unit
     journal_id: account.expenses_journal
-    partner_id: base.res_partner_9
+    partner_id: base.res_partner_19
 
 -
   I check that the invoice is in draft state
