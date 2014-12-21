@@ -36,7 +36,7 @@ external system.
         'voucher_view.xml',
     ],
     'test': [
-        'test/purchase_payment.yml',
+        'test/customer_payment.yml',
     ],
     "demo": [],
     "active": False,
