@@ -4,36 +4,36 @@
   !python {model: account.invoice}: |
     context.update({'type': 'out_invoice'})
 -
-  !record {model: account.invoice, id: account_invoice_0}:
-    account_id: account.a_expense
+  !record {model: account.invoice, id: account_invoice_source}:
+    account_id: account.a_recv
     company_id: base.main_company
     currency_id: base.EUR
     origin: 'PAPER'
     invoice_line:
-      - account_id: account.a_pay
+      - account_id: account.a_sale
         name: '[PCSC234] PC Assemble SC234'
         price_unit: 450.0
         quantity: 1.0
         product_id: product.product_product_3
         uos_id: product.product_uom_unit
     journal_id: account.bank_journal
-    partner_id: base.res_partner_19
+    partner_id: base.res_partner_12
 
 -
   I check that the invoice is in draft state
 -
-  !assert {model: account.invoice, id: account_invoice_0}:
+  !assert {model: account.invoice, id: account_invoice_source}:
     - state == 'draft'
 
 -
   I make the invoice in Open state
 -
-  !workflow {model: account.invoice, action: invoice_open, ref: account_invoice_0}
+  !workflow {model: account.invoice, action: invoice_open, ref: account_invoice_source}
 
 -
   I check that the invoice is in open state
 -
-  !assert {model: account.invoice, id: account_invoice_0}:
+  !assert {model: account.invoice, id: account_invoice_source}:
     - state == 'open'
 
 -
@@ -42,33 +42,39 @@
   !python {model: account.voucher}: |
     import netsvc
     vals = {}
-    res = self.onchange_partner_id(cr, uid, [], ref("base.res_partner_19"), ref('account.bank_journal'), 0.0, 1, ttype='payment', date=False)
+    res = self.onchange_partner_id(cr, uid, [], ref("base.res_partner_12"), ref('account.bank_journal'), 0.0, 1, ttype='receipt', date=False)
 
     vals = {
         'account_id': ref('account.cash'),
         'amount': 450.0,
         'company_id': ref('base.main_company'),
         'journal_id': ref('account.bank_journal'),
-        'partner_id': ref('base.res_partner_19'),
+        'partner_id': ref('base.res_partner_12'),
         'period_id': ref('account.period_8'),
-        'type': 'payment',
+        'type': 'purchase',
     }
 
-    if not res['value']['line_dr_ids']:
-      res['value']['line_dr_ids'] = [{'type': 'dr', 'account_id': ref('account.a_expense'),}]
+    if not res['value']['line_cr_ids']:
+      res['value']['line_cr_ids'] = [{'type': 'cr', 'account_id': ref('account.a_recv'),}]
 
-    res['value']['line_dr_ids'][0]['amount'] = 450.0
+    res['value']['line_cr_ids'][0]['amount'] = 450.0
 
-    vals['line_dr_ids'] = [(0,0,i) for i in res['value']['line_dr_ids']]
+    vals['line_cr_ids'] = [(0,0,i) for i in res['value']['line_cr_ids']]
 
     id = self.create(cr, uid, vals)
     voucher = self.browse(cr, uid, id)
+
     assert (voucher.state=='draft'), "Voucher is not in draft state"
+
     wf_service = netsvc.LocalService("workflow")
     wf_service.trg_validate(uid, 'account.voucher', voucher.id, 'proforma_voucher', cr)
+
+    voucher = self.browse(cr, uid, id)
+
+    assert (voucher.state == 'posted'), "Voucher is not in posted state"
     assert (voucher.line_ids[0].document_source == 'PAPER'), 'wrong document_source'
 -
   Finally i will Confirm the state of the invoice is paid
 -
-  !assert {model: account.invoice, id: account_invoice_0}:
+  !assert {model: account.invoice, id: account_invoice_source}:
     - state == 'paid'
