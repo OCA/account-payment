@@ -2,7 +2,7 @@
   Create an invoice for the partner Seagate with amount 450.0
 -
   !python {model: account.invoice}: |
-    context.update({'type': 'in_invoice'})
+    context.update({'type': 'out_invoice'})
 -
   !record {model: account.invoice, id: account_invoice_0}:
     account_id: account.a_expense
@@ -10,13 +10,13 @@
     currency_id: base.EUR
     origin: 'PAPER'
     invoice_line:
-      - account_id: account.a_expense
+      - account_id: account.a_pay
         name: '[PCSC234] PC Assemble SC234'
         price_unit: 450.0
         quantity: 1.0
         product_id: product.product_product_3
         uos_id: product.product_uom_unit
-    journal_id: account.expenses_journal
+    journal_id: account.bank_journal
     partner_id: base.res_partner_19
 
 -
@@ -31,12 +31,19 @@
   !workflow {model: account.invoice, action: invoice_open, ref: account_invoice_0}
 
 -
+  I check that the invoice is in open state
+-
+  !assert {model: account.invoice, id: account_invoice_0}:
+    - state == 'open'
+
+-
   I will create and post an account voucher of amount 450.0 for the partner Seagate.
 -
   !python {model: account.voucher}: |
     import netsvc
     vals = {}
     res = self.onchange_partner_id(cr, uid, [], ref("base.res_partner_19"), ref('account.bank_journal'), 0.0, 1, ttype='payment', date=False)
+
     vals = {
         'account_id': ref('account.cash'),
         'amount': 450.0,
@@ -49,8 +56,11 @@
 
     if not res['value']['line_dr_ids']:
       res['value']['line_dr_ids'] = [{'type': 'dr', 'account_id': ref('account.a_expense'),}]
+
     res['value']['line_dr_ids'][0]['amount'] = 450.0
+
     vals['line_dr_ids'] = [(0,0,i) for i in res['value']['line_dr_ids']]
+
     id = self.create(cr, uid, vals)
     voucher = self.browse(cr, uid, id)
     assert (voucher.state=='draft'), "Voucher is not in draft state"
