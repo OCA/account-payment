@@ -20,11 +20,11 @@
 #
 ##############################################################################
 from . import account_voucher
+from . import company
 from . import account_invoice
 from . import account_move_line
 from . import account_account
 from . import account_tax_code
 from . import account_journal
-from . import company
 from . import account_config_settings
 from . import account_fiscal_position
