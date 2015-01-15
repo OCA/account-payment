@@ -49,10 +49,14 @@ class account_voucher(orm.Model):
         res = super(account_voucher, self).onchange_amount(
             cr, uid, ids, *args, **kwargs)
 
-        if 'context' in kwargs and 'line_cr_ids' in kwargs['context']:
-            res['value']['line_cr_ids'] = kwargs['context']['line_cr_ids']
+        if 'value' in res and 'line_cr_ids' in res['value']:
+            for line in res['value']['line_cr_ids']:
+                line['amount'] = 0.0
+                line['reconcile'] = False
 
-        if 'context' in kwargs and 'line_dr_ids' in kwargs['context']:
-            res['value']['line_dr_ids'] = kwargs['context']['line_dr_ids']
+        if 'value' in res and 'line_dr_ids' in res['value']:
+            for line in res['value']['line_dr_ids']:
+                line['amount'] = 0.0
+                line['reconcile'] = False
 
         return res
