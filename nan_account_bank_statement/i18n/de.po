@@ -1,0 +1,342 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+# 	* nan_account_bank_statement
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 7.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-10-21 09:23+0000\n"
+"PO-Revision-Date: 2015-01-17 17:08+0100\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#. module: nan_account_bank_statement
+#: field:account.bank.statement.line,search_by:0
+msgid "Search By"
+msgstr "Suche nach"
+
+#. module: nan_account_bank_statement
+#: selection:account.bank.statement.line,search_by:0
+msgid "Invoice Origin"
+msgstr "Rechnungsursprung"
+
+#. module: nan_account_bank_statement
+#: code:addons/nan_account_bank_statement/account_statement.py:683
+#, python-format
+msgid "Company Check Error"
+msgstr "Fehlerprüfung im Unternehmen"
+
+#. module: nan_account_bank_statement
+#: selection:account.bank.statement.line,search_by:0
+msgid "Payment Order"
+msgstr "Zahlungsanweisung"
+
+#. module: nan_account_bank_statement
+#: selection:account.bank.statement.line,search_by:0
+msgid "None"
+msgstr "Keine"
+
+#. module: nan_account_bank_statement
+#: view:account.bank.statement.line.data:0
+msgid "Statement Line Data"
+msgstr "Auszugspositionsdaten"
+
+#. module: nan_account_bank_statement
+#: selection:account.bank.statement.line,search_by:0
+msgid "Reference and Amount"
+msgstr "Zweck und Betrag"
+
+#. module: nan_account_bank_statement
+#: selection:account.bank.statement.line,search_by:0
+msgid "Vat and Amount"
+msgstr "USt. und Betrag"
+
+#. module: nan_account_bank_statement
+#: help:account.bank.statement.line.rule,sequence:0
+msgid ""
+"Rules will be applied in the order defined by this Sequence and will stop in "
+"the first matching rule."
+msgstr ""
+"Anwendung erfolgt nach den Regeln in der Reihenfolge dieser Folgenummer und "
+"endet bei erster Übereinstimmung."
+
+#. module: nan_account_bank_statement
+#: field:account.bank.statement.line.data,line_id:0
+msgid "Statement Line"
+msgstr "Auszugsposition"
+
+#. module: nan_account_bank_statement
+#: code:addons/nan_account_bank_statement/account_statement.py:247
+#, python-format
+msgid "Search by VAT error"
+msgstr "Fehler bei Suche nach USt."
+
+#. module: nan_account_bank_statement
+#: model:ir.ui.menu,name:nan_account_bank_statement.menu_configuration_bank_statement
+msgid "Bank Statements"
+msgstr "Kontoauszüge"
+
+#. module: nan_account_bank_statement
+#: code:addons/nan_account_bank_statement/account_statement.py:257
+#, python-format
+msgid ""
+"You cannot search by invoice number because it seems this line has not been "
+"imported from a bank statement file. The system expected an \"invoice_number"
+"\" key in the line with amount %(amount).2f in statement %(statement)s."
+msgstr ""
+"Sie können nicht nach Rechnungsnummern suchen, es scheint als stamme diese "
+"Position nicht aus einem Kontoauszugs-Import. Das System erwartete einen "
+"\"invoice_number\"-Schlüssel in der Position mit Betrag %(amount).2f im "
+"Auszug %(statement)s."
+
+#. module: nan_account_bank_statement
+#: view:account.bank.statement.split.line.wizard:0
+msgid "Split Line Wizard"
+msgstr "Assistent für Split-Buchungen"
+
+#. module: nan_account_bank_statement
+#: code:addons/nan_account_bank_statement/account_statement.py:237
+#, python-format
+msgid "Search by reference error"
+msgstr "Fehler bei Suche nach Zweck"
+
+#. module: nan_account_bank_statement
+#: model:ir.model,name:nan_account_bank_statement.model_account_bank_statement_line_data
+msgid "account.bank.statement.line.data"
+msgstr "account.bank.statement.line.data"
+
+#. module: nan_account_bank_statement
+#: field:account.bank.statement.line.rule,company_id:0
+msgid "Company"
+msgstr "Unternehmen"
+
+#. module: nan_account_bank_statement
+#: constraint:account.bank.statement.line.rule:0
+msgid "Company Check Error."
+msgstr "Fehler bei Unternehmensprüfung."
+
+#. module: nan_account_bank_statement
+#: view:account.bank.statement.line.rule:0
+msgid "Statement Line Rule"
+msgstr "Regel für Auszugsposition"
+
+#. module: nan_account_bank_statement
+#: selection:account.bank.statement.line,search_by:0
+msgid "Invoice Number"
+msgstr "Rechnungsnummer"
+
+#. module: nan_account_bank_statement
+#: model:ir.actions.act_window,name:nan_account_bank_statement.action_statement_line_split_wizard
+msgid "action.statement.line.split.wizard"
+msgstr "action.statement.line.split.wizard"
+
+#. module: nan_account_bank_statement
+#: field:account.bank.statement.line.data,key:0
+#: field:account.bank.statement.line.rule,key:0
+msgid "Key"
+msgstr "Schlüssel"
+
+#. module: nan_account_bank_statement
+#: code:addons/nan_account_bank_statement/account_statement.py:257
+#: code:addons/nan_account_bank_statement/account_statement.py:267
+#, python-format
+msgid "Search by invoice error"
+msgstr "Fehler bei Rechnungssuche"
+
+#. module: nan_account_bank_statement
+#: code:addons/nan_account_bank_statement/account_statement.py:267
+#, python-format
+msgid ""
+"You cannot search by invoice origin because it seems this line has not been "
+"imported from a bank statement file. The system expected an \"invoice_origin"
+"\" key in the line with amount %(amount).2f in statement %(statement)s."
+msgstr ""
+"Sie können nicht nach dem Rechnungsursprung suchen, es scheint als stamme "
+"diese Position nicht aus einem Kontoauszug-Import. Das System erwartete "
+"einen \"invoice_origin\"-Schlüssel in der Position mit Betrag %(amount).2f "
+"im Auszug %(statement)s."
+
+#. module: nan_account_bank_statement
+#: field:account.bank.statement.line.rule,account_id:0
+msgid "Account"
+msgstr "Konto"
+
+#. module: nan_account_bank_statement
+#: help:account.bank.statement.line,data_ids:0
+msgid ""
+"Data related to the line, usually extracted/imported from a file provided by "
+"the bank or another partner."
+msgstr ""
+"Positionsbezogene Daten, für gewöhnlich gewonnen aus einer Datei, die von "
+"der Bank oder anderem Partner stammt."
+
+#. module: nan_account_bank_statement
+#: view:account.bank.statement.split.line.wizard:0
+msgid "_Cancel"
+msgstr "Abbrechen"
+
+#. module: nan_account_bank_statement
+#: help:account.bank.statement.line.rule,expression:0
+msgid ""
+"If the value of the given Key contains this Expression, Account and Partner "
+"will be used for that statement line."
+msgstr ""
+"Wenn der Wert des Schlüssels diesen Ausdruck enthält, werden Konto und "
+"Partner in der Auszugszeile eingesetzt."
+
+#. module: nan_account_bank_statement
+#: help:account.bank.statement.line.rule,account_id:0
+msgid "Account to be used if expression matches."
+msgstr "Zu verwendendes Konto, wenn der Ausdruck übereinstimmt."
+
+#. module: nan_account_bank_statement
+#: code:addons/nan_account_bank_statement/account_statement.py:237
+#, python-format
+msgid ""
+"You cannot search by reference because it seems this line has not been "
+"imported from a bank statement file. The system expected a \"reference\" key "
+"in the line with amount %(amount).2f in statement %(statement)s."
+msgstr ""
+"Sie können nicht nach dem Zweckfeld suchen, es scheint als stamme diese "
+"Position nicht aus einem Kontoauszug-Import. Das System erwartete einen "
+"\"reference\"-Schlüssel in der Position mit Betrag %(amount).2f im Auszug "
+"%(statement)s."
+
+#. module: nan_account_bank_statement
+#: view:account.bank.statement:0
+msgid "_Search"
+msgstr "Suche"
+
+#. module: nan_account_bank_statement
+#: view:account.bank.statement.split.line.wizard:0
+msgid "_Accept"
+msgstr "Bestätige"
+
+#. module: nan_account_bank_statement
+#: model:ir.model,name:nan_account_bank_statement.model_account_bank_statement_line
+msgid "Bank Statement Line"
+msgstr "Kontoauszugsposition"
+
+#. module: nan_account_bank_statement
+#: field:account.bank.statement.line.data,value:0
+msgid "Value"
+msgstr "Wert"
+
+#. module: nan_account_bank_statement
+#: help:account.bank.statement.line.rule,partner_id:0
+msgid "Partner to be used if expression matches"
+msgstr "Zu verwendender Partner, wenn Ausdruck übereinstimmt"
+
+#. module: nan_account_bank_statement
+#: view:account.bank.statement:0
+msgid "Split"
+msgstr "Split"
+
+#. module: nan_account_bank_statement
+#: selection:account.bank.statement.line,search_by:0
+#: field:account.bank.statement.split.line.wizard,amount:0
+msgid "Amount"
+msgstr "Betrag"
+
+#. module: nan_account_bank_statement
+#: code:addons/nan_account_bank_statement/account_statement.py:247
+#, python-format
+msgid ""
+"You cannot search by VAT because it seems this line has not been imported "
+"from a bank statement file. The system expected a \"vat\" key in the line "
+"with amount %(amount).2f in statement %(statement)s."
+msgstr ""
+"Sie können nicht nach der Umsatzsteuer suchen, es scheint als stamme diese "
+"Position nicht aus einem Kontoauszug-Import. Das System erwartete einen \"vat"
+"\"-Schlüssel in der Position mit Betrag %(amount).2f im Auszug %(statement)s."
+
+#. module: nan_account_bank_statement
+#: sql_constraint:account.bank.statement.line.data:0
+msgid "Key-value pairs must be unique per statement line."
+msgstr "Schlüssel-Wert-Paare müssen je Auszugsposition eindeutig sein."
+
+#. module: nan_account_bank_statement
+#: model:ir.model,name:nan_account_bank_statement.model_account_bank_statement_split_line_wizard
+msgid "account.bank.statement.split.line.wizard"
+msgstr "account.bank.statement.split.line.wizard"
+
+#. module: nan_account_bank_statement
+#: field:account.bank.statement.line.rule,expression:0
+msgid "Expression"
+msgstr "Ausdruck"
+
+#. module: nan_account_bank_statement
+#: selection:account.bank.statement.line,search_by:0
+msgid "All"
+msgstr "Alle"
+
+#. module: nan_account_bank_statement
+#: field:account.bank.statement.line,data_ids:0
+msgid "Related Data"
+msgstr "Zugehörige Daten"
+
+#. module: nan_account_bank_statement
+#: field:account.bank.statement.line.rule,sequence:0
+msgid "Sequence"
+msgstr "Folge"
+
+#. module: nan_account_bank_statement
+#: help:account.bank.statement.line.rule,key:0
+msgid "Key in statement line data that should match the given Expression."
+msgstr ""
+"Schlüssel in Daten der Auszugsposition der mit gegebenem Ausdruck "
+"übereinstimmen soll."
+
+#. module: nan_account_bank_statement
+#: help:account.bank.statement.line.rule,company_id:0
+msgid "Company in which this rule should apply."
+msgstr "Unternehmen, in welchem diese Regel zutreffen soll"
+
+#. module: nan_account_bank_statement
+#: selection:account.bank.statement.line,search_by:0
+#: model:ir.model,name:nan_account_bank_statement.model_account_bank_statement
+msgid "Bank Statement"
+msgstr "Kontoauszug"
+
+#. module: nan_account_bank_statement
+#: selection:account.bank.statement.line,search_by:0
+#: model:ir.actions.act_window,name:nan_account_bank_statement.action_statement_line_rules
+#: model:ir.ui.menu,name:nan_account_bank_statement.menu_statement_line_rule
+msgid "Statement Line Rules"
+msgstr "Auszugspositions-Regeln"
+
+#. module: nan_account_bank_statement
+#: view:account.bank.statement:0
+msgid "S_plit"
+msgstr "Split"
+
+#. module: nan_account_bank_statement
+#: field:account.bank.statement.line.rule,partner_id:0
+msgid "Partner"
+msgstr "Partner"
+
+#. module: nan_account_bank_statement
+#: field:account.bank.statement,total_amount:0
+msgid "Total Amount"
+msgstr "Gesamtbetrag"
+
+#. module: nan_account_bank_statement
+#: model:ir.model,name:nan_account_bank_statement.model_account_bank_statement_line_rule
+msgid "account.bank.statement.line.rule"
+msgstr "account.bank.statement.line.rule"
+
+#. module: nan_account_bank_statement
+#: code:addons/nan_account_bank_statement/account_statement.py:683
+#, python-format
+msgid ""
+"Company for account %(account)s does not match rule's company for rule "
+"%(rule)s."
+msgstr ""
+"Unternehmen des Kontos %(account)s stimmt nicht mit Regel %(rule)s des "
+"Unternehmens überein."
