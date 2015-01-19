@@ -1,4 +1,24 @@
 # -*- coding: utf-8 -*-
+###############################################################################
+#
+#    OpenERP, Open Source Management Solution
+#    This module copyright (C) 2014 Savoir-faire Linux
+#    (<http://www.savoirfairelinux.com>).
+#
+#    This program is free software: you can redistribute it and/or modify
+#    it under the terms of the GNU Affero General Public License as
+#    published by the Free Software Foundation, either version 3 of the
+#    License, or (at your option) any later version.
+#
+#    This program is distributed in the hope that it will be useful,
+#    but WITHOUT ANY WARRANTY; without even the implied warranty of
+#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+#    GNU Affero General Public License for more details.
+#
+#    You should have received a copy of the GNU Affero General Public License
+#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+#
+###############################################################################
 
 from openerp.tests import common
 
@@ -14,6 +34,49 @@ class test_account_voucher(common.TransactionCase):
 
         self.model = self.registry('account.voucher')
         self.line = self.registry('account.voucher.line')
+        self.account_model = self.registry('account.account')
+        self.partner_model = self.registry('res.partner')
+        self.invoice_model = self.registry('account.invoice')
+        self.product_model = self.registry('product.product')
+        self.voucher_model = self.registry('account.voucher')
+
+        cr, uid, context = self.cr, self.uid, self.context
+
+        self.account_id = self.account_model.search(
+            cr, uid, [('type', '=', 'payable'), ('currency_id', '=', False)],
+            limit=1, context=context)[0]
+
+        self.partner_id = self.partner_model.create(
+            cr, uid, {
+                'name': 'Test',
+                'supplier': True,
+            }, context=context)
+
+        self.invoice_id = self.invoice_model.create(
+            cr, uid, {
+                'partner_id': self.partner_id,
+                'account_id': self.account_id,
+                'date_invoice': '2015-01-01',
+                'invoice_line': [(0, 0, {
+                    'name': 'Test',
+                    'account_id': self.account_id,
+                    'price_unit': 123.45,
+                    'quantity': 1,
+                })],
+            }, context=context)
+
+        self.invoice_model.invoice_open(
+            cr, uid, [self.invoice_id],
+            context=context)
+
+        self.voucher_id = self.voucher_model.create(
+            cr, uid, {
+                'date': '2015-01-02',
+                'name': "test", 'amount': 200,
+                'account_id': self.account_id,
+                'partner_id': self.partner_id,
+                'type': 'payment',
+            }, context=context)
 
     def createVoucher(self, **kwargs):
         """
@@ -36,70 +99,26 @@ class test_account_voucher(common.TransactionCase):
         expect the returned value to have the same lines as
         before the call
         """
+        cr, uid, context = self.cr, self.uid, self.context
 
-        voucher_id = self.createVoucher(name="test",
-                                        amount=0,
-                                        account_id=self.uid)
+        voucher = self.voucher_model.browse(
+            cr, uid, self.voucher_id, context=context)
 
-        voucher = self.model.read(self.cr, self.uid, voucher_id)
-
-        self.assertEqual(voucher['line_cr_ids'], [])
-        self.assertEqual(voucher['line_dr_ids'], [])
-
-        self.model.write(self.cr, self.uid, voucher_id, {
-            "amount": 100,
-        })
-
-        voucher = self.model.read(self.cr, self.uid, voucher_id)
-
-        self.assertEqual(voucher['amount'], 100)
-        self.assertEqual(voucher['line_cr_ids'], [])
-        self.assertEqual(voucher['line_dr_ids'], [])
-
-        line1 = self.createLine(voucher_id=voucher_id,
-                                type="cr",
-                                amount=123.45,
-                                account_id=self.uid)
-
-        line_record = self.line.read(self.cr, self.uid, line1)
-        voucher = self.model.read(self.cr, self.uid, voucher_id)
-
-        self.assertNotEqual(line1, 0)
-        self.assertEqual(line_record['type'], 'cr')
-
-        self.assertEqual(len(voucher['line_cr_ids']), 1)
-        self.assertEqual(voucher['line_cr_ids'][0], line1)
-        self.assertEqual(voucher['line_dr_ids'], [])
-
-        self.model.write(self.cr, self.uid, voucher_id, {
-            "amount": 123.46
-        })
-
-        voucher = self.model.browse(self.cr, self.uid, voucher_id)
-
-        val = voucher.onchange_amount(
-            voucher.amount,
-            voucher.payment_rate,
-            voucher.partner_id.id,
+        val = voucher.onchange_partner_id(
+            self.partner_id,
             voucher.journal_id.id,
+            voucher.amount,
             voucher.currency_id.id,
-            'payment',
+            voucher.type,
             voucher.date,
-            voucher.payment_rate_currency_id.id,
-            voucher.company_id.id,
-            context=self.context
+            context=context
         )
 
-        voucher = self.model.read(self.cr, self.uid, voucher_id)
-
-        self.assertEqual(voucher['line_cr_ids'], [])
-        self.assertEqual(voucher['line_dr_ids'], [])
-
-        credit = val['value']['line_cr_ids']
         debit = val['value']['line_dr_ids']
+        credit = val['value']['line_cr_ids']
 
-        self.assertEqual(len(credit), 1)
-        self.assertEqual(len(debit), 0)
+        self.assertEqual(debit[0]['amount'], 0)
+        self.assertEqual(debit[0]['reconcile'], False)
 
-        self.assertEqual(voucher['amount'], 123.46)
-        self.assertEqual(credit[0]['amount'], 123.45)
+        self.assertEqual(credit[0]['amount'], 0)
+        self.assertEqual(credit[0]['reconcile'], False)
