@@ -21,6 +21,7 @@
 ###############################################################################
 
 from openerp.tests import common
+from openerp import netsvc
 
 
 class test_account_voucher(common.TransactionCase):
@@ -65,9 +66,10 @@ class test_account_voucher(common.TransactionCase):
                 })],
             }, context=context)
 
-        self.invoice_model.invoice_open(
-            cr, uid, [self.invoice_id],
-            context=context)
+        # Create accounting moves for the invoice
+        wf_service = netsvc.LocalService('workflow')
+        wf_service.trg_validate(
+            uid, 'account.invoice', self.invoice_id, 'invoice_open', cr)
 
         self.voucher_id = self.voucher_model.create(
             cr, uid, {

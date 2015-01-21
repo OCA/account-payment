@@ -44,19 +44,84 @@ class account_voucher(orm.Model):
 
         return res
 
+    def copy_lines(self, cr, uid, ids, context=None):
+
+        line_dr_ids = {
+            line[2]['move_line_id']: {
+                'amount': line[2]['amount'],
+                'type': line[2]['type'],
+                'reconcile': line[2]['reconcile']
+            }
+            for line in context.get('line_dr_ids', [])
+            if line[2] and line[2]['amount']
+            and line[2].get('type', False) == 'dr'
+        }
+
+        line_cr_ids = {
+            line[2]['move_line_id']: {
+                'amount': line[2]['amount'],
+                'type': line[2]['type'],
+                'reconcile': line[2]['reconcile']
+            }
+            for line in context.get('line_cr_ids', [])
+            if line[2] and line[2]['amount']
+            and line[2].get('type', False) == 'cr'
+        }
+
+        return line_dr_ids, line_cr_ids
+
     def onchange_amount(self, cr, uid, ids, *args, **kwargs):
+
+        context = kwargs.get('context', {})
+
+        line_dr_ids, line_cr_ids = self.copy_lines(
+            cr, uid, ids, context)
 
         res = super(account_voucher, self).onchange_amount(
             cr, uid, ids, *args, **kwargs)
 
-        if 'value' in res and 'line_cr_ids' in res['value']:
-            for line in res['value']['line_cr_ids']:
-                line['amount'] = 0.0
-                line['reconcile'] = False
-
         if 'value' in res and 'line_dr_ids' in res['value']:
             for line in res['value']['line_dr_ids']:
-                line['amount'] = 0.0
-                line['reconcile'] = False
+
+                move_line_id = line.get('move_line_id', False)
+
+                if move_line_id and move_line_id in line_dr_ids:
+                    old_dr_line = line_dr_ids[move_line_id]
+
+                    if old_dr_line['reconcile']:
+                        line['amount'] = line['amount_unreconciled']
+                    else:
+                        line['amount'] = old_dr_line['amount']
+
+                    if line['amount_unreconciled'] == line['amount']:
+                        line['reconcile'] = True
+                    else:
+                        line['reconcile'] = False
+
+                else:
+                    line['amount'] = 0.0
+                    line['reconcile'] = False
+
+        if 'value' in res and 'line_cr_ids' in res['value']:
+            for line in res['value']['line_cr_ids']:
+
+                move_line_id = line.get('move_line_id', False)
+
+                if move_line_id and move_line_id in line_cr_ids:
+                    old_cr_line = line_cr_ids[move_line_id]
+
+                    if old_cr_line['reconcile']:
+                        line['amount'] = line['amount_unreconciled']
+                    else:
+                        line['amount'] = old_cr_line['amount']
+
+                    if line['amount_unreconciled'] == line['amount']:
+                        line['reconcile'] = True
+                    else:
+                        line['reconcile'] = False
+
+                else:
+                    line['amount'] = 0.0
+                    line['reconcile'] = False
 
         return res
