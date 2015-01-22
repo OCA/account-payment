@@ -208,7 +208,7 @@ class PaymentOrder(orm.Model):
         for move in self.browse(cr, uid, ids, context=context):
             # Search for any line
             for line in move.line_ids:
-                if line.payment_move_id:
+                if line.payment_move_id and not line.payment_move_id.id in remove:
                     remove += [line.payment_move_id.id]
         self.pool['account.move'].button_cancel(cr, uid, remove,
                                                 context=context)
