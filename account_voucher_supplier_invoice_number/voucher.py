@@ -19,10 +19,10 @@
 #
 ##############################################################################
 
+from openerp import api, models, _
 from openerp.osv import fields, orm
-from tools.translate import _
 
-class voucher_line(orm.Model):
+class voucher_line(models.Model):
     _inherit = 'account.voucher.line'
     
     def get_suppl_inv_num(self, cr, uid, move_line_id, context=None):
@@ -40,10 +40,10 @@ class voucher_line(orm.Model):
     
     _columns = {
         'supplier_invoice_number': fields.function(_get_supplier_invoice_number,
-            type='char', size=64, string="Supplier Invoice Number"),
+            type='char', size=64, string=_("Supplier Invoice Number")),
         }
 
-class voucher(orm.Model):
+class voucher(models.Model):
     _inherit = 'account.voucher'
     
     def recompute_voucher_lines(self, cr, uid, ids, partner_id, journal_id, price,
