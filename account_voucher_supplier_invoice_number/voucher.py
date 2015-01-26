@@ -19,47 +19,55 @@
 #
 ##############################################################################
 
-from openerp.osv import fields, orm
-from tools.translate import _
+from openerp import api, fields, models, _
 
-class voucher_line(orm.Model):
+class voucher_line(models.Model):
     _inherit = 'account.voucher.line'
     
-    def get_suppl_inv_num(self, cr, uid, move_line_id, context=None):
-        move_line = self.pool.get('account.move.line').browse(cr, uid, move_line_id, context)
+    def get_suppl_inv_num(self, move_line_id):
+        move_line = self.move_line_id.search([('id', '=', move_line_id)])
         return (move_line.invoice and move_line.invoice.supplier_invoice_number or '')
     
-    def _get_supplier_invoice_number(self, cr, uid, ids, name, args, context=None):
+
+    @api.multi
+    @api.depends(
+            'move_line_id',
+            'move_line_id.invoice',
+            'move_line_id.invoice.supplier_invoice_number'
+        )
+    def _get_supplier_invoice_number(self):
         res={}
-        for line in self.browse(cr, uid, ids, context):
+        for line in self:
             res[line.id] = ''
             if line.move_line_id:
-                res[line.id] = self.get_suppl_inv_num(cr, uid,
-                    line.move_line_id.id, context=context)
+                res[line.id] = self.get_suppl_inv_num(line.move_line_id.id)
+        print res
         return res
     
-    _columns = {
-        'supplier_invoice_number': fields.function(_get_supplier_invoice_number,
-            type='char', size=64, string="Supplier Invoice Number"),
-        }
+    supplier_invoice_number = fields.Char(
+            compute = '_get_supplier_invoice_number',
+            size=64, 
+            string=_("Supplier Invoice Number")
+        )
+        
 
-class voucher(orm.Model):
+class voucher(models.Model):
     _inherit = 'account.voucher'
     
-    def recompute_voucher_lines(self, cr, uid, ids, partner_id, journal_id, price,
-        currency_id, ttype, date, context=None):
-        res = super(voucher,self).recompute_voucher_lines(cr, uid, ids, partner_id,
-            journal_id, price,
-            currency_id, ttype, date, context=context)
+    @api.one
+    def recompute_voucher_lines(self, ids, partner_id, journal_id, price,
+        currency_id, ttype, date):
+        res = super(voucher,self).recompute_voucher_lines(ids, partner_id,
+            journal_id, price, currency_id, ttype, date)
         line_obj = self.pool.get('account.voucher.line')
         if res.get('value') and res['value'].get('line_cr_ids'):
             for vals in res['value']['line_cr_ids']:
                 if vals.get('move_line_id'):
                     vals['supplier_invoice_number'] = line_obj.get_suppl_inv_num(
-                        cr, uid, vals['move_line_id'], context=context)
+                        vals['move_line_id'])
         if res.get('value') and res['value'].get('line_dr_ids'):
             for vals in res['value']['line_dr_ids']:
                 if vals.get('move_line_id'):
                     vals['supplier_invoice_number'] = line_obj.get_suppl_inv_num(
-                        cr, uid, vals['move_line_id'], context=context)
+                        vals['move_line_id'])
         return res
