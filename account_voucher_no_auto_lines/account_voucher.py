@@ -102,7 +102,7 @@ class account_voucher(orm.Model):
 
     def onchange_partner_id(self, cr, uid, ids, *args, **kwargs):
 
-        context = args[-1]
+        context = kwargs.get('context', False) or args[-1]
 
         line_dr_ids, line_cr_ids = copy_lines(context)
 
@@ -127,7 +127,7 @@ class account_voucher(orm.Model):
 
     def onchange_journal(self, cr, uid, ids, *args, **kwargs):
 
-        context = args[-1]
+        context = kwargs.get('context', False) or args[-1]
 
         line_dr_ids, line_cr_ids = copy_lines(context)
 
@@ -144,7 +144,7 @@ class account_voucher(orm.Model):
 
     def onchange_amount(self, cr, uid, ids, *args, **kwargs):
 
-        context = args[-1]
+        context = kwargs.get('context', False) or args[-1]
 
         line_dr_ids, line_cr_ids = copy_lines(context)
 

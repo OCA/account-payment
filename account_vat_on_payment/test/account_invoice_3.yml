@@ -49,6 +49,13 @@
     partner_id: base.res_partner_3
     amount: 100
 -
+  I check the full reconcile box
+-
+  !python {model: account.voucher}: |
+    voucher = self.browse(cr, uid, ref('account_voucher_3_a'), context=context)
+    voucher_line = voucher.line_cr_ids[0]
+    voucher_line.write({'reconcile': True, 'amount': 100})
+-
   I confirm the voucher
 -
   !workflow {model: account.voucher, action: proforma_voucher, ref: account_voucher_3_a}
@@ -86,6 +93,13 @@
   !record {model: account.voucher, id: account_voucher_3_b, view: account_voucher.view_vendor_receipt_form}:
     partner_id: base.res_partner_3
     amount: 130
+-
+  I check the full reconcile box
+-
+  !python {model: account.voucher}: |
+    voucher = self.browse(cr, uid, ref('account_voucher_3_b'), context=context)
+    voucher_line = voucher.line_cr_ids[0]
+    voucher_line.write({'reconcile': True, 'amount': 130})
 -
   I confirm the voucher
 -

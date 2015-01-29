@@ -113,7 +113,6 @@ class test_account_voucher(common.TransactionCase):
             voucher.currency_id.id,
             voucher.type,
             voucher.date,
-            context=context
         )
 
         debit = val['value']['line_dr_ids']
