@@ -110,7 +110,9 @@ class account_voucher(orm.Model):
             cr, uid, ids, *args, **kwargs)
 
         # Check that the method was called from the account payment view
-        if context.get('allow_auto_lines', False):
+        if context.get('allow_auto_lines', False) or \
+                context.get('active_model', False) == 'account.invoice':
+            print context
             return res
 
         if 'value' in res and 'line_cr_ids' in res['value']:

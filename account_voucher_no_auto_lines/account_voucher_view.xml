@@ -40,6 +40,9 @@
         <field name="amount" position="attributes">
           <attribute name="context">{'allow_auto_lines': True}</attribute>
         </field>
+        <field name="partner_id" position="attributes">
+          <attribute name="context">{'allow_auto_lines': True, 'search_default_customer': 1}</attribute>
+        </field>
       </field>
     </record>
 
