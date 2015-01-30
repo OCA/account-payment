@@ -37,6 +37,9 @@
         <field name="journal_id" position="attributes">
           <attribute name="context">{'allow_auto_lines': True}</attribute>
         </field>
+        <field name="amount" position="attributes">
+          <attribute name="context">{'allow_auto_lines': True}</attribute>
+        </field>
       </field>
     </record>
 
