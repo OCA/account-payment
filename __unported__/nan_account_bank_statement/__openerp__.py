@@ -37,6 +37,7 @@ This enhances standard bank statements by:
 - Adding key/value information in statement lines which can later be used by other modules for automatically finding move lines to be reconciled.""",
     "author" : "NaN·tic",
     "website" : "http://www.NaN-tic.com",
+    "license": "GPL-2 or any later version",
     "depends" : [ 
     	'account',
         'account_voucher',
