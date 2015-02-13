@@ -45,6 +45,7 @@ This module gathers all the basic functionalities that allow to handle the
 cash basis.
     """,
     'website': 'http://www.agilebg.com',
+    'license': 'AGPL-3',
     'init_xml': [],
     'data': [
         'company_view.xml',

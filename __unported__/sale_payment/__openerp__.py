@@ -26,7 +26,7 @@
     "version" : "1.0",
     "author" : "Zikzakmedia",
     "website": "www.zikzakmedia.com",
-    "license" : "GPL-3",
+    "license": "GPL-3 or any later version",
     "category" : 'Generic Modules/Sales & Purchases',
     "description": """Adds payment type and bank account to sale process.
 
