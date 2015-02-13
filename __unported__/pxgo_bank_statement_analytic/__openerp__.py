@@ -22,6 +22,7 @@
         "version" : "1.0",
         "author" : "Pexego for Igalia (http://www.igalia.com/)",
         "website" : "http://www.pexego.es",
+        "license": "GPL-3 or any later version",
         "category" : "Enterprise Specific Modules",
         "description": """
 Extends the Bank Statements to add support for analytic accounting.

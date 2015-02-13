@@ -23,7 +23,7 @@
     "version" : "1.0",
     "author" : "Pexego",
     "website": "www.pexego.es",
-    "license" : "GPL-3",
+    "license": "GPL-3 or any later version",
     "category" : 'Generic Modules/Sales & Purchases',
     "description": """Adds payment info to the purchase process.
 
