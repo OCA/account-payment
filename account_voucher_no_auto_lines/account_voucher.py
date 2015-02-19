@@ -103,16 +103,12 @@ class account_voucher(orm.Model):
     def onchange_partner_id(self, cr, uid, ids, *args, **kwargs):
 
         context = kwargs.get('context', False) or args[-1]
-
-        line_dr_ids, line_cr_ids = copy_lines(context)
-
         res = super(account_voucher, self).onchange_partner_id(
             cr, uid, ids, *args, **kwargs)
 
         # Check that the method was called from the account payment view
         if context.get('allow_auto_lines', False) or \
                 context.get('active_model', False) == 'account.invoice':
-            print context
             return res
 
         if 'value' in res and 'line_cr_ids' in res['value']:
