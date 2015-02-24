@@ -144,8 +144,6 @@ class account_voucher(orm.Model):
 
         context = kwargs.get('context', False) or args[-1]
 
-        line_dr_ids, line_cr_ids = copy_lines(context)
-
         res = super(account_voucher, self).onchange_amount(
             cr, uid, ids, *args, **kwargs)
 
@@ -153,6 +151,10 @@ class account_voucher(orm.Model):
         if context.get('allow_auto_lines', False):
             return res
 
-        update_lines(res, line_dr_ids, line_cr_ids)
+        if res.get('value', False):
+            if res['value'].get('line_cr_ids', False):
+                del res['value']['line_cr_ids']
+            if res['value'].get('line_dr_ids', False):
+                del res['value']['line_dr_ids']
 
         return res
