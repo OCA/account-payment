@@ -19,14 +19,14 @@
 #
 #
 
+from osv import fields, osv
+
 """
 Extension of the purchase orders to add payment info.
 
 Based on the sale_payment module.
 """
 __author__ = "Borja López Soilán (Pexego) <borjals@pexego.es>"
-
-from osv import fields, osv
 
 
 class purchase_order(osv.osv):

@@ -207,8 +207,9 @@ class account_bank_statement_line(osv.osv):
                 account_type = 'general'
                 if reconcile_line.partner_id:
                     if (
-                        reconcile_line.partner_id.property_account_receivable
-                        == reconcile_line.account_id
+                        reconcile_line.partner_id.
+                        property_account_receivable ==
+                        reconcile_line.account_id
                     ):
                         account_type = 'customer'
                     else:

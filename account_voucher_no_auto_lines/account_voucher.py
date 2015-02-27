@@ -32,8 +32,8 @@ def copy_lines(context=None):
             'reconcile': line[2]['reconcile']
         }
         for line in context.get('line_dr_ids', [])
-        if line[2] and line[2]['amount']
-        and line[2].get('type', False) == 'dr'
+        if line[2] and line[2]['amount'] and
+        line[2].get('type', False) == 'dr'
     }
 
     line_cr_ids = {
@@ -43,8 +43,8 @@ def copy_lines(context=None):
             'reconcile': line[2]['reconcile']
         }
         for line in context.get('line_cr_ids', [])
-        if line[2] and line[2]['amount']
-        and line[2].get('type', False) == 'cr'
+        if line[2] and line[2]['amount'] and
+        line[2].get('type', False) == 'cr'
     }
 
     return line_dr_ids, line_cr_ids
