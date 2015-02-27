@@ -19,9 +19,9 @@
 #
 #
 
+from . import purchase_payment
+
 """
 Extension of the purchase orders to add payment info.
 """
 __author__ = "Borja López Soilán (Pexego) <borjals@pexego.es>"
-
-from . import purchase_payment
