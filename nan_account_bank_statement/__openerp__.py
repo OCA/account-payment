@@ -36,7 +36,7 @@ This enhances standard bank statements by:
 - Adding a new button in statement lines to split the line in two.
 - Adding key/value information in statement lines which can later be used by
   other modules for automatically finding move lines to be reconciled.""",
-    "author": "NaN·tic",
+    "author": "NaN·tic,Odoo Community Association (OCA)",
     "website": "http://www.NaN-tic.com",
     "depends": [
         'account',

@@ -28,7 +28,7 @@
     "version": "2.0",
     'category': 'Generic Modules/Accounting',
     "depends": ["account_voucher_cash_basis"],
-    "author": "Agile Business Group",
+    "author": "Agile Business Group,Odoo Community Association (OCA)",
     "description": """
 See 'account_voucher_cash_basis' description.
 

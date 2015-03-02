@@ -27,7 +27,7 @@
     "version": "1.0",
     'category': 'Hidden/Dependency',
     "depends": ["account_voucher"],
-    "author": "Agile Business Group",
+    "author": "Agile Business Group,Odoo Community Association (OCA)",
     "description": """
 In some countries, under certain conditions, companies can apply the cash
 basis.

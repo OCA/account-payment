@@ -21,7 +21,7 @@
 {
     "name": "Account voucher tax filter",
     "version": "1.0r028",
-    "author": "Therp BV",
+    "author": "Therp BV,Odoo Community Association (OCA)",
     "category": 'Accounting & Finance',
     'complexity': "normal",
     "description": """
