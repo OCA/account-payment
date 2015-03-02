@@ -21,7 +21,7 @@
 {
     "name": "Account voucher display writeoff",
     "version": "1.0r089",
-    "author": "Therp BV",
+    "author": "Therp BV,Odoo Community Association (OCA)",
     "category": 'Accounting & Finance',
     'complexity': "normal",
     "description": """

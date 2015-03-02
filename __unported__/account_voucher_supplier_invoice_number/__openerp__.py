@@ -26,7 +26,7 @@
     'description': """
 This module adds the supplier invoice number to (Supplier Payment) voucher lines. So that it's more easy to find the right invoice we are going to pay.
 """,
-    'author': 'Agile Business Group',
+    'author': "Agile Business Group,Odoo Community Association (OCA)",
     'website': 'http://www.agilebg.com',
     'license': 'AGPL-3',
     "depends" : ['account_voucher'],
