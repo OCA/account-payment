@@ -24,7 +24,7 @@
 {
     "name" : "Sale payment type",
     "version" : "1.0",
-    "author" : "Zikzakmedia",
+    "author" : "Zikzakmedia,Odoo Community Association (OCA)",
     "website": "www.zikzakmedia.com",
     "license" : "GPL-3",
     "category" : 'Generic Modules/Sales & Purchases',

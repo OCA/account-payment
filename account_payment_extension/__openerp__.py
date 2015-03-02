@@ -27,7 +27,7 @@
 {
     "name": "Account Payment Extension",
     "version": "1.2",
-    "author": "Zikzakmedia SL",
+    "author": "Zikzakmedia SL,Odoo Community Association (OCA)",
     "category": "Accounting & Finance",
     "website": "www.zikzakmedia.com",
     "license": "AGPL-3",

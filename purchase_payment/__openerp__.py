@@ -21,7 +21,7 @@
 {
     "name" : "Purchase Payment Type and Terms",
     "version" : "1.0",
-    "author" : "Pexego",
+    "author" : "Pexego,Odoo Community Association (OCA)",
     "website": "www.pexego.es",
     "license" : "GPL-3",
     "category" : 'Generic Modules/Sales & Purchases',

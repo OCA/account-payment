@@ -23,7 +23,7 @@
 {
     'name' : "Payment days",
     'version' : "1.0",
-    'author' : "NaN·tic",
+    'author' : "NaN·tic,Odoo Community Association (OCA)",
     'category': 'Generic Modules/Accounting',
     'description': """This module allows setting more than one payment days in payment terms.""",
     'license' : "GPL-3",

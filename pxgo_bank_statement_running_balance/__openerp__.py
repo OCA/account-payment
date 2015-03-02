@@ -20,7 +20,7 @@
 {
         "name" : "Pexego - Running balance in Bank Statements",
         "version" : "1.0",
-        "author" : "Pexego for Igalia (http://www.igalia.com/)",
+        "author" : "Pexego for Igalia (http://www.igalia.com/),Odoo Community Association (OCA)",
         "website" : "http://www.pexego.es",
         "category" : "Enterprise Specific Modules",
         "description": """
