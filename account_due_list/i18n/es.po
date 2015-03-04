@@ -18,7 +18,7 @@ msgstr ""
 #. module: account_due_list
 #: view:account.move.line:0
 msgid "Receivable"
-msgstr "A cobrar"
+msgstr "Cuentas a cobrar"
 
 #. module: account_due_list
 #: view:account.move.line:0
@@ -28,7 +28,7 @@ msgstr "Pagos no conciliados"
 #. module: account_due_list
 #: view:account.move.line:0
 msgid "Payable payments"
-msgstr "Pagos"
+msgstr "Pagos a pagar"
 
 #. module: account_due_list
 #: view:account.move.line:0
@@ -48,7 +48,7 @@ msgstr "Documento origen"
 #. module: account_due_list
 #: field:account.move.line,invoice_date:0
 msgid "Invoice Date"
-msgstr "Fecha factura"
+msgstr "Fecha de factura"
 
 #. module: account_due_list
 #: code:addons/account_due_list/account_move_line.py:42
@@ -59,7 +59,7 @@ msgstr "Datos incongruentes: el apunte %s tiene más de una factura"
 #. module: account_due_list
 #: view:account.move.line:0
 msgid "Payable"
-msgstr "A pagar"
+msgstr "Cuentas a pagar"
 
 #. module: account_due_list
 #: view:account.move.line:0
@@ -79,7 +79,7 @@ msgstr "Dia"
 #. module: account_due_list
 #: view:account.move.line:0
 msgid "Overdue payments"
-msgstr "Pagos vencidos"
+msgstr "Pagos atrasados"
 
 #. module: account_due_list
 #: view:account.move.line:0
@@ -106,7 +106,7 @@ msgstr "Pago de facturas"
 #. module: account_due_list
 #: view:account.move.line:0
 msgid "Overdue"
-msgstr "Vencidos"
+msgstr "Vencidas"
 
 #. module: account_due_list
 #: view:account.move.line:0
