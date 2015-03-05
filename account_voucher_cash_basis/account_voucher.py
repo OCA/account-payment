@@ -162,6 +162,7 @@ class AccountVoucher(orm.Model):
                     }
                 current_amount = line.amount
                 if company_currency != current_currency:
+                    context['date'] = voucher.date
                     current_amount = super(
                         AccountVoucher, self)._convert_amount(
                             cr, uid, line.amount, voucher.id, context)
