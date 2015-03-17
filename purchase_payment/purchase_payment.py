@@ -19,17 +19,17 @@
 #
 #
 
-"""
-Extension of the purchase orders to add payment info.
-
-Based on the sale_payment module.
-"""
-__author__ = "Borja López Soilán (Pexego) <borjals@pexego.es>"
-
 from osv import fields, osv
+
+__author__ = "Borja López Soilán (Pexego) <borjals@pexego.es>"
 
 
 class purchase_order(osv.osv):
+    """
+    Extension of the purchase orders to add payment info.
+
+    Based on the sale_payment module.
+    """
     _inherit = 'purchase.order'
     _columns = {
         'payment_term': fields.many2one(

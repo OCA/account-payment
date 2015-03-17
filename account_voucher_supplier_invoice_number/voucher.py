@@ -29,8 +29,8 @@ class voucher_line(orm.Model):
         move_line = self.pool.get('account.move.line').browse(
             cr, uid, move_line_id, context)
         return (
-            move_line.invoice and move_line.invoice.supplier_invoice_number
-            or '')
+            move_line.invoice and
+            move_line.invoice.supplier_invoice_number or '')
 
     def _get_supplier_invoice_number(
         self, cr, uid, ids, name, args, context=None
