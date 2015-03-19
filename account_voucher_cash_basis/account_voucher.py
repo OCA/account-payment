@@ -144,10 +144,11 @@ class AccountVoucher(orm.Model):
 
         '''
         res = {}
+        ctx = dict(context) or {}
         company_currency = super(AccountVoucher, self)._get_company_currency(
-            cr, uid, voucher.id, context)
+            cr, uid, voucher.id, context=ctx)
         current_currency = super(AccountVoucher, self)._get_current_currency(
-            cr, uid, voucher.id, context)
+            cr, uid, voucher.id, context=ctx)
         for line in voucher.line_ids:
             if line.amount and line.move_line_id and line.move_line_id.invoice:
                 if line.move_line_id.invoice.id not in res:
@@ -162,10 +163,10 @@ class AccountVoucher(orm.Model):
                     }
                 current_amount = line.amount
                 if company_currency != current_currency:
-                    context['date'] = voucher.date
+                    ctx['date'] = voucher.date
                     current_amount = super(
                         AccountVoucher, self)._convert_amount(
-                            cr, uid, line.amount, voucher.id, context)
+                            cr, uid, line.amount, voucher.id, context=ctx)
                     res[line.move_line_id.invoice.id][
                         'allocated_currency'
                     ] += line.amount
