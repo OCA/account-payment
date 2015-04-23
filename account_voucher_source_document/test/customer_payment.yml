@@ -42,7 +42,11 @@
   !python {model: account.voucher}: |
     import netsvc
     vals = {}
-    res = self.onchange_partner_id(cr, uid, [], ref("base.res_partner_12"), ref('account.bank_journal'), 0.0, 1, ttype='receipt', date=False)
+    res = self.onchange_partner_id(
+        cr, uid, [],
+        ref("base.res_partner_12"), ref('account.bank_journal'), 0.0, 1,
+        ttype='receipt', date=False, context=context
+    )
 
     vals = {
         'account_id': ref('account.cash'),
@@ -61,15 +65,15 @@
 
     vals['line_cr_ids'] = [(0,0,i) for i in res['value']['line_cr_ids']]
 
-    id = self.create(cr, uid, vals)
-    voucher = self.browse(cr, uid, id)
+    id = self.create(cr, uid, vals, context=context)
+    voucher = self.browse(cr, uid, id, context=context)
 
     assert (voucher.state=='draft'), "Voucher is not in draft state"
 
     wf_service = netsvc.LocalService("workflow")
-    wf_service.trg_validate(uid, 'account.voucher', voucher.id, 'proforma_voucher', cr)
+    wf_service.trg_validate(uid, 'account.voucher', voucher.id, 'proforma_voucher', cr, context=context)
 
-    voucher = self.browse(cr, uid, id)
+    voucher = self.browse(cr, uid, id, context=context)
 
     assert (voucher.state == 'posted'), "Voucher is not in posted state"
     assert (voucher.line_ids[0].document_source == 'PAPER'), 'wrong document_source'
