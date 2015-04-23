@@ -71,7 +71,7 @@
     assert (voucher.state=='draft'), "Voucher is not in draft state"
 
     wf_service = netsvc.LocalService("workflow")
-    wf_service.trg_validate(uid, 'account.voucher', voucher.id, 'proforma_voucher', cr, context=context)
+    wf_service.trg_validate(uid, 'account.voucher', voucher.id, 'proforma_voucher', cr)
 
     voucher = self.browse(cr, uid, id, context=context)
 
