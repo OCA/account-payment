@@ -309,12 +309,14 @@ class AccountVoucher(orm.Model):
                 cr, uid, [voucher.id], context)
             # because 'move_id' has been updated by 'action_move_line_create'
             voucher.refresh()
-            if entry_posted:
-                journal_pool.write(
-                    cr, uid, voucher.journal_id.id, {'entry_posted': True})
             if self.is_vat_on_payment(voucher):
                 self._create_vat_on_payment_move(
                     cr, uid, voucher, context=context)
+            if entry_posted:
+                journal_pool.write(
+                    cr, uid, voucher.journal_id.id, {'entry_posted': True})
+                voucher.move_id.post()
+                voucher.shadow_move_id.post()
 
         return res
 
