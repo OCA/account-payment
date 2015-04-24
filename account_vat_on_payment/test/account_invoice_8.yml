@@ -44,6 +44,12 @@
       'exclude_write_off': True,
       })
 -
+  I set voucher journal to entry_posted = True
+-
+  !python {model: account.voucher}: |
+    voucher = self.browse(cr, uid, ref('account_voucher_8_a'), context=context)
+    voucher.journal_id.write({'entry_posted': True})
+-
   I confirm the voucher
 -
   !workflow {model: account.voucher, action: proforma_voucher, ref: account_voucher_8_a}
@@ -74,6 +80,9 @@
     assert sales_found, "No sales move line found"
     assert vat_found, "No VAT move line found"
     assert expenses_found, "No expenses move line found"
+    voucher.refresh()
+    assert voucher.move_id.state == 'posted', 'Move state != posted: %s' % voucher.move_id.state
+    assert voucher.shadow_move_id.state == 'posted', 'Shadow move state != posted: %s' % voucher.shadow_move_id.state
 -
   I check that the invoice state is paid
 -
