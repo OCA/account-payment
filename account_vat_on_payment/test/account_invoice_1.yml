@@ -106,6 +106,9 @@
     assert bank_found, "No bank move line found"
     assert sales_found, "No sales move line found"
     assert vat_found, "No VAT move line found"
+    voucher.refresh()
+    assert voucher.move_id.state == 'draft', 'Move state != draft: %s' % voucher.move_id.state
+    assert voucher.shadow_move_id.state == 'draft', 'Shadow move state != draft: %s' % voucher.shadow_move_id.state
 -
   I check that the invoice state is paid
 -
