@@ -316,7 +316,8 @@ class AccountVoucher(orm.Model):
                 journal_pool.write(
                     cr, uid, voucher.journal_id.id, {'entry_posted': True})
                 voucher.move_id.post()
-                voucher.shadow_move_id.post()
+                if self.is_vat_on_payment(voucher):
+                    voucher.shadow_move_id.post()
 
         return res
 
