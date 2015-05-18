@@ -35,9 +35,6 @@
     "depends": [
         'account',
     ],
-    'conflicts': [
-        'account_payment_extension',
-    ],
     "data": [
         'payment_view.xml',
     ],
