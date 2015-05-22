@@ -34,12 +34,6 @@
         'rate': 4,
         })
 -
-  I set the company exchange rate accounts
--
-  !record {model: res.company, id: base.main_company}:
-    expense_currency_exchange_account_id: account.income_fx_expense
-    income_currency_exchange_account_id: account.income_fx_expense
--
   I create customer invoice 5 - 120 USD - 1 EUR = 2 USD
 -
   !record {model: account.invoice, id: account_invoice_customer_5, view: invoice_form}:
