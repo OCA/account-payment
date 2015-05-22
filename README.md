@@ -1,15 +1,17 @@
+[![Build Status](https://travis-ci.org/OCA/account-payment.svg?branch=8.0)](https://travis-ci.org/OCA/account-payment)
+[![Coverage Status](https://coveralls.io/repos/OCA/account-payment/badge.png?branch=8.0)](https://coveralls.io/r/OCA/account-payment?branch=8.0)
+
 Odoo account payment modules
 ============================
 
-This repository has been marked as deprecated since v8.0
---------------------------------------------------------
+This project includes modules that handle payment related tasks:
 
-Version 8.0:
-------------
-You'll find those features in this repository now:
+* Manage payment modes like the official ones Paypal. Ogone...
+* Easy the visualization of payment related stuff.
+* Modules that modifies the flow involved in the payment.
+* ...
+
+You can find complementary modules for handling bank payment related tasks on:
 
  * https://github.com/OCA/bank-payment
-
-Version 7.0:
-------------
-This project includes modules that handle payment related tasks.
+ 
