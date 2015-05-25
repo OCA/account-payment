@@ -52,5 +52,11 @@
         <record id="account.bank_journal_usd" model="account.journal">
             <field name="vat_on_payment_related_journal_id" ref="shadow_bank_journal" />
         </record>
+
+        <!-- company -->
+        <record id="base.main_company" model="res.company">
+            <field name="expense_currency_exchange_account_id" ref="account.income_fx_expense"></field>
+            <field name="income_currency_exchange_account_id" ref="account.income_fx_expense"></field>
+        </record>
     </data>
 </openerp>
