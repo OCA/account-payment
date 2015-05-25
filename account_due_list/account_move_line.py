@@ -29,7 +29,7 @@ from openerp.osv import fields, orm
 from openerp.tools.translate import _
 
 
-class account_move_line(orm.Model):
+class AccountMoveLine(orm.Model):
 
     def _get_invoice(self, cr, uid, ids, field_name, arg, context=None):
         invoice_pool = self.pool['account.invoice']
@@ -75,35 +75,11 @@ class account_move_line(orm.Model):
     _inherit = 'account.move.line'
 
     _columns = {
-        'invoice_origin': fields.related(
-            'invoice',
-            'origin',
-            type='char',
-            string='Source Doc',
-            store=False
-        ),
-        'invoice_date': fields.related(
-            'invoice',
-            'date_invoice',
-            type='date',
-            string='Invoice Date',
-            store=False
-        ),
-        'partner_ref': fields.related(
-            'partner_id',
-            'ref',
-            type='char',
-            string='Partner Ref',
-            store=False
-        ),
-        'payment_term_id': fields.related(
-            'invoice',
-            'payment_term',
-            type='many2one',
-            string='Payment Term',
-            store=False,
-            relation="account.payment.term"
-        ),
+        'invoice_origin': fields.related('invoice', 'origin', type='char', string='Source Doc'),
+        'invoice_date': fields.related('invoice', 'date_invoice', type='date', string='Invoice Date'),
+        'partner_ref': fields.related('partner_id', 'ref', type='char', string='Partner Ref'),
+        'payment_term_id': fields.related('invoice', 'payment_term', type='many2one', string='Payment Term',
+            relation="account.payment.term"),
         'stored_invoice_id': fields.function(
             _get_invoice,
             method=True,
@@ -159,7 +135,7 @@ class account_move_line(orm.Model):
         else:
             # Use special views for account.move.line object
             # (for ex. tree view contains user defined fields)
-            result = super(account_move_line, self).fields_view_get(
+            result = super(AccountMoveLine, self).fields_view_get(
                 cr, uid, view_id, view_type, context,
                 toolbar=toolbar, submenu=submenu
             )
