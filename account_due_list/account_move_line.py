@@ -75,11 +75,16 @@ class AccountMoveLine(orm.Model):
     _inherit = 'account.move.line'
 
     _columns = {
-        'invoice_origin': fields.related('invoice', 'origin', type='char', string='Source Doc'),
-        'invoice_date': fields.related('invoice', 'date_invoice', type='date', string='Invoice Date'),
-        'partner_ref': fields.related('partner_id', 'ref', type='char', string='Partner Ref'),
-        'payment_term_id': fields.related('invoice', 'payment_term', type='many2one', string='Payment Term',
-            relation="account.payment.term"),
+        'invoice_origin': fields.related('invoice', 'origin', type='char',
+                                         string='Source Doc'),
+        'invoice_date': fields.related('invoice', 'date_invoice', type='date',
+                                       string='Invoice Date'),
+        'partner_ref': fields.related('partner_id', 'ref', type='char',
+                                      string='Partner Ref'),
+        'payment_term_id': fields.related('invoice', 'payment_term',
+                                          type='many2one',
+                                          string='Payment Term',
+                                          relation="account.payment.term"),
         'stored_invoice_id': fields.function(
             _get_invoice,
             method=True,
