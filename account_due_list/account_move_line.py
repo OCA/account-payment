@@ -9,6 +9,7 @@
 #    Copyright (C) 2011-2013 Agile Business Group sagl
 #    (<http://www.agilebg.com>)
 #    Ported to Odoo by Andrea Cometa <info@andreacometa.it>
+#    Ported to v8 API by Eneko Lacunza <elacunza@binovo.es>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
@@ -25,123 +26,64 @@
 #
 ##############################################################################
 
-from openerp.osv import fields, orm
 from openerp.tools.translate import _
+from openerp import models, fields, api
 
 
-class AccountMoveLine(orm.Model):
-
-    def _get_invoice(self, cr, uid, ids, field_name, arg, context=None):
-        invoice_pool = self.pool['account.invoice']
-        res = {}
-        for line in self.browse(cr, uid, ids, context=context):
-            inv_ids = invoice_pool.search(
-                cr,
-                uid,
-                [('move_id', '=', line.move_id.id)],
-                context=context
-            )
-            if len(inv_ids) > 1:
-                raise orm.except_orm(
-                    _('Error'),
-                    _('Inconsistent data: move %s has more than one invoice')
-                    % line.move_id.name
-                )
-            if inv_ids:
-                res[line.id] = inv_ids[0]
-            else:
-                res[line.id] = False
-        return res
-
-    def _get_day(self, cr, uid, ids, field_name, arg, context=None):
-        res = {}
-        for line in self.browse(cr, uid, ids, context=context):
-            if line.date_maturity:
-                res[line.id] = line.date_maturity
-            else:
-                res[line.id] = False
-        return res
-
-    def _get_move_lines(self, cr, uid, ids, context=None):
-        invoice_pool = self.pool['account.invoice']
-        res = []
-        for invoice in invoice_pool.browse(cr, uid, ids, context=context):
-            if invoice.move_id:
-                for line in invoice.move_id.line_id:
-                    if line.id not in res:
-                        res.append(line.id)
-        return res
-
+class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
 
-    _columns = {
-        'invoice_origin': fields.related('invoice', 'origin', type='char',
-                                         string='Source Doc'),
-        'invoice_date': fields.related('invoice', 'date_invoice', type='date',
-                                       string='Invoice Date'),
-        'partner_ref': fields.related('partner_id', 'ref', type='char',
-                                      string='Partner Ref'),
-        'payment_term_id': fields.related('invoice', 'payment_term',
-                                          type='many2one',
-                                          string='Payment Term',
-                                          relation="account.payment.term"),
-        'stored_invoice_id': fields.function(
-            _get_invoice,
-            method=True,
-            string="Invoice",
-            type="many2one",
-            relation="account.invoice",
-            store={
-                'account.move.line': (
-                    lambda self, cr, uid, ids, c={}: ids,
-                    ['move_id'],
-                    10
-                ),
-                'account.invoice': (
-                    _get_move_lines,
-                    ['move_id'],
-                    10
-                ),
-            }),
-        'day': fields.function(
-            _get_day, method=True, string="Day", type="char", size=16,
-            store={
-                'account.move.line': (
-                    lambda self, cr, uid, ids, c={}: ids,
-                    ['date_maturity'],
-                    10
-                ),
-            }),
-    }
+    invoice_origin = fields.Char(related='invoice.origin', string='Source Doc')
+    invoice_date= fields.Date(related='invoice.date_invoice',
+        string='Invoice Date')
+    partner_ref = fields.Char(related='partner_id.ref', string='Partner Ref')
+    payment_term_id = fields.Many2one('account.payment.term',
+        related='invoice.payment_term', string='Payment Terms')
 
-    def fields_view_get(
-        self, cr, uid, view_id=None, view_type='form',
-        context=None, toolbar=False, submenu=False
-    ):
-        model_data_obj = self.pool['ir.model.data']
-        ids = model_data_obj.search(
-            cr,
-            uid,
-            [
-                ('module', '=', 'account_due_list'),
-                ('name', '=', 'view_payments_tree')
-            ],
-            context=context
-        )
+    stored_invoice_id = fields.Many2one('account.invoice',
+        compute='_get_invoice', string='Invoice', store=True)
+
+    @api.depends('move_id', 'invoice.move_id')
+    def _get_invoice(self):
+        for line in self:
+            inv_ids = self.env['account.invoice'].search(
+                [('move_id', '=', line.move_id.id)])
+            if len(inv_ids) > 1:
+                raise orm.except_orm(_('Error'),
+                    _('Inconsistent data: move %s has more than one invoice')
+                    % line.move_id.name)
+            if line.invoice:
+                line.stored_invoice_id = inv_ids[0]
+            else:
+                line.stored_invoice_id = False
+
+    day = fields.Char(compute='_get_day', string='Day', size=16, store=True)
+
+    @api.depends('date_maturity')
+    def _get_day(self):
+        for line in self:
+            if line.date_maturity:
+                line.day = line.date_maturity
+            else:
+                line.day = False
+
+    @api.model
+    def fields_view_get(self, view_id=None, view_type='form', toolbar=False,
+                        submenu=False):
+        model_data_obj = self.env['ir.model.data']
+        ids = model_data_obj.search([
+            ('module', '=', 'account_due_list'),
+            ('name', '=', 'view_payments_tree')])
         if ids:
             view_payments_tree_id = model_data_obj.get_object_reference(
-                cr, uid, 'account_due_list', 'view_payments_tree')
+                'account_due_list', 'view_payments_tree')
         if ids and view_id == view_payments_tree_id[1]:
             # Use due list
-            result = super(orm.Model, self).fields_view_get(
-                cr, uid, view_id, view_type, context,
-                toolbar=toolbar, submenu=submenu
-            )
+            result = super(models.Model, self).fields_view_get(
+                view_id, view_type, toolbar=toolbar, submenu=submenu)
         else:
             # Use special views for account.move.line object
             # (for ex. tree view contains user defined fields)
             result = super(AccountMoveLine, self).fields_view_get(
-                cr, uid, view_id, view_type, context,
-                toolbar=toolbar, submenu=submenu
-            )
+                view_id, view_type, toolbar=toolbar, submenu=submenu)
         return result
