@@ -34,21 +34,18 @@
         <field name="priority" eval="20"/>
         <field name="arch" type="xml">
             <search string="Search Payments">
-               <group col='10' colspan='4'>
-                    <filter icon="terp-sale" string="Receivable" domain="[('account_id.type','=','receivable')]" help="Receivable payments"/>
-                    <filter icon="terp-purchase" string="Payable" domain="[('account_id.type','=','payable')]" help="Payable payments"/>
-                    <separator orientation="vertical"/>
-                    <filter icon="terp-dolar_ok!" string="Unreconciled" domain="[('reconcile_id','=',False)]" help="Unreconciled payments"/>
-                    <separator orientation="vertical"/>
-                    <filter icon="terp-go-today" string="Overdue" domain="[('date_maturity','&lt;',time.strftime('%%Y-%%m-%%d'))]" help="Overdue payments" name="overdue"/>
-                    <separator orientation="vertical"/>
-                    <field name="account_id"/>
-                    <field name="partner_id"/>
-                    <field name="invoice"/>
-                    <field name="invoice_origin"/>
-                    <field name="date_maturity"/>
-               </group>
-                <newline/>
+                <filter icon="terp-sale" string="Receivable" domain="[('account_id.type','=','receivable')]" help="Receivable payments"/>
+                <filter icon="terp-purchase" string="Payable" domain="[('account_id.type','=','payable')]" help="Payable payments"/>
+                <separator orientation="vertical"/>
+                <filter icon="terp-dolar_ok!" string="Unreconciled" domain="[('reconcile_id','=',False)]" help="Unreconciled payments"/>
+                <separator orientation="vertical"/>
+                <filter icon="terp-go-today" string="Overdue" domain="[('date_maturity','&lt;',time.strftime('%%Y-%%m-%%d'))]" help="Overdue payments" name="overdue"/>
+                <separator orientation="vertical"/>
+                <field name="account_id"/>
+                <field name="partner_id"/>
+                <field name="invoice"/>
+                <field name="invoice_origin"/>
+                <field name="date_maturity"/>
                 <group expand="0" string="Group By...">
                     <filter string="Partner" icon="terp-partner" domain="[]" context="{'group_by':'partner_id'}"/>
                     <filter string="Invoice" icon="terp-folder-orange" domain="[]" context="{'group_by':'stored_invoice_id'}"/>
