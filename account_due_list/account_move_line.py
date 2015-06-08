@@ -27,21 +27,22 @@
 ##############################################################################
 
 from openerp.tools.translate import _
-from openerp import models, fields, api
+from openerp import models, fields, api, orm
 
 
 class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
 
     invoice_origin = fields.Char(related='invoice.origin', string='Source Doc')
-    invoice_date= fields.Date(related='invoice.date_invoice',
-        string='Invoice Date')
+    invoice_date = fields.Date(related='invoice.date_invoice',
+                               string='Invoice Date')
     partner_ref = fields.Char(related='partner_id.ref', string='Partner Ref')
     payment_term_id = fields.Many2one('account.payment.term',
-        related='invoice.payment_term', string='Payment Terms')
-
+                                      related='invoice.payment_term',
+                                      string='Payment Terms')
     stored_invoice_id = fields.Many2one('account.invoice',
-        compute='_get_invoice', string='Invoice', store=True)
+                                        compute='_get_invoice',
+                                        string='Invoice', store=True)
 
     @api.depends('move_id', 'invoice.move_id')
     def _get_invoice(self):
@@ -49,7 +50,8 @@ class AccountMoveLine(models.Model):
             inv_ids = self.env['account.invoice'].search(
                 [('move_id', '=', line.move_id.id)])
             if len(inv_ids) > 1:
-                raise orm.except_orm(_('Error'),
+                raise orm.except_orm(
+                    _('Error'),
                     _('Inconsistent data: move %s has more than one invoice')
                     % line.move_id.name)
             if line.invoice:
