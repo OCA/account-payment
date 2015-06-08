@@ -27,7 +27,8 @@
 ##############################################################################
 
 from openerp.tools.translate import _
-from openerp import models, fields, api, orm
+from openerp import models, fields, api
+from openerp.osv import orm
 
 
 class AccountMoveLine(models.Model):
