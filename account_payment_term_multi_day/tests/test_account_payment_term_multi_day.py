@@ -57,8 +57,8 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
              'invoice_line': [(0, 0, {'product_id': self.product.id,
                                       'name': 'Test',
                                       'quantity': 10.0,
-                                     })],
-            })
+                                      })],
+             })
         workflow.trg_validate(self.uid, 'account.invoice', invoice.id,
                               'invoice_open', self.cr)
         for line in invoice.move_id.line_id:
@@ -80,8 +80,8 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
              'invoice_line': [(0, 0, {'product_id': self.product.id,
                                       'name': 'Test',
                                       'quantity': 10.0,
-                                     })],
-            })
+                                      })],
+             })
         workflow.trg_validate(self.uid, 'account.invoice', invoice.id,
                               'invoice_open', self.cr)
         for line in invoice.move_id.line_id:
@@ -103,8 +103,8 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
              'invoice_line': [(0, 0, {'product_id': self.product.id,
                                       'name': 'Test',
                                       'quantity': 10.0,
-                                     })],
-            })
+                                      })],
+             })
         workflow.trg_validate(self.uid, 'account.invoice', invoice.id,
                               'invoice_open', self.cr)
         for line in invoice.move_id.line_id:
