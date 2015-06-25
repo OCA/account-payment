@@ -1,0 +1,33 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_payment_term_multi_day
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-05-12 23:53+0000\n"
+"PO-Revision-Date: 2015-05-12 23:53+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_payment_term_multi_day
+#: field:account.payment.term.line,payment_days:0
+msgid "Payment day(s)"
+msgstr ""
+
+#. module: account_payment_term_multi_day
+#: code:addons/account_payment_term_multi_day/models/account_payment_term.py:77
+#, python-format
+msgid "Payment days field format is not valid."
+msgstr ""
+
+#. module: account_payment_term_multi_day
+#: help:account.payment.term.line,payment_days:0
+msgid "Put here the day or days when the partner makes the payment. Separate each possible payment day with dashes (-), commas (,) or spaces ( )."
+msgstr ""
+
