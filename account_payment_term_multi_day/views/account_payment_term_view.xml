@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="view_payment_term_line_tree_multi_day">
+            <field name="name">account.payment.term.line.tree.multi.day</field>
+            <field name="model">account.payment.term.line</field>
+            <field name="inherit_id" ref="account.view_payment_term_line_tree"/>
+            <field name="arch" type="xml">
+                <field name="days2" position="after">
+                    <field name="payment_days"/>
+                </field>
+                <field name="days2" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="view_payment_term_line_form_multi_day">
+            <field name="name">account.payment.term.line.form.multi.day</field>
+            <field name="model">account.payment.term.line</field>
+            <field name="inherit_id" ref="account.view_payment_term_line_form"/>
+            <field name="arch" type="xml">
+                <field name="days2" position="after">
+                    <field name="payment_days"/>
+                </field>
+                <field name="days2" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </field>
+            </field>
+        </record>
+    </data>
+</openerp>
