@@ -65,6 +65,6 @@ Based on previous work of Pablo Rocandio & Zikzakmedia (version for 4.2).
     ],
     'demo': [],
     'test': [],
-    'installable': False,
+    'installable': True,
     'auto_install': False,
 }

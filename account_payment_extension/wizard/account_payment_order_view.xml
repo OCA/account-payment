@@ -22,14 +22,14 @@
             <field name="model">payment.order.create</field>
             <field name="inherit_id" ref="account_payment.view_create_payment_order_lines"/>
             <field name="arch" type="xml">
-				<xpath expr="//field[@name='entries']/.." position="replace">
-			        <group col="4" colspan="4">
-                        <separator colspan="4" string="Entries"/>
-                        <field name="entries" nolabel="1"/>
-					</group>
-                    <separator string="Extra message of payment communication" colspan="4"/>
-                    <field name="communication2" colspan="4"/>
-                </xpath>
+              <xpath expr="//field[@name='entries']/.." position="replace">
+                <group col="4" colspan="4">
+                 <separator colspan="4" string="Entries"/>
+                 <field name="entries" nolabel="1"/>
+                </group>
+                 <separator string="Extra message of payment communication" colspan="4"/>
+                 <field name="communication2" colspan="4"/>
+              </xpath>
             </field>
         </record>
 

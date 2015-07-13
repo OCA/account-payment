@@ -19,12 +19,12 @@
 #
 ##############################################################################
 {
-    "name" : "Purchase Payment Type and Terms",
-    "version" : "1.0",
-    "author" : "Pexego,Odoo Community Association (OCA)",
+    "name": "Purchase Payment Type and Terms",
+    "version": "1.0",
+    "author": "Pexego,Odoo Community Association (OCA)",
     "website": "www.pexego.es",
     "license": "GPL-3 or any later version",
-    "category" : 'Generic Modules/Sales & Purchases',
+    "category": 'Generic Modules/Sales & Purchases',
     "description": """Adds payment info to the purchase process.
 
 Adds payment type, terms, and bank account to the purchase orders.
@@ -38,17 +38,15 @@ purchase will be taken from the partner.
 Invoices created from purchase orders, or from pickings related to purchase
 orders, will inherit this payment info from the payment order.
 """,
-    "depends" : [
+    "depends": [
             "account_payment",
             "account_payment_extension",
             "purchase",
             "stock",
         ],
-    "init_xml" : [],
-    "demo_xml" : [],
-    "update_xml" : [
-            "purchase_payment_view.xml",
-        ],
+    "data": [
+        "purchase_payment_view.xml",
+    ],
     "active": False,
-    "installable": False,
+    "installable": True,
 }

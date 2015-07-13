@@ -25,29 +25,34 @@
 #
 ##############################################################################
 
-from openerp.osv import orm, fields
+# from openerp.osv import osv, fields
+from openerp import models
+from openerp import fields
 
 
-class res_partner(orm.Model):
+class res_partner(models.Model):
     _inherit = 'res.partner'
-    _columns = {
-        'payment_type_customer': fields.property(
-            'payment.type', type='many2one', relation='payment.type',
-            string='Customer Payment Type', method=True, view_load=True,
-            help="Payment type of the customer"),
-        'payment_type_supplier': fields.property(
-            'payment.type', type='many2one', relation='payment.type',
-            string='Supplier Payment Type', method=True, view_load=True,
-            help="Payment type of the supplier"),
-    }
+
+    payment_type_customer = fields.Many2one(
+        'payment.type',
+        string='Customer Payment Type',
+        method=True,
+        company_dependent=True,
+        help="Payment type of the customer")
+    payment_type_supplier = fields.Many2one(
+        'payment.type',
+        string='Supplier Payment Type',
+        method=True,
+        company_dependent=True,
+        help="Payment type of the supplier")
 
 
-class res_partner_bank(orm.Model):
+class res_partner_bank(models.Model):
     _inherit = 'res.partner.bank'
 
     def create(self, cr, uid, vals, context=None):
         if vals.get('default_bank') and vals.get('partner_id') and \
-        vals.get('state'):
+                vals.get('state'):
             sql = """UPDATE res_partner_bank SET
                     default_bank = '0'
                 WHERE
@@ -78,6 +83,5 @@ class res_partner_bank(orm.Model):
         return super(res_partner_bank, self).write(
             cr, uid, ids, vals, context=context)
 
-    _columns = {
-        'default_bank': fields.boolean('Default'),
-    }
+
+    default_bank = fields.Boolean('Default')
