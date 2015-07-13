@@ -26,16 +26,17 @@ Based on the sale_payment module.
 """
 __author__ = "Borja López Soilán (Pexego) <borjals@pexego.es>"
 
-import netsvc
-from osv import fields, osv
+# from openerp.osv import fields, osv
+from openerp import models
+from openerp import fields
 
-class purchase_order(osv.osv):
+
+class purchase_order(models.Model):
     _inherit = 'purchase.order'
-    _columns = {
-        'payment_term': fields.many2one('account.payment.term', 'Payment Term', help='The payment terms. They will be transferred to the invoice.'),
-        'payment_type': fields.many2one('payment.type', 'Payment type', help='The type of payment. It will be transferred to the invoice.'),
-        'partner_bank': fields.many2one('res.partner.bank','Bank Account', select=True, help='The bank account to pay to or to be paid from. It will be transferred to the invoice.'),
-    }
+
+    payment_term = fields.Many2one('account.payment.term', 'Payment Term', help='The payment terms. They will be transferred to the invoice.')
+    payment_type = fields.Many2one('payment.type', 'Payment type', help='The type of payment. It will be transferred to the invoice.')
+    partner_bank = fields.Many2one('res.partner.bank','Bank Account', select=True, help='The bank account to pay to or to be paid from. It will be transferred to the invoice.')
 
     def onchange_partner_id(self, cr, uid, ids, partner_id):
         """
@@ -52,7 +53,7 @@ class purchase_order(osv.osv):
 
         return self.onchange_paytype_id(cr, uid, ids, paytype_id, partner_id, result)
 
-    def onchange_paytype_id(self, cr, uid, ids, paytype_id, partner_id, result = {'value': {}}):
+    def onchange_paytype_id(self, cr, uid, ids, paytype_id, partner_id, result={'value': {}}):
         """
         Detect changes of the payment type and set the bank account accordingly.
         """
@@ -92,20 +93,19 @@ class purchase_order(osv.osv):
             self.pool.get('account.invoice').write(cr, uid, [invoice_id], vals)
         return invoice_id
 
-purchase_order()
 
-
-class stock_picking(osv.osv):
+class stock_picking(models.Model):
     _inherit = 'stock.picking'
 
     def action_invoice_create(self, cr, uid, ids, journal_id=False,
-                                group=False, type='out_invoice', context=None):
+                              group=False, type='out_invoice', context=None):
         """
         Extend the invoice creation action to set the price type if needed.
         """
         # Create the invoices as usual-
-        res = super(stock_picking, self).action_invoice_create(cr, uid, ids,
-                    journal_id=journal_id, group=group, type=type, context=context)
+        res = super(stock_picking, self).action_invoice_create(
+            cr, uid, ids, journal_id=journal_id, group=group,
+            type=type, context=context)
 
         for picking_id, invoice_id in res.items():
             picking = self.browse(cr, uid, picking_id, context=context)
@@ -124,33 +124,25 @@ class stock_picking(osv.osv):
                 if vals:
                     # Write the payment info into the invoice.
                     self.pool.get('account.invoice').write(cr, uid, [invoice_id], vals, context=context)
-                    
+
         return res
 
-stock_picking()
 
-
-class res_partner(osv.osv):
+class res_partner(models.Model):
     """
     Extends the partners to add a payment terms for purchases option.
     """
     _inherit = 'res.partner'
 
-    _columns = {
-        'property_payment_term_supplier': fields.property(
-            'account.payment.term',
-            type='many2one',
-            relation='account.payment.term',
-            string ='Payment Term',
-            method=True,
-            view_load=True,
-            help="This payment term will be used instead of the default one for the current partner on purchases"),
-    }
-    
-res_partner()
+    property_payment_term_supplier = fields.Many2one(
+        'account.payment.term',
+        string='Payment Term',
+        method=True,
+        company_dependent=True,
+        help="This payment term will be used instead of the default one for the current partner on purchases")
 
 
-class account_invoice(osv.osv):
+class account_invoice(models.Model):
     """
     Extend the invoices to autoselect the payment terms,
     using either the supplier payment terms or the customer payment terms.
@@ -158,14 +150,16 @@ class account_invoice(osv.osv):
     _inherit = 'account.invoice'
 
     def onchange_partner_id(self, cr, uid, ids, type, partner_id,
-            date_invoice=False, payment_term=False, partner_bank_id=False, company_id=False):
+                            date_invoice=False, payment_term=False,
+                            partner_bank_id=False, company_id=False):
         """
         Extend the onchange to use the supplier payment terms if this is
         a purchase invoice.
         """
 
-        result = super(account_invoice, self).onchange_partner_id(cr, uid, ids, type, partner_id,
-                            date_invoice=False, payment_term=False, partner_bank_id=False, company_id=False)
+        result = super(account_invoice, self).onchange_partner_id(
+            cr, uid, ids, type, partner_id, date_invoice=False,
+            payment_term=False, partner_bank_id=False, company_id=False)
 
         #
         # Set the correct payment term
@@ -193,5 +187,3 @@ class account_invoice(osv.osv):
                 result['value']['date_due'] = False
 
         return result
-
-account_invoice()
