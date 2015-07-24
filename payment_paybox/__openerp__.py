@@ -22,32 +22,24 @@
 # ==============================================================================
 
 {
-    'name': 'Paybox',
-    'version': '0.1',
+    'name': 'Paybox payment acquirer',
+    'version': '8.0.1.0.0',
     'sequence': 150,
-    'category': 'Custom',
-    'description': """Paybox payment acquirer (France)""",
-    'author': 'Anybox',
-    'website': 'www.anybox.fr',
+    'category': 'Hidden',
+    'author': 'Florent Jouatte (Anybox), Jean-Baptiste Quenot',
+    'summary': "Payment acquirer: Paybox implementation",
     'depends': [
-        'payment',
-        'l10n_fr'
+        'payment'
     ],
     'data': [
-        'paybox_data.xml',
-        'view/paybox.xml',
-        'data/template.xml',
-    ],
-    'demo_xml': [
-    ],
-    'init_xml': [
+        'templates/payment_acquirer.xml',
+        'data/payment_acquirer.xml',
+        'views/payment_acquirer.xml',
     ],
     'css': [],
-    'icon': '',
     'test': [],
     'installable': True,
-    'application': True,
+    'application': False,
     'auto_install': False,
     'license': 'AGPL-3',
-    'post_load': None,
     }

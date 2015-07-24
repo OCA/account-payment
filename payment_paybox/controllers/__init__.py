@@ -1,3 +1,1 @@
-# flake8: noqa
-
-import controller
+from . import main

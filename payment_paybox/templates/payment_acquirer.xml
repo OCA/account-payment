@@ -23,11 +23,5 @@
             </button>
           </form>
         </template>
-
-        <record id="paybox_acquirer" model="payment.acquirer">
-            <field name="name">Paybox</field>
-            <field name="provider">paybox</field>
-            <field name="view_template_id" ref="paybox_acquirer_button"/>
-        </record>
     </data>
 </openerp>
