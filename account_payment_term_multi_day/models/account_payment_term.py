@@ -23,12 +23,16 @@ import calendar
 class AccountPaymentTerm(models.Model):
     _inherit = "account.payment.term"
 
-    @api.multi
-    def compute(self, value, date_ref=False):
-        result = super(AccountPaymentTerm, self).compute(value, date_ref)[0]
+    def compute(self, cr, uid, id, value, date_ref=False, context=None):
+        """This method can't be new API due to arguments names are not
+        standard for the API wrapper.
+        """
+        result = super(AccountPaymentTerm, self).compute(
+            cr, uid, id, value=value, date_ref=date_ref, context=context)
+        payment_term = self.browse(cr, uid, id, context=context)
         if not result:
-            return [result]
-        for i, line in enumerate(self.line_ids):
+            return result
+        for i, line in enumerate(payment_term.line_ids):
             if not line.payment_days:
                 continue
             payment_days = line._decode_payment_days(line.payment_days)
@@ -50,7 +54,7 @@ class AccountPaymentTerm(models.Model):
                     day = days_in_month
                 new_date = date + relativedelta(day=day, months=1)
             result[i] = (fields.Date.to_string(new_date), result[i][1])
-        return [result]
+        return result
 
 
 class AccountPaymentTermLine(models.Model):
