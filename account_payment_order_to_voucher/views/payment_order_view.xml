@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_payment_order_form" model="ir.ui.view">
+            <field name="name">payment.order.form</field>
+            <field name="model">payment.order</field>
+            <field name="inherit_id" ref="account_payment.view_payment_order_form"></field>
+            <field name="arch" type="xml">
+                <div class=" oe_right oe_button_box" position="after">
+                    <div class=" oe_right oe_button_box">
+                        <button class="oe_inline oe_stat_button oe_right" name="generate_vouchers" string="Create vouchers"
+                        type="object" attrs="{'invisible':['|',('state','!=','done'),('vouchers_ids','!=',False)]}"
+                        icon="fa-pencil-square-o" widget="statinfo"/>
+                    </div>
+                </div>
+                <field name="line_ids" position="after">
+                    <separator string="Vouchers"></separator>
+                    <field name="voucher_ids"></field>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
