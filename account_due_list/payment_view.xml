@@ -19,6 +19,7 @@
                 <field name="account_id" readonly="1"/>
                 <field name="debit" readonly="1" sum="Total Debit"/>
                 <field name="credit" readonly="1" sum="Total Credit"/>
+                <field name="maturity_residual" sum="Total Residual"/>
                 <field name="date_maturity"/>
                 <field name="move_id" readonly="1"/>
                 <field name="reconcile_id" readonly="1"/>
