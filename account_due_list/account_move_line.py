@@ -45,6 +45,24 @@ class AccountMoveLine(models.Model):
                                         compute='_get_invoice',
                                         string='Invoice', store=True)
 
+    maturity_residual = fields.Float(
+        compute='_maturity_residual', string="Residual Amount", store=True,
+        help="The residual amount on a receivable or payable of a journal "
+             "entry expressed in the company currency.")
+
+    @api.multi
+    @api.depends('date_maturity', 'debit', 'credit', 'reconcile_id',
+                 'reconcile_partial_id', 'account_id.reconcile',
+                 'amount_currency', 'reconcile_partial_id.line_partial_ids',
+                 'currency_id', 'company_id.currency_id')
+    def _maturity_residual(self):
+        """
+            inspired by amount_residual
+        """
+        for move_line in self:
+            sign = (move_line.debit - move_line.credit) < 0 and -1 or 1
+            move_line.maturity_residual = move_line.amount_residual * sign
+
     @api.depends('move_id', 'invoice.move_id')
     def _get_invoice(self):
         for line in self:
