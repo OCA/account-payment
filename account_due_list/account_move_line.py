@@ -45,6 +45,62 @@ class AccountMoveLine(models.Model):
                                         compute='_get_invoice',
                                         string='Invoice', store=True)
 
+    maturity_residual = fields.Float(
+        compute='_maturity_residual', string="Residual Amount", store=True,
+        help="The residual amount on a receivable or payable of a journal "\
+             "entry expressed in the company currency.")
+
+    @api.multi
+    @api.depends('date_maturity')
+    def _maturity_residual(self):
+        """
+            inspired by amount_residual
+        """
+        # currency can be used in future
+        cur_obj = self.pool['res.currency']
+        for move_line in self:
+            move_line.maturity_residual= 0.0
+
+            if move_line.reconcile_id:
+                continue
+            if not move_line.account_id.reconcile:
+                #this function does not suport to be used on move lines not
+                #related to a reconcilable account
+                continue
+
+            if move_line.currency_id:
+                move_line_total = move_line.amount_currency
+                sign = move_line.amount_currency < 0 and -1 or 1
+            else:
+                move_line_total = move_line.debit - move_line.credit
+                sign = (move_line.debit - move_line.credit) < 0 and -1 or 1
+            line_total_in_company_currency =  move_line.debit - move_line.credit
+            context_unreconciled = self._context.copy()
+            if move_line.reconcile_partial_id:
+                for payment_line in move_line.reconcile_partial_id.line_partial_ids:
+                    if payment_line.id == move_line.id:
+                        continue
+                    if (payment_line.currency_id and move_line.currency_id and
+                        payment_line.currency_id.id == move_line.currency_id.id):
+                            move_line_total += payment_line.amount_currency
+                    else:
+                        if move_line.currency_id:
+                            context_unreconciled.update(
+                                {'date': payment_line.date})
+                            amount_in_foreign_currency = cur_obj.compute(
+                                cr, uid, move_line.company_id.currency_id.id,
+                                move_line.currency_id.id, (
+                                    payment_line.debit - payment_line.credit),
+                                round=False, context=context_unreconciled)
+                            move_line_total += amount_in_foreign_currency
+                        else:
+                            move_line_total += (
+                                payment_line.debit - payment_line.credit)
+                    line_total_in_company_currency += (
+                        payment_line.debit - payment_line.credit)
+
+            move_line.maturity_residual = (sign * line_total_in_company_currency)
+
     @api.depends('move_id', 'invoice.move_id')
     def _get_invoice(self):
         for line in self:
