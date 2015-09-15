@@ -57,7 +57,8 @@ class AccountMoveLine(models.Model):
             inspired by amount_residual
         """
         for move_line in self:
-            move_line.maturity_residual = move_line.amount_residual
+            sign = (move_line.debit - move_line.credit) < 0 and -1 or 1
+            move_line.maturity_residual = move_line.amount_residual * sign
 
     @api.depends('move_id', 'invoice.move_id')
     def _get_invoice(self):
