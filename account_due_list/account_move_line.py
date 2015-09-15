@@ -51,7 +51,8 @@ class AccountMoveLine(models.Model):
              "entry expressed in the company currency.")
 
     @api.multi
-    @api.depends('date_maturity', 'debit', 'credit', 'reconcile_id', 'reconcile_partial_id')
+    @api.depends('date_maturity', 'debit', 'credit', 'reconcile_id',
+                 'reconcile_partial_id')
     def _maturity_residual(self):
         """
             inspired by amount_residual
