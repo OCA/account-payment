@@ -2,9 +2,8 @@
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
-#    Copyright (C) 2012 Domsense s.r.l. (<http://www.domsense.com>).
-#    Copyright (C) 2012-2013 Agile Business Group sagl
-#    (<http://www.agilebg.com>)
+#    Copyright (C) 2011-2012 Domsense s.r.l. (<http://www.domsense.com>).
+#    Copyright (C) 2014 Agile Business Group sagl (<http://www.agilebg.com>)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -20,5 +19,16 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import account_voucher
-import company
+
+from openerp.osv import orm, fields
+
+
+class AccountMoveLine(orm.Model):
+    _inherit = "account.move.line"
+    _columns = {
+        'real_payment_move_id': fields.many2one(
+            'account.move', 'Real payment entry'),
+        'real_account_id': fields.many2one('account.account', 'Real account'),
+        'real_tax_code_id': fields.many2one(
+            'account.tax.code', 'Real tax code'),
+    }
