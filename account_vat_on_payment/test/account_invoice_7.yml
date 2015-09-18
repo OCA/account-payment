@@ -1,0 +1,80 @@
+-
+  I create customer invoice 7 - 120 USD - 1 EUR = 2 USD
+-
+  !record {model: account.invoice, id: account_invoice_customer_7, view: invoice_form}:
+    journal_id: account.sales_journal
+    partner_id: base.res_partner_3
+    account_id: ds
+    vat_on_payment: True
+    currency_id: base.USD
+    date_invoice: !eval "'%s-08-14' %(datetime.now().year)"
+    invoice_line:
+      - quantity: 1
+        account_id: account.a_sale
+        name: 'Service'
+        price_unit: 100.0
+        invoice_line_tax_id:
+          - tax20
+-
+  I create invoice by clicking on Create button
+-
+  !workflow {model: account.invoice, action: invoice_open, ref: account_invoice_customer_7}
+-
+  I set the context that will be used for the encoding of all the vouchers of this file
+-
+  !context
+    'type': 'receipt'
+-
+  I create the payment voucher for 30 EUR - 1 EUR = 4 USD
+-
+  !record {model: account.voucher, id: account_voucher_7, view: account_voucher.view_vendor_receipt_form}:
+    partner_id: base.res_partner_3
+    amount: 30
+    journal_id: account.bank_journal
+    date: !eval "'%s-08-15' %(datetime.now().year)"
+-
+  I set the allocation for 30
+-
+  !python {model: account.voucher}: |
+    voucher = self.browse(cr, uid, ref('account_voucher_7'), context=context)
+    assert len(voucher.line_cr_ids) == 1, "There must be 1 voucher line, %s found" % len(voucher.line_cr_ids)
+    voucher.line_cr_ids[0].write({
+      'reconcile': True,
+      'amount': 60,
+      })
+    voucher.write({
+      'payment_option': 'with_writeoff',
+      'writeoff_acc_id': ref('account.income_fx_expense'),
+      'exclude_write_off': False,
+      })
+-
+  I confirm the voucher
+-
+  !workflow {model: account.voucher, action: proforma_voucher, ref: account_voucher_7}
+-
+  I check the voucher
+-
+  !python {model: account.voucher}: |
+    voucher = self.browse(cr, uid, ref('account_voucher_7'), context=context)
+    assert len(voucher.move_id.line_id) == 3, "There must be 3 real move lines, %s found" % len(voucher.move_id.line_id)
+    bank_found = False
+    vat_found = False
+    sales_found = False
+    for move_line in voucher.move_id.line_id:
+      if move_line.account_id.id == ref('account.bnk'):
+        bank_found = True
+        assert move_line.debit == 30, "Bank move line must be 30 debit, %s found" % move_line.debit
+      if move_line.account_id.id == ref('account.iva'):
+        vat_found = True
+        assert move_line.credit == 5, "VAT move line must be 5 credit, %s found" % move_line.credit
+      if move_line.account_id.id == ref('account.a_sale'):
+        sales_found = True
+        assert move_line.credit == 25, "sales move line must be 25 credit, %s found" % move_line.credit
+    assert bank_found, "No bank move line found"
+    assert sales_found, "No sales move line found"
+    assert vat_found, "No VAT move line found"
+-
+  I check that the invoice state is paid
+-
+  !assert {model: account.invoice, id: account_invoice_customer_7}:
+    - state == 'paid'

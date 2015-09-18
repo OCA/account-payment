@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        
+        <!-- shadow COA -->
+        <record id="scoa" model="account.account">
+            <field name="code">SCoA</field>
+            <field name="name">shadow COA</field>
+            <field name="type">view</field>
+            <field name="user_type" ref="account.data_account_type_view"/>
+        </record>
+        <record id="ds" model="account.account">
+            <field name="code">DS</field>
+            <field name="name">Debtors - (shadow)</field>
+            <field ref="scoa" name="parent_id"/>
+            <field name="type">receivable</field>
+            <field eval="True" name="reconcile"/>
+            <field name="user_type" ref="account.data_account_type_receivable"/>
+        </record>
+        <record id="pss" model="account.account">
+            <field name="code">PSS</field>
+            <field name="name">Product Sales - (shadow)</field>
+            <field ref="scoa" name="parent_id"/>
+            <field name="type">other</field>
+            <field name="user_type" ref="account.data_account_type_income"/>
+        </record>
+        <record id="ivas" model="account.account">
+            <field name="code">IVAS</field>
+            <field name="name">Input VAT - (shadow)</field>
+            <field ref="scoa" name="parent_id"/>
+            <field name="type">other</field>
+            <field name="user_type" ref="account.data_account_type_liability"/>
+        </record>
+        
+        <!-- real COA -->
+        <record id="account.a_sale" model="account.account">
+            <field name="vat_on_payment_related_account_id" ref="pss" />
+        </record>
+        <record id="account.iva" model="account.account">
+            <field name="vat_on_payment_related_account_id" ref="ivas" />
+        </record>
+        
+        <!-- Journals -->
+        <record id="shadow_bank_journal" model="account.journal">
+            <field name="name">Bank Journal - (shadow)</field>
+            <field name="code">SBNK</field>
+            <field name="type">general</field>
+        </record>
+        <record id="account.bank_journal" model="account.journal">
+            <field name="vat_on_payment_related_journal_id" ref="shadow_bank_journal" />
+        </record>
+        <record id="account.bank_journal_usd" model="account.journal">
+            <field name="vat_on_payment_related_journal_id" ref="shadow_bank_journal" />
+        </record>
+
+        <!-- company -->
+        <record id="base.main_company" model="res.company">
+            <field name="expense_currency_exchange_account_id" ref="account.income_fx_expense"></field>
+            <field name="income_currency_exchange_account_id" ref="account.income_fx_expense"></field>
+        </record>
+    </data>
+</openerp>

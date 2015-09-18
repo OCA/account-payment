@@ -1,0 +1,116 @@
+-
+  I create shadow Tax Code
+-
+  !record {model: account.tax.code, id: shadow_tax_code}:
+    name: Tax received
+    company_id: base.main_company
+    sign: 1
+-
+  I create Tax Code received
+-
+  !record {model: account.tax.code, id: tax_code_received}:
+    name: Tax received
+    company_id: base.main_company
+    sign: 1
+    vat_on_payment_related_tax_code_id: shadow_tax_code
+-
+  I create Tax 10%
+-
+  !record {model: account.tax, id: tax10}:
+    name: Tax 10.0
+    amount: 10.0
+    type: fixed
+    sequence: 1
+    company_id: base.main_company
+    type_tax_use: all
+    tax_code_id: tax_code_received
+    account_collected_id: account.iva
+-
+  I create Tax 20%
+-
+  !record {model: account.tax, id: tax20}:
+    name: Tax 20.0
+    amount: 20.0
+    type: fixed
+    sequence: 1
+    company_id: base.main_company
+    type_tax_use: all
+    tax_code_id: tax_code_received
+    account_collected_id: account.iva
+-
+  I create customer invoice 1 - 120 EUR
+-
+  !record {model: account.invoice, id: account_invoice_customer_1, view: invoice_form}:
+    journal_id: account.sales_journal
+    partner_id: base.res_partner_3
+    account_id: ds
+    vat_on_payment: True
+    invoice_line:
+      - quantity: 1
+        account_id: account.a_sale
+        name: 'Service'
+        price_unit: 100.0
+        invoice_line_tax_id:
+          - tax20
+-
+  I create invoice by clicking on Create button
+-
+  !workflow {model: account.invoice, action: invoice_open, ref: account_invoice_customer_1}
+-
+  I check the invoice
+-
+  !python {model: account.invoice}: |
+    invoice = self.browse(cr, uid, ref('account_invoice_customer_1'), context=context)
+    assert len(invoice.move_id.line_id) == 3, "There must be 3 move lines, %s found" % len(invoice.move_id.line_id)
+    for move_line in invoice.move_id.line_id:
+      if move_line.account_id.id == ref('ds'):
+        assert move_line.debit == 120, "Shadow credit must be 120 debit %s found" % move_line.debit
+      if move_line.account_id.id == ref('ivas'):
+        assert move_line.credit == 20, "Shadow VAT must be 20 credit %s found" % move_line.credit
+      if move_line.account_id.id == ref('pss'):
+        assert move_line.credit == 100, "Shadow sales must be 100 credit %s found" % move_line.credit
+-
+  I set the context that will be used for the encoding of all the vouchers of this file
+-
+  !context
+    'type': 'receipt'
+-
+  I create the payment voucher
+-
+  !record {model: account.voucher, id: account_voucher_1, view: account_voucher.view_vendor_receipt_form}:
+    partner_id: base.res_partner_3
+    amount: 120
+-
+  I confirm the voucher
+-
+  !workflow {model: account.voucher, action: proforma_voucher, ref: account_voucher_1}
+-
+  I check the voucher
+-
+  !python {model: account.voucher}: |
+    voucher = self.browse(cr, uid, ref('account_voucher_1'), context=context)
+    assert len(voucher.move_id.line_id) == 3, "There must be 3 real move lines, %s found" % len(voucher.move_id.line_id)
+    bank_found = False
+    vat_found = False
+    sales_found = False
+    for move_line in voucher.move_id.line_id:
+      if move_line.account_id.id == ref('account.bnk'):
+        bank_found = True
+        assert move_line.debit == 120, "Bank move line must be 120 debit, %s found" % move_line.debit
+      if move_line.account_id.id == ref('account.iva'):
+        vat_found = True
+        assert move_line.credit == 20, "VAT move line must be 120 credit, %s found" % move_line.credit
+      if move_line.account_id.id == ref('account.a_sale'):
+        sales_found = True
+        assert move_line.credit == 100, "sales move line must be 100 credit, %s found" % move_line.credit
+    assert bank_found, "No bank move line found"
+    assert sales_found, "No sales move line found"
+    assert vat_found, "No VAT move line found"
+    voucher.refresh()
+    assert voucher.move_id.state == 'draft', 'Move state != draft: %s' % voucher.move_id.state
+    assert voucher.shadow_move_id.state == 'draft', 'Shadow move state != draft: %s' % voucher.shadow_move_id.state
+-
+  I check that the invoice state is paid
+-
+  !assert {model: account.invoice, id: account_invoice_customer_1}:
+    - state == 'paid'
