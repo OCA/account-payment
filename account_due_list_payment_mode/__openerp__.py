@@ -23,12 +23,10 @@
 
 {
     "name": "Payment due list with payment mode",
-    "version": "0.1",
+    "version": "8.0.1.0.0",
     "category": "Generic Modules/Payment",
-    "description": """
-    This module adds the payment mode to the due list of pending payments.
-    """,
-    "author": "Obertix, Free Solutions",
+    "author": "Odoo Community Association (OCA),"
+              "Obertix, Free Solutions",
     "contributors": ["cubells <vicent@vcubells.net>"],
     "website": "http://www.obertix.net",
     "depends": [
@@ -39,5 +37,5 @@
         'views/payment_view.xml',
     ],
     "installable": True,
-    "auto_install": False,
+    "auto_install": True,
 }
