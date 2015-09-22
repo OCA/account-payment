@@ -45,8 +45,8 @@ amount for a withdrawal, OpenERP will automatically correct the entry).
                 'account_journal_view.xml',
                 'cash_statement_view.xml',
             ],
-        "installable": True,
+        "installable": False,
         'active': False
 
 }
- 
+
