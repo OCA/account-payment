@@ -42,8 +42,8 @@ This may be useful for petty cash management.
         "update_xml" : [
                 'bank_statement_view.xml',
             ],
-        "installable": True,
+        "installable": False,
         'active': False
 
 }
- 
+

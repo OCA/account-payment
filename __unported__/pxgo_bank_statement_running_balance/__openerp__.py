@@ -37,8 +37,8 @@ This makes it easier to find differences and mistakes in long statements.
         "update_xml" : [
                 'bank_statement_view.xml',
             ],
-        "installable": True,
+        "installable": False,
         'active': False
 
 }
- 
+
