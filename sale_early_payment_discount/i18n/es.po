@@ -1,0 +1,166 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* sale_early_payment_discount
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-26 11:11+0000\n"
+"PO-Revision-Date: 2015-06-26 11:11+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: sale_early_payment_discount
+#: view:account.invoice:sale_early_payment_discount.invoice_form_add_early_payment_button
+msgid "Apply early payment disc."
+msgstr "Aplicar descuento(s) por pronto pago"
+
+#. module: sale_early_payment_discount
+#: code:addons/sale_early_payment_discount/account_invoice.py:181
+#, python-format
+msgid "Cannot set early payment discount because now is impossible find the early payment account. Review invoice products categories have defined early payment account by default or early payment discount product have defined an output account."
+msgstr "No se puede definir un descuento por pronto pago, porque no fue posible encontrar la cuenta contable para imputarlo. Revisa que las categorías de los productos de la factura tengan definida la cuenta para pronto pago o que el producto 'descuento pronto pago', tenga definida la cuenta contable de salidas."
+
+#. module: sale_early_payment_discount
+#: field:account.partner.payment.term.early.discount,create_uid:0
+msgid "Created by"
+msgstr "Created by"
+
+#. module: sale_early_payment_discount
+#: field:account.partner.payment.term.early.discount,create_date:0
+msgid "Created on"
+msgstr "Created on"
+
+#. module: sale_early_payment_discount
+#: view:website:sale.report_saleorder_document
+msgid "E.P. Disc. :"
+msgstr "Desc. P.P. :"
+
+#. module: sale_early_payment_discount
+#: field:account.invoice,early_payment_discount:0
+#: field:account.partner.payment.term.early.discount,early_payment_discount:0
+#: field:sale.order,early_payment_discount:0
+msgid "E.P. disc.(%)"
+msgstr "Desc. P.P.(%)"
+
+#. module: sale_early_payment_discount
+#: field:account.payment.term,early_payment_discount_ids:0
+#: field:res.partner,early_payment_discount_ids:0
+msgid "E.P. discounts"
+msgstr "Descuentos P.P."
+
+#. module: sale_early_payment_discount
+#: help:account.invoice,early_payment_discount:0
+#: view:account.partner.payment.term.early.discount:sale_early_payment_discount.partner_payment_term_early_discount_form
+#: code:addons/sale_early_payment_discount/account_invoice.py:190
+#: code:addons/sale_early_payment_discount/account_invoice.py:212
+#: model:product.template,name:sale_early_payment_discount.product_rappel_product_template
+#: help:sale.order,early_payment_discount:0
+#, python-format
+msgid "Early payment discount"
+msgstr "Descuento por pronto pago"
+
+#. module: sale_early_payment_discount
+#: view:account.partner.payment.term.early.discount:sale_early_payment_discount.partner_payment_term_early_discount_tree
+#: view:account.payment.term:sale_early_payment_discount.view_payment_term_form_add_early_payment_discounts
+#: model:ir.actions.act_window,name:sale_early_payment_discount.action_payment_term_early_discount_form
+#: model:ir.model,name:sale_early_payment_discount.model_account_partner_payment_term_early_discount
+#: model:ir.ui.menu,name:sale_early_payment_discount.menu_action_payment_term_early_discount_form
+#: view:res.partner:sale_early_payment_discount.view_partner_form_add_early_payment_discounts
+msgid "Early payment discounts"
+msgstr "Descuentos por pronto pago"
+
+#. module: sale_early_payment_discount
+#: field:account.partner.payment.term.early.discount,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: sale_early_payment_discount
+#: model:ir.model,name:sale_early_payment_discount.model_account_invoice
+msgid "Invoice"
+msgstr "Factura"
+
+#. module: sale_early_payment_discount
+#: field:account.partner.payment.term.early.discount,write_uid:0
+msgid "Last Updated by"
+msgstr "Last Updated by"
+
+#. module: sale_early_payment_discount
+#: field:account.partner.payment.term.early.discount,write_date:0
+msgid "Last Updated on"
+msgstr "Last Updated on"
+
+#. module: sale_early_payment_discount
+#: view:account.partner.payment.term.early.discount:sale_early_payment_discount.partner_payment_term_early_discount_form
+#: field:account.partner.payment.term.early.discount,name:0
+msgid "Name"
+msgstr "Nombre"
+
+#. module: sale_early_payment_discount
+#: field:account.partner.payment.term.early.discount,partner_id:0
+#: model:ir.model,name:sale_early_payment_discount.model_res_partner
+msgid "Partner"
+msgstr "Empresa"
+
+#. module: sale_early_payment_discount
+#: field:account.partner.payment.term.early.discount,payment_term_id:0
+#: model:ir.model,name:sale_early_payment_discount.model_account_payment_term
+msgid "Payment Term"
+msgstr "Plazo de pago"
+
+#. module: sale_early_payment_discount
+#: help:account.partner.payment.term.early.discount,early_payment_discount:0
+msgid "Percentage of discount for early payment."
+msgstr "Percentage of discount for early payment."
+
+#. module: sale_early_payment_discount
+#: model:ir.model,name:sale_early_payment_discount.model_stock_picking
+msgid "Picking List"
+msgstr "Albarán"
+
+#. module: sale_early_payment_discount
+#: model:ir.model,name:sale_early_payment_discount.model_product_category
+msgid "Product Category"
+msgstr "Categoría de producto"
+
+#. module: sale_early_payment_discount
+#: field:account.partner.payment.term.early.discount,sale_discount:0
+msgid "Sale discount"
+msgstr "Descuento de venta"
+
+#. module: sale_early_payment_discount
+#: field:product.category,property_account_sale_early_payment_disc:0
+msgid "Sale early payment account"
+msgstr "Cuenta para el descuento por pronto pago de ventas"
+
+#. module: sale_early_payment_discount
+#: model:ir.model,name:sale_early_payment_discount.model_sale_order
+msgid "Sales Order"
+msgstr "Pedido de venta"
+
+#. module: sale_early_payment_discount
+#: model:product.category,name:sale_early_payment_discount.category_system
+msgid "System products"
+msgstr "Productos del sistema"
+
+#. module: sale_early_payment_discount
+#: help:product.category,property_account_sale_early_payment_disc:0
+msgid "This account will be used to input the early payments discount              in sale"
+msgstr "Esta cuenta se usará para imputar los descuentos por pronto pago de las ventas."
+
+#. module: sale_early_payment_discount
+#: code:addons/sale_early_payment_discount/account_invoice.py:180
+#, python-format
+msgid "Warning"
+msgstr "Aviso"
+
+#. module: sale_early_payment_discount
+#: view:website:sale.report_saleorder_document
+msgid "With E.P. :"
+msgstr "Con P.P. :"
+

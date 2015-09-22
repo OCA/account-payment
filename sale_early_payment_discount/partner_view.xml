@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_partner_form_add_early_payment_discounts" model="ir.ui.view">
+            <field name="name">res.partner.property.form.add_early_payment_discounts</field>
+            <field name="model">res.partner</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="bank_ids" position="before">
+                    <separator string="Early payment discounts"/>
+                    <field name="early_payment_discount_ids" colspan ="4" nolabel="1" context="{'partner_id': active_id}"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
