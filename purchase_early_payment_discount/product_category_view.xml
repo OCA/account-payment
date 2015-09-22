@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+            <record model="ir.ui.view" id="purchase_early_payment_account_form_view">
+                <field name="name">product.category.form</field>
+                <field name="model">product.category</field>
+                <field name="type">form</field>
+                <field name="inherit_id" ref="sale_early_payment_discount.view_category_property_form_add_early_payment_account"/>
+                <field name="arch" type="xml">
+                    <field name="property_account_sale_early_payment_disc" position="after">
+                        <field name="property_account_purchase_early_payment_disc" domain="[('type','&lt;&gt;','view'),('type','&lt;&gt;','consolidation')]"/>
+                    </field>
+                </field>
+            </record>
+
+    </data>
+</openerp>

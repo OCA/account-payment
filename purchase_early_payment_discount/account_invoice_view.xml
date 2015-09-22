@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="supplier_invoice_form_add_early_payment_button" model="ir.ui.view">
+            <field name="name">account.invoice.form_add_early_payment_button</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <header position="inside">
+                    <button name="button_compute_early_payment_disc" states="draft" string="Apply early payment disc." type="object" groups="base.group_user" />
+                </header>
+            </field>
+        </record>
+
+        <record id="supplier_invoice_form_add_early_payment_discount" model="ir.ui.view">
+            <field name="name">account.invoice.form_add_early_payment_discount</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="supplier_invoice_form_add_early_payment_button"/>
+            <field name="priority" eval="2"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <field name="payment_term" position="replace">
+                    <field name="payment_term"/>
+                    <field name="early_payment_discount"/>
+                    <field name="early_discount_amount"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,72 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#   * purchase_early_payment_discount
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-06-26 11:14+0000\n"
+"PO-Revision-Date: 2015-06-26 11:14+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: purchase_early_payment_discount
+#: view:account.invoice:purchase_early_payment_discount.supplier_invoice_form_add_early_payment_button
+msgid "Apply early payment disc."
+msgstr "Aplicar descuento(s) por pronto pago"
+
+#. module: purchase_early_payment_discount
+#: field:purchase.order,early_payment_discount:0
+msgid "E.P. disc.(%)"
+msgstr "Desc. P.P.(%)"
+
+#. module: purchase_early_payment_discount
+#: help:purchase.order,early_payment_discount:0
+msgid "Early payment discount"
+msgstr "Descuento por pronto pago"
+
+#. module: purchase_early_payment_discount
+#: model:ir.model,name:purchase_early_payment_discount.model_account_partner_payment_term_early_discount
+msgid "Early payment discounts"
+msgstr "Descuentos por pronto pago"
+
+#. module: purchase_early_payment_discount
+#: model:ir.model,name:purchase_early_payment_discount.model_account_invoice
+msgid "Invoice"
+msgstr "Factura"
+
+#. module: purchase_early_payment_discount
+#: model:ir.model,name:purchase_early_payment_discount.model_stock_picking
+msgid "Picking List"
+msgstr "Albarán"
+
+#. module: purchase_early_payment_discount
+#: model:ir.model,name:purchase_early_payment_discount.model_product_category
+msgid "Product Category"
+msgstr "Categoría de producto"
+
+#. module: purchase_early_payment_discount
+#: model:ir.model,name:purchase_early_payment_discount.model_purchase_order
+msgid "Purchase Order"
+msgstr "Pedido de compra"
+
+#. module: purchase_early_payment_discount
+#: field:account.partner.payment.term.early.discount,purchase_discount:0
+msgid "Purchase discount"
+msgstr "Descuento de compra"
+
+#. module: purchase_early_payment_discount
+#: field:product.category,property_account_purchase_early_payment_disc:0
+msgid "Purchase early payment account"
+msgstr "Cuenta para compras pronto pago"
+
+#. module: purchase_early_payment_discount
+#: help:product.category,property_account_purchase_early_payment_disc:0
+msgid "This account will be used to input the early payments discount in purchase"
+msgstr "Esta cuenta se usará para imputar las descuentos de compras pronto pago."
+
