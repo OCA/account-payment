@@ -1,3 +1,0 @@
-# list the OCA project dependencies, one per line
-bank-payment https://github.com/OCA/bank-payment
-
