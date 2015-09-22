@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_payments_mode_tree" model="ir.ui.view">
+            <field name="name">Payments MOde</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account_due_list.view_payments_tree"/>
+            <field name="arch" type="xml">
+                <field name="partner_ref" readonly="1" position="after">
+                    <field name="payment_mode_id" readonly="1"/>
+                </field>
+            </field>
+        </record>
+
+        <record id="view_payments_mode_filter" model="ir.ui.view">
+            <field name="name">Payments Mode Select</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account_due_list.view_payments_filter"/>
+            <field name="arch" type="xml">
+                <field name="date_maturity" position="after">
+                    <field name="payment_mode_id"/>
+                </field>
+                <filter string="Month" icon="terp-go-month" domain="[]" context="{'group_by':'date_maturity'}" position="after">
+                    <filter string="Payment Mode" icon="terp-dolar" domain="[]" context="{'group_by':'payment_mode_id'}"/>
+                </filter>
+            </field>
+        </record>
+
+    </data>
+</openerp>
