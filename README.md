@@ -16,3 +16,31 @@ You can find complementary modules for handling bank payment related tasks on:
 
  * https://github.com/OCA/bank-payment
  
+[//]: # (addons)
+Available addons
+----------------
+addon | version | summary
+--- | --- | ---
+[account_due_list](account_due_list/) | 0.1 | Payments Due list
+[account_due_list_payment_mode](account_due_list_payment_mode/) | 8.0.1.0.0 | Payment due list with payment mode
+[account_payment_order_to_voucher](account_payment_order_to_voucher/) | 8.0.1.0.0 | Payment order to voucher
+[account_payment_term_multi_day](account_payment_term_multi_day/) | 1.0 | Multiple payment days for payment terms
+[account_vat_on_payment](account_vat_on_payment/) | 1.0 | VAT on payment
+[account_voucher_cash_basis](account_voucher_cash_basis/) | 1.0 | Cash basis extensions for vouchers
+
+Unported addons
+---------------
+addon | version | summary
+--- | --- | ---
+[account_payment_extension](__unported__/account_payment_extension/) | 1.1.1 (unported) | Account Payment Extension
+[account_voucher_display_writeoff](__unported__/account_voucher_display_writeoff/) | 1.0r089 (unported) | Account voucher display writeoff
+[account_voucher_supplier_invoice_number](__unported__/account_voucher_supplier_invoice_number/) | 0.1 (unported) | Supplier invoice number in payment vouchers
+[account_voucher_tax_filter](__unported__/account_voucher_tax_filter/) | 1.0r028 (unported) | Account voucher tax filter
+[nan_account_bank_statement](__unported__/nan_account_bank_statement/) | 0.1 (unported) | nan_account_bank_statement
+[purchase_payment](__unported__/purchase_payment/) | 1.0 (unported) | Purchase Payment Type and Terms
+[pxgo_bank_statement_analytic](__unported__/pxgo_bank_statement_analytic/) | 1.0 (unported) | Pexego - Analytic in Bank Statements
+[pxgo_bank_statement_running_balance](__unported__/pxgo_bank_statement_running_balance/) | 1.0 (unported) | Pexego - Running balance in Bank Statements
+[pxgo_cash_statement](__unported__/pxgo_cash_statement/) | 1.0 (unported) | Pexego - Cash Statements
+[sale_payment](__unported__/sale_payment/) | 1.0 (unported) | Sale payment type
+
+[//]: # (end addons)
