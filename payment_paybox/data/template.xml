@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<openerp>
+    <data noupdate="0">
+        <record id="paybox_error_reconcile_email_template" model="email.template">
+            <field name="name">Warning Reconcile Paybox</field>
+            <field name="email_from">${user.email}</field>
+            <field name="subject">[Anybox Paybox] Avertissement lettrage</field>
+            <field name="email_to">${object.get_paybox_admin()}</field>
+            <field name="lang">${user.lang}</field>
+            <field name="model_id" ref="payment_paybox.model_paybox_warning"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html">
+                Une erreur s'est produite lors de la tentative de validation d'un paiement Paybox.
+
+                La facture ayant pour référence ${object.ref} n'a pu être validée car le lettrage n'a pu être effectué.
+
+                Veuillez vérifier les paiements ayant été enregistrés pour cette facture. 
+            </field>
+        </record>
+
+        <record id="paybox_error_invoice_email_template" model="email.template">
+            <field name="name">Warning Invoice Paybox</field>
+            <field name="email_from">${user.email}</field>
+            <field name="subject">[Anybox Paybox] Facture non trouvée</field>
+            <field name="email_to">${object.get_paybox_admin()}</field>
+            <field name="lang">${user.lang}</field>
+            <field name="model_id" ref="payment_paybox.model_paybox_warning"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html">
+                Une erreur s'est produite lors de la tentative de validation d'un paiement Paybox.
+
+                La facture ayant pour référence ${object.ref} n'a pas été trouvée.
+
+                Veuillez vérifier que l'enregistrement n'a pas été supprimé.
+            </field>
+        </record>
+    </data>
+</openerp>
+
