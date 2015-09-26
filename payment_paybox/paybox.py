@@ -39,14 +39,16 @@ class PayboxAcquirer(osv.Model):
             }
 
     _defaults = {
-            'key': '0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF',
-            'shop_id': '107904482',
-            'rank': '32',
-            'site': '1999888',
-            'hash': 'SHA512',
-            'url': 'https://preprod-tpeweb.paybox.com/',
-            'method': 'POST',
-            'devise': '978',
+            'paybox_key': '0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF0123456789ABCDEF',
+            'paybox_shop_id': '107904482',
+            'paybox_rank': '32',
+            'paybox_site': '1999888',
+            'paybox_hash': 'SHA512',
+            'paybox_url': 'https://preprod-tpeweb.paybox.com/',
+            'paybox_return_url': 'https://store.company.com',
+            'paybox_method': 'POST',
+            'paybox_currency': '978',
+            'paybox_admin_mail': 'test@company.com',
          }
 
     def _get_providers(self, cr, uid, context=None):
@@ -58,6 +60,8 @@ class PayboxAcquirer(osv.Model):
         reference = tx_values['reference']
         amount = tx_values['amount']
         key = acquirer['paybox_key']
+        if not key:
+            raise Exception("Paybox payment acquirer has not been configured properly: paybox_key is missing")
         identifiant, devise = acquirer['paybox_shop_id'], acquirer['paybox_currency']
         rang, site = acquirer['paybox_rank'], acquirer['paybox_site']
         _hash = acquirer['paybox_hash']
@@ -67,7 +71,7 @@ class PayboxAcquirer(osv.Model):
         url_retour = acquirer['paybox_return_url']
 
         if not url_retour:
-            raise osv.except_osv(u"Paiement impossible", u"URL de retour non configurée")
+            raise Exception("Paybox payment acquirer has not been configured properly: paybox_return_url is missing")
 
         # the paybox amount need to be formated in cents and zero-padded to be at least 3 characters long
         amount = "%03u" % int(amount*100)
