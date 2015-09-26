@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data noupdate="0">
+        <record id="acquirer_form_paybox" model="ir.ui.view">
+            <field name="name">acquirer.form.paybox</field>
+            <field name="model">payment.acquirer</field>
+            <field name="inherit_id" ref="payment.acquirer_form"/>
+            <field name="arch" type="xml">
+                <xpath expr='//group[@name="acquirer_display"]' position='after'>
+                    <group attrs="{'invisible': [('provider', '!=', 'paybox')]}">
+                      <field name="paybox_key" required="1"/>
+                      <field name="paybox_shop_id" required="1"/>
+                      <field name="paybox_rank" required="1"/>
+                      <field name="paybox_site" required="1"/>
+                      <field name="paybox_hash" required="1"/>
+                      <field name="paybox_url" required="1"/>
+                      <field name="paybox_return_url" required="1"/>
+                      <field name="paybox_currency" required="1"/>
+                      <field name="paybox_method" required="1"/>
+                      <field name="paybox_admin_mail" required="1"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
