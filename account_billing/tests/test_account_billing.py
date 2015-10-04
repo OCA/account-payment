@@ -44,7 +44,7 @@ class TestAccountBilling(common.TransactionCase):
         self.thb_currency_id = self.ref('base.THB')
         self.eur_currency_id = self.ref('base.EUR')
         self.date_15 = time.strftime('%Y-%m') + '-15'
-        self.date_17 = time.strftime('%Y-%m') + '-15'
+        self.date_17 = time.strftime('%Y-%m') + '-17'
         self.date_20 = time.strftime('%Y-%m') + '-20'
         self.date_25 = time.strftime('%Y-%m') + '-25'
         # get account_id

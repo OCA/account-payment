@@ -59,11 +59,8 @@ class AccountVoucher(models.Model):
         vals = self.recompute_payment_rate(cr, uid, ids, res, currency_id,
                                            date, ttype, journal_id,
                                            amount)
-        print context
-        print vals
         for key in vals.keys():
             res[key].update(vals[key])
-        print res
         if ttype == 'sale':
             del(res['value']['line_dr_ids'])
             del(res['value']['pre_line'])
@@ -83,9 +80,9 @@ class AccountVoucher(models.Model):
                                     currency_id, ttype, date, context=None):
 
         super(AccountVoucher, self).finalize_voucher_move_lines(
-                                    cr, uid, ids, account_move_lines,
-                                    partner_id, journal_id, price,
-                                    currency_id, ttype, date, context=None)
+            cr, uid, ids, account_move_lines,
+            partner_id, journal_id, price,
+            currency_id, ttype, date, context=None)
 
         if context is None:
             context = {}
