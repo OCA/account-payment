@@ -19,7 +19,7 @@
 #
 
 from openerp import models
-from openerp.addons.account_voucher import account_voucher
+from openerp.addons.account_voucher.account_voucher import account_voucher
 
 
 def recompute_voucher_lines(self, cr, uid, ids, partner_id, journal_id, price, currency_id, ttype, date, context=None):
@@ -108,7 +108,8 @@ def recompute_voucher_lines(self, cr, uid, ids, partner_id, journal_id, price, c
         account_move_lines,
         partner_id, journal_id, price,
         currency_id, ttype, date,
-        context=context)
+        context=context
+    )
     # --
 
     #compute the total debit/credit and look for a matching open amount or invoice

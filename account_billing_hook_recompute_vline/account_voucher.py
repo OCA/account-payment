@@ -18,10 +18,10 @@
 #
 #
 
-from openerp import models
+from openerp.osv import osv
 
 
-class AccountVoucher(models.Model):
+class AccountVoucher(osv.osv):
 
     _inherit = 'account.voucher'
 

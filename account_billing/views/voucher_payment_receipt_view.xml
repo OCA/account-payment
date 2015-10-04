@@ -19,7 +19,7 @@
 	                <xpath expr="/form/sheet/group/group/field[@name='amount']" position="attributes">
 	                    <attribute name="context">{'billing_id': billing_id}</attribute>
 		            </xpath>
-	                <xpath expr="/form/sheet//field[@name='date']" position="before">
+	                <xpath expr="/form/sheet//field[@name='partner_id']" position="after">
 	                	<field name="billing_id" on_change="onchange_billing_id(partner_id, journal_id, amount, currency_id, type, date, context)"
 		                	options="{'no_create': True}"	
 		                	domain="[('state','=','billed'),('payment_id','=',False),('partner_id','=',partner_id)]"

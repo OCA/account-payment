@@ -131,7 +131,7 @@
             <field name="act_window_id" ref="action_billing_receipt"/>
         </record>
 
-	    <menuitem action="action_billing_receipt" icon="STOCK_JUSTIFY_FILL" sequence="12"
+	    <menuitem action="action_billing_receipt" icon="STOCK_JUSTIFY_FILL" sequence="11"
 	    id="menu_action_billing_receipt"  parent="account.menu_finance_receivables"/>
 	    
     </data>

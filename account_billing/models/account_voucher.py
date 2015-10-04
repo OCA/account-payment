@@ -49,19 +49,21 @@ class AccountVoucher(models.Model):
             billing.payment_id = False
         return super(AccountVoucher, self).cancel_voucher()
 
-    @api.multi
-    def onchange_billing_id(self, partner_id, journal_id,
-                            amount, currency_id, ttype, date):
-        if not journal_id:
+    def onchange_billing_id(self, cr, uid, ids, partner_id, journal_id,
+                            amount, currency_id, ttype, date, context=None):
+        if not partner_id or not journal_id:
             return {}
-        res = self.recompute_voucher_lines(partner_id,
+        res = self.recompute_voucher_lines(cr, uid, ids, partner_id,
                                            journal_id, amount, currency_id,
-                                           ttype, date)
-        vals = self.recompute_payment_rate(res, currency_id,
+                                           ttype, date, context=context)
+        vals = self.recompute_payment_rate(cr, uid, ids, res, currency_id,
                                            date, ttype, journal_id,
                                            amount)
+        print context
+        print vals
         for key in vals.keys():
             res[key].update(vals[key])
+        print res
         if ttype == 'sale':
             del(res['value']['line_dr_ids'])
             del(res['value']['pre_line'])
@@ -70,6 +72,10 @@ class AccountVoucher(models.Model):
             del(res['value']['line_cr_ids'])
             del(res['value']['pre_line'])
             del(res['value']['payment_rate'])
+        if context.get('billing_id', False):
+            bill_obj = self.pool.get('account.billing')
+            billing = bill_obj.browse(cr, uid, context.get('billing_id'))
+            res['value'].update({'amount': billing.billing_amount})
         return res
 
     def finalize_voucher_move_lines(self, cr, uid, ids, account_move_lines,
