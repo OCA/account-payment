@@ -1,6 +1,3 @@
-Account Due List Payment Mode
-=============================
-
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
     :alt: License: AGPL-3
 
@@ -14,10 +11,10 @@ This module adds a field to the due list of pending payments:
 Installation
 ============
 
-This module depends on :
+This module depends on:
+
 * account_due_list
 * account_payment_partner
-This module is part of the OCA/bank-payment suite.
 
 Configuration
 =============
@@ -30,10 +27,6 @@ Usage
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/96/8.0
-
-For further information, please visit:
-
- * https://www.odoo.com/forum/help-1
 
 Known issues / Roadmap
 ======================
