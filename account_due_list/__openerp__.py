@@ -26,9 +26,11 @@
 ##############################################################################
 {
     'name': "Payments Due list",
-    'version': '8.0.0.1.0',
+    'version': '8.0.0.2.0',
     'category': 'Generic Modules/Payment',
-    'author': 'Odoo Community Association (OCA), Agile Business Group, '
+    'author': 'Odoo Community Association (OCA), '
+              'Agile Business Group, '
+              'Serv. Tecnol. Avanzados - Pedro M. Baeza,'
               'Zikzakmedia SL',
     'website': 'http://www.agilebg.com',
     'license': 'AGPL-3',
@@ -36,7 +38,7 @@
         'account',
     ],
     "data": [
-        'payment_view.xml',
+        'views/payment_view.xml',
     ],
     "installable": True,
 }
