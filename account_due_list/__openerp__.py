@@ -26,7 +26,7 @@
 ##############################################################################
 {
     'name': "Payments Due list",
-    'version': '0.1',
+    'version': '8.0.0.1.0',
     'category': 'Generic Modules/Payment',
     'author': 'Odoo Community Association (OCA), Agile Business Group, '
               'Zikzakmedia SL',

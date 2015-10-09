@@ -24,7 +24,7 @@
 
 {
     "name": "VAT on payment",
-    "version": "1.0",
+    "version": "8.0.1.0.0",
     'category': 'Generic Modules/Accounting',
     "depends": ["account_voucher_cash_basis"],
     "author": "Agile Business Group",
