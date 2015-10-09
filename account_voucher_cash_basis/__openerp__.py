@@ -23,7 +23,7 @@
 ##############################################################################
 {
     "name": "Cash basis extensions for vouchers",
-    "version": "1.0",
+    "version": "8.0.1.0.0",
     'category': 'Hidden/Dependency',
     "depends": ["account_voucher"],
     "author": "Agile Business Group",
