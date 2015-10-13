@@ -32,15 +32,15 @@ Unported addons
 ---------------
 addon | version | summary
 --- | --- | ---
-[account_payment_extension](__unported__/account_payment_extension/) | 1.1.1 (unported) | Account Payment Extension
-[account_voucher_display_writeoff](__unported__/account_voucher_display_writeoff/) | 1.0r089 (unported) | Account voucher display writeoff
-[account_voucher_supplier_invoice_number](__unported__/account_voucher_supplier_invoice_number/) | 0.1 (unported) | Supplier invoice number in payment vouchers
-[account_voucher_tax_filter](__unported__/account_voucher_tax_filter/) | 1.0r028 (unported) | Account voucher tax filter
-[nan_account_bank_statement](__unported__/nan_account_bank_statement/) | 0.1 (unported) | nan_account_bank_statement
-[purchase_payment](__unported__/purchase_payment/) | 1.0 (unported) | Purchase Payment Type and Terms
-[pxgo_bank_statement_analytic](__unported__/pxgo_bank_statement_analytic/) | 1.0 (unported) | Pexego - Analytic in Bank Statements
-[pxgo_bank_statement_running_balance](__unported__/pxgo_bank_statement_running_balance/) | 1.0 (unported) | Pexego - Running balance in Bank Statements
-[pxgo_cash_statement](__unported__/pxgo_cash_statement/) | 1.0 (unported) | Pexego - Cash Statements
-[sale_payment](__unported__/sale_payment/) | 1.0 (unported) | Sale payment type
+[account_payment_extension](account_payment_extension/) | 1.1.1 (unported) | Account Payment Extension
+[account_voucher_display_writeoff](account_voucher_display_writeoff/) | 1.0r089 (unported) | Account voucher display writeoff
+[account_voucher_supplier_invoice_number](account_voucher_supplier_invoice_number/) | 0.1 (unported) | Supplier invoice number in payment vouchers
+[account_voucher_tax_filter](account_voucher_tax_filter/) | 1.0r028 (unported) | Account voucher tax filter
+[nan_account_bank_statement](nan_account_bank_statement/) | 0.1 (unported) | nan_account_bank_statement
+[purchase_payment](purchase_payment/) | 1.0 (unported) | Purchase Payment Type and Terms
+[pxgo_bank_statement_analytic](pxgo_bank_statement_analytic/) | 1.0 (unported) | Pexego - Analytic in Bank Statements
+[pxgo_bank_statement_running_balance](pxgo_bank_statement_running_balance/) | 1.0 (unported) | Pexego - Running balance in Bank Statements
+[pxgo_cash_statement](pxgo_cash_statement/) | 1.0 (unported) | Pexego - Cash Statements
+[sale_payment](sale_payment/) | 1.0 (unported) | Sale payment type
 
 [//]: # (end addons)
