@@ -53,5 +53,5 @@ cash basis.
         'voucher_view.xml',
     ],
     'demo': [],
-    'installable': True,
+    'installable': False,
 }

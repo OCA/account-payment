@@ -31,5 +31,5 @@
     "data": [
         'views/payment_order_view.xml',
     ],
-    "installable": True,
+    'installable': False,
 }

@@ -74,5 +74,5 @@ Also, see demo and test data
         'test/account_invoice_8.yml',
         'test/account_invoice_9.yml',
     ],
-    'installable': True,
+    'installable': False,
 }

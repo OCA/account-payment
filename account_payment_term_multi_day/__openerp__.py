@@ -33,5 +33,5 @@
         'views/account_payment_term_view.xml',
     ],
     "post_init_hook": "copy_payment_day",
-    'installable': True,
+    'installable': False,
 }
