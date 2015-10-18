@@ -20,7 +20,6 @@ addons:
     packages:
       - expect-dev  # provides unbuffer utility
       - python-lxml  # because pip installation is slow
-      - python-crypto # required for payment_paybox
 
 env:
   global:
@@ -37,6 +36,7 @@ install:
   - git clone https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly
+  - pip install crypto # required for payment_paybox
 
 script:
   - travis_run_tests
