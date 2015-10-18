@@ -1,3 +1,4 @@
+# coding: utf-8
 # ==============================================================================
 #
 #    Paybox module for OpenERP, Snesup
@@ -26,7 +27,7 @@
     'version': '8.0.1.0.0',
     'sequence': 150,
     'category': 'Hidden',
-    'author': 'Florent Jouatte (Anybox), Jean-Baptiste Quenot',
+    'author': 'Odoo Community Association (OCA), Jean-Baptiste Quenot, Florent Jouatte (Anybox)',
     'summary': "Payment acquirer: Paybox implementation",
     'depends': [
         'payment'
@@ -42,4 +43,4 @@
     'application': False,
     'auto_install': False,
     'license': 'AGPL-3',
-    }
+}
