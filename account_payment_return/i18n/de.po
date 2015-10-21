@@ -23,7 +23,7 @@ msgstr "Importiert"
 #: code:addons/account_payment_return/payment_return.py:126
 #. module: account_payment_return
 #, python-format
-msgid "You must complete all invoice references in the payment return."
+msgid "You must input all invoice references in the payment return."
 msgstr "Alle Zeilen müssen mit einer Rechnung verknüpft sein."
 
 #: view:payment.return:0
@@ -55,7 +55,7 @@ msgstr "Followers"
 #: model:ir.ui.menu,name:account_payment_return.payment_return_menu
 #: view:payment.return:0
 #. module: account_payment_return
-msgid "Payment returns"
+msgid "Customer Payment returns"
 msgstr "Kunden Rückbuchungen"
 
 #: field:payment.return.line,reason:0
@@ -149,9 +149,9 @@ msgstr ""
 msgid "Messages and communication history"
 msgstr ""
 
-#: field:account.invoice,payment_returned:0
+#: field:account.invoice,returned_payment:0
 #. module: account_payment_return
-msgid "Payment returned"
+msgid "Returned payment"
 msgstr "Zahlung zurückgebucht"
 
 #: view:payment.return:0
@@ -196,7 +196,7 @@ msgstr "Rückbuchungsdatum"
 #: help:payment.return.line,partner_name:0
 #: help:payment.return.line,reason:0
 #. module: account_payment_return
-msgid "Readed from imported file. Only for reference."
+msgid "Read from imported file. Only for reference."
 msgstr "Feld für Import, nur zur Information."
 
 #: help:payment.return,message_unread:0
@@ -230,7 +230,7 @@ msgstr ""
 msgid "Status Change"
 msgstr "Status geändert"
 
-#: help:account.invoice,payment_returned:0
+#: help:account.invoice,returned_payment:0
 #. module: account_payment_return
 msgid "Invoice has been included on a payment that has been returned later."
 msgstr "Rechnung hat eine Zahlung die später zurück gebucht wurde."
@@ -242,7 +242,7 @@ msgstr ""
 
 #: help:payment.return,date:0
 #. module: account_payment_return
-msgid "This date will be used as the date for the account entry."
+msgid "This date will be used as the account entry date."
 msgstr ""
 
 #: selection:payment.return,state:0
