@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -8,7 +8,6 @@
 #                       Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
 #    Copyright (c) 2014 initOS GmbH & Co. KG <http://initos.com/>
 #                       Markus Schneider <markus.schneider at initos.com>
-#    $Id$
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
@@ -26,5 +25,4 @@
 ##############################################################################
 
 from . import payment_return
-from . import payment_return_line
 from . import account_invoice

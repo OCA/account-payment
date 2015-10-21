@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -10,6 +10,8 @@
 #                       Markus Schneider <markus.schneider at initos.com>
 #    Copyright (c) 2015 Incaser Informatica <http://www.incaser.es/>
 #                       Sergio Teruel <sergio at incaser.es>
+#    Copyright (c) 2015 Serv. Tecnol. Avanzados <http://www.serviciosbaeza.com>
+#                       Pedro M. Baeza <pedro.baeza at serviciosbaeza.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
@@ -28,19 +30,26 @@
 
 
 {
-    "name": "Account Payment Return",
-    "version": "1.0",
+    "name": "Account Payment Returns",
+    "version": "8.0.1.0.0",
+    "summary": "Manage the return of your payments",
     'license': 'AGPL-3',
-    "depends": ['mail', 'account'],
-    'author': 'Serv. Tecnol. Avanzados - Pedro M. Baeza',
+    "depends": [
+        'mail',
+        'account',
+    ],
+    'author': '7 i TRIA, '
+              'Serv. Tecnol. Avanzados - Pedro M. Baeza, '
+              'Incaser Informática, '
+              'initOS GmbH & Co., '
+              'Odoo Community Association (OCA)',
     'website': 'http://www.serviciosbaeza.com',
     'data': [
-            'security/ir.model.access.csv',
-            'security/account_payment_return_security.xml',
-            'views/payment_return_view.xml',
-            'data/ir_sequence_data.xml',
-            'views/account_invoice_view.xml',
+        'security/ir.model.access.csv',
+        'security/account_payment_return_security.xml',
+        'views/payment_return_view.xml',
+        'data/ir_sequence_data.xml',
+        'views/account_invoice_view.xml',
     ],
-    'demo': [],
     'installable': True,
 }
