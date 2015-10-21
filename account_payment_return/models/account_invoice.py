@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -24,9 +24,10 @@
 from openerp import models, fields
 
 
-class account_invoice(models.Model):
+class AccountInvoice(models.Model):
     _inherit = "account.invoice"
 
-    payment_returned = fields.Boolean('Payment returned', help='Invoice '
-                                      'has been included on a payment '
-                                      'that has been returned later.')
+    returned_payment = fields.Boolean(
+        string='Payment returned',
+        help='Invoice has been included on a payment that has been returned '
+             'later.')

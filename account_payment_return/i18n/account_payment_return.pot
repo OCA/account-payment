@@ -111,7 +111,7 @@ msgid "Invoice"
 msgstr ""
 
 #. module: account_payment_return
-#: help:account.invoice,payment_returned:0
+#: help:account.invoice,returned_payment:0
 msgid "Invoice has been included on a payment that has been returned later."
 msgstr ""
 
@@ -178,15 +178,15 @@ msgid "Payment return lines"
 msgstr ""
 
 #. module: account_payment_return
-#: field:account.invoice,payment_returned:0
-msgid "Payment returned"
+#: field:account.invoice,returned_payment:0
+msgid "Retuned payment"
 msgstr ""
 
 #. module: account_payment_return
 #: model:ir.actions.act_window,name:account_payment_return.payment_return_action
 #: model:ir.ui.menu,name:account_payment_return.payment_return_menu
 #: view:payment.return:account_payment_return.payment_return_tree_view
-msgid "Payment returns"
+msgid "Customer Payment Returns"
 msgstr ""
 
 #. module: account_payment_return
@@ -194,7 +194,7 @@ msgstr ""
 #: help:payment.return.line,date:0
 #: help:payment.return.line,partner_name:0
 #: help:payment.return.line,reason:0
-msgid "Readed from imported file. Only for reference."
+msgid "Read from imported file. Only for reference."
 msgstr ""
 
 #. module: account_payment_return
@@ -255,7 +255,7 @@ msgstr ""
 
 #. module: account_payment_return
 #: help:payment.return,date:0
-msgid "This date will be used as the date for the account entry."
+msgid "This date will be used as the account entry date."
 msgstr ""
 
 #. module: account_payment_return

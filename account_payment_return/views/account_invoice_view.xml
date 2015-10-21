@@ -9,7 +9,7 @@
             <field name="inherit_id" ref="account.invoice_form"/>
             <field name="arch" type="xml">
                 <xpath expr='//field[@name="reconciled"]' position="after">
-                    <field name="payment_returned" readonly="True"/>
+                    <field name="returned_payment" readonly="True"/>
                 </xpath>
             </field>
         </record>
@@ -22,8 +22,9 @@
             <field name="arch" type="xml">
                 <filter name="unpaid" position="after">
                     <separator/>
-                    <filter name="payment_returned" string="Returned" 
-                    		domain="[('payment_returned', '=', True)]"
+                    <filter name="filter_returned_payment"
+                            string="Returned"
+                    		domain="[('returned_payment', '=', True)]"
                     		help="Invoices whose payment has been returned"/>
                 </filter>
             </field>

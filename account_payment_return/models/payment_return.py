@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 ##############################################################################
 #
 #    OpenERP, Open Source Management Solution
@@ -24,7 +24,8 @@
 #
 ##############################################################################
 from openerp import models, fields, api, _
-from openerp.exceptions import except_orm
+from openerp.exceptions import Warning as UserError
+import openerp.addons.decimal_precision as dp
 
 
 class PaymentReturn(models.Model):
@@ -34,50 +35,47 @@ class PaymentReturn(models.Model):
     _order = 'date DESC, id DESC'
 
     company_id = fields.Many2one(
-        'res.company', 'Company', required=True,
-        help="Company",
+        'res.company', string='Company', required=True,
         states={'done': [('readonly', True)],
-                'cancelled': [('readonly', True)]
-                },
+                'cancelled': [('readonly', True)]},
         default=lambda self: self.env['res.company']._company_default_get(
             'account'))
-    date = fields.Date('Return date',
-                       help="This date will be used as the date for the "
-                       "account entry.",
-                       states={'done': [('readonly', True)],
-                               'cancelled': [('readonly', True)]},
-                       default=lambda *x: fields.Date.today())
+    date = fields.Date(
+        string='Return date',
+        help="This date will be used as the account entry date.",
+        states={'done': [('readonly', True)],
+                'cancelled': [('readonly', True)]},
+        default=lambda x: fields.Date.today())
     name = fields.Char(
-        "Reference", size=64, required=True,
+        string="Reference", required=True,
         states={'done': [('readonly', True)],
                 'cancelled': [('readonly', True)]},
         default=lambda self: self.env['ir.sequence'].next_by_code(
             'payment.return'))
-    period_id = fields.Many2one('account.period', 'Forced period',
-                                states={'done': [('readonly', True)],
-                                        'cancelled': [('readonly', True)]
-                                        })
-    line_ids = fields.One2many('payment.return.line', 'return_id',
-                               states={'done': [('readonly', True)],
-                                       'cancelled': [('readonly', True)]
-                                       })
-    journal_id = fields.Many2one('account.journal', 'Bank journal',
-                                 required=True,
-                                 states={'done': [('readonly', True)],
-                                         'cancelled': [('readonly', True)]
-                                         })
-    move_id = fields.Many2one('account.move',
-                              'Reference to the created journal entry',
-                              states={'done': [('readonly', True)],
-                                      'cancelled': [('readonly', True)]
-                                      })
-    notes = fields.Text('Notes')
-    state = fields.Selection([('draft', 'Draft'),
-                              ('imported', 'Imported'),
-                              ('done', 'Done'),
-                              ('cancelled', 'Cancelled')],
-                             'State', readonly=True, default='draft',
-                             track_visibility='onchange')
+    period_id = fields.Many2one(
+        comodel_name='account.period', string='Forced period',
+        states={'done': [('readonly', True)],
+                'cancelled': [('readonly', True)]})
+    line_ids = fields.One2many(
+        comodel_name='payment.return.line', inverse_name='return_id',
+        states={'done': [('readonly', True)],
+                'cancelled': [('readonly', True)]})
+    journal_id = fields.Many2one(
+        comodel_name='account.journal', string='Bank journal', required=True,
+        states={'done': [('readonly', True)],
+                'cancelled': [('readonly', True)]})
+    move_id = fields.Many2one(
+        comodel_name='account.move',
+        string='Reference to the created journal entry',
+        states={'done': [('readonly', True)],
+                'cancelled': [('readonly', True)]})
+    state = fields.Selection(
+        selection=[('draft', 'Draft'),
+                   ('imported', 'Imported'),
+                   ('done', 'Done'),
+                   ('cancelled', 'Cancelled')],
+        string='State', readonly=True, default='draft',
+        track_visibility='onchange')
 
     def _get_invoices(self, move_lines):
         invoice_moves = self.env['account.move']
@@ -89,62 +87,48 @@ class PaymentReturn(models.Model):
 
     @api.one
     def action_confirm(self):
-        move_obj = self.env['account.move']
         # Check for incomplete lines
-        for return_line in self.line_ids:
-            if not return_line.move_line_id:
-                raise except_orm(_('Error!'),
-                                 _("You must complete all moves "
-                                   "references in the "
-                                   "payment return."))
-
+        if any(not x.move_line_id for x in self.line_ids):
+            raise UserError(
+                _("You must input all moves references in the payment "
+                  "return."))
         move = {
             'name': '/',
             'ref': _('Return %s') % self.name,
             'journal_id': self.journal_id.id,
             'date': self.date,
             'company_id': self.company_id.id,
+            'period_id': (self.period_id.id or self.period_id.with_context(
+                company_id=self.company_id.id).find(self.date).id),
         }
-        # Period
-        if self.period_id:
-            move['period_id'] = self.period_id.id
-        else:
-            move['period_id'] = self.period_id.with_context(
-                company_id=self.company_id.id).find(self.date).id
-        move_id = move_obj.create(move)
+        move_id = self.env['account.move'].create(move)
         for return_line in self.line_ids:
             move_line = return_line.move_line_id
             old_reconcile = move_line.reconcile_id
             lines2reconcile = old_reconcile.line_id
             invoices = self._get_invoices(lines2reconcile)
-            move_line_id = move_line.copy(
+            move_line2 = move_line.copy(
                 default={
                     'move_id': move_id.id,
-                    'ref': move['ref'],
-                    'date': move['date'],
-                    'period_id': move['period_id'],
-                    'journal_id': move['journal_id'],
                     'debit': return_line.amount,
+                    'name': move['ref'],
                     'credit': 0,
                 })
-            lines2reconcile += move_line_id
-            move_line_id.copy(
+            lines2reconcile += move_line2
+            move_line2.copy(
                 default={
                     'debit': 0,
                     'credit': return_line.amount,
-                    'account_id': move_line.move_id.journal_id
-                    .default_credit_account_id.id,
+                    'account_id': self.journal_id.default_credit_account_id.id,
                 })
             # Break old reconcile and
             # make a new one with at least three moves
             old_reconcile.unlink()
             lines2reconcile.reconcile_partial()
-            move_line = move_line_id
-            return_line.write({'reconcile_id': move_line
-                               .reconcile_partial_id.id})
+            return_line.write(
+                {'reconcile_id': move_line2.reconcile_partial_id.id})
             # Mark invoice as payment refused
-            invoices.write({'payment_returned': True})
-
+            invoices.write({'returned_payment': True})
         move_id.button_validate()
         self.write({'state': 'done', 'move_id': move_id.id})
         return True
@@ -154,6 +138,7 @@ class PaymentReturn(models.Model):
         if not self.move_id:
             return True
         for return_line in self.line_ids:
+            invoices = self.env['account.invoice']
             if return_line.reconcile_id:
                 reconcile = return_line.reconcile_id
                 lines2reconcile = reconcile.line_partial_ids.filtered(
@@ -164,7 +149,7 @@ class PaymentReturn(models.Model):
                     lines2reconcile.reconcile()
                 return_line.write({'reconcile_id': False})
             # Remove payment refused flag on invoice
-            invoices.write({'payment_returned': False})
+            invoices.write({'returned_payment': False})
         self.move_id.button_cancel()
         self.move_id.unlink()
         self.write({'state': 'cancelled', 'move_id': False})
@@ -174,3 +159,41 @@ class PaymentReturn(models.Model):
     def action_draft(self):
         self.write({'state': 'draft'})
         return True
+
+
+class PaymentReturnLine(models.Model):
+    _name = "payment.return.line"
+    _description = 'Payment return lines'
+
+    return_id = fields.Many2one(
+        comodel_name='payment.return', string='Payment return',
+        required=True, ondelete='cascade')
+    concept = fields.Char(
+        string='Concept',
+        help="Read from imported file. Only for reference.")
+    reason = fields.Char(
+        string='Return reason', readonly=True,
+        help="Read from imported file. Only for reference.")
+    move_line_id = fields.Many2one(
+        comodel_name='account.move.line', string='Payment Reference')
+    date = fields.Date(
+        string='Return date', readonly=True,
+        help="Read from imported file. Only for reference.",
+        default=lambda x: fields.Date.today())
+    partner_name = fields.Char(
+        string='Partner name', readonly=True,
+        help="Read from imported file. Only for reference.")
+    partner_id = fields.Many2one(
+        comodel_name='res.partner', string='Customer',
+        domain="[('customer', '=', True)]")
+    amount = fields.Float(
+        string='Amount',
+        help="Returned amount. Can be different from the move amount",
+        digits_compute=dp.get_precision('Account'))
+    reconcile_id = fields.Many2one(
+        comodel_name='account.move.reconcile', string='Reconcile',
+        help="Reference to the reconcile object.")
+
+    @api.onchange('move_line_id')
+    def onchange_move_line(self):
+        self.amount = self.move_line_id.credit

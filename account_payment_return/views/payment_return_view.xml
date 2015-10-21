@@ -31,19 +31,14 @@
 	                                    <field name="partner_name" />
 	                                    <field name="partner_id" />
 	                                    <field name="move_line_id"
-                                            domain="[('partner_id', '=', partner_id),
-                                            ('account_id.type', '=', 'receivable'),
-                                            ('credit', '>', 0.0),
-                                            ('reconcile_ref', '!=', False)
-                                            ]"/>
+                                               domain="[('partner_id', '=', partner_id),
+                                                        ('account_id.type', '=', 'receivable'),
+                                                        ('credit', '>', 0.0),
+                                                        ('reconcile_ref', '!=', False)]"
+                                                />
 	                                    <field name="amount" />
 	                                </tree>
 	                            </field>
-	                        </page>
-	                        <page string="Notes">
-	                           <group>
-	                               <field colspan="4" name="notes" nolabel="1"/>
-	                           </group>
 	                        </page>
 	                    </notebook>
                     </sheet>
@@ -60,7 +55,7 @@
             <field name="model">payment.return</field>
             <field name="type">tree</field>
             <field name="arch" type="xml">
-                <tree string="Payment returns">
+                <tree string="Customer Payment Returns">
                     <field name="name"/>
                     <field name="date"/>
                     <field name="journal_id"/>
@@ -71,15 +66,17 @@
         </record>
 
         <record model="ir.actions.act_window" id="payment_return_action">
-            <field name="name">Payment returns</field>
+            <field name="name">Customer Payment Returns</field>
             <field name="res_model">payment.return</field>
             <field name="view_type">form</field>
             <field name="view_mode">tree,form</field>
         </record>
 
-        <menuitem id="payment_return_menu" 
-            name="Payment returns" parent="account.menu_finance_receivables"
-            action="payment_return_action" sequence="20"/>
+        <menuitem id="payment_return_menu"
+                  name="Customer Payment Returns"
+                  parent="account.menu_finance_receivables"
+                  action="payment_return_action"
+                  sequence="20"/>
 
     </data>
 </openerp>
