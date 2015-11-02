@@ -27,6 +27,7 @@ from openerp import models, fields
 class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
 
-    payment_mode_id = fields.Many2one('payment.mode',
-                                      related='invoice.payment_mode_id',
-                                      string="Payment Mode", store=True)
+    payment_mode_id = fields.Many2one(
+        'payment.mode',
+        related='stored_invoice_id.payment_mode_id',
+        string="Payment Mode", store=True)
