@@ -29,7 +29,7 @@
             <field name="inherit_id" ref="account_voucher.view_sale_receipt_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='partner_id']" position="attributes">
-                    <attribute name="on_change">onchange_partner_id(partner_id, remit_to, journal_id, amount, currency_id, type, date, context)</attribute>
+                    <attribute name="on_change">onchange_partner_id(partner_id, journal_id, amount, currency_id, type, date, context)</attribute>
                 </xpath>
                 <xpath expr="//field[@name='partner_id']" position="after">
                     <field name="remit_to" context="{'default_type':'remit_to'}"/>
@@ -43,7 +43,7 @@
             <field name="inherit_id" ref="account_voucher.view_purchase_receipt_form"/>
             <field name="arch" type="xml">
                 <xpath expr="//field[@name='partner_id']" position="attributes">
-                    <attribute name="on_change">onchange_partner_id(partner_id, remit_to, journal_id, amount, currency_id, type, date, context)</attribute>
+                    <attribute name="on_change">onchange_partner_id(partner_id, journal_id, amount, currency_id, type, date, context)</attribute>
                 </xpath>
                 <xpath expr="//field[@name='partner_id']" position="after">
                     <field name="remit_to" context="{'default_type':'remit_to'}"/>

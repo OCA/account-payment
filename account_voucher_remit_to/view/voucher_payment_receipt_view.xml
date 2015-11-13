@@ -25,8 +25,6 @@
             </field>
         </record>
 
-        <!-- TODO: merge the 3 voucher form views of this file into a single view -->
-        <!-- Low priority view... If we open a voucher from a m2o, for example. -->
         <record model="ir.ui.view" id="view_low_priority_payment_form">
             <field name="name">account.voucher.payment.low.priority.form</field>
             <field name="model">account.voucher</field>

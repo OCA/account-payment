@@ -18,4 +18,6 @@
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
 ##############################################################################
-import models
+import res_partner
+import account_voucher
+import account_invoice
