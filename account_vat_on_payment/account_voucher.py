@@ -118,7 +118,7 @@ class AccountVoucher(orm.Model):
         self, cr, uid, inv_move_line, new_line_amount, new_line_amount_curr,
         foreign_curr_id, context=None
     ):
-        vat_config_error = inv_move_line.company_id.vat_config_error        
+        vat_config_error = inv_move_line.company_id.vat_config_error
         if not inv_move_line.real_account_id:
             if vat_config_error == 'raise_error':
                 raise orm.except_orm(
@@ -201,7 +201,7 @@ class AccountVoucher(orm.Model):
         return vals
 
     def _prepare_shadow_move(self, cr, uid, voucher, context=None):
-        vat_config_error = voucher.company_id.vat_config_error        
+        vat_config_error = voucher.company_id.vat_config_error
         if not voucher.journal_id.vat_on_payment_related_journal_id:
             if vat_config_error == 'raise_error':
                 raise orm.except_orm(
@@ -214,7 +214,7 @@ class AccountVoucher(orm.Model):
                 real_journal = voucher.journal_id.id
         else:
             real_journal = (
-                voucher.journal_id.vat_on_payment_related_journal_id.id)        
+                voucher.journal_id.vat_on_payment_related_journal_id.id)
         return {
             'journal_id': real_journal,
             'period_id': voucher.move_id.period_id.id,
@@ -253,7 +253,7 @@ class AccountVoucher(orm.Model):
         move_line_pool = self.pool.get('account.move.line')
         move_pool = self.pool.get('account.move')
         inv_pool = self.pool.get('account.invoice')
-        vat_config_error = voucher.company_id.vat_config_error        
+        vat_config_error = voucher.company_id.vat_config_error
         if not voucher.journal_id.vat_on_payment_related_journal_id:
             if vat_config_error == 'raise_error':
                 raise orm.except_orm(
@@ -266,7 +266,7 @@ class AccountVoucher(orm.Model):
                 real_journal = voucher.journal_id.id
         else:
             real_journal = (
-                voucher.journal_id.vat_on_payment_related_journal_id.id)        
+                voucher.journal_id.vat_on_payment_related_journal_id.id)
         lines_to_create = []
         amounts_by_invoice = super(
             AccountVoucher, self

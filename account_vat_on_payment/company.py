@@ -41,7 +41,7 @@ class ResCompany(orm.Model):
         'vat_config_error': fields.selection(
             [('raise_error', 'Raise Error'),
              ('use_the_same', 'Use the same')],
-            'Miscconfiguration on VAT on Payment',
+            'Missconfiguration on VAT on Payment',
             default='raise_error',
             help="Selection field to configure behaviour on missconfigured "
                  "datas on VAT on payment basis.\n"
@@ -51,5 +51,4 @@ class ResCompany(orm.Model):
                  " - 'Use the same' is selected, it will not raise an error "
                  "about missconfiguration, and use the same account, journal "
                  "in VAT on payment.")
-            
     }

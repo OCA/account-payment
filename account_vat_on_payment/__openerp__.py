@@ -23,33 +23,15 @@
 
 
 {
-    "name": "VAT on payment",
-    "version": "8.0.1.0.0",
+    'name': 'VAT on payment',
+    'version': '8.0.1.0.0',
     'category': 'Generic Modules/Accounting',
-    "depends": ["account_voucher_cash_basis"],
-    "author": "Agile Business Group",
-    "website": "http://www.agilebg.com",
-    "license": "AGPL-3",
-    "description": """
-See 'account_voucher_cash_basis' description.
-
-To activate the VAT on payment behaviour, this module adds a checkbox on
-invoice form: 'Vat on payment'
-
-Moreover, three things have to be configured:
- - On account object, Related account used for real registrations on a VAT on
-    payment basis
- - On journal object, Related journal used for shadow registrations on a VAT on
-    payment basis
- - On tax code object, Related tax code used for real registrations on a VAT on
-    payment basis
-
-Requirements: http://goo.gl/Nu0wDf
-
-Howto:
-http://planet.agilebg.com/en/2012/10/vat-on-payment-treatment-with-openerp/
-Also, see demo and test data
-""",
+    'depends': ['account_voucher_cash_basis'],
+    'author': 'Agile Business Group',
+              'Odoo Community Association (OCA)'
+    'website': 'http://www.agilebg.com',
+    'license': 'AGPL-3',
+    'summary': 'VAT on Payment',
     'data': [
         'account_account_view.xml',
         'account_tax_code_view.xml',
@@ -73,16 +55,17 @@ Also, see demo and test data
         'test/account_invoice_7.yml',
         'test/account_invoice_8.yml',
         'test/account_invoice_9.yml',
-        'test/account_invoice_1_real.yml',        
-        'test/account_invoice_2_real.yml', 
-        'test/account_invoice_3_real.yml', 
-        'test/account_invoice_4_real.yml', 
-        'test/account_invoice_5_real.yml', 
-        'test/account_invoice_6_real.yml', 
-        'test/account_invoice_7_real.yml', 
+        'test/account_invoice_1_real.yml',
+        'test/account_invoice_2_real.yml',
+        'test/account_invoice_3_real.yml',
+        'test/account_invoice_4_real.yml',
+        'test/account_invoice_5_real.yml',
+        'test/account_invoice_6_real.yml',
+        'test/account_invoice_7_real.yml',
         'test/account_invoice_8_real.yml',
         'test/account_invoice_1_real_same_account.yml',
-        #'test/account_invoice_1_bank.yml',        
+        #'test/account_invoice_1_bank.yml',
     ],
+    'images': [],
     'installable': True,
 }

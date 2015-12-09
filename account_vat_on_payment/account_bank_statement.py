@@ -33,6 +33,7 @@ class AccountBankStatementLine(orm.Model):
     }
 
     def is_vat_on_payment(self, mv_line_dicts):
+        move_line_pool = self.pool.get('account.move.line')
         vat_on_p = 0
         valid_lines = 0
         for mv_line_dict in mv_line_dicts:
@@ -40,9 +41,8 @@ class AccountBankStatementLine(orm.Model):
             if mv_line_dict.get('is_tax_line'):
                 continue
             mv_line = move_line_pool.browse(
-                cr, uid,
-                mv_line_dict['counterpart_move_line_id'],
-                context=context)
+                self.cr, self.uid,
+                mv_line_dict['counterpart_move_line_id'])
             invoice = mv_line.invoice
             if invoice.vat_on_payment:
                 vat_on_p += 1
@@ -57,7 +57,7 @@ class AccountBankStatementLine(orm.Model):
         self, cr, uid, inv_move_line, new_line_amount, new_line_amount_curr,
         foreign_curr_id, context=None
     ):
-        vat_config_error = inv_move_line.company_id.vat_config_error        
+        vat_config_error = inv_move_line.company_id.vat_config_error
         if not inv_move_line.real_account_id:
             if vat_config_error == 'raise_error':
                 raise orm.except_orm(
@@ -137,7 +137,7 @@ class AccountBankStatementLine(orm.Model):
         return vals
 
     def _prepare_shadow_move(self, cr, uid, bank_line, context=None):
-        vat_config_error = bank_line.company_id.vat_config_error        
+        vat_config_error = bank_line.company_id.vat_config_error
         if not bank_line.journal_id.vat_on_payment_related_journal_id:
             if vat_config_error == 'raise_error':
                 raise orm.except_orm(
@@ -183,9 +183,8 @@ class AccountBankStatementLine(orm.Model):
                                     context=None):
         move_line_pool = self.pool.get('account.move.line')
         move_pool = self.pool.get('account.move')
-        inv_pool = self.pool.get('account.invoice')
         currency_pool = self.pool.get('res.currency')
-        vat_config_error = bank_line.company_id.vat_config_error        
+        vat_config_error = bank_line.company_id.vat_config_error
         if not bank_line.journal_id.vat_on_payment_related_journal_id:
             if vat_config_error == 'raise_error':
                 raise orm.except_orm(
@@ -211,9 +210,8 @@ class AccountBankStatementLine(orm.Model):
                 context=context)
             invoice = mv_line.invoice
             for inv_move_line in invoice.move_id.line_id:
+                pay_amount = mv_line_dict['credit'] or mv_line_dict['debit']
                 if inv_move_line.real_tax_code_id:
-                    pay_amount = mv_line_dict[
-                            'credit'] or mv_line_dict['debit']
                     new_line_amount = currency_pool.round(
                         cr, uid,
                         company_currency,
@@ -238,7 +236,6 @@ class AccountBankStatementLine(orm.Model):
                         context=context)
                     lines_to_create.append(shadow_vals)
 
-        print lines_to_create
         ctx = dict(context) or {}
         ctx['journal_id'] = real_journal
         ctx['period_id'] = bank_line.statement_id.period_id.id
@@ -266,8 +263,8 @@ class AccountBankStatementLine(orm.Model):
         bank_line.write({'shadow_move_id': shadow_move_id})
         return True
 
-    def  process_reconciliation(self, cr, uid, id, mv_line_dicts,
-                                context=None):
+    def process_reconciliation(self, cr, uid, id, mv_line_dicts,
+                               context=None):
         if context is None:
             context = {}
         st_line = self.browse(cr, uid, id, context=context)
@@ -275,7 +272,6 @@ class AccountBankStatementLine(orm.Model):
                                          context=context)
         res = super(AccountBankStatementLine, self).process_reconciliation(
             cr, uid, id, mv_line_dicts, context=context)
-        entry_posted = st_line.journal_id.entry_posted
         if st_line.shadow_move_id:
             st_line.shadow_move_id.post()
         return res
