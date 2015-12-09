@@ -64,7 +64,6 @@
         'test/account_invoice_7_real.yml',
         'test/account_invoice_8_real.yml',
         'test/account_invoice_1_real_same_account.yml',
-        #'test/account_invoice_1_bank.yml',
     ],
     'images': [],
     'installable': True,
