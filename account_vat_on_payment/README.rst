@@ -18,18 +18,14 @@ In Settings -> Accounting you have a new group called VAT on Payment.
 From this you can set:
 
 * If the company applies VAT on Payment, by checking the "VAT on payment treatment" boolean field.
-* You can set if you want to move the payment line to the Shadow Move from the "VAT lines on Payment" selection field,
-if you choose "Keep on Real Move" option, this will not change the implicit move generated on payment, it will add all extra moves to the Shadow move
-* From the selection field "Missconfiguration on VAT on Payment" you can choose if will raise an error if you missconfigured one account or journal,
-and use the same one. This behaviour is only available if you are not moving the payment lines to Shadow Entry.
+* You can set if you want to move the payment line to the Shadow Move from the "VAT lines on Payment" selection field, if you choose "Keep on Real Move" option, this will not change the implicit move generated on payment, it will add all extra moves to the Shadow move
+* From the selection field "Missconfiguration on VAT on Payment" you can choose if will raise an error if you missconfigured one account or journal, and use the same one. This behaviour is only available if you are not moving the payment lines to Shadow Entry.
 
 By default you have to configure on tax code object, Related tax code used for real registrations on a VAT on payment basis.
 
 Depending on the selection field from the configuration, you can configure:
- - On account object, Related account used for real registrations on a VAT on
-    payment basis
- - On journal object, Related journal used for shadow registrations on a VAT on
-    payment basis
+* On account object, Related account used for real registrations on a VAT on payment basis
+* On journal object, Related journal used for shadow registrations on a VAT on payment basis
 
 Requirements: http://goo.gl/Nu0wDf
 
