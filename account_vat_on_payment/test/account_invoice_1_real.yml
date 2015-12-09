@@ -1,4 +1,9 @@
 -
+  Change Company VAT Payment Lines Behaviour to stay on Real Move
+-
+  !record {model: res.company, id: base.main_company}:
+    vat_payment_lines: 'real_move'
+-
   I create shadow Tax Code
 -
   !record {model: account.tax.code, id: shadow_tax_code}:
@@ -40,9 +45,9 @@
 -
   I create customer invoice 1 - 120 EUR
 -
-  !record {model: account.invoice, id: account_invoice_customer_1, view: invoice_form}:
+  !record {model: account.invoice, id: account_invoice_customer_1_real, view: invoice_form}:
     journal_id: account.sales_journal
-    partner_id: base.res_partner_3
+    partner_id: base.res_partner_4
     account_id: ds
     vat_on_payment: True
     invoice_line:
@@ -55,12 +60,12 @@
 -
   I create invoice by clicking on Create button
 -
-  !workflow {model: account.invoice, action: invoice_open, ref: account_invoice_customer_1}
+  !workflow {model: account.invoice, action: invoice_open, ref: account_invoice_customer_1_real}
 -
   I check the invoice
 -
   !python {model: account.invoice}: |
-    invoice = self.browse(cr, uid, ref('account_invoice_customer_1'), context=context)
+    invoice = self.browse(cr, uid, ref('account_invoice_customer_1_real'), context=context)
     assert len(invoice.move_id.line_id) == 3, "There must be 3 move lines, %s found" % len(invoice.move_id.line_id)
     for move_line in invoice.move_id.line_id:
       if move_line.account_id.id == ref('ds'):
@@ -77,27 +82,29 @@
 -
   I create the payment voucher
 -
-  !record {model: account.voucher, id: account_voucher_1, view: account_voucher.view_vendor_receipt_form}:
+  !record {model: account.voucher, id: account_voucher_1_real, view: account_voucher.view_vendor_receipt_form}:
     journal_id: account.bank_journal
-    partner_id: base.res_partner_3
+    partner_id: base.res_partner_4
     amount: 120
 -
   I confirm the voucher
 -
-  !workflow {model: account.voucher, action: proforma_voucher, ref: account_voucher_1}
+  !workflow {model: account.voucher, action: proforma_voucher, ref: account_voucher_1_real}
 -
   I check the voucher
 -
   !python {model: account.voucher}: |
-    voucher = self.browse(cr, uid, ref('account_voucher_1'), context=context)
-    assert len(voucher.move_id.line_id) == 3, "There must be 3 real move lines, %s found" % len(voucher.move_id.line_id)
+    voucher = self.browse(cr, uid, ref('account_voucher_1_real'), context=context)
     bank_found = False
     vat_found = False
     sales_found = False
+    assert len(voucher.move_id.line_id) == 2, "There must be 2 real move lines, %s found" % len(voucher.move_id.line_id)
+    assert len(voucher.shadow_move_id.line_id) == 4, "There must be 4 shadow move lines, %s found" % len(voucher.shadow_move_id.line_id)
     for move_line in voucher.move_id.line_id:
       if move_line.account_id.id == ref('account.bnk'):
         bank_found = True
         assert move_line.debit == 120, "Bank move line must be 120 debit, %s found" % move_line.debit
+    for move_line in voucher.shadow_move_id.line_id:
       if move_line.account_id.id == ref('account.iva'):
         vat_found = True
         assert move_line.credit == 20, "VAT move line must be 120 credit, %s found" % move_line.credit
@@ -108,10 +115,10 @@
     assert sales_found, "No sales move line found"
     assert vat_found, "No VAT move line found"
     voucher.refresh()
-    assert voucher.move_id.state == 'draft', 'Move state != draft: %s' % voucher.move_id.state
-    assert voucher.shadow_move_id.state == 'draft', 'Shadow move state != draft: %s' % voucher.shadow_move_id.state
+    assert voucher.move_id.state != 'draft', 'Move state != posted: %s' % voucher.move_id.state
+    assert voucher.shadow_move_id.state != 'draft', 'Shadow move state != posted: %s' % voucher.shadow_move_id.state
 -
   I check that the invoice state is paid
 -
-  !assert {model: account.invoice, id: account_invoice_customer_1}:
+  !assert {model: account.invoice, id: account_invoice_customer_1_real}:
     - state == 'paid'

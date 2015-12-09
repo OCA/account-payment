@@ -9,11 +9,26 @@
             <field name="model">account.config.settings</field>
             <field name="inherit_id" ref="account_voucher_cash_basis.view_account_config_settings"/>
             <field name="arch" type="xml">
-                <xpath expr="/form/group[5]/div" position="inside">
-                    <div>
-                        <field name="vat_on_payment" class="oe_inline"/>
-                        <label for="vat_on_payment"/>
-                    </div>
+                <xpath expr="/form/group[6]" position="after">
+                    <group>
+                        <label for="id" string="VAT on Payment"/>
+                        <div name="vat_payment_config">
+                            <div>
+                                <field name="vat_on_payment" class="oe_inline"/>
+                                <label for="vat_on_payment"/>
+                            </div>
+				            <div>
+                                <label for="vat_payment_lines"/>
+                                <field name="vat_payment_lines" class="oe_inline"
+                                    widget="selection"
+                                    on_change="onchange_vat_payment_line(vat_payment_lines, context)"/>
+                            </div>
+                            <div attrs="{'invisible': [('vat_payment_lines', '=', 'shadow_move')]}">
+                                <label for="vat_config_error"/>
+                                <field name="vat_config_error" class="oe_inline"/>
+                            </div>
+                        </div>
+                    </group>
                 </xpath>
             </field>
         </record>

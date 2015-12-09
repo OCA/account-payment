@@ -20,6 +20,7 @@
 #
 ##############################################################################
 from . import account_voucher
+from . import account_bank_statement
 from . import company
 from . import account_invoice
 from . import account_move_line

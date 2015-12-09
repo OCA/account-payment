@@ -118,25 +118,39 @@ class AccountVoucher(orm.Model):
         self, cr, uid, inv_move_line, new_line_amount, new_line_amount_curr,
         foreign_curr_id, context=None
     ):
+        vat_config_error = inv_move_line.company_id.vat_config_error        
         if not inv_move_line.real_account_id:
-            raise orm.except_orm(
-                _('Error'),
-                _("We are on a VAT on payment treatment "
-                  "but move line %s does not have a related "
-                  "real account")
-                % inv_move_line.name)
+            if vat_config_error == 'raise_error':
+                raise orm.except_orm(
+                    _('Error'),
+                    _("We are on a VAT on payment treatment "
+                      "but move line %s does not have a related "
+                      "real account")
+                    % inv_move_line.name)
+            else:
+                real_account = inv_move_line.account_id.id
+        else:
+            real_account = inv_move_line.real_account_id.id
+        # Add condition if having the same account, the debit and credit
+        # should be 0 instead on increasing the turnover.
+        if inv_move_line.account_id.id == inv_move_line.real_account_id.id:
+            line_amount = 0.00
+            line_amount_curr = 0.00
+        else:
+            line_amount = new_line_amount
+            line_amount_curr = new_line_amount_curr
         vals = {
             'name': inv_move_line.name,
-            'account_id': inv_move_line.real_account_id.id,
-            'credit': (inv_move_line.credit and new_line_amount or 0.0),
-            'debit': (inv_move_line.debit and new_line_amount or 0.0),
+            'account_id': real_account,
+            'credit': (inv_move_line.credit and line_amount or 0.0),
+            'debit': (inv_move_line.debit and line_amount or 0.0),
             'type': 'real',
             'partner_id': (
                 inv_move_line.partner_id
                 and inv_move_line.partner_id.id or False)
         }
         if new_line_amount_curr:
-            vals['amount_currency'] = new_line_amount_curr
+            vals['amount_currency'] = line_amount_curr
             vals['currency_id'] = foreign_curr_id
         if inv_move_line.tax_code_id:
             if not inv_move_line.real_tax_code_id:
@@ -158,15 +172,19 @@ class AccountVoucher(orm.Model):
         self, cr, uid, inv_move_line, new_line_amount,
         context=None
     ):
+        if inv_move_line.account_id.id == inv_move_line.real_account_id.id:
+            line_amount = 0.00
+        else:
+            line_amount = new_line_amount
         vals = {
             'name': inv_move_line.name,
             'account_id': inv_move_line.account_id.id,
             'credit': (
                 inv_move_line.debit
-                and new_line_amount or 0.0),
+                and line_amount or 0.0),
             'debit': (
                 inv_move_line.credit
-                and new_line_amount or 0.0),
+                and line_amount or 0.0),
             'type': 'shadow',
             'partner_id': (
                 inv_move_line.partner_id
@@ -183,10 +201,22 @@ class AccountVoucher(orm.Model):
         return vals
 
     def _prepare_shadow_move(self, cr, uid, voucher, context=None):
+        vat_config_error = voucher.company_id.vat_config_error        
+        if not voucher.journal_id.vat_on_payment_related_journal_id:
+            if vat_config_error == 'raise_error':
+                raise orm.except_orm(
+                    _('Error'),
+                    _("We are on a VAT on payment treatment "
+                      "but journal %s does not have a related shadow "
+                      "journal")
+                    % voucher.journal_id.name)
+            else:
+                real_journal = voucher.journal_id.id
+        else:
+            real_journal = (
+                voucher.journal_id.vat_on_payment_related_journal_id.id)        
         return {
-            'journal_id': (
-                voucher.journal_id.vat_on_payment_related_journal_id.id
-            ),
+            'journal_id': real_journal,
             'period_id': voucher.move_id.period_id.id,
             'date': voucher.move_id.date,
         }
@@ -223,13 +253,20 @@ class AccountVoucher(orm.Model):
         move_line_pool = self.pool.get('account.move.line')
         move_pool = self.pool.get('account.move')
         inv_pool = self.pool.get('account.invoice')
+        vat_config_error = voucher.company_id.vat_config_error        
         if not voucher.journal_id.vat_on_payment_related_journal_id:
-            raise orm.except_orm(
-                _('Error'),
-                _("We are on a VAT on payment treatment "
-                  "but journal %s does not have a related shadow "
-                  "journal")
-                % voucher.journal_id.name)
+            if vat_config_error == 'raise_error':
+                raise orm.except_orm(
+                    _('Error'),
+                    _("We are on a VAT on payment treatment "
+                      "but journal %s does not have a related shadow "
+                      "journal")
+                    % voucher.journal_id.name)
+            else:
+                real_journal = voucher.journal_id.id
+        else:
+            real_journal = (
+                voucher.journal_id.vat_on_payment_related_journal_id.id)        
         lines_to_create = []
         amounts_by_invoice = super(
             AccountVoucher, self
@@ -265,19 +302,22 @@ class AccountVoucher(orm.Model):
                     lines_to_create.append(shadow_vals)
 
         ctx = dict(context) or {}
-        ctx['journal_id'] = (
-            voucher.journal_id.vat_on_payment_related_journal_id.id)
+        ctx['journal_id'] = real_journal
         ctx['period_id'] = voucher.move_id.period_id.id
         shadow_move_id = move_pool.create(
             cr, uid, self._prepare_shadow_move(
                 cr, uid, voucher, context=ctx), ctx)
 
-        self._move_payment_lines_to_shadow_entry(
-            cr, uid, voucher, shadow_move_id, context=ctx)
+        if voucher.company_id.vat_payment_lines == 'shadow_move':
+            self._move_payment_lines_to_shadow_entry(
+                cr, uid, voucher, shadow_move_id, context=ctx)
 
         for line_to_create in lines_to_create:
             if line_to_create['type'] == 'real':
-                line_to_create['move_id'] = voucher.move_id.id
+                if voucher.company_id.vat_payment_lines == 'shadow_move':
+                    line_to_create['move_id'] = voucher.move_id.id
+                else:
+                    line_to_create['move_id'] = shadow_move_id
             elif line_to_create['type'] == 'shadow':
                 line_to_create['move_id'] = shadow_move_id
             del line_to_create['type']

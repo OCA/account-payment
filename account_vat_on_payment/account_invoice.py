@@ -35,18 +35,22 @@ class AccountInvoice(orm.Model):
         acc_pool = self.pool.get('account.account')
         account = acc_pool.browse(
             cr, uid, line_tuple[2]['account_id'], context=context)
+        vat_config_error = account.company_id.vat_config_error
         if account.type not in ['receivable', 'payable']:
             if not account.vat_on_payment_related_account_id:
-                raise orm.except_orm(
-                    _('Error'),
-                    _("The invoice is 'VAT on payment' but "
-                      "account %s does not have a related shadow "
-                      "account")
-                    % account.name)
-            line_tuple[2]['real_account_id'] = line_tuple[
-                2]['account_id']
-            line_tuple[2]['account_id'] = (
-                account.vat_on_payment_related_account_id.id)
+                if vat_config_error == 'raise_error':
+                    raise orm.except_orm(
+                        _('Error'),
+                        _("The invoice is 'VAT on payment' but "
+                          "account %s does not have a related shadow "
+                          "account")
+                        % account.name)
+                else:
+                    real_account = line_tuple[2]['account_id']
+            else:
+                real_account = account.vat_on_payment_related_account_id.id
+            line_tuple[2]['real_account_id'] = line_tuple[2]['account_id']
+            line_tuple[2]['account_id'] = real_account
         return line_tuple
 
     def _set_vat_on_payment_tax_code(self, cr, uid, line_tuple, context=None):
