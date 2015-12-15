@@ -227,10 +227,6 @@ class AccountBankStatementLine(orm.Model):
             cr, uid, self._prepare_shadow_move(
                 cr, uid, bank_line, context=ctx), ctx)
 
-        #if bank_line.company_id.vat_payment_lines == 'shadow_move':
-        #    self._move_payment_lines_to_shadow_entry(
-        #        cr, uid, bank_line, shadow_move_id, context=ctx)
-
         for line_to_create in lines_to_create:
             if line_to_create['type'] == 'real':
                 if bank_line.company_id.vat_payment_lines == 'shadow_move':
