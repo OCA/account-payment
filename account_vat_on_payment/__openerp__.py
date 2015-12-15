@@ -9,7 +9,7 @@
     'version': '8.0.1.0.0',
     'category': 'Generic Modules/Accounting',
     'depends': ['account_voucher_cash_basis'],
-    'author': 'Agile Business Group'
+    'author': 'Agile Business Group, '
               'Odoo Community Association (OCA)',
     'website': 'http://www.agilebg.com',
     'license': 'AGPL-3',
@@ -51,5 +51,6 @@
         'test/account_invoice_3_bank.yml',
         'test/account_invoice_5_bank.yml',
     ],
+    'images': [],
     'installable': True,
 }
