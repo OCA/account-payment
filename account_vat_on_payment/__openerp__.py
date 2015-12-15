@@ -1,25 +1,7 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    Copyright (C) 2011-2012 Domsense s.r.l. (<http://www.domsense.com>).
-#    Copyright (C) 2014 Agile Business Group sagl (<http://www.agilebg.com>)
-#    @authors Lorenzo Battistini <lorenzo.battistini@agilebg.com>
-#             Stefano Sforzi <stefano.sforzi@agilebg.com>
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# © 2011-2012 Domsense s.r.l. (<http://www.domsense.com>).
+# © 2014 Agile Business Group sagl (<http://www.agilebg.com>)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 
 {
@@ -64,7 +46,10 @@
         'test/account_invoice_7_real.yml',
         'test/account_invoice_8_real.yml',
         'test/account_invoice_1_real_same_account.yml',
+        'test/account_invoice_1_bank.yml',
+        'test/account_invoice_2_bank.yml',
+        'test/account_invoice_3_bank.yml',
+        'test/account_invoice_5_bank.yml',
     ],
-    'images': [],
     'installable': True,
 }

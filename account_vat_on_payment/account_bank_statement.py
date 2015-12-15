@@ -1,24 +1,8 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    OpenERP, Open Source Management Solution
-#    Copyright (C) 2011-2012 Domsense s.r.l. (<http://www.domsense.com>).
-#    Copyright (C) 2014 Agile Business Group sagl (<http://www.agilebg.com>)
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# © 2011-2012 Domsense s.r.l. (<http://www.domsense.com>).
+# © 2014 Agile Business Group sagl (<http://www.agilebg.com>)
+# © 2015 Forest and Biomass Services Romania (<https://www.forbiom.eu>)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from openerp.osv import orm, fields
 from openerp.tools.translate import _
@@ -235,7 +219,6 @@ class AccountBankStatementLine(orm.Model):
                         cr, uid, inv_move_line, new_line_amount,
                         context=context)
                     lines_to_create.append(shadow_vals)
-
         ctx = dict(context) or {}
         ctx['journal_id'] = real_journal
         ctx['period_id'] = bank_line.statement_id.period_id.id
@@ -244,9 +227,9 @@ class AccountBankStatementLine(orm.Model):
             cr, uid, self._prepare_shadow_move(
                 cr, uid, bank_line, context=ctx), ctx)
 
-        if bank_line.company_id.vat_payment_lines == 'shadow_move':
-            self._move_payment_lines_to_shadow_entry(
-                cr, uid, bank_line, shadow_move_id, context=ctx)
+        #if bank_line.company_id.vat_payment_lines == 'shadow_move':
+        #    self._move_payment_lines_to_shadow_entry(
+        #        cr, uid, bank_line, shadow_move_id, context=ctx)
 
         for line_to_create in lines_to_create:
             if line_to_create['type'] == 'real':

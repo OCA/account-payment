@@ -4,45 +4,6 @@
   !record {model: res.company, id: base.main_company}:
     vat_payment_lines: 'real_move'
 -
-  I create shadow Tax Code
--
-  !record {model: account.tax.code, id: shadow_tax_code}:
-    name: Tax received
-    company_id: base.main_company
-    sign: 1
--
-  I create Tax Code received
--
-  !record {model: account.tax.code, id: tax_code_received}:
-    name: Tax received
-    company_id: base.main_company
-    sign: 1
-    vat_on_payment_related_tax_code_id: shadow_tax_code
--
-  I create Tax 10%
--
-  !record {model: account.tax, id: tax10}:
-    name: Tax 10.0
-    amount: 10.0
-    type: fixed
-    sequence: 1
-    company_id: base.main_company
-    type_tax_use: all
-    tax_code_id: tax_code_received
-    account_collected_id: account.iva
--
-  I create Tax 20%
--
-  !record {model: account.tax, id: tax20}:
-    name: Tax 20.0
-    amount: 20.0
-    type: fixed
-    sequence: 1
-    company_id: base.main_company
-    type_tax_use: all
-    tax_code_id: tax_code_received
-    account_collected_id: account.iva
--
   I create customer invoice 1 - 120 EUR
 -
   !record {model: account.invoice, id: account_invoice_customer_1_real, view: invoice_form}:

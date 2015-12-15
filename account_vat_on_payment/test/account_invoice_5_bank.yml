@@ -36,9 +36,9 @@
 -
   I create customer invoice 5 - 120 USD - 1 EUR = 2 USD
 -
-  !record {model: account.invoice, id: account_invoice_customer_5, view: invoice_form}:
+  !record {model: account.invoice, id: account_invoice_customer_bank_5, view: invoice_form}:
     journal_id: account.sales_journal
-    partner_id: base.res_partner_3
+    partner_id: base.res_partner_8
     account_id: ds
     vat_on_payment: True
     currency_id: base.USD
@@ -53,12 +53,12 @@
 -
   I create invoice by clicking on Create button
 -
-  !workflow {model: account.invoice, action: invoice_open, ref: account_invoice_customer_5}
+  !workflow {model: account.invoice, action: invoice_open, ref: account_invoice_customer_bank_5}
 -
   I check the invoice
 -
   !python {model: account.invoice}: |
-    invoice = self.browse(cr, uid, ref('account_invoice_customer_5'), context=context)
+    invoice = self.browse(cr, uid, ref('account_invoice_customer_bank_5'), context=context)
     assert len(invoice.move_id.line_id) == 3, "There must be 3 move lines, %s found" % len(invoice.move_id.line_id)
     for move_line in invoice.move_id.line_id:
       if move_line.account_id.id == ref('ds'):
@@ -68,35 +68,66 @@
       if move_line.account_id.id == ref('pss'):
         assert move_line.credit == 50, "Shadow sales must be 50 credit %s found" % move_line.credit
 -
-  I set the context that will be used for the encoding of all the vouchers of this file
+
+  I create a bank statement
 -
-  !context
-    'type': 'receipt'
--
-  I create the Payment for 120 USD - 1 EUR = 4 USD
--
-  !record {model: account.voucher, id: account_voucher_5_a, view: account_voucher.view_vendor_receipt_form}:
-    partner_id: base.res_partner_3
-    amount: 120
-    journal_id: account.bank_journal_usd
+  !record {model: account.bank.statement, id: bank_statement_5}:
+    name: BK test
+    balance_end_real: 0.0
+    balance_start: 0.0
     date: !eval "'%s-08-15' %(datetime.now().year)"
+    journal_id: account.bank_journal_usd
 -
-  I confirm the voucher
+  I create bank statement line - Payment for 120 USD - 1 EUR = 4 USD
 -
-  !workflow {model: account.voucher, action: proforma_voucher, ref: account_voucher_5_a}
+  !record {model: account.bank.statement.line, id: bank_statement_line_5}:
+    amount: 120
+    partner_id: base.res_partner_8
+    statement_id: bank_statement_5
+    name: 'Pay invoice'
+    journal_id: account.bank_journal_usd
 -
-  I check the voucher
+  I reconcile the invoice with the statement line.
 -
-  !python {model: account.voucher}: |
-    voucher = self.browse(cr, uid, ref('account_voucher_5_a'), context=context)
-    assert len(voucher.move_id.line_id) == 3, "There must be 3 real move lines, %s found" % len(voucher.move_id.line_id)
+  !python {model: account.bank.statement}: |
+    statement_obj = self.pool.get('account.bank.statement.line')
+    inv_obj = self.pool.get('account.invoice')
+    invoice = inv_obj.browse(cr, uid, ref('account_invoice_customer_bank_5'), context=context)
+    invoice_entry = invoice.move_id
+    for line in invoice_entry.line_id:
+      if not line.reconcile_id and line.debit:
+          counterpart_move_line = line
+          break
+    browse_payment = self.browse(cr, uid, ref("bank_statement_5"))
+    for line in browse_payment.line_ids:
+      statement_obj.process_reconciliation(cr, uid, line.id, [{
+        'counterpart_move_line_id': counterpart_move_line.id,
+        'credit':120,
+        'debit':0,
+        'name': counterpart_move_line.name,
+      }])
+    self.write(cr, uid, ref("bank_statement_5"), {'balance_end_real': 120})
+    self.button_confirm_bank(cr, uid, ref("bank_statement_5"))
+-
+  I check that the bank statement is confirm
+-
+  !assert {model: account.bank.statement, id: bank_statement_5, severity: error, string: Bank Statement should be confirm}:
+    - state == 'confirm'
+-
+  I check the bank statement line
+-
+  !python {model: account.bank.statement.line}: |
+    bank_line = self.browse(cr, uid, ref('bank_statement_line_5'), context=context)
+    assert len(bank_line.journal_entry_id.line_id) == 3, "There must be 3 real move lines, %s found" % len(bank_line.journal_entry_id.line_id)
+    assert len(bank_line.shadow_move_id.line_id) == 4, "There must be 4 shadow move lines, %s found" % len(bank_line.shadow_move_id.line_id)
     bank_found = False
     vat_found = False
     sales_found = False
-    for move_line in voucher.move_id.line_id:
+    for move_line in bank_line.journal_entry_id.line_id:
       if move_line.account_id.id == ref('account.usd_bnk'):
         bank_found = True
         assert move_line.debit == 30, "Bank move line must be 30 debit, %s found" % move_line.debit
+    for move_line in bank_line.shadow_move_id.line_id:
       if move_line.account_id.id == ref('account.iva'):
         vat_found = True
         assert move_line.credit == 5, "VAT move line must be 5 credit, %s found" % move_line.credit
@@ -109,5 +140,5 @@
 -
   I check that the invoice state is paid
 -
-  !assert {model: account.invoice, id: account_invoice_customer_5}:
+  !assert {model: account.invoice, id: account_invoice_customer_bank_5}:
     - state == 'paid'
