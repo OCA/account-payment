@@ -186,8 +186,6 @@ class AccountBankStatementLine(orm.Model):
         company_currency = bank_line.journal_id.company_id.currency_id
         statement_currency = bank_line.journal_id.currency or company_currency
         st_line_currency = bank_line.currency_id or statement_currency
-        st_line_currency_rate = bank_line.currency_id and (
-            bank_line.amount_currency / bank_line.amount) or False
         lines_to_create = []
         for mv_line_dict in mv_line_dicts:
             if mv_line_dict.get('is_tax_line'):
@@ -202,9 +200,9 @@ class AccountBankStatementLine(orm.Model):
             amount_currency = mv_line_dict['debit'] - mv_line_dict['credit']
             currency_id = st_line_currency.id
             if mv_line.currency_id.id == currency_id \
-                and float_is_zero(abs(mv_line.amount_currency) - abs(
-                    amount_currency),
-                precision_rounding=mv_line.currency_id.rounding):
+                and float_is_zero(
+                    abs(mv_line.amount_currency) - abs(amount_currency),
+                    precision_rounding=mv_line.currency_id.rounding):
                 debit_at_old_rate = mv_line.credit
                 credit_at_old_rate = mv_line.debit
             else:
