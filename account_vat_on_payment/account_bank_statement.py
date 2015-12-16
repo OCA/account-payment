@@ -6,6 +6,7 @@
 
 from openerp.osv import orm, fields
 from openerp.tools.translate import _
+from openerp.tools import float_is_zero
 
 
 class AccountBankStatementLine(orm.Model):
@@ -70,7 +71,7 @@ class AccountBankStatementLine(orm.Model):
                 inv_move_line.partner_id
                 and inv_move_line.partner_id.id or False)
         }
-        if new_line_amount_curr:
+        if new_line_amount_curr and foreign_curr_id:
             vals['amount_currency'] = line_amount_curr
             vals['currency_id'] = foreign_curr_id
         if inv_move_line.tax_code_id:
@@ -184,6 +185,9 @@ class AccountBankStatementLine(orm.Model):
                 bank_line.journal_id.vat_on_payment_related_journal_id.id)
         company_currency = bank_line.journal_id.company_id.currency_id
         statement_currency = bank_line.journal_id.currency or company_currency
+        st_line_currency = bank_line.currency_id or statement_currency
+        st_line_currency_rate = bank_line.currency_id and (
+            bank_line.amount_currency / bank_line.amount) or False
         lines_to_create = []
         for mv_line_dict in mv_line_dicts:
             if mv_line_dict.get('is_tax_line'):
@@ -193,19 +197,38 @@ class AccountBankStatementLine(orm.Model):
                 mv_line_dict['counterpart_move_line_id'],
                 context=context)
             invoice = mv_line.invoice
+            ctx = context.copy()
+            ctx['date'] = mv_line.date
+            amount_currency = mv_line_dict['debit'] - mv_line_dict['credit']
+            currency_id = st_line_currency.id
+            if mv_line.currency_id.id == currency_id \
+                and float_is_zero(abs(mv_line.amount_currency) - abs(
+                    amount_currency),
+                precision_rounding=mv_line.currency_id.rounding):
+                debit_at_old_rate = mv_line.credit
+                credit_at_old_rate = mv_line.debit
+            else:
+                debit_at_old_rate = currency_pool.compute(
+                    cr, uid, st_line_currency.id, company_currency.id,
+                    mv_line_dict['debit'], context=ctx)
+                credit_at_old_rate = currency_pool.compute(
+                    cr, uid, st_line_currency.id, company_currency.id,
+                    mv_line_dict['credit'], context=ctx)
+
+            pay_amount = credit_at_old_rate or debit_at_old_rate
+
             for inv_move_line in invoice.move_id.line_id:
-                pay_amount = mv_line_dict['credit'] or mv_line_dict['debit']
                 if inv_move_line.real_tax_code_id:
                     new_line_amount = currency_pool.round(
                         cr, uid,
                         company_currency,
                         (pay_amount / invoice.amount_total) *
                         inv_move_line.tax_amount)
-                    if (statement_currency != invoice.currency_id):
-                        new_line_amount_curr = ((
+                    if (currency_id != company_currency.id):
+                        new_line_amount_curr = -1 * ((
                             pay_amount / invoice.amount_total) *
                             inv_move_line.tax_amount)
-                        new_currency_id = mv_line_dict['currency_id']
+                        new_currency_id = currency_id
                     else:
                         new_line_amount_curr = 0.00
                         new_currency_id = False
