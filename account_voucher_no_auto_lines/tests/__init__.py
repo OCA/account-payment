@@ -20,4 +20,4 @@
 #
 ###############################################################################
 
-import test_account_voucher
+from . import test_account_voucher
