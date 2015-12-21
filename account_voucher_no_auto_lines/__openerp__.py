@@ -41,7 +41,9 @@ Contributors
     'depends': [
         'account_voucher',
     ],
-    'data': ['account_voucher_view.xml'],
+    'data': [
+        'views/account_voucher.xml',
+    ],
     'installable': True,
     'auto_install': False,
 }
