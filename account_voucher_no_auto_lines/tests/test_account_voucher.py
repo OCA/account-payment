@@ -4,10 +4,10 @@ from openerp.tests import common
 from openerp import workflow
 
 
-class test_account_voucher(common.TransactionCase):
+class TestAccountVoucher(common.TransactionCase):
 
     def setUp(self):
-        super(test_account_voucher, self).setUp()
+        super(TestAccountVoucher, self).setUp()
 
         self.user_model = self.env["res.users"]
         self.line = self.env['account.voucher.line']

@@ -23,7 +23,7 @@
 from openerp import api, models
 
 
-class account_voucher(models.Model):
+class AccountVoucher(models.Model):
 
     _inherit = 'account.voucher'
 
@@ -32,7 +32,7 @@ class account_voucher(models.Model):
         self, partner_id, journal_id, amount, currency_id, ttype, date
     ):
         context = self.env.context
-        res = super(account_voucher, self).onchange_partner_id(
+        res = super(AccountVoucher, self).onchange_partner_id(
             partner_id, journal_id, amount, currency_id, ttype, date)
 
         # Check that the method was called from the account payment view
@@ -64,7 +64,7 @@ class account_voucher(models.Model):
 
         line_dr_ids, line_cr_ids = self.copy_auto_lines()
 
-        res = super(account_voucher, self).onchange_journal(
+        res = super(AccountVoucher, self).onchange_journal(
             journal_id, line_ids, tax_id, partner_id, date,
             amount, ttype, company_id)
 
@@ -82,7 +82,7 @@ class account_voucher(models.Model):
         ttype, date, payment_rate_currency_id, company_id
     ):
 
-        res = super(account_voucher, self).onchange_amount(
+        res = super(AccountVoucher, self).onchange_amount(
             amount, rate, partner_id, journal_id, currency_id,
             ttype, date, payment_rate_currency_id, company_id)
 
