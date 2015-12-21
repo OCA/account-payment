@@ -22,28 +22,18 @@
 
 {
     'name': 'Account Voucher No Auto Lines',
-    'version': '1.0',
+    'version': '8.0.1.0.0',
     'category': 'Accounting & Finance',
-    'description': """
-Account Voucher No Auto Lines
-=============================
-
-This module allows users to select manually the lines to be payed by
-the voucher. The voucher will no longer try to match the credits/debits
-with the total amount.
-
-Contributors
-------------
-* Joao Alfredo Gama Batista (joao.gama@savoirfairelinux.com)
-    """,
-    'author': 'Savoir-faire Linux',
+    'author': 'Savoir-faire Linux, Odoo Community Association (OCA)',
     'website': 'http://www.savoirfairelinux.com',
+    'license': 'AGPL-3',
     'depends': [
         'account_voucher',
     ],
     'data': [
         'views/account_voucher.xml',
     ],
+    'images': [],
     'installable': True,
     'auto_install': False,
 }
