@@ -67,9 +67,8 @@ class AccountBankStatementLine(orm.Model):
             'credit': (inv_move_line.credit and line_amount or 0.0),
             'debit': (inv_move_line.debit and line_amount or 0.0),
             'type': 'real',
-            'partner_id': (
-                inv_move_line.partner_id
-                and inv_move_line.partner_id.id or False)
+            'partner_id': (inv_move_line.partner_id and
+                           inv_move_line.partner_id.id or False)
         }
         if new_line_amount_curr and foreign_curr_id:
             vals['amount_currency'] = line_amount_curr
@@ -100,16 +99,11 @@ class AccountBankStatementLine(orm.Model):
         vals = {
             'name': inv_move_line.name,
             'account_id': inv_move_line.account_id.id,
-            'credit': (
-                inv_move_line.debit
-                and line_amount or 0.0),
-            'debit': (
-                inv_move_line.credit
-                and line_amount or 0.0),
+            'credit': (inv_move_line.debit and line_amount or 0.0),
+            'debit': (inv_move_line.credit and line_amount or 0.0),
             'type': 'shadow',
-            'partner_id': (
-                inv_move_line.partner_id
-                and inv_move_line.partner_id.id or False)
+            'partner_id': (inv_move_line.partner_id and
+                           inv_move_line.partner_id.id or False)
         }
         if inv_move_line.tax_code_id:
             vals[
@@ -150,15 +144,11 @@ class AccountBankStatementLine(orm.Model):
                 # If the line is related to write-off and user doesn't
                 # want to compute the tax including write-off,
                 # write-off move line must stay on the real move
-                line.write({
-                    'move_id': shadow_move_id,
-                }, update_check=False)
+                line.write({'move_id': shadow_move_id}, update_check=False)
                 # this will allow user to see the real entry from
                 # invoice payment tab
-                if (
-                    line.account_id.type == 'receivable'
-                    or line.account_id.type == 'payable'
-                ):
+                if (line.account_id.type == 'receivable' or
+                        line.account_id.type == 'payable'):
                     line.write({
                         'real_payment_move_id': bank_line.journal_entry_id.id,
                     })
