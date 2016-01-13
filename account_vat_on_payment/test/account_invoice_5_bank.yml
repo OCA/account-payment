@@ -84,6 +84,7 @@
     amount: 120
     partner_id: base.res_partner_8
     statement_id: bank_statement_5
+    date: !eval "'%s-08-15' %(datetime.now().year)"
     name: 'Pay invoice'
     journal_id: account.bank_journal_usd
 -
