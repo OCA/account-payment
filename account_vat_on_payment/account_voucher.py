@@ -272,13 +272,12 @@ class AccountVoucher(orm.Model):
                 cr, uid, voucher, shadow_move_id, context=ctx)
 
         for line_to_create in lines_to_create:
-            if line_to_create['type'] == 'real':
-                if voucher.company_id.vat_payment_lines == 'shadow_move':
-                    line_to_create['move_id'] = voucher.move_id.id
-                else:
-                    line_to_create['move_id'] = shadow_move_id
-            elif line_to_create['type'] == 'shadow':
-                line_to_create['move_id'] = shadow_move_id
+            line_to_create['move_id'] = shadow_move_id
+            if (
+                line_to_create['type'] == 'real' and
+                voucher.company_id.vat_payment_lines == 'shadow_move'
+            ):
+                line_to_create['move_id'] = voucher.move_id.id
             del line_to_create['type']
 
             move_line_pool.create(cr, uid, line_to_create, ctx)
