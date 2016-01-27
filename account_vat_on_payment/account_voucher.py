@@ -35,8 +35,6 @@ class AccountVoucher(orm.Model):
     def _compute_allocated_amount(
         self, cr, uid, voucher, allocated=0, write_off=0, context=None
     ):
-        # compute the VAT or base line proportionally to
-        # the paid amount
         allocated_amount = allocated + write_off
         if (voucher.exclude_write_off and
                 voucher.payment_option == 'with_writeoff'):
@@ -56,6 +54,8 @@ class AccountVoucher(orm.Model):
             allocated=amounts_by_invoice[invoice.id]['allocated'],
             write_off=amounts_by_invoice[invoice.id]['write-off'],
             context=context)
+        # compute the VAT or base line proportionally to
+        # the paid amount
         new_line_amount = currency_obj.round(
             cr, uid, voucher.company_id.currency_id,
             (allocated_amount / amounts_by_invoice[invoice.id]['total']) *
