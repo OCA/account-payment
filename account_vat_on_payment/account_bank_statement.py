@@ -17,17 +17,16 @@ class AccountBankStatementLine(orm.Model):
             'account.move', 'Shadow Entry', readonly=True),
     }
 
-    def is_vat_on_payment(self, mv_line_dicts):
+    def is_vat_on_payment(self, cr, uid, mv_line_dicts):
         move_line_pool = self.pool.get('account.move.line')
         vat_on_p = 0
         valid_lines = 0
         for mv_line_dict in mv_line_dicts:
-            valid_lines += 1
             if mv_line_dict.get('is_tax_line'):
                 continue
+            valid_lines += 1
             mv_line = move_line_pool.browse(
-                self.cr, self.uid,
-                mv_line_dict['counterpart_move_line_id'])
+                cr, uid, mv_line_dict['counterpart_move_line_id'])
             invoice = mv_line.invoice
             if invoice.vat_on_payment:
                 vat_on_p += 1
@@ -156,6 +155,9 @@ class AccountBankStatementLine(orm.Model):
 
     def _create_vat_on_payment_move(self, cr, uid, bank_line, mv_line_dicts,
                                     context=None):
+        is_vat_on_payment = self.is_vat_on_payment(cr, uid, mv_line_dicts)
+        if not is_vat_on_payment:
+            return True
         move_line_pool = self.pool.get('account.move.line')
         move_pool = self.pool.get('account.move')
         currency_pool = self.pool.get('res.currency')
