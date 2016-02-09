@@ -28,7 +28,7 @@
 from openerp.osv import orm, fields
 
 
-class res_partner(orm.Model):
+class ResPartner(orm.Model):
     _inherit = 'res.partner'
     _columns = {
         'payment_type_customer': fields.property(
@@ -42,40 +42,30 @@ class res_partner(orm.Model):
     }
 
 
-class res_partner_bank(orm.Model):
+class ResPartnerBank(orm.Model):
     _inherit = 'res.partner.bank'
+
+    def _unmark_default(self, cr, uid, bank_id, partner_id, state):
+        bank_ids = self.search(
+            cr, uid, [('default_bank', '=', True), ('id', '!=', bank_id),
+                      ('state', '=', state), ('partner_id', '=', partner_id)])
+        self.write(cr, uid, bank_ids, {'default_bank': False})
 
     def create(self, cr, uid, vals, context=None):
         if vals.get('default_bank') and vals.get('partner_id') and \
                 vals.get('state'):
-            sql = """UPDATE res_partner_bank SET
-                    default_bank = '0'
-                WHERE
-                    partner_id = %i
-                    AND default_bank = true
-                    AND state='%s'""" % (vals['partner_id'], vals['state'])
-            cr.execute(sql)
-        return super(res_partner_bank, self).create(
+            self._unmark_default(
+                cr, uid, False, vals['partner_id'], vals['state'])
+        return super(ResPartnerBank, self).create(
             cr, uid, vals, context=context)
 
     def write(self, cr, uid, ids, vals, context=None):
-        if 'default_bank' in vals and vals['default_bank']:
-            partner_bank = self.pool.get('res.partner.bank').browse(
-                cr, uid, ids)[0]
-            partner_id = partner_bank.partner_id.id
-            if 'state' in vals and vals['state']:
-                state = vals['state']
-            else:
-                state = partner_bank.state
-            sql = """UPDATE res_partner_bank SET
-                        default_bank='0'
-                    WHERE
-                        partner_id = %i
-                        AND default_bank = true
-                        AND state = '%s'
-                        AND id <> %i""" % (partner_id, state, ids[0])
-            cr.execute(sql)
-        return super(res_partner_bank, self).write(
+        if vals.get('default_bank'):
+            partner_bank = self.browse(cr, uid, ids[0])
+            partner_id = vals.get('partner_id') or partner_bank.partner_id.id
+            state = vals.get('state') or partner_bank.state
+            self._unmark_default(cr, uid, False, partner_id, state)
+        return super(ResPartnerBank, self).write(
             cr, uid, ids, vals, context=context)
 
     _columns = {
