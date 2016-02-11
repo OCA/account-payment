@@ -10,6 +10,14 @@ This module allows users to select manually the lines to be payed by
 the voucher. The voucher will no longer try to match the credits/debits
 with the total amount.
 
+
+Configuration
+=============
+
+Go to Settings -> Account -> Configuration -> Accounting
+and check the option "No auto lines on voucher".
+
+
 Usage
 =====
 
