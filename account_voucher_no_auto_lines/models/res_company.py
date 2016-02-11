@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-###############################################################################
+##############################################################################
 #
-#    Odoo, Open Source Management Solution
-#    This module copyright (C) 2016 Savoir-faire Linux
-#    (<http://www.savoirfairelinux.com>).
+#    Odoo, Open Source Business Applications
+#    Copyright (C) 2016 Savoir-faire Linux
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as
@@ -18,8 +17,16 @@
 #    You should have received a copy of the GNU Affero General Public License
 #    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #
-###############################################################################
+##############################################################################
 
-from . import account_config_settings
-from . import account_voucher
-from . import res_company
+from openerp import fields, models
+
+
+class ResCompany(models.Model):
+    _inherit = 'res.company'
+
+    disable_voucher_auto_lines = fields.Boolean(
+        'No auto lines on voucher',
+        help="Check this box to disable automatic matching of lines "
+        "on the account voucher.",
+    )

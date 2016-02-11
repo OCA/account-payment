@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+from datetime import datetime
+
 from openerp.tests import common
 from openerp import workflow
 
@@ -10,12 +12,17 @@ class TestAccountVoucher(common.TransactionCase):
         super(TestAccountVoucher, self).setUp()
 
         self.user_model = self.env["res.users"]
+
+        self.env.user.company_id.disable_voucher_auto_lines = True
+
         self.line = self.env['account.voucher.line']
         self.account_model = self.env['account.account']
         self.partner_model = self.env['res.partner']
         self.invoice_model = self.env['account.invoice']
         self.product_model = self.env['product.product']
         self.voucher_model = self.env['account.voucher']
+
+        year = datetime.now().year
 
         self.account = self.account_model.search(
             [('type', '=', 'payable'), ('currency_id', '=', False)],
@@ -29,7 +36,7 @@ class TestAccountVoucher(common.TransactionCase):
         self.invoice = self.invoice_model.create({
             'partner_id': self.partner.id,
             'account_id': self.account.id,
-            'date_invoice': '2015-01-01',
+            'date_invoice': '%s-01-01' % year,
             'type': 'in_invoice',
             'invoice_line': [(0, 0, {
                 'name': 'Test',
@@ -45,7 +52,7 @@ class TestAccountVoucher(common.TransactionCase):
             'invoice_open', self.cr)
 
         self.voucher = self.voucher_model.create({
-            'date': '2015-01-02',
+            'date': '%s-01-02' % year,
             'name': "test", 'amount': 200,
             'account_id': self.account.id,
             'partner_id': self.partner.id,
@@ -61,7 +68,6 @@ class TestAccountVoucher(common.TransactionCase):
         voucher_line = res['value']['line_dr_ids'][0]
 
         self.assertEqual(voucher_line['amount'], 0)
-        self.assertEqual(voucher_line['reconcile'], False)
 
     def test_02_onchange_partner_id_allow_auto_lines(self):
         v = self.voucher
@@ -72,7 +78,6 @@ class TestAccountVoucher(common.TransactionCase):
         voucher_line = res['value']['line_dr_ids'][0]
 
         self.assertEqual(voucher_line['amount'], 123.45)
-        self.assertEqual(voucher_line['reconcile'], True)
 
     def test_03_onchange_amount(self):
         v = self.voucher
@@ -96,7 +101,6 @@ class TestAccountVoucher(common.TransactionCase):
         voucher_line = res['value']['line_dr_ids'][0]
 
         self.assertEqual(voucher_line['amount'], 123.45)
-        self.assertEqual(voucher_line['reconcile'], True)
 
     def test_05_onchange_journal(self):
         v = self.voucher
@@ -118,7 +122,6 @@ class TestAccountVoucher(common.TransactionCase):
         voucher_line = res['value']['line_dr_ids'][0]
 
         self.assertEqual(voucher_line['amount'], 0)
-        self.assertEqual(voucher_line['reconcile'], False)
 
         context = {'line_dr_ids': [(0, 0, voucher_line)]}
         voucher_line['amount'] = 90
@@ -132,7 +135,6 @@ class TestAccountVoucher(common.TransactionCase):
             l for l in res['value']['line_dr_ids'] if isinstance(l, dict))
 
         self.assertEqual(voucher_line['amount'], 90)
-        self.assertEqual(voucher_line['reconcile'], False)
 
     def test_06_onchange_journal_allow_auto_lines(self):
         v = self.voucher.with_context({'allow_auto_lines': True})
@@ -158,4 +160,3 @@ class TestAccountVoucher(common.TransactionCase):
             l for l in res['value']['line_dr_ids'] if isinstance(l, dict))
 
         self.assertEqual(voucher_line['amount'], 123.45)
-        self.assertEqual(voucher_line['reconcile'], True)

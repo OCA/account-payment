@@ -32,25 +32,20 @@ class AccountVoucher(models.Model):
         self, partner_id, journal_id, amount, currency_id, ttype, date
     ):
         context = self.env.context
+
+        line_dr_ids, line_cr_ids = self.copy_auto_lines()
+
         res = super(AccountVoucher, self).onchange_partner_id(
             partner_id, journal_id, amount, currency_id, ttype, date)
 
-        # Check that the method was called from the account payment view
         if (
+            not self.env.user.company_id.disable_voucher_auto_lines or
             context.get('allow_auto_lines') or
             context.get('active_model') == 'account.invoice'
         ):
             return res
 
-        if 'value' in res and 'line_cr_ids' in res['value']:
-            for line in res['value']['line_cr_ids']:
-                line['amount'] = 0.0
-                line['reconcile'] = False
-
-        if 'value' in res and 'line_dr_ids' in res['value']:
-            for line in res['value']['line_dr_ids']:
-                line['amount'] = 0.0
-                line['reconcile'] = False
+        self.update_auto_lines(res, line_dr_ids, line_cr_ids)
 
         return res
 
@@ -59,7 +54,6 @@ class AccountVoucher(models.Model):
         self, journal_id, line_ids, tax_id, partner_id,
         date, amount, ttype, company_id
     ):
-
         context = self.env.context
 
         line_dr_ids, line_cr_ids = self.copy_auto_lines()
@@ -68,8 +62,11 @@ class AccountVoucher(models.Model):
             journal_id, line_ids, tax_id, partner_id, date,
             amount, ttype, company_id)
 
-        # Check that the method was called from the account payment view
-        if context.get('allow_auto_lines'):
+        if (
+            not self.env.user.company_id.disable_voucher_auto_lines or
+            context.get('allow_auto_lines') or
+            context.get('active_model') == 'account.invoice'
+        ):
             return res
 
         self.update_auto_lines(res, line_dr_ids, line_cr_ids)
@@ -81,13 +78,17 @@ class AccountVoucher(models.Model):
         self, amount, rate, partner_id, journal_id, currency_id,
         ttype, date, payment_rate_currency_id, company_id
     ):
+        context = self.env.context
 
         res = super(AccountVoucher, self).onchange_amount(
             amount, rate, partner_id, journal_id, currency_id,
             ttype, date, payment_rate_currency_id, company_id)
 
-        # Check that the method was called from the account payment view
-        if self.env.context.get('allow_auto_lines'):
+        if (
+            not self.env.user.company_id.disable_voucher_auto_lines or
+            context.get('allow_auto_lines') or
+            context.get('active_model') == 'account.invoice'
+        ):
             return res
 
         if res.get('value'):
@@ -113,14 +114,10 @@ class AccountVoucher(models.Model):
 
                 if move_line_id and move_line_id in line_dr_ids:
                     old_dr_line = line_dr_ids[move_line_id]
-
-                    if old_dr_line['reconcile']:
-                        line['amount'] = line['amount_unreconciled']
-                    else:
-                        line['amount'] = old_dr_line['amount']
+                    line['amount'] = old_dr_line['amount']
 
                 else:
-                    line['amount'] = 0.0
+                    line['amount'] = 0
                     line['reconcile'] = False
 
         if 'value' in onchange_res and 'line_cr_ids' in onchange_res['value']:
@@ -133,34 +130,36 @@ class AccountVoucher(models.Model):
 
                 if move_line_id and move_line_id in line_cr_ids:
                     old_cr_line = line_cr_ids[move_line_id]
-
-                    if old_cr_line['reconcile']:
-                        line['amount'] = line['amount_unreconciled']
-                    else:
-                        line['amount'] = old_cr_line['amount']
+                    line['amount'] = old_cr_line['amount']
 
                 else:
-                    line['amount'] = 0.0
+                    line['amount'] = 0
                     line['reconcile'] = False
 
     @api.model
     def copy_auto_lines(self):
-        context = self.env.context
+        line_dr_ids = {}
+        line_cr_ids = {}
 
-        line_dr_ids = {
-            line[2]['move_line_id']: {
-                'amount': line[2]['amount'],
-                'reconcile': line[2]['reconcile']
-            }
-            for line in context.get('line_dr_ids', [])
-        }
+        old_line_cr_ids = self.env.context.get('line_cr_ids', [])
+        old_line_dr_ids = self.env.context.get('line_dr_ids', [])
 
-        line_cr_ids = {
-            line[2]['move_line_id']: {
-                'amount': line[2]['amount'],
-                'reconcile': line[2]['reconcile']
+        for line in old_line_dr_ids:
+            if len(line) != 3 or not isinstance(line[2], dict):
+                continue
+
+            line_dr_ids[line[2].get('move_line_id')] = {
+                'amount': line[2].get('amount'),
+                'reconcile': line[2].get('reconcile'),
             }
-            for line in context.get('line_cr_ids', [])
-        }
+
+        for line in old_line_cr_ids:
+            if len(line) != 3 or not isinstance(line[2], dict):
+                continue
+
+            line_cr_ids[line[2].get('move_line_id')] = {
+                'amount': line[2].get('amount'),
+                'reconcile': line[2].get('reconcile'),
+            }
 
         return line_dr_ids, line_cr_ids

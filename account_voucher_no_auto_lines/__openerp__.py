@@ -32,6 +32,7 @@
     ],
     'data': [
         'views/account_voucher.xml',
+        'views/account_config.xml',
     ],
     'images': [],
     'installable': True,
