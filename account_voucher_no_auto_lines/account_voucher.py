@@ -96,19 +96,20 @@ def update_lines(onchange_res, line_dr_ids, line_cr_ids):
                 line['reconcile'] = False
 
 
-class account_voucher(models.Model):
+class AccountVoucher(models.Model):
 
     _inherit = 'account.voucher'
 
     def onchange_partner_id(self, cr, uid, ids, *args, **kwargs):
 
         context = kwargs.get('context', False) or args[-1]
-        res = super(account_voucher, self).onchange_partner_id(
+        res = super(AccountVoucher, self).onchange_partner_id(
             cr, uid, ids, *args, **kwargs)
 
         # Check that the method was called from the account payment view
-        if context.get('allow_auto_lines', False) or \
-                context.get('active_model', False) == 'account.invoice':
+        if (isinstance(context, dict) and
+            (context.get('allow_auto_lines', False) or
+             context.get('active_model', False) == 'account.invoice')):
             return res
 
         if 'value' in res and 'line_cr_ids' in res['value']:
@@ -129,7 +130,7 @@ class account_voucher(models.Model):
 
         line_dr_ids, line_cr_ids = copy_lines(context)
 
-        res = super(account_voucher, self).onchange_journal(
+        res = super(AccountVoucher, self).onchange_journal(
             cr, uid, ids, *args, **kwargs)
 
         # Check that the method was called from the account payment view
@@ -144,7 +145,7 @@ class account_voucher(models.Model):
 
         context = kwargs.get('context', False) or args[-1]
 
-        res = super(account_voucher, self).onchange_amount(
+        res = super(AccountVoucher, self).onchange_amount(
             cr, uid, ids, *args, **kwargs)
 
         # Check that the method was called from the account payment view

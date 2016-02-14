@@ -23,10 +23,10 @@ from datetime import date
 from openerp.tests import common
 
 
-class test_account_voucher(common.TransactionCase):
+class TestAccountVoucher(common.TransactionCase):
 
     def setUp(self):
-        super(test_account_voucher, self).setUp()
+        super(TestAccountVoucher, self).setUp()
 
         self.user_model = self.env['res.users']
 
@@ -43,7 +43,6 @@ class test_account_voucher(common.TransactionCase):
         self.account = self.account_model.search(
             [('type', '=', 'payable'), ('currency_id', '=', False)],
             limit=1)[0]
-        print self.account
 
         self.partner = self.partner_model.create(
             {
@@ -100,14 +99,13 @@ class test_account_voucher(common.TransactionCase):
 
         voucher = self.voucher_model.browse(
             self.voucher.id)
-
         val = voucher.onchange_partner_id(
             self.partner.id,
             voucher.journal_id.id,
             voucher.amount,
             voucher.currency_id.id,
             voucher.type,
-            voucher.date,
+            voucher.date
         )
 
         debit = val['value']['line_dr_ids']
