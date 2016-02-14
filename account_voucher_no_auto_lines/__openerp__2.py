@@ -20,4 +20,29 @@
 #
 ###############################################################################
 
-from . import models
+{
+    'name': 'Account Voucher No Auto Lines',
+    'version': '1.0',
+    'category': 'Accounting & Finance',
+    'description': """
+Account Voucher No Auto Lines
+=============================
+
+This module allows users to select manually the lines to be payed by
+the voucher. The voucher will no longer try to match the credits/debits
+with the total amount.
+
+Contributors
+------------
+* Joao Alfredo Gama Batista (joao.gama@savoirfairelinux.com)
+* Kitti U. (kittiu@ecosoft.co.th)
+    """,
+    'author': 'Savoir-faire Linux',
+    'website': 'http://www.savoirfairelinux.com',
+    'depends': [
+        'account_voucher',
+    ],
+    'data': ['account_voucher_view.xml'],
+    'installable': True,
+    'auto_install': False,
+}
