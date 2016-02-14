@@ -1,9 +1,12 @@
 # -*- coding: utf-8 -*-
-# © <YEAR(S)> <AUTHOR(S)>
+# © 2016 Joao Alfredo Gama Batista, Kitti U.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+
 {
     "name": "Account Voucher No Auto Lines",
-    "summary": "No more refresh lines when change amount in Account Voucher",
+    "summary": """
+    When amount changes in Account Voucher, lines are not refreshed anymore
+    """,
     "version": "8.0.1.0.0",
     "category": "Accounting & Finance",
     "website": "http://www.savoirfairelinux.com",
