@@ -54,8 +54,8 @@ Contributors
 
 * Lorenzo Battistini <lorenzo.battistini@agilebg.com>
 * Alex Comba <alex.comba@agilebg.com>
-* Leonardo Pistone <lpistone@agmail.com>
-* Fekete Mihai <feketemihai@agmail.com>
+* Leonardo Pistone <lpistone@gmail.com>
+* Fekete Mihai <feketemihai@gmail.com>
 
 Maintainer
 ----------

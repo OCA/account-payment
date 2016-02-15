@@ -1,9 +1,4 @@
 -
-  Change Company VAT Payment Lines Behaviour to stay on Real Move
--
-  !record {model: res.company, id: base.main_company}:
-    vat_payment_lines: 'real_move'
--
   I create customer invoice 3 - 230 EUR
 -
   !record {model: account.invoice, id: account_invoice_customer_3_real, view: invoice_form}:

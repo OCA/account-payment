@@ -29,11 +29,11 @@ class AccountInvoice(orm.Model):
                           "account")
                         % account.name)
                 else:
-                    real_account = line_tuple[2]['account_id']
+                    shadow_account = line_tuple[2]['account_id']
             else:
-                real_account = account.vat_on_payment_related_account_id.id
+                shadow_account = account.vat_on_payment_related_account_id.id
             line_tuple[2]['real_account_id'] = line_tuple[2]['account_id']
-            line_tuple[2]['account_id'] = real_account
+            line_tuple[2]['account_id'] = shadow_account
         return line_tuple
 
     def _set_vat_on_payment_tax_code(self, cr, uid, line_tuple, context=None):

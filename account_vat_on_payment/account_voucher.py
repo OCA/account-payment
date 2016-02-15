@@ -35,8 +35,6 @@ class AccountVoucher(orm.Model):
     def _compute_allocated_amount(
         self, cr, uid, voucher, allocated=0, write_off=0, context=None
     ):
-        # compute the VAT or base line proportionally to
-        # the paid amount
         allocated_amount = allocated + write_off
         if (voucher.exclude_write_off and
                 voucher.payment_option == 'with_writeoff'):
@@ -56,6 +54,8 @@ class AccountVoucher(orm.Model):
             allocated=amounts_by_invoice[invoice.id]['allocated'],
             write_off=amounts_by_invoice[invoice.id]['write-off'],
             context=context)
+        # compute the VAT or base line proportionally to
+        # the paid amount
         new_line_amount = currency_obj.round(
             cr, uid, voucher.company_id.currency_id,
             (allocated_amount / amounts_by_invoice[invoice.id]['total']) *
@@ -120,7 +120,7 @@ class AccountVoucher(orm.Model):
             'partner_id': (inv_move_line.partner_id and
                            inv_move_line.partner_id.id or False)
         }
-        if new_line_amount_curr:
+        if new_line_amount_curr and foreign_curr_id:
             vals['amount_currency'] = line_amount_curr
             vals['currency_id'] = foreign_curr_id
         if inv_move_line.tax_code_id:
@@ -166,25 +166,31 @@ class AccountVoucher(orm.Model):
                 vals['tax_amount'] = -new_line_amount
         return vals
 
-    def _prepare_shadow_move(self, cr, uid, voucher, context=None):
-        vat_config_error = voucher.company_id.vat_config_error
-        if not voucher.journal_id.vat_on_payment_related_journal_id:
+    def _prepare_shadow_move(
+        self, cr, uid, document, move_id_field='move_id', context=None
+    ):
+        """
+        document can be a voucher or a bank statement line, as they share
+        almost every field, except move_id/journal_entry_id
+        """
+        vat_config_error = document.company_id.vat_config_error
+        if not document.journal_id.vat_on_payment_related_journal_id:
             if vat_config_error == 'raise_error':
                 raise orm.except_orm(
                     _('Error'),
                     _("We are on a VAT on payment treatment "
                       "but journal %s does not have a related shadow "
                       "journal")
-                    % voucher.journal_id.name)
+                    % document.journal_id.name)
             else:
-                real_journal = voucher.journal_id.id
+                real_journal = document.journal_id.id
         else:
             real_journal = (
-                voucher.journal_id.vat_on_payment_related_journal_id.id)
+                document.journal_id.vat_on_payment_related_journal_id.id)
         return {
             'journal_id': real_journal,
-            'period_id': voucher.move_id.period_id.id,
-            'date': voucher.move_id.date,
+            'period_id': eval('document.%s.period_id.id' % move_id_field),
+            'date': eval('document.%s.date' % move_id_field),
         }
 
     def _move_payment_lines_to_shadow_entry(
@@ -272,13 +278,12 @@ class AccountVoucher(orm.Model):
                 cr, uid, voucher, shadow_move_id, context=ctx)
 
         for line_to_create in lines_to_create:
-            if line_to_create['type'] == 'real':
-                if voucher.company_id.vat_payment_lines == 'shadow_move':
-                    line_to_create['move_id'] = voucher.move_id.id
-                else:
-                    line_to_create['move_id'] = shadow_move_id
-            elif line_to_create['type'] == 'shadow':
-                line_to_create['move_id'] = shadow_move_id
+            line_to_create['move_id'] = shadow_move_id
+            if (
+                line_to_create['type'] == 'real' and
+                voucher.company_id.vat_payment_lines == 'shadow_move'
+            ):
+                line_to_create['move_id'] = voucher.move_id.id
             del line_to_create['type']
 
             move_line_pool.create(cr, uid, line_to_create, ctx)
@@ -320,15 +325,19 @@ class AccountVoucher(orm.Model):
 
         return res
 
-    def cancel_voucher(self, cr, uid, ids, context=None):
-        res = super(AccountVoucher, self).cancel_voucher(
-            cr, uid, ids, context)
+    def unreconcile_documents(
+        self, cr, uid, ids, model='account.voucher', context=None
+    ):
+        """
+        document can be voucher or bank statement line,
+        as they share field names
+        """
         reconcile_pool = self.pool.get('account.move.reconcile')
         move_pool = self.pool.get('account.move')
-        for voucher in self.browse(cr, uid, ids, context=context):
+        for document in self.pool[model].browse(cr, uid, ids, context=context):
             recs = []
-            if voucher.shadow_move_id:
-                for line in voucher.shadow_move_id.line_id:
+            if document.shadow_move_id:
+                for line in document.shadow_move_id.line_id:
                     if line.reconcile_id:
                         recs += [line.reconcile_id.id]
                     if line.reconcile_partial_id:
@@ -336,8 +345,13 @@ class AccountVoucher(orm.Model):
 
                 reconcile_pool.unlink(cr, uid, recs)
 
-                if voucher.shadow_move_id:
+                if document.shadow_move_id:
                     move_pool.button_cancel(
-                        cr, uid, [voucher.shadow_move_id.id])
-                    move_pool.unlink(cr, uid, [voucher.shadow_move_id.id])
+                        cr, uid, [document.shadow_move_id.id])
+                    move_pool.unlink(cr, uid, [document.shadow_move_id.id])
+
+    def cancel_voucher(self, cr, uid, ids, context=None):
+        res = super(AccountVoucher, self).cancel_voucher(
+            cr, uid, ids, context)
+        self.unreconcile_documents(cr, uid, ids, context=context)
         return res
