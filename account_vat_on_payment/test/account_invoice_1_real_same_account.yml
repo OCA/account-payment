@@ -3,6 +3,7 @@
 -
   !python {model: res.company}: |
     self.write(cr, uid, [ref('base.main_company')], {
+      'vat_payment_lines': 'real_move',
       'vat_config_error': 'use_the_same'
       })
 -
@@ -62,7 +63,7 @@
   !python {model: account.voucher}: |
     voucher = self.browse(cr, uid, ref('account_voucher_1_same'), context=context)
     assert len(voucher.move_id.line_id) == 2, "There must be 2 real move lines, %s found" % len(voucher.move_id.line_id)
-    assert len(voucher.shadow_move_id.line_id) == 4, "There must be 4 real move lines, %s found" % len(voucher.shadow_move_id.line_id)
+    assert len(voucher.shadow_move_id.line_id) == 4, "There must be 4 shadow move lines, %s found" % len(voucher.shadow_move_id.line_id)
     bank_found = False
     vat_found = False
     sales_found = False
@@ -76,7 +77,7 @@
         assert move_line.credit == 20, "VAT move line must be 120 credit, %s found" % move_line.credit
       if move_line.account_id.id == ref('account.a_sale'):
         sales_found = True
-        assert move_line.credit == 100, "sales move line must be 100 credit, %s found" % move_line.credit
+        assert move_line.credit == 0, "sales move line must be 0 credit, %s found" % move_line.credit
         assert move_line.debit == 0, "sales move line must be 0 debit, %s found" % move_line.debit
         if move_line.tax_code_id.id == ref('base_shadow_tax_code'):
           assert move_line.tax_amount == -100, "sales move line must be -100 shadow tax amount, %s found" % move_line.tax_amount
