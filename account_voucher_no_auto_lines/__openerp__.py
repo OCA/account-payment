@@ -10,6 +10,7 @@
     "version": "8.0.1.0.0",
     "category": "Accounting & Finance",
     "website": "http://www.savoirfairelinux.com",
+    "images": [],
     "author": """
     Joao Alfredo Gama Batista, Kitti U., Odoo Community Association (OCA)
     """,
