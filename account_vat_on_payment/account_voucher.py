@@ -40,8 +40,8 @@ class AccountVoucher(orm.Model):
                 if line.amount:
                     valid_lines += 1
                     if (
-                        line.move_line_id and line.move_line_id.invoice
-                        and line.move_line_id.invoice.vat_on_payment
+                        line.move_line_id and line.move_line_id.invoice and
+                        line.move_line_id.invoice.vat_on_payment
                     ):
                         vat_on_p += 1
             if vat_on_p and vat_on_p != valid_lines:
@@ -58,8 +58,8 @@ class AccountVoucher(orm.Model):
         # the paid amount
         allocated_amount = allocated + write_off
         if (
-            voucher.exclude_write_off
-            and voucher.payment_option == 'with_writeoff'
+            voucher.exclude_write_off and
+            voucher.payment_option == 'with_writeoff'
         ):
             # avoid including write-off if set in voucher.
             # That means: use the invoice's total
@@ -79,8 +79,7 @@ class AccountVoucher(orm.Model):
             context=context)
         new_line_amount = currency_obj.round(
             cr, uid, voucher.company_id.currency_id,
-            (allocated_amount / amounts_by_invoice[invoice.id]['total'])
-            *
+            (allocated_amount / amounts_by_invoice[invoice.id]['total']) *
             (inv_move_line.credit or inv_move_line.debit)
         )
         return new_line_amount
@@ -92,8 +91,8 @@ class AccountVoucher(orm.Model):
         currency_obj = self.pool.get('res.currency')
         new_line_amount_curr = False
         if (
-            amounts_by_invoice[invoice.id].get('allocated_currency')
-            and amounts_by_invoice[invoice.id].get('foreign_currency_id')
+            amounts_by_invoice[invoice.id].get('allocated_currency') and
+            amounts_by_invoice[invoice.id].get('foreign_currency_id')
         ):
             for_curr = currency_obj.browse(
                 cr, uid, amounts_by_invoice[invoice.id]['foreign_currency_id'],
@@ -108,8 +107,7 @@ class AccountVoucher(orm.Model):
                 (
                     allocated_amount /
                     amounts_by_invoice[invoice.id]['total_currency']
-                )
-                *
+                ) *
                 (inv_move_line.amount_currency)
             )
         return new_line_amount_curr
@@ -132,8 +130,8 @@ class AccountVoucher(orm.Model):
             'debit': (inv_move_line.debit and new_line_amount or 0.0),
             'type': 'real',
             'partner_id': (
-                inv_move_line.partner_id
-                and inv_move_line.partner_id.id or False)
+                inv_move_line.partner_id and
+                inv_move_line.partner_id.id or False)
         }
         if new_line_amount_curr:
             vals['amount_currency'] = new_line_amount_curr
@@ -162,15 +160,15 @@ class AccountVoucher(orm.Model):
             'name': inv_move_line.name,
             'account_id': inv_move_line.account_id.id,
             'credit': (
-                inv_move_line.debit
-                and new_line_amount or 0.0),
+                inv_move_line.debit and
+                new_line_amount or 0.0),
             'debit': (
-                inv_move_line.credit
-                and new_line_amount or 0.0),
+                inv_move_line.credit and
+                new_line_amount or 0.0),
             'type': 'shadow',
             'partner_id': (
-                inv_move_line.partner_id
-                and inv_move_line.partner_id.id or False)
+                inv_move_line.partner_id and
+                inv_move_line.partner_id.id or False)
         }
         if inv_move_line.tax_code_id:
             vals[
@@ -200,10 +198,10 @@ class AccountVoucher(orm.Model):
                 # want to compute the tax including write-off,
                 # write-off move line must stay on the real move
                 if not (
-                    voucher.exclude_write_off
-                    and voucher.payment_option == 'with_writeoff'
-                    and line.account_id.id
-                        == voucher.writeoff_acc_id.id
+                    voucher.exclude_write_off and
+                    voucher.payment_option == 'with_writeoff' and
+                    line.account_id.id ==
+                    voucher.writeoff_acc_id.id
                 ):
                     line.write({
                         'move_id': shadow_move_id,
@@ -211,8 +209,8 @@ class AccountVoucher(orm.Model):
                 # this will allow user to see the real entry from
                 # invoice payment tab
                 if (
-                    line.account_id.type == 'receivable'
-                    or line.account_id.type == 'payable'
+                    line.account_id.type == 'receivable' or
+                    line.account_id.type == 'payable'
                 ):
                     line.write({
                         'real_payment_move_id': voucher.move_id.id,
@@ -239,8 +237,8 @@ class AccountVoucher(orm.Model):
             invoice = inv_pool.browse(cr, uid, inv_id, context)
             for inv_move_line in invoice.move_id.line_id:
                 if (
-                    inv_move_line.account_id.type != 'receivable'
-                    and inv_move_line.account_id.type != 'payable'
+                    inv_move_line.account_id.type != 'receivable' and
+                    inv_move_line.account_id.type != 'payable'
                 ):
                     new_line_amount = self._compute_new_line_amount(
                         cr, uid, voucher, inv_move_line,
