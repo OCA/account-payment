@@ -162,10 +162,10 @@ class AccountVoucher(orm.Model):
             'account_id': inv_move_line.account_id.id,
             'credit': (
                 inv_move_line.debit and
-                new_line_amount or 0.0),
+                line_amount or 0.0),
             'debit': (
                 inv_move_line.credit and
-                new_line_amount or 0.0),
+                line_amount or 0.0),
             'type': 'shadow',
             'partner_id': (
                 inv_move_line.partner_id and
