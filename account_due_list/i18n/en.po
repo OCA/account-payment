@@ -8,60 +8,60 @@ msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-03-02 19:16+0000\n"
-"PO-Revision-Date: 2016-03-02 19:24+0000\n"
+"PO-Revision-Date: 2016-03-02 19:16+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-account-payment-8-0/language/de/)\n"
+"Language-Team: English (http://www.transifex.com/oca/OCA-account-payment-8-0/language/en/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
+"Language: en\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_due_list
 #: field:account.move.line,day:0
 msgid "Day"
-msgstr ""
+msgstr "Day"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Due date"
-msgstr ""
+msgstr "Due date"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "From invoices"
-msgstr ""
+msgstr "From invoices"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Group By..."
-msgstr "Gruppierung..."
+msgstr "Group By..."
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 #: field:account.move.line,stored_invoice_id:0
 msgid "Invoice"
-msgstr ""
+msgstr "Invoice"
 
 #. module: account_due_list
 #: model:ir.model,name:account_due_list.model_account_move_line
 msgid "Journal Items"
-msgstr "Buchungsjournale"
+msgstr "Journal Items"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Month"
-msgstr ""
+msgstr "Month"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Overdue"
-msgstr "Überfällig"
+msgstr "Overdue"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Overdue payments"
-msgstr ""
+msgstr "Overdue payments"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
@@ -71,55 +71,55 @@ msgstr "Partner"
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Payable"
-msgstr "Kreditor"
+msgstr "Payable"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Payable payments"
-msgstr ""
+msgstr "Payable payments"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_tree
 msgid "Payments"
-msgstr "Zahlungen"
+msgstr "Payments"
 
 #. module: account_due_list
 #: model:ir.actions.act_window,name:account_due_list.action_invoice_payments
 #: model:ir.ui.menu,name:account_due_list.menu_action_invoice_payments
 msgid "Payments and due list"
-msgstr ""
+msgstr "Payments and due list"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Receivable"
-msgstr "Debitor"
+msgstr "Receivable"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Receivable payments"
-msgstr ""
+msgstr "Receivable payments"
 
 #. module: account_due_list
 #: field:account.move.line,maturity_residual:0
 msgid "Residual Amount"
-msgstr ""
+msgstr "Residual Amount"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Search Payments"
-msgstr "Zahlungen suchen"
+msgstr "Search Payments"
 
 #. module: account_due_list
 #: help:account.move.line,maturity_residual:0
 msgid ""
 "The residual amount on a receivable or payable of a journal entry expressed "
 "in the company currency."
-msgstr ""
+msgstr "The residual amount on a receivable or payable of a journal entry expressed in the company currency."
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_tree
 msgid "Total Credit"
-msgstr "Total Kredit"
+msgstr "Total Credit"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_tree
@@ -129,14 +129,14 @@ msgstr "Total Debit"
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_tree
 msgid "Total Residual"
-msgstr ""
+msgstr "Total Residual"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Unreconciled"
-msgstr "Offene Posten"
+msgstr "Unreconciled"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Unreconciled payments"
-msgstr ""
+msgstr "Unreconciled payments"
