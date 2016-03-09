@@ -22,6 +22,8 @@
 
 from openerp.osv import orm
 
+from openerp.addons.account_voucher import account_voucher as base_module
+
 
 def copy_lines(context=None):
 
@@ -140,21 +142,45 @@ class account_voucher(orm.Model):
 
         return res
 
-    def onchange_amount(self, cr, uid, ids, *args, **kwargs):
 
-        context = kwargs.get('context', False) or args[-1]
+def onchange_amount(
+    self, cr, uid, ids, amount, rate, partner_id, journal_id,
+    currency_id, ttype, date, payment_rate_currency_id, company_id,
+    context=None
+):
+    """
+    Patch the original onchange_amount method so that it does not
+    refresh the list of voucher lines when not required.
+    """
+    if context is None:
+        context = {}
 
-        res = super(account_voucher, self).onchange_amount(
-            cr, uid, ids, *args, **kwargs)
+    ctx = context.copy()
+    ctx.update({'date': date})
+    currency_id = currency_id or self.pool.get('res.company').browse(
+        cr, uid, company_id, context=ctx).currency_id.id
+    voucher_rate = self.pool.get('res.currency').read(
+        cr, uid, currency_id, ['rate'], context=ctx)['rate']
+    ctx.update({
+        'voucher_special_currency': payment_rate_currency_id,
+        'voucher_special_currency_rate': rate * voucher_rate})
 
-        # Check that the method was called from the account payment view
-        if context.get('allow_auto_lines', False):
-            return res
+    if context.get('allow_auto_lines'):
+        res = self.recompute_voucher_lines(
+            cr, uid, ids, partner_id, journal_id, amount, currency_id,
+            ttype, date, context=ctx)
 
-        if res.get('value', False):
-            if res['value'].get('line_cr_ids', False):
-                del res['value']['line_cr_ids']
-            if res['value'].get('line_dr_ids', False):
-                del res['value']['line_dr_ids']
+    else:
+        res = {'value': {}}
 
-        return res
+    vals = self.onchange_rate(
+        cr, uid, ids, rate, amount, currency_id,
+        payment_rate_currency_id, company_id, context=ctx)
+
+    for key in vals.keys():
+        res[key].update(vals[key])
+
+    return res
+
+
+base_module.account_voucher.onchange_amount = onchange_amount

@@ -20,6 +20,8 @@
 #
 ###############################################################################
 
+from datetime import datetime
+
 from openerp.tests import common
 from openerp import netsvc
 
@@ -53,11 +55,13 @@ class test_account_voucher(common.TransactionCase):
                 'supplier': True,
             }, context=context)
 
+        self.year = datetime.now().year
+
         self.invoice_id = self.invoice_model.create(
             cr, uid, {
                 'partner_id': self.partner_id,
                 'account_id': self.account_id,
-                'date_invoice': '2015-01-01',
+                'date_invoice': '%s-01-01' % self.year,
                 'invoice_line': [(0, 0, {
                     'name': 'Test',
                     'account_id': self.account_id,
@@ -73,7 +77,7 @@ class test_account_voucher(common.TransactionCase):
 
         self.voucher_id = self.voucher_model.create(
             cr, uid, {
-                'date': '2015-01-02',
+                'date': '%s-01-02' % self.year,
                 'name': "test", 'amount': 200,
                 'account_id': self.account_id,
                 'partner_id': self.partner_id,
