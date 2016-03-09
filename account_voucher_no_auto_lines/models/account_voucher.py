@@ -22,6 +22,8 @@
 
 from openerp import api, models
 
+from openerp.addons.account_voucher import account_voucher as base_module
+
 
 class AccountVoucher(models.Model):
 
@@ -70,32 +72,6 @@ class AccountVoucher(models.Model):
             return res
 
         self.update_auto_lines(res, line_dr_ids, line_cr_ids)
-
-        return res
-
-    @api.multi
-    def onchange_amount(
-        self, amount, rate, partner_id, journal_id, currency_id,
-        ttype, date, payment_rate_currency_id, company_id
-    ):
-        context = self.env.context
-
-        res = super(AccountVoucher, self).onchange_amount(
-            amount, rate, partner_id, journal_id, currency_id,
-            ttype, date, payment_rate_currency_id, company_id)
-
-        if (
-            not self.env.user.company_id.disable_voucher_auto_lines or
-            context.get('allow_auto_lines') or
-            context.get('active_model') == 'account.invoice'
-        ):
-            return res
-
-        if res.get('value'):
-            if res['value'].get('line_cr_ids'):
-                del res['value']['line_cr_ids']
-            if res['value'].get('line_dr_ids'):
-                del res['value']['line_dr_ids']
 
         return res
 
@@ -163,3 +139,46 @@ class AccountVoucher(models.Model):
             }
 
         return line_dr_ids, line_cr_ids
+
+
+def onchange_amount(
+    self, cr, uid, ids, amount, rate, partner_id, journal_id,
+    currency_id, ttype, date, payment_rate_currency_id, company_id,
+    context=None
+):
+    """
+    Patch the original onchange_amount method so that it does not
+    refresh the list of voucher lines when not required.
+    """
+    if context is None:
+        context = {}
+
+    ctx = context.copy()
+    ctx.update({'date': date})
+    currency_id = currency_id or self.pool.get('res.company').browse(
+        cr, uid, company_id, context=ctx).currency_id.id
+    voucher_rate = self.pool.get('res.currency').read(
+        cr, uid, currency_id, ['rate'], context=ctx)['rate']
+    ctx.update({
+        'voucher_special_currency': payment_rate_currency_id,
+        'voucher_special_currency_rate': rate * voucher_rate})
+
+    if context.get('allow_auto_lines'):
+        res = self.recompute_voucher_lines(
+            cr, uid, ids, partner_id, journal_id, amount, currency_id,
+            ttype, date, context=ctx)
+
+    else:
+        res = {'value': {}}
+
+    vals = self.onchange_rate(
+        cr, uid, ids, rate, amount, currency_id,
+        payment_rate_currency_id, company_id, context=ctx)
+
+    for key in vals.keys():
+        res[key].update(vals[key])
+
+    return res
+
+
+base_module.account_voucher.onchange_amount = onchange_amount
