@@ -32,6 +32,15 @@ class ResCompany(orm.Model):
             help="If not set, paying several 'cash basis' invoices with same "
                  "voucher with write-off won't be allowed. If set, write-off "
                  "will be distributed equally over invoices"),
+        'max_balance_diff': fields.integer(
+            string="Maximum unbalanced of payment entry (cents)",
+            help="This field is used in payment entry"
+                 " to check if move lines are ,"
+                 " unbalanced for more than this value."
+        ),
+    }
+    _defaults = {
+        'max_balance_diff': 1
     }
 
 
@@ -45,6 +54,13 @@ class AccountConfigSettings(orm.TransientModel):
             help="If not set, paying several 'cash basis' invoices with same "
                  "voucher with write-off won't be allowed. If set, write-off "
                  "will be distributed equally over invoices"),
+        'max_balance_diff': fields.related(
+            'company_id', 'max_balance_diff',
+            type="integer",
+            string="Maximum unbalanced of payment entry (cents)",
+            help="This field is used in payment entry"
+                 " to check if move lines are ,"
+                 " unbalanced for more than this value."),
     }
 
     def onchange_company_id(self, cr, uid, ids, company_id, context=None):
@@ -56,9 +72,12 @@ class AccountConfigSettings(orm.TransientModel):
             res['value'].update({
                 'allow_distributing_write_off': (
                     company.allow_distributing_write_off),
+                'max_balance_diff': (
+                    company.max_balance_diff),
             })
         else:
             res['value'].update({
                 'allow_distributing_write_off': False,
+                'max_balance_diff': False,
             })
         return res
