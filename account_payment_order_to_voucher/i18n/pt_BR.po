@@ -1,0 +1,53 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_payment_order_to_voucher
+# 
+# Translators:
+# Magno <magno.costa@akretion.com.br>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: account-payment (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-05 05:04+0000\n"
+"PO-Revision-Date: 2016-03-09 16:28+0000\n"
+"Last-Translator: Magno <magno.costa@akretion.com.br>\n"
+"Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-account-payment-8-0/language/pt_BR/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: pt_BR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+#. module: account_payment_order_to_voucher
+#: view:payment.order:account_payment_order_to_voucher.view_payment_order_form
+msgid "Create vouchers"
+msgstr "Criar Comprovantes"
+
+#. module: account_payment_order_to_voucher
+#: code:addons/account_payment_order_to_voucher/models/payment_order.py:38
+#, python-format
+msgid "Every order lines must have the same currency"
+msgstr "Todas as linhas da ordem devem estar na mesma moeda"
+
+#. module: account_payment_order_to_voucher
+#: model:ir.model,name:account_payment_order_to_voucher.model_payment_order
+msgid "Payment Order"
+msgstr "Ordem de Pagamento"
+
+#. module: account_payment_order_to_voucher
+#: code:addons/account_payment_order_to_voucher/models/payment_order.py:19
+#, python-format
+msgid "Payment order %s already has vouchers"
+msgstr "Ordem de Pagamento %s já possui comprovantes"
+
+#. module: account_payment_order_to_voucher
+#: code:addons/account_payment_order_to_voucher/models/payment_order.py:23
+#, python-format
+msgid "Payment order %s is not in 'done' state"
+msgstr "Ordem de Pagamento %s não está no estágio 'Concluído'"
+
+#. module: account_payment_order_to_voucher
+#: view:payment.order:account_payment_order_to_voucher.view_payment_order_form
+#: field:payment.order,voucher_ids:0
+msgid "Vouchers"
+msgstr "Comprovantes"
