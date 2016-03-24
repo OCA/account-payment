@@ -1,0 +1,10 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+,,,,,,,
+"access_payment_mode","access_payment_mode","model_payment_mode","account.group_account_user",1,0,0,0
+"full_access_payment_mode","full_access_payment_mode","model_payment_mode","account.group_account_manager",1,1,1,1
+,,,,,,,
+"access_payment_register","access_payment_register","model_payment_order","account.group_account_user",1,0,0,0
+"full_access_payment_register","full_access_payment_register","model_payment_order","account.group_account_manager",1,1,1,1
+,,,,,,,
+"access_payment_register_line","access_payment_register_line","model_payment_line","account.group_account_user",1,0,0,0
+"full_access_payment_register_line","full_access_payment_register_line","model_payment_line","account.group_account_manager",1,1,1,1

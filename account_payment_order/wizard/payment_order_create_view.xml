@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_payment_order_create" model="ir.ui.view">
+            <field name="name">payment.order.create.form</field>
+            <field name="model">payment.order.create</field>
+            <field name="arch" type="xml">
+            <form string="Search Payment lines">
+                <group>
+                    <field name="duedate" />
+                </group>
+                <footer>
+                    <button name="search_entries" string="Search" type="object" class="oe_highlight"/>
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel"/>
+                </footer>
+            </form>
+            </field>
+        </record>
+
+        <record id="view_payment_order_create_lines" model="ir.ui.view">
+            <field name="name">payment.order.create.lines.form</field>
+            <field name="model">payment.order.create</field>
+            <field name="arch" type="xml">
+                <form string="Search Payment lines">
+
+                    <field name="entries">
+                    	 <tree string="Journal Items">
+		                    <field name="date"/>
+		                    <field name="move_id" required="0"/>
+		                    <field name="journal_id" options='{"no_open":True}'/>
+		                    <field name="name"/>
+		                    <field name="ref"/>
+		                    <field name="statement_id" invisible="1"/>
+		                    <field name="partner_id"/>
+		                    <field name="account_id" options='{"no_open":True}' domain="[('company_id', '=', company_id)]"/>
+		                    <field name="analytic_account_id" groups="analytic.group_analytic_accounting"/>
+		                    <field name="reconciled"/>
+		                    <field name="debit" sum="Total Debit"/>
+		                    <field name="credit" sum="Total Credit"/>
+		                    <field name="date_maturity" invisible="context.get('journal_type', False) not in ['sale','sale_refund','purchase','purchase_refund']"/>
+		                    <field name="amount_currency" readonly="True" invisible="not context.get('currency_id',False)"/>
+		                    <field name="currency_id" readonly="True" invisible="not context.get('currency_id',False)" />
+		                    <field name="company_currency_id" invisible="1"/>
+		                    <field name="company_id" invisible="1"/>
+                		</tree>
+                    </field>
+
+                    <footer>
+                        <button name="create_payment" string="_Add to payment order" type="object" class="oe_highlight"/>
+                        or
+                        <button string="Cancel" class="oe_link" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="action_payment_order_create" model="ir.actions.act_window">
+            <field name="name">Populate Payment</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">payment.order.create</field>
+            <field name="view_type">form</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_payment_order_create"/>
+            <field name="target">new</field>
+        </record>
+
+        <record id="view_bank_statement_form" model="ir.ui.view">
+            <field name="name">account.bank.statement.form.inherit</field>
+            <field name="model">account.bank.statement</field>
+            <field name="inherit_id" ref="account.view_bank_statement_form"/>
+            <field name="arch" type="xml">
+	            <xpath expr="//div[@name='button_box']" position="inside">
+	                <button class="oe_inline oe_stat_button" name="%(action_account_populate_statement_confirm)d" attrs="{'invisible':[('state','=','confirm')]}" string="Import Payment Lines" help="Import Payment Lines" type="action" icon="fa-cogs" widget="statinfo"/>
+	            </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>
