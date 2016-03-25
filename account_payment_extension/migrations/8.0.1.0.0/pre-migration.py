@@ -76,7 +76,7 @@ def migrate_payment_types(pool, cr, uid):
                     cr,
                     """
                     INSERT INTO payment_mode
-                    (%s, name, active, journal, bank_id, company_id)
+                    (name, active, journal, bank_id, company_id)
                     VALUES (%s, %s, %s, %s, %s)
                     RETURNING id;""", (payment_type[1], payment_type[2],
                                        journal_id, bank_id, company_id))
