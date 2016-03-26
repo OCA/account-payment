@@ -4,12 +4,13 @@
 # 
 # Translators:
 # Paolo Valier, 2016
+# Paolo Valier, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-05 05:04+0000\n"
-"PO-Revision-Date: 2016-03-11 15:10+0000\n"
+"POT-Creation-Date: 2016-03-25 11:33+0000\n"
+"PO-Revision-Date: 2016-03-21 20:19+0000\n"
 "Last-Translator: Paolo Valier\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-payment-8-0/language/it/)\n"
 "MIME-Version: 1.0\n"
@@ -32,7 +33,7 @@ msgstr ""
 #. module: account_voucher_cash_basis
 #: model:ir.model,name:account_voucher_cash_basis.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Aziende"
 
 #. module: account_voucher_cash_basis
 #: code:addons/account_voucher_cash_basis/account_voucher.py:57
@@ -58,7 +59,7 @@ msgstr ""
 #. module: account_voucher_cash_basis
 #: field:account.voucher,line_total:0
 msgid "Lines Total"
-msgstr ""
+msgstr "Totale Righe"
 
 #. module: account_voucher_cash_basis
 #: help:account.voucher,exclude_write_off:0
