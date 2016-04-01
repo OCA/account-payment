@@ -42,6 +42,6 @@ def migrate(cr, version):
     cr.execute("UPDATE ir_module_module "
                "SET state='to install' "
                "WHERE name IN "
-               "('account_bank_payment_export',"
+               "('account_banking_payment_export',"
                " 'account_payment_partner',"
                " 'account_direct_debit')")
