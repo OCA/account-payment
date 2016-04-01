@@ -9,6 +9,7 @@
             <form string="Search Payment lines">
                 <group>
                     <field name="duedate" />
+                    <field name="populate_results" />
                 </group>
                 <footer>
                     <button name="search_entries" string="Search" type="object" class="oe_highlight"/>
@@ -25,7 +26,7 @@
             <field name="arch" type="xml">
                 <form string="Search Payment lines">
 
-                    <field name="entries">
+                    <field name="entries" context="{'display_credit': context.get('display_credit', False),'display_debit': context.get('display_debit', False),'journal_type': 'sale', 'tree_view_ref' : 'account_payment_order.payment_order_populate_view_move_line_tree'}" nolabel="1">
                     	 <tree string="Journal Items">
 		                    <field name="date"/>
 		                    <field name="move_id" required="0"/>
@@ -74,6 +75,29 @@
 	            <xpath expr="//div[@name='button_box']" position="inside">
 	                <button class="oe_inline oe_stat_button" name="%(action_account_populate_statement_confirm)d" attrs="{'invisible':[('state','=','confirm')]}" string="Import Payment Lines" help="Import Payment Lines" type="action" icon="fa-cogs" widget="statinfo"/>
 	            </xpath>
+            </field>
+        </record>
+
+        <record id="payment_order_populate_view_move_line_tree" model="ir.ui.view">
+            <field name="name">payment.order.populate.account.move.line.tree</field>
+            <field name="model">account.move.line</field>
+            <field name="arch" type="xml">
+                <tree string="Journal Items">
+                    <field name="journal_id" />
+                    <field name="date"/>
+                    <field name="name"/>
+                    <field name="ref"/>
+                    <field name="partner_id" />
+                    <field name="account_id" />
+                    <field name="journal_entry_ref" string="Journal Entry" />
+                    <field name="debit" sum="Total Debit" invisible="not context.get('display_debit', False)"/>
+                    <field name="credit" sum="Total Credit" invisible="not context.get('display_credit', False)"/>
+                    <field name="amount_residual" />
+                    <field name="date_maturity" invisible="context.get('journal_type', False) not in ['sale','sale_refund','purchase','purchase_refund']" />
+                    <field name="full_reconcile_id"/>
+                    <field name="amount_currency" invisible="not context.get('currency',False)"/>
+                    <field name="currency_id" invisible="not context.get('currency',False)" />
+                </tree>
             </field>
         </record>
 

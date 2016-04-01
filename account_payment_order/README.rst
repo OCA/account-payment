@@ -2,29 +2,53 @@
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 
-============================
+
 Payment order
 ============================
 
 This module brings back the payment.order from v8.
 
+This module also provide an infrastructure to export payment orders.
+It includes some bug fixes and obvious enhancements to payment orders that will hopefully land in offical addons one
+day.
+This technical module provides the base infrastructure to export payment orders
+for electronic banking. It provides the following technical features:
+
+* a new payment.mode.type model
+* payment.mode now has a mandatory type
+* the "make payment" button launches a wizard depending on the
+  payment.mode.type
+* a manual payment mode type is provided as an example, with a default "do
+  nothing" wizard
+  
+To enable the use of payment order to collect money for customers,
+it adds a payment_order_type (payment|debit) as a basis of direct debit support
+(this field becomes visible when account_direct_debit is installed).
 
 
 Installation
 ============
 
-To install this module, you need to:
+This module depends on:
 
-* download and install manually
-* or directly install it over Odoo-Apps
+* base_iban
+
+This modules is part of the OCA/account-payment suite.
 
 
 Usage
 =====
 
+This module provides a menu to configure payment order types : Accounting > Configuration > Miscellaneous > Payment Export Types 
+
+For further information, please visit:
+
+ * https://www.odoo.com/forum/help-1
+
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/125/9.0
+
 
 Bug Tracker
 ===========
@@ -43,6 +67,19 @@ Contributors
 * Nicolas Bessi. Copyright Camptocamp SA
 * Miguel Tallón, brain-tec AG
 * Kumar Aberer, brain-tec AG
+* Stéphane Bidoul <stephane.bidoul@acsone.eu>
+* Alexis de Lattre		
+* Pedro M. Baeza     
+* Adrien Peiffer <adrien.peiffer@acsone.eu>
+* Stefan Rijnhart
+* Laurent Mignon <laurent.mignon@acsone.eu>
+* Alexandre Fayolle
+* Danimar Ribeiro
+* Erwin van der Ploeg
+* Raphaël Valyi
+* Sandy Carter
+* Angel Moya <angel.moya@domatix.com>
+
 
 Maintainer
 ----------
