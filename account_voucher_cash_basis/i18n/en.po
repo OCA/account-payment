@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-02 19:16+0000\n"
-"PO-Revision-Date: 2016-03-02 19:16+0000\n"
+"POT-Creation-Date: 2016-04-01 14:11+0000\n"
+"PO-Revision-Date: 2016-04-01 10:52+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: English (http://www.transifex.com/oca/OCA-account-payment-8-0/language/en/)\n"
 "MIME-Version: 1.0\n"
@@ -34,8 +34,8 @@ msgid "Companies"
 msgstr "Companies"
 
 #. module: account_voucher_cash_basis
-#: code:addons/account_voucher_cash_basis/account_voucher.py:57
-#: code:addons/account_voucher_cash_basis/account_voucher.py:193
+#: code:addons/account_voucher_cash_basis/account_voucher.py:61
+#: code:addons/account_voucher_cash_basis/account_voucher.py:201
 #, python-format
 msgid "Error"
 msgstr "Error"
@@ -55,9 +55,23 @@ msgid ""
 msgstr "If not set, paying several 'cash basis' invoices with same voucher with write-off won't be allowed. If set, write-off will be distributed equally over invoices"
 
 #. module: account_voucher_cash_basis
+#: help:account.config.settings,max_balance_diff:0
+#: help:res.company,max_balance_diff:0
+msgid ""
+"In cash basis payments, while balancing unbalanced entries, this is maximum "
+"error allowed"
+msgstr "In cash basis payments, while balancing unbalanced entries, this is maximum error allowed"
+
+#. module: account_voucher_cash_basis
 #: field:account.voucher,line_total:0
 msgid "Lines Total"
 msgstr "Lines Total"
+
+#. module: account_voucher_cash_basis
+#: field:account.config.settings,max_balance_diff:0
+#: field:res.company,max_balance_diff:0
+msgid "Max balancing precision in cash basis"
+msgstr "Max balancing precision in cash basis"
 
 #. module: account_voucher_cash_basis
 #: help:account.voucher,exclude_write_off:0
@@ -68,13 +82,13 @@ msgid ""
 msgstr "Select this if you want, when closing the invoice, the\n            tax to be computed\n            based on the invoice's totals instead of the paid amount"
 
 #. module: account_voucher_cash_basis
-#: code:addons/account_voucher_cash_basis/account_voucher.py:58
+#: code:addons/account_voucher_cash_basis/account_voucher.py:62
 #, python-format
-msgid "The generated payment entry is unbalanced for more than 1 decimal"
-msgstr "The generated payment entry is unbalanced for more than 1 decimal"
+msgid "The generated payment entry is unbalanced for more than %d decimal"
+msgstr "The generated payment entry is unbalanced for more than %d decimal"
 
 #. module: account_voucher_cash_basis
-#: code:addons/account_voucher_cash_basis/account_voucher.py:193
+#: code:addons/account_voucher_cash_basis/account_voucher.py:201
 #, python-format
 msgid ""
 "You are trying to pay with write-off more than one invoice and distributing "
