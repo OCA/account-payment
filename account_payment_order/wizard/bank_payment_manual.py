@@ -6,7 +6,7 @@
 bank transfers.
 """
 
-from openerp import models, api, workflow
+from openerp import models, api
 
 
 class PaymentManual(models.TransientModel):

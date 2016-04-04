@@ -5,6 +5,7 @@
 import time
 from openerp import models, fields, api, exceptions, workflow, _
 
+
 class PaymentOrder(models.Model):
     _name = 'payment.order'
     _description = 'Payment Order'
@@ -46,7 +47,7 @@ class PaymentOrder(models.Model):
                                'Payment lines',
                                states={'done': [('readonly', True)]})
 
-    total = fields.Float(compute='_compute_total', string="Total",store=True)
+    total = fields.Float(compute='_compute_total', string="Total", store=True)
 
     user_id = fields.Many2one('res.users', 'Responsible', required=True,
                               states={'done': [('readonly', True)]},
@@ -74,7 +75,7 @@ class PaymentOrder(models.Model):
         [('payment', 'Payment'), ('debit', 'Direct debit')],
         'Payment order type', required=True, default='payment',
         readonly=True, states={'draft': [('readonly', False)]})
-    
+
     mode_type = fields.Many2one('payment.mode.type', related='mode.type',
                                 string='Payment Type')
 

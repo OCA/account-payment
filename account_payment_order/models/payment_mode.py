@@ -19,7 +19,7 @@ class PaymentMode(models.Model):
     journal_id = fields.Many2one('account.journal', 'Journal', required=True,
                                  domain=[('type', 'in', ('bank', 'cash'))],
                                  help='Bank or Cash Journal for the '
-                                 'Payment Mode',oldname='journal')
+                                 'Payment Mode', oldname='journal')
 
     company_id = fields.\
         Many2one('res.company', 'Company', required=True,
@@ -28,7 +28,6 @@ class PaymentMode(models.Model):
     partner_id = fields.Many2one('res.partner',
                                  related='company_id.partner_id',
                                  string='Partner', store=True)
-
 
     def _get_manual_bank_transfer(self, cr, uid, context=None):
         """ hack: pre-create the manual bank transfer that is also
