@@ -3,8 +3,8 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from lxml import etree
+from openerp import models, fields, api
 
-from openerp import models, fields, api, _
 
 class AccountPaymentPopulateStatement(models.TransientModel):
     _name = "account.payment.populate.statement"
@@ -27,7 +27,7 @@ class AccountPaymentPopulateStatement(models.TransientModel):
             ('move_line_id.full_reconcile_id', '=', False),
             ('order_id.mode', '=', False)])
 
-        domain = '[("id", "in", '+ str(lines.ids)+')]'
+        domain = '[("id", "in", ' + str(lines.ids) + ')]'
         doc = etree.XML(res['arch'])
         nodes = doc.xpath("//field[@name='lines']")
         for node in nodes:
@@ -40,29 +40,30 @@ class AccountPaymentPopulateStatement(models.TransientModel):
         self.ensure_one()
         statement_obj = self.env['account.bank.statement']
         statement_line_obj = self.env['account.bank.statement.line']
-        currency_obj = self.env['res.currency']
 
         if not self.lines:
             return {'type': 'ir.actions.act_window_close'}
 
-        statement = statement_obj.search([('id','=',
+        statement = statement_obj.search([('id', '=',
                                            self.env.context['active_id'])])
 
         for line in self.lines:
             ctx = self.env.context.copy()
             ctx['date'] = line.ml_maturity_date
-            amount = line.with_context(ctx).\
-                currency_id.compute(line.amount_currency,statement.currency_id)
+            amount = line.with_context(ctx).currency_id.compute(
+                line.amount_currency, statement.currency_id
+            )
 
-            st_line_vals = self._prepare_statement_line_vals(line, amount, statement)
+            st_line_vals = self.\
+                _prepare_statement_line_vals(line, amount, statement)
             st_line_id = statement_line_obj.create(st_line_vals)
             line.bank_statement_line_id = st_line_id.id
         return {'type': 'ir.actions.act_window_close'}
 
-    def _prepare_statement_line_vals(self,payment_line, amount,statement):
+    def _prepare_statement_line_vals(self, payment_line, amount, statement):
         return {
             'name': payment_line.order_id.reference or '?',
-            'amount':-amount,
+            'amount': -amount,
             'partner_id': payment_line.partner_id.id,
             'statement_id': statement.id,
             'ref': payment_line.communication,

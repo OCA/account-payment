@@ -48,22 +48,27 @@ class PaymentLine(models.Model):
         for pl in self:
             pl.amount = pl.amount_currency
             if pl.company_currency and pl.currency_id:
-                ctx = {'date':pl.order_id.date_done or time.strftime('%Y-%m-%d')}
-                pl.amount = pl.with_context(ctx).company_currency.\
-                    compute(pl.amount_currency,pl.currency_id)
+                ctx = {
+                    'date': pl.order_id.date_done or time.strftime('%Y-%m-%d')
+                }
+                pl.amount = pl.with_context(ctx).currency_id.\
+                    compute(pl.amount_currency, pl.company_currency)
 
-
-    name = fields.Char('Your Reference', required=True,default=lambda self:
-            self.env['ir.sequence'].next_by_code('payment.line'),copy=False)
+    name = fields.Char('Your Reference', required=True, default=lambda self:
+                       self.env['ir.sequence'].next_by_code('payment.line'),
+                       copy=False
+                       )
 
     communication = fields.Char('Communication', required=True,
                                 help="Used as the message between ordering "
                                 "customer and current company. Depicts "
                                 "'What do you want to say to the recipient "
-                                "about this order ?'")
+                                "about this order ?'"
+                                )
 
     communication2 = fields.Char('Communication 2',
-                                 help='The successor message of Communication')
+                                 help='The successor message of Communication'
+                                 )
 
     move_line_id = fields.\
         Many2one('account.move.line', 'Entry line',
@@ -78,7 +83,7 @@ class PaymentLine(models.Model):
                                    'currency')
 
     currency_id = fields.Many2one('res.currency', 'Partner Currency',
-                                  required=True,oldname='currency')
+                                  required=True, oldname='currency')
 
     company_currency = fields.Many2one('res.currency', 'Company Currency',
                                        readonly=True,
