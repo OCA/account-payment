@@ -49,8 +49,8 @@ class PaymentLine(models.Model):
             pl.amount = pl.amount_currency
             if pl.company_currency and pl.currency_id:
                 ctx = {'date':pl.order_id.date_done or time.strftime('%Y-%m-%d')}
-                pl.amount = pl.with_context(ctx).company_currency.\
-                    compute(pl.amount_currency,pl.currency_id)
+                pl.amount = pl.with_context(ctx).currency_id.\
+                    compute(pl.amount_currency,pl.company_currency)
 
 
     name = fields.Char('Your Reference', required=True,default=lambda self:

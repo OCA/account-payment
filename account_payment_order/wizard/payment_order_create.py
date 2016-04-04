@@ -210,11 +210,11 @@ class PaymentOrderCreate(models.TransientModel):
                 # customer invoice number (in the case of debit order)
                 communication = line.invoice_id.number.replace('/', '')
                 state = 'structured'
-        amount_currency = line.amount_residual_currency
+        amount_currency = line.amount_residual_currency if line.currency_id else line.amount_residual
         line2bank = line.line2bank()
         # -- end account banking
         res = {'move_line_id': line.id,
-               'amount_currency': amount_currency,
+               'amount_currency': abs(amount_currency),
                'bank_id': line2bank.get(line.id),
                'order_id': payment.id,
                'partner_id': line.partner_id and line.partner_id.id or False,
