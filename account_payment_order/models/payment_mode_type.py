@@ -24,15 +24,3 @@ class PaymentModeType(models.Model):
         help="This field determines if this type applies to customers "
              "(Debit) or suppliers (Payment)")
     active = fields.Boolean(string='Active', default=True)
-
-    def _auto_init(self, cr, context=None):
-        res = super(PaymentModeType, self)._auto_init(cr, context=context)
-        # migrate xmlid from manual_bank_transfer to avoid dependency on
-        # account_banking
-        cr.execute(
-            """UPDATE ir_model_data
-            SET module='account_payment_order'
-            WHERE module='account_banking' AND
-            name='manual_bank_tranfer' AND
-            model='payment.mode.type'""")
-        return res
