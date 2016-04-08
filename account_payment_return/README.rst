@@ -7,8 +7,8 @@ Returned Customers Payment Orders
 =================================
 
 This module implements customer receivables returns and allows to send
-related reconciled account move lines back to a state where
-the debt is still open, and letting history of it.
+related reconciled account move lines back to a state where the debt is still
+open, and letting history of it.
 
 This module can be extended adding importers that automatically fills the
 full returned payment record.
@@ -19,6 +19,10 @@ Usage
 Go to Accounting > Customers > Customer Payment Returns, and create a new
 record, register on each line a paid (reconciled) receivable journal item,
 and input the amount that is going to be returned.
+
+Another option to fill info is setting references and click match button to
+find matches with invoices, move lines or moves. This functionality is extended
+by other modules as *account_payment_return_import_sepa_pain*
 
 Next, press button "Confirm" to create a new move line that removes the
 balance from the bank journal and reconcile items together to show payment
@@ -52,9 +56,10 @@ Contributors
 ------------
 * 7 i TRIA <http://www.7itria.cat>
 * Avanzosc <http://www.avanzosc.com>
-* Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
+* Pedro M. Baeza <pedro.baeza@tecnativa.com>
 * Markus Schneider <markus.schneider@initos.com>
-* Sergio Teruel <sergio@incaser.es>
+* Sergio Teruel <sergio.teruel@tecnativa.com>
+* Carlos Dauden <carlos.dauden@tecnativa.com>
 
 Maintainer
 ----------
