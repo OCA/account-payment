@@ -9,6 +9,7 @@
                 <form string="Payment return" version="7.0">
                     <header>
                         <button name="action_confirm" string="Confirm" type="object" states="draft,imported" class="oe_highlight" />
+                        <button name="button_match" string="Match" type="object" states="draft,imported" class="oe_highlight" />
                         <button name="action_cancel" string="Cancel" type="object" states="done" />
                         <button name="action_draft" string="Draft" type="object" states="cancelled" />
                         <field name="state" widget="statusbar"/>
@@ -28,15 +29,17 @@
 	                                    <field name="date" />
 	                                    <field name="concept" />
 	                                    <field name="reason" />
-	                                    <field name="partner_name" />
+	                                    <field name="partner_name" invisible="1"/>
 	                                    <field name="partner_id" />
-	                                    <field name="move_line_id"
+	                                    <field name="reference" />
+	                                    <field name="move_line_ids"
+                                               widget="many2many_tags" options="{'no_create': True}"
                                                domain="[('partner_id', '=', partner_id),
                                                         ('account_id.type', '=', 'receivable'),
                                                         ('credit', '>', 0.0),
                                                         ('reconcile_ref', '!=', False)]"
                                                 />
-	                                    <field name="amount" />
+	                                    <field name="amount"/>
 	                                </tree>
 	                            </field>
 	                        </page>
@@ -77,6 +80,5 @@
                   parent="account.menu_finance_receivables"
                   action="payment_return_action"
                   sequence="20"/>
-
     </data>
 </openerp>
