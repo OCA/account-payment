@@ -1,33 +1,12 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    OpenERP, Open Source Management Solution
-#    Copyright (c) 2011-2012 7 i TRIA <http://www.7itria.cat>
-#    Copyright (c) 2011-2012 Avanzosc <http://www.avanzosc.com>
-#    Copyright (c) 2013 Serv. Tecnol. Avanzados <http://www.serviciosbaeza.com>
-#                       Pedro M. Baeza <pedro.baeza at serviciosbaeza.com>
-#    Copyright (c) 2014 initOS GmbH & Co. KG <http://initos.com/>
-#                       Markus Schneider <markus.schneider at initos.com>
-#    Copyright (c) 2015 Incaser Informatica <http://www.incaser.es/>
-#                       Sergio Teruel <sergio at incaser.es>
-#    Copyright (c) 2015 Serv. Tecnol. Avanzados <http://www.serviciosbaeza.com>
-#                       Pedro M. Baeza <pedro.baeza at serviciosbaeza.com>
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as published
-#    by the Free Software Foundation, either version 3 of the License, or
-#    (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
-
+# © 2011-2012 7 i TRIA <http://www.7itria.cat>
+# © 2011-2012 Avanzosc <http://www.avanzosc.com>
+# © 2013 Pedro M. Baeza <pedro.baeza@tecnativa.com>
+# © 2014 Markus Schneider <markus.schneider@initos.com>
+# © 2015 Sergio Teruel <sergio.teruel@tecnativa.com>
+# © 2015 Pedro M. Baeza <pedro.baeza@tecnativa.com>
+# © 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
     "name": "Account Payment Returns",
@@ -39,11 +18,10 @@
         'account',
     ],
     'author': '7 i TRIA, '
-              'Serv. Tecnol. Avanzados - Pedro M. Baeza, '
-              'Incaser Informática, '
+              'Tecnativa, '
               'initOS GmbH & Co., '
               'Odoo Community Association (OCA)',
-    'website': 'http://www.serviciosbaeza.com',
+    'website': 'http://www.tecnativa.com',
     'data': [
         'security/ir.model.access.csv',
         'security/account_payment_return_security.xml',
