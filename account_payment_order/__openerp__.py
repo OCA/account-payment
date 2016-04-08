@@ -16,7 +16,6 @@
         'document',
         'account_full_reconcile',
         'base_iban',  # for manual_bank_transfer
-        'account_full_reconcile',
     ],
     'data': [
         "data/payment_mode_type.xml",
