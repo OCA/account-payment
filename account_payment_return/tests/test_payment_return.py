@@ -37,20 +37,20 @@ class TestPaymentReturn(TransactionCase):
             {'journal_id': self.env.ref('account.bank_journal').id,
              'line_ids': [
                  (0, 0, {'partner_id': self.partner.id,
-                         'move_line_id': self.receivable_line.id,
-                         'amount': self.receivable_line.debit})]})
+                         'move_line_ids': [(6, 0, self.payment_line.ids)],
+                         'amount': self.payment_line.credit})]})
         self.payment_return.journal_id.update_posted = True
 
     def test_confirm_error(self):
-        self.payment_return.line_ids[0].move_line_id = False
+        self.payment_return.line_ids[0].move_line_ids = False
         with self.assertRaises(UserError):
             self.payment_return.action_confirm()
 
     def test_onchange_move_line(self):
         with self.env.do_in_onchange():
             record = self.env['payment.return.line'].new()
-            record.move_line_id = self.payment_line.id
-            record.onchange_move_line()
+            record.move_line_ids = self.payment_line.ids
+            record._onchange_move_line()
             self.assertEqual(record.amount, self.payment_line.credit)
 
     def test_payment_return(self):
@@ -79,3 +79,40 @@ class TestPaymentReturn(TransactionCase):
             len(self.receivable_line.reconcile_partial_id.line_partial_ids), 3)
         self.payment_return.action_cancel()
         self.assertEqual(self.invoice.state, 'paid')
+
+    def test_find_match_invoice(self):
+        self.payment_return.line_ids.write({
+            'partner_id': False,
+            'move_line_ids': [(6, 0, [])],
+            'amount': 0.0,
+            'reference': self.invoice.number,
+        })
+        self.payment_return.button_match()
+        self.assertAlmostEqual(
+            self.payment_return.line_ids[0].amount, self.payment_line.credit)
+
+    def test_find_match_move_line(self):
+        self.payment_line.name = 'test match move line 001'
+        self.payment_return.line_ids.write({
+            'partner_id': False,
+            'move_line_ids': [(6, 0, [])],
+            'amount': 0.0,
+            'reference': self.payment_line.name,
+        })
+        self.payment_return.button_match()
+        self.assertEqual(self.payment_return.line_ids[0].partner_id.id,
+                         self.payment_line.partner_id.id)
+
+    def test_find_match_move(self):
+        self.payment_move.name = 'TESTMOVEXX01'
+        self.payment_return.write({
+            'line_ids': [
+                (0, 0, {
+                    'partner_id': False,
+                    'move_line_ids': [(6, 0, [])],
+                    'amount': 0.0,
+                    'reference': self.payment_move.name,
+                })]
+        })
+        with self.assertRaises(UserError):
+            self.payment_return.button_match()
