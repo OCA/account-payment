@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-01 14:11+0000\n"
-"PO-Revision-Date: 2016-04-01 10:52+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"POT-Creation-Date: 2016-04-09 00:46+0000\n"
+"PO-Revision-Date: 2016-04-02 05:22+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-payment-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -61,7 +61,7 @@ msgstr "Če ni nastavljeno, ne bo dovoljeno plačevanje več 'gotovinskih' raču
 msgid ""
 "In cash basis payments, while balancing unbalanced entries, this is maximum "
 "error allowed"
-msgstr ""
+msgstr "Največja dovoljena napaka pri uravnoteženju neuravnoteženih vnosov gotovinskih plačil"
 
 #. module: account_voucher_cash_basis
 #: field:account.voucher,line_total:0
@@ -72,7 +72,7 @@ msgstr "Skupaj postavka"
 #: field:account.config.settings,max_balance_diff:0
 #: field:res.company,max_balance_diff:0
 msgid "Max balancing precision in cash basis"
-msgstr ""
+msgstr "Maksimalna natančnost uravnoteženja pri gotovinskih plačilih"
 
 #. module: account_voucher_cash_basis
 #: help:account.voucher,exclude_write_off:0
@@ -86,7 +86,7 @@ msgstr "Izberite, če želite izračun davka ob zapiranju računa\n            n
 #: code:addons/account_voucher_cash_basis/account_voucher.py:62
 #, python-format
 msgid "The generated payment entry is unbalanced for more than %d decimal"
-msgstr ""
+msgstr "Ustvarjeni plačilni vnos ni uravnotežen za več od %d decimalke"
 
 #. module: account_voucher_cash_basis
 #: code:addons/account_voucher_cash_basis/account_voucher.py:201
