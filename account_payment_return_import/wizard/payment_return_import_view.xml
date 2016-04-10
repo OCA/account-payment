@@ -12,9 +12,10 @@
                     <field name="hide_journal_field" invisible="1"/>
                     <label for="journal_id"/>
                     <field name="journal_id"
-                        domain="[('type', '=', 'bank')]"
-                        attrs="{'invisible': [('hide_journal_field', '=', True)]}"
-                        context="{'default_type':'bank'}"/>
+                           domain="[('type', '=', 'bank')]"
+                           attrs="{'invisible': [('hide_journal_field', '=', True)]}"
+                           context="{'default_type':'bank'}"
+                    />
                     <br/><br/><b> How to import your payment return :</b>
                     <br/><label string= "1. Download your Payment Return file from your bank website."/>
                     <br/><label string= "2. Make sure you have installed the right module to support the file format."/>
