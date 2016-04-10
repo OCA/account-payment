@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
 # © 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
+# © 2016 Pedro M. Baeza <pedro.baeza@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-"""Framework for importing payment return files."""
-import logging
 import base64
 from StringIO import StringIO
 from zipfile import ZipFile, BadZipfile  # BadZipFile in Python >= 3.2
@@ -13,23 +12,6 @@ from openerp.tools.translate import _
 from openerp.exceptions import Warning as UserError, RedirectWarning
 
 from openerp.addons.base_iban.base_iban import _pretty_iban
-
-_logger = logging.getLogger(__name__)
-
-
-class PaymentReturnLine(models.Model):
-    """Extend model payment.return.line."""
-    _inherit = 'payment.return.line'
-
-    # Ensure transactions can be imported only once (if the import format
-    # provides unique transaction ids)
-    unique_import_id = fields.Char('Import ID', readonly=True, copy=False)
-
-    _sql_constraints = [
-        ('unique_import_id',
-         'unique (unique_import_id)',
-         'A bank account transactions can be imported only once !')
-    ]
 
 
 class PaymentReturnImport(models.TransientModel):
@@ -64,27 +46,28 @@ class PaymentReturnImport(models.TransientModel):
         payment_returns, notifications = self.with_context(
             active_id=self.id
         )._import_file(data_file)
-
         result = self.env.ref(
             'account_payment_return.payment_return_action').read()[0]
         if len(payment_returns) != 1:
             result['domain'] = "[('id', 'in', %s)]" % payment_returns.ids
         else:
-            form_view_id = self.ref(
-                'account_payment_return.payment_return_form_view', False)
+            form_view = self.env.ref(
+                'account_payment_return.payment_return_form_view')
             result.update({
-                'views': [(form_view_id, 'form')],
+                'views': [(form_view.id, 'form')],
                 'res_id': payment_returns.id,
                 'context': {
-                    'notifications': notifications
+                    'notifications': notifications,
                 },
             })
         return result
 
     @api.model
     def _parse_all_files(self, data_file):
-        """Parse one file or multiple files from zip-file.
-        Return array of payment returns for further processing.
+        """Parse one or multiple files from zip-file.
+
+        :param data_file: Decoded raw content of the file
+        :return: List of payment returns dictionaries for further processing.
         """
         payment_return_raw_list = []
         files = [data_file]
@@ -99,53 +82,38 @@ class PaymentReturnImport(models.TransientModel):
         # Parse the file(s)
         for import_file in files:
             # The appropriate implementation module(s) returns the payment
-            # returns. Actually we don't care wether all the files have the
+            # returns. We support a list of dictionaries or a simple
+            # dictionary.
+
+            # Actually we don't care wether all the files have the
             # same format.
-            payment_return_raw_list.append(self._parse_file(import_file))
+            vals = self._parse_file(import_file)
+            if isinstance(vals, list):
+                payment_return_raw_list += vals
+            else:
+                payment_return_raw_list.append(vals)
         return payment_return_raw_list
 
     @api.model
     def _import_file(self, data_file):
         """ Create bank payment return(s) from file."""
         # The appropriate implementation module returns the required data
-        payment_returns = self.env['payment.return.import']
+        payment_returns = self.env['payment.return']
         notifications = []
         payment_return_raw_list = self._parse_all_files(data_file)
         # Check raw data:
         self._check_parsed_data(payment_return_raw_list)
         # Import all payment returns:
         for payret_vals in payment_return_raw_list:
-            (payment_return, new_notifications) = (
-                self._import_payment_return(payret_vals))
+            payret_vals = self._complete_payment_return(payret_vals)
+            payment_return, new_notifications = self._create_payment_return(
+                payret_vals)
             if payment_return:
-                payment_returns.append(payment_return)
+                payment_returns += payment_return
             notifications.extend(new_notifications)
         if not payment_returns:
-            raise UserError(_('You have already imported that file.'))
+            raise UserError(_('You have already imported this file.'))
         return payment_returns, notifications
-
-    @api.model
-    def _import_payment_return(self, payret_vals):
-        """Import a single bank payment return.
-
-        Return ids of created payment returns and notifications.
-        """
-        account_number = payret_vals.pop('account_number')
-        bank_account_id = self._find_bank_account_id(account_number)
-        if not bank_account_id and account_number:
-            raise UserError(
-                _('Can not find the account number %s.') % account_number
-            )
-        # Find the bank journal
-        journal_id = self._get_journal(bank_account_id)
-        # By now journal and account_number must be known
-        if not journal_id:
-            raise UserError(_('Can not determine journal for import.'))
-        # Prepare payment return data to be used for payment returns creation
-        payret_vals = self._complete_payment_return(
-            payret_vals, journal_id, account_number)
-        # Create the bank payret_vals
-        return self._create_payment_return(payret_vals)
 
     @api.model
     def _parse_file(self, data_file):
@@ -182,7 +150,7 @@ class PaymentReturnImport(models.TransientModel):
             raise UserError(_(
                 'This file doesn\'t contain any payment return.'))
         for payret_vals in payment_returns:
-            if not payret_vals.get('transactions'):
+            if payret_vals.get('transactions'):
                 return
         # If we get here, no transaction was found:
         raise UserError(_('This file doesn\'t contain any transaction.'))
@@ -221,15 +189,23 @@ class PaymentReturnImport(models.TransientModel):
         return journal_id
 
     @api.model
-    def _complete_payment_return(
-            self, payret_vals, journal_id, account_number):
+    def _complete_payment_return(self, payret_vals):
         """Complete payment return from information passed."""
-        payret_vals['journal_id'] = journal_id
+        account_number = payret_vals.pop('account_number')
+        if not payret_vals.get('journal_id'):
+            bank_account_id = self._find_bank_account_id(account_number)
+            if not bank_account_id and account_number:
+                raise UserError(
+                    _('Can not find the account number %s.') % account_number)
+            payret_vals['journal_id'] = self._get_journal(bank_account_id)
+            # By now journal and account_number must be known
+            if not payret_vals['journal_id']:
+                raise UserError(_('Can not determine journal for import.'))
         for line_vals in payret_vals['transactions']:
             unique_import_id = line_vals.get('unique_import_id', False)
             if unique_import_id:
                 line_vals['unique_import_id'] = (
-                    (account_number and account_number + '-' or '') +
+                    (account_number and (account_number + '-') or '') +
                     unique_import_id
                 )
             if not line_vals.get('reason'):
@@ -241,10 +217,8 @@ class PaymentReturnImport(models.TransientModel):
             # if the parser found a date but didn't set a period for this date,
             # do this now
             try:
-                payret_vals['period_id'] =\
-                    self.env['account.period']\
-                        .with_context(account_period_prefer_normal=True)\
-                        .find(dt=payret_vals['date']).id
+                payret_vals['period_id'] = (
+                    self.env['account.period'].find(dt=payret_vals['date']).id)
             except RedirectWarning:
                 # if there's no period for the date, ignore resulting exception
                 pass
