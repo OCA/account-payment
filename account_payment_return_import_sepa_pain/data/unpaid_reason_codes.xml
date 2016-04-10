@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data noupdate="1">
+
+    <record id="unpaid_reason_AC01" model="payment.return.reason">
+        <field name="code">AC01</field>
+        <field name="name">Account identifier incorrect (i.e. invalid IBAN)</field>
+    </record>
+    <record id="unpaid_reason_AC04" model="payment.return.reason">
+        <field name="code">AC04</field>
+        <field name="name">Account closed</field>
+    </record>
+    <record id="unpaid_reason_AC06" model="payment.return.reason">
+        <field name="code">AC06</field>
+        <field name="name">Account blocked for direct debit by the Debtor</field>
+    </record>
+    <record id="unpaid_reason_AG01" model="payment.return.reason">
+        <field name="code">AG01</field>
+        <field name="name">Direct debit forbidden on this account for regulatory reasons</field>
+    </record>
+    <record id="unpaid_reason_AG02" model="payment.return.reason">
+        <field name="code">AG02</field>
+        <field name="name">Operation/transaction code incorrect, invalid file format</field>
+    </record>
+    <record id="unpaid_reason_AM04" model="payment.return.reason">
+        <field name="code">AM04</field>
+        <field name="name">Insufficient funds</field>
+    </record>
+    <record id="unpaid_reason_AM05" model="payment.return.reason">
+        <field name="code">AM05</field>
+        <field name="name">Duplicate collection</field>
+    </record>
+    <record id="unpaid_reason_BE05" model="payment.return.reason">
+        <field name="code">BE05</field>
+        <field name="name">Identifier of the Creditor incorrect</field>
+    </record>
+    <record id="unpaid_reason_FF05" model="payment.return.reason">
+        <field name="code">FF05</field>
+        <field name="name">Direct Debit type incorrect</field>
+    </record>
+    <record id="unpaid_reason_MD01" model="payment.return.reason">
+        <field name="code">MD01</field>
+        <field name="name">No valid Mandate</field>
+    </record>
+    <record id="unpaid_reason_MD07" model="payment.return.reason">
+        <field name="code">MD07</field>
+        <field name="name">Debtor deceased</field>
+    </record>
+    <record id="unpaid_reason_MS02" model="payment.return.reason">
+        <field name="code">MS02</field>
+        <field name="name">Refusal by the Debtor</field>
+    </record>
+    <record id="unpaid_reason_MS03" model="payment.return.reason">
+        <field name="code">MS03</field>
+        <field name="name">Reason not specified</field>
+    </record>
+    <record id="unpaid_reason_RC01" model="payment.return.reason">
+        <field name="code">RC01</field>
+        <field name="name">Bank identifier incorrect (i.e. invalid BIC)</field>
+    </record>
+    <record id="unpaid_reason_RR01" model="payment.return.reason">
+        <field name="code">RR01</field>
+        <field name="name">Missing Debtor Account Or Identification</field>
+    </record>
+    <record id="unpaid_reason_RR02" model="payment.return.reason">
+        <field name="code">RR02</field>
+        <field name="name">Missing Debtors Name Or Address</field>
+    </record>
+    <record id="unpaid_reason_RR03" model="payment.return.reason">
+        <field name="code">RR03</field>
+        <field name="name">Missing Creditors Name Or Address</field>
+    </record>
+    <record id="unpaid_reason_RR04" model="payment.return.reason">
+        <field name="code">RR04</field>
+        <field name="name">Regulatory Reason</field>
+    </record>
+    <record id="unpaid_reason_SL01" model="payment.return.reason">
+        <field name="code">SL01</field>
+        <field name="name">Specific Service offered by the Debtor Bank.</field>
+    </record>
+
+</data>
+</openerp>
