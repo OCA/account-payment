@@ -189,8 +189,8 @@ msgstr "Este archivo no contiene ninguna transacción."
 #. module: account_payment_return_import
 #: code:addons/account_payment_return_import/models/account_payment_return_import.py:122
 #, python-format
-msgid "You have already imported that file."
-msgstr "Ya has importado ese archivo. "
+msgid "You have already imported this file."
+msgstr "Ya has importado este archivo. "
 
 #. module: account_payment_return_import
 #: view:payment.return.import:account_payment_return_import.account_payment_return_import_view
