@@ -1,0 +1,398 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_payment_return
+#
+# Sergio Teruel Albert, 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-10 04:05+0000\n"
+"PO-Revision-Date: 2016-04-10 06:18+0100\n"
+"Last-Translator: Carlos Incaser <carlos@incaser.es>\n"
+"Language-Team: Spanish <carlos.dauden@tecnativa.com>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.4\n"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AC06
+msgid "Account blocked for direct debit by the Debtor"
+msgstr "Cuenta bloqueada para domiciliaciones por el deudor."
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AC04
+msgid "Account closed"
+msgstr "Cuenta cerrada."
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AC01
+msgid "Account identifier incorrect (i.e. invalid IBAN)"
+msgstr "Identificación de la cuenta incorrecta (p.e. IBAN Invalido)"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_RC01
+msgid "Bank identifier incorrect (i.e. invalid BIC)"
+msgstr "Identificación del banco incorrecto (p.e. BIC Invalido)"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_MD07
+msgid "Debtor deceased"
+msgstr "Deudor fallecido"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_FF05
+msgid "Direct Debit type incorrect"
+msgstr "Tipo de domiciliación incorrecta"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AG01
+msgid "Direct debit forbidden on this account for regulatory reasons"
+msgstr "Domiciliación prohibida en esta cuenta por motivos regulatorios"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AM05
+msgid "Duplicate collection"
+msgstr "Colección duplicada"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_BE05
+msgid "Identifier of the Creditor incorrect"
+msgstr "Identificación del emisor incorrecta"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:ir.model,name:account_payment_return_import_sepa_pain.model_payment_return_import
+msgid "Import Payment Return"
+msgstr "Devoluciones de cobros"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AM04
+msgid "Insufficient funds"
+msgstr "Saldo insuficiente"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_RR03
+msgid "Missing Creditors Name Or Address"
+msgstr "Falta nombre o dirección del emisor"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_RR01
+msgid "Missing Debtor Account Or Identification"
+msgstr "Falta cuenta o identificación del deudor"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_RR02
+msgid "Missing Debtors Name Or Address"
+msgstr "Falta nombre o dirección del deudor"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_MD01
+msgid "No valid Mandate"
+msgstr "Mandato no válido"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AG02
+msgid "Operation/transaction code incorrect, invalid file format"
+msgstr ""
+"Código de operación/transacción incorrecto, formato de archivo inválido"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:ir.model,name:account_payment_return_import_sepa_pain.model_payment_return_line
+msgid "Payment return lines"
+msgstr "Líneas de la devolución"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_MS03
+msgid "Reason not specified"
+msgstr "Motivo no especificado"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_MS02
+msgid "Refusal by the Debtor"
+msgstr "Rechazado por el deudor"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_RR04
+msgid "Regulatory Reason"
+msgstr "Motivo regulatorio"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_SL01
+msgid "Specific Service offered by the Debtor Bank."
+msgstr "Servicio especifico ofrecido por el banco del deudor"
+
+#~ msgid "%d transactions had already been imported and were ignored."
+#~ msgstr "%d transacciones ya han sido importadas y serán ignoradas."
+
+#~ msgid "1 transaction had already been imported and was ignored."
+#~ msgstr "1 transacción ya ha sido importada y será ignorada."
+
+#~ msgid "1. Download your Payment Return file from your bank website."
+#~ msgstr ""
+#~ "1. Descarga tu fichero de devoluciones de cobro desde la web de tu banco."
+
+#~ msgid ""
+#~ "2. Make sure you have installed the right module to support the file "
+#~ "format."
+#~ msgstr ""
+#~ "2. Asegúrate de que tienes instalado el modulo correcto que soporta el "
+#~ "formato del archivo."
+
+#~ msgid "3. Select the file and click 'Import'."
+#~ msgstr "3. Selecciona el archivo y pincha \"Importar\"."
+
+#~ msgid "A bank account transactions can be imported only once !"
+#~ msgstr "¡Las devoluciones solo pueden ser importadas una vez!"
+
+#~ msgid ""
+#~ "Accounting journal related to the bank payment return you're importing. "
+#~ "It has be be manually chosen for payment return formats which doesn't "
+#~ "allow automatic journal detection."
+#~ msgstr ""
+#~ "Diario contable relacionado con el archivo de devoluciones que estas "
+#~ "importando. Se selecciona manualmente para formatos de archivos que no "
+#~ "permiten la detección automática del diario."
+
+#~ msgid "Already imported items"
+#~ msgstr "Elementos ya importados"
+
+#~ msgid "Can not determine journal for import."
+#~ msgstr "No puede determinarse el diario para importar."
+
+#~ msgid "Can not find the account number %s."
+#~ msgstr "No se puede encontrar el número de cuenta %s."
+
+#~ msgid "Cancel"
+#~ msgstr "Cancelar"
+
+#~ msgid ""
+#~ "Could not make sense of the given file.\n"
+#~ "Did you install the module to support this type of file?"
+#~ msgstr ""
+#~ "No se pudo hacer con sentido de el archivo dado.\n"
+#~ "¿Instalaste el modulo para soportar este tipo de archivo?"
+
+#~ msgid "Created by"
+#~ msgstr "Creado por"
+
+#~ msgid "Created on"
+#~ msgstr "Creado el"
+
+#~ msgid ""
+#~ "Get you bank payment returns in electronic format from your bank and "
+#~ "select them here."
+#~ msgstr ""
+#~ "Obtén tus devoluciones de cobros en formato electrónico desde tu banco y "
+#~ "selecciónalas aquí."
+
+#~ msgid "How to import your payment return :"
+#~ msgstr "Devoluciones de cobros"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Import ID"
+#~ msgstr "ID Importacion"
+
+#~ msgid "Import Payment Returns"
+#~ msgstr "Devoluciones de cobros"
+
+#~ msgid "Journal"
+#~ msgstr "Diario del banco"
+
+#~ msgid "Last Updated by"
+#~ msgstr "Última actualización de"
+
+#~ msgid "Last Updated on"
+#~ msgstr "Última actualización en"
+
+#~ msgid "Payment Return File"
+#~ msgstr "Fichero de devoluciones"
+
+#~ msgid "The account of this payment return is linked to another journal."
+#~ msgstr "La cuenta de esta devolución esta relacionada con otro diario."
+
+#~ msgid "This file doesn't contain any payment return."
+#~ msgstr "Este archivo no contiene ninguna devolución."
+
+#~ msgid "This file doesn't contain any transaction."
+#~ msgstr "Este archivo no contiene ninguna transacción."
+
+#~ msgid "You have already imported that file."
+#~ msgstr "Ya has importado ese archivo. "
+
+#~ msgid "_Import"
+#~ msgstr "Importado"
+
+#~ msgid "or"
+#~ msgstr "o"
+
+#~ msgid "Bank Statement File"
+#~ msgstr "Bank Statement File"
+
+#~ msgid "Amount"
+#~ msgstr "Importe"
+
+#~ msgid "Cancelled"
+#~ msgstr "Cancelada"
+
+#~ msgid "Code"
+#~ msgstr "Código"
+
+#~ msgid "Company"
+#~ msgstr "Compañía"
+
+#~ msgid "Concept"
+#~ msgstr "Concepto"
+
+#~ msgid "Confirm"
+#~ msgstr "Confirmar"
+
+#~ msgid "Customer"
+#~ msgstr "Cliente"
+
+#~ msgid "Date of the last message posted on the record."
+#~ msgstr "Fecha del último mensaje publicado en el registro."
+
+#~ msgid "Done"
+#~ msgstr "Realizada"
+
+#~ msgid "Draft"
+#~ msgstr "Borrador"
+
+#~ msgid "Followers"
+#~ msgstr "Seguidores"
+
+#~ msgid "Forced period"
+#~ msgstr "Periodo forzado"
+
+#~ msgid "If checked new messages require your attention."
+#~ msgstr "Si esta marcado nuevos mensajes requieren tu atención."
+
+#~ msgid "Invoice"
+#~ msgstr "Factura"
+
+#~ msgid "Invoice has been included on a payment that has been returned later."
+#~ msgstr ""
+#~ "La factura ha sido incluida en un pago que ha sido devuelto más tarde."
+
+#~ msgid "Invoice: %s"
+#~ msgstr "Factura: %s"
+
+#~ msgid "Invoices whose payment has been returned"
+#~ msgstr "Facturas cuyo pago haya sido devuelto"
+
+#~ msgid "Is a Follower"
+#~ msgstr "Es seguidor"
+
+#~ msgid "Last Message Date"
+#~ msgstr "Fecha del último mensaje"
+
+#~ msgid "Line ids"
+#~ msgstr "Line ids"
+
+#~ msgid "Lines"
+#~ msgstr "Líneas"
+
+#~ msgid "Match"
+#~ msgstr "Casar referencias"
+
+#~ msgid "Messages"
+#~ msgstr "Mensajes"
+
+#~ msgid "Messages and communication history"
+#~ msgstr "Historial de comunicación del sitio web"
+
+#~ msgid "Move lines: %s"
+#~ msgstr "Apuntes: %s"
+
+#~ msgid "Move: %s"
+#~ msgstr "Asiento: %s"
+
+#~ msgid "Partner name"
+#~ msgstr "Nombre del cliente"
+
+#, fuzzy
+#~ msgid "Payment Line: %s (%s) in Payment Return: %s"
+#~ msgstr "Linea de cobro: %s en Devolución de cobro: %s"
+
+#~ msgid "Payment Reference"
+#~ msgstr "Referencia de cobro"
+
+#~ msgid "Payment return"
+#~ msgstr "Devolución de cobro"
+
+#~ msgid "Payment return reason"
+#~ msgstr "Motivos de devolución"
+
+#~ msgid "Payment returned"
+#~ msgstr "Devolución de cobro"
+
+#~ msgid "Read from imported file. Only for reference."
+#~ msgstr "Leído del archivo importado. Sólo como referencia."
+
+#~ msgid "Reason"
+#~ msgstr "Motivo"
+
+#~ msgid "Reconcile"
+#~ msgstr "Conciliación"
+
+#~ msgid "Reference"
+#~ msgstr "Referencia"
+
+#~ msgid "Reference to match moves from related documents"
+#~ msgstr ""
+#~ "Referencia a los asientos coincidentes desde documentos relacionados"
+
+#~ msgid "Reference to the created journal entry"
+#~ msgstr "Referencia al asiento creado"
+
+#~ msgid "Reference to the reconcile object."
+#~ msgstr "Referencia al objeto de conciliación."
+
+#~ msgid "Return %s"
+#~ msgstr "Devolución %s"
+
+#~ msgid "Return date"
+#~ msgstr "Fecha de devolución"
+
+#~ msgid "Returned"
+#~ msgstr "Devuelta"
+
+#~ msgid "Returned amount. Can be different from the move amount"
+#~ msgstr "Importe devuelto. Puede ser distinto al importe pagado"
+
+#~ msgid "State"
+#~ msgstr "Estado"
+
+#~ msgid "Summary"
+#~ msgstr "Resumen"
+
+#~ msgid "This date will be used as the account entry date."
+#~ msgstr "Esta fecha se utilizará como fecha del asiento contable."
+
+#~ msgid "Unread Messages"
+#~ msgstr "Mensajes sin leer"
+
+#~ msgid "You must input all moves references in the payment return."
+#~ msgstr "Debes informar todas las referencias de cobro."
+
+#~ msgid "Website Messages"
+#~ msgstr "Mensajes del sitio web"
+
+#~ msgid "Website communication history"
+#~ msgstr "Historial de comunicación del sitio web"
+
+#~ msgid "Notes"
+#~ msgstr "Notas"
+
+#~ msgid "Returned payment"
+#~ msgstr "Pago devuelto"
+
+#~ msgid "Status Change"
+#~ msgstr "Cambio de estado"
+
+#~ msgid "Status changed"
+#~ msgstr "Estado cambiado"
