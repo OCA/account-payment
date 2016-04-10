@@ -1,16 +1,13 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
-    :alt: License: AGPL-3
+   :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
+   :alt: License: AGPL-3
 
+=======================================
 Account Payment Return Import SEPA Pain
 =======================================
 
 Module to import SEPA Direct Debit Unpaid Report File Format PAIN.002.001.03.
 
-
-Known issues / Roadmap
-======================
-
-* Better...
 
 Bug Tracker
 ===========
