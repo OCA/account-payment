@@ -136,12 +136,12 @@ msgstr "ID Importacion"
 #: model:ir.model,name:account_payment_return_import.model_payment_return_import
 #: model:ir.ui.menu,name:account_payment_return_import.menu_account_payment_return_import
 msgid "Import Payment Return"
-msgstr "Devoluciones de cobros"
+msgstr "Importar devolución de cobros"
 
 #. module: account_payment_return_import
 #: view:payment.return.import:account_payment_return_import.account_payment_return_import_view
 msgid "Import Payment Returns"
-msgstr "Devoluciones de cobros"
+msgstr "Importar devoluciones de cobros"
 
 #. module: account_payment_return_import
 #: field:payment.return.import,journal_id:0
@@ -189,8 +189,8 @@ msgstr "Este archivo no contiene ninguna transacción."
 #. module: account_payment_return_import
 #: code:addons/account_payment_return_import/models/account_payment_return_import.py:122
 #, python-format
-msgid "You have already imported that file."
-msgstr "Ya has importado ese archivo. "
+msgid "You have already imported this file."
+msgstr "Ya has importado este archivo. "
 
 #. module: account_payment_return_import
 #: view:payment.return.import:account_payment_return_import.account_payment_return_import_view
