@@ -14,12 +14,11 @@ from openerp.exceptions import Warning as UserError, RedirectWarning
 
 from openerp.addons.base_iban.base_iban import _pretty_iban
 
-_logger = logging.getLogger(__name__)  # pylint: disable=invalid-name
+_logger = logging.getLogger(__name__)
 
 
 class PaymentReturnLine(models.Model):
     """Extend model payment.return.line."""
-    # pylint: disable=too-many-public-methods
     _inherit = 'payment.return.line'
 
     # Ensure transactions can be imported only once (if the import format
@@ -41,7 +40,6 @@ class PaymentReturnImport(models.TransientModel):
     def _get_hide_journal_field(self):
         """ Return False if the journal_id can't be provided by the parsed
         file and must be provided by the wizard."""
-        # pylint: disable=no-self-use
         return True
 
     journal_id = fields.Many2one(
@@ -63,20 +61,24 @@ class PaymentReturnImport(models.TransientModel):
         and go to reconciliation."""
         self.ensure_one()
         data_file = base64.b64decode(self.data_file)
-        # pylint: disable=protected-access
-        payment_return_ids, notifications = self.with_context(
-            active_id=self.id  # pylint: disable=no-member
+        payment_returns, notifications = self.with_context(
+            active_id=self.id
         )._import_file(data_file)
-        # dispatch to reconciliation interface
+
         result = self.env.ref(
             'account_payment_return.payment_return_action').read()[0]
-        if len(payment_return_ids) != 1:
-            result['domain'] = "[('id', 'in', %s)]" % payment_return_ids
+        if len(payment_returns) != 1:
+            result['domain'] = "[('id', 'in', %s)]" % payment_returns.ids
         else:
-            res = self.env.ref(
+            form_view_id = self.ref(
                 'account_payment_return.payment_return_form_view', False)
-            result['views'] = [(res and res.id or False, 'form')]
-            result['res_id'] = payment_return_ids[0]
+            result.update({
+                'views': [(form_view_id, 'form')],
+                'res_id': payment_returns.id,
+                'context': {
+                    'notifications': notifications
+                },
+            })
         return result
 
     @api.model
@@ -84,7 +86,7 @@ class PaymentReturnImport(models.TransientModel):
         """Parse one file or multiple files from zip-file.
         Return array of payment returns for further processing.
         """
-        payment_returns = []
+        payment_return_raw_list = []
         files = [data_file]
         try:
             with ZipFile(StringIO(data_file), 'r') as archive:
@@ -99,28 +101,28 @@ class PaymentReturnImport(models.TransientModel):
             # The appropriate implementation module(s) returns the payment
             # returns. Actually we don't care wether all the files have the
             # same format.
-            payment_returns += self._parse_file(import_file)
-        return payment_returns
+            payment_return_raw_list.append(self._parse_file(import_file))
+        return payment_return_raw_list
 
     @api.model
     def _import_file(self, data_file):
         """ Create bank payment return(s) from file."""
         # The appropriate implementation module returns the required data
-        payment_return_ids = []
+        payment_returns = self.env['payment.return.import']
         notifications = []
-        payment_returns = self._parse_all_files(data_file)
+        payment_return_raw_list = self._parse_all_files(data_file)
         # Check raw data:
-        self._check_parsed_data(payment_returns)
+        self._check_parsed_data(payment_return_raw_list)
         # Import all payment returns:
-        for payret_vals in payment_returns:
-            (payment_return_id, new_notifications) = (
+        for payret_vals in payment_return_raw_list:
+            (payment_return, new_notifications) = (
                 self._import_payment_return(payret_vals))
-            if payment_return_id:
-                payment_return_ids.append(payment_return_id)
+            if payment_return:
+                payment_returns.append(payment_return)
             notifications.extend(new_notifications)
-        if len(payment_return_ids) == 0:
+        if not payment_returns:
             raise UserError(_('You have already imported that file.'))
-        return payment_return_ids, notifications
+        return payment_returns, notifications
 
     @api.model
     def _import_payment_return(self, payret_vals):
@@ -147,8 +149,6 @@ class PaymentReturnImport(models.TransientModel):
 
     @api.model
     def _parse_file(self, data_file):
-        # pylint: disable=no-self-use
-        # pylint: disable=unused-argument
         """ Each module adding a file support must extends this method. It
         processes the file if it can, returns super otherwise, resulting in a
         chain of responsability.
@@ -177,13 +177,12 @@ class PaymentReturnImport(models.TransientModel):
 
     @api.model
     def _check_parsed_data(self, payment_returns):
-        # pylint: disable=no-self-use
         """ Basic and structural verifications """
-        if len(payment_returns) == 0:
+        if not payment_returns:
             raise UserError(_(
                 'This file doesn\'t contain any payment return.'))
         for payret_vals in payment_returns:
-            if 'transactions' in payret_vals and payret_vals['transactions']:
+            if not payret_vals.get('transactions'):
                 return
         # If we get here, no transaction was found:
         raise UserError(_('This file doesn\'t contain any transaction.'))
@@ -194,10 +193,10 @@ class PaymentReturnImport(models.TransientModel):
         bank_account_id = None
         if account_number and len(account_number) > 4:
             iban_number = _pretty_iban(account_number)
-            bank_account_ids = self.env['res.partner.bank'].search(
+            bank_account = self.env['res.partner.bank'].search(
                 [('acc_number', '=', iban_number)], limit=1)
-            if bank_account_ids:
-                bank_account_id = bank_account_ids[0].id
+            if bank_account:
+                bank_account_id = bank_account.id
         return bank_account_id
 
     @api.model
@@ -272,7 +271,7 @@ class PaymentReturnImport(models.TransientModel):
                 filtered_st_lines.append(line_vals)
             else:
                 ignored_line_ids.append(unique_id)
-        payment_return_id = False
+        payment_return = pr_model.browse()
         if len(filtered_st_lines) > 0:
             # Remove values that won't be used to create records
             payret_vals.pop('transactions', None)
@@ -281,7 +280,7 @@ class PaymentReturnImport(models.TransientModel):
             # Create the payment return
             payret_vals['line_ids'] = [
                 [0, False, line] for line in filtered_st_lines]
-            payment_return_id = pr_model.create(payret_vals).id
+            payment_return = pr_model.create(payret_vals)
         # Prepare import feedback
         notifications = []
         num_ignored = len(ignored_line_ids)
@@ -300,4 +299,4 @@ class PaymentReturnImport(models.TransientModel):
                     'ids': prl_model.search(
                         [('unique_import_id', 'in', ignored_line_ids)]).ids}
             }]
-        return payment_return_id, notifications
+        return payment_return, notifications
