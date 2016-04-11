@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 # © 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
+# © 2016 Pedro M. Baeza <pedro.baeza@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
@@ -14,7 +15,7 @@
     'website': 'https://www.tecnativa.com',
     'depends': [
         'account_payment_return_import',
-        'account_banking_payment_transfer'
+        'account_banking_payment_export',
     ],
     'data': [
         'data/unpaid_reason_codes.xml'
