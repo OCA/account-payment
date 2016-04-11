@@ -10,8 +10,7 @@ class PaymentReturnLine(models.Model):
 
     @api.multi
     def _find_match(self):
-        lines = self.filtered(lambda x: (
-                    (not x.move_line_ids) and x.reference))
+        lines = self.filtered(lambda x: not x.move_line_ids and x.reference)
         for line in lines:
             bank_payment_line = self.env['bank.payment.line'].search(
                 [('name', '=', line.reference)])
