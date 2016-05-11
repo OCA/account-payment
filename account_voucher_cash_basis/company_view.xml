@@ -7,6 +7,12 @@
             <field name="model">account.config.settings</field>
             <field name="inherit_id" ref="account.view_account_config_settings"/>
             <field name="arch" type="xml">
+                <xpath expr="/form/group/div[@name='account_config']/div" position="after">
+                    <div>
+                        <label for="max_balance_diff"/>
+                        <field name="max_balance_diff" class="oe_inline"/>
+                    </div>
+                </xpath>
                 <xpath expr="/form/group[5]/div" position="inside">
                     <div>
                         <field name="allow_distributing_write_off" class="oe_inline"/>

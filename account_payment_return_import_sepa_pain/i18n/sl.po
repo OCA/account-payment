@@ -1,0 +1,124 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_payment_return_import_sepa_pain
+# 
+# Translators:
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: account-payment (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-14 03:08+0000\n"
+"PO-Revision-Date: 2016-04-13 07:17+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-payment-8-0/language/sl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AC06
+msgid "Account blocked for direct debit by the Debtor"
+msgstr "Konto blokiran za neposredni dolg s strani dolžnika"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AC04
+msgid "Account closed"
+msgstr "Konto zaprt"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AC01
+msgid "Account identifier incorrect (i.e. invalid IBAN)"
+msgstr "Nepravilen identifikator konta (neveljaven IBAN)"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_RC01
+msgid "Bank identifier incorrect (i.e. invalid BIC)"
+msgstr "Nepravilen identifikator banke (neveljaven BIC)"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_MD07
+msgid "Debtor deceased"
+msgstr "Dolžnik pokojen"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_FF05
+msgid "Direct Debit type incorrect"
+msgstr "Tip neposrednega dolga nepravilen"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AG01
+msgid "Direct debit forbidden on this account for regulatory reasons"
+msgstr "Na tem kontu neposredni dolg ni dovoljen iz regulativnih razlogov"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AM05
+msgid "Duplicate collection"
+msgstr "Podvoji zbirko"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_BE05
+msgid "Identifier of the Creditor incorrect"
+msgstr "Nepravilen identifikator upnika"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:ir.model,name:account_payment_return_import_sepa_pain.model_payment_return_import
+msgid "Import Payment Return"
+msgstr "Uvoz vračila plačila"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AM04
+msgid "Insufficient funds"
+msgstr "Nezadostna finančna sredstva"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_RR03
+msgid "Missing Creditors Name Or Address"
+msgstr "Manjkajoč naziv upnikov ali naslov"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_RR01
+msgid "Missing Debtor Account Or Identification"
+msgstr "Manjkajoč konto dolžnika ali identifikator"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_RR02
+msgid "Missing Debtors Name Or Address"
+msgstr "Manjkajoč naziv dolžnikov ali naslov"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_MD01
+msgid "No valid Mandate"
+msgstr "Ni veljavnega mandata"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AG02
+msgid "Operation/transaction code incorrect, invalid file format"
+msgstr "Nepravilna koda operacije/transakcije, neveljaven format datoteke"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:ir.model,name:account_payment_return_import_sepa_pain.model_payment_return_line
+msgid "Payment return lines"
+msgstr "Postavke vračil plačil"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_MS03
+msgid "Reason not specified"
+msgstr "Razlog ni določen"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_MS02
+msgid "Refusal by the Debtor"
+msgstr "Zavrnitev s strani dolžnika"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_RR04
+msgid "Regulatory Reason"
+msgstr "Regulativni razlogi"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_SL01
+msgid "Specific Service offered by the Debtor Bank."
+msgstr "Specifična storitev dolžnikove banke"
