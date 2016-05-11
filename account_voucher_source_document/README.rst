@@ -40,6 +40,7 @@ Contributors
 ------------
 
 * Lorenzo Battistini <lorenzo.battistini@agilebg.com>
+* Loïc Faure-Lacroix <loic.lacroix@savoirfairelinux.com>
 * David Dufresne <david.dufresne@savoirfairelinux.com>
 
 Maintainer
