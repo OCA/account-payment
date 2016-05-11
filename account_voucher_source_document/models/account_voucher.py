@@ -3,6 +3,8 @@
 #
 #    Copyright (C) 2013 Agile Business Group sagl
 #    (<http://www.agilebg.com>)
+#    Copyright (C) 2016 Savoir-faire Linux
+#    (<http://www.savoirfairelinux.com>)
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
@@ -19,34 +21,36 @@
 #
 ##############################################################################
 
-from openerp.osv import orm
+from openerp import api, models
 
 
-class account_voucher(orm.Model):
+class account_voucher(models.Model):
+
     _inherit = 'account.voucher'
 
-    def __get_source(self, cr, uid, res, line_type, context=None):
-        line_obj = self.pool.get('account.voucher.line')
+    @api.model
+    def _get_source(self, res, line_type):
+        line_obj = self.env['account.voucher.line']
         value = res.get('value')
         lines = value.get(line_type) if line_type in value else []
 
         for vals in lines:
             if vals.get('move_line_id'):
                 vals['document_source'] = line_obj.get_document_source(
-                    cr, uid, vals['move_line_id'], context=context
-                )
+                    vals['move_line_id'])
 
+    @api.multi
     def recompute_voucher_lines(
-        self, cr, uid, ids, partner_id, journal_id, price,
-        currency_id, ttype, date, context=None
+        self, partner_id, journal_id, price,
+        currency_id, ttype, date
     ):
 
         res = super(account_voucher, self).recompute_voucher_lines(
-            cr, uid, ids, partner_id, journal_id, price,
-            currency_id, ttype, date, context=context
+            partner_id, journal_id, price,
+            currency_id, ttype, date
         )
 
-        self.__get_source(cr, uid, res, 'line_cr_ids', context)
-        self.__get_source(cr, uid, res, 'line_dr_ids', context)
+        self._get_source(res, 'line_cr_ids')
+        self._get_source(res, 'line_dr_ids')
 
         return res

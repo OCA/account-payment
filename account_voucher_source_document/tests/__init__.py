@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 ##############################################################################
 #
-#    Copyright (C) 2013 Agile Business Group sagl
-#    (<http://www.agilebg.com>)
 #    Copyright (C) 2016 Savoir-faire Linux
 #    (<http://www.savoirfairelinux.com>)
 #
@@ -21,22 +19,4 @@
 #
 ##############################################################################
 
-{
-    'name': "Source Document in Customer Payments",
-    'version': '8.0.1.0.0',
-    'category': 'Accounting & Finance',
-    'author': (
-        'Agile Business Group sagl,'
-        'Savoir-faire linux,'
-        'Odoo Community Association'
-    ),
-    'website': 'http://www.agilebg.com',
-    'license': 'AGPL-3',
-    "depends": ['account_voucher'],
-    "data": [
-        'views/account_voucher.xml',
-    ],
-    "demo": [],
-    "active": False,
-    "installable": True
-}
+from . import test_account_voucher
