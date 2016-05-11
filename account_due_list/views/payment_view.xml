@@ -47,6 +47,7 @@
                 <field name="account_id"/>
                 <field name="partner_id"/>
                 <field name="invoice"/>
+                <field name="invoice_user_id"/>
                 <field name="invoice_origin"/>
                 <field name="date_maturity"/>
                 <group expand="0" string="Group By...">
@@ -54,6 +55,7 @@
                     <filter string="Invoice" icon="terp-folder-orange" domain="[]" context="{'group_by':'stored_invoice_id'}"/>
                     <filter string="Due date" icon="terp-go-today" domain="[]" context="{'group_by':'day'}"/>
                     <filter string="Month" icon="terp-go-month" domain="[]" context="{'group_by':'date_maturity'}"/>
+                    <filter string="Salesperson" icon="terp-sale" domain="[]" context="{'group_by':'invoice_user_id'}"/>
                </group>
            </search>
         </field>
@@ -70,7 +72,7 @@
         <field name="search_view_id" ref="view_payments_filter"/>
         <field name="domain">[('account_id.type', 'in', ['receivable', 'payable'])]</field>
     </record>
-    
+
     <menuitem name="Payments and due list"
               parent="account.menu_finance_entries"
               action="action_invoice_payments"
