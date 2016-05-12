@@ -1,0 +1,104 @@
+-
+  Change Company VAT Payment Lines Behaviour to move to shadow entry
+-
+  !python {model: res.company}: |
+    self.write(cr, uid, [ref('base.main_company')], {
+      'vat_payment_lines': 'shadow_move'
+      })
+-
+  I create customer invoice 4 - 120 EUR
+-
+  !record {model: account.invoice, id: account_invoice_customer_4_bank_shadow, view: invoice_form}:
+    journal_id: account.sales_journal
+    partner_id: base.res_partner_3
+    account_id: ds
+    vat_on_payment: True
+    invoice_line:
+      - quantity: 1
+        account_id: account.a_sale
+        name: 'Service'
+        price_unit: 100.0
+        invoice_line_tax_id:
+          - tax20
+-
+  I create invoice by clicking on Create button
+-
+  !workflow {model: account.invoice, action: invoice_open, ref: account_invoice_customer_4_bank_shadow}
+-
+  !record {model: account.bank.statement, id: bank_statement_4_shadow}:
+    name: BK test
+    balance_end_real: 0.0
+    balance_start: 0.0
+    date: !eval time.strftime('%Y-%m-%d')
+    journal_id: account.bank_journal
+-
+  I create bank statement line
+-
+  !record {model: account.bank.statement.line, id: bank_statement_line_4_shadow}:
+    amount: 100
+    partner_id: base.res_partner_8
+    statement_id: bank_statement_4_shadow
+    name: 'Pay invoice'
+    journal_id: account.bank_journal
+-
+  I reconcile the invoice with the statement line.
+-
+  !python {model: account.bank.statement}: |
+    statement_obj = self.pool.get('account.bank.statement.line')
+    inv_obj = self.pool.get('account.invoice')
+    invoice = inv_obj.browse(cr, uid, ref('account_invoice_customer_4_bank_shadow'), context=context)
+    invoice_entry = invoice.move_id
+    for line in invoice_entry.line_id:
+      if not line.reconcile_id and line.debit:
+          counterpart_move_line = line
+          assert (line.debit == 120)
+          break
+    browse_payment = self.browse(cr, uid, ref("bank_statement_4_shadow"))
+    for line in browse_payment.line_ids:
+      statement_obj.process_reconciliation(cr, uid, line.id, [
+        {
+        'counterpart_move_line_id': counterpart_move_line.id,
+        'credit':counterpart_move_line.debit,
+        'debit':0,
+        'name': counterpart_move_line.name,
+        },
+        {
+        'debit':20,
+        'name': line.name,
+        'account_id': ref('account.a_expense'),
+        }])
+    self.write(cr, uid, ref("bank_statement_4_shadow"), {'balance_end_real': 100})
+    self.button_confirm_bank(cr, uid, ref("bank_statement_4_shadow"))
+-
+  I check that the bank statement is confirm
+-
+  !assert {model: account.bank.statement, id: bank_statement_4_shadow, severity: error, string: Bank Statement should be confirm}:
+    - state == 'confirm'
+-
+  I check the bank statement line
+-
+  !python {model: account.bank.statement.line}: |
+    bank_line = self.browse(cr, uid, ref('bank_statement_line_4_shadow'), context=context)
+    assert len(bank_line.journal_entry_id.line_id) == 3, "There must be 3 real move lines, %s found" % len(bank_line.journal_entry_id.line_id)
+    assert len(bank_line.shadow_move_id.line_id) == 4, "There must be 4 shadow move lines, %s found" % len(bank_line.shadow_move_id.line_id)
+    bank_found = False
+    vat_found = False
+    sales_found = False
+    for move_line in bank_line.journal_entry_id.line_id:
+      if move_line.account_id.id == ref('account.bnk'):
+        bank_found = True
+        assert move_line.debit == 100, "Bank move line must be 120 debit, %s found" % move_line.debit
+      if move_line.account_id.id == ref('account.iva'):
+        vat_found = True
+        assert move_line.credit == 16.67, "VAT move line must be 120 credit, %s found" % move_line.credit
+      if move_line.account_id.id == ref('account.a_sale'):
+        sales_found = True
+        assert move_line.credit == 83.33, "sales move line must be 100 credit, %s found" % move_line.credit
+    assert bank_found, "No bank move line found"
+    assert sales_found, "No sales move line found"
+    assert vat_found, "No VAT move line found"
+-
+  I check that the invoice state is paid
+-
+  !assert {model: account.invoice, id: account_invoice_customer_4_bank_shadow}:
+    - state == 'paid'
