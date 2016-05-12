@@ -6,18 +6,15 @@
 Account Voucher Source Document
 ===============================
 
-This module adds the source document from
-the customer invoice to the customer payment lines. So that it's
-easier to find the invoices paid when they are imported from an
-external system.
+This module adds the source document on the voucher lines of customer payments.
+This field shows the number of the invoice related to the voucher line.
 
 
 Usage
 =====
 
-Go to Invoicing -> Customer -> Customer Payments
-
-The source document will be displayed on the voucher lines.
+1. Go to Invoicing -> Customer -> Customer Payments
+2. The source document will be displayed in the voucher lines.
 
 
 Bug Tracker
