@@ -6,9 +6,9 @@
       'vat_payment_lines': 'real_move',
       'vat_config_error': 'use_the_same'
       })
--
-  !record {model: account.account, id: account.a_sale}:
-    vat_on_payment_related_account_id: False
+    self.pool['account.account'].write(cr, uid, [ref('account.a_sale')], {
+      'vat_on_payment_related_account_id': None,
+    })
 -
   I create customer invoice 1 - 120 EUR
 -
@@ -95,5 +95,7 @@
   !assert {model: account.invoice, id: account_invoice_customer_1_same}:
     - state == 'paid'
 -
-  !record {model: account.account, id: account.a_sale}:
-    vat_on_payment_related_account_id: pss
+  !python {model: account.account}: |
+    self.write(cr, uid, [ref('account.a_sale')], {
+      'vat_on_payment_related_account_id': ref('pss'),
+    })
