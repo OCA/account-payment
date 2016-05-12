@@ -259,6 +259,7 @@ class AccountBankStatementLine(orm.Model):
         current_currency = bank_line.currency_id or statement_currency
         move_line_model = self.pool['account.move.line']
         voucher_model = self.pool['account.voucher']
+        currency_obj = self.pool.get('res.currency')
         write_off_vals = self.get_write_off_vals(
             cr, uid, mv_line_dicts, context=context)
 
@@ -291,7 +292,6 @@ class AccountBankStatementLine(orm.Model):
                 ] = voucher_model.get_invoice_total(
                     counterpart_move_line.invoice)
                 if company_currency.id != current_currency.id:
-                    currency_obj = self.pool.get('res.currency')
                     current_amount = currency_obj.compute(
                         cr, uid, current_currency.id, company_currency.id,
                         amount_currency, context=ctx)
@@ -325,6 +325,9 @@ class AccountBankStatementLine(orm.Model):
                     'You are trying to pay with write-off more than one '
                     'invoice and distributing write-off is not allowed. '
                     'See company settings.'))
+            if bank_line.amount < 0:
+                currency_write_off_per_invoice = (
+                    - currency_write_off_per_invoice)
             for inv_id in res:
                 res[inv_id][
                     'currency-write-off'
