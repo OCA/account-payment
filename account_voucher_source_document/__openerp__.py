@@ -19,7 +19,6 @@
     "data": [
         'views/account_voucher.xml',
     ],
-    "demo": [],
     "active": False,
     "installable": True
 }
