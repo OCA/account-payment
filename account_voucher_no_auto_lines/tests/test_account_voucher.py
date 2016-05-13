@@ -160,3 +160,14 @@ class TestAccountVoucher(common.TransactionCase):
             l for l in res['value']['line_dr_ids'] if isinstance(l, dict))
 
         self.assertEqual(voucher_line['amount'], 123.45)
+
+    def test_07_onchange_amount_no_currency(self):
+        v = self.voucher
+        res = v.onchange_amount(
+            v.amount, 1, v.partner_id.id, v.journal_id.id,
+            False, v.type, v.date,
+            v.payment_rate_currency_id.id, v.company_id.id
+        )
+
+        self.assertNotIn('line_dr_ids', res['value'])
+        self.assertNotIn('line_cr_ids', res['value'])
