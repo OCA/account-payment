@@ -22,8 +22,6 @@
 
 from openerp import api, models
 
-from openerp.addons.account_voucher import account_voucher as base_module
-
 
 class AccountVoucher(models.Model):
 
@@ -140,45 +138,41 @@ class AccountVoucher(models.Model):
 
         return line_dr_ids, line_cr_ids
 
+    @api.multi
+    def onchange_amount(
+        self, amount, rate, partner_id, journal_id,
+        currency_id, ttype, date, payment_rate_currency_id, company_id
+    ):
+        """
+        Patch the original onchange_amount method so that it does not
+        refresh the list of voucher lines when not required.
+        """
+        self = self.with_context(date=date)
 
-def onchange_amount(
-    self, cr, uid, ids, amount, rate, partner_id, journal_id,
-    currency_id, ttype, date, payment_rate_currency_id, company_id,
-    context=None
-):
-    """
-    Patch the original onchange_amount method so that it does not
-    refresh the list of voucher lines when not required.
-    """
-    if context is None:
-        context = {}
+        if currency_id:
+            currency = self.env['res.currency'].browse(currency_id)
+        else:
+            company = self.env['res.company'].browse(company_id)
+            currency = company.currency_id
 
-    ctx = context.copy()
-    ctx.update({'date': date})
-    currency_id = currency_id or self.pool.get('res.company').browse(
-        cr, uid, company_id, context=ctx).currency_id.id
-    voucher_rate = self.pool.get('res.currency').read(
-        cr, uid, currency_id, ['rate'], context=ctx)['rate']
-    ctx.update({
-        'voucher_special_currency': payment_rate_currency_id,
-        'voucher_special_currency_rate': rate * voucher_rate})
+        voucher_rate = currency.rate
 
-    if context.get('allow_auto_lines'):
-        res = self.recompute_voucher_lines(
-            cr, uid, ids, partner_id, journal_id, amount, currency_id,
-            ttype, date, context=ctx)
+        self = self.with_context(
+            voucher_special_currency=payment_rate_currency_id,
+            voucher_special_currency_rate=rate * voucher_rate
+        )
 
-    else:
-        res = {'value': {}}
+        if self.env.context.get('allow_auto_lines'):
+            res = self.recompute_voucher_lines(
+                partner_id, journal_id, amount, currency_id,
+                ttype, date)
+        else:
+            res = {'value': {}}
 
-    vals = self.onchange_rate(
-        cr, uid, ids, rate, amount, currency_id,
-        payment_rate_currency_id, company_id, context=ctx)
+        vals = self.onchange_rate(
+            rate, amount, currency_id, payment_rate_currency_id, company_id)
 
-    for key in vals.keys():
-        res[key].update(vals[key])
+        for key in vals.keys():
+            res[key].update(vals[key])
 
-    return res
-
-
-base_module.account_voucher.onchange_amount = onchange_amount
+        return res
