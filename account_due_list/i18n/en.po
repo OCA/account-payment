@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-03-02 19:16+0000\n"
-"PO-Revision-Date: 2016-03-02 19:16+0000\n"
+"POT-Creation-Date: 2016-05-07 05:05+0000\n"
+"PO-Revision-Date: 2016-05-07 05:05+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: English (http://www.transifex.com/oca/OCA-account-payment-8-0/language/en/)\n"
 "MIME-Version: 1.0\n"
@@ -38,15 +38,34 @@ msgid "Group By..."
 msgstr "Group By..."
 
 #. module: account_due_list
+#: help:account.move.line,payment_term_id:0
+msgid ""
+"If you use payment terms, the due date will be computed automatically at the"
+" generation of accounting entries. If you keep the payment term and the due "
+"date empty, it means direct payment. The payment term may compute several "
+"due dates, for example 50% now, 50% in one month."
+msgstr "If you use payment terms, the due date will be computed automatically at the generation of accounting entries. If you keep the payment term and the due date empty, it means direct payment. The payment term may compute several due dates, for example 50% now, 50% in one month."
+
+#. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 #: field:account.move.line,stored_invoice_id:0
 msgid "Invoice"
 msgstr "Invoice"
 
 #. module: account_due_list
+#: field:account.move.line,invoice_date:0
+msgid "Invoice Date"
+msgstr "Invoice Date"
+
+#. module: account_due_list
 #: model:ir.model,name:account_due_list.model_account_move_line
 msgid "Journal Items"
 msgstr "Journal Items"
+
+#. module: account_due_list
+#: help:account.move.line,invoice_date:0
+msgid "Keep empty to use the current date"
+msgstr "Keep empty to use the current date"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
@@ -69,6 +88,11 @@ msgid "Partner"
 msgstr "Partner"
 
 #. module: account_due_list
+#: field:account.move.line,partner_ref:0
+msgid "Partner Ref"
+msgstr "Partner Ref"
+
+#. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Payable"
 msgstr "Payable"
@@ -77,6 +101,11 @@ msgstr "Payable"
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Payable payments"
 msgstr "Payable payments"
+
+#. module: account_due_list
+#: field:account.move.line,payment_term_id:0
+msgid "Payment Terms"
+msgstr "Payment Terms"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_tree
@@ -100,6 +129,11 @@ msgid "Receivable payments"
 msgstr "Receivable payments"
 
 #. module: account_due_list
+#: help:account.move.line,invoice_origin:0
+msgid "Reference of the document that produced this invoice."
+msgstr "Reference of the document that produced this invoice."
+
+#. module: account_due_list
 #: field:account.move.line,maturity_residual:0
 msgid "Residual Amount"
 msgstr "Residual Amount"
@@ -108,6 +142,11 @@ msgstr "Residual Amount"
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Search Payments"
 msgstr "Search Payments"
+
+#. module: account_due_list
+#: field:account.move.line,invoice_origin:0
+msgid "Source Doc"
+msgstr "Source Doc"
 
 #. module: account_due_list
 #: help:account.move.line,maturity_residual:0
