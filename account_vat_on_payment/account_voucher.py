@@ -3,10 +3,9 @@
 # © 2014 Agile Business Group sagl (<http://www.agilebg.com>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-import ast
-
 from openerp.osv import orm, fields
 from openerp.tools.translate import _
+from openerp.tools.safe_eval import safe_eval
 
 
 class AccountVoucher(orm.Model):
@@ -206,9 +205,9 @@ class AccountVoucher(orm.Model):
                 document.journal_id.vat_on_payment_related_journal_id.id)
         return {
             'journal_id': real_journal,
-            'period_id': ast.literal_eval('document.%s.period_id.id' %
+            'period_id': safe_eval('document.%s.period_id.id' %
                                           move_id_field),
-            'date': ast.literal_eval('document.%s.date' % move_id_field),
+            'date': safe_eval('document.%s.date' % move_id_field),
         }
 
     def _move_payment_lines_to_shadow_entry(
