@@ -51,6 +51,8 @@
         'test/account_invoice_3_bank.yml',
         'test/account_invoice_5_bank.yml',
         'test/account_invoice_1_bank_shadow.yml',
+        'test/account_invoice_4_bank_shadow.yml',
+        'test/account_invoice_6_bank_shadow.yml',
     ],
     'images': [],
     'installable': True,
