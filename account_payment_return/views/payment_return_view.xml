@@ -32,8 +32,7 @@
 	                                    <field name="partner_name" invisible="1"/>
 	                                    <field name="partner_id" />
 	                                    <field name="reference" />
-	                                    <field name="move_line_ids"
-                                               widget="many2many_tags" options="{'no_create': True}"
+	                                    <field name="move_line_id"
                                                domain="[('partner_id', '=', partner_id),
                                                         ('account_id.type', '=', 'receivable'),
                                                         ('credit', '>', 0.0),
