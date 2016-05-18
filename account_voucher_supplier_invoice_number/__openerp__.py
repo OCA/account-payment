@@ -7,8 +7,6 @@
     'name': "Supplier Invoice Number In Payment Vouchers",
     'version': '8.0.1.0.0',
     'category': 'Accounting & Finance',
-    'description': """
-""",
     'author': (
         "Agile Business Group,"
         "Savoir-faire Linux,"
