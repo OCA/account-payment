@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 05:05+0000\n"
-"PO-Revision-Date: 2016-05-07 05:05+0000\n"
+"POT-Creation-Date: 2016-05-18 14:13+0000\n"
+"PO-Revision-Date: 2016-05-18 14:13+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: English (http://www.transifex.com/oca/OCA-account-payment-8-0/language/en/)\n"
 "MIME-Version: 1.0\n"
@@ -56,6 +56,11 @@ msgstr "Invoice"
 #: field:account.move.line,invoice_date:0
 msgid "Invoice Date"
 msgstr "Invoice Date"
+
+#. module: account_due_list
+#: field:account.move.line,invoice_user_id:0
+msgid "Invoice salesperson"
+msgstr "Invoice salesperson"
 
 #. module: account_due_list
 #: model:ir.model,name:account_due_list.model_account_move_line
@@ -137,6 +142,11 @@ msgstr "Reference of the document that produced this invoice."
 #: field:account.move.line,maturity_residual:0
 msgid "Residual Amount"
 msgstr "Residual Amount"
+
+#. module: account_due_list
+#: view:account.move.line:account_due_list.view_payments_filter
+msgid "Salesperson"
+msgstr "Salesperson"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
