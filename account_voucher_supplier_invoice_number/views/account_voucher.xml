@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <openerp>
-<data>
-
-        <!-- Supplier Payment -->
+    <data>
         <record model="ir.ui.view" id="view_vendor_payment_form">
             <field name="name">account.voucher.payment.form</field>
             <field name="model">account.voucher</field>
