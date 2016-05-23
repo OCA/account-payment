@@ -31,6 +31,7 @@ addon | version | summary
 [account_payment_term_multi_day](account_payment_term_multi_day/) | 8.0.1.0.0 | Multiple payment days for payment terms
 [account_vat_on_payment](account_vat_on_payment/) | 8.0.1.0.0 | VAT on payment
 [account_voucher_cash_basis](account_voucher_cash_basis/) | 8.0.1.0.0 | Cash basis extensions for vouchers
+[account_voucher_supplier_invoice_number](account_voucher_supplier_invoice_number/) | 8.0.1.0.0 | Supplier Invoice Number In Payment Vouchers
 [purchase_payment](purchase_payment/) | 8.0.1.0.0 | Migration for purchase payment
 [sale_payment](sale_payment/) | 8.0.1.0.0 | Migration for sale_payment
 
@@ -39,7 +40,6 @@ Unported addons
 addon | version | summary
 --- | --- | ---
 [account_voucher_display_writeoff](account_voucher_display_writeoff/) | 1.0r089 (unported) | Account voucher display writeoff
-[account_voucher_supplier_invoice_number](account_voucher_supplier_invoice_number/) | 0.1 (unported) | Supplier invoice number in payment vouchers
 [account_voucher_tax_filter](account_voucher_tax_filter/) | 1.0r028 (unported) | Account voucher tax filter
 [nan_account_bank_statement](nan_account_bank_statement/) | 0.1 (unported) | nan_account_bank_statement
 [pxgo_bank_statement_analytic](pxgo_bank_statement_analytic/) | 1.0 (unported) | Pexego - Analytic in Bank Statements
