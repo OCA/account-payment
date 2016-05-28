@@ -1,0 +1,96 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_voucher_cash_basis
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: account-payment (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-05-23 02:39+0000\n"
+"PO-Revision-Date: 2016-05-22 15:22+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-account-payment-8-0/language/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_voucher_cash_basis
+#: model:ir.model,name:account_voucher_cash_basis.model_account_voucher
+msgid "Accounting Voucher"
+msgstr "Buchhaltungsbeleg"
+
+#. module: account_voucher_cash_basis
+#: field:account.config.settings,allow_distributing_write_off:0
+#: field:res.company,allow_distributing_write_off:0
+msgid "Allow distributing write-off"
+msgstr ""
+
+#. module: account_voucher_cash_basis
+#: model:ir.model,name:account_voucher_cash_basis.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: account_voucher_cash_basis
+#: code:addons/account_voucher_cash_basis/account_voucher.py:61
+#: code:addons/account_voucher_cash_basis/account_voucher.py:201
+#, python-format
+msgid "Error"
+msgstr ""
+
+#. module: account_voucher_cash_basis
+#: field:account.voucher,exclude_write_off:0
+msgid "Exclude write-off from tax on payment"
+msgstr ""
+
+#. module: account_voucher_cash_basis
+#: help:account.config.settings,allow_distributing_write_off:0
+#: help:res.company,allow_distributing_write_off:0
+msgid ""
+"If not set, paying several 'cash basis' invoices with same voucher with "
+"write-off won't be allowed. If set, write-off will be distributed equally "
+"over invoices"
+msgstr ""
+
+#. module: account_voucher_cash_basis
+#: help:account.config.settings,max_balance_diff:0
+#: help:res.company,max_balance_diff:0
+msgid ""
+"In cash basis payments, while balancing unbalanced entries, this is maximum "
+"error allowed"
+msgstr ""
+
+#. module: account_voucher_cash_basis
+#: field:account.voucher,line_total:0
+msgid "Lines Total"
+msgstr ""
+
+#. module: account_voucher_cash_basis
+#: field:account.config.settings,max_balance_diff:0
+#: field:res.company,max_balance_diff:0
+msgid "Max balancing precision in cash basis"
+msgstr ""
+
+#. module: account_voucher_cash_basis
+#: help:account.voucher,exclude_write_off:0
+msgid ""
+"Select this if you want, when closing the invoice, the\n"
+"            tax to be computed\n"
+"            based on the invoice's totals instead of the paid amount"
+msgstr ""
+
+#. module: account_voucher_cash_basis
+#: code:addons/account_voucher_cash_basis/account_voucher.py:62
+#, python-format
+msgid "The generated payment entry is unbalanced for more than %d decimal"
+msgstr ""
+
+#. module: account_voucher_cash_basis
+#: code:addons/account_voucher_cash_basis/account_voucher.py:201
+#, python-format
+msgid ""
+"You are trying to pay with write-off more than one invoice and distributing "
+"write-off is not allowed. See company settings."
+msgstr ""
