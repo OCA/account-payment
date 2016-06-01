@@ -5,7 +5,6 @@
 
 from openerp.osv import orm, fields
 from openerp.tools.translate import _
-from openerp.tools.safe_eval import safe_eval
 
 
 class AccountVoucher(orm.Model):
@@ -203,7 +202,7 @@ class AccountVoucher(orm.Model):
         else:
             real_journal = (
                 document.journal_id.vat_on_payment_related_journal_id.id)
-        
+
         if move_id_field == 'move_id':
             move = document.move_id
         elif move_id_field == 'journal_entry_id':
