@@ -203,11 +203,15 @@ class AccountVoucher(orm.Model):
         else:
             real_journal = (
                 document.journal_id.vat_on_payment_related_journal_id.id)
+        
+        if move_id_field == 'move_id':
+            move = document.move_id
+        elif move_id_field == 'journal_entry_id':
+            move = document.journal_entry_id
         return {
             'journal_id': real_journal,
-            'period_id': safe_eval('document.%s.period_id.id' %
-                                          move_id_field),
-            'date': safe_eval('document.%s.date' % move_id_field),
+            'period_id': move.period_id.id,
+            'date': move.date,
         }
 
     def _move_payment_lines_to_shadow_entry(
