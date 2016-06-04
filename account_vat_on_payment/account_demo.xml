@@ -6,6 +6,7 @@
         <record id="scoa" model="account.account">
             <field name="code">SCoA</field>
             <field name="name">shadow COA</field>
+            <field ref="account.chart0" name="parent_id"/>
             <field name="type">view</field>
             <field name="user_type" ref="account.data_account_type_view"/>
         </record>

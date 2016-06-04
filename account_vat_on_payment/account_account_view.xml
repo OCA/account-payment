@@ -7,7 +7,7 @@
             <field name="inherit_id" ref="account.view_account_form"/>
             <field name="arch" type="xml">
                   <field position="after" name="child_consol_ids">
-                      <field name="vat_on_payment_related_account_id"/>
+                      <field name="vat_on_payment_related_account_id" domain="[('id','!=',active_id)]"/>
                     </field>
             </field>
         </record>

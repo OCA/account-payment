@@ -127,7 +127,7 @@ class AccountVoucher(orm.Model):
                 'allocated': 120.0,
                 'total': 120.0,
                 'total_currency': 0.0,
-                'write-off': 20.0,
+                'write-off': -20.0,
                 'allocated_currency': 0.0,
                 'foreign_currency_id': False, # int
                 'currency-write-off': 0.0,
