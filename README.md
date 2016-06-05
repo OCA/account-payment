@@ -29,7 +29,7 @@ addon | version | summary
 [account_payment_return_import](account_payment_return_import/) | 8.0.1.0.0 | This module add a generic wizard to import payment return fileformats. Is only the base to be extended by another modules
 [account_payment_return_import_sepa_pain](account_payment_return_import_sepa_pain/) | 8.0.1.0.0 | Module to import SEPA Direct Debit Unpaid Report File Format PAIN.002.001.03
 [account_payment_term_multi_day](account_payment_term_multi_day/) | 8.0.1.0.0 | Multiple payment days for payment terms
-[account_vat_on_payment](account_vat_on_payment/) | 8.0.1.0.0 | VAT on payment
+[account_vat_on_payment](account_vat_on_payment/) | 8.0.1.0.0 | VAT on Payment
 [account_voucher_cash_basis](account_voucher_cash_basis/) | 8.0.1.0.0 | Cash basis extensions for vouchers
 [account_voucher_supplier_invoice_number](account_voucher_supplier_invoice_number/) | 8.0.1.0.0 | Supplier Invoice Number In Payment Vouchers
 [purchase_payment](purchase_payment/) | 8.0.1.0.0 | Migration for purchase payment
