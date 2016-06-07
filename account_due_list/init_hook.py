@@ -89,14 +89,6 @@ def store_field_maturity_residual(cr):
         IS 'Residual Amount';
         """)
 
-    logger.info(
-        'Storing 0 as value to field amount_residual on account.move.line')
-
-    cr.execute(
-        """
-        UPDATE account_move_line SET maturity_residual = 0
-        """)
-
 
 def store_field_maturity_residual_post_init(env):
     logger.info('Computing field amount_residual on account.move.line')
