@@ -46,15 +46,11 @@ def store_field_stored_invoice_id(cr):
 
     cr.execute(
         """
-        UPDATE account_move_line
-        SET stored_invoice_id = subquery.invoice_id
-        FROM (
-            SELECT line.id as move_line_id, inv.id as invoice_id
-            FROM account_move_line line
-            LEFT OUTER JOIN account_move move ON line.move_id = move.id
-            LEFT OUTER JOIN account_invoice inv ON move.id = inv.move_id
-        ) AS subquery
-        WHERE account_move_line.id=subquery.move_line_id;
+        UPDATE account_move_line aml
+        SET stored_invoice_id = inv.id
+        FROM account_move AS am, account_invoice AS inv
+        WHERE am.id = aml.move_id
+        AND am.id = inv.move_id
         """
     )
 
@@ -71,11 +67,9 @@ def store_field_day(cr):
     cr.execute(
         """
         UPDATE account_move_line
-        SET day = subquery.date_maturity
-        FROM (
-            SELECT id, date_maturity FROM account_move_line
-        ) AS subquery
-        WHERE account_move_line.id=subquery.id;
+        SET day = ml.date_maturity
+        FROM account_move_line as ml
+        WHERE account_move_line.id = ml.id;
         """
     )
 
