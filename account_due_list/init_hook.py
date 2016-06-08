@@ -26,7 +26,6 @@ def pre_init_hook(cr):
     The post init script sets the value of maturity_residual.
     """
     store_field_stored_invoice_id(cr)
-    store_field_day(cr)
     store_field_maturity_residual(cr)
 
 
@@ -51,25 +50,6 @@ def store_field_stored_invoice_id(cr):
         FROM account_move AS am, account_invoice AS inv
         WHERE am.id = aml.move_id
         AND am.id = inv.move_id
-        """
-    )
-
-
-def store_field_day(cr):
-    cr.execute(
-        """
-        ALTER TABLE account_move_line ADD COLUMN day character varying(16);
-        COMMENT ON COLUMN account_move_line.day IS 'Day';
-        """)
-
-    logger.info('Computing field day on account.move.line')
-
-    cr.execute(
-        """
-        UPDATE account_move_line
-        SET day = ml.date_maturity
-        FROM account_move_line as ml
-        WHERE account_move_line.id = ml.id;
         """
     )
 
