@@ -26,6 +26,7 @@ def pre_init_hook(cr):
     The post init script sets the value of maturity_residual.
     """
     store_field_stored_invoice_id(cr)
+    store_field_invoice_user_id(cr)
     store_field_maturity_residual(cr)
 
 
@@ -50,6 +51,26 @@ def store_field_stored_invoice_id(cr):
         FROM account_move AS am, account_invoice AS inv
         WHERE am.id = aml.move_id
         AND am.id = inv.move_id
+        """
+    )
+
+
+def store_field_invoice_user_id(cr):
+    cr.execute(
+        """
+        ALTER TABLE account_move_line ADD COLUMN invoice_user_id integer;
+        COMMENT ON COLUMN account_move_line.invoice_user_id IS
+        'Invoice salesperson';
+        """)
+
+    logger.info('Computing field invoice_user_id on account.move.line')
+
+    cr.execute(
+        """
+        UPDATE account_move_line aml
+        SET invoice_user_id = inv.user_id
+        FROM account_invoice AS inv
+        WHERE aml.stored_invoice_id = inv.move_id
         """
     )
 
