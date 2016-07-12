@@ -12,6 +12,7 @@
             <tree string="Payments" colors="grey:reconcile_id!=False;red:date_maturity&lt;current_date">
                 <field name="stored_invoice_id" readonly="1"/>
                 <field name="invoice_date" readonly="1"/>
+                <field name="date_maturity" readonly="1"/>
                 <field name="invoice_origin" readonly="1"/>
                 <field name="partner_id" readonly="1"/>
                 <field name="partner_ref" readonly="1"/>
@@ -20,7 +21,7 @@
                 <field name="debit" readonly="1" sum="Total Debit"/>
                 <field name="credit" readonly="1" sum="Total Credit"/>
                 <field name="maturity_residual" sum="Total Residual"/>
-                <field name="date_maturity"/>
+                <field name="days_overdue" readonly="1"/>
                 <field name="move_id" readonly="1"/>
                 <field name="reconcile_id" readonly="1"/>
                 <field name="reconcile_partial_id" readonly="1"/>
@@ -43,12 +44,21 @@
                 <filter icon="terp-dolar_ok!" string="Unreconciled" domain="[('reconcile_id','=',False)]" help="Unreconciled payments"/>
                 <separator orientation="vertical"/>
                 <filter icon="terp-go-today" string="Overdue" domain="[('date_maturity','&lt;',time.strftime('%%Y-%%m-%%d'))]" help="Overdue payments" name="overdue"/>
+                <filter string="Overdue 0-29 days"
+                        domain="[('days_overdue','>',0), ('days_overdue','&lt;',30)]"/>
+                <filter string="Overdue 30-59 days"
+                        domain="[('days_overdue','>',30), ('days_overdue','&lt;',60)]"/>
+                <filter string="Overdue 60-89 days"
+                        domain="[('days_overdue','>',60), ('days_overdue','&lt;',90)]"/>
+                <filter string="Overdue > 90 days"
+                        domain="[('days_overdue','>',90)]"/>
                 <separator orientation="vertical"/>
                 <field name="account_id"/>
                 <field name="partner_id"/>
                 <field name="invoice"/>
                 <field name="invoice_origin"/>
                 <field name="date_maturity"/>
+                <field name="days_overdue"/>
                 <group expand="0" string="Group By...">
                     <filter string="Partner" icon="terp-partner" domain="[]" context="{'group_by':'partner_id'}"/>
                     <filter string="Invoice" icon="terp-folder-orange" domain="[]" context="{'group_by':'stored_invoice_id'}"/>
