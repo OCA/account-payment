@@ -26,6 +26,7 @@
 ##############################################################################
 
 from openerp import models, fields, api
+import datetime
 
 
 class AccountMoveLine(models.Model):
@@ -48,7 +49,14 @@ class AccountMoveLine(models.Model):
         compute='_maturity_residual', string="Residual Amount", store=True,
         help="The residual amount on a receivable or payable of a journal "
              "entry expressed in the company currency.")
+    due_amount = fields.Float(
+        compute='_compute_due_amount', string="Due Amount",
+        help="The due amount on a receivable or payable of a journal "
+             "entry expressed in the company currency.")
     day = fields.Char(compute='_get_day', string='Day', size=16, store=True)
+    days_overdue = fields.Integer(compute='_compute_days_overdue',
+                                  search='_search_days_overdue',
+                                  string='Days overdue')
 
     @api.multi
     @api.depends('date_maturity', 'debit', 'credit', 'reconcile_id',
@@ -56,6 +64,19 @@ class AccountMoveLine(models.Model):
                  'amount_currency', 'reconcile_partial_id.line_partial_ids',
                  'currency_id', 'company_id.currency_id')
     def _maturity_residual(self):
+        """
+            inspired by amount_residual
+        """
+        for move_line in self:
+            sign = (move_line.debit - move_line.credit) < 0 and -1 or 1
+            move_line.maturity_residual = move_line.amount_residual * sign
+
+    @api.multi
+    @api.depends('date_maturity', 'debit', 'credit', 'reconcile_id',
+                 'reconcile_partial_id', 'account_id.reconcile',
+                 'amount_currency', 'reconcile_partial_id.line_partial_ids',
+                 'currency_id', 'company_id.currency_id')
+    def _compute_due_amount(self):
         """
             inspired by amount_residual
         """
@@ -78,6 +99,32 @@ class AccountMoveLine(models.Model):
                 line.day = line.date_maturity
             else:
                 line.day = False
+
+    @api.depends('date_maturity')
+    def _compute_days_overdue(self):
+        today_date = fields.Date.from_string(fields.Date.today())
+        for line in self:
+            if line.date_maturity:
+                date_maturity = fields.Date.from_string(
+                    line.date_maturity)
+                days_overdue = (today_date - date_maturity).days
+                if days_overdue > 0:
+                    line.days_overdue = days_overdue
+
+    def _search_days_overdue(self, operator, value):
+        due_date = fields.Date.from_string(fields.Date.today()) - \
+                   datetime.timedelta(days=value)
+        if operator in ('!=', '<>', 'in', 'not in'):
+            raise ValueError('Invalid operator: %s' % (operator,))
+        if operator == '>':
+            operator = '<'
+        elif operator == '<':
+            operator = '>'
+        elif operator == '>=':
+            operator = '<='
+        elif operator == '<=':
+            operator = '>='
+        return [('date_maturity', operator, due_date)]
 
     @api.model
     def fields_view_get(self, view_id=None, view_type='form', toolbar=False,
