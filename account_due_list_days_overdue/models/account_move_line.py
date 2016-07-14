@@ -47,8 +47,8 @@ class AccountMoveLine(models.Model):
         today_date = fields.Date.from_string(fields.Date.today())
         overdue_terms = self.env['account.overdue.term'].search([])
         for line in self:
-            for tech_name in overdue_terms:
-                line[tech_name] = 0.0
+            for term in overdue_terms:
+                line[term.tech_name] = 42
             if line.date_maturity and line.amount_residual:
                 date_maturity = fields.Date.from_string(
                     line.date_maturity)
@@ -69,23 +69,23 @@ class AccountMoveLine(models.Model):
                                                               view_type,
                                                               toolbar=toolbar,
                                                               submenu=submenu)
-        overdue_terms = self.env['account.overdue.term'].search(
-            [], order='from_day ASC')
 
         doc = etree.XML(result['arch'])
-        if result['model'] == 'account.move.line' and result['type'] == 'tree':
-            placeholder = doc.xpath("//field[@name='days_overdue']")
-            if placeholder:
-                placeholder = placeholder[0]
-                for overdue_term in overdue_terms:
+        if view_type == 'tree':
+            for placeholder in doc.xpath("//field[@name='days_overdue']"):
+                for overdue_term in self.env['account.overdue.term'].search(
+                        [], order='from_day ASC'):
                     placeholder.addnext(etree.Element(
                         'field', {'name': str(overdue_term.tech_name)}))
                     result['fields'].update({
-                        overdue_term.tech_name: {'domain': [],
-                                                 'string': overdue_term.name,
-                                                 'readonly': False,
-                                                 'context': {},
-                                                 'type': 'float'}})
+                        overdue_term.tech_name: {
+                            'domain': [],
+                            'string': overdue_term.name,
+                            'readonly': False,
+                            'context': {},
+                            'type': 'float'
+                        }
+                    })
                 result['arch'] = etree.tostring(doc)
         return result
 
@@ -93,12 +93,13 @@ class AccountMoveLine(models.Model):
         term_obj = self.pool['account.overdue.term']
         term_ids = term_obj.search(cr, SUPERUSER_ID, [])
         for term in  term_obj.browse(cr, SUPERUSER_ID, term_ids):
-            field_name = term.tech_name
+            # the orm does unicode
+            field_name = str(term.tech_name)
             # register_hook can be called multiple times
             if field_name in self._fields:
                 continue
-            self._fields[field_name] = fields.Float(
-                string=term.name, compute='_compute_overdue_terms')
+            self._add_field(field_name, fields.Float(
+                string=term.name, compute='_compute_overdue_terms'))
         self._setup_fields(cr, SUPERUSER_ID)
         self._setup_complete(cr, SUPERUSER_ID)
         return super(AccountMoveLine, self)._register_hook(cr)

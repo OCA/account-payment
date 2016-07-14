@@ -13,4 +13,4 @@ class AccountDaysOverdue(models.Model):
     name = fields.Char(size=10, required=True)
     from_day = fields.Integer(string='From day', required=True)
     to_day = fields.Integer(string='From day', required=True)
-    tech_name = fields.Char('Technical name', readonly=True)
+    tech_name = fields.Char('Technical name', required=True)
