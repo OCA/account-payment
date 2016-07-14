@@ -22,6 +22,7 @@
                             <field name="name"/>
                             <field name="from_day"/>
                             <field name="to_day"/>
+                            <field name="tech_name" />
                         </group>
                     </form>
                 </field>
