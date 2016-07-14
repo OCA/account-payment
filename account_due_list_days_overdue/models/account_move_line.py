@@ -12,7 +12,6 @@ class AccountMoveLine(models.Model):
     days_overdue = fields.Integer(compute='_compute_days_overdue',
                                   search='_search_days_overdue',
                                   string='Days overdue')
-    overdue_term_last = fields.Float(string='> Last overdue term')
 
     @api.multi
     @api.depends('date_maturity')
@@ -48,15 +47,16 @@ class AccountMoveLine(models.Model):
         overdue_terms = self.env['account.overdue.term'].search([])
         for line in self:
             for term in overdue_terms:
-                line[term.tech_name] = 42
+                line[term.tech_name] = 0.0
             if line.date_maturity and line.amount_residual:
                 date_maturity = fields.Date.from_string(
                     line.date_maturity)
                 days_overdue = (today_date - date_maturity).days
 
                 for overdue_term in overdue_terms:
-                    if overdue_term.from_day > days_overdue > \
-                            overdue_term.to_day and line.amount_residual > 0.0:
+                    if overdue_term.to_day > days_overdue > \
+                            overdue_term.from_day and line.amount_residual > \
+                            0.0:
                         line[overdue_term.tech_name] = line.amount_residual
                 if all(line[term.tech_name] == 0.0 for term in overdue_terms) and\
                         line.amount_residual > 0.0:
@@ -74,7 +74,7 @@ class AccountMoveLine(models.Model):
         if view_type == 'tree':
             for placeholder in doc.xpath("//field[@name='days_overdue']"):
                 for overdue_term in self.env['account.overdue.term'].search(
-                        [], order='from_day ASC'):
+                        [], order='from_day DESC'):
                     placeholder.addnext(etree.Element(
                         'field', {'name': str(overdue_term.tech_name)}))
                     result['fields'].update({

@@ -14,3 +14,18 @@ class AccountDaysOverdue(models.Model):
     from_day = fields.Integer(string='From day', required=True)
     to_day = fields.Integer(string='From day', required=True)
     tech_name = fields.Char('Technical name', required=True)
+
+    @api.model
+    def create(self, vals):
+        self.pool['account.move.line']._register_hook(self.env.cr)
+        return super(AccountDaysOverdue, self).create(vals)
+
+    @api.multi
+    def write(self, vals):
+        self.pool['account.move.line']._register_hook(self.env.cr)
+        return super(AccountDaysOverdue, self).write(vals)
+
+    @api.multi
+    def unlink(self):
+        self.pool['account.move.line']._register_hook(self.env.cr)
+        return super(AccountDaysOverdue, self).unlink()
