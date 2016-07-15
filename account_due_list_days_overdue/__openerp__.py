@@ -15,8 +15,12 @@
         'account_due_list',
     ],
     "data": [
+        'security/ir.model.access.csv',
         'views/account_overdue_term_view.xml',
         'views/account_move_line_view.xml'
+    ],
+    "demo": [
+        'demo/account_overdue_term_demo.xml'
     ],
     "installable": True,
 }

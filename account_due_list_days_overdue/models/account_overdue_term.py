@@ -48,12 +48,11 @@ class AccountDaysOverdue(models.Model):
         for rec in self:
             date_domain = [
                 ('from_day', '<=', rec.to_day),
-                ('to_day', '>=', rec.from_day),
-            ]
+                ('to_day', '>=', rec.from_day)]
 
             overlap = self.search(date_domain + [('id', '!=', self.id)])
 
             if overlap:
                 raise exceptions.ValidationError(
-                        _('Overdue Term %s overlaps with %s') %
-                        (rec.name, overlap[0].name))
+                    _('Overdue Term %s overlaps with %s') %
+                    (rec.name, overlap[0].name))

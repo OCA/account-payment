@@ -3,7 +3,7 @@
 # <http://www.eficent.com>).
 # © 2016 Therp BV (<http://therp.nl>).
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from openerp import api, fields, models, SUPERUSER_ID, _
+from openerp import api, fields, models, SUPERUSER_ID
 import datetime
 from lxml import etree
 
@@ -28,8 +28,8 @@ class AccountMoveLine(models.Model):
                     line.days_overdue = days_overdue
 
     def _search_days_overdue(self, operator, value):
-        due_date = fields.Date.from_string(fields.Date.today()) - \
-                   datetime.timedelta(days=value)
+        due_date = fields.Date.from_string(
+            fields.Date.today()) - datetime.timedelta(days=value)
         if operator in ('!=', '<>', 'in', 'not in'):
             raise ValueError('Invalid operator: %s' % (operator,))
         if operator == '>':
@@ -56,13 +56,10 @@ class AccountMoveLine(models.Model):
                 days_overdue = (today_date - date_maturity).days
 
                 for overdue_term in overdue_terms:
-                    if overdue_term.to_day > days_overdue > \
-                            overdue_term.from_day and line.amount_residual > \
-                            0.0:
+                    if overdue_term.to_day >= days_overdue >= \
+                            overdue_term.from_day \
+                            and line.amount_residual > 0.0:
                         line[overdue_term.tech_name] = line.amount_residual
-                if all(line[term.tech_name] == 0.0 for term in overdue_terms) and\
-                        line.amount_residual > 0.0:
-                    line.overdue_term_last = line.amount_residual
 
     @api.model
     def fields_view_get(self, view_id=None, view_type='form', toolbar=False,
