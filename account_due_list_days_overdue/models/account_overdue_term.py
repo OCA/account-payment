@@ -34,10 +34,11 @@ class AccountDaysOverdue(models.Model):
 
     @api.multi
     def write(self, vals):
+        res = super(AccountDaysOverdue, self).write(vals)
         if self.pool['account.move.line']._register_hook(self.env.cr):
             RegistryManager.signal_registry_change(
                 self.env.cr.dbname)
-        return super(AccountDaysOverdue, self).write(vals)
+        return res
 
     @api.multi
     @api.constrains('from_day', 'to_day')
