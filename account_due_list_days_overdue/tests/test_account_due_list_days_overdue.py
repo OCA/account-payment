@@ -8,7 +8,6 @@ import openerp.tests.common as common
 from datetime import date, timedelta
 from openerp import workflow
 from openerp import exceptions
-from openerp.modules.registry import RegistryManager
 
 
 class TestAccountDueListDaysOverdue(common.TransactionCase):
