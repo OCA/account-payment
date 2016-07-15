@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
-# © 2015 Eficent Business and IT Consulting Services S.L.
+# © 2016 Eficent Business and IT Consulting Services S.L. (
+# <http://www.eficent.com>).
+# © 2016 Therp BV (<http://therp.nl>).
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from openerp import api, fields, models, SUPERUSER_ID, _
 import datetime
@@ -92,7 +94,7 @@ class AccountMoveLine(models.Model):
     def _register_hook(self, cr):
         term_obj = self.pool['account.overdue.term']
         term_ids = term_obj.search(cr, SUPERUSER_ID, [])
-        for term in  term_obj.browse(cr, SUPERUSER_ID, term_ids):
+        for term in term_obj.browse(cr, SUPERUSER_ID, term_ids):
             # the orm does unicode
             field_name = str(term.tech_name)
             # register_hook can be called multiple times
