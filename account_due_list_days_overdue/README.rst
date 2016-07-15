@@ -7,18 +7,22 @@ Account Due List Days Overdue
 =============================
 
 This module adds to the 'Payments and due list' view the number of days that
- an open item is overdue, and up to 5 columns where the amount overdue is
- classified by periods (e.g. 1-30, 31-60,..).
+ an open item is overdue, and classifies the amount due in separate terms
+ columns  (e.g. 1-30, 31-60, +61).
 
-The number of periods/buckets to show in the list and the number of days for
- within each bucket can be defined in the company settings.
+The terms columns to show in the list and the number of days for within each
+term can be configured.
 
 
 Configuration
 =============
 
-* Go to 'Settings / Companies / Companies' and change, in tab 'Aging
-  parameters', the number of days overdue for each bucket.
+* Go to 'Invoicing / Configuration / Overdue Terms', and add the terms,
+  providing the day from, date to and a name that will be displayed in the
+  Payments and due list as column.
+
+* It is recommended to always add a last term '+ X' where the 'to days' value
+  is a very big value like 99999.
 
 
 Usage
