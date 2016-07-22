@@ -17,6 +17,11 @@ class account_voucher(models.Model):
         lines = value.get(line_type) if line_type in value else []
 
         for vals in lines:
+            if isinstance(vals, tuple):
+                if vals[0] == 0:
+                    vals = vals[2]
+                else:
+                    continue
             if vals.get('move_line_id'):
                 vals['document_source'] = line_obj.get_document_source(
                     vals['move_line_id'])
