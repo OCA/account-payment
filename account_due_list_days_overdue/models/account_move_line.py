@@ -80,9 +80,10 @@ class AccountMoveLine(models.Model):
                         overdue_term.tech_name: {
                             'domain': [],
                             'string': overdue_term.name,
-                            'readonly': False,
+                            'readonly': True,
                             'context': {},
-                            'type': 'float'
+                            'type': 'float',
+                            'sum': 'Total'
                         }
                     })
                 result['arch'] = etree.tostring(doc)
