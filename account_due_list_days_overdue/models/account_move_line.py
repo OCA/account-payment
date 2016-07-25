@@ -6,6 +6,7 @@
 from openerp import api, fields, models, SUPERUSER_ID
 import datetime
 from lxml import etree
+from openerp.osv import orm
 
 
 class AccountMoveLine(models.Model):
@@ -74,18 +75,23 @@ class AccountMoveLine(models.Model):
             for placeholder in doc.xpath("//field[@name='days_overdue']"):
                 for overdue_term in self.env['account.overdue.term'].search(
                         [], order='from_day DESC'):
-                    placeholder.addnext(etree.Element(
-                        'field', {'name': str(overdue_term.tech_name)}))
+                    elem = etree.Element(
+                        'field', {
+                            'name': str(overdue_term.tech_name),
+                            'readonly': 'True'
+                        })
+                    orm.setup_modifiers(elem)
+                    placeholder.addnext(elem)
                     result['fields'].update({
                         overdue_term.tech_name: {
                             'domain': [],
                             'string': overdue_term.name,
-                            'readonly': True,
                             'context': {},
                             'type': 'float',
                             'sum': 'Total'
                         }
                     })
+
                 result['arch'] = etree.tostring(doc)
         return result
 
