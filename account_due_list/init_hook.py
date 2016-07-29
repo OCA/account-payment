@@ -70,7 +70,7 @@ def store_field_invoice_user_id(cr):
         UPDATE account_move_line aml
         SET invoice_user_id = inv.user_id
         FROM account_invoice AS inv
-        WHERE aml.stored_invoice_id = inv.move_id
+        WHERE aml.stored_invoice_id = inv.id
         """
     )
 
