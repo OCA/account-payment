@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_payments_tree" model="ir.ui.view">
+            <field name="name">Payments</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account_due_list.view_payments_tree"/>
+            <field name="priority" eval="20"/>
+            <field name="arch" type="xml">
+                <field name="maturity_residual" position="after">
+                    <field name="days_overdue"/>
+                    <field name="overdue_term_1" sum="Total Term 1"/>
+                    <field name="overdue_term_2" sum="Total Term 2"/>
+                    <field name="overdue_term_3" sum="Total Term 3"/>
+                    <field name="overdue_term_4" sum="Total Term 4"/>
+                    <field name="overdue_term_5" sum="Total Term 5"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
