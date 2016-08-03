@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+  <data>
+
+    <record id="view_bitcoin_address_form" model="ir.ui.view">
+      <field name="name">bitcoin.address.form</field>
+      <field name="model">bitcoin.address</field>
+      <field name="arch" type="xml">
+        <form string="Payment Transactions">
+          <sheet>
+            <group>
+              <group>
+                <field name="name"/>
+              </group>
+              <group>
+                <field name="order_id" />
+                <field name="create_date" readonly="1"/>
+                <field name="create_uid" readonly="1"/>
+              </group>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="view_bitcoin_address_list" model="ir.ui.view">
+      <field name="name">bitcoin.address.list</field>
+      <field name="model">bitcoin.address</field>
+      <field name="arch" type="xml">
+        <tree string="Payment Transactions">
+          <field name="name"/>
+          <field name="order_id"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="view_bitcoin_address_search" model="ir.ui.view">
+      <field name="name">bitcoin.address.search</field>
+      <field name="model">bitcoin.address</field>
+      <field name="arch" type="xml">
+        <search>
+          <filter string="Unused" name="new" domain="[('order_id','=',False)]"/>
+          <field name="name"/>
+        </search>
+      </field>
+    </record>
+
+    <record id="action_bitcoin_address" model="ir.actions.act_window">
+        <field name="name">Bitcoin Addresses</field>
+        <field name="res_model">bitcoin.address</field>
+        <field name='view_type'>form</field>
+        <field name='view_mode'>tree,form</field>
+        <field name="context">{'search_default_new':1}</field>
+    </record>
+
+    <menuitem action='action_bitcoin_address' id='menu_bitcoin_address' parent='payment.root_payment_menu' sequence='40' />
+
+    <record id="view_bitcoin_rate_form" model="ir.ui.view">
+      <field name="name">bitcoin.rate.form</field>
+      <field name="model">bitcoin.rate</field>
+      <field name="arch" type="xml">
+        <form string="Payment Transactions">
+          <sheet>
+            <group>
+              <field name="url"/>
+              <field name="markup"/>
+              <field name="unit"/>
+              <field name="valid_minutes"/>
+            </group>
+            <group>
+              <field name="rate_lines" colspan="4" nolabel="1">
+                <tree string="Rates">
+                  <field name="create_date"/>
+                  <field name="currency_id"/>
+                  <field name="amount"/>
+                  <field name="rate"/>
+                </tree>
+              </field>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
+    <record id="view_bitcoin_rate_list" model="ir.ui.view">
+      <field name="name">bitcoin.rate.list</field>
+      <field name="model">bitcoin.rate</field>
+      <field name="arch" type="xml">
+        <tree string="Payment Transactions">
+          <field name="url"/>
+        </tree>
+      </field>
+    </record>
+
+    <record id="action_bitcoin_rate" model="ir.actions.act_window">
+        <field name="name">Bitcoin Rate</field>
+        <field name="res_model">bitcoin.rate</field>
+        <field name='view_type'>form</field>
+        <field name='view_mode'>tree,form</field>
+        <field name="context">{'search_default_new':1}</field>
+    </record>
+
+    <menuitem action='action_bitcoin_rate' id='menu_bitcoin_rate' parent='payment.root_payment_menu' sequence='40' />
+
+
+  </data>
+</openerp>

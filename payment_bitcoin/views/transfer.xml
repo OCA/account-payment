@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+      <template id="bitcoin_acquirer_button">
+        <form t-if="acquirer" t-att-action="tx_url" method="post" target="_self">
+            <t t-if="tx_values.get('return_url')">
+                <input type='hidden' name='return_url' t-att-value='tx_values["return_url"]'/>
+            </t>
+            <input type='hidden' name='reference' t-att-value='reference'/>
+            <input type='hidden' name='amount' t-att-value='amount or "0.0"'/>
+            <input type='hidden' name='currency' t-att-value='currency.name'/>
+            <button type="submit" width="100px"
+                t-att-class="submit_class">
+                <img t-if="not submit_txt" src="/payment_bitcoin/static/src/img/bitcoin_icon.png"/>
+                <span t-if="submit_txt"><t t-esc="submit_txt"/> <span class="fa fa-long-arrow-right"/></span>
+            </button>
+        </form>
+      </template>
+
+      <record id="transaction_form_bitcoin" model="ir.ui.view">
+        <field name="name">acquirer.transaction.form.bitcoin</field>
+        <field name="model">payment.transaction</field>
+        <field name="inherit_id" ref="payment.transaction_form"/>
+        <field name="arch" type="xml">
+          <xpath expr='//notebook' position='inside'>
+            <page string="Bitcoin TX Details">
+              <group>
+                <field name="bitcoin_address"/>
+                <field name="bitcoin_amount"/>
+              </group>
+            </page>
+          </xpath>
+        </field>
+      </record>
+
+
+
+    </data>
+</openerp>
