@@ -48,7 +48,6 @@ class BitcoinAddress(models.Model):
                     _('Invalid Bitcoin Address'),
                     _("Bitcoin Address '%s' doesn't seem \
                      to valid Bitcoin Address") % obj.name)
-                return False
         return True
 
     _constraints = [
