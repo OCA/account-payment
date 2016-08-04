@@ -3,9 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import logging
-import pprint
 import werkzeug
-import openerp
 
 from openerp import http, SUPERUSER_ID
 from openerp.http import request
@@ -24,8 +22,7 @@ class BitcoinController(http.Controller):
     def transfer_form_feedback(self, **post):
         cr, uid, context = request.cr, SUPERUSER_ID, request.context
         _logger.info(
-            'Beginning form_feedback with post data %s',
-            pprint.pformat(post))  # debug
+            'Beginning form_feedback with post data %s') % (post)
         request.registry['payment.transaction'].\
             form_feedback(cr, uid, post, 'bitcoin', context)
         return werkzeug.utils.redirect(post.pop('return_url', '/'))

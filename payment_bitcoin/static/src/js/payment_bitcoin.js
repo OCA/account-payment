@@ -1,8 +1,7 @@
 $(document).ready(function () {
 
-    // When choosing an delivery carrier, update the quotation and the acquirers
+    // When choosing a delivery carrier, update the quotation and the acquirers
     var $payment_method = $("#payment_method");
-    console.log('Payment Method');
     $payment_method.find("input[name='acquirer']").click(function (ev) {
         var $method_id = $(ev.currentTarget).val();
         console.log($method_id);

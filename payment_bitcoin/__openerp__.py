@@ -11,7 +11,8 @@
     'author': 'initOS GmbH, Odoo Community Association (OCA)',
     'depends': [
         'payment',
-        'sale'
+        'sale',
+        'website'
     ],
     'data': [
         'views/bitcoin.xml',

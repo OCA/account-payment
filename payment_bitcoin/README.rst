@@ -10,7 +10,12 @@ Bitcoin Transfer Payment Acquirer
 Usage
 =====
 
-* go to ...
+* go to Settings -> Payments -> Payment Acquirers -> Bitcoin
+* The user can define Bitcoin Address under:
+      Settings -> Payments -> Bitcoin Addresses
+* The user can define Bitcoin Rates under:
+      Settings -> Payments -> Bitcoin Rate.
+
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
 
    :alt: Try me on Runbot
@@ -34,6 +39,11 @@ Contributors
 * Markus Schneider <markus.schneider@initos.com>
 * Katja Matthes <katja.matthes@initos.com>
 * Henning Rothe <henning.rothe@initos.com>
+
+
+Sponsors
+--------
+
 * Sponsored by Nitrokey: www.nitrokey.com
 
 Maintainer
