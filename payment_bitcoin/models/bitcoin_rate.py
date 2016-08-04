@@ -16,8 +16,8 @@ class BitcoinRate(models.Model):
 
     url = fields.Char(
         'Bitcoin Rate URL',
-        default=
-        'https://blockchain.info/tobtc?currency={CURRENCY}&value={AMOUNT}'
+        default='https://blockchain.info/tobtc?\
+        currency={CURRENCY}&value={AMOUNT}'
     )
     rate_lines = fields.One2many('bitcoin.rate.line', 'rate_id', 'Rates')
 
@@ -27,8 +27,7 @@ class BitcoinRate(models.Model):
     valid_minutes = fields.Integer(
         'Rate Valid For (Minutes)',
         default=20,
-        help=
-        "after this minutes rate will be checked again for same amount")
+        help="after this minutes rate will be checked again for same amount")
 
     @api.model
     def get_rate(self, order_id=False, order_ref=False):

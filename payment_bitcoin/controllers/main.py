@@ -31,7 +31,7 @@ class BitcoinController(http.Controller):
                 type='json',
                 auth="none")
     def payment_bitcoin_rate(self, order_id=False, order_ref=False):
-        cr, uid, context, registry = request.cr, request.uid, request.context, request.registry
+        cr, registry = request.cr, request.registry
         b_vals = registry.get('bitcoin.rate').\
             get_rate(cr, SUPERUSER_ID, order_id, order_ref)
         return b_vals
@@ -46,7 +46,7 @@ class website_sale(openerp.addons.website_sale.controllers.main.website_sale):
     def payment_get_status(self, sale_order_id, **post):
         resp = super(website_sale, self).payment_get_status(sale_order_id)
 
-        cr, uid, context = request.cr, request.uid, request.context
+        cr, context = request.cr, request.context
         order = request.registry['sale.order'].\
             browse(cr, SUPERUSER_ID, sale_order_id, context=context)
 

@@ -6,6 +6,11 @@ Payment Bitcoin
 ===============
 
 Bitcoin Transfer Payment Acquirer
+Bitcoin is an innovative payment network and a new kind of money. It uses peer-to-peer technology to operate with no
+central authority or banks; managing transactions and the issuing of bitcoins is carried out collectively by the network
+Bitcoin is open-source; its design is public, nobody owns or controls Bitcoin and everyone can take part. Through many
+of its unique properties, Bitcoin allows exciting uses that could not be covered by any previous payment system.
+This Module allows Payment Transactions using Bitcoin
 
 Usage
 =====
@@ -17,9 +22,8 @@ Usage
       Settings -> Payments -> Bitcoin Rate.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
-
    :alt: Try me on Runbot
-   :target:  https://runbot.odoo-community.org/runbot/96/8.0
+   :target: https://runbot.odoo-community.org/runbot/96/8.0
 
 
 Bug Tracker
@@ -39,7 +43,7 @@ Contributors
 * Markus Schneider <markus.schneider@initos.com>
 * Katja Matthes <katja.matthes@initos.com>
 * Henning Rothe <henning.rothe@initos.com>
-
+* Rami Alwafaie <rami.alwafaie@initos.com>
 
 Sponsors
 --------
