@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <!-- Customer Payment -->
+        <record model="ir.ui.view" id="view_vendor_receipt_form">
+            <field name="name">account.voucher.receipt.form</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher.view_vendor_receipt_form"></field>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='line_cr_ids']/tree/field[@name='amount_original']" position="before">
+                    <field name="document_source"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
