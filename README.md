@@ -32,6 +32,7 @@ addon | version | summary
 [account_payment_term_multi_day](account_payment_term_multi_day/) | 8.0.1.0.0 | Multiple payment days for payment terms
 [account_vat_on_payment](account_vat_on_payment/) | 8.0.1.0.0 | VAT on Payment
 [account_voucher_cash_basis](account_voucher_cash_basis/) | 8.0.1.0.0 | Cash basis extensions for vouchers
+[account_voucher_source_document](account_voucher_source_document/) | 8.0.1.0.0 | Source Document in Customer Payments
 [account_voucher_supplier_invoice_number](account_voucher_supplier_invoice_number/) | 8.0.1.0.0 | Supplier Invoice Number In Payment Vouchers
 [purchase_payment](purchase_payment/) | 8.0.1.0.0 | Migration for purchase payment
 [sale_payment](sale_payment/) | 8.0.1.0.0 | Migration for sale_payment
