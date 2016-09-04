@@ -27,7 +27,7 @@ class TestAccountVoucher(common.TransactionCase):
 
         self.partner = self.env['res.partner'].create({
             'name': 'Test',
-            'supplier': True,
+            'partner': True,
         })
 
     def create_invoice(self, invoice_type, amount):
@@ -38,7 +38,7 @@ class TestAccountVoucher(common.TransactionCase):
             'account_id': self.account.id,
             'date_invoice': '%s-01-01' % year,
             'type': invoice_type,
-            'supplier_invoice_number': 'TEST1234',
+            'invoice_number': 'TEST1234',
             'invoice_line': [(0, 0, {
                 'name': 'Test',
                 'account_id': self.account_expense.id,
@@ -59,7 +59,7 @@ class TestAccountVoucher(common.TransactionCase):
             'type': 'payment',
         })
 
-    def test_01_voucher_line_supplier_invoice_number(self):
+    def test_01_voucher_line_invoice_number(self):
         self.create_invoice('in_invoice', 100)
         v = self.voucher
         onchange_res = v.onchange_partner_id(
@@ -67,16 +67,16 @@ class TestAccountVoucher(common.TransactionCase):
             v.type, v.date)
 
         lines = [(0, 0, l) for l in onchange_res['value']['line_dr_ids']]
-        self.assertEqual(lines[0][2]['supplier_invoice_number'], 'TEST1234')
+        self.assertEqual(lines[0][2]['invoice_number'], 'TEST1234')
         self.voucher.write({'line_cr_ids': lines})
 
         voucher_line = self.voucher.line_ids[0]
-        self.assertEqual(voucher_line.supplier_invoice_number, 'TEST1234')
+        self.assertEqual(voucher_line.invoice_number, 'TEST1234')
 
-        self.invoice.write({'supplier_invoice_number': 'TEST5678'})
-        self.assertEqual(voucher_line.supplier_invoice_number, 'TEST5678')
+        self.invoice.write({'invoice_number': 'TEST5678'})
+        self.assertEqual(voucher_line.invoice_number, 'TEST5678')
 
-    def test_02_voucher_line_supplier_invoice_number_refund(self):
+    def test_02_voucher_line_invoice_number_refund(self):
         self.create_invoice('in_refund', 100)
         v = self.voucher
         onchange_res = v.onchange_partner_id(
@@ -84,11 +84,11 @@ class TestAccountVoucher(common.TransactionCase):
             v.type, v.date)
 
         lines = [(0, 0, l) for l in onchange_res['value']['line_cr_ids']]
-        self.assertEqual(lines[0][2]['supplier_invoice_number'], 'TEST1234')
+        self.assertEqual(lines[0][2]['invoice_number'], 'TEST1234')
         self.voucher.write({'line_cr_ids': lines})
 
         voucher_line = self.voucher.line_ids[0]
-        self.assertEqual(voucher_line.supplier_invoice_number, 'TEST1234')
+        self.assertEqual(voucher_line.invoice_number, 'TEST1234')
 
-        self.invoice.write({'supplier_invoice_number': 'TEST5678'})
-        self.assertEqual(voucher_line.supplier_invoice_number, 'TEST5678')
+        self.invoice.write({'invoice_number': 'TEST5678'})
+        self.assertEqual(voucher_line.invoice_number, 'TEST5678')

@@ -5,12 +5,13 @@
 
 {
     'name': "Supplier Invoice Number In Payment Vouchers",
-    'version': '8.0.1.0.0',
+    'version': '8.0.2.0.0',
     'category': 'Accounting & Finance',
     'author': (
         "Agile Business Group,"
         "Savoir-faire Linux,"
-        "Odoo Community Association (OCA)"
+        "Odoo Community Association (OCA),"
+        u"Blanco Martín & Asociados"
     ),
     'website': 'http://www.agilebg.com',
     'license': 'AGPL-3',

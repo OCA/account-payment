@@ -1,6 +1,6 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-# 	* account_voucher_supplier_invoice_number
+# 	* account_voucher_invoice_number
 #
 msgid ""
 msgstr ""
@@ -16,7 +16,7 @@ msgstr ""
 "Plural-Forms: \n"
 "X-Generator: Poedit 1.5.4\n"
 
-#. module: account_voucher_supplier_invoice_number
-#: field:account.voucher.line,supplier_invoice_number:0
+#. module: account_voucher_invoice_number
+#: field:account.voucher.line,invoice_number:0
 msgid "Supplier Invoice Number"
 msgstr "Numéro de facture fournisseur"

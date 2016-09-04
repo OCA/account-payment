@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * account_voucher_supplier_invoice_number
+# * account_voucher_invoice_number
 # 
 # Translators:
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2016
@@ -18,17 +18,17 @@ msgstr ""
 "Language: sl\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
-#. module: account_voucher_supplier_invoice_number
-#: model:ir.model,name:account_voucher_supplier_invoice_number.model_account_voucher
+#. module: account_voucher_invoice_number
+#: model:ir.model,name:account_voucher_invoice_number.model_account_voucher
 msgid "Accounting Voucher"
 msgstr "Računovodski vavčer"
 
-#. module: account_voucher_supplier_invoice_number
-#: field:account.voucher.line,supplier_invoice_number:0
+#. module: account_voucher_invoice_number
+#: field:account.voucher.line,invoice_number:0
 msgid "Supplier Invoice Number"
 msgstr "Dobaviteljeva številka računa"
 
-#. module: account_voucher_supplier_invoice_number
-#: model:ir.model,name:account_voucher_supplier_invoice_number.model_account_voucher_line
+#. module: account_voucher_invoice_number
+#: model:ir.model,name:account_voucher_invoice_number.model_account_voucher_line
 msgid "Voucher Lines"
 msgstr "Postavke vavčerja"

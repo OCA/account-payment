@@ -20,7 +20,7 @@ class AccountVoucher(models.Model):
         line_obj = self.env['account.voucher.line']
 
         def update_move_line(vals):
-            vals['supplier_invoice_number'] = line_obj.get_suppl_inv_num(
+            vals['invoice_number'] = line_obj.get_inv_num(
                 vals['move_line_id'])
 
         if res.get('value') and res['value'].get('line_cr_ids'):
