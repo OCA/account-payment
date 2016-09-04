@@ -10,8 +10,8 @@
     'author': (
         "Agile Business Group,"
         "Savoir-faire Linux,"
-        "Odoo Community Association (OCA),"
-        u"Blanco Martín & Asociados"
+        u"Blanco Martín & Asociados,"
+        "Odoo Community Association (OCA)"
     ),
     'website': 'http://www.agilebg.com',
     'license': 'AGPL-3',
