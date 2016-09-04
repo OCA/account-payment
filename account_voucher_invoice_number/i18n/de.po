@@ -23,7 +23,7 @@ msgstr "Buchhaltungsbeleg"
 
 #. module: account_voucher_invoice_number
 #: field:account.voucher.line,invoice_number:0
-msgid "Supplier Invoice Number"
+msgid " Invoice Number"
 msgstr "Lieferanten-Rechnungsnummer"
 
 #. module: account_voucher_invoice_number

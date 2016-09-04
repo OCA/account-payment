@@ -3,16 +3,16 @@
    :alt: License: AGPL-3
 
 ===========================================
-Supplier Invoice Number In Payment Vouchers
+ Invoice Number In Payment Vouchers
 ===========================================
 
-This module adds the supplier invoice number to voucher lines of supplier payments.
+This module adds the invoice number to voucher lines of payments and receipts.
 
 Usage
 =====
 
-1 - Go to Invoicing -> Supplier -> Supplier Payments
-2 - In the voucher lines, there is a new field Supplier Invoice Number
+1 - Go to Invoicing ->  ->  Payments (or Invoicing --> Receipts)
+2 - In the voucher lines, there is a new field: Invoice Number
 
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
@@ -43,6 +43,7 @@ Contributors
 
 * Lorenzo Battistini <lorenzo.battistini@agilebg.com>
 * David Dufresne <david.dufresne@savoirfairelinux.com>
+* Daniel Blanco <daniel@blancomartin.cl>
 
 Maintainer
 ----------

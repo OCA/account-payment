@@ -25,7 +25,7 @@ msgstr "Računovodski vavčer"
 
 #. module: account_voucher_invoice_number
 #: field:account.voucher.line,invoice_number:0
-msgid "Supplier Invoice Number"
+msgid " Invoice Number"
 msgstr "Dobaviteljeva številka računa"
 
 #. module: account_voucher_invoice_number

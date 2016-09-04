@@ -4,7 +4,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name': "Supplier Invoice Number In Payment Vouchers",
+    'name': " Invoice Number In Payment Vouchers",
     'version': '8.0.2.0.0',
     'category': 'Accounting & Finance',
     'author': (
