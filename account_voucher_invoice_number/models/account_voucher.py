@@ -25,8 +25,11 @@ class AccountVoucher(models.Model):
 
         if res.get('value') and res['value'].get('line_cr_ids'):
             for vals in res['value']['line_cr_ids']:
-                if vals.get('move_line_id'):
-                    update_move_line(vals)
+                try:
+                    if vals.get('move_line_id'):
+                        update_move_line(vals)
+                except:
+                    pass
 
         if res.get('value') and res['value'].get('line_dr_ids'):
             for vals in res['value']['line_dr_ids']:
