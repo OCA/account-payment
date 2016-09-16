@@ -12,7 +12,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="inherit_id" ref="account.view_account_payment_form"/>
         <field name="arch" type="xml">
             <field name="payment_type" position="after">
-                <field name="transfer_account_id"  attrs="{'invisible': [('payment_type','!=', 'transfer')], 'readonly': [('state', '!=', 'draft')]}"/>
+                <field name="transfer_account_id" attrs="{'invisible': [('payment_type','!=', 'transfer')], 'readonly': [('state', '!=', 'draft')], 'required': [('payment_type','=', 'transfer')]}"/>
             </field>
         </field>
     </record>

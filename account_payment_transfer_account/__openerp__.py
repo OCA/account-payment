@@ -12,6 +12,7 @@
     'depends': [
         'account',
         'account_cancel',
+        'l10n_generic_coa',
     ],
     'data': [
         'views/view_account_payment.xml',
