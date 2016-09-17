@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-09 00:46+0000\n"
-"PO-Revision-Date: 2016-04-08 17:48+0000\n"
+"POT-Creation-Date: 2016-08-15 18:00+0000\n"
+"PO-Revision-Date: 2016-09-16 21:45+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-payment-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -88,6 +88,13 @@ msgid "Date of the last message posted on the record."
 msgstr "Fecha del último mensaje publicado en el registro."
 
 #. module: account_payment_return
+#: field:payment.return,display_name:0
+#: field:payment.return.line,display_name:0
+#: field:payment.return.reason,display_name:0
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: account_payment_return
 #: selection:payment.return,state:0
 msgid "Done"
 msgstr "Realizada"
@@ -161,6 +168,13 @@ msgstr "Es seguidor"
 #: field:payment.return,message_last_post:0
 msgid "Last Message Date"
 msgstr "Fecha del último mensaje"
+
+#. module: account_payment_return
+#: field:payment.return,__last_update:0
+#: field:payment.return.line,__last_update:0
+#: field:payment.return.reason,__last_update:0
+msgid "Last Modified on"
+msgstr "Última modificación el"
 
 #. module: account_payment_return
 #: field:payment.return,write_uid:0 field:payment.return.line,write_uid:0
