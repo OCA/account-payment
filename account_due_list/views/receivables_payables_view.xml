@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+
+    <!--****************************** PAYMENTS ***********************************-->
+    <record id="view_receivables_payables_tree" model="ir.ui.view">
+        <field name="name">Receivables and Payables</field>
+        <field name="model">account.move.line</field>
+        <field name="field_parent">partner_id</field>
+        <field name="priority" eval="20"/>
+        <field name="arch" type="xml">
+            <tree string="Receivables and Payables"
+                  colors="grey:reconciled==True;red:date_maturity&lt;current_date">
+                <field name="invoice_id" readonly="1"/>
+                <field name="invoice_date" readonly="1"/>
+                <field name="invoice_origin" readonly="1"/>
+                <field name="partner_id" readonly="1"/>
+                <field name="partner_ref" readonly="1"/>
+                <field name="payment_term_id" readonly="1"/>
+                <field name="account_id" readonly="1"/>
+                <field name="debit" readonly="1" sum="Total Debit"/>
+                <field name="credit" readonly="1" sum="Total Credit"/>
+                <field name="amount_residual" sum="Total Residual"/>
+                <field name="date_maturity"/>
+                <field name="reconciled" readonly="1"/>
+                <field name="blocked"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_receivables_payables_filter" model="ir.ui.view">
+        <field name="name">Receivables and Payables Select</field>
+        <field name="model">account.move.line</field>
+        <field name="priority" eval="20"/>
+        <field name="arch" type="xml">
+            <search string="Search Payments">
+                <filter string="Accounts Receivables"
+                        domain="[('account_id.internal_type','=','receivable')]"
+                        help="Receivable open items"/>
+                <filter string="Accounts Payables"
+                        domain="[('account_id.internal_type','=','payable')]"
+                        help="Payable open items"/>
+                <separator orientation="vertical"/>
+                <filter name="from_invoices" string="From invoices" domain="[('invoice_id', '&lt;&gt;', False)]"/>
+                <separator orientation="vertical"/>
+                <filter name='unreconciled' string="Unreconciled"
+                        domain="[('reconciled','=',False)]" help="Unreconciled"/>
+                <separator orientation="vertical"/>
+                <filter string="Overdue" domain="[('date_maturity','&lt;',time.strftime('%%Y-%%m-%%d'))]" help="Overdue payments" name="overdue"/>
+                <separator orientation="vertical"/>
+                <field name="account_id"/>
+                <field name="partner_id"/>
+                <field name="invoice_id"/>
+                <field name="invoice_user_id"/>
+                <field name="invoice_origin"/>
+                <field name="date_maturity"/>
+                <group expand="0" string="Group By...">
+                    <filter string="Partner" icon="terp-partner" domain="[]" context="{'group_by':'partner_id'}"/>
+                    <filter string="Invoice" icon="terp-folder-orange" domain="[]" context="{'group_by':'invoice_id'}"/>
+                    <filter string="Due Date" icon="terp-go-month" domain="[]" context="{'group_by':'date_maturity:day'}"/>
+                    <filter string="Month" icon="terp-go-month" domain="[]" context="{'group_by':'date_maturity'}"/>
+                    <filter string="Salesperson" icon="terp-sale" domain="[]" context="{'group_by':'invoice_user_id'}"/>
+               </group>
+           </search>
+        </field>
+    </record>
+
+    <!-- Accounts Payables -->
+    <record model="ir.actions.act_window" id="action_accounts_payables">
+        <field name="name">Payables Open Items</field>
+        <field name="res_model">account.move.line</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_unreconciled': 1}</field>
+        <field name="view_id" ref="view_receivables_payables_tree"/>
+        <field name="search_view_id" ref="view_receivables_payables_filter"/>
+        <field name="domain">[('account_id.internal_type', '=',
+            'payable'), ('journal_id.type', '=', 'purchase')]</field>
+    </record>
+
+     <!-- Accounts Receivables -->
+    <record model="ir.actions.act_window" id="action_accounts_receivables">
+        <field name="name">Receivables Open Items</field>
+        <field name="res_model">account.move.line</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'search_default_unreconciled': 1}</field>
+        <field name="view_id" ref="view_receivables_payables_tree"/>
+        <field name="search_view_id" ref="view_receivables_payables_filter"/>
+        <field name="domain">[('account_id.internal_type', '=',
+            'receivable'), ('journal_id.type', '=', 'sale')]</field>
+    </record>
+
+    <menuitem name="Payables Open Items"
+              parent="account.menu_finance_payables"
+              action="action_accounts_payables"
+              id="menu_action_accounts_payables"/>
+
+
+    <menuitem name="Receivables Open Items"
+              parent="account.menu_finance_receivables"
+              action="action_accounts_receivables"
+              id="menu_action_accounts_receivables"/>
+
+</data>
+</openerp>
