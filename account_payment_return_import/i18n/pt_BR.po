@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-15 18:00+0000\n"
+"POT-Creation-Date: 2016-09-22 16:30+0000\n"
 "PO-Revision-Date: 2016-04-11 16:26+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/OCA-account-payment-8-0/language/pt_BR/)\n"
@@ -102,7 +102,7 @@ msgstr "Criado em"
 #. module: account_payment_return_import
 #: field:payment.return.import,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nome para Mostrar"
 
 #. module: account_payment_return_import
 #: help:payment.return.import,data_file:0
@@ -151,7 +151,7 @@ msgstr ""
 #. module: account_payment_return_import
 #: field:payment.return.import,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última atualização em"
 
 #. module: account_payment_return_import
 #: field:payment.return.import,write_uid:0

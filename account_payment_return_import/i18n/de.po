@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-15 18:00+0000\n"
-"PO-Revision-Date: 2016-09-09 11:33+0000\n"
+"POT-Creation-Date: 2016-09-22 16:30+0000\n"
+"PO-Revision-Date: 2016-10-04 09:43+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-payment-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -102,7 +102,7 @@ msgstr "Erstellt am:"
 #. module: account_payment_return_import
 #: field:payment.return.import,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Anzeigename"
 
 #. module: account_payment_return_import
 #: help:payment.return.import,data_file:0
@@ -146,12 +146,12 @@ msgstr ""
 #. module: account_payment_return_import
 #: field:payment.return.import,journal_id:0
 msgid "Journal"
-msgstr ""
+msgstr "Journal"
 
 #. module: account_payment_return_import
 #: field:payment.return.import,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Zuletzt geändert am"
 
 #. module: account_payment_return_import
 #: field:payment.return.import,write_uid:0
@@ -215,4 +215,4 @@ msgstr ""
 #. module: account_payment_return_import
 #: view:payment.return.import:account_payment_return_import.account_payment_return_import_view
 msgid "or"
-msgstr ""
+msgstr "oder"
