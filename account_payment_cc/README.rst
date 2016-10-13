@@ -17,7 +17,7 @@ Multiple Credit Card companies are supported.
 Usage
 =====
 
-Refer to the `documentation <./description/account_payment_cc_README.pdf>`_.
+Refer to the `documentation <./src/description/account_payment_cc_README.pdf>`_.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
