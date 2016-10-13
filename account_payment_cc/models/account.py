@@ -4,7 +4,7 @@
 from openerp.osv import fields, osv
 
 
-class account_journal(osv.osv):
+class AccountJournal(osv.osv):
 
     _inherit = "account.journal"
 

@@ -6,15 +6,17 @@
 
 
 {
-    'name' : 'Credit Card Payments',
-    'version' : '8.0.1.8.0',
-    'author' : 'Ursa Information System, OpenERP SA, Odoo Community Association (OCA)',
+    'name': 'Credit Card Payments',
+    'version': '8.0.1.8.0',
+    'license': 'AGPL-3',
+    'author': 'Ursa Information System, OpenERP SA, '
+              'Odoo Community Association (OCA)',
     'summary': 'Adds support for Credit Card AP movements',
     'maintainer': 'Ursa Information Systems',
     'website': 'http://www.ursainfosystems.com',
     'category': 'Accounting & Finance',
-    'depends' : ['account_voucher'],
-    'data' : ['views/account_view.xml',
+    'depends': ['account_voucher'],
+    'data': ['views/account_view.xml',
     ],
     'auto_install': False,
     'application': False,
