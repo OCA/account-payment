@@ -9,7 +9,7 @@
                 <div class=" oe_right oe_button_box" position="after">
                     <div class=" oe_right oe_button_box">
                         <button class="oe_inline oe_stat_button oe_right" name="generate_vouchers" string="Create vouchers"
-                        type="object" attrs="{'invisible':['|',('state','!=','done'),('vouchers_ids','!=',False)]}"
+                        type="object" attrs="{'invisible':['|',('state','!=','done'),('voucher_ids','!=',False)]}"
                         icon="fa-pencil-square-o" widget="statinfo"/>
                     </div>
                 </div>
