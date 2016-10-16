@@ -6,7 +6,7 @@
 Payment Order Sequence
 ======================
 
-This module add feature to create payment order reference
+This module adds feature to create payment order reference
 based on payment mode. Each payment mode could have different
 sequence.
 
@@ -31,11 +31,17 @@ To configure specific sequence for payment mode, you need to:
 1. Open or create payment mode
 2. Choose sequence to be used
 
-Payment mode with empty sequence will use original payment
-order sequence
 
 Usage
 =====
+
+To use this module, you need to:
+
+1. Create payment order
+
+Payment order reference will be created according sequence configuration
+on payment mode. Payment mode with empty sequence will use original payment
+order sequence.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
