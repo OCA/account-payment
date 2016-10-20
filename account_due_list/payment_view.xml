@@ -17,7 +17,7 @@
                 <field name="account_id" readonly="1"/>
                 <field name="debit" readonly="1" sum="Total Debit"/>
                 <field name="credit" readonly="1" sum="Total Credit"/>
-                <!--field name="maturity_residual" sum="Total Residual"/-->
+                <field name="maturity_residual" sum="Total Residual"/>
                 <field name="date_maturity"/>
                 <field name="move_id" readonly="1"/>
                 <field name="full_reconcile_id" readonly="1"/>
@@ -36,7 +36,7 @@
                 <filter icon="terp-sale" string="Receivable" domain="[('account_id.internal_type','=','receivable')]" help="Receivable payments"/>
                 <filter icon="terp-purchase" string="Payable" domain="[('account_id.internal_type','=','payable')]" help="Payable payments"/>
                 <separator orientation="vertical"/>
-                <filter icon="terp-dolar_ok!" string="Unreconciled" domain="[('full_reconcile_id','=',False)]" help="Unreconciled payments"/>
+                <filter icon="terp-dolar_ok!" string="Unreconciled" domain="[('amount_residual','&gt;',0)]" help="Unreconciled payments"/>
                 <separator orientation="vertical"/>
                 <filter icon="terp-go-today" string="Overdue" domain="[('date_maturity','&lt;',time.strftime('%%Y-%%m-%%d'))]" help="Overdue payments" name="overdue"/>
                 <separator orientation="vertical"/>
