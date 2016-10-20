@@ -15,12 +15,14 @@
 ##############################################################################
 
 from odoo import models, fields, api, _
+from odoo.exceptions import Warning
 
 
 class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
 
-    invoice_origin = fields.Char(related='invoice_id.origin', string='Source Doc')
+    invoice_origin = fields.Char(related='invoice_id.origin',
+                                 string='Source Doc')
     invoice_date = fields.Date(related='invoice_id.date_invoice',
                                string='Invoice Date')
     partner_ref = fields.Char(related='partner_id.ref', string='Partner Ref')
@@ -58,8 +60,7 @@ class AccountMoveLine(models.Model):
             inv_ids = self.env['account.invoice'].search(
                 [('move_id', '=', line.move_id.id)])
             if len(inv_ids) > 1:
-                raise orm.except_orm(
-                    _('Error'),
+                raise Warning(
                     _('Inconsistent data: move %s has more than one invoice')
                     % line.move_id.name)
             line.stored_invoice_id = line.invoice_id or False
@@ -68,7 +69,8 @@ class AccountMoveLine(models.Model):
             # else:
             #     line.stored_invoice_id = False
 
-    day = fields.Char(compute='_compute_get_day', string='Day', size=16, store=True)
+    day = fields.Char(
+        compute='_compute_get_day', string='Day', size=16, store=True)
 
     @api.depends('date_maturity')
     def _compute_get_day(self):
