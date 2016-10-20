@@ -8,51 +8,49 @@
 # Copyright (C) 2011 Domsense srl (<http://www.domsense.com>)
 # Copyright (C) 2011-2013 Agile Business Group sagl
 # (<http://www.agilebg.com>)
-# Ported to Odoo by Andrea Cometa <info@andreacometa.it>
+# Ported to Odoo by Andrea Cometa <a.cometa@apuliasoftware.it>
 # Ported to v8 API by Eneko Lacunza <elacunza@binovo.es>
 #
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 #
 ##############################################################################
 
-from openerp.tools.translate import _
-from openerp import models, fields, api
-from openerp.osv import orm
+from odoo import models, fields, api, _
 
 
 class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
 
-    invoice_origin = fields.Char(related='invoice.origin', string='Source Doc')
-    invoice_date = fields.Date(related='invoice.date_invoice',
+    invoice_origin = fields.Char(related='invoice_id.origin', string='Source Doc')
+    invoice_date = fields.Date(related='invoice_id.date_invoice',
                                string='Invoice Date')
     partner_ref = fields.Char(related='partner_id.ref', string='Partner Ref')
     payment_term_id = fields.Many2one('account.payment.term',
-                                      related='invoice.payment_term',
+                                      related='invoice_id.payment_term_id',
                                       string='Payment Terms')
     stored_invoice_id = fields.Many2one('account.invoice',
                                         compute='_get_invoice',
                                         string='Invoice', store=True)
 
-    maturity_residual = fields.Float(
-        compute='_maturity_residual', string="Residual Amount", store=True,
-        help="The residual amount on a receivable or payable of a journal "
-             "entry expressed in the company currency.")
+    # maturity_residual = fields.Float(
+    #     compute='_maturity_residual', string="Residual Amount", store=True,
+    #     help="The residual amount on a receivable or payable of a journal "
+    #          "entry expressed in the company currency.")
+    #
+    # @api.multi
+    # @api.depends('date_maturity', 'debit', 'credit', 'reconcile_id',
+    #              'reconcile_partial_id', 'account_id.reconcile',
+    #              'amount_currency', 'reconcile_partial_id.line_partial_ids',
+    #              'currency_id', 'company_id.currency_id')
+    # def _maturity_residual(self):
+    #     """
+    #         inspired by amount_residual
+    #     """
+    #     for move_line in self:
+    #         sign = (move_line.debit - move_line.credit) < 0 and -1 or 1
+    #         move_line.maturity_residual = move_line.amount_residual * sign
 
-    @api.multi
-    @api.depends('date_maturity', 'debit', 'credit', 'reconcile_id',
-                 'reconcile_partial_id', 'account_id.reconcile',
-                 'amount_currency', 'reconcile_partial_id.line_partial_ids',
-                 'currency_id', 'company_id.currency_id')
-    def _maturity_residual(self):
-        """
-            inspired by amount_residual
-        """
-        for move_line in self:
-            sign = (move_line.debit - move_line.credit) < 0 and -1 or 1
-            move_line.maturity_residual = move_line.amount_residual * sign
-
-    @api.depends('move_id', 'invoice.move_id')
+    @api.depends('move_id', 'invoice_id.move_id')
     def _get_invoice(self):
         for line in self:
             inv_ids = self.env['account.invoice'].search(
@@ -62,10 +60,11 @@ class AccountMoveLine(models.Model):
                     _('Error'),
                     _('Inconsistent data: move %s has more than one invoice')
                     % line.move_id.name)
-            if line.invoice:
-                line.stored_invoice_id = inv_ids[0]
-            else:
-                line.stored_invoice_id = False
+            line.stored_invoice_id = line.stored_invoice_id or False
+            # if line.invoice_id:
+            #     line.stored_invoice_id = inv_ids[0]
+            # else:
+            #     line.stored_invoice_id = False
 
     day = fields.Char(compute='_get_day', string='Day', size=16, store=True)
 

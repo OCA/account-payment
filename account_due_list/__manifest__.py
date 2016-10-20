@@ -8,7 +8,7 @@
 # @author Lorenzo Battistini <lorenzo.battistini@agilebg.com>
 # Ported to OpenERP 7.0 by Alex Comba <alex.comba@agilebg.com> and
 # Bruno Bottacini <bruno.bottacini@dorella.com>
-# Ported to Odoo by Andrea Cometa <info@andreacometa.it>
+# Ported to Odoo by Andrea Cometa <a.cometa@apuliasoftware.it>
 #
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 #
@@ -19,7 +19,7 @@
     'category': 'Generic Modules/Payment',
     'author': 'Odoo Italia Network, Odoo Community Association (OCA), '
               'Agile Business Group, Zikzakmedia SL',
-    'website': 'http://www.agilebg.com',
+    'website': 'http://www.odoo-community.org',
     'license': 'AGPL-3',
     "depends": [
         'account',
