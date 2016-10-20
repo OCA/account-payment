@@ -28,13 +28,13 @@ class AccountMoveLine(models.Model):
                                       related='invoice_id.payment_term_id',
                                       string='Payment Terms')
     stored_invoice_id = fields.Many2one('account.invoice',
-                                        compute='_get_invoice',
+                                        compute='_compute_get_invoice',
                                         string='Invoice', store=True)
     invoice_user_id = fields.Many2one(
         comodel_name='res.users', related='stored_invoice_id.user_id',
         string="Invoice salesperson", store=True)
     maturity_residual = fields.Float(
-        compute='_maturity_residual', string="Residual Amount", store=True,
+        compute='_compute_maturity_residual', string="Residual Amount", store=True,
         help="The residual amount on a receivable or payable of a journal "
              "entry expressed in the company currency.")
 
@@ -44,7 +44,7 @@ class AccountMoveLine(models.Model):
                  'account_id.reconcile',
                  'amount_currency', 'matched_debit_ids', 'matched_credit_ids',
                  'currency_id', 'company_id.currency_id')
-    def _maturity_residual(self):
+    def _compute_maturity_residual(self):
         """
             inspired by amount_residual
         """
@@ -53,7 +53,7 @@ class AccountMoveLine(models.Model):
             move_line.maturity_residual = move_line.amount_residual * sign
 
     @api.depends('move_id', 'invoice_id.move_id')
-    def _get_invoice(self):
+    def _compute_get_invoice(self):
         for line in self:
             inv_ids = self.env['account.invoice'].search(
                 [('move_id', '=', line.move_id.id)])
@@ -68,10 +68,10 @@ class AccountMoveLine(models.Model):
             # else:
             #     line.stored_invoice_id = False
 
-    day = fields.Char(compute='_get_day', string='Day', size=16, store=True)
+    day = fields.Char(compute='_compute_get_day', string='Day', size=16, store=True)
 
     @api.depends('date_maturity')
-    def _get_day(self):
+    def _compute_get_day(self):
         for line in self:
             if line.date_maturity:
                 line.day = line.date_maturity
