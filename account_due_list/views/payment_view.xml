@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
 <data>
 
     <!--****************************** PAYMENTS ***********************************-->
@@ -32,7 +32,7 @@
     </record>
 
     <record id="view_payments_filter" model="ir.ui.view">
-        <field name="name">Payments Select</field>
+        <field name="name">Payments Selection</field>
         <field name="model">account.move.line</field>
         <field name="priority" eval="20"/>
         <field name="arch" type="xml">
@@ -113,4 +113,4 @@
               sequence="5"/>
 
 </data>
-</openerp>
+</odoo>

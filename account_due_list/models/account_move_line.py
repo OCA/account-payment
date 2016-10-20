@@ -10,7 +10,7 @@
 #        (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import models, fields, api
+from odoo import models, fields, api
 
 
 class AccountMoveLine(models.Model):
@@ -27,6 +27,7 @@ class AccountMoveLine(models.Model):
     stored_invoice_id = fields.Many2one(
         comodel_name='account.invoice', compute='_compute_invoice',
         string='Invoice', store=True)
+
     invoice_user_id = fields.Many2one(
         comodel_name='res.users', related='stored_invoice_id.user_id',
         string="Invoice salesperson", store=True)
