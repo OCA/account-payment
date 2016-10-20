@@ -38,11 +38,12 @@ Credits
 Contributors
 ------------
 
+* `Odoo Italia Network <http://www.odoo-italia.net/>`_
 * Jordi Esteve <jesteve@zikzakmedia.com>
 * Lorenzo Battistini <lorenzo.battistini@agilebg.com>
 * Alex Comba <alex.comba@agilebg.com> (OpenERP v7 port)
 * Bruno Bottacini <bruno.bottacini@dorella.com> (OpenERP v7 port)
-* Andrea Cometa <info@andreacometa.it> (Odoo v8 port)
+* Andrea Cometa <a.cometa@apuliasoftware.it> (Odoo v8/v9 port)
 * Pedro M. Baeza <pedro.baeza@serviciosbaeza.com>
 
 Maintainer
