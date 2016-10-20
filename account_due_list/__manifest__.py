@@ -2,7 +2,7 @@
 # © 2008 Zikzakmedia S.L. (http://zikzakmedia.com)
 #        Jordi Esteve <jesteve@zikzakmedia.com>
 # © 2011 Domsense srl (<http://www.domsense.com>)
-# © 2011-2013 Agile Business Group sagl (<http://www.agilebg.com>)
+# © 2011-2017 Agile Business Group (<http://www.agilebg.com>)
 # © 2015 Andrea Cometa <info@andreacometa.it>
 # © 2015 Eneko Lacunza <elacunza@binovo.es>
 # © 2015 Tecnativa (http://www.tecnativa.com)
@@ -13,7 +13,7 @@
 
 {
     'name': "Payments Due list",
-    'version': '9.0.1.0.0',
+    'version': '10.0.1.0.0',
     'category': 'Generic Modules/Payment',
     'author': 'Odoo Community Association (OCA), '
               'Agile Business Group, '
@@ -22,7 +22,7 @@
     'website': 'http://www.agilebg.com',
     'license': 'AGPL-3',
     "depends": [
-        'account',
+        'account_accountant',
     ],
     "data": [
         'views/payment_view.xml',
