@@ -26,6 +26,7 @@
   I create the Payment for 100
 -
   !record {model: account.voucher, id: account_voucher_8_a, view: account_voucher.view_vendor_receipt_form}:
+    journal_id: account.bank_journal
     partner_id: base.res_partner_3
     amount: 100
 -

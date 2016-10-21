@@ -26,6 +26,7 @@
   I create the payment voucher for 50
 -
   !record {model: account.voucher, id: account_voucher_2, view: account_voucher.view_vendor_receipt_form}:
+    journal_id: account.bank_journal
     partner_id: base.res_partner_3
     amount: 50
 -
@@ -37,10 +38,10 @@
 -
   !python {model: account.voucher}: |
     voucher = self.browse(cr, uid, ref('account_voucher_2'), context=context)
-    assert len(voucher.move_id.line_id) == 3, "There must be 3 real move lines, %s found" % len(voucher.move_id.line_id)
     bank_found = False
     vat_found = False
     sales_found = False
+    assert len(voucher.move_id.line_id) == 3, "There must be 3 real move lines, %s found" % len(voucher.move_id.line_id)
     for move_line in voucher.move_id.line_id:
       if move_line.account_id.id == ref('account.bnk'):
         bank_found = True
@@ -63,6 +64,7 @@
   I create the payment voucher for 70
 -
   !record {model: account.voucher, id: account_voucher_2_b, view: account_voucher.view_vendor_receipt_form}:
+    journal_id: account.bank_journal
     partner_id: base.res_partner_3
     amount: 70
 -
@@ -74,10 +76,10 @@
 -
   !python {model: account.voucher}: |
     voucher = self.browse(cr, uid, ref('account_voucher_2_b'), context=context)
-    assert len(voucher.move_id.line_id) == 3, "There must be 3 real move lines, %s found" % len(voucher.move_id.line_id)
     bank_found = False
     vat_found = False
     sales_found = False
+    assert len(voucher.move_id.line_id) == 3, "There must be 3 real move lines, %s found" % len(voucher.move_id.line_id)
     for move_line in voucher.move_id.line_id:
       if move_line.account_id.id == ref('account.bnk'):
         bank_found = True

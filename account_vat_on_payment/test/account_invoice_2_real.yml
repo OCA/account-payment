@@ -1,0 +1,104 @@
+-
+  I create customer invoice 2 - 120 EUR
+-
+  !record {model: account.invoice, id: account_invoice_customer_2_real, view: invoice_form}:
+    journal_id: account.sales_journal
+    partner_id: base.res_partner_4
+    account_id: ds
+    vat_on_payment: True
+    invoice_line:
+      - quantity: 1
+        account_id: account.a_sale
+        name: 'Service'
+        price_unit: 100.0
+        invoice_line_tax_id:
+          - tax20
+-
+  I create invoice by clicking on Create button
+-
+  !workflow {model: account.invoice, action: invoice_open, ref: account_invoice_customer_2_real}
+-
+  I set the context that will be used for the encoding of all the vouchers of this file
+-
+  !context
+    'type': 'receipt'
+-
+  I create the payment voucher for 50
+-
+  !record {model: account.voucher, id: account_voucher_2_real, view: account_voucher.view_vendor_receipt_form}:
+    journal_id: account.bank_journal
+    partner_id: base.res_partner_4
+    amount: 50
+-
+  I confirm the voucher
+-
+  !workflow {model: account.voucher, action: proforma_voucher, ref: account_voucher_2_real}
+-
+  I check the voucher
+-
+  !python {model: account.voucher}: |
+    voucher = self.browse(cr, uid, ref('account_voucher_2_real'), context=context)
+    bank_found = False
+    vat_found = False
+    sales_found = False
+    assert len(voucher.move_id.line_id) == 2, "There must be 2 real move lines, %s found" % len(voucher.move_id.line_id)
+    assert len(voucher.shadow_move_id.line_id) == 4, "There must be 4 shadow move lines, %s found" % len(voucher.shadow_move_id.line_id)
+    for move_line in voucher.move_id.line_id:
+      if move_line.account_id.id == ref('account.bnk'):
+        bank_found = True
+        assert move_line.debit == 50, "Bank move line must be 50 debit, %s found" % move_line.debit
+    for move_line in voucher.shadow_move_id.line_id:
+      if move_line.account_id.id == ref('account.iva'):
+        vat_found = True
+        assert move_line.credit == 8.33, "VAT move line must be 8.33 credit, %s found" % move_line.credit
+      if move_line.account_id.id == ref('account.a_sale'):
+        sales_found = True
+        assert move_line.credit == 41.67, "sales move line must be 41.67 credit, %s found" % move_line.credit
+    assert bank_found, "No bank move line found"
+    assert sales_found, "No sales move line found"
+    assert vat_found, "No VAT move line found"
+-
+  I check that the invoice state is open
+-
+  !assert {model: account.invoice, id: account_invoice_customer_2_real}:
+    - state == 'open'
+-
+  I create the payment voucher for 70
+-
+  !record {model: account.voucher, id: account_voucher_2_b_real, view: account_voucher.view_vendor_receipt_form}:
+    journal_id: account.bank_journal
+    partner_id: base.res_partner_4
+    amount: 70
+-
+  I confirm the voucher
+-
+  !workflow {model: account.voucher, action: proforma_voucher, ref: account_voucher_2_b_real}
+-
+  I check the voucher
+-
+  !python {model: account.voucher}: |
+    voucher = self.browse(cr, uid, ref('account_voucher_2_b_real'), context=context)
+    bank_found = False
+    vat_found = False
+    sales_found = False
+    assert len(voucher.move_id.line_id) == 2, "There must be 2 real move lines, %s found" % len(voucher.move_id.line_id)
+    assert len(voucher.shadow_move_id.line_id) == 4, "There must be 4 shadow move lines, %s found" % len(voucher.shadow_move_id.line_id)
+    for move_line in voucher.move_id.line_id:
+      if move_line.account_id.id == ref('account.bnk'):
+        bank_found = True
+        assert move_line.debit == 70, "Bank move line must be 70 debit, %s found" % move_line.debit
+    for move_line in voucher.shadow_move_id.line_id:
+      if move_line.account_id.id == ref('account.iva'):
+        vat_found = True
+        assert move_line.credit == 11.67, "VAT move line must be 11.67 credit, %s found" % move_line.credit
+      if move_line.account_id.id == ref('account.a_sale'):
+        sales_found = True
+        assert move_line.credit == 58.33, "sales move line must be 58.33 credit, %s found" % move_line.credit    
+    assert bank_found, "No bank move line found"
+    assert sales_found, "No sales move line found"
+    assert vat_found, "No VAT move line found"
+-
+  I check that the invoice state is paid
+-
+  !assert {model: account.invoice, id: account_invoice_customer_2_real}:
+    - state == 'paid'

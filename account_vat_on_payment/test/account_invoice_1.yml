@@ -1,18 +1,36 @@
 -
-  I create shadow Tax Code
+  !record {model: res.company, id: base.main_company}:
+    vat_payment_lines: 'shadow_move'
 -
-  !record {model: account.tax.code, id: shadow_tax_code}:
-    name: Tax received
+  I create Base Shadow Tax Code
+-
+  !record {model: account.tax.code, id: base_shadow_tax_code}:
+    name: Base Shadow Tax received
     company_id: base.main_company
     sign: 1
 -
-  I create Tax Code received
+  I create Vat Shadow Tax Code
 -
-  !record {model: account.tax.code, id: tax_code_received}:
-    name: Tax received
+  !record {model: account.tax.code, id: vat_shadow_tax_code}:
+    name: VAT Shadow Tax received
     company_id: base.main_company
     sign: 1
-    vat_on_payment_related_tax_code_id: shadow_tax_code
+-
+  I create Base Tax Code received
+-
+  !record {model: account.tax.code, id: base_tax_code_received}:
+    name: Base Tax received
+    company_id: base.main_company
+    sign: 1
+    vat_on_payment_related_tax_code_id: base_shadow_tax_code
+-
+  I create VAT Tax Code received
+-
+  !record {model: account.tax.code, id: vat_tax_code_received}:
+    name: VAT Tax received
+    company_id: base.main_company
+    sign: 1
+    vat_on_payment_related_tax_code_id: vat_shadow_tax_code
 -
   I create Tax 10%
 -
@@ -23,7 +41,8 @@
     sequence: 1
     company_id: base.main_company
     type_tax_use: all
-    tax_code_id: tax_code_received
+    base_code_id: base_tax_code_received
+    tax_code_id: vat_tax_code_received
     account_collected_id: account.iva
 -
   I create Tax 20%
@@ -35,7 +54,8 @@
     sequence: 1
     company_id: base.main_company
     type_tax_use: all
-    tax_code_id: tax_code_received
+    base_code_id: base_tax_code_received
+    tax_code_id: vat_tax_code_received
     account_collected_id: account.iva
 -
   I create customer invoice 1 - 120 EUR
@@ -78,6 +98,7 @@
   I create the payment voucher
 -
   !record {model: account.voucher, id: account_voucher_1, view: account_voucher.view_vendor_receipt_form}:
+    journal_id: account.bank_journal
     partner_id: base.res_partner_3
     amount: 120
 -

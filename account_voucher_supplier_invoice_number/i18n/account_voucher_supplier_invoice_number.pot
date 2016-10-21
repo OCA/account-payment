@@ -16,17 +16,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_voucher_supplier_invoice_number
-#: model:ir.model,name:account_voucher_supplier_invoice_number.model_account_voucher
-msgid "Accounting Voucher"
-msgstr ""
-
-#. module: account_voucher_supplier_invoice_number
 #: field:account.voucher.line,supplier_invoice_number:0
 msgid "Supplier Invoice Number"
 msgstr ""
-
-#. module: account_voucher_supplier_invoice_number
-#: model:ir.model,name:account_voucher_supplier_invoice_number.model_account_voucher_line
-msgid "Voucher Lines"
-msgstr ""
-

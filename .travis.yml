@@ -1,39 +1,40 @@
 language: python
+sudo: false
+cache:
+  apt: true
+  directories:
+    - $HOME/.cache/pip
 
 python:
   - "2.7"
-  
-sudo: false
-cache: pip
 
 addons:
   apt:
     packages:
       - expect-dev  # provides unbuffer utility
       - python-lxml  # because pip installation is slow
-
-sudo: false
-cache: pip
-
-addons:
-  apt:
-    packages:
-      - expect-dev  # provides unbuffer utility
-      - python-lxml  # because pip installation is slow
+      - python-simplejson
+      - python-serial
+      - python-yaml
 
 env:
   global:
-  - VERSION="8.0" TESTS="0" LINT_CHECK="0"
+  - VERSION="8.0" TESTS="0" LINT_CHECK="0" TRANSIFEX="0"
+  - TRANSIFEX_USER='transbot@odoo-community.org'
+  - secure: TBV3BAz/Bx1rAP/diCeySS3yFo8qOk0lmy33CXmd/YKcMbKCuN6Y/a72dCvLtJkLrM2Aalo+AhafEp8JJoKf6UJLNHn09hRHL5KjKfY4I32cb60LxlGwYMAOePduBfoYWMsEv95x54caHqNd94uP8/Ot0zXRDjp0V9INHnmQIzY= 
+
   matrix:
   - LINT_CHECK="1"
-  - TESTS="1" ODOO_REPO="odoo/odoo"
-  - TESTS="1" ODOO_REPO="OCA/OCB"
+  - TRANSIFEX="1"
+  # Excluded modules are only dummy modules for migration purposes
+  - TESTS="1" ODOO_REPO="odoo/odoo" EXCLUDE="account_payment_extension,purchase_payment,sale_payment"
+  - TESTS="1" ODOO_REPO="OCA/OCB" EXCLUDE="account_payment_extension,purchase_payment,sale_payment"
 
 virtualenv:
   system_site_packages: true
 
 install:
-  - git clone https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
+  - git clone --depth=1 https://github.com/OCA/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}
   - travis_install_nightly
 
@@ -42,3 +43,4 @@ script:
 
 after_success:
   - travis_after_tests_success
+

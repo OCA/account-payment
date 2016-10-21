@@ -1,0 +1,93 @@
+-
+  I create customer invoice 8 - 120 EUR
+-
+  !record {model: account.invoice, id: account_invoice_customer_8_real, view: invoice_form}:
+    journal_id: account.sales_journal
+    partner_id: base.res_partner_4
+    account_id: ds
+    vat_on_payment: True
+    invoice_line:
+      - quantity: 1
+        account_id: account.a_sale
+        name: 'Service'
+        price_unit: 100.0
+        invoice_line_tax_id:
+          - tax20
+-
+  I create invoice by clicking on Create button
+-
+  !workflow {model: account.invoice, action: invoice_open, ref: account_invoice_customer_8_real}
+-
+  I set the context that will be used for the encoding of all the vouchers of this file
+-
+  !context
+    'type': 'receipt'
+-
+  I create the Payment for 100
+-
+  !record {model: account.voucher, id: account_voucher_8_a_real, view: account_voucher.view_vendor_receipt_form}:
+    journal_id: account.bank_journal
+    partner_id: base.res_partner_4
+    amount: 100
+-
+  I set the expenses for 20
+-
+  !python {model: account.voucher}: |
+    voucher = self.browse(cr, uid, ref('account_voucher_8_a_real'), context=context)
+    assert len(voucher.line_cr_ids) == 1, "There must be 1 voucher line, %s found" % len(voucher.line_cr_ids)
+    voucher.line_cr_ids[0].write({
+      'reconcile': True,
+      'amount': 120,
+      })
+    voucher.write({
+      'payment_option': 'with_writeoff',
+      'writeoff_acc_id': ref('account.a_expense'),
+      'exclude_write_off': True,
+      })
+-
+  I set voucher journal to entry_posted = True
+-
+  !python {model: account.voucher}: |
+    voucher = self.browse(cr, uid, ref('account_voucher_8_a_real'), context=context)
+    voucher.journal_id.write({'entry_posted': True})
+-
+  I confirm the voucher
+-
+  !workflow {model: account.voucher, action: proforma_voucher, ref: account_voucher_8_a_real}
+-
+  I check the voucher
+-
+  !python {model: account.voucher}: |
+    voucher = self.browse(cr, uid, ref('account_voucher_8_a_real'), context=context)
+    assert len(voucher.move_id.line_id) == 3, "There must be 3 real move lines, %s found" % len(voucher.move_id.line_id)
+    assert len(voucher.shadow_move_id.line_id) == 4, "There must be 4 shadow move lines, %s found" % len(voucher.shadow_move_id.line_id)
+    bank_found = False
+    vat_found = False
+    sales_found = False
+    expenses_found = False
+    for move_line in voucher.move_id.line_id:
+      if move_line.account_id.id == ref('account.bnk'):
+        bank_found = True
+        assert move_line.debit == 100, "Bank move line must be 100 debit, %s found" % move_line.debit
+      if move_line.account_id.id == ref('account.a_expense'):
+        expenses_found = True
+        assert move_line.debit == 20, "expenses move line must be 20 debit, %s found" % move_line.debit
+    for move_line in voucher.shadow_move_id.line_id:
+      if move_line.account_id.id == ref('account.iva'):
+        vat_found = True
+        assert move_line.credit == 20, "VAT move line must be 20 credit, %s found" % move_line.credit
+      if move_line.account_id.id == ref('account.a_sale'):
+        sales_found = True
+        assert move_line.credit == 100, "sales move line must be 100 credit, %s found" % move_line.credit
+    assert bank_found, "No bank move line found"
+    assert sales_found, "No sales move line found"
+    assert vat_found, "No VAT move line found"
+    assert expenses_found, "No expenses move line found"
+    voucher.refresh()
+    assert voucher.move_id.state == 'posted', 'Move state != posted: %s' % voucher.move_id.state
+    assert voucher.shadow_move_id.state == 'posted', 'Shadow move state != posted: %s' % voucher.shadow_move_id.state
+-
+  I check that the invoice state is paid
+-
+  !assert {model: account.invoice, id: account_invoice_customer_8_real}:
+    - state == 'paid'

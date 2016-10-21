@@ -41,20 +41,22 @@ class AccountMoveLine(models.Model):
     stored_invoice_id = fields.Many2one(
         comodel_name='account.invoice', compute='_compute_invoice',
         string='Invoice', store=True)
+    invoice_user_id = fields.Many2one(
+        comodel_name='res.users', related='stored_invoice_id.user_id',
+        string="Invoice salesperson", store=True)
     maturity_residual = fields.Float(
         compute='_maturity_residual', string="Residual Amount", store=True,
         help="The residual amount on a receivable or payable of a journal "
              "entry expressed in the company currency.")
-    day = fields.Char(compute='_get_day', string='Day', size=16, store=True)
 
     @api.multi
     @api.depends('date_maturity', 'debit', 'credit', 'reconcile_id',
                  'reconcile_partial_id', 'account_id.reconcile',
                  'amount_currency', 'reconcile_partial_id.line_partial_ids',
-                 'currency_id', 'company_id.currency_id')
+                 'currency_id')
     def _maturity_residual(self):
         """
-            inspired by amount_residual
+        Inspired by amount_residual
         """
         for move_line in self:
             sign = (move_line.debit - move_line.credit) < 0 and -1 or 1
@@ -67,14 +69,6 @@ class AccountMoveLine(models.Model):
             invoices = self.env['account.invoice'].search(
                 [('move_id', '=', line.move_id.id)])
             line.stored_invoice_id = invoices[:1]
-
-    @api.depends('date_maturity')
-    def _get_day(self):
-        for line in self:
-            if line.date_maturity:
-                line.day = line.date_maturity
-            else:
-                line.day = False
 
     @api.model
     def fields_view_get(self, view_id=None, view_type='form', toolbar=False,

@@ -50,13 +50,21 @@ class AccountVoucher(orm.Model):
             amount += line.debit - line.credit
         amount = currency_obj.round(
             cr, uid, move.company_id.currency_id, amount)
+        # max_balance_diff improve the evaluation, beetwen
+        # procedure's' error and an currency rounding's error
+        max_balance_diff = move.company_id.max_balance_diff
+        balance_diff = abs(amount * 10 ** dp.get_precision('Account')(cr)[1])
         # check if balance differs for more than 1 decimal according to account
         # decimal precision
-        if abs(amount * 10 ** dp.get_precision('Account')(cr)[1]) > 1:
+        if (balance_diff > max_balance_diff):
             raise orm.except_orm(
                 _('Error'),
-                _('The generated payment entry is unbalanced for more than 1 '
-                  'decimal'))
+                _(
+                    'The generated payment entry '
+                    'is unbalanced for more than %d '
+                    'decimal' % max_balance_diff
+                )
+            )
         if not currency_obj.is_zero(
             cr, uid, move.company_id.currency_id, amount
         ):
@@ -119,7 +127,7 @@ class AccountVoucher(orm.Model):
                 'allocated': 120.0,
                 'total': 120.0,
                 'total_currency': 0.0,
-                'write-off': 20.0,
+                'write-off': -20.0,
                 'allocated_currency': 0.0,
                 'foreign_currency_id': False, # int
                 'currency-write-off': 0.0,

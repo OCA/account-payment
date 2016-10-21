@@ -1,0 +1,35 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_due_list_payment_mode
+# 
+# Translators:
+# Paolo Valier, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: account-payment (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-03-25 11:33+0000\n"
+"PO-Revision-Date: 2016-03-21 20:18+0000\n"
+"Last-Translator: Paolo Valier\n"
+"Language-Team: Italian (http://www.transifex.com/oca/OCA-account-payment-8-0/language/it/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_due_list_payment_mode
+#: model:ir.model,name:account_due_list_payment_mode.model_account_move_line
+msgid "Journal Items"
+msgstr "Voci sezionale"
+
+#. module: account_due_list_payment_mode
+#: view:account.move.line:account_due_list_payment_mode.view_payments_mode_filter
+msgid "Month"
+msgstr "Mese"
+
+#. module: account_due_list_payment_mode
+#: view:account.move.line:account_due_list_payment_mode.view_payments_mode_filter
+#: field:account.move.line,payment_mode_id:0
+msgid "Payment Mode"
+msgstr "Modalità di Pagamento"

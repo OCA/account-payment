@@ -1,24 +1,7 @@
 # -*- coding: utf-8 -*-
-##############################################################################
-#
-#    OpenERP, Open Source Management Solution
-#    Copyright (C) 2011-2012 Domsense s.r.l. (<http://www.domsense.com>).
-#    Copyright (C) 2014 Agile Business Group sagl (<http://www.agilebg.com>)
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# © 2011-2012 Domsense s.r.l. (<http://www.domsense.com>).
+# © 2014 Agile Business Group sagl (<http://www.agilebg.com>)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from openerp.osv import orm, fields
 from openerp.tools.translate import _
@@ -35,18 +18,22 @@ class AccountInvoice(orm.Model):
         acc_pool = self.pool.get('account.account')
         account = acc_pool.browse(
             cr, uid, line_tuple[2]['account_id'], context=context)
+        vat_config_error = account.company_id.vat_config_error
         if account.type not in ['receivable', 'payable']:
             if not account.vat_on_payment_related_account_id:
-                raise orm.except_orm(
-                    _('Error'),
-                    _("The invoice is 'VAT on payment' but "
-                      "account %s does not have a related shadow "
-                      "account")
-                    % account.name)
-            line_tuple[2]['real_account_id'] = line_tuple[
-                2]['account_id']
-            line_tuple[2]['account_id'] = (
-                account.vat_on_payment_related_account_id.id)
+                if vat_config_error == 'raise_error':
+                    raise orm.except_orm(
+                        _('Error'),
+                        _("The invoice is 'VAT on payment' but "
+                          "account %s does not have a related shadow "
+                          "account")
+                        % account.name)
+                else:
+                    shadow_account = line_tuple[2]['account_id']
+            else:
+                shadow_account = account.vat_on_payment_related_account_id.id
+            line_tuple[2]['real_account_id'] = line_tuple[2]['account_id']
+            line_tuple[2]['account_id'] = shadow_account
         return line_tuple
 
     def _set_vat_on_payment_tax_code(self, cr, uid, line_tuple, context=None):

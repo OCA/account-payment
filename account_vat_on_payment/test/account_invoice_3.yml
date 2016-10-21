@@ -46,6 +46,7 @@
   I create the payment voucher for 100
 -
   !record {model: account.voucher, id: account_voucher_3_a, view: account_voucher.view_vendor_receipt_form}:
+    journal_id: account.bank_journal
     partner_id: base.res_partner_3
     amount: 100
 -
@@ -57,10 +58,10 @@
 -
   !python {model: account.voucher}: |
     voucher = self.browse(cr, uid, ref('account_voucher_3_a'), context=context)
-    assert len(voucher.move_id.line_id) == 4, "There must be 4 real move lines, %s found" % len(voucher.move_id.line_id)
     bank_found = False
     vat_found = False
     sales_found = False
+    assert len(voucher.move_id.line_id) == 4, "There must be 4 real move lines, %s found" % len(voucher.move_id.line_id)
     for move_line in voucher.move_id.line_id:
       if move_line.account_id.id == ref('account.bnk'):
         bank_found = True
@@ -84,6 +85,7 @@
   I create the payment voucher for 130
 -
   !record {model: account.voucher, id: account_voucher_3_b, view: account_voucher.view_vendor_receipt_form}:
+    journal_id: account.bank_journal
     partner_id: base.res_partner_3
     amount: 130
 -
@@ -95,10 +97,10 @@
 -
   !python {model: account.voucher}: |
     voucher = self.browse(cr, uid, ref('account_voucher_3_b'), context=context)
-    assert len(voucher.move_id.line_id) == 4, "There must be 4 real move lines, %s found" % len(voucher.move_id.line_id)
     bank_found = False
     vat_found = False
     sales_found = False
+    assert len(voucher.move_id.line_id) == 4, "There must be 4 real move lines, %s found" % len(voucher.move_id.line_id)
     for move_line in voucher.move_id.line_id:
       if move_line.account_id.id == ref('account.bnk'):
         bank_found = True
@@ -109,7 +111,7 @@
       if move_line.account_id.id == ref('account.a_sale'):
         # 2 times: sales lines are 2
         sales_found = True
-        assert (move_line.credit - 56.52) < 0.01, "sales move line must be 56.52 credit, %s found" % move_line.credit
+        assert abs(move_line.credit - 56.52) < 0.01, "sales move line must be 56.52 credit, %s found" % move_line.credit
     assert bank_found, "No bank move line found"
     assert sales_found, "No sales move line found"
     assert vat_found, "No VAT move line found"
