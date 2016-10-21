@@ -36,7 +36,8 @@ class AccountMoveLine(models.Model):
         comodel_name='res.users', related='stored_invoice_id.user_id',
         string="Invoice salesperson", store=True)
     maturity_residual = fields.Float(
-        compute='_compute_maturity_residual', string="Residual Amount", store=True,
+        compute='_compute_maturity_residual', string="Residual Amount",
+        store=True,
         help="The residual amount on a receivable or payable of a journal "
              "entry expressed in the company currency.")
 
