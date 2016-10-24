@@ -22,7 +22,7 @@ class BitcoinController(http.Controller):
     def transfer_form_feedback(self, **post):
         cr, uid, context = request.cr, SUPERUSER_ID, request.context
         _logger.info(
-            'Beginning form_feedback with post data %s') % (post)
+            'Beginning form_feedback with post data %s' % (post))
         request.registry['payment.transaction'].\
             form_feedback(cr, uid, post, 'bitcoin', context)
         return werkzeug.utils.redirect(post.pop('return_url', '/'))
