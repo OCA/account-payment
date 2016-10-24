@@ -20,7 +20,7 @@
     'author': 'Odoo Italia Network, '
               'Odoo Community Association (OCA), '
               'Agile Business Group, '
-              'Serv. Tecnol. Avanzados - Pedro M. Baeza,',
+              'Tecnativa,',
     'website': 'http://www.odoo-community.org',
     'license': 'AGPL-3',
     "depends": [
