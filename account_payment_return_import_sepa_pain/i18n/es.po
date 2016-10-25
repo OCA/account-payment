@@ -1,22 +1,24 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_payment_return_import_sepa_pain
-# 
+#
 # Translators:
 # Sergio Teruel Albert, 2015
 msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-14 03:08+0000\n"
-"PO-Revision-Date: 2016-04-11 21:03+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-payment-8-0/language/es/)\n"
+"POT-Creation-Date: 2016-10-25 13:04+0200\n"
+"PO-Revision-Date: 2016-10-25 13:09+0200\n"
+"Last-Translator: Carlos Incaser <carlos@incaser.es>\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-payment-8-0/"
+"language/es/)\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
-"Content-Transfer-Encoding: \n"
-"Language: es\n"
+"Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.7.1\n"
 
 #. module: account_payment_return_import_sepa_pain
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AC06
@@ -52,6 +54,11 @@ msgstr "Tipo de domiciliación incorrecta"
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AG01
 msgid "Direct debit forbidden on this account for regulatory reasons"
 msgstr "Domiciliación prohibida en esta cuenta por motivos regulatorios"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_MD06
+msgid "Disputed authorised transaction"
+msgstr "No conforme con el cargo autorizado"
 
 #. module: account_payment_return_import_sepa_pain
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AM05
@@ -96,7 +103,8 @@ msgstr "Mandato no válido"
 #. module: account_payment_return_import_sepa_pain
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AG02
 msgid "Operation/transaction code incorrect, invalid file format"
-msgstr "Código de operación/transacción incorrecto, formato de archivo inválido"
+msgstr ""
+"Código de operación/transacción incorrecto, formato de archivo inválido"
 
 #. module: account_payment_return_import_sepa_pain
 #: model:ir.model,name:account_payment_return_import_sepa_pain.model_payment_return_line

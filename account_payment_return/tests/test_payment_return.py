@@ -63,6 +63,8 @@ class TestPaymentReturn(TransactionCase):
         self.assertEqual(self.invoice.residual, self.receivable_line.debit)
         self.assertEqual(
             len(self.receivable_line.reconcile_partial_id.line_partial_ids), 3)
+        with self.assertRaises(UserError):
+            self.payment_return.unlink()
         self.payment_return.action_cancel()
         self.assertEqual(self.payment_return.state, 'cancelled')
         self.assertEqual(self.invoice.state, 'paid')
