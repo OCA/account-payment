@@ -42,6 +42,10 @@
         <field name="code">MD01</field>
         <field name="name">No valid Mandate</field>
     </record>
+    <record id="unpaid_reason_MD06" model="payment.return.reason">
+        <field name="code">MD06</field>
+        <field name="name">Disputed authorised transaction</field>
+    </record>
     <record id="unpaid_reason_MD07" model="payment.return.reason">
         <field name="code">MD07</field>
         <field name="name">Debtor deceased</field>
