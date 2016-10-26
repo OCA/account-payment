@@ -108,6 +108,13 @@ class PaymentReturn(models.Model):
         return {'returned_payment': False}
 
     @api.multi
+    def unlink(self):
+        if self.filtered(lambda x: x.state == 'done'):
+            raise UserError(_(
+                "You can not remove a payment return if state is 'Done'"))
+        return super(PaymentReturn, self).unlink()
+
+    @api.multi
     def button_match(self):
         self.mapped('line_ids').filtered(lambda x: (
             (not x.move_line_ids) and x.reference))._find_match()
