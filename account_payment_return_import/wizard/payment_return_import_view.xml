@@ -8,7 +8,10 @@
             <field name="priority">1</field>
             <field name="arch" type="xml">
                 <form string="Import Payment Returns">
-                    <field name="data_file"/>
+                    <group name="file">
+                        <field name="data_file"/>
+                        <field name="match_after_import"/>
+                    </group>
                     <field name="hide_journal_field" invisible="1"/>
                     <label for="journal_id"/>
                     <field name="journal_id"
@@ -21,7 +24,7 @@
                     <br/><label string= "2. Make sure you have installed the right module to support the file format."/>
                     <br/><label string= "3. Select the file and click 'Import'."/>
                     <footer>
-                        <button name="import_file" string="_Import" type="object" class="oe_highlight"/>
+                        <button name="import_file" string="Import" type="object" class="oe_highlight"/>
                         or
                         <button string="Cancel" class="oe_link" special="cancel"/>
                     </footer>
