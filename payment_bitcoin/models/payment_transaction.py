@@ -28,7 +28,10 @@ class PaymentTransaction(models.Model):
 
     @api.cr_uid_ids_context
     def _bitcoin_form_get_tx_from_data(self, cr, uid, data, context=None):
-        reference, amount, currency_name = data.get('reference')
+        reference, amount, currency_name = \
+            data.get('reference'), \
+            data.get('amount'), \
+            data.get('currency_name')
         tx_ids = self.search(
             cr, uid, [
                 ('reference', '=', reference),
