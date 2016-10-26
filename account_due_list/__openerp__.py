@@ -15,9 +15,9 @@
     'category': 'Generic Modules/Payment',
     'author': 'Odoo Community Association (OCA), '
               'Agile Business Group, '
-              'Serv. Tecnol. Avanzados - Pedro M. Baeza,'
+              'Tecnativa,'
               'Zikzakmedia SL,'
-              'Eficent Business and Consulting Services S.L.',
+              'Eficent',
     'website': 'http://www.agilebg.com',
     'license': 'AGPL-3',
     "depends": [
