@@ -36,6 +36,7 @@ class PaymentReturnImport(models.TransientModel):
         'Payment Return File', required=True,
         help='Get you bank payment returns in electronic format from your '
              'bank and select them here.')
+    match_after_import = fields.Boolean(default=True)
 
     @api.multi
     def import_file(self):
@@ -48,6 +49,8 @@ class PaymentReturnImport(models.TransientModel):
         )._import_file(data_file)
         result = self.env.ref(
             'account_payment_return.payment_return_action').read()[0]
+        if self.match_after_import:
+            payment_returns.button_match()
         if len(payment_returns) != 1:
             result['domain'] = "[('id', 'in', %s)]" % payment_returns.ids
         else:
