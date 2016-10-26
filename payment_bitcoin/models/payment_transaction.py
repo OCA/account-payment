@@ -5,6 +5,7 @@
 from openerp import fields, models, api
 from openerp.addons.payment.models.payment_acquirer import ValidationError
 from openerp.tools.float_utils import float_compare
+import pprint
 import logging
 _logger = logging.getLogger(__name__)
 
@@ -27,15 +28,15 @@ class PaymentTransaction(models.Model):
 
     @api.cr_uid_ids_context
     def _bitcoin_form_get_tx_from_data(self, cr, uid, data, context=None):
-        reference, amount, currency_name = \
-            data.get('reference')
+        reference, amount, currency_name = data.get('reference')
         tx_ids = self.search(
             cr, uid, [
                 ('reference', '=', reference),
             ], context=context)
 
         if not tx_ids or len(tx_ids) > 1:
-            error_msg = 'received data for reference %s' % (reference)
+            error_msg = \
+                'received data for reference %s' % (pprint.pformat(reference))
             if not tx_ids:
                 error_msg += '; no order found'
             else:
