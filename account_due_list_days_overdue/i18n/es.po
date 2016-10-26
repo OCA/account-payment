@@ -1,0 +1,109 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_due_list_days_overdue
+# 
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2016
+# Pedro M. Baeza <pedro.baeza@gmail.com>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-12-10 00:45+0000\n"
+"PO-Revision-Date: 2016-12-10 00:45+0000\n"
+"Last-Translator: Pedro M. Baeza <pedro.baeza@gmail.com>, 2016\n"
+"Language-Team: Spanish (https://www.transifex.com/oca/teams/23907/es/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: es\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_due_list_days_overdue
+#: model:ir.model,name:account_due_list_days_overdue.model_account_overdue_term
+msgid "Account Overdue Term"
+msgstr ""
+
+#. module: account_due_list_days_overdue
+#: field:account.overdue.term,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: account_due_list_days_overdue
+#: field:account.overdue.term,create_date:0
+msgid "Created on"
+msgstr "Creado en"
+
+#. module: account_due_list_days_overdue
+#: field:account.move.line,days_overdue:0
+msgid "Days overdue"
+msgstr ""
+
+#. module: account_due_list_days_overdue
+#: field:account.overdue.term,display_name:0
+msgid "Display Name"
+msgstr "Nombre a mostrar"
+
+#. module: account_due_list_days_overdue
+#: field:account.overdue.term,from_day:0
+msgid "From day"
+msgstr ""
+
+#. module: account_due_list_days_overdue
+#: field:account.overdue.term,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: account_due_list_days_overdue
+#: model:ir.model,name:account_due_list_days_overdue.model_account_move_line
+msgid "Journal Items"
+msgstr "Apuntes contables"
+
+#. module: account_due_list_days_overdue
+#: field:account.overdue.term,__last_update:0
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: account_due_list_days_overdue
+#: field:account.overdue.term,write_uid:0
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: account_due_list_days_overdue
+#: field:account.overdue.term,write_date:0
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: account_due_list_days_overdue
+#: field:account.overdue.term,name:0
+msgid "Name"
+msgstr "Nombre"
+
+#. module: account_due_list_days_overdue
+#: view:account.overdue.term:account_due_list_days_overdue.view_account_overdue_term_form
+#: view:account.overdue.term:account_due_list_days_overdue.view_account_overdue_term_search
+#: view:account.overdue.term:account_due_list_days_overdue.view_account_overdue_term_tree
+msgid "Overdue Term"
+msgstr ""
+
+#. module: account_due_list_days_overdue
+#: code:addons/account_due_list_days_overdue/models/account_overdue_term.py:57
+#, python-format
+msgid "Overdue Term %s overlaps with %s"
+msgstr ""
+
+#. module: account_due_list_days_overdue
+#: model:ir.actions.act_window,name:account_due_list_days_overdue.action_account_overdue_term_form
+#: model:ir.ui.menu,name:account_due_list_days_overdue.menu_action_account_overdue_term_form
+msgid "Overdue Terms"
+msgstr ""
+
+#. module: account_due_list_days_overdue
+#: field:account.overdue.term,tech_name:0
+msgid "Technical name"
+msgstr "Nombre técnico"
+
+#. module: account_due_list_days_overdue
+#: field:account.overdue.term,to_day:0
+msgid "To day"
+msgstr ""
