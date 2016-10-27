@@ -23,6 +23,7 @@ addon | version | summary
 --- | --- | ---
 [account_due_list](account_due_list/) | 8.0.1.0.0 | Payments Due list
 [account_due_list_aging_comments](account_due_list_aging_comments/) | 8.0.0.2.0 | Payments Due list aging comments
+[account_due_list_days_overdue](account_due_list_days_overdue/) | 8.0.0.1.0 | Payments Due list days overdue
 [account_due_list_payment_mode](account_due_list_payment_mode/) | 8.0.1.0.0 | Payment due list with payment mode
 [account_payment_extension](account_payment_extension/) | 8.0.1.0.0 | Migration for account payment extension
 [account_payment_order_to_voucher](account_payment_order_to_voucher/) | 8.0.1.0.0 | Payment order to voucher
