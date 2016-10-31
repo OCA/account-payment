@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 #  account_payment_cc - CREDIT CARD PAYMENTS for OpenERP
-#  Copyright (C) 2012 - TODAY, Ursa Information Systems (<http://ursainfosystems.com>)
+#  Copyright (C) 2012 - TODAY, Ursa Information Systems
+#  (<http://ursainfosystems.com>)
 #  Copyright (C) 2004-2010 Tiny SPRL (<http://tiny.be>)
 #  contact@ursainfosystems.com
 
