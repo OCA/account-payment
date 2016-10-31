@@ -26,7 +26,6 @@ Refer to the `documentation <./static/src/account_payment_cc_README.pdf>`_.
 Known issues / Roadmap
 ======================
 
-* ...
 
 Bug Tracker
 ===========
