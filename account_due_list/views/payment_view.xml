@@ -13,6 +13,7 @@
                 <field name="stored_invoice_id" readonly="1"/>
                 <field name="invoice_date" readonly="1"/>
                 <field name="invoice_origin" readonly="1"/>
+                <field name="name" readonly="1"/>
                 <field name="partner_id" readonly="1"/>
                 <field name="partner_ref" readonly="1"/>
                 <field name="payment_term_id" readonly="1"/>
@@ -44,6 +45,7 @@
                 <filter icon="terp-go-today" string="Overdue" domain="[('date_maturity','&lt;',time.strftime('%%Y-%%m-%%d'))]" help="Overdue payments" name="overdue"/>
                 <separator orientation="vertical"/>
                 <field name="account_id"/>
+                <field name="name"/>
                 <field name="partner_id"/>
                 <field name="invoice"/>
                 <field name="invoice_user_id"/>

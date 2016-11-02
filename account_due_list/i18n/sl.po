@@ -3,34 +3,35 @@
 # * account_due_list
 # 
 # Translators:
+# Matjaž Mozetič <m.mozetic@matmoz.si>, 2016
 msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-10 00:45+0000\n"
-"PO-Revision-Date: 2016-12-16 12:34+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-account-payment-8-0/language/de/)\n"
+"POT-Creation-Date: 2016-07-29 12:02+0000\n"
+"PO-Revision-Date: 2016-07-21 08:48+0000\n"
+"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-payment-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: sl\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Due Date"
-msgstr "Fälligkeitsdatum"
+msgstr "Valuta"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "From invoices"
-msgstr ""
+msgstr "Iz računov"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Group By..."
-msgstr "Gruppierung..."
+msgstr "Združi po..."
 
 #. module: account_due_list
 #: help:account.move.line,payment_term_id:0
@@ -39,48 +40,48 @@ msgid ""
 " generation of accounting entries. If you keep the payment term and the due "
 "date empty, it means direct payment. The payment term may compute several "
 "due dates, for example 50% now, 50% in one month."
-msgstr ""
+msgstr "Če uporabljate plačilne pogoje, bo datum zapadlosti samodejno izračunan ob nastanku knjigovodskih vnosov. Če plačilni pogoj in datum zapadlosti ostaneta prazna, to pomeni direktno plačilo. Plačilno pogoj lahko obdela več datumov zapadlosti, na primer 50% takoj, 50% v mesecu dni."
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 #: field:account.move.line,stored_invoice_id:0
 msgid "Invoice"
-msgstr "Rechnung"
+msgstr "Račun"
 
 #. module: account_due_list
 #: field:account.move.line,invoice_date:0
 msgid "Invoice Date"
-msgstr ""
+msgstr "Datum računa"
 
 #. module: account_due_list
 #: field:account.move.line,invoice_user_id:0
 msgid "Invoice salesperson"
-msgstr ""
+msgstr "Obračunski prodajalec"
 
 #. module: account_due_list
 #: model:ir.model,name:account_due_list.model_account_move_line
 msgid "Journal Items"
-msgstr "Buchungsjournale"
+msgstr "Dnevniške postavke"
 
 #. module: account_due_list
 #: help:account.move.line,invoice_date:0
 msgid "Keep empty to use the current date"
-msgstr ""
+msgstr "Pusti prazno za uporabo tekočega datuma"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Month"
-msgstr ""
+msgstr "Mesec"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Overdue"
-msgstr "Überfällig"
+msgstr "Zapadlo"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Overdue payments"
-msgstr ""
+msgstr "Zapadla plačila"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
@@ -90,97 +91,97 @@ msgstr "Partner"
 #. module: account_due_list
 #: field:account.move.line,partner_ref:0
 msgid "Partner Ref"
-msgstr ""
+msgstr "Sklic partnerja"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Payable"
-msgstr "Kreditor"
+msgstr "Plačljivo"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Payable payments"
-msgstr ""
+msgstr "Plačljiva plačila"
 
 #. module: account_due_list
 #: field:account.move.line,payment_term_id:0
 msgid "Payment Terms"
-msgstr ""
+msgstr "Plačilni pogoji"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_tree
 msgid "Payments"
-msgstr "Zahlungen"
+msgstr "Plačila"
 
 #. module: account_due_list
 #: model:ir.actions.act_window,name:account_due_list.action_invoice_payments
 #: model:ir.ui.menu,name:account_due_list.menu_action_invoice_payments
 msgid "Payments and due list"
-msgstr ""
+msgstr "Plačila in seznam zapadlih"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Receivable"
-msgstr "Debitor"
+msgstr "Terjatev"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Receivable payments"
-msgstr ""
+msgstr "Izterljiva plačila"
 
 #. module: account_due_list
 #: help:account.move.line,invoice_origin:0
 msgid "Reference of the document that produced this invoice."
-msgstr ""
+msgstr "Sklic na dokument, ki je sprožil ta račun"
 
 #. module: account_due_list
 #: field:account.move.line,maturity_residual:0
 msgid "Residual Amount"
-msgstr ""
+msgstr "Preostali znesek"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Salesperson"
-msgstr ""
+msgstr "Prodajalec"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Search Payments"
-msgstr "Zahlungen suchen"
+msgstr "Iskanje plačil"
 
 #. module: account_due_list
 #: field:account.move.line,invoice_origin:0
 msgid "Source Doc"
-msgstr ""
+msgstr "Izvorni dokument"
 
 #. module: account_due_list
 #: help:account.move.line,maturity_residual:0
 msgid ""
 "The residual amount on a receivable or payable of a journal entry expressed "
 "in the company currency."
-msgstr ""
+msgstr "Preostali znesek terjatve ali obveznosti dnevniške postavke izražen v valuti družbe."
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_tree
 msgid "Total Credit"
-msgstr "Total Kredit"
+msgstr "Skupaj v dobro"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_tree
 msgid "Total Debit"
-msgstr "Total Debit"
+msgstr "Skupaj v breme"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_tree
 msgid "Total Residual"
-msgstr "Offenes Betrag"
+msgstr "Skupaj preostalo"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Unreconciled"
-msgstr "Offene Posten"
+msgstr "Neusklajeno"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Unreconciled payments"
-msgstr ""
+msgstr "Neusklajena plačila"
