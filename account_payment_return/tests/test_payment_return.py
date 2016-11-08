@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
-# (c) 2015 Serv. Tecnol. Avanzados - Pedro M. Baeza
+# © 2015 Pedro M. Baeza <pedro.baeza@tecnativa.com>
+# © 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-from openerp.exceptions import Warning as UserError
+import json
+from openerp.exceptions import Warning as UserError, ValidationError
 from openerp.tests.common import SavepointCase
 
 
@@ -10,36 +12,74 @@ class TestPaymentReturn(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super(TestPaymentReturn, cls).setUpClass()
-        cls.account_invoice_model = cls.env['account.invoice']
-        cls.payment_return_model = cls.env['payment.return']
-        cls.partner = cls.env.ref('base.res_partner_1')
-        # Prepare invoice and pay it for making the return
-        cls.invoice = cls.env.ref('account.invoice_2')
-        cls.invoice.journal_id.update_posted = True
+
+        cls.journal = cls.env['account.journal'].create({
+            'name': 'Test Sales Journal',
+            'code': 'tVEN',
+            'type': 'sale',
+            'update_posted': True,
+        })
+        cls.bank_journal = cls.env['account.journal'].create({
+            'name': 'Test Bank Journal',
+            'code': 'BANK',
+            'type': 'bank',
+            'update_posted': True,
+        })
+        cls.account_type = cls.env['account.account.type'].create({
+            'name': 'Test',
+            'type': 'receivable',
+        })
+        cls.account = cls.env['account.account'].create({
+            'name': 'Test account',
+            'code': 'TEST',
+            'user_type_id': cls.account_type.id,
+            'reconcile': True,
+        })
+        cls.account_income = cls.env['account.account'].create({
+            'name': 'Test income account',
+            'code': 'INCOME',
+            'user_type_id': cls.env['account.account.type'].create(
+                {'name': 'Test income'}).id,
+        })
+        cls.partner = cls.env['res.partner'].create({'name': 'Test'})
+        cls.invoice = cls.env['account.invoice'].create({
+            'journal_id': cls.journal.id,
+            'account_id': cls.account.id,
+            'company_id': cls.env.user.company_id.id,
+            'currency_id': cls.env.user.company_id.currency_id.id,
+            'partner_id': cls.partner.id,
+            'invoice_line_ids': [(0, 0, {
+                'account_id': cls.account_income.id,
+                'name': 'Test line',
+                'price_unit': 50,
+                'quantity': 10,
+            })]
+        })
+        cls.reason = cls.env['payment.return.reason'].create({
+            'code': 'RTEST',
+            'name': 'Reason Test'
+        })
         cls.invoice.signal_workflow('invoice_open')
-        cls.receivable_line = cls.invoice.move_id.line_id.filtered(
-            lambda x: x.account_id.type == 'receivable')
+        cls.receivable_line = cls.invoice.move_id.line_ids.filtered(
+            lambda x: x.account_id.internal_type == 'receivable')
         # Invert the move to simulate the payment
-        cls.payment_move = cls.invoice.move_id.copy()
-        for move_line in cls.payment_move.line_id:
-            debit = move_line.debit
-            move_line.write({'debit': move_line.credit,
-                             'credit': debit})
-        cls.payment_line = cls.payment_move.line_id.filtered(
-            lambda x: x.account_id.type == 'receivable')
+        cls.payment_move = cls.invoice.move_id.copy({
+            'journal_id': cls.bank_journal.id
+        })
+        for move_line in cls.payment_move.line_ids:
+            move_line.with_context(check_move_validity=False).write({
+                'debit': move_line.credit, 'credit': move_line.debit})
+        cls.payment_line = cls.payment_move.line_ids.filtered(
+            lambda x: x.account_id.internal_type == 'receivable')
         # Reconcile both
-        cls.reconcile = cls.env['account.move.reconcile'].create(
-            {'type': 'manual',
-             'line_id': [(4, cls.payment_line.id),
-                         (4, cls.receivable_line.id)]})
+        (cls.receivable_line | cls.payment_line).reconcile()
         # Create payment return
-        cls.payment_return = cls.payment_return_model.create(
-            {'journal_id': cls.env.ref('account.bank_journal').id,
+        cls.payment_return = cls.env['payment.return'].create(
+            {'journal_id': cls.bank_journal.id,
              'line_ids': [
                  (0, 0, {'partner_id': cls.partner.id,
                          'move_line_ids': [(6, 0, cls.payment_line.ids)],
                          'amount': cls.payment_line.credit})]})
-        cls.payment_return.journal_id.update_posted = True
 
     def test_confirm_error(self):
         self.payment_return.line_ids[0].move_line_ids = False
@@ -56,32 +96,34 @@ class TestPaymentReturn(SavepointCase):
     def test_payment_return(self):
         self.payment_return.action_cancel()  # No effect
         self.assertEqual(self.invoice.state, 'paid')
+        self.assertEqual(self.payment_return.state, 'cancelled')
+        self.payment_return.action_draft()
         self.assertEqual(self.payment_return.state, 'draft')
         self.payment_return.action_confirm()
         self.assertEqual(self.payment_return.state, 'done')
         self.assertEqual(self.invoice.state, 'open')
         self.assertEqual(self.invoice.residual, self.receivable_line.debit)
-        self.assertEqual(
-            len(self.receivable_line.reconcile_partial_id.line_partial_ids), 3)
+        self.assertFalse(self.receivable_line.reconciled)
         with self.assertRaises(UserError):
             self.payment_return.unlink()
         self.payment_return.action_cancel()
         self.assertEqual(self.payment_return.state, 'cancelled')
         self.assertEqual(self.invoice.state, 'paid')
+        self.assertTrue(self.receivable_line.reconciled)
         self.payment_return.action_draft()
         self.assertEqual(self.payment_return.state, 'draft')
         self.payment_return.unlink()
 
     def test_payment_partial_return(self):
-        self.payment_return.line_ids[0].amount = 5.0
+        self.payment_return.line_ids[0].amount = 500.0
         self.assertEqual(self.invoice.state, 'paid')
         self.payment_return.action_confirm()
         self.assertEqual(self.invoice.state, 'open')
-        self.assertEqual(self.invoice.residual, 5.0)
-        self.assertEqual(
-            len(self.receivable_line.reconcile_partial_id.line_partial_ids), 3)
+        self.assertEqual(self.invoice.residual, 500.0)
+        self.assertFalse(self.receivable_line.reconciled)
         self.payment_return.action_cancel()
         self.assertEqual(self.invoice.state, 'paid')
+        self.assertTrue(self.receivable_line.reconciled)
 
     def test_find_match_invoice(self):
         self.payment_return.line_ids.write({
@@ -119,3 +161,27 @@ class TestPaymentReturn(SavepointCase):
         })
         with self.assertRaises(UserError):
             self.payment_return.button_match()
+
+    def test_duplicate_lines(self):
+        line_vals = {'partner_id': self.partner.id,
+                     'move_line_ids': [(6, 0, self.payment_line.ids)],
+                     'amount': self.payment_line.credit}
+        with self.assertRaises(ValidationError):
+            self.payment_return.line_ids = [(0, 0, line_vals)]
+        self.payment_return.action_confirm()
+        with self.assertRaises(ValidationError):
+            self.payment_return = self.env['payment.return'].create(
+                {'journal_id': self.bank_journal.id,
+                 'line_ids': [(0, 0, line_vals)]})
+
+    def test_payments_widget(self):
+        info = json.loads(self.invoice.payments_widget)
+        self.assertEqual(len(info['content']), 1)
+        self.payment_return.action_confirm()
+        info = json.loads(self.invoice.payments_widget)
+        self.assertEqual(len(info['content']), 2)
+        self.assertEqual(info['content'][1]['amount'], -500.0)
+
+    def test_reason_name_search(self):
+        self.payment_return.line_ids[0].reason_id = 'RTEST'
+        self.payment_return.line_ids[0].reason_id = 'Reason Test'
