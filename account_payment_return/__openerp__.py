@@ -10,7 +10,7 @@
 
 {
     "name": "Account Payment Returns",
-    "version": "8.0.1.0.0",
+    "version": "9.0.1.0.0",
     "summary": "Manage the return of your payments",
     'license': 'AGPL-3',
     "depends": [
@@ -28,6 +28,9 @@
         'views/payment_return_view.xml',
         'data/ir_sequence_data.xml',
         'views/account_invoice_view.xml',
+    ],
+    'qweb': [
+        "static/src/xml/account_payment.xml",
     ],
     'installable': True,
 }
