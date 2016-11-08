@@ -35,10 +35,6 @@ class PaymentReturn(models.Model):
                 'cancelled': [('readonly', True)]},
         default=lambda self: self.env['ir.sequence'].next_by_code(
             'payment.return'))
-    period_id = fields.Many2one(
-        comodel_name='account.period', string='Forced period',
-        states={'done': [('readonly', True)],
-                'cancelled': [('readonly', True)]})
     line_ids = fields.One2many(
         comodel_name='payment.return.line', inverse_name='return_id',
         states={'done': [('readonly', True)],
@@ -88,24 +84,15 @@ class PaymentReturn(models.Model):
                     append_error(line)
         if error_list:
             raise UserError(
-                "Payment reference must be unique!\n"
-                "%s" % '\n'.join(error_list)
+                _("Payment reference must be unique!"
+                  "\n%s") % '\n'.join(error_list)
             )
 
-    def _get_invoices(self, move_lines):
-        invoice_moves = move_lines.filtered('debit').mapped('move_id')
-        invoices = self.env['account.invoice'].search(
-            [('move_id', 'in', invoice_moves.ids)])
-        return invoices
-
-    def _get_move_amount(self, return_line, move_line):
+    def _get_move_amount(self, return_line):
         return return_line.amount
 
     def _prepare_invoice_returned_vals(self):
         return {'returned_payment': True}
-
-    def _prepare_invoice_returned_cancel_vals(self):
-        return {'returned_payment': False}
 
     @api.multi
     def unlink(self):
@@ -128,71 +115,67 @@ class PaymentReturn(models.Model):
             raise UserError(
                 _("You must input all moves references in the payment "
                   "return."))
-        invoices_returned = self.env['account.invoice']
-        move = {
+        move_dic = {
             'name': '/',
             'ref': _('Return %s') % self.name,
             'journal_id': self.journal_id.id,
             'date': self.date,
-            'company_id': self.company_id.id,
-            'period_id': (self.period_id.id or self.period_id.with_context(
-                company_id=self.company_id.id).find(self.date).id),
+            'company_id': self.company_id.id
         }
-        move_id = self.env['account.move'].create(move)
+        invoices = self.env['account.invoice']
+        move = self.env['account.move'].create(move_dic)
+        total_amount = 0.0
         for return_line in self.line_ids:
-            lines2reconcile = return_line.move_line_ids.mapped(
-                'reconcile_id.line_id')
-            invoices_returned |= self._get_invoices(lines2reconcile)
+            move_amount = self._get_move_amount(return_line)
+            move_line2 = self.env['account.move.line'].with_context(
+                check_move_validity=False).create({
+                    'name': move['ref'],
+                    'debit': move_amount,
+                    'credit': 0.0,
+                    'account_id': return_line.move_line_ids[0].account_id.id,
+                    'move_id': move.id,
+                    'partner_id': return_line.partner_id.id,
+                    'journal_id': move.journal_id.id,
+                })
+            total_amount += move_amount
             for move_line in return_line.move_line_ids:
-                move_amount = self._get_move_amount(return_line, move_line)
-                move_line2 = move_line.copy(
-                    default={
-                        'move_id': move_id.id,
-                        'debit': move_amount,
-                        'name': move['ref'],
-                        'credit': 0,
-                    })
-                lines2reconcile |= move_line2
-                move_line2.copy(
-                    default={
-                        'debit': 0,
-                        'credit': move_amount,
-                        'account_id':
-                            self.journal_id.default_credit_account_id.id,
-                    })
-                # Break old reconcile
-                move_line.reconcile_id.unlink()
-            # Make a new one with at least three moves
-            lines2reconcile.reconcile_partial()
-            return_line.write(
-                {'reconcile_id': move_line2.reconcile_partial_id.id})
-        # Mark invoice as payment refused
-        invoices_returned.write(self._prepare_invoice_returned_vals())
-        move_id.button_validate()
-        self.write({'state': 'done', 'move_id': move_id.id})
+                returned_moves = move_line.matched_debit_ids.mapped(
+                    'debit_move_id')
+                invoices |= returned_moves.mapped('invoice_id')
+                move_line.remove_move_reconcile()
+                (move_line | move_line2).reconcile()
+                return_line.move_line_ids.mapped('matched_debit_ids').write(
+                    {'origin_returned_move_ids': [(6, 0, returned_moves.ids)]})
+        self.env['account.move.line'].create({
+            'name': move['ref'],
+            'debit': 0.0,
+            'credit': total_amount,
+            'account_id': self.journal_id.default_credit_account_id.id,
+            'move_id': move.id,
+            'journal_id': move.journal_id.id,
+            })
+        # Write directly because we returned payments just now
+        invoices.write(self._prepare_invoice_returned_vals())
+        move.post()
+        self.write({'state': 'done', 'move_id': move.id})
         return True
 
     @api.multi
     def action_cancel(self):
-        self.ensure_one()
-        if not self.move_id:
-            return True
-        for return_line in self.line_ids:
-            invoices = self.env['account.invoice']
-            if return_line.reconcile_id:
-                reconcile = return_line.reconcile_id
-                lines2reconcile = reconcile.line_partial_ids.filtered(
-                    lambda x: x.move_id != self.move_id)
-                invoices = self._get_invoices(lines2reconcile)
-                reconcile.unlink()
-                if lines2reconcile:
-                    lines2reconcile.reconcile()
-                return_line.write({'reconcile_id': False})
-        # Remove payment refused flag on invoice
-        invoices.write(self._prepare_invoice_returned_cancel_vals())
+        invoices = self.env['account.invoice']
+        for move_line in self.mapped('move_id.line_ids').filtered(
+                lambda x: x.user_type_id.type == 'receivable'):
+            for partial_line in move_line.matched_credit_ids:
+                invoices |= partial_line.origin_returned_move_ids.mapped(
+                    'invoice_id')
+                lines2reconcile = (partial_line.origin_returned_move_ids |
+                                   partial_line.credit_move_id)
+                partial_line.credit_move_id.remove_move_reconcile()
+                lines2reconcile.reconcile()
         self.move_id.button_cancel()
         self.move_id.unlink()
         self.write({'state': 'cancelled', 'move_id': False})
+        invoices.check_payment_return()
         return True
 
     @api.multi
@@ -211,8 +194,9 @@ class PaymentReturnLine(models.Model):
     concept = fields.Char(
         string='Concept',
         help="Read from imported file. Only for reference.")
-    reason = fields.Many2one(
+    reason_id = fields.Many2one(
         comodel_name='payment.return.reason',
+        oldname="reason",
         string='Return reason',
     )
     reference = fields.Char(
@@ -234,9 +218,6 @@ class PaymentReturnLine(models.Model):
         string='Amount',
         help="Returned amount. Can be different from the move amount",
         digits_compute=dp.get_precision('Account'))
-    reconcile_id = fields.Many2one(
-        comodel_name='account.move.reconcile', string='Reconcile',
-        help="Reference to the reconcile object.")
 
     @api.multi
     def _compute_amount(self):
@@ -249,7 +230,7 @@ class PaymentReturnLine(models.Model):
             partners = line.move_line_ids.mapped('partner_id')
             if len(partners) > 1:
                 raise UserError(
-                    "All payments must be owned by the same partner")
+                    _("All payments must be owned by the same partner"))
             line.partner_id = partners[:1].id
             line.partner_name = partners[:1].name
 
@@ -260,15 +241,12 @@ class PaymentReturnLine(models.Model):
     @api.multi
     def match_invoice(self):
         for line in self:
-            if line.partner_id:
-                domain = [('partner_id', '=', line.partner_id.id)]
-            else:
-                domain = []
+            domain = line.partner_id and [
+                ('partner_id', '=', line.partner_id.id)] or []
             domain.append(('number', '=', line.reference))
             invoice = self.env['account.invoice'].search(domain)
             if invoice:
-                payments = invoice.payment_ids.filtered(
-                    lambda x: x.credit > 0.0)
+                payments = invoice.payment_move_line_ids
                 if payments:
                     line.move_line_ids = payments[0].ids
                     if not line.concept:
@@ -277,18 +255,18 @@ class PaymentReturnLine(models.Model):
     @api.multi
     def match_move_lines(self):
         for line in self:
-            if line.partner_id:
-                domain = [('partner_id', '=', line.partner_id.id)]
-            else:
-                domain = []
-            domain += [
-                ('account_id.type', '=', 'receivable'),
-                ('credit', '>', 0.0),
-                ('reconcile_ref', '!=', False),
+            domain = line.partner_id and [
+                ('partner_id', '=', line.partner_id.id)] or []
+            if line.return_id.journal_id:
+                domain.append(('journal_id', '=',
+                               line.return_id.journal_id.id))
+            domain.extend([
+                ('account_id.internal_type', '=', 'receivable'),
+                ('reconciled', '=', True),
                 '|',
                 ('name', '=', line.reference),
                 ('ref', '=', line.reference),
-            ]
+            ])
             move_lines = self.env['account.move.line'].search(domain)
             if move_lines:
                 line.move_line_ids = move_lines.ids
@@ -299,21 +277,17 @@ class PaymentReturnLine(models.Model):
     @api.multi
     def match_move(self):
         for line in self:
-            if line.partner_id:
-                domain = [('partner_id', '=', line.partner_id.id)]
-            else:
-                domain = []
+            domain = line.partner_id and [
+                ('partner_id', '=', line.partner_id.id)] or []
             domain.append(('name', '=', line.reference))
             move = self.env['account.move'].search(domain)
             if move:
                 if len(move) > 1:
                     raise UserError(
-                        "More than one matches to move reference: %s" %
+                        _("More than one matches to move reference: %s") %
                         self.reference)
-                line.move_line_ids = move.line_id.filtered(lambda l: (
-                    l.account_id.type == 'receivable' and
-                    l.credit > 0 and
-                    l.reconcile_ref
+                line.move_line_ids = move.line_ids.filtered(lambda l: (
+                    l.user_type_id.type == 'receivable' and l.reconciled
                 )).ids
                 if not line.concept:
                     line.concept = _('Move: %s') % move.ref

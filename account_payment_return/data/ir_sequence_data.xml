@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<!-- © 2015 Pedro M. Baeza <pedro.baeza@tecnativa.com>
+     © 2015 Sergio Teruel <sergio.teruel@tecnativa.com>
+     © 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl-3). -->
+<odoo>
     <data noupdate="1">
-
-        <record id="seq_payment_return_type" model="ir.sequence.type">
-            <field name="name">Payment Return</field>
-            <field name="code">payment.return</field>
-        </record>
 
         <record id="seq_payment_return" model="ir.sequence">
             <field name="name">Payment return</field>
@@ -16,4 +15,4 @@
         </record>
 
     </data>
-</openerp>
+</odoo>
