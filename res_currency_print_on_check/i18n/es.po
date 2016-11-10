@@ -1,0 +1,361 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#   * res_currency_print_on_check
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 9.0e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-10 06:29+0000\n"
+"PO-Revision-Date: 2016-11-10 06:29+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: res_currency_print_on_check
+#: model:ir.model,name:res_currency_print_on_check.model_res_currency
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: res_currency_print_on_check
+#: model:ir.model.fields,field_description:res_currency_print_on_check.field_res_currency_print_on_check
+msgid "Display Name"
+msgstr "Nombre para mostrar"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.USD
+msgid "U.S. dollars"
+msgstr "dólares americanos"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.EUR
+msgid "euros"
+msgstr "euros"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.GBP
+msgid "U.K. pounds"
+msgstr "libras esterlina"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.CAD
+msgid "canadian dollars"
+msgstr "dólares canadienses"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.AUD
+msgid "australian dollars"
+msgstr "dólares australianos"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.JPY
+msgid "japanese yens"
+msgstr "yenes"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.INR
+msgid "indian rupees"
+msgstr "rupia indias"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.NZD
+msgid "New Zealand dollars"
+msgstr "dólares neozelandés"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.CHF
+msgid "swiss francs"
+msgstr "francos suizos"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.ZAR
+msgid "south african rands"
+msgstr "rands"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.AED
+msgid "U.A.E. dirhams"
+msgstr "dírhams de E.A.U"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.ANG
+msgid "Neth. Antilles florins"
+msgstr "florines antillanos neerlandés"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.ARS
+msgid "argentine pesos"
+msgstr "pesos argentinos"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.BBD
+msgid "barbadian dollars"
+msgstr "dólares barbadenses"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.BHD
+msgid "bahraini dinars"
+msgstr "dinares bareiníes"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.BRL
+msgid "brazilian reals"
+msgstr "reales brasileños"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.BSD
+msgid "bahamian dollars"
+msgstr "dólares bahameños"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.CLP
+msgid "chilean pesos"
+msgstr "pesos chilenos"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.CNY
+msgid "chinese renminbis"
+msgstr "yuanes chinos"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.COP
+msgid "colombian pesos"
+msgstr "pesos colombianos"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.CZK
+msgid "Czech Republic korunas"
+msgstr "coronas checas"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.DKK
+msgid "danish krones"
+msgstr "coronas danesas"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.EGP
+msgid "egyptian pounds"
+msgstr "libras egipcias"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.FJD
+msgid "Fiji dollars"
+msgstr "dólares fiyianos"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.GHS
+msgid "ghanaian cedis"
+msgstr "cedis ghaneses"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.HKD
+msgid "Hong Kong dollars"
+msgstr "dólares hongkoneses"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.HNL
+msgid "honduran lempiras"
+msgstr "lempiras"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.HRK
+msgid "croatian kunas"
+msgstr "kunas"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.HUF
+msgid "hungarian forints"
+msgstr "forintos"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.IDR
+msgid "indonesian rupiahs"
+msgstr "rupias indonesias"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.ILS
+msgid "israeli new shekels"
+msgstr "nuevos séqueles"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.ISK
+msgid "icelandic kronas"
+msgstr "coronas islandesas"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.JMD
+msgid "jamaican dollars"
+msgstr "dólares jamaiquinos"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.KRW
+msgid "south korean wons"
+msgstr "wones"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.LKR
+msgid "Sri Lanka rupees"
+msgstr "rupias esrilanquesas"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.LTL
+msgid "lithuanian litas"
+msgstr "litas lituanas"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.LVL
+msgid "latvian lats"
+msgstr "lats"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.MAD
+msgid "moroccan dirhams"
+msgstr "dírhams marroquíes"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.MMK
+msgid "Myanmar kyats"
+msgstr "kyats"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.MXN
+msgid "mexican pesos"
+msgstr "pesos mexicanos"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.MYR
+msgid "malaysian ringgits"
+msgstr "ringgits"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.MZN
+msgid "mozambican meticals"
+msgstr "meticales mozambiqueños"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.NIO
+msgid "nicaraguan córdobas"
+msgstr "córdobas"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.NOK
+msgid "norwegian krones"
+msgstr "coronas noruegas"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.PAB
+msgid "panamanian balboas"
+msgstr "balboas"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.PEN
+msgid "peruvian new sols"
+msgstr "soles"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.PHP
+msgid "philippine pesos"
+msgstr "pesos filipinos"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.PKR
+msgid "pakistan rupees"
+msgstr "rupias pakistaníes"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.PLN
+msgid "polish zlotys"
+msgstr "eslotis"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.RON
+msgid "romanian new leus"
+msgstr "nuevos leus"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.RSD
+msgid "serbian dinars"
+msgstr "dinares serbios"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.RUB
+msgid "russian roubles"
+msgstr "rublos rusos"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.SAR
+msgid "saudi riyals"
+msgstr "riyales saudíes"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.SEK
+msgid "swedish kronas"
+msgstr "coronas suecas"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.SGD
+msgid "Singapore dollars"
+msgstr "dólares singapureños"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.SIT
+msgid "slovenian tolars"
+msgstr "tólares eslovenos"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.SKK
+msgid "slovak korunas"
+msgstr "coronas eslovacas"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.THB
+msgid "thai bahts"
+msgstr "bahts"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.TND
+msgid "tunisian dinars"
+msgstr "dinares tunecinos"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.TRL
+msgid "turkish liras"
+msgstr "liras turcas"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.TWD
+msgid "taiwanese new dollars"
+msgstr "nuevos dólares taiwaneses"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.UAH
+msgid "ukrainian hryvnias"
+msgstr "grivnas"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.VEF
+msgid "venezuelan bolivars fuerte"
+msgstr "bolivares fuertes"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.VND
+msgid "vietnamese dongs"
+msgstr "dongs vietnamitas"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.XAF
+msgid "CFA francs"
+msgstr "francos centroafricanos"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.XCD
+msgid "east caribbean dollars"
+msgstr "dólares del caribe oriental"
+
+#. module: res_currency_print_on_check
+#: model:res.currency,print_on_check:base.XPF
+msgid "CFP francs"
+msgstr "francos CFP"
