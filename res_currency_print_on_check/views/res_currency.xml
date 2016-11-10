@@ -7,7 +7,7 @@
             <field name="model">res.currency</field>
             <field name="inherit_id" ref="base.view_currency_form"/>
             <field name="arch" type="xml">
-                <xpath expr="//field[@name='rate_silent']" position="after">
+                <xpath expr="//field[@name='rate']" position="after">
                     <field name="print_on_check"/>
                 </xpath>
             </field>
