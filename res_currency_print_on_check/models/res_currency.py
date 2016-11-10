@@ -23,6 +23,7 @@
 from openerp import fields, models
 
 
-class Currency(models.Model):
+class ResCurrency(models.Model):
     _inherit = _name = 'res.currency'
+
     print_on_check = fields.Char('Display Name', size=64, translate=True)
