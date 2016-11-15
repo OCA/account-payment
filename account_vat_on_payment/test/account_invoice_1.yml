@@ -110,6 +110,7 @@
 -
   !python {model: account.voucher}: |
     voucher = self.browse(cr, uid, ref('account_voucher_1'), context=context)
+    invoice = self.pool['account.invoice'].browse(cr, uid, ref('account_invoice_customer_1'), context=context)
     assert len(voucher.move_id.line_id) == 3, "There must be 3 real move lines, %s found" % len(voucher.move_id.line_id)
     bank_found = False
     vat_found = False
@@ -130,6 +131,7 @@
     voucher.refresh()
     assert voucher.move_id.state == 'draft', 'Move state != draft: %s' % voucher.move_id.state
     assert voucher.shadow_move_id.state == 'draft', 'Shadow move state != draft: %s' % voucher.shadow_move_id.state
+    assert voucher.shadow_move_id.ref == invoice.number
 -
   I check that the invoice state is paid
 -

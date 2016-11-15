@@ -82,6 +82,8 @@ class AccountBankStatementLine(orm.Model):
 
     def _create_vat_on_payment_move(self, cr, uid, bank_line, mv_line_dicts,
                                     context=None):
+        if context is None:
+            context = {}
         move_line_pool = self.pool['account.move.line']
         move_pool = self.pool['account.move']
         voucher_pool = self.pool['account.voucher']
@@ -137,6 +139,7 @@ class AccountBankStatementLine(orm.Model):
         ctx['journal_id'] = real_journal
         ctx['period_id'] = bank_line.statement_id.period_id.id
         ctx['date'] = bank_line.statement_id.date
+        ctx['amounts_by_invoice'] = amounts_by_invoice
         shadow_move_id = move_pool.create(
             cr, uid, voucher_pool._prepare_shadow_move(
                 cr, uid, bank_line, move_id_field='journal_entry_id',
