@@ -1,0 +1,68 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_invoice_under_payment
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-12-06 15:23+0000\n"
+"PO-Revision-Date: 2016-12-06 16:39+0100\n"
+"Last-Translator: Alex Comba <alex.comba@agilebg.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: \n"
+"Language: it\n"
+"X-Generator: Poedit 1.8.9\n"
+
+#. module: account_invoice_under_payment
+#: view:account.move.line:account_invoice_under_payment.move_line_view_under_payment
+msgid "Amount"
+msgstr "Importo"
+
+#. module: account_invoice_under_payment
+#: code:addons/account_invoice_under_payment/models/order_create.py:53
+#, python-format
+msgid "Entry Lines"
+msgstr "Registrazioni"
+
+#. module: account_invoice_under_payment
+#: field:payment.line,failed:0
+msgid "Failed"
+msgstr "Fallito"
+
+#. module: account_invoice_under_payment
+#: model:ir.model,name:account_invoice_under_payment.model_account_invoice
+msgid "Invoice"
+msgstr "Fattura"
+
+#. module: account_invoice_under_payment
+#: model:ir.model,name:account_invoice_under_payment.model_account_move_line
+msgid "Journal Items"
+msgstr "Voci sezionale"
+
+#. module: account_invoice_under_payment
+#: view:account.move.line:account_invoice_under_payment.move_line_view_under_payment
+#: model:ir.model,name:account_invoice_under_payment.model_payment_line
+msgid "Payment Line"
+msgstr "Riga pagamento"
+
+#. module: account_invoice_under_payment
+#: view:account.move.line:account_invoice_under_payment.move_line_view_under_payment
+#: field:account.move.line,payment_line_ids:0
+msgid "Payment Lines"
+msgstr "Righe Pagamento"
+
+#. module: account_invoice_under_payment
+#: view:account.move.line:account_invoice_under_payment.move_line_view_under_payment
+msgid "Total in Company Currency"
+msgstr "Totale in valuta dell'azienda"
+
+#. module: account_invoice_under_payment
+#: view:account.invoice:account_invoice_under_payment.invoice_view_under_payment_search
+#: field:account.invoice,under_payment:0
+#: field:account.move.line,under_payment:0
+msgid "Under Payment"
+msgstr "In Pagamento"

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="payment_order_view_under_payment_form" model="ir.ui.view">
+            <field name="name">paymentorder.under_payment_form</field>
+            <field name="model">payment.order</field>
+            <field name="inherit_id" ref="account_payment.view_payment_order_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='move_line_id']" position="after">
+                    <field name="failed"/>
+                </xpath>
+                <xpath expr="//field[@name='line_ids']/tree/field[@name='name']" position="after">
+                    <field name="failed"/>
+                    <button name="set_failed" type="object" string="Change Failed State" icon="gtk-apply"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="payment_line_view_payment_form" model="ir.ui.view">
+            <field name="name">paymentline.payment_form</field>
+            <field name="model">payment.line</field>
+            <field name="inherit_id" ref="account_payment.view_payment_line_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='move_line_id']" position="after">
+                    <field name="failed"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="payment_line_view_payment_tree" model="ir.ui.view">
+            <field name="name">paymentline.payment_tree</field>
+            <field name="model">payment.line</field>
+            <field name="inherit_id" ref="account_payment.view_payment_line_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='move_line_id']" position="after">
+                    <field name="failed"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</openerp>

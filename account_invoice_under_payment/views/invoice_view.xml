@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="invoice_view_under_payment" model="ir.ui.view">
+            <field name="name">invoice.under_payment</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_supplier_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='date_invoice']" position="after">
+                    <field name="under_payment"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="invoice_view_under_payment_tree" model="ir.ui.view">
+            <field name="name">invoice.under_payment_tree</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.invoice_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='state']" position="before">
+                    <field name="under_payment"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="invoice_view_under_payment_search" model="ir.ui.view">
+            <field name="name">invoice.under_payment_search</field>
+            <field name="model">account.invoice</field>
+            <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='unpaid']" position="after">
+                    <filter name="under_payment" string="Under Payment" domain="[('under_payment','=',True)]" help="Under Payment"/>
+                </xpath>
+            </field>
+        </record>
+
+</data>
+</openerp>
