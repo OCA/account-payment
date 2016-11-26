@@ -59,7 +59,7 @@ class AccountMoveLine(models.Model):
                 for overdue_term in overdue_terms:
                     if overdue_term.to_day >= days_overdue >= \
                             overdue_term.from_day \
-                            and line.amount_residual > 0.0:
+                            and abs(line.amount_residual) > 0.0:
                         line[overdue_term.tech_name] = line.amount_residual
 
     @api.model
@@ -95,6 +95,12 @@ class AccountMoveLine(models.Model):
                 result['arch'] = etree.tostring(doc)
         return result
 
+    @api.model
+    def _add_terms(self, field_name, term_name):
+        self._add_field(field_name, fields.Float(
+            string=term_name, compute='_compute_overdue_terms'))
+        return True
+
     def _register_hook(self, cr):
         term_obj = self.pool['account.overdue.term']
         term_ids = term_obj.search(cr, SUPERUSER_ID, [])
@@ -104,8 +110,8 @@ class AccountMoveLine(models.Model):
             # register_hook can be called multiple times
             if field_name in self._fields:
                 continue
-            self._add_field(field_name, fields.Float(
-                string=term.name, compute='_compute_overdue_terms'))
-        self._setup_fields(cr, SUPERUSER_ID)
+            self._add_terms(cr, SUPERUSER_ID, field_name, term.name,
+                            context={})
+        self._setup_fields(cr, SUPERUSER_ID, False)
         self._setup_complete(cr, SUPERUSER_ID)
         return super(AccountMoveLine, self)._register_hook(cr)
