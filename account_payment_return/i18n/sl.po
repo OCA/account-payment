@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 05:05+0000\n"
-"PO-Revision-Date: 2016-05-07 07:09+0000\n"
+"POT-Creation-Date: 2016-11-02 06:22+0000\n"
+"PO-Revision-Date: 2016-11-22 16:25+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-payment-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -149,7 +149,7 @@ msgid "Invoice has been included on a payment that has been returned later."
 msgstr "Račun je bil vključen v plačilo, ki je bilo kasneje vrnjeno."
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:268
+#: code:addons/account_payment_return/models/payment_return.py:275
 #, python-format
 msgid "Invoice: %s"
 msgstr "Račun: %s"
@@ -214,13 +214,13 @@ msgid "Messages and communication history"
 msgstr "Sporočila in kronologija komunikacij"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:289
+#: code:addons/account_payment_return/models/payment_return.py:296
 #, python-format
 msgid "Move lines: %s"
 msgstr "Postavke premika: %s"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:312
+#: code:addons/account_payment_return/models/payment_return.py:319
 #, python-format
 msgid "Move: %s"
 msgstr "Premik: %s"
@@ -301,7 +301,7 @@ msgid "Reference to the reconcile object."
 msgstr "Sklic za uskladitev objekta."
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:127
+#: code:addons/account_payment_return/models/payment_return.py:134
 #, python-format
 msgid "Return %s"
 msgstr "Vračilo %s"
@@ -347,7 +347,13 @@ msgid "Unread Messages"
 msgstr "Neprebrana sporočila"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:122
+#: code:addons/account_payment_return/models/payment_return.py:113
+#, python-format
+msgid "You can not remove a payment return if state is 'Done'"
+msgstr "Vračila plačila v stanju 'Opravljeno' ne morete odstraniti"
+
+#. module: account_payment_return
+#: code:addons/account_payment_return/models/payment_return.py:129
 #, python-format
 msgid "You must input all moves references in the payment return."
 msgstr "V vračilo plačila morate vnesti vse sklice premikov."

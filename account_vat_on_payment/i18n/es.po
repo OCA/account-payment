@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-22 16:30+0000\n"
-"PO-Revision-Date: 2016-09-29 15:06+0000\n"
+"POT-Creation-Date: 2016-11-02 06:22+0000\n"
+"PO-Revision-Date: 2016-11-11 13:00+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-payment-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. module: account_vat_on_payment
 #: model:ir.model,name:account_vat_on_payment.model_account_account
 msgid "Account"
-msgstr ""
+msgstr "Cuenta"
 
 #. module: account_vat_on_payment
 #: model:ir.model,name:account_vat_on_payment.model_account_voucher
@@ -52,7 +52,7 @@ msgstr ""
 #. module: account_vat_on_payment
 #: model:ir.model,name:account_vat_on_payment.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Compañías"
 
 #. module: account_vat_on_payment
 #: help:account.config.settings,vat_on_payment:0
@@ -79,7 +79,7 @@ msgstr "Error"
 #. module: account_vat_on_payment
 #: model:ir.model,name:account_vat_on_payment.model_account_fiscal_position
 msgid "Fiscal Position"
-msgstr ""
+msgstr "Posición fiscal"
 
 #. module: account_vat_on_payment
 #: model:ir.model,name:account_vat_on_payment.model_account_invoice

@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-22 16:30+0000\n"
-"PO-Revision-Date: 2016-09-23 14:13+0000\n"
+"POT-Creation-Date: 2016-11-02 06:22+0000\n"
+"PO-Revision-Date: 2016-11-25 14:56+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-account-payment-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Due Date"
-msgstr ""
+msgstr "Date d'échéance"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
@@ -30,7 +30,7 @@ msgstr ""
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Group By..."
-msgstr ""
+msgstr "Grouper par"
 
 #. module: account_due_list
 #: help:account.move.line,payment_term_id:0
@@ -110,7 +110,7 @@ msgstr ""
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_tree
 msgid "Payments"
-msgstr ""
+msgstr "Paiements"
 
 #. module: account_due_list
 #: model:ir.actions.act_window,name:account_due_list.action_invoice_payments
@@ -173,7 +173,7 @@ msgstr ""
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_tree
 msgid "Total Residual"
-msgstr ""
+msgstr "Total résiduel"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter

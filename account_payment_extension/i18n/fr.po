@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-15 18:00+0000\n"
+"POT-Creation-Date: 2016-11-02 06:22+0000\n"
 "PO-Revision-Date: 2016-03-24 02:05+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-account-payment-8-0/language/fr/)\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. module: account_payment_extension
 #: field:res.partner,customer_payment_mode:0
 msgid "Customer Payment Mode"
-msgstr ""
+msgstr "Mode de paiement du client"
 
 #. module: account_payment_extension
 #: model:ir.model,name:account_payment_extension.model_res_partner
@@ -30,14 +30,14 @@ msgstr "Partenaire"
 #. module: account_payment_extension
 #: help:res.partner,customer_payment_mode:0
 msgid "Select the default payment mode for this customer."
-msgstr ""
+msgstr "Sélectionnez le mode de paiement par défaut pour ce client."
 
 #. module: account_payment_extension
 #: help:res.partner,supplier_payment_mode:0
 msgid "Select the default payment mode for this supplier."
-msgstr ""
+msgstr "Sélectionnez le mode de paiement par défaut pour ce fournisseur."
 
 #. module: account_payment_extension
 #: field:res.partner,supplier_payment_mode:0
 msgid "Supplier Payment Mode"
-msgstr ""
+msgstr "Mode de paiement fournisseur"

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-14 03:08+0000\n"
-"PO-Revision-Date: 2016-04-13 07:17+0000\n"
+"POT-Creation-Date: 2016-11-02 06:22+0000\n"
+"PO-Revision-Date: 2016-10-27 06:08+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-payment-8-0/language/sl/)\n"
 "MIME-Version: 1.0\n"
@@ -52,6 +52,11 @@ msgstr "Tip neposrednega dolga nepravilen"
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AG01
 msgid "Direct debit forbidden on this account for regulatory reasons"
 msgstr "Na tem kontu neposredni dolg ni dovoljen iz regulativnih razlogov"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_MD06
+msgid "Disputed authorised transaction"
+msgstr "Sporna odobrena transakcija"
 
 #. module: account_payment_return_import_sepa_pain
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AM05
