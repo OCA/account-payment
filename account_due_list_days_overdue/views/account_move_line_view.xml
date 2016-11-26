@@ -8,7 +8,7 @@
             <field name="inherit_id" ref="account_due_list.view_payments_tree"/>
             <field name="priority" eval="20"/>
             <field name="arch" type="xml">
-                <field name="maturity_residual" position="after">
+                <field name="amount_residual_currency" position="after">
                     <field name="days_overdue"/>
                 </field>
             </field>
