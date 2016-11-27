@@ -4,12 +4,10 @@ $(document).ready(function () {
     var $payment_method = $("#payment_method");
     $payment_method.find("input[name='acquirer']").click(function (ev) {
         var $method_id = $(ev.currentTarget).val();
-        console.log($method_id);
         var $method_name = $(ev.currentTarget).parent('label').find('span').text()
 
 
         $('tr[id="payment_bitcoin"]').remove()
-        console.log($method_name)
         if ($method_name=='Bitcoin')
         {
             var $order_id = $('span[data-oe-model="sale.order"][data-oe-field="amount_total"]').attr('data-oe-id');
@@ -17,10 +15,9 @@ $(document).ready(function () {
 
             openerp.jsonRpc("/payment_bitcoin/rate", 'call', {'order_id': $order_id, 'order_ref': $order_ref})
             .then(function (data) {
-                console.log(data);
-                if (data === false)
+                if (data[0] === false)
                 {
-                    alert("Can not use Bitcoin Payment Method for now, ");
+                    alert("Can not use Bitcoin Payment Method for now, \n" + data[1]);
                     $(ev.currentTarget).attr('disabled', 'disabled');
                     $(ev.currentTarget).prop('checked', false);
                 }
