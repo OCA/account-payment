@@ -39,6 +39,7 @@ Credits
 Contributors
 ------------
 
+* Zahirabbas Bhimani <zahir@zedestech.com>
 * Markus Schneider <markus.schneider@initos.com>
 * Katja Matthes <katja.matthes@initos.com>
 * Henning Rothe <henning.rothe@initos.com>

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# © initOS GmbH 2016
+# © ZedeS Technologies, initOS GmbH 2016
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from openerp import models, fields, api
@@ -35,7 +35,7 @@ class BitcoinRate(models.Model):
         # for the order currency and total amount
         sobjs = self.search([])
         if len(sobjs) != 1:
-            return False
+            return (False, 'Multiple configuration not allowed')
         sobj = sobjs[0]
 
         if order_id:
@@ -44,7 +44,7 @@ class BitcoinRate(models.Model):
             orders = self.env['sale.order'].\
                 search([('name', '=', order_ref)])
             if not orders:
-                return False
+                return (False, 'Oops, Order not found')
             order_obj = orders[0]
 
         currency = order_obj.pricelist_id.currency_id
@@ -57,7 +57,7 @@ class BitcoinRate(models.Model):
                 search([('order_id', '=', False)], limit=1)
             if not addr_ids:
                 _logger.error('No Bitcoin Address configured')
-                return False
+                return (False, 'We are running out of Bitcoin addresses')
 
         valid_rate_exists = self.env['bitcoin.rate.line'].\
             sudo().search([('order_id', '=', order_obj.id),
@@ -78,7 +78,7 @@ class BitcoinRate(models.Model):
             response = requests.get(url)
             if response.status_code != 200:
                 _logger.error('can not find Bitcoin exchange rate')
-                return False
+                return (False, 'Unable to find Bitcoin exchange rate')
 
             rate = float(response.content)
             # rate lookup entry saves in logs
