@@ -16,8 +16,8 @@ class BitcoinRate(models.Model):
 
     url = fields.Char(
         'Bitcoin Rate URL',
-        default='https://blockchain.info/tobtc?\
-        currency={CURRENCY}&value={AMOUNT}'
+        default='https://blockchain.info/tobtc?'\
+        'currency={CURRENCY}&value={AMOUNT}'
     )
     rate_lines = fields.One2many('bitcoin.rate.line', 'rate_id', 'Rates')
 

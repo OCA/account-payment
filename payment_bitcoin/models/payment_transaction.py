@@ -19,9 +19,9 @@ class PaymentTransaction(models.Model):
             acquirer = self.env['payment.acquirer'].\
                 browse(vals['acquirer_id'])
             if acquirer.provider == 'bitcoin':
-                order_ref = vals.get('reference')
-                resp = self.env['bitcoin.rate'].get_rate(order_ref=order_ref)
-                if resp:
+                order_id = vals.get('sale_order_id')
+                resp = self.env['bitcoin.rate'].get_rate(order_id=order_id)
+                if resp and resp[0]:
                     vals['bitcoin_address'] = resp[0]
                     vals['bitcoin_amount'] = resp[1]
         return super(PaymentTransaction, self).create(vals)

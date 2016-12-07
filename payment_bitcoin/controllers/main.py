@@ -58,3 +58,14 @@ class website_sale(openerp.addons.website_sale.controllers.main.website_sale):
                   % (bitcoin_amount, bitcoin_address)
             resp['message'] += '<br/><br/>' + msg
         return resp
+
+    @http.route(['/shop/payment'], type='http',
+                auth="public", website=True)
+    def payment(self, **post):
+        context = request.context
+        order = request.website.sale_get_order(context=context)
+        request.context.update({
+            'order_id': order.id,
+            'order_ref': order.name
+        })
+        return super(website_sale, self).payment(**post)
