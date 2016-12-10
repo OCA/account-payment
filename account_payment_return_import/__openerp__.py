@@ -6,7 +6,7 @@
 {
     'name': 'Account Payment Return Import',
     'category': 'Accounting',
-    'version': '8.0.1.0.0',
+    'version': '9.0.1.0.0',
     'summary': 'This module add a generic wizard to import payment return file'
                'formats. Is only the base to be extended by another modules',
     'license': 'AGPL-3',
