@@ -6,7 +6,7 @@
 {
     'name': 'Account Payment Return Import SEPA Pain',
     'category': 'Accounting',
-    'version': '8.0.1.0.0',
+    'version': '9.0.1.0.0',
     'summary': 'Module to import SEPA Direct Debit Unpaid Report File Format '
                'PAIN.002.001.03',
     'license': 'AGPL-3',
@@ -15,7 +15,7 @@
     'website': 'https://www.tecnativa.com',
     'depends': [
         'account_payment_return_import',
-        'account_banking_payment_export',
+        'account_payment_order',
     ],
     'data': [
         'data/unpaid_reason_codes.xml'
