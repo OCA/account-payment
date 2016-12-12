@@ -15,11 +15,19 @@ class TestImport(TestPaymentReturnFile):
         self.company = self.env.ref('base.main_company')
         self.acc_number = 'NL77ABNA0574908765'
         self.acc_bank = self.env['res.partner.bank'].create({
-            'state': 'iban',
             'acc_number': self.acc_number,
             'bank_name': 'TEST BANK',
             'company_id': self.company.partner_id.id,
+            'partner_id': self.company.partner_id.id,
         })
+        self.journal = self.env['account.journal'].create({
+            'name': 'Test Bank Journal',
+            'code': 'BANK',
+            'type': 'bank',
+            'update_posted': True,
+            'bank_account_id': self.acc_bank.id,
+        })
+        self.journal.bank_account_id = self.acc_bank
 
     def test_payment_return_import(self):
         """Test correct creation of single payment return."""
