@@ -48,21 +48,16 @@ class AccountVoucher(models.Model):
                         # not 0.0
                         if not line.amount:
                             continue
-                        amount = self.with_context(ctx)._convert_amount(
-                            line.amount, voucher.id)
+                        amount = abs(self.with_context(ctx)._convert_amount(
+                            line.amount, voucher.id))
                         line_debit = line_credit = 0.0
                         if voucher.type in ('purchase', 'payment'):
                             line_credit = amount
+                            line_debit = 0
                         elif voucher.type in ('sale', 'receipt'):
+                            line_credit = 0
                             line_debit = amount
-                        if line_debit < 0:
-                            line_credit = -line_debit
-                        else:
-                            line_debit = 0.0
-                        if line_credit < 0:
-                            line_debit = -line_credit
-                        else:
-                            line_credit = 0.0
+
                         move_line = {
                             'journal_id': voucher.journal_id.id,
                             'period_id': voucher.period_id.id,
