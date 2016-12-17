@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-02 06:22+0000\n"
-"PO-Revision-Date: 2016-11-25 14:56+0000\n"
+"POT-Creation-Date: 2016-12-10 00:45+0000\n"
+"PO-Revision-Date: 2016-12-15 10:10+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Portuguese (Portugal) (http://www.transifex.com/oca/OCA-account-payment-8-0/language/pt_PT/)\n"
 "MIME-Version: 1.0\n"
@@ -45,7 +45,7 @@ msgstr ""
 #. module: account_payment_return
 #: field:payment.return,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Empresa"
 
 #. module: account_payment_return
 #: field:payment.return.line,concept:0
@@ -72,7 +72,7 @@ msgstr "Criado em"
 #. module: account_payment_return
 #: field:payment.return.line,partner_id:0
 msgid "Customer"
-msgstr ""
+msgstr "Cliente"
 
 #. module: account_payment_return
 #: model:ir.actions.act_window,name:account_payment_return.payment_return_action
@@ -140,7 +140,7 @@ msgstr ""
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_account_invoice
 msgid "Invoice"
-msgstr ""
+msgstr "Fatura"
 
 #. module: account_payment_return
 #: help:account.invoice,returned_payment:0
@@ -282,7 +282,7 @@ msgstr ""
 #. module: account_payment_return
 #: field:payment.return,name:0 field:payment.return.line,reference:0
 msgid "Reference"
-msgstr ""
+msgstr "Referência"
 
 #. module: account_payment_return
 #: help:payment.return.line,reference:0
