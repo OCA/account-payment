@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<openerp>
+    <data>
+         <report
+            id="action_report_check_base"
+            model="account.payment" 
+            string="Payment Check Base"
+            report_type="qweb-pdf"
+            name="account_check_printing_report_base.report_check_base"
+            file="account_check_printing_report_base.report_check_base"
+        />
+
+        <record id="action_report_check_base" model="ir.actions.report.xml">
+            <field name="paperformat_id" ref="account_check_printing_report_base.paperformat_check"/>
+        </record>
+    </data>
+</openerp>
