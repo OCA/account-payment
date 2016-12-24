@@ -10,24 +10,23 @@ class VoucherLine(models.Model):
 
     _inherit = 'account.voucher.line'
 
-    supplier_invoice_number = fields.Char(
-        'Supplier Invoice Number',
-        compute='_compute_supplier_invoice_number',
+    invoice_number = fields.Char(
+        'Invoice Number',
+        compute='_compute_invoice_number',
         size=64,
     )
 
-    @api.depends('move_line_id.invoice.supplier_invoice_number')
-    def _compute_supplier_invoice_number(self):
+    # @api.depends('move_line_id.invoice.document_number')
+    def _compute_invoice_number(self):
         for line in self:
             if line.move_line_id:
-                line.supplier_invoice_number = self.get_suppl_inv_num(
+                line.invoice_number = self.get_inv_num(
                     line.move_line_id.id)
             else:
-                line.supplier_invoice_number = ''
+                line.invoice_number = ''
 
     @api.model
-    def get_suppl_inv_num(self, move_line_id):
+    def get_inv_num(self, move_line_id):
         move_line = self.env['account.move.line'].browse(move_line_id)
         return (
-            move_line.invoice and
-            move_line.invoice.supplier_invoice_number or '')
+            move_line.document_number or '')
