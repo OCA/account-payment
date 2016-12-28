@@ -4,9 +4,6 @@
 
 import logging
 
-from openerp import SUPERUSER_ID
-from openerp.api import Environment
-
 
 logger = logging.getLogger(__name__)
 
@@ -27,20 +24,20 @@ def pre_init_hook(cr):
     """
     store_field_stored_invoice_id(cr)
     store_field_invoice_user_id(cr)
-    store_field_maturity_residual(cr)
-
-
-def post_init_hook(cr, pool):
-    env = Environment(cr, SUPERUSER_ID, {})
-    store_field_maturity_residual_post_init(env)
 
 
 def store_field_stored_invoice_id(cr):
-    cr.execute(
-        """
-        ALTER TABLE account_move_line ADD COLUMN stored_invoice_id integer;
-        COMMENT ON COLUMN account_move_line.stored_invoice_id IS 'Invoice';
-        """)
+
+    cr.execute("""SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='account_move_line' AND
+    column_name='stored_invoice_id'""")
+    if not cr.fetchone():
+        cr.execute(
+            """
+            ALTER TABLE account_move_line ADD COLUMN stored_invoice_id integer;
+            COMMENT ON COLUMN account_move_line.stored_invoice_id IS 'Invoice';
+            """)
 
     logger.info('Computing field stored_invoice_id on account.move.line')
 
@@ -56,12 +53,18 @@ def store_field_stored_invoice_id(cr):
 
 
 def store_field_invoice_user_id(cr):
-    cr.execute(
-        """
-        ALTER TABLE account_move_line ADD COLUMN invoice_user_id integer;
-        COMMENT ON COLUMN account_move_line.invoice_user_id IS
-        'Invoice salesperson';
-        """)
+
+    cr.execute("""SELECT column_name
+    FROM information_schema.columns
+    WHERE table_name='account_move_line' AND
+    column_name='invoice_user_id'""")
+    if not cr.fetchone():
+        cr.execute(
+            """
+            ALTER TABLE account_move_line ADD COLUMN invoice_user_id integer;
+            COMMENT ON COLUMN account_move_line.invoice_user_id IS
+            'Invoice salesperson';
+            """)
 
     logger.info('Computing field invoice_user_id on account.move.line')
 
@@ -73,25 +76,3 @@ def store_field_invoice_user_id(cr):
         WHERE aml.stored_invoice_id = inv.id
         """
     )
-
-
-def store_field_maturity_residual(cr):
-    cr.execute(
-        """
-        ALTER TABLE account_move_line ADD COLUMN maturity_residual
-        double precision;
-        COMMENT ON COLUMN account_move_line.maturity_residual
-        IS 'Residual Amount';
-        """)
-
-
-def store_field_maturity_residual_post_init(env):
-    logger.info('Computing field amount_residual on account.move.line')
-
-    for move_line in env['account.move.line'].search([]):
-        sign = (move_line.debit - move_line.credit) < 0 and -1 or 1
-        maturity_residual = move_line.amount_residual * sign
-        env.cr.execute(
-            """
-            UPDATE account_move_line SET maturity_residual = %s WHERE id = %s
-            """, (maturity_residual, move_line.id))
