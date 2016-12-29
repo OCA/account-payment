@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
+<odoo>
     <data>
-
         <record id="view_payments_tree" model="ir.ui.view">
             <field name="name">Payments</field>
             <field name="model">account.move.line</field>
@@ -11,11 +10,11 @@
                 <tree position="attributes">
                     <attribute name="editable">top</attribute>
                 </tree>
-                <field name="reconcile_partial_id" position="after">
+                <field name="reconciled" position="after">
                     <field name="aging_comments"/>
                 </field>
             </field>
         </record>
 
     </data>
-</openerp>
+</odoo>
