@@ -9,27 +9,17 @@ Account Due List Aging Comments
 This module extends the Payments and Due list to add the capability to
 introduce aging comments in-line.
 
-
-Configuration
-=============
-
-No configuration is needed.
-
 Usage
 =====
 
 To use this module, you need to go to:
 
-* Accounting->Journal Entries->Payments and due list
+* Accounting -> Adviser -> Payments and due list
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/96/8.0
+   :target: https://runbot.odoo-community.org/runbot/96/9.0
 
-Known issues / Roadmap
-======================
-
-No known issues.
 
 Bug Tracker
 ===========
