@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-15 18:00+0000\n"
-"PO-Revision-Date: 2016-09-16 21:46+0000\n"
+"POT-Creation-Date: 2016-12-24 00:17+0000\n"
+"PO-Revision-Date: 2016-12-30 09:20+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-account-payment-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. module: account_voucher_cash_basis
 #: model:ir.model,name:account_voucher_cash_basis.model_account_voucher
 msgid "Accounting Voucher"
-msgstr ""
+msgstr "Justificatif comptable"
 
 #. module: account_voucher_cash_basis
 #: field:account.config.settings,allow_distributing_write_off:0
@@ -31,7 +31,7 @@ msgstr ""
 #. module: account_voucher_cash_basis
 #: model:ir.model,name:account_voucher_cash_basis.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Sociétés"
 
 #. module: account_voucher_cash_basis
 #: code:addons/account_voucher_cash_basis/account_voucher.py:61

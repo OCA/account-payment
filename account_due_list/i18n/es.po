@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-03 00:13+0000\n"
-"PO-Revision-Date: 2016-12-08 11:55+0000\n"
+"POT-Creation-Date: 2016-12-24 00:17+0000\n"
+"PO-Revision-Date: 2016-12-27 13:16+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-payment-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -173,7 +173,7 @@ msgstr "Total debe"
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_tree
 msgid "Total Residual"
-msgstr ""
+msgstr "Total pendiente"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter

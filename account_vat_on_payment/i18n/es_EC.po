@@ -1,0 +1,288 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_vat_on_payment
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: account-payment (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-12-24 00:17+0000\n"
+"PO-Revision-Date: 2016-12-27 08:23+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Spanish (Ecuador) (http://www.transifex.com/oca/OCA-account-payment-8-0/language/es_EC/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: es_EC\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_vat_on_payment
+#: model:ir.model,name:account_vat_on_payment.model_account_account
+msgid "Account"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: model:ir.model,name:account_vat_on_payment.model_account_voucher
+msgid "Accounting Voucher"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: model:ir.model,name:account_vat_on_payment.model_account_bank_statement_line
+msgid "Bank Statement Line"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: code:addons/account_vat_on_payment/account_bank_statement.py:39
+#: code:addons/account_vat_on_payment/account_voucher.py:33
+#, python-format
+msgid ""
+"Can't handle VAT on payment if not every invoice is on a VAT on payment "
+"treatment"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: code:addons/account_vat_on_payment/account_bank_statement.py:238
+#, python-format
+msgid ""
+"Can't handle write-off with more than 1 move line without "
+"counterpart_move_line_id"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: model:ir.model,name:account_vat_on_payment.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: help:account.config.settings,vat_on_payment:0
+#: help:res.company,vat_on_payment:0
+msgid "Company Selected applies VAT on payment."
+msgstr ""
+
+#. module: account_vat_on_payment
+#: code:addons/account_vat_on_payment/account_bank_statement.py:38
+#: code:addons/account_vat_on_payment/account_bank_statement.py:93
+#: code:addons/account_vat_on_payment/account_bank_statement.py:237
+#: code:addons/account_vat_on_payment/account_bank_statement.py:324
+#: code:addons/account_vat_on_payment/account_invoice.py:26
+#: code:addons/account_vat_on_payment/account_invoice.py:45
+#: code:addons/account_vat_on_payment/account_voucher.py:32
+#: code:addons/account_vat_on_payment/account_voucher.py:106
+#: code:addons/account_vat_on_payment/account_voucher.py:139
+#: code:addons/account_vat_on_payment/account_voucher.py:195
+#: code:addons/account_vat_on_payment/account_voucher.py:252
+#, python-format
+msgid "Error"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: model:ir.model,name:account_vat_on_payment.model_account_fiscal_position
+msgid "Fiscal Position"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: model:ir.model,name:account_vat_on_payment.model_account_invoice
+msgid "Invoice"
+msgstr "Factura"
+
+#. module: account_vat_on_payment
+#: model:ir.model,name:account_vat_on_payment.model_account_journal
+msgid "Journal"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: model:ir.model,name:account_vat_on_payment.model_account_move_line
+msgid "Journal Items"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: selection:account.config.settings,vat_payment_lines:0
+#: selection:res.company,vat_payment_lines:0
+msgid "Keep on Real Move"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: field:account.config.settings,vat_config_error:0
+msgid "Miscconfiguration on VAT on Payment"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: field:res.company,vat_config_error:0
+msgid "Missconfiguration on VAT on Payment"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: selection:account.config.settings,vat_payment_lines:0
+#: selection:res.company,vat_payment_lines:0
+msgid "Move to Shadow Move"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: selection:account.config.settings,vat_config_error:0
+#: selection:res.company,vat_config_error:0
+msgid "Raise Error"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: field:account.move.line,real_account_id:0
+msgid "Real account"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: field:account.move.line,real_payment_move_id:0
+msgid "Real payment entry"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: field:account.move.line,real_tax_code_id:0
+msgid "Real tax code"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: help:account.account,vat_on_payment_related_account_id:0
+msgid ""
+"Related account used for real registrations on a VAT on payment basis. Set "
+"the shadow account here"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: help:account.journal,vat_on_payment_related_journal_id:0
+msgid ""
+"Related journal used for shadow registrations on a VAT on payment basis. Set"
+" the shadow journal here"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: help:account.tax.code,vat_on_payment_related_tax_code_id:0
+msgid ""
+"Related tax code used for real registrations on a VAT on payment basis. Set "
+"the shadow tax code here"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: help:account.config.settings,vat_config_error:0
+#: help:res.company,vat_config_error:0
+msgid ""
+"Selection field to configure behaviour on missconfigured datas on VAT on payment basis.\n"
+" - 'Raise Error' is selected, if an account, journal doesn't have set the corresponding VAT on payment field, it will raise an error about missconfiguration.\n"
+" - 'Use the same' is selected, it will not raise an error about missconfiguration, and use the same account, journal in VAT on payment."
+msgstr ""
+
+#. module: account_vat_on_payment
+#: help:account.config.settings,vat_payment_lines:0
+#: help:res.company,vat_payment_lines:0
+msgid ""
+"Selection field to configure if the account moves generated on VAT on "
+"payment basis should modify the implicit account moves generated normally, "
+"and to move the partner account move line to the shadow move."
+msgstr ""
+
+#. module: account_vat_on_payment
+#: field:account.account,vat_on_payment_related_account_id:0
+msgid "Shadow Account for VAT on payment"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: field:account.bank.statement.line,shadow_move_id:0
+#: field:account.voucher,shadow_move_id:0
+msgid "Shadow Entry"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: field:account.journal,vat_on_payment_related_journal_id:0
+msgid "Shadow Journal for VAT on payment"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: field:account.tax.code,vat_on_payment_related_tax_code_id:0
+msgid "Shadow Tax code for VAT on payment"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: model:ir.model,name:account_vat_on_payment.model_account_tax_code
+msgid "Tax Code"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: code:addons/account_vat_on_payment/account_invoice.py:27
+#, python-format
+msgid ""
+"The invoice is 'VAT on payment' but account %s does not have a related "
+"shadow account"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: code:addons/account_vat_on_payment/account_invoice.py:46
+#, python-format
+msgid ""
+"The invoice is 'VAT on payment' but tax code %s does not have a related "
+"shadow tax code"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: selection:account.config.settings,vat_config_error:0
+#: selection:res.company,vat_config_error:0
+msgid "Use the same"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: field:account.config.settings,vat_payment_lines:0
+#: field:res.company,vat_payment_lines:0
+msgid "VAT lines on Payment"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: view:account.config.settings:account_vat_on_payment.view_account_settings_currency_xchange_form
+msgid "VAT on Payment"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: field:account.fiscal.position,default_has_vat_on_payment:0
+msgid "VAT on Payment Default Flag"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: field:account.config.settings,vat_on_payment:0
+#: field:res.company,vat_on_payment:0
+msgid "VAT on payment treatment"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: field:account.invoice,vat_on_payment:0
+msgid "Vat on payment"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: code:addons/account_vat_on_payment/account_bank_statement.py:94
+#: code:addons/account_vat_on_payment/account_voucher.py:196
+#: code:addons/account_vat_on_payment/account_voucher.py:253
+#, python-format
+msgid ""
+"We are on a VAT on payment treatment but journal %s does not have a related "
+"shadow journal"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: code:addons/account_vat_on_payment/account_voucher.py:107
+#, python-format
+msgid ""
+"We are on a VAT on payment treatment but move line %s does not have a "
+"related real account"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: code:addons/account_vat_on_payment/account_voucher.py:140
+#, python-format
+msgid ""
+"We are on a VAT on payment treatment but move line %s does not have a "
+"related real tax code"
+msgstr ""
+
+#. module: account_vat_on_payment
+#: code:addons/account_vat_on_payment/account_bank_statement.py:324
+#, python-format
+msgid ""
+"You are trying to pay with write-off more than one invoice and distributing "
+"write-off is not allowed. See company settings."
+msgstr ""

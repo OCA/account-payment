@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-02 06:22+0000\n"
-"PO-Revision-Date: 2016-11-25 14:55+0000\n"
+"POT-Creation-Date: 2016-12-24 00:17+0000\n"
+"PO-Revision-Date: 2016-12-30 08:51+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-account-payment-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -68,13 +68,13 @@ msgstr ""
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:206
 #, python-format
 msgid "Can not determine journal for import."
-msgstr ""
+msgstr "Impossible de déterminer le journal pour l'import"
 
 #. module: account_payment_return_import
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:202
 #, python-format
 msgid "Can not find the account number %s."
-msgstr ""
+msgstr "Impossible de trouvé le numéro de compte %s."
 
 #. module: account_payment_return_import
 #: view:payment.return.import:account_payment_return_import.account_payment_return_import_view
@@ -87,7 +87,7 @@ msgstr "Annuler"
 msgid ""
 "Could not make sense of the given file.\n"
 "Did you install the module to support this type of file?"
-msgstr ""
+msgstr "Impossible de traiter le fichier donné.\nAvez vous installez le module qui supporte ce type de fichier?"
 
 #. module: account_payment_return_import
 #: field:payment.return.import,create_uid:0
@@ -114,7 +114,7 @@ msgstr ""
 #. module: account_payment_return_import
 #: field:payment.return.import,hide_journal_field:0
 msgid "Hide the journal field in the view"
-msgstr ""
+msgstr "Masquer le champ journal de la vue"
 
 #. module: account_payment_return_import
 #: view:payment.return.import:account_payment_return_import.account_payment_return_import_view

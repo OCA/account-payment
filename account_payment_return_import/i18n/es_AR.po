@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-02 06:22+0000\n"
-"PO-Revision-Date: 2016-10-26 09:53+0000\n"
+"POT-Creation-Date: 2016-12-24 00:17+0000\n"
+"PO-Revision-Date: 2016-12-27 08:23+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (Argentina) (http://www.transifex.com/oca/OCA-account-payment-8-0/language/es_AR/)\n"
 "MIME-Version: 1.0\n"
@@ -79,7 +79,7 @@ msgstr ""
 #. module: account_payment_return_import
 #: view:payment.return.import:account_payment_return_import.account_payment_return_import_view
 msgid "Cancel"
-msgstr ""
+msgstr "Cancelar"
 
 #. module: account_payment_return_import
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:144

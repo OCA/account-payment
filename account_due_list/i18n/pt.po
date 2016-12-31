@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-02 06:22+0000\n"
-"PO-Revision-Date: 2016-11-09 00:25+0000\n"
+"POT-Creation-Date: 2016-12-24 00:17+0000\n"
+"PO-Revision-Date: 2016-12-27 08:22+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Portuguese (http://www.transifex.com/oca/OCA-account-payment-8-0/language/pt/)\n"
 "MIME-Version: 1.0\n"
@@ -45,7 +45,7 @@ msgstr ""
 #: view:account.move.line:account_due_list.view_payments_filter
 #: field:account.move.line,stored_invoice_id:0
 msgid "Invoice"
-msgstr ""
+msgstr "Fatura"
 
 #. module: account_due_list
 #: field:account.move.line,invoice_date:0

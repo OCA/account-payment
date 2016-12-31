@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-02 06:22+0000\n"
-"PO-Revision-Date: 2016-11-25 14:55+0000\n"
+"POT-Creation-Date: 2016-12-24 00:17+0000\n"
+"PO-Revision-Date: 2016-12-27 08:24+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Romanian (http://www.transifex.com/oca/OCA-account-payment-8-0/language/ro/)\n"
 "MIME-Version: 1.0\n"
@@ -92,17 +92,17 @@ msgstr ""
 #. module: account_payment_return_import
 #: field:payment.return.import,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creat de"
 
 #. module: account_payment_return_import
 #: field:payment.return.import,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creat la"
 
 #. module: account_payment_return_import
 #: field:payment.return.import,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nume Afişat"
 
 #. module: account_payment_return_import
 #: help:payment.return.import,data_file:0
@@ -124,7 +124,7 @@ msgstr ""
 #. module: account_payment_return_import
 #: field:payment.return.import,id:0
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_payment_return_import
 #: view:payment.return.import:account_payment_return_import.account_payment_return_import_view
@@ -156,17 +156,17 @@ msgstr ""
 #. module: account_payment_return_import
 #: field:payment.return.import,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima actualizare în"
 
 #. module: account_payment_return_import
 #: field:payment.return.import,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Ultima actualizare făcută de"
 
 #. module: account_payment_return_import
 #: field:payment.return.import,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Ultima actualizare la"
 
 #. module: account_payment_return_import
 #: field:payment.return.import,match_after_import:0

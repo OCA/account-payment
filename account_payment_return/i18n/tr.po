@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-02 06:22+0000\n"
-"PO-Revision-Date: 2016-11-25 14:57+0000\n"
+"POT-Creation-Date: 2016-12-24 00:17+0000\n"
+"PO-Revision-Date: 2016-12-30 22:02+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Turkish (http://www.transifex.com/oca/OCA-account-payment-8-0/language/tr/)\n"
 "MIME-Version: 1.0\n"
@@ -40,12 +40,12 @@ msgstr ""
 #. module: account_payment_return
 #: field:payment.return.reason,code:0
 msgid "Code"
-msgstr ""
+msgstr "Kod"
 
 #. module: account_payment_return
 #: field:payment.return,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Şirket"
 
 #. module: account_payment_return
 #: field:payment.return.line,concept:0
@@ -72,7 +72,7 @@ msgstr "Oluşturuldu"
 #. module: account_payment_return
 #: field:payment.return.line,partner_id:0
 msgid "Customer"
-msgstr ""
+msgstr "Müşteri"
 
 #. module: account_payment_return
 #: model:ir.actions.act_window,name:account_payment_return.payment_return_action
@@ -91,7 +91,7 @@ msgstr "Kayıda eklenen son mesajın tarihi."
 #: field:payment.return.line,display_name:0
 #: field:payment.return.reason,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Görünen İsim"
 
 #. module: account_payment_return
 #: selection:payment.return,state:0
@@ -119,7 +119,7 @@ msgstr ""
 msgid ""
 "Holds the Chatter summary (number of messages, ...). This summary is "
 "directly in html format in order to be inserted in kanban views."
-msgstr ""
+msgstr "Sohbet özetini tutar (kaç mesa vs) Bu özet kanban görünümleri gibi yerlerde kullanılmak için doğrudan HTML formatındadır. "
 
 #. module: account_payment_return
 #: field:payment.return,id:0 field:payment.return.line,id:0
@@ -140,7 +140,7 @@ msgstr ""
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_account_invoice
 msgid "Invoice"
-msgstr ""
+msgstr "Fatura"
 
 #. module: account_payment_return
 #: help:account.invoice,returned_payment:0
@@ -173,7 +173,7 @@ msgstr "Son mesaj tarihi"
 #: field:payment.return.line,__last_update:0
 #: field:payment.return.reason,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Son değişiklik"
 
 #. module: account_payment_return
 #: field:payment.return,write_uid:0 field:payment.return.line,write_uid:0
@@ -195,12 +195,12 @@ msgstr ""
 #. module: account_payment_return
 #: view:payment.return:account_payment_return.payment_return_form_view
 msgid "Lines"
-msgstr ""
+msgstr "Satırlar"
 
 #. module: account_payment_return
 #: view:payment.return:account_payment_return.payment_return_form_view
 msgid "Match"
-msgstr ""
+msgstr "Eşleştirme"
 
 #. module: account_payment_return
 #: field:payment.return,message_ids:0
@@ -210,7 +210,7 @@ msgstr "Mesajlar"
 #. module: account_payment_return
 #: help:payment.return,message_ids:0
 msgid "Messages and communication history"
-msgstr ""
+msgstr "Mesaj ve iletişim geçmişi"
 
 #. module: account_payment_return
 #: code:addons/account_payment_return/models/payment_return.py:296

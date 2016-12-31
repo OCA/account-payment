@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-02 06:22+0000\n"
-"PO-Revision-Date: 2016-11-02 06:22+0000\n"
+"POT-Creation-Date: 2016-12-24 00:17+0000\n"
+"PO-Revision-Date: 2016-12-24 00:17+0000\n"
 "Last-Translator: Christophe CHAUVET <christophe.chauvet@gmail.com>, 2016\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +37,7 @@ msgstr "Créé le"
 #. module: account_due_list_days_overdue
 #: field:account.move.line,days_overdue:0
 msgid "Days overdue"
-msgstr ""
+msgstr "Jours de retard"
 
 #. module: account_due_list_days_overdue
 #: field:account.overdue.term,display_name:0
