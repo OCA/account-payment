@@ -138,7 +138,23 @@ class AccountVoucher(models.Model):
                     else:
                         move_line['credit'] = amount
                     move_line_pool.create(move_line)
-                move_line_pool.create(fline)
+                move_lines = move_line_pool.create(fline)
+
+                move_lines += self.env['account.move.line'].search([
+                    ('move_id.ref', '=', move_id.ref),
+                    ('reconcile_id', '=', False),
+                    ('reconcile_partial_id', '=', False),
+                    ('partner_id', '!=', fline.get('partner_id')),
+                    ('account_id', '=', fline.get('account_id')),
+                ])
+
+                if len(move_lines) == 2:
+                    move_lines.reconcile(
+                        writeoff_acc_id=voucher.writeoff_acc_id.id,
+                        writeoff_period_id=voucher.period_id.id,
+                        writeoff_journal_id=voucher.journal_id.id,
+                    )
+
         return res
 
     @api.multi
