@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-24 00:17+0000\n"
-"PO-Revision-Date: 2016-12-27 08:21+0000\n"
+"POT-Creation-Date: 2016-12-31 01:11+0000\n"
+"PO-Revision-Date: 2017-01-13 09:22+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-account-payment-8-0/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -91,7 +91,7 @@ msgstr ""
 #: field:payment.return.line,display_name:0
 #: field:payment.return.reason,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Veure el nom"
 
 #. module: account_payment_return
 #: selection:payment.return,state:0
@@ -173,7 +173,7 @@ msgstr ""
 #: field:payment.return.line,__last_update:0
 #: field:payment.return.reason,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Darrera modificació el"
 
 #. module: account_payment_return
 #: field:payment.return,write_uid:0 field:payment.return.line,write_uid:0
@@ -328,7 +328,7 @@ msgstr ""
 #. module: account_payment_return
 #: field:payment.return,state:0
 msgid "State"
-msgstr ""
+msgstr "Estat"
 
 #. module: account_payment_return
 #: field:payment.return,message_summary:0

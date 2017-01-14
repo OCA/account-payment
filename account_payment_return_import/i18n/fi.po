@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-02 06:22+0000\n"
-"PO-Revision-Date: 2016-11-25 14:55+0000\n"
+"POT-Creation-Date: 2016-12-31 01:11+0000\n"
+"PO-Revision-Date: 2017-01-13 09:29+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Finnish (http://www.transifex.com/oca/OCA-account-payment-8-0/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -38,12 +38,12 @@ msgstr ""
 #: view:payment.return.import:account_payment_return_import.account_payment_return_import_view
 msgid ""
 "2. Make sure you have installed the right module to support the file format."
-msgstr ""
+msgstr "2. Varmista että järjestelmässä on asennettuna tarvittava moduuli tukemaan käytettyä tiedostomuotoa."
 
 #. module: account_payment_return_import
 #: view:payment.return.import:account_payment_return_import.account_payment_return_import_view
 msgid "3. Select the file and click 'Import'."
-msgstr ""
+msgstr "3. Valitse tiedostoa ja klikkaa \"Tuo\"."
 
 #. module: account_payment_return_import
 #: sql_constraint:payment.return.line:0
@@ -134,7 +134,7 @@ msgstr "Tuo"
 #. module: account_payment_return_import
 #: field:payment.return.line,unique_import_id:0
 msgid "Import ID"
-msgstr ""
+msgstr "Tuonnin ID"
 
 #. module: account_payment_return_import
 #: model:ir.actions.act_window,name:account_payment_return_import.action_account_payment_return_import
@@ -151,7 +151,7 @@ msgstr ""
 #. module: account_payment_return_import
 #: field:payment.return.import,journal_id:0
 msgid "Journal"
-msgstr ""
+msgstr "Piväkirja"
 
 #. module: account_payment_return_import
 #: field:payment.return.import,__last_update:0
@@ -220,4 +220,4 @@ msgstr ""
 #. module: account_payment_return_import
 #: view:payment.return.import:account_payment_return_import.account_payment_return_import_view
 msgid "or"
-msgstr ""
+msgstr "tai"
