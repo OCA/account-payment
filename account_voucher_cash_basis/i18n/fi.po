@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-24 00:17+0000\n"
-"PO-Revision-Date: 2016-12-27 08:25+0000\n"
+"POT-Creation-Date: 2016-12-31 01:11+0000\n"
+"PO-Revision-Date: 2017-01-17 12:12+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Finnish (http://www.transifex.com/oca/OCA-account-payment-8-0/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -38,7 +38,7 @@ msgstr "Yritykset"
 #: code:addons/account_voucher_cash_basis/account_voucher.py:201
 #, python-format
 msgid "Error"
-msgstr ""
+msgstr "Virhe"
 
 #. module: account_voucher_cash_basis
 #: field:account.voucher,exclude_write_off:0

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-31 01:11+0000\n"
-"PO-Revision-Date: 2017-01-13 09:22+0000\n"
+"PO-Revision-Date: 2017-01-17 19:11+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-account-payment-8-0/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 #. module: account_payment_return
 #: field:payment.return.line,amount:0
 msgid "Amount"
-msgstr ""
+msgstr "Import"
 
 #. module: account_payment_return
 #: field:payment.return,journal_id:0
@@ -45,7 +45,7 @@ msgstr ""
 #. module: account_payment_return
 #: field:payment.return,company_id:0
 msgid "Company"
-msgstr ""
+msgstr "Empresa"
 
 #. module: account_payment_return
 #: field:payment.return.line,concept:0

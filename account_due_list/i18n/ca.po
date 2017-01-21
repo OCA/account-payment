@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-31 01:11+0000\n"
-"PO-Revision-Date: 2017-01-09 16:01+0000\n"
+"PO-Revision-Date: 2017-01-17 19:46+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-account-payment-8-0/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -65,7 +65,7 @@ msgstr ""
 #. module: account_due_list
 #: help:account.move.line,invoice_date:0
 msgid "Keep empty to use the current date"
-msgstr ""
+msgstr "Mantingui en blanc per utilitzar la data actual"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
