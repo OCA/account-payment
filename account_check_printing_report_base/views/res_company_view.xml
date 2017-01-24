@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="res_company_form_view_inherited" model="ir.ui.view">
+            <field name="name">Res Company Form View Inherited</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <group name="account_grp" position="after">
+                    <group name="check_layout" string="Check printing layout">
+                        <field name="check_layout_id"/>
+                    </group>
+                </group>
+            </field>
+        </record>
+    </data>
+</openerp>
