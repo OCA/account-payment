@@ -17,6 +17,13 @@ You can find complementary modules for handling bank payment related tasks on:
  * https://github.com/OCA/bank-payment
  
 [//]: # (addons)
+Available addons
+----------------
+addon | version | summary
+--- | --- | ---
+[account_check_printing_report_base](account_check_printing_report_base/) | 9.0.1.0.0 | Account Check Printing Report Base
+[account_check_printing_report_dlt103](account_check_printing_report_dlt103/) | 9.0.1.0.0 | Account Check Printing Report DLT103
+
 Unported addons
 ---------------
 addon | version | summary
