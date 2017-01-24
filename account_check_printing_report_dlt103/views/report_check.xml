@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <template id="report_check_dlt103">
+            <t t-call="report.html_container">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <div>
+                            <div style="position:absolute; right:24mm; top:23mm;">
+                                <span t-field="o.payment_date"/>
+                            </div>
+                            <div style="position:absolute; top:40mm;">
+                                <span style="position:absolute; left:27mm;"
+                                      t-field="o.partner_id.name"/>
+                                <span style="position:absolute; left:230mm;"
+                                      t-esc="o.amount"/>
+                            </div>
+                            <div style="position:absolute; left:13mm; top:50mm;" >
+                                <strong><span t-esc="fill_stars(o.check_amount_in_words)"/></strong>
+                            </div>
+                            <div style="position:absolute; left:23mm; top:86mm;">
+                                <span t-field="o.communication"/>
+                            </div>
+                        </div>
+                        <div style="position:absolute; top:125mm; left:10mm;">
+                            <strong>
+                                <span
+                                        t-esc="'Partner: {}'.format(o.partner_id.name)"/>
+                                <span style="padding-right:100mm;float:right;"
+                                      t-esc="'Date: {}'.format(o.payment_date)"/>
+                                <span style="position:absolute; right:35mm;"
+                                      t-esc="'Check #: {}'.format(o.check_number)"/>
+                            </strong>
+                            <t>
+                                <table width="100%" style="padding-right:22mm;">
+                                    <thead>
+                                        <tr style="text-align:left;">
+                                            <th style="padding-top:3mm;">Due Date</th>
+                                            <th>Description</th>
+                                            <th>Original Amount</th>
+                                            <th>Balance Due</th>
+                                            <th>Payment</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="paid_lines[o.id]"
+                                           t-as="line">
+                                            <tr style="text-align:left;border-top: 0px;">
+                                               <td style="padding-top:3mm;"><span t-esc="line['date_due']"/></td>
+                                                <td><span t-esc="line['reference'] or line['number']"/></td>
+                                                <td><span t-esc="line['amount_total']" t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></td>
+                                                <td><span t-esc="line['residual']" t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></td>
+                                                <td><span t-esc="line['paid_amount']" t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                                <div style="padding-right:20mm;padding-top:55mm;padding-bottom:15mm;" align="right">
+                                    <b>Check Amount:</b><span
+                                        t-field='o.amount' t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                                </div>
+                            </t>
+                        </div>
+                        <div style="position:absolute; top:235mm; left:10mm;">
+                            <t>
+                                <table width="100%" style="padding-right:22mm;">
+                                    <thead>
+                                        <tr style="text-align:left;">
+                                            <th style="padding-top:3mm;">Due Date</th>
+                                            <th>Description</th>
+                                            <th>Original Amount</th>
+                                            <th>Balance Due</th>
+                                            <th>Payment</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="paid_lines[o.id]"
+                                           t-as="line">
+                                            <tr style="text-align:left;border-top: 0px;">
+                                               <td style="padding-top:3mm;"><span t-esc="line['date_due']"/></td>
+                                                <td><span t-esc="line['reference'] or line['number']"/></td>
+                                                <td><span t-esc="line['amount_total']" t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></td>
+                                                <td><span t-esc="line['residual']" t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></td>
+                                                <td><span t-esc="line['paid_amount']" t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                                <div style="padding-right:20mm;padding-top:55mm;padding-bottom:15mm;" align="right">
+                                    <b>Check Amount:</b><span
+                                        t-field='o.amount' t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                                </div>
+                            </t>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </template>
+    </data>
+</openerp>

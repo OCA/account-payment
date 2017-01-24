@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="account_payment_check_report_dlt103"
+                model="account.payment.check.report">
+            <field name="name">dlt103</field>
+            <field name="report">account_check_printing_report_dlt103.report_check_dlt103</field>
+        </record>
+    </data>
+</openerp>
