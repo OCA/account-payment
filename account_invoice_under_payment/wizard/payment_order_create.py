@@ -15,6 +15,10 @@ class PaymentOrderCreate(models.TransientModel):
         result = super(PaymentOrderCreate, self).search_entries()
         line_obj = self.env['account.move.line']
         result.get('context', {}).update({'line_ids': line_obj.search(
-            [('id', 'in', result['context']['line_ids']),
-             ('under_payment', '=', False)]).ids})
+            ['&',
+             ('id', 'in', result['context']['line_ids']),
+             '|',
+             ('under_payment', '=', False),
+             ('reconcile_partial_id', '!=', False),
+             ]).ids})
         return result
