@@ -9,22 +9,4 @@
 # © 2016 Eficent Business and IT Consulting Services S.L.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-{
-    'name': "Receivables and Payables Open Items",
-    'version': '9.0.1.0.0',
-    'category': 'Generic Modules/Payment',
-    'author': 'Odoo Community Association (OCA), '
-              'Agile Business Group, '
-              'Tecnativa,'
-              'Zikzakmedia SL,'
-              'Eficent',
-    'website': 'http://www.agilebg.com',
-    'license': 'AGPL-3',
-    "depends": [
-        'account',
-    ],
-    "data": [
-        'views/receivables_payables_view.xml',
-    ],
-    "installable": True,
-}
+from . import account_move_line
