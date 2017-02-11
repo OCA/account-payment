@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-31 01:11+0000\n"
-"PO-Revision-Date: 2017-01-30 14:44+0000\n"
+"POT-Creation-Date: 2017-02-04 00:25+0000\n"
+"PO-Revision-Date: 2017-02-10 12:10+0000\n"
 "Last-Translator: Javier García-Panach <panaka7@gmail.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-payment-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -142,7 +142,7 @@ msgstr "Importe pendiente"
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Salesperson"
-msgstr ""
+msgstr "Comercial"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
