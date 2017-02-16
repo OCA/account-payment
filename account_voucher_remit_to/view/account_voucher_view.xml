@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record model="ir.ui.view" id="view_voucher_tree">
+            <field name="name">account.voucher.tree</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher.view_voucher_tree"/>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="remit_to"/>
+                </field>
+            </field>
+        </record>
+
+        <!-- This general view is used in 
+             Invoicing - Journal Entries - Journal Vouchers -->
+        <record model="ir.ui.view" id="view_voucher_form">
+            <field name="name">account.voucher.form</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher.view_voucher_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="attributes">
+                    <attribute name="on_change">onchange_partner_id(partner_id, remit_to, journal_id, amount, currency_id, type, date, context)</attribute>
+                </xpath>
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="remit_to" context="{'default_type':'remit_to'}"/>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_voucher_filter" model="ir.ui.view">
+            <field name="name">account.voucher.select</field>
+            <field name="model">account.voucher</field>
+            <field name="inherit_id" ref="account_voucher.view_voucher_filter"/>
+            <field name="priority">1</field>
+            <field name="arch" type="xml">
+                <field name="partner_id" position="after">
+                    <field name="remit_to" context="{'default_type':'remit_to'}"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>
