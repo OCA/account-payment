@@ -54,23 +54,7 @@
         </field>
     </record>
 
-    <!--
-    ========================================================================================================
-         BANK STATEMENT
-     ========================================================================================================
 
-
-    <record id="view_bank_statement_form_ext" model="ir.ui.view">
-        <field name="name">account.bank.statement.form.ext</field>
-        <field name="model">account.bank.statement</field>
-        <field name="inherit_id" ref="account_payment.view_bank_statement_form"/>
-        <field name="arch" type="xml">
-            <button name="%(account_payment.action_account_populate_statement_confirm)d" position="replace">
-                  <button name="%(act_wizard_populate_statement)d" string="Import payment lines" type="action" attrs="{'invisible':[('state','=','confirm')]}" icon="gtk-execute"/>
-            </button>
-        </field>
-    </record>
-     -->
     <!--
     ====================================================================================================
          PAYMENT ORDER
@@ -82,6 +66,31 @@
         <field name="model">payment.order</field>
         <field name="inherit_id" ref="account_payment.view_payment_order_form"/>
         <field name="arch" type="xml">
+            <field name='line_ids' position="after">
+                <group>
+                    <group class="oe_subtotal_footer oe_right">
+                        <field name="total" widget="monetary"/>
+                    </group>
+                </group>
+            </field>
+            <field name='total' position="replace">
+                <field name="total" invisible="1"/>
+            </field>
+            <xpath expr="//field[@name='create_date']" position="replace">
+                <field colspan="4" name="create_date"/>
+            </xpath>
+            <xpath expr="//field[@name='ml_maturity_date']" position="replace">
+                <field colspan="4" name="ml_maturity_date"/>
+            </xpath>
+            <xpath expr="//field[@name='ml_inv_ref']" position="replace">
+                <field colspan="4" name="ml_inv_ref"/>
+            </xpath>
+            <field name='name' position="replace">
+                <field colspan="4" name="name"/>
+            </field>
+            <field name='state' position="replace">
+                <field colspan="4" name="state"/>
+            </field>
             <button name="%(account_payment.action_create_payment_order)d" position="replace">
                 <button name="%(action_create_payment_extension_order)d" string="Select invoices to pay/receive payment" type="action" attrs="{'invisible':[('state','=','done')]}" icon="gtk-find"/>
             </button>
@@ -95,11 +104,11 @@
                     <field name="period_id" attrs="{'required': [('create_account_moves', '!=', 'bank-statement')], 'invisible': [('create_account_moves', '=', 'bank-statement')]}"/>
             </field>
             <field name="move_line_id" position="replace">
-            <group col="6" colspan="4">
-                <field name="move_line_id" on_change="onchange_move_line(move_line_id,parent.mode,parent.date_prefered,parent.date_scheduled,currency,company_currency,context)" select="1"/>
-                <field name="account_id"/>
-                <field name="payment_move_id"/>
-            </group>
+	            <group>
+	                <field name="move_line_id" on_change="onchange_move_line(move_line_id,parent.mode,parent.date_prefered,parent.date_scheduled,currency,company_currency,context)" select="1"/>
+	                <field name="account_id"/>
+	                <field name="payment_move_id"/>
+                </group>
             </field>
         </field>
     </record>
@@ -110,7 +119,22 @@
         <field name="inherit_id" ref="account_payment.view_payment_line_form"/>
         <field name="arch" type="xml">
             <field name="move_line_id" position="replace">
-                <group col="6" colspan="4">
+                <group>
+                    <field name="move_line_id" on_change="onchange_move_line(move_line_id, False, currency, company_currency)" select="1"/>
+                    <field name="account_id"/>
+                    <field name="payment_move_id"/>
+                </group>
+            </field>
+        </field>
+    </record>
+    
+    <record id="view_payment_line_form_ext1" model="ir.ui.view">
+        <field name="name">payment.line.ext1</field>
+        <field name="model">payment.line</field>
+        <field name="inherit_id" ref="account_payment.view_payment_line_form"/>
+        <field name="arch" type="xml">
+            <field name="move_line_id" position="replace">
+                <group>
                     <field name="move_line_id" on_change="onchange_move_line(move_line_id, False, currency, company_currency)" select="1"/>
                     <field name="account_id"/>
                     <field name="payment_move_id"/>
@@ -207,30 +231,6 @@
             </search>
         </field>
     </record>
-
-    <!-- Invoice Payments -->
-    <record model="ir.actions.act_window" id="action_invoice_payments">
-        <field name="name">Invoice payments</field>
-        <field name="res_model">account.move.line</field>
-        <field name="view_type">form</field>
-        <field name="view_id" ref="view_payments_tree"/>
-        <field name="search_view_id" ref="view_payments_filter"/>
-        <field name="domain">[('account_id.type', 'in', ['receivable', 'payable']), ('reconcile_id', '=', False)]</field>
-    </record>
-
-    <menuitem name="Invoice payments" parent="account_payment.menu_main_payment" action="action_invoice_payments" id="menu_action_invoice_payments" sequence="4"/>
--
-    <!-- Done Payments -->
-    <record model="ir.actions.act_window" id="action_done_payments">
-        <field name="name">Done payments</field>
-        <field name="res_model">account.move.line</field>
-        <field name="view_type">form</field>
-        <field name="view_id" ref="view_payments_tree"/>
-        <field name="search_view_id" ref="view_payments_filter"/>
-        <field name="domain">[('account_id.type', 'in', ['receivable', 'payable']), ('reconcile_id', '!=', False)]</field>
-    </record>
-
-    <menuitem name="Done payments" parent="account_payment.menu_main_payment" action="action_done_payments" id="menu_action_done_payments" sequence="5"/>
 
 </data>
 </openerp>
