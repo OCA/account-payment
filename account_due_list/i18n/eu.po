@@ -3,35 +3,34 @@
 # * account_due_list
 # 
 # Translators:
-# Rudolf Schnapka <rs@techno-flex.de>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-11 00:19+0000\n"
-"PO-Revision-Date: 2017-02-24 23:44+0000\n"
-"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-account-payment-8-0/language/de/)\n"
+"PO-Revision-Date: 2017-02-23 15:58+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Basque (http://www.transifex.com/oca/OCA-account-payment-8-0/language/eu/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
+"Language: eu\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Due Date"
-msgstr "Fälligkeitsdatum"
+msgstr ""
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "From invoices"
-msgstr "Aus Rechnungen"
+msgstr ""
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Group By..."
-msgstr "Gruppierung..."
+msgstr ""
 
 #. module: account_due_list
 #: help:account.move.line,payment_term_id:0
@@ -40,148 +39,148 @@ msgid ""
 " generation of accounting entries. If you keep the payment term and the due "
 "date empty, it means direct payment. The payment term may compute several "
 "due dates, for example 50% now, 50% in one month."
-msgstr "Wenn Sie Zahlungsbedingungen verwenden, wird das Fälligkeitsdatum automatisch beim Anlegen der Buchungen errechnet. Wenn Sie die Zahlungsbedingung und das Fälligkeitsadtum leer lassen, bedeutet dies sofortige Fälligkeit. Die Zahlungsbedingung kann mehrer Fälligkeiten ermitteln, z.B. 50% sofort und 50% in einem Monat."
+msgstr ""
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 #: field:account.move.line,stored_invoice_id:0
 msgid "Invoice"
-msgstr "Rechnung"
+msgstr ""
 
 #. module: account_due_list
 #: field:account.move.line,invoice_date:0
 msgid "Invoice Date"
-msgstr "Rechnungsdatum"
+msgstr ""
 
 #. module: account_due_list
 #: field:account.move.line,invoice_user_id:0
 msgid "Invoice salesperson"
-msgstr "Verkaufer in Rechnung"
+msgstr ""
 
 #. module: account_due_list
 #: model:ir.model,name:account_due_list.model_account_move_line
 msgid "Journal Items"
-msgstr "Buchungsjournale"
+msgstr ""
 
 #. module: account_due_list
 #: help:account.move.line,invoice_date:0
 msgid "Keep empty to use the current date"
-msgstr "Leer lassen, um aktuelles Datum zu verwenden"
+msgstr ""
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Month"
-msgstr "Monat"
+msgstr "Hilabete"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Overdue"
-msgstr "Überfällig"
+msgstr ""
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Overdue payments"
-msgstr "Überfällige Zahlungen"
+msgstr ""
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Partner"
-msgstr "Partner"
+msgstr "Kidea"
 
 #. module: account_due_list
 #: field:account.move.line,partner_ref:0
 msgid "Partner Ref"
-msgstr "Partnerbezug"
+msgstr ""
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Payable"
-msgstr "Kreditor"
+msgstr ""
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Payable payments"
-msgstr "Fällige Zahlungsausgänge"
+msgstr ""
 
 #. module: account_due_list
 #: field:account.move.line,payment_term_id:0
 msgid "Payment Terms"
-msgstr "Zahlungsbedingungen"
+msgstr ""
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_tree
 msgid "Payments"
-msgstr "Zahlungen"
+msgstr ""
 
 #. module: account_due_list
 #: model:ir.actions.act_window,name:account_due_list.action_invoice_payments
 #: model:ir.ui.menu,name:account_due_list.menu_action_invoice_payments
 msgid "Payments and due list"
-msgstr "Zahlungen und Fälligkeiten"
+msgstr ""
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Receivable"
-msgstr "Debitor"
+msgstr ""
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Receivable payments"
-msgstr "Fällige Zahlungseingänge"
+msgstr ""
 
 #. module: account_due_list
 #: help:account.move.line,invoice_origin:0
 msgid "Reference of the document that produced this invoice."
-msgstr "Bezug auf den Beleg, der zu dieser Rechnung führte."
+msgstr ""
 
 #. module: account_due_list
 #: field:account.move.line,maturity_residual:0
 msgid "Residual Amount"
-msgstr "Restbetrag"
+msgstr ""
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Salesperson"
-msgstr "Verkäufer"
+msgstr ""
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Search Payments"
-msgstr "Zahlungen suchen"
+msgstr ""
 
 #. module: account_due_list
 #: field:account.move.line,invoice_origin:0
 msgid "Source Doc"
-msgstr "Ursprungsbeleg"
+msgstr ""
 
 #. module: account_due_list
 #: help:account.move.line,maturity_residual:0
 msgid ""
 "The residual amount on a receivable or payable of a journal entry expressed "
 "in the company currency."
-msgstr "Der Restbetrag von Ein- oder Ausgängen von Journalposten in Hauswährung"
+msgstr ""
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_tree
 msgid "Total Credit"
-msgstr "Total Kredit"
+msgstr ""
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_tree
 msgid "Total Debit"
-msgstr "Total Debit"
+msgstr ""
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_tree
 msgid "Total Residual"
-msgstr "Offenes Betrag"
+msgstr ""
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Unreconciled"
-msgstr "Offene Posten"
+msgstr ""
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Unreconciled payments"
-msgstr "Offene Posten"
+msgstr ""

@@ -3,13 +3,14 @@
 # * account_payment_order_to_voucher
 # 
 # Translators:
+# Rudolf Schnapka <rs@techno-flex.de>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-22 16:30+0000\n"
-"PO-Revision-Date: 2016-03-02 19:16+0000\n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2017-02-11 00:19+0000\n"
+"PO-Revision-Date: 2017-02-19 21:11+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-payment-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,13 +21,13 @@ msgstr ""
 #. module: account_payment_order_to_voucher
 #: view:payment.order:account_payment_order_to_voucher.view_payment_order_form
 msgid "Create vouchers"
-msgstr ""
+msgstr "Quittungen erstellen"
 
 #. module: account_payment_order_to_voucher
 #: code:addons/account_payment_order_to_voucher/models/payment_order.py:38
 #, python-format
 msgid "Every order lines must have the same currency"
-msgstr ""
+msgstr "Jede Auftragsposition muß die gleiche Währung verwenden"
 
 #. module: account_payment_order_to_voucher
 #: model:ir.model,name:account_payment_order_to_voucher.model_payment_order
@@ -37,16 +38,16 @@ msgstr "Zahlungsauftrag"
 #: code:addons/account_payment_order_to_voucher/models/payment_order.py:19
 #, python-format
 msgid "Payment order %s already has vouchers"
-msgstr ""
+msgstr "Zahlungsanweisung %s hat bereits Quittungen"
 
 #. module: account_payment_order_to_voucher
 #: code:addons/account_payment_order_to_voucher/models/payment_order.py:23
 #, python-format
 msgid "Payment order %s is not in 'done' state"
-msgstr ""
+msgstr "Zahlungsanweisung %s ist nicht 'Abgeschlossen'"
 
 #. module: account_payment_order_to_voucher
 #: view:payment.order:account_payment_order_to_voucher.view_payment_order_form
 #: field:payment.order,voucher_ids:0
 msgid "Vouchers"
-msgstr ""
+msgstr "Quittungen"

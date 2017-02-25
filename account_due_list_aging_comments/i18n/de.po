@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
+# Rudolf Schnapka <rs@techno-flex.de>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-07-29 12:02+0000\n"
-"PO-Revision-Date: 2016-07-29 12:02+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"POT-Creation-Date: 2017-02-11 00:19+0000\n"
+"PO-Revision-Date: 2017-02-11 00:19+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>, 2017\n"
 "Language-Team: German (https://www.transifex.com/oca/teams/23907/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,7 +22,7 @@ msgstr ""
 #. module: account_due_list_aging_comments
 #: field:account.move.line,aging_comments:0
 msgid "Aging comments"
-msgstr ""
+msgstr "Hinweis zum Verlauf"
 
 #. module: account_due_list_aging_comments
 #: model:ir.model,name:account_due_list_aging_comments.model_account_move_line
@@ -31,4 +32,4 @@ msgstr "Buchungsjournale"
 #. module: account_due_list_aging_comments
 #: view:account.move.line:account_due_list_aging_comments.view_payments_tree
 msgid "top"
-msgstr ""
+msgstr "oben"
