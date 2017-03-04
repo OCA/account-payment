@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-10 00:45+0000\n"
-"PO-Revision-Date: 2016-12-15 10:08+0000\n"
+"POT-Creation-Date: 2017-02-11 00:19+0000\n"
+"PO-Revision-Date: 2017-03-02 09:14+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Portuguese (Portugal) (http://www.transifex.com/oca/OCA-account-payment-8-0/language/pt_PT/)\n"
 "MIME-Version: 1.0\n"
@@ -74,7 +74,7 @@ msgstr ""
 #: code:addons/account_vat_on_payment/account_voucher.py:252
 #, python-format
 msgid "Error"
-msgstr ""
+msgstr "Erro"
 
 #. module: account_vat_on_payment
 #: model:ir.model,name:account_vat_on_payment.model_account_fiscal_position
@@ -94,7 +94,7 @@ msgstr ""
 #. module: account_vat_on_payment
 #: model:ir.model,name:account_vat_on_payment.model_account_move_line
 msgid "Journal Items"
-msgstr ""
+msgstr "Itens do Diário"
 
 #. module: account_vat_on_payment
 #: selection:account.config.settings,vat_payment_lines:0
