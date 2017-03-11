@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-11 00:19+0000\n"
-"PO-Revision-Date: 2017-02-19 19:15+0000\n"
+"PO-Revision-Date: 2017-03-04 22:05+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-payment-8-0/language/de/)\n"
 "MIME-Version: 1.0\n"
@@ -74,7 +74,7 @@ msgstr ""
 #: code:addons/account_vat_on_payment/account_voucher.py:252
 #, python-format
 msgid "Error"
-msgstr ""
+msgstr "Fehler"
 
 #. module: account_vat_on_payment
 #: model:ir.model,name:account_vat_on_payment.model_account_fiscal_position
