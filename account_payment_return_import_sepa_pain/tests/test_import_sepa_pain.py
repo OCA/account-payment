@@ -20,6 +20,7 @@ class TestImport(TestPaymentReturnFile):
             'bank_name': 'TEST BANK',
             'company_id': self.company.partner_id.id,
         })
+        self.acc_bank.journal_id.payment_return_pattern = '.*'
 
     def test_payment_return_import(self):
         """Test correct creation of single payment return."""
