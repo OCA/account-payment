@@ -34,7 +34,10 @@ from odoo.osv import orm
 class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
 
-    invoice_origin = fields.Char(related='invoice_id.origin', string='Source Doc')
+    invoice_origin = fields.Char(
+        related='invoice_id.origin',
+        string='Source Doc'
+    )
     invoice_date = fields.Date(related='invoice_id.date_invoice',
                                string='Invoice Date')
     partner_ref = fields.Char(related='partner_id.ref', string='Partner Ref')
@@ -77,7 +80,7 @@ class AccountMoveLine(models.Model):
                     _('Error'),
                     _('Inconsistent data: move %s has more than one invoice')
                     % line.move_id.name)
-            if line.invoice:
+            if line.invoice_id:
                 line.stored_invoice_id = inv_ids[0]
             else:
                 line.stored_invoice_id = False
