@@ -10,6 +10,7 @@
 #    (<http://www.agilebg.com>)
 #    Ported to Odoo by Andrea Cometa <info@andreacometa.it>
 #    Ported to v8 API by Eneko Lacunza <elacunza@binovo.es>
+#    Ported to v10 API by Albert De La Fuente <info@haevas.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
