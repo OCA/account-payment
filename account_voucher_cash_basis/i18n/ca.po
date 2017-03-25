@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-31 01:11+0000\n"
-"PO-Revision-Date: 2017-01-09 16:08+0000\n"
+"POT-Creation-Date: 2017-02-11 00:19+0000\n"
+"PO-Revision-Date: 2017-03-23 14:13+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-account-payment-8-0/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -31,7 +31,7 @@ msgstr ""
 #. module: account_voucher_cash_basis
 #: model:ir.model,name:account_voucher_cash_basis.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Empreses"
 
 #. module: account_voucher_cash_basis
 #: code:addons/account_voucher_cash_basis/account_voucher.py:61

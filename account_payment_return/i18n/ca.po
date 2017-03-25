@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-31 01:11+0000\n"
-"PO-Revision-Date: 2017-01-17 19:11+0000\n"
+"POT-Creation-Date: 2017-02-11 00:19+0000\n"
+"PO-Revision-Date: 2017-03-24 18:35+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-account-payment-8-0/language/ca/)\n"
 "MIME-Version: 1.0\n"
@@ -72,7 +72,7 @@ msgstr "Creat el"
 #. module: account_payment_return
 #: field:payment.return.line,partner_id:0
 msgid "Customer"
-msgstr ""
+msgstr "Client "
 
 #. module: account_payment_return
 #: model:ir.actions.act_window,name:account_payment_return.payment_return_action
@@ -200,7 +200,7 @@ msgstr ""
 #. module: account_payment_return
 #: view:payment.return:account_payment_return.payment_return_form_view
 msgid "Match"
-msgstr ""
+msgstr "Associar "
 
 #. module: account_payment_return
 #: field:payment.return,message_ids:0
