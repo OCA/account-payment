@@ -17,6 +17,7 @@ You can find complementary modules for handling bank payment related tasks on:
  * https://github.com/OCA/bank-payment
  
 [//]: # (addons)
+
 Available addons
 ----------------
 addon | version | summary
