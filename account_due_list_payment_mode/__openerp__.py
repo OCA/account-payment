@@ -6,7 +6,6 @@
     "category": "Generic Modules/Payment",
     "author": "Obertix Free Solutions, "
               "Tecnativa, "
-              "Haevas, "
               "Odoo Community Association (OCA),",
     "website": "https://odoo-community.org/",
     "depends": [
