@@ -10,7 +10,7 @@ class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
 
     payment_mode_id = fields.Many2one(
-        comodel_name='payment.mode',
+        comodel_name='account.payment.mode',
         related='invoice_id.payment_mode_id',
         string="Payment Mode",
         store=True,
