@@ -1,4 +1,4 @@
-# -*- encoding: utf-8 -*-
+# -*- coding: utf-8 -*-
 
 {
     "name": "Payment due list with payment mode",
@@ -6,6 +6,7 @@
     "category": "Generic Modules/Payment",
     "author": "Obertix Free Solutions, "
               "Tecnativa, "
+              "Haevas, "
               "Odoo Community Association (OCA),",
     "website": "https://odoo-community.org/",
     "depends": [
