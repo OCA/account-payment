@@ -26,6 +26,7 @@ addon | version | summary
 [account_check_printing_report_dlt103](account_check_printing_report_dlt103/) | 9.0.1.0.0 | Account Check Printing Report DLT103
 [account_due_list](account_due_list/) | 9.0.1.0.0 | Payments Due list
 
+
 Unported addons
 ---------------
 addon | version | summary
