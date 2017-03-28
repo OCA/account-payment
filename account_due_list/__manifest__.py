@@ -9,6 +9,7 @@
 #    Ported to OpenERP 7.0 by Alex Comba <alex.comba@agilebg.com> and
 #    Bruno Bottacini <bruno.bottacini@dorella.com>
 #    Ported to Odoo by Andrea Cometa <info@andreacometa.it>
+#    Ported to Odoo v10.0 API by Albert De La Fuente <info@haevas.com>
 #
 #    This program is free software: you can redistribute it and/or modify
 #    it under the terms of the GNU Affero General Public License as published
@@ -26,7 +27,7 @@
 ##############################################################################
 {
     'name': "Payments Due list",
-    'version': '8.0.0.1.0',
+    'version': '10.0.1.0.0',
     'category': 'Generic Modules/Payment',
     'author': 'Odoo Community Association (OCA), Agile Business Group, '
               'Zikzakmedia SL',
@@ -38,5 +39,5 @@
     "data": [
         'payment_view.xml',
     ],
-    'installable': False,
+    'installable': True,
 }
