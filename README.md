@@ -40,6 +40,7 @@ addon | version | summary
 [purchase_payment](purchase_payment/) | 8.0.1.0.0 | Migration for purchase payment
 [sale_payment](sale_payment/) | 8.0.1.0.0 | Migration for sale_payment
 
+
 Unported addons
 ---------------
 addon | version | summary
