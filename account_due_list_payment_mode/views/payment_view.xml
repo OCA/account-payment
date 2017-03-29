@@ -18,8 +18,7 @@
             <field name="date_maturity" position="after">
                 <field name="payment_mode_id"/>
             </field>
-            <filter string="Month" icon="terp-go-month"
-                    filter_context="{'group_by':'date_maturity'}" position="after">
+            <filter context="{'group_by':'date_maturity'}" position="after">
                 <filter name="payment_mode" string="Payment Mode"
                         context="{'group_by':'payment_mode_id'}"/>
             </filter>
