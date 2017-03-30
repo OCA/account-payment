@@ -9,7 +9,7 @@
         <field name="model">payment.return</field>
         <field name="type">form</field>
         <field name="arch" type="xml">
-            <form string="Payment return" version="7.0">
+            <form string="Payment return">
                 <header>
                     <button name="action_confirm" string="Confirm" type="object" states="draft,imported" class="oe_highlight" />
                     <button name="button_match" string="Match" type="object" states="draft,imported" class="oe_highlight" />
@@ -26,7 +26,7 @@
                     </group>
                     <notebook colspan="4">
                         <page string="Lines">
-                            <field name="line_ids" colspan="4" nolabel="1" widget="one2many_list">
+                            <field name="line_ids" colspan="4" nolabel="1" widget="one2many_list" context="{'default_date': date}">>
                                 <tree string="Payment return lines" editable="top">
                                     <field name="date" />
                                     <field name="concept" />
