@@ -220,10 +220,7 @@ class PaymentReturnLine(models.Model):
         help="Reference to match moves from related documents")
     move_line_ids = fields.Many2many(
         comodel_name='account.move.line', string='Payment Reference')
-    date = fields.Date(
-        string='Return date', readonly=True,
-        help="Read from imported file. Only for reference.",
-        default=lambda x: fields.Date.today())
+    date = fields.Date(string='Return date')
     partner_name = fields.Char(
         string='Partner name', readonly=True,
         help="Read from imported file. Only for reference.")
