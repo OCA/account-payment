@@ -6,23 +6,23 @@
                 <t t-foreach="docs" t-as="o">
                     <div class="page">
                         <div>
-                            <div style="position:absolute; right:24mm; top:23mm;">
+                            <div style="position:absolute; right:20mm; top:19mm;">
                                 <span t-field="o.payment_date"/>
                             </div>
-                            <div style="position:absolute; top:40mm;">
-                                <span style="position:absolute; left:27mm;"
-                                      t-field="o.partner_id.name"/>
-                                <span style="position:absolute; left:230mm;"
-                                      t-esc="o.amount"/>
+                            <div>
+                                <span style="position:absolute; top:33mm; left:30mm;" t-field="o.partner_id.name"/>
                             </div>
-                            <div style="position:absolute; left:13mm; top:50mm;" >
+                            <div>
+                                <span style="position:absolute; top:33mm; left:177mm;" t-esc="o.amount"/>
+                            </div>
+                            <div style="position:absolute; left:16mm; top:40mm;">
                                 <strong><span t-esc="fill_stars(o.check_amount_in_words)"/></strong>
                             </div>
-                            <div style="position:absolute; left:23mm; top:86mm;">
+                            <div style="position:absolute; left:25mm; top:66mm;">
                                 <span t-field="o.communication"/>
                             </div>
                         </div>
-                        <div style="position:absolute; top:125mm; left:10mm;">
+                        <div style="position:absolute; top:93mm; left:10mm;">
                             <strong>
                                 <span
                                         t-esc="'Partner: {}'.format(o.partner_id.name)"/>
@@ -32,7 +32,7 @@
                                       t-esc="'Check #: {}'.format(o.check_number)"/>
                             </strong>
                             <t>
-                                <table width="100%" style="padding-right:22mm;">
+                                <table width="96%" style="padding-right:22mm;">
                                     <thead>
                                         <tr style="text-align:left;">
                                             <th style="padding-top:3mm;">Due Date</th>
@@ -47,7 +47,7 @@
                                            t-as="line">
                                             <tr style="text-align:left;border-top: 0px;">
                                                <td style="padding-top:3mm;"><span t-esc="line['date_due']"/></td>
-                                                <td><span t-esc="line['reference'] or line['number']"/></td>
+                                                <td style="max-width: 55mm;" t-esc="line['reference'] or line['number']"></td>
                                                 <td><span t-esc="line['amount_total']" t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></td>
                                                 <td><span t-esc="line['residual']" t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></td>
                                                 <td><span t-esc="line['paid_amount']" t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></td>
@@ -61,9 +61,9 @@
                                 </div>
                             </t>
                         </div>
-                        <div style="position:absolute; top:235mm; left:10mm;">
+                        <div style="position:absolute; top:177mm; left:10mm;">
                             <t>
-                                <table width="100%" style="padding-right:22mm;">
+                                <table width="96%" style="padding-right:22mm;">
                                     <thead>
                                         <tr style="text-align:left;">
                                             <th style="padding-top:3mm;">Due Date</th>
@@ -78,7 +78,7 @@
                                            t-as="line">
                                             <tr style="text-align:left;border-top: 0px;">
                                                <td style="padding-top:3mm;"><span t-esc="line['date_due']"/></td>
-                                                <td><span t-esc="line['reference'] or line['number']"/></td>
+                                                <td style="max-width: 55mm;" t-esc="line['reference'] or line['number']"></td>
                                                 <td><span t-esc="line['amount_total']" t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></td>
                                                 <td><span t-esc="line['residual']" t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></td>
                                                 <td><span t-esc="line['paid_amount']" t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></td>
