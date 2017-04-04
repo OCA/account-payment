@@ -47,7 +47,10 @@ Credits
 Contributors
 ------------
 
+* Obertix Free Solutions <http://obertix.net>
 * cubells <vicent@vcubells.net>
+* Sergio Teruel <sergio.teruel@tecnativa.com>
+* Albert De La Fuente <info@haevas.com>
 
 Maintainer
 ----------
