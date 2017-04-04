@@ -30,12 +30,16 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
         self.check_report = self.env.ref(
             'account_check_printing_report_base'
             '.account_payment_check_report_base')
-
-        self.payment_method_check = self.payment_method_model.create({
-            'name': 'Check',
-            'code': 'check_printing',
-            'payment_type': 'outbound',
-        })
+        self.payment_method_check = self.payment_method_model.search(
+            [('code', '=', 'check_printing')], limit=1,
+        )
+        if not self.payment_method_check:
+            self.payment_method_check = self.payment_method_model.create({
+                'name': 'Check',
+                'code': 'check_printing',
+                'payment_type': 'outbound',
+                'check': True,
+            })
         self.purchase_journal = self.journal_model.create({
             'name': 'Purchase Journal - Test',
             'type': 'purchase',
