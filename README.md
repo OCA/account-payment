@@ -18,11 +18,17 @@ You can find complementary modules for handling bank payment related tasks on:
  
 [//]: # (addons)
 
+Available addons
+----------------
+addon | version | summary
+--- | --- | ---
+[account_due_list](account_due_list/) | 10.0.1.0.0 | Payments Due list
+
+
 Unported addons
 ---------------
 addon | version | summary
 --- | --- | ---
-[account_due_list](account_due_list/) | 8.0.0.1.0 (unported) | Payments Due list
 [account_due_list_payment_mode](account_due_list_payment_mode/) | 8.0.1.0.0 (unported) | Payment due list with payment mode
 [account_payment_order_to_voucher](account_payment_order_to_voucher/) | 8.0.1.0.0 (unported) | Payment order to voucher
 [account_payment_term_multi_day](account_payment_term_multi_day/) | 8.0.1.0.0 (unported) | Multiple payment days for payment terms
