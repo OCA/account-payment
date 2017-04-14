@@ -21,11 +21,11 @@ Usage
 
 To use this module, you need to go to:
 
-* Accounting->Journal Entries->Payments and due list
+* Accounting > Adviser > Payments and due list
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/96/9.0
+   :target: https://runbot.odoo-community.org/runbot/96/10.0
 
 Bug Tracker
 ===========
@@ -49,6 +49,7 @@ Contributors
 * Andrea Cometa <info@andreacometa.it> (Odoo v8 port)
 * Pedro M. Baeza <pedro.baeza@tecnativa.com>
 * Jordi Ballester <jordi.ballester@eficent.com> (Odoo v9 port)
+* Maxime Chambreuil <mchambreuil@ursainfosystems.com>
 
 Maintainer
 ----------
