@@ -19,10 +19,11 @@
               'Agile Business Group, '
               'Tecnativa,'
               'Zikzakmedia SL',
+              'Ursa Information Systems',
     'website': 'http://www.agilebg.com',
     'license': 'AGPL-3',
     "depends": [
-        'account',
+        'account_accountant',
     ],
     "data": [
         'views/payment_view.xml',
