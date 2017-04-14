@@ -1,0 +1,5 @@
+id,active,perm_create,perm_unlink,group_id/id,name,model_id/id,perm_read,perm_write
+partner_aging_customer_ad,TRUE,FALSE,FALSE,account.group_account_invoice,AR can READ,partner_aging.model_partner_aging_customer_ad,TRUE,FALSE
+partner_aging_supplier_ad,TRUE,FALSE,FALSE,account.group_account_invoice,AP can READ,partner_aging.model_partner_aging_supplier_ad,TRUE,FALSE
+partner_aging_date,TRUE,FALSE,FALSE,account.group_account_invoice,AP can READ,partner_aging.model_partner_aging_date,TRUE,FALSE
+supplier_aging_date,TRUE,FALSE,FALSE,account.group_account_invoice,AP can READ,partner_aging.model_supplier_aging_date,TRUE,FALSE
