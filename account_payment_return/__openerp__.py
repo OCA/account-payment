@@ -10,7 +10,7 @@
 
 {
     "name": "Account Payment Returns",
-    "version": "8.0.1.0.0",
+    "version": "8.0.1.1.0",
     "summary": "Manage the return of your payments",
     'license': 'AGPL-3',
     "depends": [

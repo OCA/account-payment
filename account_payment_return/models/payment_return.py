@@ -121,15 +121,13 @@ class PaymentReturn(models.Model):
         self._check_duplicate_move_line()
 
     @api.multi
-    def action_confirm(self):
+    def _prepare_return_move_vals(self):
+        """Prepare the values for the journal entry created from the return.
+
+        :return: Dictionary with the record values.
+        """
         self.ensure_one()
-        # Check for incomplete lines
-        if self.line_ids.filtered(lambda x: not x.move_line_ids):
-            raise UserError(
-                _("You must input all moves references in the payment "
-                  "return."))
-        invoices_returned = self.env['account.invoice']
-        move = {
+        return {
             'name': '/',
             'ref': _('Return %s') % self.name,
             'journal_id': self.journal_id.id,
@@ -138,7 +136,20 @@ class PaymentReturn(models.Model):
             'period_id': (self.period_id.id or self.period_id.with_context(
                 company_id=self.company_id.id).find(self.date).id),
         }
-        move_id = self.env['account.move'].create(move)
+
+    @api.multi
+    def action_confirm(self):
+        self.ensure_one()
+        # Check for incomplete lines
+        if self.line_ids.filtered(lambda x: not x.move_line_ids):
+            raise UserError(
+                _("You must input all moves references in the payment "
+                  "return."))
+        invoices_returned = self.env['account.invoice']
+        move_line_obj = self.env['account.move.line']
+        move = self.env['account.move'].create(
+            self._prepare_return_move_vals()
+        )
         for return_line in self.line_ids:
             lines2reconcile = return_line.move_line_ids.mapped(
                 'reconcile_id.line_id')
@@ -147,9 +158,9 @@ class PaymentReturn(models.Model):
                 move_amount = self._get_move_amount(return_line, move_line)
                 move_line2 = move_line.copy(
                     default={
-                        'move_id': move_id.id,
+                        'move_id': move.id,
                         'debit': move_amount,
-                        'name': move['ref'],
+                        'name': move.ref,
                         'credit': 0,
                     })
                 lines2reconcile |= move_line2
@@ -162,14 +173,17 @@ class PaymentReturn(models.Model):
                     })
                 # Break old reconcile
                 move_line.reconcile_id.unlink()
+            extra_lines_vals = return_line._prepare_extra_move_lines(move)
+            for extra_line_vals in extra_lines_vals:
+                move_line_obj.create(extra_line_vals)
             # Make a new one with at least three moves
             lines2reconcile.reconcile_partial()
             return_line.write(
                 {'reconcile_id': move_line2.reconcile_partial_id.id})
         # Mark invoice as payment refused
         invoices_returned.write(self._prepare_invoice_returned_vals())
-        move_id.button_validate()
-        self.write({'state': 'done', 'move_id': move_id.id})
+        move.button_validate()
+        self.write({'state': 'done', 'move_id': move.id})
         return True
 
     @api.multi
@@ -331,3 +345,15 @@ class PaymentReturnLine(models.Model):
         lines2match.match_move()
         self._get_partner_from_move()
         self.filtered(lambda x: not x.amount)._compute_amount()
+
+    @api.multi
+    def _prepare_extra_move_lines(self, move):
+        """Include possible extra lines in the return journal entry for other
+        return concepts.
+
+        :param self: Reference to the payment return line.
+        :param move: Reference to the journal entry created for the return.
+        :return: A list with dictionaries of the extra move lines to add
+        """
+        self.ensure_one()
+        return []
