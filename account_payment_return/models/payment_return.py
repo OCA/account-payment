@@ -120,8 +120,6 @@ class PaymentReturn(models.Model):
             'journal_id': self.journal_id.id,
             'date': self.date,
             'company_id': self.company_id.id,
-            'period_id': (self.period_id.id or self.period_id.with_context(
-                company_id=self.company_id.id).find(self.date).id),
         }
 
     @api.multi
