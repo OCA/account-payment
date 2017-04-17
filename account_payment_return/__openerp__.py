@@ -4,13 +4,13 @@
 # © 2013 Pedro M. Baeza <pedro.baeza@tecnativa.com>
 # © 2014 Markus Schneider <markus.schneider@initos.com>
 # © 2015 Sergio Teruel <sergio.teruel@tecnativa.com>
-# © 2015 Pedro M. Baeza <pedro.baeza@tecnativa.com>
+# © 2015-2017 Pedro M. Baeza <pedro.baeza@tecnativa.com>
 # © 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
     "name": "Account Payment Returns",
-    "version": "9.0.1.0.0",
+    "version": "9.0.1.1.0",
     "summary": "Manage the return of your payments",
     'license': 'AGPL-3',
     "depends": [
