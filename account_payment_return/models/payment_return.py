@@ -108,6 +108,21 @@ class PaymentReturn(models.Model):
         self._check_duplicate_move_line()
 
     @api.multi
+    def _prepare_return_move_vals(self):
+        """Prepare the values for the journal entry created from the return.
+
+        :return: Dictionary with the record values.
+        """
+        self.ensure_one()
+        return {
+            'name': '/',
+            'ref': _('Return %s') % self.name,
+            'journal_id': self.journal_id.id,
+            'date': self.date,
+            'company_id': self.company_id.id,
+        }
+
+    @api.multi
     def action_confirm(self):
         self.ensure_one()
         # Check for incomplete lines
@@ -115,21 +130,17 @@ class PaymentReturn(models.Model):
             raise UserError(
                 _("You must input all moves references in the payment "
                   "return."))
-        move_dic = {
-            'name': '/',
-            'ref': _('Return %s') % self.name,
-            'journal_id': self.journal_id.id,
-            'date': self.date,
-            'company_id': self.company_id.id
-        }
         invoices = self.env['account.invoice']
-        move = self.env['account.move'].create(move_dic)
+        move_line_obj = self.env['account.move.line']
+        move = self.env['account.move'].create(
+            self._prepare_return_move_vals()
+        )
         total_amount = 0.0
         for return_line in self.line_ids:
             move_amount = self._get_move_amount(return_line)
             move_line2 = self.env['account.move.line'].with_context(
                 check_move_validity=False).create({
-                    'name': move['ref'],
+                    'name': move.ref,
                     'debit': move_amount,
                     'credit': 0.0,
                     'account_id': return_line.move_line_ids[0].account_id.id,
@@ -146,14 +157,17 @@ class PaymentReturn(models.Model):
                 (move_line | move_line2).reconcile()
                 return_line.move_line_ids.mapped('matched_debit_ids').write(
                     {'origin_returned_move_ids': [(6, 0, returned_moves.ids)]})
-        self.env['account.move.line'].create({
-            'name': move['ref'],
+            extra_lines_vals = return_line._prepare_extra_move_lines(move)
+            for extra_line_vals in extra_lines_vals:
+                move_line_obj.create(extra_line_vals)
+        move_line_obj.create({
+            'name': move.ref,
             'debit': 0.0,
             'credit': total_amount,
             'account_id': self.journal_id.default_credit_account_id.id,
             'move_id': move.id,
             'journal_id': move.journal_id.id,
-            })
+        })
         # Write directly because we returned payments just now
         invoices.write(self._prepare_invoice_returned_vals())
         move.post()
@@ -307,3 +321,15 @@ class PaymentReturnLine(models.Model):
         lines2match.match_move()
         self._get_partner_from_move()
         self.filtered(lambda x: not x.amount)._compute_amount()
+
+    @api.multi
+    def _prepare_extra_move_lines(self, move):
+        """Include possible extra lines in the return journal entry for other
+        return concepts.
+
+        :param self: Reference to the payment return line.
+        :param move: Reference to the journal entry created for the return.
+        :return: A list with dictionaries of the extra move lines to add
+        """
+        self.ensure_one()
+        return []
