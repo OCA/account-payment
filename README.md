@@ -30,12 +30,7 @@ Unported addons
 addon | version | summary
 --- | --- | ---
 [account_due_list_payment_mode](account_due_list_payment_mode/) | 8.0.1.0.0 (unported) | Payment due list with payment mode
-[account_payment_order_to_voucher](account_payment_order_to_voucher/) | 8.0.1.0.0 (unported) | Payment order to voucher
 [account_payment_term_multi_day](account_payment_term_multi_day/) | 8.0.1.0.0 (unported) | Multiple payment days for payment terms
 [account_vat_on_payment](account_vat_on_payment/) | 8.0.1.0.0 (unported) | VAT on payment
-[account_voucher_cash_basis](account_voucher_cash_basis/) | 8.0.1.0.0 (unported) | Cash basis extensions for vouchers
-[account_voucher_display_writeoff](account_voucher_display_writeoff/) | 1.0r089 (unported) | Account voucher display writeoff
-[account_voucher_supplier_invoice_number](account_voucher_supplier_invoice_number/) | 0.1 (unported) | Supplier invoice number in payment vouchers
-[account_voucher_tax_filter](account_voucher_tax_filter/) | 1.0r028 (unported) | Account voucher tax filter
 
 [//]: # (end addons)
