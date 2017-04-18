@@ -29,7 +29,7 @@ addon | version | summary
 [account_payment_extension](account_payment_extension/) | 8.0.1.0.0 | Migration for account payment extension
 [account_payment_order_sequence](account_payment_order_sequence/) | 8.0.1.0.0 | Payment Order Sequence
 [account_payment_order_to_voucher](account_payment_order_to_voucher/) | 8.0.1.0.0 | Payment order to voucher
-[account_payment_return](account_payment_return/) | 8.0.1.0.0 | Manage the return of your payments
+[account_payment_return](account_payment_return/) | 8.0.1.1.0 | Manage the return of your payments
 [account_payment_return_import](account_payment_return_import/) | 8.0.1.0.0 | This module add a generic wizard to import payment return fileformats. Is only the base to be extended by another modules
 [account_payment_return_import_sepa_pain](account_payment_return_import_sepa_pain/) | 8.0.1.0.0 | Module to import SEPA Direct Debit Unpaid Report File Format PAIN.002.001.03
 [account_payment_term_multi_day](account_payment_term_multi_day/) | 8.0.1.0.0 | Multiple payment days for payment terms
