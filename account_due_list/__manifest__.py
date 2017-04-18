@@ -18,8 +18,7 @@
     'author': 'Odoo Community Association (OCA), '
               'Agile Business Group, '
               'Tecnativa,'
-              'Zikzakmedia SL, '
-              'Ursa Information Systems',
+              'Zikzakmedia SL',
     'website': 'http://www.agilebg.com',
     'license': 'AGPL-3',
     "depends": [
