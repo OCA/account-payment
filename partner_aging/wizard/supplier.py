@@ -82,13 +82,13 @@ class SupplierAgingDate(models.TransientModel):
                             (supplier_aging._name.replace('.', '_'), query))
 
         return {
-              'name': _('Supplier Aging'),
-              'view_type': 'form',
-              'view_mode': 'tree,form',
-              'res_model': 'partner.aging.supplier.ad',
-              'type': 'ir.actions.act_window',
-              'domain': [('total', '!=', 0)],
-              'context': ctx,
+            'name': _('Supplier Aging'),
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'res_model': 'partner.aging.supplier.ad',
+            'type': 'ir.actions.act_window',
+            'domain': [('total', '!=', 0)],
+            'context': ctx,
         }
 
 

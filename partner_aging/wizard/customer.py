@@ -83,13 +83,13 @@ class PartnerAgingDate(models.TransientModel):
                             (customer_aging._name.replace('.', '_'), query))
 
         return {
-              'name': _('Customer Aging'),
-              'view_type': 'form',
-              'view_mode': 'tree,form',
-              'res_model': 'partner.aging.customer.ad',
-              'type': 'ir.actions.act_window',
-              'domain': [('total', '!=', 0)],
-              'context': ctx,
+            'name': _('Customer Aging'),
+            'view_type': 'form',
+            'view_mode': 'tree,form',
+            'res_model': 'partner.aging.customer.ad',
+            'type': 'ir.actions.act_window',
+            'domain': [('total', '!=', 0)],
+            'context': ctx,
         }
 
 
