@@ -79,7 +79,7 @@ class PartnerAgingDate(models.TransientModel):
 
         tools.drop_view_if_exists(self.env.cr, '%s' %
                                   (customer_aging._name.replace('.', '_')))
-        self.env.cr.execute("""CREATE OR REPLACE VIEW %s AS ( %s)""" %
+        self.env.cr.execute("""CREATE OR REPLACE VIEW %s AS (%s)""" %
                             (customer_aging._name.replace('.', '_'), query))
 
         return {

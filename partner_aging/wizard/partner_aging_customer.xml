@@ -8,13 +8,15 @@
         <field name="type">search</field>
         <field name="arch" type="xml">
             <search string="Customer Aging Date wise">
-                <filter string="Overdue" name="overdue" help="Overdue" domain="['|','|','|','|',
-							                     ('days_due_01to30','&gt;',0),
-							                     ('days_due_31to60','&gt;',0),
-							                     ('days_due_61to90','&gt;',0),
-							                     ('days_due_91to120','&gt;',0),
-							                     ('days_due_121togr','&gt;',0)
-							                     ]" />
+                <filter string="Overdue"
+                        name="overdue"
+                        help="Overdue"
+                        domain="['|', '|', '|', '|',
+                            ('days_due_01to30', '&gt;', 0),
+                            ('days_due_31to60', '&gt;', 0),
+                            ('days_due_61to90', '&gt;', 0),
+                            ('days_due_91to120', '&gt;', 0),
+                            ('days_due_121togr', '&gt;', 0)]" />
                 <field name="partner_id" string="Customer" />
                 <field name="invoice_id" />
                 <field name="invoice_ref"/>
@@ -60,7 +62,6 @@
         <field name="view_id" ref="view_customer_aging_ad_tree" />
         <field name="view_mode">tree,form</field>
         <field name="limit">99999999</field>
-        <field name="help"></field>
     </record>
 
     <record id="view_partner_aging_date" model="ir.ui.view">
