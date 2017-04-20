@@ -23,9 +23,9 @@ class PartnerAgingDate(models.TransientModel):
         customer_aging = self.env['partner.aging.customer.ad']
 
         query = """
-                SELECT aml.id, aml.partner_id as partner_id, ai.user_id as salesman, aml.date as date, aml.date as date_due, ai.number as invoice_ref, 
+                SELECT aml.id, aml.partner_id as partner_id, ai.user_id as salesman, aml.date as date, aml.date as date_due, ai.number as invoice_ref,
                 days_due AS avg_days_overdue, 0 as days_due_01to30,
-                CASE WHEN (days_due BETWEEN 31 and 60) THEN 
+                CASE WHEN (days_due BETWEEN 31 and 60) THEN
                     CASE WHEN (aml.full_reconcile_id is NULL and aml.amount_residual<0) THEN -(aml.credit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
                         WHEN (aml.full_reconcile_id is NULL and aml.amount_residual>0) THEN aml.debit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s')
                         WHEN (aml.full_reconcile_id is NOT NULL) THEN aml.amount_residual END ELSE 0 END AS days_due_31to60,
@@ -70,12 +70,13 @@ class PartnerAgingDate(models.TransientModel):
                 LEFT JOIN account_invoice as ai ON ai.move_id = aml.move_id
                 WHERE
                 aml.user_type_id in (select id from account_account_type where type = 'receivable')
-                and aml.date <='%s'
-                and aml.amount_residual!=0
+                and aml.date <= '%s'
+                and aml.amount_residual != 0
                 GROUP BY aml.partner_id, aml.id, ai.number, days_due, ai.user_id, ai.id
-              """%(age_date,age_date,age_date,age_date,age_date,age_date,\
-                   age_date,age_date,age_date,age_date,age_date,age_date,\
-                   age_date,age_date,)
+              """ % (age_date, age_date, age_date, age_date, age_date,  # noqa
+                     age_date, age_date, age_date, age_date, age_date,
+                     age_date, age_date, age_date, age_date)
+
         tools.drop_view_if_exists(self.env.cr, '%s' %
                                   (customer_aging._name.replace('.', '_')))
         self.env.cr.execute("""CREATE OR REPLACE VIEW %s AS ( %s)""" %
@@ -106,15 +107,16 @@ class AccountAgingCustomerAD(models.Model):
         models = self.env['ir.model.data']
         # Get this line's invoice id
         inv_id = self.invoice_id.id
-        
-        # If this is an unapplied payment(all unapplied payments hard-coded to -999),
-        # get the referenced voucher
+
+        # If this is an unapplied payment (all unapplied payments hard-coded to
+        #  -999), get the referenced voucher
         if inv_id == -999:
             payment = self.env['account.voucher']
-            # Get referenced customer payment (invoice_ref field is actually a payment for these)
+            # Get referenced customer payment
+            # (invoice_ref field is actually a payment for these)
             voucher_id = payment.search([('number', '=', self.invoice_ref)])[0]
             view = models.xmlid_to_object('account_voucher.view_voucher_form')
-            #Set values for form
+            # Set values for form
             view_id = view and view.id or False
             name = 'Customer Payments'
             res_model = 'account.voucher'
@@ -159,7 +161,7 @@ class AccountAgingCustomerAD(models.Model):
     days_due_61to90 = fields.Float(u'61/90', readonly=True)
     days_due_91to120 = fields.Float(u'91/120', readonly=True)
     days_due_121togr = fields.Float(u'+121', readonly=True)
-    max_days_overdue = fields.Integer(u'Days Outstanding',readonly=True)
+    max_days_overdue = fields.Integer(u'Days Outstanding', readonly=True)
     invoice_ref = fields.Char('Our Invoice', size=25, readonly=True)
     invoice_id = fields.Many2one('account.invoice', 'Invoice', readonly=True)
     salesman = fields.Many2one('res.users', u'Sales Rep', readonly=True)
@@ -221,7 +223,7 @@ class AccountAgingCustomerAD(models.Model):
                 and aml.date <=current_date
                 and aml.amount_residual!=0
                 GROUP BY aml.partner_id, aml.id, ai.number, days_due, ai.user_id, ai.id
-              """
+              """  # noqa
         tools.drop_view_if_exists(cr, '%s' % (self._name.replace('.', '_')))
         cr.execute("""CREATE OR REPLACE VIEW %s AS ( %s)""" %
                    (self._name.replace('.', '_'), query))
