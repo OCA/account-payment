@@ -81,7 +81,7 @@
         </record>
 
         <record id="action_supplier_aging_date" model="ir.actions.act_window">
-            <field name="name">Supplier Aging by Date</field>
+            <field name="name">Supplier Aging</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">supplier.aging.date</field>
             <field name="view_type">form</field>

@@ -27,15 +27,11 @@ To use this module, you need to:
 
 #. Go to Accounting
 #. Click on Sales > Customer Aging or Purchases > Supplier Aging
+#. Change the date if necessary
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/96/10.0
-
-Known issues / Roadmap
-======================
-
-* ...
 
 Bug Tracker
 ===========
