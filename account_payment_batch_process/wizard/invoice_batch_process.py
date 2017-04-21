@@ -179,7 +179,7 @@ class AccountRegisterPayments(models.TransientModel):
         })
         return rec
 
-    def get_payment_batch_vals(self, inv_payment=False, group_data={}):
+    def get_payment_batch_vals(self, inv_payment=False, group_data=None):
         if group_data:
             res = {
                 'journal_id': self.journal_id.id,
