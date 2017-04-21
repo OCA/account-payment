@@ -55,13 +55,9 @@ class AccountPayment(models.Model):
                 # Reconcile with the invoices and write off
                 if 'is_customer' in self._context and\
                         self._context.get('is_customer'):
-                    payment_difference_handling =\
-                        self._context.get('group_data')[p_id]['inv_val'][inv]
-                    ['payment_difference_handling']
-                    payment_difference = self._context.get('group_data')[p_id]
-                    ['inv_val'][inv]['payment_difference']
-                    writeoff_account_id = self._context.get('group_data')[p_id]
-                    ['inv_val'][inv]['writeoff_account_id']
+                    payment_difference_handling = self._context.get('group_data')[p_id]['inv_val'][inv]['payment_difference_handling']  # noqa
+                    payment_difference = self._context.get('group_data')[p_id]['inv_val'][inv]['payment_difference']  # noqa
+                    writeoff_account_id = self._context.get('group_data')[p_id]['inv_val'][inv]['writeoff_account_id']  # noqa
                     if payment_difference_handling == 'reconcile' and\
                             payment_difference:
                         writeoff_line =\
