@@ -11,6 +11,13 @@ This module allows you to print DLT103 lined checks.
 See https://www.google.es/search?q=dlt103
 
 
+Installation
+============
+In order to install this module you must first install also the module
+'report_paper_wkhtmltopdf_params', available in
+https://github.com/OCA/server-tools
+
+
 Configuration
 =============
 

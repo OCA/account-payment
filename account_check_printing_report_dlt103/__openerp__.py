@@ -16,6 +16,7 @@
     'depends': ['account_check_printing_report_base'],
     'data': [
         'data/report_paperformat.xml',
+        'data/report_paperformat_parameter.xml',
         'data/account_payment_check_report_data.xml',
         'views/report_check.xml',
         'report/account_check_writing_report.xml',
