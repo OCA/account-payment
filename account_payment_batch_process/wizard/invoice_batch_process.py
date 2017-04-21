@@ -89,13 +89,11 @@ class InvoicePaymentLine(models.TransientModel):
 class AccountRegisterPayments(models.TransientModel):
     _inherit = "account.register.payments"
 
-    @api.one
     @api.depends('invoice_customer_payments.receiving_amt')
     def _compute_customer_pay_total(self):
         self.total_customer_pay_amount = sum(line.receiving_amt for line in
                                              self.invoice_customer_payments)
 
-    @api.one
     @api.depends('invoice_payments.paying_amt')
     def _compute_pay_total(self):
         self.total_pay_amount = sum(line.paying_amt for line in
@@ -224,11 +222,11 @@ class AccountRegisterPayments(models.TransientModel):
                         old_total = data[partner_id]['total']
                         # Build memo value
                         if memo:
-                            memo = data[partner_id]['memo'] + ' : ' +\
-                                   memo + '-' + str(paym.invoice_id.number)
+                            memo = data[partner_id]['memo'] + ' : ' + memo +\
+                                '-' + str(paym.invoice_id.number)
                         else:
-                            memo = data[partner_id]['memo'] + ' : '\
-                                   + str(paym.invoice_id.number)
+                            memo = data[partner_id]['memo'] + ' : ' +\
+                                str(paym.invoice_id.number)
                         # Calculate amount in words
                         amount_word = amount_to_text_en.amount_to_text(
                             math.floor(old_total + paym.receiving_amt),
@@ -259,7 +257,7 @@ class AccountRegisterPayments(models.TransientModel):
                         # Build memo value
                         if self.communication:
                             memo = self.communication + '-' +\
-                                   str(paym.invoice_id.number)
+                                str(paym.invoice_id.number)
                         else:
                             memo = str(paym.invoice_id.number)
                         # Calculate amount in words
@@ -270,9 +268,8 @@ class AccountRegisterPayments(models.TransientModel):
                         decimals = paym.receiving_amt % 1
                         if decimals >= 10**-2:
                             amount_word += _(' and %s/100') %\
-                                           str(int(round(float_round(
-                                               decimals*100,
-                                               precision_rounding=1))))
+                                str(int(round(float_round(
+                                    decimals*100, precision_rounding=1))))
                         data.update({
                             partner_id: {
                                 'partner_id': partner_id,
@@ -310,11 +307,11 @@ class AccountRegisterPayments(models.TransientModel):
                         # Build memo value
                         if self.communication:
                             memo = data[partner_id]['memo'] + ' : ' +\
-                                   self.communication + '-' +\
-                                   str(paym.invoice_id.number)
+                                self.communication + '-' +\
+                                str(paym.invoice_id.number)
                         else:
                             memo = data[partner_id]['memo'] + ' : ' +\
-                                   str(paym.invoice_id.number)
+                                str(paym.invoice_id.number)
                         # Calculate amount in words
                         amount_word = amount_to_text_en.amount_to_text(
                             math.floor(old_total + paym.paying_amt),
@@ -337,7 +334,7 @@ class AccountRegisterPayments(models.TransientModel):
                         # Build memo value
                         if self.communication:
                             memo = self.communication + '-' +\
-                                   str(paym.invoice_id.number)
+                                str(paym.invoice_id.number)
                         else:
                             memo = str(paym.invoice_id.number)
                         # Calculate amount in words
