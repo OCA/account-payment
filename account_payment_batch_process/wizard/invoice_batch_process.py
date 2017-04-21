@@ -56,9 +56,7 @@ class InvoiceCustomerPaymentLine(models.TransientModel):
         amount_word = amount_word.replace(' and Zero Cent', '')
         decimals = self.receiving_amt % 1
         if decimals >= 10**-2:
-            amount_word += _(' and %s/100') %\
-                           str(int(round(float_round(decimals*100,
-                                                     precision_rounding=1))))
+            amount_word += _(' and %s/100') % str(int(round(float_round(decimals*100, precision_rounding=1))))  # noqa
         self.check_amount_in_words = amount_word
         self.payment_difference = self.balance_amt - self.receiving_amt
 
@@ -202,9 +200,7 @@ class AccountRegisterPayments(models.TransientModel):
                     self.env.ref('account_check_printing.'
                                  'account_payment_method_check'):
                 res.update({
-                    'check_amount_in_words': group_data[
-                                                 'total_check_amount_in_words'
-                                             ] or '',
+                    'check_amount_in_words': group_data['total_check_amount_in_words'] or '',  # noqa
                 })
             return res
 
@@ -222,8 +218,7 @@ class AccountRegisterPayments(models.TransientModel):
                                         ' match!.'))
             for paym in self.invoice_customer_payments:
                 if paym.receiving_amt > 0:
-                    paym.payment_difference = paym.balance_amt - \
-                                              paym.receiving_amt
+                    paym.payment_difference = paym.balance_amt - paym.receiving_amt  # noqa
                     partner_id = str(paym.invoice_id.partner_id.id)
                     if partner_id in data:
                         old_total = data[partner_id]['total']
@@ -241,13 +236,10 @@ class AccountRegisterPayments(models.TransientModel):
                         amount_word = amount_word.replace(' and Zero Cent', '')
                         decimals = (old_total + paym.receiving_amt) % 1
                         if decimals >= 10**-2:
-                            amount_word += _(' and %s/100') % str(int(round(
-                                float_round(decimals*100,
-                                            precision_rounding=1))))
+                            amount_word += _(' and %s/100') % str(int(round(float_round(decimals*100, precision_rounding=1))))  # noqa
                         data[partner_id].update({
                             'partner_id': partner_id,
-                            'partner_type': INV_TO_PARTN[
-                                paym.invoice_id.type],
+                            'partner_type': INV_TO_PARTN[paym.invoice_id.type],
                             'total': old_total + paym.receiving_amt,
                             'memo': memo,
                             'payment_method_id': paym.payment_method_id and paym.payment_method_id.id or False,  # noqa
@@ -330,10 +322,7 @@ class AccountRegisterPayments(models.TransientModel):
                         amount_word = amount_word.replace(' and Zero Cent', '')
                         decimals = (old_total + paym.paying_amt) % 1
                         if decimals >= 10**-2:
-                            amount_word += _(' and %s/100') %\
-                                           str(int(round(float_round(
-                                               decimals*100,
-                                               precision_rounding=1))))
+                            amount_word += _(' and %s/100') % str(int(round(float_round(decimals*100, precision_rounding=1))))  # noqa
                         data[partner_id].update({'partner_id': partner_id,
                                                  'partner_type': INV_TO_PARTN[paym.invoice_id.type],  # noqa
                                                  'total': old_total +
@@ -352,16 +341,11 @@ class AccountRegisterPayments(models.TransientModel):
                         else:
                             memo = str(paym.invoice_id.number)
                         # Calculate amount in words
-                        amount_word = amount_to_text_en.amount_to_text(
-                            math.floor(paym.paying_amt), lang='en',
-                            currency='')
+                        amount_word = amount_to_text_en.amount_to_text(math.floor(paym.paying_amt), lang='en', currency='')  # noqa
                         amount_word = amount_word.replace(' and Zero Cent', '')
                         decimals = paym.paying_amt % 1
                         if decimals >= 10**-2:
-                            amount_word += _(' and %s/100') %\
-                                           str(int(round(float_round(
-                                               decimals*100,
-                                               precision_rounding=1))))
+                            amount_word += _(' and %s/100') % str(int(round(float_round(decimals*100, precision_rounding=1))))  # noqa
                         data.update({
                             partner_id:
                                 {'partner_id': partner_id,
