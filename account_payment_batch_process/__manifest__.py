@@ -18,7 +18,6 @@
         "python": ["math"],
     },
     "data": [
-        "security/ir.model.access.csv",
         "wizard/invoice_batch_process_view.xml",
         "views/invoice_view.xml"
     ],
