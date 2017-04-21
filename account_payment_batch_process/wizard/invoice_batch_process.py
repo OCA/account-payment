@@ -365,7 +365,7 @@ class AccountRegisterPayments(models.TransientModel):
             payment.post()
 
         view_id = self.env['ir.model.data'].get_object_reference(
-            'ursa_payment_batch_process',
+            'account_payment_batch_process',
             'view_account_supplier_payment_tree_nocreate')[1]
         return {
             'name': _('Payments'),
