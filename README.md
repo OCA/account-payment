@@ -25,6 +25,8 @@ addon | version | summary
 [account_check_printing_report_base](account_check_printing_report_base/) | 9.0.1.0.0 | Account Check Printing Report Base
 [account_check_printing_report_dlt103](account_check_printing_report_dlt103/) | 9.0.1.0.0 | Account Check Printing Report DLT103
 [account_due_list](account_due_list/) | 9.0.1.0.0 | Payments Due list
+[account_due_list_aging_comments](account_due_list_aging_comments/) | 9.0.0.1.0 | Payments Due list aging comments
+[account_due_list_days_overdue](account_due_list_days_overdue/) | 9.0.0.1.0 | Payments Due list days overdue
 [account_due_list_payment_mode](account_due_list_payment_mode/) | 9.0.1.0.0 | Payment due list with payment mode
 [account_payment_return](account_payment_return/) | 9.0.1.1.0 | Manage the return of your payments
 
