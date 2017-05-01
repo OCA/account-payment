@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-02 06:22+0000\n"
-"PO-Revision-Date: 2016-11-25 14:56+0000\n"
+"POT-Creation-Date: 2017-04-18 00:39+0000\n"
+"PO-Revision-Date: 2017-04-28 09:21+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-payment-8-0/language/es/)\n"
 "MIME-Version: 1.0\n"
@@ -149,7 +149,7 @@ msgid "Invoice has been included on a payment that has been returned later."
 msgstr "La factura ha sido incluida en un pago que ha sido devuelto más tarde."
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:275
+#: code:addons/account_payment_return/models/payment_return.py:286
 #, python-format
 msgid "Invoice: %s"
 msgstr "Factura: %s"
@@ -214,13 +214,13 @@ msgid "Messages and communication history"
 msgstr "Historial de comunicación del sitio web"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:296
+#: code:addons/account_payment_return/models/payment_return.py:307
 #, python-format
 msgid "Move lines: %s"
 msgstr "Apuntes: %s"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:319
+#: code:addons/account_payment_return/models/payment_return.py:330
 #, python-format
 msgid "Move: %s"
 msgstr "Asiento: %s"
@@ -265,8 +265,7 @@ msgid "Payment returned"
 msgstr "Devolución de cobro"
 
 #. module: account_payment_return
-#: help:payment.return.line,concept:0 help:payment.return.line,date:0
-#: help:payment.return.line,partner_name:0
+#: help:payment.return.line,concept:0 help:payment.return.line,partner_name:0
 msgid "Read from imported file. Only for reference."
 msgstr "Leído del archivo importado. Sólo como referencia."
 
@@ -301,7 +300,7 @@ msgid "Reference to the reconcile object."
 msgstr "Referencia al objeto de conciliación."
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:134
+#: code:addons/account_payment_return/models/payment_return.py:132
 #, python-format
 msgid "Return %s"
 msgstr "Devolución %s"
@@ -353,7 +352,7 @@ msgid "You can not remove a payment return if state is 'Done'"
 msgstr "No puede borrar una devolución de pagos en estado 'Realizado'"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:129
+#: code:addons/account_payment_return/models/payment_return.py:146
 #, python-format
 msgid "You must input all moves references in the payment return."
 msgstr "Debes informar todas las referencias de cobro."
