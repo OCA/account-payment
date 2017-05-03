@@ -24,6 +24,8 @@ addons:
 env:
   global:
   - VERSION="9.0" TESTS="0" LINT_CHECK="0"
+  - TRANSIFEX_USER='transbot@odoo-community.org'
+  - secure: TBV3BAz/Bx1rAP/diCeySS3yFo8qOk0lmy33CXmd/YKcMbKCuN6Y/a72dCvLtJkLrM2Aalo+AhafEp8JJoKf6UJLNHn09hRHL5KjKfY4I32cb60LxlGwYMAOePduBfoYWMsEv95x54caHqNd94uP8/Ot0zXRDjp0V9INHnmQIzY= 
   matrix:
   - LINT_CHECK="1"
   - TESTS="1" ODOO_REPO="odoo/odoo"
