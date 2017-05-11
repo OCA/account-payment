@@ -14,9 +14,6 @@
         "account",
         "account_check_printing",
     ],
-    "external_dependencies": {
-        "python": ["math"],
-    },
     "data": [
         "wizard/invoice_batch_process_view.xml",
         "views/invoice_view.xml"
