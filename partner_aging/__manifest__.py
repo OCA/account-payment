@@ -5,7 +5,7 @@
     'name': 'Interactive Partner Aging at any date',
     'summary': 'Aging as a view - invoices and credits',
     'version': '10.0.1.0.0',
-    'license': 'AGPL',
+    'license': 'AGPL-3',
     'author': 'Ursa Information Systems, Odoo Community Association (OCA)',
     'category': 'Accounting & Finance',
     'maintainer': 'Ursa Information Systems',
