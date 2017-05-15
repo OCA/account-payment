@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2015-2017 Eficent Business and IT Consulting Services
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
 <odoo>
     <data>
         <record id="view_payments_tree" model="ir.ui.view">
