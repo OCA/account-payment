@@ -23,6 +23,7 @@ Available addons
 addon | version | summary
 --- | --- | ---
 [account_due_list](account_due_list/) | 10.0.1.0.0 | Payments Due list
+[account_due_list_aging_comments](account_due_list_aging_comments/) | 10.0.1.0.0 | Payments Due list aging comments
 
 
 Unported addons
