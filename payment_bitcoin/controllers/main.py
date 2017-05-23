@@ -56,7 +56,7 @@ class website_sale(openerp.addons.website_sale.controllers.main.website_sale):
 
             msg = "Please send %s mBTC to the following address: %s"\
                   % (bitcoin_amount, bitcoin_address)
-            resp['message'] += '<br/><br/>' + msg
+            resp['message'] += msg
         return resp
 
     @http.route(['/shop/payment'], type='http',
