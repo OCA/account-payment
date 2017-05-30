@@ -7,6 +7,7 @@ import werkzeug
 
 from openerp import http, SUPERUSER_ID
 from openerp.http import request
+from openerp.tools.translate import _
 
 import openerp.addons.website_sale.controllers.main
 
@@ -54,7 +55,7 @@ class website_sale(openerp.addons.website_sale.controllers.main.website_sale):
             bitcoin_address = order.payment_tx_id.bitcoin_address
             bitcoin_amount = order.payment_tx_id.bitcoin_amount
 
-            msg = "Please send %s mBTC to the following address: %s"\
+            msg = _("Please send %s mBTC to the following address: %s")\
                   % (bitcoin_amount, bitcoin_address)
             resp['message'] += msg
         return resp
