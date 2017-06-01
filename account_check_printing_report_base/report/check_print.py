@@ -4,9 +4,9 @@
 # Copyright 2016 Serpent Consulting Services Pvt. Ltd.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, exceptions, models, _
+from odoo import api, exceptions, models, _
 import time
-from openerp.tools import float_is_zero
+from odoo.tools import float_is_zero
 
 
 class ReportCheckPrint(models.AbstractModel):
@@ -87,20 +87,19 @@ class ReportCheckPrint(models.AbstractModel):
                 line['paid_amount'] = total_amount_to_show
                 lines[payment.id].append(line)
         return lines
-
+    
     @api.multi
-    def render_html(self, data):
-        payments = self.env['account.payment'].browse(self.ids)
+    def render_html(self, docids, data=None):
+        payments = self.env['account.payment'].browse(docids)
         paid_lines = self.get_paid_lines(payments)
         docargs = {
-            'doc_ids': self.ids,
+            'doc_ids': docids,
             'doc_model': 'account.payment',
             'docs': payments,
             'time': time,
             'fill_stars': self.fill_stars,
             'paid_lines': paid_lines
         }
-
         if self.env.user.company_id.check_layout_id:
                 return self.env['report'].render(
                     self.env.user.company_id.check_layout_id.report,
