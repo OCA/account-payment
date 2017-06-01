@@ -3,6 +3,8 @@
     <record id="account_payment_check_report_base"
             model="account.payment.check.report">
         <field name="name">base</field>
-        <field name="report">account_check_printing_report_base.report_check_base</field>
+        <field name="report">
+            account_check_printing_report_base.report_check_base
+        </field>
     </record>
 </odoo>

@@ -53,8 +53,9 @@ class ReportCheckPrint(models.AbstractModel):
                                 [p.currency_id ==
                                  pay.matched_debit_ids[0].currency_id for p
                                  in pay.matched_debit_ids]) \
-                                and pay.matched_debit_ids[0].currency_id \
-                                or False
+                                                  and pay.matched_debit_ids[
+                                                      0].currency_id \
+                                                  or False
                     elif invoice.type in ('in_invoice', 'out_refund'):
                         amount = sum(
                             [p.amount for p in pay.matched_credit_ids if
@@ -68,16 +69,17 @@ class ReportCheckPrint(models.AbstractModel):
                                 [p.currency_id ==
                                  pay.matched_credit_ids[0].currency_id for p
                                  in pay.matched_credit_ids]) \
-                                and pay.matched_credit_ids[0].currency_id \
-                                or False
+                                                  and pay.matched_credit_ids[
+                                                      0].currency_id \
+                                                  or False
 
                     if payment_currency_id and payment_currency_id == \
                             invoice.currency_id:
                         amount_to_show = amount_currency
                     else:
-                        amount_to_show = pay.company_id.currency_id.\
+                        amount_to_show = pay.company_id.currency_id. \
                             with_context(date=pay.date).compute(
-                                amount, invoice.currency_id)
+                            amount, invoice.currency_id)
                     if not float_is_zero(
                             amount_to_show,
                             precision_rounding=invoice.currency_id.rounding):
@@ -87,7 +89,7 @@ class ReportCheckPrint(models.AbstractModel):
                 line['paid_amount'] = total_amount_to_show
                 lines[payment.id].append(line)
         return lines
-    
+
     @api.multi
     def render_html(self, docids, data=None):
         payments = self.env['account.payment'].browse(docids)
@@ -101,7 +103,7 @@ class ReportCheckPrint(models.AbstractModel):
             'paid_lines': paid_lines
         }
         if self.env.user.company_id.check_layout_id:
-                return self.env['report'].render(
-                    self.env.user.company_id.check_layout_id.report,
-                    docargs)
+            return self.env['report'].render(
+                self.env.user.company_id.check_layout_id.report,
+                docargs)
         raise exceptions.Warning(_('You must define a check layout'))
