@@ -77,9 +77,10 @@ class ReportCheckPrint(models.AbstractModel):
                             invoice.currency_id:
                         amount_to_show = amount_currency
                     else:
-                        amount_to_show = pay.company_id.currency_id. \
-                            with_context(date=pay.date).compute(
-                            amount, invoice.currency_id)
+                        amount_to_show = \
+                            pay.company_id.currency_id.with_context(
+                                date=pay.date).compute(
+                                amount, invoice.currency_id)
                     if not float_is_zero(
                             amount_to_show,
                             precision_rounding=invoice.currency_id.rounding):
