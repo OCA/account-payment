@@ -49,13 +49,13 @@ class ReportCheckPrint(models.AbstractModel):
                                                p.debit_move_id in
                                                invoice.move_id.line_ids])
                         if pay.matched_debit_ids:
-                            payment_currency_id = all(
-                                [p.currency_id ==
-                                 pay.matched_debit_ids[0].currency_id for p
-                                 in pay.matched_debit_ids]) \
-                                                  and pay.matched_debit_ids[
-                                                      0].currency_id \
-                                                  or False
+                            payment_currency_id = \
+                                all(
+                                    [p.currency_id ==
+                                     pay.matched_debit_ids[0].currency_id
+                                     for p in pay.matched_debit_ids]) \
+                                and pay.matched_debit_ids[0].currency_id \
+                                or False
                     elif invoice.type in ('in_invoice', 'out_refund'):
                         amount = sum(
                             [p.amount for p in pay.matched_credit_ids if
@@ -65,13 +65,13 @@ class ReportCheckPrint(models.AbstractModel):
                                                p.credit_move_id in
                                                invoice.move_id.line_ids])
                         if pay.matched_credit_ids:
-                            payment_currency_id = all(
-                                [p.currency_id ==
-                                 pay.matched_credit_ids[0].currency_id for p
-                                 in pay.matched_credit_ids]) \
-                                                  and pay.matched_credit_ids[
-                                                      0].currency_id \
-                                                  or False
+                            payment_currency_id = \
+                                all(
+                                    [p.currency_id ==
+                                     pay.matched_credit_ids[0].currency_id
+                                     for p in pay.matched_credit_ids]) \
+                                and pay.matched_credit_ids[0].currency_id \
+                                or False
 
                     if payment_currency_id and payment_currency_id == \
                             invoice.currency_id:
