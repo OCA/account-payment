@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-01 14:49+0000\n"
-"PO-Revision-Date: 2017-05-05 21:20+0000\n"
+"POT-Creation-Date: 2017-05-20 00:11+0000\n"
+"PO-Revision-Date: 2017-05-31 21:52+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-account-payment-8-0/language/fr/)\n"
 "MIME-Version: 1.0\n"
@@ -271,7 +271,7 @@ msgstr ""
 #. module: account_payment_return
 #: field:payment.return.reason,name:0
 msgid "Reason"
-msgstr ""
+msgstr "Motif"
 
 #. module: account_payment_return
 #: field:payment.return.line,reconcile_id:0
