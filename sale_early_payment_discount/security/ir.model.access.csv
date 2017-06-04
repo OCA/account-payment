@@ -1,0 +1,5 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_account_partner_payment_term_early_discount_auser","access_account_partner_payment_term_early_discount_account_user","model_account_partner_payment_term_early_discount","account.group_account_user",1,0,0,0
+"access_account_partner_payment_term_early_discount_amanager","access_account_partner_payment_term_early_discount_account_manager","model_account_partner_payment_term_early_discount","account.group_account_manager",1,1,1,1
+"access_account_partner_payment_term_early_discount_buser","access_account_partner_payment_term_early_discount_base_user","model_account_partner_payment_term_early_discount","base.group_user",1,0,0,0
+"access_account_partner_payment_term_early_discount_suser","access_account_partner_payment_term_early_discount_sale_user","model_account_partner_payment_term_early_discount","base.group_sale_salesman",1,0,0,0

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="partner_payment_term_early_discount_add_purchase_form" model="ir.ui.view">
+            <field name="name">account.partner.payment.term.early.discount.form</field>
+            <field name="model">account.partner.payment.term.early.discount</field>
+            <field name="inherit_id" ref="sale_early_payment_discount.partner_payment_term_early_discount_form"/>
+            <field name="arch" type="xml">
+                <field name="sale_discount" position="after">
+                    <label for="purchase_discount"/>
+                    <field name="purchase_discount"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>

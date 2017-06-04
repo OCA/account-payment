@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_order_form_add_early_payment_disc_total" model="ir.ui.view">
+            <field name="name">sale.order.form.add_early_payment_disc_total</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <field name="amount_total" position="after">
+                    <label for="early_payment_disc_untaxed"/>
+                    <field name="early_payment_disc_untaxed" nolabel="1"/>
+                    <label for="early_payment_disc_tax"/>
+                    <field name="early_payment_disc_tax" nolabel="1"/>
+                    <label for="early_payment_disc_total"/>
+                    <field name="early_payment_disc_total" nolabel="1"/>
+                    <newline/>
+                </field>
+                <field name="payment_term" position="after">
+                    <field name="early_payment_discount"/>
+                </field>
+                <field name="partner_id" position="attributes">
+                    <attribute name="onchange"/>
+                </field>
+            </field>
+        </record>
+
+    </data>
+</openerp>

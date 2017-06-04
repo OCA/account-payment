@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <template id="sale_order_add_early_payment" inherit_id="sale.report_saleorder_document">
+            <xpath expr="//div[@class='col-xs-4 pull-right']/table" position="inside">
+                <tr class="border-black">
+                    <td>
+                      <strong>E.P. Disc. :</strong>
+                    </td>
+                    <td>
+                      <span t-field="o.early_payment_discount"/> %
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <strong>With E.P. :</strong>
+                    </td>
+                    <td>
+                      <span t-field="o.early_payment_disc_total"/> <span t-field="o.pricelist_id.currency_id.symbol"/>
+                    </td>
+                 </tr>
+            </xpath>
+        </template>
+
+    </data>
+</openerp>
