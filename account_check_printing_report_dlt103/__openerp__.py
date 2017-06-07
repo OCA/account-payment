@@ -20,5 +20,5 @@
         'views/report_check.xml',
         'report/account_check_writing_report.xml',
     ],
-    'installable': True,
+    'installable': False,
 }
