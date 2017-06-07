@@ -9,13 +9,6 @@ Account Check Printing Report Base
 This module provides the basic framework for check printing, and a sample
 layout.
 
-Installation
-============
-
-To install this module, you need to:
-
-#. Do this ...
-
 Configuration
 =============
 
@@ -30,21 +23,15 @@ Usage
 * Go to 'Invoicing / Purchases / Payments'. Select one of the payments with
   type 'Check' and print the check.
 
-
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/96/9.0
-
-Known issues / Roadmap
-======================
-
-
+   :target: https://runbot.odoo-community.org/runbot/96/10.0
 
 Bug Tracker
 ===========
 
 Bugs are tracked on `GitHub Issues
-<https://github.com/OCA/{project_repo}/issues>`_. In case of trouble, please
+<https://github.com/OCA/account-payment/issues>`_. In case of trouble, please
 check there if your issue has already been reported. If you spotted it first,
 help us smash it by providing detailed and welcomed feedback.
 
@@ -62,12 +49,6 @@ Contributors
 * Jordi Ballester Alomar <jordi.ballester@eficent.com>
 * Lois Rilo Antelo <lois.rilo@eficent.com>
 * Sandip Mangukiya <smangukiya@ursainfosystems.com>
-
-Funders
--------
-
-The development of this module has been financially supported by:
-
 
 Maintainer
 ----------
