@@ -4,9 +4,9 @@
 # Copyright 2016 Serpent Consulting Services Pvt. Ltd.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import api, exceptions, models, _
+from odoo import api, exceptions, models, _
 import time
-from openerp.tools import float_is_zero
+from odoo.tools import float_is_zero
 
 
 class ReportCheckPrint(models.AbstractModel):
@@ -49,10 +49,11 @@ class ReportCheckPrint(models.AbstractModel):
                                                p.debit_move_id in
                                                invoice.move_id.line_ids])
                         if pay.matched_debit_ids:
-                            payment_currency_id = all(
-                                [p.currency_id ==
-                                 pay.matched_debit_ids[0].currency_id for p
-                                 in pay.matched_debit_ids]) \
+                            payment_currency_id = \
+                                all(
+                                    [p.currency_id ==
+                                     pay.matched_debit_ids[0].currency_id
+                                     for p in pay.matched_debit_ids]) \
                                 and pay.matched_debit_ids[0].currency_id \
                                 or False
                     elif invoice.type in ('in_invoice', 'out_refund'):
@@ -64,10 +65,11 @@ class ReportCheckPrint(models.AbstractModel):
                                                p.credit_move_id in
                                                invoice.move_id.line_ids])
                         if pay.matched_credit_ids:
-                            payment_currency_id = all(
-                                [p.currency_id ==
-                                 pay.matched_credit_ids[0].currency_id for p
-                                 in pay.matched_credit_ids]) \
+                            payment_currency_id = \
+                                all(
+                                    [p.currency_id ==
+                                     pay.matched_credit_ids[0].currency_id
+                                     for p in pay.matched_credit_ids]) \
                                 and pay.matched_credit_ids[0].currency_id \
                                 or False
 
@@ -75,8 +77,9 @@ class ReportCheckPrint(models.AbstractModel):
                             invoice.currency_id:
                         amount_to_show = amount_currency
                     else:
-                        amount_to_show = pay.company_id.currency_id.\
-                            with_context(date=pay.date).compute(
+                        amount_to_show = \
+                            pay.company_id.currency_id.with_context(
+                                date=pay.date).compute(
                                 amount, invoice.currency_id)
                     if not float_is_zero(
                             amount_to_show,
@@ -89,20 +92,19 @@ class ReportCheckPrint(models.AbstractModel):
         return lines
 
     @api.multi
-    def render_html(self, data):
-        payments = self.env['account.payment'].browse(self.ids)
+    def render_html(self, docids, data=None):
+        payments = self.env['account.payment'].browse(docids)
         paid_lines = self.get_paid_lines(payments)
         docargs = {
-            'doc_ids': self.ids,
+            'doc_ids': docids,
             'doc_model': 'account.payment',
             'docs': payments,
             'time': time,
             'fill_stars': self.fill_stars,
             'paid_lines': paid_lines
         }
-
         if self.env.user.company_id.check_layout_id:
-                return self.env['report'].render(
-                    self.env.user.company_id.check_layout_id.report,
-                    docargs)
+            return self.env['report'].render(
+                self.env.user.company_id.check_layout_id.report,
+                docargs)
         raise exceptions.Warning(_('You must define a check layout'))
