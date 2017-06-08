@@ -24,6 +24,7 @@ addon | version | summary
 --- | --- | ---
 [account_due_list](account_due_list/) | 10.0.1.0.0 | Payments Due list
 [account_due_list_aging_comments](account_due_list_aging_comments/) | 10.0.1.0.0 | Payments Due list aging comments
+[account_payment_credit_card](account_payment_credit_card/) | 10.0.1.0.0 | Add support for credit card payments
 
 
 Unported addons
