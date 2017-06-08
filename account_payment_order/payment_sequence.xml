@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+        <record id="seq_payment_order" model="ir.sequence">
+            <field name="name">Payment Order</field>
+            <field name="code">payment.order</field>
+            <field name="prefix">P</field>
+            <field name="padding">5</field>
+        </record>
+
+        <record id="seq_payment_line" model="ir.sequence">
+            <field name="name">Payment Line</field>
+            <field name="code">payment.line</field>
+            <field name="padding">5</field>
+        </record>
+
+    </data>
+</openerp>

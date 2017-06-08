@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_payment_line_tree" model="ir.ui.view">
+            <field name="name">Payment Order Lines</field>
+            <field name="model">payment.line</field>
+            <field name="arch" type="xml">
+                <tree string="Payment Line">
+                    <field name="order_id"/>
+                    <field name="ml_inv_ref" />                    
+                    <field name="partner_id"/>
+                    <field name="communication"/>
+                   
+                    <field name="bank_id" domain="[('partner_id', '=', partner_id)]"/>                    
+                    <field name="ml_maturity_date"/>
+                    <field name="create_date"/>
+                    <field name="amount_currency" sum="Total amount"/>
+                    <field name="currency_id" />
+                    <field name="move_line_id" />
+                    <field name="name"/>                
+                </tree>
+            </field>
+        </record>        
+    </data>
+</openerp>
