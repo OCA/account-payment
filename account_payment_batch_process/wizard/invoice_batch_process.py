@@ -51,13 +51,7 @@ class InvoiceCustomerPaymentLine(models.TransientModel):
 
     @api.onchange('receiving_amt')
     def _onchange_amount(self):
-        amount_word = amount_to_text_en.amount_to_text(
-            math.floor(self.receiving_amt), lang='en', currency='')
-        amount_word = amount_word.replace(' and Zero Cent', '')
-        decimals = self.receiving_amt % 1
-        if decimals >= 10**-2:
-            amount_word += _(' and %s/100') % str(int(round(float_round(decimals*100, precision_rounding=1))))  # noqa
-        self.check_amount_in_words = amount_word
+        self.check_amount_in_words = AmountToTextFractional(self.receiving_amt)
         self.payment_difference = self.balance_amt - self.receiving_amt
 
 
@@ -76,14 +70,7 @@ class InvoicePaymentLine(models.TransientModel):
 
     @api.onchange('paying_amt')
     def _onchange_amount(self):
-        amount_word = amount_to_text_en.amount_to_text(math.floor(
-            self.paying_amt), lang='en', currency='')
-        amount_word = amount_word.replace(' and Zero Cent', '')
-        decimals = self.paying_amt % 1
-        if decimals >= 10**-2:
-            amount_word += _(' and %s/100') % str(int(round(float_round(
-                decimals*100, precision_rounding=1))))
-        self.check_amount_in_words = amount_word
+        self.check_amount_in_words = AmountToTextFractional(self.paying_amt)
 
 
 class AccountRegisterPayments(models.TransientModel):
@@ -228,19 +215,15 @@ class AccountRegisterPayments(models.TransientModel):
                             memo = data[partner_id]['memo'] + ' : ' +\
                                 str(paym.invoice_id.number)
                         # Calculate amount in words
-                        amount_word = amount_to_text_en.amount_to_text(
-                            math.floor(old_total + paym.receiving_amt),
-                            lang='en', currency='')
-                        amount_word = amount_word.replace(' and Zero Cent', '')
-                        decimals = (old_total + paym.receiving_amt) % 1
-                        if decimals >= 10**-2:
-                            amount_word += _(' and %s/100') % str(int(round(float_round(decimals*100, precision_rounding=1))))  # noqa
+                        amount_total = old_total + paym.receiving_amt
+                        amount_word = AmountToTextFractional(amount_total)
                         data[partner_id].update({
                             'partner_id': partner_id,
                             'partner_type': INV_TO_PARTN[paym.invoice_id.type],
-                            'total': old_total + paym.receiving_amt,
+                            'total': amount_total,
                             'memo': memo,
-                            'payment_method_id': paym.payment_method_id and paym.payment_method_id.id or False,  # noqa
+                            'payment_method_id': paym.payment_method_id and
+                            paym.payment_method_id.id or False,
                             'total_check_amount_in_words': amount_word
                         })
                         data[partner_id]['inv_val'].update({
@@ -261,15 +244,8 @@ class AccountRegisterPayments(models.TransientModel):
                         else:
                             memo = str(paym.invoice_id.number)
                         # Calculate amount in words
-                        amount_word = amount_to_text_en.amount_to_text(
-                            math.floor(paym.receiving_amt), lang='en',
-                            currency='')
-                        amount_word = amount_word.replace(' and Zero Cent', '')
-                        decimals = paym.receiving_amt % 1
-                        if decimals >= 10**-2:
-                            amount_word += _(' and %s/100') %\
-                                str(int(round(float_round(
-                                    decimals*100, precision_rounding=1))))
+                        amount_word = AmountToTextFractional(
+                            paym.receiving_amt)
                         data.update({
                             partner_id: {
                                 'partner_id': partner_id,
@@ -313,17 +289,11 @@ class AccountRegisterPayments(models.TransientModel):
                             memo = data[partner_id]['memo'] + ' : ' +\
                                 str(paym.invoice_id.number)
                         # Calculate amount in words
-                        amount_word = amount_to_text_en.amount_to_text(
-                            math.floor(old_total + paym.paying_amt),
-                            lang='en', currency='')
-                        amount_word = amount_word.replace(' and Zero Cent', '')
-                        decimals = (old_total + paym.paying_amt) % 1
-                        if decimals >= 10**-2:
-                            amount_word += _(' and %s/100') % str(int(round(float_round(decimals*100, precision_rounding=1))))  # noqa
+                        amount_total = old_total + paym.paying_amt
+                        amount_word = AmountToTextFractional(amount_total)
                         data[partner_id].update({'partner_id': partner_id,
                                                  'partner_type': INV_TO_PARTN[paym.invoice_id.type],  # noqa
-                                                 'total': old_total +
-                                                     paym.paying_amt,
+                                                 'total': amount_total,
                                                  'memo': memo,
                                                  'total_check_amount_in_words':
                                                      amount_word
@@ -338,11 +308,7 @@ class AccountRegisterPayments(models.TransientModel):
                         else:
                             memo = str(paym.invoice_id.number)
                         # Calculate amount in words
-                        amount_word = amount_to_text_en.amount_to_text(math.floor(paym.paying_amt), lang='en', currency='')  # noqa
-                        amount_word = amount_word.replace(' and Zero Cent', '')
-                        decimals = paym.paying_amt % 1
-                        if decimals >= 10**-2:
-                            amount_word += _(' and %s/100') % str(int(round(float_round(decimals*100, precision_rounding=1))))  # noqa
+                        amount_word = AmountToTextFractional(paym.paying_amt)
                         data.update({
                             partner_id:
                                 {'partner_id': partner_id,
@@ -409,3 +375,17 @@ class AccountRegisterPayments(models.TransientModel):
             'target': 'new',
             'context': ctx
         }
+
+
+# amountInt: int value
+# returns: string of amountInt converted to english text,
+#           with decimals converted to cent fractional
+def AmountToTextFractional(amountInt):
+    amount_word = amount_to_text_en.amount_to_text(
+        math.floor(amountInt), lang='en', currency='')
+    amount_word = amount_word.replace(' and Zero Cent', '')
+    decimals = amountInt % 1
+    if decimals >= 10**-2:
+        amount_word += _(' and %s/100') % str(int(round(
+            float_round(decimals*100, precision_rounding=1))))
+    return amount_word
