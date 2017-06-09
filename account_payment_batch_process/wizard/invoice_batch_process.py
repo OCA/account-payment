@@ -194,7 +194,6 @@ class AccountRegisterPayments(models.TransientModel):
         # Make group data either for Customers or Vendors
         context = dict(self._context or {})
         data = {}
-        memo = self.communication or ' '
         if self.is_customer:
             context.update({'is_customer': True})
             if self.total_customer_pay_amount != self.cheque_amount:
@@ -208,9 +207,10 @@ class AccountRegisterPayments(models.TransientModel):
                     if partner_id in data:
                         old_total = data[partner_id]['total']
                         # Build memo value
-                        if memo:
-                            memo = data[partner_id]['memo'] + ' : ' + memo +\
-                                '-' + str(paym.invoice_id.number)
+                        if self.communication:
+                            memo = data[partner_id]['memo'] + ' : ' +\
+                                self.communication + '-' +\
+                                str(paym.invoice_id.number)
                         else:
                             memo = data[partner_id]['memo'] + ' : ' +\
                                 str(paym.invoice_id.number)
