@@ -47,9 +47,9 @@ class AccountPayment(models.Model):
                     self._get_shared_move_line_vals(debit,
                                                     credit, amount_currency,
                                                     move.id, False)
-                currunt_invoice = self.env['account.invoice'].browse(int(inv))
+                current_invoice = self.env['account.invoice'].browse(int(inv))
                 counterpart_aml_dict.update(
-                    self._get_counterpart_move_line_vals(currunt_invoice))
+                    self._get_counterpart_move_line_vals(current_invoice))
                 counterpart_aml_dict.update({'currency_id': currency_id})
                 counterpart_aml = aml_obj.create(counterpart_aml_dict)
                 # Reconcile with the invoices and write off
@@ -83,7 +83,7 @@ class AccountPayment(models.Model):
                             counterpart_aml['credit'] += debit_wo - credit_wo
                         counterpart_aml['amount_currency'] -=\
                             amount_currency_wo
-                currunt_invoice.register_payment(counterpart_aml)
+                current_invoice.register_payment(counterpart_aml)
                 # Write counterpart lines
                 if not self.currency_id != self.company_id.currency_id:
                     amount_currency = 0
