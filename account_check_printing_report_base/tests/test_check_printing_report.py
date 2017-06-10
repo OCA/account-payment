@@ -95,7 +95,7 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
                                            self.acc_expense, False)
         self._create_invoice_line(acc_expense, vendor_bill)
 
-        vendor_bill.signal_workflow('invoice_open')
+        vendor_bill.action_invoice_open()
         # Pay the invoice using a bank journal associated to the main company
         ctx = {'active_model': 'account.invoice', 'active_ids': [
             vendor_bill.id]}
@@ -120,7 +120,7 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
         acc_expense = self._create_account('account expense test', 'ACPRB2',
                                            self.acc_expense, False)
         self._create_invoice_line(acc_expense, vendor_bill)
-        vendor_bill.signal_workflow('invoice_open')
+        vendor_bill.action_invoice_open()
         ctx = {'active_model': 'account.invoice', 'active_ids': [
             vendor_bill.id]}
         register_payments = \
