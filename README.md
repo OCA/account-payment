@@ -29,6 +29,7 @@ addon | version | summary
 [account_due_list_days_overdue](account_due_list_days_overdue/) | 9.0.0.1.0 | Payments Due list days overdue
 [account_due_list_payment_mode](account_due_list_payment_mode/) | 9.0.1.0.0 | Payment due list with payment mode
 [account_payment_return](account_payment_return/) | 9.0.1.1.0 | Manage the return of your payments
+[account_payment_show_invoice](account_payment_show_invoice/) | 9.0.1.0.0 | Extends the tree view of payments to show the paid invoices related to the payments using the vendor reference by default
 
 
 Unported addons
