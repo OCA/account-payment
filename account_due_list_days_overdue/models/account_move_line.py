@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-# © 2016 Eficent Business and IT Consulting Services S.L. (
-# <http://www.eficent.com>).
-# © 2016 Therp BV (<http://therp.nl>).
+# Copyright 2016 Eficent Business and IT Consulting Services S.L. (
+#   (<http://www.eficent.com>).
+# Copyright 2016 Therp BV (<http://therp.nl>).
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from openerp import api, fields, models, SUPERUSER_ID
+from odoo import api, fields, models
 import datetime
 from lxml import etree
-from openerp.osv import orm
+from odoo.osv import orm
 
 
 class AccountMoveLine(models.Model):
@@ -101,17 +101,15 @@ class AccountMoveLine(models.Model):
             string=term_name, compute='_compute_overdue_terms'))
         return True
 
-    def _register_hook(self, cr):
-        term_obj = self.pool['account.overdue.term']
-        term_ids = term_obj.search(cr, SUPERUSER_ID, [])
-        for term in term_obj.browse(cr, SUPERUSER_ID, term_ids):
+    def _register_hook(self):
+        term_obj = self.env['account.overdue.term']
+        for term in term_obj.search([]):
             # the orm does unicode
             field_name = str(term.tech_name)
             # register_hook can be called multiple times
             if field_name in self._fields:
                 continue
-            self._add_terms(cr, SUPERUSER_ID, field_name, term.name,
-                            context={})
-        self._setup_fields(cr, SUPERUSER_ID, False)
-        self._setup_complete(cr, SUPERUSER_ID)
-        return super(AccountMoveLine, self)._register_hook(cr)
+            self._add_terms(field_name, term.name)
+        self._setup_fields(False)
+        self._setup_complete()
+        return super(AccountMoveLine, self)._register_hook()
