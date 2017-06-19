@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data noupdate="1">
+        <record id="payment_acquirer" model="payment.acquirer">
+            <field name="name">Sisow iDeal</field>
+            <field name="provider">sisow</field>
+            <field name="environment">test</field>
+            <field name="image" file="payment_sisow/static/description/icon.png" type="base64" />
+            <field name="company_id" ref="base.main_company" />
+            <field name="view_template_id" ref="sisow_acquirer_button" />
+        </record>
+    </data>
+</openerp>

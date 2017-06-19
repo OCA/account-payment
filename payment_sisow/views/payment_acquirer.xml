@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="view_payment_acquirer_form" model="ir.ui.view">
+            <field name="model">payment.acquirer</field>
+            <field name="inherit_id" ref="payment.acquirer_form" />
+            <field name="arch" type="xml">
+                <group name="acquirer" position="after">
+                    <group name="sisow" attrs="{'invisible': [('provider', '!=', 'sisow')]}">
+                        <field name="sisow_merchant_id" attrs="{'required': [('provider', '=', 'sisow')]}" />
+                        <field name="sisow_merchant_key" attrs="{'required': [('provider', '=', 'sisow')]}" />
+                        <field name="sisow_shop_id" groups="base.group_no_one" />
+                    </group>
+                </group>
+            </field>
+        </record>
+    </data>
+</openerp>

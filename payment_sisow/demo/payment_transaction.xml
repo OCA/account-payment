@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+    <data>
+        <record id="sisow_transaction" model="payment.transaction">
+            <field name="reference">sisow transaction</field>
+            <field name="acquirer_id" ref="payment_acquirer" />
+            <field name="currency_id" ref="base.EUR" />
+            <field name="amount">42</field>
+        </record>
+    </data>
+</openerp>
