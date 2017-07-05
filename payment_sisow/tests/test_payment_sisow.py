@@ -74,8 +74,9 @@ class TestPaymentSisow(HttpCase):
                 </signature>
             </transactionresponse>
             ''' % hashlib.sha1(
-                '123456/shop/payment/validate' +
-                acquirer.sisow_merchant_id +
-                acquirer.sisow_merchant_key
+                '123456/shop/payment/validate%s%s' % (
+                    acquirer.sisow_merchant_id,
+                    acquirer.sisow_merchant_key
+                )
             ).hexdigest()
         return result
