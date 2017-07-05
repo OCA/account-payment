@@ -91,10 +91,8 @@ class PaymentAcquirer(models.Model):
             entrancecode=entrancecode,
             returnurl=return_url,
             sha1=hashlib.sha1(
-                '%s%s%s%s%s%s' % (
-                    purchaseid, entrancecode, amount, self.sisow_shop_id,
-                    self.sisow_merchant_id, self.sisow_merchant_key
-                )
+                purchaseid + entrancecode + amount + self.sisow_shop_id +
+                self.sisow_merchant_id + self.sisow_merchant_key
             ).hexdigest(),
         )
         error = self._sisow_xpath(result, '//sisow:error')
@@ -108,10 +106,8 @@ class PaymentAcquirer(models.Model):
         transaction_id = self._sisow_xpath(result, '//sisow:trxid')[0].text
         sha1 = self._sisow_xpath(result, '//sisow:sha1')[0].text
         assert hashlib.sha1(
-            '%s%s%s%s' % (
-                transaction_id, issuerurl, self.sisow_merchant_id,
-                self.sisow_merchant_key,
-            )
+            transaction_id + issuerurl + self.sisow_merchant_id +
+            self.sisow_merchant_key
         ).hexdigest() == sha1, 'Invalid message received'
         issuerurl = urllib.unquote(issuerurl)
         transaction.sudo().write({

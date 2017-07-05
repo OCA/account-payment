@@ -61,8 +61,7 @@ class TestPaymentSisow(HttpCase):
         acquirer = self.env.ref('payment_sisow.payment_acquirer')
         if url == ('https://www.sisow.nl/Sisow/iDeal/RestHandler.ashx/'
                    'TransactionRequest'):
-            result.content = '''
-            <?xml version="1.0" encoding="UTF-8"?>
+            result.content = '''<?xml version="1.0" encoding="UTF-8"?>
             <transactionresponse
                 xmlns="https://www.sisow.nl/Sisow/REST" version="1.0.0">
                 <transaction>
@@ -74,9 +73,8 @@ class TestPaymentSisow(HttpCase):
                 </signature>
             </transactionresponse>
             ''' % hashlib.sha1(
-                '123456/shop/payment/validate%s%s' % (
-                    acquirer.sisow_merchant_id,
-                    acquirer.sisow_merchant_key
-                )
+                '123456/shop/payment/validate' +
+                acquirer.sisow_merchant_id +
+                acquirer.sisow_merchant_key
             ).hexdigest()
         return result
