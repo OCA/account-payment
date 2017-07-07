@@ -7,11 +7,10 @@ import base64
 from StringIO import StringIO
 from zipfile import ZipFile, BadZipfile  # BadZipFile in Python >= 3.2
 
-from openerp import api, models, fields
-from openerp.tools.translate import _
-from openerp.exceptions import Warning as UserError
+from odoo import _, api, models, fields
+from odoo.exceptions import Warning as UserError
 
-from openerp.addons.base_iban.base_iban import pretty_iban
+from odoo.addons.base_iban.models.res_partner_bank import pretty_iban
 
 
 class PaymentReturnImport(models.TransientModel):
