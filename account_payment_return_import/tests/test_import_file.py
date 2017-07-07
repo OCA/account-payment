@@ -4,8 +4,8 @@
 
 import logging
 
-from openerp.tests.common import TransactionCase
-from openerp.modules.module import get_module_resource
+from odoo.tests.common import TransactionCase
+from odoo.modules.module import get_module_resource
 
 
 _logger = logging.getLogger(__name__)
