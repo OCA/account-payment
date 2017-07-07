@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
-# © 2011-2012 7 i TRIA <http://www.7itria.cat>
-# © 2011-2012 Avanzosc <http://www.avanzosc.com>
-# © 2013 Pedro M. Baeza <pedro.baeza@tecnativa.com>
-# © 2014 Markus Schneider <markus.schneider@initos.com>
-# © 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
+# Copyright 2011-2012 7 i TRIA <http://www.7itria.cat>
+# Copyright 2011-2012 Avanzosc <http://www.avanzosc.com>
+# Copyright 2013 Pedro M. Baeza <pedro.baeza@tecnativa.com>
+# Copyright 2014 Markus Schneider <markus.schneider@initos.com>
+# Copyright 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import models, fields, api, _
-from openerp.exceptions import Warning as UserError
-import openerp.addons.decimal_precision as dp
+from odoo import _, api, fields, models
+from odoo.exceptions import Warning as UserError
+import odoo.addons.decimal_precision as dp
 
 
 class PaymentReturn(models.Model):
@@ -230,7 +230,7 @@ class PaymentReturnLine(models.Model):
     amount = fields.Float(
         string='Amount',
         help="Returned amount. Can be different from the move amount",
-        digits_compute=dp.get_precision('Account'))
+        digits=dp.get_precision('Account'))
 
     @api.multi
     def _compute_amount(self):
