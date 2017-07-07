@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
-# © 2015 Pedro M. Baeza <pedro.baeza@tecnativa.com>
-# © 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
+# Copyright 2015 Pedro M. Baeza <pedro.baeza@tecnativa.com>
+# Copyright 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
+# Copyright 2017 David Vidal <david.vidal@tecnativa.com>
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 import json
-from openerp.exceptions import Warning as UserError, ValidationError
-from openerp.tests.common import SavepointCase
+from odoo.exceptions import Warning as UserError, ValidationError
+from odoo.tests.common import SavepointCase
 
 
 class TestPaymentReturn(SavepointCase):
@@ -59,7 +60,7 @@ class TestPaymentReturn(SavepointCase):
             'code': 'RTEST',
             'name': 'Reason Test'
         })
-        cls.invoice.signal_workflow('invoice_open')
+        cls.invoice.action_invoice_open()
         cls.receivable_line = cls.invoice.move_id.line_ids.filtered(
             lambda x: x.account_id.internal_type == 'receivable')
         # Invert the move to simulate the payment
@@ -183,5 +184,9 @@ class TestPaymentReturn(SavepointCase):
         self.assertEqual(info['content'][1]['amount'], -500.0)
 
     def test_reason_name_search(self):
-        self.payment_return.line_ids[0].reason_id = 'RTEST'
-        self.payment_return.line_ids[0].reason_id = 'Reason Test'
+        reason = self.env['payment.return.reason']
+        line = self.payment_return.line_ids[0]
+        line.reason_id = reason.name_search('RTEST')[0]
+        self.assertEqual(line.reason_id.name, 'Reason Test')
+        line.reason_id = reason.name_search('Reason Test')[0]
+        self.assertEqual(line.reason_id.code, 'RTEST')

@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
-# © 2013 Pedro M. Baeza <pedro.baeza@tecnativa.com>
-# © 2014 Markus Schneider <markus.schneider@initos.com>
-# © 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
+# Copyright 2013 Pedro M. Baeza <pedro.baeza@tecnativa.com>
+# Copyright 2014 Markus Schneider <markus.schneider@initos.com>
+# Copyright 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import json
 from operator import itemgetter
-from openerp import _, api, models, fields
+from odoo import _, api, fields, models
 
 
 class AccountInvoice(models.Model):
