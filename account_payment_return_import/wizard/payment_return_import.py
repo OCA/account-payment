@@ -12,6 +12,8 @@ from odoo.exceptions import Warning as UserError
 
 from odoo.addons.base_iban.models.res_partner_bank import pretty_iban
 
+from .base_parser import BaseParser
+
 
 class PaymentReturnImport(models.TransientModel):
     _name = 'payment.return.import'
@@ -140,10 +142,14 @@ class PaymentReturnImport(models.TransientModel):
                 -o 'partner_name': string
                 -o 'reference': string
         """
-        raise UserError(_(
-            'Could not make sense of the given file.\n'
-            'Did you install the module to support this type of file?'
-        ))
+        parser = BaseParser()
+        try:
+            return parser.parse(data_file)
+        except Exception:
+            raise UserError(_(
+                'Could not make sense of the given file.\n'
+                'Did you install the module to support this type of file?'
+            ))
 
     @api.model
     def _check_parsed_data(self, payment_returns):
