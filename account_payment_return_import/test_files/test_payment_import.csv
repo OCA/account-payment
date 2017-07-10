@@ -1,0 +1,2 @@
+account_number,name,date,amount,unique_import_id,concept,reason_code,reason,partner_name,reference
+NL77ABNA0574908765,M00000123,2017-07-10,250.9,123,Test payment return,RTEST,Reason Test,Test partner,

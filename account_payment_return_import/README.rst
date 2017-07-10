@@ -9,9 +9,34 @@ Account Payment Return Import
 This module adds a generic wizard + methods to import payment return file
 formats.
 
-It's only the base to be extended by another modules.
+It's a base to be extended by another modules though it allows to import a csv
+that will proccess the return payments on it.
 
 Multiple payment return files contained in a zip are also supported.
+
+Usage
+=====
+
+Under *Invoicing > Sales* there is available a new menu called *Import Payment
+Return* that drives to a wizard that allows to upload a csv with that has to
+have the following columns (* for required):
+
+::
+
+   account_number
+   name *
+   date *
+   amount *
+   unique_import_id *
+   concept
+   reason_code
+   reason
+   partner_name
+   reference
+
+.. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
+   :alt: Try me on Runbot
+   :target: https://runbot.odoo-community.org/runbot/96/10.0
 
 Bug Tracker
 ===========
@@ -20,13 +45,6 @@ Bugs are tracked on `GitHub Issues
 <https://github.com/OCA/account-payment/issues>`_. In case of trouble, please
 check there if your issue has already been reported. If you spotted it first,
 help us smash it by providing detailed and welcomed feedback.
-
-Usage
-=====
-
-.. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
-   :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/96/8.0
 
 Credits
 =======
