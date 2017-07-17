@@ -24,6 +24,7 @@ addon | version | summary
 --- | --- | ---
 [account_due_list](account_due_list/) | 10.0.1.0.0 | Payments Due list
 [account_due_list_aging_comments](account_due_list_aging_comments/) | 10.0.1.0.0 | Payments Due list aging comments
+[account_due_list_payment_mode](account_due_list_payment_mode/) | 10.0.1.0.0 | Payment due list with payment mode
 [account_payment_batch_process](account_payment_batch_process/) | 10.0.1.0.0 | Process Payments in Batch
 [account_payment_credit_card](account_payment_credit_card/) | 10.0.1.0.0 | Add support for credit card payments
 
@@ -32,7 +33,6 @@ Unported addons
 ---------------
 addon | version | summary
 --- | --- | ---
-[account_due_list_payment_mode](account_due_list_payment_mode/) | 8.0.1.0.0 (unported) | Payment due list with payment mode
 [account_payment_term_multi_day](account_payment_term_multi_day/) | 8.0.1.0.0 (unported) | Multiple payment days for payment terms
 [account_vat_on_payment](account_vat_on_payment/) | 8.0.1.0.0 (unported) | VAT on payment
 
