@@ -26,12 +26,8 @@ Usage
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/96/8.0
+   :target: https://runbot.odoo-community.org/runbot/96/10.0
 
-Known issues / Roadmap
-======================
-
- * No known issues.
 
 Bug Tracker
 ===========
@@ -47,7 +43,10 @@ Credits
 Contributors
 ------------
 
+* Obertix Free Solutions <http://obertix.net>
 * cubells <vicent@vcubells.net>
+* Sergio Teruel <sergio.teruel@tecnativa.com>
+* Albert De La Fuente <info@haevas.com>
 
 Maintainer
 ----------
