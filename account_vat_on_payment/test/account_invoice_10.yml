@@ -1,0 +1,92 @@
+-
+  I create the payment voucher for 120 also known as payment on account
+-
+  !record {model: account.voucher, id: account_voucher_10, view: account_voucher.view_vendor_receipt_form}:
+    journal_id: account.bank_journal
+    partner_id: base.res_partner_10
+    type: 'receipt'
+    amount: 120.0
+-
+  I confirm the voucher
+-
+  !workflow {model: account.voucher, action: proforma_voucher, ref: account_voucher_10}
+-
+  I check the voucher
+-
+  !python {model: account.voucher}: |
+    voucher = self.browse(cr, uid, ref('account_voucher_10'), context=context)
+    bank_found = False
+    recv_found = False
+    assert len(voucher.move_id.line_id) == 2, "There must be 2 real move lines, %s found" % len(voucher.move_id.line_id)
+    for move_line in voucher.move_id.line_id:
+      if move_line.account_id.id == ref('account.bnk'):
+        bank_found = True
+        assert move_line.debit == 120, "Bank move line must be 120 debit, %s found" % move_line.debit
+      if move_line.account_id.id == ref('account.a_recv'):
+        recv_found = True
+        assert move_line.credit == 120, "Debtors move line must be 120 credit, %s found" % move_line.credit
+    assert bank_found, "No bank move line found"
+    assert recv_found, "No receivable line found"
+
+-
+  I create customer invoice for 120 EUR with 20 EUR tax
+-
+  !record {model: account.invoice, id: account_invoice_customer_10, view: invoice_form}:
+    journal_id: account.sales_journal
+    partner_id: base.res_partner_10
+    account_id: ds
+    vat_on_payment: True
+    invoice_line:
+      - quantity: 1
+        account_id: account.a_sale
+        name: 'Service'
+        price_unit: 100.0
+        invoice_line_tax_id:
+          - tax20
+-
+  I confirm the invoice
+-
+  !workflow {model: account.invoice, action: invoice_open, ref: account_invoice_customer_10}
+-
+  I set the context that will be used for the encoding of all the vouchers of this file
+-
+  !context
+    'type': 'receipt'
+-
+  I create the payment voucher to reconcile payment on account and invoice
+-
+  !record {model: account.voucher, id: account_voucher_101, view: account_voucher.view_vendor_receipt_form}:
+    journal_id: account.bank_journal
+    partner_id: base.res_partner_10
+    amount: 0.0
+-
+  I confirm the voucher
+-
+  !workflow {model: account.voucher, action: proforma_voucher, ref: account_voucher_101}
+-
+  I check the voucher
+-
+  !python {model: account.voucher}: |
+    voucher = self.browse(cr, uid, ref('account_voucher_101'), context=context)
+    recv_found = False
+    vat_found = False
+    sales_found = False
+    assert len(voucher.move_id.line_id) == 4, "There must be 4 real move lines, %s found" % len(voucher.move_id.line_id)
+    for move_line in voucher.move_id.line_id:
+      if move_line.account_id.id == ref('account.a_recv'):
+        recv_found = True
+        assert move_line.debit == 120, "Bank move line must be 120 debit, %s found" % move_line.debit
+      if move_line.account_id.id == ref('account.iva'):
+        vat_found = True
+        assert move_line.credit == 20, "VAT move line must be 20 credit, %s found" % move_line.credit
+      if move_line.account_id.id == ref('account.a_sale'):
+        sales_found = True
+        assert move_line.credit == 100, "sales move line must be 100 credit, %s found" % move_line.credit
+    assert recv_found, "No receivable move line found"
+    assert sales_found, "No sales move line found"
+    assert vat_found, "No VAT move line found"
+-
+  I check that the invoice state is paid
+-
+  !assert {model: account.invoice, id: account_invoice_customer_10}:
+    - state == 'paid'

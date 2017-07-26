@@ -22,9 +22,13 @@ class AccountVoucher(orm.Model):
             for line in voucher.line_ids:
                 if line.amount:
                     valid_lines += 1
+                    # Only increase counter when invoice
+                    # not set as vat on payment
                     if (
-                        line.move_line_id and line.move_line_id.invoice and
-                        line.move_line_id.invoice.vat_on_payment
+                        line.move_line_id and
+                        ((line.move_line_id.invoice and
+                          line.move_line_id.invoice.vat_on_payment) or
+                         (not line.move_line_id.invoice))
                     ):
                         vat_on_p += 1
             if vat_on_p and vat_on_p != valid_lines:
@@ -216,7 +220,23 @@ class AccountVoucher(orm.Model):
     def _move_payment_lines_to_shadow_entry(
         self, cr, uid, voucher, shadow_move_id, context=None
     ):
-        for line in voucher.move_ids:
+
+        def _filterrecaml(line):
+            '''Check for reconciled invoice lines'''
+            inv = False
+            if line.reconcile_id or line.reconcile_partial_id:
+                lines = line.reconcile_id.line_id or \
+                    line.reconcile_partial_id.line_partial_ids
+                inv = lines.filtered(lambda r: r.invoice)
+
+            if line.account_id.type not in ('liquidity',
+                                            'receivable',
+                                            'payable') or inv:
+                return True
+
+            return False
+
+        for line in voucher.move_ids.filtered(_filterrecaml):
             if line.account_id.type != 'liquidity':
                 # If the line is related to write-off and user doesn't
                 # want to compute the tax including write-off,

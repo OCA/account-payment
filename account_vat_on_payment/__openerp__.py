@@ -37,6 +37,7 @@
         'test/account_invoice_7.yml',
         'test/account_invoice_8.yml',
         'test/account_invoice_9.yml',
+        'test/account_invoice_10.yml',
         'test/account_invoice_1_real.yml',
         'test/account_invoice_2_real.yml',
         'test/account_invoice_3_real.yml',
