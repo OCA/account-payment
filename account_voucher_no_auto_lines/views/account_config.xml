@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record id="view_account_config_settings" model="ir.ui.view">
+            <field name="name">account.config.settings.form</field>
+            <field name="model">account.config.settings</field>
+            <field name="inherit_id" ref="account.view_account_config_settings"/>
+            <field name="arch" type="xml">
+                <div name="other_cofing" position="inside">
+                    <div>
+                        <field name="disable_voucher_auto_lines" class="oe_inline"/>
+                        <label for="disable_voucher_auto_lines"/>
+                    </div>
+                </div>
+            </field>
+        </record>
+
+    </data>
+</openerp>
