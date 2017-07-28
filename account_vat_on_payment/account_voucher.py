@@ -204,13 +204,24 @@ class AccountVoucher(orm.Model):
                 document.journal_id.vat_on_payment_related_journal_id.id)
 
         if move_id_field == 'move_id':
+            # voucher
             move = document.move_id
         elif move_id_field == 'journal_entry_id':
+            # bank statement line
             move = document.journal_entry_id
+
+        ref = ''
+        if context.get('amounts_by_invoice'):
+            amounts_by_invoice = context['amounts_by_invoice']
+            invoices = self.pool['account.invoice'].browse(
+                cr, uid, amounts_by_invoice.keys(), context)
+            ref = ', '.join([i.number for i in invoices])
+
         return {
             'journal_id': real_journal,
             'period_id': move.period_id.id,
             'date': move.date,
+            'ref': ref,
         }
 
     def _move_payment_lines_to_shadow_entry(
@@ -296,6 +307,7 @@ class AccountVoucher(orm.Model):
         ctx = dict(context) or {}
         ctx['journal_id'] = real_journal
         ctx['period_id'] = voucher.move_id.period_id.id
+        ctx['amounts_by_invoice'] = amounts_by_invoice
         shadow_move_id = move_pool.create(
             cr, uid, self._prepare_shadow_move(
                 cr, uid, voucher, context=ctx), ctx)
