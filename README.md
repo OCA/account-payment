@@ -29,13 +29,13 @@ addon | version | summary
 [account_payment_credit_card](account_payment_credit_card/) | 10.0.1.0.0 | Add support for credit card payments
 [account_payment_return](account_payment_return/) | 10.0.1.0.0 | Manage the return of your payments
 [account_payment_return_import](account_payment_return_import/) | 10.0.1.0.0 | This module adds a generic wizard to import payment returnfile formats. Is only the base to be extended by anothermodules
+[account_payment_return_import_sepa_pain](account_payment_return_import_sepa_pain/) | 10.0.1.0.0 | Module to import SEPA Direct Debit Unpaid Report File Format PAIN.002.001.03
 
 
 Unported addons
 ---------------
 addon | version | summary
 --- | --- | ---
-[account_payment_term_multi_day](account_payment_term_multi_day/) | 8.0.1.0.0 (unported) | Multiple payment days for payment terms
 [account_vat_on_payment](account_vat_on_payment/) | 8.0.1.0.0 (unported) | VAT on payment
 
 [//]: # (end addons)
