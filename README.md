@@ -31,6 +31,7 @@ addon | version | summary
 [account_partner_reconcile](account_partner_reconcile/) | 9.0.1.0.0 | Account Partner Reconcile
 [account_payment_return](account_payment_return/) | 9.0.1.1.0 | Manage the return of your payments
 [account_payment_return_import](account_payment_return_import/) | 9.0.1.0.0 | This module add a generic wizard to import payment return fileformats. Is only the base to be extended by another modules
+[account_payment_return_import_sepa_pain](account_payment_return_import_sepa_pain/) | 9.0.1.0.0 | Module to import SEPA Direct Debit Unpaid Report File Format PAIN.002.001.03
 [account_payment_show_invoice](account_payment_show_invoice/) | 9.0.1.0.0 | Extends the tree view of payments to show the paid invoices related to the payments using the vendor reference by default
 
 
