@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-31 01:11+0000\n"
-"PO-Revision-Date: 2017-01-17 12:12+0000\n"
+"POT-Creation-Date: 2017-07-28 08:15+0000\n"
+"PO-Revision-Date: 2017-04-25 10:44+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Finnish (http://www.transifex.com/oca/OCA-account-payment-8-0/language/fi/)\n"
 "MIME-Version: 1.0\n"
@@ -42,7 +42,7 @@ msgid ""
 msgstr ""
 
 #. module: account_vat_on_payment
-#: code:addons/account_vat_on_payment/account_bank_statement.py:238
+#: code:addons/account_vat_on_payment/account_bank_statement.py:241
 #, python-format
 msgid ""
 "Can't handle write-off with more than 1 move line without "
@@ -62,16 +62,16 @@ msgstr ""
 
 #. module: account_vat_on_payment
 #: code:addons/account_vat_on_payment/account_bank_statement.py:38
-#: code:addons/account_vat_on_payment/account_bank_statement.py:93
-#: code:addons/account_vat_on_payment/account_bank_statement.py:237
-#: code:addons/account_vat_on_payment/account_bank_statement.py:324
+#: code:addons/account_vat_on_payment/account_bank_statement.py:95
+#: code:addons/account_vat_on_payment/account_bank_statement.py:240
+#: code:addons/account_vat_on_payment/account_bank_statement.py:327
 #: code:addons/account_vat_on_payment/account_invoice.py:26
 #: code:addons/account_vat_on_payment/account_invoice.py:45
 #: code:addons/account_vat_on_payment/account_voucher.py:32
 #: code:addons/account_vat_on_payment/account_voucher.py:106
 #: code:addons/account_vat_on_payment/account_voucher.py:139
 #: code:addons/account_vat_on_payment/account_voucher.py:195
-#: code:addons/account_vat_on_payment/account_voucher.py:252
+#: code:addons/account_vat_on_payment/account_voucher.py:263
 #, python-format
 msgid "Error"
 msgstr "Virhe"
@@ -254,9 +254,9 @@ msgid "Vat on payment"
 msgstr ""
 
 #. module: account_vat_on_payment
-#: code:addons/account_vat_on_payment/account_bank_statement.py:94
+#: code:addons/account_vat_on_payment/account_bank_statement.py:96
 #: code:addons/account_vat_on_payment/account_voucher.py:196
-#: code:addons/account_vat_on_payment/account_voucher.py:253
+#: code:addons/account_vat_on_payment/account_voucher.py:264
 #, python-format
 msgid ""
 "We are on a VAT on payment treatment but journal %s does not have a related "
@@ -280,7 +280,7 @@ msgid ""
 msgstr ""
 
 #. module: account_vat_on_payment
-#: code:addons/account_vat_on_payment/account_bank_statement.py:324
+#: code:addons/account_vat_on_payment/account_bank_statement.py:327
 #, python-format
 msgid ""
 "You are trying to pay with write-off more than one invoice and distributing "
