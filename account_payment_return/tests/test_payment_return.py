@@ -2,6 +2,7 @@
 # Copyright 2015 Pedro M. Baeza <pedro.baeza@tecnativa.com>
 # Copyright 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
 # Copyright 2017 David Vidal <david.vidal@tecnativa.com>
+# Copyright 2017 Luis M. Ontalba <luis.martinez@tecnativa.com>
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 import json
@@ -80,7 +81,10 @@ class TestPaymentReturn(SavepointCase):
              'line_ids': [
                  (0, 0, {'partner_id': cls.partner.id,
                          'move_line_ids': [(6, 0, cls.payment_line.ids)],
-                         'amount': cls.payment_line.credit})]})
+                         'amount': cls.payment_line.credit,
+                         'expense_account': cls.account.id,
+                         'expense_amount': 10.0,
+                         'expense_partner_id': cls.partner.id})]})
 
     def test_confirm_error(self):
         self.payment_return.line_ids[0].move_line_ids = False
@@ -105,6 +109,7 @@ class TestPaymentReturn(SavepointCase):
         self.assertEqual(self.invoice.state, 'open')
         self.assertEqual(self.invoice.residual, self.receivable_line.debit)
         self.assertFalse(self.receivable_line.reconciled)
+        self.assertEqual(len(self.payment_return.move_id.line_ids), 4)
         with self.assertRaises(UserError):
             self.payment_return.unlink()
         self.payment_return.action_cancel()
