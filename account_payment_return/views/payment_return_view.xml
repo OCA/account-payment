@@ -43,10 +43,9 @@
                                                     ('reconciled', '=', True)]"
                                             />
                                     <field name="amount"/>
+                                    <field name="expense_amount" />
                                     <field name="expense_account"
                                            attrs="{'required':[('expense_amount','!=', 0)]}" />
-                                    <field name="expense_amount"
-                                           attrs="{'required':[('expense_account','!=', False)]}"/>
                                     <field name="expense_partner_id"
                                            attrs="{'required':[('expense_account','!=', False)]}"/>
                                 </tree>

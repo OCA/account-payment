@@ -27,6 +27,7 @@
         'security/ir.model.access.csv',
         'security/account_payment_return_security.xml',
         'views/payment_return_view.xml',
+        'views/account_journal_view.xml',
         'data/ir_sequence_data.xml',
         'views/account_invoice_view.xml',
     ],

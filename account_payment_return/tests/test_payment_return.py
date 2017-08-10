@@ -21,12 +21,6 @@ class TestPaymentReturn(SavepointCase):
             'type': 'sale',
             'update_posted': True,
         })
-        cls.bank_journal = cls.env['account.journal'].create({
-            'name': 'Test Bank Journal',
-            'code': 'BANK',
-            'type': 'bank',
-            'update_posted': True,
-        })
         cls.account_type = cls.env['account.account.type'].create({
             'name': 'Test',
             'type': 'receivable',
@@ -36,6 +30,15 @@ class TestPaymentReturn(SavepointCase):
             'code': 'TEST',
             'user_type_id': cls.account_type.id,
             'reconcile': True,
+        })
+        cls.partner_expense = cls.env['res.partner'].create({'name': 'PE'})
+        cls.bank_journal = cls.env['account.journal'].create({
+            'name': 'Test Bank Journal',
+            'code': 'BANK',
+            'type': 'bank',
+            'update_posted': True,
+            'default_expense_account_id': cls.account.id,
+            'default_expense_partner_id': cls.partner_expense.id,
         })
         cls.account_income = cls.env['account.account'].create({
             'name': 'Test income account',
@@ -104,11 +107,17 @@ class TestPaymentReturn(SavepointCase):
         self.assertEqual(self.payment_return.state, 'cancelled')
         self.payment_return.action_draft()
         self.assertEqual(self.payment_return.state, 'draft')
+        self.payment_return.line_ids[0].expense_amount = 20.0
+        self.payment_return.line_ids[0]._onchange_expense_amount()
         self.payment_return.action_confirm()
         self.assertEqual(self.payment_return.state, 'done')
         self.assertEqual(self.invoice.state, 'open')
         self.assertEqual(self.invoice.residual, self.receivable_line.debit)
         self.assertFalse(self.receivable_line.reconciled)
+        self.assertEqual(self.payment_return.line_ids[0].expense_account,
+                         self.bank_journal.default_expense_account_id)
+        self.assertEqual(self.payment_return.line_ids[0].expense_partner_id,
+                         self.bank_journal.default_expense_partner_id)
         self.assertEqual(len(self.payment_return.move_id.line_ids), 4)
         with self.assertRaises(UserError):
             self.payment_return.unlink()

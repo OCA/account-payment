@@ -158,7 +158,7 @@ class PaymentReturn(models.Model):
                 (move_line | move_line2).reconcile()
                 return_line.move_line_ids.mapped('matched_debit_ids').write(
                     {'origin_returned_move_ids': [(6, 0, returned_moves.ids)]})
-            if return_line.expense_amount and return_line.expense_account:
+            if return_line.expense_amount:
                 expense_lines_vals = []
                 expense_lines_vals.append({
                     'name': move.ref,
@@ -280,6 +280,13 @@ class PaymentReturnLine(models.Model):
     @api.onchange('move_line_ids')
     def _onchange_move_line(self):
         self._compute_amount()
+
+    @api.onchange('expense_amount')
+    def _onchange_expense_amount(self):
+        if self.expense_amount:
+            journal = self.return_id.journal_id
+            self.expense_account = journal.default_expense_account_id
+            self.expense_partner_id = journal.default_expense_partner_id
 
     @api.multi
     def match_invoice(self):
