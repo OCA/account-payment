@@ -11,7 +11,7 @@
 
 {
     "name": "Account Payment Returns",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.1.0",
     "summary": "Manage the return of your payments",
     'license': 'AGPL-3',
     "depends": [
@@ -27,6 +27,7 @@
         'security/ir.model.access.csv',
         'security/account_payment_return_security.xml',
         'views/payment_return_view.xml',
+        'views/account_journal_view.xml',
         'data/ir_sequence_data.xml',
         'views/account_invoice_view.xml',
     ],
