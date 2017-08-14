@@ -23,6 +23,7 @@
                         <field name="journal_id" domain="[('type', 'in', ['bank', 'cash'])]"/>
                         <field name="date"/>
                         <field name="company_id" groups="base.group_multi_company"/>
+                        <field name="move_id" readonly="True"/>
                     </group>
                     <notebook colspan="4">
                         <page string="Lines">
@@ -42,6 +43,11 @@
                                                     ('reconciled', '=', True)]"
                                             />
                                     <field name="amount"/>
+                                    <field name="expense_amount" />
+                                    <field name="expense_account"
+                                           attrs="{'required':[('expense_amount','!=', 0)]}" />
+                                    <field name="expense_partner_id"
+                                           attrs="{'required':[('expense_account','!=', False)]}"/>
                                 </tree>
                             </field>
                         </page>

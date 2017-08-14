@@ -24,19 +24,18 @@ Another option to fill info is setting references and click match button to
 find matches with invoices, move lines or moves. This functionality is extended
 by other modules as *account_payment_return_import_sepa_pain*
 
+It's possible to add a commission amount on each line.
+
 Next, press button "Confirm" to create a new move line that removes the
 balance from the bank journal and reconcile items together to show payment
 history through it.
 
+After confirmation you can access from the payment form view to the move
+created.
+
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/96/10.0
-
-Known issues / Roadmap
-======================
-
-* Add a button to see the created move.
-* Allow to add a commission amount on each line.
 
 Bug Tracker
 ===========
@@ -58,6 +57,7 @@ Contributors
 * Sergio Teruel <sergio.teruel@tecnativa.com>
 * Carlos Dauden <carlos.dauden@tecnativa.com>
 * David Vidal <david.vidal@tecnativa.com>
+* Luis M. Ontalba <luis.martinez@tecnativa.com>
 
 Maintainer
 ----------

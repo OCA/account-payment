@@ -4,6 +4,7 @@
 # Copyright 2013 Pedro M. Baeza <pedro.baeza@tecnativa.com>
 # Copyright 2014 Markus Schneider <markus.schneider@initos.com>
 # Copyright 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
+# Copyright 2017 Luis M. Ontalba <luis.martinez@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
@@ -157,6 +158,28 @@ class PaymentReturn(models.Model):
                 (move_line | move_line2).reconcile()
                 return_line.move_line_ids.mapped('matched_debit_ids').write(
                     {'origin_returned_move_ids': [(6, 0, returned_moves.ids)]})
+            if return_line.expense_amount:
+                expense_lines_vals = []
+                expense_lines_vals.append({
+                    'name': move.ref,
+                    'move_id': move.id,
+                    'debit': 0.0,
+                    'credit': return_line.expense_amount,
+                    'partner_id': return_line.expense_partner_id.id,
+                    'account_id': (return_line.return_id.journal_id.
+                                   default_credit_account_id.id),
+                })
+                expense_lines_vals.append({
+                    'move_id': move.id,
+                    'debit': return_line.expense_amount,
+                    'name': move.ref,
+                    'credit': 0.0,
+                    'partner_id': return_line.expense_partner_id.id,
+                    'account_id': return_line.expense_account.id,
+                })
+                for expense_line_vals in expense_lines_vals:
+                    move_line_obj.with_context(
+                        check_move_validity=False).create(expense_line_vals)
             extra_lines_vals = return_line._prepare_extra_move_lines(move)
             for extra_line_vals in extra_lines_vals:
                 move_line_obj.create(extra_line_vals)
@@ -231,6 +254,13 @@ class PaymentReturnLine(models.Model):
         string='Amount',
         help="Returned amount. Can be different from the move amount",
         digits=dp.get_precision('Account'))
+    expense_account = fields.Many2one(
+        comodel_name='account.account', string='Expense Account')
+    expense_amount = fields.Float(string='Expense amount')
+    expense_partner_id = fields.Many2one(
+        comodel_name="res.partner", string="Expense partner",
+        domain=[('supplier', '=', True)],
+    )
 
     @api.multi
     def _compute_amount(self):
@@ -250,6 +280,13 @@ class PaymentReturnLine(models.Model):
     @api.onchange('move_line_ids')
     def _onchange_move_line(self):
         self._compute_amount()
+
+    @api.onchange('expense_amount')
+    def _onchange_expense_amount(self):
+        if self.expense_amount:
+            journal = self.return_id.journal_id
+            self.expense_account = journal.default_expense_account_id
+            self.expense_partner_id = journal.default_expense_partner_id
 
     @api.multi
     def match_invoice(self):
