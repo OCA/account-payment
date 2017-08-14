@@ -2,6 +2,7 @@
 # Copyright 2015 Pedro M. Baeza <pedro.baeza@tecnativa.com>
 # Copyright 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
 # Copyright 2017 David Vidal <david.vidal@tecnativa.com>
+# Copyright 2017 Luis M. Ontalba <luis.martinez@tecnativa.com>
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 import json
@@ -20,12 +21,6 @@ class TestPaymentReturn(SavepointCase):
             'type': 'sale',
             'update_posted': True,
         })
-        cls.bank_journal = cls.env['account.journal'].create({
-            'name': 'Test Bank Journal',
-            'code': 'BANK',
-            'type': 'bank',
-            'update_posted': True,
-        })
         cls.account_type = cls.env['account.account.type'].create({
             'name': 'Test',
             'type': 'receivable',
@@ -35,6 +30,15 @@ class TestPaymentReturn(SavepointCase):
             'code': 'TEST',
             'user_type_id': cls.account_type.id,
             'reconcile': True,
+        })
+        cls.partner_expense = cls.env['res.partner'].create({'name': 'PE'})
+        cls.bank_journal = cls.env['account.journal'].create({
+            'name': 'Test Bank Journal',
+            'code': 'BANK',
+            'type': 'bank',
+            'update_posted': True,
+            'default_expense_account_id': cls.account.id,
+            'default_expense_partner_id': cls.partner_expense.id,
         })
         cls.account_income = cls.env['account.account'].create({
             'name': 'Test income account',
@@ -80,7 +84,10 @@ class TestPaymentReturn(SavepointCase):
              'line_ids': [
                  (0, 0, {'partner_id': cls.partner.id,
                          'move_line_ids': [(6, 0, cls.payment_line.ids)],
-                         'amount': cls.payment_line.credit})]})
+                         'amount': cls.payment_line.credit,
+                         'expense_account': cls.account.id,
+                         'expense_amount': 10.0,
+                         'expense_partner_id': cls.partner.id})]})
 
     def test_confirm_error(self):
         self.payment_return.line_ids[0].move_line_ids = False
@@ -100,11 +107,18 @@ class TestPaymentReturn(SavepointCase):
         self.assertEqual(self.payment_return.state, 'cancelled')
         self.payment_return.action_draft()
         self.assertEqual(self.payment_return.state, 'draft')
+        self.payment_return.line_ids[0].expense_amount = 20.0
+        self.payment_return.line_ids[0]._onchange_expense_amount()
         self.payment_return.action_confirm()
         self.assertEqual(self.payment_return.state, 'done')
         self.assertEqual(self.invoice.state, 'open')
         self.assertEqual(self.invoice.residual, self.receivable_line.debit)
         self.assertFalse(self.receivable_line.reconciled)
+        self.assertEqual(self.payment_return.line_ids[0].expense_account,
+                         self.bank_journal.default_expense_account_id)
+        self.assertEqual(self.payment_return.line_ids[0].expense_partner_id,
+                         self.bank_journal.default_expense_partner_id)
+        self.assertEqual(len(self.payment_return.move_id.line_ids), 4)
         with self.assertRaises(UserError):
             self.payment_return.unlink()
         self.payment_return.action_cancel()
