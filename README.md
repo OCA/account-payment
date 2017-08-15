@@ -27,7 +27,7 @@ addon | version | summary
 [account_due_list_payment_mode](account_due_list_payment_mode/) | 10.0.1.0.0 | Payment due list with payment mode
 [account_payment_batch_process](account_payment_batch_process/) | 10.0.1.0.0 | Process Payments in Batch
 [account_payment_credit_card](account_payment_credit_card/) | 10.0.1.0.0 | Add support for credit card payments
-[account_payment_return](account_payment_return/) | 10.0.1.0.0 | Manage the return of your payments
+[account_payment_return](account_payment_return/) | 10.0.1.1.0 | Manage the return of your payments
 [account_payment_return_import](account_payment_return_import/) | 10.0.1.0.0 | This module adds a generic wizard to import payment returnfile formats. Is only the base to be extended by anothermodules
 [account_payment_return_import_sepa_pain](account_payment_return_import_sepa_pain/) | 10.0.1.0.0 | Module to import SEPA Direct Debit Unpaid Report File Format PAIN.002.001.03
 
