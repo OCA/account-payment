@@ -69,7 +69,7 @@ class SupplierAgingDate(models.TransientModel):
                 LEFT JOIN account_invoice as ai ON ai.move_id = aml.move_id
                 WHERE
                 aml.user_type_id in (select id from account_account_type where type = 'payable')
-                and aml.date <='%s'
+                and aml.date <= '%s'
                 and aml.amount_residual != 0
                 GROUP BY aml.partner_id, aml.id, ai.number, days_due, ai.user_id, ai.id
               """ % (age_date, age_date, age_date, age_date, age_date,   # noqa
@@ -171,7 +171,7 @@ class PartnerAgingSupplierAD(models.Model):
                         WHEN (aml.full_reconcile_id is NOT NULL) THEN aml.amount_residual END ELSE 0 END AS not_due,
 
                 CASE WHEN (aml.full_reconcile_id is NULL and aml.amount_residual<0) THEN aml.credit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= current_date)
-                    WHEN (aml.full_reconcile_id is NULL and aml.amount_residual>0) THEN -(aml.debit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= current_date))
+                     WHEN (aml.full_reconcile_id is NULL and aml.amount_residual>0) THEN -(aml.debit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= current_date))
                      WHEN (aml.full_reconcile_id is NOT NULL) THEN aml.amount_residual END AS total,
                 ai.id as invoice_id,
                 ai.date_due as inv_date_due

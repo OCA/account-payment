@@ -220,10 +220,10 @@ class AccountAgingCustomerAD(models.Model):
                 LEFT JOIN account_invoice as ai ON ai.move_id = aml.move_id
                 WHERE
                 aml.user_type_id in (select id from account_account_type where type = 'receivable')
-                and aml.date <=current_date
-                and aml.amount_residual!=0
+                and aml.date <= current_date
+                and aml.amount_residual != 0
                 GROUP BY aml.partner_id, aml.id, ai.number, days_due, ai.user_id, ai.id
               """  # noqa
         tools.drop_view_if_exists(cr, '%s' % (self._name.replace('.', '_')))
-        cr.execute("""CREATE OR REPLACE VIEW %s AS ( %s)""" %
+        cr.execute("""CREATE OR REPLACE VIEW %s AS (%s)""" %
                    (self._name.replace('.', '_'), query))
