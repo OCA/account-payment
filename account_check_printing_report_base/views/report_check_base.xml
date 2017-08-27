@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
     <template id="report_check_base">
         <t t-call="report.html_container">
             <t t-foreach="docs" t-as="o">
@@ -79,4 +80,5 @@
             </t>
         </t>
     </template>
+
 </odoo>
