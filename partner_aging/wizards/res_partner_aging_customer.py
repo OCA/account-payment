@@ -2,40 +2,34 @@
 # Copyright 2017 Ursa Information Systems <http://www.ursainfosystems.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-
 from odoo import tools
 from odoo import api, fields, models, _
 
-
-class PartnerAgingDate(models.TransientModel):
-    _name = "partner.aging.date"
-
-    age_date = fields.Datetime("Aging Date",
-                               required=True,
-                               default=lambda self: fields.Datetime.now())
-
-    @api.multi
-    def open_partner_aging(self):
-        ctx = self._context.copy()
-        ctx.update({'age_date': self.age_date})
-
-        customer_aging = self.env['partner.aging.customer.ad']
-        customer_aging.execute_aging_query(age_date=self.age_date)
-
-        return {
-            'name': _('Customer Aging'),
-            'view_type': 'form',
-            'view_mode': 'tree,form',
-            'res_model': 'partner.aging.customer.ad',
-            'type': 'ir.actions.act_window',
-            'domain': [('total', '!=', 0)],
-            'context': ctx,
-        }
+# All unapplied payments are hard-coded to -999
+UNAPPLIED_PAYMENT = -999
 
 
-class AccountAgingCustomerAD(models.Model):
-    _name = 'partner.aging.customer.ad'
+class ResPartnerAgingCustomer(models.Model):
+    _name = 'res.partner.aging.customer'
     _auto = False
+    _order = 'partner_id'
+
+    partner_id = fields.Many2one('res.partner', 'Partner', readonly=True)
+    avg_days_overdue = fields.Integer('Avg Days Overdue', readonly=True)
+    date = fields.Date('Date', readonly=True)
+    date_due = fields.Date('Due Date', readonly=True)
+    inv_date_due = fields.Date('Invoice Date', readonly=True)
+    total = fields.Float('Total', readonly=True)
+    not_due = fields.Float('Not Due Yet', readonly=True)
+    days_due_01to30 = fields.Float('1/30', readonly=True)
+    days_due_31to60 = fields.Float('31/60', readonly=True)
+    days_due_61to90 = fields.Float('61/90', readonly=True)
+    days_due_91to120 = fields.Float('91/120', readonly=True)
+    days_due_121togr = fields.Float('+121', readonly=True)
+    max_days_overdue = fields.Integer('Days Outstanding', readonly=True)
+    invoice_ref = fields.Char('Our Invoice', size=25, readonly=True)
+    invoice_id = fields.Many2one('account.invoice', 'Invoice', readonly=True)
+    salesman = fields.Many2one('res.users', 'Sales Rep', readonly=True)
 
     @api.multi
     def execute_aging_query(self, age_date=False):
@@ -103,7 +97,7 @@ class AccountAgingCustomerAD(models.Model):
                             (self._name.replace('.', '_'), query))
 
     @api.multi
-    def docopen(self):
+    def open_document(self):
         """
         @description  Open document (invoice or payment) related to the
                       unapplied payment or outstanding balance on this line
@@ -113,14 +107,13 @@ class AccountAgingCustomerAD(models.Model):
         # Get this line's invoice id
         inv_id = self.invoice_id.id
 
-        # If this is an unapplied payment (all unapplied payments hard-coded to
-        #  -999), get the referenced voucher
-        if inv_id == -999:
+        # If this is an unapplied payment, get the referenced voucher
+        if inv_id == UNAPPLIED_PAYMENT:
             payment = self.env['account.voucher']
             # Get referenced customer payment
             # (invoice_ref field is actually a payment for these)
             voucher_id = payment.search([('number', '=', self.invoice_ref)])[0]
-            view = models.xmlid_to_object('account_voucher.view_voucher_form')
+            view = self.env.ref('account_voucher.view_voucher_form')
             # Set values for form
             view_id = view and view.id or False
             name = 'Customer Payments'
@@ -130,7 +123,7 @@ class AccountAgingCustomerAD(models.Model):
 
         # Otherwise get the invoice
         else:
-            view = models.xmlid_to_object('account.invoice_form')
+            view = self.env.ref('account.invoice_form')
             view_id = view and view.id or False
             name = 'Customer Invoices'
             res_model = 'account.invoice'
@@ -154,25 +147,7 @@ class AccountAgingCustomerAD(models.Model):
             'res_id': doc_id,
         }
 
-    partner_id = fields.Many2one('res.partner', u'Partner', readonly=True)
-    avg_days_overdue = fields.Integer(u'Avg Days Overdue', readonly=True)
-    date = fields.Date(u'Date', readonly=True)
-    date_due = fields.Date(u'Due Date', readonly=True)
-    inv_date_due = fields.Date(u'Invoice Date', readonly=True)
-    total = fields.Float(u'Total', readonly=True)
-    not_due = fields.Float(u'Not Due Yet', readonly=True)
-    days_due_01to30 = fields.Float(u'1/30', readonly=True)
-    days_due_31to60 = fields.Float(u'31/60', readonly=True)
-    days_due_61to90 = fields.Float(u'61/90', readonly=True)
-    days_due_91to120 = fields.Float(u'91/120', readonly=True)
-    days_due_121togr = fields.Float(u'+121', readonly=True)
-    max_days_overdue = fields.Integer(u'Days Outstanding', readonly=True)
-    invoice_ref = fields.Char('Our Invoice', size=25, readonly=True)
-    invoice_id = fields.Many2one('account.invoice', 'Invoice', readonly=True)
-    salesman = fields.Many2one('res.users', u'Sales Rep', readonly=True)
-
-    _order = 'partner_id'
-
     @api.model_cr
     def init(self):
         self.execute_aging_query()
+        super(ResPartnerAgingCustomer, self).init()

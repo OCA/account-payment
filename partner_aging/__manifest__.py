@@ -8,15 +8,14 @@
     'license': 'AGPL-3',
     'author': 'Ursa Information Systems, Odoo Community Association (OCA)',
     'category': 'Accounting & Finance',
-    'maintainer': 'Ursa Information Systems',
     'website': 'http://www.ursainfosystems.com',
     'depends': [
         'account_accountant',
         'account_voucher',
     ],
     'data': [
-        'wizard/partner_aging_customer.xml',
-        'wizard/partner_aging_supplier.xml',
+        'wizards/res_partner_aging_customer.xml',
+        'wizards/res_partner_aging_supplier.xml',
         'security/ir.model.access.csv',
     ],
     'installable': True,

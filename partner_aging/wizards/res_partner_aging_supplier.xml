@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- Customer Aging search/filters -->
-    <record model="ir.ui.view" id="view_customer_aging_ad_search">
-        <field name="name">customer.aging.ad.search</field>
-        <field name="model">partner.aging.customer.ad</field>
+    <!-- Supplier Aging search/filters -->
+    <record model="ir.ui.view" id="view_supplier_aging_ad_search">
+        <field name="name">supplier.aging.ad.search</field>
+        <field name="model">res.partner.aging.supplier</field>
         <field name="type">search</field>
         <field name="arch" type="xml">
-            <search string="Customer Aging Date wise">
+            <search string="Supplier Aging Date wise">
                 <filter string="Overdue"
                         name="overdue"
                         help="Overdue"
@@ -17,8 +17,8 @@
                             ('days_due_61to90', '&gt;', 0),
                             ('days_due_91to120', '&gt;', 0),
                             ('days_due_121togr', '&gt;', 0)]" />
-                <field name="partner_id" string="Customer" />
-                <field name="invoice_id" />
+                <field name="partner_id" string="Supplier" />
+                <field name="invoice_id"/>
                 <field name="invoice_ref"/>
                 <field name="total" sum="Total"/>
                 <group expand="0" string="Group By...">
@@ -28,23 +28,22 @@
         </field>
     </record>
 
-    <!-- Customer Aging tree -->
-    <record model="ir.ui.view" id="view_customer_aging_ad_tree">
-        <field name="name">customer.aging.ad.tree</field>
-        <field name="model">partner.aging.customer.ad</field>
+    <!-- Supplier Aging Tree -->
+    <record model="ir.ui.view" id="view_supplier_aging_ad_tree">
+        <field name="name">supplier.aging.ad.tree</field>
+        <field name="model">res.partner.aging.supplier</field>
         <field name="type">tree</field>
         <field name="arch" type="xml">
-            <tree create="false" delete="false" string="Customer Aging Date wise" colors="red:max_days_overdue &gt; 0 and total &gt; 0;">
-                <field name="partner_id" string="Customer" />
-                <field name="salesman" />
+            <tree create="false" delete ="false" string="Supplier Aging Date wise" colors="red:max_days_overdue &gt; 0 and total &gt; 0;">
+                <field name="partner_id" string="Supplier"/>
                 <field name="date_due" string="Invoice Date"/>
                 <field name="inv_date_due" string="Due Date"/>
                 <field name="max_days_overdue" />
-                <field name="invoice_id" invisible="1" />
-                <button name="docopen" type="object" icon="fa-list-alt" attrs="{'invisible':[('invoice_id', '=', False)]}"/>
-                <field name="invoice_ref" />
+                <field name="invoice_id"/>
+                <button name="open_document" type="object" icon="fa-list-alt" attrs="{'invisible':[('invoice_id', '=', False)]}"/>
+                <field name="invoice_ref"/>
                 <field name="not_due" string="Current" sum="Total" />
-                <field name="days_due_01to30" invisible="1" sum="Total" />
+                <field name="days_due_01to30" sum="Total" />
                 <field name="days_due_31to60" sum="Total" />
                 <field name="days_due_61to90" sum="Total" />
                 <field name="days_due_91to120" sum="Total" />
@@ -54,26 +53,26 @@
         </field>
     </record>
 
-    <!-- Customer Aging Action -->
-    <record id="action_customer_aging_ad" model="ir.actions.act_window">
-        <field name="name">Customer Aging Date wise</field>
-        <field name="res_model">partner.aging.customer.ad</field>
+    <!-- Supplier Aging action -->
+    <record id="action_supplier_aging_ad" model="ir.actions.act_window">
+        <field name="name">Supplier Aging</field>
+        <field name="res_model">res.partner.aging.supplier</field>
         <field name="view_type">form</field>
-        <field name="view_id" ref="view_customer_aging_ad_tree" />
+        <field name="view_id" ref="view_supplier_aging_ad_tree"/>
         <field name="view_mode">tree,form</field>
         <field name="limit">99999999</field>
     </record>
 
-    <record id="view_partner_aging_date" model="ir.ui.view">
-        <field name="name">Partner Aging Date</field>
-        <field name="model">partner.aging.date</field>
+    <record id="view_supplier_aging_date" model="ir.ui.view">
+        <field name="name">Supplier Aging Date</field>
+        <field name="model">res.partner.aging.date</field>
         <field name="arch" type="xml">
-            <form string="Choose date for partner Aging">
+            <form string="Choose date for Supplier Aging">
                 <group>
                     <field name="age_date"/>
                 </group>
                 <footer>
-                    <button name="open_partner_aging" string="Customer Aging" type="object" class="oe_highlight"/>
+                    <button name="open_supplier_aging" string="Supplier Aging" type="object" class="oe_highlight"/>
                     or
                     <button string="Cancel" class="oe_link" special="cancel" />
                 </footer>
@@ -81,20 +80,20 @@
         </field>
     </record>
 
-    <record id="action_partner_aging_date" model="ir.actions.act_window">
-        <field name="name">Customer Aging</field>
+    <record id="action_supplier_aging_date" model="ir.actions.act_window">
+        <field name="name">Supplier Aging</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">partner.aging.date</field>
+        <field name="res_model">res.partner.aging.date</field>
         <field name="view_type">form</field>
         <field name="view_mode">form</field>
-        <field name="view_id" ref="view_partner_aging_date"/>
+        <field name="view_id" ref="view_supplier_aging_date"/>
         <field name="target">new</field>
     </record>
 
-    <!-- Customer Aging Menuitem -->
-    <menuitem action="action_partner_aging_date"
-              id="menu_customer_aging_wizard"
-              parent="account.menu_finance_receivables"
-              sequence="201" />
+    <!-- Supplier Aging Menuitem -->
+    <menuitem action="action_supplier_aging_date"
+              id="menu_supplier_aging_wizard"
+              parent="account.menu_finance_payables"
+              sequence="201"/>
 
 </odoo>

@@ -2,39 +2,30 @@
 # Copyright 2017 Ursa Information Systems <http://www.ursainfosystems.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-
 from odoo import tools
 from odoo import api, fields, models, _
 
 
-class SupplierAgingDate(models.TransientModel):
-    _name = "supplier.aging.date"
-
-    age_date = fields.Datetime("Aging Date", required=True,
-                               default=lambda self: fields.Datetime.now())
-
-    @api.multi
-    def open_partner_aging(self):
-        ctx = self._context.copy()
-        ctx.update({'age_date': self.age_date})
-
-        supplier_aging = self.env['partner.aging.supplier.ad']
-        supplier_aging.execute_aging_query(age_date=self.age_date)
-
-        return {
-            'name': _('Supplier Aging'),
-            'view_type': 'form',
-            'view_mode': 'tree,form',
-            'res_model': 'partner.aging.supplier.ad',
-            'type': 'ir.actions.act_window',
-            'domain': [('total', '!=', 0)],
-            'context': ctx,
-        }
-
-
-class PartnerAgingSupplierAD(models.Model):
-    _name = 'partner.aging.supplier.ad'
+class ResPartnerAgingSupplier(models.Model):
+    _name = 'res.partner.aging.supplier'
     _auto = False
+    _order = 'partner_id'
+
+    partner_id = fields.Many2one('res.partner', 'Partner', readonly=True)
+    max_days_overdue = fields.Integer('Days Outstanding', readonly=True)
+    avg_days_overdue = fields.Integer('Avg Days Overdue', readonly=True)
+    date = fields.Date('Date', readonly=True)
+    date_due = fields.Date('Due Date', readonly=True)
+    inv_date_due = fields.Date('Invoice Date', readonly=True)
+    total = fields.Float('Total', readonly=True)
+    not_due = fields.Float('Not Due Yet', readonly=True)
+    days_due_01to30 = fields.Float('1/30', readonly=True)
+    days_due_31to60 = fields.Float('31/60', readonly=True)
+    days_due_61to90 = fields.Float('61/90', readonly=True)
+    days_due_91to120 = fields.Float('91/120', readonly=True)
+    days_due_121togr = fields.Float('+121', readonly=True)
+    invoice_ref = fields.Char('Their Invoice', size=25, readonly=True)
+    invoice_id = fields.Many2one('account.invoice', 'Invoice', readonly=True)
 
     @api.multi
     def execute_aging_query(self, age_date=False):
@@ -102,12 +93,11 @@ class PartnerAgingSupplierAD(models.Model):
                             (self._name.replace('.', '_'), query))
 
     @api.multi
-    def invopen(self):
+    def open_document(self):
         """
             @description  Create link to view each listed invoice
         """
-        view = self.env['ir.model.data']. \
-            xmlid_to_object('account.invoice_form')
+        view = self.env.ref('account.invoice_form')
         view_id = view and view.id or False
 
         return {
@@ -123,24 +113,7 @@ class PartnerAgingSupplierAD(models.Model):
             'res_id': self.invoice_id.id
         }
 
-    partner_id = fields.Many2one('res.partner', u'Partner', readonly=True)
-    max_days_overdue = fields.Integer(u'Days Outstanding', readonly=True)
-    avg_days_overdue = fields.Integer(u'Avg Days Overdue', readonly=True)
-    date = fields.Date(u'Date', readonly=True)
-    date_due = fields.Date(u'Due Date', readonly=True)
-    inv_date_due = fields.Date(u'Invoice Date', readonly=True)
-    total = fields.Float(u'Total', readonly=True)
-    not_due = fields.Float(u'Not Due Yet', readonly=True)
-    days_due_01to30 = fields.Float(u'1/30', readonly=True)
-    days_due_31to60 = fields.Float(u'31/60', readonly=True)
-    days_due_61to90 = fields.Float(u'61/90', readonly=True)
-    days_due_91to120 = fields.Float(u'91/120', readonly=True)
-    days_due_121togr = fields.Float(u'+121', readonly=True)
-    invoice_ref = fields.Char('Their Invoice', size=25, readonly=True)
-    invoice_id = fields.Many2one('account.invoice', 'Invoice', readonly=True)
-
-    _order = 'partner_id'
-
     @api.model_cr
     def init(self):
         self.execute_aging_query()
+        super(ResPartnerAgingSupplier, self).init()
