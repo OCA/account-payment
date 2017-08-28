@@ -102,8 +102,6 @@ class ResPartnerAgingCustomer(models.Model):
         @description  Open document (invoice or payment) related to the
                       unapplied payment or outstanding balance on this line
         """
-
-        models = self.env['ir.model.data']
         # Get this line's invoice id
         inv_id = self.invoice_id.id
 
