@@ -26,6 +26,7 @@ addon | version | summary
 [account_due_list](account_due_list/) | 10.0.1.0.0 | Payments Due list
 [account_due_list_aging_comments](account_due_list_aging_comments/) | 10.0.1.0.0 | Payments Due list aging comments
 [account_due_list_payment_mode](account_due_list_payment_mode/) | 10.0.1.0.0 | Payment due list with payment mode
+[account_partner_reconcile](account_partner_reconcile/) | 10.0.1.0.0 | Account Partner Reconcile
 [account_payment_batch_process](account_payment_batch_process/) | 10.0.1.0.0 | Process Payments in Batch
 [account_payment_credit_card](account_payment_credit_card/) | 10.0.1.0.0 | Add support for credit card payments
 [account_payment_return](account_payment_return/) | 10.0.1.1.0 | Manage the return of your payments
