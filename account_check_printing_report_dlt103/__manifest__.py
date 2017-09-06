@@ -6,7 +6,7 @@
 
 {
     'name': 'Account Check Printing Report DLT103',
-    'version': '9.0.1.0.0',
+    'version': '10.0.1.0.0',
     'license': 'AGPL-3',
     'author': "Eficent,"
               "Serpent Consulting Services Pvt. Ltd.,"
