@@ -1,6 +1,6 @@
-
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
-    :alt: License: AGPL-3
+   :target: http://www.gnu.org/licenses/agpl
+   :alt: License: AGPL-3
 
 ====================================
 Account Check Printing Report DLT103
@@ -13,6 +13,7 @@ See https://www.google.es/search?q=dlt103
 
 Installation
 ============
+
 In order to install this module you must first install also the module
 'report_paper_wkhtmltopdf_params', available in
 https://github.com/OCA/server-tools
@@ -33,16 +34,15 @@ Usage
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/96/9.0
+   :target: https://runbot.odoo-community.org/runbot/96/10.0
 
 Bug Tracker
 ===========
 
 Bugs are tracked on `GitHub Issues
-<https://github.com/OCA/account-payment/issues>`_. In case of
-trouble, please
+<https://github.com/OCA/account-payment/issues>`_. In case of trouble, please
 check there if your issue has already been reported. If you spotted it first,
-help us smashing it by providing a detailed and welcomed feedback.
+help us smash it by providing detailed and welcomed feedback.
 
 
 Credits
