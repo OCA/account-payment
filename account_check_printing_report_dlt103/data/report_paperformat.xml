@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
+<odoo>
         <record id="paperformat_check_dlt103" model="report.paperformat">
            <field name="name">US Check Letter</field>
             <field name="default" eval="False" />
@@ -16,5 +15,4 @@
             <field name="header_spacing">0</field>
             <field name="dpi">90</field>
         </record>
-    </data>
-</openerp>
+</odoo>
