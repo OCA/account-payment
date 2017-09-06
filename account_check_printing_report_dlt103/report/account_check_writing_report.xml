@@ -1,6 +1,5 @@
 <?xml version="1.0"?>
-<openerp>
-    <data>
+<odoo>
          <report
             id="action_report_check_dlt103"
             model="account.payment"
@@ -12,5 +11,4 @@
         <record id="action_report_check_dlt103" model="ir.actions.report.xml">
             <field name="paperformat_id" ref="account_check_printing_report_dlt103.paperformat_check_dlt103"/>
         </record>
-    </data>
-</openerp>
+</odoo>
