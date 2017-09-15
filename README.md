@@ -26,6 +26,7 @@ addon | version | summary
 [account_check_printing_report_dlt103](account_check_printing_report_dlt103/) | 10.0.1.0.0 | Account Check Printing Report DLT103
 [account_due_list](account_due_list/) | 10.0.1.0.0 | Payments Due list
 [account_due_list_aging_comments](account_due_list_aging_comments/) | 10.0.1.0.0 | Payments Due list aging comments
+[account_due_list_days_overdue](account_due_list_days_overdue/) | 10.0.0.1.0 | Payments Due list days overdue
 [account_due_list_payment_mode](account_due_list_payment_mode/) | 10.0.1.0.0 | Payment due list with payment mode
 [account_partner_reconcile](account_partner_reconcile/) | 10.0.1.0.0 | Account Partner Reconcile
 [account_payment_batch_process](account_payment_batch_process/) | 10.0.1.0.0 | Process Payments in Batch
