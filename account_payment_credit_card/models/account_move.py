@@ -20,7 +20,7 @@ class AccountMove(models.Model):
             # check whether journal has Transfer AP to Credit Card
             # Company = checked or not
             if move.journal_id and\
-                    move.journal_id.support_creditcard_transactions:
+                    move.journal_id.credit_card:
 
                 # browse move lines
                 for move_line in move.line_ids:
