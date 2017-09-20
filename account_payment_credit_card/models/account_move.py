@@ -17,8 +17,10 @@ class AccountMove(models.Model):
         for move in self:
 
             result = []
-            # check weather jouranl has Transfer AP to Credit Card Company = checked or not
-            if move.journal_id and move.journal_id.support_creditcard_transactions:
+            # check whether journal has Transfer AP to Credit Card
+            # Company = checked or not
+            if move.journal_id and 
+                move.journal_id.support_creditcard_transactions:
 
                 # browse move lines
                 for move_line in move.line_ids:
@@ -26,13 +28,19 @@ class AccountMove(models.Model):
                     result.append({
                         'name': move_line.name,
                         'ref': move_line.ref,
-                        'partner_id': move.journal_id.partner_id and move.journal_id.partner_id.id or move_line.partner_id and move_line.partner_id.id or False,
-                        'journal_id': move_line.journal_id and move_line.journal_id.id,
-                        'account_id': move_line.account_id and move_line.account_id.id,
+                        'partner_id': move.journal_id.partner_id and
+                            move.journal_id.partner_id.id or
+                            move_line.partner_id
+                            and move_line.partner_id.id or False,
+                        'journal_id': move_line.journal_id and
+                            move_line.journal_id.id,
+                        'account_id': move_line.account_id and
+                            move_line.account_id.id,
                         'debit': move_line.credit,
                         'credit': move_line.debit,
                         'date_maturity': move_line.date_maturity,
-                        'move_id': move_line.move_id and move_line.move_id.id,
+                        'move_id': move_line.move_id and 
+                            move_line.move_id.id,
                         'date': move_line.date
                     })
 
