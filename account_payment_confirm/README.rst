@@ -1,18 +1,32 @@
 .. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
    :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
    :alt: License: AGPL-3
-   
-=====================
-Account Payment Confirm
-=====================
 
-This module will confirm the all the selected draft payments
+=======================
+Account Payment Confirm
+=======================
+
+This module allows to confirm the all the selected draft payments for customers and vendor bills.
+
+Installation
+============
+
+* No specific installation required.
+
+Configuration
+=============
+
+* No specific configuration required.
 
 Usage
 =====
 
 Go to a invoice tree view, select several payments and click expand the
 action button and click 'Confirm draft payment'.
+
+.. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
+   :alt: Try me on Runbot
+   :target: https://runbot.odoo-community.org/runbot/173/10.0
 
 
 Bug Tracker
@@ -31,7 +45,8 @@ Contributors
 
 * Mhadhbi Achraf <mhadhbi.achref@gmail.com>
 
----------
+Maintainer
+----------
 
 .. image:: https://odoo-community.org/logo.png
    :alt: Odoo Community Association
