@@ -1,0 +1,26 @@
+<odoo>
+    <data>
+        <record id="account_payment_confirm_view" model="ir.ui.view">
+            <field name="name">account.payment.confirm.form</field>
+            <field name="model">account.payment.confirm</field>
+            <field name="arch" type="xml">
+                <form string="Confirm Draft Payments">
+                    <p class="oe_grey">
+                        Once draft payments are confirmed, you will not be able
+                        to modify them.
+                    </p>
+                    <footer>
+                        <button string="Confirm Payments" name="payment_confirm" type="object" default_focus="1" class="btn-primary"/>
+                        <button string="Cancel" class="btn-default" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <act_window id="action_account_payment_confirm"
+            multi="True"
+            key2="client_action_multi" name="Confirm Draft Payments"
+            res_model="account.payment.confirm" src_model="account.payment"
+            view_mode="form" target="new" view_type="form" />
+      </data>
+</odoo>
