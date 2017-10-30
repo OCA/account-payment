@@ -21,7 +21,7 @@ Configuration
 Usage
 =====
 
-Go to a invoice tree view, select several payments and click expand the
+Go to a payment tree view, select several payments and click expand the
 action button and click 'Confirm draft payment'.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
