@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-11 00:19+0000\n"
-"PO-Revision-Date: 2017-03-10 13:16+0000\n"
+"POT-Creation-Date: 2017-10-28 00:20+0000\n"
+"PO-Revision-Date: 2017-11-03 12:16+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Indonesian (http://www.transifex.com/oca/OCA-account-payment-8-0/language/id/)\n"
 "MIME-Version: 1.0\n"
@@ -35,12 +35,12 @@ msgstr "Batalkan"
 #. module: account_payment_return
 #: selection:payment.return,state:0
 msgid "Cancelled"
-msgstr ""
+msgstr "Dibatalkan"
 
 #. module: account_payment_return
 #: field:payment.return.reason,code:0
 msgid "Code"
-msgstr ""
+msgstr "Kode"
 
 #. module: account_payment_return
 #: field:payment.return,company_id:0
@@ -102,7 +102,7 @@ msgstr ""
 #: view:payment.return:account_payment_return.payment_return_form_view
 #: selection:payment.return,state:0
 msgid "Draft"
-msgstr ""
+msgstr "Draf"
 
 #. module: account_payment_return
 #: field:payment.return,message_follower_ids:0
@@ -119,7 +119,7 @@ msgstr ""
 msgid ""
 "Holds the Chatter summary (number of messages, ...). This summary is "
 "directly in html format in order to be inserted in kanban views."
-msgstr ""
+msgstr "Memegang ringkasan Chatter (jumlah pesan, ...). Ringkasan ini langsung dalam format html agar bisa dimasukkan dalam pandangan kanban."
 
 #. module: account_payment_return
 #: field:payment.return,id:0 field:payment.return.line,id:0
@@ -148,7 +148,7 @@ msgid "Invoice has been included on a payment that has been returned later."
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:275
+#: code:addons/account_payment_return/models/payment_return.py:286
 #, python-format
 msgid "Invoice: %s"
 msgstr ""
@@ -161,7 +161,7 @@ msgstr ""
 #. module: account_payment_return
 #: field:payment.return,message_is_follower:0
 msgid "Is a Follower"
-msgstr ""
+msgstr "Ini Adalah Pengikut"
 
 #. module: account_payment_return
 #: field:payment.return,message_last_post:0
@@ -213,13 +213,13 @@ msgid "Messages and communication history"
 msgstr "Pesan dan riwayat komunikasi"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:296
+#: code:addons/account_payment_return/models/payment_return.py:307
 #, python-format
 msgid "Move lines: %s"
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:319
+#: code:addons/account_payment_return/models/payment_return.py:330
 #, python-format
 msgid "Move: %s"
 msgstr ""
@@ -264,8 +264,7 @@ msgid "Payment returned"
 msgstr ""
 
 #. module: account_payment_return
-#: help:payment.return.line,concept:0 help:payment.return.line,date:0
-#: help:payment.return.line,partner_name:0
+#: help:payment.return.line,concept:0 help:payment.return.line,partner_name:0
 msgid "Read from imported file. Only for reference."
 msgstr ""
 
@@ -300,7 +299,7 @@ msgid "Reference to the reconcile object."
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:134
+#: code:addons/account_payment_return/models/payment_return.py:132
 #, python-format
 msgid "Return %s"
 msgstr ""
@@ -328,12 +327,12 @@ msgstr ""
 #. module: account_payment_return
 #: field:payment.return,state:0
 msgid "State"
-msgstr ""
+msgstr "Bagian"
 
 #. module: account_payment_return
 #: field:payment.return,message_summary:0
 msgid "Summary"
-msgstr ""
+msgstr "Ringkasan"
 
 #. module: account_payment_return
 #: help:payment.return,date:0
@@ -352,7 +351,7 @@ msgid "You can not remove a payment return if state is 'Done'"
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:129
+#: code:addons/account_payment_return/models/payment_return.py:146
 #, python-format
 msgid "You must input all moves references in the payment return."
 msgstr ""
