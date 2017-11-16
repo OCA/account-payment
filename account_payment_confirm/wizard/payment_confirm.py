@@ -20,8 +20,6 @@ class AccountPaymentConfirm(models.TransientModel):
         for record in self.env['account.payment'].browse(active_ids):
             if record.state != 'draft':
                 raise UserError(
-                                _("Selected payment(s) cannot be confirmed",
-                                  "as they are not in 'Draft' state.")
-                                )
+                    _("Selected payment(s) cannot be confirmed as they are not in 'Draft' state."))
             record.post()
         return {'type': 'ir.actions.act_window_close'}
