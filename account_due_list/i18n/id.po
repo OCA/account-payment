@@ -3,13 +3,14 @@
 # * account_due_list
 # 
 # Translators:
+# Wahyu Setiawan <wahyusetiaaa@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-11 00:19+0000\n"
-"PO-Revision-Date: 2017-03-23 20:09+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"POT-Creation-Date: 2017-11-04 01:14+0000\n"
+"PO-Revision-Date: 2017-11-17 09:19+0000\n"
+"Last-Translator: Wahyu Setiawan <wahyusetiaaa@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/oca/OCA-account-payment-8-0/language/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,12 +26,12 @@ msgstr "Tanggal Jatuh Tempo"
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "From invoices"
-msgstr ""
+msgstr "Faktur Formulir"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Group By..."
-msgstr ""
+msgstr "Dikelompokan berdasarkan .."
 
 #. module: account_due_list
 #: help:account.move.line,payment_term_id:0
@@ -39,7 +40,7 @@ msgid ""
 " generation of accounting entries. If you keep the payment term and the due "
 "date empty, it means direct payment. The payment term may compute several "
 "due dates, for example 50% now, 50% in one month."
-msgstr ""
+msgstr "Jika Anda menggunakan persyaratan pembayaran, tanggal jatuh tempo akan dihitung secara otomatis pada saat pembuatan entri akuntansi. Jika Anda menyimpan istilah pembayaran dan tanggal jatuh tempo kosong, itu berarti pembayaran langsung. Istilah pembayaran dapat menghitung beberapa tanggal jatuh tempo, misalnya 50% sekarang, 50% dalam satu bulan."
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
