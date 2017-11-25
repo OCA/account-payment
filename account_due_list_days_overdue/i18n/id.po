@@ -4,13 +4,14 @@
 # 
 # Translators:
 # OCA Transbot <transbot@odoo-community.org>, 2016
+# Wahyu Setiawan <wahyusetiaaa@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-02 06:22+0000\n"
-"PO-Revision-Date: 2016-11-02 06:22+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"POT-Creation-Date: 2017-11-18 01:15+0000\n"
+"PO-Revision-Date: 2017-11-18 01:15+0000\n"
+"Last-Translator: Wahyu Setiawan <wahyusetiaaa@gmail.com>, 2017\n"
 "Language-Team: Indonesian (https://www.transifex.com/oca/teams/23907/id/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -36,7 +37,7 @@ msgstr "Dibuat pada"
 #. module: account_due_list_days_overdue
 #: field:account.move.line,days_overdue:0
 msgid "Days overdue"
-msgstr ""
+msgstr "Jatuh tempo hari"
 
 #. module: account_due_list_days_overdue
 #: field:account.overdue.term,display_name:0
@@ -56,7 +57,7 @@ msgstr "ID"
 #. module: account_due_list_days_overdue
 #: model:ir.model,name:account_due_list_days_overdue.model_account_move_line
 msgid "Journal Items"
-msgstr ""
+msgstr "Journal Items"
 
 #. module: account_due_list_days_overdue
 #: field:account.overdue.term,__last_update:0

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-04 01:14+0000\n"
-"PO-Revision-Date: 2017-11-17 09:19+0000\n"
+"POT-Creation-Date: 2017-11-18 01:15+0000\n"
+"PO-Revision-Date: 2017-11-19 03:24+0000\n"
 "Last-Translator: Wahyu Setiawan <wahyusetiaaa@gmail.com>\n"
 "Language-Team: Indonesian (http://www.transifex.com/oca/OCA-account-payment-8-0/language/id/)\n"
 "MIME-Version: 1.0\n"
@@ -51,137 +51,137 @@ msgstr "Faktur"
 #. module: account_due_list
 #: field:account.move.line,invoice_date:0
 msgid "Invoice Date"
-msgstr "Tanggal Invoice"
+msgstr "Tanggal Faktur"
 
 #. module: account_due_list
 #: field:account.move.line,invoice_user_id:0
 msgid "Invoice salesperson"
-msgstr ""
+msgstr "Pramuniaga faktur"
 
 #. module: account_due_list
 #: model:ir.model,name:account_due_list.model_account_move_line
 msgid "Journal Items"
-msgstr ""
+msgstr "Journal Items"
 
 #. module: account_due_list
 #: help:account.move.line,invoice_date:0
 msgid "Keep empty to use the current date"
-msgstr ""
+msgstr "Biarkan kosong untuk menggunakan tanggal sekarang"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Month"
-msgstr ""
+msgstr "Bulan"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Overdue"
-msgstr ""
+msgstr "Terlambat"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Overdue payments"
-msgstr ""
+msgstr "Pembayaran terlambat"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Partner"
-msgstr ""
+msgstr "Mitra"
 
 #. module: account_due_list
 #: field:account.move.line,partner_ref:0
 msgid "Partner Ref"
-msgstr ""
+msgstr "Rujukan Mitra"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Payable"
-msgstr ""
+msgstr "Hutang"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Payable payments"
-msgstr ""
+msgstr "Pembayaran hutang"
 
 #. module: account_due_list
 #: field:account.move.line,payment_term_id:0
 msgid "Payment Terms"
-msgstr ""
+msgstr "Termin Pembayaran"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_tree
 msgid "Payments"
-msgstr ""
+msgstr "Pembayaran"
 
 #. module: account_due_list
 #: model:ir.actions.act_window,name:account_due_list.action_invoice_payments
 #: model:ir.ui.menu,name:account_due_list.menu_action_invoice_payments
 msgid "Payments and due list"
-msgstr ""
+msgstr "Pembayaran dan daftar jatuh tempo"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Receivable"
-msgstr ""
+msgstr "Piutang"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Receivable payments"
-msgstr ""
+msgstr "Pembayaran Piutang"
 
 #. module: account_due_list
 #: help:account.move.line,invoice_origin:0
 msgid "Reference of the document that produced this invoice."
-msgstr ""
+msgstr "Referensi dokumen yang dihasilkan faktur ini."
 
 #. module: account_due_list
 #: field:account.move.line,maturity_residual:0
 msgid "Residual Amount"
-msgstr ""
+msgstr "Jumlah sisa"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Salesperson"
-msgstr ""
+msgstr "Pramuniaga"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Search Payments"
-msgstr ""
+msgstr "Mencari pembayaran"
 
 #. module: account_due_list
 #: field:account.move.line,invoice_origin:0
 msgid "Source Doc"
-msgstr ""
+msgstr "Berkas sumber"
 
 #. module: account_due_list
 #: help:account.move.line,maturity_residual:0
 msgid ""
 "The residual amount on a receivable or payable of a journal entry expressed "
 "in the company currency."
-msgstr ""
+msgstr "Jumlah sisa pada piutang atau hutang jurnal yang dinyatakan dalam mata uang perusahaan."
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_tree
 msgid "Total Credit"
-msgstr ""
+msgstr "Kredit total"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_tree
 msgid "Total Debit"
-msgstr ""
+msgstr "Debit Total"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_tree
 msgid "Total Residual"
-msgstr ""
+msgstr "Sisa Total"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Unreconciled"
-msgstr ""
+msgstr "Tidak direkonsiliasi"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
 msgid "Unreconciled payments"
-msgstr ""
+msgstr "Pembayaran tidak diekonsilisasi"
