@@ -1,6 +1,5 @@
-# -*- coding: utf-8 -*-
 # © 2016 Eficent Business and IT Consulting Services S.L.
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo.tests.common import TransactionCase
 from odoo.exceptions import UserError
@@ -105,7 +104,7 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
                 'journal_id': self.bank_journal.id,
                 'payment_method_id': self.payment_method_check.id
             })
-        register_payments.create_payment()
+        register_payments.create_payments()
         payment = self.payment_model.search([], order="id desc", limit=1)
         with self.assertRaises(UserError):
             payment.print_checks()
@@ -129,7 +128,7 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
                 'journal_id': self.bank_journal.id,
                 'payment_method_id': self.payment_method_check.id
             })
-        register_payments.create_payment()
+        register_payments.create_payments()
         payment = self.payment_model.search([], order="id desc", limit=1)
         e = False
         try:
