@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016 Eficent Business and IT Consulting Services S.L.
 # (http://www.eficent.com)
 # Copyright 2016 Serpent Consulting Services Pvt. Ltd.
@@ -92,7 +91,7 @@ class ReportCheckPrint(models.AbstractModel):
         return lines
 
     @api.multi
-    def render_html(self, docids, data=None):
+    def get_report_values(self, docids, data=None):
         payments = self.env['account.payment'].browse(docids)
         paid_lines = self.get_paid_lines(payments)
         docargs = {
@@ -104,7 +103,5 @@ class ReportCheckPrint(models.AbstractModel):
             'paid_lines': paid_lines
         }
         if self.env.user.company_id.check_layout_id:
-            return self.env['report'].render(
-                self.env.user.company_id.check_layout_id.report,
-                docargs)
+            return docargs
         raise exceptions.Warning(_('You must define a check layout'))
