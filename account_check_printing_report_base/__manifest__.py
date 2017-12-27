@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016 Eficent Business and IT Consulting Services S.L.
 # (http://www.eficent.com)
 # Copyright 2016 Serpent Consulting Services Pvt. Ltd.
@@ -6,7 +5,7 @@
 
 {
     "name": "Account Check Printing Report Base",
-    "version": "10.0.1.0.1",
+    "version": "11.0.1.0.0",
     "license": "AGPL-3",
     "author": "Eficent,"
               "Serpent Consulting Services Pvt. Ltd.,"
