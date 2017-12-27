@@ -2,9 +2,12 @@
 <odoo>
 
     <template id="report_check_base">
-        <t t-call="report.html_container">
+        <t t-call="web.html_container">
+            <div class="header"/>
+            <div class="article">
             <t t-foreach="docs" t-as="o">
                 <div class="page">
+                    <div class="row">
                     <div style="padding-top:20mm;">
                         <address t-field="o.partner_id"
                                  t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true, "no_tag_br": true}'/>
@@ -77,7 +80,9 @@
                         </div>
                     </div>
                 </div>
+                </div>
             </t>
+            </div>
         </t>
     </template>
 
