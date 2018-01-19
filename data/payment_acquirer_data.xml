@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="payment.payment_acquirer_slimpay" model="payment.acquirer">
+            <field name="name">Slimpay</field>
+            <field name="image" type="base64" file="payment_slimpay/static/src/img/slimpay_icon.png"/>
+            <field name="provider">slimpay</field>
+            <field name="company_id" ref="base.main_company"/>
+            <field name="view_template_id" ref="slimpay_acquirer_button"/>
+            <field name="environment">test</field>
+            <field name="pre_msg"><![CDATA[
+<p>You will be prompt with Slimpay Payment page for payment information.</p>]]></field>
+            <field name="slimpay_api_url">https://api.preprod.slimpay.com</field>
+            <field name="slimpay_creditor">democreditor</field>
+            <field name="slimpay_app_id">democreditor01</field>
+            <field name="slimpay_app_secret">democreditor01</field>
+        </record>
+    </data>
+</odoo>

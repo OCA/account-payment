@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="acquirer_form_slimpay" model="ir.ui.view">
+            <field name="name">payment.acquirer.form.inherit</field>
+            <field name="model">payment.acquirer</field>
+            <field name="inherit_id" ref="payment.acquirer_form"/>
+            <field name="arch" type="xml">
+                <xpath expr='//group[@name="acquirer"]' position='after'>
+                    <group attrs="{'invisible': [('provider', '!=', 'slimpay')]}">
+                        <field name="slimpay_api_url"/>
+                        <field name="slimpay_creditor"/>
+                        <field name="slimpay_app_id"/>
+                        <field name="slimpay_app_secret" password="True"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

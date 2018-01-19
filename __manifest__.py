@@ -6,9 +6,16 @@
     'description': """Slimpay Payment Acquirer""",
     'author': "Commown SCIC SAS",
     'license': "AGPL-3",
-    'website': "https://www.commown.fr",
-    'depends': ['payment'],
+    'website': "https://commown.fr",
+    'depends': ['payment', 'partner_firstname', 'base_phone'],
+    'external_dependencies': {
+        'python': ['coreapi', 'hal_codec', 'iso8601', 'requests',
+                   'phonenumbers']
+    },
     'data': [
+        'views/payment_views.xml',
+        'views/payment_slimpay_templates.xml',
+        'data/payment_acquirer_data.xml',
     ],
     'installable': True,
 }

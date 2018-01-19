@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="slimpay_acquirer_button">
+            <form t-if="acquirer" method="post" target="_self">
+                <input type="hidden" name='return_url' t-att-value='returndata'/>
+                <input id="acquirer_slimpay" type='hidden' name="acquirer" t-att-value="acquirer.id"/>
+                <!-- Submit-->
+                <button id="pay_slimpay" width="100px" t-att-class="submit_class">
+                    <img t-if="not submit_txt" src="/payment_slimpay/static/src/img/slimpay_icon.png"/>
+                    <span t-if="submit_txt"><t t-esc="submit_txt"/> <span class="fa fa-long-arrow-right"/></span>
+                </button>
+                <script type="text/javascript" src="/payment_slimpay/static/src/js/slimpay.js"></script>
+            </form>
+        </template>
+
+    </data>
+</odoo>
