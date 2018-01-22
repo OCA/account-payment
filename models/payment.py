@@ -8,6 +8,7 @@ from hal_codec import HALCodec
 from iso8601 import parse_date
 
 from odoo import models, fields
+from odoo.tools.safe_eval import safe_eval
 
 
 _logger = logging.getLogger(__name__)
@@ -39,17 +40,17 @@ class PaymentAcquirerSlimpay(models.Model):
         groups='base.group_user')
     slimpay_creditor = fields.Char(
         'Creditor reference',
-        size=32,
+        size=64,
         required_if_provider='slimpay',
         groups='base.group_user')
     slimpay_app_id = fields.Char(
         'OAuth application Id',
-        size=32,
+        size=64,
         required_if_provider='slimpay',
         groups='base.group_user')
     slimpay_app_secret = fields.Char(
         'OAuth application Secret',
-        size=32,
+        size=64,
         required_if_provider='slimpay',
         groups='base.group_user')
 
@@ -156,5 +157,33 @@ class PaymentAcquirerSlimpay(models.Model):
             root, 'https://api.slimpay.net/alps#create-orders',
             validate=False, action='POST', params=params)
         url = order.links['https://api.slimpay.net/alps#user-approval'].url
-        _logger.info("User approval URL is: %s", url)
+        _logger.debug("User approval URL is: %s", url)
         return url
+
+    def _slimpay_s2s_validate(self, sale_order, posted_data):
+        """The posted data is validated using a http request to slimpay's
+        server (to ensure posted data has not been forged), then the
+        transaction status is updated.
+        """
+        sale_order.ensure_one()
+        assert sale_order.payment_acquirer_id.provider == 'slimpay'
+        so_url = posted_data['_links']['self']['href']
+        doc = self.slimpay_client.get(so_url)
+        _logger.warning(doc)
+        assert doc['reference'] == sale_order.name
+        slimpay_state = doc['state']
+        tx = sale_order.payment_tx_id
+        tx_attrs = {
+            'acquirer_reference': doc['id'],
+        }
+        if slimpay_state == 'closed.completed':
+            tx_attrs['state'] = 'done'
+            tx_attrs['date_validate'] = parse_date(doc['dateClosed'])
+            tx.write(tx_attrs)
+            if tx.sudo().callback_eval:
+                safe_eval(tx.sudo().callback_eval, {'self': self})
+            return True
+        elif slimpay_state.startswith("closed.aborted"):
+            tx_attrs['state'] = 'cancel'
+        tx.write(tx_attrs)
+        return False
