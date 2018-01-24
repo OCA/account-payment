@@ -116,7 +116,7 @@ class PaymentAcquirerSlimpay(models.Model):
                     return phonenumbers.format_number(
                         parsed, phonenumbers.PhoneNumberFormat.E164)
 
-    def slimpay_signatory(self, partner):
+    def _slimpay_api_signatory(self, partner):
         data = {
             "familyName": partner.lastname or None,
             "givenName": partner.firstname or None,
@@ -132,37 +132,50 @@ class PaymentAcquirerSlimpay(models.Model):
         }
         return data
 
-    def slimpay_get_approval_url(self, so, partner, notify_url):
-        root = self.slimpay_root_doc
-        params = {
-            'reference': so.name,
-            'locale': self.env.context['lang'].split('_')[0],
+    def _slimpay_api_mandate(self, partner, notify_url):
+        return {
+            'type': 'signMandate',
+            'mandate': {
+                'action': 'sign',
+                'paymentScheme': 'SEPA.DIRECT_DEBIT.CORE',
+                'signatory': self._slimpay_api_signatory(partner),
+            },
+        }
+
+    def _slimpay_api_payment(self, ref, amount, currency, partner, notify_url):
+        return {
+            'type': 'payment',
+            'action': 'create',
+            'payin': {
+                'scheme': 'SEPA.DIRECT_DEBIT.CORE',
+                'direction': 'IN',
+                'amount': amount,
+                'currency': currency.name,
+                'label': ref,
+                'notifyUrl': notify_url,
+            }
+        }
+
+    def _slimpay_api_create_order(self, ref, amount, currency, partner,
+                                  notify_url):
+        return {
+            'reference': ref,
+            'locale': self.env.context.get('lang', 'fr_FR').split('_')[0],
             'creditor': {'reference': self.slimpay_creditor},
             'subscriber': {'reference': partner.id},
             'started': True,
             'items': [
-                {
-                    'type': 'signMandate',
-                    'mandate': {
-                        'action': 'sign',
-                        'paymentScheme': 'SEPA.DIRECT_DEBIT.CORE',
-                        'signatory': self.slimpay_signatory(partner),
-                    },
-                },
-                {
-                    'type': 'payment',
-                    'action': 'create',
-                    'payin': {
-                        'scheme': 'SEPA.DIRECT_DEBIT.CORE',
-                        'direction': 'IN',
-                        'amount': so.amount_total,
-                        'currency': so.currency_id.name,
-                        'label': so.name,
-                        'notifyUrl': notify_url,
-                    },
-                },
+                self._slimpay_api_mandate(partner, notify_url),
+                self._slimpay_api_payment(ref, amount, currency, partner,
+                                          notify_url),
             ],
         }
+
+    def slimpay_get_approval_url(self, ref, amount, currency, partner,
+                                 notify_url):
+        root = self.slimpay_root_doc
+        params = self._slimpay_api_create_order(
+            ref, amount, currency, partner, notify_url)
         _logger.debug("slimpay parameters: %s", params)
         order = self.slimpay_client.action(
             root, 'https://api.slimpay.net/alps#create-orders',

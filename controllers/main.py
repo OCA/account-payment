@@ -26,17 +26,20 @@ class SlimpayController(WebsiteSale):
         # Get some required database objects
         so_id = request.session['sale_order_id']
         so = request.env['sale.order'].sudo().browse(so_id)
+        ref, amount, currency = so.name, so.amount_total, so.currency_id
         partner = so.partner_id
         acquirer = request.env['payment.acquirer'].sudo().browse(acquirer_id)
         mandate = acquirer.slimpay_get_valid_mandate(partner)
         return_url = '/shop/payment/validate'
         if mandate is None:
             # If the partner has no valid mandate, ask a signature and pay:
-            url = acquirer.slimpay_get_approval_url(so, partner, return_url)
+            url = acquirer.slimpay_get_approval_url(ref, amount, currency,
+                                                    partner, return_url)
         else:
             # Otherwise only create a direct debit:
             # raise Exception('Debit with pre-existing mandate unimplemented!')
-            url = acquirer.slimpay_get_approval_url(so, partner, return_url)
+            url = acquirer.slimpay_get_approval_url(ref, amount, currency,
+                                                    partner, return_url)
         _logger.debug('Approval URL: %s', url)
         return url
 

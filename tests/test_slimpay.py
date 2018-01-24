@@ -8,7 +8,9 @@ class PaymentModelTC(TransactionCase):
         self.slimpay = self.env['payment.acquirer'].search(
             [('provider', '=', 'slimpay')])
         self.slimpay.ensure_one()
-        self.partner = self.env['res.partner'].create({'name': 'Commown'})
+        france = self.env['res.country'].search([('name', '=', 'France')])
+        self.partner = self.env['res.partner'].create(
+            {'name': 'Commown', 'country_id': france.id})
 
     def check_phone_value(self, expected):
         actual = self.slimpay.slimpay_mobile_phone(self.partner)
@@ -23,20 +25,18 @@ class PaymentModelTC(TransactionCase):
         self.partner.write({'phone': '06.01.02.03.04'})
         self.check_phone_value('+33601020304')
 
-    def test_slimpay_signatory(self):
+    def test_slimpay_api_signatory(self):
         self.assertEqual(
             {'familyName': u'Commown', 'email': None, 'givenName': None,
              'billingAddress': {'city': None,
-                                'country': None,
+                                'country': u'FR',
                                 'postalCode': None,
                                 'street1': None,
                                 'street2': None,
                                 'telephone': None}
-             }, self.slimpay.slimpay_signatory(self.partner))
-        france = self.env['res.country'].search([('name', '=', 'France')])
+             }, self.slimpay._slimpay_api_signatory(self.partner))
         self.partner.write({'street': '2 rue de Rome', 'street2': 'Appt X',
-                            'zip': '67000', 'city': 'Strasbourg',
-                            'country_id': france.id})
+                            'zip': '67000', 'city': 'Strasbourg'})
         self.assertEqual(
             {'familyName': u'Commown', 'email': None, 'givenName': None,
              'billingAddress': {'city': u'Strasbourg',
@@ -45,4 +45,18 @@ class PaymentModelTC(TransactionCase):
                                 'street1': u'2 rue de Rome',
                                 'street2': u'Appt X',
                                 'telephone': None}
-             }, self.slimpay.slimpay_signatory(self.partner))
+             }, self.slimpay._slimpay_api_signatory(self.partner))
+
+    def test_slimpay_api_create_order(self):
+        euro = self.env['res.currency'].search([('name', '=', 'EUR')])
+        result = self.slimpay._slimpay_api_create_order(
+            'my ref', 42, euro, self.partner, 'https://commown.fr/')
+        self.assertEqual('my ref', result['reference'])
+        self.assertEqual('fr', result['locale'])
+        self.assertEqual(['signMandate', 'payment'],
+                         [item['type'] for item in result['items']])
+        sign, payment = result['items']
+        self.assertIn('signatory', sign['mandate'])
+        self.assertEqual(42, payment['payin']['amount'])
+        self.assertEqual(u'EUR', payment['payin']['currency'])
+        self.assertEqual('https://commown.fr/', payment['payin']['notifyUrl'])
