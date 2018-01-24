@@ -92,18 +92,29 @@ class PaymentAcquirerSlimpay(models.Model):
             if ordered_valid:
                 return ordered_valid[-1]
 
-    def slimpay_mobile_phone(self, partner):
-        "Slimpay requires a mobile phone. Find one for partner or return None"
-        for phone in (partner.phone, partner.mobile):
+    def slimpay_mobile_phone(self, partner, fields=('phone', 'mobile')):
+        """If possible, supply a valid mobile phone number to Slimpay, to
+        simplify end-user's life. If found, return it E164 formatted.
+
+        The method searches the given `partner`'s `fields` for a
+        mobile phone, and uses its country to parse it. If no country
+        was found, use France as a default (slimpay is mostly a
+        french company for the moment).
+        """
+        region = 'FR'  # slimpay mainly supports France
+        if partner.country_id.code:
+            region = partner.country_id.code.upper()
+        for field in fields:
+            phone = getattr(partner, field)
             if phone:
                 try:
-                    parsed = phonenumbers.parse(
-                        phone, partner.country_id.code.upper())
+                    parsed = phonenumbers.parse(phone, region=region)
                 except phonenumbers.NumberParseException:
                     continue
                 if (phonenumbers.number_type(parsed)
                         == phonenumbers.PhoneNumberType.MOBILE):
-                    return phone
+                    return phonenumbers.format_number(
+                        parsed, phonenumbers.PhoneNumberFormat.E164)
 
     def slimpay_signatory(self, partner):
         data = {
