@@ -22,3 +22,27 @@ class PaymentModelTC(TransactionCase):
         self.check_phone_value(None)
         self.partner.write({'phone': '06.01.02.03.04'})
         self.check_phone_value('+33601020304')
+
+    def test_slimpay_signatory(self):
+        self.assertEqual(
+            {'familyName': u'Commown', 'email': None, 'givenName': None,
+             'billingAddress': {'city': None,
+                                'country': None,
+                                'postalCode': None,
+                                'street1': None,
+                                'street2': None,
+                                'telephone': None}
+             }, self.slimpay.slimpay_signatory(self.partner))
+        france = self.env['res.country'].search([('name', '=', 'France')])
+        self.partner.write({'street': '2 rue de Rome', 'street2': 'Appt X',
+                            'zip': '67000', 'city': 'Strasbourg',
+                            'country_id': france.id})
+        self.assertEqual(
+            {'familyName': u'Commown', 'email': None, 'givenName': None,
+             'billingAddress': {'city': u'Strasbourg',
+                                'country': u'FR',
+                                'postalCode': u'67000',
+                                'street1': u'2 rue de Rome',
+                                'street2': u'Appt X',
+                                'telephone': None}
+             }, self.slimpay.slimpay_signatory(self.partner))

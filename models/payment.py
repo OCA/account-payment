@@ -118,16 +118,16 @@ class PaymentAcquirerSlimpay(models.Model):
 
     def slimpay_signatory(self, partner):
         data = {
-            "familyName": partner.lastname,
-            "givenName": partner.firstname,
-            "email": partner.email,
+            "familyName": partner.lastname or None,
+            "givenName": partner.firstname or None,
+            "email": partner.email or None,
             "billingAddress": {
-                "street1": partner.street,
+                "street1": partner.street or None,
                 "street2": partner.street2 or None,
                 "telephone": self.slimpay_mobile_phone(partner),
-                "postalCode": partner.zip,
-                "city": partner.city,
-                "country": partner.country_id.code,
+                "postalCode": partner.zip or None,
+                "city": partner.city or None,
+                "country": partner.country_id.code or None,
             }
         }
         return data
