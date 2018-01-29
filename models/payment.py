@@ -120,11 +120,11 @@ class PaymentAcquirerSlimpay(models.Model):
         data = {
             "familyName": partner.lastname or None,
             "givenName": partner.firstname or None,
+            "telephone": self.slimpay_mobile_phone(partner),
             "email": partner.email or None,
             "billingAddress": {
                 "street1": partner.street or None,
                 "street2": partner.street2 or None,
-                "telephone": self.slimpay_mobile_phone(partner),
                 "postalCode": partner.zip or None,
                 "city": partner.city or None,
                 "country": partner.country_id.code or None,

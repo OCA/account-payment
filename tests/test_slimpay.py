@@ -28,23 +28,23 @@ class PaymentModelTC(TransactionCase):
     def test_slimpay_api_signatory(self):
         self.assertEqual(
             {'familyName': u'Commown', 'email': None, 'givenName': None,
-             'billingAddress': {'city': None,
-                                'country': u'FR',
-                                'postalCode': None,
-                                'street1': None,
-                                'street2': None,
-                                'telephone': None}
+             'telephone': None, 'billingAddress': {
+                 'city': None,
+                 'country': u'FR',
+                 'postalCode': None,
+                 'street1': None,
+                 'street2': None}
              }, self.slimpay._slimpay_api_signatory(self.partner))
         self.partner.write({'street': '2 rue de Rome', 'street2': 'Appt X',
                             'zip': '67000', 'city': 'Strasbourg'})
         self.assertEqual(
             {'familyName': u'Commown', 'email': None, 'givenName': None,
-             'billingAddress': {'city': u'Strasbourg',
-                                'country': u'FR',
-                                'postalCode': u'67000',
-                                'street1': u'2 rue de Rome',
-                                'street2': u'Appt X',
-                                'telephone': None}
+             'telephone': None, 'billingAddress': {
+                 'city': u'Strasbourg',
+                 'country': u'FR',
+                 'postalCode': u'67000',
+                 'street1': u'2 rue de Rome',
+                 'street2': u'Appt X'}
              }, self.slimpay._slimpay_api_signatory(self.partner))
 
     def test_slimpay_api_create_order(self):
