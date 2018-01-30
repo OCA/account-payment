@@ -15,6 +15,7 @@
     'data': [
         'views/payment_views.xml',
         'views/payment_slimpay_templates.xml',
+        'views/address_template.xml',
         'data/payment_acquirer_data.xml',
     ],
     'installable': True,
