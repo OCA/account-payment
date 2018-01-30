@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # © 2008 Zikzakmedia S.L. (http://zikzakmedia.com)
 #        Jordi Esteve <jesteve@zikzakmedia.com>
 # © 2011 Domsense srl (<http://www.domsense.com>)
@@ -8,6 +7,8 @@
 # © 2015 Tecnativa (http://www.tecnativa.com)
 # © 2016 Eficent Business and IT Consulting Services S.L.
 #        (http://www.eficent.com)
+# © 2018 Ozono Multimedia S.L.L.
+#        (http://www.ozonomultimedia.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import models, fields, api
