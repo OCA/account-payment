@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<data>
 
     <!--****************************** PAYMENTS ***********************************-->
     <record id="view_payments_tree" model="ir.ui.view">
@@ -9,8 +8,8 @@
         <field name="field_parent">partner_id</field>
         <field name="priority" eval="20"/>
         <field name="arch" type="xml">
-            <tree string="Payments"
-                  colors="grey:reconciled!=False;red:date_maturity&lt;current_date">
+            <tree string="Payments" decoration-muted="reconciled!=False" 
+                    decoration-danger="date_maturity&lt;current_date">
                 <field name="stored_invoice_id" readonly="1"/>
                 <field name="invoice_date" readonly="1"/>
                 <field name="invoice_origin" readonly="1"/>
@@ -37,10 +36,10 @@
         <field name="priority" eval="20"/>
         <field name="arch" type="xml">
             <search string="Search Payments">
-                <filter icon="terp-sale" string="Receivable"
+                <filter string="Receivable"
                         domain="[('account_id.internal_type','=','receivable')]"
                         help="Receivable payments"/>
-                <filter icon="terp-purchase" string="Payable"
+                <filter string="Payable"
                         domain="[('account_id.internal_type','=','payable')]"
                         help="Payable payments"/>
                 <separator orientation="vertical"/>
@@ -48,13 +47,12 @@
                         string="From invoices"
                         domain="[('stored_invoice_id', '&lt;&gt;', False)]"/>
                 <separator orientation="vertical"/>
-                <filter icon="terp-dolar_ok!"
+                <filter name="unreconciled"
                         string="Unreconciled"
                         domain="[('reconciled','=',False)]"
                         help="Unreconciled payments"/>
                 <separator orientation="vertical"/>
-                <filter icon="terp-go-today"
-                        string="Overdue"
+                <filter string="Overdue"
                         domain="[('date_maturity','&lt;',time.strftime('%%Y-%%m-%%d'))]"
                         help="Overdue payments" name="overdue"/>
                 <separator orientation="vertical"/>
@@ -70,23 +68,18 @@
                 <field name="amount_residual_currency"/>
                 <group expand="0" string="Group By...">
                     <filter string="Partner"
-                            icon="terp-partner"
                             domain="[]"
                             context="{'group_by':'partner_id'}"/>
                     <filter string="Invoice"
-                            icon="terp-folder-orange"
                             domain="[]"
                             context="{'group_by':'stored_invoice_id'}"/>
                     <filter string="Due Date"
-                            icon="terp-go-month"
                             domain="[]"
                             context="{'group_by':'date_maturity:day'}"/>
                     <filter string="Month"
-                            icon="terp-go-month"
                             domain="[]"
                             context="{'group_by':'date_maturity'}"/>
                     <filter string="Salesperson"
-                            icon="terp-sale"
                             domain="[]"
                             context="{'group_by':'invoice_user_id'}"/>
                </group>
@@ -110,7 +103,6 @@
               parent="account.menu_finance_entries"
               action="action_invoice_payments"
               id="menu_action_invoice_payments"
-              sequence="5"/>
+              sequence="50"/>
 
-</data>
 </odoo>
