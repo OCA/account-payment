@@ -18,22 +18,22 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_due_list
-#: view:account.move.line:account_due_list.view_payments_filter
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Due Date"
 msgstr ""
 
 #. module: account_due_list
-#: view:account.move.line:account_due_list.view_payments_filter
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "From invoices"
 msgstr ""
 
 #. module: account_due_list
-#: view:account.move.line:account_due_list.view_payments_filter
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Group By..."
 msgstr ""
 
 #. module: account_due_list
-#: help:account.move.line,payment_term_id:0
+#: model:ir.model.fields,help:account_due_list.field_account_move_line_payment_term_id
 msgid ""
 "If you use payment terms, the due date will be computed automatically at the"
 " generation of accounting entries. If you keep the payment term and the due "
@@ -42,18 +42,18 @@ msgid ""
 msgstr ""
 
 #. module: account_due_list
-#: view:account.move.line:account_due_list.view_payments_filter
-#: field:account.move.line,stored_invoice_id:0
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line_stored_invoice_id
 msgid "Invoice"
 msgstr ""
 
 #. module: account_due_list
-#: field:account.move.line,invoice_date:0
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line_invoice_date
 msgid "Invoice Date"
 msgstr ""
 
 #. module: account_due_list
-#: field:account.move.line,invoice_user_id:0
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line_invoice_user_id
 msgid "Invoice salesperson"
 msgstr ""
 
@@ -63,52 +63,52 @@ msgid "Journal Items"
 msgstr ""
 
 #. module: account_due_list
-#: help:account.move.line,invoice_date:0
+#: model:ir.model.fields,help:account_due_list.field_account_move_line_invoice_date
 msgid "Keep empty to use the current date"
 msgstr ""
 
 #. module: account_due_list
-#: view:account.move.line:account_due_list.view_payments_filter
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Month"
 msgstr ""
 
 #. module: account_due_list
-#: view:account.move.line:account_due_list.view_payments_filter
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Overdue"
 msgstr ""
 
 #. module: account_due_list
-#: view:account.move.line:account_due_list.view_payments_filter
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Overdue payments"
 msgstr ""
 
 #. module: account_due_list
-#: view:account.move.line:account_due_list.view_payments_filter
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Partner"
 msgstr "Партньор"
 
 #. module: account_due_list
-#: field:account.move.line,partner_ref:0
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line_partner_ref
 msgid "Partner Ref"
 msgstr ""
 
 #. module: account_due_list
-#: view:account.move.line:account_due_list.view_payments_filter
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Payable"
 msgstr ""
 
 #. module: account_due_list
-#: view:account.move.line:account_due_list.view_payments_filter
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Payable payments"
 msgstr ""
 
 #. module: account_due_list
-#: field:account.move.line,payment_term_id:0
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line_payment_term_id
 msgid "Payment Terms"
 msgstr ""
 
 #. module: account_due_list
-#: view:account.move.line:account_due_list.view_payments_tree
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_tree
 msgid "Payments"
 msgstr ""
 
@@ -119,17 +119,17 @@ msgid "Payments and due list"
 msgstr ""
 
 #. module: account_due_list
-#: view:account.move.line:account_due_list.view_payments_filter
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Receivable"
 msgstr ""
 
 #. module: account_due_list
-#: view:account.move.line:account_due_list.view_payments_filter
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Receivable payments"
 msgstr ""
 
 #. module: account_due_list
-#: help:account.move.line,invoice_origin:0
+#: model:ir.model.fields,help:account_due_list.field_account_move_line_invoice_origin
 msgid "Reference of the document that produced this invoice."
 msgstr ""
 
@@ -139,17 +139,17 @@ msgid "Residual Amount"
 msgstr ""
 
 #. module: account_due_list
-#: view:account.move.line:account_due_list.view_payments_filter
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Salesperson"
 msgstr ""
 
 #. module: account_due_list
-#: view:account.move.line:account_due_list.view_payments_filter
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Search Payments"
 msgstr ""
 
 #. module: account_due_list
-#: field:account.move.line,invoice_origin:0
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line_invoice_origin
 msgid "Source Doc"
 msgstr ""
 
@@ -161,26 +161,26 @@ msgid ""
 msgstr ""
 
 #. module: account_due_list
-#: view:account.move.line:account_due_list.view_payments_tree
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_tree
 msgid "Total Credit"
 msgstr ""
 
 #. module: account_due_list
-#: view:account.move.line:account_due_list.view_payments_tree
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_tree
 msgid "Total Debit"
 msgstr ""
 
 #. module: account_due_list
-#: view:account.move.line:account_due_list.view_payments_tree
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_tree
 msgid "Total Residual"
 msgstr ""
 
 #. module: account_due_list
-#: view:account.move.line:account_due_list.view_payments_filter
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Unreconciled"
 msgstr ""
 
 #. module: account_due_list
-#: view:account.move.line:account_due_list.view_payments_filter
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Unreconciled payments"
 msgstr ""
