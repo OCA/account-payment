@@ -7,7 +7,7 @@
     'author': "Commown SCIC SAS",
     'license': "AGPL-3",
     'website': "https://commown.fr",
-    'depends': ['payment', 'partner_firstname', 'base_phone'],
+    'depends': ['website_sale', 'partner_firstname', 'base_phone'],
     'external_dependencies': {
         'python': ['coreapi', 'hal_codec', 'iso8601', 'requests',
                    'phonenumbers']
