@@ -1,4 +1,5 @@
 import logging
+import json
 
 from odoo import http
 from odoo.http import request
@@ -43,13 +44,13 @@ class SlimpayController(WebsiteSale):
         _logger.debug('Approval URL: %s', url)
         return url
 
-    @http.route(['/payment/slimpay/s2s/feedback'], type='json',
+    @http.route(['/payment/slimpay/s2s/feedback'], type='http',
                 auth='public', methods=['POST'], csrf=False)
     def feedback(self):
         """Controller called by slimpay once the customer has finished the
         checkout process. Performs basic checks then delegates to the acquirer.
         """
-        post = request.jsonrequest
+        post = json.loads(request.httprequest.data)
         _logger.debug('slimpay feedback, post=%s', post)
         ref = post['reference']
         so = request.env['sale.order'].sudo().search([('name', '=', ref)])
