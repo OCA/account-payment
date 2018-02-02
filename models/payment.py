@@ -206,8 +206,12 @@ class PaymentAcquirerSlimpay(models.Model):
             tx.write(tx_attrs)
             if tx.sudo().callback_eval:
                 safe_eval(tx.sudo().callback_eval, {'self': self})
+            # Confirm sale if necessary
+            tx._confirm_so(acquirer_name='slimpay')
             return True
         elif slimpay_state.startswith("closed.aborted"):
             tx_attrs['state'] = 'cancel'
         tx.write(tx_attrs)
+        # Confirm sale if necessary
+        tx._confirm_so(acquirer_name='slimpay')
         return False
