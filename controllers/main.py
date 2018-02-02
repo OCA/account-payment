@@ -2,7 +2,7 @@ import logging
 import json
 
 from odoo import http
-from odoo.http import request
+from odoo.http import request, Response
 
 from odoo.addons.website_sale.controllers.main import WebsiteSale
 
@@ -56,13 +56,14 @@ class SlimpayController(WebsiteSale):
         so = request.env['sale.order'].sudo().search([('name', '=', ref)])
         if len(so) != 1:
             _logger.warning('Enable to find 1 sale order for %r', ref)
-            return
+            return Response('Incorrect sale order reference', status=500)
         if so.payment_acquirer_id.provider != 'slimpay':
             _logger.warning('Feedback called with non slimpay order %r', ref)
-            return
+            return Response('Incorrect sale order handler', status=500)
         if not so.payment_acquirer_id._slimpay_s2s_validate(so, post):
             _logger.warning('Invalid feedback for order %r', ref)
             return
+        return Response("OK", status=200)
 
     def _get_mandatory_billing_fields(self):
         "Handled by the template, see field_required"
