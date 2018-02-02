@@ -62,7 +62,7 @@ class SlimpayController(WebsiteSale):
             return Response('Incorrect sale order handler', status=500)
         if not so.payment_acquirer_id._slimpay_s2s_validate(so, post):
             _logger.warning('Invalid feedback for order %r', ref)
-            return
+            return Response('Invalid feedback for order', status=500)
         return Response("OK", status=200)
 
     def _get_mandatory_billing_fields(self):
