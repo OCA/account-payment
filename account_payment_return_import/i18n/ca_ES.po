@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-18 00:39+0000\n"
-"PO-Revision-Date: 2017-04-25 10:41+0000\n"
+"POT-Creation-Date: 2017-12-22 02:02+0000\n"
+"PO-Revision-Date: 2018-02-02 14:11+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (Spain) (http://www.transifex.com/oca/OCA-account-payment-8-0/language/ca_ES/)\n"
 "MIME-Version: 1.0\n"
@@ -92,17 +92,17 @@ msgstr ""
 #. module: account_payment_return_import
 #: field:payment.return.import,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creat per"
 
 #. module: account_payment_return_import
 #: field:payment.return.import,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creat a"
 
 #. module: account_payment_return_import
 #: field:payment.return.import,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nom visible"
 
 #. module: account_payment_return_import
 #: help:payment.return.import,data_file:0
@@ -156,17 +156,17 @@ msgstr "Diari"
 #. module: account_payment_return_import
 #: field:payment.return.import,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Darrera modificació en"
 
 #. module: account_payment_return_import
 #: field:payment.return.import,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Darrera actualització per"
 
 #. module: account_payment_return_import
 #: field:payment.return.import,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Darrera actualització el"
 
 #. module: account_payment_return_import
 #: field:payment.return.import,match_after_import:0

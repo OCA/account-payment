@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-18 00:39+0000\n"
-"PO-Revision-Date: 2017-04-25 10:41+0000\n"
+"POT-Creation-Date: 2017-12-22 02:02+0000\n"
+"PO-Revision-Date: 2018-02-02 14:11+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
 "Language-Team: Catalan (Spain) (http://www.transifex.com/oca/OCA-account-payment-8-0/language/ca_ES/)\n"
 "MIME-Version: 1.0\n"
@@ -40,7 +40,7 @@ msgstr ""
 #. module: account_payment_return
 #: field:payment.return.reason,code:0
 msgid "Code"
-msgstr ""
+msgstr "Codi"
 
 #. module: account_payment_return
 #: field:payment.return,company_id:0
@@ -61,13 +61,13 @@ msgstr ""
 #: field:payment.return,create_uid:0 field:payment.return.line,create_uid:0
 #: field:payment.return.reason,create_uid:0
 msgid "Created by"
-msgstr ""
+msgstr "Creat per"
 
 #. module: account_payment_return
 #: field:payment.return,create_date:0 field:payment.return.line,create_date:0
 #: field:payment.return.reason,create_date:0
 msgid "Created on"
-msgstr ""
+msgstr "Creat a"
 
 #. module: account_payment_return
 #: field:payment.return.line,partner_id:0
@@ -91,7 +91,7 @@ msgstr ""
 #: field:payment.return.line,display_name:0
 #: field:payment.return.reason,display_name:0
 msgid "Display Name"
-msgstr ""
+msgstr "Nom visible"
 
 #. module: account_payment_return
 #: selection:payment.return,state:0
@@ -173,19 +173,19 @@ msgstr ""
 #: field:payment.return.line,__last_update:0
 #: field:payment.return.reason,__last_update:0
 msgid "Last Modified on"
-msgstr ""
+msgstr "Darrera modificació en"
 
 #. module: account_payment_return
 #: field:payment.return,write_uid:0 field:payment.return.line,write_uid:0
 #: field:payment.return.reason,write_uid:0
 msgid "Last Updated by"
-msgstr ""
+msgstr "Darrera actualització per"
 
 #. module: account_payment_return
 #: field:payment.return,write_date:0 field:payment.return.line,write_date:0
 #: field:payment.return.reason,write_date:0
 msgid "Last Updated on"
-msgstr ""
+msgstr "Darrera actualització el"
 
 #. module: account_payment_return
 #: field:payment.return,line_ids:0
@@ -195,7 +195,7 @@ msgstr ""
 #. module: account_payment_return
 #: view:payment.return:account_payment_return.payment_return_form_view
 msgid "Lines"
-msgstr ""
+msgstr "Linies"
 
 #. module: account_payment_return
 #: view:payment.return:account_payment_return.payment_return_form_view
