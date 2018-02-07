@@ -66,12 +66,14 @@ class SlimpayController(WebsiteSale):
         return Response("OK", status=200)
 
     def _get_mandatory_billing_fields(self):
-        "Handled by the template, see field_required"
-        return []
+        ''' Replace "name" by "firstname" and "lastname" '''
+        fields = super(SlimpayController, self)._get_mandatory_billing_fields()
+        return ['firstname', 'lastname'] + [f for f in fields if f != 'name']
 
     def _get_mandatory_shipping_fields(self):
-        "Handled by the template, see field_required"
-        return []
+        ''' Replace "name" by "firstname" and "lastname" '''
+        fields = super(SlimpayController, self)._get_mandatory_shipping_fields()
+        return ['firstname', 'lastname'] + [f for f in fields if f != 'name']
 
     def values_postprocess(self, order, mode, values, errors, error_msg):
         """
