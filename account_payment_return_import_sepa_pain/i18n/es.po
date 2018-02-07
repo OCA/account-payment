@@ -8,9 +8,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-25 13:04+0200\n"
-"PO-Revision-Date: 2016-10-25 13:09+0200\n"
-"Last-Translator: Carlos Incaser <carlos@incaser.es>\n"
+"POT-Creation-Date: 2017-03-17 18:30+0100\n"
+"PO-Revision-Date: 2017-03-17 18:33+0100\n"
+"Last-Translator: Carlos Dauden <carlos.dauden@tecnativa.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-payment-8-0/"
 "language/es/)\n"
 "Language: es\n"
@@ -81,6 +81,11 @@ msgid "Insufficient funds"
 msgstr "Saldo insuficiente"
 
 #. module: account_payment_return_import_sepa_pain
+#: model:ir.model,name:account_payment_return_import_sepa_pain.model_account_journal
+msgid "Journal"
+msgstr "Diario"
+
+#. module: account_payment_return_import_sepa_pain
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_RR03
 msgid "Missing Creditors Name Or Address"
 msgstr "Falta nombre o dirección del emisor"
@@ -105,6 +110,20 @@ msgstr "Mandato no válido"
 msgid "Operation/transaction code incorrect, invalid file format"
 msgstr ""
 "Código de operación/transacción incorrecto, formato de archivo inválido"
+
+#. module: account_payment_return_import_sepa_pain
+#: help:account.journal,payment_return_pattern:0
+msgid ""
+"Pattern applied to reference in bank payment line search\n"
+"If empty takes complete reference"
+msgstr ""
+"Patrón aplicado a la referencia en la búsqueda de lineas de pago bancarias.\n"
+"Si está vacío coge la referencia completa."
+
+#. module: account_payment_return_import_sepa_pain
+#: field:account.journal,payment_return_pattern:0
+msgid "Payment Return Ref Pattern"
+msgstr "Patrón referencia devolución"
 
 #. module: account_payment_return_import_sepa_pain
 #: model:ir.model,name:account_payment_return_import_sepa_pain.model_payment_return_line

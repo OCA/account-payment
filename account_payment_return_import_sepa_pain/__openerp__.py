@@ -18,7 +18,8 @@
         'account_banking_payment_export',
     ],
     'data': [
-        'data/unpaid_reason_codes.xml'
+        'data/unpaid_reason_codes.xml',
+        'views/account_journal_view.xml',
     ],
     'installable': True,
 }
