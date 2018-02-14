@@ -14,7 +14,7 @@ class AccountRegisterPayments(models.TransientModel):
     def create_payment(self):
         res = super(AccountRegisterPayments, self).create_payment()
         if (self.journal_id.check_print_auto and
-                self.payment_method_id.name == 'Check'):
+                self.payment_method_id.code == 'check_printing'):
             payment = self.env['account.payment'].search([
                 ('journal_id', '=', self.journal_id.id),
                 ('payment_method_id.name', 'like',
@@ -38,6 +38,6 @@ class AccountPayment(models.Model):
     def post(self):
         res = super(AccountPayment, self).post()
         if (self.journal_id.check_print_auto and
-                self.payment_method_id.name == 'Check'):
+                self.payment_method_id.code == 'check_printing'):
             return self.do_print_checks()
         return res
