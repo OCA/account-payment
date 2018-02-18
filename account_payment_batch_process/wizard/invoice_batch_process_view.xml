@@ -43,8 +43,8 @@
                         <tree editable="bottom" create="false">
                             <field name="partner_id" readonly="1"/>
                             <field name="invoice_id" readonly="1"/>
-                            <field name="balance_amt" readonly="1"/>
-                            <field name="paying_amt"/>
+                            <field name="balance_amt" readonly="1" sum="TOTAL BALANCE"/>
+                            <field name="paying_amt" sum="TOTAL PAYMENT"/>
                             <field name="check_amount_in_words" invisible="1"/>
                         </tree>
                     </field>
@@ -52,8 +52,8 @@
                         <tree editable="bottom" create="false">
                             <field name="partner_id" readonly="1"/>
                             <field name="invoice_id" readonly="1"/>
-                            <field name="balance_amt" readonly="1"/>
-                            <field name="receiving_amt"/>
+                            <field name="balance_amt" readonly="1" sum="TOTAL BALANCE"/>
+                            <field name="receiving_amt" sum="TOTAL PAYMENT"/>
                             <field name="check_amount_in_words" invisible="1"/>
                             <field name="payment_method_id" domain="[('payment_type','=','inbound')]" widget="selection"/>
                             <field name="payment_difference"/>
