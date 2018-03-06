@@ -1,99 +1,119 @@
 # -*- coding: utf-8 -*-
-#
-##############################################################################
-#
-#    Authors: Adrien Peiffer
-#    Copyright (c) 2014 Acsone SA/NV (http://www.acsone.eu)
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# Copyright 2014 ACSONE SA/NV
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from openerp import models, fields, api, exceptions, _
 from datetime import datetime, timedelta
-from openerp.tools import DEFAULT_SERVER_DATE_FORMAT
+
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError
+
+READONLY_STATES = {
+    'draft': [('readonly', False)],
+}
 
 
-class account_invoice(models.Model):
+class AccountInvoice(models.Model):
+
     _inherit = 'account.invoice'
 
-    discount_percent = fields\
-        .Float(string='Discount Percent', readonly=True,
-               states={'draft': [('readonly', False)]})
-    discount_amount = fields\
-        .Float(string='Amount Discount deducted',
-               compute='_compute_discount_amount')
-    forced_discount_amount = fields\
-        .Float(string='Amount Discount deducted', readonly=True,
-               states={'draft': [('readonly', False)]})
-    discount = fields\
-        .Float(compute='_compute_discount', string='Amount Discount')
-    discount_delay = fields\
-        .Integer(string='Discount Delay (days)', readonly=True,
-                 states={'draft': [('readonly', False)]})
-    discount_due_date = fields.Date(string='Discount Due Date', readonly=True,
-                                    states={'draft': [('readonly', False)]})
-    discount_due_date_readonly =\
-        fields.Date(string='Discount Due Date',
-                    compute='_compute_discount_due_date')
-    force_discount_amount = fields.Boolean(string="Force Discount Amount",
-                                           states={'draft': [('readonly',
-                                                              False)]})
+    discount_percent = fields.Float(
+        string="Discount (%)",
+        readonly=True,
+        states=READONLY_STATES,
+    )
+    amount_total_with_discount = fields.Monetary(
+        string="Total (with discount)",
+        compute='_compute_amount_total_with_discount',
+    )
+    discount_amount = fields.Monetary(
+        compute='_compute_discount_amount',
+    )
+    discount_delay = fields.Integer(
+        string="Discount Delay (days)",
+        readonly=True,
+        states=READONLY_STATES
+    )
+    discount_due_date = fields.Date(
+        readonly=True,
+        states=READONLY_STATES
+    )
+    discount_due_date_readonly = fields.Date(
+        string="Discount Due Date",
+        compute='_compute_discount_due_date',
+    )
 
-    @api.depends('discount_due_date')
-    @api.one
-    def _compute_discount_due_date(self):
-        self.discount_due_date_readonly = self.discount_due_date
-
-    @api.one
-    def _compute_discount(self):
-        self.discount = self.amount_total - self.discount_amount
-
-    @api.onchange('discount_delay')
-    @api.one
-    def _discount_delay_change(self):
-        if self.discount != 0 and self.discount_delay != 0:
-            if self.date_invoice:
-                date_invoice = datetime.strptime(self.date_invoice,
-                                                 DEFAULT_SERVER_DATE_FORMAT)
-            else:
-                date_invoice = datetime.now()
-            due_date = date_invoice + timedelta(days=self.discount_delay)
-            self.discount_due_date = due_date.date()
-
-    @api.depends('discount_percent', 'amount_tax', 'amount_total',
-                 'force_discount_amount', 'forced_discount_amount')
-    @api.one
+    @api.multi
+    @api.depends(
+        'amount_total',
+        'amount_untaxed',
+        'discount_percent',
+        'company_id.cash_discount_base_amount_type',
+    )
     def _compute_discount_amount(self):
-        if not self.force_discount_amount:
+        for rec in self:
             discount_amount = 0.0
-            if self.discount_percent == 0.0:
-                discount_amount = self.amount_total
+            if rec.discount_percent != 0.0:
+                base_amount_type = \
+                    rec.company_id.cash_discount_base_amount_type
+                base_amount = (
+                    base_amount_type == 'untaxed' and
+                    rec.amount_untaxed or rec.amount_total)
+                discount_amount = (
+                    base_amount * (0.0 + rec.discount_percent / 100))
+            rec.discount_amount = discount_amount
+
+    @api.multi
+    @api.depends(
+        'amount_total',
+        'discount_amount',
+    )
+    def _compute_amount_total_with_discount(self):
+        for rec in self:
+            rec.amount_total_with_discount = \
+                rec.amount_total - rec.discount_amount
+
+    @api.multi
+    @api.depends(
+        'discount_due_date',
+    )
+    def _compute_discount_due_date(self):
+        for rec in self:
+            rec.discount_due_date_readonly = rec.discount_due_date
+
+    @api.multi
+    @api.onchange(
+        'discount_delay',
+    )
+    def _onchange_discount_delay(self):
+        date_today = datetime.today()
+        for rec in self:
+            if rec.discount_amount == 0 or rec.discount_delay == 0:
+                continue
+            if rec.date_invoice:
+                date_invoice = fields.Date.from_string(rec.date_invoice)
             else:
-                discount = self.amount_untaxed * \
-                    (0.0 + self.discount_percent/100)
-                discount_amount = (self.amount_total - discount)
-            self.discount_amount = discount_amount
-        else:
-            self.discount_amount = self.forced_discount_amount
+                date_invoice = date_today
+            due_date = date_invoice + timedelta(days=rec.discount_delay)
+            rec.discount_due_date = due_date
+
+    @api.multi
+    @api.onchange(
+        'payment_term_id',
+    )
+    def _onchange_payment_term_discount_options(self):
+        payment_term = self.payment_term_id
+        if payment_term and self.type in ('in_invoice', 'out_invoice'):
+            self.discount_percent = payment_term.discount_percent
+            self.discount_delay = payment_term.discount_delay
 
     @api.multi
     def action_move_create(self):
-        super(account_invoice, self).action_move_create()
+        res = super(AccountInvoice, self).action_move_create()
         for inv in self:
-            inv._discount_delay_change()
-            if not inv.discount_due_date and inv.discount != 0.0:
-                raise exceptions.Warning(_('Warning !\n You have to define '
-                                           'a discount due date'))
-        return True
+            inv._onchange_discount_delay()
+            if not inv.discount_due_date and inv.discount_amount != 0.0:
+                raise UserError(_(
+                    "You can't set a discount amount if there is no "
+                    "discount due date. (Invoice ID: %s)"
+                ) % (inv.id,))
+        return res

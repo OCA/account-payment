@@ -4,10 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 8.0\n"
+"Project-Id-Version: Odoo Server 10.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-20 11:23+0000\n"
-"PO-Revision-Date: 2015-05-20 11:23+0000\n"
+"POT-Creation-Date: 2018-03-09 07:25+0000\n"
+"PO-Revision-Date: 2018-03-09 07:25+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,46 +16,70 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_cash_discount_base
-#: view:website:account.report_invoice_document
+#: model:ir.ui.view,arch_db:account_cash_discount_base.report_invoice_document_inherit
 msgid "% discount for payment before"
 msgstr "% d'escompte pour un paiement avant le"
 
 #. module: account_cash_discount_base
-#: view:account.invoice:account_cash_discount_base.invoice_form_inherit
-#: view:account.invoice:account_cash_discount_base.invoice_supplier_form_inherit
-msgid "(update)"
-msgstr "(mise à jour)"
+#: model:ir.ui.view,arch_db:account_cash_discount_base.res_company_form_view
+msgid "Base Amount Type"
+msgstr "Montant de base"
 
 #. module: account_cash_discount_base
-#: field:account.invoice,discount:0
-msgid "Amount Discount"
+#: model:ir.ui.view,arch_db:account_cash_discount_base.invoice_form_inherit
+#: model:ir.ui.view,arch_db:account_cash_discount_base.invoice_supplier_form_inherit
+#: model:ir.ui.view,arch_db:account_cash_discount_base.res_company_form_view
+msgid "Cash Discount"
+msgstr "Escompte"
+
+#. module: account_cash_discount_base
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_res_company_cash_discount_base_amount_type
+msgid "Cash discount base amount type"
+msgstr "Montant de base pour l'escompte"
+
+#. module: account_cash_discount_base
+#: model:ir.model,name:account_cash_discount_base.model_res_company
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: account_cash_discount_base
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_invoice_discount_percent
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_payment_term_discount_percent
+msgid "Discount (%)"
+msgstr "Remise (%)"
+
+#. module: account_cash_discount_base
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_invoice_discount_delay
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_payment_term_discount_delay
+msgid "Discount Delay (days)"
+msgstr "Délai de l'escompte (jours)"
+
+#. module: account_cash_discount_base
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_invoice_discount_due_date_readonly
+msgid "Discount Due Date"
+msgstr "Date d'échéance de l'escompte"
+
+#. module: account_cash_discount_base
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_invoice_discount_amount
+msgid "Discount amount"
 msgstr "Montant de l'escompte"
 
 #. module: account_cash_discount_base
-#: field:account.invoice,discount_amount:0
-msgid "Amount Discount deducted"
-msgstr "Montant total escompte déduit"
-
-#. module: account_cash_discount_base
-#: field:payment.order.create,cash_discount_date:0
-msgid "Cash Discount Due Date"
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_invoice_discount_due_date
+msgid "Discount due date"
 msgstr "Date d'échéance de l'escompte"
 
 #. module: account_cash_discount_base
-#: view:account.invoice:account_cash_discount_base.invoice_form_inherit
-#: view:account.invoice:account_cash_discount_base.invoice_supplier_form_inherit
-msgid "Cash discount"
-msgstr "Escompte"
+#: code:addons/account_cash_discount_base/models/res_company.py:21
+#, python-format
+msgid "Excluding tax"
+msgstr "Prix HT"
 
 #. module: account_cash_discount_base
-#: field:payment.line,discount_amount:0
-msgid "Discount Amount"
-msgstr "Escompte"
-
-#. module: account_cash_discount_base
-#: field:account.invoice,discount_due_date:0
-msgid "Discount Due Date"
-msgstr "Date d'échéance de l'escompte"
+#: code:addons/account_cash_discount_base/models/res_company.py:22
+#, python-format
+msgid "Including all taxes"
+msgstr "Prix TTC"
 
 #. module: account_cash_discount_base
 #: model:ir.model,name:account_cash_discount_base.model_account_invoice
@@ -63,32 +87,22 @@ msgid "Invoice"
 msgstr "Facture"
 
 #. module: account_cash_discount_base
-#: model:ir.model,name:account_cash_discount_base.model_payment_line
-msgid "Payment Line"
-msgstr "Ligne de paiement"
+#: model:ir.model,name:account_cash_discount_base.model_account_payment_term
+msgid "Payment Term"
+msgstr "Conditions de paiement"
 
 #. module: account_cash_discount_base
-#: view:account.invoice:account_cash_discount_base.invoice_form_inherit
-#: view:account.invoice:account_cash_discount_base.invoice_supplier_form_inherit
-msgid "Payments"
-msgstr "Règlements"
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_invoice_amount_total_with_discount
+msgid "Total (with discount)"
+msgstr "Total (avec l'escompte)"
 
 #. module: account_cash_discount_base
-#: view:account.invoice:account_cash_discount_base.invoice_form_inherit
-#: view:account.invoice:account_cash_discount_base.invoice_supplier_form_inherit
-msgid "Recompute taxes and total"
-msgstr "Recalculer les taxes et le total"
-
-#. module: account_cash_discount_base
-#: view:website:account.report_invoice_document
+#: model:ir.ui.view,arch_db:account_cash_discount_base.report_invoice_document_inherit
 msgid "Total With a"
 msgstr "Total avec"
 
 #. module: account_cash_discount_base
-#: code:addons/account_cash_discount_base/models/account_invoice.py:91
+#: code:addons/account_cash_discount_base/models/account_invoice.py:115
 #, python-format
-msgid "Warning !\n"
-" You have to define a discount due date"
-msgstr "Attention !\n"
-" Vous devez définir une date d'échéance de l'escompte"
-
+msgid "You can't set a discount amount if there is no discount due date. (Invoice ID: %s)"
+msgstr "Vous ne pouvez pas définir un montant d'escompte si il n'y a pas de de date d'échéance d'escompte. (Facture ID: %s)"

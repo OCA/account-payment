@@ -12,13 +12,12 @@ from the delay. The amount with discount deducted is computed at the same time
 as taxes. This module also adds cash discount informations on customer invoice
 report.
 
-On supplier invoices, you can set the discount percent or directly defined the
-total amount with discount deducted. For the discount due date, you can fill it
-directly or set a delay. In this case, discount due date is still computed at
-invoice's validation.
+On supplier invoices, you can set the discount percent. For the discount due
+date, you can fill it directly or set a delay. In this case, discount due date
+is still computed at invoice's validation.
 
-In all cases, the discount is a percentage of the  untaxed amount.
-
+You can decide to calculate the discount amount based on the total price taxes
+included or not.
 
 
 Installation
@@ -28,6 +27,22 @@ To install this module, you need to:
 
  * Click on install button
 
+
+Configuration
+=============
+
+To configure the base amount type, you need to:
+
+#. Go to your companies
+#. Set the cash discount base amount type (including taxes or not)
+
+You can also configure default discount percent and delay on the payment term.
+
+.. figure:: path/to/local/image.png
+   :alt: alternative description
+   :width: 600 px
+
+
 Usage
 =====
 
@@ -36,19 +51,24 @@ description on customer and supplier invoices.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/173/8.0
+   :target: https://runbot.odoo-community.org/runbot/96/10.0
 
 For further information, please visit:
 
  * https://www.odoo.com/forum/help-1
 
+Known issues / Roadmap
+======================
+
+* If you change the company base amount type, discount amount will change on old invoices as it's a simple compute method.
+
 Bug Tracker
 ===========
 
-Bugs are tracked on `GitHub Issues <https://github.com/OCA/bank-payment/issues>`_.
+Bugs are tracked on `GitHub Issues <https://github.com/OCA/account-payment/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and welcomed feedback
-`here <https://github.com/OCA/bank-payment/issues/new?body=module:%20account_cash_discount_base%0Aversion:%208.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`here <https://github.com/OCA/account-payment/issues/new?body=module:%20account_cash_discount_base%0Aversion:%208.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Credits
 =======
@@ -59,6 +79,7 @@ Contributors:
 * Christelle De Coninck (ACSONE) <christelle.deconinck@acsone.eu>
 * Stéphane Bidoul (ACSONE) <stephane.bidoul@acsone.eu>
 * Adrien Peiffer (ACSONE) <adrien.peiffer@acsone.eu>
+* Benjamin Willig (ACSONE) <benjamin.willig@acsone.eu>
 
 Maintainer:
 -----------
