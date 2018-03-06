@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record model="ir.ui.view" id="invoice_supplier_form_inherit">
+        <field name="name">account.invoice.supplier.form (account_cash_discount_base)</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='journal_id']/parent::group/parent::group" position="inside">
+                <group string="Cash Discount" name="cash_discount">
+                    <field name="discount_percent"/>
+                    <field name="discount_amount"/>
+                    <field name="amount_total_with_discount"/>
+                    <field name="discount_delay"/>
+                    <field name="discount_due_date" invisible="1"/>
+                    <field name="discount_due_date_readonly"/>
+                </group>
+            </xpath>
+
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="invoice_form_inherit">
+        <field name="name">account.invoice.form (account_cash_discount_base)</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//page[@name='other_info']/group[1]" position="inside">
+                <group string="Cash Discount" name="cash_discount">
+                    <field name="discount_percent"/>
+                    <field name="discount_amount"/>
+                    <field name="amount_total_with_discount"/>
+                    <field name="discount_delay"/>
+                    <field name="discount_due_date" invisible="1"/>
+                    <field name="discount_due_date_readonly"/>
+                </group>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>
