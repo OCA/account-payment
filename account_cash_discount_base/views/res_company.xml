@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="res_company_form_view">
+        <field name="name">res.company.form (in account_cash_discount_base)</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+
+
+            <xpath expr="//field[@name='partner_id']/parent::group/parent::group" position="inside">
+                <group name="cash_discount" string="Cash Discount">
+                    <field name="cash_discount_base_amount_type" string="Base Amount Type"/>
+                </group>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>
