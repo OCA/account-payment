@@ -1,31 +1,25 @@
-.. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
+.. image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :alt: License: AGPL-3
 
 ==========================
 Account Cash Discount Base
 ==========================
 
-This module was written to allow you to define cash discount on your customer
-or supplier invoice. On customer invoice, you can add a discount delay and
-a discount percent. At invoice's validation, the discount due date is genereted
+This module was written to allow you to define cash discount (aka early payment discount)
+on customer or supplier invoices.
+
+On customer invoices, you can add a discount delay and
+a discount percentage. At invoice validation, the discount due date is generated
 from the delay. The amount with discount deducted is computed at the same time
 as taxes. This module also adds cash discount informations on customer invoice
 report.
 
-On supplier invoices, you can set the discount percent. For the discount due
+On supplier invoices, you can set the discount percentage. For the discount due
 date, you can fill it directly or set a delay. In this case, discount due date
 is still computed at invoice's validation.
 
 You can decide to calculate the discount amount based on the total price taxes
 included or not.
-
-
-Installation
-============
-
-To install this module, you need to:
-
- * Click on install button
 
 
 Configuration
@@ -37,10 +31,6 @@ To configure the base amount type, you need to:
 #. Set the cash discount base amount type (including taxes or not)
 
 You can also configure default discount percent and delay on the payment term.
-
-.. figure:: path/to/local/image.png
-   :alt: alternative description
-   :width: 600 px
 
 
 Usage
