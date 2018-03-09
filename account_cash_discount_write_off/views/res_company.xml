@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="res_company_form_view">
+        <field name="name">res.company.form (in account_cash_discount_write_off)</field>
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="account_cash_discount_base.res_company_form_view"/>
+        <field name="arch" type="xml">
+
+            <field name="cash_discount_base_amount_type" position="after">
+                <field name="default_cash_discount_writeoff_account_id" string="Write-Off Account"/>
+                <field name="default_cash_discount_writeoff_journal_id" string="Write-Off Journal"/>
+            </field>
+
+        </field>
+    </record>
+
+</odoo>
