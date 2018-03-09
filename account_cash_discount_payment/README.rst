@@ -1,25 +1,18 @@
-.. image:: https://img.shields.io/badge/licence-AGPL--3-blue.svg
+.. image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :alt: License: AGPL-3
 
 =============================
 Account Cash Discount Payment
 =============================
 
-This module was written to extend Account Cash Discount Base module to allow
-you to add some invoices on payment order considering the cash discount on it.
-Then if you add an invoice on a payment order and if there is a cash discount
-on it. The amount on payment line will be the residual amount discount deducted,
+Extends Account Cash Discount Base and Payment Order modules to let you
+add invoices on payment order considering the cash discount on it.
+When an invoice with cash discount is added to a payment order,
+the amount proposed on payment line will be the residual amount discount deducted,
 provided that the due date has not expired.
 
 This module also offers to search by discount due date to add invoices on
 payment order and add discount amount on payment line.
-
-Installation
-============
-
-To install this module, you need to:
-
- * Click on install button
 
 Usage
 =====
