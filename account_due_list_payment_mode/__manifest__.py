@@ -2,12 +2,13 @@
 
 {
     "name": "Payment due list with payment mode",
-    "version": "10.0.1.0.0",
+    "version": "11.0.1.0.0",
     "category": "Generic Modules/Payment",
     "author": "Obertix Free Solutions, "
               "Tecnativa, "
               "Odoo Community Association (OCA),",
-    "website": "https://odoo-community.org/",
+    "license": "AGPL-3",
+    "website": "https://github.com/OCA/account-payment",
     "depends": [
         "account_payment_partner",
         "account_due_list",
@@ -15,6 +16,6 @@
     "data": [
         'views/payment_view.xml',
     ],
+    "application": False,
     "installable": True,
-    "auto_install": False,
 }
