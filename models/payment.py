@@ -1,29 +1,14 @@
 import logging
-from base64 import b64encode
 
-import requests
-import phonenumbers
-import coreapi
-from hal_codec import HALCodec
 from iso8601 import parse_date
 
-from odoo import models, fields
+from odoo import models, fields, api
 from odoo.tools.safe_eval import safe_eval
+
+from slimpay_utils import SlimpayClient
 
 
 _logger = logging.getLogger(__name__)
-
-
-def _oauth_token(api_url, app_id, app_secret):
-    auth = b64encode(':'.join((app_id, app_secret)))
-    resp = requests.post(
-        '%s/oauth/token' % api_url,
-        headers={'Accept': 'application/json',
-                 'Authorization': 'Basic %s' % auth,
-                 'Content-Type': 'application/x-www-form-urlencoded'},
-        data={'grant_type': 'client_credentials', 'scope': 'api'})
-    resp.raise_for_status()
-    return resp.json()['access_token']
 
 
 def _signed_date(mandate):
@@ -57,132 +42,10 @@ class PaymentAcquirerSlimpay(models.Model):
     @property
     def slimpay_client(self):
         if not hasattr(self, '_slimpay_client'):
-            token = _oauth_token(self.slimpay_api_url,
-                                 self.slimpay_app_id,
-                                 self.slimpay_app_secret)
-            _logger.debug('Got token %s', token)
-            transport = coreapi.transports.HTTPTransport(
-                headers={'Authorization': 'Bearer %s' % token})
-            self._slimpay_client = coreapi.Client(decoders=[HALCodec()],
-                                                  transports=[transport])
+            self._slimpay_client = SlimpayClient(
+                self.slimpay_api_url, self.slimpay_creditor,
+                self.slimpay_app_id, self.slimpay_app_secret)
         return self._slimpay_client
-
-    @property
-    def slimpay_root_doc(self):
-        if not hasattr(self, '_slimpay_root_doc'):
-            self._slimpay_root_doc = self.slimpay_client.get(
-                self.slimpay_api_url)
-        return self._slimpay_root_doc
-
-    def slimpay_get_valid_mandate(self, partner, **search_params):
-        """Return the most recently signed active mandate which matches given
-        search criterias
-        (see https://dev.slimpay.com/hapi/reference/mandates#search-mandates)
-        """
-        search_params['creditorReference'] = self.slimpay_creditor
-        search_params['subscriberReference'] = partner.id
-        doc = self.slimpay_client.action(
-            self.slimpay_root_doc,
-            'https://api.slimpay.net/alps#search-mandates',
-            params=search_params, action='GET')
-        if 'mandates' in doc:
-            ordered_valid = [
-                m for m in sorted(doc['mandates'], key=_signed_date)
-                if m['state'] == 'active']
-            if ordered_valid:
-                return ordered_valid[-1]
-
-    def slimpay_mobile_phone(self, partner, fields=('phone', 'mobile')):
-        """If possible, supply a valid mobile phone number to Slimpay, to
-        simplify end-user's life. If found, return it E164 formatted.
-
-        The method searches the given `partner`'s `fields` for a
-        mobile phone, and uses its country to parse it. If no country
-        was found, use France as a default (slimpay is mostly a
-        french company for the moment).
-        """
-        region = 'FR'  # slimpay mainly supports France
-        if partner.country_id.code:
-            region = partner.country_id.code.upper()
-        for field in fields:
-            phone = getattr(partner, field)
-            if phone:
-                try:
-                    parsed = phonenumbers.parse(phone, region=region)
-                except phonenumbers.NumberParseException:
-                    continue
-                if (phonenumbers.number_type(parsed)
-                        == phonenumbers.PhoneNumberType.MOBILE):
-                    return phonenumbers.format_number(
-                        parsed, phonenumbers.PhoneNumberFormat.E164)
-
-    def _slimpay_api_signatory(self, partner):
-        data = {
-            "familyName": partner.lastname or None,
-            "givenName": partner.firstname or None,
-            "telephone": self.slimpay_mobile_phone(partner),
-            "email": partner.email or None,
-            "billingAddress": {
-                "street1": partner.street or None,
-                "street2": partner.street2 or None,
-                "postalCode": partner.zip or None,
-                "city": partner.city or None,
-                "country": partner.country_id.code or None,
-            }
-        }
-        return data
-
-    def _slimpay_api_mandate(self, partner, notify_url):
-        return {
-            'type': 'signMandate',
-            'mandate': {
-                'action': 'sign',
-                'paymentScheme': 'SEPA.DIRECT_DEBIT.CORE',
-                'signatory': self._slimpay_api_signatory(partner),
-            },
-        }
-
-    def _slimpay_api_payment(self, ref, amount, currency, partner, notify_url):
-        return {
-            'type': 'payment',
-            'action': 'create',
-            'payin': {
-                'scheme': 'SEPA.DIRECT_DEBIT.CORE',
-                'direction': 'IN',
-                'amount': amount,
-                'currency': currency.name,
-                'label': ref,
-                'notifyUrl': notify_url,
-            }
-        }
-
-    def _slimpay_api_create_order(self, ref, amount, currency, partner,
-                                  notify_url):
-        return {
-            'reference': ref,
-            'locale': self.env.context.get('lang', 'fr_FR').split('_')[0],
-            'creditor': {'reference': self.slimpay_creditor},
-            'subscriber': {'reference': partner.id},
-            'started': True,
-            'items': [
-                self._slimpay_api_mandate(partner, notify_url),
-                self._slimpay_api_payment(ref, amount, currency, partner,
-                                          notify_url),
-            ],
-        }
-
-    def slimpay_get_approval_url(self, ref, amount, currency, partner,
-                                 notify_url):
-        root = self.slimpay_root_doc
-        params = self._slimpay_api_create_order(
-            ref, amount, currency, partner, notify_url)
-        _logger.debug("slimpay parameters: %s", params)
-        order = self.slimpay_client.action(
-            root, 'https://api.slimpay.net/alps#create-orders',
-            validate=False, action='POST', params=params)
-        url = order.links['https://api.slimpay.net/alps#user-approval'].url
-        _logger.debug("User approval URL is: %s", url)
-        return url
 
     def _slimpay_s2s_validate(self, sale_order, posted_data):
         """The posted data is validated using a http request to slimpay's
@@ -193,7 +56,7 @@ class PaymentAcquirerSlimpay(models.Model):
         assert sale_order.payment_acquirer_id.provider == 'slimpay'
         so_url = posted_data['_links']['self']['href']
         doc = self.slimpay_client.get(so_url)
-        _logger.warning(doc)
+        _logger.info("Slimpay corresponding order doc: %s", doc)
         assert doc['reference'] == sale_order.name
         slimpay_state = doc['state']
         tx = sale_order.payment_tx_id
@@ -201,13 +64,7 @@ class PaymentAcquirerSlimpay(models.Model):
             'acquirer_reference': doc['id'],
         }
         if slimpay_state == 'closed.completed':
-            tx_attrs['state'] = 'done'
-            tx_attrs['date_validate'] = parse_date(doc['dateClosed'])
-            tx.write(tx_attrs)
-            if tx.sudo().callback_eval:
-                safe_eval(tx.sudo().callback_eval, {'self': self})
-            # Confirm sale if necessary
-            tx._confirm_so(acquirer_name='slimpay')
+            self._slimpay_tx_completed(tx, doc, **tx_attrs)
             return True
         elif slimpay_state.startswith("closed.aborted"):
             tx_attrs['state'] = 'cancel'
@@ -215,3 +72,43 @@ class PaymentAcquirerSlimpay(models.Model):
         # Confirm sale if necessary
         tx._confirm_so(acquirer_name='slimpay')
         return False
+
+    def _slimpay_tx_completed(self, tx, order_doc, **tx_attrs):
+        tx_attrs['state'] = 'done'
+        tx_attrs['date_validate'] = parse_date(order_doc['dateClosed'])
+        tx.write(tx_attrs)
+        if tx.sudo().callback_eval:
+            safe_eval(tx.sudo().callback_eval, {'self': self})
+        # Confirm sale if necessary
+        tx._confirm_so(acquirer_name='slimpay')
+        # Use mandate as a token for later automatic payments
+        partner = tx.sale_order_id.partner_id
+        client = self.slimpay_client
+        mandate_doc = client.get_from_doc(order_doc, 'get-mandate')
+        mandate_id = mandate_doc['id']
+        bank_account_doc = client.get_from_doc(mandate_doc, 'get-bank-account')
+        token_name = u'IBAN %s (%s)' % (
+            bank_account_doc['iban'], bank_account_doc['institutionName'])
+        token = self.env['payment.token'].create({
+            'name': token_name,
+            'partner_id': partner.id,
+            'acquirer_id': tx.acquirer_id.id,
+            'acquirer_ref': mandate_id,
+        })
+        token.payment_ids |= tx
+        partner.payment_token_id = token.id
+        _logger.info('Added token id %s for %s', token.id, token.name)
+
+
+class SlimpayTransaction(models.Model):
+    _inherit = 'payment.transaction'
+
+    @api.multi
+    def slimpay_s2s_do_transaction(self, **kwargs):
+        """ Perform a payment through a server to server call using a previously
+        signed mandate.
+        """
+        # See contract_payment_auto/models/account_analytic_account.py:99
+        self.acquirer_id.slimpay_client.create_payin(
+            'TR%d' % self.id, self.payment_token_id.acquirer_ref,
+            self.amount, self.currency_id.name)

@@ -3,7 +3,7 @@ from base64 import b64encode
 
 from iso8601 import parse_date
 import requests
-
+import phonenumbers
 import coreapi
 from hal_codec import HALCodec
 
@@ -36,16 +36,167 @@ def _signed_date(mandate):
     return parse_date(mandate['dateSigned'])
 
 
-def get_valid_mandate(client, root, **params):
-    """Return the most recently signed active mandate which matches given
-    criterias (see
-    https://dev.slimpay.com/hapi/reference/mandates#search-mandates).
+def partner_mobile_phone(partner, fields=('phone', 'mobile')):
+    """If possible, supply a valid mobile phone number to Slimpay, to
+    simplify end-user's life. If found, return it E164 formatted.
+
+    The method searches the given `partner`'s `fields` for a
+    mobile phone, and uses its country to parse it. If no country
+    was found, use France as a default (slimpay is mostly a
+    french company for the moment).
     """
-    doc = client.action(
-        root, 'https://api.slimpay.net/alps#search-mandates',
-        params=params, action='GET')
-    if 'mandates' in doc:
-        ordered_valid = [m for m in sorted(doc['mandates'], key=_signed_date)
-                         if m['state'] == 'active']
-        if ordered_valid:
-            return ordered_valid[-1]
+    region = 'FR'  # slimpay mainly supports France
+    if partner.country_id.code:
+        region = partner.country_id.code.upper()
+    for field in fields:
+        phone = getattr(partner, field)
+        if phone:
+            try:
+                parsed = phonenumbers.parse(phone, region=region)
+            except phonenumbers.NumberParseException:
+                continue
+            if (phonenumbers.number_type(parsed)
+                    == phonenumbers.PhoneNumberType.MOBILE):
+                return phonenumbers.format_number(
+                    parsed, phonenumbers.PhoneNumberFormat.E164)
+
+
+def subscriber_from_partner(partner):
+    data = {
+        "familyName": partner.lastname or None,
+        "givenName": partner.firstname or None,
+        "telephone": partner_mobile_phone(partner),
+        "email": partner.email or None,
+        "billingAddress": {
+            "street1": partner.street or None,
+            "street2": partner.street2 or None,
+            "postalCode": partner.zip or None,
+            "city": partner.city or None,
+            "country": partner.country_id.code or None,
+        }
+    }
+    return {'reference': partner.id, 'signatory': data}
+
+
+class SlimpayClient(object):
+
+    def __init__(self, api_url, creditor, app_id, app_secret):
+        self.api_url = api_url
+        self.creditor = creditor
+        self.app_id = app_id
+        self.app_secret = app_secret
+        self._client = get_client(api_url, app_id, app_secret)
+        self._root_doc = None
+
+    def action(self, action, short_method_name, validate=False, params=None):
+        return self._client.action(
+            self.root_doc, self.method_name(short_method_name),
+            action=action, validate=validate, params=params)
+
+    def approval_url(self, ref, locale, amount, currency, subscriber,
+                     notify_url):
+        """ Return the URL a final user must visit to perform a mandate
+        signature with a first payment.
+
+        `ref` is the internal order reference (e.g.: "SO402")
+        `locale` is the language locale of the user (e.g.: "fr")
+        `amount` and `currency` designate the initial payment value
+        `subscriber` designate a dict with keys 'reference' and 'signatory' as
+        obtained using with `subscriber_from_partner`.
+        `notify_url` is the URL to be notified at the end of the operation.
+        """
+        params = self._repr_order(
+            ref, locale, amount, currency, subscriber, notify_url)
+        _logger.debug("slimpay approval_url parameters: %s", params)
+        order = self.action('POST', 'create-orders', params=params)
+        url = order.links[self.method_name('user-approval')].url
+        _logger.debug("User approval URL is: %s", url)
+        return url
+
+    def create_payin(self, payin_ref, mandate_ref, amount, currency):
+        params = {
+            'creditor': {'reference': self.creditor},
+            'mandate': {'reference': mandate_ref},
+            'reference': payin_ref, 'label': payin_ref,
+            'amount': amount, 'currency': currency,
+            'scheme': 'SEPA.DIRECT_DEBIT.CORE',
+            'executionDate': None,  # means ASAP
+        }
+        response = self.action('POST', 'create-payins', params=params)
+        if response.get('executionStatus') != 'toprocess':
+            _logger.error(
+                'Invalid slimpay payment response for transaction %s:\n %s',
+                self.id, response)
+            raise ValueError('Invalid slimpay payment status for %s: %s'
+                             % (self.id, response.get('executionStatus')))
+
+    def get(self, url):
+        """ Expose the raw coreapi `get` method """
+        return self._client.get(url)
+
+    def get_from_doc(self, doc, short_method_name):
+        """ Fetch the `short_method_name` method from given document `doc` """
+        return self._client.get(doc[self.method_name(short_method_name)].url)
+
+    def last_valid_mandate(self, subscriber_ref):
+        """Return the most recently signed active mandate which matches given
+        search criterias
+        (see https://dev.slimpay.com/hapi/reference/mandates#search-mandates)
+        """
+        search_params = {'creditorReference': self.creditor,
+                         'subscriberReference': subscriber_ref}
+        doc = self.action('GET', 'search-mandates', params=search_params)
+        if 'mandates' in doc:
+            ordered_valid = [
+                m for m in sorted(doc['mandates'], key=_signed_date)
+                if m['state'] == 'active']
+            if ordered_valid:
+                return ordered_valid[-1]
+
+    def method_name(self, name):
+        """ Return complete slimpay API method from its given short name """
+        return 'https://api.slimpay.net/alps#%s' % name
+
+    @property
+    def root_doc(self):
+        if self._root_doc is None:
+            self._root_doc = self._client.get(self.api_url)
+        return self._root_doc
+
+    def _repr_mandate(self, subscriber):
+        return {
+            'type': 'signMandate',
+            'mandate': {
+                'action': 'sign',
+                'paymentScheme': 'SEPA.DIRECT_DEBIT.CORE',
+                'signatory': subscriber['signatory'],
+            },
+        }
+
+    def _repr_order(self, ref, locale, amount, currency, subscriber,
+                    notify_url):
+        return {
+            'reference': ref,
+            'locale': locale,
+            'creditor': {'reference': self.creditor},
+            'subscriber': {'reference': subscriber['reference']},
+            'started': True,
+            'items': [
+                self._repr_mandate(subscriber),
+                self._repr_payment(ref, amount, currency, notify_url),
+            ],
+        }
+
+    def _repr_payment(self, label, amount, currency, notify_url):
+        return {
+            'type': 'payment',
+            'action': 'create',
+            'payin': {
+                'scheme': 'SEPA.DIRECT_DEBIT.CORE',
+                'direction': 'IN',
+                'amount': amount,
+                'currency': currency.name,
+                'label': label,
+                'notifyUrl': notify_url,
+            }
+        }

@@ -6,6 +6,8 @@ from odoo.http import request, Response
 
 from odoo.addons.website_sale.controllers.main import WebsiteSale
 
+from odoo.addons.payment_slimpay.models import slimpay_utils
+
 
 _logger = logging.getLogger(__name__)
 
@@ -21,6 +23,7 @@ class SlimpayController(WebsiteSale):
         slimpay's redirect URL instead of a form to be submitted.
         """
         _logger.debug('payment_transaction CALLED! kwargs: %s', kwargs)
+        _logger.debug('session data: %s', request.session)
         response = self.payment_transaction(
             acquirer_id, tx_type='form', token=None, **kwargs)
         _logger.debug('initial response:\n%s', response)
@@ -30,19 +33,12 @@ class SlimpayController(WebsiteSale):
         ref, amount, currency = so.name, so.amount_total, so.currency_id
         partner = so.partner_id
         acquirer = request.env['payment.acquirer'].sudo().browse(acquirer_id)
-        mandate = acquirer.slimpay_get_valid_mandate(partner)
         return_url = '/shop/payment/validate'
-        if mandate is None:
-            # If the partner has no valid mandate, ask a signature and pay:
-            url = acquirer.slimpay_get_approval_url(ref, amount, currency,
-                                                    partner, return_url)
-        else:
-            # Otherwise only create a direct debit:
-            # raise Exception('Debit with pre-existing mandate unimplemented!')
-            url = acquirer.slimpay_get_approval_url(ref, amount, currency,
-                                                    partner, return_url)
-        _logger.debug('Approval URL: %s', url)
-        return url
+        locale = request.env.context.get('lang', 'fr_FR').split('_')[0]
+        # May emit a direct debit only if a mandate exists; unsupported for now
+        subscriber = slimpay_utils.subscriber_from_partner(partner)
+        return acquirer.slimpay_client.approval_url(
+            ref, locale, amount, currency, subscriber, return_url)
 
     @http.route(['/payment/slimpay/s2s/feedback'], type='http',
                 auth='public', methods=['POST'], csrf=False)
@@ -72,12 +68,13 @@ class SlimpayController(WebsiteSale):
 
     def _get_mandatory_shipping_fields(self):
         ''' Replace "name" by "firstname" and "lastname" '''
-        fields = super(SlimpayController, self)._get_mandatory_shipping_fields()
+        fields = super(SlimpayController,
+                       self)._get_mandatory_shipping_fields()
         return ['firstname', 'lastname'] + [f for f in fields if f != 'name']
 
     def values_postprocess(self, order, mode, values, errors, error_msg):
-        """
-        """
+        """ Do not drop firstname and lastname fields for `partner_firstname`
+        module compatiblity. """
         new_values, errors, error_msg = super(
             SlimpayController, self).values_postprocess(order, mode, values,
                                                         errors, error_msg)
