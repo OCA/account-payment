@@ -1,6 +1,8 @@
 import logging
 import json
 
+from coreapi.exceptions import ErrorMessage as CoreAPIErrorMessage
+
 from odoo import http
 from odoo.http import request, Response
 
@@ -37,8 +39,16 @@ class SlimpayController(WebsiteSale):
         locale = request.env.context.get('lang', 'fr_FR').split('_')[0]
         # May emit a direct debit only if a mandate exists; unsupported for now
         subscriber = slimpay_utils.subscriber_from_partner(partner)
-        return acquirer.slimpay_client.approval_url(
-            ref, locale, amount, currency, subscriber, return_url)
+        try:
+            return acquirer.slimpay_client.approval_url(
+                ref, locale, amount, currency, subscriber, return_url)
+        except CoreAPIErrorMessage as exc:
+            if exc.error.startswith('Duplicate order'):
+                _logger.warning('GOT DUPLICATE ORDER FOR %s', so.name)
+                url = acquirer.slimpay_client.get_approval_url(so.id)
+                if url:
+                    return url
+            raise
 
     @http.route(['/payment/slimpay/s2s/feedback'], type='http',
                 auth='public', methods=['POST'], csrf=False)

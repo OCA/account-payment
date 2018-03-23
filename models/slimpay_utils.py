@@ -113,6 +113,13 @@ class SlimpayClient(object):
         _logger.debug("User approval URL is: %s", url)
         return url
 
+    def get_approval_url(self, order_ref):
+        order_doc = self.action('GET', 'get-orders', params={
+            'creditorReference': self.creditor, 'reference': order_ref})
+        meth = self.method_name('user-approval')
+        if meth in order_doc.links:
+            return order_doc.links[meth]
+
     def create_payin(self, payin_ref, mandate_ref, amount, currency):
         params = {
             'creditor': {'reference': self.creditor},
