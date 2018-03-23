@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2011-2012 7 i TRIA <http://www.7itria.cat>
 # Copyright 2011-2012 Avanzosc <http://www.avanzosc.com>
 # Copyright 2013 Pedro M. Baeza <pedro.baeza@tecnativa.com>
@@ -85,7 +84,7 @@ class PaymentReturn(models.Model):
                     append_error(line)
         if error_list:
             raise UserError(
-                _("Payment reference must be unique!"
+                _("Payment reference must be unique"
                   "\n%s") % '\n'.join(error_list)
             )
 
@@ -255,10 +254,10 @@ class PaymentReturnLine(models.Model):
         help="Returned amount. Can be different from the move amount",
         digits=dp.get_precision('Account'))
     expense_account = fields.Many2one(
-        comodel_name='account.account', string='Expense Account')
-    expense_amount = fields.Float(string='Expense amount')
+        comodel_name='account.account', string='Charges Account')
+    expense_amount = fields.Float(string='Charges Amount')
     expense_partner_id = fields.Many2one(
-        comodel_name="res.partner", string="Expense partner",
+        comodel_name="res.partner", string="Charges Partner",
         domain=[('supplier', '=', True)],
     )
 

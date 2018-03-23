@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2013 Pedro M. Baeza <pedro.baeza@tecnativa.com>
 # Copyright 2014 Markus Schneider <markus.schneider@initos.com>
 # Copyright 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
@@ -34,7 +33,7 @@ class AccountInvoice(models.Model):
         super(AccountInvoice, self)._get_payment_info_JSON()
         if not self.returned_payment:
             return True
-        if self.payments_widget != u'false':
+        if self.payments_widget != 'false':
             info = json.loads(self.payments_widget)
         else:
             info = {'title': _('Less Payment'),
