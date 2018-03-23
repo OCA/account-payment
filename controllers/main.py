@@ -30,7 +30,7 @@ class SlimpayController(WebsiteSale):
         # Get some required database objects
         so_id = request.session['sale_order_id']
         so = request.env['sale.order'].sudo().browse(so_id)
-        ref, amount, currency = so.name, so.amount_total, so.currency_id
+        ref, amount, currency = so.id, so.amount_total, so.currency_id
         partner = so.partner_id
         acquirer = request.env['payment.acquirer'].sudo().browse(acquirer_id)
         return_url = '/shop/payment/validate'
@@ -48,8 +48,8 @@ class SlimpayController(WebsiteSale):
         """
         post = json.loads(request.httprequest.data)
         _logger.debug('slimpay feedback, post=%s', post)
-        ref = post['reference']
-        so = request.env['sale.order'].sudo().search([('name', '=', ref)])
+        ref = int(post['reference'])
+        so = request.env['sale.order'].sudo().browse(ref)
         if len(so) != 1:
             _logger.warning('Enable to find 1 sale order for %r', ref)
             return Response('Incorrect sale order reference', status=500)

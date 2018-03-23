@@ -57,7 +57,7 @@ class PaymentAcquirerSlimpay(models.Model):
         so_url = posted_data['_links']['self']['href']
         doc = self.slimpay_client.get(so_url)
         _logger.info("Slimpay corresponding order doc: %s", doc)
-        assert doc['reference'] == sale_order.name
+        assert doc['reference'] == str(sale_order.id)
         slimpay_state = doc['state']
         tx = sale_order.payment_tx_id
         tx_attrs = {
