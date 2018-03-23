@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2011-2012 7 i TRIA <http://www.7itria.cat>
 # Copyright 2011-2012 Avanzosc <http://www.avanzosc.com>
 # Copyright 2013 Pedro M. Baeza <pedro.baeza@tecnativa.com>
@@ -11,7 +10,7 @@
 
 {
     "name": "Account Payment Returns",
-    "version": "10.0.1.1.0",
+    "version": "11.0.1.0.0",
     "summary": "Manage the return of your payments",
     'license': 'AGPL-3',
     "depends": [
