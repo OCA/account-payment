@@ -2,8 +2,10 @@ odoo.define('payment_slimpay.slimpay', function(require) {
     "use strict";
 
     var ajax = require('web.ajax');
-
-    console.log('SLIMPAY JAVASCRIPT MODULE LOADED!');
+    var core = require('web.core');
+    var _t = core._t;
+    var qweb = core.qweb;
+    ajax.loadXML('/payment_slimpay/static/src/xml/slimpay_templates.xml', qweb);
 
     $('#pay_slimpay').on('click', function(ev) {
         ev.preventDefault();
@@ -33,8 +35,14 @@ odoo.define('payment_slimpay.slimpay', function(require) {
                      'call', params)
             .done(function (data) {
                 window.location.href = data;
-            }).fail(function() {
-                console.log('Please add error display... args: ', arguments);
+            })
+            .fail(function() {
+                console.log('Slimpay transaction error! Args: ', arguments);
+                var msg = (arguments && arguments[1] && arguments[1].data &&
+                           arguments[1].data.message);
+                var wizard = $(qweb.render(
+                    'slimpay.error', {'msg': msg || _t('Payment error')}));
+                wizard.appendTo($('body')).modal({'keyboard': true});
             });
         return false;
     });

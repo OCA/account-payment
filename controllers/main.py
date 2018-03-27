@@ -43,12 +43,13 @@ class SlimpayController(WebsiteSale):
             return acquirer.slimpay_client.approval_url(
                 ref, locale, amount, currency, subscriber, return_url)
         except CoreAPIErrorMessage as exc:
-            if exc.error.startswith('Duplicate order'):
+            _logger.error('CoreAPIErrorMessage: %s', exc)
+            if unicode(exc).startswith(u'Duplicate order'):
                 _logger.warning('GOT DUPLICATE ORDER FOR %s', so.name)
                 url = acquirer.slimpay_client.get_approval_url(so.id)
                 if url:
                     return url
-            raise
+            raise Exception(exc.error['message'])
 
     @http.route(['/payment/slimpay/s2s/feedback'], type='http',
                 auth='public', methods=['POST'], csrf=False)
