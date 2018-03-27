@@ -10,7 +10,7 @@
     'depends': ['website_sale', 'partner_firstname', 'base_phone'],
     'external_dependencies': {
         'python': ['coreapi', 'hal_codec', 'iso8601', 'requests',
-                   'phonenumbers']
+                   'phonenumbers', 'regex']
     },
     'data': [
         'views/payment_views.xml',
