@@ -72,16 +72,19 @@ class SlimpayPartner(models.Model):
     def _slimpay_firstname_constraint(self):
         """Ensure firstname is valid for slimpay."""
         for rec in self:
-            self._slimpay_check_firstname(rec.firstname)
+            if not rec.is_company:
+                self._slimpay_check_firstname(rec.firstname or u'')
 
     @api.constrains("lastname")
     def _slimpay_lastname_constraint(self):
         """Ensure lastname is valid for slimpay."""
         for rec in self:
-            self._slimpay_check_lastname(rec.lastname)
+            if not rec.is_company:
+                self._slimpay_check_lastname(rec.lastname or u'')
 
     @api.constrains("zip")
     def _slimpay_zip_constraint(self):
         """Ensure zipcode is valid for slimpay (when in France)."""
         for rec in self:
-            self._slimpay_check_zip(rec.zip, country_id=rec.country_id.id)
+            if not rec.is_company:
+                self._slimpay_check_zip(rec.zip, country_id=rec.country_id.id)
