@@ -96,3 +96,15 @@ class SlimpayController(WebsiteSale):
                     "been dropped.", field)
                 new_values[field] = values[field]
         return new_values, errors, error_msg
+
+    def checkout_form_validate(self, mode, all_form_values, data):
+        """ Validate partner constraints wrt Slimpay's rule """
+        errors, error_msg = super(
+            SlimpayController, self).checkout_form_validate(
+                mode, all_form_values, data)
+        order = request.website.sale_get_order()
+        partner = order.partner_id
+        for field, msg in partner.slimpay_checks(all_form_values).items():
+            errors[field] = 'error'
+            error_msg.append(msg)
+        return errors, error_msg
