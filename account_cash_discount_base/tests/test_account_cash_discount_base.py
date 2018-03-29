@@ -30,6 +30,24 @@ class TestAccountCashDiscountBase(TestAccountCashDiscountCommon):
         invoice.compute_taxes()
         return invoice
 
+    def test_company_use_tax_adjustment(self):
+        self.company.cash_discount_base_amount_type = 'untaxed'
+        self.assertFalse(self.company.cash_discount_use_tax_adjustment)
+
+        self.company.cash_discount_base_amount_type = 'total'
+        self.assertTrue(self.company.cash_discount_use_tax_adjustment)
+
+    def test_invoice_has_discount(self):
+        invoice = self.create_simple_invoice(1000)
+        self.assertFalse(invoice.has_discount)
+
+        invoice.discount_percent = 10
+        self.assertFalse(invoice.has_discount)
+
+        invoice.discount_delay = 10
+        invoice._onchange_discount_delay()
+        self.assertTrue(invoice.has_discount)
+
     def test_compute_discount_untaxed(self):
         self.company.cash_discount_base_amount_type = 'untaxed'
         invoice = self.create_simple_invoice(1000)

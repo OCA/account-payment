@@ -43,6 +43,10 @@ class AccountInvoice(models.Model):
         string="Discount Due Date",
         compute='_compute_discount_due_date',
     )
+    has_discount = fields.Boolean(
+        compute='_compute_has_discount',
+        store=True,
+    )
 
     @api.multi
     @api.depends(
@@ -82,7 +86,21 @@ class AccountInvoice(models.Model):
             rec.discount_due_date_readonly = rec.discount_due_date
 
     @api.multi
+    @api.depends(
+        'discount_amount',
+        'discount_due_date',
+    )
+    def _compute_has_discount(self):
+        for rec in self:
+            rec.has_discount = (
+                rec.discount_amount != 0 and
+                rec.discount_due_date != 0
+            )
+
+    @api.multi
     @api.onchange(
+        'has_discount_amount',
+        'discount_amount',
         'discount_delay',
     )
     def _onchange_discount_delay(self):
