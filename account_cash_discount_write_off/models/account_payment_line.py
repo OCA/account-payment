@@ -11,27 +11,18 @@ class PaymentLine(models.Model):
     _inherit = 'account.payment.line'
 
     @api.multi
-    def check_cash_discount_write_off_creation(self):
+    def _check_cash_discount_write_off_creation(self):
         self.ensure_one()
-        move_line = self.move_line_id
-        has_partial_reconciliation = (
-            bool(move_line.matched_debit_ids) or
-            bool(move_line.matched_credit_ids))
-        return (
-            self.pay_with_discount and
-            has_partial_reconciliation and
-            move_line.invoice_id
-        )
+        return self.pay_with_discount
 
     @api.multi
     def get_cash_discount_writeoff_move_values(self):
         self.ensure_one()
         move_line = self.move_line_id
         partner = move_line.partner_id
-        partner = partner._find_accounting_partner(partner)
         invoice = move_line.invoice_id
         company = invoice.company_id
-        tax_adjustment = company.cash_discount_base_amount_type == 'total'
+        tax_adjustment = company.cash_discount_use_tax_adjustment
 
         woff_account = False
         woff_journal = False
