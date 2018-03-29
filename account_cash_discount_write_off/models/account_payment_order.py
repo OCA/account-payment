@@ -13,20 +13,20 @@ class AccountPaymentOrder(models.Model):
     def generated2uploaded(self):
         res = super(AccountPaymentOrder, self).generated2uploaded()
         for order in self:
-            order.create_cash_discount_write_off()
+            order._create_cash_discount_write_off()
         return res
 
     @api.multi
-    def create_cash_discount_write_off(self):
+    def _create_cash_discount_write_off(self):
         self.ensure_one()
         for payment_line in self.payment_line_ids:
-            if payment_line.check_cash_discount_write_off_creation():
-                self.create_payment_line_discount_write_off(payment_line)
+            if payment_line._check_cash_discount_write_off_creation():
+                self._create_payment_line_discount_write_off(payment_line)
 
     @api.multi
-    def create_payment_line_discount_write_off(self, payment_line):
+    def _create_payment_line_discount_write_off(self, payment_line):
         self.ensure_one()
-        move = self.create_payment_line_discount_write_off_move(payment_line)
+        move = self._create_payment_line_discount_write_off_move(payment_line)
         move_lines = payment_line.move_line_id | move.line_ids
         lines_to_reconcile = move_lines.filtered(
             lambda line:
@@ -36,9 +36,10 @@ class AccountPaymentOrder(models.Model):
         lines_to_reconcile.reconcile()
 
     @api.multi
-    def create_payment_line_discount_write_off_move(self, payment_line):
+    def _create_payment_line_discount_write_off_move(self, payment_line):
         self.ensure_one()
         move_values = payment_line.get_cash_discount_writeoff_move_values()
         move = self.env['account.move'].create(move_values)
-        move.post()
+        if self.payment_mode_id.post_move:
+            move.post()
         return move
