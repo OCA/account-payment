@@ -11,9 +11,7 @@
         <field name="arch" type="xml">
 
             <field name="date_type" position="after">
-                <field name="cash_discount_date_start"
-                       attrs="{'invisible': [('date_type', '!=', 'discount_due_date')], 'required': [('date_type', '=', 'discount_due_date')]}"/>
-                <field name="cash_discount_date_end"
+                <field name="cash_discount_date"
                        attrs="{'invisible': [('date_type', '!=', 'discount_due_date')], 'required': [('date_type', '=', 'discount_due_date')]}"/>
             </field>
 

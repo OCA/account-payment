@@ -24,9 +24,8 @@ class AccountMoveLine(models.Model):
         values = super(AccountMoveLine, self)._prepare_payment_line_vals(
             payment_order)
 
-        values['original_amount_currency'] = values['amount_currency']
         invoice = self.invoice_id
-        if invoice and invoice.discount_due_date:
+        if invoice and invoice.discount_due_date and invoice.has_discount:
             today = fields.Date.today()
             discount_amount = invoice.discount_amount
             amount_currency = abs(self.amount_residual) - discount_amount
