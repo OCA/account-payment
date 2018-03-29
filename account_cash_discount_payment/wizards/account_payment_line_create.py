@@ -14,8 +14,11 @@ class AccountPaymentLineCreate(models.TransientModel):
             ('discount_due_date', _("Discount Due Date")),
         ],
     )
-    cash_discount_date_start = fields.Date()
-    cash_discount_date_end = fields.Date()
+    cash_discount_date = fields.Date(
+        default=lambda self: fields.Date.today(),
+        help="Search lines with a discount due date which is posterior to "
+             "the selected date."
+    )
 
     @api.multi
     def _prepare_move_line_domain(self):
@@ -25,10 +28,8 @@ class AccountPaymentLineCreate(models.TransientModel):
         )._prepare_move_line_domain()
 
         if self.date_type == 'discount_due_date':
-            date_start = self.cash_discount_date_start
-            date_end = self.cash_discount_date_end
+            due_date = self.cash_discount_date
             domain += [
-                ('invoice_id.discount_due_date', '>=', date_start),
-                ('invoice_id.discount_due_date', '<=', date_end),
+                ('invoice_id.discount_due_date', '>=', due_date),
             ]
         return domain
