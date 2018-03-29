@@ -59,6 +59,12 @@ class TestAccountCashDiscountWriteOff(TestAccountCashDiscountPaymentCommon):
 
         payment_line = payment_order.payment_line_ids[0]
         self.assertTrue(payment_line.pay_with_discount)
+        self.assertTrue(payment_line._check_cash_discount_write_off_creation())
+        old_amount = payment_line.amount_currency
+        payment_line.amount_currency = 10
+        self.assertFalse(
+            payment_line._check_cash_discount_write_off_creation())
+        payment_line.amount_currency = old_amount
 
         payment_order.open2generated()
 
