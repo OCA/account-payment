@@ -47,11 +47,6 @@ For further information, please visit:
 
  * https://www.odoo.com/forum/help-1
 
-Known issues / Roadmap
-======================
-
-* If you change the company base amount type, discount amount will change on old invoices as it's a simple compute method.
-
 Bug Tracker
 ===========
 
