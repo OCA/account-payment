@@ -27,6 +27,7 @@ class TestAccountCashDiscountWriteOff(TestAccountCashDiscountPaymentCommon):
 
     def test_cash_discount_with_write_off(self):
         payment_mode = self.payment_mode_out
+        payment_mode.post_move = True
         discount_due_date = Date.today()
 
         invoice = self.create_supplier_invoice(
@@ -37,7 +38,7 @@ class TestAccountCashDiscountWriteOff(TestAccountCashDiscountPaymentCommon):
         move.post()
 
         payment_order = self.PaymentOrder.create({
-            'payment_mode_id': self.payment_mode_out.id,
+            'payment_mode_id': payment_mode.id,
             'payment_type': 'outbound',
             'journal_id': self.bank_ing_journal.id,
         })
@@ -46,8 +47,7 @@ class TestAccountCashDiscountWriteOff(TestAccountCashDiscountPaymentCommon):
             active_model=payment_order._name,
             active_id=payment_order.id,
         ).create({
-            'cash_discount_date_start': discount_due_date,
-            'cash_discount_date_end': discount_due_date,
+            'cash_discount_date': discount_due_date,
             'date_type': 'discount_due_date',
             'journal_ids': [(6, 0, [self.purchase_journal.id])],
         })
@@ -104,6 +104,7 @@ class TestAccountCashDiscountWriteOff(TestAccountCashDiscountPaymentCommon):
         self.assertEqual(self.company.cash_discount_base_amount_type, 'total')
 
         payment_mode = self.payment_mode_out
+        payment_mode.post_move = True
         discount_due_date = Date.today()
 
         invoice = self.create_supplier_invoice(
@@ -115,7 +116,7 @@ class TestAccountCashDiscountWriteOff(TestAccountCashDiscountPaymentCommon):
         move.post()
 
         payment_order = self.PaymentOrder.create({
-            'payment_mode_id': self.payment_mode_out.id,
+            'payment_mode_id': payment_mode.id,
             'payment_type': 'outbound',
             'journal_id': self.bank_ing_journal.id,
         })
@@ -124,8 +125,7 @@ class TestAccountCashDiscountWriteOff(TestAccountCashDiscountPaymentCommon):
             active_model=payment_order._name,
             active_id=payment_order.id,
         ).create({
-            'cash_discount_date_start': discount_due_date,
-            'cash_discount_date_end': discount_due_date,
+            'cash_discount_date': discount_due_date,
             'date_type': 'discount_due_date',
             'journal_ids': [(6, 0, [self.purchase_journal.id])],
         })
