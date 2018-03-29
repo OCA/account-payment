@@ -3,6 +3,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, models, fields
+from odoo.tools import float_compare
 
 
 class AccountMoveLine(models.Model):
@@ -27,11 +28,16 @@ class AccountMoveLine(models.Model):
         invoice = self.invoice_id
         if invoice and invoice.discount_due_date and invoice.has_discount:
             today = fields.Date.today()
+            rounding = invoice.currency_id.rounding
             discount_amount = invoice.discount_amount
-            amount_currency = abs(self.amount_residual) - discount_amount
-            values.update({
-                'pay_with_discount': invoice.discount_due_date >= today,
-                'amount_currency': amount_currency,
-                'discount_amount': discount_amount,
-            })
+            pay_with_discount = (
+                invoice.discount_due_date >= today and
+                float_compare(
+                    invoice.residual, invoice.amount_total,
+                    precision_rounding=rounding,
+                ) == 0
+            )
+            values['pay_with_discount'] = pay_with_discount
+            if pay_with_discount:
+                values['amount_currency'] -= discount_amount
         return values
