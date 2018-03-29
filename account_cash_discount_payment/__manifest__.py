@@ -15,6 +15,7 @@
         'account_payment_order',
     ],
     'data': [
+        'views/account_move_line.xml',
         'views/account_payment_line.xml',
         'wizards/account_payment_line_create.xml',
     ],
