@@ -20,6 +20,13 @@ class AccountPaymentLineCreate(models.TransientModel):
              "the selected date."
     )
 
+    @api.onchange(
+        'date_type', 'move_date', 'due_date', 'journal_ids', 'invoice',
+        'target_move', 'allow_blocked', 'payment_mode', 'cash_discount_date',
+    )
+    def move_line_filters_change(self):
+        return super(AccountPaymentLineCreate, self).move_line_filters_change()
+
     @api.multi
     def _prepare_move_line_domain(self):
         self.ensure_one()
