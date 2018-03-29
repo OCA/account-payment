@@ -24,9 +24,11 @@ class AccountInvoice(models.Model):
     amount_total_with_discount = fields.Monetary(
         string="Total (with discount)",
         compute='_compute_amount_total_with_discount',
+        store=True,
     )
     discount_amount = fields.Monetary(
         compute='_compute_discount_amount',
+        store=True,
     )
     discount_delay = fields.Integer(
         string="Discount Delay (days)",
@@ -47,7 +49,7 @@ class AccountInvoice(models.Model):
         'amount_total',
         'amount_untaxed',
         'discount_percent',
-        'company_id.cash_discount_base_amount_type',
+        'company_id',
     )
     def _compute_discount_amount(self):
         for rec in self:
@@ -58,8 +60,7 @@ class AccountInvoice(models.Model):
                 base_amount = (
                     base_amount_type == 'untaxed' and
                     rec.amount_untaxed or rec.amount_total)
-                discount_amount = (
-                    base_amount * (0.0 + rec.discount_percent / 100))
+                discount_amount = base_amount * (rec.discount_percent / 100)
             rec.discount_amount = discount_amount
 
     @api.multi
