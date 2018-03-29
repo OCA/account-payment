@@ -18,6 +18,7 @@
                     <field name="discount_delay"/>
                     <field name="discount_due_date" invisible="1"/>
                     <field name="discount_due_date_readonly"/>
+                    <field name="has_discount" invisible="1"/>
                 </group>
             </xpath>
 
@@ -38,6 +39,7 @@
                     <field name="discount_delay"/>
                     <field name="discount_due_date" invisible="1"/>
                     <field name="discount_due_date_readonly"/>
+                    <field name="has_discount" invisible="1"/>
                 </group>
             </xpath>
 
