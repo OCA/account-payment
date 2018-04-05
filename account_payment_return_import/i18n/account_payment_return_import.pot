@@ -1,22 +1,17 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * account_payment_return_import
+#	* account_payment_return_import
 #
-# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: account-payment (8.0)\n"
+"Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-08-15 18:00+0000\n"
-"PO-Revision-Date: 2016-04-11 16:26+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: Thai (http://www.transifex.com/oca/OCA-account-payment-8-0/"
-"language/th/)\n"
-"Language: th\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: \n"
 
 #. module: account_payment_return_import
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:264
@@ -37,8 +32,7 @@ msgstr ""
 
 #. module: account_payment_return_import
 #: model:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
-msgid ""
-"2. Make sure you have installed the right module to support the file format."
+msgid "2. Make sure you have installed the right module to support the file format."
 msgstr ""
 
 #. module: account_payment_return_import
@@ -48,8 +42,7 @@ msgstr ""
 
 #. module: account_payment_return_import
 #: model:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
-msgid ""
-"<br/><br/><b> How to import your payment return :</b>\n"
+msgid "<br/><br/><b> How to import your payment return :</b>\n"
 "                <br/>"
 msgstr ""
 
@@ -60,10 +53,7 @@ msgstr ""
 
 #. module: account_payment_return_import
 #: model:ir.model.fields,help:account_payment_return_import.field_payment_return_import_journal_id
-msgid ""
-"Accounting journal related to the bank payment return you're importing. It "
-"has be be manually chosen for payment return formats which doesn't allow "
-"automatic journal detection."
+msgid "Accounting journal related to the bank payment return you're importing. It has be be manually chosen for payment return formats which doesn't allow automatic journal detection."
 msgstr ""
 
 #. module: account_payment_return_import
@@ -87,13 +77,12 @@ msgstr ""
 #. module: account_payment_return_import
 #: model:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
 msgid "Cancel"
-msgstr "ยกเลิก"
+msgstr ""
 
 #. module: account_payment_return_import
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:149
 #, python-format
-msgid ""
-"Could not make sense of the given file.\n"
+msgid "Could not make sense of the given file.\n"
 "Did you install the module to support this type of file?"
 msgstr ""
 
@@ -120,9 +109,7 @@ msgstr ""
 
 #. module: account_payment_return_import
 #: model:ir.model.fields,help:account_payment_return_import.field_payment_return_import_data_file
-msgid ""
-"Get you bank payment returns in electronic format from your bank and select "
-"them here."
+msgid "Get you bank payment returns in electronic format from your bank and select them here."
 msgstr ""
 
 #. module: account_payment_return_import
@@ -230,3 +217,4 @@ msgstr ""
 #: model:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
 msgid "or"
 msgstr ""
+
