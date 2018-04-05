@@ -1,10 +1,10 @@
-# -*- coding: utf-8 -*-
 # © 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
 # © 2016 Pedro M. Baeza <pedro.baeza@tecnativa.com>
+# Copyright 2018 Tecnativa - Luis M. Ontalba
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import base64
-from StringIO import StringIO
+from io import BytesIO
 from zipfile import ZipFile, BadZipfile  # BadZipFile in Python >= 3.2
 
 from odoo import _, api, models, fields
@@ -76,7 +76,7 @@ class PaymentReturnImport(models.TransientModel):
         payment_return_raw_list = []
         files = [data_file]
         try:
-            with ZipFile(StringIO(data_file), 'r') as archive:
+            with ZipFile(BytesIO(data_file), 'r') as archive:
                 files = [
                     archive.read(filename) for filename in archive.namelist()
                     if not filename.endswith('/')
