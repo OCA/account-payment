@@ -1,11 +1,11 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 David Vidal <david.vidal@tecnativa.com>
+# Copyright 2018 Tecnativa - Luis M. Ontalba
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _
 from odoo.exceptions import UserError
 import csv
-from cStringIO import StringIO
+from io import StringIO
 
 
 class BaseParser(object):
@@ -31,7 +31,7 @@ class BaseParser(object):
     def parse(self, data):
         """Dummy csv parse"""
         try:
-            data = StringIO(data)
+            data = StringIO(data.decode())
             reader = csv.DictReader(data)
             payment_returns = []
             for row in reader:

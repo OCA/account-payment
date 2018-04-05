@@ -1,7 +1,8 @@
-# -*- coding: utf-8 -*-
 # © 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
+# Copyright 2018 Tecnativa - Luis M. Ontalba
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import base64
 import logging
 
 from odoo.tests.common import TransactionCase
@@ -59,8 +60,8 @@ class TestPaymentReturnFile(TransactionCase):
             'test_files',
             file_name
         )
-        return_file = open(
-            return_path, 'rb').read().encode('base64')
+        return_file = base64.b64encode(open(
+            return_path, 'rb').read())
         bank_return_id = import_model.create(
             dict(
                 data_file=return_file,
