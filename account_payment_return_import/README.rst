@@ -36,7 +36,7 @@ have the following columns (* for required):
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
-   :target: https://runbot.odoo-community.org/runbot/96/10.0
+   :target: https://runbot.odoo-community.org/runbot/96/11.0
 
 Bug Tracker
 ===========
@@ -55,6 +55,7 @@ Contributors
 * Carlos Dauden <pedro.baeza@tecnativa.com>
 * Pedro M. Baeza <pedro.baeza@tecnativa.com>
 * David Vidal <david.vidal@tecnativa.com>
+* Luis M. Ontalba <luis.martinez@tecnativa.com>
 
 Maintainer
 ----------
