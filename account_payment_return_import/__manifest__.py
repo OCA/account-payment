@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
 # Copyright 2016 Pedro M. Baeza <pedro.baeza@tecnativa.com>
 # Copyright 2017 David Vidal <david.vidal@tecnativa.com>
@@ -7,7 +6,7 @@
 {
     'name': 'Account Payment Return Import',
     'category': 'Accounting',
-    'version': '10.0.1.0.0',
+    'version': '11.0.1.0.0',
     'summary': 'This module adds a generic wizard to import payment return'
                'file formats. Is only the base to be extended by another'
                'modules',
