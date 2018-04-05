@@ -1,0 +1,123 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_payment_return_import_sepa_pain
+# 
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: account-payment (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-04-14 03:08+0000\n"
+"PO-Revision-Date: 2016-04-11 21:02+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-account-payment-8-0/language/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AC06
+msgid "Account blocked for direct debit by the Debtor"
+msgstr ""
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AC04
+msgid "Account closed"
+msgstr ""
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AC01
+msgid "Account identifier incorrect (i.e. invalid IBAN)"
+msgstr ""
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_RC01
+msgid "Bank identifier incorrect (i.e. invalid BIC)"
+msgstr ""
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_MD07
+msgid "Debtor deceased"
+msgstr ""
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_FF05
+msgid "Direct Debit type incorrect"
+msgstr ""
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AG01
+msgid "Direct debit forbidden on this account for regulatory reasons"
+msgstr ""
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AM05
+msgid "Duplicate collection"
+msgstr ""
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_BE05
+msgid "Identifier of the Creditor incorrect"
+msgstr ""
+
+#. module: account_payment_return_import_sepa_pain
+#: model:ir.model,name:account_payment_return_import_sepa_pain.model_payment_return_import
+msgid "Import Payment Return"
+msgstr ""
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AM04
+msgid "Insufficient funds"
+msgstr ""
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_RR03
+msgid "Missing Creditors Name Or Address"
+msgstr ""
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_RR01
+msgid "Missing Debtor Account Or Identification"
+msgstr ""
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_RR02
+msgid "Missing Debtors Name Or Address"
+msgstr ""
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_MD01
+msgid "No valid Mandate"
+msgstr ""
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AG02
+msgid "Operation/transaction code incorrect, invalid file format"
+msgstr ""
+
+#. module: account_payment_return_import_sepa_pain
+#: model:ir.model,name:account_payment_return_import_sepa_pain.model_payment_return_line
+msgid "Payment return lines"
+msgstr "Rückbuchungszeilen"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_MS03
+msgid "Reason not specified"
+msgstr ""
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_MS02
+msgid "Refusal by the Debtor"
+msgstr ""
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_RR04
+msgid "Regulatory Reason"
+msgstr ""
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_SL01
+msgid "Specific Service offered by the Debtor Bank."
+msgstr ""
