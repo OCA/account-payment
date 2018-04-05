@@ -44,7 +44,7 @@ class SlimpayController(WebsiteSale):
                 ref, locale, amount, currency, subscriber, return_url)
         except CoreAPIErrorMessage as exc:
             _logger.error('CoreAPIErrorMessage: %s', exc)
-            if unicode(exc).startswith(u'Duplicate order'):
+            if exc.error['message'].startswith(u'Duplicate order'):
                 _logger.warning('GOT DUPLICATE ORDER FOR %s', so.name)
                 url = acquirer.slimpay_client.get_approval_url(so.id)
                 if url:
