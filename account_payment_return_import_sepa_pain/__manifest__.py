@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
 # Copyright 2016 Pedro M. Baeza <pedro.baeza@tecnativa.com>
 # Copyright 2017 David Vidal <david.vidal@tecnativa.com>
@@ -7,7 +6,7 @@
 {
     'name': 'Account Payment Return Import SEPA Pain',
     'category': 'Accounting',
-    'version': '10.0.1.0.0',
+    'version': '11.0.1.0.0',
     'summary': 'Module to import SEPA Direct Debit Unpaid Report File Format '
                'PAIN.002.001.03',
     'license': 'AGPL-3',
