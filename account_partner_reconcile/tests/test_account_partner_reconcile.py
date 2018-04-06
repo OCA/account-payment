@@ -20,18 +20,20 @@ class TestAccountPartnerReconcile(TransactionCase):
         res = self.partner1.action_open_reconcile()
 
         # assertDictContainsSubset is deprecated in Python <3.2
-        expected = {
+        expect = {
             'type': 'ir.actions.client',
             'tag': 'manual_reconciliation_view',
         }
         self.assertDictEqual(
-            expected, {k: v for k, v in res.items() if k in expected},
-            'There was an error and the manual_reconciliation_view couldn\'t be opened.')
+            expect, {k: v for k, v in res.items() if k in expect},
+            'There was an error and the manual_reconciliation_view '
+            'couldn\'t be opened.')
 
-        expected = {
+        expect = {
             'partner_ids': self.partner1.ids,
             'show_mode_selector': True,
         }
         self.assertDictEqual(
-            expected, {k: v for k, v in res['context'].items() if k in expected},
-            'There was an error and the manual_reconciliation_view couldn\'t be opened.')
+            expect, {k: v for k, v in res['context'].items() if k in expect},
+            'There was an error and the manual_reconciliation_view '
+            'couldn\'t be opened.')
