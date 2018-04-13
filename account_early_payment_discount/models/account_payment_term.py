@@ -1,8 +1,7 @@
-# -*- coding: utf-8 -*-
-# © 2016 Cyril Gaudin (Camptocamp)
-# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+# Copyright 2016 Cyril Gaudin (Camptocamp)
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from openerp import _, api, fields, models
+from odoo import _, api, fields, models
 
 
 class AccountPaymentTerm(models.Model):
@@ -33,10 +32,9 @@ class AccountPaymentTerm(models.Model):
         ')',
 
         _("'Number of day(s)' and 'Discount' fields "
-          "should be filled if 'Early Payment Discount' is checked")
+          "must be filled if 'Early Payment Discount' is checked")
     )]
 
-    @api.depends()
     def _compute_company_currency(self):
         self.company_currency = self.env.user.company_id.currency_id
 
