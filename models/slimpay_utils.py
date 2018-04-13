@@ -130,12 +130,14 @@ class SlimpayClient(object):
             'executionDate': None,  # means ASAP
         }
         response = self.action('POST', 'create-payins', params=params)
+        _logger.debug('create-payins reponse: %s', response)
         if response.get('executionStatus') != 'toprocess':
             _logger.error(
                 'Invalid slimpay payment response for transaction %s:\n %s',
                 self.id, response)
             raise ValueError('Invalid slimpay payment status for %s: %s'
                              % (self.id, response.get('executionStatus')))
+        return response.get('state') == 'accepted'
 
     def get(self, url):
         """ Expose the raw coreapi `get` method """
