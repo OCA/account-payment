@@ -5,7 +5,7 @@ from iso8601 import parse_date
 from odoo import models, fields, api
 from odoo.tools.safe_eval import safe_eval
 
-from slimpay_utils import SlimpayClient
+from slimpay_utils import SlimpayClient, parse_slimpay_order_reference
 
 
 _logger = logging.getLogger(__name__)
@@ -57,7 +57,7 @@ class PaymentAcquirerSlimpay(models.Model):
         so_url = posted_data['_links']['self']['href']
         doc = self.slimpay_client.get(so_url)
         _logger.info("Slimpay corresponding order doc: %s", doc)
-        assert doc['reference'] == str(sale_order.id)
+        assert parse_slimpay_order_reference(doc['reference']) == sale_order.id
         slimpay_state = doc['state']
         tx = sale_order.payment_tx_id
         tx_attrs = {

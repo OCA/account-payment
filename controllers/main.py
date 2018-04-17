@@ -1,8 +1,6 @@
 import logging
 import json
 
-from coreapi.exceptions import ErrorMessage as CoreAPIErrorMessage
-
 from odoo import http
 from odoo.http import request, Response
 
@@ -32,24 +30,15 @@ class SlimpayController(WebsiteSale):
         # Get some required database objects
         so_id = request.session['sale_order_id']
         so = request.env['sale.order'].sudo().browse(so_id)
-        ref, amount, currency = so.id, so.amount_total, so.currency_id
         partner = so.partner_id
         acquirer = request.env['payment.acquirer'].sudo().browse(acquirer_id)
         return_url = '/shop/payment/validate'
         locale = request.env.context.get('lang', 'fr_FR').split('_')[0]
         # May emit a direct debit only if a mandate exists; unsupported for now
         subscriber = slimpay_utils.subscriber_from_partner(partner)
-        try:
-            return acquirer.slimpay_client.approval_url(
-                ref, locale, amount, currency, subscriber, return_url)
-        except CoreAPIErrorMessage as exc:
-            _logger.error('CoreAPIErrorMessage: %s', exc)
-            if exc.error['message'].startswith(u'Duplicate order'):
-                _logger.warning('GOT DUPLICATE ORDER FOR %s', so.name)
-                url = acquirer.slimpay_client.get_approval_url(so.id)
-                if url:
-                    return url
-            raise Exception(exc.error['message'])
+        return acquirer.slimpay_client.approval_url(
+            so.id, locale, so.amount_total, so.currency_id,
+            subscriber, return_url)
 
     @http.route(['/payment/slimpay/s2s/feedback'], type='http',
                 auth='public', methods=['POST'], csrf=False)
@@ -59,7 +48,13 @@ class SlimpayController(WebsiteSale):
         """
         post = json.loads(request.httprequest.data)
         _logger.debug('slimpay feedback, post=%s', post)
-        ref = int(post['reference'])
+        try:
+            ref = slimpay_utils.parse_slimpay_order_reference(
+                post['reference'])
+        except:
+            _logger.warning('Could not decode Slimpay order reference %r',
+                            post['reference'])
+            raise
         so = request.env['sale.order'].sudo().browse(ref)
         if len(so) != 1:
             _logger.warning('Enable to find 1 sale order for %r', ref)

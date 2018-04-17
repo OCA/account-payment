@@ -1,5 +1,6 @@
 import logging
 from base64 import b64encode
+from datetime import datetime
 
 from iso8601 import parse_date
 import requests
@@ -78,6 +79,16 @@ def subscriber_from_partner(partner):
     return {'reference': partner.id, 'signatory': data}
 
 
+def build_slimpay_order_reference(order_id):
+    """ Build a unique Slimpay reference from giver sale.order id """
+    return '%s-%s' % (order_id, datetime.now().strftime('%Y%m%d-%H%M%S'))
+
+
+def parse_slimpay_order_reference(reference):
+    """ Return a sale.order id from give Slimpay order `reference` """
+    return int(reference.split('-', 1)[0])
+
+
 class SlimpayClient(object):
 
     def __init__(self, api_url, creditor, app_id, app_secret):
@@ -93,12 +104,12 @@ class SlimpayClient(object):
             self.root_doc, self.method_name(short_method_name),
             action=action, validate=validate, params=params)
 
-    def approval_url(self, ref, locale, amount, currency, subscriber,
+    def approval_url(self, order_id, locale, amount, currency, subscriber,
                      notify_url):
         """ Return the URL a final user must visit to perform a mandate
         signature with a first payment.
 
-        `ref` is the internal order reference (e.g.: "SO402")
+        `order_id` is the internal order db identifier (an int, e.g. 402)
         `locale` is the language locale of the user (e.g.: "fr")
         `amount` and `currency` designate the initial payment value
         `subscriber` designate a dict with keys 'reference' and 'signatory' as
@@ -106,19 +117,12 @@ class SlimpayClient(object):
         `notify_url` is the URL to be notified at the end of the operation.
         """
         params = self._repr_order(
-            ref, locale, amount, currency, subscriber, notify_url)
+            order_id, locale, amount, currency, subscriber, notify_url)
         _logger.debug("slimpay approval_url parameters: %s", params)
         order = self.action('POST', 'create-orders', params=params)
         url = order.links[self.method_name('user-approval')].url
         _logger.debug("User approval URL is: %s", url)
         return url
-
-    def get_approval_url(self, order_ref):
-        order_doc = self.action('GET', 'get-orders', params={
-            'creditorReference': self.creditor, 'reference': order_ref})
-        meth = self.method_name('user-approval')
-        if meth in order_doc.links:
-            return order_doc.links[meth]
 
     def create_payin(self, payin_ref, mandate_ref, amount, currency):
         params = {
@@ -182,17 +186,17 @@ class SlimpayClient(object):
             },
         }
 
-    def _repr_order(self, ref, locale, amount, currency, subscriber,
+    def _repr_order(self, order_id, locale, amount, currency, subscriber,
                     notify_url):
         return {
-            'reference': ref,
+            'reference': build_slimpay_order_reference(order_id),
             'locale': locale,
             'creditor': {'reference': self.creditor},
             'subscriber': {'reference': subscriber['reference']},
             'started': True,
             'items': [
                 self._repr_mandate(subscriber),
-                self._repr_payment(ref, amount, currency, notify_url),
+                self._repr_payment(order_id, amount, currency, notify_url),
             ],
         }
 
