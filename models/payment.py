@@ -74,16 +74,19 @@ class PaymentAcquirerSlimpay(models.Model):
         return False
 
     def _slimpay_tx_completed(self, tx, order_doc, **tx_attrs):
+        _logger.info('Trying to complete transaction id %s', tx.id)
         tx_attrs['state'] = 'done'
         tx_attrs['date_validate'] = parse_date(order_doc['dateClosed'])
         tx.write(tx_attrs)
         if tx.sudo().callback_eval:
             safe_eval(tx.sudo().callback_eval, {'self': self})
         # Confirm sale if necessary
+        _logger.info('Confirming the sale...')
         tx._confirm_so(acquirer_name='slimpay')
         # Use mandate as a token for later automatic payments
         partner = tx.sale_order_id.partner_id
         client = self.slimpay_client
+        _logger.info("Fetching new partner's mandate...")
         mandate_doc = client.get_from_doc(order_doc, 'get-mandate')
         mandate_id = mandate_doc['id']
         bank_account_doc = client.get_from_doc(mandate_doc, 'get-bank-account')
