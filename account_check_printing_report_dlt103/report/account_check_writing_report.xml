@@ -1,4 +1,6 @@
 <?xml version="1.0"?>
+<!-- Copyright 2018 Eficent Business and IT Consulting Services S.L.
+     License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
 <odoo>
          <report
             id="action_report_check_dlt103"
@@ -6,9 +8,7 @@
             string="Payment Check DLT103"
             report_type="qweb-pdf"
             name="account_check_printing_report_dlt103.report_check_dlt103"
-            file="account_check_printing_report_dlt103.report_check_dlt103"/>
+            file="account_check_printing_report_dlt103.report_check_dlt103"
+            paperformat="account_check_printing_report_dlt103.paperformat_check_dlt103"/>
 
-        <record id="action_report_check_dlt103" model="ir.actions.report.xml">
-            <field name="paperformat_id" ref="account_check_printing_report_dlt103.paperformat_check_dlt103"/>
-        </record>
 </odoo>
