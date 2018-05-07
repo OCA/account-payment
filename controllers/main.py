@@ -22,11 +22,8 @@ class SlimpayController(WebsiteSale):
         website_sale method, but creates the slimpay order and respond with
         slimpay's redirect URL instead of a form to be submitted.
         """
-        _logger.debug('payment_transaction CALLED! kwargs: %s', kwargs)
-        _logger.debug('session data: %s', request.session)
-        response = self.payment_transaction(
+        self.payment_transaction(
             acquirer_id, tx_type='form', token=None, **kwargs)
-        _logger.debug('initial response:\n%s', response)
         # Get some required database objects
         so_id = request.session['sale_order_id']
         so = request.env['sale.order'].sudo().browse(so_id)
