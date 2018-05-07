@@ -1,1 +1,1 @@
-from . import test_slimpay
+from . import test_utils
