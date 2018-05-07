@@ -34,8 +34,8 @@ class SlimpayController(WebsiteSale):
         # May emit a direct debit only if a mandate exists; unsupported for now
         subscriber = slimpay_utils.subscriber_from_partner(partner)
         return acquirer.slimpay_client.approval_url(
-            so.id, locale, so.amount_total, so.currency_id,
-            subscriber, return_url)
+            so.payment_tx_id.reference, so.id, locale, so.amount_total,
+            so.currency_id, subscriber, return_url)
 
     @http.route(['/payment/slimpay/s2s/feedback'], type='http',
                 auth='public', methods=['POST'], csrf=False)
@@ -45,22 +45,17 @@ class SlimpayController(WebsiteSale):
         """
         post = json.loads(request.httprequest.data)
         _logger.debug('slimpay feedback, post=%s', post)
-        try:
-            ref = slimpay_utils.parse_slimpay_order_reference(
-                post['reference'])
-        except:
-            _logger.warning('Could not decode Slimpay order reference %r',
-                            post['reference'])
-            raise
-        so = request.env['sale.order'].sudo().browse(ref)
-        if len(so) != 1:
-            _logger.warning('Enable to find 1 sale order for %r', ref)
-            return Response('Incorrect sale order reference', status=500)
-        if so.payment_acquirer_id.provider != 'slimpay':
-            _logger.warning('Feedback called with non slimpay order %r', ref)
-            return Response('Incorrect sale order handler', status=500)
-        if not so.payment_acquirer_id._slimpay_s2s_validate(so, post):
-            _logger.warning('Invalid feedback for order %r', ref)
+        tx_ref = post['reference']
+        tx = request.env['payment.transaction'].sudo().search(
+            [('reference', '=', tx_ref)])
+        if len(tx) != 1:
+            _logger.warning('Enable to find 1 transaction for %r', tx_ref)
+            return Response('Incorrect transaction reference', status=500)
+        if tx.acquirer_id.provider != 'slimpay':
+            _logger.warning('Feedback called with non slimpay tx %r', tx_ref)
+            return Response('Incorrect transaction handler', status=500)
+        if not tx.acquirer_id._slimpay_s2s_validate(tx, post):
+            _logger.warning('Invalid feedback for transaction %r', tx_ref)
             return Response('Invalid feedback for order', status=500)
         return Response("OK", status=200)
 

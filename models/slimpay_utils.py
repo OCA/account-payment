@@ -79,16 +79,6 @@ def subscriber_from_partner(partner):
     return {'reference': partner.id, 'signatory': data}
 
 
-def build_slimpay_order_reference(order_id):
-    """ Build a unique Slimpay reference from giver sale.order id """
-    return '%s-%s' % (order_id, datetime.now().strftime('%Y%m%d-%H%M%S'))
-
-
-def parse_slimpay_order_reference(reference):
-    """ Return a sale.order id from give Slimpay order `reference` """
-    return int(reference.split('-', 1)[0])
-
-
 class SlimpayClient(object):
 
     def __init__(self, api_url, creditor, app_id, app_secret):
@@ -104,8 +94,8 @@ class SlimpayClient(object):
             self.root_doc, self.method_name(short_method_name),
             action=action, validate=validate, params=params)
 
-    def approval_url(self, order_id, locale, amount, currency, subscriber,
-                     notify_url):
+    def approval_url(self, tx_ref, order_id, locale, amount, currency,
+                     subscriber, notify_url):
         """ Return the URL a final user must visit to perform a mandate
         signature with a first payment.
 
@@ -117,7 +107,7 @@ class SlimpayClient(object):
         `notify_url` is the URL to be notified at the end of the operation.
         """
         params = self._repr_order(
-            order_id, locale, amount, currency, subscriber, notify_url)
+            tx_ref, order_id, locale, amount, currency, subscriber, notify_url)
         _logger.debug("slimpay approval_url parameters: %s", params)
         order = self.action('POST', 'create-orders', params=params)
         url = order.links[self.method_name('user-approval')].url
@@ -186,10 +176,10 @@ class SlimpayClient(object):
             },
         }
 
-    def _repr_order(self, order_id, locale, amount, currency, subscriber,
-                    notify_url):
+    def _repr_order(self, tx_ref, order_id, locale, amount, currency,
+                    subscriber, notify_url):
         return {
-            'reference': build_slimpay_order_reference(order_id),
+            'reference': tx_ref,
             'locale': locale,
             'creditor': {'reference': self.creditor},
             'subscriber': {'reference': subscriber['reference']},

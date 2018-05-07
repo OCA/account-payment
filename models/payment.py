@@ -5,7 +5,7 @@ from iso8601 import parse_date
 from odoo import models, fields, api
 from odoo.tools.safe_eval import safe_eval
 
-from slimpay_utils import SlimpayClient, parse_slimpay_order_reference
+from slimpay_utils import SlimpayClient
 
 
 _logger = logging.getLogger(__name__)
@@ -47,19 +47,16 @@ class PaymentAcquirerSlimpay(models.Model):
                 self.slimpay_app_id, self.slimpay_app_secret)
         return self._slimpay_client
 
-    def _slimpay_s2s_validate(self, sale_order, posted_data):
+    def _slimpay_s2s_validate(self, tx, posted_data):
         """The posted data is validated using a http request to slimpay's
         server (to ensure posted data has not been forged), then the
         transaction status is updated.
         """
-        sale_order.ensure_one()
-        assert sale_order.payment_acquirer_id.provider == 'slimpay'
-        so_url = posted_data['_links']['self']['href']
-        doc = self.slimpay_client.get(so_url)
+        url = posted_data['_links']['self']['href']
+        doc = self.slimpay_client.get(url)
         _logger.info("Slimpay corresponding order doc: %s", doc)
-        assert parse_slimpay_order_reference(doc['reference']) == sale_order.id
+        assert doc['reference'] == tx.reference
         slimpay_state = doc['state']
-        tx = sale_order.payment_tx_id
         tx_attrs = {
             'acquirer_reference': doc['id'],
         }
