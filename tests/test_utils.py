@@ -1,3 +1,5 @@
+from mock import patch
+
 from odoo.tests.common import TransactionCase
 
 from odoo.addons.payment_slimpay.models import slimpay_utils
@@ -53,17 +55,19 @@ class SlimpayUtilsTC(TransactionCase):
 
     def test_slimpay_api_create_order(self):
         euro = self.env['res.currency'].search([('name', '=', 'EUR')])
-        client = slimpay_utils.SlimpayClient('api_url', 'creditor',
-                                             'app_id', 'app_secret')
+        with patch.object(slimpay_utils, 'get_client'):
+            client = slimpay_utils.SlimpayClient('api_url', 'creditor',
+                                                 'app_id', 'app_secret')
         subscriber = slimpay_utils.subscriber_from_partner(self.partner)
         result = client._repr_order(
-            'my ref', 'fr', 42, euro.name, subscriber, 'https://commown.fr/')
-        self.assertEqual('my ref', result['reference'])
+            'tx', 'so', 'fr', 42, euro, subscriber, 'https://commown.fr/')
+        self.assertEqual('tx', result['reference'])
         self.assertEqual('fr', result['locale'])
         self.assertEqual(['signMandate', 'payment'],
                          [item['type'] for item in result['items']])
         sign, payment = result['items']
         self.assertIn('signatory', sign['mandate'])
         self.assertEqual(42, payment['payin']['amount'])
+        self.assertEqual('so', payment['payin']['label'])
         self.assertEqual(u'EUR', payment['payin']['currency'])
         self.assertEqual('https://commown.fr/', payment['payin']['notifyUrl'])
