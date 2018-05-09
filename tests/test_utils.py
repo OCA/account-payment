@@ -1,10 +1,12 @@
 from mock import patch
 
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import TransactionCase, at_install, post_install
 
 from odoo.addons.payment_slimpay.models import slimpay_utils
 
 
+@at_install(False)
+@post_install(True)
 class SlimpayUtilsTC(TransactionCase):
 
     def setUp(self):
