@@ -120,3 +120,25 @@ class SlimpayControllersTC(HttpCase):
 
         self.assertEqual('IBAN my-iban (my-bank)', tx['payment_token_id'][1])
         self.assertEqual('sale', tx['so_state'])
+
+    def test_slimpay_portal_sale_ok_with_two_transaction(self):
+        """ Perform a successful portal sale in two steps:
+        - first transaction fails (typically times out while user finds its
+        bank coordinates)
+        - second transaction succeeds.
+        """
+        self.authenticate('portal', 'portal')
+        self.add_product_to_user_cart()
+
+        tx1_ref = self.pay_cart()
+        self.check_transaction(tx1_ref, 'draft')
+        self.simulate_feedback(tx1_ref, 'closed.aborted.aborted_byclient')
+        tx1 = self.check_transaction(tx1_ref, 'cancel')
+        self.assertEqual('draft', tx1['so_state'])
+
+        tx2_ref = self.pay_cart()
+        self.check_transaction(tx2_ref, 'draft')
+        self.simulate_feedback(tx2_ref)
+        tx2 = self.check_transaction(tx2_ref, 'done')
+        self.assertEqual('sale', tx2['so_state'])
+        self.assertEqual(tx1['sale_order_id'][0], tx2['sale_order_id'][0])

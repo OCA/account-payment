@@ -50,13 +50,13 @@ class SlimpayController(WebsiteSale):
             [('reference', '=', tx_ref)])
         if len(tx) != 1:
             _logger.warning('Enable to find 1 transaction for %r', tx_ref)
-            return Response('Incorrect transaction reference', status=500)
+            return Response('Incorrect transaction reference', status=200)
         if tx.acquirer_id.provider != 'slimpay':
             _logger.warning('Feedback called with non slimpay tx %r', tx_ref)
-            return Response('Incorrect transaction handler', status=500)
+            return Response('Incorrect transaction handler', status=200)
         if not tx.acquirer_id._slimpay_s2s_validate(tx, post):
             _logger.warning('Invalid feedback for transaction %r', tx_ref)
-            return Response('Invalid feedback for order', status=500)
+            return Response('Invalid feedback for order', status=200)
         return Response("OK", status=200)
 
     def _get_mandatory_billing_fields(self):
