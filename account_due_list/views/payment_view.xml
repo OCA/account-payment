@@ -87,14 +87,39 @@
         </field>
     </record>
 
+    <record id="view_payments_pivot" model="ir.ui.view">
+        <field name="name">account.move.line.pivot</field>
+        <field name="model">account.move.line</field>
+        <field name="arch" type="xml">
+            <pivot string="Payments and due list">
+                <field name="journal_id" type="row"/>
+                <field name="date_maturity" type="col"/>
+                <field name="amount_residual" type="measure"/>
+            </pivot>
+        </field>
+    </record>
+
+    <record id="view_payments_graph" model="ir.ui.view">
+        <field name="name">account.move.line.graph</field>
+        <field name="model">account.move.line</field>
+        <field name="arch" type="xml">
+            <graph string="Payments and due list">
+                <field name="date_maturity" type="row"/>
+                <field name="amount_residual" type="measure"/>
+            </graph>
+        </field>
+    </record>
+
     <!-- Invoice Payments -->
     <record model="ir.actions.act_window" id="action_invoice_payments">
         <field name="name">Payments and due list</field>
         <field name="res_model">account.move.line</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,form,pivot,graph</field>
         <field name="context">{'search_default_from_invoices': 1}</field>
-        <field name="view_id" ref="view_payments_tree"/>
+        <field name="view_ids" eval="[(5, 0, 0),
+                                      (0, 0, {'view_mode': 'tree', 'view_id': ref('view_payments_tree')}),
+                                      (0, 0, {'view_mode': 'pivot', 'view_id': ref('view_payments_pivot')}),
+                                      (0, 0, {'view_mode': 'graph', 'view_id': ref('view_payments_graph')})]"/>
         <field name="search_view_id" ref="view_payments_filter"/>
         <field name="domain">[('account_id.internal_type', 'in', ['receivable', 'payable'])]</field>
     </record>
