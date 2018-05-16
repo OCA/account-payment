@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_due_list
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
@@ -10,11 +10,12 @@ msgstr ""
 "POT-Creation-Date: 2016-12-03 00:13+0000\n"
 "PO-Revision-Date: 2016-12-08 11:55+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-payment-8-0/language/es/)\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-payment-8-0/"
+"language/es/)\n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: es\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_due_list
@@ -34,8 +35,17 @@ msgstr "Agrupar por"
 
 #. module: account_due_list
 #: model:ir.model.fields,help:account_due_list.field_account_move_line_payment_term_id
-msgid "If you use payment terms, the due date will be computed automatically at the generation of accounting entries. If you keep the payment terms and the due date empty, it means direct payment. The payment terms may compute several due dates, for example 50% now, 50% in one month."
-msgstr "Si utiliza los términos de pago, la fecha de vencimiento se calculará automáticamente en la generación de asientos contables. Si deja vació los términos de pago y la fecha de vencimiento, se asumirá que es un pago inmediato. Los términos de pago permiten calcular varias fechas de vencimiento, por ejemplo 50% ahora, 50% en un mes."
+msgid ""
+"If you use payment terms, the due date will be computed automatically at the "
+"generation of accounting entries. If you keep the payment terms and the due "
+"date empty, it means direct payment. The payment terms may compute several "
+"due dates, for example 50% now, 50% in one month."
+msgstr ""
+"Si utiliza los términos de pago, la fecha de vencimiento se calculará "
+"automáticamente en la generación de asientos contables. Si deja vació los "
+"términos de pago y la fecha de vencimiento, se asumirá que es un pago "
+"inmediato. Los términos de pago permiten calcular varias fechas de "
+"vencimiento, por ejemplo 50% ahora, 50% en un mes."
 
 #. module: account_due_list
 #: model:ir.model.fields,field_description:account_due_list.field_account_move_line_stored_invoice_id
@@ -111,6 +121,8 @@ msgstr "Pagos"
 #. module: account_due_list
 #: model:ir.actions.act_window,name:account_due_list.action_invoice_payments
 #: model:ir.ui.menu,name:account_due_list.menu_action_invoice_payments
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_graph
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_pivot
 msgid "Payments and due list"
 msgstr "Efectos"
 
@@ -173,4 +185,3 @@ msgstr "No conciliado"
 #: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Unreconciled payments"
 msgstr "Efectos sin conciliar"
-
