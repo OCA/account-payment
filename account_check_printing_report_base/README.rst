@@ -9,7 +9,6 @@ Account Check Printing Report Base
 This module provides the basic framework for check printing, and a sample
 layout.
 
-
 Installation
 ============
 
@@ -30,10 +29,18 @@ Usage
 
 * Go to 'Invoicing / Purchases / Payments'. Select one of the payments with
   type 'Check' and print the check.
+* For automatic check printing when validating payment, mark the field in
+  the journal associated.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
    :target: https://runbot.odoo-community.org/runbot/96/11.0
+
+Known issues / Roadmap
+======================
+
+* When print check automatically in the payment validation process, the wizard
+  remains opened.
 
 Bug Tracker
 ===========
@@ -57,6 +64,7 @@ Contributors
 * Jordi Ballester Alomar <jordi.ballester@eficent.com>
 * Lois Rilo Antelo <lois.rilo@eficent.com>
 * Sandip Mangukiya <smangukiya@ursainfosystems.com>
+* Luis M. Ontalba <luis.martinez@tecnativa.com>
 
 Maintainer
 ----------
