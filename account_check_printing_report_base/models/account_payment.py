@@ -6,6 +6,22 @@
 from odoo import models, api
 
 
+class AccountRegisterPayments(models.TransientModel):
+    _inherit = "account.register.payments"
+
+    @api.multi
+    def create_payment(self):
+        res = super(AccountRegisterPayments, self).create_payment()
+        if (self.journal_id.check_print_auto and
+                self.payment_method_id.code == 'check_printing'):
+            payment = self.env['account.payment'].search([
+                ('journal_id', '=', self.journal_id.id),
+                ('payment_method_id.name', 'like',
+                 self.payment_method_id.name)], order="id desc", limit=1)
+            return payment.do_print_checks()
+        return res
+
+
 class AccountPayment(models.Model):
     _inherit = "account.payment"
 
@@ -17,3 +33,11 @@ class AccountPayment(models.Model):
                     rec.company_id.check_layout_id.report
                 ).report_action(self)
         return super(AccountPayment, self).do_print_checks()
+
+    @api.multi
+    def post(self):
+        res = super(AccountPayment, self).post()
+        if (self.journal_id.check_print_auto and
+                self.payment_method_id.code == 'check_printing'):
+            return self.do_print_checks()
+        return res
