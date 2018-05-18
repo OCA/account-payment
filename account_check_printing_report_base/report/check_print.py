@@ -27,13 +27,22 @@ class ReportCheckPrint(models.AbstractModel):
             for invoice in payment.invoice_ids:
                 amount_currency = 0.0
                 amount = 0.0
+                date_due = invoice.date_due
+                due_lines = invoice.move_id.mapped('line_ids').filtered(
+                    lambda x: (
+                        x.account_id.internal_type in
+                        ('receivable', 'payable') and x.date_maturity
+                    )
+                )
+                if due_lines:
+                    date_due = min(due_lines.mapped('date_maturity'))
                 line = {
-                    'date_due': invoice.date_due,
+                    'date_due': date_due,
                     'reference': invoice.reference,
                     'number': invoice.number,
                     'amount_total': invoice.amount_total,
                     'residual': invoice.residual,
-                    'paid_amount': 0.0
+                    'paid_amount': 0.0,
                 }
                 if invoice.type == 'out_refund':
                     line['amount_total'] *= -1
