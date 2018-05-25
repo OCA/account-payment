@@ -114,11 +114,12 @@ class SlimpayClient(object):
         _logger.debug("User approval URL is: %s", url)
         return url
 
-    def create_payin(self, payin_ref, mandate_ref, amount, currency):
+    def create_payin(self, payin_ref, mandate_ref, amount, currency,
+                     payin_label):
         params = {
             'creditor': {'reference': self.creditor},
             'mandate': {'reference': mandate_ref},
-            'reference': payin_ref, 'label': payin_ref,
+            'reference': payin_ref, 'label': payin_label,
             'amount': amount, 'currency': currency,
             'scheme': 'SEPA.DIRECT_DEBIT.CORE',
             'executionDate': None,  # means ASAP

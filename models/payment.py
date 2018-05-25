@@ -114,8 +114,11 @@ class SlimpayTransaction(models.Model):
         mandate_ref = client.action('GET', 'get-mandates', params={
             'id': self.payment_token_id.acquirer_ref})['reference']
         _logger.debug('Found mandate reference: %s', mandate_ref)
+        label = self.env.context.get(
+            'slimpay_payin_label', self.reference or 'TR%d' % self.id)
         result = client.create_payin(
-            'TR%d' % self.id, mandate_ref, self.amount, self.currency_id.name)
+            'TR%d' % self.id, mandate_ref, self.amount, self.currency_id.name,
+            label)
         _logger.debug('Payin creation result: %s', result)
         if result:
             self.update({'state': 'done'})
