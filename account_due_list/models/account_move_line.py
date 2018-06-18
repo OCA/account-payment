@@ -23,7 +23,7 @@ class AccountMoveLine(models.Model):
     partner_ref = fields.Char(related='partner_id.ref', string='Partner Ref')
     payment_term_id = fields.Many2one('account.payment.term',
                                       related='invoice_id.payment_term_id',
-                                      string='Payment Terms')
+                                      string='Payment Terms', store=True)
     stored_invoice_id = fields.Many2one(
         comodel_name='account.invoice', compute='_compute_invoice',
         string='Invoice', store=True)
