@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="0">
+        <template id="paybox_acquirer_button">
+          <form t-att-action="tx_url" method="post" target="_self">
+            <input type="hidden" name="PBX_SITE" t-att-value="tx_values['site']"/>
+            <input type="hidden" name="PBX_RANG" t-att-value="tx_values['rank']"/>
+            <input type="hidden" name="PBX_HASH" t-att-value="tx_values['hash']"/>
+            <input type="hidden" name="PBX_CMD" t-att-value="tx_values['reference']"/>
+            <input type="hidden" name="PBX_IDENTIFIANT" t-att-value="tx_values['identifiant']"/>
+            <input type="hidden" name="PBX_TOTAL" t-att-value="tx_values['amount']"/>
+            <input type="hidden" name="PBX_DEVISE" t-att-value="tx_values['devise']"/>
+            <input type="hidden" name="PBX_PORTEUR" t-att-value="tx_values['porteur']"/>
+            <input type="hidden" name="PBX_RETOUR" t-att-value="tx_values['retour']"/>
+            <input type="hidden" name="PBX_TIME" t-att-value="tx_values['time']"/>
+            <input type="hidden" name="PBX_EFFECTUE" t-att-value="tx_values['effectue']"/>
+            <input type="hidden" name="PBX_REFUSE" t-att-value="tx_values['refuse']"/>
+            <input type="hidden" name="PBX_ANNULE" t-att-value="tx_values['annule']"/>
+            <input type="hidden" name="PBX_REPONDRE_A" t-att-value="tx_values['url_ipn']"/>
+            <input type="hidden" name="PBX_HMAC" t-att-value="tx_values['hmac']"/>
+            <button type="submit" width="100px" t-att-class="submit_class">
+                Payer en ligne <span class="fa fa-long-arrow-right"/>
+            </button>
+          </form>
+        </template>
+    </data>
+</openerp>
