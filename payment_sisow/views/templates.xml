@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <template id="assets_backend" name="payment_sisow assets" inherit_id="website.assets_frontend">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/payment_sisow/static/src/js/payment_sisow.js"></script>
+        </xpath>
+    </template>
+    <template id="sisow_acquirer_button">
+        <form t-if="acquirer.sisow_merchant_id" action="/payment/sisow/redirect" method="post" target="_self" t-att-class="request.session.get('issuerid') and False or 'has-error'">
+            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+            <select name="issuerid" required="required" class="form-control sisow_issuer">
+                <option t-att-selected="request.session.get('sisow_issuer') and None or 'selected'" disabled="disabled" value="">Choose your bank...</option>
+                <t t-foreach="acquirer._sisow_issuers()" t-as="issuer">
+                    <option t-att-value="issuer['id']" t-att-selected="request.session.get('sisow_issuer') == issuer['id'] and 'selected' or None"><t t-esc="issuer['name']" /></option>
+                </t>
+            </select>
+            <button type="submit" t-att-class="submit_class + ' pull-right'"><t t-esc="submit_txt" /> <span class="fa fa-long-arrow-right"/></button>
+        </form>
+    </template>
+</odoo>
