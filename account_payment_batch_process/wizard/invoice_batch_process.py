@@ -5,7 +5,7 @@
 
 import math
 from odoo import api, fields, models, _
-from odoo.tools import amount_to_text_en, float_round
+from odoo.tools import amount_to_text_en, float_round, float_compare
 from odoo.exceptions import UserError, ValidationError
 
 INV_TO_PARTN = {
@@ -192,14 +192,18 @@ class AccountRegisterPayments(models.TransientModel):
     @api.multi
     def make_payments(self):
         # Make group data either for Customers or Vendors
+        precision = self.env['decimal.precision'].precision_get('Account')
         context = dict(self._context or {})
         data = {}
         if self.is_customer:
             context.update({'is_customer': True})
-            if self.total_customer_pay_amount != self.cheque_amount:
+            if float_compare(
+                    self.total_customer_pay_amount,
+                    self.cheque_amount,
+                    precision_digits=precision) != 0:
                 raise ValidationError(_('Verification Failed! Total Invoices'
                                         ' Amount and Check amount does not'
-                                        ' match!.'))
+                                        ' match!'))
             for paym in self.invoice_customer_payments:
                 if paym.receiving_amt > 0:
                     paym.payment_difference = paym.balance_amt - paym.receiving_amt  # noqa
@@ -271,10 +275,13 @@ class AccountRegisterPayments(models.TransientModel):
                         })
         else:
             context.update({'is_customer': False})
-            if self.total_pay_amount != self.cheque_amount:
+            if float_compare(
+                    self.total_pay_amount,
+                    self.cheque_amount,
+                    precision_digits=precision) != 0:
                 raise ValidationError(_('Verification Failed! Total Invoices'
                                         ' Amount and Check amount does not'
-                                        ' match!.'))
+                                        ' match!'))
             for paym in self.invoice_payments:
                 if paym.paying_amt > 0:
                     partner_id = str(paym.invoice_id.partner_id.id)
