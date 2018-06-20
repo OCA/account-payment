@@ -29,7 +29,7 @@ addon | version | summary
 [account_due_list_days_overdue](account_due_list_days_overdue/) | 10.0.0.1.0 | Payments Due list days overdue
 [account_due_list_payment_mode](account_due_list_payment_mode/) | 10.0.1.0.0 | Payment due list with payment mode
 [account_partner_reconcile](account_partner_reconcile/) | 10.0.1.0.0 | Account Partner Reconcile
-[account_payment_batch_process](account_payment_batch_process/) | 10.0.1.0.0 | Process Payments in Batch
+[account_payment_batch_process](account_payment_batch_process/) | 10.0.1.0.1 | Process Payments in Batch
 [account_payment_credit_card](account_payment_credit_card/) | 10.0.1.0.0 | Add support for credit card payments
 [account_payment_return](account_payment_return/) | 10.0.1.1.0 | Manage the return of your payments
 [account_payment_return_import](account_payment_return_import/) | 10.0.1.0.0 | This module adds a generic wizard to import payment returnfile formats. Is only the base to be extended by anothermodules
