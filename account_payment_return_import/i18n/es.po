@@ -140,6 +140,11 @@ msgid "ID"
 msgstr "ID"
 
 #. module: account_payment_return_import
+#: view:payment.return.import:account_payment_return_import.account_payment_return_import_view
+msgid "Import"
+msgstr "Importar"
+
+#. module: account_payment_return_import
 #: field:payment.return.line,unique_import_id:0
 msgid "Import ID"
 msgstr "ID Importacion"
@@ -224,11 +229,6 @@ msgstr ""
 #, python-format
 msgid "You have already imported this file."
 msgstr "Ya has importado este archivo. "
-
-#. module: account_payment_return_import
-#: view:payment.return.import:account_payment_return_import.account_payment_return_import_view
-msgid "Import"
-msgstr "Importar"
 
 #. module: account_payment_return_import
 #: view:payment.return.import:account_payment_return_import.account_payment_return_import_view

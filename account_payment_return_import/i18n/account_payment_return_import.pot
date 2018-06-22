@@ -1,22 +1,17 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * account_payment_return_import
+#	* account_payment_return_import
 #
-# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: account-payment (8.0)\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-18 00:39+0000\n"
-"PO-Revision-Date: 2017-04-25 10:40+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: English (United Kingdom) (http://www.transifex.com/oca/OCA-"
-"account-payment-8-0/language/en_GB/)\n"
-"Language: en_GB\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: account_payment_return_import
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:268
@@ -37,8 +32,7 @@ msgstr ""
 
 #. module: account_payment_return_import
 #: view:payment.return.import:account_payment_return_import.account_payment_return_import_view
-msgid ""
-"2. Make sure you have installed the right module to support the file format."
+msgid "2. Make sure you have installed the right module to support the file format."
 msgstr ""
 
 #. module: account_payment_return_import
@@ -53,10 +47,7 @@ msgstr ""
 
 #. module: account_payment_return_import
 #: help:payment.return.import,journal_id:0
-msgid ""
-"Accounting journal related to the bank payment return you're importing. It "
-"has be be manually chosen for payment return formats which doesn't allow "
-"automatic journal detection."
+msgid "Accounting journal related to the bank payment return you're importing. It has be be manually chosen for payment return formats which doesn't allow automatic journal detection."
 msgstr ""
 
 #. module: account_payment_return_import
@@ -80,36 +71,33 @@ msgstr ""
 #. module: account_payment_return_import
 #: view:payment.return.import:account_payment_return_import.account_payment_return_import_view
 msgid "Cancel"
-msgstr "Cancel"
+msgstr ""
 
 #. module: account_payment_return_import
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:144
 #, python-format
-msgid ""
-"Could not make sense of the given file.\n"
+msgid "Could not make sense of the given file.\n"
 "Did you install the module to support this type of file?"
 msgstr ""
 
 #. module: account_payment_return_import
 #: field:payment.return.import,create_uid:0
 msgid "Created by"
-msgstr "Created by"
+msgstr ""
 
 #. module: account_payment_return_import
 #: field:payment.return.import,create_date:0
 msgid "Created on"
-msgstr "Created on"
+msgstr ""
 
 #. module: account_payment_return_import
 #: field:payment.return.import,display_name:0
 msgid "Display Name"
-msgstr "Display Name"
+msgstr ""
 
 #. module: account_payment_return_import
 #: help:payment.return.import,data_file:0
-msgid ""
-"Get you bank payment returns in electronic format from your bank and select "
-"them here."
+msgid "Get you bank payment returns in electronic format from your bank and select them here."
 msgstr ""
 
 #. module: account_payment_return_import
@@ -125,7 +113,7 @@ msgstr ""
 #. module: account_payment_return_import
 #: field:payment.return.import,id:0
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: account_payment_return_import
 #: view:payment.return.import:account_payment_return_import.account_payment_return_import_view
@@ -152,22 +140,22 @@ msgstr ""
 #. module: account_payment_return_import
 #: field:payment.return.import,journal_id:0
 msgid "Journal"
-msgstr "Journal"
+msgstr ""
 
 #. module: account_payment_return_import
 #: field:payment.return.import,__last_update:0
 msgid "Last Modified on"
-msgstr "Last Modified on"
+msgstr ""
 
 #. module: account_payment_return_import
 #: field:payment.return.import,write_uid:0
 msgid "Last Updated by"
-msgstr "Last Updated by"
+msgstr ""
 
 #. module: account_payment_return_import
 #: field:payment.return.import,write_date:0
 msgid "Last Updated on"
-msgstr "Last Updated on"
+msgstr ""
 
 #. module: account_payment_return_import
 #: field:payment.return.import,match_after_import:0
@@ -221,4 +209,5 @@ msgstr ""
 #. module: account_payment_return_import
 #: view:payment.return.import:account_payment_return_import.account_payment_return_import_view
 msgid "or"
-msgstr "or"
+msgstr ""
+

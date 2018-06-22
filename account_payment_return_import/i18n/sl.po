@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_payment_return_import
-# 
+#
 # Translators:
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2016
 msgid ""
@@ -11,12 +11,14 @@ msgstr ""
 "POT-Creation-Date: 2016-11-02 06:22+0000\n"
 "PO-Revision-Date: 2016-11-22 16:25+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-payment-8-0/language/sl/)\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-"
+"payment-8-0/language/sl/)\n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sl\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
 
 #. module: account_payment_return_import
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:268
@@ -39,7 +41,9 @@ msgstr "1. Prenesite datoteko vračila plačila iz spletne strani svoje banke."
 #: view:payment.return.import:account_payment_return_import.account_payment_return_import_view
 msgid ""
 "2. Make sure you have installed the right module to support the file format."
-msgstr "2. Prepričajte se, da imate nameščen ustrezen modul za podporo formatu datoteke."
+msgstr ""
+"2. Prepričajte se, da imate nameščen ustrezen modul za podporo formatu "
+"datoteke."
 
 #. module: account_payment_return_import
 #: view:payment.return.import:account_payment_return_import.account_payment_return_import_view
@@ -57,7 +61,10 @@ msgid ""
 "Accounting journal related to the bank payment return you're importing. It "
 "has be be manually chosen for payment return formats which doesn't allow "
 "automatic journal detection."
-msgstr "Knjigovodski dnevnik vezan na vračilo bančnega plačila, ki ga uvažate. Za formate vračil plačil, ki ne dovoljujejo samodejne zaznave dnevnika, mora biti izbran ročno."
+msgstr ""
+"Knjigovodski dnevnik vezan na vračilo bančnega plačila, ki ga uvažate. Za "
+"formate vračil plačil, ki ne dovoljujejo samodejne zaznave dnevnika, mora "
+"biti izbran ročno."
 
 #. module: account_payment_return_import
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:274
@@ -88,7 +95,9 @@ msgstr "Preklic"
 msgid ""
 "Could not make sense of the given file.\n"
 "Did you install the module to support this type of file?"
-msgstr "Dana datoteka nima smisla..\nSte namestili modul za podporo temu tipu datotek?"
+msgstr ""
+"Dana datoteka nima smisla..\n"
+"Ste namestili modul za podporo temu tipu datotek?"
 
 #. module: account_payment_return_import
 #: field:payment.return.import,create_uid:0
@@ -110,7 +119,9 @@ msgstr "Prikazni naziv"
 msgid ""
 "Get you bank payment returns in electronic format from your bank and select "
 "them here."
-msgstr "Od svoje banke pridobite vračila plačil v elektronskem formatu in jih izberite tukaj."
+msgstr ""
+"Od svoje banke pridobite vračila plačil v elektronskem formatu in jih "
+"izberite tukaj."
 
 #. module: account_payment_return_import
 #: field:payment.return.import,hide_journal_field:0
