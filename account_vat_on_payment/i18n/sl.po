@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_vat_on_payment
-# 
+#
 # Translators:
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2016
 msgid ""
@@ -11,12 +11,14 @@ msgstr ""
 "POT-Creation-Date: 2017-07-28 08:15+0000\n"
 "PO-Revision-Date: 2017-07-28 05:38+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-payment-8-0/language/sl/)\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-"
+"payment-8-0/language/sl/)\n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sl\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
 
 #. module: account_vat_on_payment
 #: model:ir.model,name:account_vat_on_payment.model_account_account
@@ -40,7 +42,9 @@ msgstr "Postavka bančnega izpiska"
 msgid ""
 "Can't handle VAT on payment if not every invoice is on a VAT on payment "
 "treatment"
-msgstr "Ne da se obdelati DDV na plačilu, če niso vsi računi z DDV pri obdelavi plačil"
+msgstr ""
+"Ne da se obdelati DDV na plačilu, če niso vsi računi z DDV pri obdelavi "
+"plačil"
 
 #. module: account_vat_on_payment
 #: code:addons/account_vat_on_payment/account_bank_statement.py:241
@@ -48,7 +52,9 @@ msgstr "Ne da se obdelati DDV na plačilu, če niso vsi računi z DDV pri obdela
 msgid ""
 "Can't handle write-off with more than 1 move line without "
 "counterpart_move_line_id"
-msgstr "Odpisov z več kot 1 postavko premika brez proti-postavke - counterpart_move_line_id - ni mogoče urejati."
+msgstr ""
+"Odpisov z več kot 1 postavko premika brez proti-postavke - "
+"counterpart_move_line_id - ni mogoče urejati."
 
 #. module: account_vat_on_payment
 #: model:ir.model,name:account_vat_on_payment.model_res_company
@@ -145,30 +151,47 @@ msgstr "Dejanska davčna koda"
 msgid ""
 "Related account used for real registrations on a VAT on payment basis. Set "
 "the shadow account here"
-msgstr "Povezani konti za dejanske vknjižbe pri DDV na osnovi plačil. Sem nastavite 'konto v senci'"
+msgstr ""
+"Povezani konti za dejanske vknjižbe pri DDV na osnovi plačil. Sem nastavite "
+"'konto v senci'"
 
 #. module: account_vat_on_payment
 #: help:account.journal,vat_on_payment_related_journal_id:0
 msgid ""
-"Related journal used for shadow registrations on a VAT on payment basis. Set"
-" the shadow journal here"
-msgstr "Povezani dnevnik za vknjižbe 'v senci' pri DDV na osnovi plačil. Sem nastavite dnevnik 'v senci'"
+"Related journal used for shadow registrations on a VAT on payment basis. Set "
+"the shadow journal here"
+msgstr ""
+"Povezani dnevnik za vknjižbe 'v senci' pri DDV na osnovi plačil. Sem "
+"nastavite dnevnik 'v senci'"
 
 #. module: account_vat_on_payment
 #: help:account.tax.code,vat_on_payment_related_tax_code_id:0
 msgid ""
 "Related tax code used for real registrations on a VAT on payment basis. Set "
 "the shadow tax code here"
-msgstr "Povezana davčna koda za dejanske vknjižbe pri DDV na osnovi plačil. Sem nastavite 'konto v senci'"
+msgstr ""
+"Povezana davčna koda za dejanske vknjižbe pri DDV na osnovi plačil. Sem "
+"nastavite 'konto v senci'"
 
 #. module: account_vat_on_payment
 #: help:account.config.settings,vat_config_error:0
 #: help:res.company,vat_config_error:0
 msgid ""
-"Selection field to configure behaviour on missconfigured datas on VAT on payment basis.\n"
-" - 'Raise Error' is selected, if an account, journal doesn't have set the corresponding VAT on payment field, it will raise an error about missconfiguration.\n"
-" - 'Use the same' is selected, it will not raise an error about missconfiguration, and use the same account, journal in VAT on payment."
-msgstr "Polje izbire za nastavitev obnašanja pri napačni nastavitvi podatkov glede DDV za plačila.\n - Če je izbrano 'Sproži napako', bo, v primerih da dnevnik nima nastavljenega ustrezajočega polja za DDV pri plačilih, sproženo obvestilo o napaki glede nastavitev.\n - Če je izbrano 'Uporabi isto', se obvestilo o napaki pri nastavitvah ne bo sprožilo in bosta uporabljena isti konto in dnevnik za DDV pri plačilih."
+"Selection field to configure behaviour on missconfigured datas on VAT on "
+"payment basis.\n"
+" - 'Raise Error' is selected, if an account, journal doesn't have set the "
+"corresponding VAT on payment field, it will raise an error about "
+"missconfiguration.\n"
+" - 'Use the same' is selected, it will not raise an error about "
+"missconfiguration, and use the same account, journal in VAT on payment."
+msgstr ""
+"Polje izbire za nastavitev obnašanja pri napačni nastavitvi podatkov glede "
+"DDV za plačila.\n"
+" - Če je izbrano 'Sproži napako', bo, v primerih da dnevnik nima "
+"nastavljenega ustrezajočega polja za DDV pri plačilih, sproženo obvestilo o "
+"napaki glede nastavitev.\n"
+" - Če je izbrano 'Uporabi isto', se obvestilo o napaki pri nastavitvah ne bo "
+"sprožilo in bosta uporabljena isti konto in dnevnik za DDV pri plačilih."
 
 #. module: account_vat_on_payment
 #: help:account.config.settings,vat_payment_lines:0
@@ -177,7 +200,10 @@ msgid ""
 "Selection field to configure if the account moves generated on VAT on "
 "payment basis should modify the implicit account moves generated normally, "
 "and to move the partner account move line to the shadow move."
-msgstr "Izbirno polje za nastavitev, ali naj kontni premiki nastali na osnovi DDV pri plačilih spremenijo povezane kontne premike, ki nastanejo po običajni poti in za premik vknjižbe v konto partnerja v senčni premik."
+msgstr ""
+"Izbirno polje za nastavitev, ali naj kontni premiki nastali na osnovi DDV "
+"pri plačilih spremenijo povezane kontne premike, ki nastanejo po običajni "
+"poti in za premik vknjižbe v konto partnerja v senčni premik."
 
 #. module: account_vat_on_payment
 #: field:account.account,vat_on_payment_related_account_id:0
@@ -211,7 +237,9 @@ msgstr "Davčna koda"
 msgid ""
 "The invoice is 'VAT on payment' but account %s does not have a related "
 "shadow account"
-msgstr "Račun ima nastavljeno 'DDV po plačilih', a konto %s nima ustrezajočega senčnega konta"
+msgstr ""
+"Račun ima nastavljeno 'DDV po plačilih', a konto %s nima ustrezajočega "
+"senčnega konta"
 
 #. module: account_vat_on_payment
 #: code:addons/account_vat_on_payment/account_invoice.py:46
@@ -219,7 +247,9 @@ msgstr "Račun ima nastavljeno 'DDV po plačilih', a konto %s nima ustrezajočeg
 msgid ""
 "The invoice is 'VAT on payment' but tax code %s does not have a related "
 "shadow tax code"
-msgstr "Račun ima nastavljeno 'DDV po plačilih', a davčna koda %s nima ustrezajočega senčne davčne kode"
+msgstr ""
+"Račun ima nastavljeno 'DDV po plačilih', a davčna koda %s nima ustrezajočega "
+"senčne davčne kode"
 
 #. module: account_vat_on_payment
 #: selection:account.config.settings,vat_config_error:0
@@ -262,7 +292,9 @@ msgstr "DDV po plačilih"
 msgid ""
 "We are on a VAT on payment treatment but journal %s does not have a related "
 "shadow journal"
-msgstr "Smo v obdelavi DDV po plačilih, a dnevnik %s nima ustrezajočega senčnega dnevnika"
+msgstr ""
+"Smo v obdelavi DDV po plačilih, a dnevnik %s nima ustrezajočega senčnega "
+"dnevnika"
 
 #. module: account_vat_on_payment
 #: code:addons/account_vat_on_payment/account_voucher.py:107
@@ -270,7 +302,9 @@ msgstr "Smo v obdelavi DDV po plačilih, a dnevnik %s nima ustrezajočega senčn
 msgid ""
 "We are on a VAT on payment treatment but move line %s does not have a "
 "related real account"
-msgstr "Smo v obdelavi DDV po plačilih, a postavka premika %s nima ustrezajočega dejanskega konta"
+msgstr ""
+"Smo v obdelavi DDV po plačilih, a postavka premika %s nima ustrezajočega "
+"dejanskega konta"
 
 #. module: account_vat_on_payment
 #: code:addons/account_vat_on_payment/account_voucher.py:140
@@ -278,7 +312,9 @@ msgstr "Smo v obdelavi DDV po plačilih, a postavka premika %s nima ustrezajoče
 msgid ""
 "We are on a VAT on payment treatment but move line %s does not have a "
 "related real tax code"
-msgstr "Smo v obdelavi DDV po plačilih, a postavka premika %s nima ustrezajoče davčne kode"
+msgstr ""
+"Smo v obdelavi DDV po plačilih, a postavka premika %s nima ustrezajoče "
+"davčne kode"
 
 #. module: account_vat_on_payment
 #: code:addons/account_vat_on_payment/account_bank_statement.py:327
@@ -286,4 +322,6 @@ msgstr "Smo v obdelavi DDV po plačilih, a postavka premika %s nima ustrezajoče
 msgid ""
 "You are trying to pay with write-off more than one invoice and distributing "
 "write-off is not allowed. See company settings."
-msgstr "Plačati poskušate več računov z odpisom, distribucija odpisov pa ni dovoljena. Poglejte nastavitve družbe."
+msgstr ""
+"Plačati poskušate več računov z odpisom, distribucija odpisov pa ni "
+"dovoljena. Poglejte nastavitve družbe."

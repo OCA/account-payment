@@ -1,22 +1,17 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * account_vat_on_payment
+#	* account_vat_on_payment
 #
-# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: account-payment (8.0)\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-18 00:39+0000\n"
-"PO-Revision-Date: 2017-04-25 10:39+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Galician (http://www.transifex.com/oca/OCA-account-"
-"payment-8-0/language/gl/)\n"
-"Language: gl\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: account_vat_on_payment
 #: model:ir.model,name:account_vat_on_payment.model_account_account
@@ -37,17 +32,13 @@ msgstr ""
 #: code:addons/account_vat_on_payment/account_bank_statement.py:39
 #: code:addons/account_vat_on_payment/account_voucher.py:33
 #, python-format
-msgid ""
-"Can't handle VAT on payment if not every invoice is on a VAT on payment "
-"treatment"
+msgid "Can't handle VAT on payment if not every invoice is on a VAT on payment treatment"
 msgstr ""
 
 #. module: account_vat_on_payment
 #: code:addons/account_vat_on_payment/account_bank_statement.py:241
 #, python-format
-msgid ""
-"Can't handle write-off with more than 1 move line without "
-"counterpart_move_line_id"
+msgid "Can't handle write-off with more than 1 move line without counterpart_move_line_id"
 msgstr ""
 
 #. module: account_vat_on_payment
@@ -85,12 +76,12 @@ msgstr ""
 #. module: account_vat_on_payment
 #: model:ir.model,name:account_vat_on_payment.model_account_invoice
 msgid "Invoice"
-msgstr "Factura"
+msgstr ""
 
 #. module: account_vat_on_payment
 #: model:ir.model,name:account_vat_on_payment.model_account_journal
 msgid "Journal"
-msgstr "Diario"
+msgstr ""
 
 #. module: account_vat_on_payment
 #: model:ir.model,name:account_vat_on_payment.model_account_move_line
@@ -142,45 +133,31 @@ msgstr ""
 
 #. module: account_vat_on_payment
 #: help:account.account,vat_on_payment_related_account_id:0
-msgid ""
-"Related account used for real registrations on a VAT on payment basis. Set "
-"the shadow account here"
+msgid "Related account used for real registrations on a VAT on payment basis. Set the shadow account here"
 msgstr ""
 
 #. module: account_vat_on_payment
 #: help:account.journal,vat_on_payment_related_journal_id:0
-msgid ""
-"Related journal used for shadow registrations on a VAT on payment basis. Set "
-"the shadow journal here"
+msgid "Related journal used for shadow registrations on a VAT on payment basis. Set the shadow journal here"
 msgstr ""
 
 #. module: account_vat_on_payment
 #: help:account.tax.code,vat_on_payment_related_tax_code_id:0
-msgid ""
-"Related tax code used for real registrations on a VAT on payment basis. Set "
-"the shadow tax code here"
+msgid "Related tax code used for real registrations on a VAT on payment basis. Set the shadow tax code here"
 msgstr ""
 
 #. module: account_vat_on_payment
 #: help:account.config.settings,vat_config_error:0
 #: help:res.company,vat_config_error:0
-msgid ""
-"Selection field to configure behaviour on missconfigured datas on VAT on "
-"payment basis.\n"
-" - 'Raise Error' is selected, if an account, journal doesn't have set the "
-"corresponding VAT on payment field, it will raise an error about "
-"missconfiguration.\n"
-" - 'Use the same' is selected, it will not raise an error about "
-"missconfiguration, and use the same account, journal in VAT on payment."
+msgid "Selection field to configure behaviour on missconfigured datas on VAT on payment basis.\n"
+" - 'Raise Error' is selected, if an account, journal doesn't have set the corresponding VAT on payment field, it will raise an error about missconfiguration.\n"
+" - 'Use the same' is selected, it will not raise an error about missconfiguration, and use the same account, journal in VAT on payment."
 msgstr ""
 
 #. module: account_vat_on_payment
 #: help:account.config.settings,vat_payment_lines:0
 #: help:res.company,vat_payment_lines:0
-msgid ""
-"Selection field to configure if the account moves generated on VAT on "
-"payment basis should modify the implicit account moves generated normally, "
-"and to move the partner account move line to the shadow move."
+msgid "Selection field to configure if the account moves generated on VAT on payment basis should modify the implicit account moves generated normally, and to move the partner account move line to the shadow move."
 msgstr ""
 
 #. module: account_vat_on_payment
@@ -212,17 +189,13 @@ msgstr ""
 #. module: account_vat_on_payment
 #: code:addons/account_vat_on_payment/account_invoice.py:27
 #, python-format
-msgid ""
-"The invoice is 'VAT on payment' but account %s does not have a related "
-"shadow account"
+msgid "The invoice is 'VAT on payment' but account %s does not have a related shadow account"
 msgstr ""
 
 #. module: account_vat_on_payment
 #: code:addons/account_vat_on_payment/account_invoice.py:46
 #, python-format
-msgid ""
-"The invoice is 'VAT on payment' but tax code %s does not have a related "
-"shadow tax code"
+msgid "The invoice is 'VAT on payment' but tax code %s does not have a related shadow tax code"
 msgstr ""
 
 #. module: account_vat_on_payment
@@ -263,31 +236,24 @@ msgstr ""
 #: code:addons/account_vat_on_payment/account_voucher.py:196
 #: code:addons/account_vat_on_payment/account_voucher.py:264
 #, python-format
-msgid ""
-"We are on a VAT on payment treatment but journal %s does not have a related "
-"shadow journal"
+msgid "We are on a VAT on payment treatment but journal %s does not have a related shadow journal"
 msgstr ""
 
 #. module: account_vat_on_payment
 #: code:addons/account_vat_on_payment/account_voucher.py:107
 #, python-format
-msgid ""
-"We are on a VAT on payment treatment but move line %s does not have a "
-"related real account"
+msgid "We are on a VAT on payment treatment but move line %s does not have a related real account"
 msgstr ""
 
 #. module: account_vat_on_payment
 #: code:addons/account_vat_on_payment/account_voucher.py:140
 #, python-format
-msgid ""
-"We are on a VAT on payment treatment but move line %s does not have a "
-"related real tax code"
+msgid "We are on a VAT on payment treatment but move line %s does not have a related real tax code"
 msgstr ""
 
 #. module: account_vat_on_payment
 #: code:addons/account_vat_on_payment/account_bank_statement.py:327
 #, python-format
-msgid ""
-"You are trying to pay with write-off more than one invoice and distributing "
-"write-off is not allowed. See company settings."
+msgid "You are trying to pay with write-off more than one invoice and distributing write-off is not allowed. See company settings."
 msgstr ""
+

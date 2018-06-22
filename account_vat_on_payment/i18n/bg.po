@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_vat_on_payment
-# 
+#
 # Translators:
 msgid ""
 msgstr ""
@@ -10,11 +10,12 @@ msgstr ""
 "POT-Creation-Date: 2016-12-24 00:17+0000\n"
 "PO-Revision-Date: 2016-12-27 08:23+0000\n"
 "Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Bulgarian (http://www.transifex.com/oca/OCA-account-payment-8-0/language/bg/)\n"
+"Language-Team: Bulgarian (http://www.transifex.com/oca/OCA-account-"
+"payment-8-0/language/bg/)\n"
+"Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: bg\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_vat_on_payment
@@ -42,7 +43,7 @@ msgid ""
 msgstr ""
 
 #. module: account_vat_on_payment
-#: code:addons/account_vat_on_payment/account_bank_statement.py:238
+#: code:addons/account_vat_on_payment/account_bank_statement.py:241
 #, python-format
 msgid ""
 "Can't handle write-off with more than 1 move line without "
@@ -62,16 +63,16 @@ msgstr ""
 
 #. module: account_vat_on_payment
 #: code:addons/account_vat_on_payment/account_bank_statement.py:38
-#: code:addons/account_vat_on_payment/account_bank_statement.py:93
-#: code:addons/account_vat_on_payment/account_bank_statement.py:237
-#: code:addons/account_vat_on_payment/account_bank_statement.py:324
+#: code:addons/account_vat_on_payment/account_bank_statement.py:95
+#: code:addons/account_vat_on_payment/account_bank_statement.py:240
+#: code:addons/account_vat_on_payment/account_bank_statement.py:327
 #: code:addons/account_vat_on_payment/account_invoice.py:26
 #: code:addons/account_vat_on_payment/account_invoice.py:45
 #: code:addons/account_vat_on_payment/account_voucher.py:32
 #: code:addons/account_vat_on_payment/account_voucher.py:106
 #: code:addons/account_vat_on_payment/account_voucher.py:139
 #: code:addons/account_vat_on_payment/account_voucher.py:195
-#: code:addons/account_vat_on_payment/account_voucher.py:252
+#: code:addons/account_vat_on_payment/account_voucher.py:263
 #, python-format
 msgid "Error"
 msgstr ""
@@ -149,8 +150,8 @@ msgstr ""
 #. module: account_vat_on_payment
 #: help:account.journal,vat_on_payment_related_journal_id:0
 msgid ""
-"Related journal used for shadow registrations on a VAT on payment basis. Set"
-" the shadow journal here"
+"Related journal used for shadow registrations on a VAT on payment basis. Set "
+"the shadow journal here"
 msgstr ""
 
 #. module: account_vat_on_payment
@@ -164,9 +165,13 @@ msgstr ""
 #: help:account.config.settings,vat_config_error:0
 #: help:res.company,vat_config_error:0
 msgid ""
-"Selection field to configure behaviour on missconfigured datas on VAT on payment basis.\n"
-" - 'Raise Error' is selected, if an account, journal doesn't have set the corresponding VAT on payment field, it will raise an error about missconfiguration.\n"
-" - 'Use the same' is selected, it will not raise an error about missconfiguration, and use the same account, journal in VAT on payment."
+"Selection field to configure behaviour on missconfigured datas on VAT on "
+"payment basis.\n"
+" - 'Raise Error' is selected, if an account, journal doesn't have set the "
+"corresponding VAT on payment field, it will raise an error about "
+"missconfiguration.\n"
+" - 'Use the same' is selected, it will not raise an error about "
+"missconfiguration, and use the same account, journal in VAT on payment."
 msgstr ""
 
 #. module: account_vat_on_payment
@@ -254,9 +259,9 @@ msgid "Vat on payment"
 msgstr ""
 
 #. module: account_vat_on_payment
-#: code:addons/account_vat_on_payment/account_bank_statement.py:94
+#: code:addons/account_vat_on_payment/account_bank_statement.py:96
 #: code:addons/account_vat_on_payment/account_voucher.py:196
-#: code:addons/account_vat_on_payment/account_voucher.py:253
+#: code:addons/account_vat_on_payment/account_voucher.py:264
 #, python-format
 msgid ""
 "We are on a VAT on payment treatment but journal %s does not have a related "
@@ -280,7 +285,7 @@ msgid ""
 msgstr ""
 
 #. module: account_vat_on_payment
-#: code:addons/account_vat_on_payment/account_bank_statement.py:324
+#: code:addons/account_vat_on_payment/account_bank_statement.py:327
 #, python-format
 msgid ""
 "You are trying to pay with write-off more than one invoice and distributing "
