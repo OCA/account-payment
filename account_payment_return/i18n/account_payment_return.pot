@@ -1,22 +1,17 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * account_payment_return
+#	* account_payment_return
 #
-# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: account-payment (8.0)\n"
+"Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-24 00:17+0000\n"
-"PO-Revision-Date: 2016-12-27 08:22+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
-"Language-Team: Lao (http://www.transifex.com/oca/OCA-account-payment-8-0/"
-"language/lo/)\n"
-"Language: lo\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: \n"
 
 #. module: account_payment_return
 #: field:payment.return.line,amount:0
@@ -31,7 +26,7 @@ msgstr ""
 #. module: account_payment_return
 #: view:payment.return:account_payment_return.payment_return_form_view
 msgid "Cancel"
-msgstr "ຍົກເລີອກ"
+msgstr ""
 
 #. module: account_payment_return
 #: selection:payment.return,state:0
@@ -59,13 +54,15 @@ msgid "Confirm"
 msgstr ""
 
 #. module: account_payment_return
-#: field:payment.return,create_uid:0 field:payment.return.line,create_uid:0
+#: field:payment.return,create_uid:0
+#: field:payment.return.line,create_uid:0
 #: field:payment.return.reason,create_uid:0
 msgid "Created by"
 msgstr ""
 
 #. module: account_payment_return
-#: field:payment.return,create_date:0 field:payment.return.line,create_date:0
+#: field:payment.return,create_date:0
+#: field:payment.return.line,create_date:0
 #: field:payment.return.reason,create_date:0
 msgid "Created on"
 msgstr ""
@@ -117,13 +114,12 @@ msgstr ""
 
 #. module: account_payment_return
 #: help:payment.return,message_summary:0
-msgid ""
-"Holds the Chatter summary (number of messages, ...). This summary is "
-"directly in html format in order to be inserted in kanban views."
+msgid "Holds the Chatter summary (number of messages, ...). This summary is directly in html format in order to be inserted in kanban views."
 msgstr ""
 
 #. module: account_payment_return
-#: field:payment.return,id:0 field:payment.return.line,id:0
+#: field:payment.return,id:0
+#: field:payment.return.line,id:0
 #: field:payment.return.reason,id:0
 msgid "ID"
 msgstr ""
@@ -177,13 +173,15 @@ msgid "Last Modified on"
 msgstr ""
 
 #. module: account_payment_return
-#: field:payment.return,write_uid:0 field:payment.return.line,write_uid:0
+#: field:payment.return,write_uid:0
+#: field:payment.return.line,write_uid:0
 #: field:payment.return.reason,write_uid:0
 msgid "Last Updated by"
 msgstr ""
 
 #. module: account_payment_return
-#: field:payment.return,write_date:0 field:payment.return.line,write_date:0
+#: field:payment.return,write_date:0
+#: field:payment.return.line,write_date:0
 #: field:payment.return.reason,write_date:0
 msgid "Last Updated on"
 msgstr ""
@@ -265,7 +263,8 @@ msgid "Payment returned"
 msgstr ""
 
 #. module: account_payment_return
-#: help:payment.return.line,concept:0 help:payment.return.line,partner_name:0
+#: help:payment.return.line,concept:0
+#: help:payment.return.line,partner_name:0
 msgid "Read from imported file. Only for reference."
 msgstr ""
 
@@ -280,7 +279,8 @@ msgid "Reconcile"
 msgstr ""
 
 #. module: account_payment_return
-#: field:payment.return,name:0 field:payment.return.line,reference:0
+#: field:payment.return,name:0
+#: field:payment.return.line,reference:0
 msgid "Reference"
 msgstr ""
 
@@ -306,7 +306,8 @@ msgid "Return %s"
 msgstr ""
 
 #. module: account_payment_return
-#: field:payment.return,date:0 field:payment.return.line,date:0
+#: field:payment.return,date:0
+#: field:payment.return.line,date:0
 msgid "Return date"
 msgstr ""
 
@@ -356,3 +357,4 @@ msgstr ""
 #, python-format
 msgid "You must input all moves references in the payment return."
 msgstr ""
+

@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_payment_return
-# 
+#
 # Translators:
 # Rudolf Schnapka <rs@techno-flex.de>, 2017
 msgid ""
@@ -11,11 +11,12 @@ msgstr ""
 "POT-Creation-Date: 2017-04-18 00:39+0000\n"
 "PO-Revision-Date: 2017-04-19 11:44+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-account-payment-8-0/language/de/)\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-account-payment-8-0/"
+"language/de/)\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_payment_return
@@ -120,7 +121,10 @@ msgstr "Erzwungene Periode"
 msgid ""
 "Holds the Chatter summary (number of messages, ...). This summary is "
 "directly in html format in order to be inserted in kanban views."
-msgstr "Beinhaltet die Dialogzusammenfassung (Anzahl Mitteilungen, ...). Diese Zusammenfassung liegt in HTML vor, um direkt in Kanban-Ansichten verwendet werden zu können."
+msgstr ""
+"Beinhaltet die Dialogzusammenfassung (Anzahl Mitteilungen, ...). Diese "
+"Zusammenfassung liegt in HTML vor, um direkt in Kanban-Ansichten verwendet "
+"werden zu können."
 
 #. module: account_payment_return
 #: field:payment.return,id:0 field:payment.return.line,id:0
