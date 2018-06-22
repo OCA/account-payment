@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_due_list
-# 
+#
 # Translators:
 # Matjaž Mozetič <m.mozetic@matmoz.si>, 2016
 msgid ""
@@ -11,12 +11,14 @@ msgstr ""
 "POT-Creation-Date: 2016-07-29 12:02+0000\n"
 "PO-Revision-Date: 2016-07-21 08:48+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-payment-8-0/language/sl/)\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-"
+"payment-8-0/language/sl/)\n"
+"Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: sl\n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
+"%100==4 ? 2 : 3);\n"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
@@ -36,11 +38,15 @@ msgstr "Združi po..."
 #. module: account_due_list
 #: help:account.move.line,payment_term_id:0
 msgid ""
-"If you use payment terms, the due date will be computed automatically at the"
-" generation of accounting entries. If you keep the payment term and the due "
+"If you use payment terms, the due date will be computed automatically at the "
+"generation of accounting entries. If you keep the payment term and the due "
 "date empty, it means direct payment. The payment term may compute several "
 "due dates, for example 50% now, 50% in one month."
-msgstr "Če uporabljate plačilne pogoje, bo datum zapadlosti samodejno izračunan ob nastanku knjigovodskih vnosov. Če plačilni pogoj in datum zapadlosti ostaneta prazna, to pomeni direktno plačilo. Plačilno pogoj lahko obdela več datumov zapadlosti, na primer 50% takoj, 50% v mesecu dni."
+msgstr ""
+"Če uporabljate plačilne pogoje, bo datum zapadlosti samodejno izračunan ob "
+"nastanku knjigovodskih vnosov. Če plačilni pogoj in datum zapadlosti "
+"ostaneta prazna, to pomeni direktno plačilo. Plačilno pogoj lahko obdela več "
+"datumov zapadlosti, na primer 50% takoj, 50% v mesecu dni."
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
@@ -159,7 +165,9 @@ msgstr "Izvorni dokument"
 msgid ""
 "The residual amount on a receivable or payable of a journal entry expressed "
 "in the company currency."
-msgstr "Preostali znesek terjatve ali obveznosti dnevniške postavke izražen v valuti družbe."
+msgstr ""
+"Preostali znesek terjatve ali obveznosti dnevniške postavke izražen v valuti "
+"družbe."
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_tree

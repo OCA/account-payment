@@ -1,7 +1,7 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
 # * account_due_list
-# 
+#
 # Translators:
 # Rudolf Schnapka <rs@techno-flex.de>, 2017
 msgid ""
@@ -11,11 +11,12 @@ msgstr ""
 "POT-Creation-Date: 2017-02-11 00:19+0000\n"
 "PO-Revision-Date: 2017-02-24 23:44+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-account-payment-8-0/language/de/)\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-account-payment-8-0/"
+"language/de/)\n"
+"Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Language: de\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_due_list
@@ -36,11 +37,16 @@ msgstr "Gruppierung..."
 #. module: account_due_list
 #: help:account.move.line,payment_term_id:0
 msgid ""
-"If you use payment terms, the due date will be computed automatically at the"
-" generation of accounting entries. If you keep the payment term and the due "
+"If you use payment terms, the due date will be computed automatically at the "
+"generation of accounting entries. If you keep the payment term and the due "
 "date empty, it means direct payment. The payment term may compute several "
 "due dates, for example 50% now, 50% in one month."
-msgstr "Wenn Sie Zahlungsbedingungen verwenden, wird das Fälligkeitsdatum automatisch beim Anlegen der Buchungen errechnet. Wenn Sie die Zahlungsbedingung und das Fälligkeitsadtum leer lassen, bedeutet dies sofortige Fälligkeit. Die Zahlungsbedingung kann mehrer Fälligkeiten ermitteln, z.B. 50% sofort und 50% in einem Monat."
+msgstr ""
+"Wenn Sie Zahlungsbedingungen verwenden, wird das Fälligkeitsdatum "
+"automatisch beim Anlegen der Buchungen errechnet. Wenn Sie die "
+"Zahlungsbedingung und das Fälligkeitsadtum leer lassen, bedeutet dies "
+"sofortige Fälligkeit. Die Zahlungsbedingung kann mehrer Fälligkeiten "
+"ermitteln, z.B. 50% sofort und 50% in einem Monat."
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
@@ -159,7 +165,8 @@ msgstr "Ursprungsbeleg"
 msgid ""
 "The residual amount on a receivable or payable of a journal entry expressed "
 "in the company currency."
-msgstr "Der Restbetrag von Ein- oder Ausgängen von Journalposten in Hauswährung"
+msgstr ""
+"Der Restbetrag von Ein- oder Ausgängen von Journalposten in Hauswährung"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_tree
