@@ -8,11 +8,15 @@
             <form string="Pay supplier invoice or customer refund">
                 <group>
                     <field name="company_id" invisible="1"/>
-                    <field name="journal_ids" invisible="1"/>
+                    <field name="journal_ids" invisible="1">
+                        <tree>
+                            <field name="id"/>
+                        </tree>
+                    </field>
                     <field name="journal_count" invisible="1"/>
                     <field name="journal_id"
                            class="oe_inline"
-                           domain="[('id', 'in', journal_ids[0][2])]"
+                           domain="[('id', 'in', journal_ids)]"
                            options="{'no_create': True, 'no_open':True}"
                            attrs="{'invisible':[('journal_count', '&lt;', 2)]}"
                     />
