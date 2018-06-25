@@ -54,6 +54,9 @@ class SlimpayController(WebsiteSale):
         if tx.acquirer_id.provider != 'slimpay':
             _logger.warning('Feedback called with non slimpay tx %r', tx_ref)
             return Response('Incorrect transaction handler', status=200)
+        if tx.state == 'done':
+            _logger.debug('Transaction %r is already completed!', tx_ref)
+            return Response("OK", status=200)
         if not tx.acquirer_id._slimpay_s2s_validate(tx, post):
             _logger.warning('Invalid feedback for transaction %r', tx_ref)
             return Response('Invalid feedback for order', status=200)
