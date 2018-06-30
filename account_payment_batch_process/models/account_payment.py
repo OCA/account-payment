@@ -5,6 +5,9 @@
 
 from odoo import api, models, _
 
+import logging
+
+_logger = logging.getLogger(__name__)
 
 class AccountPayment(models.Model):
     _inherit = "account.payment"
@@ -17,16 +20,25 @@ class AccountPayment(models.Model):
         """
         # If group data
         if 'group_data' in self._context:
+            move_obj = self.env['account.move']
             aml_obj = self.env['account.move.line'].\
                 with_context(check_move_validity=False)
             invoice_currency = False
+            batch_id = self._context.get('batch_id')
+            _logger.info('\n\n\n batch_id: %s \n\n\n' % batch_id)
             if self.invoice_ids and\
                     all([x.currency_id == self.invoice_ids[0].currency_id
                          for x in self.invoice_ids]):
                 # If all the invoices selected share the same currency,
                 # record the paiement in that currency too
                 invoice_currency = self.invoice_ids[0].currency_id
-            move = self.env['account.move'].create(self._get_move_vals())
+            
+            #Check if Move was created via Batch Payment Wizard
+            move = move_obj.search([('batch_id','=',batch_id)])
+            if not move:
+                move = move_obj.create(self._get_move_vals())
+                move.batch_id = batch_id
+
             p_id = str(self.partner_id.id)
             for inv in self._context.get('group_data')[p_id]['inv_val']:
                 amt = 0

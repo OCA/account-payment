@@ -321,7 +321,7 @@ class AccountRegisterPayments(models.TransientModel):
                                  }
                         })
         # Update context
-        context.update({'group_data': data})
+        context.update({'group_data': data, 'batch_id': self.id})
         # Making partner wise payment
         payment_ids = []
         for p in list(data):
