@@ -95,7 +95,7 @@ class SlimpayClient(object):
             action=action, validate=validate, params=params)
 
     def approval_url(self, tx_ref, order_id, locale, amount, currency,
-                     subscriber, notify_url):
+                     decimal_places, subscriber, notify_url):
         """ Return the URL a final user must visit to perform a mandate
         signature with a first payment.
 
@@ -107,7 +107,8 @@ class SlimpayClient(object):
         `notify_url` is the URL to be notified at the end of the operation.
         """
         params = self._repr_order(
-            tx_ref, order_id, locale, amount, currency, subscriber, notify_url)
+            tx_ref, order_id, locale, amount, currency, decimal_places,
+            subscriber, notify_url)
         _logger.debug("slimpay approval_url parameters: %s", params)
         order = self.action('POST', 'create-orders', params=params)
         url = order.links[self.method_name('user-approval')].url
@@ -115,12 +116,13 @@ class SlimpayClient(object):
         return url
 
     def create_payin(self, payin_ref, mandate_ref, amount, currency,
-                     payin_label):
+                     decimal_places, payin_label):
         params = {
             'creditor': {'reference': self.creditor},
             'mandate': {'reference': mandate_ref},
             'reference': payin_ref, 'label': payin_label,
-            'amount': amount, 'currency': currency,
+            'amount': round(amount, decimal_places),
+            'currency': currency,
             'scheme': 'SEPA.DIRECT_DEBIT.CORE',
             'executionDate': None,  # means ASAP
         }
@@ -178,7 +180,7 @@ class SlimpayClient(object):
         }
 
     def _repr_order(self, tx_ref, order_id, locale, amount, currency,
-                    subscriber, notify_url):
+                    decimal_places, subscriber, notify_url):
         return {
             'reference': tx_ref,
             'locale': locale,
@@ -187,19 +189,21 @@ class SlimpayClient(object):
             'started': True,
             'items': [
                 self._repr_mandate(subscriber),
-                self._repr_payment(order_id, amount, currency, notify_url),
+                self._repr_payment(order_id, amount, currency, decimal_places,
+                                   notify_url),
             ],
         }
 
-    def _repr_payment(self, label, amount, currency, notify_url):
+    def _repr_payment(self, label, amount, currency, decimal_places,
+                      notify_url):
         return {
             'type': 'payment',
             'action': 'create',
             'payin': {
                 'scheme': 'SEPA.DIRECT_DEBIT.CORE',
                 'direction': 'IN',
-                'amount': amount,
-                'currency': currency.name,
+                'amount': round(amount, decimal_places),
+                'currency': currency,
                 'label': label,
                 'notifyUrl': notify_url,
             }

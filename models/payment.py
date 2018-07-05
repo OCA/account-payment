@@ -118,7 +118,7 @@ class SlimpayTransaction(models.Model):
             'slimpay_payin_label', self.reference or 'TR%d' % self.id)
         result = client.create_payin(
             'TR%d' % self.id, mandate_ref, self.amount, self.currency_id.name,
-            label)
+            self.currency_id.decimal_places, label)
         _logger.debug('Payin creation result: %s', result)
         if result:
             self.update({'state': 'done'})

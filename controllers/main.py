@@ -35,7 +35,8 @@ class SlimpayController(WebsiteSale):
         subscriber = slimpay_utils.subscriber_from_partner(partner)
         return acquirer.slimpay_client.approval_url(
             so.payment_tx_id.reference, so.id, locale, so.amount_total,
-            so.currency_id, subscriber, return_url)
+            so.currency_id.name, so.currency_id.decimal_places,
+            subscriber, return_url)
 
     @http.route(['/payment/slimpay/s2s/feedback'], type='http',
                 auth='public', methods=['POST'], csrf=False)

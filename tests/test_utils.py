@@ -62,14 +62,15 @@ class SlimpayUtilsTC(TransactionCase):
                                                  'app_id', 'app_secret')
         subscriber = slimpay_utils.subscriber_from_partner(self.partner)
         result = client._repr_order(
-            'tx', 'so', 'fr', 42, euro, subscriber, 'https://commown.fr/')
+            'tx', 'so', 'fr', 149.20000000000002, euro.name,
+            euro.decimal_places, subscriber, 'https://commown.fr/')
         self.assertEqual('tx', result['reference'])
         self.assertEqual('fr', result['locale'])
         self.assertEqual(['signMandate', 'payment'],
                          [item['type'] for item in result['items']])
         sign, payment = result['items']
         self.assertIn('signatory', sign['mandate'])
-        self.assertEqual(42, payment['payin']['amount'])
+        self.assertEqual(149.20, payment['payin']['amount'])
         self.assertEqual('so', payment['payin']['label'])
         self.assertEqual(u'EUR', payment['payin']['currency'])
         self.assertEqual('https://commown.fr/', payment['payin']['notifyUrl'])
