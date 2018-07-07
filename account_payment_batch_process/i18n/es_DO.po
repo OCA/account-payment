@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-29 11:59+0000\n"
-"PO-Revision-Date: 2018-05-29 08:23-0400\n"
+"POT-Creation-Date: 2018-07-07 17:25+0000\n"
+"PO-Revision-Date: 2018-07-07 13:27-0400\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -45,7 +45,7 @@ msgid "Balance Amount"
 msgstr "Balance"
 
 #. module: account_payment_batch_process
-#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:375
+#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:512
 #: model:ir.actions.act_window,name:account_payment_batch_process.action_invoice_batch_process
 #: model:ir.actions.act_window,name:account_payment_batch_process.action_invoice_invoice_batch_process
 #, python-format
@@ -58,7 +58,7 @@ msgid "Check Amount"
 msgstr "Monto a Pagar"
 
 #. module: account_payment_batch_process
-#: code:addons/account_payment_batch_process/models/account_payment.py:73
+#: code:addons/account_payment_batch_process/models/account_payment.py:83
 #, python-format
 msgid "Counterpart"
 msgstr "Contrapartida"
@@ -100,10 +100,10 @@ msgstr "Nombre mostrado"
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_customer_payment_line_id
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line_id
 msgid "ID"
-msgstr "ID (identificación)"
+msgstr "ID"
 
 #. module: account_payment_batch_process
-#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:127
+#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:142
 #, python-format
 msgid "In order to pay multiple invoices at once, they must use the same currency."
 msgstr "Para pagar múltiples facturas en lotes, deben tener la misma moneda."
@@ -172,7 +172,7 @@ msgid "Payment Type"
 msgstr "Tipo de pago"
 
 #. module: account_payment_batch_process
-#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:345
+#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:473
 #: model:ir.model,name:account_payment_batch_process.model_account_payment
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_account_register_payments_invoice_payments
 #, python-format
@@ -185,13 +185,13 @@ msgid "Post Difference In"
 msgstr "Contabiliziar la diferencia en"
 
 #. module: account_payment_batch_process
-#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:113
+#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:126
 #, python-format
 msgid "Program error: the expected model for this action is 'account.invoice'. The provided one is '%d'."
 msgstr "Error de programa: el modelo esperado para esta acción es 'account.invoice'. El proporcionado es '%d'."
 
 #. module: account_payment_batch_process
-#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:110
+#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:122
 #, python-format
 msgid "Program error: wizard action executed without active_model or active_ids in context."
 msgstr "Error de programa: acción de asistente ejecutada sin active_model o active_ids en contexto."
@@ -238,8 +238,20 @@ msgid "Total Invoices"
 msgstr "Total de facturas"
 
 #. module: account_payment_batch_process
-#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:208
-#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:283
+#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:450
+#, python-format
+msgid "Verification Failed! Amount not must be bigest."
+msgstr "¡Fallo en la verificación! El monto no debe ser mayor."
+
+#. module: account_payment_batch_process
+#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:434
+#, python-format
+msgid "Verification Failed! Payment Method must be indicate."
+msgstr "¡Fallo en la verificación! El método de pago debe ser indicado."
+
+#. module: account_payment_batch_process
+#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:427
+#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:443
 #, python-format
 msgid "Verification Failed! Total Invoices Amount and Check amount does not match!."
 msgstr "¡Fallo en la verificación! El monto total de las facturas y el cheque no coincide."
@@ -251,14 +263,14 @@ msgid "Wizard"
 msgstr "Asistente"
 
 #. module: account_payment_batch_process
-#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:120
+#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:134
 #, python-format
 msgid "You can only register payments for open invoices"
 msgstr "Solo puede registrar pagos por facturas abiertas"
 
 #. module: account_payment_batch_process
-#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:124
-#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:155
+#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:138
+#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:184
 #, python-format
 msgid "You cannot mix customer invoices and vendor bills in a single payment."
 msgstr "No puede mezclar facturas de clientes y facturas de proveedores en un solo pago."

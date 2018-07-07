@@ -55,8 +55,8 @@
                             <field name="balance_amt" readonly="1" sum="TOTAL BALANCE"  force_save="1"/>
                             <field name="receiving_amt" sum="TOTAL PAYMENT"/>
                             <field name="check_amount_in_words" invisible="1"/>
-                            <field name="payment_method_id" domain="[('payment_type','=','inbound')]"/>
-                            <field name="payment_difference"/>
+                            <field name="payment_method_id" domain="[('payment_type','=','inbound')]" required="1"/>
+                            <field name="payment_difference" readonly="1"  force_save="1"/>
                             <field name="handling"/>
                             <field name="writeoff_account_id"
                                    string="Post Difference In"
@@ -82,15 +82,18 @@
             <xpath expr="//field[@name='amount']" position="attributes">
                 <attribute name="invisible">context.get('batch', False)</attribute>
             </xpath>
-<!--
             <xpath expr="//field[@name='payment_method_id']" position="attributes">
                 <attribute name="attrs">{'invisible': ['|',('hide_payment_method', '=', True),('is_customer','=',True)]}</attribute>
                 <attribute name="domain">[('payment_type','=','outbound')]</attribute>
             </xpath>
--->
+            <xpath expr="//field[@name='currency_id']" position="attributes">
+                <attribute name="invisible">not context.get('batch', False)</attribute>
+            </xpath>
+
             <xpath expr="//field[@name='communication']" position="after">
                 <field name="cheque_amount" invisible="not context.get('batch', False)"/>
             </xpath>
+
         </field>
     </record>
 
