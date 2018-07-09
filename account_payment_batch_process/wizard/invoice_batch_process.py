@@ -328,7 +328,7 @@ class AccountRegisterPayments(models.TransientModel):
                                  }
                         })
         # Update context
-        context.update({'group_data': data})
+        context.update({'group_data': data, 'batch_id': self.id})
         # Making partner wise payment
         payment_ids = []
         for p in list(data):
@@ -336,6 +336,10 @@ class AccountRegisterPayments(models.TransientModel):
                 create(self.get_payment_batch_vals(group_data=data[p]))
             payment_ids.append(payment.id)
             payment.post()
+            move = payment.move_line_ids[0].move_id
+        move.post()
+
+
 
         view_id = self.env['ir.model.data'].get_object_reference(
             'account_payment_batch_process',
