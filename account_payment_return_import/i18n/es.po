@@ -1,0 +1,236 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_payment_return_import
+#
+# Translators:
+# Sergio Teruel Albert, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: account-payment (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-10-25 13:32+0200\n"
+"PO-Revision-Date: 2016-10-25 13:36+0200\n"
+"Last-Translator: Carlos Incaser <carlos@incaser.es>\n"
+"Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-payment-8-0/"
+"language/es/)\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 1.8.7.1\n"
+
+#. module: account_payment_return_import
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:268
+#, python-format
+msgid "%d transactions had already been imported and were ignored."
+msgstr "%d transacciones ya han sido importadas y serán ignoradas."
+
+#. module: account_payment_return_import
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:271
+#, python-format
+msgid "1 transaction had already been imported and was ignored."
+msgstr "1 transacción ya ha sido importada y será ignorada."
+
+#. module: account_payment_return_import
+#: view:payment.return.import:account_payment_return_import.account_payment_return_import_view
+msgid "1. Download your Payment Return file from your bank website."
+msgstr ""
+"1. Descarga tu fichero de devoluciones de cobro desde la web de tu banco."
+
+#. module: account_payment_return_import
+#: view:payment.return.import:account_payment_return_import.account_payment_return_import_view
+msgid ""
+"2. Make sure you have installed the right module to support the file format."
+msgstr ""
+"2. Asegúrate de que tienes instalado el modulo correcto que soporta el "
+"formato del archivo."
+
+#. module: account_payment_return_import
+#: view:payment.return.import:account_payment_return_import.account_payment_return_import_view
+msgid "3. Select the file and click 'Import'."
+msgstr "3. Selecciona el archivo y pincha \"Importar\"."
+
+#. module: account_payment_return_import
+#: sql_constraint:payment.return.line:0
+msgid "A bank account transactions can be imported only once !"
+msgstr "¡Las devoluciones solo pueden ser importadas una vez!"
+
+#. module: account_payment_return_import
+#: help:payment.return.import,journal_id:0
+msgid ""
+"Accounting journal related to the bank payment return you're importing. It "
+"has be be manually chosen for payment return formats which doesn't allow "
+"automatic journal detection."
+msgstr ""
+"Diario contable relacionado con el archivo de devoluciones que estas "
+"importando. Se selecciona manualmente para formatos de archivos que no "
+"permiten la detección automática del diario."
+
+#. module: account_payment_return_import
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:274
+#, python-format
+msgid "Already imported items"
+msgstr "Elementos ya importados"
+
+#. module: account_payment_return_import
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:206
+#, python-format
+msgid "Can not determine journal for import."
+msgstr "No puede determinarse el diario para importar."
+
+#. module: account_payment_return_import
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:202
+#, python-format
+msgid "Can not find the account number %s."
+msgstr "No se puede encontrar el número de cuenta %s."
+
+#. module: account_payment_return_import
+#: view:payment.return.import:account_payment_return_import.account_payment_return_import_view
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: account_payment_return_import
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:144
+#, python-format
+msgid ""
+"Could not make sense of the given file.\n"
+"Did you install the module to support this type of file?"
+msgstr ""
+"No se pudo dar sentido al archivo dado.\n"
+"¿Instaló el modulo para soportar este tipo de archivo?"
+
+#. module: account_payment_return_import
+#: field:payment.return.import,create_uid:0
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: account_payment_return_import
+#: field:payment.return.import,create_date:0
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: account_payment_return_import
+#: field:payment.return.import,display_name:0
+msgid "Display Name"
+msgstr "Nombre mostrado"
+
+#. module: account_payment_return_import
+#: help:payment.return.import,data_file:0
+msgid ""
+"Get you bank payment returns in electronic format from your bank and select "
+"them here."
+msgstr ""
+"Obtén tus devoluciones de cobros en formato electrónico desde tu banco y "
+"selecciónalas aquí."
+
+#. module: account_payment_return_import
+#: field:payment.return.import,hide_journal_field:0
+msgid "Hide the journal field in the view"
+msgstr "Oculta el campo diario en la vista"
+
+#. module: account_payment_return_import
+#: view:payment.return.import:account_payment_return_import.account_payment_return_import_view
+msgid "How to import your payment return :"
+msgstr "Devoluciones de cobros"
+
+#. module: account_payment_return_import
+#: field:payment.return.import,id:0
+msgid "ID"
+msgstr "ID"
+
+#. module: account_payment_return_import
+#: field:payment.return.line,unique_import_id:0
+msgid "Import ID"
+msgstr "ID Importacion"
+
+#. module: account_payment_return_import
+#: model:ir.actions.act_window,name:account_payment_return_import.action_account_payment_return_import
+#: model:ir.model,name:account_payment_return_import.model_payment_return_import
+#: model:ir.ui.menu,name:account_payment_return_import.menu_account_payment_return_import
+msgid "Import Payment Return"
+msgstr "Importar devolución de cobros"
+
+#. module: account_payment_return_import
+#: view:payment.return.import:account_payment_return_import.account_payment_return_import_view
+msgid "Import Payment Returns"
+msgstr "Importar devoluciones de cobros"
+
+#. module: account_payment_return_import
+#: field:payment.return.import,journal_id:0
+msgid "Journal"
+msgstr "Diario del banco"
+
+#. module: account_payment_return_import
+#: field:payment.return.import,__last_update:0
+msgid "Last Modified on"
+msgstr "Última modificación el"
+
+#. module: account_payment_return_import
+#: field:payment.return.import,write_uid:0
+msgid "Last Updated by"
+msgstr "Última actualización de"
+
+#. module: account_payment_return_import
+#: field:payment.return.import,write_date:0
+msgid "Last Updated on"
+msgstr "Última actualización en"
+
+#. module: account_payment_return_import
+#: field:payment.return.import,match_after_import:0
+msgid "Match after import"
+msgstr "Casar referencias después de importar"
+
+#. module: account_payment_return_import
+#: field:payment.return.import,data_file:0
+msgid "Payment Return File"
+msgstr "Fichero de devoluciones"
+
+#. module: account_payment_return_import
+#: model:ir.model,name:account_payment_return_import.model_payment_return_line
+msgid "Payment return lines"
+msgstr "Líneas de la devolución"
+
+#. module: account_payment_return_import
+#: field:payment.return.line,raw_import_data:0
+msgid "Raw import data"
+msgstr ""
+
+#. module: account_payment_return_import
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:185
+#, python-format
+msgid "The account of this payment return is linked to another journal."
+msgstr "La cuenta de esta devolución esta relacionada con otro diario."
+
+#. module: account_payment_return_import
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:153
+#, python-format
+msgid "This file doesn't contain any payment return."
+msgstr "Este archivo no contiene ninguna devolución."
+
+#. module: account_payment_return_import
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:159
+#, python-format
+msgid "This file doesn't contain any transaction."
+msgstr "Este archivo no contiene ninguna transacción."
+
+#. module: account_payment_return_import
+#: help:payment.return.line,raw_import_data:0
+msgid "XML RAW data stored for debugging/check purposes"
+msgstr ""
+
+#. module: account_payment_return_import
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:118
+#, python-format
+msgid "You have already imported this file."
+msgstr "Ya has importado este archivo. "
+
+#. module: account_payment_return_import
+#: view:payment.return.import:account_payment_return_import.account_payment_return_import_view
+msgid "Import"
+msgstr "Importar"
+
+#. module: account_payment_return_import
+#: view:payment.return.import:account_payment_return_import.account_payment_return_import_view
+msgid "or"
+msgstr "o"

@@ -1,0 +1,190 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_due_list
+# 
+# Translators:
+# Andrea Cometa <a.cometa@apuliasoftware.it>, 2016
+# Paolo Valier, 2016
+# Paolo Valier, 2016
+# Stefano <stefano.sforzi@agilebg.com>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: account-payment (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-09-22 16:30+0000\n"
+"PO-Revision-Date: 2016-10-07 12:53+0000\n"
+"Last-Translator: Andrea Cometa <a.cometa@apuliasoftware.it>\n"
+"Language-Team: Italian (http://www.transifex.com/oca/OCA-account-payment-8-0/language/it/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Language: it\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_due_list
+#: view:account.move.line:account_due_list.view_payments_filter
+msgid "Due Date"
+msgstr "Scadenza"
+
+#. module: account_due_list
+#: view:account.move.line:account_due_list.view_payments_filter
+msgid "From invoices"
+msgstr "Da fatture"
+
+#. module: account_due_list
+#: view:account.move.line:account_due_list.view_payments_filter
+msgid "Group By..."
+msgstr "Raggruppa per..."
+
+#. module: account_due_list
+#: help:account.move.line,payment_term_id:0
+msgid ""
+"If you use payment terms, the due date will be computed automatically at the"
+" generation of accounting entries. If you keep the payment term and the due "
+"date empty, it means direct payment. The payment term may compute several "
+"due dates, for example 50% now, 50% in one month."
+msgstr ""
+
+#. module: account_due_list
+#: view:account.move.line:account_due_list.view_payments_filter
+#: field:account.move.line,stored_invoice_id:0
+msgid "Invoice"
+msgstr "Fattura"
+
+#. module: account_due_list
+#: field:account.move.line,invoice_date:0
+msgid "Invoice Date"
+msgstr "Data fattura"
+
+#. module: account_due_list
+#: field:account.move.line,invoice_user_id:0
+msgid "Invoice salesperson"
+msgstr "Responsabile"
+
+#. module: account_due_list
+#: model:ir.model,name:account_due_list.model_account_move_line
+msgid "Journal Items"
+msgstr "Voci sezionale"
+
+#. module: account_due_list
+#: help:account.move.line,invoice_date:0
+msgid "Keep empty to use the current date"
+msgstr "Lasciare vuoto per usare la data odierna"
+
+#. module: account_due_list
+#: view:account.move.line:account_due_list.view_payments_filter
+msgid "Month"
+msgstr "Mese"
+
+#. module: account_due_list
+#: view:account.move.line:account_due_list.view_payments_filter
+msgid "Overdue"
+msgstr "Scaduti"
+
+#. module: account_due_list
+#: view:account.move.line:account_due_list.view_payments_filter
+msgid "Overdue payments"
+msgstr "Pagaementi scaduti"
+
+#. module: account_due_list
+#: view:account.move.line:account_due_list.view_payments_filter
+msgid "Partner"
+msgstr "Partner"
+
+#. module: account_due_list
+#: field:account.move.line,partner_ref:0
+msgid "Partner Ref"
+msgstr "Riferimento partner"
+
+#. module: account_due_list
+#: view:account.move.line:account_due_list.view_payments_filter
+msgid "Payable"
+msgstr "Debiti"
+
+#. module: account_due_list
+#: view:account.move.line:account_due_list.view_payments_filter
+msgid "Payable payments"
+msgstr "Termini di pagamento"
+
+#. module: account_due_list
+#: field:account.move.line,payment_term_id:0
+msgid "Payment Terms"
+msgstr "Termini di pagamento"
+
+#. module: account_due_list
+#: view:account.move.line:account_due_list.view_payments_tree
+msgid "Payments"
+msgstr "Pagamenti"
+
+#. module: account_due_list
+#: model:ir.actions.act_window,name:account_due_list.action_invoice_payments
+#: model:ir.ui.menu,name:account_due_list.menu_action_invoice_payments
+msgid "Payments and due list"
+msgstr "Pagamenti e scadenze"
+
+#. module: account_due_list
+#: view:account.move.line:account_due_list.view_payments_filter
+msgid "Receivable"
+msgstr "Crediti"
+
+#. module: account_due_list
+#: view:account.move.line:account_due_list.view_payments_filter
+msgid "Receivable payments"
+msgstr "Pagamenti ricevibili"
+
+#. module: account_due_list
+#: help:account.move.line,invoice_origin:0
+msgid "Reference of the document that produced this invoice."
+msgstr "Riferimento del documento che ha generato questa fattura"
+
+#. module: account_due_list
+#: field:account.move.line,maturity_residual:0
+msgid "Residual Amount"
+msgstr "Ammontare residuo"
+
+#. module: account_due_list
+#: view:account.move.line:account_due_list.view_payments_filter
+msgid "Salesperson"
+msgstr "Commerciale"
+
+#. module: account_due_list
+#: view:account.move.line:account_due_list.view_payments_filter
+msgid "Search Payments"
+msgstr "Ricerca pagamenti"
+
+#. module: account_due_list
+#: field:account.move.line,invoice_origin:0
+msgid "Source Doc"
+msgstr "Documento origine"
+
+#. module: account_due_list
+#: help:account.move.line,maturity_residual:0
+msgid ""
+"The residual amount on a receivable or payable of a journal entry expressed "
+"in the company currency."
+msgstr "L'importo residuo su una voce di credito o debito, espressa nella valuta dell'azienda"
+
+#. module: account_due_list
+#: view:account.move.line:account_due_list.view_payments_tree
+msgid "Total Credit"
+msgstr "Credito totale"
+
+#. module: account_due_list
+#: view:account.move.line:account_due_list.view_payments_tree
+msgid "Total Debit"
+msgstr "Debito totale"
+
+#. module: account_due_list
+#: view:account.move.line:account_due_list.view_payments_tree
+msgid "Total Residual"
+msgstr "Totale residuo"
+
+#. module: account_due_list
+#: view:account.move.line:account_due_list.view_payments_filter
+msgid "Unreconciled"
+msgstr "Non riconciliate"
+
+#. module: account_due_list
+#: view:account.move.line:account_due_list.view_payments_filter
+msgid "Unreconciled payments"
+msgstr "Pagamenti non riconciliati"
