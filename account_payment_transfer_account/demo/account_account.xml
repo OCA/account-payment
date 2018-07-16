@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="account_transfer_account" model="account.account">
+        <field name="name">Demo Transfer Account</field>
+        <field name="code">101720</field>
+        <field name="user_type_id" ref="account.data_account_type_current_assets" />
+        <field name="company_id" ref="base.main_company" />
+        <field name="is_transfer_account" eval="True" />
+        <field name="reconcile" eval="True" />
+    </record>
+
+</odoo>
