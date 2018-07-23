@@ -20,6 +20,7 @@
                     <field name="discount_due_date" invisible="1"/>
                     <field name="discount_due_date_readonly"/>
                     <field name="has_discount" invisible="1"/>
+                    <field name="discount_base_date" invisible="1"/>
                 </group>
             </xpath>
 
