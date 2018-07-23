@@ -47,6 +47,9 @@ class AccountInvoice(models.Model):
         compute='_compute_has_discount',
         store=True,
     )
+    discount_base_date = fields.Date(
+        compute='_compute_discount_base_date',
+    )
 
     @api.multi
     @api.depends(
@@ -99,14 +102,22 @@ class AccountInvoice(models.Model):
             )
 
     @api.multi
+    @api.depends('date_invoice')
+    def _compute_discount_base_date(self):
+        for rec in self:
+            discount_base_date = datetime.today()
+            if rec.date_invoice:
+                discount_base_date = rec.date_invoice
+            rec.discount_base_date = discount_base_date
+
+    @api.multi
     @api.onchange(
         'has_discount',
-        'date_invoice',
+        'discount_base_date',
         'discount_amount',
         'discount_delay',
     )
     def _onchange_discount_delay(self):
-        date_today = datetime.today()
         for rec in self:
             skip = (
                 rec.discount_amount == 0 or
@@ -115,11 +126,9 @@ class AccountInvoice(models.Model):
             )
             if skip:
                 continue
-            if rec.date_invoice:
-                date_invoice = fields.Date.from_string(rec.date_invoice)
-            else:
-                date_invoice = date_today
-            due_date = date_invoice + timedelta(days=rec.discount_delay)
+            discount_base_date = fields.Date.from_string(
+                rec.discount_base_date)
+            due_date = discount_base_date + timedelta(days=rec.discount_delay)
             rec.discount_due_date = due_date
 
     @api.multi
