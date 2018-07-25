@@ -105,10 +105,10 @@ class AccountInvoice(models.Model):
     @api.depends('date_invoice')
     def _compute_discount_base_date(self):
         for rec in self:
-            discount_base_date = datetime.today()
             if rec.date_invoice:
-                discount_base_date = rec.date_invoice
-            rec.discount_base_date = discount_base_date
+                rec.discount_base_date = rec.date_invoice
+            else:
+                rec.discount_base_date = fields.Date.context_today(rec)
 
     @api.multi
     @api.onchange(
