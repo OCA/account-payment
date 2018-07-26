@@ -26,6 +26,7 @@ class ResPartnerAgingSupplier(models.Model):
     days_due_121togr = fields.Float('+121', readonly=True)
     invoice_ref = fields.Char('Their Invoice', size=25, readonly=True)
     invoice_id = fields.Many2one('account.invoice', 'Invoice', readonly=True)
+    salesman = fields.Many2one('res.users', 'Sales Rep', readonly=True)
 
     @api.multi
     def execute_aging_query(self, age_date=False):
@@ -145,14 +146,14 @@ class ResPartnerAgingSupplier(models.Model):
                 aml.user_type_id in (select id from account_account_type where type = 'payable')
                 AND aml.date <= '%s'
                 AND aml.partner_id IS NULL
-                AND aml.reconcile_id is NULL
+                AND aml.full_reconcile_id is NULL
                 GROUP BY aml.partner_id, aml.id, ai.number, days_due, ai.user_id, ai.id
                 
                 UNION
                 select aml.id,
-                        aml.partner_id,
+                        aml.partner_id as partner_id,
                         aml.create_uid as salesman,
-                        aml.date,
+                        aml.date as date,
                         aml.date as date_due,
                         ' ' as invoice_ref,
                         0 as avg_days_overdue,
@@ -166,7 +167,8 @@ class ResPartnerAgingSupplier(models.Model):
                        CASE WHEN (aml.debit - (select sum(credit) from account_move_line l where l.full_reconcile_id = aml.full_reconcile_id and l.date<='%s')) > 0 then 
                            -(aml.debit - (select sum(credit) from account_move_line l where l.full_reconcile_id = aml.full_reconcile_id and l.date<='%s'))
                        ELSE 0 END AS total,
-                       null as invoice_id
+                       null as invoice_id,
+                       aml.date as inv_date_due
                 from account_move_line aml
                 where aml.date <= '%s'
                 and aml.full_reconcile_id IS NOT NULL

@@ -152,11 +152,12 @@ class ResPartnerAgingCustomer(models.Model):
                 AND aml.full_reconcile_id is NULL
                 GROUP BY aml.partner_id, aml.id, ai.number, days_due, ai.user_id, ai.id
                 
+                
                 UNION
                 select aml.id,
-                        aml.partner_id,
+                        aml.partner_id as partner_id,
                         aml.create_uid as salesman,
-                        aml.date,
+                        aml.date as date,
                         aml.date as date_due,
                         ' ' as invoice_ref,
                         0 as avg_days_overdue,
@@ -170,7 +171,8 @@ class ResPartnerAgingCustomer(models.Model):
                        CASE WHEN (aml.credit - (select sum(debit) from account_move_line l where l.full_reconcile_id = aml.full_reconcile_id and l.date<='%s')) > 0 then 
                            -(aml.credit - (select sum(debit) from account_move_line l where l.full_reconcile_id = aml.full_reconcile_id and l.date<='%s'))
                        ELSE 0 END AS total,
-                       null as invoice_id
+                       null as invoice_id,
+                       aml.date as inv_date_due
                 from account_move_line aml
                 where aml.date <= '%s'
                 and aml.full_reconcile_id IS NOT NULL
