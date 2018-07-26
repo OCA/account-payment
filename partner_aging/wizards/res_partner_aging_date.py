@@ -26,7 +26,7 @@ class ResPartnerAgingDate(models.TransientModel):
             'view_mode': 'tree,form',
             'res_model': 'res.partner.aging.customer',
             'type': 'ir.actions.act_window',
-            'domain': [('total', '!=', 0)],
+            'domain': [('total','<>',0.0000000)],
             'context': ctx,
         }
 
