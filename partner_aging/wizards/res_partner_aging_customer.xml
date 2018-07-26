@@ -44,7 +44,7 @@
                 <button name="open_document" type="object" icon="fa-list-alt" attrs="{'invisible':[('invoice_id', '=', False)]}"/>
                 <field name="invoice_ref" />
                 <field name="not_due" string="Current" sum="Total" />
-                <field name="days_due_01to30" invisible="1" sum="Total" />
+                <field name="days_due_01to30" sum="Total" />
                 <field name="days_due_31to60" sum="Total" />
                 <field name="days_due_61to90" sum="Total" />
                 <field name="days_due_91to120" sum="Total" />
