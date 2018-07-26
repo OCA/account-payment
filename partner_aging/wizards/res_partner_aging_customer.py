@@ -38,7 +38,7 @@ class ResPartnerAgingCustomer(models.Model):
 
         query = """
                 SELECT aml.id, aml.partner_id as partner_id, ai.user_id as salesman, aml.date as date, aml.date as date_due, ai.number as invoice_ref,
-                days_due AS avg_days_overdue, 0 as days_due_01to30,
+                days_due AS avg_days_overdue,
                 CASE WHEN (days_due BETWEEN 1 and 30) THEN
                     CASE WHEN (aml.full_reconcile_id is NULL and aml.amount_residual<0) THEN -(aml.credit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
                         WHEN (aml.full_reconcile_id is NULL and aml.amount_residual>0) THEN aml.debit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s')
@@ -96,7 +96,7 @@ class ResPartnerAgingCustomer(models.Model):
                 UNION
                 
                 SELECT aml.id, aml.partner_id as partner_id, ai.user_id as salesman, aml.date as date, aml.date as date_due, ai.number as invoice_ref,
-                days_due AS avg_days_overdue, 0 as days_due_01to30,
+                days_due AS avg_days_overdue,
                 CASE WHEN (days_due BETWEEN 1 and 30) THEN
                     CASE WHEN (aml.full_reconcile_id is NULL and aml.amount_residual<0) THEN -(aml.credit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
                         WHEN (aml.full_reconcile_id is NULL and aml.amount_residual>0) THEN aml.debit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s')
