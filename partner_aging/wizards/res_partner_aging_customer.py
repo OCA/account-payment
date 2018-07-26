@@ -174,7 +174,7 @@ class ResPartnerAgingCustomer(models.Model):
                 from account_move_line aml
                 where aml.date <= '%s'
                 and aml.full_reconcile_id IS NOT NULL
-                and aml.account_id in (select id from account_account where type = 'receivable')
+                and aml.account_id in (select id from account_account_type where type = 'receivable')
                 and aml.credit > 0
               """ % (age_date, age_date, age_date, age_date,  # noqa
                      age_date, age_date, age_date, age_date,
