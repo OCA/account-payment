@@ -175,11 +175,11 @@ class ResPartnerAgingSupplier(models.Model):
                 and aml.account_id in (select id from account_account_type where type = 'payable')
                 and aml.debit > 0
               """ % (age_date, age_date, age_date, age_date,# noqa
-                     age_date, age_date, age_date, age_date, 
                      age_date, age_date, age_date, age_date,
                      age_date, age_date, age_date, age_date,
                      age_date, age_date, age_date, age_date,
-                     age_date, age_date, age_date, age_date, 
+                     age_date, age_date, age_date, age_date,
+                     age_date, age_date, age_date, age_date,
                      age_date, age_date, age_date, age_date,
                      age_date, age_date, age_date, age_date,
                      age_date, age_date, age_date,)

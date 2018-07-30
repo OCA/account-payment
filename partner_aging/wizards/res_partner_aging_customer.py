@@ -185,7 +185,7 @@ class ResPartnerAgingCustomer(models.Model):
                      age_date, age_date, age_date, age_date,  # noqa
                      age_date, age_date, age_date, age_date,
                      age_date, age_date, age_date, age_date,
-                     age_date, age_date, age_date, age_date, 
+                     age_date, age_date, age_date, age_date,
                      age_date, age_date, age_date,)
 
         tools.drop_view_if_exists(self.env.cr, '%s' %

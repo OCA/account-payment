@@ -2,18 +2,17 @@
 #
 #   See __openerp__.py about license
 #
-from odoo.addons.account.tests.account_test_users import AccountTestUsers
 from openerp.tests.common import TransactionCase
-from openerp import api, fields, models, _
-from datetime import date, datetime, timedelta
+from openerp import fields
 
 class TestPartnerAging(TransactionCase):
 
+    
     def test_partner_aging_date(self):
         current_date = fields.Datetime.now()
         partner_aging_date = self.env['res.partner.aging.date'].create(
             {
-                'age_date' : current_date,
+                'age_date': current_date,
             }
         )
         partner_aging_date.age_date = current_date
