@@ -8,7 +8,7 @@
     'license': 'AGPL-3',
     'author': 'Ursa Information Systems, Odoo Community Association (OCA)',
     'category': 'Accounting & Finance',
-    'website': 'http://www.ursainfosystems.com',
+    'website': 'https://github.com/OCA/account-payment',
     'depends': [
         'account_accountant',
         'account_voucher',
