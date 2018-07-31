@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-#
-#   See __openerp__.py about license
-#
+# Copyright 2017 Ursa Information Systems <http://www.ursainfosystems.com>
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
 from openerp.tests.common import TransactionCase
 from openerp import fields
 
@@ -11,10 +11,7 @@ class TestPartnerAging(TransactionCase):
     def test_partner_aging_date(self):
         current_date = fields.Datetime.now()
         partner_aging_date = self.env['res.partner.aging.date'].create(
-            {
-                'age_date': current_date,
-            }
-        )
+            {'age_date': current_date})
         partner_aging_date.age_date = current_date
         # call function open_customer_aging here
         res = partner_aging_date.open_customer_aging()
