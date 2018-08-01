@@ -35,6 +35,7 @@ addon | version | summary
 [account_payment_return_import](account_payment_return_import/) | 10.0.1.0.0 | This module adds a generic wizard to import payment returnfile formats. Is only the base to be extended by anothermodules
 [account_payment_return_import_sepa_pain](account_payment_return_import_sepa_pain/) | 10.0.1.0.0 | Module to import SEPA Direct Debit Unpaid Report File Format PAIN.002.001.03
 [account_payment_show_invoice](account_payment_show_invoice/) | 10.0.1.0.0 | Extends the tree view of payments to show the paid invoices related to the payments using the vendor reference by default
+[partner_aging](partner_aging/) | 10.0.1.0.0 | Aging as a view - invoices and credits
 
 
 Unported addons
