@@ -21,6 +21,7 @@ setuptools.setup(
         'odoo10-addon-account_payment_return_import',
         'odoo10-addon-account_payment_return_import_sepa_pain',
         'odoo10-addon-account_payment_show_invoice',
+        'odoo10-addon-partner_aging',
     ],
     classifiers=[
         'Programming Language :: Python',
