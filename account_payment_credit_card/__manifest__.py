@@ -11,8 +11,7 @@
     "maintainer": "Ursa Information Systems",
     "website": "http://www.ursainfosystems.com",
     "depends": [
-        "account_accountant",
-        "account_voucher",
+        "account",
     ],
     "data": [
         "views/account_view.xml",
