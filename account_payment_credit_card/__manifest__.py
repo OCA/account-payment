@@ -9,7 +9,7 @@
     "author": "Ursa Information Systems, Odoo Community Association (OCA)",
     "category": "Accounting & Finance",
     "maintainer": "Ursa Information Systems",
-    "website": "http://www.ursainfosystems.com",
+    "website": "https://github.com/OCA/account-payment",
     "depends": [
         "account",
     ],
