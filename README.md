@@ -39,7 +39,6 @@ Unported addons
 ---------------
 addon | version | summary
 --- | --- | ---
-[account_payment_term_multi_day](account_payment_term_multi_day/) | 8.0.1.0.0 (unported) | Multiple payment days for payment terms
 [account_vat_on_payment](account_vat_on_payment/) | 8.0.1.0.0 (unported) | VAT on payment
 
 [//]: # (end addons)
