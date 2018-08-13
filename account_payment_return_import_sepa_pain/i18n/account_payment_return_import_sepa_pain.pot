@@ -1,22 +1,17 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * account_payment_return_import_sepa_pain
+#	* account_payment_return_import_sepa_pain
 #
-# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: account-payment (8.0)\n"
+"Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-04-14 03:08+0000\n"
-"PO-Revision-Date: 2016-04-11 21:02+0000\n"
 "Last-Translator: <>\n"
-"Language-Team: German (http://www.transifex.com/oca/OCA-account-payment-8-0/"
-"language/de/)\n"
-"Language: de\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: \n"
 
 #. module: account_payment_return_import_sepa_pain
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AC06
@@ -106,7 +101,7 @@ msgstr ""
 #. module: account_payment_return_import_sepa_pain
 #: model:ir.model,name:account_payment_return_import_sepa_pain.model_payment_return_line
 msgid "Payment return lines"
-msgstr "Rückbuchungszeilen"
+msgstr ""
 
 #. module: account_payment_return_import_sepa_pain
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_MS03
@@ -127,3 +122,4 @@ msgstr ""
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_SL01
 msgid "Specific Service offered by the Debtor Bank."
 msgstr ""
+
