@@ -16,9 +16,3 @@ Non-purchase transactions like fees for annual membership, balance transfers, ca
 Both of these methods will allow these items to be settled when making a payment to the credit card company.
 
 This module also supports payment cancellation and re-entry (in the case a mistaken amount is entered) as well as refunds (where the purchase is returned and a credit from the credit card company will be issued).
-
-
-Bugs are tracked on `GitHub Issues
-<https://github.com/OCA/account-payment/issues>`_. In case of trouble, please
-check there if your issue has already been reported. If you spotted it first,
-help us smash it by providing detailed and welcomed feedback.
