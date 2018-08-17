@@ -8,7 +8,6 @@
     "license": "AGPL-3",
     "author": "Open Source Integrators, Odoo Community Association (OCA)",
     "category": "Accounting & Finance",
-    "maintainer": "Open Source Integrators",
     "website": "https://github.com/OCA/account-payment",
     "depends": [
         "account",
