@@ -1,2 +1,2 @@
 
-* Ursa Information Systems <http://www.ursainfosystems.com>
+* Open Source Integrators <http://www.opensourceintegrators.com>
