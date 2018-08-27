@@ -2,9 +2,9 @@
    :target: https://www.gnu.org/licenses/agpl
    :alt: License: AGPL-3
 
-===============================
-Account Due List Aging Comments
-===============================
+==============================
+Account Due List Aging Comment
+==============================
 
 This module extends the Payments and Due list to add the capability to
 introduce aging comments in-line.
