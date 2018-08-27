@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016 Eficent Business and IT Consulting Services S.L. (
 #   (<http://www.eficent.com>).
 # Copyright 2016 Therp BV (<http://therp.nl>).
@@ -12,9 +11,11 @@ from odoo.osv import orm
 class AccountMoveLine(models.Model):
     _inherit = 'account.move.line'
 
-    days_overdue = fields.Integer(compute='_compute_days_overdue',
-                                  search='_search_days_overdue',
-                                  string='Days overdue')
+    days_overdue = fields.Integer(
+        compute='_compute_days_overdue',
+        search='_search_days_overdue',
+        string='Days overdue',
+    )
 
     @api.multi
     @api.depends('date_maturity')
@@ -65,10 +66,9 @@ class AccountMoveLine(models.Model):
     @api.model
     def fields_view_get(self, view_id=None, view_type='form', toolbar=False,
                         submenu=False):
-        result = super(AccountMoveLine, self).fields_view_get(view_id,
-                                                              view_type,
-                                                              toolbar=toolbar,
-                                                              submenu=submenu)
+        result = super(AccountMoveLine, self).fields_view_get(
+            view_id, view_type, toolbar=toolbar, submenu=submenu,
+        )
 
         doc = etree.XML(result['arch'])
         if view_type == 'tree':
@@ -110,6 +110,6 @@ class AccountMoveLine(models.Model):
             if field_name in self._fields:
                 continue
             self._add_terms(field_name, term.name)
-        self._setup_fields(False)
+        self._setup_fields()
         self._setup_complete()
         return super(AccountMoveLine, self)._register_hook()
