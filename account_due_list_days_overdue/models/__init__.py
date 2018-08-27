@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016 Eficent Business and IT Consulting Services S.L.
 #   (<http://www.eficent.com>).
 # Copyright 2016 Therp BV (<http://therp.nl>).
