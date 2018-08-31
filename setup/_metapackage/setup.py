@@ -19,6 +19,7 @@ setuptools.setup(
         'odoo11-addon-account_payment_return',
         'odoo11-addon-account_payment_return_import',
         'odoo11-addon-account_payment_return_import_sepa_pain',
+        'odoo11-addon-account_payment_show_invoice',
     ],
     classifiers=[
         'Programming Language :: Python',
