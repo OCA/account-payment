@@ -13,3 +13,6 @@ class AccountJournal(models.Model):
         help='Default check for the company is printed automatically when '
              'invoice payment is validated',
     )
+    check_layout_id = fields.Many2one(
+        comodel_name='account.payment.check.report',
+        string="Check format")
