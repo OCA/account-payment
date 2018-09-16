@@ -27,11 +27,36 @@ class AccountPayment(models.Model):
 
     @api.multi
     def do_print_checks(self):
+        ICPSudo = self.env['ir.config_parameter'].sudo()
+        check_layout_verification = ICPSudo.get_param(
+            'account_check_printing_report_base.check_layout_verification')
+
         for rec in self:
-            if rec.company_id.check_layout_id:
-                return self.env['ir.actions.report']._get_report_from_name(
-                    rec.company_id.check_layout_id.report
-                ).report_action(self)
+
+            if not check_layout_verification or \
+               check_layout_verification == 'by_company':
+
+                if rec.company_id.check_layout_id:
+                    return self.env['ir.actions.report']._get_report_from_name(
+                        rec.company_id.check_layout_id.report
+                    ).report_action(self)
+
+            elif check_layout_verification == 'by_journal':
+                if rec.journal_id.check_layout_id:
+                    return self.env['ir.actions.report']._get_report_from_name(
+                        rec.journal_id.check_layout_id.report
+                    ).report_action(self)
+
+            else:
+                if rec.journal_id.check_layout_id:
+                    return self.env['ir.actions.report']._get_report_from_name(
+                        rec.journal_id.check_layout_id.report
+                    ).report_action(self)
+                elif rec.company_id.check_layout_id:
+                    return self.env['ir.actions.report']._get_report_from_name(
+                        rec.company_id.check_layout_id.report
+                    ).report_action(self)
+
         return super(AccountPayment, self).do_print_checks()
 
     @api.multi

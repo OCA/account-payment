@@ -29,6 +29,8 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
         self.check_report = self.env.ref(
             'account_check_printing_report_base'
             '.account_payment_check_report_base')
+        self.check_report_by_journal = self.check_report.copy({
+            'name': 'Test Check Layout By Journal'})
         self.payment_method_check = self.payment_method_model.search(
             [('code', '=', 'check_printing')], limit=1,
         )
@@ -109,9 +111,25 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
         with self.assertRaises(UserError):
             payment.print_checks()
 
+        # Set check layout verification by journal
+        ICPSudo = self.env['ir.config_parameter'].sudo()
+        ICPSudo.set_param(
+            'account_check_printing_report_base.check_layout_verification',
+            'by_journal')
+        self.assertFalse(payment.journal_id.check_layout_id)
+        with self.assertRaises(UserError):
+            payment.print_checks()
+
     def test_check_printing_with_layout(self):
         ''' Test if the check is printed when the layout is specified for a
-        company'''
+        company, journal, or both.'''
+        ICPSudo = self.env['ir.config_parameter'].sudo()
+        check_layout_verification = ICPSudo.get_param(
+            'account_check_printing_report_base.check_layout_verification')
+        # By default verification of check layout is False but is assumed
+        # to be "by company"
+        self.assertFalse(check_layout_verification)
+
         self.company.check_layout_id = self.check_report
         acc_payable = self._create_account('account payable test', 'ACPRB1',
                                            self.acc_payable, True)
@@ -131,6 +149,31 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
         register_payments.create_payments()
         payment = self.payment_model.search([], order="id desc", limit=1)
         e = False
+        try:
+            payment.print_checks()
+        except UserError as e:
+            pass
+        self.assertEquals(e, False)
+
+        # Set check layout verification by journal
+        ICPSudo.set_param(
+            'account_check_printing_report_base.check_layout_verification',
+            'by_journal')
+        payment.journal_id.check_layout_id = self.check_report_by_journal
+        self.company.check_layout_id = False
+        try:
+            payment.print_checks()
+        except UserError as e:
+            pass
+        self.assertEquals(e, False)
+
+        # Set check layout verification to both (by company and by journal)
+        # If "Both" is set and both layouts are set then the layout set
+        # "By Journal" has higher priority, else any of these is selected.
+        ICPSudo.set_param(
+            'account_check_printing_report_base.check_layout_verification',
+            'both')
+        self.company.check_layout_id = self.check_report
         try:
             payment.print_checks()
         except UserError as e:
