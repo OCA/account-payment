@@ -102,6 +102,26 @@ class ReportCheckPrint(models.AbstractModel):
             'fill_stars': self.fill_stars,
             'paid_lines': paid_lines
         }
-        if self.env.user.company_id.check_layout_id:
-            return docargs
+
+        ICPSudo = self.env['ir.config_parameter'].sudo()
+        check_layout_verification = ICPSudo.get_param(
+            'account_check_printing_report_base.check_layout_verification')
+
+        if not check_layout_verification or \
+           check_layout_verification == 'by_company':
+            if self.env.user.company_id.check_layout_id:
+                return docargs
+        elif check_layout_verification == 'by_journal':
+            if all([
+                    p.journal_id.check_layout_id
+                    for p in payments]):
+                return docargs
+        else:
+            if all([
+                    p.journal_id.check_layout_id
+                    for p in payments]):
+                return docargs
+            elif self.env.user.company_id.check_layout_id:
+                return docargs
+
         raise exceptions.Warning(_('You must define a check layout'))
