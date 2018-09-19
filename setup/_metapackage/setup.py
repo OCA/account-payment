@@ -12,6 +12,8 @@ setuptools.setup(
         'odoo11-addon-account_check_printing_report_base',
         'odoo11-addon-account_check_printing_report_dlt103',
         'odoo11-addon-account_due_list',
+        'odoo11-addon-account_due_list_aging_comment',
+        'odoo11-addon-account_due_list_days_overdue',
         'odoo11-addon-account_due_list_payment_mode',
         'odoo11-addon-account_early_payment_discount',
         'odoo11-addon-account_partner_reconcile',
