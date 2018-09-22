@@ -22,7 +22,7 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
-[account_check_printing_report_base](account_check_printing_report_base/) | 10.0.1.1.0 | Account Check Printing Report Base
+[account_check_printing_report_base](account_check_printing_report_base/) | 10.0.1.1.1 | Account Check Printing Report Base
 [account_check_printing_report_dlt103](account_check_printing_report_dlt103/) | 10.0.1.0.0 | Account Check Printing Report DLT103
 [account_due_list](account_due_list/) | 10.0.2.0.0 | Payments Due list
 [account_due_list_aging_comments](account_due_list_aging_comments/) | 10.0.1.0.0 | Payments Due list aging comments
