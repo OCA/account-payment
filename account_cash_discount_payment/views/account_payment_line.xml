@@ -11,6 +11,7 @@
         <field name="arch" type="xml">
 
             <field name="date" position="after">
+                <field name="toggle_pay_with_discount_allowed" invisible="1"/>
                 <field name="pay_with_discount_allowed" invisible="1"/>
                 <field name="pay_with_discount" attrs="{'invisible': [('pay_with_discount_allowed', '=', False)]}"/>
                 <field name="discount_due_date" attrs="{'invisible': [('pay_with_discount_allowed', '=', False)]}"/>
