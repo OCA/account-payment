@@ -17,6 +17,7 @@ class TestAccountCashDiscountBase(TestAccountCashDiscountCommon):
             'partner_id': self.partner_agrolait.id,
             'account_id': self.recv_account.id,
             'company_id': self.company.id,
+            'type': 'in_invoice',
             'invoice_line_ids': [
                 (0, 0, {
                     'name': "Test",
