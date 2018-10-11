@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-10 00:45+0000\n"
-"PO-Revision-Date: 2016-12-16 12:34+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"PO-Revision-Date: 2018-10-11 12:10+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-payment-8-0/"
 "language/de/)\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.1.1\n"
 
 #. module: account_due_list
 #: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -26,7 +27,7 @@ msgstr "Fälligkeitsdatum"
 #. module: account_due_list
 #: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "From invoices"
-msgstr ""
+msgstr "Aus Rechnungen"
 
 #. module: account_due_list
 #: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -41,6 +42,11 @@ msgid ""
 "date empty, it means direct payment. The payment terms may compute several "
 "due dates, for example 50% now, 50% in one month."
 msgstr ""
+"Wenn Sie Zahlungsbedingungen verwenden, wird das Fälligkeitsdatum bei der "
+"Erstellung von Buchungen automatisch berechnet. Wenn Sie die "
+"Zahlungsbedingungen und das Fälligkeitsdatum leer lassen, bedeutet das "
+"Sofortzahlung. Die Zahlungsbedingungen können mehrere Fälligkeiten "
+"berechnen, z.B. 50% jetzt, 50% in einem Monat."
 
 #. module: account_due_list
 #: model:ir.model.fields,field_description:account_due_list.field_account_move_line_stored_invoice_id
@@ -51,28 +57,27 @@ msgstr "Rechnung"
 #. module: account_due_list
 #: model:ir.model.fields,field_description:account_due_list.field_account_move_line_invoice_date
 msgid "Invoice Date"
-msgstr ""
+msgstr "Rechnungsdatum"
 
 #. module: account_due_list
 #: model:ir.model.fields,field_description:account_due_list.field_account_move_line_invoice_user_id
 msgid "Invoice salesperson"
-msgstr ""
+msgstr "Rechnungssachbearbeiter"
 
 #. module: account_due_list
 #: model:ir.model,name:account_due_list.model_account_move_line
-#, fuzzy
 msgid "Journal Item"
-msgstr "Buchungsjournale"
+msgstr "Journal-Posten"
 
 #. module: account_due_list
 #: model:ir.model.fields,help:account_due_list.field_account_move_line_invoice_date
 msgid "Keep empty to use the current date"
-msgstr ""
+msgstr "Leer lassen, um aktuelles Datum zu verwenden"
 
 #. module: account_due_list
 #: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Month"
-msgstr ""
+msgstr "Monat"
 
 #. module: account_due_list
 #: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -82,7 +87,7 @@ msgstr "Überfällig"
 #. module: account_due_list
 #: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Overdue payments"
-msgstr ""
+msgstr "Überfällige Zahlungen"
 
 #. module: account_due_list
 #: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -92,7 +97,7 @@ msgstr "Partner"
 #. module: account_due_list
 #: model:ir.model.fields,field_description:account_due_list.field_account_move_line_partner_ref
 msgid "Partner Ref"
-msgstr ""
+msgstr "Partnerref"
 
 #. module: account_due_list
 #: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -102,12 +107,12 @@ msgstr "Kreditor"
 #. module: account_due_list
 #: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Payable payments"
-msgstr ""
+msgstr "Ausgangszahlungen"
 
 #. module: account_due_list
 #: model:ir.model.fields,field_description:account_due_list.field_account_move_line_payment_term_id
 msgid "Payment Terms"
-msgstr ""
+msgstr "Zahlungsbedingungen"
 
 #. module: account_due_list
 #: model:ir.ui.view,arch_db:account_due_list.view_payments_tree
@@ -120,7 +125,7 @@ msgstr "Zahlungen"
 #: model:ir.ui.view,arch_db:account_due_list.view_payments_graph
 #: model:ir.ui.view,arch_db:account_due_list.view_payments_pivot
 msgid "Payments and due list"
-msgstr ""
+msgstr "Zahlungs- und Fälligkeitsliste"
 
 #. module: account_due_list
 #: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -130,17 +135,17 @@ msgstr "Debitor"
 #. module: account_due_list
 #: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Receivable payments"
-msgstr ""
+msgstr "Zahlungseingänge"
 
 #. module: account_due_list
 #: model:ir.model.fields,help:account_due_list.field_account_move_line_invoice_origin
 msgid "Reference of the document that produced this invoice."
-msgstr ""
+msgstr "Bezug auf das diese Rechnung verursachende Dokument."
 
 #. module: account_due_list
 #: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Salesperson"
-msgstr ""
+msgstr "Verkäufer"
 
 #. module: account_due_list
 #: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -150,28 +155,27 @@ msgstr "Zahlungen suchen"
 #. module: account_due_list
 #: model:ir.model.fields,field_description:account_due_list.field_account_move_line_invoice_origin
 msgid "Source Doc"
-msgstr ""
+msgstr "Herkunftsdokument"
 
 #. module: account_due_list
 #: model:ir.ui.view,arch_db:account_due_list.view_payments_tree
 msgid "Total Credit"
-msgstr "Total Kredit"
+msgstr "Kreditsumme"
 
 #. module: account_due_list
 #: model:ir.ui.view,arch_db:account_due_list.view_payments_tree
 msgid "Total Debit"
-msgstr "Total Debit"
+msgstr "Gesamtschuld"
 
 #. module: account_due_list
 #: model:ir.ui.view,arch_db:account_due_list.view_payments_tree
 msgid "Total Residual"
-msgstr "Offenes Betrag"
+msgstr "Offene Summe"
 
 #. module: account_due_list
 #: model:ir.ui.view,arch_db:account_due_list.view_payments_tree
-#, fuzzy
 msgid "Total Residual Currency"
-msgstr "Offenes Betrag"
+msgstr "Währung d. offenen Betrags"
 
 #. module: account_due_list
 #: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -181,4 +185,4 @@ msgstr "Offene Posten"
 #. module: account_due_list
 #: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Unreconciled payments"
-msgstr ""
+msgstr "Offene Zahlungen"
