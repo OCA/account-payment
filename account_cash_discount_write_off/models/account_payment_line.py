@@ -4,7 +4,7 @@
 
 from odoo import api, models, _
 from odoo.exceptions import UserError
-from odoo.tools import float_compare, float_round
+from odoo.tools import float_compare, float_round, float_is_zero
 
 
 class PaymentLine(models.Model):
@@ -75,6 +75,7 @@ class PaymentLine(models.Model):
                     precision_rounding=rounding,
                 )
                 discount_amount_credit -= amount
+
                 if tax_move_line.tax_line_id:
                     account = tax_move_line.account_id
                 else:
@@ -89,11 +90,28 @@ class PaymentLine(models.Model):
                     'tax_ids': [(6, 0, tax_move_line.tax_ids.ids)]
                 })
 
-        if discount_amount_credit > 0:
+        amount_left = not float_is_zero(
+            discount_amount_credit,
+            precision_rounding=rounding
+        )
+        if amount_left:
+            writeoff_amount = float_round(
+                abs(discount_amount_credit),
+                precision_rounding=rounding,
+            )
             lines_values.append({
                 'partner_id': partner.id,
                 'name': move_line_name,
-                'credit': discount_amount_credit,
+                'credit': (
+                    writeoff_amount
+                    if discount_amount_credit > 0
+                    else 0.0
+                ),
+                'debit': (
+                    writeoff_amount
+                    if discount_amount_credit < 0
+                    else 0.0
+                ),
                 'account_id': woff_account.id,
             })
 
