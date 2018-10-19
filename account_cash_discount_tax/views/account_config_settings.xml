@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_account_config_settings_cash_discount_tax" model="ir.ui.view">
+        <field name="name">account.config.settings (in account_cash_discount_tax)</field>
+        <field name="model">account.config.settings</field>
+        <field name="inherit_id" ref="account.view_account_config_settings"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='group_warning_account']" position="after">
+                <label for="id" string="Cash Discount Tax"/>
+                <div name="cash_discount_tax">
+                    <div>
+                        <label for="cash_discount_tax_description"/>
+                        <field name="cash_discount_tax_description" class="oe_inline"/>
+                    </div>
+                    <div>
+                        <label for="cash_discount_tax_account_id"/>
+                        <field name="cash_discount_tax_account_id" class="oe_inline"/>
+                    </div>
+                    <div>
+                        <label for="cash_discount_invoice_tax"/>
+                        <field name="cash_discount_invoice_tax" class="oe_inline"/>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
