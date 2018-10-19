@@ -6,6 +6,7 @@ from datetime import timedelta
 
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
+from odoo.addons import decimal_precision as dp
 
 READONLY_STATES = {
     'draft': [('readonly', False)],
@@ -20,6 +21,7 @@ class AccountInvoice(models.Model):
         string="Discount (%)",
         readonly=True,
         states=READONLY_STATES,
+        digits=dp.get_precision('Discount'),
     )
     amount_total_with_discount = fields.Monetary(
         string="Total (with discount)",
