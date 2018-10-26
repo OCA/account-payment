@@ -72,6 +72,7 @@ Contributors
 * Balaji Kannan <bkannan@ursainfosystems.com>
 * Bhavesh Odedra <bodedra@ursainfosystems.com>
 * Odoo Dev Team: DS, JA
+* Bogdan Stanciu <bogdanovidiu.stanciu@gmail.com>
 
 Funders
 -------

@@ -11,4 +11,4 @@ class AccountJournal(models.Model):
 
     credit_card = fields.Boolean(string='Transfer AP to Credit Card Company')
     partner_id = fields.Many2one('res.partner', string='Credit Card Company',
-        domain=[('supplier', '=', True)])
+                                 domain=[('supplier', '=', True)])

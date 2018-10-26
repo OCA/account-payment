@@ -29,6 +29,7 @@ addon | version | summary
 [account_due_list_days_overdue](account_due_list_days_overdue/) | 9.0.0.1.0 | Payments Due list days overdue
 [account_due_list_payment_mode](account_due_list_payment_mode/) | 9.0.1.0.0 | Payment due list with payment mode
 [account_partner_reconcile](account_partner_reconcile/) | 9.0.1.0.0 | Account Partner Reconcile
+[account_payment_credit_card](account_payment_credit_card/) | 9.0.1.1.0 | Add support for credit card payments
 [account_payment_return](account_payment_return/) | 9.0.1.1.0 | Manage the return of your payments
 [account_payment_return_import](account_payment_return_import/) | 9.0.1.0.0 | This module add a generic wizard to import payment return fileformats. Is only the base to be extended by another modules
 [account_payment_return_import_sepa_pain](account_payment_return_import_sepa_pain/) | 9.0.1.0.0 | Module to import SEPA Direct Debit Unpaid Report File Format PAIN.002.001.03
