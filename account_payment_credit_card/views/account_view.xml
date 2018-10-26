@@ -9,10 +9,9 @@
         <field name="arch" type="xml">
             <field name="show_on_dashboard" position="after">
                 <field name="credit_card"
-                       attrs="{'readonly':[('type', '!=', 'bank')]}" />
+                       attrs="{'invisible':[('type', '!=', 'bank')]}" />
                 <field name="partner_id"
-                       attrs="{'readonly':[('type', '!=', 'bank'),
-                       ('credit_card', '=', False)]}" />
+                       attrs="{'invisible':[('type', '!=', 'bank')],'required':[('credit_card', '=', True)],'readonly':[('credit_card', '=', False)]}" />
             </field>
         </field>
     </record>

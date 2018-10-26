@@ -5,7 +5,7 @@
 {
     "name": "Credit Card Payments",
     "summary": "Add support for credit card payments",
-    "version": "10.0.1.0.0",
+    "version": "9.0.1.0.0",
     "license": "AGPL-3",
     "author": "Ursa Information Systems, Odoo Community Association (OCA)",
     "category": "Accounting & Finance",
