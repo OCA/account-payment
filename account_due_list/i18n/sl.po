@@ -21,22 +21,23 @@ msgstr ""
 "%100==4 ? 2 : 3);\n"
 
 #. module: account_due_list
-#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Due Date"
 msgstr "Valuta"
 
 #. module: account_due_list
-#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "From invoices"
 msgstr "Iz računov"
 
 #. module: account_due_list
-#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
-msgid "Group By..."
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+#, fuzzy
+msgid "Group By"
 msgstr "Združi po..."
 
 #. module: account_due_list
-#: model:ir.model.fields,help:account_due_list.field_account_move_line_payment_term_id
+#: model:ir.model.fields,help:account_due_list.field_account_move_line__payment_term_id
 #, fuzzy
 msgid ""
 "If you use payment terms, the due date will be computed automatically at the "
@@ -50,18 +51,18 @@ msgstr ""
 "datumov zapadlosti, na primer 50% takoj, 50% v mesecu dni."
 
 #. module: account_due_list
-#: model:ir.model.fields,field_description:account_due_list.field_account_move_line_stored_invoice_id
-#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
 msgid "Invoice"
 msgstr "Račun"
 
 #. module: account_due_list
-#: model:ir.model.fields,field_description:account_due_list.field_account_move_line_invoice_date
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line__invoice_date
 msgid "Invoice Date"
 msgstr "Datum računa"
 
 #. module: account_due_list
-#: model:ir.model.fields,field_description:account_due_list.field_account_move_line_invoice_user_id
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line__invoice_user_id
 msgid "Invoice salesperson"
 msgstr "Obračunski prodajalec"
 
@@ -72,123 +73,121 @@ msgid "Journal Item"
 msgstr "Dnevniške postavke"
 
 #. module: account_due_list
-#: model:ir.model.fields,help:account_due_list.field_account_move_line_invoice_date
+#: model:ir.model.fields,help:account_due_list.field_account_move_line__invoice_date
 msgid "Keep empty to use the current date"
 msgstr "Pusti prazno za uporabo tekočega datuma"
 
 #. module: account_due_list
-#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Month"
 msgstr "Mesec"
 
 #. module: account_due_list
-#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Overdue"
 msgstr "Zapadlo"
 
 #. module: account_due_list
-#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
-msgid "Overdue payments"
-msgstr "Zapadla plačila"
-
-#. module: account_due_list
-#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Partner"
 msgstr "Partner"
 
 #. module: account_due_list
-#: model:ir.model.fields,field_description:account_due_list.field_account_move_line_partner_ref
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line__partner_ref
 msgid "Partner Ref"
 msgstr "Sklic partnerja"
 
 #. module: account_due_list
-#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Payable"
 msgstr "Plačljivo"
 
 #. module: account_due_list
-#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
-msgid "Payable payments"
-msgstr "Plačljiva plačila"
-
-#. module: account_due_list
-#: model:ir.model.fields,field_description:account_due_list.field_account_move_line_payment_term_id
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line__payment_term_id
 msgid "Payment Terms"
 msgstr "Plačilni pogoji"
 
 #. module: account_due_list
-#: model:ir.ui.view,arch_db:account_due_list.view_payments_tree
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
 msgid "Payments"
 msgstr "Plačila"
 
 #. module: account_due_list
 #: model:ir.actions.act_window,name:account_due_list.action_invoice_payments
 #: model:ir.ui.menu,name:account_due_list.menu_action_invoice_payments
-#: model:ir.ui.view,arch_db:account_due_list.view_payments_graph
-#: model:ir.ui.view,arch_db:account_due_list.view_payments_pivot
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_graph
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_pivot
 msgid "Payments and due list"
 msgstr "Plačila in seznam zapadlih"
 
 #. module: account_due_list
-#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Receivable"
 msgstr "Terjatev"
 
 #. module: account_due_list
-#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
-msgid "Receivable payments"
-msgstr "Izterljiva plačila"
-
-#. module: account_due_list
-#: model:ir.model.fields,help:account_due_list.field_account_move_line_invoice_origin
+#: model:ir.model.fields,help:account_due_list.field_account_move_line__invoice_origin
 msgid "Reference of the document that produced this invoice."
 msgstr "Sklic na dokument, ki je sprožil ta račun"
 
 #. module: account_due_list
-#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Salesperson"
 msgstr "Prodajalec"
 
 #. module: account_due_list
-#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Search Payments"
 msgstr "Iskanje plačil"
 
 #. module: account_due_list
-#: model:ir.model.fields,field_description:account_due_list.field_account_move_line_invoice_origin
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line__invoice_origin
 msgid "Source Doc"
 msgstr "Izvorni dokument"
 
 #. module: account_due_list
-#: model:ir.ui.view,arch_db:account_due_list.view_payments_tree
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line__stored_invoice_id
+#, fuzzy
+msgid "Stored Invoice"
+msgstr "Račun"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
 msgid "Total Credit"
 msgstr "Skupaj v dobro"
 
 #. module: account_due_list
-#: model:ir.ui.view,arch_db:account_due_list.view_payments_tree
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
 msgid "Total Debit"
 msgstr "Skupaj v breme"
 
 #. module: account_due_list
-#: model:ir.ui.view,arch_db:account_due_list.view_payments_tree
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
 msgid "Total Residual"
 msgstr "Skupaj preostalo"
 
 #. module: account_due_list
-#: model:ir.ui.view,arch_db:account_due_list.view_payments_tree
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
 #, fuzzy
 msgid "Total Residual Currency"
 msgstr "Skupaj preostalo"
 
 #. module: account_due_list
-#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Unreconciled"
 msgstr "Neusklajeno"
 
-#. module: account_due_list
-#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
-msgid "Unreconciled payments"
-msgstr "Neusklajena plačila"
+#~ msgid "Overdue payments"
+#~ msgstr "Zapadla plačila"
+
+#~ msgid "Payable payments"
+#~ msgstr "Plačljiva plačila"
+
+#~ msgid "Receivable payments"
+#~ msgstr "Izterljiva plačila"
+
+#~ msgid "Unreconciled payments"
+#~ msgstr "Neusklajena plačila"
 
 #~ msgid "Residual Amount"
 #~ msgstr "Preostali znesek"
