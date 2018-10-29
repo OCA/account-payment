@@ -10,7 +10,7 @@
         <field name="arch" type="xml">
             <tree string="Payments" decoration-muted="reconciled!=False" 
                     decoration-danger="date_maturity&lt;current_date">
-                <field name="stored_invoice_id" readonly="1"/>
+                <field name="stored_invoice_id" string="Invoice" readonly="1"/>
                 <field name="invoice_date" readonly="1"/>
                 <field name="invoice_origin" readonly="1"/>
                 <field name="name" readonly="1"/>
@@ -38,24 +38,23 @@
             <search string="Search Payments">
                 <filter string="Receivable"
                         domain="[('account_id.internal_type','=','receivable')]"
-                        help="Receivable payments"/>
+                        name="receivable"/>
                 <filter string="Payable"
                         domain="[('account_id.internal_type','=','payable')]"
-                        help="Payable payments"/>
-                <separator orientation="vertical"/>
+                        name="payable"/>
+                <separator/>
                 <filter name="from_invoices"
                         string="From invoices"
                         domain="[('stored_invoice_id', '&lt;&gt;', False)]"/>
-                <separator orientation="vertical"/>
+                <separator/>
                 <filter name="unreconciled"
                         string="Unreconciled"
-                        domain="[('reconciled','=',False)]"
-                        help="Unreconciled payments"/>
-                <separator orientation="vertical"/>
+                        domain="[('reconciled','=',False)]" />
+                <separator/>
                 <filter string="Overdue"
                         domain="[('date_maturity','&lt;',time.strftime('%%Y-%%m-%%d'))]"
-                        help="Overdue payments" name="overdue"/>
-                <separator orientation="vertical"/>
+                        name="overdue"/>
+                <separator/>
                 <field name="account_id"/>
                 <field name="name"/>
                 <field name="partner_id"/>
@@ -66,22 +65,22 @@
                 <field name="reconciled"/>
                 <field name="amount_residual"/>
                 <field name="amount_residual_currency"/>
-                <group expand="0" string="Group By...">
+                <group expand="0" string="Group By">
                     <filter string="Partner"
                             domain="[]"
-                            context="{'group_by':'partner_id'}"/>
+                            context="{'group_by':'partner_id'}" name="group_by_partner"/>
                     <filter string="Invoice"
                             domain="[]"
-                            context="{'group_by':'stored_invoice_id'}"/>
+                            context="{'group_by':'stored_invoice_id'}" name="group_by_invoice"/>
                     <filter string="Due Date"
                             domain="[]"
-                            context="{'group_by':'date_maturity:day'}"/>
+                            context="{'group_by':'date_maturity:day'}" name="group_by_duedate"/>
                     <filter string="Month"
                             domain="[]"
-                            context="{'group_by':'date_maturity'}"/>
+                            context="{'group_by':'date_maturity'}" name="group_by_month"/>
                     <filter string="Salesperson"
                             domain="[]"
-                            context="{'group_by':'invoice_user_id'}"/>
+                            context="{'group_by':'invoice_user_id'}" name="group_by_salesperson"/>
                </group>
            </search>
         </field>
