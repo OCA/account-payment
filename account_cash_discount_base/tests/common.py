@@ -12,6 +12,8 @@ class TestAccountCashDiscountCommon(SavepointCase):
         super(TestAccountCashDiscountCommon, cls).setUpClass()
         cls.Account = cls.env['account.account']
         cls.AccountInvoice = cls.env['account.invoice']
+        cls.AccountInvoiceRefund = cls.env['account.invoice.refund']
+        cls.AccountMoveLine = cls.env['account.move.line']
         cls.Journal = cls.env['account.journal']
         cls.MoveLine = cls.env['account.move.line']
         cls.Tax = cls.env['account.tax']
@@ -51,6 +53,15 @@ class TestAccountCashDiscountCommon(SavepointCase):
             'sequence': 30,
             'name': 'Tax 15.0% (Percentage of Price)',
             'amount': 15.0,
+            'amount_type': 'percent',
+            'include_base_amount': False,
+            'type_tax_use': 'purchase',
+        })
+
+        cls.tax_17_p = cls.Tax.create({
+            'sequence': 30,
+            'name': 'Tax 17.0% (Percentage of Price)',
+            'amount': 17.0,
             'amount_type': 'percent',
             'include_base_amount': False,
             'type_tax_use': 'purchase',
