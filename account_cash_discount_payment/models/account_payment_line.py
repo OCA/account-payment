@@ -33,21 +33,15 @@ class PaymentLine(models.Model):
     def _compute_pay_with_discount_allowed(self):
         """
         Discount can be used only when the invoice has not already
-        been paid partially
+        been paid partially or if the invoice has been reconciled only with
+        refunds
         """
         for rec in self:
             allowed = False
             move_line = rec.move_line_id
             if move_line and move_line.invoice_id:
                 invoice = move_line.invoice_id
-                currency = invoice.currency_id
-                allowed = (
-                    invoice.has_discount and
-                    float_compare(
-                        invoice.residual, invoice.amount_total,
-                        precision_rounding=currency.rounding,
-                    ) == 0
-                )
+                allowed = invoice._can_pay_invoice_with_discount()
             rec.pay_with_discount_allowed = allowed
 
     @api.multi
@@ -94,12 +88,12 @@ class PaymentLine(models.Model):
         # _onchange_amount_with_discount which enable or disable the value
         # depending on the amount)
         change_base_amount = float_compare(
-            self.amount_currency, invoice.amount_total_with_discount,
+            self.amount_currency, invoice.residual_with_discount,
             precision_rounding=currency.rounding) == 0
         if self.pay_with_discount:
-            self.amount_currency = invoice.amount_total_with_discount
+            self.amount_currency = invoice.residual_with_discount
         elif change_base_amount:
-            self.amount_currency = invoice.amount_total
+            self.amount_currency = invoice.residual
 
     @api.onchange(
         'amount_currency',
@@ -115,7 +109,7 @@ class PaymentLine(models.Model):
         invoice = self.move_line_id.invoice_id
         currency = self.currency_id
         can_pay_with_discount = float_compare(
-            self.amount_currency, invoice.amount_total_with_discount,
+            self.amount_currency, invoice.residual_with_discount,
             precision_rounding=currency.rounding) == 0
         if not can_pay_with_discount:
             self.pay_with_discount = False
