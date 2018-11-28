@@ -11,6 +11,10 @@ from odoo.addons import decimal_precision as dp
 READONLY_STATES = {
     'draft': [('readonly', False)],
 }
+DISCOUNT_ALLOWED_TYPES = (
+    'in_invoice',
+    'in_refund',
+)
 
 
 class AccountInvoice(models.Model):
@@ -28,8 +32,15 @@ class AccountInvoice(models.Model):
         compute='_compute_amount_total_with_discount',
         store=True,
     )
+    residual_with_discount = fields.Monetary(
+        compute='_compute_residual_with_discount'
+    )
     discount_amount = fields.Monetary(
         compute='_compute_discount_amount',
+        store=True,
+    )
+    refunds_discount_amount = fields.Monetary(
+        compute='_compute_refunds_discount_amount',
         store=True,
     )
     discount_delay = fields.Integer(
@@ -75,6 +86,37 @@ class AccountInvoice(models.Model):
     @api.multi
     @api.depends(
         'amount_total',
+        'refunds_discount_amount',
+        'residual',
+    )
+    def _compute_residual_with_discount(self):
+        for rec in self:
+            rec.residual_with_discount = (
+                rec.residual -
+                rec.discount_amount +
+                rec.refunds_discount_amount
+            )
+
+    @api.multi
+    @api.depends(
+        'amount_total',
+        'payment_move_line_ids.debit',
+        'payment_move_line_ids.credit',
+        'payment_move_line_ids.invoice_id.discount_amount',
+        'payment_move_line_ids.invoice_id.type',
+    )
+    def _compute_refunds_discount_amount(self):
+        for rec in self:
+            refunds_discount_total = 0.0
+            for pmove_line in rec.payment_move_line_ids:
+                pmove_line_inv = pmove_line.invoice_id
+                if pmove_line_inv and pmove_line_inv.type == 'in_refund':
+                    refunds_discount_total += pmove_line_inv.discount_amount
+            rec.refunds_discount_amount = refunds_discount_total
+
+    @api.multi
+    @api.depends(
+        'amount_total',
         'discount_amount',
     )
     def _compute_amount_total_with_discount(self):
@@ -100,7 +142,7 @@ class AccountInvoice(models.Model):
             rec.has_discount = (
                 rec.discount_amount != 0 and
                 rec.discount_due_date != 0 and
-                rec.type == 'in_invoice'
+                rec.type in DISCOUNT_ALLOWED_TYPES
             )
 
     @api.multi
@@ -124,7 +166,7 @@ class AccountInvoice(models.Model):
             skip = (
                 rec.discount_amount == 0 or
                 rec.discount_delay == 0 or
-                rec.type != 'in_invoice'
+                rec.type not in DISCOUNT_ALLOWED_TYPES
             )
             if skip:
                 continue
@@ -139,7 +181,7 @@ class AccountInvoice(models.Model):
     )
     def _onchange_payment_term_discount_options(self):
         payment_term = self.payment_term_id
-        if payment_term and self.type == 'in_invoice':
+        if payment_term and self.type in DISCOUNT_ALLOWED_TYPES:
             self.discount_percent = payment_term.discount_percent
             self.discount_delay = payment_term.discount_delay
 
@@ -154,3 +196,31 @@ class AccountInvoice(models.Model):
                     "discount due date. (Invoice ID: %s)"
                 ) % (inv.id,))
         return res
+
+    @api.model
+    def _prepare_refund(
+            self, invoice, date_invoice=None, date=None, description=None,
+            journal_id=None):
+        values = super(AccountInvoice, self)._prepare_refund(
+            invoice,
+            date_invoice=date_invoice, date=date,
+            description=description, journal_id=journal_id
+        )
+
+        partner_id = values.get('partner_id')
+        if invoice.type in DISCOUNT_ALLOWED_TYPES and partner_id:
+            partner = self.env['res.partner'].browse(partner_id)
+            payment_term = partner.property_supplier_payment_term_id
+            values['payment_term_id'] = payment_term.id
+        return values
+
+    @api.multi
+    @api.returns('self')
+    def refund(self, date_invoice=None, date=None, description=None, journal_id=None):
+        invoice = super(AccountInvoice, self).refund(
+            date_invoice=date_invoice, date=date, description=description,
+            journal_id=journal_id
+        )
+        invoice._onchange_payment_term_discount_options()
+        invoice._onchange_discount_delay()
+        return invoice
