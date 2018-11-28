@@ -164,3 +164,78 @@ class TestAccountCashDiscountWriteOff(TestAccountCashDiscountPaymentCommon):
         ])
         self.assertEqual(len(tax_15_move_line), 1)
         self.assertEqual(tax_15_move_line.credit, 15)
+
+    def test_cash_discount_with_refund(self):
+        self.company.write({
+            'default_cash_discount_writeoff_account_id':
+                self.cash_discount_writeoff_account.id,
+            'default_cash_discount_writeoff_journal_id':
+                self.cash_discount_writeoff_journal.id,
+            'cash_discount_base_amount_type': 'total',
+        })
+
+        payment_mode = self.payment_mode_out
+        payment_mode.post_move = True
+        discount_due_date = Date.today()
+
+        invoice = self.create_supplier_invoice(
+            discount_due_date, payment_mode, 100, 2,
+            [self.tax_17_p.id])
+        invoice.action_invoice_open()
+        self.assertAlmostEqual(invoice.residual, 117)
+        self.assertAlmostEqual(invoice.residual_with_discount, 114.66)
+
+        move = invoice.move_id
+        move.post()
+
+        self.AccountInvoiceRefund.create({}).with_context(
+            active_ids=invoice.ids,
+        ).compute_refund()
+
+        refund = self.AccountInvoice.search([
+            ('origin', '=', invoice.number),
+            ('type', '=', 'in_refund'),
+        ])
+        refund.invoice_line_ids[0].price_unit = 10
+        refund.write({
+            'discount_due_date': discount_due_date,
+            'discount_percent': 2,
+        })
+        refund.compute_taxes()
+        refund.action_invoice_open()
+        credit_aml_id = self.AccountMoveLine.search([
+            ('move_id', '=', refund.move_id.id),
+            ('debit', '>', 0),
+        ], limit=1)
+
+        invoice.assign_outstanding_credit(credit_aml_id.id)
+
+        self.assertAlmostEqual(invoice.residual, 105.3)
+        self.assertAlmostEqual(invoice.residual_with_discount, 103.19)
+
+        payment_order = self.PaymentOrder.create({
+            'payment_mode_id': payment_mode.id,
+            'payment_type': 'outbound',
+            'journal_id': self.bank_ing_journal.id,
+        })
+
+        payment_line_wizard = self.PaymentLineCreate.with_context(
+            active_model=payment_order._name,
+            active_id=payment_order.id,
+        ).create({
+            'cash_discount_date': discount_due_date,
+            'date_type': 'discount_due_date',
+            'journal_ids': [(6, 0, [self.purchase_journal.id])],
+        })
+
+        payment_line_wizard.populate()
+        payment_line_wizard.create_payment_lines()
+
+        payment_line = payment_order.payment_line_ids[0]
+        self.assertAlmostEqual(payment_line.amount_currency, 103.19)
+
+        payment_order.draft2open()
+        payment_order.open2generated()
+        payment_order.generated2uploaded()
+
+        self.assertEqual(invoice.state, 'paid')
