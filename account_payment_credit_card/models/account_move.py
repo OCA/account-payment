@@ -9,7 +9,7 @@ class AccountMove(models.Model):
     _inherit = 'account.move'
 
     @api.multi
-    def post(self):
+    def post(self, invoice=False):
         for move in self:
 
             result = []
@@ -25,7 +25,7 @@ class AccountMove(models.Model):
                         'name': move_line.name,
                         'ref': move_line.ref,
                         'partner_id':
-                            move.journal_id.partner_id.id or
+                            move.journal_id.card_processor_partner_id.id or
                             move_line.partner_id.id or False,
                         'journal_id': move_line.journal_id.id,
                         'account_id': move_line.account_id.id,
@@ -43,4 +43,4 @@ class AccountMove(models.Model):
                     for vals in result:
                         self.env['account.move.line'].create(vals)
 
-        return super(AccountMove, self).post()
+        return super(AccountMove, self).post(invoice=invoice)
