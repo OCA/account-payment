@@ -1,0 +1,182 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_due_list
+#
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: account-payment (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-29 10:12+0000\n"
+"PO-Revision-Date: 2016-12-02 13:53+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"Language-Team: Norwegian Bokmål (http://www.transifex.com/oca/OCA-account-"
+"payment-8-0/language/nb/)\n"
+"Language: nb\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_due_list
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Due Date"
+msgstr ""
+
+#. module: account_due_list
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "From invoices"
+msgstr ""
+
+#. module: account_due_list
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Group By..."
+msgstr "Grupper etter ..."
+
+#. module: account_due_list
+#: model:ir.model.fields,help:account_due_list.field_account_move_line_payment_term_id
+msgid ""
+"If you use payment terms, the due date will be computed automatically at the "
+"generation of accounting entries. If you keep the payment terms and the due "
+"date empty, it means direct payment. The payment terms may compute several "
+"due dates, for example 50% now, 50% in one month."
+msgstr ""
+
+#. module: account_due_list
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line_stored_invoice_id
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Invoice"
+msgstr ""
+
+#. module: account_due_list
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line_invoice_date
+msgid "Invoice Date"
+msgstr ""
+
+#. module: account_due_list
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line_invoice_user_id
+msgid "Invoice salesperson"
+msgstr ""
+
+#. module: account_due_list
+#: model:ir.model,name:account_due_list.model_account_move_line
+msgid "Journal Item"
+msgstr ""
+
+#. module: account_due_list
+#: model:ir.model.fields,help:account_due_list.field_account_move_line_invoice_date
+msgid "Keep empty to use the current date"
+msgstr ""
+
+#. module: account_due_list
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Month"
+msgstr "Måned"
+
+#. module: account_due_list
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Overdue"
+msgstr ""
+
+#. module: account_due_list
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Overdue payments"
+msgstr ""
+
+#. module: account_due_list
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Partner"
+msgstr ""
+
+#. module: account_due_list
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line_partner_ref
+msgid "Partner Ref"
+msgstr ""
+
+#. module: account_due_list
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Payable"
+msgstr ""
+
+#. module: account_due_list
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Payable payments"
+msgstr ""
+
+#. module: account_due_list
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line_payment_term_id
+msgid "Payment Terms"
+msgstr ""
+
+#. module: account_due_list
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_tree
+msgid "Payments"
+msgstr ""
+
+#. module: account_due_list
+#: model:ir.actions.act_window,name:account_due_list.action_invoice_payments
+#: model:ir.ui.menu,name:account_due_list.menu_action_invoice_payments
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_graph
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_pivot
+msgid "Payments and due list"
+msgstr ""
+
+#. module: account_due_list
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Receivable"
+msgstr ""
+
+#. module: account_due_list
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Receivable payments"
+msgstr ""
+
+#. module: account_due_list
+#: model:ir.model.fields,help:account_due_list.field_account_move_line_invoice_origin
+msgid "Reference of the document that produced this invoice."
+msgstr ""
+
+#. module: account_due_list
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Salesperson"
+msgstr ""
+
+#. module: account_due_list
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Search Payments"
+msgstr ""
+
+#. module: account_due_list
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line_invoice_origin
+msgid "Source Doc"
+msgstr ""
+
+#. module: account_due_list
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_tree
+msgid "Total Credit"
+msgstr ""
+
+#. module: account_due_list
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_tree
+msgid "Total Debit"
+msgstr ""
+
+#. module: account_due_list
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_tree
+msgid "Total Residual"
+msgstr ""
+
+#. module: account_due_list
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_tree
+msgid "Total Residual Currency"
+msgstr ""
+
+#. module: account_due_list
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Unreconciled"
+msgstr ""
+
+#. module: account_due_list
+#: model:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Unreconciled payments"
+msgstr ""
