@@ -62,7 +62,9 @@ class AccountPayment(models.Model):
     @api.multi
     def post(self):
         res = super(AccountPayment, self).post()
-        if (self.journal_id.check_print_auto and
-                self.payment_method_id.code == 'check_printing'):
-            return self.do_print_checks()
+        recs = self.filtered(
+            lambda x: x.journal_id.check_print_auto
+            and x.payment_method_id.code == 'check_printing')
+        if recs:
+            return recs.do_print_checks()
         return res
