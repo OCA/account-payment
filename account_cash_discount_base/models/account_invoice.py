@@ -39,6 +39,10 @@ class AccountInvoice(models.Model):
         compute='_compute_discount_amount',
         store=True,
     )
+    real_discount_amount = fields.Monetary(
+        compute='_compute_real_discount_amount',
+        string="Discount amount (minus related refunds amount)",
+    )
     refunds_discount_amount = fields.Monetary(
         compute='_compute_refunds_discount_amount',
         store=True,
@@ -113,6 +117,18 @@ class AccountInvoice(models.Model):
                 if pmove_line_inv and pmove_line_inv.type == 'in_refund':
                     refunds_discount_total += pmove_line_inv.discount_amount
             rec.refunds_discount_amount = refunds_discount_total
+
+    @api.multi
+    @api.depends(
+        'discount_amount',
+        'refunds_discount_amount',
+    )
+    def _compute_real_discount_amount(self):
+        for rec in self:
+            rec.real_discount_amount = (
+                rec.discount_amount -
+                rec.refunds_discount_amount
+            )
 
     @api.multi
     @api.depends(
@@ -216,7 +232,9 @@ class AccountInvoice(models.Model):
 
     @api.multi
     @api.returns('self')
-    def refund(self, date_invoice=None, date=None, description=None, journal_id=None):
+    def refund(
+            self, date_invoice=None, date=None, description=None,
+            journal_id=None):
         invoice = super(AccountInvoice, self).refund(
             date_invoice=date_invoice, date=date, description=description,
             journal_id=journal_id
