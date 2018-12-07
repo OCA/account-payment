@@ -32,9 +32,9 @@
             </field>
 
             <field name="amount_currency" position="after">
-                <field name="pay_with_discount"/>
-                <field name="pay_with_discount_allowed"/>
-                <field name="toggle_pay_with_discount_allowed"/>
+                <field name="pay_with_discount_allowed" invisible="1"/>
+                <field name="toggle_pay_with_discount_allowed" invisible="1"/>
+                <field name="pay_with_discount" attrs="{'invisible': [('pay_with_discount_allowed', '=', False)]}"/>
                 <field name="discount_amount" attrs="{'invisible': [('pay_with_discount_allowed', '=', False)]}"/>
                 <button name="toggle_pay_with_discount" help="Toggle Discount"
                         string="Disable discount"
