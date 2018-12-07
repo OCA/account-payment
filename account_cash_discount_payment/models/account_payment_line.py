@@ -25,7 +25,7 @@ class PaymentLine(models.Model):
         readonly=True,
     )
     discount_amount = fields.Monetary(
-        related='move_line_id.invoice_id.discount_amount',
+        related='move_line_id.invoice_id.real_discount_amount',
         readonly=True,
     )
 
