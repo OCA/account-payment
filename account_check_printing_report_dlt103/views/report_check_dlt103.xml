@@ -7,96 +7,99 @@
                     <t t-foreach="docs" t-as="o">
                         <div class="page">
                             <div>
-                                <div style="position:absolute; right:23mm; top:22mm;">
+                                <div style="font-size:12px;position:absolute;right:22mm;top:10mm;">
                                     <span t-field="o.payment_date"/>
                                 </div>
-                                <div>
-                                    <span style="position:absolute; top:34mm; left:30mm;" t-field="o.partner_id.name"/>
+                                <div style="font-size:12px; overflow:hidden;white-space:nowrap;position:absolute;top:22mm;left:28mm;">
+                                    <span t-field="o.partner_id.name"/>
                                 </div>
                                 <div>
-                                    <span style="position:absolute; top:34mm; left:177mm;" t-esc="'%.2f' % (o.amount)"/>
+                                    <span style="font-size:12px;position:absolute;top:22mm;left:166mm;" t-esc="'%.2f' % (o.amount)"/>
                                 </div>
-                                <div style="position:absolute; left:16mm; top:43mm;">
+                                <div style="font-size:12px;white-space:nowrap;position:absolute;left:15mm;top:30mm;">
                                     <strong><span t-esc="fill_stars(o.check_amount_in_words)"/></strong>
                                 </div>
-                                <div style="position:absolute; left:20mm; top:66mm;max-width: 100mm;max-height: 10mm;">
+                                <div style="position:absolute;font-size:12px;left:18mm;top:51mm;max-width: 100mm;max-height: 10mm;">
                                     <span t-field="o.communication"/>
                                 </div>
                             </div>
-                            <div style="position:absolute; top:100mm; left:10mm;">
+                            <div style="position:absolute;top:84mm;left:10mm;">
                                 <strong>
-                                    <span
-                                            t-esc="'Partner: {}'.format(o.partner_id.name)"/>
-                                    <span style="padding-right:100mm;float:right;"
+                                    <span style="font-size:12px;overflow:hidden;white-space:nowrap;padding-top:6mm;"
+                                        t-esc="'Partner: {}'.format(o.partner_id.name[:30])"/>
+                                    <span style="font-size:12px;padding-right:96mm;float:right;padding-top:1.5mm;"
                                           t-esc="'Date: {}'.format(o.payment_date)"/>
-                                    <span style="position:absolute; right:35mm;"
+                                    <span style="font-size:12px;overflow:hidden;white-space:nowrap;position:absolute;right:35mm;padding-top:1.5mm;"
                                           t-esc="'Check #: {}'.format(o.check_number)"/>
                                 </strong>
                                 <t>
-                                    <table width="96%" style="padding-right:22mm;">
+                                    <table width="96%" style="font-size:12px;padding-right:22mm;">
                                         <thead>
-                                            <tr style="text-align:left;">
-                                                <th style="padding-top:3mm;">Due Date</th>
-                                                <th>Description</th>
-                                                <th>Original Amount</th>
-                                                <th>Balance Due</th>
-                                                <th>Payment</th>
+                                            <tr style="font-size:12px;text-align:left;">
+                                                <th style="font-size:12px;padding-top:1mm;width:25mm;">Due Date</th>
+                                                <th style="font-size:12px;padding-top:1mm;position:relative;left:1mm;width:72mm;">Description</th>
+                                                <th style="font-size:12px;padding-top:1mm;position:relative;width:39mm;">Original Amount</th>
+                                                <th style="font-size:12px;padding-top:1mm;position:relative;width:29mm;">Balance Due</th>
+                                                <th style="font-size:12px;padding-top:1mm;position:relative;">Payment</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <t t-foreach="paid_lines[o.id]"
                                                t-as="line">
                                                 <tr style="text-align:left;border-top: 0px;">
-                                                   <td style="padding-top:3mm;"><span t-esc="line['date_due']"/></td>
-                                                    <td style="max-width: 55mm;"
+                                                   <td style="font-size:12px;padding-top:4mm;vertical-align: top;"><span t-esc="line['date_due']"/></td>
+                                                    <td style="font-size:12px;padding-top:4mm;position:relative;left:1mm;width:55mm;vertical-align:top;"
                                                         t-esc="line['reference'] or line['number']"/>
-                                                    <td><span t-esc="line['amount_total']" t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></td>
-                                                    <td><span t-esc="line['residual']" t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></td>
-                                                    <td><span t-esc="line['paid_amount']" t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></td>
+                                                    <td style="font-size:12px;padding-top:4mm;position:relative;vertical-align: top;"><span t-esc="line['amount_total']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></td>
+                                                    <td style="font-size:12px;padding-top:4mm;position:relative;vertical-align: top;"><span t-esc="line['residual']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></td>
+                                                    <td style="font-size:12px;padding-top:4mm;position:relative;vertical-align: top;"><span t-esc="line['paid_amount']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></td>
                                                 </tr>
                                             </t>
                                         </tbody>
                                     </table>
-                                    <div style="padding-right:20mm;padding-top:55mm;padding-bottom:15mm;" align="right">
-                                        <b>Check Amount:</b><span
-                                            t-field='o.amount' t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                                    <div style="font-size:12px;padding-right:20mm;padding-top:53mm;padding-bottom:15mm;" align="right">
+                                        <b>Check Amount: </b><span
+                                            t-field='o.amount' t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                                     </div>
                                 </t>
                             </div>
-                            <div style="position:absolute; top:190mm; left:10mm;">
+                            <div style="position:absolute;top:169mm;left:10mm;">
                                 <strong>
-                                    <span t-esc="'Partner: {}'.format(o.partner_id.name)"/>
-                                    <span style="padding-right:100mm;float:right;" t-esc="'Date: {}'.format(o.payment_date)"/>
-                                    <span style="position:absolute; right:35mm;" t-esc="'Check #: {}'.format(o.check_number)"/>
+                                    <span style="font-size:12px;overflow:hidden;white-space:nowrap;padding-top:6mm;"
+                                        t-esc="'Partner: {}'.format(o.partner_id.name[:30])"/>
+                                    <span style="font-size:12px;padding-right:96mm;float:right;padding-top:1.5mm;"
+                                          t-esc="'Date: {}'.format(o.payment_date)"/>
+                                    <span style="font-size:12px;overflow:hidden;white-space:nowrap;position:absolute;right:35mm;padding-top:1.5mm;"
+                                          t-esc="'Check #: {}'.format(o.check_number)"/>
                                 </strong>
                                 <t>
-                                    <table width="96%" style="padding-right:22mm;">
+                                    <table width="96%" style="font-size:12px;padding-right:22mm;">
                                         <thead>
-                                            <tr style="text-align:left;">
-                                                <th style="padding-top:3mm;">Due Date</th>
-                                                <th>Description</th>
-                                                <th>Original Amount</th>
-                                                <th>Balance Due</th>
-                                                <th>Payment</th>
+                                            <tr style="font-size:12px;text-align:left;">
+                                                <th style="font-size:12px;padding-top:1mm;width:25mm;">Due Date</th>
+                                                <th style="font-size:12px;padding-top:1mm;position:relative;left:1mm;width:72mm;">Description</th>
+                                                <th style="font-size:12px;padding-top:1mm;position:relative;width:39mm;">Original Amount</th>
+                                                <th style="font-size:12px;padding-top:1mm;position:relative;width:29mm;">Balance Due</th>
+                                                <th style="font-size:12px;padding-top:1mm;position:relative;">Payment</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             <t t-foreach="paid_lines[o.id]"
                                                t-as="line">
                                                 <tr style="text-align:left;border-top: 0px;">
-                                                   <td style="padding-top:3mm;"><span t-esc="line['date_due']"/></td>
-                                                    <td style="max-width: 55mm;"
+                                                   <td style="font-size:12px;padding-top:4mm;vertical-align: top;"><span t-esc="line['date_due']"/></td>
+                                                    <td style="font-size:12px;padding-top:4mm;position:relative;left:1mm;width:55mm;vertical-align:top;"
                                                         t-esc="line['reference'] or line['number']"/>
-                                                    <td><span t-esc="line['amount_total']" t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></td>
-                                                    <td><span t-esc="line['residual']" t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></td>
-                                                    <td><span t-esc="line['paid_amount']" t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></td>
+                                                    <td style="font-size:12px;padding-top:4mm;position:relative;vertical-align: top;"><span t-esc="line['amount_total']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></td>
+                                                    <td style="font-size:12px;padding-top:4mm;position:relative;vertical-align: top;"><span t-esc="line['residual']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></td>
+                                                    <td style="font-size:12px;padding-top:4mm;position:relative;vertical-align: top;"><span t-esc="line['paid_amount']" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/></td>
                                                 </tr>
                                             </t>
                                         </tbody>
                                     </table>
-                                    <div style="padding-right:20mm;padding-top:50mm;padding-bottom:15mm;" align="right">
-                                        <b>Check Amount:</b><span
-                                            t-field='o.amount' t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                                    <div style="font-size:12px;padding-right:20mm;padding-top:48mm;" align="right">
+                                        <b>Check Amount: </b><span
+                                            t-field='o.amount' t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                                     </div>
                                 </t>
                             </div>
