@@ -191,6 +191,20 @@ class AccountInvoice(models.Model):
             due_date = discount_base_date + timedelta(days=rec.discount_delay)
             rec.discount_due_date = due_date
 
+    @api.onchange(
+        'partner_id',
+        'company_id',
+    )
+    def _onchange_partner_id(self):
+        old_payment_term_id = self.payment_term_id
+        res = super(AccountInvoice, self)._onchange_partner_id()
+        if self.payment_term_id != old_payment_term_id:
+            # be sure to load discount options based on the payment term.
+            # It was not loaded when creating a vendor bill from a purchase
+            # order.
+            self._onchange_payment_term_discount_options()
+        return res
+
     @api.multi
     @api.onchange(
         'payment_term_id',
