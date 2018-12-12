@@ -41,7 +41,9 @@ class PaymentLine(models.Model):
             move_line = rec.move_line_id
             if move_line and move_line.invoice_id:
                 invoice = move_line.invoice_id
-                allowed = invoice._can_pay_invoice_with_discount()
+                allowed = invoice._can_pay_invoice_with_discount(
+                    check_due_date=False
+                )
             rec.pay_with_discount_allowed = allowed
 
     @api.multi

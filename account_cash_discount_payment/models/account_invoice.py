@@ -11,7 +11,7 @@ class AccountInvoice(models.Model):
     _inherit = 'account.invoice'
 
     @api.multi
-    def _can_pay_invoice_with_discount(self):
+    def _can_pay_invoice_with_discount(self, check_due_date=True):
         self.ensure_one()
         today = fields.Date.today()
         rounding = self.currency_id.rounding
@@ -24,8 +24,13 @@ class AccountInvoice(models.Model):
             if pmove_line_inv and pmove_line_inv.type == 'in_refund':
                 refunds_amount_total += pmove_line_inv.amount_total
 
+        if check_due_date:
+            date_check_valid = self.discount_due_date >= today
+        else:
+            date_check_valid = True
+
         return (
-            self.discount_due_date >= today and
+            date_check_valid and
             float_compare(
                 self.residual,
                 self.amount_total - refunds_amount_total,
