@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2018 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="invoice_supplier_form_inherit">
+        <field name="name">account.invoice.supplier.form (account_cash_discount_base)</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account.invoice_supplier_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//field[@name='journal_id']/parent::group/parent::group" position="inside">
+                <group string="Cash Discount" name="cash_discount"
+                       attrs="{'invisible': [('type', 'not in', ('in_invoice', 'in_refund'))]}">
+                    <field name="discount_percent"/>
+                    <field name="discount_amount"/>
+                    <field name="amount_total_with_discount"/>
+                    <field name="discount_delay"/>
+                    <field name="discount_due_date" invisible="1"/>
+                    <field name="discount_due_date_readonly"/>
+                    <field name="has_discount" invisible="1"/>
+                    <field name="discount_base_date" invisible="1"/>
+                    <field name="refunds_discount_amount"/>
+                </group>
+            </xpath>
+
+        </field>
+    </record>
+
+</odoo>
