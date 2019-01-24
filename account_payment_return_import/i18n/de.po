@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-09-22 16:30+0000\n"
+"POT-Creation-Date: 2019-01-30 10:56+0000\n"
 "PO-Revision-Date: 2018-10-11 13:48+0000\n"
 "Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
 "Language-Team: German (http://www.transifex.com/oca/OCA-account-payment-8-0/"
@@ -32,40 +32,13 @@ msgid "1 transaction had already been imported and was ignored."
 msgstr "1 Geschäftsvorfall war bereits importiert und wurde ignoriert."
 
 #. module: account_payment_return_import
-#: model:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
-msgid "1. Download your Payment Return file from your bank website."
-msgstr ""
-"1. Laden Sie die Datei Zahlungsrückläufer von Ihrer Bank-Webseite herunter."
-
-#. module: account_payment_return_import
-#: model:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
-msgid ""
-"2. Make sure you have installed the right module to support the file format."
-msgstr ""
-"2. Stellen Sie sicher, dass Sie das passende Modul für Ihr Dateiformat "
-"installiert haben."
-
-#. module: account_payment_return_import
-#: model:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
-msgid "3. Select the file and click 'Import'."
-msgstr "3. Wählen Sie die Datei aus und klicken 'Import'."
-
-#. module: account_payment_return_import
-#: model:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
-msgid ""
-"<br/><br/><b> How to import your payment return :</b>\n"
-"                <br/>"
-msgstr ""
-"<br/><br/><b> Wie Sie Ihre Zahlungsrückläufer importieren:</b>\n"
-"                <br/>"
-
-#. module: account_payment_return_import
 #: sql_constraint:payment.return.line:0
-msgid "A bank account transactions can be imported only once !"
+#, fuzzy
+msgid "A payment return transaction can be imported only once!"
 msgstr "Ein Bank-Geschäftsvorfall darf nur ein Mal importiert werden!"
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,help:account_payment_return_import.field_payment_return_import_journal_id
+#: model:ir.model.fields,help:account_payment_return_import.field_payment_return_import__journal_id
 msgid ""
 "Accounting journal related to the bank payment return you're importing. It "
 "has be be manually chosen for payment return formats which doesn't allow "
@@ -94,7 +67,7 @@ msgid "Can not find the account number %s."
 msgstr "Kann das Konto %s nicht finden."
 
 #. module: account_payment_return_import
-#: model:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
+#: model_terms:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -115,22 +88,22 @@ msgid "Couldn't load file data"
 msgstr "Konnte die Dateidaten nicht laden"
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import_create_uid
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__create_uid
 msgid "Created by"
 msgstr "Erstellt von"
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import_create_date
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__create_date
 msgid "Created on"
 msgstr "Erstellt am:"
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import_display_name
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__display_name
 msgid "Display Name"
 msgstr "Anzeigename"
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,help:account_payment_return_import.field_payment_return_import_data_file
+#: model:ir.model.fields,help:account_payment_return_import.field_payment_return_import__data_file
 msgid ""
 "Get you bank payment returns in electronic format from your bank and select "
 "them here."
@@ -139,22 +112,33 @@ msgstr ""
 "hier aus."
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import_hide_journal_field
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__hide_journal_field
 msgid "Hide the journal field in the view"
 msgstr "Das Journalfeld in der Sicht verbergen"
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import_id
+#: model_terms:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
+msgid ""
+"How to import your payment return :\n"
+"                    1. Download your Payment Return file from your bank "
+"website.\n"
+"                    2. Make sure you have installed the right module to "
+"support the file format.\n"
+"                    3. Select the file and click 'Import'."
+msgstr ""
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__id
 msgid "ID"
 msgstr "ID"
 
 #. module: account_payment_return_import
-#: model:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
+#: model_terms:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
 msgid "Import"
 msgstr "Importieren"
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_line_unique_import_id
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_line__unique_import_id
 msgid "Import ID"
 msgstr "Import-ID"
 
@@ -166,37 +150,32 @@ msgid "Import Payment Return"
 msgstr "Importiere Rücklasten"
 
 #. module: account_payment_return_import
-#: model:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
-msgid "Import Payment Returns"
-msgstr "Importiere Zahlungsrückläufer"
-
-#. module: account_payment_return_import
-#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import_journal_id
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__journal_id
 msgid "Journal"
 msgstr "Journal"
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import___last_update
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import____last_update
 msgid "Last Modified on"
 msgstr "Zuletzt geändert am"
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import_write_uid
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__write_uid
 msgid "Last Updated by"
 msgstr "Zuletzt aktualisiert von"
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import_write_date
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__write_date
 msgid "Last Updated on"
 msgstr "Zuletzt aktualisiert am"
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import_match_after_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__match_after_import
 msgid "Match After Import"
 msgstr "Nach Import abstimmen"
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import_data_file
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__data_file
 msgid "Payment Return File"
 msgstr "Rücklasten-Datei"
 
@@ -206,7 +185,7 @@ msgid "Payment return lines"
 msgstr "Rückbuchungszeilen"
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_line_raw_import_data
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_line__raw_import_data
 msgid "Raw Import Data"
 msgstr "Import Rohdaten"
 
@@ -229,7 +208,7 @@ msgid "This file doesn't contain any transaction."
 msgstr "Diese Datei enthält keinen Vorgang."
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,help:account_payment_return_import.field_payment_return_line_raw_import_data
+#: model:ir.model.fields,help:account_payment_return_import.field_payment_return_line__raw_import_data
 msgid "XML RAW data stored for debugging/check purposes"
 msgstr "XML-Rohdaten sind zur Fehler-/Prüfung abgespeichert"
 
@@ -239,7 +218,30 @@ msgstr "XML-Rohdaten sind zur Fehler-/Prüfung abgespeichert"
 msgid "You have already imported this file."
 msgstr "Sie haben diese Datei bereits importiert."
 
-#. module: account_payment_return_import
-#: model:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
-msgid "or"
-msgstr "oder"
+#~ msgid "1. Download your Payment Return file from your bank website."
+#~ msgstr ""
+#~ "1. Laden Sie die Datei Zahlungsrückläufer von Ihrer Bank-Webseite "
+#~ "herunter."
+
+#~ msgid ""
+#~ "2. Make sure you have installed the right module to support the file "
+#~ "format."
+#~ msgstr ""
+#~ "2. Stellen Sie sicher, dass Sie das passende Modul für Ihr Dateiformat "
+#~ "installiert haben."
+
+#~ msgid "3. Select the file and click 'Import'."
+#~ msgstr "3. Wählen Sie die Datei aus und klicken 'Import'."
+
+#~ msgid ""
+#~ "<br/><br/><b> How to import your payment return :</b>\n"
+#~ "                <br/>"
+#~ msgstr ""
+#~ "<br/><br/><b> Wie Sie Ihre Zahlungsrückläufer importieren:</b>\n"
+#~ "                <br/>"
+
+#~ msgid "Import Payment Returns"
+#~ msgstr "Importiere Zahlungsrückläufer"
+
+#~ msgid "or"
+#~ msgstr "oder"
