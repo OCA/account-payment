@@ -17,5 +17,5 @@ class PaymentReturnLine(models.Model):
     _sql_constraints = [
         ('unique_import_id',
          'unique (unique_import_id)',
-         'A bank account transactions can be imported only once !')
+         'A payment return transaction can be imported only once!')
     ]

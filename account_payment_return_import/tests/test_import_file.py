@@ -5,6 +5,7 @@
 import base64
 import logging
 
+from odoo import fields
 from odoo.tests.common import TransactionCase
 from odoo.modules.module import get_module_resource
 
@@ -83,9 +84,9 @@ class TestPaymentReturnFile(TransactionCase):
         return_obj = ids[0]
         if date:
             self.assertEqual(
-                return_obj.date, date,
+                fields.Date.to_string(return_obj.date), date,
                 'Date %s not equal to expected %s' %
-                (return_obj.date, date)
+                (fields.Date.to_string(return_obj.date), date)
             )
         if transactions:
             for transaction in transactions:
