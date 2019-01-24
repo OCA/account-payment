@@ -20,7 +20,7 @@ class PaymentReturnImport(models.TransientModel):
             return parser.parse(data_file)
         except ValueError:
             # Not a valid file, returning super will call next candidate:
-            _logger.debug("Paymen return file was not a Direct Debit Unpaid "
+            _logger.debug("Payment return file was not a Direct Debit Unpaid "
                           "Report file.",
                           exc_info=True)
             return super(PaymentReturnImport, self)._parse_file(data_file)

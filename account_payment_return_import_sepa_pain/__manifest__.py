@@ -6,13 +6,14 @@
 {
     'name': 'Account Payment Return Import SEPA Pain',
     'category': 'Accounting',
-    'version': '11.0.1.0.0',
+    'version': '12.0.1.0.0',
     'summary': 'Module to import SEPA Direct Debit Unpaid Report File Format '
                'PAIN.002.001.03',
     'license': 'AGPL-3',
     'author': 'Tecnativa,'
               'Odoo Community Association (OCA)',
-    'website': 'https://www.tecnativa.com',
+    'website': 'https://github.com/OCA/account-payment/tree/12.0/'
+               'account_payment_return_import_sepa_pain',
     'depends': [
         'account_payment_return_import',
         'account_payment_order',
