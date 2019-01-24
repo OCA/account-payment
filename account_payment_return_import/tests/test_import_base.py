@@ -15,7 +15,7 @@ class TestImportBase(TestPaymentReturnFile):
         self.acc_bank = self.env['res.partner.bank'].create({
             'acc_number': self.acc_number,
             'bank_name': 'TEST BANK',
-            'company_id': self.company.partner_id.id,
+            'company_id': self.company.id,
             'partner_id': self.company.partner_id.id,
         })
         self.journal = self.env['account.journal'].create({
