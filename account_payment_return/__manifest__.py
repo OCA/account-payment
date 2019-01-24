@@ -10,18 +10,18 @@
 
 {
     "name": "Account Payment Returns",
-    "version": "11.0.1.0.0",
+    "version": "12.0.1.0.0",
     "summary": "Manage the return of your payments",
     'license': 'AGPL-3',
     "depends": [
         'mail',
         'account',
     ],
-    'author': '7 i TRIA, '
+    'author': 'Odoo Community Association (OCA),'
+              '7 i TRIA, '
               'Tecnativa, '
-              'initOS GmbH & Co., '
-              'Odoo Community Association (OCA)',
-    'website': 'https://www.tecnativa.com',
+              'initOS GmbH & Co., ',
+    'website': 'https://github.com/OCA/account-payment',
     'data': [
         'security/ir.model.access.csv',
         'security/account_payment_return_security.xml',
