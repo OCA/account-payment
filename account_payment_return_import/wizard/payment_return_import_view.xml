@@ -6,7 +6,13 @@
         <field name="model">payment.return.import</field>
         <field name="priority">1</field>
         <field name="arch" type="xml">
-            <form string="Import Payment Returns">
+            <form>
+                <div name="info_alert" class="alert alert-info" role="alert">
+                    How to import your payment return :<br/>
+                    1. Download your Payment Return file from your bank website.<br/>
+                    2. Make sure you have installed the right module to support the file format.<br/>
+                    3. Select the file and click 'Import'.
+                </div>
                 <group name="file">
                     <field name="data_file"/>
                     <field name="match_after_import"/>
@@ -18,13 +24,8 @@
                        attrs="{'invisible': [('hide_journal_field', '=', True)]}"
                        context="{'default_type':'bank'}"
                 />
-                <br/><br/><b> How to import your payment return :</b>
-                <br/><label string= "1. Download your Payment Return file from your bank website."/>
-                <br/><label string= "2. Make sure you have installed the right module to support the file format."/>
-                <br/><label string= "3. Select the file and click 'Import'."/>
                 <footer>
                     <button name="import_file" string="Import" type="object" class="oe_highlight"/>
-                    or
                     <button string="Cancel" class="oe_link" special="cancel"/>
                 </footer>
             </form>

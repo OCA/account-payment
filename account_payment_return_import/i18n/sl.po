@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 05:05+0000\n"
+"POT-Creation-Date: 2019-01-30 10:56+0000\n"
 "PO-Revision-Date: 2016-05-07 07:10+0000\n"
 "Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-"
@@ -33,38 +33,13 @@ msgid "1 transaction had already been imported and was ignored."
 msgstr "1 transakcija je bila že uvožena in je bila spregledana."
 
 #. module: account_payment_return_import
-#: model:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
-msgid "1. Download your Payment Return file from your bank website."
-msgstr "1. Prenesite datoteko vračila plačila iz spletne strani svoje banke."
-
-#. module: account_payment_return_import
-#: model:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
-msgid ""
-"2. Make sure you have installed the right module to support the file format."
-msgstr ""
-"2. Prepričajte se, da imate nameščen ustrezen modul za podporo formatu "
-"datoteke."
-
-#. module: account_payment_return_import
-#: model:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
-msgid "3. Select the file and click 'Import'."
-msgstr "3. Izberite datoteko in kliknite 'Uvozi'."
-
-#. module: account_payment_return_import
-#: model:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
-#, fuzzy
-msgid ""
-"<br/><br/><b> How to import your payment return :</b>\n"
-"                <br/>"
-msgstr "Kako uvoziti vračilo plačila:"
-
-#. module: account_payment_return_import
 #: sql_constraint:payment.return.line:0
-msgid "A bank account transactions can be imported only once !"
+#, fuzzy
+msgid "A payment return transaction can be imported only once!"
 msgstr "Transakcije bančnega računa se lahko uvozi le enkrat!"
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,help:account_payment_return_import.field_payment_return_import_journal_id
+#: model:ir.model.fields,help:account_payment_return_import.field_payment_return_import__journal_id
 msgid ""
 "Accounting journal related to the bank payment return you're importing. It "
 "has be be manually chosen for payment return formats which doesn't allow "
@@ -93,7 +68,7 @@ msgid "Can not find the account number %s."
 msgstr "Ni mogoče najti številke računa %s."
 
 #. module: account_payment_return_import
-#: model:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
+#: model_terms:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
 msgid "Cancel"
 msgstr "Preklic"
 
@@ -114,22 +89,22 @@ msgid "Couldn't load file data"
 msgstr ""
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import_create_uid
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__create_uid
 msgid "Created by"
 msgstr "Ustvaril"
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import_create_date
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__create_date
 msgid "Created on"
 msgstr "Ustvarjeno"
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import_display_name
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__display_name
 msgid "Display Name"
 msgstr "Prikazni naziv"
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,help:account_payment_return_import.field_payment_return_import_data_file
+#: model:ir.model.fields,help:account_payment_return_import.field_payment_return_import__data_file
 msgid ""
 "Get you bank payment returns in electronic format from your bank and select "
 "them here."
@@ -138,23 +113,34 @@ msgstr ""
 "izberite tukaj."
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import_hide_journal_field
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__hide_journal_field
 msgid "Hide the journal field in the view"
 msgstr "Skrij polje dnevnika na prikazu"
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import_id
+#: model_terms:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
+msgid ""
+"How to import your payment return :\n"
+"                    1. Download your Payment Return file from your bank "
+"website.\n"
+"                    2. Make sure you have installed the right module to "
+"support the file format.\n"
+"                    3. Select the file and click 'Import'."
+msgstr ""
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__id
 msgid "ID"
 msgstr "ID"
 
 #. module: account_payment_return_import
-#: model:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
+#: model_terms:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
 #, fuzzy
 msgid "Import"
 msgstr "_Uvozi"
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_line_unique_import_id
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_line__unique_import_id
 msgid "Import ID"
 msgstr "ID uvoza"
 
@@ -166,37 +152,32 @@ msgid "Import Payment Return"
 msgstr "Uvoz vračila plačila"
 
 #. module: account_payment_return_import
-#: model:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
-msgid "Import Payment Returns"
-msgstr "Uvoz vračil plačil"
-
-#. module: account_payment_return_import
-#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import_journal_id
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__journal_id
 msgid "Journal"
 msgstr "Dnevnik"
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import___last_update
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import____last_update
 msgid "Last Modified on"
 msgstr "Zadnjič spremenjeno"
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import_write_uid
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__write_uid
 msgid "Last Updated by"
 msgstr "Zadnji posodobil"
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import_write_date
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__write_date
 msgid "Last Updated on"
 msgstr "Zadnjič posodobljeno"
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import_match_after_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__match_after_import
 msgid "Match After Import"
 msgstr ""
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import_data_file
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__data_file
 msgid "Payment Return File"
 msgstr "Datoteka vračila plačila"
 
@@ -206,7 +187,7 @@ msgid "Payment return lines"
 msgstr "Postavke vračil plačil"
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_line_raw_import_data
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_line__raw_import_data
 #, fuzzy
 msgid "Raw Import Data"
 msgstr "Surovi uvozni podatki"
@@ -230,7 +211,7 @@ msgid "This file doesn't contain any transaction."
 msgstr "Ta datoteka ne vsebuje nobene transakcije."
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,help:account_payment_return_import.field_payment_return_line_raw_import_data
+#: model:ir.model.fields,help:account_payment_return_import.field_payment_return_line__raw_import_data
 msgid "XML RAW data stored for debugging/check purposes"
 msgstr "XML RAW podatki shranjeni za namene razhroščevanja/kontrole"
 
@@ -240,7 +221,28 @@ msgstr "XML RAW podatki shranjeni za namene razhroščevanja/kontrole"
 msgid "You have already imported this file."
 msgstr "To datoteko ste že uvozili"
 
-#. module: account_payment_return_import
-#: model:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
-msgid "or"
-msgstr "ali"
+#~ msgid "1. Download your Payment Return file from your bank website."
+#~ msgstr ""
+#~ "1. Prenesite datoteko vračila plačila iz spletne strani svoje banke."
+
+#~ msgid ""
+#~ "2. Make sure you have installed the right module to support the file "
+#~ "format."
+#~ msgstr ""
+#~ "2. Prepričajte se, da imate nameščen ustrezen modul za podporo formatu "
+#~ "datoteke."
+
+#~ msgid "3. Select the file and click 'Import'."
+#~ msgstr "3. Izberite datoteko in kliknite 'Uvozi'."
+
+#, fuzzy
+#~ msgid ""
+#~ "<br/><br/><b> How to import your payment return :</b>\n"
+#~ "                <br/>"
+#~ msgstr "Kako uvoziti vračilo plačila:"
+
+#~ msgid "Import Payment Returns"
+#~ msgstr "Uvoz vračil plačil"
+
+#~ msgid "or"
+#~ msgstr "ali"

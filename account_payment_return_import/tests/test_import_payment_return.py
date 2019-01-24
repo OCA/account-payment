@@ -12,10 +12,11 @@ class TestAccountPaymentReturnImport(TransactionCase):
         self.company = self.env.ref('base.main_company')
         self.acc_number = 'NL77ABNA0574908765'
         self.acc_bank = self.env['res.partner.bank'].create({
+            'partner_id': self.company.partner_id.id,
             'state': 'iban',
             'acc_number': self.acc_number,
             'bank_name': 'TEST BANK',
-            'company_id': self.company.partner_id.id,
+            'company_id': self.company.id
         })
         self.journal = self.acc_bank.journal_id
 
