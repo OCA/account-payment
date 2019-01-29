@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2015 Pedro M. Baeza <pedro.baeza@tecnativa.com>
+     Copyright 2015 Sergio Teruel <sergio.teruel@tecnativa.com>
+     Copyright 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl-3). -->
+<odoo>
+
+    <record id="invoice_return_form" model="ir.ui.view">
+        <field name="name">account.invoice.form.return</field>
+        <field name="model">account.invoice</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="account.invoice_form"/>
+        <field name="arch" type="xml">
+            <field name="date_due" position="after">
+                <field name="returned_payment" readonly="True"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_account_invoice_filter_return" model="ir.ui.view">
+        <field name="name">account.invoice.select.return</field>
+        <field name="model">account.invoice</field>
+        <field name="type">search</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+        <field name="arch" type="xml">
+            <filter name="unpaid" position="after">
+                <separator/>
+                <filter name="filter_returned_payment"
+                        string="Returned"
+                        domain="[('returned_payment', '=', True)]"
+                        help="Invoices whose payment has been returned"/>
+            </filter>
+        </field>
+    </record>
+
+</odoo>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2015 Sergio Teruel <sergio.teruel@tecnativa.com>
+     Copyright 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl-3). -->
+<odoo>
+
+    <record id="account_payment_return_comp_rule" model="ir.rule">
+        <field name="name">Payment return mapping company rule</field>
+        <field name="model_id" ref="model_payment_return"/>
+        <field name="global" eval="True"/>
+        <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',[user.company_id.id])]</field>
+    </record>
+
+</odoo>
