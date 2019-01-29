@@ -76,6 +76,7 @@ Authors
 * 7 i TRIA
 * Tecnativa
 * initOS GmbH & Co.
+* 
 
 Contributors
 ~~~~~~~~~~~~
