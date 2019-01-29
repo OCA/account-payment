@@ -42,12 +42,15 @@ class SlimpayPartner(models.Model):
         (only restrictive for France).
 
         """
-        if country_id is not None:
-            country = self.env['res.country'].browse(int(country_id))
-            if country.code == 'FR':
-                if not self.SLIMPAY_FR_ZIP.match(value):
-                    raise SlimpayPartnerFieldError(
-                        'zip', _('Incorrect zip code (should be 5 figures)'))
+        try:
+            country_id = int(country_id)
+        except:
+            return
+        country = self.env['res.country'].browse(int(country_id))
+        if country.code == 'FR':
+            if not self.SLIMPAY_FR_ZIP.match(value):
+                raise SlimpayPartnerFieldError(
+                    'zip', _('Incorrect zip code (should be 5 figures)'))
 
     @api.model
     def slimpay_checks(self, values):
