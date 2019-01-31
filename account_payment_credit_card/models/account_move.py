@@ -9,7 +9,7 @@ class AccountMove(models.Model):
     _inherit = 'account.move'
 
     @api.multi
-    def post(self):
+    def post(self, invoice=False):
         for move in self:
 
             result = []
@@ -43,4 +43,4 @@ class AccountMove(models.Model):
                     for vals in result:
                         self.env['account.move.line'].create(vals)
 
-        return super(AccountMove, self).post()
+        return super(AccountMove, self).post(invoice=invoice)
