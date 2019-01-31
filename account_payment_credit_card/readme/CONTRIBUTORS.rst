@@ -4,3 +4,4 @@
 * Bhavesh Odedra <bodedra@opensourceintegrators.com>
 * Sudarshan Kadalazhi <skadalazhi@opensourceintegrators.com>
 * Odoo Dev Team: DS, JA
+* Nikul Chaudhary <nikulchaudhary2112@gmail.com>
