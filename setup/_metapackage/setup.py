@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo12-addon-account_due_list',
         'odoo12-addon-account_payment_return',
+        'odoo12-addon-account_payment_return_import',
     ],
     classifiers=[
         'Programming Language :: Python',
