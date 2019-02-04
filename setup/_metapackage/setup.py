@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo12-addon-account_due_list',
         'odoo12-addon-account_payment_return',
         'odoo12-addon-account_payment_return_import',
+        'odoo12-addon-account_payment_return_import_sepa_pain',
     ],
     classifiers=[
         'Programming Language :: Python',
