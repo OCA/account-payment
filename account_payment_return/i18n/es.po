@@ -21,11 +21,6 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 
 #. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_message_needaction
-msgid "Action Needed"
-msgstr "Acción necesaria"
-
-#. module: account_payment_return
 #. openerp-web
 #: code:addons/account_payment_return/static/src/xml/account_payment.xml:18
 #, python-format
@@ -33,7 +28,7 @@ msgid "Add"
 msgstr "Añadir"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:233
+#: code:addons/account_payment_return/models/payment_return.py:276
 #, python-format
 msgid "All payments must be owned by the same partner"
 msgstr "Todos los pagos deben pertenecer a la misma empresa"
@@ -105,9 +100,24 @@ msgid "Customer Payment Returns"
 msgstr "Devoluciones de cobros"
 
 #. module: account_payment_return
-#: model:ir.model.fields,help:account_payment_return.field_payment_return_message_last_post
-msgid "Date of the last message posted on the record."
-msgstr "Fecha del último mensaje publicado en el registro."
+#: model:ir.model.fields,field_description:account_payment_return.field_account_journal_default_expense_account_id
+msgid "Default Expense Account"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_journal_default_expense_partner_id
+msgid "Default Expense Partner"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_account_journal_default_expense_account_id
+msgid "Default account for commission expenses"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_account_journal_default_expense_partner_id
+msgid "Default partner for commission expenses"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_display_name
@@ -128,19 +138,19 @@ msgid "Draft"
 msgstr "Borrador"
 
 #. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_message_follower_ids
-msgid "Followers"
-msgstr "Seguidores"
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line_expense_account
+msgid "Expense Account"
+msgstr ""
 
 #. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_message_channel_ids
-msgid "Followers (Channels)"
-msgstr "Seguidores (Canales)"
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line_expense_amount
+msgid "Expense amount"
+msgstr ""
 
 #. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_message_partner_ids
-msgid "Followers (Partners)"
-msgstr "Seguidores (Empresas)"
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line_expense_partner_id
+msgid "Expense partner"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_id
@@ -148,16 +158,6 @@ msgstr "Seguidores (Empresas)"
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason_id
 msgid "ID"
 msgstr "ID"
-
-#. module: account_payment_return
-#: model:ir.model.fields,help:account_payment_return.field_payment_return_message_unread
-msgid "If checked new messages require your attention."
-msgstr "Si esta marcado nuevos mensajes requieren tu atención."
-
-#. module: account_payment_return
-#: model:ir.model.fields,help:account_payment_return.field_payment_return_message_needaction
-msgid "If checked, new messages require your attention."
-msgstr "Si esta marcado nuevos mensajes requieren tu atención."
 
 #. module: account_payment_return
 #: selection:payment.return,state:0
@@ -175,7 +175,7 @@ msgid "Invoice has been included on a payment that has been returned later."
 msgstr "La factura ha sido incluida en un pago que ha sido devuelto más tarde."
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:253
+#: code:addons/account_payment_return/models/payment_return.py:303
 #, python-format
 msgid "Invoice: %s"
 msgstr "Factura: %s"
@@ -186,19 +186,15 @@ msgid "Invoices whose payment has been returned"
 msgstr "Facturas cuyo pago haya sido devuelto"
 
 #. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_message_is_follower
-msgid "Is Follower"
-msgstr "Es un seguidor"
+#: model:ir.model,name:account_payment_return.model_account_journal
+#, fuzzy
+msgid "Journal"
+msgstr "Apunte contable"
 
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_account_move_line
 msgid "Journal Item"
 msgstr "Apunte contable"
-
-#. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_message_last_post
-msgid "Last Message Date"
-msgstr "Fecha del último mensaje"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return___last_update
@@ -222,7 +218,7 @@ msgid "Last Updated on"
 msgstr "Última actualización en"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/account_invoice.py:38
+#: code:addons/account_payment_return/models/account_invoice.py:40
 #, python-format
 msgid "Less Payment"
 msgstr "Menos pagos"
@@ -243,42 +239,27 @@ msgid "Match"
 msgstr "Casar referencias"
 
 #. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_message_ids
-msgid "Messages"
-msgstr "Mensajes"
-
-#. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:287
+#: code:addons/account_payment_return/models/payment_return.py:337
 #, python-format
 msgid "More than one matches to move reference: %s"
 msgstr "Mas de una coincidencia para la referencia: %s"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:274
+#: code:addons/account_payment_return/models/payment_return.py:324
 #, python-format
 msgid "Move lines: %s"
 msgstr "Apuntes: %s"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:293
+#: code:addons/account_payment_return/models/payment_return.py:343
 #, python-format
 msgid "Move: %s"
 msgstr "Asiento: %s"
 
 #. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_message_needaction_counter
-msgid "Number of Actions"
-msgstr "Número de acciones"
-
-#. module: account_payment_return
-#: model:ir.model.fields,help:account_payment_return.field_payment_return_message_needaction_counter
-msgid "Number of messages which requires an action"
-msgstr "Número de mensajes que requieren una acción"
-
-#. module: account_payment_return
-#: model:ir.model.fields,help:account_payment_return.field_payment_return_message_unread_counter
-msgid "Number of unread messages"
-msgstr "Número de mensajes no leidos"
+#: model:ir.model.fields,help:account_payment_return.field_payment_return_line_date
+msgid "Only for reference"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_account_partial_reconcile_origin_returned_move_ids
@@ -301,7 +282,7 @@ msgid "Partner name"
 msgstr "Nombre del cliente"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:64
+#: code:addons/account_payment_return/models/payment_return.py:65
 #, python-format
 msgid "Payment Line: %s (%s) in Payment Return: %s"
 msgstr "Línea de pago: %s (%s) en devolución de pago: %s"
@@ -312,7 +293,7 @@ msgid "Payment Reference"
 msgstr "Referencia de cobro"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:87
+#: code:addons/account_payment_return/models/payment_return.py:88
 #, python-format
 msgid ""
 "Payment reference must be unique!\n"
@@ -346,7 +327,6 @@ msgstr "Devolución de cobro"
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return_line_concept
-#: model:ir.model.fields,help:account_payment_return.field_payment_return_line_date
 #: model:ir.model.fields,help:account_payment_return.field_payment_return_line_partner_name
 msgid "Read from imported file. Only for reference."
 msgstr "Leído del archivo importado. Sólo como referencia."
@@ -410,23 +390,13 @@ msgid "This date will be used as the account entry date."
 msgstr "Esta fecha se utilizará como fecha del asiento contable."
 
 #. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_message_unread
-msgid "Unread Messages"
-msgstr "Mensajes sin leer"
-
-#. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_message_unread_counter
-msgid "Unread Messages Counter"
-msgstr "Mensajes sin leer"
-
-#. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:100
+#: code:addons/account_payment_return/models/payment_return.py:101
 #, python-format
 msgid "You can not remove a payment return if state is 'Done'"
 msgstr "No puede borrar una devolución de pagos en estado 'Realizado'"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:116
+#: code:addons/account_payment_return/models/payment_return.py:132
 #, python-format
 msgid "You must input all moves references in the payment return."
 msgstr "Debes informar todas las referencias de cobro."
@@ -437,6 +407,51 @@ msgstr "Debes informar todas las referencias de cobro."
 #, python-format
 msgid "assign to invoice"
 msgstr "asignar a la factura"
+
+#~ msgid "Action Needed"
+#~ msgstr "Acción necesaria"
+
+#~ msgid "Date of the last message posted on the record."
+#~ msgstr "Fecha del último mensaje publicado en el registro."
+
+#~ msgid "Followers"
+#~ msgstr "Seguidores"
+
+#~ msgid "Followers (Channels)"
+#~ msgstr "Seguidores (Canales)"
+
+#~ msgid "Followers (Partners)"
+#~ msgstr "Seguidores (Empresas)"
+
+#~ msgid "If checked new messages require your attention."
+#~ msgstr "Si esta marcado nuevos mensajes requieren tu atención."
+
+#~ msgid "If checked, new messages require your attention."
+#~ msgstr "Si esta marcado nuevos mensajes requieren tu atención."
+
+#~ msgid "Is Follower"
+#~ msgstr "Es un seguidor"
+
+#~ msgid "Last Message Date"
+#~ msgstr "Fecha del último mensaje"
+
+#~ msgid "Messages"
+#~ msgstr "Mensajes"
+
+#~ msgid "Number of Actions"
+#~ msgstr "Número de acciones"
+
+#~ msgid "Number of messages which requires an action"
+#~ msgstr "Número de mensajes que requieren una acción"
+
+#~ msgid "Number of unread messages"
+#~ msgstr "Número de mensajes no leidos"
+
+#~ msgid "Unread Messages"
+#~ msgstr "Mensajes sin leer"
+
+#~ msgid "Unread Messages Counter"
+#~ msgstr "Mensajes sin leer"
 
 #~ msgid "Reconcile"
 #~ msgstr "Conciliación"

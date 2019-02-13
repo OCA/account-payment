@@ -1,24 +1,17 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * account_payment_return
+#	* account_payment_return
 #
-# Translators:
-# Matjaž Mozetič <m.mozetic@matmoz.si>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: account-payment (8.0)\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-05-07 05:05+0000\n"
-"PO-Revision-Date: 2016-05-07 07:09+0000\n"
-"Last-Translator: Matjaž Mozetič <m.mozetic@matmoz.si>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-"
-"payment-8-0/language/sl/)\n"
-"Language: sl\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
-"%100==4 ? 2 : 3);\n"
+"Plural-Forms: \n"
 
 #. module: account_payment_return
 #. openerp-web
@@ -36,68 +29,68 @@ msgstr ""
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line_amount
 msgid "Amount"
-msgstr "Znesek"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_journal_id
 msgid "Bank journal"
-msgstr "Bančni dnevnik"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
 msgid "Cancel"
-msgstr "Preklic"
+msgstr ""
 
 #. module: account_payment_return
 #: selection:payment.return,state:0
 msgid "Cancelled"
-msgstr "Preklicano"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason_code
 msgid "Code"
-msgstr "Koda"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_company_id
 msgid "Company"
-msgstr "Družba"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line_concept
 msgid "Concept"
-msgstr "Koncept"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
 msgid "Confirm"
-msgstr "Potrdi"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_create_uid
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line_create_uid
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason_create_uid
 msgid "Created by"
-msgstr "Ustvaril"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_create_date
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line_create_date
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason_create_date
 msgid "Created on"
-msgstr "Ustvarjeno"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line_partner_id
 msgid "Customer"
-msgstr "Kupec"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.actions.act_window,name:account_payment_return.payment_return_action
 #: model:ir.ui.menu,name:account_payment_return.payment_return_menu
 #: model:ir.ui.view,arch_db:account_payment_return.payment_return_tree_view
 msgid "Customer Payment Returns"
-msgstr "Vračila plačil kupcem"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_account_journal_default_expense_account_id
@@ -124,18 +117,18 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line_display_name
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason_display_name
 msgid "Display Name"
-msgstr "Prikazni naziv"
+msgstr ""
 
 #. module: account_payment_return
 #: selection:payment.return,state:0
 msgid "Done"
-msgstr "Opravljeno"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
 #: selection:payment.return,state:0
 msgid "Draft"
-msgstr "Osnutek"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line_expense_account
@@ -157,39 +150,38 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line_id
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason_id
 msgid "ID"
-msgstr "ID"
+msgstr ""
 
 #. module: account_payment_return
 #: selection:payment.return,state:0
 msgid "Imported"
-msgstr "Uvoženo"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_account_invoice
 msgid "Invoice"
-msgstr "Račun"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_account_invoice_returned_payment
 msgid "Invoice has been included on a payment that has been returned later."
-msgstr "Račun je bil vključen v plačilo, ki je bilo kasneje vrnjeno."
+msgstr ""
 
 #. module: account_payment_return
 #: code:addons/account_payment_return/models/payment_return.py:303
 #, python-format
 msgid "Invoice: %s"
-msgstr "Račun: %s"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.ui.view,arch_db:account_payment_return.view_account_invoice_filter_return
 msgid "Invoices whose payment has been returned"
-msgstr "Računi, katerih plačila so bila vrnjena"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_account_journal
-#, fuzzy
 msgid "Journal"
-msgstr "Bančni dnevnik"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_account_move_line
@@ -201,21 +193,21 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line___last_update
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason___last_update
 msgid "Last Modified on"
-msgstr "Zadnjič spremenjeno"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line_write_uid
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason_write_uid
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_write_uid
 msgid "Last Updated by"
-msgstr "Zadnji posodobil"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line_write_date
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason_write_date
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_write_date
 msgid "Last Updated on"
-msgstr "Zadnjič posodobljeno"
+msgstr ""
 
 #. module: account_payment_return
 #: code:addons/account_payment_return/models/account_invoice.py:40
@@ -226,17 +218,17 @@ msgstr ""
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line_ids
 msgid "Line ids"
-msgstr "ID-ji postavk"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
 msgid "Lines"
-msgstr "Postavke"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
 msgid "Match"
-msgstr "Ujemanje"
+msgstr ""
 
 #. module: account_payment_return
 #: code:addons/account_payment_return/models/payment_return.py:337
@@ -248,13 +240,13 @@ msgstr ""
 #: code:addons/account_payment_return/models/payment_return.py:324
 #, python-format
 msgid "Move lines: %s"
-msgstr "Postavke premika: %s"
+msgstr ""
 
 #. module: account_payment_return
 #: code:addons/account_payment_return/models/payment_return.py:343
 #, python-format
 msgid "Move: %s"
-msgstr "Premik: %s"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return_line_date
@@ -268,9 +260,8 @@ msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_account_partial_reconcile
-#, fuzzy
 msgid "Partial Reconcile"
-msgstr "Uskladi"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_account_move_line_partial_reconcile_returned_ids
@@ -280,113 +271,112 @@ msgstr ""
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line_partner_name
 msgid "Partner name"
-msgstr "Naziv partnerja"
+msgstr ""
 
 #. module: account_payment_return
 #: code:addons/account_payment_return/models/payment_return.py:65
 #, python-format
 msgid "Payment Line: %s (%s) in Payment Return: %s"
-msgstr "Postavka plačila %s (%s) iz vračila plačila: %s"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line_move_line_ids
 msgid "Payment Reference"
-msgstr "Sklic plačila"
+msgstr ""
 
 #. module: account_payment_return
 #: code:addons/account_payment_return/models/payment_return.py:88
-#, fuzzy, python-format
-msgid ""
-"Payment reference must be unique!\n"
+#, python-format
+msgid "Payment reference must be unique!\n"
 "%s"
-msgstr "Sklic plačila"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line_return_id
 #: model:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
 msgid "Payment return"
-msgstr "Vračilo plačila"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_payment_return_line
 #: model:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
 msgid "Payment return lines"
-msgstr "Postavke vračil plačil"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_payment_return_reason
 msgid "Payment return reason"
-msgstr "Razlog vračila plačila"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_account_invoice_returned_payment
 msgid "Payment returned"
-msgstr "Plačilo povrnjeno"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return_line_concept
 #: model:ir.model.fields,help:account_payment_return.field_payment_return_line_partner_name
 msgid "Read from imported file. Only for reference."
-msgstr "Prebrano iz uvožene datoteke. Le za sklic."
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason_name
 msgid "Reason"
-msgstr "Razlog"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line_reference
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_name
 msgid "Reference"
-msgstr "Sklic"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return_line_reference
 msgid "Reference to match moves from related documents"
-msgstr "Sklic za ujemanje premikov s povezanimi dokumenti"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_move_id
 msgid "Reference to the created journal entry"
-msgstr "Sklic na ustvarjeni dnevniški vnos"
+msgstr ""
 
 #. module: account_payment_return
 #: code:addons/account_payment_return/models/payment_return.py:120
 #, python-format
 msgid "Return %s"
-msgstr "Vračilo %s"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_date
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line_date
 msgid "Return date"
-msgstr "Datum vračila"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line_reason_id
 msgid "Return reason"
-msgstr "Razlog vračila"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.ui.view,arch_db:account_payment_return.view_account_invoice_filter_return
 msgid "Returned"
-msgstr "Vrnjeno"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return_line_amount
 msgid "Returned amount. Can be different from the move amount"
-msgstr "Vrnjeni znesek. Lahko se razlikuje od zneska premika"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_state
 msgid "State"
-msgstr "Stanje"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return_date
 msgid "This date will be used as the account entry date."
-msgstr "Datum, ki bo uporabljen kot datum vknjižbe."
+msgstr ""
 
 #. module: account_payment_return
 #: code:addons/account_payment_return/models/payment_return.py:101
@@ -398,7 +388,7 @@ msgstr ""
 #: code:addons/account_payment_return/models/payment_return.py:132
 #, python-format
 msgid "You must input all moves references in the payment return."
-msgstr "V vračilo plačila morate vnesti vse sklice premikov."
+msgstr ""
 
 #. module: account_payment_return
 #. openerp-web
@@ -407,42 +397,3 @@ msgstr "V vračilo plačila morate vnesti vse sklice premikov."
 msgid "assign to invoice"
 msgstr ""
 
-#~ msgid "Date of the last message posted on the record."
-#~ msgstr "Datum zadnjega objavljenega sporočila na zapisu."
-
-#~ msgid "Followers"
-#~ msgstr "Sledilci"
-
-#~ msgid "Forced period"
-#~ msgstr "Vsiljeno obdobje"
-
-#~ msgid ""
-#~ "Holds the Chatter summary (number of messages, ...). This summary is "
-#~ "directly in html format in order to be inserted in kanban views."
-#~ msgstr ""
-#~ "Vsebuje povzetek komunikacij (število sporočil, ...) neposredno v html "
-#~ "formatu, da se lahko vstavi v kanban prikaze."
-
-#~ msgid "If checked new messages require your attention."
-#~ msgstr "Označeno pomeni, da nova sporočila zahtevajo vašo pozornost."
-
-#~ msgid "Is a Follower"
-#~ msgstr "Je sledilec"
-
-#~ msgid "Last Message Date"
-#~ msgstr "Datum zadnjega sporočila"
-
-#~ msgid "Messages"
-#~ msgstr "Sporočila"
-
-#~ msgid "Messages and communication history"
-#~ msgstr "Sporočila in kronologija komunikacij"
-
-#~ msgid "Reference to the reconcile object."
-#~ msgstr "Sklic za uskladitev objekta."
-
-#~ msgid "Summary"
-#~ msgstr "Povzetek"
-
-#~ msgid "Unread Messages"
-#~ msgstr "Neprebrana sporočila"
