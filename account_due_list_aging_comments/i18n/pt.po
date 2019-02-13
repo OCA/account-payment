@@ -1,0 +1,25 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_due_list_aging_comments
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+
+#. module: account_due_list_aging_comments
+#: model:ir.model.fields,field_description:account_due_list_aging_comments.field_account_move_line_aging_comments
+msgid "Aging comments"
+msgstr ""
+
+#. module: account_due_list_aging_comments
+#: model:ir.model,name:account_due_list_aging_comments.model_account_move_line
+msgid "Journal Item"
+msgstr ""
