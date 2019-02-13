@@ -1,16 +1,13 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# 	* account_cash_discount_payment
+#	* account_cash_discount_payment
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0+e\n"
+"Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-09 07:24+0000\n"
-"PO-Revision-Date: 2018-03-09 07:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
-"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -18,26 +15,24 @@ msgstr ""
 
 #. module: account_cash_discount_payment
 #: model:ir.model.fields,field_description:account_cash_discount_payment.field_account_payment_line_create_cash_discount_date
-#, fuzzy
 msgid "Cash discount date"
-msgstr "Dernière date d'escompte"
+msgstr ""
 
 #. module: account_cash_discount_payment
 #: model:ir.ui.view,arch_db:account_cash_discount_payment.account_payment_line_tree_view
-#, fuzzy
 msgid "Disable discount"
-msgstr "Payer avec l'escompte"
+msgstr ""
 
 #. module: account_cash_discount_payment
 #: code:addons/account_cash_discount_payment/wizards/account_payment_line_create.py:14
 #, python-format
 msgid "Discount Due Date"
-msgstr "Discount Due Date"
+msgstr ""
 
 #. module: account_cash_discount_payment
 #: model:ir.model.fields,field_description:account_cash_discount_payment.field_account_move_line_discount_amount
 msgid "Discount amount"
-msgstr "Montant de l'escompte"
+msgstr ""
 
 #. module: account_cash_discount_payment
 #: model:ir.model.fields,field_description:account_cash_discount_payment.field_account_payment_line_discount_amount
@@ -48,13 +43,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_cash_discount_payment.field_account_move_line_discount_due_date
 #: model:ir.model.fields,field_description:account_cash_discount_payment.field_account_payment_line_discount_due_date
 msgid "Discount due date"
-msgstr "Date d'échéance de l'escompte"
+msgstr ""
 
 #. module: account_cash_discount_payment
 #: model:ir.ui.view,arch_db:account_cash_discount_payment.account_payment_line_tree_view
-#, fuzzy
 msgid "Enable discount"
-msgstr "Payer avec l'escompte"
+msgstr ""
 
 #. module: account_cash_discount_payment
 #: model:ir.model,name:account_cash_discount_payment.model_account_invoice
@@ -64,29 +58,26 @@ msgstr ""
 #. module: account_cash_discount_payment
 #: model:ir.model,name:account_cash_discount_payment.model_account_move_line
 msgid "Journal Item"
-msgstr "Écriture comptable"
+msgstr ""
 
 #. module: account_cash_discount_payment
 #: model:ir.model.fields,field_description:account_cash_discount_payment.field_account_payment_line_pay_with_discount
 msgid "Pay with discount"
-msgstr "Payer avec l'escompte"
+msgstr ""
 
 #. module: account_cash_discount_payment
 #: model:ir.model.fields,field_description:account_cash_discount_payment.field_account_payment_line_pay_with_discount_allowed
-#, fuzzy
 msgid "Pay with discount allowed"
-msgstr "Payer avec l'escompte"
+msgstr ""
 
 #. module: account_cash_discount_payment
 #: model:ir.model,name:account_cash_discount_payment.model_account_payment_line
 msgid "Payment Lines"
-msgstr "Lignes de paiement"
+msgstr ""
 
 #. module: account_cash_discount_payment
 #: model:ir.model.fields,help:account_cash_discount_payment.field_account_payment_line_create_cash_discount_date
-msgid ""
-"Search lines with a discount due date which is posterior to the selected "
-"date."
+msgid "Search lines with a discount due date which is posterior to the selected date."
 msgstr ""
 
 #. module: account_cash_discount_payment
@@ -96,9 +87,8 @@ msgstr ""
 
 #. module: account_cash_discount_payment
 #: model:ir.model.fields,field_description:account_cash_discount_payment.field_account_payment_line_toggle_pay_with_discount_allowed
-#, fuzzy
 msgid "Toggle pay with discount allowed"
-msgstr "Payer avec l'escompte"
+msgstr ""
 
 #. module: account_cash_discount_payment
 #: code:addons/account_cash_discount_payment/models/account_payment_line.py:120
@@ -109,22 +99,18 @@ msgstr ""
 #. module: account_cash_discount_payment
 #: model:ir.model,name:account_cash_discount_payment.model_account_payment_line_create
 msgid "Wizard to create payment lines"
-msgstr "Assistant pour créer des lignes de paiement"
+msgstr ""
 
 #. module: account_cash_discount_payment
 #: code:addons/account_cash_discount_payment/models/account_payment_line.py:131
 #, python-format
-msgid ""
-"You can change the pay with discount value only if there is a linked invoice "
-"with a discount and if the payment order is not done. (Payment Order: %s)"
+msgid "You can change the pay with discount value only if there is a linked invoice with a discount and if the payment order is not done. (Payment Order: %s)"
 msgstr ""
 
 #. module: account_cash_discount_payment
 #: code:addons/account_cash_discount_payment/models/account_payment_line.py:68
 #, python-format
-msgid ""
-"You can't pay with a discount if the payment line is not linked to an "
-"invoice which has a discount."
+msgid "You can't pay with a discount if the payment line is not linked to an invoice which has a discount."
 msgstr ""
 
 #. module: account_cash_discount_payment
@@ -133,8 +119,3 @@ msgstr ""
 msgid "You can't pay with a discount if you don't pay all the invoice at once."
 msgstr ""
 
-#~ msgid "Cash discount date start"
-#~ msgstr "Première date d'escompte"
-
-#~ msgid "Original amount currency"
-#~ msgstr "Montant total de base (sans l'escompte)"
