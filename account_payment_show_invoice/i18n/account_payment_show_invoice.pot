@@ -19,6 +19,16 @@ msgid "Invoices"
 msgstr ""
 
 #. module: account_payment_show_invoice
+#: model:ir.model,name:account_payment_show_invoice.model_account_move_line
+msgid "Journal Item"
+msgstr ""
+
+#. module: account_payment_show_invoice
+#: model:ir.model.fields,field_description:account_payment_show_invoice.field_account_move_line_payment_invoice_ids
+msgid "Payment Invoices"
+msgstr ""
+
+#. module: account_payment_show_invoice
 #: model:ir.model,name:account_payment_show_invoice.model_account_payment
 msgid "Payments"
 msgstr ""
