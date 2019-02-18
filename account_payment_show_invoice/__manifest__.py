@@ -5,7 +5,7 @@
     "name": "Account Payment Show Invoice",
     "summary": "Extends the tree view of payments to show the paid invoices "
                "related to the payments using the vendor reference by default",
-    "version": "10.0.1.0.0",
+    "version": "10.0.1.1.0",
     "category": "Account-payment",
     "website": "https://odoo-community.org/",
     "author": "Eficent, Odoo Community Association (OCA)",
@@ -15,5 +15,6 @@
     "depends": ["account"],
     "data": [
         "views/account_payment_view.xml",
+        "views/account_move_line.xml",
     ],
 }

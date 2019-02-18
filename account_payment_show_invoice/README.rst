@@ -8,6 +8,7 @@ Account Payment Show Invoice
 
 This module extends the tree view of payments to show the paid invoices
 related to the payments using the vendor reference by default.
+It shows invoices on account move lines level too.
 
 .. image:: account_payment_show_invoice/static/description/payments_view.png
    :alt: payment view
@@ -21,6 +22,8 @@ To use this module, you need to:
 #. Go to 'Invoicing > Purchases > Payments' or to 'Invoicing > Sales >
    Payments'
 #. There you can see a new column *Invoices*.
+#. Go to 'Invoicing > Adviser > Journal Items'
+#. There you can see a new column *Payment Invoices*.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
    :alt: Try me on Runbot
@@ -46,6 +49,7 @@ Contributors
 ------------
 
 * Lois Rilo <lois.rilo@eficent.com>
+* Denis Roussel <denis.roussel@acsone.eu>
 
 Maintainer
 ----------
