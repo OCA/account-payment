@@ -150,12 +150,6 @@ msgid "Report name"
 msgstr ""
 
 #. module: account_check_printing_report_base
-#: code:addons/account_check_printing_report_base/report/check_print.py:107
-#, python-format
-msgid "You must define a check layout"
-msgstr ""
-
-#. module: account_check_printing_report_base
 #: model:ir.model,name:account_check_printing_report_base.model_account_payment_check_report
 msgid "account.payment.check.report"
 msgstr ""
