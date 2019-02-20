@@ -189,11 +189,6 @@ class AccountInvoice(models.Model):
 class account_abstract_payment(models.AbstractModel):
     _inherit = "account.abstract.payment"
 
-    @api.one
-    @api.constrains('amount')
-    def _check_amount(self):
-        return True
-
     def _compute_total_invoices_amount(self):
         """ remove only abs() from returned total of original function """
         total = super(account_abstract_payment, self). \
