@@ -162,7 +162,7 @@ class TestAccountInvoiceNegative(TransactionCase):
         register_payments.create_payment()
         payment = self.payment_model.search([], order="id desc", limit=1)
         self.assertAlmostEquals(payment.amount, 100)
-        self.assertAlmostEquals(payment.payment_difference, -100)
+        self.assertAlmostEquals(payment.payment_difference, 0)
         self.assertEqual(payment.state, 'posted')
         self.assertEqual(self.invoice.state, 'paid')
 
@@ -197,7 +197,7 @@ class TestAccountInvoiceNegative(TransactionCase):
         refund_payment = self.payment_model.search(
             [], order="id desc", limit=1)
         self.assertAlmostEquals(refund_payment.amount, 100)
-        self.assertAlmostEquals(refund_payment.payment_difference, 100)
+        self.assertAlmostEquals(refund_payment.payment_difference, 0)
         self.assertEqual(refund_payment.state, 'posted')
         self.assertEqual(invoice_refund.state, 'paid')
 
@@ -216,7 +216,7 @@ class TestAccountInvoiceNegative(TransactionCase):
         register_payments.create_payment()
         payment = self.payment_model.search([], order="id desc", limit=1)
         self.assertAlmostEquals(payment.amount, 100)
-        self.assertAlmostEquals(payment.payment_difference, 100)
+        self.assertAlmostEquals(payment.payment_difference, 0)
         self.assertEqual(payment.state, 'posted')
         self.assertEqual(self.negative_invoice.state, 'paid')
 
@@ -251,7 +251,7 @@ class TestAccountInvoiceNegative(TransactionCase):
         refund_payment = self.payment_model.search(
             [], order="id desc", limit=1)
         self.assertAlmostEquals(refund_payment.amount, 100)
-        self.assertAlmostEquals(refund_payment.payment_difference, -100)
+        self.assertAlmostEquals(refund_payment.payment_difference, 0)
         self.assertEqual(refund_payment.state, 'posted')
         self.assertEqual(invoice_refund.state, 'paid')
 
@@ -269,7 +269,7 @@ class TestAccountInvoiceNegative(TransactionCase):
         register_payments.create_payment()
         payment = self.payment_model.search([], order="id desc", limit=1)
         self.assertAlmostEquals(payment.amount, 100)
-        self.assertAlmostEquals(payment.payment_difference, 100)
+        self.assertAlmostEquals(payment.payment_difference, 0)
         self.assertEqual(payment.state, 'posted')
         self.assertEqual(self.supplier_invoice.state, 'paid')
 
@@ -304,7 +304,7 @@ class TestAccountInvoiceNegative(TransactionCase):
         refund_payment = self.payment_model.search(
             [], order="id desc", limit=1)
         self.assertAlmostEquals(refund_payment.amount, 100)
-        self.assertAlmostEquals(refund_payment.payment_difference, -100)
+        self.assertAlmostEquals(refund_payment.payment_difference, 0)
         self.assertEqual(refund_payment.state, 'posted')
         self.assertEqual(invoice_refund.state, 'paid')
 
@@ -323,7 +323,7 @@ class TestAccountInvoiceNegative(TransactionCase):
         register_payments.create_payment()
         payment = self.payment_model.search([], order="id desc", limit=1)
         self.assertAlmostEquals(payment.amount, 100)
-        self.assertAlmostEquals(payment.payment_difference, -100)
+        self.assertAlmostEquals(payment.payment_difference, 0)
         self.assertEqual(payment.state, 'posted')
         self.assertEqual(self.supplier_negative_invoice.state, 'paid')
 
@@ -358,6 +358,6 @@ class TestAccountInvoiceNegative(TransactionCase):
         refund_payment = self.payment_model.search(
             [], order="id desc", limit=1)
         self.assertAlmostEquals(refund_payment.amount, 100)
-        self.assertAlmostEquals(refund_payment.payment_difference, 100)
+        self.assertAlmostEquals(refund_payment.payment_difference, 0)
         self.assertEqual(refund_payment.state, 'posted')
         self.assertEqual(invoice_refund.state, 'paid')

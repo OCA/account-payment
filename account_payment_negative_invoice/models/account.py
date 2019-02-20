@@ -226,10 +226,10 @@ class account_payment(models.Model):
     def _get_payment_values(
             self, invoice_amount, payment_amount, invoice_type, payment_type):
         invoice_amount_unsigned = abs(invoice_amount)
-        amount = invoice_amount * (
+        original_amount_signed = invoice_amount * (
             -1 if invoice_type in ['in_invoice', 'out_refund'] else 1)
         sign = 1
-        if amount < 0:
+        if original_amount_signed < 0:
             if invoice_type in ['out_invoice', 'in_refund']:
                 if payment_type == 'inbound':
                     payment_difference = invoice_amount_unsigned - payment_amount
@@ -273,9 +273,9 @@ class account_payment(models.Model):
             'invoice_ids', rec.get('invoice_ids'))
         if invoice_defaults and len(invoice_defaults) == 1:
             invoice = invoice_defaults[0]
-            residual_signed = invoice['residual_signed'] * (
+            original_residual_signed = invoice['residual_signed'] * (
                 -1 if invoice['type'] in ['in_invoice', 'out_refund'] else 1)
-            if residual_signed < 0:
+            if original_residual_signed < 0:
                 payment_type = invoice['type'] in ['out_invoice', 'in_refund']\
                     and 'outbound' or 'inbound'
             else:
