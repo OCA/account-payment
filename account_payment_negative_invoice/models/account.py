@@ -302,23 +302,23 @@ class account_register_payments(models.TransientModel):
         active_model = context.get('active_model')
         active_ids = context.get('active_ids')
         invoices = self.env[active_model].browse(active_ids)
-        total_amount_signed = sum(inv.residual_signed for inv in invoices)
-        invoices_type = set(invoices.mapped('type'))
-        if total_amount_signed < 0:
+        # get total amount original signed
+        total_original_amount_signed = sum(inv.residual_signed * (
+            -1 if inv.type in ['in_invoice', 'out_refund'] else 1
+        ) for inv in invoices)
+        if total_original_amount_signed < 0:
+            payment_type = [
+                inv.type in ['out_invoice', 'in_refund']
+                and 'outbound' or 'inbound' for inv in invoices]
+        else:
+            payment_type = [
+                inv.type in ['out_invoice', 'in_refund']
+                and 'inbound' or 'outbound' for inv in invoices]
+        if len(set(payment_type)) == 1:
             rec.update({
-                'payment_type': 'inbound',
+                'payment_type': payment_type[0],
             })
         else:
-            # if amount is > 0 and there is a mix of in_invoice or out_refund
-            # with out_invoice or in_refund, forbid creation of negative
-            # payments
-            if invoices_type and [
-                x not in ['out_refund', 'in_invoice'] for x in invoices_type
-            ] and len(set(invoices.mapped('type'))) > 1:
-                raise UserError(_('With negative invoice payment do not mix '
-                                  'invoice and refunds.'))
-            else:
-                rec.update({
-                    'payment_type': 'inbound',
-                })
+            raise UserError(_('With negative invoice payment do not mix '
+                              'invoice and refunds.'))
         return rec
