@@ -196,7 +196,7 @@ class TestAccountInvoiceNegative(TransactionCase):
         refund_register_payments.create_payment()
         refund_payment = self.payment_model.search(
             [], order="id desc", limit=1)
-        self.assertAlmostEquals(refund_payment.amount, -100)
+        self.assertAlmostEquals(refund_payment.amount, 100)
         self.assertAlmostEquals(refund_payment.payment_difference, 100)
         self.assertEqual(refund_payment.state, 'posted')
         self.assertEqual(invoice_refund.state, 'paid')
@@ -215,7 +215,7 @@ class TestAccountInvoiceNegative(TransactionCase):
             })
         register_payments.create_payment()
         payment = self.payment_model.search([], order="id desc", limit=1)
-        self.assertAlmostEquals(payment.amount, -100)
+        self.assertAlmostEquals(payment.amount, 100)
         self.assertAlmostEquals(payment.payment_difference, 100)
         self.assertEqual(payment.state, 'posted')
         self.assertEqual(self.negative_invoice.state, 'paid')
@@ -262,13 +262,13 @@ class TestAccountInvoiceNegative(TransactionCase):
                'active_ids': [self.supplier_invoice.id]}
         register_payments = \
             self.register_payments_model.with_context(ctx).create({
-                'payment_date': fields.Date.to_string(date.today()),
+                'payment_date': fields.Date.today(),
                 'journal_id': self.bank_journal.id,
                 'payment_method_id': self.payment_method_check.id
             })
         register_payments.create_payment()
         payment = self.payment_model.search([], order="id desc", limit=1)
-        self.assertAlmostEquals(payment.amount, -100)
+        self.assertAlmostEquals(payment.amount, 100)
         self.assertAlmostEquals(payment.payment_difference, 100)
         self.assertEqual(payment.state, 'posted')
         self.assertEqual(self.supplier_invoice.state, 'paid')
@@ -278,7 +278,7 @@ class TestAccountInvoiceNegative(TransactionCase):
         invoice_refund_obj = self.env['account.invoice.refund']
         account_invoice_refund = invoice_refund_obj.create(dict(
             description='Refund invoice',
-            date=fields.Date.to_string(date.today()),
+            date=fields.Date.today(),
             filter_refund='refund'
         ))
 
@@ -357,7 +357,7 @@ class TestAccountInvoiceNegative(TransactionCase):
         refund_register_payments.create_payment()
         refund_payment = self.payment_model.search(
             [], order="id desc", limit=1)
-        self.assertAlmostEquals(refund_payment.amount, -100)
+        self.assertAlmostEquals(refund_payment.amount, 100)
         self.assertAlmostEquals(refund_payment.payment_difference, 100)
         self.assertEqual(refund_payment.state, 'posted')
         self.assertEqual(invoice_refund.state, 'paid')

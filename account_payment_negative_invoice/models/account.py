@@ -2,9 +2,9 @@
 
 import json
 
-from odoo import models, api, _
+from odoo import models, api, _, fields
 from odoo.tools import float_is_zero
-from odoo.exceptions import UserError
+from odoo.exceptions import UserError, ValidationError
 
 
 class AccountInvoice(models.Model):
@@ -220,34 +220,51 @@ class account_abstract_payment(models.AbstractModel):
 class account_payment(models.Model):
     _inherit = "account.payment"
 
+    payment_sign = fields.Integer('Payment sign',
+                                  compute='_compute_payment_difference')
+
+    def _get_payment_values(
+            self, invoice_amount, payment_amount, invoice_type, payment_type):
+        invoice_amount_unsigned = abs(invoice_amount)
+        amount = invoice_amount * (
+            -1 if invoice_type in ['in_invoice', 'out_refund'] else 1)
+        sign = 1
+        if amount < 0:
+            if invoice_type in ['out_invoice', 'in_refund']:
+                if payment_type == 'inbound':
+                    payment_difference = invoice_amount_unsigned - payment_amount
+                    sign = -1
+                else:
+                    payment_difference = payment_amount - invoice_amount_unsigned
+            else:
+                if payment_type == 'inbound':
+                    payment_difference = payment_amount - invoice_amount_unsigned
+                    sign = -1
+                else:
+                    payment_difference = invoice_amount_unsigned - payment_amount
+        else:
+            if invoice_type in ['in_invoice', 'out_refund']:
+                if payment_type == 'outbound':
+                    payment_difference = payment_amount - invoice_amount_unsigned
+                else:
+                    payment_difference = invoice_amount_unsigned - payment_amount
+                    sign = -1
+            else:
+                if payment_type == 'outbound':
+                    payment_difference = payment_amount - invoice_amount_unsigned
+                else:
+                    payment_difference = invoice_amount_unsigned - payment_amount
+                    sign = -1
+        return payment_difference, sign
+
     @api.one
     @api.depends('invoice_ids', 'amount', 'payment_date', 'currency_id')
     def _compute_payment_difference(self):
         super(account_payment, self)._compute_payment_difference()
-        # it is a payment if amount < 0 and payment type is inbound
         amount = self._compute_total_invoices_amount()
-        if amount < 0:
-            if self.invoice_ids[0].type in ['out_invoice', 'in_refund']:
-                if self.payment_type == 'inbound':
-                    self.payment_difference = amount - self.amount
-                else:
-                    self.payment_difference = self.amount - amount
-            else:
-                if self.payment_type == 'inbound':
-                    self.payment_difference = self.amount - amount
-                else:
-                    self.payment_difference = amount - self.amount
-        else:
-            if self.invoice_ids[0].type in ['in_invoice', 'out_refund']:
-                if self.payment_type == 'outbound':
-                    self.payment_difference = self.amount - amount
-                else:
-                    self.payment_difference = amount - self.amount
-            else:
-                if self.payment_type == 'outbound':
-                    self.payment_difference = self.amount - amount
-                else:
-                    self.payment_difference = amount - self.amount
+        self.payment_difference, self.payment_sign = self._get_payment_values(
+            amount, self.amount, self.invoice_ids[0].type, self.payment_type
+        )
 
     @api.model
     def default_get(self, fields):
@@ -256,17 +273,23 @@ class account_payment(models.Model):
             'invoice_ids', rec.get('invoice_ids'))
         if invoice_defaults and len(invoice_defaults) == 1:
             invoice = invoice_defaults[0]
-            payment_type = rec['payment_type']
-            if invoice['residual_signed'] < 0:
-                payment_type = 'inbound'
+            residual_signed = invoice['residual_signed'] * (
+                -1 if invoice['type'] in ['in_invoice', 'out_refund'] else 1)
+            if residual_signed < 0:
+                payment_type = invoice['type'] in ['out_invoice', 'in_refund']\
+                    and 'outbound' or 'inbound'
             else:
-                if invoice['type'] in ['out_refund', 'in_invoice']:
-                    payment_type = 'inbound'
+                payment_type = invoice['type'] in ['out_invoice', 'in_refund']\
+                    and 'inbound' or 'outbound'
             rec.update({
-                'amount': invoice['residual_signed'],
                 'payment_type': payment_type,
             })
         return rec
+
+    def _create_payment_entry(self, amount):
+        amount = abs(amount) * self.payment_sign
+        res = super(account_payment, self)._create_payment_entry(amount)
+        return res
 
 
 class account_register_payments(models.TransientModel):
@@ -280,7 +303,6 @@ class account_register_payments(models.TransientModel):
         active_ids = context.get('active_ids')
         invoices = self.env[active_model].browse(active_ids)
         total_amount_signed = sum(inv.residual_signed for inv in invoices)
-        total_amount = sum(inv.residual_signed for inv in invoices)
         invoices_type = set(invoices.mapped('type'))
         if total_amount_signed < 0:
             rec.update({
@@ -299,7 +321,4 @@ class account_register_payments(models.TransientModel):
                 rec.update({
                     'payment_type': 'inbound',
                 })
-        rec.update({
-            'amount': total_amount,
-        })
         return rec
