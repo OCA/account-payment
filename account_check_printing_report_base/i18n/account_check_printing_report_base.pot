@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-16 14:13+0000\n"
-"PO-Revision-Date: 2018-09-16 14:13+0000\n"
+"POT-Creation-Date: 2019-02-23 04:21+0000\n"
+"PO-Revision-Date: 2019-02-23 04:21+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -17,6 +17,7 @@ msgstr ""
 
 #. module: account_check_printing_report_base
 #: model:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
+#: model:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_journal
 msgid "<b>Check Amount:</b>"
 msgstr ""
 
@@ -27,35 +28,14 @@ msgstr ""
 
 #. module: account_check_printing_report_base
 #: model:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
+#: model:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_journal
 msgid "Balance Due"
-msgstr ""
-
-#. module: account_check_printing_report_base
-#: selection:res.config.settings,check_layout_verification:0
-msgid "Both"
-msgstr ""
-
-#. module: account_check_printing_report_base
-#: selection:res.config.settings,check_layout_verification:0
-msgid "By Company"
-msgstr ""
-
-#. module: account_check_printing_report_base
-#: selection:res.config.settings,check_layout_verification:0
-msgid "By Journal"
 msgstr ""
 
 #. module: account_check_printing_report_base
 #: model:ir.ui.view,arch_db:account_check_printing_report_base.account_payment_check_report_form
 #: model:ir.ui.view,arch_db:account_check_printing_report_base.account_payment_check_report_tree
-#: model:ir.ui.view,arch_db:account_check_printing_report_base.res_config_settings_view_form
 msgid "Check Layout"
-msgstr ""
-
-#. module: account_check_printing_report_base
-#: model:ir.model.fields,field_description:account_check_printing_report_base.field_res_config_settings_check_layout_verification
-#: model:ir.ui.view,arch_db:account_check_printing_report_base.res_config_settings_view_form
-msgid "Check Layout Verification"
 msgstr ""
 
 #. module: account_check_printing_report_base
@@ -97,6 +77,7 @@ msgstr ""
 
 #. module: account_check_printing_report_base
 #: model:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
+#: model:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_journal
 msgid "Description"
 msgstr ""
 
@@ -110,6 +91,12 @@ msgstr ""
 #: model:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
 msgid "Due\n"
 "                                                Date"
+msgstr ""
+
+#. module: account_check_printing_report_base
+#: model:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_journal
+msgid "Due\n"
+"                                                Date JOURNAL"
 msgstr ""
 
 #. module: account_check_printing_report_base
@@ -146,17 +133,24 @@ msgstr ""
 
 #. module: account_check_printing_report_base
 #: model:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
+#: model:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_journal
 msgid "Original Amount"
 msgstr ""
 
 #. module: account_check_printing_report_base
 #: model:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
+#: model:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_journal
 msgid "Payment"
 msgstr ""
 
 #. module: account_check_printing_report_base
 #: model:ir.actions.report,name:account_check_printing_report_base.action_report_check_base
 msgid "Payment Check Base"
+msgstr ""
+
+#. module: account_check_printing_report_base
+#: model:ir.actions.report,name:account_check_printing_report_base.action_report_check_base_journal
+msgid "Payment Check Base Journal"
 msgstr ""
 
 #. module: account_check_printing_report_base
