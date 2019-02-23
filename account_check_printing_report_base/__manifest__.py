@@ -2,6 +2,7 @@
 # (http://www.eficent.com)
 # Copyright 2016 Serpent Consulting Services Pvt. Ltd.
 # Copyright 2017 Tecnativa.
+# Copyright 2018 iterativo.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 {
@@ -11,6 +12,7 @@
     "author": "Eficent,"
               "Serpent Consulting Services Pvt. Ltd.,"
               "Ursa Information Systems,"
+              "iterativo SRL,"
               "Odoo Community Association (OCA)",
     "category": "Generic Modules/Accounting",
     "website": "https://github.com/OCA/account-payment",
@@ -25,7 +27,6 @@
         "views/res_company_view.xml",
         "views/account_payment_check_report_view.xml",
         "report/account_check_writing_report.xml",
-        "views/res_config_settings_views.xml",
     ],
     "installable": True,
 }
