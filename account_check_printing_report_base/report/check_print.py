@@ -1,6 +1,7 @@
 # Copyright 2016 Eficent Business and IT Consulting Services S.L.
 # (http://www.eficent.com)
 # Copyright 2016 Serpent Consulting Services Pvt. Ltd.
+# Copyright 2018 iterativo.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 import time
@@ -103,25 +104,11 @@ class ReportCheckPrint(models.AbstractModel):
             'paid_lines': paid_lines
         }
 
-        ICPSudo = self.env['ir.config_parameter'].sudo()
-        check_layout_verification = ICPSudo.get_param(
-            'account_check_printing_report_base.check_layout_verification')
-
-        if not check_layout_verification or \
-           check_layout_verification == 'by_company':
-            if self.env.user.company_id.check_layout_id:
-                return docargs
-        elif check_layout_verification == 'by_journal':
-            if all([
-                    p.journal_id.check_layout_id
-                    for p in payments]):
-                return docargs
-        else:
-            if all([
-                    p.journal_id.check_layout_id
-                    for p in payments]):
-                return docargs
-            elif self.env.user.company_id.check_layout_id:
-                return docargs
+        if all([
+                p.journal_id.check_layout_id
+                for p in payments]):
+            return docargs
+        elif self.env.user.company_id.check_layout_id:
+            return docargs
 
         raise exceptions.Warning(_('You must define a check layout'))
