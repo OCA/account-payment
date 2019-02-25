@@ -6,7 +6,7 @@
 {
     'name': 'Account Payment Return Import SEPA Pain',
     'category': 'Accounting',
-    'version': '12.0.1.0.0',
+    'version': '12.0.1.0.1',
     'summary': 'Module to import SEPA Direct Debit Unpaid Report File Format '
                'PAIN.002.001.03',
     'license': 'AGPL-3',
@@ -19,7 +19,7 @@
         'account_payment_order',
     ],
     'data': [
-        'data/unpaid_reason_codes.xml'
+        'data/payment.return.reason.csv'
     ],
     'installable': True,
 }
