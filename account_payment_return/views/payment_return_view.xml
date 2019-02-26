@@ -32,6 +32,7 @@
                                     <field name="date" />
                                     <field name="concept" />
                                     <field name="reason_id" />
+                                    <field name="reason_additional_information"/>
                                     <field name="partner_name" invisible="1"/>
                                     <field name="partner_id" />
                                     <field name="reference" />
