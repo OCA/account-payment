@@ -235,6 +235,10 @@ class PaymentReturnLine(models.Model):
         oldname="reason",
         string='Return reason',
     )
+    reason_additional_information = fields.Char(
+        string="Return reason (info)",
+        help="Additional information on return reason.",
+    )
     reference = fields.Char(
         string='Reference',
         help="Reference to match moves from related documents")
