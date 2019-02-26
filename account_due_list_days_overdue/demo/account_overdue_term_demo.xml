@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright 2016 Eficent Business and IT Consulting Services S.L.
+(<http://www.eficent.com>).
+Copyright 2016 Therp BV (<http://therp.nl>).
+# License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
+-->
+
+<odoo>
+
+    <record id="overdue_term_1" model="account.overdue.term">
+        <field name="name">1-30</field>
+        <field name="from_day">1</field>
+        <field name="to_day">30</field>
+    </record>
+
+    <record id="overdue_term_2" model="account.overdue.term">
+        <field name="name">31-60</field>
+        <field name="from_day">31</field>
+        <field name="to_day">60</field>
+    </record>
+
+    <record id="overdue_term_3" model="account.overdue.term">
+        <field name="name">61-90</field>
+        <field name="from_day">61</field>
+        <field name="to_day">90</field>
+    </record>
+
+    <record id="overdue_term_4" model="account.overdue.term">
+        <field name="name">+91</field>
+        <field name="from_day">91</field>
+        <field name="to_day">9999999</field>
+    </record>
+
+</odoo>

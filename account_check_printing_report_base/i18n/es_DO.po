@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-23 04:29+0000\n"
-"PO-Revision-Date: 2019-02-23 04:29+0000\n"
+"POT-Creation-Date: 2019-02-26 15:00+0000\n"
+"PO-Revision-Date: 2019-02-26 15:00+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -152,12 +152,6 @@ msgstr "Registrar pagos en múltiples facturas"
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_payment_check_report_report
 msgid "Report name"
 msgstr "Nombre del reporte"
-
-#. module: account_check_printing_report_base
-#: code:addons/account_check_printing_report_base/report/check_print.py:114
-#, python-format
-msgid "You must define a check layout"
-msgstr "You must define a check layout"
 
 #. module: account_check_printing_report_base
 #: model:ir.model,name:account_check_printing_report_base.model_account_payment_check_report
