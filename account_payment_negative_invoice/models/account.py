@@ -4,7 +4,7 @@ import json
 
 from odoo import models, api, _, fields
 from odoo.tools import float_is_zero
-from odoo.exceptions import UserError, ValidationError
+from odoo.exceptions import UserError
 
 
 class AccountInvoice(models.Model):
@@ -220,35 +220,35 @@ class account_payment(models.Model):
 
     def _get_payment_values(
             self, invoice_amount, payment_amount, invoice_type, payment_type):
-        invoice_amount_unsigned = abs(invoice_amount)
+        amount_unsigned = abs(invoice_amount)
         original_amount_signed = invoice_amount * (
             -1 if invoice_type in ['in_invoice', 'out_refund'] else 1)
         sign = 1
         if original_amount_signed < 0:
             if invoice_type in ['out_invoice', 'in_refund']:
                 if payment_type == 'inbound':
-                    payment_difference = invoice_amount_unsigned - payment_amount
+                    payment_difference = amount_unsigned - payment_amount
                     sign = -1
                 else:
-                    payment_difference = payment_amount - invoice_amount_unsigned
+                    payment_difference = payment_amount - amount_unsigned
             else:
                 if payment_type == 'inbound':
-                    payment_difference = payment_amount - invoice_amount_unsigned
+                    payment_difference = payment_amount - amount_unsigned
                     sign = -1
                 else:
-                    payment_difference = invoice_amount_unsigned - payment_amount
+                    payment_difference = amount_unsigned - payment_amount
         else:
             if invoice_type in ['in_invoice', 'out_refund']:
                 if payment_type == 'outbound':
-                    payment_difference = payment_amount - invoice_amount_unsigned
+                    payment_difference = payment_amount - amount_unsigned
                 else:
-                    payment_difference = invoice_amount_unsigned - payment_amount
+                    payment_difference = amount_unsigned - payment_amount
                     sign = -1
             else:
                 if payment_type == 'outbound':
-                    payment_difference = payment_amount - invoice_amount_unsigned
+                    payment_difference = payment_amount - amount_unsigned
                 else:
-                    payment_difference = invoice_amount_unsigned - payment_amount
+                    payment_difference = amount_unsigned - payment_amount
                     sign = -1
         return payment_difference, sign
 
