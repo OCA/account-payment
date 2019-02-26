@@ -20,3 +20,8 @@ class PaymentReturnReason(models.Model):
         if not recs:
             recs = self.search([('name', operator, name)] + args, limit=limit)
         return recs.name_get()
+
+    @api.multi
+    def name_get(self):
+        return [(r.id, "[{code}] {name}".format(code=r.code, name=r.name))
+                for r in self]
