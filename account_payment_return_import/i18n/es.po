@@ -120,11 +120,11 @@ msgstr "Oculta el campo diario en la vista"
 #. module: account_payment_return_import
 #: model_terms:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
 msgid ""
-"How to import your payment return :\n"
+"How to import your payment return :<br/>\n"
 "                    1. Download your Payment Return file from your bank "
-"website.\n"
+"website.<br/>\n"
 "                    2. Make sure you have installed the right module to "
-"support the file format.\n"
+"support the file format.<br/>\n"
 "                    3. Select the file and click 'Import'."
 msgstr ""
 
