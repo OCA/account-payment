@@ -21,7 +21,8 @@ class TestPaymentReturnFile(TransactionCase):
     """
 
     def _test_transaction(
-            self, return_obj, reference=False, returned_amount=False):
+            self, return_obj, reference=False, returned_amount=False,
+            reason_add_info=False):
         """Check whether transaction with attributes passed was created.
 
         Actually this method also tests whether automatic creation of
@@ -33,6 +34,9 @@ class TestPaymentReturnFile(TransactionCase):
             domain.append(('amount', '=', returned_amount))
         if reference:
             domain.append(('reference', '=', reference))
+        if reason_add_info:
+            domain.append(
+                ('reason_additional_information', '=', reason_add_info))
         ids = transaction_model.search(domain)
         if not ids:
             # We will get assertion error, but to solve we need to see
