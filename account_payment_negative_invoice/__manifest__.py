@@ -17,6 +17,4 @@
     "depends": [
         "account",
     ],
-    "data": [
-    ],
 }
