@@ -62,6 +62,7 @@ Unique End to End identifier for the transaction as assigned by the originator i
 <Rsn>
  <Cd>AC01</Cd>
  </Rsn>
+<AddtlInf>ACC NUMBER INVALID</AddtlInf>
  </StsRsnInf>
  <OrgnlTxRef>
  <Amt><InstdAmt Ccy="EUR">100</InstdAmt></Amt>

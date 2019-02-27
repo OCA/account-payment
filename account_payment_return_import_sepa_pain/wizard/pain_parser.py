@@ -66,6 +66,10 @@ class PainParser(object):
             ns, node, './ns:StsRsnInf/ns:Rsn/ns:Cd', transaction,
             'reason_code'
         )
+        self.add_value_from_node(
+            ns, node, './ns:StsRsnInf/ns:AddtlInf', transaction,
+            'reason_additional_information'
+        )
         details_node = node.xpath(
             './ns:OrgnlTxRef', namespaces={'ns': ns})
         if details_node:

@@ -34,6 +34,7 @@ class TestImport(TestPaymentReturnFile):
             {
                 'returned_amount': 100.00,
                 'reference': 'E2EID1',
+                'reason_add_info': 'ACC NUMBER INVALID',
             },
         ]
         self._test_return_import(
