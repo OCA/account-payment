@@ -31,7 +31,12 @@ msgid "Add"
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:275
+#: model:ir.model.fields,help:account_payment_return.field_payment_return_line__reason_additional_information
+msgid "Additional information on return reason."
+msgstr ""
+
+#. module: account_payment_return
+#: code:addons/account_payment_return/models/payment_return.py:258
 #, python-format
 msgid "All payments must be owned by the same partner"
 msgstr ""
@@ -214,7 +219,7 @@ msgid "Invoice has been included on a payment that has been returned later."
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:302
+#: code:addons/account_payment_return/models/payment_return.py:285
 #, python-format
 msgid "Invoice: %s"
 msgstr ""
@@ -297,19 +302,19 @@ msgid "Messages"
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:336
+#: code:addons/account_payment_return/models/payment_return.py:319
 #, python-format
 msgid "More than one matches to move reference: %s"
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:323
+#: code:addons/account_payment_return/models/payment_return.py:306
 #, python-format
 msgid "Move lines: %s"
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:342
+#: code:addons/account_payment_return/models/payment_return.py:325
 #, python-format
 msgid "Move: %s"
 msgstr ""
@@ -435,6 +440,7 @@ msgstr ""
 
 #. module: account_payment_return
 #: code:addons/account_payment_return/models/payment_return.py:119
+#: code:addons/account_payment_return/models/payment_return.py:348
 #, python-format
 msgid "Return %s"
 msgstr ""
@@ -448,6 +454,11 @@ msgstr ""
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__reason_id
 msgid "Return reason"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__reason_additional_information
+msgid "Return reason (info)"
 msgstr ""
 
 #. module: account_payment_return
@@ -497,7 +508,7 @@ msgid "You can not remove a payment return if state is 'Done'"
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:131
+#: code:addons/account_payment_return/models/payment_return.py:143
 #, python-format
 msgid "You must input all moves references in the payment return."
 msgstr ""
