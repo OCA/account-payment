@@ -24,7 +24,7 @@
                     <label for="epd_discount" />
                     <div>
                         <field name="epd_discount" class="oe_inline" attrs="{'required':[('early_payment_discount', '=', True)]}"/>
-                        <label string="%" class="oe_inline"/>
+                        <label for="" string="%" class="oe_inline"/>
                     </div>
 
                     <field name="company_currency" invisible="1" />
