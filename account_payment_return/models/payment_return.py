@@ -123,6 +123,18 @@ class PaymentReturn(models.Model):
         }
 
     @api.multi
+    def _prepare_move_line(self, move, total_amount):
+        self.ensure_one()
+        return {
+            'name': move.ref,
+            'debit': 0.0,
+            'credit': total_amount,
+            'account_id': self.journal_id.default_credit_account_id.id,
+            'move_id': move.id,
+            'journal_id': move.journal_id.id,
+        }
+
+    @api.multi
     def action_confirm(self):
         self.ensure_one()
         # Check for incomplete lines
@@ -131,24 +143,15 @@ class PaymentReturn(models.Model):
                 _("You must input all moves references in the payment "
                   "return."))
         invoices = self.env['account.invoice']
-        move_line_obj = self.env['account.move.line']
+        move_line_model = self.env['account.move.line']
         move = self.env['account.move'].create(
-            self._prepare_return_move_vals()
-        )
+            self._prepare_return_move_vals())
         total_amount = 0.0
         for return_line in self.line_ids:
-            move_amount = self._get_move_amount(return_line)
-            move_line2 = self.env['account.move.line'].with_context(
-                check_move_validity=False).create({
-                    'name': move.ref,
-                    'debit': move_amount,
-                    'credit': 0.0,
-                    'account_id': return_line.move_line_ids[0].account_id.id,
-                    'move_id': move.id,
-                    'partner_id': return_line.partner_id.id,
-                    'journal_id': move.journal_id.id,
-                })
-            total_amount += move_amount
+            move_line2_vals = return_line._prepare_return_move_line_vals(move)
+            move_line2 = move_line_model.with_context(
+                check_move_validity=False).create(move_line2_vals)
+            total_amount += move_line2.debit
             for move_line in return_line.move_line_ids:
                 returned_moves = move_line.matched_debit_ids.mapped(
                     'debit_move_id')
@@ -158,38 +161,14 @@ class PaymentReturn(models.Model):
                 return_line.move_line_ids.mapped('matched_debit_ids').write(
                     {'origin_returned_move_ids': [(6, 0, returned_moves.ids)]})
             if return_line.expense_amount:
-                expense_lines_vals = []
-                expense_lines_vals.append({
-                    'name': move.ref,
-                    'move_id': move.id,
-                    'debit': 0.0,
-                    'credit': return_line.expense_amount,
-                    'partner_id': return_line.expense_partner_id.id,
-                    'account_id': (return_line.return_id.journal_id.
-                                   default_credit_account_id.id),
-                })
-                expense_lines_vals.append({
-                    'move_id': move.id,
-                    'debit': return_line.expense_amount,
-                    'name': move.ref,
-                    'credit': 0.0,
-                    'partner_id': return_line.expense_partner_id.id,
-                    'account_id': return_line.expense_account.id,
-                })
-                for expense_line_vals in expense_lines_vals:
-                    move_line_obj.with_context(
-                        check_move_validity=False).create(expense_line_vals)
+                expense_lines_vals = return_line._prepare_expense_lines_vals(
+                    move)
+                move_line_model.with_context(check_move_validity=False).create(
+                    expense_lines_vals)
             extra_lines_vals = return_line._prepare_extra_move_lines(move)
-            for extra_line_vals in extra_lines_vals:
-                move_line_obj.create(extra_line_vals)
-        move_line_obj.create({
-            'name': move.ref,
-            'debit': 0.0,
-            'credit': total_amount,
-            'account_id': self.journal_id.default_credit_account_id.id,
-            'move_id': move.id,
-            'journal_id': move.journal_id.id,
-        })
+            move_line_model.create(extra_lines_vals)
+        move_line_vals = self._prepare_move_line(move, total_amount)
+        move_line_model.create(move_line_vals)
         # Write directly because we returned payments just now
         invoices.write(self._prepare_invoice_returned_vals())
         move.post()
@@ -361,6 +340,42 @@ class PaymentReturnLine(models.Model):
         lines2match.match_move()
         self._get_partner_from_move()
         self.filtered(lambda x: not x.amount)._compute_amount()
+
+    @api.multi
+    def _prepare_return_move_line_vals(self, move):
+        self.ensure_one()
+        return {
+            'name': _('Return %s') % self.return_id.name,
+            'debit': self.return_id._get_move_amount(self),
+            'credit': 0.0,
+            'account_id': self.move_line_ids[0].account_id.id,
+            'partner_id': self.partner_id.id,
+            'journal_id': self.return_id.journal_id.id,
+            'move_id': move.id,
+        }
+
+    @api.multi
+    def _prepare_expense_lines_vals(self, move):
+        self.ensure_one()
+        return [
+            {
+                'name': move.ref,
+                'move_id': move.id,
+                'debit': 0.0,
+                'credit': self.expense_amount,
+                'partner_id': self.expense_partner_id.id,
+                'account_id': self.return_id.journal_id.
+                default_credit_account_id.id,
+            },
+            {
+                'move_id': move.id,
+                'debit': self.expense_amount,
+                'name': move.ref,
+                'credit': 0.0,
+                'partner_id': self.expense_partner_id.id,
+                'account_id': self.expense_account.id,
+            }
+        ]
 
     @api.multi
     def _prepare_extra_move_lines(self, move):
