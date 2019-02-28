@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
 
 from odoo import fields
-from odoo.tests.common import TransactionCase
+from odoo.addons.account.tests.account_test_classes import AccountingTestCase
 from datetime import date
 
 
-class TestAccountInvoiceNegative(TransactionCase):
+class TestAccountInvoiceNegative(AccountingTestCase):
 
     def setUp(self):
         super(TestAccountInvoiceNegative, self).setUp()
@@ -41,8 +41,11 @@ class TestAccountInvoiceNegative(TransactionCase):
         self.product = self.env.ref('product.product_product_4')
         self.company = self.env.ref('base.main_company')
         self._create_account_type()
-        self.bank_journal = self.env['account.journal'].search(
-            [('type', '=', 'bank')])[0]
+        self.bank_journal = self.env['account.journal'].create(
+            {'name': 'Bank US', 'type': 'bank', 'code': 'BNKNI',
+             'currency_id': self.currency_usd_id})
+        # self.bank_journal = self.env['account.journal'].search(
+        #     [('type', '=', 'bank')])[0]
         # we create an invoice
         inv_date = date.today()
         self.invoice = self.account_invoice_model.create({
