@@ -8,7 +8,7 @@
     "development_status": "Alpha",
     "category": "Hidden",
     "website": "https://github.com/OCA/account-financial-tools/tree/10.0/"
-               "account_invoice_negative",
+               "account_payment_negative_invoice",
     "author": "Efatto.it di Sergio Corato, Odoo Community Association (OCA)",
     "maintainers": ["sergiocorato"],
     "license": "AGPL-3",

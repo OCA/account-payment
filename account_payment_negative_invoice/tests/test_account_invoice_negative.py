@@ -42,8 +42,7 @@ class TestAccountInvoiceNegative(AccountingTestCase):
         self.company = self.env.ref('base.main_company')
         self._create_account_type()
         self.bank_journal = self.env['account.journal'].create(
-            {'name': 'Bank US', 'type': 'bank', 'code': 'BNKNI',
-             'currency_id': self.currency_usd.id})
+            {'name': 'Bank US', 'type': 'bank', 'code': 'BNKNI'})
         # we create an invoice
         inv_date = date.today()
         self.invoice = self.account_invoice_model.create({
