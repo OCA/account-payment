@@ -21,24 +21,27 @@ msgstr ""
 "X-Generator: Poedit 1.8.7.1\n"
 
 #. module: account_payment_return_import_sepa_pain
-#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AC06
-msgid "Account blocked for direct debit by the Debtor"
-msgstr "Cuenta bloqueada para domiciliaciones por el deudor."
-
-#. module: account_payment_return_import_sepa_pain
-#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AC04
-msgid "Account closed"
-msgstr "Cuenta cerrada."
-
-#. module: account_payment_return_import_sepa_pain
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AC09
 msgid "Account currency is invalid or missing"
 msgstr ""
 
 #. module: account_payment_return_import_sepa_pain
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AC01
-msgid "Account identifier incorrect (i.e. invalid IBAN)"
-msgstr "Identificación de la cuenta incorrecta (p.e. IBAN Invalido)"
+#, fuzzy
+msgid "Account number is invalid or missing."
+msgstr "Identificación del banco incorrecto (p.e. BIC Invalido)"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AC04
+msgid ""
+"Account number specified has been closed on the bank of account's books. "
+msgstr ""
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AC06
+msgid ""
+"Account specified is blocked, prohibiting posting of transactions against it."
+msgstr ""
 
 #. module: account_payment_return_import_sepa_pain
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AC12
@@ -76,6 +79,7 @@ msgid "Amount is invalid or missing"
 msgstr ""
 
 #. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AM04
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AM07
 msgid ""
 "Amount of funds available to cover specified message amount is insufficient."
@@ -116,9 +120,16 @@ msgid "Balance of payments complementary info is requested"
 msgstr ""
 
 #. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AG02
+msgid "Bank Operation code specified in the message is not valid for receiver"
+msgstr ""
+
+#. module: account_payment_return_import_sepa_pain
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_RC01
-msgid "Bank identifier incorrect (i.e. invalid BIC)"
-msgstr "Identificación del banco incorrecto (p.e. BIC Invalido)"
+msgid ""
+"Bank identifier code specified in the message has an incorrect format "
+"(formerly IncorrectFormatForRoutingCode)."
+msgstr ""
 
 #. module: account_payment_return_import_sepa_pain
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_RC02
@@ -411,11 +422,6 @@ msgid "Debtor country code is missing or invalid"
 msgstr ""
 
 #. module: account_payment_return_import_sepa_pain
-#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_MD07
-msgid "Debtor deceased"
-msgstr "Deudor fallecido"
-
-#. module: account_payment_return_import_sepa_pain
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_BE08
 msgid "Debtor name is missing"
 msgstr ""
@@ -424,21 +430,6 @@ msgstr ""
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_BE16
 msgid "Debtor or Ultimate Debtor identification code missing or invalid"
 msgstr ""
-
-#. module: account_payment_return_import_sepa_pain
-#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_FF05
-msgid "Direct Debit type incorrect"
-msgstr "Tipo de domiciliación incorrecta"
-
-#. module: account_payment_return_import_sepa_pain
-#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AG01
-msgid "Direct debit forbidden on this account for regulatory reasons"
-msgstr "Domiciliación prohibida en esta cuenta por motivos regulatorios"
-
-#. module: account_payment_return_import_sepa_pain
-#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_MD06
-msgid "Disputed authorised transaction"
-msgstr "No conforme con el cargo autorizado"
 
 #. module: account_payment_return_import_sepa_pain
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_SL14
@@ -461,8 +452,15 @@ msgid "Due to specific service offered by the Creditor Agent"
 msgstr "Servicio especifico ofrecido por el banco del deudor"
 
 #. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_SL01
+#, fuzzy
+msgid "Due to specific service offered by the Debtor Agent"
+msgstr "Servicio especifico ofrecido por el banco del deudor"
+
+#. module: account_payment_return_import_sepa_pain
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AM05
-msgid "Duplicate collection"
+#, fuzzy
+msgid "Duplication"
 msgstr "Colección duplicada"
 
 #. module: account_payment_return_import_sepa_pain
@@ -479,6 +477,12 @@ msgstr ""
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_DU04
 msgid "End To End ID is not unique."
 msgstr ""
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_MD07
+#, fuzzy
+msgid "End customer is deceased."
+msgstr "Deudor fallecido"
 
 #. module: account_payment_return_import_sepa_pain
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_BE06
@@ -541,11 +545,6 @@ msgid ""
 msgstr ""
 
 #. module: account_payment_return_import_sepa_pain
-#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_BE05
-msgid "Identifier of the Creditor incorrect"
-msgstr "Identificación del emisor incorrecta"
-
-#. module: account_payment_return_import_sepa_pain
 #: model:ir.model,name:account_payment_return_import_sepa_pain.model_payment_return_import
 msgid "Import Payment Return"
 msgstr "Devoluciones de cobros"
@@ -595,11 +594,6 @@ msgid "Instruction ID is not unique."
 msgstr ""
 
 #. module: account_payment_return_import_sepa_pain
-#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AM04
-msgid "Insufficient funds"
-msgstr "Saldo insuficiente"
-
-#. module: account_payment_return_import_sepa_pain
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_ED06
 msgid "Interbank settlement system not available."
 msgstr ""
@@ -637,6 +631,11 @@ msgid ""
 msgstr ""
 
 #. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_FF05
+msgid "Local Instrument code is missing or invalid"
+msgstr ""
+
+#. module: account_payment_return_import_sepa_pain
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_CH09
 msgid "Mandate changes are not allowed"
 msgstr ""
@@ -657,21 +656,6 @@ msgid "Message Identification is not unique."
 msgstr ""
 
 #. module: account_payment_return_import_sepa_pain
-#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_RR03
-msgid "Missing Creditors Name Or Address"
-msgstr "Falta nombre o dirección del emisor"
-
-#. module: account_payment_return_import_sepa_pain
-#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_RR01
-msgid "Missing Debtor Account Or Identification"
-msgstr "Falta cuenta o identificación del deudor"
-
-#. module: account_payment_return_import_sepa_pain
-#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_RR02
-msgid "Missing Debtors Name Or Address"
-msgstr "Falta nombre o dirección del deudor"
-
-#. module: account_payment_return_import_sepa_pain
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_BE20
 msgid "Name length exceeds local rules for payment type."
 msgstr ""
@@ -685,7 +669,8 @@ msgstr ""
 
 #. module: account_payment_return_import_sepa_pain
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_MD01
-msgid "No valid Mandate"
+#, fuzzy
+msgid "No Mandate"
 msgstr "Mandato no válido"
 
 #. module: account_payment_return_import_sepa_pain
@@ -709,12 +694,6 @@ msgid "Number of transactions is invalid or missing."
 msgstr ""
 
 #. module: account_payment_return_import_sepa_pain
-#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AG02
-msgid "Operation/transaction code incorrect, invalid file format"
-msgstr ""
-"Código de operación/transacción incorrecto, formato de archivo inválido"
-
-#. module: account_payment_return_import_sepa_pain
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_DS17
 msgid "Order data and signatures don’t match"
 msgstr ""
@@ -732,6 +711,11 @@ msgstr ""
 #. module: account_payment_return_import_sepa_pain
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AG09
 msgid "Original payment never received."
+msgstr ""
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_BE05
+msgid "Party who initiated the message is not recognised by the end customer"
 msgstr ""
 
 #. module: account_payment_return_import_sepa_pain
@@ -770,21 +754,23 @@ msgid "Purpose is missing or invalid"
 msgstr ""
 
 #. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_MS03
+#, fuzzy
+msgid "Reason has not been specified by agent."
+msgstr "Motivo no especificado"
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_MS02
+#, fuzzy
+msgid "Reason has not been specified by end customer"
+msgstr "Motivo no especificado"
+
+#. module: account_payment_return_import_sepa_pain
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_NARR
 msgid ""
 "Reason is provided as narrative information in the additional reason "
 "information."
 msgstr ""
-
-#. module: account_payment_return_import_sepa_pain
-#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_MS03
-msgid "Reason not specified"
-msgstr "Motivo no especificado"
-
-#. module: account_payment_return_import_sepa_pain
-#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_MS02
-msgid "Refusal by the Debtor"
-msgstr "Rechazado por el deudor"
 
 #. module: account_payment_return_import_sepa_pain
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_RR04
@@ -826,6 +812,11 @@ msgstr ""
 #. module: account_payment_return_import_sepa_pain
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_S000
 msgid "Request for Cancellation is acknowledged following validation."
+msgstr ""
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_MD06
+msgid "Return of funds requested by end customer"
 msgstr ""
 
 #. module: account_payment_return_import_sepa_pain
@@ -871,11 +862,6 @@ msgid "Signer is not allowed to sign this operation type."
 msgstr ""
 
 #. module: account_payment_return_import_sepa_pain
-#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_SL01
-msgid "Specific Service offered by the Debtor Bank."
-msgstr "Servicio especifico ofrecido por el banco del deudor"
-
-#. module: account_payment_return_import_sepa_pain
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AM02
 msgid "Specific transaction/message amount is greater than allowed maximum"
 msgstr ""
@@ -892,6 +878,27 @@ msgstr ""
 msgid ""
 "Specification of debtor's address, which is required for payment, is missing/"
 "not correct."
+msgstr ""
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_RR03
+msgid ""
+"Specification of the creditor’s name and/or address needed for regulatory "
+"requirements is insufficient or missing."
+msgstr ""
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_RR01
+msgid ""
+"Specification of the debtor’s account or unique identification needed for "
+"reasons of regulatory requirements is insufficient or missing"
+msgstr ""
+
+#. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_RR02
+msgid ""
+"Specification of the debtor’s name and/or address needed for regulatory "
+"requirements is insufficient or missing."
 msgstr ""
 
 #. module: account_payment_return_import_sepa_pain
@@ -1156,6 +1163,12 @@ msgid "Transaction failed due to invalid or missing user or access right"
 msgstr ""
 
 #. module: account_payment_return_import_sepa_pain
+#: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_AG01
+#, fuzzy
+msgid "Transaction forbidden on this type of account (formerly NoAgreement)"
+msgstr "Domiciliación prohibida en esta cuenta por motivos regulatorios"
+
+#. module: account_payment_return_import_sepa_pain
 #: model:payment.return.reason,name:account_payment_return_import_sepa_pain.unpaid_reason_DU03
 msgid "Transaction is not unique."
 msgstr ""
@@ -1250,3 +1263,46 @@ msgstr ""
 #, fuzzy
 msgid "Whitelisting service offered by the Debtor Agent"
 msgstr "Servicio especifico ofrecido por el banco del deudor"
+
+#~ msgid "Account blocked for direct debit by the Debtor"
+#~ msgstr "Cuenta bloqueada para domiciliaciones por el deudor."
+
+#~ msgid "Account closed"
+#~ msgstr "Cuenta cerrada."
+
+#~ msgid "Account identifier incorrect (i.e. invalid IBAN)"
+#~ msgstr "Identificación de la cuenta incorrecta (p.e. IBAN Invalido)"
+
+#~ msgid "Bank identifier incorrect (i.e. invalid BIC)"
+#~ msgstr "Identificación del banco incorrecto (p.e. BIC Invalido)"
+
+#~ msgid "Direct Debit type incorrect"
+#~ msgstr "Tipo de domiciliación incorrecta"
+
+#~ msgid "Disputed authorised transaction"
+#~ msgstr "No conforme con el cargo autorizado"
+
+#~ msgid "Identifier of the Creditor incorrect"
+#~ msgstr "Identificación del emisor incorrecta"
+
+#~ msgid "Insufficient funds"
+#~ msgstr "Saldo insuficiente"
+
+#~ msgid "Missing Creditors Name Or Address"
+#~ msgstr "Falta nombre o dirección del emisor"
+
+#~ msgid "Missing Debtor Account Or Identification"
+#~ msgstr "Falta cuenta o identificación del deudor"
+
+#~ msgid "Missing Debtors Name Or Address"
+#~ msgstr "Falta nombre o dirección del deudor"
+
+#~ msgid "Operation/transaction code incorrect, invalid file format"
+#~ msgstr ""
+#~ "Código de operación/transacción incorrecto, formato de archivo inválido"
+
+#~ msgid "Refusal by the Debtor"
+#~ msgstr "Rechazado por el deudor"
+
+#~ msgid "Specific Service offered by the Debtor Bank."
+#~ msgstr "Servicio especifico ofrecido por el banco del deudor"
