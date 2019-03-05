@@ -9,7 +9,7 @@
         <field name="priority" eval="20"/>
         <field name="arch" type="xml">
             <tree string="Payments" decoration-muted="reconciled!=False" 
-                    decoration-danger="date_maturity&lt;current_date">
+                    decoration-danger="date_maturity&lt;current_date" create="false" delete="false">
                 <field name="stored_invoice_id" string="Invoice" readonly="1"/>
                 <field name="invoice_date" readonly="1"/>
                 <field name="invoice_origin" readonly="1"/>
