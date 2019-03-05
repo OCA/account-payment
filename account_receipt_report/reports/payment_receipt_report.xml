@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_account_payment_receipt">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.basic_layout">
+                    <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)"/>
+                    <div class="page">
+                        <style type="text/css">
+                            .square {
+                            border:1px solid;
+                            min-height: 60px;
+                            }
+                            .highlight {
+                            font-weight: bold;
+                            }
+                            .row-content {
+                            padding: 5px;
+                            }
+                        </style>
+                        <div class="row">
+                            <div class="col-xs-4">
+                                <div class="row row-content">
+                                    <img t-if="o.company_id.logo"
+                                         t-att-src="'data:image/png;base64,%s' % to_text(o.company_id.logo)" style="width: 200px;"/>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-3 square">
+                                <div class="row row-content">
+                                    <div class="highlight">Receipt #</div>
+                                    <div><span t-field="o.name"/></div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 square">
+                                <div class="row row-content">
+                                    <div class="highlight">Expedition place</div>
+                                    <div><span t-field="o.company_id.city" class="text-uppercase"/></div>
+                                </div>
+                            </div>
+                            <div class="col-xs-3 square">
+                                <div class="row row-content">
+                                    <div class="highlight">Amount</div>
+                                    <div><span t-field="o.credit" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 square">
+                                <div class="row row-content">
+                                    <div class="highlight">Expedition date</div>
+                                    <div><span t-field="o.date"/></div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 square">
+                                <div class="row row-content">
+                                    <div class="highlight">Due date</div>
+                                    <div><span t-esc="o.date_maturity" t-options="{'widget': 'date'}"/></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="border-spacing: 2px;">
+                            <div class="col-xs-12 square"
+                                 style="min-height: 80px;">
+                                <div class="row row-content">
+                                    <div> <span class="highlight">INVOICE </span> <span t-field="o.ref"/></div>
+                                    <div><span class="highlight">TOTAL TO PAY </span> <span t-field="o.credit" t-options="{'widget': 'monetary', 'display_currency': o.company_currency_id}"/></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="border-spacing: 2px;">
+                            <div class="col-xs-6 square">
+                                <div class="row row-content">
+                                    <div class="highlight">Payable</div>
+                                    <div><span t-field="o.journal_id.name"/></div>
+                                </div>
+                            </div>
+                            <div class="col-xs-6 square">
+                                <div class="row row-content">
+                                    <div class="highlight">IBAN</div>
+                                    <div> </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row" style="border-spacing: 2px;">
+                            <div class="col-xs-8 square">
+                                <div class="row row-content">
+                                    <span t-field="o.partner_id"
+                                          t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": True}'/>
+                                    <b>VAT: <span t-field="o.partner_id.vat"/></b>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+    <report id="action_account_report_payment_receipt"
+             model="account.move.line"
+             string="Account Payment Receipt"
+             report_type="qweb-pdf"
+             name="account_receipt_report.report_account_payment_receipt"
+             file="account_receipt_report.report_account_payment_receipt"
+             menu="True"
+     />
+
+</odoo>

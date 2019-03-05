@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_bank_statement_form" model="ir.ui.view">
+        <field name="model">account.bank.statement</field>
+        <field name="inherit_id" ref="account.view_bank_statement_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='line_ids']/tree" position="inside">
+                <button icon="fa fa-print" name="action_print_invoice_payment" type="object"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
