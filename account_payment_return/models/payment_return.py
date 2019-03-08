@@ -8,6 +8,7 @@
 
 from odoo import _, api, fields, models
 from odoo.exceptions import Warning as UserError
+from odoo.exceptions import ValidationError
 import odoo.addons.decimal_precision as dp
 
 
@@ -83,7 +84,7 @@ class PaymentReturn(models.Model):
                 for line in duplicate_lines:
                     append_error(line)
         if error_list:
-            raise UserError(
+            raise ValidationError(
                 _("Payment reference must be unique"
                   "\n%s") % '\n'.join(error_list)
             )

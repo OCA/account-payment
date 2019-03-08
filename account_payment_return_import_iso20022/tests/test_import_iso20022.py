@@ -9,24 +9,25 @@ from odoo.addons.account_payment_return_import.tests import (
 class TestImport(TestPaymentReturnFile):
     """Run test to import payment return import."""
 
-    def setUp(self):
-        super(TestImport, self).setUp()
-        self.company = self.env.ref('base.main_company')
-        self.acc_number = 'NL77ABNA0574908765'
-        self.acc_bank = self.env['res.partner.bank'].create({
-            'acc_number': self.acc_number,
+    @classmethod
+    def setUpClass(cls):
+        super(TestImport, cls).setUpClass()
+        cls.company = cls.env.ref('base.main_company')
+        cls.acc_number = 'NL77ABNA0574908765'
+        cls.acc_bank = cls.env['res.partner.bank'].create({
+            'acc_number': cls.acc_number,
             'bank_name': 'TEST BANK',
-            'company_id': self.company.partner_id.id,
-            'partner_id': self.company.partner_id.id,
+            'company_id': cls.company.partner_id.id,
+            'partner_id': cls.company.partner_id.id,
         })
-        self.journal = self.env['account.journal'].create({
+        cls.journal = cls.env['account.journal'].create({
             'name': 'Test Bank Journal',
             'code': 'BANK',
             'type': 'bank',
             'update_posted': True,
-            'bank_account_id': self.acc_bank.id,
+            'bank_account_id': cls.acc_bank.id,
         })
-        self.journal.bank_account_id = self.acc_bank
+        cls.journal.bank_account_id = cls.acc_bank
 
     def test_payment_return_import_pain(self):
         """Test correct creation of single payment return."""
