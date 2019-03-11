@@ -14,3 +14,10 @@ class AccountJournal(models.Model):
         comodel_name="res.partner", string="Default Charges Partner",
         domain=[('supplier', '=', True)], help='Default partner for '
                                                'charge expenses')
+    return_auto_reconcile = fields.Boolean(
+        string="Reconcile payment returns",
+        help="Enable automatic payment return reconciliation. This option "
+             "is meant to be used only when working when transfer accounts, "
+             "not if working directly with bank accounts.",
+        default=False,
+    )
