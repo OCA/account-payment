@@ -17,7 +17,14 @@
                     <button name="action_draft" string="Draft" type="object" states="cancelled" />
                     <field name="state" widget="statusbar"/>
                 </header>
+                <div class="alert alert-warning"
+                     attrs="{'invisible': [('auto_reconcile_failure', '=', False)]}"
+                     role="alert">
+                    The payment return could not be automatically reconciled.
+                </div>
                 <sheet string="Payment return">
+                    <field name="auto_reconcile_failure"
+                           invisible="1"/>
                     <group>
                         <field name="name"/>
                         <field name="journal_id" domain="[('type', 'in', ['bank', 'cash'])]"/>
