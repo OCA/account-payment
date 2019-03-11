@@ -4,6 +4,7 @@
 
 from odoo.addons.account_payment_return_import.tests import (
     TestPaymentReturnFile)
+from odoo.exceptions import UserError
 
 
 class TestImport(TestPaymentReturnFile):
@@ -46,6 +47,23 @@ class TestImport(TestPaymentReturnFile):
             date='2016-10-08', transactions=transactions
         )
 
+    def test_payment_return_import_pain_invalid(self):
+        transactions = [
+            {
+                'returned_amount': 100.00,
+                'reference': 'E2EID1',
+                'reason_add_info': 'ACC NUMBER INVALID',
+            },
+        ]
+        with self.assertRaises(UserError):
+            self._test_return_import(
+                'account_payment_return_import_iso20022',
+                'test-sepa-pain-unpaid-invalid.xml',
+                'MSGID99345678912',
+                local_account='NL77ABNA0574908765',
+                date='2016-10-08', transactions=transactions
+            )
+
     def test_zip_import_pain(self):
         """Test import of multiple statements from zip file."""
         self._test_return_import(
@@ -72,6 +90,23 @@ class TestImport(TestPaymentReturnFile):
             local_account='NL77ABNA0574908765',
             date='2016-10-08', transactions=transactions
         )
+
+    def test_payment_return_import_camt_invalid(self):
+        transactions = [
+            {
+                'returned_amount': 100.00,
+                'reference': 'E2EID1',
+                'reason_add_info': '/RTYP/RTRN',
+            },
+        ]
+        with self.assertRaises(UserError):
+            self._test_return_import(
+                'account_payment_return_import_iso20022',
+                'test-sepa-camt-unpaid-invalid.xml',
+                'MSGID99345678912',
+                local_account='NL77ABNA0574908765',
+                date='2016-10-08', transactions=transactions
+            )
 
     def test_zip_import_camt(self):
         """Test import of multiple statements from zip file."""
