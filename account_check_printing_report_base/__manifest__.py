@@ -12,7 +12,6 @@
     "author": "Eficent,"
               "Serpent Consulting Services Pvt. Ltd.,"
               "Ursa Information Systems,"
-              "iterativo SRL,"
               "Odoo Community Association (OCA)",
     "category": "Generic Modules/Accounting",
     "website": "https://github.com/OCA/account-payment",
