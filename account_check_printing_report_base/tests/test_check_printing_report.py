@@ -1,4 +1,5 @@
 # © 2016 Eficent Business and IT Consulting Services S.L.
+# Copyright 2018 iterativo.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo.tests.common import TransactionCase
@@ -29,6 +30,8 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
         self.check_report = self.env.ref(
             'account_check_printing_report_base'
             '.account_payment_check_report_base')
+        self.check_report_by_journal = self.check_report.copy({
+            'name': 'Test Check Layout By Journal'})
         self.payment_method_check = self.payment_method_model.search(
             [('code', '=', 'check_printing')], limit=1,
         )
@@ -86,7 +89,8 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
         return invoice_line
 
     def test_check_printing_no_layout(self):
-        '''Test if the exception raises when no layout is set for a company'''
+        '''Test if the exception raises when no layout is set for a
+        company or for the journal.'''
         acc_payable = self._create_account('account payable test', 'ACPRB1',
                                            self.acc_payable, True)
         vendor_bill = self._create_vendor_bill(acc_payable)
@@ -109,9 +113,19 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
         with self.assertRaises(UserError):
             payment.print_checks()
 
+        # Set check layout verification by journal
+        ICPSudo = self.env['ir.config_parameter'].sudo()
+        ICPSudo.set_param(
+            'account_check_printing_report_base.check_layout_verification',
+            'by_journal')
+        self.assertFalse(payment.journal_id.check_layout_id)
+        with self.assertRaises(UserError):
+            payment.print_checks()
+
     def test_check_printing_with_layout(self):
         ''' Test if the check is printed when the layout is specified for a
-        company'''
+        company and journal.'''
+
         self.company.check_layout_id = self.check_report
         acc_payable = self._create_account('account payable test', 'ACPRB1',
                                            self.acc_payable, True)
@@ -130,6 +144,8 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
             })
         register_payments.create_payments()
         payment = self.payment_model.search([], order="id desc", limit=1)
+        payment.journal_id.check_layout_id = self.check_report_by_journal
+
         e = False
         try:
             payment.print_checks()
