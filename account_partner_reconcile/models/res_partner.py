@@ -1,4 +1,4 @@
-# © 2017 Eficent Business and IT Consulting Services S.L.
+# Copyright 2017 Eficent Business and IT Consulting Services S.L.
 #        (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
@@ -17,7 +17,8 @@ class ResPartner(models.Model):
 
         action_context = {'show_mode_selector': True,
                           'partner_ids': [self.id, ],
-                          'account_ids': accounts.ids}
+                          'account_ids': accounts.ids,
+                          }
         return {
             'type': 'ir.actions.client',
             'tag': 'manual_reconciliation_view',
