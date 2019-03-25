@@ -57,12 +57,14 @@ class CashInvoiceOut(models.TransientModel):
         'account.journal',
         default=_default_journals,
         required=True,
-        readonly=True
+        readonly=True,
+        string='Journals'
     )
     journal_id = fields.Many2one(
         'account.journal',
         required=True,
-        default=_default_journal
+        default=_default_journal,
+        string='Journal'
     )
     journal_count = fields.Integer(
         default=_default_journal_count,
