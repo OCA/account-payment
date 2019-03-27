@@ -9,7 +9,6 @@ class AccountPaymentTerm(models.Model):
 
     early_payment_discount = fields.Boolean(
         string="Early Payment Discount",
-        default=False
     )
 
     epd_nb_days = fields.Integer(string="Number of day(s)")
