@@ -10,6 +10,9 @@ class AccountInvoice(models.Model):
 
     _inherit = 'res.company'
 
+    enable_cash_discount_tax = fields.Boolean(
+        help='Check this to enable Cash Discount for Tax Button',
+    )
     cash_discount_tax_description = fields.Char(
         string='Description for Tax Discount',
         help="The description used in invoices when generating cash discount"

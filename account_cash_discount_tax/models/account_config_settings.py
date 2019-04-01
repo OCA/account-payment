@@ -9,6 +9,10 @@ class AccountConfigSettings(models.TransientModel):
 
     _inherit = 'account.config.settings'
 
+    enable_cash_discount_tax = fields.Boolean(
+        related='company_id.enable_cash_discount_tax',
+        help='Check this to enable Cash Discount for Tax Button',
+    )
     cash_discount_tax_description = fields.Char(
         related='company_id.cash_discount_tax_description',
         string='Cash Discount Description for Taxes Lines',

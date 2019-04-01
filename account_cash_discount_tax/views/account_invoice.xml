@@ -10,11 +10,13 @@
             <field name="inherit_id" ref="account.invoice_supplier_form"/>
             <field name="arch" type="xml">
                 <button name="action_invoice_draft" position="after">
+                    <field name="enable_cash_discount_tax" invisible="1"/>
                     <button name="action_add_cash_discount_tax_lines"
                             type="object"
                             string="Fill in Tax Cash Discount"
                             states="draft"
-                            groups="account.group_account_invoice"/>
+                            groups="account.group_account_invoice"
+                            attrs="{'invisible': [('enable_cash_discount_tax', '=', False)]}"/>
                 </button>
             </field>
     </record>

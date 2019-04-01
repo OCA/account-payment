@@ -95,6 +95,7 @@ class TestAccountCashDiscountTax(common.SavepointCase):
         self.partner_agrolait.property_account_payable_id = account_pay
         self.env.user.company_id.cash_discount_tax_description = \
             'The Discount'
+        self.env.user.company_id.enable_cash_discount_tax = True
 
     def _create_invoice(self, amount, tax=None):
         self.invoice = self.invoice_obj.create({
@@ -331,5 +332,30 @@ class TestAccountCashDiscountTax(common.SavepointCase):
             self.invoice.amount_tax,
         )
         self.invoice.action_invoice_open()
+        with self.assertRaises(ValidationError):
+            self.invoice.action_add_cash_discount_tax_lines()
+
+    def test_invoice_taxes_disabled(self):
+        # Create invoice with several taxes
+        # Check that taxes are == 380.0 (1000.0 * 20%) + (3000.0 * 6%)
+        # Launch Wizard to add tax cash discount lines
+        # Check new lines values
+        # Check tax amount (tax amount == (380.0 - (380.0 * 3 %))
+        self.env.user.company_id.enable_cash_discount_tax = False
+        self.env.user.company_id.cash_discount_tax_account_id = \
+            self.disc_account
+        self.env.user.company_id.cash_discount_base_amount_type = 'untaxed'
+        self.partner_agrolait.property_supplier_payment_term_id =\
+            self.term_15_3
+        self._create_invoice_taxes(1000.0)
+        self.invoice._onchange_payment_term_discount_options()
+        self.assertEquals(
+            2,
+            len(self.invoice.invoice_line_ids),
+        )
+        self.assertEquals(
+            380.0,
+            self.invoice.amount_tax,
+        )
         with self.assertRaises(ValidationError):
             self.invoice.action_add_cash_discount_tax_lines()
