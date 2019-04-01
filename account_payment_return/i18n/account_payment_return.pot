@@ -21,7 +21,7 @@ msgid "Add"
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:276
+#: code:addons/account_payment_return/models/payment_return.py:277
 #, python-format
 msgid "All payments must be owned by the same partner"
 msgstr ""
@@ -168,7 +168,7 @@ msgid "Invoice has been included on a payment that has been returned later."
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:303
+#: code:addons/account_payment_return/models/payment_return.py:304
 #, python-format
 msgid "Invoice: %s"
 msgstr ""
@@ -231,19 +231,19 @@ msgid "Match"
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:337
+#: code:addons/account_payment_return/models/payment_return.py:338
 #, python-format
 msgid "More than one matches to move reference: %s"
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:324
+#: code:addons/account_payment_return/models/payment_return.py:325
 #, python-format
 msgid "Move lines: %s"
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:343
+#: code:addons/account_payment_return/models/payment_return.py:344
 #, python-format
 msgid "Move: %s"
 msgstr ""
@@ -274,7 +274,7 @@ msgid "Partner name"
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:65
+#: code:addons/account_payment_return/models/payment_return.py:66
 #, python-format
 msgid "Payment Line: %s (%s) in Payment Return: %s"
 msgstr ""
@@ -285,7 +285,7 @@ msgid "Payment Reference"
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:88
+#: code:addons/account_payment_return/models/payment_return.py:89
 #, python-format
 msgid "Payment reference must be unique!\n"
 "%s"
@@ -342,7 +342,7 @@ msgid "Reference to the created journal entry"
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:120
+#: code:addons/account_payment_return/models/payment_return.py:121
 #, python-format
 msgid "Return %s"
 msgstr ""
@@ -379,13 +379,13 @@ msgid "This date will be used as the account entry date."
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:101
+#: code:addons/account_payment_return/models/payment_return.py:102
 #, python-format
 msgid "You can not remove a payment return if state is 'Done'"
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:132
+#: code:addons/account_payment_return/models/payment_return.py:133
 #, python-format
 msgid "You must input all moves references in the payment return."
 msgstr ""
