@@ -21,6 +21,9 @@ is still computed at invoice's validation.
 You can decide to calculate the discount amount based on the total price taxes
 included or not.
 
+You can also define a manual amount on invoice level if your company configuration
+allows it.
+
 
 Configuration
 =============
@@ -29,6 +32,7 @@ To configure the base amount type, you need to:
 
 #. Go to your companies
 #. Set the cash discount base amount type (including taxes or not)
+#. Set if you authorize or not manual cash discount
 
 You can also configure default discount percent and delay on the payment term.
 

@@ -13,6 +13,11 @@
             <xpath expr="//field[@name='journal_id']/parent::group/parent::group" position="inside">
                 <group string="Cash Discount" name="cash_discount"
                        attrs="{'invisible': [('type', 'not in', ('in_invoice', 'in_refund'))]}">
+                    <field name="company_cash_discount_allow_manual" invisible="1"/>
+                    <field name="enable_manual_cash_discount"
+                           attrs="{'invisible': [('company_cash_discount_allow_manual', '=', False)]}"/>
+                    <field name="manual_cash_discount"
+                           attrs="{'invisible': [('enable_manual_cash_discount', '=', False)]}"/>
                     <field name="discount_percent"/>
                     <field name="discount_amount"/>
                     <field name="amount_total_with_discount"/>

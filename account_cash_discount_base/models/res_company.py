@@ -18,6 +18,9 @@ class ResCompany(models.Model):
         compute='_compute_cash_discount_tax_adjustment',
         store=True,
     )
+    cash_discount_allow_manual = fields.Boolean(
+        string='Allow manual cash discount',
+    )
 
     @api.model
     def _get_cash_discount_base_amount_types(self):

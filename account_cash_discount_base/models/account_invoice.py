@@ -67,6 +67,18 @@ class AccountInvoice(models.Model):
     discount_base_date = fields.Date(
         compute='_compute_discount_base_date',
     )
+    company_cash_discount_allow_manual = fields.Boolean(
+        related='company_id.cash_discount_allow_manual',
+        readonly=True,
+    )
+    enable_manual_cash_discount = fields.Boolean(
+        string='Enter manual cash discount',
+        help='If manual cash discount is allowed on your company,'
+             'shows a field to enter cash discount amount.'
+    )
+    manual_cash_discount = fields.Monetary(
+        help='This is the amount of Cash Discount.'
+    )
 
     @api.multi
     @api.depends(
@@ -74,9 +86,14 @@ class AccountInvoice(models.Model):
         'amount_untaxed',
         'discount_percent',
         'company_id',
+        'enable_manual_cash_discount',
+        'manual_cash_discount',
     )
     def _compute_discount_amount(self):
-        for rec in self:
+        manual_cash_invoices = self.filtered('enable_manual_cash_discount')
+        for rec in manual_cash_invoices:
+            rec.discount_amount = rec.manual_cash_discount
+        for rec in self - manual_cash_invoices:
             discount_amount = 0.0
             if rec.discount_percent != 0.0:
                 base_amount_type = \

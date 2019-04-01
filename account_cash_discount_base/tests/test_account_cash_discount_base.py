@@ -117,3 +117,20 @@ class TestAccountCashDiscountBase(TestAccountCashDiscountCommon):
         self.assertEqual(
             invoice.discount_delay,
             payment_term.discount_delay)
+
+    def test_compute_discount_manual(self):
+        self.company.cash_discount_allow_manual = True
+        invoice = self.create_simple_invoice(1000)
+
+        invoice.discount_percent = 0
+        self.assertEqual(invoice.discount_amount, 0)
+        self.assertEqual(invoice.amount_total_with_discount, 1100)
+
+        invoice.discount_percent = 10
+        self.assertEqual(invoice.discount_amount, 100)
+        self.assertEqual(invoice.amount_total_with_discount, 1000)
+
+        invoice.enable_manual_cash_discount = True
+        invoice.manual_cash_discount = 150
+        self.assertEqual(invoice.discount_amount, 150)
+        self.assertEqual(invoice.amount_total_with_discount, 950)
