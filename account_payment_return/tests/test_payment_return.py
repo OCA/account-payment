@@ -174,7 +174,7 @@ class TestPaymentReturn(SavepointCase):
                     'reference': self.payment_move.name,
                 })]
         })
-        with self.assertRaises(UserError):
+        with self.assertRaises(ValidationError):
             self.payment_return.button_match()
 
     def test_duplicate_lines(self):
