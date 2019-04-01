@@ -7,7 +7,7 @@
     'summary': """
         This module helps accoutant to fill in invoices with cash discount
         allowed on taxes only""",
-    'version': '10.0.1.1.0',
+    'version': '10.0.1.2.0',
     'license': 'AGPL-3',
     'author': 'ACSONE SA/NV,Odoo Community Association (OCA)',
     'website': 'https://github.com/OCA/account-payment',

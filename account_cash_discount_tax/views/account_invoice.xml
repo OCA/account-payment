@@ -14,9 +14,8 @@
                     <button name="action_add_cash_discount_tax_lines"
                             type="object"
                             string="Fill in Tax Cash Discount"
-                            states="draft"
                             groups="account.group_account_invoice"
-                            attrs="{'invisible': [('enable_cash_discount_tax', '=', False)]}"/>
+                            attrs="{'invisible': ['|', ('state', '!=', 'draft'), '|', ('enable_cash_discount_tax', '=', False), ('enable_manual_cash_discount', '=', True)]}"/>
                 </button>
             </field>
     </record>
