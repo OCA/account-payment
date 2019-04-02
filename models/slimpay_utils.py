@@ -88,9 +88,12 @@ class SlimpayClient(object):
         self._client = get_client(api_url, app_id, app_secret)
         self._root_doc = None
 
-    def action(self, action, short_method_name, validate=False, params=None):
+    def action(self, action, short_method_name, validate=False, params=None,
+               doc=None):
+        if doc is None:
+            doc = self.root_doc
         return self._client.action(
-            self.root_doc, self.method_name(short_method_name),
+            doc, self.method_name(short_method_name),
             action=action, validate=validate, params=params)
 
     def approval_url(self, tx_ref, order_id, locale, amount, currency,
