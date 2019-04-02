@@ -1,6 +1,5 @@
 import logging
 from base64 import b64encode
-from datetime import datetime
 
 from iso8601 import parse_date
 import requests
@@ -130,10 +129,10 @@ class SlimpayClient(object):
         _logger.debug('create-payins reponse: %s', response)
         if response.get('executionStatus') != 'toprocess':
             _logger.error(
-                'Invalid slimpay payment response for transaction %s:\n %s',
-                self.id, response)
-            raise ValueError('Invalid slimpay payment status for %s: %s'
-                             % (self.id, response.get('executionStatus')))
+                'Invalid slimpay payment response for transaction %r:\n %r',
+                payin_ref, response)
+            raise ValueError('Invalid slimpay payment status for %r: %r'
+                             % (payin_ref, response.get('executionStatus')))
         return response.get('state') == 'accepted'
 
     def get(self, url):
