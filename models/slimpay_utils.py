@@ -134,8 +134,7 @@ class SlimpayClient(object):
             _logger.error(
                 'Invalid slimpay payment response for transaction %r:\n %r',
                 payin_ref, response)
-            raise ValueError('Invalid slimpay payment status for %r: %r'
-                             % (payin_ref, response.get('executionStatus')))
+            return False
         return response.get('state') == 'accepted'
 
     def get(self, url):
