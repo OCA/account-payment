@@ -6,7 +6,7 @@
     'category': 'Generic Modules/Payment',
     'development_status': 'Beta',
     'author': 'Odoo Community Association (OCA)',
-    'summary': 'Check printing commons',
+    'summary': 'List of open credits and debits, with due date',
     'website': 'https://github.com/OCA/account-payment',
     'license': 'LGPL-3',
     'depends': ['account'],
