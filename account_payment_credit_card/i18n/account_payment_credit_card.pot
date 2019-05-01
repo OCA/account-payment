@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 11.0\n"
+"Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
@@ -14,12 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_payment_credit_card
-#: model:ir.model,name:account_payment_credit_card.model_account_move
-msgid "Account Entry"
-msgstr ""
-
-#. module: account_payment_credit_card
-#: model:ir.model.fields,field_description:account_payment_credit_card.field_account_journal_partner_id
+#: model:ir.model.fields,field_description:account_payment_credit_card.field_account_journal__partner_id
 msgid "Credit Card Company"
 msgstr ""
 
@@ -29,7 +24,12 @@ msgid "Journal"
 msgstr ""
 
 #. module: account_payment_credit_card
-#: model:ir.model.fields,field_description:account_payment_credit_card.field_account_journal_credit_card
+#: model:ir.model,name:account_payment_credit_card.model_account_move
+msgid "Journal Entries"
+msgstr ""
+
+#. module: account_payment_credit_card
+#: model:ir.model.fields,field_description:account_payment_credit_card.field_account_journal__credit_card
 msgid "Transfer AP to Credit Card Company"
 msgstr ""
 
