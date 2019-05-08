@@ -1,4 +1,4 @@
-# © 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
+# Copyright 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, models
@@ -14,4 +14,4 @@ class PaymentReturnLine(models.Model):
         for line in lines:
             line.move_line_ids = AccountMoveLine.search(
                 [('bank_payment_line_id.name', '=', line.reference)])
-        super(PaymentReturnLine, lines)._find_match()
+        return super(PaymentReturnLine, lines)._find_match()

@@ -46,6 +46,7 @@ class TestPaymentReturn(SavepointCase):
                 {'name': 'Test income'}).id,
         })
         cls.partner = cls.env['res.partner'].create({'name': 'Test'})
+        cls.partner_1 = cls.env['res.partner'].create({'name': 'Test 1'})
         cls.invoice = cls.env['account.invoice'].create({
             'journal_id': cls.journal.id,
             'account_id': cls.account.id,
@@ -172,6 +173,37 @@ class TestPaymentReturn(SavepointCase):
                     'amount': 0.0,
                     'reference': self.payment_move.name,
                 })]
+        })
+        with self.assertRaises(ValidationError):
+            self.payment_return.button_match()
+
+    def test_find_match_move_duplicate(self):
+        self.payment_move.name = 'test match move line 001'
+        invoice_1 = self.invoice.copy({'partner_id': self.partner_1.id})
+        invoice_1.action_invoice_open()
+        receivable_line = invoice_1.move_id.line_ids.filtered(
+            lambda x: x.account_id.internal_type == 'receivable')
+        payment_move = invoice_1.move_id.copy({
+            'journal_id': self.bank_journal.id
+        })
+        for move_line in payment_move.line_ids:
+            move_line.with_context(check_move_validity=False).write({
+                'debit': move_line.credit, 'credit': move_line.debit})
+        payment_line = payment_move.line_ids.filtered(
+            lambda x: x.account_id.internal_type == 'receivable')
+        # Reconcile both
+        (receivable_line | payment_line).reconcile()
+        payment_move.name = 'test match move line 001'
+        self.payment_return.write({
+            'line_ids': [
+                (5, 0),
+                (0, 0, {
+                    'partner_id': False,
+                    'move_line_ids': [(6, 0, [])],
+                    'amount': 0.0,
+                    'reference': self.payment_move.name,
+                }),
+            ]
         })
         with self.assertRaises(UserError):
             self.payment_return.button_match()

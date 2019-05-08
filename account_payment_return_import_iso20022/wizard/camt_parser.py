@@ -1,31 +1,41 @@
-# Copyright 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
-# Copyright 2016 Pedro M. Baeza <pedro.baeza@tecnativa.com>
+# Copyright 2019 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import re
 from lxml import etree
 
+RE_CAMT = re.compile(
+    r'(^urn:iso:std:iso:20022:tech:xsd:camt.'
+    r'|^ISO:camt.)'
+)
+RE_CAMT_VERSION = re.compile(
+    r'(^urn:iso:std:iso:20022:tech:xsd:camt.054.001.02'
+    r'|^ISO:camt.054.001.02)'
+)
 
-class PainParser(object):
-    """Parser for SEPA Direct Debit Unpaid Report import files."""
 
-    def parse_amount(self, ns, node):
+class CamtParser(object):
+    """Parser for CAMT Bank to Customer Debit Credit Notification."""
+
+    @staticmethod
+    def parse_amount(ns, node):
         """Parse element that contains Amount and CreditDebitIndicator."""
         if node is None:
             return 0.0
         amount = 0.0
-        amount_node = node.xpath('./ns:Amt/ns:InstdAmt', namespaces={'ns': ns})
+        amount_node = node.xpath('./ns:Amt', namespaces={'ns': ns})
         if amount_node:
             amount = float(amount_node[0].text)
         return amount
 
-    def parse_date(self, ns, node):
+    @staticmethod
+    def parse_date(ns, node):
         """Parse element that contains date."""
         date_node = node.xpath('./ns:GrpHdr/ns:CreDtTm', namespaces={'ns': ns})
         return date_node[0].text[:10]
 
-    def add_value_from_node(
-            self, ns, node, xpath_str, obj, key, join_str=None):
+    @staticmethod
+    def add_value_from_node(ns, node, xpath_str, obj, key, join_str=None):
         """Add value to object from first or all nodes found with xpath.
 
         If xpath_str is a list (or iterable), it will be seen as a series
@@ -44,54 +54,62 @@ class PainParser(object):
                 break
 
     def parse_transaction_details(self, ns, node, transaction):
-        """Parse transaction details."""
-        transaction['amount'] = self.parse_amount(ns, node)
+        """
+        Parse transaction details.
+        """
         self.add_value_from_node(
-            ns, node, './ns:ReqdColltnDt', transaction, 'date')
+            ns, node, './ns:Refs/ns:EndToEndId',
+            transaction, 'reference')
         self.add_value_from_node(
-            ns, node, './ns:RmtInf/ns:Ustrd', transaction, 'concept')
+            ns, node, './ns:RltdDts/ns:IntrBkSttlmDt',
+            transaction, 'date')
         self.add_value_from_node(
-            ns, node, './ns:Dbtr/ns:Nm', transaction, 'partner_name')
+            ns, node, './ns:RmtInf/ns:Ustrd',
+            transaction, 'concept')
         self.add_value_from_node(
-            ns, node, './ns:DbtrAcct/ns:Id/ns:IBAN', transaction,
-            'account_number')
+            ns, node, './ns:RltdPties/ns:Dbtr/ns:Nm',
+            transaction, 'partner_name')
+        self.add_value_from_node(
+            ns, node, './ns:RltdPties/ns:DbtrAcct/ns:Id/ns:IBAN',
+            transaction, 'account_number')
+        self.add_value_from_node(
+            ns, node, './ns:RtrInf/ns:Rsn/ns:Cd',
+            transaction, 'reason_code')
+        self.add_value_from_node(
+            ns, node, './ns:RtrInf/ns:AddtlInf',
+            transaction, 'reason_additional_information')
 
     def parse_transaction(self, ns, node, transaction):
-        """Parse transaction (entry) node."""
-        self.add_value_from_node(
-            ns, node, './ns:OrgnlEndToEndId', transaction,
-            'reference'
-        )
-        self.add_value_from_node(
-            ns, node, './ns:StsRsnInf/ns:Rsn/ns:Cd', transaction,
-            'reason_code'
-        )
-        self.add_value_from_node(
-            ns, node, './ns:StsRsnInf/ns:AddtlInf', transaction,
-            'reason_additional_information'
-        )
+        """
+        Parse transaction (entry) node.
+        """
+        return_info = node.xpath(
+            './ns:NtryDtls/ns:TxDtls/ns:RtrInf', namespaces={'ns': ns})
+        if not return_info:
+            return transaction
+        transaction['amount'] = self.parse_amount(ns, node)
         details_node = node.xpath(
-            './ns:OrgnlTxRef', namespaces={'ns': ns})
+            './ns:NtryDtls/ns:TxDtls', namespaces={'ns': ns})
         if details_node:
             self.parse_transaction_details(ns, details_node[0], transaction)
         transaction['raw_import_data'] = etree.tostring(node)
         return transaction
 
     def parse_payment_return(self, ns, node):
-        """Parse a single payment return node."""
+        """
+        Parse a single payment return node.
+        """
         payment_return = {}
         self.add_value_from_node(
             ns, node, './ns:GrpHdr/ns:MsgId', payment_return, 'name')
         payment_return['date'] = self.parse_date(ns, node)
-        transaction_nodes = node.xpath(
-            './ns:OrgnlPmtInfAndSts/ns:TxInfAndSts', namespaces={'ns': ns})
-        if transaction_nodes:
-            self.add_value_from_node(
-                ns, transaction_nodes[0],
-                './ns:OrgnlTxRef/ns:CdtrAcct/ns:Id/ns:IBAN', payment_return,
-                'account_number')
+        self.add_value_from_node(
+            ns, node, './ns:Ntfctn/ns:Acct/ns:Id/ns:IBAN', payment_return,
+            'account_number')
+        entry_nodes = node.xpath(
+            './ns:Ntfctn/ns:Ntry', namespaces={'ns': ns})
         payment_return['transactions'] = []
-        for entry_node in transaction_nodes:
+        for entry_node in entry_nodes:
             transaction = {}
             self.parse_transaction(ns, entry_node, transaction)
             payment_return['transactions'].append(transaction)
@@ -104,43 +122,37 @@ class PainParser(object):
         return payment_return
 
     def check_version(self, ns, root):
-        """Validate validity of SEPA Direct Debit Unpaid Report file."""
-        # Check wether it is SEPA Direct Debit Unpaid Report at all:
-        re_pain = re.compile(
-            r'(^urn:iso:std:iso:20022:tech:xsd:pain.'
-            r'|^ISO:pain.)'
-        )
-        if not re_pain.search(ns):
-            raise ValueError('no pain: ' + ns)
-        # Check wether version 002.001.03:
-        re_pain_version = re.compile(
-            r'(^urn:iso:std:iso:20022:tech:xsd:pain.002.001.03'
-            r'|^ISO:pain.002.001.03)'
-        )
-        if not re_pain_version.search(ns):
-            raise ValueError('no PAIN.002.001.03: ' + ns)
-        # Check GrpHdr element:
+        """
+        Check whether the validity of the camt.054.001.02 file.
+        :raise: ValueError if not valid
+        """
+        # Check whether it's a CAMT Bank to Customer Debit Credit Notification
+        if not RE_CAMT.search(ns):
+            raise ValueError('no camt: ' + ns)
+        # Check the camt version
+        if not RE_CAMT_VERSION.search(ns):
+            raise ValueError('no camt.054.001.02: ' + ns)
+        # Check GrpHdr element
         root_0_0 = root[0][0].tag[len(ns) + 2:]  # strip namespace
         if root_0_0 != 'GrpHdr':
             raise ValueError('expected GrpHdr, got: ' + root_0_0)
 
     def parse(self, data):
-        """Parse a pain.002.001.03 file."""
-        try:
-            root = etree.fromstring(
-                data, parser=etree.XMLParser(recover=True))
-        except etree.XMLSyntaxError:
-            # ABNAmro is known to mix up encodings
-            root = etree.fromstring(
-                data.decode('iso-8859-15').encode('utf-8'))
+        """
+        Parse a camt.054.001.02 file.
+        :param data:
+        :return: account.payment.return records list
+        :raise: ValueError if parsing failed
+        """
+        root = etree.fromstring(
+            data, parser=etree.XMLParser(recover=True))
         if root is None:
-            raise ValueError(
-                'Not a valid xml file, or not an xml file at all.')
+            raise ValueError("The XML file is not valid.")
         ns = root.tag[1:root.tag.index("}")]
         self.check_version(ns, root)
         payment_returns = []
         for node in root:
             payment_return = self.parse_payment_return(ns, node)
-            if len(payment_return['transactions']):
+            if payment_return['transactions']:
                 payment_returns.append(payment_return)
         return payment_returns
