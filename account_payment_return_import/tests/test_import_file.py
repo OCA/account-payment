@@ -6,14 +6,14 @@ import base64
 import logging
 
 from odoo import fields
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import SavepointCase
 from odoo.modules.module import get_module_resource
 
 
 _logger = logging.getLogger(__name__)
 
 
-class TestPaymentReturnFile(TransactionCase):
+class TestPaymentReturnFile(SavepointCase):
     """Check whether payment returns with transactions correctly imported.
 
     No actual tests are done in this class, implementations are in
