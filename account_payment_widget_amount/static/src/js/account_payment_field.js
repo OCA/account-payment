@@ -37,18 +37,22 @@ odoo.define('account_payment_widget_amount.payment', function (require) {
                             id: content.id,
                             currency: content.currency,
                             position: content.position,
+                            amount: content.amount,
                         }));
                         $content.filter('.js_payment_amount').on('click', self._onOutstandingCreditAssign.bind(self));
                         return $content;
                     },
                     html: true,
-                    placement: 'left',
+                    placement: function() { return $(window).width() <= 1080 ? 'bottom' : 'left'; },
                     title: 'Enter the payment amount',
                     trigger: 'click',
                     delay: { "show": 0, "hide": 100 },
                     container: $(k).parent(),
                 };
                 $(k).popover(options);
+                $(k).on('shown.bs.popover', function() {
+                    document.getElementById("paid_amount").placeholder = $(this).parent().find('#paid_amount').attr('amount')
+                });
             });
         },
         //--------------------------------------------------------------------------
@@ -63,7 +67,7 @@ odoo.define('account_payment_widget_amount.payment', function (require) {
         _onOutstandingCreditAssign: function (event) {
             var self = this;
             var id = parseInt($(event.target).attr('id'), 10);
-            var payment_amount = parseFloat(document.getElementById("paid_amount").value);
+            var payment_amount = parseFloat(document.getElementById("paid_amount").value) || 0.0;
             var context = {
                 'paid_amount': payment_amount,
             }

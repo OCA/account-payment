@@ -9,8 +9,8 @@
                     <td style="padding-right:20px;"><strong style="white-space: nowrap;">Paid Amount: </strong></td>
                     <td t-if="position == 'before'"><t t-esc="currency"/></td>
                     <td style="text-align:right;">
-                        <input type="text" name="currency-field" id="paid_amount" class="o_website_form_input"
-                               data-type="number" value="" placeholder="0.00"/>
+                        <input type="number" name="currency-field" id="paid_amount" class="o_website_form_input"
+                               data-type="number" placeholder="" t-att-amount="amount"/>
                     </td>
                     <td t-if="position == 'after'"><t t-esc="currency"/></td>
                 </tr>
