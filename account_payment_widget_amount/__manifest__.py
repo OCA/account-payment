@@ -4,8 +4,6 @@
     "name": "Account Payment Widget Amount",
     "summary": "Extends the payment widget to be able to choose the payment "
                "amount",
-    "description": "Extends the payment widget to be able to choose the "
-                   "payment amount",
     "version": "12.0.1.0.0",
     "category": "Account-payment",
     "website": "https://odoo-community.org/",
@@ -20,5 +18,4 @@
     'qweb': [
         "static/src/xml/account_payment.xml",
     ],
-    'installable': True,
 }
