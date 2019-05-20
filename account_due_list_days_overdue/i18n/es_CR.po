@@ -25,32 +25,32 @@ msgid "Account Overdue Term"
 msgstr ""
 
 #. module: account_due_list_days_overdue
-#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term_create_uid
+#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term__create_uid
 msgid "Created by"
 msgstr "Creado por"
 
 #. module: account_due_list_days_overdue
-#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term_create_date
+#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term__create_date
 msgid "Created on"
 msgstr "Creado en"
 
 #. module: account_due_list_days_overdue
-#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_move_line_days_overdue
+#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_move_line__days_overdue
 msgid "Days overdue"
 msgstr ""
 
 #. module: account_due_list_days_overdue
-#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term_display_name
+#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: account_due_list_days_overdue
-#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term_from_day
+#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term__from_day
 msgid "From day"
 msgstr ""
 
 #. module: account_due_list_days_overdue
-#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term_id
+#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term__id
 msgid "ID"
 msgstr "ID"
 
@@ -61,29 +61,29 @@ msgid "Journal Item"
 msgstr "Elementos diario"
 
 #. module: account_due_list_days_overdue
-#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term___last_update
+#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term____last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: account_due_list_days_overdue
-#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term_write_uid
+#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term__write_uid
 msgid "Last Updated by"
 msgstr "Ultima actualización por"
 
 #. module: account_due_list_days_overdue
-#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term_write_date
+#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term__write_date
 msgid "Last Updated on"
 msgstr "Ultima actualización en"
 
 #. module: account_due_list_days_overdue
-#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term_name
+#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term__name
 msgid "Name"
 msgstr "Nombre"
 
 #. module: account_due_list_days_overdue
-#: model:ir.ui.view,arch_db:account_due_list_days_overdue.view_account_overdue_term_form
-#: model:ir.ui.view,arch_db:account_due_list_days_overdue.view_account_overdue_term_search
-#: model:ir.ui.view,arch_db:account_due_list_days_overdue.view_account_overdue_term_tree
+#: model_terms:ir.ui.view,arch_db:account_due_list_days_overdue.view_account_overdue_term_form
+#: model_terms:ir.ui.view,arch_db:account_due_list_days_overdue.view_account_overdue_term_search
+#: model_terms:ir.ui.view,arch_db:account_due_list_days_overdue.view_account_overdue_term_tree
 msgid "Overdue Term"
 msgstr ""
 
@@ -100,11 +100,11 @@ msgid "Overdue Terms"
 msgstr ""
 
 #. module: account_due_list_days_overdue
-#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term_tech_name
+#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term__tech_name
 msgid "Technical name"
 msgstr ""
 
 #. module: account_due_list_days_overdue
-#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term_to_day
+#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term__to_day
 msgid "To day"
 msgstr ""
