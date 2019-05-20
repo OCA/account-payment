@@ -31,6 +31,7 @@ addon | version | summary
 [account_due_list_aging_comments](account_due_list_aging_comments/) | 10.0.1.0.0 | Payments Due list aging comments
 [account_due_list_days_overdue](account_due_list_days_overdue/) | 10.0.0.1.0 | Payments Due list days overdue
 [account_due_list_payment_mode](account_due_list_payment_mode/) | 10.0.1.0.0 | Payment due list with payment mode
+[account_move_line_auto_reconcile_hook](account_move_line_auto_reconcile_hook/) | 10.0.1.0.0 | Adds Hook to account move line
 [account_partner_reconcile](account_partner_reconcile/) | 10.0.1.0.0 | Account Partner Reconcile
 [account_payment_batch_process](account_payment_batch_process/) | 10.0.1.0.1 | Process Payments in Batch
 [account_payment_credit_card](account_payment_credit_card/) | 10.0.1.0.0 | Add support for credit card payments
@@ -38,6 +39,7 @@ addon | version | summary
 [account_payment_return_import](account_payment_return_import/) | 10.0.1.0.0 | This module adds a generic wizard to import payment returnfile formats. Is only the base to be extended by anothermodules
 [account_payment_return_import_sepa_pain](account_payment_return_import_sepa_pain/) | 10.0.1.0.0 | Module to import SEPA Direct Debit Unpaid Report File Format PAIN.002.001.03
 [account_payment_show_invoice](account_payment_show_invoice/) | 10.0.1.1.0 | Extends the tree view of payments to show the paid invoices related to the payments using the vendor reference by default
+[account_payment_widget_amount](account_payment_widget_amount/) | 10.0.1.0.0 | Extends the payment widget to be able to choose the payment amount
 [partner_aging](partner_aging/) | 10.0.1.0.0 | Aging as a view - invoices and credits
 
 
