@@ -17,6 +17,7 @@ setuptools.setup(
         'odoo10-addon-account_due_list_aging_comments',
         'odoo10-addon-account_due_list_days_overdue',
         'odoo10-addon-account_due_list_payment_mode',
+        'odoo10-addon-account_move_line_auto_reconcile_hook',
         'odoo10-addon-account_partner_reconcile',
         'odoo10-addon-account_payment_batch_process',
         'odoo10-addon-account_payment_credit_card',
@@ -24,6 +25,7 @@ setuptools.setup(
         'odoo10-addon-account_payment_return_import',
         'odoo10-addon-account_payment_return_import_sepa_pain',
         'odoo10-addon-account_payment_show_invoice',
+        'odoo10-addon-account_payment_widget_amount',
         'odoo10-addon-partner_aging',
     ],
     classifiers=[
