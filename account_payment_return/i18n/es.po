@@ -28,7 +28,7 @@ msgid "Add"
 msgstr "Añadir"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:276
+#: code:addons/account_payment_return/models/payment_return.py:277
 #, python-format
 msgid "All payments must be owned by the same partner"
 msgstr "Todos los pagos deben pertenecer a la misma empresa"
@@ -175,7 +175,7 @@ msgid "Invoice has been included on a payment that has been returned later."
 msgstr "La factura ha sido incluida en un pago que ha sido devuelto más tarde."
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:303
+#: code:addons/account_payment_return/models/payment_return.py:304
 #, python-format
 msgid "Invoice: %s"
 msgstr "Factura: %s"
@@ -239,19 +239,19 @@ msgid "Match"
 msgstr "Casar referencias"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:337
+#: code:addons/account_payment_return/models/payment_return.py:338
 #, python-format
 msgid "More than one matches to move reference: %s"
 msgstr "Mas de una coincidencia para la referencia: %s"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:324
+#: code:addons/account_payment_return/models/payment_return.py:325
 #, python-format
 msgid "Move lines: %s"
 msgstr "Apuntes: %s"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:343
+#: code:addons/account_payment_return/models/payment_return.py:344
 #, python-format
 msgid "Move: %s"
 msgstr "Asiento: %s"
@@ -282,7 +282,7 @@ msgid "Partner name"
 msgstr "Nombre del cliente"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:65
+#: code:addons/account_payment_return/models/payment_return.py:66
 #, python-format
 msgid "Payment Line: %s (%s) in Payment Return: %s"
 msgstr "Línea de pago: %s (%s) en devolución de pago: %s"
@@ -293,7 +293,7 @@ msgid "Payment Reference"
 msgstr "Referencia de cobro"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:88
+#: code:addons/account_payment_return/models/payment_return.py:89
 #, python-format
 msgid ""
 "Payment reference must be unique!\n"
@@ -353,7 +353,7 @@ msgid "Reference to the created journal entry"
 msgstr "Referencia al asiento creado"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:120
+#: code:addons/account_payment_return/models/payment_return.py:121
 #, python-format
 msgid "Return %s"
 msgstr "Devolución %s"
@@ -390,13 +390,13 @@ msgid "This date will be used as the account entry date."
 msgstr "Esta fecha se utilizará como fecha del asiento contable."
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:101
+#: code:addons/account_payment_return/models/payment_return.py:102
 #, python-format
 msgid "You can not remove a payment return if state is 'Done'"
 msgstr "No puede borrar una devolución de pagos en estado 'Realizado'"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:132
+#: code:addons/account_payment_return/models/payment_return.py:133
 #, python-format
 msgid "You must input all moves references in the payment return."
 msgstr "Debes informar todas las referencias de cobro."
