@@ -15,8 +15,7 @@ Installation
 
 This module depends on:
 
-* account_due_list
-* account_payment_partner
+* account_payment_partner in OCA/bank-payment repository.
 
 Configuration
 =============
@@ -27,7 +26,7 @@ to check "Show full accounting features" in user permission.
 Usage
 =====
 
-#. Go to *Invoicing > Adviser > Payments and due list* and you'll see the new
+#. Go to *Invoicing > Adviser > Payments and due list* and you will see the new
    field payment mode in the due list.
 
 .. image:: https://odoo-community.org/website/image/ir.attachment/5784_f2813bd/datas
@@ -53,6 +52,7 @@ Contributors
 * Sergio Teruel <sergio.teruel@tecnativa.com>
 * Albert De La Fuente <info@haevas.com>
 * Vicent Cubells <vicent.cubells@tecnativa.com>
+* Miquel Raïch <miquel.raich@eficent.com>
 
 Maintainer
 ----------
