@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_due_list_payment_mode
+# 	* account_due_list_payment_mode
 #
 msgid ""
 msgstr ""
@@ -17,6 +17,6 @@ msgstr ""
 "X-Generator: Weblate 3.4\n"
 
 #. module: account_due_list_payment_mode
-#: model:ir.ui.view,arch_db:account_due_list_payment_mode.view_payments_mode_filter
+#: model_terms:ir.ui.view,arch_db:account_due_list_payment_mode.view_payments_mode_filter
 msgid "Payment Mode"
 msgstr "Zahlungsmodus"
