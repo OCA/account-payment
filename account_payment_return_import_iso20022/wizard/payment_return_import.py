@@ -14,7 +14,29 @@ class PaymentReturnImport(models.TransientModel):
     _inherit = 'payment.return.import'
 
     @api.model
+    def _xml_split_file(self, data_file):
+        """BNP France is known to merge xml files"""
+        if not data_file.startswith(b'<?xml'):
+            return [data_file]
+        data_file_elements = []
+        all_files = data_file.split(b'<?xml')
+        for file in all_files:
+            if file:
+                data_file_elements.append(b'<?xml' + file)
+        return data_file_elements
+
+    @api.model
     def _parse_file(self, data_file):
+        data_file_elements = self._xml_split_file(data_file)
+        payment_returns = []
+        for data_file_element in data_file_elements:
+            payment_returns.extend(
+                self._parse_single_document(data_file_element)
+            )
+        return payment_returns
+
+    @api.model
+    def _parse_single_document(self, data_file):
         """
         Try to parse the file as the following format or fall back on next
         parser:
