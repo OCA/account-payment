@@ -39,15 +39,6 @@ and only users in that group see these buttons and menus.
 .. contents::
    :local:
 
-Installation
-============
-
-This module depends on :
-
-* account
-
-This modules are parts of the OCA/bank-payment suite.
-
 Configuration
 =============
 
