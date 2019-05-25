@@ -18,6 +18,9 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
         self.account_invoice_line_model = self.env['account.invoice.line']
         self.account_account_model = self.env['account.account']
         self.payment_model = self.env['account.payment']
+        self.report_check_base_model = self.env[
+            'report.account_check_printing_report_base.report_check_base'
+        ]
 
         self.partner1 = self.env.ref('base.res_partner_1')
         self.company = self.env.ref('base.main_company')
@@ -137,3 +140,38 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
         except UserError as e:
             pass
         self.assertEquals(e, False)
+
+    def test_check_printing_for_invoice_with_2_payments(self):
+        """Ensure that 'paid_amount' contains the correct value when printing
+        check on invoice with two payments.
+        """
+        self.company.check_layout_id = self.check_report
+        acc_payable = self._create_account('account payable test', 'ACPRB1',
+                                           self.acc_payable, True)
+        vendor_bill = self._create_vendor_bill(acc_payable)
+        acc_expense = self._create_account('account expense test', 'ACPRB2',
+                                           self.acc_expense, False)
+        self._create_invoice_line(acc_expense, vendor_bill)
+        self._create_invoice_line(acc_expense, vendor_bill)
+        vendor_bill.action_invoice_open()
+        ctx = {'active_model': 'account.invoice', 'active_ids': [
+            vendor_bill.id]}
+        register_payments = \
+            self.register_payments_model.with_context(ctx).create({
+                'amount': 2.99,  # covers half the invoice amount
+                'payment_date': time.strftime('%Y') + '-07-15',
+                'journal_id': self.bank_journal.id,
+                'payment_method_id': self.payment_method_check.id
+            })
+        register_payments.create_payment()
+        register_payments.create_payment()
+        self.assertEquals(vendor_bill.state, 'paid')
+
+        payment = vendor_bill.payment_ids[0]
+        lines = self.report_check_base_model.get_paid_lines(payment)
+        self.assertEquals(len(lines), 1)
+
+        line = lines[payment.id][0]
+        self.assertEquals(line['number'], vendor_bill.number)
+        self.assertAlmostEqual(line['amount_total'], vendor_bill.amount_total)
+        self.assertAlmostEqual(line['paid_amount'], payment.amount)

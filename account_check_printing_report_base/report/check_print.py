@@ -47,7 +47,10 @@ class ReportCheckPrint(models.AbstractModel):
                 if invoice.type == 'out_refund':
                     line['amount_total'] *= -1
                 total_amount_to_show = 0.0
-                for pay in invoice.payment_move_line_ids:
+                payment_move_lines = (
+                    invoice.payment_move_line_ids & payment.move_line_ids
+                )
+                for pay in payment_move_lines:
                     payment_currency_id = False
                     if invoice.type in ('out_invoice', 'in_refund'):
                         amount = sum(
