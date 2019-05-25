@@ -1,12 +1,8 @@
-# -*- coding: utf-8 -*-
 # Copyright (C) 2012 - TODAY, Open Source Integrators
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import tools
-from odoo import api, fields, models, _
-
-# All unapplied payments are hard-coded to -999
-UNAPPLIED_PAYMENT = -999
+from odoo import api, fields, models
 
 
 class ResPartnerAgingCustomer(models.Model):
@@ -37,123 +33,261 @@ class ResPartnerAgingCustomer(models.Model):
             age_date = fields.Date.context_today(self)
 
         query = """
-                SELECT aml.id, aml.partner_id as partner_id, ai.user_id as salesman, aml.date as date, aml.date as date_due, ai.number as invoice_ref,
+                SELECT aml.id, aml.partner_id as partner_id,
+                ai.user_id as salesman, aml.date as date, aml.date as
+                date_due, ai.number as invoice_ref,
                 days_due AS avg_days_overdue,
                 CASE WHEN (days_due BETWEEN 1 and 30) THEN
-                    CASE WHEN (aml.full_reconcile_id is NULL and aml.amount_residual<0) THEN -(aml.credit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
-                        WHEN (aml.full_reconcile_id is NULL and aml.amount_residual>0) THEN aml.debit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s')
-                        WHEN (aml.full_reconcile_id is NOT NULL) THEN aml.amount_residual END ELSE 0 END AS days_due_01to30,
+                    CASE WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual<0) THEN -(aml.credit-(select
+                    coalesce(sum(apr.amount),0) from account_partial_reconcile
+                    apr where (apr.credit_move_id =aml.id or
+                    apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual>0) THEN aml.debit-(select
+                    coalesce(sum(apr.amount),0) from
+                    account_partial_reconcile apr where
+                    (apr.credit_move_id =aml.id or
+                    apr.debit_move_id=aml.id) and apr.create_date <= '%s')
+                    WHEN (aml.full_reconcile_id is NOT NULL) THEN
+                    aml.amount_residual END ELSE 0 END AS days_due_01to30,
 
                 CASE WHEN (days_due BETWEEN 31 and 60) THEN
-                    CASE WHEN (aml.full_reconcile_id is NULL and aml.amount_residual<0) THEN -(aml.credit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
-                        WHEN (aml.full_reconcile_id is NULL and aml.amount_residual>0) THEN aml.debit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s')
-                        WHEN (aml.full_reconcile_id is NOT NULL) THEN aml.amount_residual END ELSE 0 END AS days_due_31to60,
+                    CASE WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual<0) THEN -(aml.credit-(select
+                    coalesce(sum(apr.amount),0) from account_partial_reconcile
+                    apr where (apr.credit_move_id =aml.id or
+                    apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual>0) THEN aml.debit-(select
+                    coalesce(sum(apr.amount),0) from
+                    account_partial_reconcile apr where
+                    (apr.credit_move_id =aml.id or
+                    apr.debit_move_id=aml.id) and apr.create_date <= '%s')
+                    WHEN (aml.full_reconcile_id is NOT NULL) THEN
+                    aml.amount_residual END ELSE 0 END AS days_due_31to60,
 
                 CASE WHEN (days_due BETWEEN 61 and 90) THEN
-                    CASE WHEN (aml.full_reconcile_id is NULL and aml.amount_residual<0) THEN -(aml.credit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
-                        WHEN (aml.full_reconcile_id is NULL and aml.amount_residual>0) THEN aml.debit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s')
-                        WHEN (aml.full_reconcile_id is NOT NULL) THEN aml.amount_residual END ELSE 0 END AS days_due_61to90,
+                    CASE WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual<0) THEN -(aml.credit-(select
+                    coalesce(sum(apr.amount),0) from account_partial_reconcile
+                    apr where (apr.credit_move_id =aml.id or
+                    apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual>0) THEN aml.debit-(select
+                    coalesce(sum(apr.amount),0) from
+                    account_partial_reconcile apr where
+                    (apr.credit_move_id =aml.id or
+                    apr.debit_move_id=aml.id) and apr.create_date <= '%s')
+                    WHEN (aml.full_reconcile_id is NOT NULL) THEN
+                    aml.amount_residual END ELSE 0 END AS days_due_61to90,
 
                 CASE WHEN (days_due BETWEEN 91 and 120) THEN
-                        CASE WHEN (aml.full_reconcile_id is NULL and aml.amount_residual<0) THEN -(aml.credit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
-                        WHEN (aml.full_reconcile_id is NULL and aml.amount_residual>0) THEN aml.debit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s')
-                        WHEN (aml.full_reconcile_id is NOT NULL) THEN aml.amount_residual END ELSE 0 END AS days_due_91to120,
+                    CASE WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual<0) THEN -(aml.credit-(select
+                    coalesce(sum(apr.amount),0) from account_partial_reconcile
+                    apr where (apr.credit_move_id =aml.id or
+                    apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual>0) THEN aml.debit-(select
+                    coalesce(sum(apr.amount),0) from
+                    account_partial_reconcile apr where
+                    (apr.credit_move_id =aml.id or
+                    apr.debit_move_id=aml.id) and
+                    apr.create_date <= '%s')
+                    WHEN (aml.full_reconcile_id is NOT NULL) THEN
+                    aml.amount_residual END ELSE 0 END AS days_due_91to120,
 
                 CASE WHEN (days_due >= 121) THEN
-                        CASE WHEN (aml.full_reconcile_id is NULL and aml.amount_residual<0) THEN -(aml.credit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
-                        WHEN (aml.full_reconcile_id is NULL and aml.amount_residual>0) THEN aml.debit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s')
-                        WHEN (aml.full_reconcile_id is NOT NULL) THEN aml.amount_residual END ELSE 0 END AS days_due_121togr,
+                    CASE WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual<0) THEN -(aml.credit-(select
+                    coalesce(sum(apr.amount),0) from account_partial_reconcile
+                    apr where (apr.credit_move_id =aml.id or
+                    apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual>0) THEN aml.debit-(select
+                    coalesce(sum(apr.amount),0) from account_partial_reconcile
+                    apr where (apr.credit_move_id =aml.id or
+                    apr.debit_move_id=aml.id) and apr.create_date <= '%s')
+                    WHEN (aml.full_reconcile_id is NOT NULL) THEN
+                    aml.amount_residual END ELSE 0 END AS days_due_121togr,
 
-                CASE when days_due < 0 THEN 0 ELSE days_due END as "max_days_overdue",
+                CASE when days_due < 0 THEN 0 ELSE days_due END as
+                    "max_days_overdue",
 
                 CASE WHEN (days_due < 1) THEN
-                        CASE WHEN (aml.full_reconcile_id is NULL and aml.amount_residual<0) THEN -(aml.credit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
-                        WHEN (aml.full_reconcile_id is NULL and aml.amount_residual>0) THEN aml.debit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s')
-                        WHEN (aml.full_reconcile_id is NOT NULL) THEN aml.amount_residual END ELSE 0 END AS not_due,
+                    CASE WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual<0) THEN -(aml.credit-(select
+                    coalesce(sum(apr.amount),0) from account_partial_reconcile
+                    apr where (apr.credit_move_id =aml.id or
+                    apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual>0) THEN aml.debit-(select
+                    coalesce(sum(apr.amount),0) from account_partial_reconcile
+                    apr where (apr.credit_move_id =aml.id or
+                    apr.debit_move_id=aml.id) and apr.create_date <= '%s')
+                    WHEN (aml.full_reconcile_id is NOT NULL) THEN
+                    aml.amount_residual END ELSE 0 END AS not_due,
 
-                CASE WHEN (aml.full_reconcile_id is NULL and aml.amount_residual<0) THEN -(aml.credit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
-                     WHEN (aml.full_reconcile_id is NULL and aml.amount_residual>0) THEN aml.debit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s')
-                     WHEN (aml.full_reconcile_id is NOT NULL) THEN aml.amount_residual END AS total,
-                ai.id as invoice_id,
-                ai.date_due as inv_date_due
+                CASE WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual<0) THEN -(aml.credit-(select
+                    coalesce(sum(apr.amount),0) from account_partial_reconcile
+                    apr where (apr.credit_move_id =aml.id or
+                    apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual>0) THEN aml.debit-(select
+                    coalesce(sum(apr.amount),0) from account_partial_reconcile
+                    apr where (apr.credit_move_id =aml.id or
+                    apr.debit_move_id=aml.id) and apr.create_date <= '%s')
+                    WHEN (aml.full_reconcile_id is NOT NULL) THEN
+                    aml.amount_residual END AS total,
+                    ai.id as invoice_id,
+                    ai.date_due as inv_date_due
                 FROM account_move_line aml
-                INNER JOIN         
-                  (     
-                   SELECT lt.id, 
-                   CASE WHEN inv.date_due is null then 0
-                   WHEN inv.id is not null THEN '%s' - inv.date_due 
-                   ELSE current_date - lt.date END AS days_due              
-                   FROM account_move_line lt LEFT JOIN account_invoice inv on lt.move_id = inv.move_id   
-                ) DaysDue       
+                INNER JOIN
+                    (SELECT lt.id,
+                    CASE WHEN inv.date_due is null then 0
+                    WHEN inv.id is not null THEN '%s' - inv.date_due
+                    ELSE current_date - lt.date END AS days_due
+                    FROM account_move_line lt LEFT JOIN account_invoice inv
+                    on lt.move_id = inv.move_id) DaysDue
                 ON DaysDue.id = aml.id
                 LEFT JOIN account_invoice as ai ON ai.move_id = aml.move_id
-                WHERE
-                aml.user_type_id in (select id from account_account_type where type = 'receivable')
-                and aml.date <= '%s'
-                AND (ai.state in ('open','paid') OR aml.full_reconcile_id IS NULL)
-                GROUP BY aml.partner_id, aml.id, ai.number, days_due, ai.user_id, ai.id
-                
-                UNION
-                
-                SELECT aml.id, aml.partner_id as partner_id, ai.user_id as salesman, aml.date as date, aml.date as date_due, ai.number as invoice_ref,
-                days_due AS avg_days_overdue,
+                WHERE aml.user_type_id in
+                    (select id from account_account_type where
+                    type = 'receivable') and aml.date
+                    <= '%s' AND (ai.state in ('open','paid') OR
+                    aml.full_reconcile_id IS NULL) GROUP BY aml.partner_id,
+                    aml.id, ai.number, days_due, ai.user_id, ai.id UNION
+                    SELECT aml.id, aml.partner_id as partner_id, ai.user_id as
+                    salesman, aml.date as date, aml.date as date_due,
+                    ai.number as invoice_ref,days_due AS avg_days_overdue,
+
                 CASE WHEN (days_due BETWEEN 1 and 30) THEN
-                    CASE WHEN (aml.full_reconcile_id is NULL and aml.amount_residual<0) THEN -(aml.credit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
-                        WHEN (aml.full_reconcile_id is NULL and aml.amount_residual>0) THEN aml.debit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s')
-                        WHEN (aml.full_reconcile_id is NOT NULL) THEN aml.amount_residual END ELSE 0 END AS days_due_01to30,
+
+                CASE WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual<0) THEN -(aml.credit-(select
+                    coalesce(sum(apr.amount),0) from account_partial_reconcile
+                    apr where (apr.credit_move_id =aml.id or
+                    apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual>0) THEN aml.debit-(select
+                    coalesce(sum(apr.amount),0) from account_partial_reconcile
+                    apr where (apr.credit_move_id =aml.id or
+                    apr.debit_move_id=aml.id) and apr.create_date <= '%s')
+                    WHEN (aml.full_reconcile_id is NOT NULL) THEN
+                    aml.amount_residual END ELSE 0 END AS days_due_01to30,
 
                 CASE WHEN (days_due BETWEEN 31 and 60) THEN
-                    CASE WHEN (aml.full_reconcile_id is NULL and aml.amount_residual<0) THEN -(aml.credit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
-                        WHEN (aml.full_reconcile_id is NULL and aml.amount_residual>0) THEN aml.debit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s')
-                        WHEN (aml.full_reconcile_id is NOT NULL) THEN aml.amount_residual END ELSE 0 END AS days_due_31to60,
+                    CASE WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual<0) THEN -(aml.credit-(select
+                    coalesce(sum(apr.amount),0) from account_partial_reconcile
+                    apr where (apr.credit_move_id =aml.id or
+                    apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                        WHEN (aml.full_reconcile_id is NULL and
+                        aml.amount_residual>0) THEN aml.debit-(select
+                        coalesce(sum(apr.amount),0) from
+                        account_partial_reconcile apr where
+                        (apr.credit_move_id =aml.id or
+                        apr.debit_move_id=aml.id)
+                        and apr.create_date <= '%s')
+                        WHEN (aml.full_reconcile_id is NOT NULL) THEN
+                        aml.amount_residual END ELSE 0 END AS days_due_31to60,
 
                 CASE WHEN (days_due BETWEEN 61 and 90) THEN
-                    CASE WHEN (aml.full_reconcile_id is NULL and aml.amount_residual<0) THEN -(aml.credit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
-                        WHEN (aml.full_reconcile_id is NULL and aml.amount_residual>0) THEN aml.debit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s')
-                        WHEN (aml.full_reconcile_id is NOT NULL) THEN aml.amount_residual END ELSE 0 END AS days_due_61to90,
+                    CASE WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual<0) THEN -(aml.credit-(select
+                    coalesce(sum(apr.amount),0) from account_partial_reconcile
+                    apr where (apr.credit_move_id =aml.id or
+                    apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual>0) THEN aml.debit-(select
+                    coalesce(sum(apr.amount),0) from
+                    account_partial_reconcile apr where
+                    (apr.credit_move_id =aml.id or
+                    apr.debit_move_id=aml.id) and apr.create_date <= '%s')
+                    WHEN (aml.full_reconcile_id is NOT NULL) THEN
+                    aml.amount_residual END ELSE 0 END AS days_due_61to90,
 
                 CASE WHEN (days_due BETWEEN 91 and 120) THEN
-                        CASE WHEN (aml.full_reconcile_id is NULL and aml.amount_residual<0) THEN -(aml.credit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
-                        WHEN (aml.full_reconcile_id is NULL and aml.amount_residual>0) THEN aml.debit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s')
-                        WHEN (aml.full_reconcile_id is NOT NULL) THEN aml.amount_residual END ELSE 0 END AS days_due_91to120,
+                    CASE WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual<0) THEN -(aml.credit-(select
+                    coalesce(sum(apr.amount),0) from
+                    account_partial_reconcile apr where
+                    (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id)
+                    and apr.create_date <= '%s')) WHEN (aml.full_reconcile_id
+                    is NULL and aml.amount_residual>0) THEN
+                    aml.debit-(select coalesce(sum(apr.amount),0) from
+                    account_partial_reconcile apr where
+                    (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id)
+                    and apr.create_date <= '%s')
+                    WHEN (aml.full_reconcile_id is NOT NULL) THEN
+                    aml.amount_residual END ELSE 0 END AS days_due_91to120,
 
                 CASE WHEN (days_due >= 121) THEN
-                        CASE WHEN (aml.full_reconcile_id is NULL and aml.amount_residual<0) THEN -(aml.credit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
-                        WHEN (aml.full_reconcile_id is NULL and aml.amount_residual>0) THEN aml.debit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s')
-                        WHEN (aml.full_reconcile_id is NOT NULL) THEN aml.amount_residual END ELSE 0 END AS days_due_121togr,
+                    CASE WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual<0) THEN -(aml.credit-(select
+                    coalesce(sum(apr.amount),0) from
+                    account_partial_reconcile apr where
+                    (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id)
+                    and apr.create_date <= '%s')) WHEN (aml.full_reconcile_id
+                    is NULL and aml.amount_residual>0) THEN aml.debit-(select
+                    coalesce(sum(apr.amount),0) from account_partial_reconcile
+                    apr where (apr.credit_move_id =aml.id or
+                    apr.debit_move_id=aml.id) and apr.create_date <= '%s')
+                    WHEN (aml.full_reconcile_id is NOT NULL) THEN
+                    aml.amount_residual END ELSE 0 END AS days_due_121togr,
 
-                CASE when days_due < 0 THEN 0 ELSE days_due END as "max_days_overdue",
+                CASE when days_due < 0 THEN
+                    0 ELSE days_due END as "max_days_overdue",
 
                 CASE WHEN (days_due < 1) THEN
-                        CASE WHEN (aml.full_reconcile_id is NULL and aml.amount_residual<0) THEN -(aml.credit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
-                        WHEN (aml.full_reconcile_id is NULL and aml.amount_residual>0) THEN aml.debit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s')
-                        WHEN (aml.full_reconcile_id is NOT NULL) THEN aml.amount_residual END ELSE 0 END AS not_due,
+                    CASE WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual<0) THEN -(aml.credit-(select
+                    coalesce(sum(apr.amount),0) from account_partial_reconcile
+                    apr where (apr.credit_move_id =aml.id or
+                    apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual>0) THEN aml.debit-(select
+                    coalesce(sum(apr.amount),0) from account_partial_reconcile
+                    apr where (apr.credit_move_id =aml.id or
+                    apr.debit_move_id=aml.id) and apr.create_date <= '%s')
+                    WHEN (aml.full_reconcile_id is NOT NULL) THEN
+                    aml.amount_residual END ELSE 0 END AS not_due,
 
-                CASE WHEN (aml.full_reconcile_id is NULL and aml.amount_residual<0) THEN -(aml.credit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
-                     WHEN (aml.full_reconcile_id is NULL and aml.amount_residual>0) THEN aml.debit-(select coalesce(sum(apr.amount),0) from account_partial_reconcile apr where (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id) and apr.create_date <= '%s')
-                     WHEN (aml.full_reconcile_id is NOT NULL) THEN aml.amount_residual END AS total,
-                ai.id as invoice_id,
-                ai.date_due as inv_date_due
-                FROM account_move_line aml
-                INNER JOIN         
-                  (     
-                   SELECT lt.id, 
-                   CASE WHEN inv.date_due is null then 0
-                   WHEN inv.id is not null THEN '%s' - inv.date_due 
-                   ELSE current_date - lt.date END AS days_due              
-                   FROM account_move_line lt LEFT JOIN account_invoice inv on lt.move_id = inv.move_id   
-                ) DaysDue       
+                CASE WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual<0) THEN -(aml.credit-(select
+                    coalesce(sum(apr.amount),0) from account_partial_reconcile
+                    apr where (apr.credit_move_id =aml.id or
+                    apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual>0) THEN aml.debit-(select
+                    coalesce(sum(apr.amount),0) from account_partial_reconcile
+                    apr where (apr.credit_move_id =aml.id or
+                    apr.debit_move_id=aml.id) and apr.create_date <= '%s')
+                    WHEN (aml.full_reconcile_id is NOT NULL) THEN
+                    aml.amount_residual END AS total,
+                    ai.id as invoice_id,
+                    ai.date_due as inv_date_due
+                    FROM account_move_line aml
+                    INNER JOIN
+                      (
+                       SELECT lt.id,
+                       CASE WHEN inv.date_due is null then 0
+                       WHEN inv.id is not null THEN '%s' - inv.date_due
+                       ELSE current_date - lt.date END AS days_due
+                       FROM account_move_line lt LEFT JOIN account_invoice
+                       inv on lt.move_id = inv.move_id
+                    ) DaysDue
                 ON DaysDue.id = aml.id
                 LEFT JOIN account_invoice as ai ON ai.move_id = aml.move_id
-                WHERE
-                aml.user_type_id in (select id from account_account_type where type = 'receivable')
+                WHERE aml.user_type_id in (select id from account_account_type
+                where type = 'receivable')
                 AND aml.date <= '%s'
                 AND aml.partner_id IS NULL
                 AND aml.full_reconcile_id is NULL
-                GROUP BY aml.partner_id, aml.id, ai.number, days_due, ai.user_id, ai.id
-                
-                
-                UNION
+                GROUP BY aml.partner_id, aml.id, ai.number, days_due,
+                ai.user_id, ai.id UNION
                 select aml.id,
                         aml.partner_id as partner_id,
                         aml.create_uid as salesman,
@@ -168,79 +302,45 @@ class ResPartnerAgingCustomer(models.Model):
                         0 as days_due_121togr,
                         0 as max_days_overdue,
                         0 as not_due,
-                       CASE WHEN (aml.credit - (select sum(debit) from account_move_line l where l.full_reconcile_id = aml.full_reconcile_id and l.date<='%s')) > 0 then 
-                           -(aml.credit - (select sum(debit) from account_move_line l where l.full_reconcile_id = aml.full_reconcile_id and l.date<='%s'))
-                       ELSE 0 END AS total,
-                       null as invoice_id,
-                       aml.date as inv_date_due
+                        CASE WHEN (aml.credit - (select sum(debit)
+                        from account_move_line l where
+                        l.full_reconcile_id = aml.full_reconcile_id and
+                        l.date<='%s')) > 0 then -(aml.credit - (select
+                        sum(debit) from account_move_line l where
+                        l.full_reconcile_id = aml.full_reconcile_id and
+                        l.date<='%s')) ELSE 0 END AS total,
+                        null as invoice_id, aml.date as inv_date_due
                 from account_move_line aml
                 where aml.date <= '%s'
                 and aml.full_reconcile_id IS NOT NULL
-                and aml.account_id in (select id from account_account_type where type = 'receivable')
+                and aml.account_id in (select id from
+                account_account_type where type = 'receivable')
                 and aml.credit > 0
-              """ % (age_date, age_date, age_date, age_date,  # noqa
-                     age_date, age_date, age_date, age_date,
-                     age_date, age_date, age_date, age_date,
-                     age_date, age_date, age_date, age_date,
-                     age_date, age_date, age_date, age_date,  # noqa
-                     age_date, age_date, age_date, age_date,
-                     age_date, age_date, age_date, age_date,
-                     age_date, age_date, age_date, age_date,
-                     age_date, age_date, age_date,)
+              """ % (
+            age_date, age_date, age_date, age_date,
+            age_date, age_date, age_date, age_date,
+            age_date, age_date, age_date, age_date,
+            age_date, age_date, age_date, age_date,
+            age_date, age_date, age_date, age_date,
+            age_date, age_date, age_date, age_date,
+            age_date, age_date, age_date, age_date,
+            age_date, age_date, age_date, age_date,
+            age_date, age_date, age_date)
 
-        tools.drop_view_if_exists(self.env.cr, '%s' %
-                                  (self._name.replace('.', '_')))
-        self.env.cr.execute("""CREATE OR REPLACE VIEW %s AS (%s)""" %
-                            (self._name.replace('.', '_'), query))
+        tools.drop_view_if_exists(self.env.cr, self._table)
+        # pylint: disable=sql-injection
+        q = """CREATE OR REPLACE VIEW %s AS (%s)""" % (self._table, (query))
+        self.env.cr.execute(q)
 
     @api.multi
     def open_document(self):
         """
-        @description  Open document (invoice or payment) related to the
-                      unapplied payment or outstanding balance on this line
+        @description  Open form view of Customer Invoice
         """
-        # Get this line's invoice id
-        inv_id = self.invoice_id.id
-
-        # If this is an unapplied payment, get the referenced voucher
-        if inv_id == UNAPPLIED_PAYMENT:
-            payment = self.env['account.voucher']
-            # Get referenced customer payment
-            # (invoice_ref field is actually a payment for these)
-            voucher_id = payment.search([('number', '=', self.invoice_ref)])[0]
-            view = self.env.ref('account_voucher.view_voucher_form')
-            # Set values for form
-            view_id = view and view.id or False
-            name = 'Customer Payments'
-            res_model = 'account.voucher'
-            ctx = "{}"
-            doc_id = voucher_id
-
-        # Otherwise get the invoice
-        else:
-            view = self.env.ref('account.invoice_form')
-            view_id = view and view.id or False
-            name = 'Customer Invoices'
-            res_model = 'account.invoice'
-            ctx = "{'type':'out_invoice'}"
-            doc_id = inv_id
-
-        if not doc_id:
-            return {}
-
-        # Open up the document's form
-        return {
-            'name': _(name),
-            'view_type': 'form',
-            'view_mode': 'form',
-            'view_id': [view_id],
-            'res_model': res_model,
-            'context': ctx,
-            'type': 'ir.actions.act_window',
-            'nodestroy': True,
-            'target': 'current',
-            'res_id': doc_id,
-        }
+        action = self.env.ref('account.action_invoice_tree1').read()[0]
+        action['views'] = [(self.env.ref('account.invoice_form').id, 'form')]
+        action['res_id'] = self.invoice_id.id
+        return action
 
     @api.model_cr
     def init(self):
