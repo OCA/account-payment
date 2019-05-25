@@ -34,7 +34,7 @@
         <field name="model">res.partner.aging.customer</field>
         <field name="type">tree</field>
         <field name="arch" type="xml">
-            <tree create="false" delete="false" string="Customer Aging Date wise" colors="red:max_days_overdue &gt; 0 and total &gt; 0;">
+            <tree create="false" delete="false" string="Customer Aging Date wise" decoration-danger="max_days_overdue > 0 and total > 0">
                 <field name="partner_id" string="Customer" />
                 <field name="salesman" />
                 <field name="date_due" string="Invoice Date"/>
@@ -55,12 +55,12 @@
     </record>
 
     <!-- Customer Aging Action -->
-    <record id="action_customer_aging_ad" model="ir.actions.act_window">
+    <record id="action_customer_aging_tree" model="ir.actions.act_window">
         <field name="name">Customer Aging Date wise</field>
         <field name="res_model">res.partner.aging.customer</field>
         <field name="view_type">form</field>
         <field name="view_id" ref="view_customer_aging_ad_tree" />
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree</field>
         <field name="limit">99999999</field>
     </record>
 
@@ -91,7 +91,7 @@
         <field name="target">new</field>
     </record>
 
-    <!-- Customer Aging Menuitem -->
+    <!-- Customer Aging Menu Item -->
     <menuitem action="action_partner_aging_date"
               id="menu_customer_aging_wizard"
               parent="account.menu_finance_receivables"
