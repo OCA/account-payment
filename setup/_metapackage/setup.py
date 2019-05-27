@@ -24,6 +24,7 @@ setuptools.setup(
         'odoo11-addon-account_payment_return_import_sepa_pain',
         'odoo11-addon-account_payment_show_invoice',
         'odoo11-addon-account_payment_widget_amount',
+        'odoo11-addon-account_voucher_killer',
     ],
     classifiers=[
         'Programming Language :: Python',
