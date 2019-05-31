@@ -19,77 +19,69 @@ class ReportCheckPrint(models.AbstractModel):
         else:
             return amount_in_word
 
+    def _get_residual_amount(self, payment, line):
+        amt = line.amount_residual
+        if amt < 0.0:
+            amt *= -1
+        amt = payment.company_id.currency_id.with_context(
+            date=payment.payment_date).compute(
+            amt, payment.currency_id)
+        return amt
+
+    def _get_total_amount(self, payment, line):
+        amt = line.balance
+        if amt < 0.0:
+            amt *= -1
+        amt = payment.company_id.currency_id.with_context(
+            date=payment.payment_date).compute(
+            amt, payment.currency_id)
+        return amt
+
+    def _get_paid_amount(self, payment, line):
+        amount = 0.0
+        total_amount_to_show = 0.0
+        # We pay out
+        if line.matched_credit_ids:
+            amount = sum([p.amount for p in line.matched_credit_ids])
+        # We receive payment
+        elif line.matched_debit_ids:
+            amount = sum([p.amount for p in line.matched_debit_ids])
+
+        amount_to_show = \
+            payment.company_id.currency_id.with_context(
+                date=payment.payment_date).compute(
+                amount, payment.currency_id)
+        if not float_is_zero(
+                amount_to_show,
+                precision_rounding=payment.currency_id.rounding):
+            total_amount_to_show = amount_to_show
+        return total_amount_to_show
+
     @api.multi
     def get_paid_lines(self, payments):
-        if self.env.context.get('active_model') != 'account.payment':
-            return {}
         lines = {}
         for payment in payments:
             lines[payment.id] = []
-            for invoice in payment.invoice_ids:
-                amount_currency = 0.0
-                amount = 0.0
+            pay_acc = payment.journal_id.default_debit_account_id or \
+                      payment.journal_id.default_credit_account_id
+            rec_lines = payment.move_line_ids.filtered(
+                lambda x: x.account_id.reconcile and x.account_id != pay_acc)
+            amls = rec_lines.matched_credit_ids.mapped('credit_move_id') + \
+                   rec_lines.matched_debit_ids.mapped('debit_move_id')
+            amls -= rec_lines
+            for aml in amls:
+                date_due = aml.date_maturity
+                total_amt = self._get_total_amount(payment, aml)
+                residual_amt = self._get_residual_amount(payment, aml)
+                paid_amt = self._get_paid_amount(payment, aml)
                 line = {
-                    'date_due': invoice.date_due,
-                    'reference': invoice.reference,
-                    'number': invoice.number,
-                    'amount_total': invoice.amount_total,
-                    'residual': invoice.residual,
-                    'paid_amount': 0.0
+                    'date_due': date_due,
+                    'reference': aml.display_name,
+                    'number': aml.name,
+                    'amount_total': total_amt,
+                    'residual': residual_amt,
+                    'paid_amount': paid_amt,
                 }
-                if invoice.type == 'out_refund':
-                    line['amount_total'] *= -1
-                total_amount_to_show = 0.0
-                for pay in invoice.payment_move_line_ids:
-                    payment_currency_id = False
-                    if invoice.type in ('out_invoice', 'in_refund'):
-                        amount = sum(
-                            [p.amount for p in pay.matched_debit_ids if
-                             p.debit_move_id in invoice.move_id.line_ids])
-                        amount_currency = sum([p.amount_currency for p in
-                                               pay.matched_debit_ids if
-                                               p.debit_move_id in
-                                               invoice.move_id.line_ids])
-                        if pay.matched_debit_ids:
-                            payment_currency_id = \
-                                all(
-                                    [p.currency_id ==
-                                     pay.matched_debit_ids[0].currency_id
-                                     for p in pay.matched_debit_ids]) \
-                                and pay.matched_debit_ids[0].currency_id \
-                                or False
-                    elif invoice.type in ('in_invoice', 'out_refund'):
-                        amount = sum(
-                            [p.amount for p in pay.matched_credit_ids if
-                             p.credit_move_id in invoice.move_id.line_ids])
-                        amount_currency = sum([p.amount_currency for p in
-                                               pay.matched_credit_ids if
-                                               p.credit_move_id in
-                                               invoice.move_id.line_ids])
-                        if pay.matched_credit_ids:
-                            payment_currency_id = \
-                                all(
-                                    [p.currency_id ==
-                                     pay.matched_credit_ids[0].currency_id
-                                     for p in pay.matched_credit_ids]) \
-                                and pay.matched_credit_ids[0].currency_id \
-                                or False
-
-                    if payment_currency_id and payment_currency_id == \
-                            invoice.currency_id:
-                        amount_to_show = amount_currency
-                    else:
-                        amount_to_show = \
-                            pay.company_id.currency_id.with_context(
-                                date=pay.date).compute(
-                                amount, invoice.currency_id)
-                    if not float_is_zero(
-                            amount_to_show,
-                            precision_rounding=invoice.currency_id.rounding):
-                        total_amount_to_show += amount_to_show
-                if invoice.type in ['in_refund', 'out_refund']:
-                    total_amount_to_show *= -1
-                line['paid_amount'] = total_amount_to_show
                 lines[payment.id].append(line)
         return lines
 
