@@ -15,7 +15,7 @@
                         <span t-esc="o.payment_date"/>
                         <br/>
                         <span t-field="o.amount"
-                              t-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                              t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                         <br/>
                         <span t-esc="fill_stars(o.check_amount_in_words)"/>
                     </div>
@@ -56,15 +56,15 @@
                                                 </td>
                                                 <td>
                                                     <span t-esc="line['amount_total']"
-                                                          t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                                                          t-esc-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                                                 </td>
                                                 <td>
                                                     <span t-esc="line['residual']"
-                                                          t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                                                          t-esc-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                                                 </td>
                                                 <td>
                                                     <span t-esc="line['paid_amount']"
-                                                          t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                                                          t-esc-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                                                 </td>
                                             </tr>
                                         </t>
@@ -74,7 +74,7 @@
                                      align="right">
                                     <b>Check Amount:</b>
                                     <span t-field="o.amount"
-                                          t-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                                          t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                                 </div>
                             </t>
                         </div>
