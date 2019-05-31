@@ -29,23 +29,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <t name="paid_lines_loop" t-foreach="o.invoice_ids" t-as="line">
+                                    <t name="paid_lines_loop" t-foreach="paid_lines(o)" t-as="line">
                                         <tr style="text-align:left;border-top: 0px;">
                                             <td style="padding-top:2mm;">
-                                                <span t-esc="_format_date_to_partner_lang(line.date_due, o.partner_id.id)"/>
+                                                <span t-esc="_format_date_to_partner_lang(line.date_maturity, o.partner_id.id)"/>
                                             </td>
                                             <td style="max-width: 55mm;"
-                                                t-esc="line.reference or line.number"/>
+                                                t-esc="line.display_name"/>
                                             <td>
-                                                <span t-esc="total_amount(line)"
+                                                <span t-esc="total_amount(o, line)"
                                                       t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
                                             </td>
                                             <td>
-                                                <span t-field="line.residual"
+                                                <span t-esc="residual_amount(o, line)"
                                                       t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
                                             </td>
                                             <td>
-                                                <span t-esc="payed_amount(line)"
+                                                <span t-esc="paid_amount(o, line)"
                                                       t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
                                             </td>
                                         </tr>
