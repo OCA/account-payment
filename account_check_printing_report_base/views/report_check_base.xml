@@ -49,7 +49,7 @@
                                                     <span t-esc="line['date_due']"/>
                                                 </td>
                                                 <td>
-                                                    <span t-esc="line['reference'] or line['number']"/>
+                                                    <span t-esc="line['reference']"/>
                                                 </td>
                                                 <td>
                                                     <span t-esc="line['amount_total']"
