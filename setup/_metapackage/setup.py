@@ -18,6 +18,7 @@ setuptools.setup(
         'odoo11-addon-account_early_payment_discount',
         'odoo11-addon-account_move_line_auto_reconcile_hook',
         'odoo11-addon-account_partner_reconcile',
+        'odoo11-addon-account_payment_batch_process',
         'odoo11-addon-account_payment_credit_card',
         'odoo11-addon-account_payment_return',
         'odoo11-addon-account_payment_return_import',
