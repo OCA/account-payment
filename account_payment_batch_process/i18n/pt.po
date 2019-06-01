@@ -1,0 +1,305 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_payment_batch_process
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2019-02-13 20:50+0000\n"
+"Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>\n"
+"Language-Team: none\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.4\n"
+
+#. module: account_payment_batch_process
+#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:396
+#, python-format
+msgid " and %s/100"
+msgstr " e %s/100"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_customer_payment_line_writeoff_account_id
+msgid "Account"
+msgstr "Conta"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_customer_payment_line_handling
+msgid "Action"
+msgstr "Ação"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_customer_payment_line_check_amount_in_words
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line_check_amount_in_words
+msgid "Amount in Words"
+msgstr "Valor por Extenso"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_account_register_payments_is_auto_fill
+#: model:ir.ui.view,arch_db:account_payment_batch_process.view_account_payment_from_invoices_batch_inherited
+msgid "Auto-Fill Pay Amount"
+msgstr "Preencher Automaticamente o Montante de Pagamento"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line_balance_amt
+msgid "Balance Amount"
+msgstr "Valor do Saldo"
+
+#. module: account_payment_batch_process
+#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:374
+#: model:ir.actions.act_window,name:account_payment_batch_process.action_invoice_batch_process
+#: model:ir.actions.act_window,name:account_payment_batch_process.action_invoice_invoice_batch_process
+#, python-format
+msgid "Batch Payments"
+msgstr "Pagamentos em Lote"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_account_register_payments_cheque_amount
+msgid "Check Amount"
+msgstr "Valor a Verificar"
+
+#. module: account_payment_batch_process
+#: code:addons/account_payment_batch_process/models/account_payment.py:73
+#, python-format
+msgid "Counterpart"
+msgstr "Contraparte"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_customer_payment_line_create_uid
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line_create_uid
+msgid "Created by"
+msgstr "Criado por"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_customer_payment_line_create_date
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line_create_date
+msgid "Created on"
+msgstr "Criado em"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_customer_payment_line_invoice_id
+msgid "Customer Invoice"
+msgstr "Fatura do Cliente"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_customer_payment_line_partner_id
+msgid "Customer Name"
+msgstr "Nome do Cliente"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_customer_payment_line_payment_difference
+msgid "Difference Amount"
+msgstr "Valor da Diferença"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_customer_payment_line_display_name
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line_display_name
+msgid "Display Name"
+msgstr "Nome a Exibir"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_customer_payment_line_id
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line_id
+msgid "ID"
+msgstr ""
+
+#. module: account_payment_batch_process
+#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:126
+#, python-format
+msgid "In order to pay multiple invoices at once, they must use the same currency."
+msgstr ""
+"Para pagar várias faturas ao mesmo tempo, estas devem estar na mesma moeda."
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_customer_payment_line_balance_amt
+msgid "Invoice Balance"
+msgstr "Saldo da Fatura"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_account_register_payments_is_customer
+msgid "Is Customer?"
+msgstr "É Cliente?"
+
+#. module: account_payment_batch_process
+#: selection:invoice.customer.payment.line,handling:0
+msgid "Keep open"
+msgstr "Manter em aberto"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_customer_payment_line___last_update
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line___last_update
+#, fuzzy
+msgid "Last Modified on"
+msgstr "Última Modificação em"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_customer_payment_line_write_uid
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line_write_uid
+#, fuzzy
+msgid "Last Updated by"
+msgstr "Última Atualização por"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_customer_payment_line_write_date
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line_write_date
+#, fuzzy
+msgid "Last Updated on"
+msgstr "Última Atualização em"
+
+#. module: account_payment_batch_process
+#: model:ir.ui.view,arch_db:account_payment_batch_process.view_account_payment_from_invoices_batch_inherited
+#, fuzzy
+msgid "List of Customer Invoices to Receive"
+msgstr "Lista de Faturas de Cliente a Receber"
+
+#. module: account_payment_batch_process
+#: model:ir.ui.view,arch_db:account_payment_batch_process.view_account_payment_from_invoices_batch_inherited
+#, fuzzy
+msgid "List of Supplier Invoices to Pay"
+msgstr "Lista de Faturas de Fornecedor a Pagar"
+
+#. module: account_payment_batch_process
+#: model:ir.ui.view,arch_db:account_payment_batch_process.view_account_payment_from_invoices_batch_inherited
+#, fuzzy
+msgid "Make Payments"
+msgstr "Fazer Pagamentos"
+
+#. module: account_payment_batch_process
+#: selection:invoice.customer.payment.line,handling:0
+#, fuzzy
+msgid "Mark invoice as fully paid"
+msgstr "Marcar a fatura como paga na totalidade"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line_paying_amt
+#, fuzzy
+msgid "Pay Amount"
+msgstr "Valor a Pagar"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_customer_payment_line_payment_method_id
+#, fuzzy
+msgid "Payment Type"
+msgstr "Tipo do Pagamento"
+
+#. module: account_payment_batch_process
+#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:344
+#: model:ir.model,name:account_payment_batch_process.model_account_payment
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_account_register_payments_invoice_payments
+#, fuzzy, python-format
+msgid "Payments"
+msgstr "Pagamentos"
+
+#. module: account_payment_batch_process
+#: model:ir.ui.view,arch_db:account_payment_batch_process.view_account_payment_from_invoices_batch_inherited
+#, fuzzy
+msgid "Post Difference In"
+msgstr "Publicar Diferença em"
+
+#. module: account_payment_batch_process
+#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:112
+#, fuzzy, python-format
+msgid "Program error: the expected model for this action is 'account.invoice'. The provided one is '%d'."
+msgstr ""
+"Erro de Programação: o modelo esperado para esta ação é 'account.invoice'. O "
+"que foi disponibilizado é '%d'."
+
+#. module: account_payment_batch_process
+#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:109
+#, fuzzy, python-format
+msgid "Program error: wizard action executed without active_model or active_ids in context."
+msgstr ""
+"Erro de programação: ação do assistente executada sem active_model ou "
+"active_ids no contexto."
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_account_register_payments_invoice_customer_payments
+#, fuzzy
+msgid "Receipts"
+msgstr "Recebimentos"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_customer_payment_line_receiving_amt
+#, fuzzy
+msgid "Receive Amount"
+msgstr "Valor a Receber"
+
+#. module: account_payment_batch_process
+#: model:ir.model,name:account_payment_batch_process.model_account_register_payments
+#, fuzzy
+msgid "Register payments on multiple invoices"
+msgstr "Registar pagamentos em múltiplas faturas"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line_invoice_id
+#, fuzzy
+msgid "Supplier Invoice"
+msgstr "Fatura de Fornecedor"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line_partner_id
+#, fuzzy
+msgid "Supplier Name"
+msgstr "Nome do Fornecedor"
+
+#. module: account_payment_batch_process
+#: model:ir.ui.view,arch_db:account_payment_batch_process.view_account_payment_from_invoices_batch_inherited
+#, fuzzy
+msgid "TOTAL BALANCE"
+msgstr "Saldo Total"
+
+#. module: account_payment_batch_process
+#: model:ir.ui.view,arch_db:account_payment_batch_process.view_account_payment_from_invoices_batch_inherited
+#, fuzzy
+msgid "TOTAL PAYMENT"
+msgstr "Pagamento Total"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_account_register_payments_total_customer_pay_amount
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_account_register_payments_total_pay_amount
+#, fuzzy
+msgid "Total Invoices"
+msgstr "Total das Faturas"
+
+#. module: account_payment_batch_process
+#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:204
+#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:282
+#, fuzzy, python-format
+msgid "Verification Failed! Total Invoices Amount and Check amount does not match!"
+msgstr ""
+"A verificação falhou! O valor total das faturas não coincide com o valor de "
+"verificação!"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_customer_payment_line_wizard_id
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line_wizard_id
+#, fuzzy
+msgid "Wizard"
+msgstr "Assistente"
+
+#. module: account_payment_batch_process
+#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:119
+#, fuzzy, python-format
+msgid "You can only register payments for open invoices"
+msgstr "Só pode registar pagamentos para faturas em aberto"
+
+#. module: account_payment_batch_process
+#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:123
+#: code:addons/account_payment_batch_process/wizard/invoice_batch_process.py:154
+#, fuzzy, python-format
+msgid "You cannot mix customer invoices and vendor bills in a single payment."
+msgstr "Não pode juntar faturas de clientes e fornecedores num único pagamento."
+
+#. module: account_payment_batch_process
+#: model:ir.model,name:account_payment_batch_process.model_invoice_customer_payment_line
+msgid "invoice.customer.payment.line"
+msgstr ""
+
+#. module: account_payment_batch_process
+#: model:ir.model,name:account_payment_batch_process.model_invoice_payment_line
+msgid "invoice.payment.line"
+msgstr ""
