@@ -21,6 +21,7 @@ setuptools.setup(
         'odoo10-addon-account_partner_reconcile',
         'odoo10-addon-account_payment_batch_process',
         'odoo10-addon-account_payment_credit_card',
+        'odoo10-addon-account_payment_residual_amount',
         'odoo10-addon-account_payment_return',
         'odoo10-addon-account_payment_return_import',
         'odoo10-addon-account_payment_return_import_sepa_pain',
