@@ -28,7 +28,7 @@ Account Payment Residual Amount
 This module allows a user to display the amount from a payment that has not
 yet been reconciled (called the residual amount).
 
-.. image:: account_payment_show_invoice/static/description/payments_view.png
+.. image:: https://raw.githubusercontent.com/OCA/account-payment/10.0/account_payment_residual_amount/account_payment_show_invoice/static/description/payments_view.png
    :alt: payment view
    :width: 600 px
 
