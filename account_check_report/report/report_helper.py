@@ -20,10 +20,12 @@ class ReportCheckPrint(models.AbstractModel):
         return date.strftime(lang.date_format)
 
     def _get_paid_lines(self, payment):
+        pay_acc = payment.journal_id.default_debit_account_id or \
+            payment.journal_id.default_credit_account_id
         rec_lines = payment.move_line_ids.filtered(
-            lambda l: l.account_id.reconcile)
-        amls = rec_lines.matched_credit_ids.mapped('credit_move_id') + \
-            rec_lines.matched_debit_ids.mapped('debit_move_id')
+            lambda x: x.account_id.reconcile and x.account_id != pay_acc)
+        amls = rec_lines.mapped('matched_credit_ids.credit_move_id') + \
+            rec_lines.mapped('matched_debit_ids.debit_move_id')
         amls -= rec_lines
         return amls
 
