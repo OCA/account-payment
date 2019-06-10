@@ -21,7 +21,8 @@ class ReportCheckPrint(models.AbstractModel):
 
     @api.multi
     def get_paid_lines(self, payments):
-        if self.env.context.get('active_model') != 'account.payment':
+        model = self.env.context.get('active_model')
+        if model and model != 'account.payment':
             return {}
         lines = {}
         for payment in payments:
