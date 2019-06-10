@@ -91,9 +91,13 @@ msgstr "Nombre mostrado"
 
 #. module: account_check_printing_report_base
 #: model:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
+#, fuzzy
+#| msgid ""
+#| "Due\n"
+#| "                                                Date"
 msgid ""
 "Due\n"
-"                                                Date"
+"                                                    Date"
 msgstr ""
 "Fecha\n"
 "                                                Vencimiento"
