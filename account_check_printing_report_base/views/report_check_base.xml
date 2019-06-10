@@ -15,7 +15,7 @@
                         <span t-esc="o.payment_date"/>
                         <br/>
                         <span t-field="o.amount"
-                              t-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                              t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
                         <br/>
                         <span t-esc="fill_stars(o.check_amount_in_words)"/>
                     </div>
@@ -30,52 +30,54 @@
                                 <span style="padding-right:60mm;float:right;"
                                       t-esc="o.payment_date"/>
                             </strong>
-                            <t t-foreach="range(2)" t-as="i">
-                                <table width="100%"
-                                       style="padding-right:22mm;">
-                                    <thead>
-                                        <tr style="text-align:left;">
-                                            <th style="padding-top:3mm;">Due
-                                                Date
-                                            </th>
-                                            <th>Description</th>
-                                            <th>Original Amount</th>
-                                            <th>Balance Due</th>
-                                            <th>Payment</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <t t-foreach="paid_lines[o.id]"
-                                           t-as="line">
-                                            <tr style="text-align:left;border-top: 0px;">
-                                                <td style="padding-top:3mm;">
-                                                    <span t-esc="line['date_due']"/>
-                                                </td>
-                                                <td>
-                                                    <span t-esc="line['reference'] or line['number']"/>
-                                                </td>
-                                                <td>
-                                                    <span t-esc="line['amount_total']"
-                                                          t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
-                                                </td>
-                                                <td>
-                                                    <span t-esc="line['residual']"
-                                                          t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
-                                                </td>
-                                                <td>
-                                                    <span t-esc="line['paid_amount']"
-                                                          t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
-                                                </td>
+                            <t t-if="paid_lines">
+                                <t t-foreach="range(2)" t-as="i">
+                                    <table width="100%"
+                                           style="padding-right:22mm;">
+                                        <thead>
+                                            <tr style="text-align:left;">
+                                                <th style="padding-top:3mm;">Due
+                                                    Date
+                                                </th>
+                                                <th>Description</th>
+                                                <th>Original Amount</th>
+                                                <th>Balance Due</th>
+                                                <th>Payment</th>
                                             </tr>
-                                        </t>
-                                    </tbody>
-                                </table>
-                                <div style="padding-right:20mm;padding-top:45mm;padding-bottom:15mm;"
-                                     align="right">
-                                    <b>Check Amount:</b>
-                                    <span t-field="o.amount"
-                                          t-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
-                                </div>
+                                        </thead>
+                                        <tbody>
+                                            <t t-foreach="paid_lines[o.id]"
+                                               t-as="line">
+                                                <tr style="text-align:left;border-top: 0px;">
+                                                    <td style="padding-top:3mm;">
+                                                        <span t-esc="line['date_due']"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="line['reference'] or line['number']"/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="line['amount_total']"
+                                                              t-esc-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="line['residual']"
+                                                              t-esc-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                                    </td>
+                                                    <td>
+                                                        <span t-esc="line['paid_amount']"
+                                                              t-esc-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                                    </td>
+                                                </tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+                                    <div style="padding-right:20mm;padding-top:45mm;padding-bottom:15mm;"
+                                         align="right">
+                                        <b>Check Amount:</b>
+                                        <span t-field="o.amount"
+                                              t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                    </div>
+                                </t>
                             </t>
                         </div>
                     </div>
