@@ -86,7 +86,7 @@ class TestImport(TestPaymentReturnFile):
         self._test_return_import(
             'account_payment_return_import_iso20022',
             'test-sepa-camt-unpaid.xml',
-            'MSGID99345678912',
+            'ZY08XXXXXXIS634C',
             local_account='NL77ABNA0574908765',
             date='2016-10-08', transactions=transactions
         )
@@ -103,7 +103,7 @@ class TestImport(TestPaymentReturnFile):
             self._test_return_import(
                 'account_payment_return_import_iso20022',
                 'test-sepa-camt-unpaid-invalid.xml',
-                'MSGID99345678912',
+                'ZY08XXXXXXIS634C',
                 local_account='NL77ABNA0574908765',
                 date='2016-10-08', transactions=transactions
             )
@@ -113,7 +113,7 @@ class TestImport(TestPaymentReturnFile):
         self._test_return_import(
             'account_payment_return_import_iso20022',
             'test-sepa-camt-unpaid.zip',
-            'MSGID99345678912',
+            'ZY08XXXXXXIS634C',
             local_account='NL77ABNA0574908765',
             date='2016-10-08'
         )
