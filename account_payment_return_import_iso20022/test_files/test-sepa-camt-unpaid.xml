@@ -55,6 +55,11 @@
                             <EndToEndId>E2EID1</EndToEndId>
                             <MndtId>MANDATEID2</MndtId>
                         </Refs>
+                        <AmtDtls>
+                            <InstdAmt>
+                                <Amt Ccy="EUR">100.00</Amt>
+                            </InstdAmt>
+                        </AmtDtls>
                         <RltdPties>
                             <Dbtr>
                                 <Nm>DEBTOR4</Nm>

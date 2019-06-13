@@ -19,11 +19,12 @@ class CamtParser(object):
 
     @staticmethod
     def parse_amount(ns, node):
-        """Parse element that contains Amount and CreditDebitIndicator."""
+        """Parse element that contains Amount."""
         if node is None:
             return 0.0
         amount = 0.0
-        amount_node = node.xpath('./ns:Amt', namespaces={'ns': ns})
+        amount_node = node.xpath(
+            './ns:AmtDtls/ns:InstdAmt/ns:Amt', namespaces={'ns': ns})
         if amount_node:
             amount = float(amount_node[0].text)
         return amount
@@ -79,47 +80,58 @@ class CamtParser(object):
             ns, node, './ns:RtrInf/ns:AddtlInf',
             transaction, 'reason_additional_information')
 
-    def parse_transaction(self, ns, node, transaction):
+    def parse_transactions(self, ns, node, transactions):
         """
-        Parse transaction (entry) node.
+        Parse transactions (entry) node.
         """
-        return_info = node.xpath(
-            './ns:NtryDtls/ns:TxDtls/ns:RtrInf', namespaces={'ns': ns})
-        if not return_info:
-            return transaction
-        transaction['amount'] = self.parse_amount(ns, node)
-        details_node = node.xpath(
+        details_nodes = node.xpath(
             './ns:NtryDtls/ns:TxDtls', namespaces={'ns': ns})
-        if details_node:
-            self.parse_transaction_details(ns, details_node[0], transaction)
-        transaction['raw_import_data'] = etree.tostring(node)
-        return transaction
-
-    def parse_payment_return(self, ns, node):
-        """
-        Parse a single payment return node.
-        """
-        payment_return = {}
-        self.add_value_from_node(
-            ns, node, './ns:GrpHdr/ns:MsgId', payment_return, 'name')
-        payment_return['date'] = self.parse_date(ns, node)
-        self.add_value_from_node(
-            ns, node, './ns:Ntfctn/ns:Acct/ns:Id/ns:IBAN', payment_return,
-            'account_number')
-        entry_nodes = node.xpath(
-            './ns:Ntfctn/ns:Ntry', namespaces={'ns': ns})
-        payment_return['transactions'] = []
-        for entry_node in entry_nodes:
+        for details_node in details_nodes:
+            return_info = details_node.xpath(
+                './ns:RtrInf', namespaces={'ns': ns})
+            if not return_info:
+                continue
             transaction = {}
-            self.parse_transaction(ns, entry_node, transaction)
-            payment_return['transactions'].append(transaction)
-        # Give an unique ID to each transaction
-        subno = 0
-        for transaction in payment_return['transactions']:
-            subno += 1
-            transaction['unique_import_id'] = (
-                payment_return['name'] + str(subno).zfill(4))
-        return payment_return
+            transaction['amount'] = self.parse_amount(ns, details_node)
+            self.parse_transaction_details(ns, details_node, transaction)
+            transaction['raw_import_data'] = etree.tostring(details_node)
+            transactions.append(transaction)
+        return transactions
+
+    def parse_payment_returns(self, ns, node):
+        """
+        Parse entry node.
+        """
+        return_date = self.parse_date(ns, node)
+        payment_returns = []
+        notification_nodes = node.xpath(
+            './ns:Ntfctn', namespaces={'ns': ns})
+        for notification_node in notification_nodes:
+            entry_nodes = notification_node.xpath(
+                './ns:Ntry', namespaces={'ns': ns})
+            for i, entry_node in enumerate(entry_nodes):
+                payment_return = {}
+                self.add_value_from_node(
+                    ns, notification_node, './ns:Id', payment_return, 'name')
+                payment_return['date'] = return_date
+                self.add_value_from_node(
+                    ns, notification_node, './ns:Acct/ns:Id/ns:IBAN',
+                    payment_return, 'account_number')
+                payment_return['transactions'] = []
+                transactions = []
+                self.parse_transactions(ns, entry_node, transactions)
+                payment_return['transactions'].extend(transactions)
+                subno = 0
+                for transaction in payment_return['transactions']:
+                    subno += 1
+                    transaction['unique_import_id'] = \
+                        "{return_name}{entry_subno}{transaction_subno}".format(
+                            return_name=payment_return['name'],
+                            entry_subno=i,
+                            transaction_subno=subno,
+                        )
+                payment_returns.append(payment_return)
+        return payment_returns
 
     def check_version(self, ns, root):
         """
@@ -150,9 +162,10 @@ class CamtParser(object):
             raise ValueError("The XML file is not valid.")
         ns = root.tag[1:root.tag.index("}")]
         self.check_version(ns, root)
-        payment_returns = []
+        parsed_payment_returns = []
         for node in root:
-            payment_return = self.parse_payment_return(ns, node)
-            if payment_return['transactions']:
-                payment_returns.append(payment_return)
-        return payment_returns
+            payment_returns = self.parse_payment_returns(ns, node)
+            for payment_return in payment_returns:
+                if payment_return['transactions']:
+                    parsed_payment_returns.append(payment_return)
+        return parsed_payment_returns
