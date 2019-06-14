@@ -17,6 +17,7 @@
                'account_payment_return_import',
     'depends': ['account_payment_return'],
     'data': [
+        'views/payment_return_view.xml',
         'wizard/payment_return_import_view.xml',
     ],
     'installable': True,

@@ -19,13 +19,13 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:264
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:267
 #, python-format
 msgid "%d transactions had already been imported and were ignored."
 msgstr ""
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:267
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:270
 #, python-format
 msgid "1 transaction had already been imported and was ignored."
 msgstr ""
@@ -44,13 +44,24 @@ msgid ""
 msgstr ""
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:270
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:273
 #, python-format
 msgid "Already imported items"
 msgstr ""
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:211
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return__imported_bank_account_id
+#: model_terms:ir.ui.view,arch_db:account_payment_return_import.payment_return_search_view
+msgid "Bank account"
+msgstr ""
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,help:account_payment_return_import.field_payment_return__imported_bank_account_id
+msgid "Bank account from the imported file"
+msgstr ""
+
+#. module: account_payment_return_import
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:214
 #, python-format
 msgid "Can not determine journal for import."
 msgstr ""
@@ -168,6 +179,11 @@ msgstr ""
 #. module: account_payment_return_import
 #: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__data_file
 msgid "Payment Return File"
+msgstr ""
+
+#. module: account_payment_return_import
+#: model:ir.model,name:account_payment_return_import.model_payment_return
+msgid "Payment return"
 msgstr ""
 
 #. module: account_payment_return_import
