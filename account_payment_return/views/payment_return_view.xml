@@ -31,6 +31,7 @@
                         <field name="date"/>
                         <field name="company_id" groups="base.group_multi_company"/>
                         <field name="move_id" readonly="True"/>
+                        <field name="total_amount"/>
                     </group>
                     <notebook colspan="4">
                         <page string="Lines">
@@ -50,8 +51,8 @@
                                                     ('account_id.internal_type', '=', 'receivable'),
                                                     ('reconciled', '=', True)]"
                                             />
-                                    <field name="amount"/>
-                                    <field name="expense_amount" />
+                                    <field name="amount" sum="Total amount"/>
+                                    <field name="expense_amount" sum="Total charges amount"/>
                                     <field name="expense_account"
                                            attrs="{'required':[('expense_amount','!=', 0)]}" />
                                     <field name="expense_partner_id"
@@ -80,6 +81,7 @@
                 <field name="journal_id"/>
                 <field name="company_id" groups="base.group_multi_company"/>
                 <field name="state"/>
+                <field name="total_amount" sum="Total amount"/>
             </tree>
         </field>
     </record>
