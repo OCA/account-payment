@@ -49,6 +49,12 @@ class PaymentReturn(models.Model):
         string='Reference to the created journal entry',
         states={'done': [('readonly', True)],
                 'cancelled': [('readonly', True)]})
+    total_amount = fields.Float(
+        string="Total amount",
+        compute='_compute_total_amount',
+        readonly=True,
+        store=False,
+    )
     state = fields.Selection(
         selection=[('draft', 'Draft'),
                    ('imported', 'Imported'),
@@ -88,6 +94,24 @@ class PaymentReturn(models.Model):
                 _("Payment reference must be unique"
                   "\n%s") % '\n'.join(error_list)
             )
+
+    @api.multi
+    @api.depends('line_ids.amount')
+    def _compute_total_amount(self):
+        return_line_model = self.env['payment.return.line']
+        domain = [('return_id', 'in', self.ids)]
+        res = return_line_model.read_group(
+            domain=domain,
+            fields=['return_id', 'amount'],
+            groupby=['return_id'],
+        )
+        lines_dict = {}
+        for dic in res:
+            return_id = dic['return_id'][0]
+            total_amount = dic['amount']
+            lines_dict[return_id] = total_amount
+        for rec in self:
+            rec.total_amount = lines_dict.get(rec.id, 0.0)
 
     def _get_move_amount(self, return_line):
         return return_line.amount
