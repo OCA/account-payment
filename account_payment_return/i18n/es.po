@@ -34,7 +34,7 @@ msgid "Additional information on return reason."
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:259
+#: code:addons/account_payment_return/models/payment_return.py:336
 #, python-format
 msgid "All payments must be owned by the same partner"
 msgstr "Todos los pagos deben pertenecer a la misma empresa"
@@ -47,6 +47,11 @@ msgstr "Importe"
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_attachment_count
 msgid "Attachment Count"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__auto_reconcile_failure
+msgid "Automatic reconciliation failure"
 msgstr ""
 
 #. module: account_payment_return
@@ -165,6 +170,14 @@ msgid "Draft"
 msgstr "Borrador"
 
 #. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_account_journal__return_auto_reconcile
+msgid ""
+"Enable automatic payment return reconciliation. This option is meant to be "
+"used only when working when transfer accounts, not if working directly with "
+"bank accounts."
+msgstr ""
+
+#. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_follower_ids
 msgid "Followers"
 msgstr ""
@@ -177,6 +190,11 @@ msgstr ""
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_partner_ids
 msgid "Followers (Partners)"
+msgstr ""
+
+#. module: account_payment_return
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_search_view
+msgid "Group By"
 msgstr ""
 
 #. module: account_payment_return
@@ -217,7 +235,7 @@ msgid "Invoice has been included on a payment that has been returned later."
 msgstr "La factura ha sido incluida en un pago que ha sido devuelto más tarde."
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:286
+#: code:addons/account_payment_return/models/payment_return.py:363
 #, python-format
 msgid "Invoice: %s"
 msgstr "Factura: %s"
@@ -234,6 +252,7 @@ msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_account_journal
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_search_view
 msgid "Journal"
 msgstr "Diario"
 
@@ -300,19 +319,19 @@ msgid "Messages"
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:320
+#: code:addons/account_payment_return/models/payment_return.py:397
 #, python-format
 msgid "More than one matches to move reference: %s"
 msgstr "Mas de una coincidencia para la referencia: %s"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:307
+#: code:addons/account_payment_return/models/payment_return.py:384
 #, python-format
 msgid "Move lines: %s"
 msgstr "Apuntes: %s"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:326
+#: code:addons/account_payment_return/models/payment_return.py:403
 #, python-format
 msgid "Move: %s"
 msgstr "Asiento: %s"
@@ -368,7 +387,7 @@ msgid "Partner name"
 msgstr "Nombre del cliente"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:65
+#: code:addons/account_payment_return/models/payment_return.py:90
 #, python-format
 msgid "Payment Line: %s (%s) in Payment Return: %s"
 msgstr "Línea de pago: %s (%s) en devolución de pago: %s"
@@ -379,7 +398,7 @@ msgid "Payment Reference"
 msgstr "Referencia de cobro"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:88
+#: code:addons/account_payment_return/models/payment_return.py:113
 #, python-format
 msgid ""
 "Payment reference must be unique\n"
@@ -423,6 +442,13 @@ msgid "Reason"
 msgstr "Motivo"
 
 #. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_journal__return_auto_reconcile
+#, fuzzy
+#| msgid "Payment return"
+msgid "Reconcile payment returns"
+msgstr "Devolución de cobro"
+
+#. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__name
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__reference
 msgid "Reference"
@@ -439,8 +465,8 @@ msgid "Reference to the created journal entry"
 msgstr "Referencia al asiento creado"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:120
-#: code:addons/account_payment_return/models/payment_return.py:349
+#: code:addons/account_payment_return/models/payment_return.py:163
+#: code:addons/account_payment_return/models/payment_return.py:426
 #, python-format
 msgid "Return %s"
 msgstr "Devolución %s"
@@ -475,13 +501,33 @@ msgstr "Importe devuelto. Puede ser distinto al importe pagado"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__state
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_search_view
 msgid "State"
 msgstr "Estado"
+
+#. module: account_payment_return
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
+msgid "The payment return could not be automatically reconciled."
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return__date
 msgid "This date will be used as the account entry date."
 msgstr "Esta fecha se utilizará como fecha del asiento contable."
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__total_amount
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_tree_view
+msgid "Total amount"
+msgstr ""
+
+#. module: account_payment_return
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
+#, fuzzy
+#| msgid "Charges Amount"
+msgid "Total charges amount"
+msgstr "Importe de la comisión"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_unread
@@ -504,13 +550,13 @@ msgid "Website communication history"
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:101
+#: code:addons/account_payment_return/models/payment_return.py:144
 #, python-format
 msgid "You can not remove a payment return if state is 'Done'"
 msgstr "No puede borrar una devolución de pagos en estado 'Realizado'"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:144
+#: code:addons/account_payment_return/models/payment_return.py:213
 #, python-format
 msgid "You must input all moves references in the payment return."
 msgstr "Debes informar todas las referencias de cobro."
