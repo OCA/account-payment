@@ -86,6 +86,27 @@
         </field>
     </record>
 
+    <record model="ir.ui.view" id="payment_return_search_view">
+        <field name="name">payment.return.search</field>
+        <field name="model">payment.return</field>
+        <field name="type">search</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_by_journal"
+                            string="Journal"
+                            domain="[]"
+                            context="{'group_by':'journal_id'}"/>
+                    <filter name="group_by_state"
+                            string="State"
+                            domain="[]"
+                            context="{'group_by':'state'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
     <record model="ir.actions.act_window" id="payment_return_action">
         <field name="name">Customer Payment Returns</field>
         <field name="res_model">payment.return</field>
