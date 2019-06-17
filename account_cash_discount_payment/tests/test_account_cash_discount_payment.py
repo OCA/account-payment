@@ -78,3 +78,43 @@ class TestAccountCashDiscountPayment(TestAccountCashDiscountPaymentCommon):
 
         self.assertAlmostEqual(payment_line.discount_amount, 500, 2)
         self.assertAlmostEqual(payment_line.amount_currency, 1500, 2)
+
+    def test_invoice_payment_discount_state(self):
+        invoice_date = Date.today()
+        invoice = self.create_supplier_invoice(
+            invoice_date, self.payment_mode_out, 2000, 25, [])
+        invoice.action_invoice_open()
+
+        move = invoice.move_id
+        move.post()
+
+        payment_order = self.PaymentOrder.create({
+            'payment_mode_id': self.payment_mode_out.id,
+            'payment_type': 'outbound',
+        })
+
+        payment_line_wizard = self.PaymentLineCreate.with_context(
+            active_model=payment_order._name,
+            active_id=payment_order.id,
+        ).create({
+            'cash_discount_date': invoice_date,
+            'date_type': 'discount_due_date',
+            'journal_ids': [(6, 0, [self.purchase_journal.id])],
+        })
+        self.assertEqual(payment_line_wizard.order_id, payment_order)
+
+        payment_line_wizard.populate()
+        move_lines = payment_line_wizard.move_line_ids
+        self.assertEqual(len(move_lines), 1)
+
+        move_line = move_lines[0]
+        self.assertAlmostEqual(move_line.discount_amount, 500, 2)
+
+        payment_line_wizard.create_payment_lines()
+
+        payment_line = payment_order.payment_line_ids[0]
+
+        payment_order.generated2uploaded()
+
+        # Check pay_with_discount_constraint
+        payment_line.move_line_id = False

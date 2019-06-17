@@ -60,7 +60,9 @@ class PaymentLine(models.Model):
         'move_line_id',
     )
     def _check_pay_with_discount(self):
-        for rec in self:
+        # Check constraint only on 'in progress' payments
+        for rec in self.filtered(
+                lambda l: l.state not in ('cancel', 'uploaded')):
             if not rec.pay_with_discount:
                 continue
             if not rec.pay_with_discount_allowed:
