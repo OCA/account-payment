@@ -24,6 +24,7 @@
                         <field name="date"/>
                         <field name="company_id" groups="base.group_multi_company"/>
                         <field name="move_id" readonly="True"/>
+                        <field name="total_amount"/>
                     </group>
                     <notebook colspan="4">
                         <page string="Lines">
@@ -43,8 +44,8 @@
                                                     ('account_id.internal_type', '=', 'receivable'),
                                                     ('reconciled', '=', True)]"
                                             />
-                                    <field name="amount"/>
-                                    <field name="expense_amount" />
+                                    <field name="amount" sum="Total amount"/>
+                                    <field name="expense_amount" sum="Total charges amount"/>
                                     <field name="expense_account"
                                            attrs="{'required':[('expense_amount','!=', 0)]}" />
                                     <field name="expense_partner_id"
@@ -73,7 +74,29 @@
                 <field name="journal_id"/>
                 <field name="company_id" groups="base.group_multi_company"/>
                 <field name="state"/>
+                <field name="total_amount" sum="Total amount"/>
             </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="payment_return_search_view">
+        <field name="name">payment.return.search</field>
+        <field name="model">payment.return</field>
+        <field name="type">search</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <group expand="0" string="Group By">
+                    <filter name="group_by_journal"
+                            string="Journal"
+                            domain="[]"
+                            context="{'group_by':'journal_id'}"/>
+                    <filter name="group_by_state"
+                            string="State"
+                            domain="[]"
+                            context="{'group_by':'state'}"/>
+                </group>
+            </search>
         </field>
     </record>
 

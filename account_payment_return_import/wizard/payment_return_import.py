@@ -205,7 +205,10 @@ class PaymentReturnImport(models.TransientModel):
             if not bank_account_id and account_number:
                 raise UserError(
                     _('Can not find the account number %s.') % account_number)
-            payret_vals['journal_id'] = self._get_journal(bank_account_id)
+            payret_vals.update({
+                'imported_bank_account_id': bank_account_id,
+                'journal_id': self._get_journal(bank_account_id),
+            })
             # By now journal and account_number must be known
             if not payret_vals['journal_id']:
                 raise UserError(_('Can not determine journal for import.'))

@@ -235,3 +235,13 @@ class TestPaymentReturn(SavepointCase):
         self.assertEqual(line.reason_id.name, 'Reason Test')
         line.reason_id = reason.name_search('Reason Test')[0]
         self.assertEqual(line.reason_id.code, 'RTEST')
+
+    def test_compute_total(self):
+        self.assertEqual(self.payment_return.total_amount, 500)
+        self.payment_return.write({
+            'line_ids': [(0, 0, {
+                'partner_id': self.partner.id,
+                'amount': 10.5,
+                'expense_account': self.account.id,
+                'expense_partner_id': self.partner.id})]})
+        self.assertEqual(self.payment_return.total_amount, 510.5)
