@@ -7,23 +7,23 @@
                     <t t-foreach="docs" t-as="o">
                         <div class="page">
                             <div>
-                                <div style="font-size:12px;position:absolute;right:22mm;top:20mm;">
+                                <div style="font-size:12px;position:absolute;right:22mm;top:10mm;">
                                     <span t-field="o.payment_date"/>
                                 </div>
-                                <div style="font-size:12px; overflow:hidden;white-space:nowrap;position:absolute;top:32mm;left:28mm;">
+                                <div style="font-size:12px; overflow:hidden;white-space:nowrap;position:absolute;top:22mm;left:28mm;">
                                     <span t-field="o.partner_id.name"/>
                                 </div>
                                 <div>
-                                    <span style="font-size:12px;position:absolute;top:32mm;left:166mm;" t-esc="'%.2f' % (o.amount)"/>
+                                    <span style="font-size:12px;position:absolute;top:22mm;left:166mm;" t-esc="'%.2f' % (o.amount)"/>
                                 </div>
-                                <div style="font-size:12px;white-space:nowrap;position:absolute;left:15mm;top:40mm;">
+                                <div style="font-size:12px;white-space:nowrap;position:absolute;left:15mm;top:30mm;">
                                     <strong><span t-esc="fill_stars(o.check_amount_in_words)"/></strong>
                                 </div>
-                                <div style="position:absolute;font-size:12px;left:18mm;top:61mm;max-width: 100mm;max-height: 10mm;">
+                                <div style="position:absolute;font-size:12px;left:18mm;top:51mm;max-width: 100mm;max-height: 10mm;">
                                     <span t-field="o.communication"/>
                                 </div>
                             </div>
-                            <div style="position:absolute;top:94mm;left:10mm;">
+                            <div style="position:absolute;top:84mm;left:10mm;">
                                 <strong>
                                     <span style="font-size:12px;overflow:hidden;white-space:nowrap;padding-top:6mm;"
                                         t-esc="'Partner: {}'.format(o.partner_id.name[:30])"/>
@@ -63,7 +63,7 @@
                                     </div>
                                 </t>
                             </div>
-                            <div style="position:absolute;top:179mm;left:10mm;">
+                            <div style="position:absolute;top:169mm;left:10mm;">
                                 <strong>
                                     <span style="font-size:12px;overflow:hidden;white-space:nowrap;padding-top:6mm;"
                                         t-esc="'Partner: {}'.format(o.partner_id.name[:30])"/>
