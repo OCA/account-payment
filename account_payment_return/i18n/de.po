@@ -36,7 +36,7 @@ msgid "Additional information on return reason."
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:259
+#: code:addons/account_payment_return/models/payment_return.py:283
 #, python-format
 msgid "All payments must be owned by the same partner"
 msgstr ""
@@ -184,6 +184,11 @@ msgid "Followers (Partners)"
 msgstr "Followers"
 
 #. module: account_payment_return
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_search_view
+msgid "Group By"
+msgstr ""
+
+#. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__id
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__id
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__id
@@ -221,7 +226,7 @@ msgid "Invoice has been included on a payment that has been returned later."
 msgstr "Rechnung hat eine Zahlung die später zurück gebucht wurde."
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:286
+#: code:addons/account_payment_return/models/payment_return.py:310
 #, python-format
 msgid "Invoice: %s"
 msgstr ""
@@ -239,6 +244,7 @@ msgstr "Followers"
 
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_account_journal
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_search_view
 #, fuzzy
 msgid "Journal"
 msgstr "Banken Journal"
@@ -308,19 +314,19 @@ msgid "Messages"
 msgstr "Ungelesene Nachricht"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:320
+#: code:addons/account_payment_return/models/payment_return.py:344
 #, python-format
 msgid "More than one matches to move reference: %s"
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:307
+#: code:addons/account_payment_return/models/payment_return.py:331
 #, python-format
 msgid "Move lines: %s"
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:326
+#: code:addons/account_payment_return/models/payment_return.py:350
 #, python-format
 msgid "Move: %s"
 msgstr ""
@@ -377,7 +383,7 @@ msgid "Partner name"
 msgstr "Kunde"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:65
+#: code:addons/account_payment_return/models/payment_return.py:71
 #, python-format
 msgid "Payment Line: %s (%s) in Payment Return: %s"
 msgstr ""
@@ -388,7 +394,7 @@ msgid "Payment Reference"
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:88
+#: code:addons/account_payment_return/models/payment_return.py:94
 #, python-format
 msgid ""
 "Payment reference must be unique\n"
@@ -446,8 +452,8 @@ msgid "Reference to the created journal entry"
 msgstr "Journal"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:120
-#: code:addons/account_payment_return/models/payment_return.py:349
+#: code:addons/account_payment_return/models/payment_return.py:144
+#: code:addons/account_payment_return/models/payment_return.py:373
 #, python-format
 msgid "Return %s"
 msgstr "Rücklastschrift %s"
@@ -482,6 +488,7 @@ msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__state
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_search_view
 msgid "State"
 msgstr "Status"
 
@@ -489,6 +496,19 @@ msgstr "Status"
 #: model:ir.model.fields,help:account_payment_return.field_payment_return__date
 msgid "This date will be used as the account entry date."
 msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__total_amount
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_tree_view
+msgid "Total amount"
+msgstr ""
+
+#. module: account_payment_return
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
+#, fuzzy
+msgid "Total charges amount"
+msgstr "Betrag"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_unread
@@ -513,13 +533,13 @@ msgid "Website communication history"
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:101
+#: code:addons/account_payment_return/models/payment_return.py:125
 #, python-format
 msgid "You can not remove a payment return if state is 'Done'"
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:144
+#: code:addons/account_payment_return/models/payment_return.py:168
 #, python-format
 msgid "You must input all moves references in the payment return."
 msgstr ""
