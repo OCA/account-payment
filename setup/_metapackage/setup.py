@@ -17,6 +17,7 @@ setuptools.setup(
         'odoo12-addon-account_payment_return_import_iso20022',
         'odoo12-addon-account_payment_show_invoice',
         'odoo12-addon-account_payment_widget_amount',
+        'odoo12-addon-account_voucher_killer',
     ],
     classifiers=[
         'Programming Language :: Python',
