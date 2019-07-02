@@ -20,5 +20,6 @@
         'account_payment_order',
     ],
     'data': [
+        "data/payment.return.reason.csv"
     ],
 }
