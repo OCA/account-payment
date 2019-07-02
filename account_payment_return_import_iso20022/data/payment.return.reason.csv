@@ -213,8 +213,8 @@ unpaid_reason_S003,S003,Request for Cancellation has been forwarded to the payme
 unpaid_reason_S004,S004,Request for Cancellation has been acknowledged as delivered to payment processing/last payment processing agent.
 unpaid_reason_SL01,SL01,Due to specific service offered by the Debtor Agent
 unpaid_reason_SL02,SL02,Due to specific service offered by the Creditor Agent
-unpaid_reason_SL11,SL11,Whitelisting service offered by the Debtor Agent, Debtor has not included the Creditor on its “Whitelist” (yet). In the Whitelist the Debtor may list all allowed Creditors to debit Debtor bank account
-unpaid_reason_SL12,SL12,Blacklisting service offered by the Debtor Agent, Debtor included the Creditor on his “Blacklist”. In the Blacklist the Debtor may list all Creditors not allowed to debit Debtor bank account
+unpaid_reason_SL11,SL11,"Whitelisting service offered by the Debtor Agent, Debtor has not included the Creditor on its “Whitelist” (yet). In the Whitelist the Debtor may list all allowed Creditors to debit Debtor bank account"
+unpaid_reason_SL12,SL12,"Blacklisting service offered by the Debtor Agent, Debtor included the Creditor on his “Blacklist”. In the Blacklist the Debtor may list all Creditors not allowed to debit Debtor bank account"
 unpaid_reason_SL13,SL13,Due to Maximum allowed Direct Debit Transactions per period service offered by the Debtor Agent.
 unpaid_reason_SL14,SL14,Due to Maximum allowed Direct Debit Transaction amount service offered by the Debtor Agent.
 unpaid_reason_TA01,TA01,The transmission of the file was not successful – it had to be aborted (for technical reasons)
