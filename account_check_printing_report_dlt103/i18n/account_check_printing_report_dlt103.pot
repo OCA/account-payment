@@ -15,7 +15,7 @@ msgstr ""
 
 #. module: account_check_printing_report_dlt103
 #: model:ir.ui.view,arch_db:account_check_printing_report_dlt103.report_check_dlt103
-msgid "<b>Check Amount:</b>"
+msgid "<b>Check Amount: </b>"
 msgstr ""
 
 #. module: account_check_printing_report_dlt103
