@@ -1,5 +1,6 @@
-* Bhavesh Odedra <bodedra@ursainfosystems.com>
-* Balaji Kannan <bkannan@ursainfosystems.com>
-* Sandeep Mangukiya <smangukiya@ursainfosystems.com>
-* Sudarshan Kadalazhi <skadalazhi@ursainfosystems.com>
-* Serpent Consulting Services Pvt. Ltd. <support@serpentcs.com>
+* Bhavesh Odedra <bodedra@opensourceintegrators.com>
+* Balaji Kannan <bkannan@opensourceintegrators.com>
+* Sandeep Mangukiya <smangukiya@opensourceintegrators.com>
+* Sudarshan Kadalazhi <skadalazhi@opensourceintegrators.com>
+* Murtuza Saleh <murtuza.saleh@serpentcs.com>
+* Maxime Chambreuil <mchambreuil@opensourceintegrators.com>
