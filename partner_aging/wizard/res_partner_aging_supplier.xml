@@ -22,7 +22,7 @@
                 <field name="invoice_ref"/>
                 <field name="total" sum="Total"/>
                 <group expand="0" string="Group By...">
-                    <filter string="Partner" domain="[]" context="{'group_by':'partner_id'}"/>
+                    <filter string="Partner" name="partner_id" domain="[]" context="{'group_by':'partner_id'}"/>
                 </group>
             </search>
         </field>
@@ -40,7 +40,7 @@
                 <field name="inv_date_due" string="Due Date"/>
                 <field name="max_days_overdue" />
                 <field name="invoice_id"/>
-                <button name="open_document" type="object" icon="fa-list-alt" attrs="{'invisible':[('invoice_id', '=', False)]}"/>
+                <button name="open_document" string="Open Document" type="object" icon="fa-list-alt" attrs="{'invisible':[('invoice_id', '=', False)]}"/>
                 <field name="invoice_ref"/>
                 <field name="not_due" string="Current" sum="Total" />
                 <field name="days_due_01to30" sum="Total" />
