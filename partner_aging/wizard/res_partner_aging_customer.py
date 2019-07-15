@@ -7,6 +7,7 @@ from odoo import api, fields, models
 
 class ResPartnerAgingCustomer(models.Model):
     _name = 'res.partner.aging.customer'
+    _description = 'Res Partner Aging Customer'
     _auto = False
     _order = 'partner_id'
 
