@@ -9,7 +9,6 @@
     'category': 'Accounting & Finance',
     'website': 'https://github.com/OCA/account-payment',
     'depends': [
-        'account_invoicing',
         'account_voucher',
     ],
     'data': [

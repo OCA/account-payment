@@ -6,6 +6,7 @@ from odoo import api, fields, models
 
 class ResPartnerAgingDate(models.TransientModel):
     _name = "res.partner.aging.date"
+    _description = 'Res Partner Aging Date'
 
     age_date = fields.Date("Aging Date",
                            required=True,
