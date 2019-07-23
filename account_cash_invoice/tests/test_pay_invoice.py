@@ -67,6 +67,8 @@ class TestSessionPayInvoice(common.TransactionCase):
             'amount': 100.0
         })
         in_invoice.run()
+        in_invoice.compute_journal_count()
+        self.assertEqual(in_invoice.journal_count, 1)
         out_invoice = self.env['cash.invoice.out'].with_context(
             active_ids=statement.ids, active_model='account.bank.statement'
         ).create({
@@ -78,3 +80,5 @@ class TestSessionPayInvoice(common.TransactionCase):
         statement.check_confirm_bank()
         self.assertEqual(self.invoice_out.residual, 0.)
         self.assertEqual(self.invoice_in.residual, 0.)
+        out_invoice.compute_journal_count()
+        self.assertEqual(out_invoice.journal_count, 1)
