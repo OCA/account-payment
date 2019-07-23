@@ -35,41 +35,41 @@ class CashInvoiceIn(models.TransientModel):
         return len(self._default_journals().ids)
 
     invoice_id = fields.Many2one(
-        'account.invoice',
+        comodel_name='account.invoice',
         string='Invoice',
-        required=True
+        required=True,
     )
     name = fields.Char(
-        related='invoice_id.number'
+        related='invoice_id.number',
     )
     company_id = fields.Many2one(
-        'res.company',
-        default=_default_company,
-        required=True,
-        readonly=True
-    )
-    currency_id = fields.Many2one(
-        'res.currency',
-        default=_default_currency,
-        required=True,
-        readonly=True
-    )
-    journal_ids = fields.Many2many(
-        'account.journal',
-        default=_default_journals,
+        comodel_name='res.company',
+        default=lambda self: self._default_company(),
         required=True,
         readonly=True,
-        string='Journals'
+    )
+    currency_id = fields.Many2one(
+        comodel_name='res.currency',
+        default=lambda self: self._default_currency(),
+        required=True,
+        readonly=True,
+    )
+    journal_ids = fields.Many2many(
+        comodel_name='account.journal',
+        default=lambda self: self._default_journals(),
+        required=True,
+        readonly=True,
+        string='Journals',
     )
     journal_id = fields.Many2one(
-        'account.journal',
+        comodel_name='account.journal',
         required=True,
-        default=_default_journal,
-        string='Journal'
+        default=lambda self: self._default_journal(),
+        string='Journal',
     )
     journal_count = fields.Integer(
-        default=_default_journal_count,
-        readonly=True
+        default=lambda self: self._default_journal_count(),
+        readonly=True,
     )
 
     def default_company(self, active_model, active_ids):
@@ -91,9 +91,7 @@ class CashInvoiceIn(models.TransientModel):
 
     @api.multi
     def _calculate_values_for_statement_line(self, record):
-        res = super(CashInvoiceIn, self)._calculate_values_for_statement_line(
-            record
-        )
+        res = super()._calculate_values_for_statement_line(record)
         res['invoice_id'] = self.invoice_id.id
         res['account_id'] = self.invoice_id.account_id.id
         res['ref'] = self.invoice_id.number
