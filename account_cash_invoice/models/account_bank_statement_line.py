@@ -8,9 +8,9 @@ class AccountBankStatementLine(models.Model):
     _inherit = 'account.bank.statement.line'
 
     invoice_id = fields.Many2one(
-        'account.invoice',
+        comodel_name='account.invoice',
         string='Invoice',
-        readonly=True
+        readonly=True,
     )
 
     @api.multi
