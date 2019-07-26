@@ -11,6 +11,7 @@ from odoo.tools import float_is_zero
 
 class ReportCheckPrint(models.AbstractModel):
     _name = 'report.account_check_printing_report_base.report_check_base'
+    _description = 'Report Check Print'
 
     def fill_stars(self, amount_in_word):
         if amount_in_word and len(amount_in_word) < 100:
