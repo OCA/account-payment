@@ -89,8 +89,7 @@ msgstr ""
 
 #. module: account_check_printing_report_base
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
-msgid "Due\n"
-"                                                Date"
+msgid "Due Date"
 msgstr ""
 
 #. module: account_check_printing_report_base
