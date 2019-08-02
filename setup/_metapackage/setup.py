@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo12-addon-account_cash_invoice',
         'odoo12-addon-account_check_printing_report_base',
         'odoo12-addon-account_due_list',
+        'odoo12-addon-account_due_list_aging_comment',
         'odoo12-addon-account_due_list_days_overdue',
         'odoo12-addon-account_due_list_payment_mode',
         'odoo12-addon-account_move_line_auto_reconcile_hook',
