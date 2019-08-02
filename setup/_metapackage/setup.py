@@ -8,6 +8,7 @@ setuptools.setup(
     description="Meta package for oca-account-payment Odoo addons",
     version=version,
     install_requires=[
+        'odoo12-addon-account_cash_invoice',
         'odoo12-addon-account_check_printing_report_base',
         'odoo12-addon-account_due_list',
         'odoo12-addon-account_due_list_days_overdue',
