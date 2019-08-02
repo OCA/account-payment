@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 11.0\n"
+"Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
@@ -14,8 +14,8 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_cash_invoice
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in_amount
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out_amount
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in__amount
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out__amount
 msgid "Amount"
 msgstr ""
 
@@ -25,8 +25,8 @@ msgid "Bank Statement Line"
 msgstr ""
 
 #. module: account_cash_invoice
-#: model:ir.ui.view,arch_db:account_cash_invoice.cash_invoice_in_form
-#: model:ir.ui.view,arch_db:account_cash_invoice.cash_invoice_out_form
+#: model_terms:ir.ui.view,arch_db:account_cash_invoice.cash_invoice_in_form
+#: model_terms:ir.ui.view,arch_db:account_cash_invoice.cash_invoice_out_form
 msgid "Cancel"
 msgstr ""
 
@@ -36,104 +36,113 @@ msgid "Collect Payment from Invoice"
 msgstr ""
 
 #. module: account_cash_invoice
-#: model:ir.ui.view,arch_db:account_cash_invoice.cash_invoice_out_form
+#: model_terms:ir.ui.view,arch_db:account_cash_invoice.cash_invoice_out_form
 msgid "Collect payment from customer invoice or supplier refund"
 msgstr ""
 
 #. module: account_cash_invoice
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in_company_id
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out_company_id
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in__company_id
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out__company_id
 msgid "Company"
 msgstr ""
 
 #. module: account_cash_invoice
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in_create_uid
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out_create_uid
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in__create_uid
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out__create_uid
 msgid "Created by"
 msgstr ""
 
 #. module: account_cash_invoice
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in_create_date
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out_create_date
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in__create_date
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out__create_date
 msgid "Created on"
 msgstr ""
 
 #. module: account_cash_invoice
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in_currency_id
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out_currency_id
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in__currency_id
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out__currency_id
 msgid "Currency"
 msgstr ""
 
 #. module: account_cash_invoice
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in_display_name
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out_display_name
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in__display_name
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: account_cash_invoice
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in_id
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out_id
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in__id
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out__id
 msgid "ID"
 msgstr ""
 
 #. module: account_cash_invoice
-#: model:ir.model.fields,field_description:account_cash_invoice.field_account_bank_statement_line_invoice_id
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in_invoice_id
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out_invoice_id
+#: model:ir.model.fields,field_description:account_cash_invoice.field_account_bank_statement_line__invoice_id
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in__invoice_id
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out__invoice_id
 msgid "Invoice"
 msgstr ""
 
 #. module: account_cash_invoice
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in_journal_id
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in_journal_ids
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out_journal_id
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out_journal_ids
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in__journal_id
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out__journal_id
 msgid "Journal"
 msgstr ""
 
 #. module: account_cash_invoice
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in_journal_count
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out_journal_count
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in__journal_count
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out__journal_count
 msgid "Journal Count"
 msgstr ""
 
 #. module: account_cash_invoice
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in___last_update
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out___last_update
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in__journal_ids
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out__journal_ids
+msgid "Journals"
+msgstr ""
+
+#. module: account_cash_invoice
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in____last_update
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out____last_update
 msgid "Last Modified on"
 msgstr ""
 
 #. module: account_cash_invoice
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in_write_uid
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out_write_uid
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in__write_uid
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out__write_uid
 msgid "Last Updated by"
 msgstr ""
 
 #. module: account_cash_invoice
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in_write_date
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out_write_date
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in__write_date
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out__write_date
 msgid "Last Updated on"
 msgstr ""
 
 #. module: account_cash_invoice
 #: model:ir.actions.act_window,name:account_cash_invoice.action_cash_invoice_in_from_statement
-#: model:ir.ui.view,arch_db:account_cash_invoice.cash_invoice_in_form
+#: model_terms:ir.ui.view,arch_db:account_cash_invoice.cash_invoice_in_form
 msgid "Pay invoice"
 msgstr ""
 
 #. module: account_cash_invoice
-#: model:ir.ui.view,arch_db:account_cash_invoice.cash_invoice_in_form
+#: model_terms:ir.ui.view,arch_db:account_cash_invoice.cash_invoice_in_form
 msgid "Pay supplier invoice or customer refund"
 msgstr ""
 
 #. module: account_cash_invoice
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in_name
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out_name
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in__name
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out__name
 msgid "Reason"
 msgstr ""
 
 #. module: account_cash_invoice
-#: model:ir.ui.view,arch_db:account_cash_invoice.cash_invoice_out_form
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out__ref
+msgid "Reference"
+msgstr ""
+
+#. module: account_cash_invoice
+#: model_terms:ir.ui.view,arch_db:account_cash_invoice.cash_invoice_out_form
 msgid "Register"
 msgstr ""
 
