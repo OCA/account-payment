@@ -16,6 +16,6 @@
         "views/account_view.xml",
     ],
     "installable": True,
-    "development_status": "beta",
+    "development_status": "Beta",
     "maintainers": ["max3903"],
 }

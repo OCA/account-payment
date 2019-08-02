@@ -1,4 +1,3 @@
-
 This module provides a way to record Credit Card purchases and to pay them the same way regular purchases are recorded (via Vendor Bills) and paid (via Vendor Payments).
 
 By default, if vendor bills are used to record credit card purchases, the liability (AP) from the supplier/vendor must be moved to the credit card company via a manual journal entry.

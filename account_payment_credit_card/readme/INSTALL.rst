@@ -1,2 +1,0 @@
-
-* No specific installation required
