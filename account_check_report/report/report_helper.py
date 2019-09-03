@@ -20,13 +20,28 @@ class ReportCheckPrint(models.AbstractModel):
         return date.strftime(lang.date_format)
 
     def _get_paid_lines(self, payment):
-        pay_acc = payment.journal_id.default_debit_account_id or \
-            payment.journal_id.default_credit_account_id
         rec_lines = payment.move_line_ids.filtered(
-            lambda x: x.account_id.reconcile and x.account_id != pay_acc)
+            lambda x: x.account_id.reconcile and x.account_id ==
+            payment.destination_account_id
+            and x.partner_id == payment.partner_id)
         amls = rec_lines.mapped('matched_credit_ids.credit_move_id') + \
             rec_lines.mapped('matched_debit_ids.debit_move_id')
         amls -= rec_lines
+        # Here we need to handle a nasty corner case.
+        # Sometimes we match a payment with invoices and refunds. Internally
+        # Odoo will match some invoices with their refunds, and not with the
+        # payment, so the payment move line is not linked with those matches
+        # invoices and refunds. But the end user was not really aware of this
+        # as he probably just selected a bunch of invoices and refunds and made
+        # a payment, assuming that the payment will correctly reflect the
+        # refunds. In order to solve that, we will just include all the move
+        # lines associated to the invoices that the user intended to pay,
+        # including refunds.
+        invoice_amls = payment.invoice_ids.mapped('move_id.line_ids').filtered(
+            lambda x: x.account_id.reconcile
+            and x.account_id == payment.destination_account_id
+            and x.partner_id == payment.partner_id)
+        amls |= invoice_amls
         return amls
 
     def _get_residual_amount(self, payment, line):
@@ -43,10 +58,14 @@ class ReportCheckPrint(models.AbstractModel):
         total_amount_to_show = 0.0
         # We pay out
         if line.matched_credit_ids:
-            amount = sum([p.amount for p in line.matched_credit_ids])
+            amount = -1 * sum([p.amount for p in line.matched_credit_ids])
         # We receive payment
         elif line.matched_debit_ids:
             amount = sum([p.amount for p in line.matched_debit_ids])
+
+        # In case of customer payment, we reverse the amounts
+        if payment.partner_type == 'customer':
+            amount *= -1
 
         amount_to_show = \
             payment.company_id.currency_id.with_context(
