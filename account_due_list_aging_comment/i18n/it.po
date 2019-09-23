@@ -19,7 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #. module: account_due_list_aging_comment
-#: model:ir.model.fields,field_description:account_due_list_aging_comment.field_account_move_line_aging_comments
+#: model:ir.model.fields,field_description:account_due_list_aging_comment.field_account_move_line__aging_comments
 msgid "Aging Comments"
 msgstr ""
 
