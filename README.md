@@ -15,7 +15,7 @@ This project includes modules that handle payment related tasks:
 You can find complementary modules for handling bank payment related tasks on:
 
  * https://github.com/OCA/bank-payment
- 
+
 Contributing
 ------------
 Do you want to contribute? Please read our [contributing guidelines](https://github.com/OCA/maintainer-tools/blob/master/CONTRIBUTING.md).
