@@ -11,6 +11,6 @@ class ReportCheckPrint(models.AbstractModel):
     _name = 'report.account_check_printing_report_dlt103.report_check_dlt103'
     _inherit = 'report.account_check_printing_report_base.report_check_base'
 
-    @api.multi
+    @api.model
     def render_html(self, docids, data):
         return super(ReportCheckPrint, self).render_html(docids, data)

@@ -97,7 +97,7 @@ class ReportCheckPrint(models.AbstractModel):
                 lines[payment.id].append(line)
         return lines
 
-    @api.multi
+    @api.model
     def render_html(self, docids, data=None):
         payments = self.env['account.payment'].browse(docids)
         paid_lines = self.get_paid_lines(payments)
