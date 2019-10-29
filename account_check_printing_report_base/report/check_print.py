@@ -5,8 +5,6 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 import time
-from datetime import datetime
-from odoo.tools.misc import DEFAULT_SERVER_DATE_FORMAT
 from odoo import api, models
 from odoo.tools import float_is_zero
 
@@ -15,16 +13,17 @@ class ReportCheckPrint(models.AbstractModel):
     _name = 'report.account_check_printing_report_base.report_check_base'
     _description = 'Report Check Print'
 
+    @api.model
     def fill_stars_number(self, amount, stars_prefix=5, stars_suffix=1):
         str_prefix = ' '.join(['*' * stars_prefix, amount, '*' * stars_suffix])
         return str_prefix
 
-    def _format_date_to_partner_lang(self, str_date, partner_id):
+    def _format_date_to_partner_lang(self, date, partner_id):
         lang_code = self.env['res.partner'].browse(partner_id).lang
         lang = self.env['res.lang']._lang_get(lang_code)
-        date = datetime.strptime(str_date, DEFAULT_SERVER_DATE_FORMAT).date()
         return date.strftime(lang.date_format)
 
+    @api.model
     def fill_stars(self, amount_in_word):
         if amount_in_word and len(amount_in_word) < 100:
             stars = 100 - len(amount_in_word)
@@ -98,7 +97,7 @@ class ReportCheckPrint(models.AbstractModel):
                 lines[payment.id].append(line)
         return lines
 
-    @api.multi
+    @api.model
     def _get_report_values(self, docids, data=None):
         model = self.env.context.get('active_model', 'account.payment')
         objects = self.env[model].browse(docids)
