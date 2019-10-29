@@ -19,6 +19,11 @@ msgid "<b>Check Amount:</b>"
 msgstr ""
 
 #. module: account_check_printing_report_base
+#: model:ir.model,name:account_check_printing_report_base.model_account_payment_check_report
+msgid "Account Payment Check Report"
+msgstr ""
+
+#. module: account_check_printing_report_base
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_journal_check_print_auto
 msgid "Automatic check printing"
 msgstr ""
@@ -150,14 +155,9 @@ msgid "Report name"
 msgstr ""
 
 #. module: account_check_printing_report_base
-#: code:addons/account_check_printing_report_base/report/check_print.py:104
+#: code:addons/account_check_printing_report_base/report/check_print.py:118
 #, python-format
 msgid "You must define a check layout"
-msgstr ""
-
-#. module: account_check_printing_report_base
-#: model:ir.model,name:account_check_printing_report_base.model_account_payment_check_report
-msgid "account.payment.check.report"
 msgstr ""
 
 #. module: account_check_printing_report_base
