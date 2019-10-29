@@ -1,28 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="sslm102">
-        <t t-call="report.html_container">
-            <t t-foreach="docs" t-as="o">
-                <div class="page">
-                    <div name='top_block' style="position:absolute; top:15mm; left:10mm;">
-                        <t t-call="account_check_printing_report_sslm102.invoice_data"/>
+         <t t-call="web.html_container">
+             <div class="header"/>
+             <div class="article">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <div name='top_block' style="position:absolute; top:15mm; left:10mm;">
+                            <t t-call="account_check_printing_report_sslm102.invoice_data"/>
+                        </div>
+                        <div name='top_block_check_amount' style="position:absolute; top:80mm; right:22mm;" align="right">
+                            <b>Check Amount: </b><span
+                                t-field='o.amount' t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                        </div>
+                        <div name='middle_block'>
+                            <t t-call="account_check_printing_report_sslm102.check_data"/>
+                        </div>
+                        <div name='bottom_block' style="position:absolute; top:180mm; left:10mm;">
+                            <t t-call="account_check_printing_report_sslm102.invoice_data"/>
+                        </div>
+                        <div name='middle_block_check_amount' style="position:absolute; top:250mm; right:22mm;" align="right">
+                            <b>Check Amount: </b><span
+                                t-field='o.amount' t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                        </div>
                     </div>
-                    <div name='top_block_check_amount' style="position:absolute; top:80mm; right:22mm;" align="right">
-                        <b>Check Amount: </b><span
-                            t-field='o.amount' t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
-                    </div>
-                    <div name='middle_block'>
-                        <t t-call="account_check_printing_report_sslm102.check_data"/>
-                    </div>
-                    <div name='bottom_block' style="position:absolute; top:180mm; left:10mm;">
-                        <t t-call="account_check_printing_report_sslm102.invoice_data"/>
-                    </div>
-                    <div name='middle_block_check_amount' style="position:absolute; top:250mm; right:22mm;" align="right">
-                        <b>Check Amount: </b><span
-                            t-field='o.amount' t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
-                    </div>
-                </div>
-            </t>
+                </t>
+             </div>
         </t>
     </template>
 
@@ -46,6 +49,7 @@
             </div>
         </div>
     </template>
+
     <template id="invoice_data">
         <div>
             <strong name='invoice_data_header'>
