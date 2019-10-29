@@ -94,7 +94,7 @@ class ReportCheckPrint(models.AbstractModel):
                 lines[payment.id].append(line)
         return lines
 
-    @api.multi
+    @api.model
     def get_report_values(self, docids, data=None):
         model = self.env.context.get('active_model', 'account.payment')
         objects = self.env[model].browse(docids)
