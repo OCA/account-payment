@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # © 2016 Serpent Consulting Services Pvt. Ltd.
@@ -13,5 +12,5 @@ class ReportCheckPrint(models.AbstractModel):
     _description = "Check sslm102"
 
     @api.model
-    def render_html(self, docids, data):
-        return super(ReportCheckPrint, self).render_html(docids, data)
+    def _get_report_values(self, docids, data):
+        return super(ReportCheckPrint, self)._get_report_values(docids, data)
