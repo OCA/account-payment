@@ -5,12 +5,24 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 import time
+from datetime import datetime
+from odoo.tools.misc import DEFAULT_SERVER_DATE_FORMAT
 from odoo import api, exceptions, models, _
 from odoo.tools import float_is_zero
 
 
 class ReportCheckPrint(models.AbstractModel):
     _name = 'report.account_check_printing_report_base.report_check_base'
+
+    def fill_stars_number(self, amount, stars_prefix=5, stars_suffix=1):
+        str = ' '.join(['*' * stars_prefix, amount, '*' * stars_suffix])
+        return str
+
+    def _format_date_to_partner_lang(self, str_date, partner_id):
+        lang_code = self.env['res.partner'].browse(partner_id).lang
+        lang = self.env['res.lang']._lang_get(lang_code)
+        date = datetime.strptime(str_date, DEFAULT_SERVER_DATE_FORMAT).date()
+        return date.strftime(lang.date_format)
 
     def fill_stars(self, amount_in_word):
         if amount_in_word and len(amount_in_word) < 100:
@@ -85,7 +97,7 @@ class ReportCheckPrint(models.AbstractModel):
                 lines[payment.id].append(line)
         return lines
 
-    @api.multi
+    @api.model
     def render_html(self, docids, data=None):
         payments = self.env['account.payment'].browse(docids)
         paid_lines = self.get_paid_lines(payments)
@@ -95,7 +107,9 @@ class ReportCheckPrint(models.AbstractModel):
             'docs': payments,
             'time': time,
             'fill_stars': self.fill_stars,
-            'paid_lines': paid_lines
+            'fill_stars_number': self.fill_stars_number,
+            'paid_lines': paid_lines,
+            '_format_date_to_partner_lang': self._format_date_to_partner_lang,
         }
         if self.env.user.company_id.check_layout_id:
             return self.env['report'].render(
