@@ -12,6 +12,7 @@ from odoo.tools import float_is_zero
 class ReportCheckPrint(models.AbstractModel):
     _name = 'report.account_check_printing_report_base.report_check_base'
 
+    @api.model
     def fill_stars(self, amount_in_word):
         if amount_in_word and len(amount_in_word) < 100:
             stars = 100 - len(amount_in_word)
@@ -88,7 +89,7 @@ class ReportCheckPrint(models.AbstractModel):
                 lines[payment.id].append(line)
         return lines
 
-    @api.multi
+    @api.model
     def get_report_values(self, docids, data=None):
         model = self.env.context.get('active_model', 'account.payment')
         objects = self.env[model].browse(docids)
