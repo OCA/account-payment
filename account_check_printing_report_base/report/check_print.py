@@ -1,10 +1,11 @@
 # Copyright 2016 Eficent Business and IT Consulting Services S.L.
 # (http://www.eficent.com)
 # Copyright 2016 Serpent Consulting Services Pvt. Ltd.
+# Copyright 2018 iterativo.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 import time
-from odoo import api, exceptions, models, _
+from odoo import api, models
 from odoo.tools import float_is_zero
 
 
@@ -20,6 +21,9 @@ class ReportCheckPrint(models.AbstractModel):
 
     @api.multi
     def get_paid_lines(self, payments):
+        model = self.env.context.get('active_model')
+        if model and model != 'account.payment':
+            return {}
         lines = {}
         for payment in payments:
             lines[payment.id] = []
@@ -92,16 +96,15 @@ class ReportCheckPrint(models.AbstractModel):
 
     @api.multi
     def get_report_values(self, docids, data=None):
-        payments = self.env['account.payment'].browse(docids)
-        paid_lines = self.get_paid_lines(payments)
+        model = self.env.context.get('active_model', 'account.payment')
+        objects = self.env[model].browse(docids)
+        paid_lines = self.get_paid_lines(objects)
         docargs = {
             'doc_ids': docids,
-            'doc_model': 'account.payment',
-            'docs': payments,
+            'doc_model': models,
+            'docs': objects,
             'time': time,
             'fill_stars': self.fill_stars,
             'paid_lines': paid_lines
         }
-        if self.env.user.company_id.check_layout_id:
-            return docargs
-        raise exceptions.Warning(_('You must define a check layout'))
+        return docargs

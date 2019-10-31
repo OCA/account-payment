@@ -2,11 +2,12 @@
 # (http://www.eficent.com)
 # Copyright 2016 Serpent Consulting Services Pvt. Ltd.
 # Copyright 2017 Tecnativa.
+# Copyright 2018 iterativo.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 {
     "name": "Account Check Printing Report Base",
-    "version": "11.0.1.1.0",
+    "version": "11.0.1.2.1",
     "license": "AGPL-3",
     "author": "Eficent,"
               "Serpent Consulting Services Pvt. Ltd.,"

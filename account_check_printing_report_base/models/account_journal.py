@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2017 Tecnativa.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
@@ -13,3 +12,6 @@ class AccountJournal(models.Model):
         help='Default check for the company is printed automatically when '
              'invoice payment is validated',
     )
+    check_layout_id = fields.Many2one(
+        comodel_name='account.payment.check.report',
+        string="Check format")

@@ -41,6 +41,7 @@ msgid "Check Layouts"
 msgstr ""
 
 #. module: account_check_printing_report_base
+#: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_journal_check_layout_id
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_res_company_check_layout_id
 msgid "Check format"
 msgstr ""
@@ -84,7 +85,7 @@ msgstr ""
 #. module: account_check_printing_report_base
 #: model:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
 msgid "Due\n"
-"                                                Date"
+"                                                    Date"
 msgstr ""
 
 #. module: account_check_printing_report_base
@@ -147,12 +148,6 @@ msgstr ""
 #. module: account_check_printing_report_base
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_payment_check_report_report
 msgid "Report name"
-msgstr ""
-
-#. module: account_check_printing_report_base
-#: code:addons/account_check_printing_report_base/report/check_print.py:107
-#, python-format
-msgid "You must define a check layout"
 msgstr ""
 
 #. module: account_check_printing_report_base

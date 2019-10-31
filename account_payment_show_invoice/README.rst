@@ -28,7 +28,7 @@ Account Payment Show Invoice
 This module extends the tree view of payments to show the paid invoices
 related to the payments using the vendor reference by default.
 
-.. image:: account_payment_show_invoice/static/description/payments_view.png
+.. image:: https://raw.githubusercontent.com/OCA/account-payment/11.0/account_payment_show_invoice/account_payment_show_invoice/static/description/payments_view.png
    :alt: payment view
    :width: 600 px
 
