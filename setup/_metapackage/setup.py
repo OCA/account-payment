@@ -14,6 +14,7 @@ setuptools.setup(
         'odoo10-addon-account_check_printing_report_base',
         'odoo10-addon-account_check_printing_report_dlt103',
         'odoo10-addon-account_check_printing_report_sslm102',
+        'odoo10-addon-account_check_report',
         'odoo10-addon-account_due_list',
         'odoo10-addon-account_due_list_aging_comments',
         'odoo10-addon-account_due_list_days_overdue',
