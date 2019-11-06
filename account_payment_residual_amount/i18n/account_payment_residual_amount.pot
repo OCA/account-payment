@@ -19,17 +19,17 @@ msgid "Payments"
 msgstr ""
 
 #. module: account_payment_residual_amount
-#: model:ir.model.fields,field_description:account_payment_residual_amount.field_account_payment_amount_residual
+#: model:ir.model.fields,field_description:account_payment_residual_amount.field_account_payment__amount_residual
 msgid "Residual Amount"
 msgstr ""
 
 #. module: account_payment_residual_amount
-#: model:ir.model.fields,help:account_payment_residual_amount.field_account_payment_amount_residual
+#: model:ir.model.fields,help:account_payment_residual_amount.field_account_payment__amount_residual
 msgid "The residual amount on a journal item expressed in the company currency."
 msgstr ""
 
 #. module: account_payment_residual_amount
-#: model:ir.ui.view,arch_db:account_payment_residual_amount.view_account_supplier_payment_tree
+#: model_terms:ir.ui.view,arch_db:account_payment_residual_amount.view_account_supplier_payment_tree
 msgid "Total"
 msgstr ""
 
