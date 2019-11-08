@@ -1,22 +1,19 @@
-# -*- coding: utf-8 -*-
 # Copyright 2016 Eficent Business and IT Consulting Services S.L.
 #   (http://www.eficent.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 import time
-from datetime import datetime
-from odoo.tools.misc import DEFAULT_SERVER_DATE_FORMAT
 from odoo import api, models
 from odoo.tools import float_is_zero
 
 
 class ReportCheckPrint(models.AbstractModel):
     _name = 'report.account_check_report.check_report'
+    _description = "Report Check Print"
 
-    def _format_date_to_partner_lang(self, str_date, partner_id):
+    def _format_date_to_partner_lang(self, date, partner_id):
         lang_code = self.env['res.partner'].browse(partner_id).lang
         lang = self.env['res.lang']._lang_get(lang_code)
-        date = datetime.strptime(str_date, DEFAULT_SERVER_DATE_FORMAT).date()
         return date.strftime(lang.date_format)
 
     def _get_paid_lines(self, payment):
@@ -37,7 +34,7 @@ class ReportCheckPrint(models.AbstractModel):
         # refunds. In order to solve that, we will just include all the move
         # lines associated to the invoices that the user intended to pay,
         # including refunds.
-        invoice_amls = payment.invoice_ids.mapped('move_id.line_ids').filtered(
+        invoice_amls = payment.invoice_ids.payment_move_line_ids.filtered(
             lambda x: x.account_id.reconcile
             and x.account_id == payment.destination_account_id
             and x.partner_id == payment.partner_id)
@@ -86,8 +83,8 @@ class ReportCheckPrint(models.AbstractModel):
             amt, payment.currency_id)
         return amt
 
-    @api.multi
-    def render_html(self, docids, data=None):
+    @api.model
+    def _get_report_values(self, docids, data=None):
         payments = self.env['account.payment'].browse(docids)
         docargs = {
             'doc_ids': docids,
@@ -100,5 +97,4 @@ class ReportCheckPrint(models.AbstractModel):
             'paid_amount': self._get_paid_amount,
             '_format_date_to_partner_lang': self._format_date_to_partner_lang,
         }
-        return self.env['report'].render(
-            'account_check_report.check_report', docargs)
+        return docargs
