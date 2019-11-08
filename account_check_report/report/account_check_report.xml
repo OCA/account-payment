@@ -2,8 +2,9 @@
 <odoo>
 
     <template id="check_report">
-        <t t-call="report.html_container">
-            <t t-call="report.external_layout">
+        <t t-call="web.html_container">
+            <div class="header"/>
+            <div class="article">
                 <t t-foreach="docs" t-as="o">
                     <div class="page">
                         <div name="title" class="oe_mt32">
@@ -59,7 +60,7 @@
                         </div>
                     </div>
                 </t>
-            </t>
+            </div>
         </t>
     </template>
 
