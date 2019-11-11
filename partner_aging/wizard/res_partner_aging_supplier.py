@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import tools
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class ResPartnerAgingSupplier(models.Model):
@@ -25,17 +25,17 @@ class ResPartnerAgingSupplier(models.Model):
     days_due_91to120 = fields.Float('91/120', readonly=True)
     days_due_121togr = fields.Float('+121', readonly=True)
     invoice_ref = fields.Char('Their Invoice', size=25, readonly=True)
-    invoice_id = fields.Many2one('account.invoice', 'Invoice', readonly=True)
+    invoice_id = fields.Many2one('account.move', 'Invoice', readonly=True)
     salesman = fields.Many2one('res.users', 'Sales Rep', readonly=True)
 
-    @api.multi
     def execute_aging_query(self, age_date=False):
         if not age_date:
             age_date = fields.Date.context_today(self)
 
         query = """
-                SELECT aml.id, aml.partner_id as partner_id, ai.user_id as
-                salesman, aml.date as date, aml.date as date_due, ai.number
+                SELECT aml.id, aml.partner_id as partner_id,
+                 ai.invoice_user_id as salesman, aml.date as date,
+                aml.date as date_due, ai.name
                 as invoice_ref, days_due AS avg_days_overdue,
                 CASE WHEN (days_due BETWEEN 1 and 30) THEN
                     CASE WHEN (aml.full_reconcile_id is NULL and
@@ -151,30 +151,31 @@ class ResPartnerAgingSupplier(models.Model):
                      WHEN (aml.full_reconcile_id is NOT NULL) THEN
                      aml.amount_residual END AS total,
                 ai.id as invoice_id,
-                ai.date_due as inv_date_due
-                FROM account_move_line aml
+                ai.invoice_date_due as inv_date_due
+                FROM account_account ac,account_move_line aml
                 INNER JOIN
                   (
                    SELECT lt.id,
-                   CASE WHEN inv.date_due is null then 0
-                   WHEN inv.id is not null THEN '%s' - inv.date_due
+                   CASE WHEN inv.invoice_date_due is null then 0
+                   WHEN inv.id is not null THEN '%s' - inv.invoice_date_due
                    ELSE current_date - lt.date END AS days_due
-                   FROM account_move_line lt LEFT JOIN account_invoice inv on
-                   lt.move_id = inv.move_id
+                   FROM account_move_line lt LEFT JOIN account_move inv on
+                   lt.move_id = inv.id
                 ) DaysDue
                 ON DaysDue.id = aml.id
-                LEFT JOIN account_invoice as ai ON ai.move_id = aml.move_id
+                LEFT JOIN account_move as ai ON ai.id = aml.move_id
                 WHERE
-                aml.user_type_id in (select id from account_account_type where
+                ac.user_type_id in (select id from account_account_type where
                 type = 'payable')
                 AND aml.date <= '%s'
-                AND (ai.state in ('open','paid') OR
-                aml.full_reconcile_id IS NULL)
-                GROUP BY aml.partner_id, aml.id, ai.number, days_due,
-                ai.user_id, ai.id
+                AND ai.state = 'posted' AND (ai.invoice_payment_state != 'paid' OR
+                    aml.full_reconcile_id IS NULL) AND ai.type = 'in_invoice'
+                GROUP BY aml.partner_id, aml.id, ai.name, days_due,
+                ai.invoice_user_id, ai.id
                 UNION
-                SELECT aml.id, aml.partner_id as partner_id, ai.user_id as
-                salesman, aml.date as date, aml.date as date_due, ai.number as
+                SELECT aml.id, aml.partner_id as partner_id,
+                ai.invoice_user_id as salesman, aml.date as date,
+                aml.date as date_due, ai.name as
                 invoice_ref, days_due AS avg_days_overdue,
                 CASE WHEN (days_due BETWEEN 1 and 30) THEN
                     CASE WHEN (aml.full_reconcile_id is NULL and
@@ -290,27 +291,27 @@ class ResPartnerAgingSupplier(models.Model):
                      WHEN (aml.full_reconcile_id is NOT NULL) THEN
                      aml.amount_residual END AS total,
                 ai.id as invoice_id,
-                ai.date_due as inv_date_due
-                FROM account_move_line aml
+                ai.invoice_date_due as inv_date_due
+                FROM account_account ac,account_move_line aml
                 INNER JOIN
                   (
                    SELECT lt.id,
-                   CASE WHEN inv.date_due is null then 0
-                   WHEN inv.id is not null THEN '%s' - inv.date_due
+                   CASE WHEN inv.invoice_date_due is null then 0
+                   WHEN inv.id is not null THEN '%s' - inv.invoice_date_due
                    ELSE current_date - lt.date END AS days_due
-                   FROM account_move_line lt LEFT JOIN account_invoice inv on
-                   lt.move_id = inv.move_id
+                   FROM account_move_line lt LEFT JOIN account_move inv on
+                   lt.move_id = inv.id
                 ) DaysDue
                 ON DaysDue.id = aml.id
-                LEFT JOIN account_invoice as ai ON ai.move_id = aml.move_id
+                LEFT JOIN account_move as ai ON ai.id = aml.move_id
                 WHERE
-                aml.user_type_id in (select id from account_account_type where
+                ac.user_type_id in (select id from account_account_type where
                 type = 'payable')
                 AND aml.date <= '%s'
                 AND aml.partner_id IS NULL
                 AND aml.full_reconcile_id is NULL
-                GROUP BY aml.partner_id, aml.id, ai.number, days_due,
-                ai.user_id, ai.id
+                GROUP BY aml.partner_id, aml.id, ai.name, days_due,
+                ai.invoice_user_id, ai.id
                 UNION
                 select aml.id,
                         aml.partner_id as partner_id,
@@ -359,18 +360,16 @@ class ResPartnerAgingSupplier(models.Model):
         q = """CREATE OR REPLACE VIEW %s AS (%s)""" % (self._table, (query))
         self.env.cr.execute(q)
 
-    @api.multi
     def open_document(self):
         """
             @description  Open form view of Supplier Invoice
         """
-        action = self.env.ref('account.action_invoice_tree2').read()[0]
+        action = self.env.ref('account.action_move_in_invoice_type').read()[0]
         action['views'] = [
-            (self.env.ref('account.invoice_supplier_form').id, 'form')]
+            (self.env.ref('account.view_move_form').id, 'form')]
         action['res_id'] = self.invoice_id.id
         return action
 
-    @api.model_cr
     def init(self):
         self.execute_aging_query()
         super(ResPartnerAgingSupplier, self).init()

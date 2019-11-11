@@ -58,9 +58,8 @@
     <record id="action_customer_aging_tree" model="ir.actions.act_window">
         <field name="name">Customer Aging Date wise</field>
         <field name="res_model">res.partner.aging.customer</field>
-        <field name="view_type">form</field>
         <field name="view_id" ref="view_customer_aging_ad_tree" />
-        <field name="view_mode">tree</field>
+        <field name="view_mode">tree,form</field>
         <field name="limit">99999999</field>
     </record>
 
@@ -85,7 +84,6 @@
         <field name="name">Customer Aging</field>
         <field name="type">ir.actions.act_window</field>
         <field name="res_model">res.partner.aging.date</field>
-        <field name="view_type">form</field>
         <field name="view_mode">form</field>
         <field name="view_id" ref="view_partner_aging_date"/>
         <field name="target">new</field>

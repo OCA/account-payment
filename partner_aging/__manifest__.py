@@ -3,13 +3,13 @@
 {
     'name': 'Interactive Partner Aging at any date',
     'summary': 'Aging as a view - invoices and credits',
-    'version': '12.0.1.0.0',
+    'version': '13.0.1.0.0',
     'license': 'AGPL-3',
     'author': 'Open Source Integrators, Odoo Community Association (OCA)',
     'category': 'Accounting & Finance',
     'website': 'https://github.com/OCA/account-payment',
     'depends': [
-        'account_voucher',
+        'account',
     ],
     'data': [
         'security/ir.model.access.csv',

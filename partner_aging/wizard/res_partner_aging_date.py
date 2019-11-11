@@ -1,7 +1,7 @@
 # Copyright 2012 Open Source Integrators
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class ResPartnerAgingDate(models.TransientModel):
@@ -13,7 +13,6 @@ class ResPartnerAgingDate(models.TransientModel):
                            default=lambda self: fields.Date.context_today(
                                self))
 
-    @api.multi
     def open_customer_aging(self):
         ctx = self._context.copy()
         ctx.update({'age_date': self.age_date})
@@ -25,7 +24,6 @@ class ResPartnerAgingDate(models.TransientModel):
         action['context'] = ctx
         return action
 
-    @api.multi
     def open_supplier_aging(self):
         ctx = self._context.copy()
         ctx.update({'age_date': self.age_date})
