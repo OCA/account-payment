@@ -15,4 +15,5 @@
     'data': [
     ],
     'installable': True,
+    'sequence': 50,
 }
