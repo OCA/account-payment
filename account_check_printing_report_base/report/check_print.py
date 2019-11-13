@@ -5,8 +5,6 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 import time
-from datetime import datetime
-from odoo.tools.misc import DEFAULT_SERVER_DATE_FORMAT
 from odoo import api, models
 from odoo.tools import float_is_zero
 
@@ -20,10 +18,9 @@ class ReportCheckPrint(models.AbstractModel):
         str_prefix = ' '.join(['*' * stars_prefix, amount, '*' * stars_suffix])
         return str_prefix
 
-    def _format_date_to_partner_lang(self, str_date, partner_id):
+    def _format_date_to_partner_lang(self, date, partner_id):
         lang_code = self.env['res.partner'].browse(partner_id).lang
         lang = self.env['res.lang']._lang_get(lang_code)
-        date = datetime.strptime(str_date, DEFAULT_SERVER_DATE_FORMAT).date()
         return date.strftime(lang.date_format)
 
     @api.model
