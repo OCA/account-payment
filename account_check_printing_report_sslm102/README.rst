@@ -49,7 +49,7 @@ Go to 'Settings / Users / Companies' and assign the check format 'SSLM102'.
 Usage
 =====
 
-* Go to 'Invoicing / Purchases / Payments'. Select one of the payments with
+* Go to 'Invoicing / Vendors / Payments'. Select one of the payments with
   type 'Check' and print the check.
 
 
