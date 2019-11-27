@@ -1,4 +1,5 @@
 import logging
+import re
 from base64 import b64encode
 
 from iso8601 import parse_date
@@ -7,6 +8,8 @@ import phonenumbers
 import coreapi
 from hal_codec import HALCodec
 
+
+SLIMPAY_FORBIDEN_CHARS_RE = re.compile(r'[0-9@/\\]')
 
 _logger = logging.getLogger(__name__)
 
@@ -61,10 +64,24 @@ def partner_mobile_phone(partner, fields=('phone', 'mobile')):
                     parsed, phonenumbers.PhoneNumberFormat.E164)
 
 
+def slimpay_normalize_names(name):
+    """As of november 2019, the doc states (for givenName and familyName):
+      Are forbidden:
+
+      digits from 0 to 9
+      the at sign @
+      the slash /
+      the backslash \
+
+    (see https://dev.slimpay.com/hapi/guide/checkout/setting-up-direct-debits)
+    """
+    return SLIMPAY_FORBIDEN_CHARS_RE.sub('', name)
+
+
 def subscriber_from_partner(partner):
     data = {
-        "familyName": partner.lastname or None,
-        "givenName": partner.firstname or None,
+        "familyName": slimpay_normalize_names(partner.lastname) or None,
+        "givenName": slimpay_normalize_names(partner.firstname) or None,
         "telephone": partner_mobile_phone(partner),
         "email": partner.email or None,
         "billingAddress": {

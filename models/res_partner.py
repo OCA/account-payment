@@ -8,32 +8,7 @@ from ..exceptions import SlimpayPartnerFieldError
 class SlimpayPartner(models.Model):
     _inherit = 'res.partner'
 
-    SLIMPAY_NAME_RE = regex.compile(u'^[\p{L} -]+$')
     SLIMPAY_FR_ZIP = regex.compile(u'^[0-9]{5}+$')
-
-    @api.model
-    def _slimpay_check_name_field(self, fieldname, value):
-        """Check slimpay validity regarding partner's first- or last- name
-        (`fieldname` being one of "firstname", "lastname").
-        """
-        if not self.SLIMPAY_NAME_RE.match(value):
-            msg = _('%(field)s must contain only letters, spaces and "-"')
-            raise SlimpayPartnerFieldError(fieldname,
-                                           msg % {'field': _(fieldname)})
-
-    @api.model
-    def _slimpay_check_firstname(self, value, **kw):
-        """Raise a `SlimpayPartnerFieldError` if given firstname `value` is not
-        valid for Slimpay.
-        """
-        self._slimpay_check_name_field('firstname', value)
-
-    @api.model
-    def _slimpay_check_lastname(self, value, **kw):
-        """Raise a `SlimpayPartnerFieldError` if given lastname `value` is not
-        valid for Slimpay.
-        """
-        self._slimpay_check_name_field('lastname', value)
 
     @api.model
     def _slimpay_check_zip(self, value, country_id=None, **kw):
@@ -70,20 +45,6 @@ class SlimpayPartner(models.Model):
                 except SlimpayPartnerFieldError as exc:
                     errors[fieldname] = exc.msg
         return errors
-
-    @api.constrains("firstname")
-    def _slimpay_firstname_constraint(self):
-        """Ensure firstname is valid for slimpay."""
-        for rec in self:
-            if not rec.is_company:
-                self._slimpay_check_firstname(rec.firstname or u'')
-
-    @api.constrains("lastname")
-    def _slimpay_lastname_constraint(self):
-        """Ensure lastname is valid for slimpay."""
-        for rec in self:
-            if not rec.is_company:
-                self._slimpay_check_lastname(rec.lastname or u'')
 
     @api.constrains("zip")
     def _slimpay_zip_constraint(self):

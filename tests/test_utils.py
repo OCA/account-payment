@@ -1,3 +1,5 @@
+# coding: utf-8
+
 from mock import patch
 
 from odoo.tests.common import TransactionCase, at_install, post_install
@@ -13,7 +15,7 @@ class SlimpayUtilsTC(TransactionCase):
         super(SlimpayUtilsTC, self).setUp()
         france = self.env['res.country'].search([('name', '=', 'France')])
         self.partner = self.env['res.partner'].create(
-            {'firstname': 'F', 'lastname': 'C', 'country_id': france.id})
+            {'firstname': 'F', 'lastname': u'C/@\\é9', 'country_id': france.id})
 
     def check_phone_value(self, expected):
         actual = slimpay_utils.partner_mobile_phone(self.partner)
@@ -31,7 +33,7 @@ class SlimpayUtilsTC(TransactionCase):
     def test_slimpay_signatory(self):
         subscriber = slimpay_utils.subscriber_from_partner(self.partner)
         self.assertEqual(
-            {'familyName': u'C', 'email': None, 'givenName': 'F',
+            {'familyName': u'Cé', 'email': None, 'givenName': 'F',
              'telephone': None, 'billingAddress': {
                  'city': None,
                  'country': u'FR',
@@ -46,7 +48,7 @@ class SlimpayUtilsTC(TransactionCase):
         subscriber = slimpay_utils.subscriber_from_partner(self.partner)
         self.assertEqual(self.partner.id, subscriber['reference'])
         self.assertEqual(
-            {'familyName': u'C', 'email': None, 'givenName': 'F',
+            {'familyName': u'Cé', 'email': None, 'givenName': 'F',
              'telephone': None, 'billingAddress': {
                  'city': u'Strasbourg',
                  'country': u'FR',
