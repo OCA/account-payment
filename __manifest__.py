@@ -2,7 +2,7 @@
     'name': 'Slimpay Payment Acquirer',
     'category': 'Accounting',
     'summary': 'Payment Acquirer: Slimpay Implementation',
-    'version': '10.0.1.1.5',
+    'version': '10.0.1.1.6',
     'description': """Slimpay Payment Acquirer""",
     'author': "Commown SCIC SAS",
     'license': "AGPL-3",
