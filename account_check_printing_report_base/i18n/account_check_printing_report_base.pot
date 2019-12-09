@@ -24,6 +24,7 @@ msgid "Account Payment Check Report"
 msgstr ""
 
 #. module: account_check_printing_report_base
+#: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_bank_statement_import_journal_creation__check_print_auto
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_journal__check_print_auto
 msgid "Automatic check printing"
 msgstr ""
@@ -46,6 +47,7 @@ msgid "Check Layouts"
 msgstr ""
 
 #. module: account_check_printing_report_base
+#: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_bank_statement_import_journal_creation__check_layout_id
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_journal__check_layout_id
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_res_company__check_layout_id
 msgid "Check format"
@@ -72,6 +74,7 @@ msgid "Created on"
 msgstr ""
 
 #. module: account_check_printing_report_base
+#: model:ir.model.fields,help:account_check_printing_report_base.field_account_bank_statement_import_journal_creation__check_print_auto
 #: model:ir.model.fields,help:account_check_printing_report_base.field_account_journal__check_print_auto
 msgid "Default check for the company is printed automatically when invoice payment is validated"
 msgstr ""

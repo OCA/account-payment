@@ -78,8 +78,8 @@ class ReportCheckPrint(models.AbstractModel):
                 payment.journal_id.default_credit_account_id
             rec_lines = payment.move_line_ids.filtered(
                 lambda x: x.account_id.reconcile and x.account_id != pay_acc)
-            amls = rec_lines.matched_credit_ids.mapped('credit_move_id') + \
-                rec_lines.matched_debit_ids.mapped('debit_move_id')
+            amls = rec_lines.mapped('matched_credit_ids.credit_move_id') + \
+                rec_lines.mapped('matched_debit_ids.debit_move_id')
             amls -= rec_lines
             for aml in amls:
                 date_due = aml.date_maturity
