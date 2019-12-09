@@ -24,11 +24,11 @@ msgstr "<b>Monto del cheque:</b>"
 #. module: account_check_printing_report_base
 #: model:ir.model,name:account_check_printing_report_base.model_account_payment_check_report
 #, fuzzy
-#| msgid "account.payment.check.report"
 msgid "Account Payment Check Report"
 msgstr "account.payment.check.report"
 
 #. module: account_check_printing_report_base
+#: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_bank_statement_import_journal_creation__check_print_auto
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_journal__check_print_auto
 msgid "Automatic check printing"
 msgstr "Impresión de cheque automático"
@@ -51,6 +51,7 @@ msgid "Check Layouts"
 msgstr "Plantillas de cheque"
 
 #. module: account_check_printing_report_base
+#: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_bank_statement_import_journal_creation__check_layout_id
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_journal__check_layout_id
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_res_company__check_layout_id
 msgid "Check format"
@@ -77,6 +78,7 @@ msgid "Created on"
 msgstr "Creado en"
 
 #. module: account_check_printing_report_base
+#: model:ir.model.fields,help:account_check_printing_report_base.field_account_bank_statement_import_journal_creation__check_print_auto
 #: model:ir.model.fields,help:account_check_printing_report_base.field_account_journal__check_print_auto
 msgid ""
 "Default check for the company is printed automatically when invoice payment "
@@ -156,7 +158,6 @@ msgstr "Pagos"
 #. module: account_check_printing_report_base
 #: model:ir.model,name:account_check_printing_report_base.model_account_register_payments
 #, fuzzy
-#| msgid "Payments"
 msgid "Register Payments"
 msgstr "Pagos"
 
