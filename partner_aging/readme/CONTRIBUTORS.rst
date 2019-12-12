@@ -4,3 +4,4 @@
 * Sudarshan Kadalazhi <skadalazhi@opensourceintegrators.com>
 * Murtuza Saleh <murtuza.saleh@serpentcs.com>
 * Maxime Chambreuil <mchambreuil@opensourceintegrators.com>
+* Nikul Chaudhary <nikul.chaudhary.serpentcs@gmail.com>
