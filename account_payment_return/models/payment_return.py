@@ -6,9 +6,9 @@
 # Copyright 2017 Luis M. Ontalba <luis.martinez@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+import odoo.addons.decimal_precision as dp
 from odoo import _, api, fields, models
 from odoo.exceptions import Warning as UserError
-import odoo.addons.decimal_precision as dp
 
 
 class PaymentReturn(models.Model):
@@ -135,19 +135,27 @@ class PaymentReturn(models.Model):
         move = self.env['account.move'].create(
             self._prepare_return_move_vals()
         )
+        payment_order_type = self.env['account.payment.order'] \
+            .search([('bank_line_ids.name', '=', self.line_ids[0].reference)])\
+            .payment_type
         total_amount = 0.0
         for return_line in self.line_ids:
             move_amount = self._get_move_amount(return_line)
             move_line2 = self.env['account.move.line'].with_context(
-                check_move_validity=False).create({
+                check_move_validity=False).create(
+                {
                     'name': move.ref,
-                    'debit': move_amount,
-                    'credit': 0.0,
                     'account_id': return_line.move_line_ids[0].account_id.id,
                     'move_id': move.id,
                     'partner_id': return_line.partner_id.id,
                     'journal_id': move.journal_id.id,
                 })
+            if payment_order_type == 'inbound':
+                move_line2.debit = move_amount
+                move_line2.credit = 0.0
+            else:
+                move_line2.debit = 0.0
+                move_line2.credit = move_amount
             total_amount += move_amount
             for move_line in return_line.move_line_ids:
                 returned_moves = move_line.matched_debit_ids.mapped(
@@ -182,14 +190,20 @@ class PaymentReturn(models.Model):
             extra_lines_vals = return_line._prepare_extra_move_lines(move)
             for extra_line_vals in extra_lines_vals:
                 move_line_obj.create(extra_line_vals)
+
         move_line_obj.create({
             'name': move.ref,
-            'debit': 0.0,
-            'credit': total_amount,
             'account_id': self.journal_id.default_credit_account_id.id,
             'move_id': move.id,
             'journal_id': move.journal_id.id,
         })
+        if payment_order_type == 'inbound':
+            move_line_obj.debit = total_amount
+            move_line_obj.credit = 0.0
+        else:
+            move_line_obj.debit = 0.0
+            move_line_obj.credit = total_amount
+
         # Write directly because we returned payments just now
         invoices.write(self._prepare_invoice_returned_vals())
         move.post()
