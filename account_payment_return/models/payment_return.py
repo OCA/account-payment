@@ -169,7 +169,7 @@ class PaymentReturn(models.Model):
     @api.multi
     def _prepare_move_line(self, move, total_amount):
         self.ensure_one()
-        return {
+        line_vals = {
             'name': move.ref,
             'debit': 0.0,
             'credit': total_amount,
@@ -177,6 +177,15 @@ class PaymentReturn(models.Model):
             'move_id': move.id,
             'journal_id': move.journal_id.id,
         }
+        payment_order_type = self.env['account.payment.order'].search([
+            ('bank_line_ids.name', '=', self.line_ids[0].reference)]).payment_type
+        if payment_order_type == 'inbound':
+            line_vals['debit'] = total_amount
+            line_vals['credit'] = 0.0
+        else:
+            line_vals['debit'] = 0.0
+            line_vals['credit'] = total_amount
+        return line_vals
 
     @api.multi
     def _auto_reconcile(self, credit_move_line, all_move_lines, total_amount):
@@ -221,7 +230,7 @@ class PaymentReturn(models.Model):
             move_line2_vals = return_line._prepare_return_move_line_vals(move)
             move_line2 = move_line_model.with_context(
                 check_move_validity=False).create(move_line2_vals)
-            total_amount += move_line2.debit
+            total_amount += move_line2.debit or move_line2.credit
             for move_line in return_line.move_line_ids:
                 # move_line: credit on customer account (from payment move)
                 # returned_moves: debit on customer account (from invoice move)
@@ -422,15 +431,23 @@ class PaymentReturnLine(models.Model):
     @api.multi
     def _prepare_return_move_line_vals(self, move):
         self.ensure_one()
-        return {
+        line_vals = {
             'name': _('Return %s') % self.return_id.name,
-            'debit': self.return_id._get_move_amount(self),
-            'credit': 0.0,
             'account_id': self.move_line_ids[0].account_id.id,
             'partner_id': self.partner_id.id,
             'journal_id': self.return_id.journal_id.id,
             'move_id': move.id,
         }
+        payment_order_type = self.env['account.payment.order'].search([
+            ('bank_line_ids.name', '=', self.reference)]).payment_type
+        move_amount = self.return_id._get_move_amount(self)
+        if payment_order_type == 'inbound':
+            line_vals['debit'] = move_amount
+            line_vals['credit'] = 0.0
+        else:
+            line_vals['debit'] = 0.0
+            line_vals['credit'] = move_amount
+        return line_vals
 
     @api.multi
     def _prepare_expense_lines_vals(self, move):

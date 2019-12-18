@@ -43,7 +43,7 @@
     </record>
 
     <menuitem id="menu_account_payment_return_import"
-              parent="account.menu_finance_receivables"
-              action="action_account_payment_return_import" sequence="22"/>
+              parent="account_payment_order.payment_root"
+              action="action_account_payment_return_import" sequence="60"/>
 
 </odoo>

@@ -115,8 +115,8 @@
     </record>
 
     <menuitem id="payment_return_menu"
-              name="Customer Payment Returns"
-              parent="account.menu_finance_receivables"
+              name="Payment Returns"
+              parent="account_payment_order.payment_root"
               action="payment_return_action"
-              sequence="20"/>
+              sequence="70"/>
 </odoo>
