@@ -3,10 +3,10 @@
    :alt: License: AGPL-3
 
 =================================
-Returned Customers Payment Orders
+Returned Payment Orders
 =================================
 
-This module implements customer receivables returns and allows to send
+This module implements receivables returns and allows to send
 related reconciled account move lines back to a state where the debt is still
 open, and letting history of it.
 
@@ -16,7 +16,7 @@ full returned payment record.
 Usage
 =====
 
-#. Go to Invoicing > Sales > Customer Payment Returns, and create a new
+#. Go to Invoicing > Payments > Payment Returns, and create a new
    record, register on each line a paid (reconciled) receivable journal item,
    and input the amount that is going to be returned.
 
@@ -58,6 +58,7 @@ Contributors
 * Carlos Dauden <carlos.dauden@tecnativa.com>
 * David Vidal <david.vidal@tecnativa.com>
 * Luis M. Ontalba <luis.martinez@tecnativa.com>
+* Benoît Schopfer <bschopfer@compassion.ch>
 
 Maintainer
 ----------

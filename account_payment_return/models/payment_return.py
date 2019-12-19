@@ -135,27 +135,35 @@ class PaymentReturn(models.Model):
         move = self.env['account.move'].create(
             self._prepare_return_move_vals()
         )
-        payment_order_type = self.env['account.payment.order'] \
-            .search([('bank_line_ids.name', '=', self.line_ids[0].reference)])\
-            .payment_type
+        payment_order = self.env['account.payment.order'] \
+            .search([('bank_line_ids.name', '=', self.line_ids[0].reference)])
         total_amount = 0.0
         for return_line in self.line_ids:
+            payment_lines = payment_order.bank_line_ids \
+                .search([('name', '=', return_line.reference)]) \
+                .payment_line_ids
+            for pl in payment_lines:
+                pl.returned_move_line_id = pl.move_line_id
+                pl.move_line_id = False
+                pl.payment_line_returned = True
             move_amount = self._get_move_amount(return_line)
+            debit = 0.0
+            credit = 0.0
+            if payment_order.payment_type == 'inbound':
+                debit = move_amount
+            else:
+                credit = move_amount
             move_line2 = self.env['account.move.line'].with_context(
                 check_move_validity=False).create(
                 {
                     'name': move.ref,
+                    'debit': debit,
+                    'credit': credit,
                     'account_id': return_line.move_line_ids[0].account_id.id,
                     'move_id': move.id,
                     'partner_id': return_line.partner_id.id,
                     'journal_id': move.journal_id.id,
                 })
-            if payment_order_type == 'inbound':
-                move_line2.debit = move_amount
-                move_line2.credit = 0.0
-            else:
-                move_line2.debit = 0.0
-                move_line2.credit = move_amount
             total_amount += move_amount
             for move_line in return_line.move_line_ids:
                 returned_moves = move_line.matched_debit_ids.mapped(
@@ -191,18 +199,20 @@ class PaymentReturn(models.Model):
             for extra_line_vals in extra_lines_vals:
                 move_line_obj.create(extra_line_vals)
 
+        credit = 0.0
+        debit = 0.0
+        if payment_order.payment_type == 'inbound':
+            credit = total_amount
+        else:
+            debit = total_amount
         move_line_obj.create({
             'name': move.ref,
+            'debit': debit,
+            'credit': credit,
             'account_id': self.journal_id.default_credit_account_id.id,
             'move_id': move.id,
             'journal_id': move.journal_id.id,
         })
-        if payment_order_type == 'inbound':
-            move_line_obj.debit = total_amount
-            move_line_obj.credit = 0.0
-        else:
-            move_line_obj.debit = 0.0
-            move_line_obj.credit = total_amount
 
         # Write directly because we returned payments just now
         invoices.write(self._prepare_invoice_returned_vals())
