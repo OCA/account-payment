@@ -40,7 +40,7 @@ full returned payment record.
 Usage
 =====
 
-#. Go to Invoicing > Sales > Customer Payment Returns, and create a new
+#. Go to Invoicing > Payments > Payment Returns, and create a new
    record, register on each line a paid (reconciled) receivable journal item,
    and input the amount that is going to be returned.
 
@@ -89,6 +89,7 @@ Contributors
 * Carlos Dauden <carlos.dauden@tecnativa.com>
 * David Vidal <david.vidal@tecnativa.com>
 * Luis M. Ontalba <luis.martinez@tecnativa.com>
+* Benoît Schopfer <bschopfer@compassion.ch>
 
 Maintainers
 ~~~~~~~~~~~

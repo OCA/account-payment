@@ -227,6 +227,13 @@ class PaymentReturn(models.Model):
         total_amount = 0.0
         all_move_lines = move_line_model.browse()
         for return_line in self.line_ids:
+            payment_lines = payment_order.bank_line_ids \
+                .search([('name', '=', return_line.reference)]) \
+                .payment_line_ids
+            for pl in payment_lines:
+                pl.returned_move_line_id = pl.move_line_id
+                pl.move_line_id = False
+                pl.payment_line_returned = True
             move_line2_vals = return_line._prepare_return_move_line_vals(move)
             move_line2 = move_line_model.with_context(
                 check_move_validity=False).create(move_line2_vals)
