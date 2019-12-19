@@ -10,6 +10,7 @@ from odoo import _, api, fields, models
 from odoo.exceptions import Warning as UserError
 from odoo.exceptions import ValidationError
 import odoo.addons.decimal_precision as dp
+from odoo.tools import float_compare
 
 
 class PaymentReturn(models.Model):
@@ -62,6 +63,24 @@ class PaymentReturn(models.Model):
                    ('cancelled', 'Cancelled')],
         string='State', readonly=True, default='draft',
         track_visibility='onchange')
+    auto_reconcile_failure = fields.Boolean(
+        string="Automatic reconciliation failure",
+        compute='_compute_auto_reconcile_failure',
+        readonly=True,
+        store=False,
+    )
+
+    @api.multi
+    def _compute_auto_reconcile_failure(self):
+        """
+        This method computes the auto_reconcile_failure field which is as flag
+        allowing to detect the unreconciled "done" payment returns with
+        automatic reconciliation enabled.
+        """
+        for rec in self.filtered(lambda r: r.state == 'done' and
+                                 r.journal_id.return_auto_reconcile):
+            crdt_move_line = rec.move_id.line_ids.filtered(lambda l: l.credit)
+            rec.auto_reconcile_failure = not crdt_move_line.reconciled
 
     @api.multi
     @api.constrains('line_ids')
@@ -160,6 +179,32 @@ class PaymentReturn(models.Model):
         }
 
     @api.multi
+    def _auto_reconcile(self, credit_move_line, all_move_lines, total_amount):
+        """
+        Reconcile the payment return if the option return_auto_reconcile is
+        enabled on the journal.
+        """
+        self.ensure_one()
+        if not self.journal_id.return_auto_reconcile:
+            return
+        rounding = self.env.user.company_id.currency_id.rounding
+        counterpart_move_lines = self.env['account.move.line'].browse()
+        for move_line in all_move_lines:
+            move = move_line.move_id
+            if len(move.line_ids) != 2:  # auto.reconciliation not possible
+                return
+            counterpart_move_lines |= move.line_ids.filtered(
+                lambda line: line != move_line)
+        if counterpart_move_lines and float_compare(
+                total_amount, sum(counterpart_move_lines.mapped('debit')),
+                precision_rounding=rounding) == 0 and not any(
+                rec.reconciled for rec in counterpart_move_lines):
+            lines_to_reconcile = credit_move_line | counterpart_move_lines
+            if len(lines_to_reconcile.mapped('account_id')) != 1:
+                return
+            lines_to_reconcile.reconcile()
+
+    @api.multi
     def action_confirm(self):
         self.ensure_one()
         # Check for incomplete lines
@@ -172,14 +217,18 @@ class PaymentReturn(models.Model):
         move = self.env['account.move'].create(
             self._prepare_return_move_vals())
         total_amount = 0.0
+        all_move_lines = move_line_model.browse()
         for return_line in self.line_ids:
             move_line2_vals = return_line._prepare_return_move_line_vals(move)
             move_line2 = move_line_model.with_context(
                 check_move_validity=False).create(move_line2_vals)
             total_amount += move_line2.debit
             for move_line in return_line.move_line_ids:
+                # move_line: credit on customer account (from payment move)
+                # returned_moves: debit on customer account (from invoice move)
                 returned_moves = move_line.matched_debit_ids.mapped(
                     'debit_move_id')
+                all_move_lines |= move_line
                 invoices |= returned_moves.mapped('invoice_id')
                 move_line.remove_move_reconcile()
                 (move_line | move_line2).reconcile()
@@ -193,7 +242,11 @@ class PaymentReturn(models.Model):
             extra_lines_vals = return_line._prepare_extra_move_lines(move)
             move_line_model.create(extra_lines_vals)
         move_line_vals = self._prepare_move_line(move, total_amount)
-        move_line_model.create(move_line_vals)
+        # credit_move_line: credit on transfer or bank account
+        credit_move_line = move_line_model.create(move_line_vals)
+        # Reconcile (if option enabled)
+        self._auto_reconcile(
+            credit_move_line, all_move_lines, total_amount)
         # Write directly because we returned payments just now
         invoices.write(self._prepare_invoice_returned_vals())
         move.post()

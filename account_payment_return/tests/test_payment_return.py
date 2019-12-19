@@ -129,6 +129,19 @@ class TestPaymentReturn(SavepointCase):
         self.assertEqual(self.payment_return.state, 'draft')
         self.payment_return.unlink()
 
+    def test_payment_return_auto_reconcile(self):
+        self.assertEqual(self.invoice.state, 'paid')
+        self.payment_return.action_draft()
+        self.payment_return.line_ids[0].expense_amount = 20.0
+        self.payment_return.line_ids[0]._onchange_expense_amount()
+        self.payment_return.journal_id.return_auto_reconcile = True
+        self.payment_return.action_confirm()
+        self.assertEqual(self.payment_return.state, 'done')
+        self.assertEqual(self.invoice.state, 'open')
+        crdt_move_lines = self.payment_return.move_id.line_ids.filtered(
+            lambda l: l.credit)
+        self.assertTrue(crdt_move_lines.mapped('reconciled'))
+
     def test_payment_partial_return(self):
         self.payment_return.line_ids[0].amount = 500.0
         self.assertEqual(self.invoice.state, 'paid')
