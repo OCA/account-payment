@@ -149,10 +149,10 @@ class PaymentReturn(models.Model):
             move_amount = self._get_move_amount(return_line)
             debit = 0.0
             credit = 0.0
-            if payment_order.payment_type == 'inbound':
-                debit = move_amount
-            else:
+            if payment_order.payment_type == 'outbound':
                 credit = move_amount
+            else:
+                debit = move_amount
             move_line2 = self.env['account.move.line'].with_context(
                 check_move_validity=False).create(
                 {
@@ -165,14 +165,31 @@ class PaymentReturn(models.Model):
                     'journal_id': move.journal_id.id,
                 })
             total_amount += move_amount
-            for move_line in return_line.move_line_ids:
-                returned_moves = move_line.matched_debit_ids.mapped(
-                    'debit_move_id')
-                invoices |= returned_moves.mapped('invoice_id')
-                move_line.remove_move_reconcile()
-                (move_line | move_line2).reconcile()
-                return_line.move_line_ids.mapped('matched_debit_ids').write(
-                    {'origin_returned_move_ids': [(6, 0, returned_moves.ids)]})
+
+            if payment_order.payment_type == 'outbound':
+                for move_line in return_line.move_line_ids:
+                    returned_moves = move_line.matched_credit_ids.mapped(
+                        'credit_move_id')
+                    invoices |= returned_moves.mapped('invoice_id')
+                    move_line.remove_move_reconcile()
+                    (move_line | move_line2).reconcile()
+                    return_line.move_line_ids.mapped(
+                        'matched_credit_ids').write(
+                        {
+                            'origin_returned_move_ids': [
+                                (6, 0, returned_moves.ids)]})
+            else:
+                for move_line in return_line.move_line_ids:
+                    returned_moves = move_line.matched_debit_ids.mapped(
+                        'debit_move_id')
+                    invoices |= returned_moves.mapped('invoice_id')
+                    move_line.remove_move_reconcile()
+                    (move_line | move_line2).reconcile()
+                    return_line.move_line_ids.mapped(
+                        'matched_debit_ids').write(
+                        {
+                            'origin_returned_move_ids': [
+                                (6, 0, returned_moves.ids)]})
             if return_line.expense_amount:
                 expense_lines_vals = []
                 expense_lines_vals.append({
@@ -201,10 +218,10 @@ class PaymentReturn(models.Model):
 
         credit = 0.0
         debit = 0.0
-        if payment_order.payment_type == 'inbound':
-            credit = total_amount
-        else:
+        if payment_order.payment_type == 'outbound':
             debit = total_amount
+        else:
+            credit = total_amount
         move_line_obj.create({
             'name': move.ref,
             'debit': debit,
@@ -223,8 +240,9 @@ class PaymentReturn(models.Model):
     @api.multi
     def action_cancel(self):
         invoices = self.env['account.invoice']
-        for move_line in self.mapped('move_id.line_ids').filtered(
-                lambda x: x.user_type_id.type == 'receivable'):
+        for move_line in self.mapped('move_id.line_ids')\
+                .filtered(lambda x: x.user_type_id.type == 'receivable'
+                          or x.user_type_id.type == 'payable'):
             for partial_line in move_line.matched_credit_ids:
                 invoices |= partial_line.origin_returned_move_ids.mapped(
                     'invoice_id')
@@ -232,6 +250,23 @@ class PaymentReturn(models.Model):
                                    partial_line.credit_move_id)
                 partial_line.credit_move_id.remove_move_reconcile()
                 lines2reconcile.reconcile()
+            for partial_line in move_line.matched_debit_ids:
+                invoices |= partial_line.origin_returned_move_ids.mapped(
+                    'invoice_id')
+                lines2reconcile = (partial_line.origin_returned_move_ids |
+                                   partial_line.debit_move_id)
+                partial_line.debit_move_id.remove_move_reconcile()
+                lines2reconcile.reconcile()
+        payment_order = self.env['account.payment.order'] \
+            .search([('bank_line_ids.name', '=', self.line_ids[0].reference)])
+        for return_line in self.line_ids:
+            payment_lines = payment_order.bank_line_ids \
+                .search([('name', '=', return_line.reference)]) \
+                .payment_line_ids
+            for pl in payment_lines:
+                pl.move_line_id = pl.returned_move_line_id
+                pl.returned_move_line_id = False
+                pl.payment_line_returned = False
         self.move_id.button_cancel()
         self.move_id.unlink()
         self.write({'state': 'cancelled', 'move_id': False})
