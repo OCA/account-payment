@@ -25,7 +25,7 @@ Account Payment Returns
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
 
-This module implements customer receivables returns and allows to send
+This module implements customer receivables returns and vendor payable returns and allows to send
 related reconciled account move lines back to a state where the debt is still
 open, and letting history of it.
 
@@ -41,12 +41,14 @@ Usage
 =====
 
 #. Go to Invoicing > Payments > Payment Returns, and create a new
-   record, register on each line a paid (reconciled) receivable journal item,
+   record, register on each line a paid (reconciled) receivable/payable journal item,
    and input the amount that is going to be returned.
 
    Another option to fill info is setting references and click match button to
    find matches with invoices, move lines or moves. This functionality is extended
    by other modules as *account_payment_return_import_sepa_pain*
+
+   When using the return from a payment/debit order, if the payment mode generate offsetting moves with a transfert account, a transfert return journal has to be created.
 
 #. It's possible to add bank charges amount on each line.
 
