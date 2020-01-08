@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<odoo>
+         <report
+            id="action_report_check_sslm102"
+            model="account.payment"
+            string="Payment Check SSLM102"
+            report_type="qweb-pdf"
+            name="account_check_printing_report_sslm102.sslm102"
+            file="account_check_printing_report_sslm102.sslm102"
+            paperformat="account_check_printing_report_sslm102.paperformat_check_sslm102"/>
+
+</odoo>

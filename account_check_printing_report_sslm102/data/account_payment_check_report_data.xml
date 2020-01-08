@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+        <record id="account_payment_check_report_sslm102"
+                model="account.payment.check.report">
+            <field name="name">sslm102</field>
+            <field name="report">account_check_printing_report_sslm102.sslm102</field>
+        </record>
+</odoo>

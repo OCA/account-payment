@@ -13,6 +13,17 @@ class ReportCheckPrint(models.AbstractModel):
     _name = 'report.account_check_printing_report_base.report_check_base'
     _description = 'Report Check Print'
 
+    @api.model
+    def fill_stars_number(self, amount, stars_prefix=5, stars_suffix=1):
+        str_prefix = ' '.join(['*' * stars_prefix, amount, '*' * stars_suffix])
+        return str_prefix
+
+    def _format_date_to_partner_lang(self, date, partner_id):
+        lang_code = self.env['res.partner'].browse(partner_id).lang
+        lang = self.env['res.lang']._lang_get(lang_code)
+        return date.strftime(lang.date_format)
+
+    @api.model
     def fill_stars(self, amount_in_word):
         if amount_in_word and len(amount_in_word) < 100:
             stars = 100 - len(amount_in_word)
@@ -86,7 +97,7 @@ class ReportCheckPrint(models.AbstractModel):
                 lines[payment.id].append(line)
         return lines
 
-    @api.multi
+    @api.model
     def _get_report_values(self, docids, data=None):
         model = self.env.context.get('active_model', 'account.payment')
         objects = self.env[model].browse(docids)
@@ -97,6 +108,8 @@ class ReportCheckPrint(models.AbstractModel):
             'docs': objects,
             'time': time,
             'fill_stars': self.fill_stars,
-            'paid_lines': paid_lines
+            'fill_stars_number': self.fill_stars_number,
+            'paid_lines': paid_lines,
+            '_format_date_to_partner_lang': self._format_date_to_partner_lang,
         }
         return docargs

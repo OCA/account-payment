@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="sslm102">
+         <t t-call="web.html_container">
+             <div class="header"/>
+             <div class="article">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <div name='top_block' style="position:absolute; top:15mm; left:10mm;">
+                            <t t-call="account_check_printing_report_sslm102.invoice_data"/>
+                        </div>
+                        <div name='top_block_check_amount' style="position:absolute; top:80mm; right:22mm;" align="right">
+                            <b>Check Amount: </b><span
+                                t-field='o.amount' t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                        </div>
+                        <div name='middle_block'>
+                            <t t-call="account_check_printing_report_sslm102.check_data"/>
+                        </div>
+                        <div name='bottom_block' style="position:absolute; top:180mm; left:10mm;">
+                            <t t-call="account_check_printing_report_sslm102.invoice_data"/>
+                        </div>
+                        <div name='middle_block_check_amount' style="position:absolute; top:250mm; right:22mm;" align="right">
+                            <b>Check Amount: </b><span
+                                t-field='o.amount' t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/>
+                        </div>
+                    </div>
+                </t>
+             </div>
+        </t>
+    </template>
+
+    <template id="check_data">
+        <div>
+            <div name='amount_in_words' style="position:absolute; right:20mm; top:115mm;">
+                <strong><span t-esc="fill_stars(o.check_amount_in_words)"/></strong>
+            </div>
+            <div name='payment_date' style="position:absolute; right:60mm; top:128mm;">
+                <span t-esc="_format_date_to_partner_lang(o.payment_date, o.partner_id.id)"/>
+            </div>
+            <div name='payment_amount' style="position:absolute; right:10mm; top:128mm;">
+                <span t-esc="fill_stars_number('%.2f' % o.amount, stars_prefix=5, stars_suffix=1)"/>
+            </div>
+            <div name='partner_data' style="position:absolute; top:125mm; left:25mm;">
+                <div t-field="o.partner_id"
+                     t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'/>
+            </div>
+            <div name='communication' style="position:absolute; left:20mm; top:150mm;max-width: 100mm;max-height: 10mm;">
+                <span t-field="o.communication"/>
+            </div>
+        </div>
+    </template>
+
+    <template id="invoice_data">
+        <div>
+            <strong name='invoice_data_header'>
+                <span name='partner'
+                        t-esc="'Partner: {}'.format(o.partner_id.name)"/>
+                <span name='payment_date' style="padding-right:100mm;float:right;"
+                      t-esc="'Date: {}'.format(_format_date_to_partner_lang(o.payment_date, o.partner_id.id))"/>
+                <span name='check_number' style="position:absolute; right:35mm;"
+                      t-esc="'Check #: {}'.format(o.check_number)"/>
+            </strong>
+            <table name="invoice_details" width="96%" style="padding-right:22mm;">
+                <thead>
+                    <tr style="text-align:left;">
+                        <th style="padding-top:3mm;">Due Date</th>
+                        <th>Description</th>
+                        <th>Original Amount</th>
+                        <th>Balance Due</th>
+                        <th>Payment</th>
+                    </tr>
+                </thead>
+                <t t-set="line_count" t-value="0"/>
+                <t t-set="total_lines" t-value="0"/>
+                <t t-foreach="paid_lines[o.id]"
+                       t-as="line">
+                    <t t-set="total_lines" t-value="total_lines+1"/>
+                </t>
+                <tbody>
+                    <t name="paid_lines_loop" t-foreach="paid_lines[o.id]"
+                       t-as="line">
+                        <t name="line_count_condition" t-if="line_count &lt; 7">
+                            <tr style="text-align:left;border-top: 0px;">
+                                <td style="padding-top:2mm;"><span t-esc="_format_date_to_partner_lang(line['date_due'], o.partner_id.id)"/></td>
+                                <td style="max-width: 55mm;"
+                                    t-esc="line['reference'] or line['number']"/>
+                                <td><span t-esc="line['amount_total']" t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></td>
+                                <td><span t-esc="line['residual']" t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></td>
+                                <td><span t-esc="line['paid_amount']" t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'/></td>
+                            </tr>
+                        </t>
+                        <t t-set="line_count" t-value="line_count+1"/>
+                        <t name="line_limit_warning_condition" t-if="line_count == 7">
+                            <tr style="text-align:left;border-top: 0px;">
+                                <td style="padding-top:2mm;" colspan="5">(*) Not all invoices were printed</td>
+                            </tr>
+                        </t>
+                    </t>
+                </tbody>
+            </table>
+        </div>
+    </template>
+
+</odoo>
