@@ -5,6 +5,9 @@
         <field name="image" type="base64" file="payment_ippay/static/src/img/ippay.png"/>
         <field name="provider">ippay</field>
         <field name="company_id" ref="base.main_company"/>
+        <field name="view_template_id" ref="ippay_form" />
+        <field name="registration_view_template_id" ref="ippay_s2s_form"/>
+        <field name="payment_flow">s2s</field>
         <field name="environment">test</field>
         <field name="description" type="html">
             <p>

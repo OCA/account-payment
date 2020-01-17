@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="ippay_form">
+        <input type="hidden" name="data_set" t-att-data-action-url="ippay_tx_url" data-remove-me=""/>
+        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+        <input type="hidden" name="return_url" t-att-value="return_url"/>
+        <input type="hidden" name="api_url" t-att-value="api_url"/>
+        <input type="hidden" name="terminal_id" t-att-value="terminal_id"/>
+    </template>
+
+
+    <template id="assets_frontend_mondido" inherit_id="web.assets_frontend" name="Mondido Payment Assets">
+        <xpath expr="." position="inside">
+            <script type="text/javascript" src="/payment_ippay/static/src/js/payment_ippay.js"></script> 
+        </xpath>
+    </template>
+
+    <template id="ippay_s2s_form">
+         
+
+        <input type="hidden" name="data_set" data-create-route="/payment/ippay/s2s/create_json_3ds"/>
+        <div t-attf-class="row mt8 #{'' if bootstrap_formatting else 'o_card_brand_detail'}">
+            <t t-set="card_details" t-value="request.env['res.partner'].search([('id', '=', int(partner_id))]).payment_token_id"/>
+            <t t-if="not card_details">
+                <t t-set="card_details" t-value="request.env['payment.token'].search([('partner_id', '=', int(partner_id))], limit=1)"/>
+            </t>
+           <!-- <div>
+                <label>Payment Details</label>
+                <label class="radio-inline ml-2 mr-4">
+                    <input type="radio" name="payment_opt" style="margin-right: 5px;" checked="checked" value="defualt" required="required"/>Defualt Card
+                </label>
+                <label class="radio-inline">
+                  <input type="radio" name="payment_opt" style="margin-right: 5px;" value="new"/>New Card
+                </label>
+            </div> -->
+             <!-- <t t-esc="card_details"/>
+             <div t-att-class="'defualt_dtl' if card_details else ' d-none'"> -->
+            <div t-att-class="'defualt_dtl' if card_details.name else ' d-none'">
+                <t t-esc="card_details.name"/>
+            </div>
+            <div t-att-class="'new_dtl' if not card_details.name else ' d-none'">
+            <!-- <div class="new_dtl"> -->
+                <div> You have not default details </div>
+                <div t-att-class="'form-group col-lg-12' if bootstrap_formatting else 'form-group'">
+                    <input type="tel" name="cc_number" id="cc_number" class="form-control" placeholder="Card number" data-is-required="true" />
+                    <div class="card_placeholder"></div>
+                    <div class="visa"></div>
+                    <input type="hidden" name="cc_brand" value=""/>
+                </div>
+                <div t-att-class="'form-group col-lg-5' if bootstrap_formatting else 'form-group'">
+                    <input type="text" name="cc_holder_name" id="cc_holder_name" class="form-control" placeholder="Cardholder name" data-is-required="true"/>
+                </div>
+                <div t-att-class="'form-group col-lg-3' if bootstrap_formatting else 'form-group'">
+                    <input type="text" name="cc_expiry" id="cc_expiry" class="form-control" maxlength="7" placeholder="Expires (MM / YY)" data-is-required="true"/>
+                </div>
+                <div t-att-class="'form-group col-lg-4' if bootstrap_formatting else 'form-group'">
+                    <input type="text" name="cc_cvc" id="cc_cvc" class="form-control" maxlength="4" placeholder="CVC" data-is-required="true"/>
+                </div>
+            </div>
+        </div>
+        <input type="hidden" name="acquirer_id" t-att-value="id"/>
+        <input class="d-none" name="csrf_token" t-att-value="request.csrf_token()"/>
+        <input t-if="return_url" type="hidden" name="return_url" t-att-value="return_url"/>
+        <t t-esc="partner"/>
+        <t t-esc="reference"/>
+        <input t-if="partner_id" type="hidden" name="partner_id" t-att-value="partner_id"/>
+    </template>
+
+<!--     <template name="Failed" id="payment_ippay.Failed">
+       <t t-call="website.layout">
+            <div class="container" id="id_section1">
+                <div id="wrap" t-attf-class="wrapper">
+                    <div class="row">
+                        <div class="col-md-10" align="center">
+                            <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+                            <link href="/payment_ippay/static/src/css/transaction_failed.css" rel="stylesheet" />
+                            <form action="/shop/payment" class="form-horizontal mt32" onsubmit="" method="post" >
+                                <input type="hidden" name="csrf_token" t-att-value="csrf_token"/>
+                                <div class='row div_head' style='height:80px;'>
+                                    <div class='col-md-3' style='margin-left:10%'>
+                                        <img src='/payment_ippay/static/src/img/failed.jpg' width='75px' height='75px' style="margin-left: 249px;"></img>
+                                    </div>
+                                    <div class='col-md-6'>
+                                        <h2><b>Transaction Failed</b></h2>
+                                    </div>
+                                </div>
+                                <div class='row div_head' align='center' style='height:30px;'>
+                                    <div class="col-md-8" style='margin-left:173px;'>
+                                        Reason: <t t-esc='error'/>
+                                    </div>
+                                </div>
+                                <div class='row div_head' align='center' style='height:30px; margin-left: 130px;'>
+                                    <div class="col-md-3" style='margin-left:200px;'>
+                                        <a href='/my/invoices' width="100px" id='id_submit' class="btn btn-success">
+                                            Return to Invoice
+                                        </a>
+                                    </div>
+                                    <div class="col-md-3">
+                                        <a href='/' width="100px" id='id_submit' class="btn btn-success">
+                                            Back to Home Page
+                                        </a>
+                                    </div>
+                                </div>
+                                <div class="clearfix"/>
+                                <br/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+ -->
+</odoo>
