@@ -10,14 +10,15 @@
     "maintainer": "Open Source Integrators",
     "website": "http://www.opensourceintegrators.com",
     "category": "Accounting",
-    "depends": ['payment', 'website'],
+    "depends": ["payment", "website", "account_payment"],
     "data": [
         "views/payment_view.xml",
         "views/payment_ippay_templates.xml",
         "data/ippay_payment_data.xml",
         "data/account_payment_method.xml",
+        "views/account_portal_templates.xml",
     ],
     "development_status": "beta",
     "installable": True,
-    'external_dependencies': {'python': ['xmltodict']}
+    "external_dependencies": {"python": ["xmltodict"]},
 }
