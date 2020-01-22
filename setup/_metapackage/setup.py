@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo12-addon-account_cash_invoice',
         'odoo12-addon-account_check_printing_report_base',
+        'odoo12-addon-account_check_printing_report_dlt103',
         'odoo12-addon-account_check_printing_report_sslm102',
         'odoo12-addon-account_check_report',
         'odoo12-addon-account_due_list',
