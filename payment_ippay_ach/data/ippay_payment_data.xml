@@ -1,0 +1,22 @@
+<odoo>
+
+    <record id="payment_acquirer_ippay_ach" model="payment.acquirer">
+        <field name="name">IPpay ACH</field>
+        <field name="image" type="base64" file="payment_ippay_ach/static/description/icon.png"/>
+        <field name="provider">ippay_ach</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="environment">test</field>
+        <field name="description" type="html">
+            <p>
+                An IPpay ACH payment gateway to accept online payments via check.
+            </p>
+        </field>
+        <field name="api_url">https://testgtwy.ippay.com/ippay</field>
+        <field name="ippay_ach_terminal_id">TESTTERMINAL</field>
+        <field name="payment_icon_ids" eval="[(6, 0, [
+                ref('payment_icon_echeck'),
+            ])]"
+        />
+    </record>
+
+</odoo>
