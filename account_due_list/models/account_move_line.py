@@ -5,8 +5,7 @@
 # © 2015 Andrea Cometa <info@andreacometa.it>
 # © 2015 Eneko Lacunza <elacunza@binovo.es>
 # © 2015 Tecnativa (http://www.tecnativa.com)
-# © 2016 Eficent Business and IT Consulting Services S.L.
-#        (http://www.eficent.com)
+# © 2016 ForgeFlow S.L. (http://www.forgeflow.com)
 # © 2018 Ozono Multimedia S.L.L.
 #        (http://www.ozonomultimedia.com)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
@@ -17,36 +16,20 @@ from odoo import api, fields, models
 class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
-    invoice_origin = fields.Char(related="invoice_id.origin", string="Source Doc")
-    invoice_date = fields.Date(related="invoice_id.date_invoice", string="Invoice Date")
+    invoice_origin = fields.Char(related="move_id.invoice_origin", string="Source Doc")
+    invoice_date = fields.Date(related="move_id.invoice_date", string="Invoice Date")
     partner_ref = fields.Char(related="partner_id.ref", string="Partner Ref")
     payment_term_id = fields.Many2one(
         "account.payment.term",
-        related="invoice_id.payment_term_id",
+        related="move_id.invoice_payment_term_id",
         string="Payment Terms",
     )
-    stored_invoice_id = fields.Many2one(
-        comodel_name="account.invoice",
-        compute="_compute_invoice",
-        string="Stored Invoice",
-        store=True,
-    )
-
     invoice_user_id = fields.Many2one(
         comodel_name="res.users",
-        related="stored_invoice_id.user_id",
+        related="move_id.invoice_user_id",
         string="Invoice salesperson",
         store=True,
     )
-
-    @api.multi
-    @api.depends("move_id", "invoice_id.move_id")
-    def _compute_invoice(self):
-        for line in self:
-            invoices = self.env["account.invoice"].search(
-                [("move_id", "=", line.move_id.id)]
-            )
-            line.stored_invoice_id = invoices[:1]
 
     @api.model
     def fields_view_get(
