@@ -2,6 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 import logging
+
 logger = logging.getLogger(__name__)
 
 
@@ -25,18 +26,21 @@ def pre_init_hook(cr):
 
 def store_field_stored_invoice_id(cr):
 
-    cr.execute("""SELECT column_name
+    cr.execute(
+        """SELECT column_name
     FROM information_schema.columns
     WHERE table_name='account_move_line' AND
-    column_name='stored_invoice_id'""")
+    column_name='stored_invoice_id'"""
+    )
     if not cr.fetchone():
         cr.execute(
             """
             ALTER TABLE account_move_line ADD COLUMN stored_invoice_id integer;
             COMMENT ON COLUMN account_move_line.stored_invoice_id IS 'Invoice';
-            """)
+            """
+        )
 
-    logger.info('Computing field stored_invoice_id on account.move.line')
+    logger.info("Computing field stored_invoice_id on account.move.line")
 
     cr.execute(
         """
@@ -51,19 +55,22 @@ def store_field_stored_invoice_id(cr):
 
 def store_field_invoice_user_id(cr):
 
-    cr.execute("""SELECT column_name
+    cr.execute(
+        """SELECT column_name
     FROM information_schema.columns
     WHERE table_name='account_move_line' AND
-    column_name='invoice_user_id'""")
+    column_name='invoice_user_id'"""
+    )
     if not cr.fetchone():
         cr.execute(
             """
             ALTER TABLE account_move_line ADD COLUMN invoice_user_id integer;
             COMMENT ON COLUMN account_move_line.invoice_user_id IS
             'Invoice salesperson';
-            """)
+            """
+        )
 
-    logger.info('Computing field invoice_user_id on account.move.line')
+    logger.info("Computing field invoice_user_id on account.move.line")
 
     cr.execute(
         """
