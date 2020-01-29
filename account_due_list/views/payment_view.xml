@@ -8,9 +8,9 @@
         <field name="field_parent">partner_id</field>
         <field name="priority" eval="20"/>
         <field name="arch" type="xml">
-            <tree string="Payments" decoration-muted="reconciled!=False" 
-                    decoration-danger="date_maturity&lt;current_date" create="false" delete="false">
-                <field name="stored_invoice_id" string="Invoice" readonly="1"/>
+            <tree string="Payments" decoration-muted="reconciled!=False"
+                    decoration-danger="reconciled==False and date_maturity&lt;current_date" create="false" delete="false">
+                <field name="move_id" string="Invoice" readonly="1"/>
                 <field name="invoice_date" readonly="1"/>
                 <field name="invoice_origin" readonly="1"/>
                 <field name="name" readonly="1"/>
@@ -24,7 +24,6 @@
                 <field name="amount_residual_currency"
                        sum="Total Residual Currency"/>
                 <field name="date_maturity"/>
-                <field name="move_id" readonly="1"/>
                 <field name="reconciled" readonly="1"/>
             </tree>
         </field>
@@ -45,7 +44,7 @@
                 <separator/>
                 <filter name="from_invoices"
                         string="From invoices"
-                        domain="[('stored_invoice_id', '&lt;&gt;', False)]"/>
+                        domain="[('move_id', '&lt;&gt;', False)]"/>
                 <separator/>
                 <filter name="unreconciled"
                         string="Unreconciled"
@@ -58,7 +57,7 @@
                 <field name="account_id"/>
                 <field name="name"/>
                 <field name="partner_id"/>
-                <field name="invoice_id"/>
+                <field name="move_id"/>
                 <field name="invoice_user_id"/>
                 <field name="invoice_origin"/>
                 <field name="date_maturity"/>
@@ -71,7 +70,7 @@
                             context="{'group_by':'partner_id'}" name="group_by_partner"/>
                     <filter string="Invoice"
                             domain="[]"
-                            context="{'group_by':'stored_invoice_id'}" name="group_by_invoice"/>
+                            context="{'group_by':'move_id'}" name="group_by_invoice"/>
                     <filter string="Due Date"
                             domain="[]"
                             context="{'group_by':'date_maturity:day'}" name="group_by_duedate"/>
