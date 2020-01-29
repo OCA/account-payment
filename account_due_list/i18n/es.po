@@ -35,20 +35,6 @@ msgid "Group By"
 msgstr "Agrupar por"
 
 #. module: account_due_list
-#: model:ir.model.fields,help:account_due_list.field_account_move_line__payment_term_id
-msgid ""
-"If you use payment terms, the due date will be computed automatically at the "
-"generation of accounting entries. If you keep the payment terms and the due "
-"date empty, it means direct payment. The payment terms may compute several "
-"due dates, for example 50% now, 50% in one month."
-msgstr ""
-"Si utiliza los términos de pago, la fecha de vencimiento se calculará "
-"automáticamente en la generación de asientos contables. Si deja vació los "
-"términos de pago y la fecha de vencimiento, se asumirá que es un pago "
-"inmediato. Los términos de pago permiten calcular varias fechas de "
-"vencimiento, por ejemplo 50% ahora, 50% en un mes."
-
-#. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
 msgid "Invoice"
@@ -68,11 +54,6 @@ msgstr "Comercial de la factura"
 #: model:ir.model,name:account_due_list.model_account_move_line
 msgid "Journal Item"
 msgstr "Apunte contable"
-
-#. module: account_due_list
-#: model:ir.model.fields,help:account_due_list.field_account_move_line__invoice_date
-msgid "Keep empty to use the current date"
-msgstr "Dejarlo vacío para utilizar la fecha actual."
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -123,11 +104,6 @@ msgid "Receivable"
 msgstr "Cobros"
 
 #. module: account_due_list
-#: model:ir.model.fields,help:account_due_list.field_account_move_line__invoice_origin
-msgid "Reference of the document that produced this invoice."
-msgstr "Referencia del documento que ha creado esta factura."
-
-#. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Salesperson"
 msgstr "Comercial"
@@ -143,10 +119,11 @@ msgid "Source Doc"
 msgstr "Doc. origen"
 
 #. module: account_due_list
-#: model:ir.model.fields,field_description:account_due_list.field_account_move_line__stored_invoice_id
+#: model:ir.model.fields,help:account_due_list.field_account_move_line__invoice_origin
 #, fuzzy
-msgid "Stored Invoice"
-msgstr "Factura"
+#| msgid "Reference of the document that produced this invoice."
+msgid "The document(s) that generated the invoice."
+msgstr "Referencia del documento que ha creado esta factura."
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
@@ -172,6 +149,25 @@ msgstr "Total Residual Currency"
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Unreconciled"
 msgstr "No conciliado"
+
+#~ msgid ""
+#~ "If you use payment terms, the due date will be computed automatically at "
+#~ "the generation of accounting entries. If you keep the payment terms and "
+#~ "the due date empty, it means direct payment. The payment terms may "
+#~ "compute several due dates, for example 50% now, 50% in one month."
+#~ msgstr ""
+#~ "Si utiliza los términos de pago, la fecha de vencimiento se calculará "
+#~ "automáticamente en la generación de asientos contables. Si deja vació los "
+#~ "términos de pago y la fecha de vencimiento, se asumirá que es un pago "
+#~ "inmediato. Los términos de pago permiten calcular varias fechas de "
+#~ "vencimiento, por ejemplo 50% ahora, 50% en un mes."
+
+#~ msgid "Keep empty to use the current date"
+#~ msgstr "Dejarlo vacío para utilizar la fecha actual."
+
+#, fuzzy
+#~ msgid "Stored Invoice"
+#~ msgstr "Factura"
 
 #~ msgid "Overdue payments"
 #~ msgstr "Efectos vencidos"
