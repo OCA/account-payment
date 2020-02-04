@@ -1,0 +1,11 @@
+/* Chrome, Safari, Edge, Opera */
+input#aba::-webkit-outer-spin-button,
+input#aba::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+#aba{
+  -moz-appearance:textfield;
+}

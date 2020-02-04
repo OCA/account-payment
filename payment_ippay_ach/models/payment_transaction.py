@@ -1,3 +1,4 @@
+"""Ippay ACH Payment transcation."""
 # Copyright (C) 2019 Open Source Integrators
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -13,12 +14,14 @@ _logger = logging.getLogger(__name__)
 
 
 class PaymentTansaction(models.Model):
+    """PaymentTansaction."""
+
     _inherit = "payment.transaction"
 
     @api.multi
     def _ippay_ach_s2s_do_payment(self, invoice):
         sequence = self.acquirer_id.journal_id.sequence_id
-        check_number = sequence.next_by_id()
+        check_number = ((sequence.next_by_id()).split('/'))[2]
         request = """
             <ippay>
                 <TransactionType>CHECK</TransactionType>
@@ -26,8 +29,8 @@ class PaymentTansaction(models.Model):
                 <CardName>%s</CardName>
                 <TotalAmount>%s</TotalAmount>
                 <ACH Type = 'SAVINGS' SEC = 'PPD'>
-                <Token>%s</Token>
-                <CheckNumber>%s</CheckNumber>
+                    <Token>%s</Token>
+                    <CheckNumber>%s</CheckNumber>
                 </ACH>
             </ippay>""" % (
             self.acquirer_id.ippay_ach_terminal_id,
@@ -36,6 +39,7 @@ class PaymentTansaction(models.Model):
             self.payment_token_id.acquirer_ref,
             check_number,
         )
+
         _logger.info("Request to get IPPay ACH Transaction ID: %s" % (request))
         try:
             r = requests.post(
@@ -50,9 +54,8 @@ class PaymentTansaction(models.Model):
         content = xmltodict.parse(r.content)
         response = content.get("ippayResponse") or content.get("IPPayresponse")
         self.date = fields.Datetime.now()
-        if response.get("ResponseText") == "CHECK ACCEPTED" and not response.get(
-            "AdditionalInfo"
-        ):
+        if (response.get("ResponseText") == "CHECK ACCEPTED" and not
+                response.get("AdditionalInfo")):
             self.acquirer_reference = response.get("TransactionID")
             self.state = "done"
         else:
@@ -68,6 +71,7 @@ class PaymentTansaction(models.Model):
 
     @api.multi
     def ippay_ach_s2s_do_transaction(self):
+        """Invoice payment using ippay ACH."""
         context = self.env.context
         inv_rec = self.env["account.invoice"].browse(context.get("active_ids"))
         for inv in inv_rec:
