@@ -25,7 +25,7 @@ addon | version | summary
 [account_cash_discount_base](account_cash_discount_base/) | 10.0.1.0.0 | Account Cash Discount Base
 [account_cash_discount_payment](account_cash_discount_payment/) | 10.0.1.0.0 | Account Cash Discount Payment
 [account_cash_discount_write_off](account_cash_discount_write_off/) | 10.0.1.0.0 | Create an automatic writeoff for payment with discount on the payment order confirmation
-[account_check_printing_report_base](account_check_printing_report_base/) | 10.0.1.1.1 | Account Check Printing Report Base
+[account_check_printing_report_base](account_check_printing_report_base/) | 10.0.1.2.0 | Account Check Printing Report Base
 [account_check_printing_report_dlt103](account_check_printing_report_dlt103/) | 10.0.1.0.0 | Account Check Printing Report DLT103
 [account_check_printing_report_sslm102](account_check_printing_report_sslm102/) | 10.0.1.0.0 | Allows you to print SSLM102 lined checks.
 [account_check_report](account_check_report/) | 10.0.1.0.0 | Account Check Report
