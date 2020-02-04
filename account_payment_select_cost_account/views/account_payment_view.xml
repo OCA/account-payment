@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_account_payment_form_select_account" model="ir.ui.view">
+        <field name="name">view_account_payment_form_select_account</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="destination_account_id" invisible="1"/>
+                <field name="force_destination_account_id"
+                       attrs="{'required': [('state', '=', 'draft'), ('payment_type', 'in', ('outbound'))], 'invisible': [('payment_type', 'not in', ('outbound'))], 'readonly': [('state', '!=', 'draft')]}"/>
+            </field>
+        </field>
+    </record>
+</odoo>
