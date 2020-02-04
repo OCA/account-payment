@@ -14,16 +14,16 @@ Payment Due List Payment Mode
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--payment-lightgray.png?logo=github
-    :target: https://github.com/OCA/account-payment/tree/12.0/account_due_list_payment_mode
+    :target: https://github.com/OCA/account-payment/tree/13.0/account_due_list_payment_mode
     :alt: OCA/account-payment
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/account-payment-12-0/account-payment-12-0-account_due_list_payment_mode
+    :target: https://translation.odoo-community.org/projects/account-payment-13-0/account-payment-13-0-account_due_list_payment_mode
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
-    :target: https://runbot.odoo-community.org/runbot/96/12.0
+    :target: https://runbot.odoo-community.org/runbot/96/13.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module adds a field to the due list of pending payments:
 
@@ -50,7 +50,7 @@ to check "Show full accounting features" in user permission.
 Usage
 =====
 
-#. Go to *Invoicing > Adviser > Payments and due list* and you will see the new
+#. Go to *Invoicing > Accounting > Payments and due list* and you will see the new
    field payment mode in the due list.
 
 Bug Tracker
@@ -71,7 +71,7 @@ Authors
 
 * Obertix Free Solutions
 * Tecnativa
-* 
+*
 
 Contributors
 ~~~~~~~~~~~~
@@ -80,7 +80,7 @@ Contributors
 * Sergio Teruel <sergio.teruel@tecnativa.com>
 * Albert De La Fuente <info@haevas.com>
 * Vicent Cubells <vicent.cubells@tecnativa.com>
-* Miquel Raïch <miquel.raich@eficent.com>
+* Miquel Raïch <miquel.raich@forgeflow.com>
 
 Maintainers
 ~~~~~~~~~~~
