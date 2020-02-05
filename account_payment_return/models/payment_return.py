@@ -212,7 +212,6 @@ class PaymentReturn(models.Model):
             raise UserError(
                 _("You must input all moves references in the payment "
                   "return."))
-        invoices = self.env['account.invoice']
         move_line_model = self.env['account.move.line']
         move = self.env['account.move'].create(
             self._prepare_return_move_vals())
@@ -228,8 +227,8 @@ class PaymentReturn(models.Model):
                 # returned_moves: debit on customer account (from invoice move)
                 returned_moves = move_line.matched_debit_ids.mapped(
                     'debit_move_id')
+                returned_moves._payment_returned(return_line)
                 all_move_lines |= move_line
-                invoices |= returned_moves.mapped('invoice_id')
                 move_line.remove_move_reconcile()
                 (move_line | move_line2).reconcile()
                 return_line.move_line_ids.mapped('matched_debit_ids').write(
@@ -247,8 +246,6 @@ class PaymentReturn(models.Model):
         # Reconcile (if option enabled)
         self._auto_reconcile(
             credit_move_line, all_move_lines, total_amount)
-        # Write directly because we returned payments just now
-        invoices.write(self._prepare_invoice_returned_vals())
         move.post()
         self.write({'state': 'done', 'move_id': move.id})
         return True
@@ -418,6 +415,9 @@ class PaymentReturnLine(models.Model):
         lines2match.match_move()
         self._get_partner_from_move()
         self.filtered(lambda x: not x.amount)._compute_amount()
+
+    def _prepare_invoice_returned_vals(self):
+        return self.return_id._prepare_invoice_returned_vals()
 
     @api.multi
     def _prepare_return_move_line_vals(self, move):

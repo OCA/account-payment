@@ -1,7 +1,7 @@
 # Copyright 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import fields, models
+from odoo import api, fields, models
 
 
 class AccountPartialReconcile(models.Model):
@@ -24,3 +24,7 @@ class AccountMoveLine(models.Model):
         column1='move_line_id',
         column2='partial_reconcile_id',
     )
+
+    @api.multi
+    def _payment_returned(self, return_line):
+        self.mapped('invoice_id')._payment_returned(return_line)
