@@ -1,4 +1,4 @@
-"""Ippay Cotroller."""
+"""Ippay Controller."""
 
 from odoo import http, _
 from odoo.http import request
@@ -19,51 +19,58 @@ class PaymentPortal(PaymentPortal):
                 type='http', auth='public', website=True)
     def invoice_pay_token(self, invoice_id, pm_id=None, **kwargs):
         """Use a token to perform a s2s transaction."""
-        acquirer = request.env['payment.acquirer'].browse(
-            int(kwargs.get('acquirer_id')))
-        if acquirer.provider == 'ippay_ach':
+        if kwargs.get('ippay_ach_acquirer'):
+            acquirer = request.env['payment.acquirer'].browse(
+                int(kwargs.get('ippay_ach_acquirer')))
+            if acquirer.provider == 'ippay_ach':
+                error_url = kwargs.get('error_url', '/my')
+                access_token = kwargs.get('access_token')
+                params = {}
+                if access_token:
+                    params['access_token'] = access_token
 
-            error_url = kwargs.get('error_url', '/my')
-            access_token = kwargs.get('access_token')
-            params = {}
-            if access_token:
-                params['access_token'] = access_token
+                invoice_sudo = request.env['account.invoice'].sudo().browse(
+                    invoice_id).exists()
 
-            invoice_sudo = request.env['account.invoice'].sudo().browse(
-                invoice_id).exists()
+                if not invoice_sudo:
+                    params['error'] = 'pay_invoice_invalid_doc'
+                    return request.redirect(_build_url_w_params(
+                        error_url, params))
 
-            if not invoice_sudo:
-                params['error'] = 'pay_invoice_invalid_doc'
-                return request.redirect(_build_url_w_params(error_url, params))
+                success_url = kwargs.get(
+                    'success_url', "%s?%s" % (
+                        invoice_sudo.access_url,
+                        url_encode({
+                            'access_token': access_token})
+                        if access_token else '')
+                )
+                try:
+                    token = request.env['payment.token'].sudo().browse(
+                        int(pm_id))
+                except (ValueError, TypeError):
+                    token = False
+                # Updated the Partner refrence for ippay_ach payment
+                token_owner = invoice_sudo.partner_id
+                if not token or token.partner_id != token_owner:
+                    params['error'] = 'pay_invoice_invalid_token'
+                    return request.redirect(_build_url_w_params(
+                        error_url, params))
 
-            success_url = kwargs.get(
-                'success_url', "%s?%s" % (invoice_sudo.access_url, url_encode(
-                    {'access_token': access_token}) if access_token else '')
-            )
-            try:
-                token = request.env['payment.token'].sudo().browse(int(pm_id))
-            except (ValueError, TypeError):
-                token = False
-            # Updated the Partner refrence for ippay_ach payment
-            token_owner = invoice_sudo.partner_id
-            if not token or token.partner_id != token_owner:
-                params['error'] = 'pay_invoice_invalid_token'
-                return request.redirect(_build_url_w_params(error_url, params))
+                vals = {
+                    'payment_token_id': token.id,
+                    'type': 'server2server',
+                    'return_url': _build_url_w_params(success_url, params),
+                }
+                tx = invoice_sudo._create_payment_transaction(vals)
+                tx._ippay_ach_s2s_do_payment(invoice_sudo)
+                PaymentProcessing.add_payment_transaction(tx)
 
-            vals = {
-                'payment_token_id': token.id,
-                'type': 'server2server',
-                'return_url': _build_url_w_params(success_url, params),
-            }
-            tx = invoice_sudo._create_payment_transaction(vals)
-            tx._ippay_ach_s2s_do_payment(invoice_sudo)
-            PaymentProcessing.add_payment_transaction(tx)
+                params['success'] = 'pay_invoice'
+                return request.redirect('/payment/process')
 
-            params['success'] = 'pay_invoice'
-            return request.redirect('/payment/process')
-        else:
-            return super(PaymentPortal, self).invoice_pay_token(
-                invoice_id=invoice_id, pm_id=pm_id, kwargs=kwargs)
+        return super(PaymentPortal, self).invoice_pay_token(
+            invoice_id=invoice_id, pm_id=pm_id, kwargs=kwargs)
+
 
 
 class IppayController(http.Controller):

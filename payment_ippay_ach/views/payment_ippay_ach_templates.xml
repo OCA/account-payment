@@ -5,16 +5,16 @@
         <xpath expr="link[last()]" position="after">
             <link rel="stylesheet" type="text/css" href="/payment_ippay_ach/static/src/css/ippay_ach.css"/>
         </xpath>
-    </template>
-
-    <template id="ippay_ach_s2s_form">
         <xpath expr="." position="inside">
             <script type="text/javascript" src="/payment_ippay_ach/static/src/js/payment_ippay_ach.js"></script>
         </xpath>
+    </template>
+
+    <template id="ippay_ach_s2s_form">
         <input type="hidden" name="data_set" data-create-route="/payment/ippay_ach/s2s/create_json_3ds" />
         <div t-attf-class="row mt8 #{'' if bootstrap_formatting else 'o_card_brand_detail'}">
             <input type="hidden" t-if="order_id" name="order_id" t-att-value="order_id.id" />
-            <t t-set="payment_tokens" t-value="request.env['payment.token'].search([('partner_id', '=', int(order_id.partner_id.id)), ('acquirer_id', '=', id)])" />
+            <t t-set="payment_tokens" t-value="request.env['payment.token'].sudo().search([('partner_id', '=', int(order_id.partner_id.id)), ('acquirer_id', '=', id)])" />
             <t t-set="partner" t-value="order_id.partner_id" />
             <input type="hidden" t-if="order_id" name="partner" t-att-value="order_id.partner_id.id" />
             <div t-att-class="'defualt_acc_dtl' if payment_tokens else ' d-none'">
@@ -23,7 +23,7 @@
                     <select style="padding:2px!important;" class="token_id" name="token_id" required="required">
                         <option value="0"></option>
                         <t t-foreach="payment_tokens or []" t-as="token">
-                            <option t-att-value="token.id" t-att-selected="token.id == partner.payment_token_id and partner.payment_token_id.id">
+                            <option t-att-value="token.id" t-att-selected="token.id == partner and partner.payment_token_id and partner.payment_token_id.id">
                                 <t t-esc="token.name" />
                             </option>
                         </t>
@@ -37,6 +37,7 @@
             </div>
         </div>
         <input type="hidden" name="acquirer_id" t-att-value="id" />
+        <input type="hidden" name="ippay_ach_acquirer" class="ippay_ach_acquirer"/>
         <input class="d-none" name="csrf_token" t-att-value="request.csrf_token()" />
         <input t-if="return_url" type="hidden" name="return_url" t-att-value="return_url" />
         <input t-if="partner_id" type="hidden" name="partner_id" t-att-value="order_id.partner_id.id" />

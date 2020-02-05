@@ -17,6 +17,7 @@
         "views/payment_ippay_ach_templates.xml",
         "data/payment_icon_data.xml",
         "data/ippay_payment_data.xml",
+        "views/account_portal_templates.xml"
     ],
     "development_status": "beta",
     "installable": True,
