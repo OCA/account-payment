@@ -15,6 +15,10 @@ class AccountInvoice(models.Model):
         string='Payment returned',
         help='Invoice has been included on a payment that has been returned '
              'later.')
+    last_returned_payment_reason_id = fields.Many2one(
+        comodel_name='payment.return.reason',
+        string='Last Returned Payment Reason',
+    )
 
     @api.multi
     def check_payment_return(self):

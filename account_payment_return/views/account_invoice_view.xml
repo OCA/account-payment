@@ -13,6 +13,9 @@
         <field name="arch" type="xml">
             <field name="date_due" position="after">
                 <field name="returned_payment" readonly="True"/>
+                <field name="last_returned_payment_reason_id"
+                    readonly="True"
+                    attrs="{'invisible': [('returned_payment', '=', False)]}"/>
             </field>
         </field>
     </record>
