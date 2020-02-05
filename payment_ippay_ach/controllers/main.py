@@ -72,7 +72,6 @@ class PaymentPortal(PaymentPortal):
             invoice_id=invoice_id, pm_id=pm_id, kwargs=kwargs)
 
 
-
 class IppayController(http.Controller):
     """Ipapay Controller."""
 
