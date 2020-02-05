@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_account_payment_form" model="ir.ui.view">
+        <field name="name">account.payment.form</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form" />
+        <field name="arch" type="xml">
+            <field name="destination_journal_id" position="after">
+                <field
+                    name="fee_transfer"
+                    attrs="{'invisible': [('payment_type', '!=', 'transfer')]}"
+                />
+                <field
+                    name="writeoff_account_id"
+                    attrs="{'readonly': [('state', '!=', 'draft')], 'required': [('payment_type', '=', 'transfer'), ('fee_transfer', '!=', 0.0)], 'invisible': ['|', ('payment_type', '!=', 'transfer'), ('fee_transfer', '=', 0.0)]}"
+                    string="Fee Account"
+                />
+                <field
+                    name="writeoff_label"
+                    attrs="{'readonly': [('state', '!=', 'draft')], 'required': [('payment_type', '=', 'transfer'), ('fee_transfer', '!=', 0.0)], 'invisible': ['|', ('payment_type', '!=', 'transfer'), ('fee_transfer', '=', 0.0)]}"
+                    string="Fee Label"
+                />
+                <field
+                    name="deduct_journal_id"
+                    attrs="{'required': [('payment_type', '=', 'transfer'), ('fee_transfer', '!=', 0.0)], 'invisible': ['|', ('payment_type', '!=', 'transfer'), ('fee_transfer', '=', 0.0)]}"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
