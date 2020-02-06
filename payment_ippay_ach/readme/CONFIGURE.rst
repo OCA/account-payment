@@ -7,12 +7,3 @@
       select Electronic
     * Advanced Settings /payment Method Types, for Outgoing Payments:
       select Checks (needed for the Sequence field to be made visible)
-
-* Configure the Journal's Sequence to be a simple integer (important!):
-
-    * Implementation: Standard
-    * Prefix: none
-    * Suffix none
-    * Use subsequences per date_range: no
-    * Sequence size: 1
-    * Step: 1
