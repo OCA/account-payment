@@ -27,7 +27,8 @@ class PaymentAcquirer(models.Model):
     @api.model
     def ippay_ach_s2s_form_process(self, data):
         """Create the token when user add the details from customer Portal."""
-        token_id = data.get('selected_token_id')
+        Token = self.env["payment.token"]
+        token_id = data.get("selected_token_id")
         if not token_id:
             values = {
                 'bank_acc_number': data.get('bank_acc_number'),
@@ -36,10 +37,26 @@ class PaymentAcquirer(models.Model):
                 'acquirer_id': int(data.get('acquirer_id')),
                 'partner_id': int(data.get('partner_id'))
             }
-            payment_method = self.env['payment.token'].sudo().create(values)
+            # Only create a new Token if it doesn't already exist
+            token_code = Token._ippay_ach_get_token(values)
+            payment_method = Token.sudo().search(
+                [
+                    ("acquirer_ref", "=", token_code),
+                    ("partner_id", "=", values.get("partner_id")),
+                    ("acquirer_id", "=", values.get("acquirer_id")),
+                ],
+                limit=1,
+            )
+            if not payment_method:
+                payment_method = Token.sudo().create(values)
         else:
-            payment_method = self.env['payment.token'].sudo().search(
-                [('id', '=', int(token_id))])
+            payment_method = Token.sudo().search(
+                [
+                    ("id", "=", int(token_id)),
+                    ("partner_id", "=", data.get("partner_id")),
+                    ("acquirer_id", "=", data.get("acquirer_id")),
+                ]
+            )
         return payment_method
 
     @api.multi
@@ -109,7 +126,7 @@ class PaymentToken(models.Model):
             limit=1)
         if existing:
             raise ValidationError(_(
-                "This payment method is " "already assigned to this Customer.")
+                "This payment method is already assigned to this Customer.")
             )
         else:
             return {

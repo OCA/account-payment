@@ -9,9 +9,6 @@ from odoo.addons.portal.controllers.portal import _build_url_w_params
 from odoo.exceptions import ValidationError, UserError
 
 
-error_str = ''
-
-
 class PaymentPortal(PaymentPortal):
     """Ippay ACH PaymentPortal."""
 
@@ -113,10 +110,7 @@ class IppayController(http.Controller):
             }
 
         if not token:
-            res = {
-                'result': False,
-            }
-            return res
+            return {'result': False}
 
         res = {
             'result': True,

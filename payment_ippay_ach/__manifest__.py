@@ -10,7 +10,7 @@
     "maintainer": "Open Source Integrators",
     "website": "http://www.opensourceintegrators.com",
     "category": "Accounting",
-    "depends": ["payment", "website", "account_payment"],
+    "depends": ["account_payment"],
     "data": [
         "security/payment_security.xml",
         "views/payment_view.xml",

@@ -2,9 +2,6 @@
 <odoo>
 
     <template id="assets_frontend_ippay_ach" inherit_id="payment.assets_frontend">
-        <xpath expr="link[last()]" position="after">
-            <link rel="stylesheet" type="text/css" href="/payment_ippay_ach/static/src/css/ippay_ach.css"/>
-        </xpath>
         <xpath expr="." position="inside">
             <script type="text/javascript" src="/payment_ippay_ach/static/src/js/payment_ippay_ach.js"></script>
         </xpath>
@@ -48,12 +45,10 @@
             <input type="text" name="bank_acc_number" id="bank_acc_number" class="form-control" placeholder="Account Number" data-is-required="true" />
         </div>
         <div t-att-class="'form-group col-lg-3' if bootstrap_formatting else 'form-group'">
-            <input type="number" name="aba" id="aba" class="form-control" size="9" maxlength="9" placeholder="ABA" data-is-required="true" />
-        </div>
-        <div t-att-class="'form-group col-lg-3' if bootstrap_formatting else 'form-group'">
             <input type="hidden" name="ch_holder_name" id="ch_holder_name" class="form-control"  data-is-required="true" t-att-value="order_id.partner_id.name"/>
+            <input type="text" name="aba" id="aba" class="form-control" maxlength="9" placeholder="ABA" data-is-required="true" />
         </div>
-        <t t-if="new_acc_dtl">
+        <t t-if="payment_tokens">
             <a class="form-group back" href="#">Back</a>
         </t>
     </template>

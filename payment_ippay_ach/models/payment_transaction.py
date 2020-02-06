@@ -21,7 +21,7 @@ class PaymentTansaction(models.Model):
     @api.multi
     def _ippay_ach_s2s_do_payment(self, invoice):
         sequence = self.acquirer_id.journal_id.sequence_id
-        check_number = ((sequence.next_by_id()).split('/'))[2]
+        check_number = ((sequence.next_by_id()).split('/'))[-1]
         request = """
             <ippay>
                 <TransactionType>CHECK</TransactionType>
