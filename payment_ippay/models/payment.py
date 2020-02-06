@@ -25,7 +25,7 @@ class PaymentAcquirerIppay(models.Model):
     @api.model
     def ippay_s2s_form_process(self, data):
         """Get Payment token ref from Ippay payment token."""
-        token = self.env["payment.token"]
+        Token = self.env["payment.token"]
         token_id = data.get("selected_token_id")
         if not token_id:
             values = {
@@ -38,8 +38,8 @@ class PaymentAcquirerIppay(models.Model):
                 "partner_id": int(data.get("partner_id")),
             }
             # Only create a new Token if it doesn't already exist
-            token_code = token._ippay_get_token(values)
-            payment_method = token.sudo().search(
+            token_code = Token._ippay_get_token(values)
+            payment_method = Token.sudo().search(
                 [
                     ("acquirer_ref", "=", token_code),
                     ("partner_id", "=", values.get("partner_id")),
@@ -48,9 +48,9 @@ class PaymentAcquirerIppay(models.Model):
                 limit=1,
             )
             if not payment_method:
-                payment_method = token.sudo().create(values)
+                payment_method = Token.sudo().create(values)
         else:
-            payment_method = token.sudo().search(
+            payment_method = Token.sudo().search(
                 [
                     ("id", "=", int(token_id)),
                     ("partner_id", "=", data.get("partner_id")),
