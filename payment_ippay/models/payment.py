@@ -1,3 +1,4 @@
+"""Ippay Payment."""
 # Copyright (C) 2019 Open Source Integrators
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -9,15 +10,22 @@ from odoo.addons.payment.models.payment_acquirer import ValidationError
 
 
 class PaymentAcquirerIppay(models.Model):
+    """Ippay Payment acquirer."""
+
     _inherit = "payment.acquirer"
 
     provider = fields.Selection(selection_add=[("ippay", "IPpay")])
-    api_url = fields.Char("Api URL", required_if_provider="ippay")
-    ippay_terminal_id = fields.Char("IPpay TerminalID", required_if_provider="ippay")
+    api_url = fields.Char(
+        "Api URL",
+        required_if_provider="ippay")
+    ippay_terminal_id = fields.Char(
+        "IPpay TerminalID",
+        required_if_provider="ippay")
 
     @api.model
     def ippay_s2s_form_process(self, data):
-        Token = self.env["payment.token"]
+        """Get Payment token ref from Ippay payment token."""
+        token = self.env["payment.token"]
         token_id = data.get("selected_token_id")
         if not token_id:
             values = {
@@ -30,8 +38,8 @@ class PaymentAcquirerIppay(models.Model):
                 "partner_id": int(data.get("partner_id")),
             }
             # Only create a new Token if it doesn't already exist
-            token_code = Token._ippay_get_token(values)
-            PaymentMethod = Token.sudo().search(
+            token_code = token._ippay_get_token(values)
+            payment_method = token.sudo().search(
                 [
                     ("acquirer_ref", "=", token_code),
                     ("partner_id", "=", values.get("partner_id")),
@@ -39,20 +47,21 @@ class PaymentAcquirerIppay(models.Model):
                 ],
                 limit=1,
             )
-            if not PaymentMethod:
-                PaymentMethod = Token.sudo().create(values, token_code)
+            if not payment_method:
+                payment_method = token.sudo().create(values)
         else:
-            PaymentMethod = Token.sudo().search(
+            payment_method = token.sudo().search(
                 [
                     ("id", "=", int(token_id)),
-                    ("partner_id", "=", values.get("partner_id")),
-                    ("acquirer_id", "=", values.get("acquirer_id")),
+                    ("partner_id", "=", data.get("partner_id")),
+                    ("acquirer_id", "=", data.get("acquirer_id")),
                 ]
             )
-        return PaymentMethod
+        return payment_method
 
     @api.multi
     def ippay_s2s_form_validate(self, data):
+        """Check the validation of card details elements."""
         error = dict()
         token_id = data.get("selected_token_id")
         if not token_id:
@@ -90,6 +99,8 @@ class PaymentAcquirerIppay(models.Model):
 
 
 class PaymentToken(models.Model):
+    """Ippay payment token."""
+
     _inherit = "payment.token"
 
     @api.model
@@ -100,10 +111,12 @@ class PaymentToken(models.Model):
             values["cc_number"] = values["cc_number"].replace(" ", "")
             card_detail = {
                 "cc_number": values["cc_number"],
-                "expiry_month": values.get("cc_expiry_month")
-                or expiry[0].replace(" ", ""),
-                "expiry_year": values.get("cc_expiry_year")
-                or expiry[1].replace(" ", ""),
+                "expiry_month":
+                    values.get("cc_expiry_month") or
+                    expiry[0].replace(" ", ""),
+                "expiry_year":
+                    values.get("cc_expiry_year") or
+                    expiry[1].replace(" ", ""),
             }
 
             xml = """<ippay>
@@ -120,7 +133,8 @@ class PaymentToken(models.Model):
             )
             if acquirer.api_url:
                 url = acquirer.api_url
-            r = requests.post(url, data=xml, headers={"Content-Type": "text/xml"})
+            r = requests.post(url, data=xml, headers={
+                              "Content-Type": "text/xml"})
             data = xmltodict.parse(r.content)
             token = data["IPPayResponse"].get("Token")
             if not token:
@@ -133,20 +147,20 @@ class PaymentToken(models.Model):
 
     @api.model
     def ippay_create(self, values, token_code=False):
+        """Ippay token refrence create."""
         # In case we already know the token assigned, just use it
         token_code = token_code or self._ippay_get_token(values)
         existing = self.sudo().search(
             [
-                ("acquirer_ref", "=", token_code)(
-                    "partner_id", "=", values.get("partner_id")
-                ),
+                ("acquirer_ref", "=", token_code),
+                ("partner_id", "=", values.get("partner_id")),
                 ("acquirer_id", "=", values.get("acquirer_id")),
             ],
             limit=1,
         )
         if existing:
             raise ValidationError(
-                _("This payment method is " "already assigned to this Customer.")
+                _("This payment method is already assigned to this Customer.")
             )
         else:
             return {

@@ -5,6 +5,7 @@ odoo.define('payment_ippay.ippay_payment', function(require) {
     var ajax = require('web.ajax');
     var core = require('web.core');
     var PaymentForm = require('payment.payment_form');
+    var rpc = require('web.rpc');
 
     var _t = core._t;
     var qweb = core.qweb;
@@ -16,6 +17,22 @@ odoo.define('payment_ippay.ippay_payment', function(require) {
         }),
 
         payEvent: function (ev) {
+            var checked_radio = this.$('input[type="radio"]:checked');
+            if (checked_radio.length === 1) {
+                checked_radio = checked_radio[0];
+            }
+            var acquirer_id = this.getAcquirerIdFromRadio(checked_radio);
+            var fields = ['provider']
+            var domain = [['id','=',acquirer_id]];
+            rpc.query({
+                model: 'payment.acquirer',
+                method: 'search_read',
+                args: [domain, fields],
+            }).then(function(record){
+                if(record[0]['provider'] == 'ippay'){
+                    $('.ippay_acquirer').val(acquirer_id)
+                }
+            })
             ev.preventDefault();
             if($(".selected_token_id").val().length > 0){
                 $('.new_card_dtl').html('')
