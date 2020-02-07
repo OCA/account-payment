@@ -112,12 +112,10 @@ class IppayController(http.Controller):
         if not token:
             return {'result': False}
 
-        res = {
+        return {
             'result': True,
             'id': token.id,
             'short_name': token.short_name,
             '3d_secure': False,
             'verified': True,
         }
-
-        return res
