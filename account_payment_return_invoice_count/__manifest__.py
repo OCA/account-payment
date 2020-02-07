@@ -11,7 +11,7 @@
     "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-payment",
     "depends": ["account_payment_return"],
-    "data": ["views/account_invoice.xml"],
+    "data": ["views/res_config_settings.xml", "views/account_invoice.xml"],
     "demo": [],
     "post_init_hook": "post_init_hook",
 }
