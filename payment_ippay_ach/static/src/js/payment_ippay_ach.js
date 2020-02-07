@@ -42,15 +42,19 @@ odoo.define('payment_ippay_ach.ippay_ach_payment', function(require) {
     });
 
     $(".new").on('click', function(){
-        $(".selected_token_id").val()
+        $(".selected_token_id").val('')
+        $(".token_id").prop('selectedIndex', 0);
         $(".defualt_acc_dtl").addClass('d-none')
         $(".new_acc_dtl").removeClass('d-none')
+        $("#payment_error").addClass('d-none')
     })
 
     $(".back").on('click', function(){
-        $(".selected_token_id").val()
+        $(".selected_token_id").val('')
+        $(".token_id").prop('selectedIndex', 0);
         $(".defualt_acc_dtl").removeClass('d-none')
         $(".new_acc_dtl").addClass('d-none')
+        $("#payment_error").addClass('d-none')
     })
 
     $(".token_id").change(function (e){
@@ -64,6 +68,15 @@ odoo.define('payment_ippay_ach.ippay_ach_payment', function(require) {
 
         return true;
     })
+
+    $('.new_acc_dtl').on('keypress', '#bank_acc_number', function (evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode
+        if (charCode > 31 && (charCode < 48 || charCode > 57))
+            return false;
+
+        return true;
+    })
+
 
 });
 
