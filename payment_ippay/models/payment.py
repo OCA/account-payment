@@ -50,13 +50,7 @@ class PaymentAcquirerIppay(models.Model):
             if not payment_method:
                 payment_method = Token.sudo().create(values)
         else:
-            payment_method = Token.sudo().search(
-                [
-                    ("id", "=", int(token_id)),
-                    ("partner_id", "=", data.get("partner_id")),
-                    ("acquirer_id", "=", data.get("acquirer_id")),
-                ]
-            )
+            payment_method = Token.sudo().browse(int(token_id))
         return payment_method
 
     @api.multi

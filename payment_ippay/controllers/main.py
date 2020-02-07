@@ -114,16 +114,12 @@ class PaymentPortal(PaymentPortal):
             }
 
         if not token:
-            res = {
-                "result": False,
-            }
-            return res
+            return {"result": False}
 
-        res = {
+        return {
             "result": True,
             "id": token.id,
             "short_name": token.short_name,
             "3d_secure": False,
             "verified": True,
         }
-        return res
