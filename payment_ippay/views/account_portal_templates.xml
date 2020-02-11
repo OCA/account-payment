@@ -1,0 +1,9 @@
+<odoo>
+
+    <template id="ippay_portal_invoice_payment" name="Invoice Payment" inherit_id="account_payment.portal_invoice_payment">
+        <xpath expr="//div[hasclass('modal-body')]/div/t" position="inside">
+            <t t-set="order_id" t-value="invoice"/>
+        </xpath>
+    </template>
+
+</odoo>

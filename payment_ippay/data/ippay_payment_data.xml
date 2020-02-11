@@ -1,0 +1,27 @@
+<odoo>
+
+    <record id="payment_acquirer_ippay" model="payment.acquirer">
+        <field name="name">IPPay Credit Cards</field>
+        <field name="image" type="base64" file="payment_ippay/static/src/img/ippay.png"/>
+        <field name="provider">ippay</field>
+        <field name="company_id" ref="base.main_company"/>
+        <field name="view_template_id" ref="ippay_form" />
+        <field name="registration_view_template_id" ref="ippay_s2s_form"/>
+        <field name="payment_flow">s2s</field>
+        <field name="environment">test</field>
+        <field name="description" type="html">
+            <p>
+                An IPPay payment gateway to accept online payments via Credit Cards.
+            </p>
+        </field>
+        <field name="api_url">https://testgtwy.ippay.com/ippay</field>
+        <field name="ippay_terminal_id">TESTTERMINAL</field>
+        <field name="payment_icon_ids" eval="[(6, 0, [
+                ref('payment.payment_icon_cc_visa'),
+                ref('payment.payment_icon_cc_mastercard'),
+                ref('payment.payment_icon_cc_american_express'),
+            ])]"
+        />
+    </record>
+
+</odoo>
