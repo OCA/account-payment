@@ -1,0 +1,17 @@
+<odoo>
+
+    <record id='acquirer_form_ippay_ach' model='ir.ui.view'>
+        <field name='name'>acquirer.form.ippay.ach></field>
+        <field name='model'>payment.acquirer</field>
+        <field name='inherit_id' ref='payment.acquirer_form'/>
+        <field name='arch' type='xml'>
+            <xpath expr="//group[@name='acquirer']" position="after">
+                <group attrs="{'invisible': [('provider','!=', 'ippay_ach')]}">
+                    <field name='api_url' widget="url" />
+                    <field name='ippay_ach_terminal_id'/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
