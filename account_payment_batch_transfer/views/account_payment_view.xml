@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="journal_dashboard_view_inherit" model="ir.ui.view">
+        <field name="name">account.journal.dashboard.kanban.inherit</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.account_journal_dashboard_kanban_view" />
+        <field name="arch" type="xml">
+            <xpath expr='//a[@name="create_internal_transfer"]' position="after">
+                <a
+                    role="menuitem"
+                    type="object"
+                    name="create_internal_transfer"
+                    context="{'default_use_batch_transfer': True}"
+                >Batch Transfer</a>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_account_payment_transfer_tree" model="ir.ui.view">
+        <field name="name">account.payment.batch.transfer.tree</field>
+        <field name="model">account.payment.batch.transfer</field>
+        <field name="arch" type="xml">
+            <tree editable="bottom">
+                <field name="description" />
+                <field name="amount" sum="Total" />
+                <field name="fee" sum="Total Fee" />
+            </tree>
+        </field>
+    </record>
+    <record id="view_account_payment_form" model="ir.ui.view">
+        <field name="name">account.payment.form</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='partner_group']" position="inside">
+                <field
+                    name="use_batch_transfer"
+                    attrs="{'invisible': [('payment_type', '!=', 'transfer')]}"
+                />
+            </xpath>
+            <field name="fee_transfer" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'invisible': ['|', ('payment_type', '!=', 'transfer'), ('use_batch_transfer', '=', True)]}</attribute>
+            </field>
+            <field name="writeoff_account_id" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'readonly': [('state', '!=', 'draft')], 'required': [('payment_type', '=', 'transfer'), ('use_batch_transfer', '=', False), ('fee_transfer', '!=', 0.0)], 'invisible': ['|', ('payment_type', '!=', 'transfer'), '&amp;', ('fee_transfer', '=', 0.0), ('use_batch_transfer', '=', False)]}</attribute>
+            </field>
+            <field name="deduct_journal_id" position="attributes">
+                <attribute
+                    name="attrs"
+                >{'required': [('payment_type', '=', 'transfer'), ('fee_transfer', '!=', 0.0)], 'invisible': ['|', ('payment_type', '!=', 'transfer'), '&amp;', ('fee_transfer', '=', 0.0), ('use_batch_transfer', '=', False)]}</attribute>
+            </field>
+            <xpath expr="//sheet" position="inside">
+                <notebook attrs="{'invisible': [('use_batch_transfer', '!=', True)]}">
+                    <page string="Transaction">
+                        <field
+                            name="batch_transfer_ids"
+                            ref="view_account_payment_transfer_tree"
+                        />
+                    </page>
+                </notebook>
+            </xpath>
+        </field>
+    </record>
+</odoo>
