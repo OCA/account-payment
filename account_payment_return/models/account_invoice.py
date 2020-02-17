@@ -27,6 +27,12 @@ class AccountInvoice(models.Model):
         (self - returned_invoices).filtered('returned_payment').write(
             {'returned_payment': False})
 
+    @api.multi
+    def _payment_returned(self, return_line):
+        vals = return_line._prepare_invoice_returned_vals()
+        if vals:
+            self.write(vals)
+
     @api.one
     @api.depends('payment_move_line_ids.amount_residual')
     def _get_payment_info_JSON(self):
