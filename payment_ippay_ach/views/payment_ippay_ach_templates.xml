@@ -10,10 +10,8 @@
     <template id="ippay_ach_s2s_form">
         <input type="hidden" name="data_set" data-create-route="/payment/ippay_ach/s2s/create_json_3ds" />
         <div t-attf-class="row mt8 #{'' if bootstrap_formatting else 'o_card_brand_detail'}">
-            <input type="hidden" t-if="order_id" name="order_id" t-att-value="order_id.id" />
-            <t t-set="payment_tokens" t-value="request.env['payment.token'].sudo().search([('partner_id', '=', int(order_id.partner_id.id)), ('acquirer_id', '=', id)])" />
-            <t t-set="partner" t-value="order_id.partner_id" />
-            <input type="hidden" t-if="order_id" name="partner" t-att-value="order_id.partner_id.id" />
+            <t t-set="payment_tokens" t-value="pms" />
+            <t t-set="partner" t-value="partner_id or order_id.partner_id.id" />
             <div t-att-class="'defualt_acc_dtl' if payment_tokens else ' d-none'">
                 <div t-att-class="'form-group col-xl-6' if bootstrap_formatting else 'form-group'">
                     <label class="col-form-label" for="payment_tokens">Saved payment token</label>
@@ -37,7 +35,7 @@
         <input type="hidden" name="ippay_ach_acquirer" class="ippay_ach_acquirer"/>
         <input class="d-none" name="csrf_token" t-att-value="request.csrf_token()" />
         <input t-if="return_url" type="hidden" name="return_url" t-att-value="return_url" />
-        <input t-if="partner_id" type="hidden" name="partner_id" t-att-value="order_id.partner_id.id" />
+        <input t-if="partner_id" type="hidden" name="partner_id" t-att-value="partner" />
     </template>
 
     <template id="payment_check_form" name="Payment Check Form">
@@ -45,7 +43,7 @@
             <input type="text" name="bank_acc_number" id="bank_acc_number" class="form-control" placeholder="Account Number" data-is-required="true" />
         </div>
         <div t-att-class="'form-group col-lg-3' if bootstrap_formatting else 'form-group'">
-            <input type="hidden" name="ch_holder_name" id="ch_holder_name" class="form-control"  data-is-required="true" t-att-value="order_id.partner_id.name"/>
+            <input type="hidden" name="ch_holder_name" id="ch_holder_name" class="form-control" data-is-required="true" />
             <input type="text" name="aba" id="aba" class="form-control" maxlength="9" placeholder="ABA" data-is-required="true" />
         </div>
         <t t-if="payment_tokens">
