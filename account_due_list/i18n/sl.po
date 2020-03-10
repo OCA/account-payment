@@ -37,20 +37,6 @@ msgid "Group By"
 msgstr "Združi po..."
 
 #. module: account_due_list
-#: model:ir.model.fields,help:account_due_list.field_account_move_line__payment_term_id
-#, fuzzy
-msgid ""
-"If you use payment terms, the due date will be computed automatically at the "
-"generation of accounting entries. If you keep the payment terms and the due "
-"date empty, it means direct payment. The payment terms may compute several "
-"due dates, for example 50% now, 50% in one month."
-msgstr ""
-"Če uporabljate plačilne pogoje, bo datum zapadlosti samodejno izračunan ob "
-"nastanku knjigovodskih vnosov. Če plačilni pogoj in datum zapadlosti "
-"ostaneta prazna, to pomeni direktno plačilo. Plačilno pogoj lahko obdela več "
-"datumov zapadlosti, na primer 50% takoj, 50% v mesecu dni."
-
-#. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
 msgid "Invoice"
@@ -71,11 +57,6 @@ msgstr "Obračunski prodajalec"
 #, fuzzy
 msgid "Journal Item"
 msgstr "Dnevniške postavke"
-
-#. module: account_due_list
-#: model:ir.model.fields,help:account_due_list.field_account_move_line__invoice_date
-msgid "Keep empty to use the current date"
-msgstr "Pusti prazno za uporabo tekočega datuma"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -126,11 +107,6 @@ msgid "Receivable"
 msgstr "Terjatev"
 
 #. module: account_due_list
-#: model:ir.model.fields,help:account_due_list.field_account_move_line__invoice_origin
-msgid "Reference of the document that produced this invoice."
-msgstr "Sklic na dokument, ki je sprožil ta račun"
-
-#. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Salesperson"
 msgstr "Prodajalec"
@@ -146,10 +122,11 @@ msgid "Source Doc"
 msgstr "Izvorni dokument"
 
 #. module: account_due_list
-#: model:ir.model.fields,field_description:account_due_list.field_account_move_line__stored_invoice_id
+#: model:ir.model.fields,help:account_due_list.field_account_move_line__invoice_origin
 #, fuzzy
-msgid "Stored Invoice"
-msgstr "Račun"
+#| msgid "Reference of the document that produced this invoice."
+msgid "The document(s) that generated the invoice."
+msgstr "Sklic na dokument, ki je sprožil ta račun"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
@@ -176,6 +153,25 @@ msgstr "Skupaj preostalo"
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Unreconciled"
 msgstr "Neusklajeno"
+
+#, fuzzy
+#~ msgid ""
+#~ "If you use payment terms, the due date will be computed automatically at "
+#~ "the generation of accounting entries. If you keep the payment terms and "
+#~ "the due date empty, it means direct payment. The payment terms may "
+#~ "compute several due dates, for example 50% now, 50% in one month."
+#~ msgstr ""
+#~ "Če uporabljate plačilne pogoje, bo datum zapadlosti samodejno izračunan "
+#~ "ob nastanku knjigovodskih vnosov. Če plačilni pogoj in datum zapadlosti "
+#~ "ostaneta prazna, to pomeni direktno plačilo. Plačilno pogoj lahko obdela "
+#~ "več datumov zapadlosti, na primer 50% takoj, 50% v mesecu dni."
+
+#~ msgid "Keep empty to use the current date"
+#~ msgstr "Pusti prazno za uporabo tekočega datuma"
+
+#, fuzzy
+#~ msgid "Stored Invoice"
+#~ msgstr "Račun"
 
 #~ msgid "Overdue payments"
 #~ msgstr "Zapadla plačila"

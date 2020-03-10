@@ -40,15 +40,6 @@ msgid "Group By"
 msgstr "Raggruppa per..."
 
 #. module: account_due_list
-#: model:ir.model.fields,help:account_due_list.field_account_move_line__payment_term_id
-msgid ""
-"If you use payment terms, the due date will be computed automatically at the "
-"generation of accounting entries. If you keep the payment terms and the due "
-"date empty, it means direct payment. The payment terms may compute several "
-"due dates, for example 50% now, 50% in one month."
-msgstr ""
-
-#. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
 msgid "Invoice"
@@ -68,11 +59,6 @@ msgstr "Responsabile"
 #: model:ir.model,name:account_due_list.model_account_move_line
 msgid "Journal Item"
 msgstr "Movimento contabile"
-
-#. module: account_due_list
-#: model:ir.model.fields,help:account_due_list.field_account_move_line__invoice_date
-msgid "Keep empty to use the current date"
-msgstr "Lasciare vuoto per usare la data odierna"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -123,11 +109,6 @@ msgid "Receivable"
 msgstr "Crediti"
 
 #. module: account_due_list
-#: model:ir.model.fields,help:account_due_list.field_account_move_line__invoice_origin
-msgid "Reference of the document that produced this invoice."
-msgstr "Riferimento del documento che ha generato questa fattura"
-
-#. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Salesperson"
 msgstr "Commerciale"
@@ -143,10 +124,11 @@ msgid "Source Doc"
 msgstr "Documento origine"
 
 #. module: account_due_list
-#: model:ir.model.fields,field_description:account_due_list.field_account_move_line__stored_invoice_id
+#: model:ir.model.fields,help:account_due_list.field_account_move_line__invoice_origin
 #, fuzzy
-msgid "Stored Invoice"
-msgstr "Fattura"
+#| msgid "Reference of the document that produced this invoice."
+msgid "The document(s) that generated the invoice."
+msgstr "Riferimento del documento che ha generato questa fattura"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
@@ -173,6 +155,13 @@ msgstr "Totale residuo"
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Unreconciled"
 msgstr "Non riconciliate"
+
+#~ msgid "Keep empty to use the current date"
+#~ msgstr "Lasciare vuoto per usare la data odierna"
+
+#, fuzzy
+#~ msgid "Stored Invoice"
+#~ msgstr "Fattura"
 
 #~ msgid "Overdue payments"
 #~ msgstr "Pagamenti scaduti"
