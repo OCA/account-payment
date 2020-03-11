@@ -3,7 +3,7 @@
 
 {
     "name": "IPPay Payment Acquirer for Credit Cards",
-    "version": "12.0.1.0.0",
+    "version": "12.0.1.1.0",
     "license": "AGPL-3",
     "summary": "Store and use credit cards using IPPay",
     "author": "Open Source Integrators, Odoo Community Association (OCA)",

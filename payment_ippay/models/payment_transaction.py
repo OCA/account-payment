@@ -55,8 +55,8 @@ class PaymentTansaction(models.Model):
 
     @api.multi
     def ippay_s2s_do_transaction(self):
-        context = self.env.context
-        inv_rec = self.env["account.invoice"].browse(context.get("active_ids"))
-        for inv in inv_rec:
-            if inv.type == "out_invoice":
-                self._ippay_s2s_do_payment(invoice=inv)
+        for transaction in self:
+            inv_rec = self.invoice_ids
+            for inv in inv_rec:
+                if inv.type == "out_invoice":
+                    self._ippay_s2s_do_payment(invoice=inv)

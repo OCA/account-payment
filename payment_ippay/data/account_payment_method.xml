@@ -1,6 +1,4 @@
-
-<odoo>
-    <data noupdate="0">
+<odoo noupdate="0">
 
         <record id="account_payment_method_electric_outbound" model="account.payment.method">
             <field name="name">Electronic</field>
@@ -8,5 +6,4 @@
             <field name="payment_type">outbound</field>
         </record>
 
-    </data>
 </odoo>

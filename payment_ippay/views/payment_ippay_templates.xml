@@ -8,41 +8,19 @@
         <input type="hidden" name="api_url" t-att-value="api_url" />
         <input type="hidden" name="terminal_id" t-att-value="terminal_id" />
     </template>
-    <template id="assets_frontend_ippay" inherit_id="web.assets_frontend" name="Ippay Payment Assets">
-        <xpath expr="." position="inside">
-            <script type="text/javascript" src="/payment_ippay/static/src/js/payment_ippay.js"></script>
-        </xpath>
-    </template>
 
     <template id="ippay_s2s_form">
         <input type="hidden" name="data_set" data-create-route="/payment/ippay/s2s/create_json_3ds" />
+        <t t-set="partner" t-value="partner_id or order_id.partner_id.id" />
         <div t-attf-class="row mt8 #{'' if bootstrap_formatting else 'o_card_brand_detail'}">
-            <t t-set="payment_tokens" t-value="pms" />
-            <t t-set="partner" t-value="partner_id or order_id.partner_id.id" />
-            <div t-att-class="'defualt_dtl' if payment_tokens else ' d-none'">
-                <div t-att-class="'form-group col-xl-6' if bootstrap_formatting else 'form-group'">
-                    <label class="col-form-label" for="payment_tokens">Saved payment token</label>
-                    <select style="padding:2px!important;" class="token_id" name="token_id" required="required">
-                        <option value="0"></option>
-                        <t t-foreach="payment_tokens or []" t-as="token">
-                            <option t-att-value="token.id" t-att-selected="token.id == partner and partner.payment_token_id and partner.payment_token_id.id">
-                                <t t-esc="token.name" />
-                            </option>
-                        </t>
-                    </select>
-                </div>
-                <input type="hidden" name="selected_token_id" class="selected_token_id" />
-                <a class="form-group new" href="#">New Card</a>
-            </div>
-            <div t-att-class="'new_card_dtl' if not payment_tokens else 'new_card_dtl d-none'">
-                <t t-call="payment_ippay.payment_card_form"/>
-            </div>
+            <t t-call="payment_ippay.payment_card_form"/>
         </div>
         <input type="hidden" name="acquirer_id" t-att-value="id" />
         <input type="hidden" name="ippay_acquirer" class="ippay_acquirer"/>
         <input class="d-none" name="csrf_token" t-att-value="request.csrf_token()" />
         <input t-if="return_url" type="hidden" name="return_url" t-att-value="return_url" />
-        <input t-if="partner_id" type="hidden" name="partner_id" t-att-value="partner" />
+        <input t-if="partner" type="hidden" name="partner_id" t-att-value="partner" />
+        <input t-if="partner" type="hidden" name="partner" t-att-value="partner" />
     </template>
 
     <template id="payment_card_form" name="Payment Card Form">
