@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo13-addon-account_due_list',
         'odoo13-addon-account_due_list_payment_mode',
+        'odoo13-addon-account_payment_multi_deduction',
         'odoo13-addon-partner_aging',
     ],
     classifiers=[
