@@ -1,41 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <template id="assets_frontend_ippay_ach" inherit_id="payment.assets_frontend">
-        <xpath expr="." position="inside">
-            <script type="text/javascript" src="/payment_ippay_ach/static/src/js/payment_ippay_ach.js"></script>
+    <template id="ippay_ach_payment_tokens_list" inherit_id="payment.payment_tokens_list">
+        <xpath expr="//input[@t-att-checked='checked_pm_id == pm.id']" position="after">
+            <span t-if="pm and pm.acquirer_id" t-esc="pm.acquirer_id.name"/>
         </xpath>
     </template>
 
     <template id="ippay_ach_s2s_form">
+        <t t-set="partner" t-value="partner_id or order_id.partner_id.id" />
         <input type="hidden" name="data_set" data-create-route="/payment/ippay_ach/s2s/create_json_3ds" />
         <div t-attf-class="row mt8 #{'' if bootstrap_formatting else 'o_card_brand_detail'}">
-            <t t-set="payment_tokens" t-value="pms" />
-            <t t-set="partner" t-value="partner_id or order_id.partner_id.id" />
-            <div t-att-class="'defualt_acc_dtl' if payment_tokens else ' d-none'">
-                <div t-att-class="'form-group col-xl-6' if bootstrap_formatting else 'form-group'">
-                    <label class="col-form-label" for="payment_tokens">Saved payment token</label>
-                    <select style="padding:2px!important;" class="token_id" name="token_id" required="required">
-                        <option value="0"></option>
-                        <t t-foreach="payment_tokens or []" t-as="token">
-                            <option t-att-value="token.id" t-att-selected="token.id == partner and partner.payment_token_id and partner.payment_token_id.id">
-                                <t t-esc="token.name" />
-                            </option>
-                        </t>
-                    </select>
-                </div>
-                <input type="hidden" name="selected_token_id" class="selected_token_id" />
-                <a class="form-group new" href="#">New Account</a>
-            </div>
-            <div t-att-class="'new_acc_dtl' if not payment_tokens else 'new_acc_dtl d-none'">
-                <t t-call="payment_ippay_ach.payment_check_form"/>
-            </div>
+            <t t-call="payment_ippay_ach.payment_check_form"/>
         </div>
         <input type="hidden" name="acquirer_id" t-att-value="id" />
         <input type="hidden" name="ippay_ach_acquirer" class="ippay_ach_acquirer"/>
         <input class="d-none" name="csrf_token" t-att-value="request.csrf_token()" />
         <input t-if="return_url" type="hidden" name="return_url" t-att-value="return_url" />
-        <input t-if="partner_id" type="hidden" name="partner_id" t-att-value="partner" />
+        <input t-if="partner" type="hidden" name="partner_id" t-att-value="partner" />
+        <input t-if="partner" type="hidden" name="partner" t-att-value="partner" />
     </template>
 
     <template id="payment_check_form" name="Payment Check Form">
@@ -46,9 +29,6 @@
             <input type="hidden" name="ch_holder_name" id="ch_holder_name" class="form-control" data-is-required="true" />
             <input type="text" name="aba" id="aba" class="form-control" maxlength="9" placeholder="ABA" data-is-required="true" />
         </div>
-        <t t-if="payment_tokens">
-            <a class="form-group back" href="#">Back</a>
-        </t>
     </template>
 
 </odoo>
