@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="ippay_ach_payment_tokens_list" inherit_id="payment.payment_tokens_list">
+        <xpath expr="//input[@t-att-checked='checked_pm_id == pm.id']" position="after">
+            <span t-if="pm and pm.acquirer_id" t-esc="pm.acquirer_id.name"/>
+        </xpath>
+    </template>
+
+    <template id="ippay_ach_payment_tokens_list" inherit_id="payment.payment_tokens_list">
+        <xpath expr="//div[starts-with(@t-attf-id,'o_payment_add_token_acq_')]/div">
+            <t t-if="mode == 'payment' and acq and acq.ippay_ach_save_token == 'ask'">
+            <div t-att-class="'form-group col-lg-8' if bootstrap_formatting else 'form-group'">
+                <label>
+                    <input type="checkbox" name="save_token" id="save_token" />
+                    Save payment data
+                </label>
+            </div>
+            </t>
+            <input t-if="mode == 'manage' and acq and acq.ippay_ach_save_token != 'none'" type="hidden" name="save_token" value="on" />
+        </xpath>
+    </template>
+
+    <template id="ippay_ach_s2s_form">
+        <t t-set="bootstrap_formatting" t-value="True" />
+        <t t-set="partner" t-value="partner_id or order_id.partner_id.id" />
+        <input type="hidden" name="data_set" data-create-route="/payment/ippay_ach/s2s/create_json_3ds" />
+        <div t-attf-class="row mt8 #{'' if bootstrap_formatting else 'o_card_brand_detail'}">
+            <t t-call="payment_ippay_ach.payment_check_form"/>
+        </div>
+        <input type="hidden" name="acquirer_id" t-att-value="id" />
+        <input type="hidden" name="ippay_ach_acquirer" class="ippay_ach_acquirer"/>
+        <input class="d-none" name="csrf_token" t-att-value="request.csrf_token()" />
+        <input t-if="return_url" type="hidden" name="return_url" t-att-value="return_url" />
+        <input t-if="partner" type="hidden" name="partner_id" t-att-value="partner" />
+        <input t-if="partner" type="hidden" name="partner" t-att-value="partner" />
+    </template>
+
+    <template id="payment_check_form" name="Payment Check Form">
+        <div t-att-class="'form-group col-lg-5' if bootstrap_formatting else 'form-group'">
+            <input type="text" name="bank_acc_number" id="bank_acc_number" class="form-control" placeholder="Account Number" data-is-required="true" />
+        </div>
+        <div t-att-class="'form-group col-lg-3' if bootstrap_formatting else 'form-group'">
+            <input type="hidden" name="ch_holder_name" id="ch_holder_name" class="form-control" data-is-required="true" />
+            <input type="text" name="aba" id="aba" class="form-control" maxlength="9" placeholder="ABA" data-is-required="true" />
+        </div>
+    </template>
+
+</odoo>
