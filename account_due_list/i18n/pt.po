@@ -121,7 +121,6 @@ msgstr "Doc. Origem"
 #. module: account_due_list
 #: model:ir.model.fields,help:account_due_list.field_account_move_line__invoice_origin
 #, fuzzy
-#| msgid "Reference of the document that produced this invoice."
 msgid "The document(s) that generated the invoice."
 msgstr "Referência do documento que produziu esta fatura."
 
