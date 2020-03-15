@@ -8,6 +8,7 @@ import logging
 from odoo import api, fields, models, _
 from odoo.exceptions import ValidationError
 
+
 _logger = logging.getLogger(__name__)
 
 
@@ -17,6 +18,9 @@ class PaymentTansaction(models.Model):
     @api.multi
     def _ippay_s2s_do_payment(self, invoice):
         acquirer = self.acquirer_id
+        acquirer_ref = self.payment_token_id.acquirer_ref
+        if not (self.payment_token_id.save_token and acquirer.ippay_save_token):
+            self.payment_token_id.unlink()
         request = """
             <ippay>
                 <TransactionType>SALE</TransactionType>
@@ -25,7 +29,7 @@ class PaymentTansaction(models.Model):
                 <TotalAmount>%s</TotalAmount>
             </ippay>""" % (
             acquirer.ippay_terminal_id,
-            self.payment_token_id.acquirer_ref,
+            acquirer_ref,
             str(self.amount).replace(".", ""),
         )
         # TODO_ add verbosity parameter?

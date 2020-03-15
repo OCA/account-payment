@@ -11,6 +11,11 @@
                     <field name='ippay_terminal_id' />
                 </group>
             </xpath>
+            <field name="save_token" position="after">
+                <field name="ippay_save_token"
+                       attrs="{'invisible': [('provider', '!=', 'ippay')]}"
+                />
+            </field>
         </field>
     </record>
 

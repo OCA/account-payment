@@ -21,6 +21,31 @@ class PaymentAcquirerIppay(models.Model):
     ippay_terminal_id = fields.Char(
         "IPpay TerminalID",
         required_if_provider="ippay")
+    ippay_save_token = fields.Selection([
+        ('none', 'Never'),
+        ('ask', 'Let the customer decide'),
+        ('always', 'Always')],
+        string='Save Cards', default='none',
+        help="This option allows customers to save their credit card "
+             "as a payment token and to reuse it for a later purchase. "
+             "If you manage subscriptions (recurring invoicing), "
+             "you need it to automatically charge the customer when you "
+             "issue an invoice.")
+
+    def _get_feature_support(self):
+        """Get advanced feature support by provider.
+
+        Each provider should add its technical in the corresponding
+        key for the following features:
+            * fees: support payment fees computations
+            * authorize: support authorizing payment (separates
+                         authorization and capture)
+            * tokenize: support saving payment data in a payment.tokenize
+                        object
+        """
+        res = super()._get_feature_support()
+        res['tokenize'].append('ippay')
+        return res
 
     @api.model
     def ippay_s2s_form_process(self, data):
@@ -28,7 +53,13 @@ class PaymentAcquirerIppay(models.Model):
         Token = self.env["payment.token"]
         token_id = data.get("selected_token_id")
         if not token_id:
+            save_token = (
+                self.ippay_save_token == 'always' or
+                (self.ippay_save_token == 'ask' and
+                 bool(data.get('save_token')))
+            )
             values = {
+                "save_token": save_token,
                 "cc_number": data.get("cc_number"),
                 "cc_holder_name": data.get("cc_holder_name"),
                 "cc_expiry": data.get("cc_expiry"),
@@ -97,6 +128,8 @@ class PaymentToken(models.Model):
 
     _inherit = "payment.token"
 
+    save_token = fields.Boolean()
+
     @api.model
     def _ippay_get_token(self, values):
         acquirer = self.env["payment.acquirer"].browse(values["acquirer_id"])
@@ -141,7 +174,7 @@ class PaymentToken(models.Model):
 
     @api.model
     def ippay_create(self, values, token_code=False):
-        """Ippay token refrence create."""
+        """Ippay token reference create."""
         # In case we already know the token assigned, just use it
         token_code = token_code or self._ippay_get_token(values)
         existing = self.sudo().search(
