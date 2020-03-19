@@ -21,6 +21,7 @@ class PaymentTansaction(models.Model):
         acquirer_ref = self.payment_token_id.acquirer_ref
         if not (self.payment_token_id.save_token and acquirer.ippay_save_token):
             self.payment_token_id.unlink()
+        amount = format(self.amount, ".2f").replace(".", "")
         request = """
             <ippay>
                 <TransactionType>SALE</TransactionType>
@@ -30,7 +31,7 @@ class PaymentTansaction(models.Model):
             </ippay>""" % (
             acquirer.ippay_terminal_id,
             acquirer_ref,
-            str(self.amount).replace(".", ""),
+            amount,
         )
         # TODO_ add verbosity parameter?
         _logger.info("Request to get IPPay Transaction ID: %s" % (request))
