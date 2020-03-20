@@ -1,8 +1,9 @@
 import logging
 import json
 
-from odoo import http
+from odoo import http, _
 from odoo.http import request, Response
+from odoo.exceptions import UserError
 
 from odoo.addons.website_sale.controllers.main import WebsiteSale
 
@@ -27,20 +28,36 @@ class SlimpayController(WebsiteSale):
         if 'sale_transaction_id' in request.session:
             del request.session['sale_transaction_id']
         self.payment_transaction(
-            acquirer_id, tx_type='form', token=None, **kwargs)
-        # Get some required database objects
-        so_id = request.session['sale_order_id']
-        so = request.env['sale.order'].sudo().browse(so_id)
-        partner = so.partner_id
+            acquirer_id, tx_type='form', token=token, **kwargs)
+        so = request.env['sale.order'].sudo().browse(
+            request.session['sale_order_id'])
+        validated_payment_url = '/shop/payment/validate'
+        if token:
+            self._pay_with_token(so.payment_tx_id)
+            return validated_payment_url
+        else:
+            return self._approval_url(so, acquirer_id, validated_payment_url)
+
+    def _approval_url(self, so, acquirer_id, return_url):
+        "Use Slimpay dedicated Web UI to sign a mandate and create a payment"
         acquirer = request.env['payment.acquirer'].sudo().browse(acquirer_id)
-        return_url = '/shop/payment/validate'
         locale = request.env.context.get('lang', 'fr_FR').split('_')[0]
         # May emit a direct debit only if a mandate exists; unsupported for now
-        subscriber = slimpay_utils.subscriber_from_partner(partner)
+        subscriber = slimpay_utils.subscriber_from_partner(so.partner_id)
         return acquirer.slimpay_client.approval_url(
             so.payment_tx_id.reference, so.id, locale, so.amount_total,
             so.currency_id.name, so.currency_id.decimal_places,
             subscriber, return_url)
+
+    def _pay_with_token(self, tx):
+        """Use Slimpay s2s API to create a payment with transaction's token,
+        then confirm the sale as usual.
+        """
+        if tx.slimpay_s2s_do_transaction():
+            tx._confirm_so(acquirer_name='slimpay')
+        else:
+            raise UserError(
+                _('Transaction error: take a screenshot and contact us'))
 
     @http.route(['/payment/slimpay/s2s/feedback'], type='http',
                 auth='public', methods=['POST'], csrf=False)
