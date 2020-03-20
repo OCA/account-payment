@@ -22,6 +22,10 @@ class SlimpayController(WebsiteSale):
         website_sale method, but creates the slimpay order and respond with
         slimpay's redirect URL instead of a form to be submitted.
         """
+        # When a previous error occured, the tx id may stay in the
+        # session and generate an error here after
+        if 'sale_transaction_id' in request.session:
+            del request.session['sale_transaction_id']
         self.payment_transaction(
             acquirer_id, tx_type='form', token=None, **kwargs)
         # Get some required database objects
