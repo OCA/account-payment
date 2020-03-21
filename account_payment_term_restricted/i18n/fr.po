@@ -1,0 +1,61 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_payment_term_restricted
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-03-19 14:37+0000\n"
+"PO-Revision-Date: 2020-03-19 14:37+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_payment_term_restricted
+#: model:ir.model,name:account_payment_term_restricted.model_res_partner
+msgid "Contact"
+msgstr "Contact"
+
+#. module: account_payment_term_restricted
+#: model:ir.model.fields,field_description:account_payment_term_restricted.field_res_partner__property_payment_term_id
+#: model:ir.model.fields,field_description:account_payment_term_restricted.field_res_users__property_payment_term_id
+msgid "Customer Payment Terms"
+msgstr "Conditions de paiement du client"
+
+#. module: account_payment_term_restricted
+#: model:ir.model,name:account_payment_term_restricted.model_account_payment_term
+msgid "Payment Terms"
+msgstr "Modalités de paiement"
+
+#. module: account_payment_term_restricted
+#: model:ir.model.fields,help:account_payment_term_restricted.field_res_partner__property_supplier_payment_term_id
+#: model:ir.model.fields,help:account_payment_term_restricted.field_res_users__property_supplier_payment_term_id
+msgid "This payment term will be used instead of the default one for purchase orders and vendor bills"
+msgstr "Ce délai de paiement sera utilisé à la place de celui par défaut pour les bons de commande et les factures fournisseurs"
+
+#. module: account_payment_term_restricted
+#: model:ir.model.fields,help:account_payment_term_restricted.field_res_partner__property_payment_term_id
+#: model:ir.model.fields,help:account_payment_term_restricted.field_res_users__property_payment_term_id
+msgid "This payment term will be used instead of the default one for sales orders and customer invoices"
+msgstr "Ce délai de paiement sera utilisé à la place de celui par défaut pour les commandes clients et les factures clients"
+
+#. module: account_payment_term_restricted
+#: model:ir.model.fields,field_description:account_payment_term_restricted.field_res_partner__property_supplier_payment_term_id
+#: model:ir.model.fields,field_description:account_payment_term_restricted.field_res_users__property_supplier_payment_term_id
+msgid "Vendor Payment Terms"
+msgstr "Conditions de paiement du fournisseur"
+
+#. module: account_payment_term_restricted
+#: model:ir.model.fields,field_description:account_payment_term_restricted.field_account_payment_term__for_customer
+msgid "for Customers"
+msgstr "pour les clients"
+
+#. module: account_payment_term_restricted
+#: model:ir.model.fields,field_description:account_payment_term_restricted.field_account_payment_term__for_supplier
+msgid "for Suppliers"
+msgstr "pour les fournisseurs"
+
