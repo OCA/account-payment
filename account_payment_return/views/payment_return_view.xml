@@ -7,7 +7,6 @@
     <record model="ir.ui.view" id="payment_return_form_view">
         <field name="name">payment.return.form</field>
         <field name="model">payment.return</field>
-        <field name="type">form</field>
         <field name="arch" type="xml">
             <form string="Payment return">
                 <header>
@@ -152,7 +151,6 @@
     <record model="ir.actions.act_window" id="payment_return_action">
         <field name="name">Customer Payment Returns</field>
         <field name="res_model">payment.return</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
     </record>
     <menuitem
