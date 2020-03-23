@@ -22,19 +22,12 @@ msgid "Action Needed"
 msgstr ""
 
 #. module: account_payment_return
-#. openerp-web
-#: code:addons/account_payment_return/static/src/xml/account_payment.xml:18
-#, python-format
-msgid "Add"
-msgstr "Añadir"
-
-#. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return_line__reason_additional_information
 msgid "Additional information on return reason."
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:336
+#: code:addons/account_payment_return/models/payment_return.py:0
 #, python-format
 msgid "All payments must be owned by the same partner"
 msgstr "Todos los pagos deben pertenecer a la misma empresa"
@@ -65,7 +58,7 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #. module: account_payment_return
-#: selection:payment.return,state:0
+#: model:ir.model.fields.selection,name:account_payment_return.selection__payment_return__state__cancelled
 msgid "Cancelled"
 msgstr "Cancelada"
 
@@ -159,13 +152,13 @@ msgid "Display Name"
 msgstr "Nombre mostrado"
 
 #. module: account_payment_return
-#: selection:payment.return,state:0
+#: model:ir.model.fields.selection,name:account_payment_return.selection__payment_return__state__done
 msgid "Done"
 msgstr "Realizada"
 
 #. module: account_payment_return
+#: model:ir.model.fields.selection,name:account_payment_return.selection__payment_return__state__draft
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
-#: selection:payment.return,state:0
 msgid "Draft"
 msgstr "Borrador"
 
@@ -173,7 +166,7 @@ msgstr "Borrador"
 #: model:ir.model.fields,help:account_payment_return.field_account_journal__return_auto_reconcile
 msgid ""
 "Enable automatic payment return reconciliation. This option is meant to be "
-"used only when working when transfer accounts, not if working directly with "
+"used only when working with transfer accounts, not if working directly with "
 "bank accounts."
 msgstr ""
 
@@ -205,43 +198,42 @@ msgid "ID"
 msgstr "ID (identificación)"
 
 #. module: account_payment_return
-#: model:ir.model.fields,help:account_payment_return.field_payment_return__message_unread
-msgid "If checked new messages require your attention."
-msgstr ""
-
-#. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return__message_needaction
+#: model:ir.model.fields,help:account_payment_return.field_payment_return__message_unread
 msgid "If checked, new messages require your attention."
 msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return__message_has_error
+#: model:ir.model.fields,help:account_payment_return.field_payment_return__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
 #. module: account_payment_return
-#: selection:payment.return,state:0
+#: model:ir.model.fields.selection,name:account_payment_return.selection__payment_return__state__imported
 msgid "Imported"
 msgstr "Importado"
 
 #. module: account_payment_return
-#: model:ir.model,name:account_payment_return.model_account_invoice
-msgid "Invoice"
-msgstr "Factura"
+#. openerp-web
+#: code:addons/account_payment_return/static/src/xml/account_payment_return.xml:0
+#, python-format
+msgid "Info"
+msgstr ""
 
 #. module: account_payment_return
-#: model:ir.model.fields,help:account_payment_return.field_account_invoice__returned_payment
+#: model:ir.model.fields,help:account_payment_return.field_account_move__returned_payment
 msgid "Invoice has been included on a payment that has been returned later."
 msgstr "La factura ha sido incluida en un pago que ha sido devuelto más tarde."
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:363
+#: code:addons/account_payment_return/models/payment_return.py:0
 #, python-format
 msgid "Invoice: %s"
 msgstr "Factura: %s"
 
 #. module: account_payment_return
-#: model_terms:ir.ui.view,arch_db:account_payment_return.view_account_invoice_filter_return
+#: model_terms:ir.ui.view,arch_db:account_payment_return.view_account_invoice_filter
 msgid "Invoices whose payment has been returned"
 msgstr "Facturas cuyo pago haya sido devuelto"
 
@@ -255,6 +247,13 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_search_view
 msgid "Journal"
 msgstr "Diario"
+
+#. module: account_payment_return
+#: model:ir.model,name:account_payment_return.model_account_move
+#, fuzzy
+#| msgid "Journal Item"
+msgid "Journal Entries"
+msgstr "Apunte contable"
 
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_account_move_line
@@ -281,12 +280,6 @@ msgstr "Última actualización de"
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__write_date
 msgid "Last Updated on"
 msgstr "Última actualización en"
-
-#. module: account_payment_return
-#: code:addons/account_payment_return/models/account_invoice.py:39
-#, python-format
-msgid "Less Payment"
-msgstr "Menos pagos"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__line_ids
@@ -319,19 +312,13 @@ msgid "Messages"
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:397
-#, python-format
-msgid "More than one matches to move reference: %s"
-msgstr "Mas de una coincidencia para la referencia: %s"
-
-#. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:384
+#: code:addons/account_payment_return/models/payment_return.py:0
 #, python-format
 msgid "Move lines: %s"
 msgstr "Apuntes: %s"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:403
+#: code:addons/account_payment_return/models/payment_return.py:0
 #, python-format
 msgid "Move: %s"
 msgstr "Asiento: %s"
@@ -343,7 +330,7 @@ msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_has_error_counter
-msgid "Number of error"
+msgid "Number of errors"
 msgstr ""
 
 #. module: account_payment_return
@@ -387,7 +374,15 @@ msgid "Partner name"
 msgstr "Nombre del cliente"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:90
+#. openerp-web
+#: code:addons/account_payment_return/static/src/xml/account_payment_return.xml:0
+#, fuzzy, python-format
+#| msgid "Payment return"
+msgid "Payment Info"
+msgstr "Devolución de cobro"
+
+#. module: account_payment_return
+#: code:addons/account_payment_return/models/payment_return.py:0
 #, python-format
 msgid "Payment Line: %s (%s) in Payment Return: %s"
 msgstr "Línea de pago: %s (%s) en devolución de pago: %s"
@@ -398,7 +393,7 @@ msgid "Payment Reference"
 msgstr "Referencia de cobro"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:113
+#: code:addons/account_payment_return/models/payment_return.py:0
 #, python-format
 msgid ""
 "Payment reference must be unique\n"
@@ -426,7 +421,7 @@ msgid "Payment return reason"
 msgstr "Motivos de devolución"
 
 #. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_account_invoice__returned_payment
+#: model:ir.model.fields,field_description:account_payment_return.field_account_move__returned_payment
 msgid "Payment returned"
 msgstr "Devolución de cobro"
 
@@ -465,8 +460,7 @@ msgid "Reference to the created journal entry"
 msgstr "Referencia al asiento creado"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:163
-#: code:addons/account_payment_return/models/payment_return.py:426
+#: code:addons/account_payment_return/models/payment_return.py:0
 #, python-format
 msgid "Return %s"
 msgstr "Devolución %s"
@@ -490,7 +484,7 @@ msgid "Return reason (info)"
 msgstr "Motivo de la devolución"
 
 #. module: account_payment_return
-#: model_terms:ir.ui.view,arch_db:account_payment_return.view_account_invoice_filter_return
+#: model_terms:ir.ui.view,arch_db:account_payment_return.view_account_invoice_filter
 msgid "Returned"
 msgstr "Devuelta"
 
@@ -498,6 +492,11 @@ msgstr "Devuelta"
 #: model:ir.model.fields,help:account_payment_return.field_payment_return_line__amount
 msgid "Returned amount. Can be different from the move amount"
 msgstr "Importe devuelto. Puede ser distinto al importe pagado"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__state
@@ -550,20 +549,28 @@ msgid "Website communication history"
 msgstr ""
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:144
+#: code:addons/account_payment_return/models/payment_return.py:0
 #, python-format
 msgid "You can not remove a payment return if state is 'Done'"
 msgstr "No puede borrar una devolución de pagos en estado 'Realizado'"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:213
+#: code:addons/account_payment_return/models/payment_return.py:0
 #, python-format
 msgid "You must input all moves references in the payment return."
 msgstr "Debes informar todas las referencias de cobro."
 
-#. module: account_payment_return
-#. openerp-web
-#: code:addons/account_payment_return/static/src/xml/account_payment.xml:18
-#, python-format
-msgid "assign to invoice"
-msgstr "asignar a la factura"
+#~ msgid "Add"
+#~ msgstr "Añadir"
+
+#~ msgid "Invoice"
+#~ msgstr "Factura"
+
+#~ msgid "Less Payment"
+#~ msgstr "Menos pagos"
+
+#~ msgid "More than one matches to move reference: %s"
+#~ msgstr "Mas de una coincidencia para la referencia: %s"
+
+#~ msgid "assign to invoice"
+#~ msgstr "asignar a la factura"
