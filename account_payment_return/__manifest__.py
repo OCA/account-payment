@@ -10,10 +10,10 @@
 
 {
     "name": "Account Payment Returns",
-    "version": "12.0.2.0.0",
+    "version": "13.0.1.0.0",
     "summary": "Manage the return of your payments",
     "license": "AGPL-3",
-    "depends": ["mail", "account",],
+    "depends": ["mail", "account"],
     "author": "Odoo Community Association (OCA),"
     "7 i TRIA, "
     "Tecnativa, "
@@ -22,11 +22,12 @@
     "data": [
         "security/ir.model.access.csv",
         "security/account_payment_return_security.xml",
+        "views/assets.xml",
         "views/payment_return_view.xml",
         "views/account_journal_view.xml",
         "data/ir_sequence_data.xml",
-        "views/account_invoice_view.xml",
+        "views/account_move_views.xml",
     ],
-    "qweb": ["static/src/xml/account_payment.xml",],
+    "qweb": ["static/src/xml/account_payment_return.xml"],
     "installable": True,
 }
