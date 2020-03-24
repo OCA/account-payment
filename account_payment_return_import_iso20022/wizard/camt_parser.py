@@ -7,7 +7,10 @@ from lxml import etree
 
 RE_CAMT = re.compile(r"(^urn:iso:std:iso:20022:tech:xsd:camt." r"|^ISO:camt.)")
 RE_CAMT_VERSION = re.compile(
-    r"(^urn:iso:std:iso:20022:tech:xsd:camt.054.001.02" r"|^ISO:camt.054.001.02)"
+    r"(^urn:iso:std:iso:20022:tech:xsd:camt.054.001.02"
+    r"|^ISO:camt.054.001.02"
+    r"|^urn:iso:std:iso:20022:tech:xsd:camt.053.001.02"
+    r"|^ISO:camt.053.001.02)"
 )
 
 
@@ -21,7 +24,8 @@ class CamtParser:
             return 0.0
         amount = 0.0
         amount_node = node.xpath(
-            "./ns:AmtDtls/ns:InstdAmt/ns:Amt", namespaces={"ns": ns}
+            "./ns:AmtDtls/ns:InstdAmt/ns:Amt | ./ns:AmtDtls/ns:TxAmt/ns:Amt",
+            namespaces={"ns": ns},
         )
         if amount_node:
             amount = float(amount_node[0].text)
@@ -91,6 +95,7 @@ class CamtParser:
         Parse transactions (entry) node.
         """
         details_nodes = node.xpath("./ns:NtryDtls/ns:TxDtls", namespaces={"ns": ns})
+        entry_date = node.xpath("./ns:BookgDt/ns:Dt", namespaces={"ns": ns})
         for details_node in details_nodes:
             return_info = details_node.xpath("./ns:RtrInf", namespaces={"ns": ns})
             if not return_info:
@@ -99,6 +104,8 @@ class CamtParser:
             transaction["amount"] = self.parse_amount(ns, details_node)
             self.parse_transaction_details(ns, details_node, transaction)
             transaction["raw_import_data"] = etree.tostring(details_node)
+            if not transaction.get("date"):
+                transaction["date"] = entry_date[0].text
             transactions.append(transaction)
         return transactions
 
@@ -108,7 +115,9 @@ class CamtParser:
         """
         return_date = self.parse_date(ns, node)
         payment_returns = []
-        notification_nodes = node.xpath("./ns:Ntfctn", namespaces={"ns": ns})
+        notification_nodes = node.xpath(
+            "./ns:Ntfctn | ./ns:Stmt", namespaces={"ns": ns}
+        )
         for notification_node in notification_nodes:
             entry_nodes = notification_node.xpath("./ns:Ntry", namespaces={"ns": ns})
             for i, entry_node in enumerate(entry_nodes):
@@ -143,7 +152,7 @@ class CamtParser:
 
     def check_version(self, ns, root):
         """
-        Check whether the validity of the camt.054.001.02 file.
+        Check the validity of the camt file.
         :raise: ValueError if not valid
         """
         # Check whether it's a CAMT Bank to Customer Debit Credit Notification
@@ -151,7 +160,7 @@ class CamtParser:
             raise ValueError("no camt: " + ns)
         # Check the camt version
         if not RE_CAMT_VERSION.search(ns):
-            raise ValueError("no camt.054.001.02: " + ns)
+            raise ValueError("no camt.053.001.02 nor camt.054.001.02: " + ns)
         # Check GrpHdr element
         root_0_0 = root[0][0].tag[len(ns) + 2 :]  # strip namespace
         if root_0_0 != "GrpHdr":
@@ -159,7 +168,7 @@ class CamtParser:
 
     def parse(self, data):
         """
-        Parse a camt.054.001.02 file.
+        Parse camt.054.001.02 file and camt.053 .001.02 files.
         :param data:
         :return: account.payment.return records list
         :raise: ValueError if parsing failed

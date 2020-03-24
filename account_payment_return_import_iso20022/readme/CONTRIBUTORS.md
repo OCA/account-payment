@@ -9,3 +9,4 @@
 - [Acsone](https://acsone.eu)
 
   > - Thomas Binsfeld
+  > - Souheil Bejaoui
