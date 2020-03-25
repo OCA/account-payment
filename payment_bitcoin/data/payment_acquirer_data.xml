@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo noupdate="1">
+
+    <record id="bitcoin_rate_default" model="bitcoin.rate">
+      <field name="markup">10</field>
+    </record>
+
+    <record id="payment_icon_bitcoin" model="payment.icon">
+      <field name="name">Bitcoin</field>
+      <field name="image" type="base64" file="payment_bitcoin/static/src/img/bitcoin_icon.png"/>
+    </record>
+
+
+    <record id="payment_acquirer_bitcoin" model="payment.acquirer">
+      <field name="name">Bitcoin</field>
+      <field name="image" type="base64" file="payment_bitcoin/static/src/img/bitcoin_icon.png"/>
+      <field name="provider">bitcoin</field>
+      <field name="company_id" ref="base.main_company"/>
+      <field name="view_template_id" ref="bitcoin_form"/>
+      <field name="environment">test</field>
+      <field name="website_published" eval="True"/>
+      <field name="pre_msg"><![CDATA[
+        <p>Transfer information will be provided after choosing the payment mode.</p>]]>
+      </field>
+      <field name="post_msg"></field>
+      <field name="payment_icon_ids" eval='[(6, 0, [ref("payment_icon_bitcoin")])]'/>
+    </record>
+
+
+</odoo>

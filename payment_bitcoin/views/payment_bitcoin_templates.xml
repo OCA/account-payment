@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <template id="bitcoin_form">
+      <input type="hidden" name="data_set" t-att-data-action-url="tx_url" data-remove-me=""/>
+      <t t-if="return_url">
+        <input type='hidden' name='return_url' t-att-value='return_url'/>
+      </t>
+      <input type='hidden' name='reference' t-att-value='reference'/>
+      <input type='hidden' name='amount' t-att-value='amount'/>
+      <input type='hidden' name='currency' t-att-value='currency.name'/>
+    </template>
+
+    <record id="transaction_form_bitcoin" model="ir.ui.view">
+      <field name="model">payment.transaction</field>
+      <field name="inherit_id" ref="payment.transaction_form"/>
+      <field name="arch" type="xml">
+        <xpath expr="//field[@name='acquirer_reference']" position="after">
+          <label for="bitcoin_address"/>
+          <div>
+            <field name="bitcoin_address_link" readonly="1"/>
+          </div>
+          <label for="bitcoin_amount"/>
+          <div>
+            <field name="bitcoin_amount"/>&amp;nbsp;
+            <field name="bitcoin_unit"/>
+          </div>
+        </xpath>
+      </field>
+    </record>
+
+</odoo>

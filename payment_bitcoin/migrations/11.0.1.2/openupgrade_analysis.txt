@@ -1,0 +1,26 @@
+---Fields in module 'payment_bitcoin'---
+---XML records in module 'crm_project'---
+DEL ir.ui.view: payment_bitcoin.view_bitcoin_address_form
+DEL ir.ui.view: payment_bitcoin.view_bitcoin_address_list
+DEL ir.ui.view: payment_bitcoin.view_bitcoin_address_search
+DEL ir.actions.act_window: payment_bitcoin.action_bitcoin_address
+DEL ir.ui.menu: payment_bitcoin.menu_bitcoin_address
+DEL ir.ui.menu: payment_bitcoin.menu_bitcoin_rate
+DEL ir.ui.view: payment_bitcoin.view_bitcoin_rate_form
+DEL ir.ui.view: payment_bitcoin.view_bitcoin_rate_list
+DEL ir.actions.act_window: payment_bitcoin.action_bitcoin_rate
+DEL ir.ui.view: payment_bitcoin.order_reference
+DEL ir.ui.view: payment_bitcoin.bitcoin_form
+DEL ir.ui.view: payment_bitcoin.assets_frontend
+NEW ir.ui.view: payment_bitcoin.view_bitcoin_address_form
+NEW ir.ui.view: payment_bitcoin.view_bitcoin_address_list
+NEW ir.ui.view: payment_bitcoin.view_bitcoin_address_search
+NEW ir.actions.act_window: payment_bitcoin.action_bitcoin_address
+NEW ir.ui.menu: payment_bitcoin.menu_bitcoin_address
+NEW ir.ui.menu: payment_bitcoin.menu_bitcoin_rate
+NEW ir.ui.view: payment_bitcoin.view_bitcoin_rate_form
+NEW ir.ui.view: payment_bitcoin.view_bitcoin_rate_list
+NEW ir.actions.act_window: payment_bitcoin.action_bitcoin_rate
+NEW ir.ui.view: payment_bitcoin.order_reference
+NEW ir.ui.view: payment_bitcoin.bitcoin_form
+NEW ir.ui.view: payment_bitcoin.assets_frontend

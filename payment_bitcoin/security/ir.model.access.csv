@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_bitcoin_rate,bitcoin.rate.public,model_bitcoin_rate,base.group_system,1,1,1,1
+access_bitcoin_rate_line,bitcoin.rate.line.public,model_bitcoin_rate_line,base.group_system,1,1,1,1
+access_bitcoin_address,bitcoin.address.public,model_bitcoin_address,base.group_system,1,1,1,1

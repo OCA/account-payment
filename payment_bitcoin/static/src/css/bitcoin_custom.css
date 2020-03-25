@@ -1,0 +1,14 @@
+#payment_bitcoin {
+    width: 100px;
+    background-color: #F7931A;
+    padding: 5px;
+    color: #fff;
+}
+
+#payment_bitcoin h4 {
+    font-weight: bold;
+}
+
+#payment_bitcoin h4 span {
+    padding: 5px;
+}
