@@ -1,4 +1,4 @@
-Under *Invoicing > Sales* there is available a new menu called *Import Payment
+Under *Invoicing > Customers* there is available a new menu called *Import Payment
 Return* that drives to a wizard that allows to upload a csv with that has to
 have the following columns (* for required):
 
