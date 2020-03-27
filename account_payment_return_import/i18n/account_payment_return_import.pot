@@ -1,12 +1,12 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_payment_return_import
+# 	* account_payment_return_import
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,29 +14,32 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:267
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "%d transactions had already been imported and were ignored."
 msgstr ""
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:270
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "1 transaction had already been imported and was ignored."
 msgstr ""
 
 #. module: account_payment_return_import
-#: sql_constraint:payment.return.line:0
+#: model:ir.model.constraint,message:account_payment_return_import.constraint_payment_return_line_unique_import_id
 msgid "A payment return transaction can be imported only once!"
 msgstr ""
 
 #. module: account_payment_return_import
 #: model:ir.model.fields,help:account_payment_return_import.field_payment_return_import__journal_id
-msgid "Accounting journal related to the bank payment return you're importing. It has be be manually chosen for payment return formats which doesn't allow automatic journal detection."
+msgid ""
+"Accounting journal related to the bank payment return you're importing. It "
+"has be be manually chosen for payment return formats which doesn't allow "
+"automatic journal detection."
 msgstr ""
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:273
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "Already imported items"
 msgstr ""
@@ -53,13 +56,13 @@ msgid "Bank account from the imported file"
 msgstr ""
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:214
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "Can not determine journal for import."
 msgstr ""
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:207
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "Can not find the account number %s."
 msgstr ""
@@ -70,14 +73,15 @@ msgid "Cancel"
 msgstr ""
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:149
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
-msgid "Could not make sense of the given file.\n"
+msgid ""
+"Could not make sense of the given file.\n"
 "Did you install the module to support this type of file?"
 msgstr ""
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/base_parser.py:42
+#: code:addons/account_payment_return_import/wizard/base_parser.py:0
 #, python-format
 msgid "Couldn't load file data"
 msgstr ""
@@ -99,7 +103,9 @@ msgstr ""
 
 #. module: account_payment_return_import
 #: model:ir.model.fields,help:account_payment_return_import.field_payment_return_import__data_file
-msgid "Get you bank payment returns in electronic format from your bank and select them here."
+msgid ""
+"Get you bank payment returns in electronic format from your bank and select "
+"them here."
 msgstr ""
 
 #. module: account_payment_return_import
@@ -109,7 +115,8 @@ msgstr ""
 
 #. module: account_payment_return_import
 #: model_terms:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
-msgid "How to import your payment return :<br/>\n"
+msgid ""
+"How to import your payment return :<br/>\n"
 "                    1. Download your Payment Return file from your bank website.<br/>\n"
 "                    2. Make sure you have installed the right module to support the file format.<br/>\n"
 "                    3. Select the file and click 'Import'."
@@ -183,19 +190,19 @@ msgid "Raw Import Data"
 msgstr ""
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:190
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "The account of this payment return is linked to another journal."
 msgstr ""
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:158
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "This file doesn't contain any payment return."
 msgstr ""
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:164
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "This file doesn't contain any transaction."
 msgstr ""
@@ -206,8 +213,7 @@ msgid "XML RAW data stored for debugging/check purposes"
 msgstr ""
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:119
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "You have already imported this file."
 msgstr ""
-
