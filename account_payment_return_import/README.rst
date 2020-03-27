@@ -14,13 +14,13 @@ Account Payment Return Import
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--payment-lightgray.png?logo=github
-    :target: https://github.com/OCA/account-payment/tree/12.0/account_payment_return_import
+    :target: https://github.com/OCA/account-payment/tree/13.0/account_payment_return_import
     :alt: OCA/account-payment
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/account-payment-12-0/account-payment-12-0-account_payment_return_import
+    :target: https://translation.odoo-community.org/projects/account-payment-13-0/account-payment-13-0-account_payment_return_import
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
-    :target: https://runbot.odoo-community.org/runbot/96/12.0
+    :target: https://runbot.odoo-community.org/runbot/96/13.0
     :alt: Try me on Runbot
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
@@ -29,7 +29,7 @@ This module adds a generic wizard + methods to import payment return file
 formats.
 
 It's a base to be extended by another modules though it allows to import a csv
-that will proccess the return payments on it.
+that will process the return payments on it.
 
 Multiple payment return files contained in a zip are also supported.
 
@@ -41,7 +41,7 @@ Multiple payment return files contained in a zip are also supported.
 Usage
 =====
 
-Under *Invoicing > Sales* there is available a new menu called *Import Payment
+Under *Invoicing > Customers* there is available a new menu called *Import Payment
 Return* that drives to a wizard that allows to upload a csv with that has to
 have the following columns (* for required):
 
@@ -64,7 +64,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/account-payment/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/account-payment/issues/new?body=module:%20account_payment_return_import%0Aversion:%2012.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/account-payment/issues/new?body=module:%20account_payment_return_import%0Aversion:%2013.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -79,11 +79,14 @@ Authors
 Contributors
 ~~~~~~~~~~~~
 
-* Carlos Dauden <pedro.baeza@tecnativa.com>
-* Pedro M. Baeza <pedro.baeza@tecnativa.com>
-* David Vidal <david.vidal@tecnativa.com>
-* Luis M. Ontalba <luis.martinez@tecnativa.com>
 * Thomas Binsfeld <thomas.binsfeld@acsone.eu>
+* `Tecnativa <https://www.tecnativa.com>`_:
+
+  * Carlos Dauden
+  * Pedro M. Baeza
+  * David Vidal
+  * Luis M. Ontalba
+  * Ernesto Tejeda
 
 Maintainers
 ~~~~~~~~~~~
@@ -98,6 +101,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/account-payment <https://github.com/OCA/account-payment/tree/12.0/account_payment_return_import>`_ project on GitHub.
+This module is part of the `OCA/account-payment <https://github.com/OCA/account-payment/tree/13.0/account_payment_return_import>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
