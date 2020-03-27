@@ -5,12 +5,12 @@ from odoo import fields, models
 
 
 class PaymentReturn(models.Model):
-    _inherit = 'payment.return'
+    _inherit = "payment.return"
 
     imported_bank_account_id = fields.Many2one(
         string="Bank account",
         help="Bank account from the imported file",
-        comodel_name='res.partner.bank',
-        ondelete='restrict',
+        comodel_name="res.partner.bank",
+        ondelete="restrict",
         readonly=True,
     )
