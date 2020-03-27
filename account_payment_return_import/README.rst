@@ -29,7 +29,7 @@ This module adds a generic wizard + methods to import payment return file
 formats.
 
 It's a base to be extended by another modules though it allows to import a csv
-that will proccess the return payments on it.
+that will process the return payments on it.
 
 Multiple payment return files contained in a zip are also supported.
 
@@ -41,7 +41,7 @@ Multiple payment return files contained in a zip are also supported.
 Usage
 =====
 
-Under *Invoicing > Sales* there is available a new menu called *Import Payment
+Under *Invoicing > Customers* there is available a new menu called *Import Payment
 Return* that drives to a wizard that allows to upload a csv with that has to
 have the following columns (* for required):
 
@@ -79,11 +79,14 @@ Authors
 Contributors
 ~~~~~~~~~~~~
 
-* Carlos Dauden <pedro.baeza@tecnativa.com>
-* Pedro M. Baeza <pedro.baeza@tecnativa.com>
-* David Vidal <david.vidal@tecnativa.com>
-* Luis M. Ontalba <luis.martinez@tecnativa.com>
 * Thomas Binsfeld <thomas.binsfeld@acsone.eu>
+* `Tecnativa <https://www.tecnativa.com>`_:
+
+  * Carlos Dauden
+  * Pedro M. Baeza
+  * David Vidal
+  * Luis M. Ontalba
+  * Ernesto Tejeda
 
 Maintainers
 ~~~~~~~~~~~
