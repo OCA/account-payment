@@ -20,19 +20,19 @@ msgstr ""
 "X-Generator: Weblate 3.1.1\n"
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:267
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "%d transactions had already been imported and were ignored."
 msgstr "%d Geschäftsvorfälle waren bereits importiert und wurden ignoriert."
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:270
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "1 transaction had already been imported and was ignored."
 msgstr "1 Geschäftsvorfall war bereits importiert und wurde ignoriert."
 
 #. module: account_payment_return_import
-#: sql_constraint:payment.return.line:0
+#: model:ir.model.constraint,message:account_payment_return_import.constraint_payment_return_line_unique_import_id
 #, fuzzy
 msgid "A payment return transaction can be imported only once!"
 msgstr "Ein Bank-Geschäftsvorfall darf nur ein Mal importiert werden!"
@@ -49,7 +49,7 @@ msgstr ""
 "werden, welches keine automatische Journalerkennung ermöglicht."
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:273
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "Already imported items"
 msgstr "Bereits importierte Positionen"
@@ -66,13 +66,13 @@ msgid "Bank account from the imported file"
 msgstr ""
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:214
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "Can not determine journal for import."
 msgstr "Kann das Journal für den Import nicht bestimmen."
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:207
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "Can not find the account number %s."
 msgstr "Kann das Konto %s nicht finden."
@@ -83,7 +83,7 @@ msgid "Cancel"
 msgstr "Abbrechen"
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:149
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid ""
 "Could not make sense of the given file.\n"
@@ -93,7 +93,7 @@ msgstr ""
 "Haben Sie das zugehörige Modul für diesen Dateityp installiert?"
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/base_parser.py:42
+#: code:addons/account_payment_return_import/wizard/base_parser.py:0
 #, python-format
 msgid "Couldn't load file data"
 msgstr "Konnte die Dateidaten nicht laden"
@@ -193,7 +193,6 @@ msgstr "Rücklasten-Datei"
 #. module: account_payment_return_import
 #: model:ir.model,name:account_payment_return_import.model_payment_return
 #, fuzzy
-#| msgid "Payment return lines"
 msgid "Payment return"
 msgstr "Rückbuchungszeilen"
 
@@ -208,19 +207,19 @@ msgid "Raw Import Data"
 msgstr "Import Rohdaten"
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:190
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "The account of this payment return is linked to another journal."
 msgstr "Das Konto dieser Rücklast ist mit einem anderen Journal verknüpft."
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:158
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "This file doesn't contain any payment return."
 msgstr "Diese Datei enthält keine Rücklast."
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:164
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "This file doesn't contain any transaction."
 msgstr "Diese Datei enthält keinen Vorgang."
@@ -231,7 +230,7 @@ msgid "XML RAW data stored for debugging/check purposes"
 msgstr "XML-Rohdaten sind zur Fehler-/Prüfung abgespeichert"
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:119
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "You have already imported this file."
 msgstr "Sie haben diese Datei bereits importiert."
