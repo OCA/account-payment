@@ -180,11 +180,11 @@ class PaymentReturn(models.Model):
         payment_order_type = self.env['account.payment.order'].search([
             ('bank_line_ids.name', '=', self.line_ids[0].reference)]).payment_type
         if payment_order_type == 'inbound':
-            line_vals['debit'] = total_amount
-            line_vals['credit'] = 0.0
-        else:
             line_vals['debit'] = 0.0
             line_vals['credit'] = total_amount
+        else:
+            line_vals['debit'] = total_amount
+            line_vals['credit'] = 0.0
         return line_vals
 
     @api.multi
@@ -222,36 +222,44 @@ class PaymentReturn(models.Model):
                 _("You must input all moves references in the payment "
                   "return."))
         move_line_model = self.env['account.move.line']
-        move = self.env['account.move'].create(
-            self._prepare_return_move_vals())
+        move = self.env['account.move'].create(self._prepare_return_move_vals())
         total_amount = 0.0
         all_move_lines = move_line_model.browse()
         for return_line in self.line_ids:
-            payment_lines = payment_order.bank_line_ids \
-                .search([('name', '=', return_line.reference)]) \
-                .payment_line_ids
-            for pl in payment_lines:
-                pl.returned_move_line_id = pl.move_line_id
-                pl.move_line_id = False
-                pl.payment_line_returned = True
+            payment_lines = self.env['bank.payment.line'].search([
+                ('name', '=', return_line.reference)]).mapped('payment_line_ids')
+            payment_lines.write({
+                'payment_line_returned': True
+            })
+            order_type = payment_lines.mapped('order_id').payment_type
             move_line2_vals = return_line._prepare_return_move_line_vals(move)
             move_line2 = move_line_model.with_context(
                 check_move_validity=False).create(move_line2_vals)
             total_amount += move_line2.debit or move_line2.credit
-            for move_line in return_line.move_line_ids:
-                # move_line: credit on customer account (from payment move)
-                # returned_moves: debit on customer account (from invoice move)
-                returned_moves = move_line.matched_debit_ids.mapped(
-                    'debit_move_id')
-                returned_moves._payment_returned(return_line)
-                all_move_lines |= move_line
-                move_line.remove_move_reconcile()
-                (move_line | move_line2).reconcile()
-                return_line.move_line_ids.mapped('matched_debit_ids').write(
-                    {'origin_returned_move_ids': [(6, 0, returned_moves.ids)]})
+            if order_type == 'outbound':
+                for move_line in return_line.move_line_ids:
+                    returned_moves = move_line.matched_credit_ids.mapped(
+                        'credit_move_id')
+                    returned_moves._payment_returned(return_line)
+                    all_move_lines |= move_line
+                    move_line.remove_move_reconcile()
+                    (move_line | move_line2).reconcile()
+                    return_line.move_line_ids.mapped('matched_credit_ids').write(
+                        {'origin_returned_move_ids': [(6, 0, returned_moves.ids)]})
+            else:
+                for move_line in return_line.move_line_ids:
+                    # move_line: credit on customer account (from payment move)
+                    # returned_moves: debit on customer account (from invoice move)
+                    returned_moves = move_line.matched_debit_ids.mapped(
+                        'debit_move_id')
+                    returned_moves._payment_returned(return_line)
+                    all_move_lines |= move_line
+                    move_line.remove_move_reconcile()
+                    (move_line | move_line2).reconcile()
+                    return_line.move_line_ids.mapped('matched_debit_ids').write(
+                        {'origin_returned_move_ids': [(6, 0, returned_moves.ids)]})
             if return_line.expense_amount:
-                expense_lines_vals = return_line._prepare_expense_lines_vals(
-                    move)
+                expense_lines_vals = return_line._prepare_expense_lines_vals(move)
                 move_line_model.with_context(check_move_validity=False).create(
                     expense_lines_vals)
             extra_lines_vals = return_line._prepare_extra_move_lines(move)
@@ -269,9 +277,8 @@ class PaymentReturn(models.Model):
     @api.multi
     def action_cancel(self):
         invoices = self.env['account.invoice']
-        for move_line in self.mapped('move_id.line_ids')\
-                .filtered(lambda x: x.user_type_id.type == 'receivable'
-                          or x.user_type_id.type == 'payable'):
+        for move_line in self.mapped('move_id.line_ids') \
+                .filtered(lambda x: x.user_type_id.type in ('receivable', 'payable')):
             for partial_line in move_line.matched_credit_ids:
                 invoices |= partial_line.origin_returned_move_ids.mapped(
                     'invoice_id')
@@ -286,16 +293,10 @@ class PaymentReturn(models.Model):
                                    partial_line.debit_move_id)
                 partial_line.debit_move_id.remove_move_reconcile()
                 lines2reconcile.reconcile()
-        payment_order = self.env['account.payment.order'] \
-            .search([('bank_line_ids.name', '=', self.line_ids[0].reference)])
         for return_line in self.line_ids:
-            payment_lines = payment_order.bank_line_ids \
-                .search([('name', '=', return_line.reference)]) \
-                .payment_line_ids
-            for pl in payment_lines:
-                pl.move_line_id = pl.returned_move_line_id
-                pl.returned_move_line_id = False
-                pl.payment_line_returned = False
+            payment_lines = self.env['bank.payment.line'].search([
+                ('name', '=', return_line.reference)]).mapped('payment_line_ids')
+            payment_lines.write({'payment_line_returned': False})
         self.move_id.button_cancel()
         self.move_id.unlink()
         self.write({'state': 'cancelled', 'move_id': False})
@@ -464,7 +465,7 @@ class PaymentReturnLine(models.Model):
             'move_id': move.id,
         }
         payment_order_type = self.env['account.payment.order'].search([
-            ('bank_line_ids.name', '=', self.reference)]).payment_type
+            ('bank_line_ids.name', '=', self.reference)], limit=1).payment_type
         move_amount = self.return_id._get_move_amount(self)
         if payment_order_type == 'inbound':
             line_vals['debit'] = move_amount
