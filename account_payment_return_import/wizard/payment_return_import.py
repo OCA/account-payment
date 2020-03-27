@@ -1,4 +1,4 @@
-# © 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
+# Copyright 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
 # © 2016 Pedro M. Baeza <pedro.baeza@tecnativa.com>
 # Copyright 2018 Tecnativa - Luis M. Ontalba
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
@@ -19,11 +19,10 @@ class PaymentReturnImport(models.TransientModel):
     _name = "payment.return.import"
     _description = "Import Payment Return"
 
-    @api.model
     def _compute_hide_journal_field(self):
         """ Return False if the journal_id can't be provided by the parsed
         file and must be provided by the wizard."""
-        return True
+        self.hide_journal_field = True
 
     journal_id = fields.Many2one(
         "account.journal",
@@ -44,7 +43,6 @@ class PaymentReturnImport(models.TransientModel):
     )
     match_after_import = fields.Boolean(default=True)
 
-    @api.multi
     def import_file(self):
         """Process the file chosen in the wizard, create bank payment return(s)
         and go to reconciliation."""
@@ -64,7 +62,7 @@ class PaymentReturnImport(models.TransientModel):
                 {
                     "views": [(form_view.id, "form")],
                     "res_id": payment_returns.id,
-                    "context": {"notifications": notifications,},
+                    "context": {"notifications": notifications},
                 }
             )
         return result
