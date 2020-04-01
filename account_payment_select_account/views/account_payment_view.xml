@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+    Copyright (C) 2016-Today: La Louve (<http://www.cooplalouve.fr/>)
+    Copyright (C) 2019-Today: Druidoo (<https://www.druidoo.io>)
+    @author: La Louve
+    License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html
+-->
+
+<odoo>
+    <record id="view_account_payment_form" model="ir.ui.view">
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_invoice_form"/>
+        <field name="arch" type="xml">
+
+            <field name="journal_id" position="attributes">
+                <attribute name="widget" eval="False"/>
+                <attribute name="options">{'no_create': True, 'no_quick_create': True, 'no_create_edit': True}</attribute>
+            </field>
+
+            <field name="journal_id" position="after">
+                <field name="require_payment_account" invisible="1"/>
+                <field name="payment_account_id"
+                    options="{'no_create': True, 'no_quick_create': True, 'no_create_edit': True}"
+                    attrs="{'required': [('require_payment_account', '=', True)], 'invisible': [('require_payment_account', '!=', True)]}"/>
+            </field>
+        </field>
+    </record>
+</odoo>
