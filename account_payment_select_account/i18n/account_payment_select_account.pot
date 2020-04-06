@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-27 16:02+0000\n"
-"PO-Revision-Date: 2020-03-27 16:02+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -29,3 +27,4 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_payment_select_account.field_account_payment__require_payment_account
 msgid "Require Payment Account"
 msgstr ""
+
