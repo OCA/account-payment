@@ -75,7 +75,7 @@ def slimpay_normalize_names(name):
 
     (see https://dev.slimpay.com/hapi/guide/checkout/setting-up-direct-debits)
     """
-    return SLIMPAY_FORBIDEN_CHARS_RE.sub('', name)
+    return SLIMPAY_FORBIDEN_CHARS_RE.sub('', name or u'')
 
 
 def subscriber_from_partner(partner):
