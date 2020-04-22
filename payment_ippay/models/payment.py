@@ -124,11 +124,17 @@ class PaymentAcquirerIppay(models.Model):
 
 
 class PaymentToken(models.Model):
-    """Ippay payment token."""
+    """
+    Ippay payment token.
+    """
 
     _inherit = "payment.token"
 
-    save_token = fields.Boolean()
+    # By default, keep the Token for future transactions
+    # This is the case when creating from the backend
+    # When collected from the Portal, the user is asked,
+    # and it may be set to False to be used only for the current transaction
+    save_token = fields.Boolean(default=True)
 
     @api.model
     def _ippay_get_token(self, values):

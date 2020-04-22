@@ -19,7 +19,8 @@ class PaymentTansaction(models.Model):
     def _ippay_s2s_do_payment(self, invoice):
         acquirer = self.acquirer_id
         acquirer_ref = self.payment_token_id.acquirer_ref
-        if not (self.payment_token_id.save_token and acquirer.ippay_save_token):
+        if not (self.payment_token_id.save_token
+                and acquirer.ippay_save_token):
             self.payment_token_id.unlink()
         amount = format(self.amount, ".2f").replace(".", "")
         request = """
@@ -37,7 +38,9 @@ class PaymentTansaction(models.Model):
         _logger.info("Request to get IPPay Transaction ID: %s" % (request))
         try:
             r = requests.post(
-                acquirer.api_url, data=request, headers={"Content-Type": "text/xml"}
+                acquirer.api_url,
+                data=request,
+                headers={"Content-Type": "text/xml"}
             )
         except Exception as e:
             raise ValidationError(_(e))
@@ -52,7 +55,9 @@ class PaymentTansaction(models.Model):
             return True
         else:
             self.state = "cancel"
-            self.state_message = response.get("ErrMsg") or response.get("ResponseText")
+            self.state_message = (
+                response.get("ErrMsg")
+                or response.get("ResponseText"))
             invoice.message_post(
                 body=_("IPPay Credit Card Payment DECLINED: %s - %s")
                 % (response.get("ActionCode"), self.state_message,)
