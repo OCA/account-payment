@@ -5,7 +5,7 @@
 
 {
     "name": "Payments Due list days overdue",
-    "version": "13.0.1.0.0",
+    "version": "13.0.1.0.1",
     "category": "Accounting",
     "author": "Odoo Community Association (OCA), " "Eficent",
     "website": "https://github.com/OCA/account-payment",
