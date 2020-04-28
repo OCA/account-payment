@@ -39,7 +39,6 @@
     <record id="action_account_overdue_term_form" model="ir.actions.act_window">
         <field name="name">Overdue Terms</field>
         <field name="res_model">account.overdue.term</field>
-        <field name="view_type">form</field>
         <field name="view_mode">tree,form</field>
         <field name="search_view_id" ref="view_account_overdue_term_search" />
     </record>

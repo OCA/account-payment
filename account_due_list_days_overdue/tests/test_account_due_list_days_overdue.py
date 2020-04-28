@@ -17,9 +17,9 @@ class TestAccountDueListDaysOverdue(TransactionCase):
         self.account_user_type = self.env.ref("account.data_account_type_receivable")
         self.revenue_user_type = self.env.ref("account.data_account_type_revenue")
         self.account = self.env["account.account"]
+        self.account_move_model = self.env["account.move"]
         self.account_move_line_model = self.env["account.move.line"]
-        self.account_invoice_model = self.env["account.invoice"]
-        self.account_invoice_line_model = self.env["account.invoice.line"]
+        self.account_journal_model = self.env["account.journal"]
         self.overdue_term_1 = self.env.ref(
             "account_due_list_days_overdue.overdue_term_1"
         )
@@ -29,33 +29,36 @@ class TestAccountDueListDaysOverdue(TransactionCase):
         self.product = self.env.ref("product.product_product_4")
         self.company = self.env.ref("base.main_company")
         self._create_account_type()
-
+        self.sale_journal = self.account_journal_model.create(
+            {
+                "name": "Company Sale journal",
+                "type": "sale",
+                "code": "SALE",
+                "company_id": self.company.id,
+            }
+        )
         # we create an invoice
         inv_date = date.today() - timedelta(days=16)
-        self.invoice = self.account_invoice_model.create(
-            {
-                "partner_id": self.partner_agrolait.id,
-                "reference_type": "none",
-                "currency_id": self.currency_usd.id,
-                "name": "invoice to customer",
-                "payment_term_id": self.payment_term.id,
-                "account_id": self.receivable_account.id,
-                "type": "out_invoice",
-                "date_invoice": fields.Date.to_string(inv_date),
-            }
-        )
-
-        self.account_invoice_line_model.create(
-            {
-                "product_id": self.product.id,
-                "quantity": 1,
-                "price_unit": 100,
-                "account_id": self.sales_account.id,
-                "invoice_id": self.invoice.id,
-                "name": "product that cost 100",
-            }
-        )
-        self.invoice.action_invoice_open()
+        inv_data = {
+            "name": "invoice to customer",
+            "partner_id": self.partner_agrolait.id,
+            "currency_id": self.currency_usd.id,
+            "invoice_date": fields.Date.to_string(inv_date),
+            "journal_id": self.sale_journal.id,
+            "type": "out_invoice",
+            "invoice_payment_term_id": self.payment_term.id,
+            "invoice_line_ids": [],
+        }
+        line_data = {
+            "product_id": self.product.id,
+            "name": "product that cost 100",
+            "account_id": self.sales_account.id,
+            "price_unit": 100,
+            "quantity": 1,
+        }
+        inv_data["invoice_line_ids"].append((0, 0, line_data))
+        self.invoice = self.account_move_model.create(inv_data)
+        self.invoice.post()
 
     def _create_account_type(self):
         # Create receivable and sales test account
@@ -78,11 +81,10 @@ class TestAccountDueListDaysOverdue(TransactionCase):
         )
 
     def test_workflow_open(self):
-        self.assertEqual(self.invoice.state, "open")
+        self.assertEqual(self.invoice.state, "posted")
 
     def test_due_days(self):
-        move = self.invoice.move_id
-        for line in move.line_ids:
+        for line in self.invoice.line_ids:
             if line.account_id == self.receivable_account:
                 self.assertEqual(
                     line.days_overdue,
@@ -91,9 +93,8 @@ class TestAccountDueListDaysOverdue(TransactionCase):
                 )
 
     def test_overdue_term(self):
-        move = self.invoice.move_id
         self.account_move_line_model._register_hook()
-        for line in move.line_ids:
+        for line in self.invoice.line_ids:
             if line.account_id == self.receivable_account:
                 self.assertEqual(
                     line[self.overdue_term_1.tech_name],

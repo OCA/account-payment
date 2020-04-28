@@ -15,10 +15,12 @@ class AccountDaysOverdue(models.Model):
     from_day = fields.Integer(string="From day", required=True)
     to_day = fields.Integer(string="To day", required=True)
     tech_name = fields.Char(
-        "Technical name", readonly=True, compute="_compute_technical_name", store=True
+        string="Technical name",
+        readonly=True,
+        compute="_compute_technical_name",
+        store=True,
     )
 
-    @api.multi
     @api.depends("from_day", "to_day")
     def _compute_technical_name(self):
         for rec in self:
@@ -31,14 +33,12 @@ class AccountDaysOverdue(models.Model):
             Registry(self.env.cr.dbname).registry_invalidated = True
         return res
 
-    @api.multi
     def write(self, vals):
         res = super(AccountDaysOverdue, self).write(vals)
         if self.env["account.move.line"]._register_hook():
             Registry(self.env.cr.dbname).registry_invalidated = True
         return res
 
-    @api.multi
     @api.constrains("from_day", "to_day")
     def check_overlap(self):
         """Check that overdue terms do not overlap

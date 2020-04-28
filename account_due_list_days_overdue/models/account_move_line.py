@@ -7,7 +7,11 @@ import datetime
 from lxml import etree
 
 from odoo import api, fields, models
-from odoo.osv import orm
+
+from odoo.addons.base.models.ir_ui_view import (
+    transfer_modifiers_to_node,
+    transfer_node_to_modifiers,
+)
 
 
 class AccountMoveLine(models.Model):
@@ -19,16 +23,17 @@ class AccountMoveLine(models.Model):
         string="Days overdue",
     )
 
-    @api.multi
     @api.depends("date_maturity")
     def _compute_days_overdue(self):
         today_date = fields.Date.from_string(fields.Date.today())
         for line in self:
+            days = None
             if line.date_maturity and line.amount_residual:
                 date_maturity = fields.Date.from_string(line.date_maturity)
                 days_overdue = (today_date - date_maturity).days
                 if days_overdue > 0:
-                    line.days_overdue = days_overdue
+                    days = days_overdue
+            line.days_overdue = days
 
     def _search_days_overdue(self, operator, value):
         due_date = fields.Date.from_string(fields.Date.today()) - datetime.timedelta(
@@ -46,7 +51,6 @@ class AccountMoveLine(models.Model):
             operator = ">="
         return [("date_maturity", operator, due_date)]
 
-    @api.multi
     @api.depends("date_maturity")
     def _compute_overdue_terms(self):
         today_date = fields.Date.from_string(fields.Date.today())
@@ -83,7 +87,9 @@ class AccountMoveLine(models.Model):
                         "field",
                         {"name": str(overdue_term.tech_name), "readonly": "True"},
                     )
-                    orm.setup_modifiers(elem)
+                    modifiers = {}
+                    transfer_node_to_modifiers(elem, modifiers)
+                    transfer_modifiers_to_node(elem, modifiers)
                     placeholder.addnext(elem)
                     result["fields"].update(
                         {
