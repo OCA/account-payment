@@ -17,13 +17,13 @@ Payments Due list days overdue
     :target: https://github.com/OCA/account-payment/tree/13.0/account_due_list_days_overdue
     :alt: OCA/account-payment
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/account-payment-12-0/account-payment-12-0-account_due_list_days_overdue
+    :target: https://translation.odoo-community.org/projects/account-payment-13-0/account-payment-13-0-account_due_list_days_overdue
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
     :target: https://runbot.odoo-community.org/runbot/96/13.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5|
+|badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This module adds to the 'Payments and due list' view the number of days that
 an open item is overdue, and classifies the amount due in separate terms
@@ -77,6 +77,9 @@ Contributors
 
 * Jordi Ballester Alomar <jordi.ballester@eficent.com>
 * Holger Brunn <hbrunn@therp.nl>
+* `Sygel <https://www.sygel.es>`_:
+
+  * Valentin Vinagre <valentin.vinagre@sygel.es>
 
 Maintainers
 ~~~~~~~~~~~
