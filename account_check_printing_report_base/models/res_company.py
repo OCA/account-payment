@@ -3,12 +3,12 @@
 # Copyright 2016 Serpent Consulting Services Pvt. Ltd.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import models, fields
+from odoo import fields, models
 
 
 class ResCompany(models.Model):
     _inherit = "res.company"
 
     check_layout_id = fields.Many2one(
-        comodel_name='account.payment.check.report',
-        string="Check format")
+        comodel_name="account.payment.check.report", string="Check format"
+    )
