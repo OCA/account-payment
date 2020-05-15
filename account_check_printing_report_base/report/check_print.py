@@ -69,7 +69,6 @@ class ReportCheckPrint(models.AbstractModel):
             total_amount_to_show = amount_to_show
         return total_amount_to_show
 
-    @api.multi
     def get_paid_lines(self, payments):
         lines = {}
         for payment in payments:
