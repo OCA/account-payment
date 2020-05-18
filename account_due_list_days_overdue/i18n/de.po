@@ -88,7 +88,7 @@ msgid "Overdue Term"
 msgstr "Überfälligkeit"
 
 #. module: account_due_list_days_overdue
-#: code:addons/account_due_list_days_overdue/models/account_overdue_term.py:55
+#: code:addons/account_due_list_days_overdue/models/account_overdue_term.py:0
 #, python-format
 msgid "Overdue Term %s overlaps with %s"
 msgstr "Überfälligkiet %s überschneidet sich mit %s"
