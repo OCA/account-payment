@@ -124,21 +124,25 @@ msgid "Customer Payment Returns"
 msgstr "Devoluciones de cobros"
 
 #. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_import_journal_creation__default_expense_account_id
 #: model:ir.model.fields,field_description:account_payment_return.field_account_journal__default_expense_account_id
 msgid "Default Charges Account"
 msgstr "Cuenta por defecto para comisiones"
 
 #. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_import_journal_creation__default_expense_partner_id
 #: model:ir.model.fields,field_description:account_payment_return.field_account_journal__default_expense_partner_id
 msgid "Default Charges Partner"
 msgstr "Empresa por defecto para comisiones"
 
 #. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_account_bank_statement_import_journal_creation__default_expense_account_id
 #: model:ir.model.fields,help:account_payment_return.field_account_journal__default_expense_account_id
 msgid "Default account for bank charges"
 msgstr "Cuenta por defecto para comisiones"
 
 #. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_account_bank_statement_import_journal_creation__default_expense_partner_id
 #: model:ir.model.fields,help:account_payment_return.field_account_journal__default_expense_partner_id
 #, fuzzy
 msgid "Default partner for charge expenses"
@@ -163,6 +167,7 @@ msgid "Draft"
 msgstr "Borrador"
 
 #. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_account_bank_statement_import_journal_creation__return_auto_reconcile
 #: model:ir.model.fields,help:account_payment_return.field_account_journal__return_auto_reconcile
 msgid ""
 "Enable automatic payment return reconciliation. This option is meant to be "
@@ -437,6 +442,7 @@ msgid "Reason"
 msgstr "Motivo"
 
 #. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_import_journal_creation__return_auto_reconcile
 #: model:ir.model.fields,field_description:account_payment_return.field_account_journal__return_auto_reconcile
 #, fuzzy
 #| msgid "Payment return"
