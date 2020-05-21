@@ -7,6 +7,9 @@ from odoo import fields, models
 class PaymentToken(models.Model):
     _inherit = 'payment.token'
 
+    # Needed to solve XML View issues, depending on Acquirers installed
+    save_token = fields.Boolean()
+
     def _compute_is_default_payment(self):
         for token in self:
             is_default = token.partner_id.payment_token_id == token
@@ -17,6 +20,7 @@ class PaymentToken(models.Model):
         compute=_compute_is_default_payment,
         readonly=True,
     )
+    expiry_date = fields.Date()
 
     def set_default_payment(self):
         self.ensure_one()

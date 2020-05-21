@@ -1,20 +1,32 @@
 <odoo>
 
-    <record model='ir.ui.view' id='payment_token_form_view_default'>
-        <field name='name'>payment.token.form.default</field>
-        <field name='model'>payment.token</field>
+    <record model="ir.ui.view" id="payment_token_form_view_default">
+
+        <field name="name">payment.token.form add default</field>
+        <field name="model">payment.token</field>
         <field name="inherit_id" ref="payment.payment_token_form_view"/>
-        <field name='arch' type='xml'>
+        <field name="arch" type="xml">
 
             <xpath expr="//button[@name='%(payment.action_payment_tx_ids)d']"
                    position="before">
                 <button class="oe_stat_button" name="set_default_payment"
                     type="object" string="Set as Default" icon="fa-cog">
                 </button>
+                <button name="account_invoice_credit_card.action_add_credit_card_token"
+                    type="action"
+                    string="Replace"
+                    class="oe_stat_button"
+                    icon="fa-credit-card"
+                    context="{'default_partner_id': partner_id, 'default_provider_id': acquirer_id, 'default_replaced_token_id': id}"
+                    help="Replace this payment token, for example, to replace an expired Credit card with a new one."
+                    >
+                </button>
             </xpath>
 
-            <field name="active" position="after">
+            <field name="name" position="after">
+                <field name="active" invisible="True"/>
                 <field name="is_default_payment"/>
+                <field name="expiry_date"/>
             </field>
 
             <field name="acquirer_ref" position="attributes">
@@ -24,14 +36,15 @@
         </field>
     </record>
 
-    <record model='ir.ui.view' id='payment_token_tree_view'>
-        <field name='name'>payment.token.tree add default</field>
-        <field name='model'>payment.token</field>
+    <record model="ir.ui.view" id="payment_token_tree_view">
+        <field name="name">payment.token.tree add default</field>
+        <field name="model">payment.token</field>
         <field name="inherit_id" ref="payment.payment_token_tree_view"/>
-        <field name='arch' type='xml'>
+        <field name="arch" type="xml">
 
             <field name="active" position="after">
                 <field name="is_default_payment"/>
+                <field name="expiry_date"/>
             </field>
 
         </field>

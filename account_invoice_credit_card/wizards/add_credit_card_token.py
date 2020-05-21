@@ -47,6 +47,10 @@ class AddCreditCardToken(models.TransientModel):
     #     "Related provider", related="provider_id.provider")
     bank_acc_number = fields.Char("Account Number")
     aba = fields.Char("ABA")
+    replaced_token_id = fields.Many2one(
+        "payment.token",
+        string="Replaces Payment Token",
+        readonly=True)
 
     @api.onchange('cc_number')
     def onchange_cc_number(self):
@@ -115,10 +119,15 @@ class AddCreditCardToken(models.TransientModel):
                 'ch_holder_name': self.partner_id.name,
             }
         else:
-            expiry = str(self.cc_expiry_month) + '/' + str(self.cc_expiry_year)
+            expiry = "%s/%s" % (self.cc_expiry_month, self.cc_expiry_year)
+            # If you're on year 2100, fix this!
+            expiry_date_day1 = fields.Date.to_date(
+                '20%s-%s-01' % (self.cc_expiry_year, self.cc_expiry_month))
+            expiry_date_eom = fields.Date.end_of(expiry_date_day1, 'month')
             payment_token_data = {
                 'acquirer_id': self.provider_id.id,
                 'partner_id': self.partner_id.id,
+                'expiry_date': expiry_date_eom,
                 'cc_number': self.cc_number,
                 'cc_expiry_month': self.cc_expiry_month,
                 'cc_expiry_year': self.cc_expiry_year,
@@ -130,6 +139,8 @@ class AddCreditCardToken(models.TransientModel):
             # create payment token
         token_id = self.env['payment.token'].sudo().create(
             payment_token_data)
+        if self.replaced_token_id:
+            self.replaced_token_id.active = False
         return token_id
 
     @api.multi
