@@ -135,6 +135,7 @@ class PaymentToken(models.Model):
     # When collected from the Portal, the user is asked,
     # and it may be set to False to be used only for the current transaction
     save_token = fields.Boolean(default=True)
+    expiry_date = fields.Date()
 
     @api.model
     def _ippay_get_token(self, values):
@@ -181,23 +182,26 @@ class PaymentToken(models.Model):
     @api.model
     def ippay_create(self, values, token_code=False):
         """Ippay token reference create."""
-        # In case we already know the token assigned, just use it
-        token_code = token_code or self._ippay_get_token(values)
+        # Search if the card was already stored
+        # We use the last four digits for this
         existing = self.sudo().search(
-            [
-                ("acquirer_ref", "=", token_code),
-                ("partner_id", "=", values.get("partner_id")),
-                ("acquirer_id", "=", values.get("acquirer_id")),
-            ],
-            limit=1,
-        )
+            [("partner_id", "=", values.get("partner_id")),
+             ("acquirer_id", "=", values.get("acquirer_id"))]
+            ).filtered(lambda s: s.name[-4:] == values["cc_number"][:-4])
         if existing:
             raise ValidationError(
                 _("This payment method is already assigned to this Customer.")
             )
-        else:
-            return {
-                "name": "XXXXXXXXXXXX%s - %s"
-                % (values["cc_number"][-4:], values["cc_holder_name"]),
-                "acquirer_ref": token_code,
-            }
+        # In case we already know the token assigned, just use it
+        token_code = token_code or self._ippay_get_token(values)
+        expiry_date = fields.Date.end_of(
+                fields.Date.to_date(
+                    '20%s-%s-01' %  # Beware year 2100!
+                    (values["cc_expiry_year"], values["cc_expiry_month"])),
+                'month')
+        return {
+            "name": "XXXXXXXXXXXX%s - %s"
+            % (values["cc_number"][-4:], values["cc_holder_name"]),
+            "acquirer_ref": token_code,
+            "expiry_date": expiry_date,
+        }
