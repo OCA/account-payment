@@ -5,9 +5,9 @@
 		<delete id="followup_edi_email_template" model="mail.template"/>
 
         <record id="followup_edi_email_template" model="mail.template">
-            <field name="name">Payment Follow up - Send Email</field>
+            <field name="name">Payment Follow Up - Send Email</field>
             <field name="model_id" ref="account.model_res_partner"/>
-            <field name="subject">${object.company_id.name} --> Payment Follow up</field>            
+            <field name="subject">${object.company_id.name} --> Payment Follow Up</field>            
             <field name="email_from">${(object.user_id.email and '%s &lt;%s&gt;' % (object.user_id.name, object.user_id.email) or '')|safe}</field>
             <field name="partner_to">${object.id}</field>
             <field name="email_cc"></field>
@@ -17,7 +17,7 @@
             <field name="body_html"><![CDATA[
 	            <p>Hello ${object.name},</p>
 	            <br/>
-				<p>I hope you’re well.</p>
+				<p>I hope you're well.</p>
 				<br/>
 				<p>If there has been no mistake on our part, it appears that the following amount remains unpaid. I'm sure you're busy, but I'd appreciate it if you could take a few minutes and review the following invoices.</p>
 				<p>If you made the payment after this email was sent, please ignore this message.</p>
@@ -33,7 +33,7 @@
 		<delete id="followup_layout_email_template" model="mail.template"/>
 
 		<record id="followup_layout_email_template" model="mail.template">
-            <field name="name">Payment Follow up - Layout</field>
+            <field name="name">Payment Follow Up - Layout</field>
             <field name="subject">${object.subject}</field>
             <field name="model_id" ref="mail.model_mail_message"/>
             <field name="auto_delete" eval="True"/>
@@ -51,7 +51,7 @@
 				                        <table width="590" border="0" cellpadding="0" bgcolor="#875A7B" style="min-width: 590px; background-color: rgb(135,90,123); padding: 20px; border-collapse:separate;">
 				                            <tr>
 				                                <td valign="middle">
-				                                    <span style="font-size:20px; color:white; font-weight: bold;">Payment Follow up</span>
+				                                    <span style="font-size:20px; color:white; font-weight: bold;">Payment Follow Up</span>
 				                                </td>
 				                                <td valign="middle" align="right">
 				                                    <img src="/logo.png?company=${company.id}" style="padding: 0px; margin: 0px; height: auto; width: 80px;" alt="${company.name}">
