@@ -4,9 +4,9 @@
 {
     'name': 'Account follow up email template',
     'version': '1.0',
-    'category': 'Accounting',
-    'description': '''
-        Add email template for payment follow up.
+    'category': 'Accounting & Finance',
+    'summary': '''
+        This module add email template for payment follow up.
     ''',
     'author': 'TRESCLOUD CIA LTDA',
     'maintainer': 'TRESCLOUD CIA. LTDA.',
