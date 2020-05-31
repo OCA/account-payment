@@ -10,6 +10,7 @@
     ''',
     'author': 'TRESCLOUD, Odoo Community Association (OCA)',
     'website': 'http://www.trescloud.com',
+    'images': ['static/description/icon.png'],
     'license': 'LGPL-3',
     'depends': [
         'base',
