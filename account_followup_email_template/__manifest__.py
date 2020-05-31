@@ -8,8 +8,7 @@
     'summary': '''
         This module add email template for payment follow up.
     ''',
-    'author': 'TRESCLOUD CIA LTDA',
-    'maintainer': 'TRESCLOUD CIA. LTDA.',
+    'author': 'TRESCLOUD, Odoo Community Association (OCA)',
     'website': 'http://www.trescloud.com',
     'license': 'LGPL-3',
     'depends': [
