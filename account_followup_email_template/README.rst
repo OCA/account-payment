@@ -11,7 +11,7 @@ This module add an email template for payment follow-up, which is registered in 
 Usage
 =====
 
-Go to '... / Customers' messages section and add a new message.
+Go to 'Sales/Customers' messages section and add a new message.
 
 .. image:: /account_followup_email_template/static/description/followup_01.png
 
@@ -54,6 +54,11 @@ Contributors
 
 * Andres Calle <andres.calle@trescloud.com>
 * Jose M Rivero <jose.rivero@trescloud.com>
+
+Images
+------
+
+* Odoo Community Association: 'Icon <https://freeicons.io/email-icons03/email-icon-28814>'_.
 
 Maintainer
 ----------
