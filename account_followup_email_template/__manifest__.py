@@ -3,7 +3,7 @@
 
 {
     'name': 'Account follow up email template',
-    'version': '1.0',
+    'version': '10.0.1.0.0',
     'category': 'Accounting & Finance',
     'summary': '''
         This module add email template for payment follow up.
