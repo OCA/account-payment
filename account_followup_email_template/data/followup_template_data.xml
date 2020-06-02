@@ -2,8 +2,6 @@
 <odoo>
     <data>
 
-        <delete id="followup_edi_email_template" model="mail.template"/>
-
         <record id="followup_edi_email_template" model="mail.template">
             <field name="name">Payment Follow Up - Send Email</field>
             <field name="model_id" ref="account.model_res_partner"/>
@@ -29,8 +27,6 @@
                 <p>${object.company_id.name}</p>
             ]]></field>
         </record>
-
-        <delete id="followup_layout_email_template" model="mail.template"/>
 
         <record id="followup_layout_email_template" model="mail.template">
             <field name="name">Payment Follow Up - Layout</field>
