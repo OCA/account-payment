@@ -11,8 +11,8 @@ msgstr ""
 "POT-Creation-Date: 2018-06-01 02:42+0000\n"
 "PO-Revision-Date: 2019-09-23 14:24+0000\n"
 "Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
-"23907/pt_BR/)\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
+"teams/23907/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -47,7 +47,7 @@ msgid "Created on"
 msgstr "Criado em"
 
 #. module: account_payment_term_extension
-#: code:addons/account_payment_term_extension/models/account_payment_term.py:41
+#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Date %s cannot is both a holiday and a Postponed date"
 msgstr "A data %s não pode ser um feriado e uma data adiada"
@@ -63,13 +63,13 @@ msgid "Holiday"
 msgstr "Feriado"
 
 #. module: account_payment_term_extension
-#: code:addons/account_payment_term_extension/models/account_payment_term.py:29
+#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Holiday %s can only be postponed into the future"
 msgstr "O feriado %s só pode ser adiado para o futuro"
 
 #. module: account_payment_term_extension
-#: code:addons/account_payment_term_extension/models/account_payment_term.py:34
+#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Holiday %s is duplicated in current payment term"
 msgstr "O feriado %s é duplicado no prazo de pagamento atual"
@@ -136,7 +136,7 @@ msgid "Payment day(s)"
 msgstr "Dia(s) de Pagamento(s)"
 
 #. module: account_payment_term_extension
-#: code:addons/account_payment_term_extension/models/account_payment_term.py:105
+#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Payment days field format is not valid."
 msgstr "O formato do campo Dias de pagamento não é válido."
