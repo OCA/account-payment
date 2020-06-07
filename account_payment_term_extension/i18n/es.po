@@ -44,7 +44,7 @@ msgid "Created on"
 msgstr "Creado en"
 
 #. module: account_payment_term_extension
-#: code:addons/account_payment_term_extension/models/account_payment_term.py:41
+#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Date %s cannot is both a holiday and a Postponed date"
 msgstr "La fecha %s no puede ser un festivo y una fecha postpuesta"
@@ -60,13 +60,13 @@ msgid "Holiday"
 msgstr "Festivo"
 
 #. module: account_payment_term_extension
-#: code:addons/account_payment_term_extension/models/account_payment_term.py:29
+#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Holiday %s can only be postponed into the future"
 msgstr "El festivo %s solamente puede ser postpuesto al futuro"
 
 #. module: account_payment_term_extension
-#: code:addons/account_payment_term_extension/models/account_payment_term.py:34
+#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Holiday %s is duplicated in current payment term"
 msgstr "El festivo %s está duplicado en el plazo de pago actual"
@@ -133,7 +133,7 @@ msgid "Payment day(s)"
 msgstr "Día(s) de pago"
 
 #. module: account_payment_term_extension
-#: code:addons/account_payment_term_extension/models/account_payment_term.py:105
+#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Payment days field format is not valid."
 msgstr "El campo días de pago no tiene un formato válido."
