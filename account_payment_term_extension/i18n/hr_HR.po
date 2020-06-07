@@ -47,7 +47,7 @@ msgid "Created on"
 msgstr "Kreirano"
 
 #. module: account_payment_term_extension
-#: code:addons/account_payment_term_extension/models/account_payment_term.py:41
+#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Date %s cannot is both a holiday and a Postponed date"
 msgstr ""
@@ -63,13 +63,13 @@ msgid "Holiday"
 msgstr ""
 
 #. module: account_payment_term_extension
-#: code:addons/account_payment_term_extension/models/account_payment_term.py:29
+#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Holiday %s can only be postponed into the future"
 msgstr ""
 
 #. module: account_payment_term_extension
-#: code:addons/account_payment_term_extension/models/account_payment_term.py:34
+#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Holiday %s is duplicated in current payment term"
 msgstr ""
@@ -118,7 +118,6 @@ msgstr ""
 #. module: account_payment_term_extension
 #: model:ir.model,name:account_payment_term_extension.model_account_payment_term_holiday
 #, fuzzy
-#| msgid "Payment day(s)"
 msgid "Payment Term Holidays"
 msgstr "Plaćanje dan(a)"
 
@@ -138,7 +137,7 @@ msgid "Payment day(s)"
 msgstr "Plaćanje dan(a)"
 
 #. module: account_payment_term_extension
-#: code:addons/account_payment_term_extension/models/account_payment_term.py:105
+#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Payment days field format is not valid."
 msgstr "Format polja dani plaćanja nije ispravan."
