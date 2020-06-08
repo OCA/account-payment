@@ -1,33 +1,32 @@
 # Copyright 2018 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from datetime import datetime
+from datetime import date
 from dateutil.relativedelta import relativedelta
 
 from odoo.exceptions import UserError
-from odoo.fields import Date
+from odoo.tests.common import Form
 from .common import TestAccountCashDiscountCommon
 
 
 class TestAccountCashDiscountBase(TestAccountCashDiscountCommon):
 
     def create_simple_invoice(self, amount):
-        invoice = self.AccountInvoice.create({
-            'partner_id': self.partner_agrolait.id,
-            'account_id': self.recv_account.id,
-            'company_id': self.company.id,
-            'type': 'in_invoice',
-            'invoice_line_ids': [
-                (0, 0, {
-                    'name': "Test",
-                    'quantity': 1,
-                    'account_id': self.exp_account.id,
-                    'price_unit': amount,
-                    'invoice_line_tax_ids': [(6, 0, [self.tax_10_p.id])],
-                })
-            ]
-        })
-        invoice.compute_taxes()
+        invoice_form = Form(self.AccountMove.with_context(
+            default_type='in_invoice',
+            default_company_id=self.company.id,
+        ))
+        invoice_form.partner_id = self.partner_agrolait
+
+        with invoice_form.invoice_line_ids.new() as line_form:
+            line_form.name = "test"
+            line_form.quantity = 1
+            line_form.account_id = self.exp_account
+            line_form.price_unit = amount
+            line_form.tax_ids.clear()
+            line_form.tax_ids.add(self.tax_10_p)
+
+        invoice = invoice_form.save()
         return invoice
 
     def test_company_use_tax_adjustment(self):
@@ -74,7 +73,7 @@ class TestAccountCashDiscountBase(TestAccountCashDiscountCommon):
 
     def test_discount_delay_1(self):
         days_delay = 10
-        today = datetime.today()
+        today = date.today()
         today_10_days_later = today + relativedelta(days=days_delay)
 
         invoice = self.create_simple_invoice(100)
@@ -85,21 +84,24 @@ class TestAccountCashDiscountBase(TestAccountCashDiscountCommon):
         invoice.invalidate_cache()
         invoice.discount_percent = 10
         invoice._onchange_discount_delay()
-        self.assertEqual(
-            invoice.discount_due_date, Date.to_string(today_10_days_later))
+        self.assertEqual(invoice.discount_due_date, today_10_days_later)
 
     def test_discount_delay_2(self):
         invoice = self.create_simple_invoice(100)
         invoice.discount_percent = 10
 
-        with self.assertRaises(UserError), self.env.cr.savepoint():
-            invoice.action_invoice_open()
+        with self.assertRaises(UserError) as e, self.env.cr.savepoint():
+            invoice.action_post()
+
+        self.assertTrue(
+            "You can't set a discount amount if there is no "
+            "discount due date" in e.exception.name,
+        )
 
         invoice.discount_delay = 10
         invoice._onchange_discount_delay()
         self.assertTrue(invoice.discount_due_date)
-
-        invoice.action_invoice_open()
+        invoice.action_post()
 
     def test_onchange_payment_term(self):
         payment_term = self.payment_term
@@ -107,9 +109,6 @@ class TestAccountCashDiscountBase(TestAccountCashDiscountCommon):
         payment_term.discount_delay = 5
 
         invoice = self.create_simple_invoice(100)
-        invoice.payment_term_id = payment_term
-
-        invoice._onchange_payment_term_discount_options()
         self.assertEqual(
             invoice.discount_percent,
             payment_term.discount_percent)

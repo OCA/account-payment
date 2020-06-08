@@ -25,7 +25,6 @@ class ResCompany(models.Model):
             ('total', _("Including all taxes")),
         ]
 
-    @api.multi
     @api.depends(
         'cash_discount_base_amount_type',
     )
