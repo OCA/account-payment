@@ -15,9 +15,9 @@ DISCOUNT_ALLOWED_TYPES = (
 )
 
 
-class AccountInvoice(models.Model):
+class AccountMove(models.Model):
 
-    _inherit = 'account.invoice'
+    _inherit = 'account.move'
 
     discount_percent = fields.Float(
         string="Discount (%)",
@@ -66,7 +66,6 @@ class AccountInvoice(models.Model):
         compute='_compute_discount_base_date',
     )
 
-    @api.multi
     @api.depends(
         'amount_total',
         'amount_untaxed',
@@ -85,38 +84,35 @@ class AccountInvoice(models.Model):
                 discount_amount = base_amount * (rec.discount_percent / 100)
             rec.discount_amount = discount_amount
 
-    @api.multi
     @api.depends(
         'amount_total',
         'refunds_discount_amount',
-        'residual',
+        'amount_residual',
     )
     def _compute_residual_with_discount(self):
         for rec in self:
             rec.residual_with_discount = (
-                rec.residual -
+                rec.amount_residual -
                 rec.discount_amount +
                 rec.refunds_discount_amount
             )
 
-    @api.multi
     @api.depends(
         'amount_total',
-        'payment_move_line_ids.debit',
-        'payment_move_line_ids.credit',
-        'payment_move_line_ids.invoice_id.discount_amount',
-        'payment_move_line_ids.invoice_id.type',
+        'line_ids.matched_credit_ids.credit_move_id.move_id.type',
+        'line_ids.matched_credit_ids.credit_move_id.move_id.discount_amount',
+        'line_ids.matched_debit_ids.debit_move_id.move_id.type',
+        'line_ids.matched_credit_ids.debit_move_id.move_id.discount_amount',
     )
     def _compute_refunds_discount_amount(self):
         for rec in self:
             refunds_discount_total = 0.0
-            for pmove_line in rec.payment_move_line_ids:
-                pmove_line_inv = pmove_line.invoice_id
-                if pmove_line_inv and pmove_line_inv.type == 'in_refund':
-                    refunds_discount_total += pmove_line_inv.discount_amount
+            for pmove_line in rec._get_payment_move_lines():
+                pmove_line_move = pmove_line.move_id
+                if pmove_line_move and pmove_line_move.type == 'in_refund':
+                    refunds_discount_total += pmove_line_move.discount_amount
             rec.refunds_discount_amount = refunds_discount_total
 
-    @api.multi
     @api.depends(
         'discount_amount',
         'refunds_discount_amount',
@@ -128,7 +124,6 @@ class AccountInvoice(models.Model):
                 rec.refunds_discount_amount
             )
 
-    @api.multi
     @api.depends(
         'amount_total',
         'discount_amount',
@@ -138,7 +133,6 @@ class AccountInvoice(models.Model):
             rec.amount_total_with_discount = \
                 rec.amount_total - rec.discount_amount
 
-    @api.multi
     @api.depends(
         'discount_due_date',
     )
@@ -146,7 +140,6 @@ class AccountInvoice(models.Model):
         for rec in self:
             rec.discount_due_date_readonly = rec.discount_due_date
 
-    @api.multi
     @api.depends(
         'discount_amount',
         'discount_due_date',
@@ -159,16 +152,14 @@ class AccountInvoice(models.Model):
                 rec.type in DISCOUNT_ALLOWED_TYPES
             )
 
-    @api.multi
-    @api.depends('date_invoice')
+    @api.depends('invoice_date')
     def _compute_discount_base_date(self):
         for rec in self:
-            if rec.date_invoice:
-                rec.discount_base_date = rec.date_invoice
+            if rec.invoice_date:
+                rec.discount_base_date = rec.invoice_date
             else:
                 rec.discount_base_date = fields.Date.context_today(rec)
 
-    @api.multi
     @api.onchange(
         'has_discount',
         'discount_base_date',
@@ -194,63 +185,59 @@ class AccountInvoice(models.Model):
         'company_id',
     )
     def _onchange_partner_id(self):
-        old_payment_term_id = self.payment_term_id
-        res = super(AccountInvoice, self)._onchange_partner_id()
-        if self.payment_term_id != old_payment_term_id:
+        old_payment_term_id = self.invoice_payment_term_id
+        res = super(AccountMove, self)._onchange_partner_id()
+        if self.invoice_payment_term_id != old_payment_term_id:
             # be sure to load discount options based on the payment term.
             # It was not loaded when creating a vendor bill from a purchase
             # order.
             self._onchange_payment_term_discount_options()
         return res
 
-    @api.multi
     @api.onchange(
-        'payment_term_id',
+        'invoice_payment_term_id',
     )
     def _onchange_payment_term_discount_options(self):
-        payment_term = self.payment_term_id
+        payment_term = self.invoice_payment_term_id
         if payment_term and self.type in DISCOUNT_ALLOWED_TYPES:
             self.discount_percent = payment_term.discount_percent
             self.discount_delay = payment_term.discount_delay
 
-    @api.multi
-    def action_move_create(self):
-        res = super(AccountInvoice, self).action_move_create()
-        for inv in self:
-            inv._onchange_discount_delay()
-            if not inv.discount_due_date and inv.discount_amount != 0.0:
+    def _get_payment_move_lines(self):
+        self.ensure_one()
+        line_ids = []
+        for line in self.line_ids:
+            account_type = line.account_id.user_type_id.type
+            if account_type not in ('receivable', 'payable'):
+                continue
+            line_ids.extend(
+                [rp.credit_move_id.id for rp in line.matched_credit_ids]
+            )
+            line_ids.extend(
+                [rp.debit_move_id.id for rp in line.matched_debit_ids]
+            )
+        return self.env['account.move.line'].browse(set(line_ids))
+
+    def action_post(self):
+        for move in self:
+            if move.type not in DISCOUNT_ALLOWED_TYPES:
+                continue
+            move._onchange_discount_delay()
+            if not move.discount_due_date and move.discount_amount != 0.0:
                 raise UserError(_(
                     "You can't set a discount amount if there is no "
-                    "discount due date. (Invoice ID: %s)"
-                ) % (inv.id,))
-        return res
+                    "discount due date. (Move ID: %s)"
+                ) % (move.id,))
+        return super(AccountMove, self).action_post()
 
-    @api.model
-    def _prepare_refund(
-            self, invoice, date_invoice=None, date=None, description=None,
-            journal_id=None):
-        values = super(AccountInvoice, self)._prepare_refund(
-            invoice,
-            date_invoice=date_invoice, date=date,
-            description=description, journal_id=journal_id
+    def _reverse_move_vals(self, default_values, cancel=True):
+        print("_reverse_move_vals")
+        res = super(AccountMove, self)._reverse_move_vals(
+            default_values, cancel=cancel
         )
-
-        partner_id = values.get('partner_id')
-        if invoice.type in DISCOUNT_ALLOWED_TYPES and partner_id:
+        partner_id = self.partner_id
+        if self.type in DISCOUNT_ALLOWED_TYPES and partner_id:
             partner = self.env['res.partner'].browse(partner_id)
             payment_term = partner.property_supplier_payment_term_id
-            values['payment_term_id'] = payment_term.id
-        return values
-
-    @api.multi
-    @api.returns('self')
-    def refund(
-            self, date_invoice=None, date=None, description=None,
-            journal_id=None):
-        invoice = super(AccountInvoice, self).refund(
-            date_invoice=date_invoice, date=date, description=description,
-            journal_id=journal_id
-        )
-        invoice._onchange_payment_term_discount_options()
-        invoice._onchange_discount_delay()
-        return invoice
+            res['invoice_payment_term_id'] = payment_term.id
+        return res
