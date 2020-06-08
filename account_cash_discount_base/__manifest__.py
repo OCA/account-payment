@@ -3,7 +3,7 @@
 
 {
     'name': 'Account Cash Discount Base',
-    'version': '10.0.1.0.0',
+    'version': '13.0.1.0.0',
     'license': 'AGPL-3',
     'author': 'ACSONE SA/NV,'
               'Odoo Community Association (OCA)',
@@ -13,7 +13,7 @@
         'account',
     ],
     'data': [
-        'views/account_invoice.xml',
+        'views/account_move.xml',
         'views/account_payment_term.xml',
         'views/res_company.xml',
         'reports/report_invoice.xml',

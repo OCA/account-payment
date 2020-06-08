@@ -4,13 +4,13 @@
 
 <odoo>
 
-    <record model="ir.ui.view" id="invoice_supplier_form_inherit">
-        <field name="name">account.invoice.supplier.form (account_cash_discount_base)</field>
-        <field name="model">account.invoice</field>
-        <field name="inherit_id" ref="account.invoice_supplier_form"/>
+    <record model="ir.ui.view" id="account_move_form">
+        <field name="name">account.move.form (account_cash_discount_base)</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form"/>
         <field name="arch" type="xml">
 
-            <xpath expr="//field[@name='journal_id']/parent::group/parent::group" position="inside">
+            <xpath expr="//page[@name='other_info']" position="inside">
                 <group string="Cash Discount" name="cash_discount"
                        attrs="{'invisible': [('type', 'not in', ('in_invoice', 'in_refund'))]}">
                     <field name="discount_percent"/>
