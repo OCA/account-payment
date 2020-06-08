@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright 2018 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -20,4 +19,5 @@
         'wizards/account_payment_line_create.xml',
     ],
     'demo': [],
+    'installable': False,
 }
