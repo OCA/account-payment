@@ -10,8 +10,8 @@ class TestAccountCashDiscountCommon(SavepointCase):
     def setUpClass(cls):
         super(TestAccountCashDiscountCommon, cls).setUpClass()
         cls.Account = cls.env['account.account']
-        cls.AccountInvoice = cls.env['account.invoice']
-        cls.AccountInvoiceRefund = cls.env['account.invoice.refund']
+        cls.AccountMove = cls.env['account.move']
+        cls.AccountMoveReversal = cls.env['account.move.reversal']
         cls.AccountMoveLine = cls.env['account.move.line']
         cls.Journal = cls.env['account.journal']
         cls.MoveLine = cls.env['account.move.line']
@@ -78,4 +78,10 @@ class TestAccountCashDiscountCommon(SavepointCase):
             'type': 'purchase',
         })
 
-        cls.payment_term = cls.env.ref('account.account_payment_term')
+        cls.payment_term = cls.env.ref(
+            'account.account_payment_term_end_following_month'
+        )
+        cls.partner_agrolait.property_account_payable_id = cls.exp_account
+        cls.partner_agrolait.property_supplier_payment_term_id = (
+            cls.payment_term
+        )
