@@ -6,12 +6,7 @@ from odoo import fields, models
 
 class AccountPaymentTerm(models.Model):
 
-    _inherit = 'account.payment.term'
+    _inherit = "account.payment.term"
 
-    discount_percent = fields.Float(
-        string='Discount (%)',
-        digits='Discount',
-    )
-    discount_delay = fields.Integer(
-        string='Discount Delay (days)'
-    )
+    discount_percent = fields.Float(string="Discount (%)", digits="Discount",)
+    discount_delay = fields.Integer(string="Discount Delay (days)")

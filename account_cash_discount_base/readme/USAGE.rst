@@ -7,4 +7,3 @@ You can also configure default discount percent and delay on the payment term.
 
 To use this module you can defined all of informations written in the
 description on customer and supplier invoices.
-
