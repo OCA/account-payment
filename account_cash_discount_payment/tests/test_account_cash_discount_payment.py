@@ -12,10 +12,7 @@ class TestAccountCashDiscountPayment(TestAccountCashDiscountPaymentCommon):
         invoice_date = Date.today()
         invoice = self.create_supplier_invoice(
             invoice_date, self.payment_mode_out, 2000, 25, [])
-        invoice.action_invoice_open()
-
-        move = invoice.move_id
-        move.post()
+        invoice.action_post()
 
         payment_order = self.PaymentOrder.create({
             'payment_mode_id': self.payment_mode_out.id,
@@ -28,6 +25,7 @@ class TestAccountCashDiscountPayment(TestAccountCashDiscountPaymentCommon):
         ).create({
             'cash_discount_date': invoice_date,
             'date_type': 'discount_due_date',
+            'target_move': 'posted',
             'journal_ids': [(6, 0, [self.purchase_journal.id])],
         })
         self.assertEqual(payment_line_wizard.order_id, payment_order)
