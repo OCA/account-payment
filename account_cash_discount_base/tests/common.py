@@ -81,7 +81,7 @@ class TestAccountCashDiscountCommon(SavepointCase):
         cls.payment_term = cls.env.ref(
             'account.account_payment_term_end_following_month'
         )
-        cls.partner_agrolait.property_account_payable_id = cls.exp_account
+        cls.partner_agrolait.property_account_payable_id = cls.pay_account
         cls.partner_agrolait.property_supplier_payment_term_id = (
             cls.payment_term
         )
