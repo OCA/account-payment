@@ -3,7 +3,7 @@
 
 {
     'name': 'Account Cash Discount Payment',
-    'version': '10.0.1.0.0',
+    'version': '13.0.1.0.0',
     'author': 'ACSONE SA/NV,'
               'Odoo Community Association (OCA)',
     'website': 'https://github.com/acsone/account-payment',
@@ -19,5 +19,4 @@
         'wizards/account_payment_line_create.xml',
     ],
     'demo': [],
-    'installable': False,
 }

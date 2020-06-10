@@ -26,7 +26,6 @@ class AccountPaymentLineCreate(models.TransientModel):
     def move_line_filters_change(self):
         return super(AccountPaymentLineCreate, self).move_line_filters_change()
 
-    @api.multi
     def _prepare_move_line_domain(self):
         self.ensure_one()
         domain = super(
@@ -36,6 +35,6 @@ class AccountPaymentLineCreate(models.TransientModel):
         if self.date_type == 'discount_due_date':
             due_date = self.cash_discount_date
             domain += [
-                ('invoice_id.discount_due_date', '>=', due_date),
+                ('move_id.discount_due_date', '>=', due_date),
             ]
         return domain
