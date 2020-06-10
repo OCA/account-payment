@@ -106,12 +106,9 @@ class AccountMove(models.Model):
     )
     def _compute_refunds_discount_amount(self):
         for rec in self:
-            refunds_discount_total = 0.0
-            for pmove_line in rec._get_payment_move_lines():
-                pmove_line_move = pmove_line.move_id
-                if pmove_line_move and pmove_line_move.type == 'in_refund':
-                    refunds_discount_total += pmove_line_move.discount_amount
-            rec.refunds_discount_amount = refunds_discount_total
+            rec.refunds_discount_amount = rec._get_refunds_amount_total()[
+                'discount'
+            ]
 
     @api.depends(
         'discount_amount',
@@ -218,6 +215,20 @@ class AccountMove(models.Model):
             )
         return self.env['account.move.line'].browse(set(line_ids))
 
+    def _get_refunds_amount_total(self):
+        self.ensure_one()
+        refunds_discount_total = 0.0
+        refunds_amount_total = 0.0
+        for pmove_line in self._get_payment_move_lines():
+            pmove_line_move = pmove_line.move_id
+            if pmove_line_move and pmove_line_move.type == 'in_refund':
+                refunds_discount_total += pmove_line_move.discount_amount
+                refunds_amount_total += pmove_line_move.amount_total
+        return {
+            'discount': refunds_discount_total,
+            'total': refunds_amount_total
+        }
+
     def action_post(self):
         for move in self:
             if move.type not in DISCOUNT_ALLOWED_TYPES:
@@ -231,7 +242,6 @@ class AccountMove(models.Model):
         return super(AccountMove, self).action_post()
 
     def _reverse_move_vals(self, default_values, cancel=True):
-        print("_reverse_move_vals")
         res = super(AccountMove, self)._reverse_move_vals(
             default_values, cancel=cancel
         )

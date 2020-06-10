@@ -5,6 +5,7 @@ from odoo.addons.account_cash_discount_payment.tests.common import \
     TestAccountCashDiscountPaymentCommon
 from odoo.exceptions import UserError
 from odoo.fields import Date
+from odoo.tests.common import Form
 
 
 class TestAccountCashDiscountWriteOff(TestAccountCashDiscountPaymentCommon):
@@ -31,10 +32,7 @@ class TestAccountCashDiscountWriteOff(TestAccountCashDiscountPaymentCommon):
 
         invoice = self.create_supplier_invoice(
             discount_due_date, payment_mode, 1000, 10, [])
-        invoice.action_invoice_open()
-
-        move = invoice.move_id
-        move.post()
+        invoice.action_post()
 
         payment_order = self.PaymentOrder.create({
             'payment_mode_id': payment_mode.id,
@@ -79,7 +77,7 @@ class TestAccountCashDiscountWriteOff(TestAccountCashDiscountPaymentCommon):
 
         payment_order.generated2uploaded()
 
-        payment_move_lines = invoice.payment_move_line_ids
+        payment_move_lines = invoice._get_payment_move_lines()
         write_off_line = self.MoveLine.search([
             ('id', 'in', payment_move_lines.ids),
             ('name', '=', "Cash Discount Write-Off"),
@@ -96,7 +94,7 @@ class TestAccountCashDiscountWriteOff(TestAccountCashDiscountPaymentCommon):
         self.assertEqual(
             write_off_base_line.account_id,
             self.cash_discount_writeoff_account)
-        self.assertEqual(invoice.state, 'paid')
+        self.assertEqual(invoice.invoice_payment_state, 'paid')
 
     def test_cash_discount_with_write_off_with_taxes(self):
         self.company.write({
@@ -114,11 +112,8 @@ class TestAccountCashDiscountWriteOff(TestAccountCashDiscountPaymentCommon):
 
         invoice = self.create_supplier_invoice(
             discount_due_date, payment_mode, 1000, 10,
-            [self.tax_10_p.id, self.tax_15_p.id])
-        invoice.action_invoice_open()
-
-        move = invoice.move_id
-        move.post()
+            [self.tax_10_p, self.tax_15_p])
+        invoice.action_post()
 
         payment_order = self.PaymentOrder.create({
             'payment_mode_id': payment_mode.id,
@@ -142,7 +137,7 @@ class TestAccountCashDiscountWriteOff(TestAccountCashDiscountPaymentCommon):
         payment_order.open2generated()
         payment_order.generated2uploaded()
 
-        self.assertEqual(invoice.state, 'paid')
+        self.assertEqual(invoice.invoice_payment_state, 'paid')
 
         discount_writeoff_move_lines = self.MoveLine.search([
             ('journal_id',
@@ -179,37 +174,40 @@ class TestAccountCashDiscountWriteOff(TestAccountCashDiscountPaymentCommon):
 
         invoice = self.create_supplier_invoice(
             discount_due_date, payment_mode, 100, 2,
-            [self.tax_17_p.id])
-        invoice.action_invoice_open()
-        self.assertAlmostEqual(invoice.residual, 117)
+            [self.tax_17_p])
+        invoice.action_post()
+        self.assertAlmostEqual(invoice.amount_residual, 117)
         self.assertAlmostEqual(invoice.residual_with_discount, 114.66)
 
-        move = invoice.move_id
-        move.post()
+        move_reversal = self.AccountMoveReversal.with_context(
+            active_model=invoice._name,
+            active_ids=invoice.ids
+        ).create({
+            'reason': 'no reason',
+            'refund_method': 'refund',
+        })
+        reversal = move_reversal.reverse_moves()
 
-        self.AccountInvoiceRefund.create({}).with_context(
-            active_ids=invoice.ids,
-        ).compute_refund()
+        refund = self.env["account.move"].browse(reversal["res_id"])
 
-        refund = self.AccountInvoice.search([
-            ('origin', '=', invoice.number),
-            ('type', '=', 'in_refund'),
-        ])
-        refund.invoice_line_ids[0].price_unit = 10
+        refund_form = Form(refund)
+        with refund_form.invoice_line_ids.edit(0) as refund_line:
+            refund_line.price_unit = 10
+        refund_form.save()
+
         refund.write({
             'discount_due_date': discount_due_date,
             'discount_percent': 2,
         })
-        refund.compute_taxes()
-        refund.action_invoice_open()
+        refund.action_post()
         credit_aml_id = self.AccountMoveLine.search([
-            ('move_id', '=', refund.move_id.id),
+            ('move_id', '=', refund.id),
             ('debit', '>', 0),
         ], limit=1)
 
-        invoice.assign_outstanding_credit(credit_aml_id.id)
+        invoice.js_assign_outstanding_line(credit_aml_id.id)
 
-        self.assertAlmostEqual(invoice.residual, 105.3)
+        self.assertAlmostEqual(invoice.amount_residual, 105.3)
         self.assertAlmostEqual(invoice.residual_with_discount, 103.19)
 
         payment_order = self.PaymentOrder.create({
@@ -237,4 +235,4 @@ class TestAccountCashDiscountWriteOff(TestAccountCashDiscountPaymentCommon):
         payment_order.open2generated()
         payment_order.generated2uploaded()
 
-        self.assertEqual(invoice.state, 'paid')
+        self.assertEqual(invoice.invoice_payment_state, 'paid')
