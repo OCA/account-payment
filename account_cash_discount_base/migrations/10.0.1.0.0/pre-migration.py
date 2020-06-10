@@ -6,7 +6,7 @@ from openupgradelib import openupgrade
 
 def migrate(cr, version):
     modules = [
-        ('account_cash_discount_payment_term', 'account_cash_discount_base'),
+        ("account_cash_discount_payment_term", "account_cash_discount_base"),
     ]
     openupgrade.update_module_names(cr, modules, merge_modules=True)
     # recompute fields
