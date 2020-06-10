@@ -10,24 +10,19 @@ class PaymentLine(models.Model):
 
     _inherit = 'account.payment.line'
 
-    @api.multi
     def _check_cash_discount_write_off_creation(self):
         self.ensure_one()
         create_write_off = (
             self.pay_with_discount and
             self.move_line_id and
-            self.move_line_id.invoice_id and
-            self.move_line_id.invoice_id.has_discount
+            self.move_line_id.move_id and
+            self.move_line_id.move_id.has_discount
         )
         if not create_write_off:
             return False
 
-        invoice = self.move_line_id.invoice_id
-        refunds_amount_total = 0.0
-        for pmove_line in invoice.payment_move_line_ids:
-            pmove_line_inv = pmove_line.invoice_id
-            if pmove_line_inv and pmove_line_inv.type == 'in_refund':
-                refunds_amount_total += pmove_line_inv.amount_total
+        invoice = self.move_line_id.move_id
+        refunds_amount_total = invoice._get_refunds_amount_total()['total']
 
         # Invoice residual has already changed so we need to compute
         # the residual with discount before the first reconciliation
@@ -43,12 +38,11 @@ class PaymentLine(models.Model):
             precision_rounding=self.currency_id.rounding
         ) == 0
 
-    @api.multi
     def get_cash_discount_writeoff_move_values(self):
         self.ensure_one()
         move_line = self.move_line_id
         partner = move_line.partner_id
-        invoice = move_line.invoice_id
+        invoice = move_line.move_id
         company = invoice.company_id
         tax_adjustment = company.cash_discount_use_tax_adjustment
         rounding = self.currency_id.rounding
@@ -82,8 +76,8 @@ class PaymentLine(models.Model):
         }]
 
         if tax_adjustment:
-            refund_moves = invoice.payment_move_line_ids.filtered(
-                lambda line: line.invoice_id.type == 'in_refund'
+            refund_moves = invoice._get_payment_move_lines().filtered(
+                lambda line: line.move_id.type == 'in_refund'
             ).mapped('move_id')
             target_move_ids = refund_moves.ids + [move_line.move_id.id]
 
@@ -95,7 +89,7 @@ class PaymentLine(models.Model):
             ])
 
             for tax_move_line in tax_move_lines:
-                tax_invoice = tax_move_line.invoice_id
+                tax_invoice = tax_move_line.move_id
                 amount = float_round(
                     abs(tax_move_line.balance) *
                     tax_invoice.discount_percent / 100.0,
@@ -116,7 +110,9 @@ class PaymentLine(models.Model):
                     'debit': tax_move_line.credit > 0 and amount or 0.0,
                     'credit': tax_move_line.debit > 0 and amount or 0.0,
                     'account_id': account.id,
-                    'tax_line_id': tax_move_line.tax_line_id.id,
+                    'tax_repartition_line_id': (
+                        tax_move_line.tax_repartition_line_id.id)
+                    ,
                     'tax_ids': [(6, 0, tax_move_line.tax_ids.ids)]
                 })
 
