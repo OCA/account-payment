@@ -6,13 +6,11 @@ from odoo import fields, models
 
 class ResCompany(models.Model):
 
-    _inherit = 'res.company'
+    _inherit = "res.company"
 
     default_cash_discount_writeoff_account_id = fields.Many2one(
-        comodel_name='account.account',
-        string="Cash Discount Write-Off Account"
+        comodel_name="account.account", string="Cash Discount Write-Off Account"
     )
     default_cash_discount_writeoff_journal_id = fields.Many2one(
-        comodel_name='account.journal',
-        string="Cash Discount Write-Off Journal"
+        comodel_name="account.journal", string="Cash Discount Write-Off Journal"
     )

@@ -6,7 +6,7 @@ from odoo import models
 
 class AccountPaymentOrder(models.Model):
 
-    _inherit = 'account.payment.order'
+    _inherit = "account.payment.order"
 
     def generated2uploaded(self):
         res = super(AccountPaymentOrder, self).generated2uploaded()
@@ -25,16 +25,15 @@ class AccountPaymentOrder(models.Model):
         move = self._create_payment_line_discount_write_off_move(payment_line)
         move_lines = payment_line.move_line_id | move.line_ids
         lines_to_reconcile = move_lines.filtered(
-            lambda line:
-            not line.reconciled and
-            line.account_id == payment_line.move_line_id.account_id
+            lambda line: not line.reconciled
+            and line.account_id == payment_line.move_line_id.account_id
         )
         lines_to_reconcile.reconcile()
 
     def _create_payment_line_discount_write_off_move(self, payment_line):
         self.ensure_one()
         move_values = payment_line.get_cash_discount_writeoff_move_values()
-        move = self.env['account.move'].create(move_values)
+        move = self.env["account.move"].create(move_values)
         if self.payment_mode_id.post_move:
             move.action_post()
         return move
