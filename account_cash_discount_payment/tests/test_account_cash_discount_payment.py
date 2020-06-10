@@ -1,33 +1,34 @@
 # Copyright 2018 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.fields import Date
 from odoo.exceptions import ValidationError
+from odoo.fields import Date
+
 from .common import TestAccountCashDiscountPaymentCommon
 
 
 class TestAccountCashDiscountPayment(TestAccountCashDiscountPaymentCommon):
-
     def test_invoice_payment_discount(self):
         invoice_date = Date.today()
         invoice = self.create_supplier_invoice(
-            invoice_date, self.payment_mode_out, 2000, 25, [])
+            invoice_date, self.payment_mode_out, 2000, 25, []
+        )
         invoice.action_post()
 
-        payment_order = self.PaymentOrder.create({
-            'payment_mode_id': self.payment_mode_out.id,
-            'payment_type': 'outbound',
-        })
+        payment_order = self.PaymentOrder.create(
+            {"payment_mode_id": self.payment_mode_out.id, "payment_type": "outbound"}
+        )
 
         payment_line_wizard = self.PaymentLineCreate.with_context(
-            active_model=payment_order._name,
-            active_id=payment_order.id,
-        ).create({
-            'cash_discount_date': invoice_date,
-            'date_type': 'discount_due_date',
-            'target_move': 'posted',
-            'journal_ids': [(6, 0, [self.purchase_journal.id])],
-        })
+            active_model=payment_order._name, active_id=payment_order.id,
+        ).create(
+            {
+                "cash_discount_date": invoice_date,
+                "date_type": "discount_due_date",
+                "target_move": "posted",
+                "journal_ids": [(6, 0, [self.purchase_journal.id])],
+            }
+        )
         self.assertEqual(payment_line_wizard.order_id, payment_order)
 
         payment_line_wizard.populate()
@@ -48,7 +49,7 @@ class TestAccountCashDiscountPayment(TestAccountCashDiscountPaymentCommon):
         # and verify there is a warning
         payment_line.amount_currency = 125
         onchange_res = payment_line._onchange_amount_with_discount()
-        self.assertTrue('warning' in onchange_res)
+        self.assertTrue("warning" in onchange_res)
         self.assertFalse(payment_line.pay_with_discount)
 
         # Change it back to use the discount
@@ -70,8 +71,8 @@ class TestAccountCashDiscountPayment(TestAccountCashDiscountPaymentCommon):
         payment_line.pay_with_discount = True
         payment_line._onchange_pay_with_discount()
         self.assertEqual(
-            payment_line.amount_currency,
-            invoice.amount_total - invoice.discount_amount)
+            payment_line.amount_currency, invoice.amount_total - invoice.discount_amount
+        )
 
         self.assertAlmostEqual(payment_line.discount_amount, 500, 2)
         self.assertAlmostEqual(payment_line.amount_currency, 1500, 2)
