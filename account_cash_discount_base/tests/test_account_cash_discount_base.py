@@ -2,20 +2,22 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from datetime import date
+
 from dateutil.relativedelta import relativedelta
 
 from odoo.exceptions import UserError
 from odoo.tests.common import Form
+
 from .common import TestAccountCashDiscountCommon
 
 
 class TestAccountCashDiscountBase(TestAccountCashDiscountCommon):
-
     def create_simple_invoice(self, amount):
-        invoice_form = Form(self.AccountMove.with_context(
-            default_type='in_invoice',
-            default_company_id=self.company.id,
-        ))
+        invoice_form = Form(
+            self.AccountMove.with_context(
+                default_type="in_invoice", default_company_id=self.company.id,
+            )
+        )
         invoice_form.partner_id = self.partner_agrolait
 
         with invoice_form.invoice_line_ids.new() as line_form:
@@ -30,10 +32,10 @@ class TestAccountCashDiscountBase(TestAccountCashDiscountCommon):
         return invoice
 
     def test_company_use_tax_adjustment(self):
-        self.company.cash_discount_base_amount_type = 'untaxed'
+        self.company.cash_discount_base_amount_type = "untaxed"
         self.assertFalse(self.company.cash_discount_use_tax_adjustment)
 
-        self.company.cash_discount_base_amount_type = 'total'
+        self.company.cash_discount_base_amount_type = "total"
         self.assertTrue(self.company.cash_discount_use_tax_adjustment)
 
     def test_invoice_has_discount(self):
@@ -48,7 +50,7 @@ class TestAccountCashDiscountBase(TestAccountCashDiscountCommon):
         self.assertTrue(invoice.has_discount)
 
     def test_compute_discount_untaxed(self):
-        self.company.cash_discount_base_amount_type = 'untaxed'
+        self.company.cash_discount_base_amount_type = "untaxed"
         invoice = self.create_simple_invoice(1000)
 
         invoice.discount_percent = 0
@@ -60,7 +62,7 @@ class TestAccountCashDiscountBase(TestAccountCashDiscountCommon):
         self.assertEqual(invoice.amount_total_with_discount, 1000)
 
     def test_compute_discount_total(self):
-        self.company.cash_discount_base_amount_type = 'total'
+        self.company.cash_discount_base_amount_type = "total"
         invoice = self.create_simple_invoice(1000)
 
         invoice.discount_percent = 0
@@ -109,9 +111,5 @@ class TestAccountCashDiscountBase(TestAccountCashDiscountCommon):
         payment_term.discount_delay = 5
 
         invoice = self.create_simple_invoice(100)
-        self.assertEqual(
-            invoice.discount_percent,
-            payment_term.discount_percent)
-        self.assertEqual(
-            invoice.discount_delay,
-            payment_term.discount_delay)
+        self.assertEqual(invoice.discount_percent, payment_term.discount_percent)
+        self.assertEqual(invoice.discount_delay, payment_term.discount_delay)
