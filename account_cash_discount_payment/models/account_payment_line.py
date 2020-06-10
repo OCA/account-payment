@@ -20,15 +20,14 @@ class PaymentLine(models.Model):
         compute='_compute_toggle_pay_with_discount_allowed',
     )
     discount_due_date = fields.Date(
-        related='move_line_id.invoice_id.discount_due_date',
+        related='move_line_id.move_id.discount_due_date',
         readonly=True,
     )
     discount_amount = fields.Monetary(
-        related='move_line_id.invoice_id.real_discount_amount',
+        related='move_line_id.move_id.real_discount_amount',
         readonly=True,
     )
 
-    @api.multi
     def _compute_pay_with_discount_allowed(self):
         """
         Discount can be used only when the invoice has not already
@@ -38,14 +37,13 @@ class PaymentLine(models.Model):
         for rec in self:
             allowed = False
             move_line = rec.move_line_id
-            if move_line and move_line.invoice_id:
-                invoice = move_line.invoice_id
+            if move_line and move_line.move_id.has_discount:
+                invoice = move_line.move_id
                 allowed = invoice._can_pay_invoice_with_discount(
                     check_due_date=False
                 )
             rec.pay_with_discount_allowed = allowed
 
-    @api.multi
     def _compute_toggle_pay_with_discount_allowed(self):
         for rec in self:
             rec.toggle_pay_with_discount_allowed = (
@@ -53,7 +51,6 @@ class PaymentLine(models.Model):
                 rec.order_id.state not in ('uploaded', 'cancelled')
             )
 
-    @api.multi
     @api.constrains(
         'pay_with_discount',
         'move_line_id',
@@ -82,7 +79,7 @@ class PaymentLine(models.Model):
         invoice total and invoice discount amount.
         """
         self._check_pay_with_discount()
-        invoice = self.move_line_id.invoice_id
+        invoice = self.move_line_id.move_id
         currency = self.currency_id
         # When pay_with_discount is changed to False, we do not want to lose
         # the amount if the user changed it manually (related to the
@@ -94,7 +91,7 @@ class PaymentLine(models.Model):
         if self.pay_with_discount:
             self.amount_currency = invoice.residual_with_discount
         elif change_base_amount:
-            self.amount_currency = invoice.residual
+            self.amount_currency = invoice.amount_residual
 
     @api.onchange(
         'amount_currency',
@@ -107,7 +104,7 @@ class PaymentLine(models.Model):
         """
         if not self.pay_with_discount_allowed or not self.pay_with_discount:
             return
-        invoice = self.move_line_id.invoice_id
+        invoice = self.move_line_id.move_id
         currency = self.currency_id
         can_pay_with_discount = float_compare(
             self.amount_currency, invoice.residual_with_discount,
@@ -122,7 +119,6 @@ class PaymentLine(models.Model):
                 }
             }
 
-    @api.multi
     def _check_toggle_pay_with_discount_allowed(self):
         for rec in self:
             if not rec.toggle_pay_with_discount_allowed:
@@ -133,7 +129,6 @@ class PaymentLine(models.Model):
                           rec.order_id.name)
                 )
 
-    @api.multi
     def toggle_pay_with_discount(self):
         self.ensure_one()
         self._check_toggle_pay_with_discount_allowed()
