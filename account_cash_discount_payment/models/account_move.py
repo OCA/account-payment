@@ -21,11 +21,12 @@ class AccountMove(models.Model):
         else:
             date_check_valid = True
 
+        refunds_amount_total = self._get_refunds_amount_total()['total']
         return (
             date_check_valid and
             float_compare(
                 self.amount_residual,
-                self.amount_total - self.refunds_discount_amount,
+                self.amount_total - refunds_amount_total,
                 precision_rounding=rounding,
             ) == 0
         )
