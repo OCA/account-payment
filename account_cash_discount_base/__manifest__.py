@@ -2,20 +2,17 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name': 'Account Cash Discount Base',
-    'version': '13.0.1.0.0',
-    'license': 'AGPL-3',
-    'author': 'ACSONE SA/NV,'
-              'Odoo Community Association (OCA)',
-    'website': 'https://github.com/acsone/account-payment',
-    'category': 'Accounting',
-    'depends': [
-        'account',
-    ],
-    'data': [
-        'views/account_move.xml',
-        'views/account_payment_term.xml',
-        'views/res_company.xml',
-        'reports/report_invoice.xml',
+    "name": "Account Cash Discount Base",
+    "version": "13.0.1.0.0",
+    "license": "AGPL-3",
+    "author": "ACSONE SA/NV," "Odoo Community Association (OCA)",
+    "website": "https://github.com/acsone/account-payment",
+    "category": "Accounting",
+    "depends": ["account"],
+    "data": [
+        "views/account_move.xml",
+        "views/account_payment_term.xml",
+        "views/res_company.xml",
+        "reports/report_invoice.xml",
     ],
 }
