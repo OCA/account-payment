@@ -6,7 +6,7 @@
     'description': """Slimpay Payment Acquirer""",
     'author': "Commown SCIC SAS",
     'license': "AGPL-3",
-    'website': "https://commown.fr",
+    'website': "https://commown.coop",
     'depends': ['website_sale', 'partner_firstname', 'base_phone'],
     'external_dependencies': {
         'python': ['coreapi', 'hal_codec', 'iso8601', 'requests',
