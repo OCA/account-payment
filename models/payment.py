@@ -111,9 +111,11 @@ class SlimpayTransaction(models.Model):
         _logger.debug('Found mandate reference: %s', mandate_ref)
         label = self.env.context.get(
             'slimpay_payin_label', self.reference or 'TR%d' % self.id)
-        result = client.create_payin(
-            'TR%d' % self.id, mandate_ref, self.amount, self.currency_id.name,
+        result, acquirer_reference = client.create_payin(
+            mandate_ref, self.amount, self.currency_id.name,
             self.currency_id.decimal_places, label)
-        _logger.debug('Payin creation result: %s', result)
-        self.update({'state': 'done' if result else 'error'})
+        _logger.debug('Payin creation result: %s, reference: %s',
+                      result, acquirer_reference)
+        self.update({'state': 'done' if result else 'error',
+                     'acquirer_reference': acquirer_reference})
         return result

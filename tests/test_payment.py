@@ -43,8 +43,10 @@ class SlimpayPaymentTC(TransactionCase):
             elif method == 'POST' and func == 'create-payins':
                 self.assertEqual(params['mandate']['reference'], 'MANDATE_REF')
                 self.assertEqual(params['amount'], 149.2)  # rounded amount
-                return {'executionStatus': 'toprocess', 'state': 'accepted'}
+                return {'executionStatus': 'toprocess', 'state': 'accepted',
+                        'reference': 'PAYIN_REF'}
 
         with patch.object(SlimpayClient, 'action', side_effect=fake_action):
             tx.slimpay_s2s_do_transaction()
         self.assertEqual(tx.state, 'done')
+        self.assertEqual(tx.acquirer_reference, 'PAYIN_REF')

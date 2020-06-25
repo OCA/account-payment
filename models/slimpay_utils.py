@@ -131,12 +131,12 @@ class SlimpayClient(object):
         _logger.debug("User approval URL is: %s", url)
         return url
 
-    def create_payin(self, payin_ref, mandate_ref, amount, currency,
+    def create_payin(self, mandate_ref, amount, currency,
                      decimal_places, payin_label):
         params = {
             'creditor': {'reference': self.creditor},
             'mandate': {'reference': mandate_ref},
-            'reference': payin_ref, 'label': payin_label,
+            'label': payin_label,
             'amount': round(amount, decimal_places),
             'currency': currency,
             'scheme': 'SEPA.DIRECT_DEBIT.CORE',
@@ -146,10 +146,10 @@ class SlimpayClient(object):
         _logger.debug('create-payins reponse: %s', response)
         if response.get('executionStatus') != 'toprocess':
             _logger.error(
-                'Invalid slimpay payment response for transaction %r:\n %r',
-                payin_ref, response)
-            return False
-        return response.get('state') == 'accepted'
+                'Invalid slimpay payment response for transaction:\n %r',
+                response)
+            return False, None
+        return response.get('state') == 'accepted', response['reference']
 
     def get(self, url):
         """ Expose the raw coreapi `get` method """
