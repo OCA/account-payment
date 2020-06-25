@@ -7,7 +7,7 @@
     'author': "Commown SCIC SAS",
     'license': "AGPL-3",
     'website': "https://commown.coop",
-    'depends': ['website_sale', 'partner_firstname', 'base_phone'],
+    'depends': ['payment', 'partner_firstname', 'base_phone'],
     'external_dependencies': {
         'python': ['coreapi', 'hal_codec', 'iso8601', 'requests',
                    'phonenumbers', 'regex']
@@ -15,7 +15,6 @@
     'data': [
         'views/payment_views.xml',
         'views/payment_slimpay_templates.xml',
-        'views/address_template.xml',
         'data/payment_acquirer_data.xml',
     ],
     'installable': True,
