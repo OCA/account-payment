@@ -92,8 +92,8 @@ class PaymentAcquirerSlimpay(models.Model):
             'acquirer_ref': mandate_id,
         })
         token.payment_ids |= tx
-        partner.payment_token_id = token.id  # XXX dependency on "contract"
         _logger.info('Added token id %s for %s', token.id, token.name)
+        return token
 
 
 class SlimpayTransaction(models.Model):
