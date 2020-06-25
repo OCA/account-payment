@@ -13,7 +13,7 @@ class SlimpayUtilsTC(TransactionCase):
 
     def setUp(self):
         super(SlimpayUtilsTC, self).setUp()
-        france = self.env['res.country'].search([('name', '=', 'France')])
+        france = self.env['res.country'].search([('code', '=', 'FR')])
         self.partner = self.env['res.partner'].create(
             {'firstname': 'F', 'lastname': u'C/@\\é9', 'country_id': france.id})
 
