@@ -4,7 +4,7 @@ from base64 import b64encode
 
 from iso8601 import parse_date
 import requests
-import phonenumbers
+import phonenumbers as pn
 import coreapi
 from hal_codec import HALCodec
 
@@ -48,20 +48,17 @@ def partner_mobile_phone(partner, fields=('phone', 'mobile')):
     was found, use France as a default (slimpay is mostly a
     french company for the moment).
     """
-    region = 'FR'  # slimpay mainly supports France
-    if partner.country_id.code:
-        region = partner.country_id.code.upper()
+    region = partner.country_id.code if partner.country_id.code else 'FR'
+
     for field in fields:
         phone = getattr(partner, field)
         if phone:
             try:
-                parsed = phonenumbers.parse(phone, region=region)
-            except phonenumbers.NumberParseException:
+                parsed = pn.parse(phone, region=region)
+            except pn.NumberParseException:
                 continue
-            if (phonenumbers.number_type(parsed)
-                    == phonenumbers.PhoneNumberType.MOBILE):
-                return phonenumbers.format_number(
-                    parsed, phonenumbers.PhoneNumberFormat.E164)
+            if pn.number_type(parsed) == pn.PhoneNumberType.MOBILE:
+                return pn.format_number(parsed, pn.PhoneNumberFormat.E164)
 
 
 def slimpay_normalize_names(name):
