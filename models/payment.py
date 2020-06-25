@@ -45,7 +45,7 @@ class PaymentAcquirerSlimpay(models.Model):
 
     def _slimpay_s2s_validate(self, tx, posted_data):
         """The posted data is validated using a http request to slimpay's
-        server (to ensure posted data has not been forged), then the
+        server (to make sure posted data has not been forged), then the
         transaction status is updated.
         """
         url = posted_data['_links']['self']['href']
@@ -104,7 +104,6 @@ class SlimpayTransaction(models.Model):
         """ Perform a payment through a server to server call using a previously
         signed mandate.
         """
-        # See contract_payment_auto/models/account_analytic_account.py:99
         _logger.debug('Starting auto Slimpay Transaction TR%s...', self.id)
         client = self.acquirer_id.slimpay_client
         mandate_ref = client.action('GET', 'get-mandates', params={
