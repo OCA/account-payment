@@ -11,10 +11,6 @@ from slimpay_utils import SlimpayClient
 _logger = logging.getLogger(__name__)
 
 
-def _signed_date(mandate):
-    return parse_date(mandate['dateSigned'])
-
-
 class PaymentAcquirerSlimpay(models.Model):
     _inherit = 'payment.acquirer'
 
