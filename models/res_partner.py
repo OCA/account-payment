@@ -35,6 +35,9 @@ class SlimpayPartner(models.Model):
         errors, if any, for fields that have a slimpay validation
         rule, under the form::
             {'field name': 'error message'}
+
+        This is mostly useful for website_sale's
+        `checkout_form_validate` controller method.
         """
         errors = {}
         for fieldname in values:
