@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
     <!-- Payment Tree View -->
@@ -79,21 +78,19 @@
             <xpath expr="//button[@name='create_payments']" position="after">
                 <button name="make_payments" string="Make Payments" type="object" class="btn-primary" invisible="not context.get('batch', False)"/>
             </xpath>
-            <xpath expr="//field[@name='amount']" position="attributes">
+            <label for="amount" position="attributes">
+                <attribute name="invisible">context.get('batch', False)</attribute>
+            </label>
+            <xpath expr="//div[@name='amount_div']" position="attributes">
                 <attribute name="invisible">context.get('batch', False)</attribute>
             </xpath>
             <xpath expr="//field[@name='payment_method_id']" position="attributes">
                 <attribute name="attrs">{'invisible': ['|',('hide_payment_method', '=', True),('is_customer','=',True)]}</attribute>
                 <attribute name="domain">[('payment_type','=','outbound')]</attribute>
             </xpath>
-            <xpath expr="//field[@name='currency_id']" position="attributes">
-                <attribute name="invisible">not context.get('batch', False)</attribute>
-            </xpath>
-
             <xpath expr="//field[@name='communication']" position="after">
                 <field name="cheque_amount" invisible="not context.get('batch', False)"/>
             </xpath>
-
         </field>
     </record>
 
