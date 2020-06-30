@@ -19,7 +19,7 @@ class SlimpayPartner(models.Model):
         """
         try:
             country_id = int(country_id)
-        except:
+        except (TypeError, ValueError):
             return
         country = self.env['res.country'].browse(int(country_id))
         if country.code == 'FR':
