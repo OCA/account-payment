@@ -28,6 +28,7 @@ class InvoiceCustomerPaymentLine(models.TransientModel):
     batch payment record of customer invoices
     """
     _name = "invoice.customer.payment.line"
+    _description = "Batch Payment Record of Customer Invoices"
     _rec_name = 'invoice_id'
 
     invoice_id = fields.Many2one('account.invoice', string="Customer Invoice",
@@ -62,6 +63,7 @@ class InvoicePaymentLine(models.TransientModel):
     Batch payment record of supplier invoices
     """
     _name = "invoice.payment.line"
+    _description = "Batch Payment Record of Supplier Invoices"
     _rec_name = 'invoice_id'
 
     invoice_id = fields.Many2one('account.invoice', string="Supplier Invoice",
@@ -90,12 +92,14 @@ class AccountRegisterPayments(models.TransientModel):
         for rec in self:
             rec.total_customer_pay_amount = sum(
                 line.receiving_amt for line in rec.invoice_customer_payments)
+            rec.cheque_amount = rec.total_customer_pay_amount
 
     @api.depends('invoice_payments.paying_amt')
     def _compute_pay_total(self):
         for rec in self:
             rec.total_pay_amount = sum(line.paying_amt for line in
                                        rec.invoice_payments)
+            rec.cheque_amount = rec.total_pay_amount
 
     is_auto_fill = fields.Char(string="Auto-Fill Pay Amount")
     invoice_payments = fields.One2many('invoice.payment.line', 'wizard_id',
@@ -106,10 +110,10 @@ class AccountRegisterPayments(models.TransientModel):
         'wizard_id', string='Receipts')
     cheque_amount = fields.Float("Check Amount",
                                  required=True, default=0.00)
-    total_pay_amount = fields.Float("Total Invoices",
+    total_pay_amount = fields.Float("Total Supplier Invoices",
                                     compute='_compute_pay_total')
     total_customer_pay_amount = fields.Float(
-        "Total Invoices", compute='_compute_customer_pay_total')
+        "Total Customer Invoices", compute='_compute_customer_pay_total')
 
     @api.model
     def default_get(self, pfields):

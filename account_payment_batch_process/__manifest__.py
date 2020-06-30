@@ -5,7 +5,7 @@
 {
     "name": "Batch Payments Processing",
     "summary": "Process Payments in Batch",
-    "version": "11.0.1.0.0",
+    "version": "12.0.1.0.0",
     "license": "AGPL-3",
     "author": "Open Source Integrators, Odoo Community Association (OCA)",
     "category": "Generic Modules/Payment",
@@ -17,7 +17,6 @@
         "wizard/invoice_batch_process_view.xml",
         "views/invoice_view.xml"
     ],
-    "application": False,
     "development_status": "Beta",
     "maintainers": ["max3903"],
 }

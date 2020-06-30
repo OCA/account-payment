@@ -18,18 +18,6 @@ class AccountPayment(models.Model):
         if 'group_data' in self._context:
             aml_obj = self.env['account.move.line'].with_context(
                 check_move_validity=False)
-            invoice_currency = False
-            comp_currency = all(
-                [
-                    x.currency_id == self.invoice_ids[0].currency_id
-                    for x in self.invoice_ids
-                ])
-
-            if self.invoice_ids and comp_currency:
-                # If all the invoices selected share the same currency,
-                # record the paiement in that currency too
-                invoice_currency = self.invoice_ids[0].currency_id
-
             move = self.env['account.move'].create(self._get_move_vals())
             p_id = str(self.partner_id.id)
 
@@ -44,10 +32,9 @@ class AccountPayment(models.Model):
 
                 aml_ctx = aml_obj.with_context(date=self.payment_date)
                 debit, credit, amount_currency, currency_id = \
-                    aml_ctx.compute_amount_fields(
+                    aml_ctx._compute_amount_fields(
                         amt, self.currency_id,
-                        self.company_id.currency_id,
-                        invoice_currency)
+                        self.company_id.currency_id)
                 # Write line corresponding to invoice payment
                 counterpart_aml_dict = \
                     self._get_shared_move_line_vals(
@@ -76,11 +63,10 @@ class AccountPayment(models.Model):
                         aml_ctx = aml_obj.with_context(date=self.payment_date)
                         debit_wo, credit_wo, \
                             amount_currency_wo, \
-                            currency_id = aml_ctx.compute_amount_fields(
+                            currency_id = aml_ctx._compute_amount_fields(
                                 payment_difference,
                                 self.currency_id,
-                                self.company_id.currency_id,
-                                invoice_currency)
+                                self.company_id.currency_id)
                         writeoff_line['name'] = _('Counterpart')
                         writeoff_line['account_id'] = writeoff_account_id
                         writeoff_line['debit'] = debit_wo
