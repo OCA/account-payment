@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl-3). -->
+<odoo>
+    <record model="ir.ui.view" id="payment_return_reason_form_view">
+        <field name="model">payment.return.reason</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Payment return reason">
+                <group>
+                    <field name="code" required="True"/>
+                    <field name="name" required="True"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="payment_return_reason_tree_view">
+        <field name="model">payment.return.reason</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Payment return reason">
+                <field name="code"/>
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="payment_return_reason_search_view">
+        <field name="model">payment.return.reason</field>
+        <field name="type">search</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name" filter_domain="['|', ('code', 'ilike', self), ('name', 'ilike', self)]"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="payment_return_reason_action">
+        <field name="name">Payment Return Reasons</field>
+        <field name="res_model">payment.return.reason</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem id="payment_return_reason_menu"
+              name="Payment Return Reasons"
+              parent="account.menu_finance_configuration"
+              action="payment_return_reason_action"/>
+</odoo>

@@ -29,6 +29,7 @@
         'views/account_journal_view.xml',
         'data/ir_sequence_data.xml',
         'views/account_invoice_view.xml',
+        'views/payment_return_reason.xml',
     ],
     'qweb': [
         "static/src/xml/account_payment.xml",
