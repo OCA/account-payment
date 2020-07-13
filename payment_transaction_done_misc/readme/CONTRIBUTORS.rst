@@ -1,2 +1,0 @@
-* Odoo Nodriza Tech
-* victoralmau
