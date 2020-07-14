@@ -5,16 +5,15 @@ from odoo import api, models, fields
 
 class PaymentTransaction(models.Model):
     _inherit = 'payment.transaction'
-
-    @api.multi
-    def write(self, vals):
-        self.ensure_one()
+    
+    @api.one
+    def write(self, vals):        
         #state_done_now
         state_done_now = False
         if 'state' in vals:
             if vals['state']=='done' and self.state!='done':
                 if self.sale_order_id.id>0:
-                    state_done_now = True
+                    state_done_now = True                    
         #write
         return_object = super(PaymentTransaction, self).write(vals)
         #operations
@@ -25,19 +24,19 @@ class PaymentTransaction(models.Model):
                     #send_mail
                     if sale_order_id.user_id.id>0:
                         mail_compose_message_obj = self.env['mail.compose.message'].sudo(sale_order_id.user_id.id).create({})
-                    else:
+                    else:                
                         mail_compose_message_obj = self.env['mail.compose.message'].sudo().create({})
                     #onchange_template_id
                     return_mail_compose_message_obj = mail_compose_message_obj.onchange_template_id(self.acquirer_id.done_sale_order_customer_mail_template_id.id, 'comment', 'payment.transaction', self.id)
-                    mail_body = return_mail_compose_message_obj['value']['body']
+                    mail_body = return_mail_compose_message_obj['value']['body']                                            
                     #update
                     mail_compose_message_obj.composition_mode = 'comment'
                     mail_compose_message_obj.model = 'sale.order'
                     mail_compose_message_obj.res_id = sale_order_id.id
-                    mail_compose_message_obj.record_name = sale_order_id.name
+                    mail_compose_message_obj.record_name = sale_order_id.name                
                     mail_compose_message_obj.template_id = self.acquirer_id.done_sale_order_customer_mail_template_id.id
                     mail_compose_message_obj.body = mail_body
-                    mail_compose_message_obj.subject = return_mail_compose_message_obj['value']['subject']
+                    mail_compose_message_obj.subject = return_mail_compose_message_obj['value']['subject']                  
                     #send_mail_action
                     mail_compose_message_obj.send_mail_action()
             #done_sale_order_user_id_mail_template_id
@@ -81,11 +80,11 @@ class PaymentTransaction(models.Model):
                     'payment_date': self.date_validate,
                     'communication': self.reference,
                     'payment_method_id': self.acquirer_id.done_account_journal_id_account_payment_method.id,
-                    'payment_transaction_id': self.id
+                    'payment_transaction_id': self.id                  
                 }
                 #create
                 account_payment_obj = self.env['account.payment'].sudo().create(account_payment_vals)
                 #post
-                account_payment_obj.post()
+                account_payment_obj.post()                                            
         #return
         return return_object
