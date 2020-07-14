@@ -10,6 +10,7 @@
                 <group>
                     <field name="code" required="True"/>
                     <field name="name" required="True"/>
+                    <field name="next_action_type_id"/>
                 </group>
             </form>
         </field>
