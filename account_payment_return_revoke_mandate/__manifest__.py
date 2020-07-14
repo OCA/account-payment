@@ -11,6 +11,6 @@
     "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-payment",
     "depends": ["account_banking_mandate", "account_payment_return"],
-    "data": [],
+    "data": ["views/payment_return_reason.xml"],
     "demo": [],
 }
