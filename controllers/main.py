@@ -1,30 +1,14 @@
 import logging
 import json
 
-from odoo import http, _
+from odoo import http
 from odoo.http import request, Response
-from odoo.exceptions import UserError
-
-from odoo.addons.payment_slimpay.models import slimpay_utils
 
 
 _logger = logging.getLogger(__name__)
 
 
 class SlimpayController(http.Controller):
-
-    def _approval_url(self, so, acquirer_id, return_url):
-        """ Helper to be used with website_sale to get a Slimpay URL for the
-        end-user to sign a mandate and create a first payment online."
-        """
-        acquirer = request.env['payment.acquirer'].sudo().browse(acquirer_id)
-        locale = request.env.context.get('lang', 'fr_FR').split('_')[0]
-        # May emit a direct debit only if a mandate exists; unsupported for now
-        subscriber = slimpay_utils.subscriber_from_partner(so.partner_id)
-        return acquirer.slimpay_client.approval_url(
-            so.payment_tx_id.reference, so.id, locale, so.amount_total,
-            so.currency_id.name, so.currency_id.decimal_places,
-            subscriber, return_url)
 
     @http.route(['/payment/slimpay/s2s/feedback'], type='http',
                 auth='public', methods=['POST'], csrf=False)
