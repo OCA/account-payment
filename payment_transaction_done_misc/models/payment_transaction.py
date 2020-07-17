@@ -19,7 +19,7 @@ class PaymentTransaction(models.Model):
         return_object = super(PaymentTransaction, self).write(vals)
         # operations
         if state_done_now:
-            #done_sale_order_customer_mail_template_id
+            # done_sale_order_customer_mail_template_id
             if self.acquirer_id.done_sale_order_customer_mail_template_id.id > 0:
                 for sale_order_id in self.sale_order_ids:
                     # send_mail
@@ -64,7 +64,7 @@ class PaymentTransaction(models.Model):
                             [6, False, [self.sale_order_id.user_id.partner_id.id]]]
                     # create
                     if self.sale_order_id.user_id.id > 0:
-                        mail_message_obj = self.env['mail.message'].sudo(self.sale_order_id.user_id.id).create(
+                        self.env['mail.message'].sudo(self.sale_order_id.user_id.id).create(
                             mail_message_vals)
                     else:
                         self.env['mail.message'].sudo().create(mail_message_vals)
