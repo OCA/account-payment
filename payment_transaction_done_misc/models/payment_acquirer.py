@@ -10,7 +10,8 @@ class PaymentAcquirer(models.Model):
         comodel_name='mail.template',
         domain=[('model_id.model', '=', 'payment.transaction')],
         string='Mail template from customer',
-        help='Email that will be sent to the customer when the transaction is completed and linked to a sales order'
+        help='Email that will be sent to the customer'
+             ' when the transaction is completed and linked to a sales order'
     )
     done_sale_order_user_id_mail_template_id = fields.Many2one(
         comodel_name='mail.template',
@@ -29,4 +30,3 @@ class PaymentAcquirer(models.Model):
         string='Payment method',
         help='Payment method used in payment'
     )
-

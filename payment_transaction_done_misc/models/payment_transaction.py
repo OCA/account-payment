@@ -24,7 +24,9 @@ class PaymentTransaction(models.Model):
                 for sale_order_id in self.sale_order_ids:
                     # send_mail
                     if sale_order_id.user_id:
-                        mcm_obj = self.env['mail.compose.message'].sudo(sale_order_id.user_id.id).create({})
+                        mcm_obj = self.env['mail.compose.message'].sudo(
+                            sale_order_id.user_id.id
+                        ).create({})
                     else:
                         mcm_obj = self.env['mail.compose.message'].sudo().create({})
                     # onchange_template_id
@@ -40,7 +42,8 @@ class PaymentTransaction(models.Model):
                     mcm_obj.model = 'sale.order'
                     mcm_obj.res_id = sale_order_id.id
                     mcm_obj.record_name = sale_order_id.name
-                    mcm_obj.template_id = self.acquirer_id.done_sale_order_customer_mail_template_id.id
+                    mcm_obj.template_id = self.acquirer_id.\
+                        done_sale_order_customer_mail_template_id.id
                     mcm_obj.body = mail_body
                     mcm_obj.subject = res['value']['subject']
                     # send_mail_action
@@ -51,7 +54,8 @@ class PaymentTransaction(models.Model):
                     mcm_obj = self.env['mail.compose.message'].sudo().create({})
                     # onchange_template_id
                     res = mcm_obj.onchange_template_id(
-                        self.acquirer_id.done_sale_order_user_id_mail_template_id.id, 'comment',
+                        self.acquirer_id.done_sale_order_user_id_mail_template_id.id,
+                        'comment',
                         'payment.transaction', self.id)
                     mail_body = res['value']['body']
                     # create
@@ -65,12 +69,13 @@ class PaymentTransaction(models.Model):
                     }
                     # add_auto_starred
                     if self.sale_order_id.user_id:
-                        vals['starred_partner_ids'] = [[6, False, [self.sale_order_id.user_id.partner_id.id]]]
+                        vals['starred_partner_ids'] = \
+                            [[6, False, [self.sale_order_id.user_id.partner_id.id]]]
                     # create
                     if self.sale_order_id.user_id:
                         self.env['mail.message'].sudo(self.sale_order_id.user_id.id).create(vals)
                     else:
-                        self.env['mail.message'].sudo().create(mail_message_vals)
+                        self.env['mail.message'].sudo().create(vals)
             # done_account_journal_id_account_payment
             if self.acquirer_id.done_account_journal_id_account_payment:
                 # vals
@@ -78,12 +83,14 @@ class PaymentTransaction(models.Model):
                     'payment_type': 'inbound',
                     'partner_type': 'customer',
                     'partner_id': self.partner_id.id,
-                    'journal_id': self.acquirer_id.done_account_journal_id_account_payment.id,
+                    'journal_id': self.acquirer_id.
+                        done_account_journal_id_account_payment.id,
                     'amount': self.amount,
                     'currency_id': self.currency_id.id,
                     'payment_date': self.date_validate,
                     'communication': self.reference,
-                    'payment_method_id': self.acquirer_id.done_account_journal_id_account_payment_method.id,
+                    'payment_method_id': self.acquirer_id.
+                        done_account_journal_id_account_payment_method.id,
                     'payment_transaction_id': self.id
                 }
                 # create
