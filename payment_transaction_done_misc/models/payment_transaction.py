@@ -42,7 +42,8 @@ class PaymentTransaction(models.Model):
                     mcm_obj.model = 'sale.order'
                     mcm_obj.res_id = sale_order_id.id
                     mcm_obj.record_name = sale_order_id.name
-                    mcm_obj.template_id = self.acquirer_id.done_so_customer_template_id.id
+                    mcm_obj.template_id = \
+                        self.acquirer_id.done_so_customer_template_id.id
                     mcm_obj.body = mail_body
                     mcm_obj.subject = res['value']['subject']
                     # send_mail_action
