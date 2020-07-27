@@ -73,7 +73,9 @@ class PaymentTransaction(models.Model):
                             [[6, False, [self.sale_order_id.user_id.partner_id.id]]]
                     # create
                     if self.sale_order_id.user_id:
-                        self.env['mail.message'].sudo(self.sale_order_id.user_id.id).create(vals)
+                        self.env['mail.message'].sudo(
+                            self.sale_order_id.user_id.id
+                        ).create(vals)
                     else:
                         self.env['mail.message'].sudo().create(vals)
             # done_account_journal_id_account_payment
@@ -83,14 +85,14 @@ class PaymentTransaction(models.Model):
                     'payment_type': 'inbound',
                     'partner_type': 'customer',
                     'partner_id': self.partner_id.id,
-                    'journal_id': self.acquirer_id.
-                        done_account_journal_id_account_payment.id,
+                    'journal_id':
+                        self.acquirer_id.done_account_journal_id_account_payment.id,
                     'amount': self.amount,
                     'currency_id': self.currency_id.id,
                     'payment_date': self.date_validate,
                     'communication': self.reference,
-                    'payment_method_id': self.acquirer_id.
-                        done_account_journal_id_account_payment_method.id,
+                    'payment_method_id':
+                        self.acquirer_id.done_account_journal_id_account_payment_method.id,
                     'payment_transaction_id': self.id
                 }
                 # create
@@ -99,4 +101,3 @@ class PaymentTransaction(models.Model):
                 account_payment_obj.post()
         # return
         return return_object
-
