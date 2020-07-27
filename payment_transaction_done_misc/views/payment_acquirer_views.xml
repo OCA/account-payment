@@ -5,16 +5,16 @@
         <field name="name">payment.acquirer.done.misc.form</field>
         <field name="model">payment.acquirer</field>
         <field name="inherit_id" ref="payment.acquirer_form" />
-        <field name="priority" eval="20"/>                
+        <field name="priority" eval="20"/>
         <field name="arch" type="xml">
             <field name="registration_view_template_id" position="after">
                 <group name="payment_transaction_done_misc" string="Misc">
-                    <field name="done_sale_order_customer_mail_template_id" options='{"no_create": True, "no_create_edit": True}'/>
-                    <field name="done_sale_order_user_id_mail_template_id" options='{"no_create": True, "no_create_edit": True}'/>
-                    <field name="done_account_journal_id_account_payment" options='{"no_create": True, "no_create_edit": True}'/>
-                    <field name="done_account_journal_id_account_payment_method" options='{"no_create": True, "no_create_edit": True}'/>                                    
+                    <field name="done_so_customer_template_id" options='{"no_create": True, "no_create_edit": True}'/>
+                    <field name="done_so_user_id_template_id" options='{"no_create": True, "no_create_edit": True}'/>
+                    <field name="done_account_journal_id" options='{"no_create": True, "no_create_edit": True}'/>
+                    <field name="done_payment_method_id" options='{"no_create": True, "no_create_edit": True}'/>
                 </group>
-            </field>                                                            
+            </field>
         </field>
     </record>
 
