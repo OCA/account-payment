@@ -29,3 +29,4 @@ class PaymentAcquirer(models.Model):
         string='Payment method',
         help='Payment method used in payment'
     )
+
