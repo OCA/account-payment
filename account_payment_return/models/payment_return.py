@@ -274,6 +274,7 @@ class PaymentReturn(models.Model):
                 )
                 partial_line.credit_move_id.remove_move_reconcile()
                 lines2reconcile.reconcile()
+        self.move_id.filtered(lambda move: move.state == "posted").button_draft()
         self.move_id.with_context(force_delete=True).unlink()
         self.write({"state": "cancelled", "move_id": False})
         invoices.check_payment_return()
