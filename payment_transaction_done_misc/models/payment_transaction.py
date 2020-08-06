@@ -24,13 +24,13 @@ class PaymentTransaction(models.Model):
                 for sale_order_id in self.sale_order_ids:
                     # send_mail
                     if sale_order_id.user_id:
-                        mcm_obj = self.env['mail.compose.message'].sudo(
+                        mcm = self.env['mail.compose.message'].sudo(
                             sale_order_id.user_id.id
                         ).create({})
                     else:
-                        mcm_obj = self.env['mail.compose.message'].sudo().create({})
+                        mcm = self.env['mail.compose.message'].sudo().create({})
                     # onchange_template_id
-                    res = mcm_obj.onchange_template_id(
+                    res = mcm.onchange_template_id(
                         self.acquirer_id.done_so_customer_template_id.id,
                         'comment',
                         'payment.transaction',
@@ -38,25 +38,27 @@ class PaymentTransaction(models.Model):
                     )
                     mail_body = res['value']['body']
                     # update
-                    mcm_obj.composition_mode = 'comment'
-                    mcm_obj.model = 'sale.order'
-                    mcm_obj.res_id = sale_order_id.id
-                    mcm_obj.record_name = sale_order_id.name
-                    mcm_obj.template_id = \
+                    mcm.composition_mode = 'comment'
+                    mcm.model = 'sale.order'
+                    mcm.res_id = sale_order_id.id
+                    mcm.record_name = sale_order_id.name
+                    mcm.template_id = \
                         self.acquirer_id.done_so_customer_template_id.id
-                    mcm_obj.body = mail_body
-                    mcm_obj.subject = res['value']['subject']
+                    mcm.body = mail_body
+                    mcm.subject = res['value']['subject']
                     # send_mail_action
-                    mcm_obj.send_mail_action()
+                    mcm.send_mail_action()
             # done_so_user_id_template_id
             if self.acquirer_id.done_so_user_id_template_id:
                 if self.sale_order_id:
-                    mcm_obj = self.env['mail.compose.message'].sudo().create({})
+                    mcm = self.env['mail.compose.message'].sudo().create({})
                     # onchange_template_id
-                    res = mcm_obj.onchange_template_id(
+                    res = mcm.onchange_template_id(
                         self.acquirer_id.done_so_user_id_template_id.id,
                         'comment',
-                        'payment.transaction', self.id)
+                        'payment.transaction',
+                        self.id
+                    )
                     mail_body = res['value']['body']
                     # create
                     vals = {
@@ -79,7 +81,7 @@ class PaymentTransaction(models.Model):
                     else:
                         self.env['mail.message'].sudo().create(vals)
             # done_payment_method_id
-            if self.acquirer_id.done_payment_method_id:
+            if self.acquirer_id.done_account_journal_id_account_payment:
                 # vals
                 vals = {
                     'payment_type': 'inbound',

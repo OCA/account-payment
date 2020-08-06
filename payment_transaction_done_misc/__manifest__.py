@@ -4,7 +4,7 @@
     "name": "Payment transaction Done misc",
     "version": "12.0.1.0.0",
     "category": "Sales Management",
-    "website": "https://github.com/OCA/account-payment",
+    "website": "https://nodrizatech.com/",
     "author": "Odoo Nodriza Tech (ONT), "
               "Odoo Community Association (OCA)",
     "license": "AGPL-3",
@@ -16,5 +16,5 @@
     "data": [
         "views/payment_acquirer_views.xml",
     ],
-    "installable": True,
+    "installable": True
 }

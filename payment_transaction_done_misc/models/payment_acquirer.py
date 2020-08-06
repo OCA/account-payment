@@ -10,19 +10,21 @@ class PaymentAcquirer(models.Model):
         comodel_name='mail.template',
         domain=[('model_id.model', '=', 'payment.transaction')],
         string='Mail template from customer',
-        help='Email that will be sent to the customer'
-             ' when the transaction is completed and linked to a sales order'
+        help='Email that will be sent to the customer when the '
+             'transaction is completed and linked to a sales order'
     )
     done_so_user_id_template_id = fields.Many2one(
         comodel_name='mail.template',
         domain=[('model_id.model', '=', 'payment.transaction')],
         string='Mail template from user_id',
-        help='Create an internal note related to user_id from sale_order'
+        help='Create an internal note related to user_id '
+             'from sale_order'
     )
     done_account_journal_id = fields.Many2one(
         comodel_name='account.journal',
         string='Account journal',
-        help='Account journal used to create payments from transactions done'
+        help='Account journal used to create payments from '
+             'transactions done'
     )
     done_payment_method_id = fields.Many2one(
         comodel_name='account.payment.method',
