@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_payment_credit_card
+# 	* account_payment_credit_card
 #
 msgid ""
 msgstr ""
@@ -17,6 +17,7 @@ msgstr ""
 "X-Generator: Weblate 3.10\n"
 
 #. module: account_payment_credit_card
+#: model:ir.model.fields,field_description:account_payment_credit_card.field_account_bank_statement_import_journal_creation__partner_id
 #: model:ir.model.fields,field_description:account_payment_credit_card.field_account_journal__partner_id
 msgid "Credit Card Company"
 msgstr "Empresa do Cartão de Crédito"
@@ -32,6 +33,7 @@ msgid "Journal Entries"
 msgstr "Movimentos do Diário"
 
 #. module: account_payment_credit_card
+#: model:ir.model.fields,field_description:account_payment_credit_card.field_account_bank_statement_import_journal_creation__credit_card
 #: model:ir.model.fields,field_description:account_payment_credit_card.field_account_journal__credit_card
 msgid "Transfer AP to Credit Card Company"
 msgstr "Transferir Pagáveis para Empresa do Cartão de Crédito"
