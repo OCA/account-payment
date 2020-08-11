@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_check_printing_report_base
+# 	* account_check_printing_report_base
 #
 msgid ""
 msgstr ""
@@ -27,6 +27,7 @@ msgid "Account Payment Check Report"
 msgstr "Relatório de Impressão de Cheques"
 
 #. module: account_check_printing_report_base
+#: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_bank_statement_import_journal_creation__check_print_auto
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_journal__check_print_auto
 msgid "Automatic check printing"
 msgstr "Impressão automática de cheques"
@@ -49,6 +50,7 @@ msgid "Check Layouts"
 msgstr "Layouts de Cheques"
 
 #. module: account_check_printing_report_base
+#: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_bank_statement_import_journal_creation__check_layout_id
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_journal__check_layout_id
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_res_company__check_layout_id
 msgid "Check format"
@@ -75,8 +77,11 @@ msgid "Created on"
 msgstr "Criado em"
 
 #. module: account_check_printing_report_base
+#: model:ir.model.fields,help:account_check_printing_report_base.field_account_bank_statement_import_journal_creation__check_print_auto
 #: model:ir.model.fields,help:account_check_printing_report_base.field_account_journal__check_print_auto
-msgid "Default check for the company is printed automatically when invoice payment is validated"
+msgid ""
+"Default check for the company is printed automatically when invoice payment "
+"is validated"
 msgstr ""
 "Predefinição - o cheque para a empresa é impresso automaticamente quando o "
 "pagamento da fatura é validado"
