@@ -24,7 +24,6 @@ msgstr "<b>Monto del cheque:</b>"
 #. module: account_check_printing_report_base
 #: model:ir.model,name:account_check_printing_report_base.model_account_payment_check_report
 #, fuzzy
-#| msgid "account.payment.check.report"
 msgid "Account Payment Check Report"
 msgstr "account.payment.check.report"
 
@@ -159,7 +158,6 @@ msgstr "Pagos"
 #. module: account_check_printing_report_base
 #: model:ir.model,name:account_check_printing_report_base.model_account_register_payments
 #, fuzzy
-#| msgid "Payments"
 msgid "Register Payments"
 msgstr "Pagos"
 
