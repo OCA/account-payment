@@ -1,12 +1,14 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_cash_discount_base
+# 	* account_cash_discount_base
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0\n"
+"Project-Id-Version: Odoo Server 13.0+e\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"POT-Creation-Date: 2020-08-17 10:32+0000\n"
+"PO-Revision-Date: 2020-08-17 10:32+0000\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -14,29 +16,29 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_cash_discount_base
-#: model:ir.ui.view,arch_db:account_cash_discount_base.report_invoice_document_inherit
+#: model_terms:ir.ui.view,arch_db:account_cash_discount_base.report_invoice_document_inherit
 msgid "% discount for payment before"
 msgstr ""
 
 #. module: account_cash_discount_base
-#: model:ir.ui.view,arch_db:account_cash_discount_base.res_company_form_view
+#: model_terms:ir.ui.view,arch_db:account_cash_discount_base.res_company_form_view
 msgid "Base Amount Type"
 msgstr ""
 
 #. module: account_cash_discount_base
-#: model:ir.ui.view,arch_db:account_cash_discount_base.invoice_supplier_form_inherit
-#: model:ir.ui.view,arch_db:account_cash_discount_base.res_company_form_view
+#: model_terms:ir.ui.view,arch_db:account_cash_discount_base.account_move_form
+#: model_terms:ir.ui.view,arch_db:account_cash_discount_base.res_company_form_view
 msgid "Cash Discount"
 msgstr ""
 
 #. module: account_cash_discount_base
-#: model:ir.model.fields,field_description:account_cash_discount_base.field_res_company_cash_discount_base_amount_type
-msgid "Cash discount base amount type"
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_res_company__cash_discount_base_amount_type
+msgid "Cash Discount Base Amount Type"
 msgstr ""
 
 #. module: account_cash_discount_base
-#: model:ir.model.fields,field_description:account_cash_discount_base.field_res_company_cash_discount_use_tax_adjustment
-msgid "Cash discount use tax adjustment"
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_res_company__cash_discount_use_tax_adjustment
+msgid "Cash Discount Use Tax Adjustment"
 msgstr ""
 
 #. module: account_cash_discount_base
@@ -45,92 +47,94 @@ msgid "Companies"
 msgstr ""
 
 #. module: account_cash_discount_base
-#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_invoice_discount_percent
-#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_payment_term_discount_percent
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_move__discount_percent
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_payment_term__discount_percent
 msgid "Discount (%)"
 msgstr ""
 
 #. module: account_cash_discount_base
-#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_invoice_discount_delay
-#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_payment_term_discount_delay
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_move__discount_amount
+msgid "Discount Amount"
+msgstr ""
+
+#. module: account_cash_discount_base
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_move__discount_base_date
+msgid "Discount Base Date"
+msgstr ""
+
+#. module: account_cash_discount_base
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_move__discount_delay
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_payment_term__discount_delay
 msgid "Discount Delay (days)"
 msgstr ""
 
 #. module: account_cash_discount_base
-#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_invoice_discount_due_date_readonly
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_move__discount_due_date
+#: model_terms:ir.ui.view,arch_db:account_cash_discount_base.account_move_form
 msgid "Discount Due Date"
 msgstr ""
 
 #. module: account_cash_discount_base
-#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_invoice_discount_amount
-msgid "Discount amount"
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_move__discount_due_date_readonly
+msgid "Discount Due Date Readonly"
 msgstr ""
 
 #. module: account_cash_discount_base
-#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_invoice_real_discount_amount
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_move__real_discount_amount
 msgid "Discount amount (minus related refunds amount)"
 msgstr ""
 
 #. module: account_cash_discount_base
-#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_invoice_discount_base_date
-msgid "Discount base date"
-msgstr ""
-
-#. module: account_cash_discount_base
-#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_invoice_discount_due_date
-msgid "Discount due date"
-msgstr ""
-
-#. module: account_cash_discount_base
-#: code:addons/account_cash_discount_base/models/res_company.py:25
+#: code:addons/account_cash_discount_base/models/res_company.py:0
 #, python-format
 msgid "Excluding tax"
 msgstr ""
 
 #. module: account_cash_discount_base
-#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_invoice_has_discount
-msgid "Has discount"
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_move__has_discount
+msgid "Has Discount"
 msgstr ""
 
 #. module: account_cash_discount_base
-#: code:addons/account_cash_discount_base/models/res_company.py:26
+#: code:addons/account_cash_discount_base/models/res_company.py:0
 #, python-format
 msgid "Including all taxes"
 msgstr ""
 
 #. module: account_cash_discount_base
-#: model:ir.model,name:account_cash_discount_base.model_account_invoice
-msgid "Invoice"
+#: model:ir.model,name:account_cash_discount_base.model_account_move
+msgid "Journal Entries"
 msgstr ""
 
 #. module: account_cash_discount_base
 #: model:ir.model,name:account_cash_discount_base.model_account_payment_term
-msgid "Payment Term"
+msgid "Payment Terms"
 msgstr ""
 
 #. module: account_cash_discount_base
-#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_invoice_refunds_discount_amount
-msgid "Refunds discount amount"
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_move__refunds_discount_amount
+msgid "Refunds Discount Amount"
 msgstr ""
 
 #. module: account_cash_discount_base
-#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_invoice_residual_with_discount
-msgid "Residual with discount"
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_move__residual_with_discount
+msgid "Residual With Discount"
 msgstr ""
 
 #. module: account_cash_discount_base
-#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_invoice_amount_total_with_discount
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_move__amount_total_with_discount
 msgid "Total (with discount)"
 msgstr ""
 
 #. module: account_cash_discount_base
-#: model:ir.ui.view,arch_db:account_cash_discount_base.report_invoice_document_inherit
+#: model_terms:ir.ui.view,arch_db:account_cash_discount_base.report_invoice_document_inherit
 msgid "Total With a"
 msgstr ""
 
 #. module: account_cash_discount_base
-#: code:addons/account_cash_discount_base/models/account_invoice.py:224
+#: code:addons/account_cash_discount_base/models/account_move.py:0
 #, python-format
-msgid "You can't set a discount amount if there is no discount due date. (Invoice ID: %s)"
+msgid ""
+"You can't set a discount amount if there is no discount due date. (Move ID: "
+"%s)"
 msgstr ""
-
