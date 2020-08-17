@@ -45,12 +45,12 @@ msgid "Payment Order"
 msgstr ""
 
 #. module: account_cash_discount_write_off
-#: model:ir.ui.view,arch_db:account_cash_discount_write_off.res_company_form_view
+#: model_terms:ir.ui.view,arch_db:account_cash_discount_write_off.res_company_form_view
 msgid "Write-Off Account"
 msgstr ""
 
 #. module: account_cash_discount_write_off
-#: model:ir.ui.view,arch_db:account_cash_discount_write_off.res_company_form_view
+#: model_terms:ir.ui.view,arch_db:account_cash_discount_write_off.res_company_form_view
 msgid "Write-Off Journal"
 msgstr ""
 
