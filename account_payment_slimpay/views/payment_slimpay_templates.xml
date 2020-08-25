@@ -3,19 +3,13 @@
     <data>
 
         <template id="slimpay_acquirer_button">
-            <form t-if="acquirer" t-att-action="tx_url" method="post" target="_self">
-                <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-                <t t-if="return_url">
-                    <input type='hidden' name='return_url' t-att-value='return_url'/>
-                </t>
-                <input id="acquirer_slimpay" type='hidden' name="acquirer" t-att-value="acquirer.id"/>
-                <!-- Submit-->
-                <button id="pay_slimpay" type="submit" width="100px" t-att-class="submit_class">
-                    <img t-if="not submit_txt" src="/payment_slimpay/static/src/img/slimpay_icon.png"/>
-                    <span t-if="submit_txt"><t t-esc="submit_txt"/> <span class="fa fa-long-arrow-right"/></span>
-                </button>
-                <script type="text/javascript" src="/payment_slimpay/static/src/js/slimpay.js"></script>
-            </form>
+          <input type="hidden" name="acquirer" t-att-value="acquirer.id" id="acquirer_slimpay"/>
+          <script type="text/javascript">
+            odoo.define(function (require) {
+                var ajax = require('web.ajax');
+                ajax.loadJS("/account_payment_slimpay/static/src/js/slimpay.js");
+            });
+          </script>
         </template>
 
     </data>

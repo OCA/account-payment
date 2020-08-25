@@ -15,11 +15,11 @@ _logger = logging.getLogger(__name__)
 
 
 def get_token(api_url, app_id, app_secret):
-    auth = b64encode(':'.join((app_id, app_secret)))
+    auth = b64encode(b':'.join((bytes(app_id, 'utf-8'), bytes(app_secret, 'utf-8'))))
     resp = requests.post(
         '%s/oauth/token' % api_url,
         headers={'Accept': 'application/json',
-                 'Authorization': 'Basic %s' % auth,
+                 'Authorization': 'Basic %s' % auth.decode('utf-8'),
                  'Content-Type': 'application/x-www-form-urlencoded'},
         data={'grant_type': 'client_credentials', 'scope': 'api'})
     resp.raise_for_status()
@@ -72,7 +72,7 @@ def slimpay_normalize_names(name):
 
     (see https://dev.slimpay.com/hapi/guide/checkout/setting-up-direct-debits)
     """
-    return SLIMPAY_FORBIDEN_CHARS_RE.sub('', name or u'')
+    return SLIMPAY_FORBIDEN_CHARS_RE.sub('', name or '')
 
 
 def subscriber_from_partner(partner):

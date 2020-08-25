@@ -1,6 +1,6 @@
 from mock import patch
 
-from odoo.addons.payment_slimpay.models.payment import SlimpayClient
+from odoo.addons.account_payment_slimpay.models.payment import SlimpayClient
 
 from odoo.tests.common import TransactionCase, at_install, post_install
 
@@ -10,7 +10,7 @@ from odoo.tests.common import TransactionCase, at_install, post_install
 class SlimpayPaymentTC(TransactionCase):
 
     def setUp(self):
-        patcher = patch('odoo.addons.payment_slimpay.models.'
+        patcher = patch('odoo.addons.account_payment_slimpay.models.'
                         'slimpay_utils.get_client')
         patcher.start()
         super(SlimpayPaymentTC, self).setUp()

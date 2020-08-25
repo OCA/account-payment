@@ -1,4 +1,4 @@
-import regex  # not re: we use unicode properties
+import re
 
 from odoo import api, models, _
 
@@ -8,7 +8,7 @@ from ..exceptions import SlimpayPartnerFieldError
 class SlimpayPartner(models.Model):
     _inherit = 'res.partner'
 
-    SLIMPAY_FR_ZIP = regex.compile(u'^[0-9]{5}+$')
+    SLIMPAY_FR_ZIP = re.compile('^[0-9]{5}$')
 
     @api.model
     def _slimpay_check_zip(self, value, country_id=None, **kw):

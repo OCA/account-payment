@@ -1,10 +1,8 @@
-# coding: utf-8
-
 from mock import patch
 
 from odoo.tests.common import TransactionCase, at_install, post_install
 
-from odoo.addons.payment_slimpay.models import slimpay_utils
+from odoo.addons.account_payment_slimpay.models import slimpay_utils
 
 
 @at_install(False)
@@ -15,7 +13,7 @@ class SlimpayUtilsTC(TransactionCase):
         super(SlimpayUtilsTC, self).setUp()
         france = self.env['res.country'].search([('code', '=', 'FR')])
         self.partner = self.env['res.partner'].create(
-            {'firstname': 'F', 'lastname': u'C/@\\é9', 'country_id': france.id})
+            {'firstname': 'F', 'lastname': 'C/@\\é9', 'country_id': france.id})
 
     def check_phone_value(self, expected):
         actual = slimpay_utils.partner_mobile_phone(self.partner)
@@ -33,10 +31,10 @@ class SlimpayUtilsTC(TransactionCase):
     def test_slimpay_signatory(self):
         subscriber = slimpay_utils.subscriber_from_partner(self.partner)
         self.assertEqual(
-            {'familyName': u'Cé', 'email': None, 'givenName': 'F',
+            {'familyName': 'Cé', 'email': None, 'givenName': 'F',
              'telephone': None, 'billingAddress': {
                  'city': None,
-                 'country': u'FR',
+                 'country': 'FR',
                  'postalCode': None,
                  'street1': None,
                  'street2': None}
@@ -48,13 +46,13 @@ class SlimpayUtilsTC(TransactionCase):
         subscriber = slimpay_utils.subscriber_from_partner(self.partner)
         self.assertEqual(self.partner.id, subscriber['reference'])
         self.assertEqual(
-            {'familyName': u'Cé', 'email': None, 'givenName': 'F',
+            {'familyName': 'Cé', 'email': None, 'givenName': 'F',
              'telephone': None, 'billingAddress': {
-                 'city': u'Strasbourg',
-                 'country': u'FR',
-                 'postalCode': u'67000',
-                 'street1': u'2 rue de Rome',
-                 'street2': u'Appt X'}
+                 'city': 'Strasbourg',
+                 'country': 'FR',
+                 'postalCode': '67000',
+                 'street1': '2 rue de Rome',
+                 'street2': 'Appt X'}
              }, subscriber['signatory'])
 
     def test_slimpay_api_create_order(self):
@@ -74,5 +72,5 @@ class SlimpayUtilsTC(TransactionCase):
         self.assertIn('signatory', sign['mandate'])
         self.assertEqual(149.20, payment['payin']['amount'])
         self.assertEqual('so', payment['payin']['label'])
-        self.assertEqual(u'EUR', payment['payin']['currency'])
+        self.assertEqual('EUR', payment['payin']['currency'])
         self.assertEqual('https://commown.fr/', payment['payin']['notifyUrl'])
