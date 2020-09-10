@@ -2,24 +2,22 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
-    'name': 'Account Payment Return Import Iso20022',
-    'summary': """
+    "name": "Account Payment Return Import Iso20022",
+    "summary": """
         This addon allows to import payment returns from ISO 20022 files
         like PAIN or CAMT.""",
-    'version': '12.0.1.1.0',
-    'development_status': 'Production/Stable',
-    'license': 'AGPL-3',
-    'author': 'Odoo Community Association (OCA),Tecnativa,ACSONE SA/NV',
-    'website': 'https://github.com/OCA/account-payment/tree/12.0/'
-               'account_payment_return_import_iso20022',
-    'depends': [
+    "version": "12.0.1.1.0",
+    "development_status": "Production/Stable",
+    "license": "AGPL-3",
+    "author": "Odoo Community Association (OCA),Tecnativa,ACSONE SA/NV",
+    "website": "https://github.com/OCA/account-payment/tree/12.0/"
+    "account_payment_return_import_iso20022",
+    "depends": [
         # OCA/account-payment
-        'account_payment_return',
-        'account_payment_return_import',
+        "account_payment_return",
+        "account_payment_return_import",
         # OCA/bank-payment
-        'account_payment_order',
+        "account_payment_order",
     ],
-    'data': [
-        "data/payment.return.reason.csv"
-    ],
+    "data": ["data/payment.return.reason.csv"],
 }
