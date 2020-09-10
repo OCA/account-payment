@@ -41,13 +41,13 @@ class ResPartnerAgingCustomer(models.Model):
                     aml.amount_residual<0) THEN -(aml.credit-(select
                     coalesce(sum(apr.amount),0) from account_partial_reconcile
                     apr where (apr.credit_move_id =aml.id or
-                    apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    apr.debit_move_id=aml.id) and apr.create_date <= '{}'))
                     WHEN (aml.full_reconcile_id is NULL and
                     aml.amount_residual>0) THEN aml.debit-(select
                     coalesce(sum(apr.amount),0) from
                     account_partial_reconcile apr where
                     (apr.credit_move_id =aml.id or
-                    apr.debit_move_id=aml.id) and apr.create_date <= '%s')
+                    apr.debit_move_id=aml.id) and apr.create_date <= '{}')
                     WHEN (aml.full_reconcile_id is NOT NULL) THEN
                     aml.amount_residual END ELSE 0 END AS days_due_01to30,
 
@@ -56,13 +56,13 @@ class ResPartnerAgingCustomer(models.Model):
                     aml.amount_residual<0) THEN -(aml.credit-(select
                     coalesce(sum(apr.amount),0) from account_partial_reconcile
                     apr where (apr.credit_move_id =aml.id or
-                    apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    apr.debit_move_id=aml.id) and apr.create_date <= '{}'))
                     WHEN (aml.full_reconcile_id is NULL and
                     aml.amount_residual>0) THEN aml.debit-(select
                     coalesce(sum(apr.amount),0) from
                     account_partial_reconcile apr where
                     (apr.credit_move_id =aml.id or
-                    apr.debit_move_id=aml.id) and apr.create_date <= '%s')
+                    apr.debit_move_id=aml.id) and apr.create_date <= '{}')
                     WHEN (aml.full_reconcile_id is NOT NULL) THEN
                     aml.amount_residual END ELSE 0 END AS days_due_31to60,
 
@@ -71,13 +71,13 @@ class ResPartnerAgingCustomer(models.Model):
                     aml.amount_residual<0) THEN -(aml.credit-(select
                     coalesce(sum(apr.amount),0) from account_partial_reconcile
                     apr where (apr.credit_move_id =aml.id or
-                    apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    apr.debit_move_id=aml.id) and apr.create_date <= '{}'))
                     WHEN (aml.full_reconcile_id is NULL and
                     aml.amount_residual>0) THEN aml.debit-(select
                     coalesce(sum(apr.amount),0) from
                     account_partial_reconcile apr where
                     (apr.credit_move_id =aml.id or
-                    apr.debit_move_id=aml.id) and apr.create_date <= '%s')
+                    apr.debit_move_id=aml.id) and apr.create_date <= '{}')
                     WHEN (aml.full_reconcile_id is NOT NULL) THEN
                     aml.amount_residual END ELSE 0 END AS days_due_61to90,
 
@@ -86,14 +86,14 @@ class ResPartnerAgingCustomer(models.Model):
                     aml.amount_residual<0) THEN -(aml.credit-(select
                     coalesce(sum(apr.amount),0) from account_partial_reconcile
                     apr where (apr.credit_move_id =aml.id or
-                    apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    apr.debit_move_id=aml.id) and apr.create_date <= '{}'))
                     WHEN (aml.full_reconcile_id is NULL and
                     aml.amount_residual>0) THEN aml.debit-(select
                     coalesce(sum(apr.amount),0) from
                     account_partial_reconcile apr where
                     (apr.credit_move_id =aml.id or
                     apr.debit_move_id=aml.id) and
-                    apr.create_date <= '%s')
+                    apr.create_date <= '{}')
                     WHEN (aml.full_reconcile_id is NOT NULL) THEN
                     aml.amount_residual END ELSE 0 END AS days_due_91to120,
 
@@ -102,12 +102,12 @@ class ResPartnerAgingCustomer(models.Model):
                     aml.amount_residual<0) THEN -(aml.credit-(select
                     coalesce(sum(apr.amount),0) from account_partial_reconcile
                     apr where (apr.credit_move_id =aml.id or
-                    apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    apr.debit_move_id=aml.id) and apr.create_date <= '{}'))
                     WHEN (aml.full_reconcile_id is NULL and
                     aml.amount_residual>0) THEN aml.debit-(select
                     coalesce(sum(apr.amount),0) from account_partial_reconcile
                     apr where (apr.credit_move_id =aml.id or
-                    apr.debit_move_id=aml.id) and apr.create_date <= '%s')
+                    apr.debit_move_id=aml.id) and apr.create_date <= '{}')
                     WHEN (aml.full_reconcile_id is NOT NULL) THEN
                     aml.amount_residual END ELSE 0 END AS days_due_121togr,
 
@@ -118,12 +118,12 @@ class ResPartnerAgingCustomer(models.Model):
                     aml.amount_residual<0) THEN -(aml.credit-(select
                     coalesce(sum(apr.amount),0) from account_partial_reconcile
                     apr where (apr.credit_move_id =aml.id or
-                    apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    apr.debit_move_id=aml.id) and apr.create_date <= '{}'))
                     WHEN (aml.full_reconcile_id is NULL and
                     aml.amount_residual>0) THEN aml.debit-(select
                     coalesce(sum(apr.amount),0) from account_partial_reconcile
                     apr where (apr.credit_move_id =aml.id or
-                    apr.debit_move_id=aml.id) and apr.create_date <= '%s')
+                    apr.debit_move_id=aml.id) and apr.create_date <= '{}')
                     WHEN (aml.full_reconcile_id is NOT NULL) THEN
                     aml.amount_residual END ELSE 0 END AS not_due,
 
@@ -131,12 +131,12 @@ class ResPartnerAgingCustomer(models.Model):
                     aml.amount_residual<0) THEN -(aml.credit-(select
                     coalesce(sum(apr.amount),0) from account_partial_reconcile
                     apr where (apr.credit_move_id =aml.id or
-                    apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    apr.debit_move_id=aml.id) and apr.create_date <= '{}'))
                     WHEN (aml.full_reconcile_id is NULL and
                     aml.amount_residual>0) THEN aml.debit-(select
                     coalesce(sum(apr.amount),0) from account_partial_reconcile
                     apr where (apr.credit_move_id =aml.id or
-                    apr.debit_move_id=aml.id) and apr.create_date <= '%s')
+                    apr.debit_move_id=aml.id) and apr.create_date <= '{}')
                     WHEN (aml.full_reconcile_id is NOT NULL) THEN
                     aml.amount_residual END AS total,
                     ai.id as invoice_id,
@@ -145,7 +145,7 @@ class ResPartnerAgingCustomer(models.Model):
                 INNER JOIN
                     (SELECT lt.id,
                     CASE WHEN inv.invoice_date_due is null then 0
-                    WHEN inv.id is not null THEN '%s' - inv.invoice_date_due
+                    WHEN inv.id is not null THEN '{}' - inv.invoice_date_due
                     ELSE current_date - lt.date END AS days_due
                     FROM account_move_line lt LEFT JOIN account_move inv
                     on lt.move_id = inv.id) DaysDue
@@ -154,7 +154,7 @@ class ResPartnerAgingCustomer(models.Model):
                 WHERE ac.user_type_id in
                     (select id from account_account_type where
                     type = 'receivable') and aml.date
-                    <= '%s' AND ai.state = 'posted' AND
+                    <= '{}' AND ai.state = 'posted' AND
                     (ai.invoice_payment_state != 'paid' OR
                     aml.full_reconcile_id IS NULL) AND ai.type = 'out_invoice'
                     GROUP BY aml.partner_id,
@@ -170,12 +170,12 @@ class ResPartnerAgingCustomer(models.Model):
                     aml.amount_residual<0) THEN -(aml.credit-(select
                     coalesce(sum(apr.amount),0) from account_partial_reconcile
                     apr where (apr.credit_move_id =aml.id or
-                    apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    apr.debit_move_id=aml.id) and apr.create_date <= '{}'))
                     WHEN (aml.full_reconcile_id is NULL and
                     aml.amount_residual>0) THEN aml.debit-(select
                     coalesce(sum(apr.amount),0) from account_partial_reconcile
                     apr where (apr.credit_move_id =aml.id or
-                    apr.debit_move_id=aml.id) and apr.create_date <= '%s')
+                    apr.debit_move_id=aml.id) and apr.create_date <= '{}')
                     WHEN (aml.full_reconcile_id is NOT NULL) THEN
                     aml.amount_residual END ELSE 0 END AS days_due_01to30,
 
@@ -184,14 +184,14 @@ class ResPartnerAgingCustomer(models.Model):
                     aml.amount_residual<0) THEN -(aml.credit-(select
                     coalesce(sum(apr.amount),0) from account_partial_reconcile
                     apr where (apr.credit_move_id =aml.id or
-                    apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    apr.debit_move_id=aml.id) and apr.create_date <= '{}'))
                         WHEN (aml.full_reconcile_id is NULL and
                         aml.amount_residual>0) THEN aml.debit-(select
                         coalesce(sum(apr.amount),0) from
                         account_partial_reconcile apr where
                         (apr.credit_move_id =aml.id or
                         apr.debit_move_id=aml.id)
-                        and apr.create_date <= '%s')
+                        and apr.create_date <= '{}')
                         WHEN (aml.full_reconcile_id is NOT NULL) THEN
                         aml.amount_residual END ELSE 0 END AS days_due_31to60,
 
@@ -200,13 +200,13 @@ class ResPartnerAgingCustomer(models.Model):
                     aml.amount_residual<0) THEN -(aml.credit-(select
                     coalesce(sum(apr.amount),0) from account_partial_reconcile
                     apr where (apr.credit_move_id =aml.id or
-                    apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    apr.debit_move_id=aml.id) and apr.create_date <= '{}'))
                     WHEN (aml.full_reconcile_id is NULL and
                     aml.amount_residual>0) THEN aml.debit-(select
                     coalesce(sum(apr.amount),0) from
                     account_partial_reconcile apr where
                     (apr.credit_move_id =aml.id or
-                    apr.debit_move_id=aml.id) and apr.create_date <= '%s')
+                    apr.debit_move_id=aml.id) and apr.create_date <= '{}')
                     WHEN (aml.full_reconcile_id is NOT NULL) THEN
                     aml.amount_residual END ELSE 0 END AS days_due_61to90,
 
@@ -216,12 +216,12 @@ class ResPartnerAgingCustomer(models.Model):
                     coalesce(sum(apr.amount),0) from
                     account_partial_reconcile apr where
                     (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id)
-                    and apr.create_date <= '%s')) WHEN (aml.full_reconcile_id
+                    and apr.create_date <= '{}')) WHEN (aml.full_reconcile_id
                     is NULL and aml.amount_residual>0) THEN
                     aml.debit-(select coalesce(sum(apr.amount),0) from
                     account_partial_reconcile apr where
                     (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id)
-                    and apr.create_date <= '%s')
+                    and apr.create_date <= '{}')
                     WHEN (aml.full_reconcile_id is NOT NULL) THEN
                     aml.amount_residual END ELSE 0 END AS days_due_91to120,
 
@@ -231,11 +231,11 @@ class ResPartnerAgingCustomer(models.Model):
                     coalesce(sum(apr.amount),0) from
                     account_partial_reconcile apr where
                     (apr.credit_move_id =aml.id or apr.debit_move_id=aml.id)
-                    and apr.create_date <= '%s')) WHEN (aml.full_reconcile_id
+                    and apr.create_date <= '{}')) WHEN (aml.full_reconcile_id
                     is NULL and aml.amount_residual>0) THEN aml.debit-(select
                     coalesce(sum(apr.amount),0) from account_partial_reconcile
                     apr where (apr.credit_move_id =aml.id or
-                    apr.debit_move_id=aml.id) and apr.create_date <= '%s')
+                    apr.debit_move_id=aml.id) and apr.create_date <= '{}')
                     WHEN (aml.full_reconcile_id is NOT NULL) THEN
                     aml.amount_residual END ELSE 0 END AS days_due_121togr,
 
@@ -247,12 +247,12 @@ class ResPartnerAgingCustomer(models.Model):
                     aml.amount_residual<0) THEN -(aml.credit-(select
                     coalesce(sum(apr.amount),0) from account_partial_reconcile
                     apr where (apr.credit_move_id =aml.id or
-                    apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    apr.debit_move_id=aml.id) and apr.create_date <= '{}'))
                     WHEN (aml.full_reconcile_id is NULL and
                     aml.amount_residual>0) THEN aml.debit-(select
                     coalesce(sum(apr.amount),0) from account_partial_reconcile
                     apr where (apr.credit_move_id =aml.id or
-                    apr.debit_move_id=aml.id) and apr.create_date <= '%s')
+                    apr.debit_move_id=aml.id) and apr.create_date <= '{}')
                     WHEN (aml.full_reconcile_id is NOT NULL) THEN
                     aml.amount_residual END ELSE 0 END AS not_due,
 
@@ -260,12 +260,12 @@ class ResPartnerAgingCustomer(models.Model):
                     aml.amount_residual<0) THEN -(aml.credit-(select
                     coalesce(sum(apr.amount),0) from account_partial_reconcile
                     apr where (apr.credit_move_id =aml.id or
-                    apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    apr.debit_move_id=aml.id) and apr.create_date <= '{}'))
                     WHEN (aml.full_reconcile_id is NULL and
                     aml.amount_residual>0) THEN aml.debit-(select
                     coalesce(sum(apr.amount),0) from account_partial_reconcile
                     apr where (apr.credit_move_id =aml.id or
-                    apr.debit_move_id=aml.id) and apr.create_date <= '%s')
+                    apr.debit_move_id=aml.id) and apr.create_date <= '{}')
                     WHEN (aml.full_reconcile_id is NOT NULL) THEN
                     aml.amount_residual END AS total,
                     ai.id as invoice_id,
@@ -275,7 +275,7 @@ class ResPartnerAgingCustomer(models.Model):
                       (
                        SELECT lt.id,
                        CASE WHEN inv.invoice_date_due is null then 0
-                       WHEN inv.id is not null THEN '%s' - inv.invoice_date_due
+                       WHEN inv.id is not null THEN '{}' - inv.invoice_date_due
                        ELSE current_date - lt.date END AS days_due
                        FROM account_move_line lt LEFT JOIN account_move
                        inv on lt.move_id = inv.id
@@ -284,7 +284,7 @@ class ResPartnerAgingCustomer(models.Model):
                 LEFT JOIN account_move as ai ON ai.id = aml.move_id
                 WHERE ac.user_type_id in (select id from account_account_type
                 where type = 'receivable')
-                AND aml.date <= '%s'
+                AND aml.date <= '{}'
                 AND aml.partner_id IS NULL
                 AND aml.full_reconcile_id is NULL
                 GROUP BY aml.partner_id, aml.id, ai.name, days_due,
@@ -306,18 +306,18 @@ class ResPartnerAgingCustomer(models.Model):
                         CASE WHEN (aml.credit - (select sum(debit)
                         from account_move_line l where
                         l.full_reconcile_id = aml.full_reconcile_id and
-                        l.date<='%s')) > 0 then -(aml.credit - (select
+                        l.date<='{}')) > 0 then -(aml.credit - (select
                         sum(debit) from account_move_line l where
                         l.full_reconcile_id = aml.full_reconcile_id and
-                        l.date<='%s')) ELSE 0 END AS total,
+                        l.date<='{}')) ELSE 0 END AS total,
                         null as invoice_id, aml.date as inv_date_due
                 from account_move_line aml
-                where aml.date <= '%s'
+                where aml.date <= '{}'
                 and aml.full_reconcile_id IS NOT NULL
                 and aml.account_id in (select id from
                 account_account_type where type = 'receivable')
                 and aml.credit > 0
-              """ % (
+              """.format(
             age_date,
             age_date,
             age_date,
