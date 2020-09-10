@@ -1,5 +1,8 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<Document xmlns="urn:iso:std:iso:20022:tech:xsd:other.054.001.02" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<?xml version="1.0" encoding="UTF-8" ?>
+<Document
+    xmlns="urn:iso:std:iso:20022:tech:xsd:other.054.001.02"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+>
     <BkToCstmrDbtCdtNtfctn>
         <GrpHdr>
             <MsgId>MSGID99345678912</MsgId>
