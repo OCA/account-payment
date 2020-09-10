@@ -1,13 +1,13 @@
-# Copyright 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
+# Copyright 2016 Tecnativa - Carlos Dauden
+# Copyright 2020 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import api, models
+from odoo import models
 
 
 class PaymentReturnLine(models.Model):
     _inherit = "payment.return.line"
 
-    @api.multi
     def _find_match(self):
         AccountMoveLine = self.env["account.move.line"]
         lines = self.filtered(lambda x: not x.move_line_ids and x.reference)
