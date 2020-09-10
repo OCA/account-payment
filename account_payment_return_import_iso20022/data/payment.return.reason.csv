@@ -1,5 +1,5 @@
 id,code,name
-unpaid_reason_AB01,AB01,Clearing process aborted due to timeout.   
+unpaid_reason_AB01,AB01,Clearing process aborted due to timeout.
 unpaid_reason_AB02,AB02,Clearing process aborted due to a fatal error.   
 unpaid_reason_AB03,AB03,Settlement aborted due to timeout.   
 unpaid_reason_AB04,AB04,Settlement process aborted due to a fatal error.   
@@ -12,7 +12,7 @@ unpaid_reason_AB10,AB10,Transaction stopped due to error at the Instructed Agent
 unpaid_reason_AC01,AC01,Account number is invalid or missing.
 unpaid_reason_AC02,AC02,Debtor account number invalid or missing
 unpaid_reason_AC03,AC03,Creditor account number invalid or missing
-unpaid_reason_AC04,AC04,Account number specified has been closed on the bank of account's books. 
+unpaid_reason_AC04,AC04,Account number specified has been closed on the bank of account's books.
 unpaid_reason_AC05,AC05,Debtor account number closed
 unpaid_reason_AC06,AC06,"Account specified is blocked, prohibiting posting of transactions against it."
 unpaid_reason_AC07,AC07,Creditor account number closed
@@ -26,7 +26,7 @@ unpaid_reason_AC14,AC14,Creditor account type missing or invalid
 unpaid_reason_AC15,AC15,The account details for the counterparty have changed.
 unpaid_reason_AG01,AG01,Transaction forbidden on this type of account (formerly NoAgreement)
 unpaid_reason_AG02,AG02,Bank Operation code specified in the message is not valid for receiver
-unpaid_reason_AG03,AG03,Transaction type not supported/authorized on this account 
+unpaid_reason_AG03,AG03,Transaction type not supported/authorized on this account
 unpaid_reason_AG04,AG04,Agent country code is missing or invalid.
 unpaid_reason_AG05,AG05,Debtor agent country code is missing or invalid
 unpaid_reason_AG06,AG06,Creditor agent country code is missing or invalid
@@ -93,15 +93,15 @@ unpaid_reason_CH16,CH16,Content is incorrect
 unpaid_reason_CH17,CH17,Element is not allowed
 unpaid_reason_CH19,CH19,Values in Interbank Settlement Date or Requested Collection Date will be set to the next TARGET day
 unpaid_reason_CH20,CH20,Number of decimal points not compatible with the currency
-unpaid_reason_CH21,CH21,Mandatory element is missing 
-unpaid_reason_CH22,CH22,SDD CORE and B2B not permitted within one message 
+unpaid_reason_CH21,CH21,Mandatory element is missing
+unpaid_reason_CH22,CH22,SDD CORE and B2B not permitted within one message
 unpaid_reason_CNOR,CNOR,Creditor bank is not registered under this BIC in the CSM
 unpaid_reason_CURR,CURR,Currency of the payment is incorrect
 unpaid_reason_CUST,CUST,Cancellation requested by the Debtor
 unpaid_reason_DNOR,DNOR,Debtor bank is not registered under this BIC in the CSM
 unpaid_reason_DS01,DS01,The electronic signature(s) is/are correct
 unpaid_reason_DS02,DS02,An authorized user has cancelled the order
-unpaid_reason_DS03,DS03,The user’s attempt to cancel the order was not successful 
+unpaid_reason_DS03,DS03,The user’s attempt to cancel the order was not successful
 unpaid_reason_DS04,DS04,The order was rejected by the bank side (for reasons concerning content)
 unpaid_reason_DS05,DS05,The order was correct and could be forwarded for postprocessing
 unpaid_reason_DS06,DS06,The order was transferred to VEU
