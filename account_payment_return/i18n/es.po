@@ -403,6 +403,14 @@ msgid "Payment Reference"
 msgstr "Referencia de cobro"
 
 #. module: account_payment_return
+#: model:ir.actions.act_window,name:account_payment_return.payment_return_reason_action
+#: model:ir.ui.menu,name:account_payment_return.payment_return_reason_menu
+#, fuzzy
+#| msgid "Payment return reason"
+msgid "Payment Return Reasons"
+msgstr "Motivos de devolución"
+
+#. module: account_payment_return
 #: code:addons/account_payment_return/models/payment_return.py:113
 #, python-format
 msgid ""
@@ -427,6 +435,8 @@ msgstr "Líneas de la devolución"
 
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_payment_return_reason
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_reason_form_view
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_reason_tree_view
 msgid "Payment return reason"
 msgstr "Motivos de devolución"
 
