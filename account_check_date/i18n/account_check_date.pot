@@ -1,0 +1,25 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_check_date
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_check_date
+#: model:ir.model.fields,field_description:account_check_date.field_account_payment__check_date
+#: model_terms:ir.ui.view,arch_db:account_check_date.view_payment_check_date_search
+msgid "Check Date"
+msgstr ""
+
+#. module: account_check_date
+#: model:ir.model,name:account_check_date.model_account_payment
+msgid "Payments"
+msgstr ""
