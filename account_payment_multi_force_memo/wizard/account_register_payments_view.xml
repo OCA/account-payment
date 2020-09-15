@@ -1,0 +1,13 @@
+<odoo>
+    <record id="view_account_payment_from_invoices_inherit_show_communication" model="ir.ui.view">
+        <field name="name">view.account.payment.from.invoices.inherit.show.communication</field>
+        <field name="model">account.register.payments</field>
+        <field name="inherit_id" ref="account.view_account_payment_from_invoices"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='show_communication_field']" position="attributes">
+                <attribute name="invisible">0</attribute>
+                <attribute name="readonly">0</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
