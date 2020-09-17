@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record model="ir.actions.act_window" id="action_sale_account_payment">
+        <field name="name">Payments</field>
+        <field name="res_model">account.payment</field>
+        <field
+            name="groups_id"
+            eval="[(4, ref('sales_team.group_sale_salesman')),(4, ref('sales_team.group_sale_salesman_all_leads')),(4, ref('sales_team.group_sale_manager'))]"
+        />
+        <field name="view_mode">tree,form</field>
+        <field
+            name="context"
+        >{'default_payment_type': 'inbound','default_partner_type': 'customer'}</field>
+        <field
+            name="view_ids"
+            eval="[(5, 0, 0),(0, 0, {'view_mode': 'tree', 'view_id': ref('account.view_account_payment_tree')})]"
+        />
+    </record>
+    <menuitem
+        name="Payments"
+        parent="sale.sale_order_menu"
+        action="action_sale_account_payment"
+        id="menu_action_sale_account_payments"
+        sequence="50"
+        groups="sales_team.group_sale_salesman,sales_team.group_sale_salesman_all_leads,sales_team.group_sale_manager"
+    />
+</odoo>

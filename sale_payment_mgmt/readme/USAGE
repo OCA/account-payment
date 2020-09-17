@@ -1,0 +1,13 @@
+To use this module, you need to go to:
+
+* Sales > Orders > Payments
+
+A salesman can register payments with these steps:
+
+#. Go to Sales > Orders > Orders.
+#. Click on an invoiced sales order.
+#. Click on the smart-button "Invoices" in the upper right part of the order.
+#. Click on the button "Register Payment".
+#. Select the amount if different from the total or let the default total one.
+#. Select the payment method.
+#. Click on the button "Validate".
