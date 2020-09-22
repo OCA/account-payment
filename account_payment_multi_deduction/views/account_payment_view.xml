@@ -3,6 +3,7 @@
         <field name="name">view.account.payment.form</field>
         <field name="model">account.payment</field>
         <field name="inherit_id" ref="account.view_account_payment_form" />
+        <field name="groups_id" eval="[(4, ref('account.group_account_invoice'))]" />
         <field name="arch" type="xml">
             <xpath
                 expr="/form/sheet/group/group[@name='payment_difference']/div/div"
