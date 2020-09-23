@@ -137,6 +137,18 @@ class PaymentToken(models.Model):
     save_token = fields.Boolean(default=True)
     expiry_date = fields.Date()
 
+    def _get_expiry_month_year(self, values):
+        """
+        Given a credit card values dict, returns the expiry month and year.
+        They might be already given in the "cc_expiry_month" and "cc_expiry_year" keys.
+        Otherwise they need to extracted from the "cc_expiry" key instead.
+        """
+        if "cc_expiry_month" in values and "cc_expiry_year" in values:
+            return (values["cc_expiry_month"], values["cc_expiry_year"])
+        else:
+            expiry = [x.strip() for x in values["cc_expiry"].split("/")]
+            return tuple(expiry)
+
     @api.model
     def _ippay_get_token(self, values):
         acquirer = self.env["payment.acquirer"].browse(values["acquirer_id"])
@@ -194,10 +206,9 @@ class PaymentToken(models.Model):
             )
         # In case we already know the token assigned, just use it
         token_code = token_code or self._ippay_get_token(values)
+        month, year = self._get_expiry_month_year(values)
         expiry_date = fields.Date.end_of(
-                fields.Date.to_date(
-                    '20%s-%s-01' %  # Beware year 2100!
-                    (values["cc_expiry_year"], values["cc_expiry_month"])),
+                fields.Date.to_date('20%s-%s-01' % (year, month)),  # Beware year 2100!
                 'month')
         return {
             "name": "XXXXXXXXXXXX%s - %s"
