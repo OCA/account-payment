@@ -83,4 +83,52 @@
         </t>
     </template>
 
+    <template id="report_check_base_a4">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-set="o" t-value="o.with_context(lang = o.partner_id.lang)" />
+                <t t-call="web.external_layout">
+                    <div class="page">
+                        <div id="check_body">
+                            <p>Dear partner</p>
+                            <p>
+                                We attach the list of invoices paid with this check with amount of
+                                <span t-field="o.amount" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}" />
+                            </p>
+                            <div class="col-10 col-offset-2 mt32">
+                                <table class="table table-sm table-borderless">
+                                    <thead>
+                                        <tr>
+                                            <th>Invoice / Reference</th>
+                                            <th>Due Date</th>
+                                            <th class="text-right">Original Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <t t-foreach="paid_lines[o.id]" t-as="line">
+                                            <tr>
+                                                <td>
+                                                    <span t-esc="line['reference'] or line['number']" />
+                                                </td>
+                                                <td>
+                                                    <span t-esc="line['date_due']" />
+                                                </td>
+                                                <td class="text-right">
+                                                    <span t-esc="line['residual'] or line['amount_total']" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}" />
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 mt64">Waiting for your agreement, regards.</div>
+                            </div>
+                        </div>
+                    </div>
+                </t>
+            </t>
+        </t>
+    </template>
+
 </odoo>

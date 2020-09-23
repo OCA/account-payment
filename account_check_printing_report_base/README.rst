@@ -33,13 +33,6 @@ layout.
 .. contents::
    :local:
 
-Installation
-============
-
-In order to install this module you must first install also the module
-'report_paper_wkhtmltopdf_params', available in
-https://github.com/OCA/server-tools
-
 Configuration
 =============
 
@@ -88,8 +81,11 @@ Contributors
 * Jordi Ballester Alomar <jordi.ballester@eficent.com>
 * Lois Rilo Antelo <lois.rilo@eficent.com>
 * Sandip Mangukiya <smangukiya@ursainfosystems.com>
-* Luis M. Ontalba <luis.martinez@tecnativa.com>
 * Manuel Marquez <mmarquez@iterativo.do>
+* `Tecnativa <https://www.tecnativa.com>`_:
+
+  * Luis M. Ontalba
+  * Carlos Roca
 
 Maintainers
 ~~~~~~~~~~~

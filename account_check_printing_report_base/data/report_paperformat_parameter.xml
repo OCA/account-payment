@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<odoo>
-    <record id="paperformat_base_parameter_disable_smart_shrinking"
-            model="report.paperformat.parameter">
-        <field name="paperformat_id"
-               ref="account_check_printing_report_base.paperformat_check"/>
-        <field name="name">--disable-smart-shrinking</field>
-    </record>
-</odoo>
