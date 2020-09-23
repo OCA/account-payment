@@ -113,3 +113,8 @@ class ReportCheckPrint(models.AbstractModel):
             '_format_date_to_partner_lang': self._format_date_to_partner_lang,
         }
         return docargs
+
+
+class ReportCheckPrintA4(models.AbstractModel):
+    _name = 'report.account_check_printing_report_base.report_check_base_a4'
+    _inherit = 'report.account_check_printing_report_base.report_check_base'
