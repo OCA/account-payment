@@ -1,8 +1,10 @@
 import logging
 
 from iso8601 import parse_date
+from coreapi.exceptions import ErrorMessage
 
-from odoo import models, fields, api
+from odoo import models, fields, api, _
+from odoo.exceptions import UserError
 from odoo.tools.safe_eval import safe_eval
 
 from .slimpay_utils import SlimpayClient
@@ -96,6 +98,22 @@ class PaymentAcquirerSlimpay(models.Model):
 class SlimpayTransaction(models.Model):
     _inherit = 'payment.transaction'
 
+    def _is_out_transaction(self):
+        """ Determine using the context of the transaction if it is inward or
+        outward. At time of writing, the only case that is properly handled is
+        when an out_invoice is create through the interface.
+        It seems difficult to improve it without changing Odoo, as the payment
+        module implementation of the `_do_payment` method does not give any
+        information to the transaction regarding the direction of the payment,
+        the payment itself being linked to the transaction after the
+        `s2s_do_transaction` call.
+        Note that in odoo v12, the transaction `payment_id` relation will make
+        this test much more reliable.
+        """
+        self.ensure_one()
+        return (self.env.context.get('type') == 'out_invoice'
+               and self.env.context.get('active_model') == 'account.invoice')
+
     @api.multi
     def slimpay_s2s_do_transaction(self, **kwargs):
         """ Perform a payment through a server to server call using a previously
@@ -108,11 +126,14 @@ class SlimpayTransaction(models.Model):
         _logger.debug('Found mandate reference: %s', mandate_ref)
         label = self.env.context.get(
             'slimpay_payin_label', self.reference or 'TR%d' % self.id)
-        result, acquirer_reference = client.create_payin(
-            mandate_ref, self.amount, self.currency_id.name,
-            self.currency_id.decimal_places, label)
-        _logger.debug('Payin creation result: %s, reference: %s',
-                      result, acquirer_reference)
-        self.update({'state': 'done' if result else 'error',
+        amount = round(self.amount, self.currency_id.decimal_places)
+        out = self._is_out_transaction()
+        try:
+            acquirer_reference = client.create_payment(
+                mandate_ref, amount, self.currency_id.name, label, out=out)
+            _logger.debug('Payment creation result: %s', acquirer_reference)
+        except ErrorMessage as exc:
+            raise UserError(_(exc))
+        self.update({'state': 'done' if acquirer_reference else 'error',
                      'acquirer_reference': acquirer_reference})
-        return result
+        return bool(acquirer_reference)

@@ -131,25 +131,35 @@ class SlimpayClient(object):
         _logger.debug("User approval URL is: %s", url)
         return url
 
-    def create_payin(self, mandate_ref, amount, currency,
-                     decimal_places, payin_label):
+    def create_payment(self, mandate_ref, amount, currency, label, out=False):
+        """ Create a Slimpay payin or payout depending on `out` boolean value.
+        Returns False if it fails, otherwise Slimpay payment's reference.
+        """
+        if out:
+            scheme = 'SEPA.CREDIT_TRANSFER'
+            method = 'create-payouts'
+        else:
+            scheme = 'SEPA.DIRECT_DEBIT.CORE'
+            method = 'create-payins'
         params = {
             'creditor': {'reference': self.creditor},
             'mandate': {'reference': mandate_ref},
-            'label': payin_label,
-            'amount': round(amount, decimal_places),
+            'label': label,
+            'amount': amount,
             'currency': currency,
-            'scheme': 'SEPA.DIRECT_DEBIT.CORE',
+            'scheme': scheme,
             'executionDate': None,  # means ASAP
         }
-        response = self.action('POST', 'create-payins', params=params)
-        _logger.debug('create-payins reponse: %s', response)
+        _logger.debug('Payment creation with params: %s (method: %s)',
+                      params, method)
+        response = self.action('POST', method, params=params)
+        _logger.debug('%s reponse: %s', method, response)
         if response.get('executionStatus') != 'toprocess':
             _logger.error(
                 'Invalid slimpay payment response for transaction:\n %r',
                 response)
-            return False, None
-        return response.get('state') == 'accepted', response['reference']
+            return False
+        return response.get('state') == 'accepted' and response['reference']
 
     def get(self, url):
         """ Expose the raw coreapi `get` method """
