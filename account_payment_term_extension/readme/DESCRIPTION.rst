@@ -1,5 +1,6 @@
 This module extends the functionality of payment terms to :
 
+* support payment term option, days after end of week
 * support rounding, months and weeks on payment term lines
 * allow to set more than one day of payment in payment terms
 * if a payment term date is a holiday, it is postponed to a selected date

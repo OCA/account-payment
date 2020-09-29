@@ -76,6 +76,23 @@ class AccountPaymentTermLine(models.Model):
     )
     months = fields.Integer(string="Number of Months")
     weeks = fields.Integer(string="Number of Weeks")
+    option = fields.Selection(
+        selection_add=[("day_after_next_weekday", "days after next week day")],
+    )
+    week_end = fields.Selection(
+        [
+            ("1", "Monday"),
+            ("2", "Tuesday"),
+            ("3", "Wednesday"),
+            ("4", "Thursday"),
+            ("5", "Friday"),
+            ("6", "Saturday"),
+            ("7", "Sunday"),
+        ],
+        string="Last Day of Week",
+        required=True,
+        default="7",
+    )
 
     def compute_line_amount(self, total_amount, remaining_amount, precision_digits):
         """Compute the amount for a payment term line.
@@ -203,6 +220,19 @@ class AccountPaymentTerm(models.Model):
             elif line.option == "day_current_month":
                 # Getting last day of next month
                 next_date += relativedelta(day=line.days, months=0)
+            elif line.option == "day_after_next_weekday":
+                # Getting date from days after end of week.
+                # I.e., if date_ref is Wed 5th, Thu 6th or Fri 7th
+                # and the last day of week is Sun 9th
+                # 5 days after that is -- Friday 14th --
+                # --
+                # force_week_start are Monday = "1" ... Sunday = "7"
+                week_end = int(line.week_end) - 1
+                to_weekend = (week_end - next_date.weekday()) % 7
+                # To days after this weekend
+                next_date += relativedelta(
+                    days=to_weekend + line.days, weeks=line.weeks, months=line.months
+                )
             next_date = self.apply_payment_days(line, next_date)
             next_date = self.apply_holidays(next_date)
             if not float_is_zero(amt, precision_digits=precision_digits):

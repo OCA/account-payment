@@ -53,6 +53,13 @@
                 </div>
             </xpath>
             <field name="option" position="after">
+                <label for="week_end" string="" />
+                <!--Empty label to force space between elements-->
+                <field
+                    name="week_end"
+                    class="oe_inline"
+                    attrs="{'invisible': [('option', '!=', 'day_after_next_weekday')]}"
+                />
                 <br />
                 <label
                     for="weeks"

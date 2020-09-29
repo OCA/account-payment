@@ -11,3 +11,7 @@
 * `Domatix <https://domatix.com>`:
 
   * Carlos Martínez
+
+* `Ecosoft <http://ecosoft.co.th>`:
+
+  * Kitti U. <kittiu@ecosoft.co.th>

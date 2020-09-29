@@ -12,6 +12,9 @@ class TestAccountPaymentTerm(TransactionCase):
         self.sixty_days_end_of_month = self.env.ref(
             "account_payment_term_extension.sixty_days_end_of_month"
         )
+        self.six_days_end_of_week = self.env.ref(
+            "account_payment_term_extension.six_days_end_of_week"
+        )
         self.account_payment_term_holiday = self.env["account.payment.term.holiday"]
 
     def test_00_compute(self):
@@ -156,3 +159,16 @@ class TestAccountPaymentTerm(TransactionCase):
             self.account_payment_term_holiday.create(
                 {"holiday": "2015-06-07", "date_postponed": "2015-06-08"}
             )
+
+    def test_six_day_end_of_week(self):
+        """ When use lang with week_start = Sunday,
+        it will result in Friday (6th day of week) after this weekend """
+        # US is using Sunday as first day of week
+        res = self.six_days_end_of_week.compute(10, date_ref="2015-05-31")
+        self.assertEquals(res[0][0], "2015-06-12")
+        res = self.six_days_end_of_week.compute(10, date_ref="2015-06-02")
+        self.assertEquals(res[0][0], "2015-06-12")
+        res = self.six_days_end_of_week.compute(10, date_ref="2015-06-06")
+        self.assertEquals(res[0][0], "2015-06-12")
+        res = self.six_days_end_of_week.compute(10, date_ref="2015-06-07")
+        self.assertEquals(res[0][0], "2015-06-19")
