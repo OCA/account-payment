@@ -11,8 +11,9 @@
                 <group
                     string="Cash Discount"
                     name="cash_discount"
-                    attrs="{'invisible': [('type', 'not in', ('in_invoice', 'in_refund'))]}"
+                    attrs="{'invisible': [('is_cash_discount_allowed', '=', False)]}"
                 >
+                    <field name="is_cash_discount_allowed" invisible="1" />
                     <field name="discount_percent" />
                     <field name="discount_amount" />
                     <field name="amount_total_with_discount" />
@@ -27,6 +28,30 @@
                     <field name="refunds_discount_amount" />
                 </group>
             </xpath>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="account_move_tree_view">
+        <field name="name">account.move.tree (in account_cash_discount_base)</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_invoice_tree" />
+        <field name="priority" eval="90" />
+        <field name="arch" type="xml">
+            <field name="state" position="before">
+                <field
+                    name="discount_amount"
+                    invisible="context.get('default_type') != 'out_invoice'"
+                    sum="Total" optional="show"
+                />
+                <field
+                    name="amount_total_with_discount"
+                    invisible="context.get('default_type') != 'out_invoice'"
+                    sum="Total" optional="show"
+                />
+                <field
+                    name="discount_due_date_readonly"
+                    invisible="context.get('default_type') != 'out_invoice'"
+                />
+            </field>
         </field>
     </record>
 </odoo>

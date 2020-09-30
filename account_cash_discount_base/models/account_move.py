@@ -12,6 +12,7 @@ READONLY_STATES = {
 DISCOUNT_ALLOWED_TYPES = (
     "in_invoice",
     "in_refund",
+    "out_invoice",
 )
 
 
@@ -19,6 +20,9 @@ class AccountMove(models.Model):
 
     _inherit = "account.move"
 
+    is_cash_discount_allowed = fields.Boolean(
+        compute="_compute_is_cash_discount_allowed",
+    )
     discount_percent = fields.Float(
         string="Discount (%)", readonly=True, states=READONLY_STATES, digits="Discount",
     )
@@ -43,6 +47,11 @@ class AccountMove(models.Model):
     discount_due_date_readonly = fields.Date(compute="_compute_discount_due_date",)
     has_discount = fields.Boolean(compute="_compute_has_discount", store=True,)
     discount_base_date = fields.Date(compute="_compute_discount_base_date",)
+
+    @api.depends("type",)
+    def _compute_is_cash_discount_allowed(self):
+        for rec in self:
+            rec.is_cash_discount_allowed = rec.type in DISCOUNT_ALLOWED_TYPES
 
     @api.depends(
         "amount_total", "amount_untaxed", "discount_percent", "company_id",
@@ -169,9 +178,13 @@ class AccountMove(models.Model):
         self.ensure_one()
         refunds_discount_total = 0.0
         refunds_amount_total = 0.0
+        inv_type = self.type
+        expected_refund_type = False
+        if inv_type in DISCOUNT_ALLOWED_TYPES and inv_type.endswith("invoice"):
+            expected_refund_type = inv_type.replace("invoice", "refund")
         for pmove_line in self._get_payment_move_lines():
             pmove_line_move = pmove_line.move_id
-            if pmove_line_move and pmove_line_move.type == "in_refund":
+            if pmove_line_move and pmove_line_move.type == expected_refund_type:
                 refunds_discount_total += pmove_line_move.discount_amount
                 refunds_amount_total += pmove_line_move.amount_total
         return {"discount": refunds_discount_total, "total": refunds_amount_total}
