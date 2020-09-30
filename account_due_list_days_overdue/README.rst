@@ -23,7 +23,7 @@ Payments Due list days overdue
     :target: https://runbot.odoo-community.org/runbot/96/13.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module adds to the 'Payments and due list' view the number of days that
 an open item is overdue, and classifies the amount due in separate terms
@@ -70,12 +70,12 @@ Credits
 Authors
 ~~~~~~~
 
-* Eficent
+* ForgeFlow
 
 Contributors
 ~~~~~~~~~~~~
 
-* Jordi Ballester Alomar <jordi.ballester@eficent.com>
+* Jordi Ballester Alomar <jordi.ballester@forgeflow.com>
 * Holger Brunn <hbrunn@therp.nl>
 * `Sygel <https://www.sygel.es>`_:
 
