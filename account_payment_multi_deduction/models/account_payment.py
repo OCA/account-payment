@@ -82,7 +82,6 @@ class AccountPayment(models.Model):
             company_currency = payment.company_id.currency_id
             write_off_amount = -payment.payment_difference or 0.0
             write_off_balance = 0.0
-            currency_id = False
             if payment.currency_id == company_currency:
                 write_off_balance = write_off_amount
             else:  # Multi-currencies.
@@ -92,39 +91,38 @@ class AccountPayment(models.Model):
                     payment.company_id,
                     payment.payment_date,
                 )
-                currency_id = payment.currency_id.id
             # Create new line_ids with multi deduction table
             if write_off_balance:
                 for deduct in payment.deduction_ids:
-                    wo_amount_currency = deduct.amount
-                    wo_amount = payment.currency_id._convert(
-                        wo_amount_currency,
-                        company_currency,
-                        payment.company_id,
-                        payment.payment_date,
-                    )
                     move_vals[0]["line_ids"].append(
-                        (
-                            0,
-                            0,
-                            {
-                                "name": deduct.name,
-                                "amount_currency": wo_amount_currency,
-                                "currency_id": currency_id,
-                                "debit": wo_amount > 0.0 and wo_amount or 0.0,
-                                "credit": wo_amount < 0.0 and -wo_amount or 0.0,
-                                "date_maturity": payment.payment_date,
-                                "partner_id": payment.partner_id.id,
-                                "account_id": deduct.account_id.id,
-                                "payment_id": payment.id,
-                            },
-                        )
+                        (0, 0, payment._prepare_deduct_move_line(deduct))
                     )
 
             all_move_vals += move_vals
         # Set diff handling back to original
         x_payments.write({"payment_difference_handling": "reconcile_multi_deduct"})
         return all_move_vals
+
+    def _prepare_deduct_move_line(self, deduct):
+        company_currency = self.company_id.currency_id
+        currency_id = (
+            self.currency_id.id if self.currency_id != company_currency else False
+        )
+        wo_amount_currency = deduct.amount
+        wo_amount = self.currency_id._convert(
+            wo_amount_currency, company_currency, self.company_id, self.payment_date,
+        )
+        return {
+            "name": deduct.name,
+            "amount_currency": wo_amount_currency,
+            "currency_id": currency_id,
+            "debit": wo_amount > 0.0 and wo_amount or 0.0,
+            "credit": wo_amount < 0.0 and -wo_amount or 0.0,
+            "date_maturity": self.payment_date,
+            "partner_id": self.partner_id.id,
+            "account_id": deduct.account_id.id,
+            "payment_id": self.id,
+        }
 
 
 class AccountPaymentDeduction(models.Model):
