@@ -30,7 +30,11 @@
                     >
                         <tree editable="bottom">
                             <field name="currency_id" invisible="1" />
-                            <field name="account_id" />
+                            <field name="open" />
+                            <field
+                                name="account_id"
+                                attrs="{'required': [('open', '=', False)]}"
+                            />
                             <field name="name" />
                             <field name="amount" sum="Total Deduction" />
                         </tree>
