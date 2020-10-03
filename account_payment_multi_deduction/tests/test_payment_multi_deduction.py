@@ -85,7 +85,7 @@ class TestPaymentMultiDeduction(SavepointCase):
             "active_model": "account.move",
         }
         PaymentWizard = self.env["account.payment"]
-        view_id = "account_payment_multi_deduction." "view_account_payment_form"
+        view_id = "account_payment_multi_deduction.view_account_payment_form"
         with self.assertRaises(UserError):  # Deduct only 20.0, throw error
             with Form(PaymentWizard.with_context(ctx), view=view_id) as f:
                 f.amount = 400.0
@@ -155,7 +155,7 @@ class TestPaymentMultiDeduction(SavepointCase):
             "active_model": "account.move",
         }
         PaymentWizard = self.env["account.payment"]
-        view_id = "account_payment_multi_deduction." "view_account_payment_form"
+        view_id = "account_payment_multi_deduction.view_account_payment_form"
 
         with Form(PaymentWizard.with_context(ctx), view=view_id) as f:
             f.currency_id = self.currency_2x
@@ -216,6 +216,61 @@ class TestPaymentMultiDeduction(SavepointCase):
                     "credit": 0.0,
                     "amount_currency": 60.0,
                     "currency_id": self.currency_2x.id,
+                },
+            ],
+        )
+
+    def test_one_invoice_payment_with_keep_open(self):
+        """ Validate 1 invoice and make payment with 2 deduction,
+        one as normal deduct and another as keep open """
+        self.cust_invoice.post()  # total amount 450.0
+        ctx = {
+            "active_ids": [self.cust_invoice.id],
+            "active_id": self.cust_invoice.id,
+            "active_model": "account.move",
+        }
+        PaymentWizard = self.env["account.payment"]
+        view_id = "account_payment_multi_deduction.view_account_payment_form"
+        with Form(PaymentWizard.with_context(ctx), view=view_id) as f:
+            f.amount = 400.0  # Reduce to 400.0, and mark fully paid (multi)
+            f.payment_difference_handling = "reconcile_multi_deduct"
+            with f.deduction_ids.new() as f2:
+                f2.account_id = self.account_expense
+                f2.name = "Expense 1"
+                f2.amount = 20.0
+            with f.deduction_ids.new() as f2:  # Keep Open
+                f2.open = True
+                f2.amount = 30.0
+
+        payment = f.save()
+        payment.post()
+
+        self.assertEqual(payment.state, "posted")
+
+        move_lines = self.env["account.move.line"].search(
+            [("payment_id", "=", payment.id)]
+        )
+        bank_account = (
+            payment.journal_id.default_debit_account_id
+            or payment.journal_id.default_credit_account_id
+        )
+
+        self.assertEqual(self.cust_invoice.invoice_payment_state, "not_paid")
+        self.assertEqual(self.cust_invoice.amount_residual, 30)
+        self.assertRecordValues(
+            move_lines,
+            [
+                {
+                    "account_id": self.account_receivable.id,
+                    "debit": 0.0,
+                    "credit": 420.0,
+                },
+                {"account_id": bank_account.id, "debit": 400.0, "credit": 0.0},
+                {
+                    "account_id": self.account_expense.id,
+                    "name": "Expense 1",
+                    "debit": 20.0,
+                    "credit": 0.0,
                 },
             ],
         )
