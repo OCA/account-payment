@@ -24,7 +24,7 @@ class AccountPayment(models.Model):
         help="Sum of deduction amount(s) must equal to the payment difference",
     )
 
-    @api.constrains("deduction_ids")
+    @api.constrains("deduction_ids", "payment_difference_handling")
     def _check_deduction_amount(self):
         self.ensure_one()
         prec_digits = self.env.user.company_id.currency_id.decimal_places
@@ -93,11 +93,24 @@ class AccountPayment(models.Model):
                 )
             # Create new line_ids with multi deduction table
             if write_off_balance:
-                for deduct in payment.deduction_ids:
+                for deduct in payment.deduction_ids.filtered(lambda l: not l.open):
                     move_vals[0]["line_ids"].append(
                         (0, 0, payment._prepare_deduct_move_line(deduct))
                     )
 
+            # Remove the keep open amount from AR/AP line
+            move_lines = move_vals[0]["line_ids"]
+            debit = sum(map(lambda l: l[2]["debit"], move_lines))
+            credit = sum(map(lambda l: l[2]["credit"], move_lines))
+            dest_account_id = payment.destination_account_id.id
+            dest_line = list(
+                filter(lambda l: l[2]["account_id"] == dest_account_id, move_lines)
+            )
+            if debit > credit:
+                dest_line[0][2]["debit"] -= abs(debit - credit)
+            elif credit > debit:
+                dest_line[0][2]["credit"] -= abs(debit - credit)
+            # --
             all_move_vals += move_vals
         # Set diff handling back to original
         x_payments.write({"payment_difference_handling": "reconcile_multi_deduct"})
@@ -145,7 +158,21 @@ class AccountPaymentDeduction(models.Model):
         comodel_name="account.account",
         string="Account",
         domain=[("deprecated", "=", False)],
-        required=True,
+        required=False,
     )
+    open = fields.Boolean(string="Open", help="Keep this line open")
     amount = fields.Monetary(string="Deduction Amount", required=True)
     name = fields.Char(string="Label", required=True)
+
+    @api.onchange("open")
+    def _onchange_open(self):
+        if self.open:
+            self.account_id = False
+            self.name = _("Keep open")
+        else:
+            self.name = False
+
+    @api.onchange("account_id")
+    def _onchange_account_id(self):
+        if self.account_id:
+            self.open = False
