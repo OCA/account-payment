@@ -8,10 +8,10 @@ class AccountJournal(models.Model):
     _inherit = "account.journal"
 
     check_print_auto = fields.Boolean(
-        string='Automatic check printing',
-        help='Default check for the company is printed automatically when '
-             'invoice payment is validated',
+        string="Automatic check printing",
+        help="Default check for the company is printed automatically when "
+        "invoice payment is validated",
     )
     check_layout_id = fields.Many2one(
-        comodel_name='account.payment.check.report',
-        string="Check format")
+        comodel_name="account.payment.check.report", string="Check format"
+    )

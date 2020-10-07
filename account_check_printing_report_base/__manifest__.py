@@ -10,13 +10,12 @@
     "version": "12.0.1.2.0",
     "license": "AGPL-3",
     "author": "Eficent,"
-              "Serpent Consulting Services Pvt. Ltd.,"
-              "Ursa Information Systems,"
-              "Odoo Community Association (OCA)",
+    "Serpent Consulting Services Pvt. Ltd.,"
+    "Ursa Information Systems,"
+    "Odoo Community Association (OCA)",
     "category": "Generic Modules/Accounting",
     "website": "https://github.com/OCA/account-payment",
-    "depends": ["account_check_printing",
-                "report_wkhtmltopdf_param"],
+    "depends": ["account_check_printing", "report_wkhtmltopdf_param"],
     "data": [
         "security/ir.model.access.csv",
         "data/report_paperformat.xml",
