@@ -4,5 +4,5 @@
 * Manuel Marquez <mmarquez@iterativo.do>
 * `Tecnativa <https://www.tecnativa.com>`_:
 
-  * Luis M. Ontalba
-  * Carlos Roca
+    * Luis M. Ontalba
+    * Carlos Roca

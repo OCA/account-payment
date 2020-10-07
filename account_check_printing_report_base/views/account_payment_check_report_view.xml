@@ -37,7 +37,6 @@
     <record id="action_account_payment_check_report" model="ir.actions.act_window">
         <field name="name">Check Layouts</field>
         <field name="res_model">account.payment.check.report</field>
-        <field name='view_type'>form</field>
         <field name='view_mode'>tree,form</field>
     </record>
     <menuitem
