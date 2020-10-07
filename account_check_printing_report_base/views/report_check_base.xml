@@ -111,37 +111,35 @@
                                     t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
                                 />
                             </p>
-                            <div class="col-10 col-offset-2 mt32">
-                                <table class="table table-sm table-borderless">
-                                    <thead>
+                            <table class="table table-sm table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th>Invoice / Reference</th>
+                                        <th>Due Date</th>
+                                        <th class="text-right">Original Amount</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="paid_lines[o.id]" t-as="line">
                                         <tr>
-                                            <th>Invoice / Reference</th>
-                                            <th>Due Date</th>
-                                            <th class="text-right">Original Amount</th>
+                                            <td>
+                                                <span
+                                                    t-esc="line['reference'] or line['number']"
+                                                />
+                                            </td>
+                                            <td>
+                                                <span t-esc="line['date_due']" />
+                                            </td>
+                                            <td class="text-right">
+                                                <span
+                                                    t-esc="line['residual'] or line['amount_total']"
+                                                    t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
+                                                />
+                                            </td>
                                         </tr>
-                                    </thead>
-                                    <tbody>
-                                        <t t-foreach="paid_lines[o.id]" t-as="line">
-                                            <tr>
-                                                <td>
-                                                    <span
-                                                        t-esc="line['reference'] or line['number']"
-                                                    />
-                                                </td>
-                                                <td>
-                                                    <span t-esc="line['date_due']" />
-                                                </td>
-                                                <td class="text-right">
-                                                    <span
-                                                        t-esc="line['residual'] or line['amount_total']"
-                                                        t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
-                                                    />
-                                                </td>
-                                            </tr>
-                                        </t>
-                                    </tbody>
-                                </table>
-                            </div>
+                                    </t>
+                                </tbody>
+                            </table>
                             <div class="row">
                                 <div
                                     class="col-12 mt64"

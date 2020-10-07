@@ -69,7 +69,6 @@ class ReportCheckPrint(models.AbstractModel):
             total_amount_to_show = amount_to_show
         return total_amount_to_show
 
-    @api.multi
     def get_paid_lines(self, payments):
         lines = {}
         for payment in payments:
@@ -122,3 +121,4 @@ class ReportCheckPrint(models.AbstractModel):
 class ReportCheckPrintA4(models.AbstractModel):
     _name = "report.account_check_printing_report_base.report_check_base_a4"
     _inherit = "report.account_check_printing_report_base.report_check_base"
+    _description = "Report Check Print for A4"
