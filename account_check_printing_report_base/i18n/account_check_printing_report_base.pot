@@ -4,8 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-09-23 14:21+0000\n"
+"PO-Revision-Date: 2020-09-23 14:21+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -92,26 +94,18 @@ msgstr ""
 #. module: account_check_printing_report_base
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_payment_check_report__display_name
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_report_check_base__display_name
-#: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_report_check_base_a4__display_name
 msgid "Display Name"
 msgstr ""
 
 #. module: account_check_printing_report_base
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
-#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
 msgid "Due Date"
 msgstr ""
 
 #. module: account_check_printing_report_base
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_payment_check_report__id
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_report_check_base__id
-#: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_report_check_base_a4__id
 msgid "ID"
-msgstr ""
-
-#. module: account_check_printing_report_base
-#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
-msgid "Invoice / Reference"
 msgstr ""
 
 #. module: account_check_printing_report_base
@@ -122,7 +116,6 @@ msgstr ""
 #. module: account_check_printing_report_base
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_payment_check_report____last_update
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_report_check_base____last_update
-#: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_report_check_base_a4____last_update
 msgid "Last Modified on"
 msgstr ""
 
@@ -143,7 +136,6 @@ msgstr ""
 
 #. module: account_check_printing_report_base
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
-#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
 msgid "Original Amount"
 msgstr ""
 
@@ -196,4 +188,3 @@ msgstr ""
 #: model:ir.model,name:account_check_printing_report_base.model_report_account_check_printing_report_base_report_check_base_a4
 msgid "report.account_check_printing_report_base.report_check_base_a4"
 msgstr ""
-
