@@ -8,7 +8,7 @@ from odoo import fields, models
 
 class AccountPaymentCheckReport(models.Model):
     _name = "account.payment.check.report"
-    _description = 'Account Payment Check Report'
+    _description = "Account Payment Check Report"
 
-    name = fields.Char(string='Name', required=True)
-    report = fields.Char(string='Report name', required=True)
+    name = fields.Char(string="Name", required=True)
+    report = fields.Char(string="Report name", required=True)

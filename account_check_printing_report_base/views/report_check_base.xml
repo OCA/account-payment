@@ -1,36 +1,38 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-
     <template id="report_check_base">
         <t t-call="web.html_container">
-            <div class="header"/>
+            <div class="header" />
             <div class="article">
                 <t t-foreach="docs" t-as="o">
                     <div class="page">
-                        <div class="oe_structure"/>
+                        <div class="oe_structure" />
                         <div class="row mb32 mt32" style="padding-top: 20mm;">
                             <div class="col-8">
-                                <address t-field="o.partner_id"
-                                         t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true, "no_tag_br": true}'/>
-
-                                <span t-esc="o.payment_date"/>
-                                <br/>
-                                <span t-field="o.amount"
-                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
-                                <br/>
-                                <span t-esc="fill_stars(o.check_amount_in_words)"/>
+                                <address
+                                    t-field="o.partner_id"
+                                    t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true, "no_tag_br": true}'
+                                />
+                                <span t-esc="o.payment_date" />
+                                <br />
+                                <span
+                                    t-field="o.amount"
+                                    t-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                />
+                                <br />
+                                <span t-esc="fill_stars(o.check_amount_in_words)" />
                             </div>
                         </div>
-                        <br/>
-                        <br/>
-                        <br/>
-                        <br/>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
                         <div class="row">
                             <div class="col-8">
-                                <strong t-field="o.partner_id.name"/>
+                                <strong t-field="o.partner_id.name" />
                             </div>
                             <div class="col-4">
-                                <strong t-field="o.payment_date"/>
+                                <strong t-field="o.payment_date" />
                             </div>
                         </div>
                         <t t-foreach="range(2)" t-as="i">
@@ -48,41 +50,52 @@
                                     <t t-foreach="paid_lines[o.id]" t-as="line">
                                         <tr>
                                             <td>
-                                                <span t-esc="line['date_due']"/>
+                                                <span t-esc="line['date_due']" />
                                             </td>
                                             <td>
-                                                <span t-esc="line['reference'] or line['number']"/>
+                                                <span
+                                                    t-esc="line['reference'] or line['number']"
+                                                />
                                             </td>
                                             <td>
-                                                <span t-esc="line['amount_total']"
-                                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                                <span
+                                                    t-esc="line['amount_total']"
+                                                    t-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                                />
                                             </td>
                                             <td>
-                                                <span t-esc="line['residual']"
-                                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                                <span
+                                                    t-esc="line['residual']"
+                                                    t-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                                />
                                             </td>
                                             <td>
-                                                <span t-esc="line['paid_amount']"
-                                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                                <span
+                                                    t-esc="line['paid_amount']"
+                                                    t-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                                />
                                             </td>
                                         </tr>
                                     </t>
                                 </tbody>
                             </table>
-                            <div style="padding-right: 20mm; padding-top: 45mm; padding-bottom: 15mm;"
-                                 align="right">
+                            <div
+                                style="padding-right: 20mm; padding-top: 45mm; padding-bottom: 15mm;"
+                                align="right"
+                            >
                                 <b>Check Amount:</b>
-                                <span t-field="o.amount"
-                                      t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                <span
+                                    t-field="o.amount"
+                                    t-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                />
                             </div>
                         </t>
                     </div>
-                    <p style="page-break-before:always;"></p>
+                    <p style="page-break-before:always;" />
                 </t>
             </div>
         </t>
     </template>
-
     <template id="report_check_base_a4">
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="o">
@@ -93,7 +106,10 @@
                             <p>Dear partner</p>
                             <p>
                                 We attach the list of invoices paid with this check with amount of
-                                <span t-field="o.amount" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}" />
+                                <span
+                                    t-field="o.amount"
+                                    t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
+                                />
                             </p>
                             <div class="col-10 col-offset-2 mt32">
                                 <table class="table table-sm table-borderless">
@@ -108,13 +124,18 @@
                                         <t t-foreach="paid_lines[o.id]" t-as="line">
                                             <tr>
                                                 <td>
-                                                    <span t-esc="line['reference'] or line['number']" />
+                                                    <span
+                                                        t-esc="line['reference'] or line['number']"
+                                                    />
                                                 </td>
                                                 <td>
                                                     <span t-esc="line['date_due']" />
                                                 </td>
                                                 <td class="text-right">
-                                                    <span t-esc="line['residual'] or line['amount_total']" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}" />
+                                                    <span
+                                                        t-esc="line['residual'] or line['amount_total']"
+                                                        t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
+                                                    />
                                                 </td>
                                             </tr>
                                         </t>
@@ -122,7 +143,9 @@
                                 </table>
                             </div>
                             <div class="row">
-                                <div class="col-12 mt64">Waiting for your agreement, regards.</div>
+                                <div
+                                    class="col-12 mt64"
+                                >Waiting for your agreement, regards.</div>
                             </div>
                         </div>
                     </div>
@@ -130,5 +153,4 @@
             </t>
         </t>
     </template>
-
 </odoo>
