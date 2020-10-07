@@ -4,13 +4,12 @@
 # Copyright 2018 iterativo.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, models
+from odoo import models
 
 
 class AccountRegisterPayments(models.TransientModel):
-    _inherit = "account.register.payments"
+    _inherit = "account.payment.register"
 
-    @api.multi
     def create_payment(self):
         res = super(AccountRegisterPayments, self).create_payment()
         if (
@@ -32,7 +31,6 @@ class AccountRegisterPayments(models.TransientModel):
 class AccountPayment(models.Model):
     _inherit = "account.payment"
 
-    @api.multi
     def do_print_checks(self):
 
         for rec in self:
@@ -53,7 +51,6 @@ class AccountPayment(models.Model):
 
         return super(AccountPayment, self).do_print_checks()
 
-    @api.multi
     def post(self):
         res = super(AccountPayment, self).post()
         recs = self.filtered(
