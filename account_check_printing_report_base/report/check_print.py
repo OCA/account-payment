@@ -5,29 +5,30 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 import time
+
 from odoo import api, models
 from odoo.tools import float_is_zero
 
 
 class ReportCheckPrint(models.AbstractModel):
-    _name = 'report.account_check_printing_report_base.report_check_base'
-    _description = 'Report Check Print'
+    _name = "report.account_check_printing_report_base.report_check_base"
+    _description = "Report Check Print"
 
     @api.model
     def fill_stars_number(self, amount, stars_prefix=5, stars_suffix=1):
-        str_prefix = ' '.join(['*' * stars_prefix, amount, '*' * stars_suffix])
+        str_prefix = " ".join(["*" * stars_prefix, amount, "*" * stars_suffix])
         return str_prefix
 
     def _format_date_to_partner_lang(self, date, partner_id):
-        lang_code = self.env['res.partner'].browse(partner_id).lang
-        lang = self.env['res.lang']._lang_get(lang_code)
+        lang_code = self.env["res.partner"].browse(partner_id).lang
+        lang = self.env["res.lang"]._lang_get(lang_code)
         return date.strftime(lang.date_format)
 
     @api.model
     def fill_stars(self, amount_in_word):
         if amount_in_word and len(amount_in_word) < 100:
             stars = 100 - len(amount_in_word)
-            return ' '.join([amount_in_word, '*' * stars])
+            return " ".join([amount_in_word, "*" * stars])
         else:
             return amount_in_word
 
@@ -36,8 +37,8 @@ class ReportCheckPrint(models.AbstractModel):
         if amt < 0.0:
             amt *= -1
         amt = payment.company_id.currency_id.with_context(
-            date=payment.payment_date).compute(
-            amt, payment.currency_id)
+            date=payment.payment_date
+        ).compute(amt, payment.currency_id)
         return amt
 
     def _get_total_amount(self, payment, line):
@@ -45,8 +46,8 @@ class ReportCheckPrint(models.AbstractModel):
         if amt < 0.0:
             amt *= -1
         amt = payment.company_id.currency_id.with_context(
-            date=payment.payment_date).compute(
-            amt, payment.currency_id)
+            date=payment.payment_date
+        ).compute(amt, payment.currency_id)
         return amt
 
     def _get_paid_amount(self, payment, line):
@@ -59,13 +60,12 @@ class ReportCheckPrint(models.AbstractModel):
         elif line.matched_debit_ids:
             amount = sum([p.amount for p in line.matched_debit_ids])
 
-        amount_to_show = \
-            payment.company_id.currency_id.with_context(
-                date=payment.payment_date).compute(
-                amount, payment.currency_id)
+        amount_to_show = payment.company_id.currency_id.with_context(
+            date=payment.payment_date
+        ).compute(amount, payment.currency_id)
         if not float_is_zero(
-                amount_to_show,
-                precision_rounding=payment.currency_id.rounding):
+            amount_to_show, precision_rounding=payment.currency_id.rounding
+        ):
             total_amount_to_show = amount_to_show
         return total_amount_to_show
 
@@ -74,12 +74,16 @@ class ReportCheckPrint(models.AbstractModel):
         lines = {}
         for payment in payments:
             lines[payment.id] = []
-            pay_acc = payment.journal_id.default_debit_account_id or \
-                payment.journal_id.default_credit_account_id
+            pay_acc = (
+                payment.journal_id.default_debit_account_id
+                or payment.journal_id.default_credit_account_id
+            )
             rec_lines = payment.move_line_ids.filtered(
-                lambda x: x.account_id.reconcile and x.account_id != pay_acc)
-            amls = rec_lines.mapped('matched_credit_ids.credit_move_id') + \
-                rec_lines.mapped('matched_debit_ids.debit_move_id')
+                lambda x: x.account_id.reconcile and x.account_id != pay_acc
+            )
+            amls = rec_lines.mapped(
+                "matched_credit_ids.credit_move_id"
+            ) + rec_lines.mapped("matched_debit_ids.debit_move_id")
             amls -= rec_lines
             for aml in amls:
                 date_due = aml.date_maturity
@@ -87,34 +91,34 @@ class ReportCheckPrint(models.AbstractModel):
                 residual_amt = self._get_residual_amount(payment, aml)
                 paid_amt = self._get_paid_amount(payment, aml)
                 line = {
-                    'date_due': date_due,
-                    'reference': aml.display_name,
-                    'number': aml.name,
-                    'amount_total': total_amt,
-                    'residual': residual_amt,
-                    'paid_amount': paid_amt,
+                    "date_due": date_due,
+                    "reference": aml.display_name,
+                    "number": aml.name,
+                    "amount_total": total_amt,
+                    "residual": residual_amt,
+                    "paid_amount": paid_amt,
                 }
                 lines[payment.id].append(line)
         return lines
 
     @api.model
     def _get_report_values(self, docids, data=None):
-        model = self.env.context.get('active_model', 'account.payment')
+        model = self.env.context.get("active_model", "account.payment")
         objects = self.env[model].browse(docids)
         paid_lines = self.get_paid_lines(objects)
         docargs = {
-            'doc_ids': docids,
-            'doc_model': models,
-            'docs': objects,
-            'time': time,
-            'fill_stars': self.fill_stars,
-            'fill_stars_number': self.fill_stars_number,
-            'paid_lines': paid_lines,
-            '_format_date_to_partner_lang': self._format_date_to_partner_lang,
+            "doc_ids": docids,
+            "doc_model": models,
+            "docs": objects,
+            "time": time,
+            "fill_stars": self.fill_stars,
+            "fill_stars_number": self.fill_stars_number,
+            "paid_lines": paid_lines,
+            "_format_date_to_partner_lang": self._format_date_to_partner_lang,
         }
         return docargs
 
 
 class ReportCheckPrintA4(models.AbstractModel):
-    _name = 'report.account_check_printing_report_base.report_check_base_a4'
-    _inherit = 'report.account_check_printing_report_base.report_check_base'
+    _name = "report.account_check_printing_report_base.report_check_base_a4"
+    _inherit = "report.account_check_printing_report_base.report_check_base"
