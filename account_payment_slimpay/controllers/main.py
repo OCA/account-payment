@@ -16,7 +16,7 @@ class SlimpayController(http.Controller):
         """Controller called by slimpay once the customer has finished the
         checkout process. Performs basic checks then delegates to the acquirer.
         """
-        post = json.loads(request.httprequest.data)
+        post = json.loads(request.httprequest.data.decode('utf-8'))
         _logger.debug('slimpay feedback, post=%s', post)
         tx_ref = post['reference']
         tx = request.env['payment.transaction'].sudo().search(
