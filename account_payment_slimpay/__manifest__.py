@@ -13,7 +13,7 @@
     "application": False,
     "installable": True,
     "external_dependencies": {
-        "python": ["hal_codec", "iso8601", "requests", "phonenumbers"]
+        "python": ["hal_codec", "iso8601"]
     },
     "depends": [
         "payment",
