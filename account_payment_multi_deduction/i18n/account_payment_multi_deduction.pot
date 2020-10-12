@@ -54,6 +54,17 @@ msgid "ID"
 msgstr ""
 
 #. module: account_payment_multi_deduction
+#: code:addons/account_payment_multi_deduction/models/account_payment.py:0
+#, python-format
+msgid "Keep open"
+msgstr ""
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,help:account_payment_multi_deduction.field_account_payment_deduction__open
+msgid "Keep this line open"
+msgstr ""
+
+#. module: account_payment_multi_deduction
 #: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__name
 msgid "Label"
 msgstr ""
@@ -76,6 +87,11 @@ msgstr ""
 #. module: account_payment_multi_deduction
 #: model:ir.model.fields.selection,name:account_payment_multi_deduction.selection__account_payment__payment_difference_handling__reconcile_multi_deduct
 msgid "Mark invoice as fully paid (multi deduct)"
+msgstr ""
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__open
+msgid "Open"
 msgstr ""
 
 #. module: account_payment_multi_deduction
