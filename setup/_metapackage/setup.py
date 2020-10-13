@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo13-addon-account_check_date',
+        'odoo13-addon-account_check_printing_report_base',
         'odoo13-addon-account_due_list',
         'odoo13-addon-account_due_list_days_overdue',
         'odoo13-addon-account_due_list_payment_mode',
