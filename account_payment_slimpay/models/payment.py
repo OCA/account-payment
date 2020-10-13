@@ -130,7 +130,7 @@ class SlimpayTransaction(models.Model):
             return context['slimpay_payin_label']
         else:
             payment = context.get('tx_from_payment')
-            if payment.communication:
+            if payment and payment.communication:
                 return payment.communication
             return self.reference or 'TR%d' % self.id
 
