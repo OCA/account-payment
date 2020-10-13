@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<odoo>
+    <report
+        id="action_report_check_base"
+        string="Payment Check Base"
+        model="account.payment"
+        name="account_check_printing_report_base.report_check_base"
+        file="account_check_printing_report_base.report_check_base"
+        report_type="qweb-pdf"
+        paperformat="account_check_printing_report_base.paperformat_check"
+    />
+    <report
+        id="action_report_check_base_a4"
+        string="Payment Check Base A4"
+        model="account.payment"
+        name="account_check_printing_report_base.report_check_base_a4"
+        file="account_check_printing_report_base.report_check_base_a4"
+        report_type="qweb-pdf"
+        paperformat="base.paperformat_euro"
+    />
+</odoo>

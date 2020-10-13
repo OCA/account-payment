@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="account_payment_check_report_base" model="account.payment.check.report">
+        <field name="name">Base</field>
+        <field
+            name="report"
+        >account_check_printing_report_base.report_check_base</field>
+    </record>
+    <record
+        id="account_payment_check_report_base_a4"
+        model="account.payment.check.report"
+    >
+        <field name="name">Base A4</field>
+        <field
+            name="report"
+        >account_check_printing_report_base.report_check_base_a4</field>
+    </record>
+</odoo>
