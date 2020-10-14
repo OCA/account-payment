@@ -26,20 +26,20 @@ class AccountPayment(models.Model):
 
     @api.constrains("deduction_ids", "payment_difference_handling")
     def _check_deduction_amount(self):
-        self.ensure_one()
         prec_digits = self.env.user.company_id.currency_id.decimal_places
-        if self.payment_difference_handling == "reconcile_multi_deduct":
-            if (
-                float_compare(
-                    self.payment_difference,
-                    sum(self.deduction_ids.mapped("amount")),
-                    precision_digits=prec_digits,
-                )
-                != 0
-            ):
-                raise UserError(
-                    _("The total deduction should be %s") % self.payment_difference
-                )
+        for rec in self:
+            if rec.payment_difference_handling == "reconcile_multi_deduct":
+                if (
+                    float_compare(
+                        rec.payment_difference,
+                        sum(rec.deduction_ids.mapped("amount")),
+                        precision_digits=prec_digits,
+                    )
+                    != 0
+                ):
+                    raise UserError(
+                        _("The total deduction should be %s") % rec.payment_difference
+                    )
 
     @api.depends("payment_difference", "deduction_ids")
     def _compute_deduct_residual(self):
