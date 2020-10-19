@@ -20,6 +20,7 @@ setuptools.setup(
         'odoo12-addon-account_move_line_auto_reconcile_hook',
         'odoo12-addon-account_payment_credit_card',
         'odoo12-addon-account_payment_multi_deduction',
+        'odoo12-addon-account_payment_promissory_note',
         'odoo12-addon-account_payment_residual_amount',
         'odoo12-addon-account_payment_return',
         'odoo12-addon-account_payment_return_import',
