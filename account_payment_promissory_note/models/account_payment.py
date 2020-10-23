@@ -6,8 +6,7 @@ from odoo import api, fields, models
 
 
 class AccountPayment(models.Model):
-    _name = 'account.payment'
-    _inherit = ['account.payment', 'account.abstract.payment']
+    _inherit = 'account.payment'
 
     promissory_note = fields.Boolean(
         readonly=True,
