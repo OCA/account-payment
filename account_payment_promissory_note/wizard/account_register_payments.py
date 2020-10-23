@@ -6,30 +6,16 @@ from odoo import api, models
 
 
 class AccountRegisterPayments(models.TransientModel):
-    _name = 'account.register.payments'
-    _inherit = ['account.register.payments', 'account.abstract.payment']
+    _inherit = 'account.register.payments'
 
-    def get_payment_vals(self):
-        vals = super(AccountRegisterPayments, self).get_payment_vals()
-        vals.update({
-            'promissory_note': self.promissory_note,
-            'date_due': self.date_due,
-        })
+    def get_payments_vals(self):
+        vals = super(AccountRegisterPayments, self).get_payments_vals()
+        for val in vals:
+            val.update({
+                'promissory_note': self.promissory_note,
+                'date_due': self.date_due,
+            })
         return vals
-
-    def create_payment(self):
-        # Overwrite original method for obtain payment and return action
-        payment = self.env['account.payment'].create(self.get_payment_vals())
-        payment.post()
-        if payment.payment_method_id != self.env.ref(
-                'account_check_printing.account_payment_method_check'):
-            return {'type': 'ir.actions.act_window_close'}
-        action = self.env.ref(
-            'account.action_account_payments_payable').read()[0]
-        action['views'] = [
-            (self.env.ref('account.view_account_payment_form').id, 'form')]
-        action['res_id'] = payment.id
-        return action
 
     @api.onchange('promissory_note')
     def _onchange_promissory_note(self):
