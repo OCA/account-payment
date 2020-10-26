@@ -8,14 +8,14 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2020-09-23 14:21+0000\n"
 "PO-Revision-Date: 2020-09-23 16:35+0200\n"
+"Last-Translator: Carlos <carlos.roca@tecnativa.com>\n"
 "Language-Team: \n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.0.6\n"
-"Last-Translator: Carlos <carlos.roca@tecnativa.com>\n"
-"Language: es\n"
 
 #. module: account_check_printing_report_base
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
@@ -100,19 +100,27 @@ msgstr "Descripción"
 #. module: account_check_printing_report_base
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_payment_check_report__display_name
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_report_check_base__display_name
+#: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_report_check_base_a4__display_name
 msgid "Display Name"
 msgstr "Nombre mostrado"
 
 #. module: account_check_printing_report_base
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
 msgid "Due Date"
 msgstr "Fecha vencimiento"
 
 #. module: account_check_printing_report_base
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_payment_check_report__id
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_report_check_base__id
+#: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_report_check_base_a4__id
 msgid "ID"
 msgstr "ID (identificación)"
+
+#. module: account_check_printing_report_base
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
+msgid "Invoice / Reference"
+msgstr ""
 
 #. module: account_check_printing_report_base
 #: model:ir.model,name:account_check_printing_report_base.model_account_journal
@@ -122,6 +130,7 @@ msgstr "Diario"
 #. module: account_check_printing_report_base
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_payment_check_report____last_update
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_report_check_base____last_update
+#: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_report_check_base_a4____last_update
 msgid "Last Modified on"
 msgstr "Última modificación en"
 
@@ -142,6 +151,7 @@ msgstr "Nombre"
 
 #. module: account_check_printing_report_base
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
 msgid "Original Amount"
 msgstr "Importe original"
 
@@ -166,14 +176,19 @@ msgid "Payments"
 msgstr "Pagos"
 
 #. module: account_check_printing_report_base
-#: model:ir.model,name:account_check_printing_report_base.model_account_register_payments
-msgid "Register Payments"
-msgstr "Registrar pagos"
+#: model:ir.model,name:account_check_printing_report_base.model_account_payment_register
+msgid "Register Payment"
+msgstr ""
 
 #. module: account_check_printing_report_base
 #: model:ir.model,name:account_check_printing_report_base.model_report_account_check_printing_report_base_report_check_base
 msgid "Report Check Print"
 msgstr "Informe de impresión de cheques"
+
+#. module: account_check_printing_report_base
+#: model:ir.model,name:account_check_printing_report_base.model_report_account_check_printing_report_base_report_check_base_a4
+msgid "Report Check Print for A4"
+msgstr ""
 
 #. module: account_check_printing_report_base
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_payment_check_report__report
@@ -191,7 +206,5 @@ msgid "We attach the list of invoices paid with this check with amount of"
 msgstr ""
 "Adjuntamos el listado de facturas pagadas con este cheque con precio de"
 
-#. module: account_check_printing_report_base
-#: model:ir.model,name:account_check_printing_report_base.model_report_account_check_printing_report_base_report_check_base_a4
-msgid "report.account_check_printing_report_base.report_check_base_a4"
-msgstr ""
+#~ msgid "Register Payments"
+#~ msgstr "Registrar pagos"
