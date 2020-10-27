@@ -38,4 +38,10 @@ class AccountMoveLine(models.Model):
         amount_reconcile = min(sm_debit_move.amount_residual,
                                -sm_credit_move.amount_residual, paid_amt)
 
+        self.env.context = dict(self.env.context)
+        if amount_reconcile<paid_amt:
+            self.env.context.update({'paid_amount': paid_amt-amount_reconcile})
+        else:
+            self.env.context.update({'paid_amount': '0'})
+
         return amount_reconcile, amount_reconcile_currency
