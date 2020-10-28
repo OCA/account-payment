@@ -9,7 +9,7 @@
         <field name="arch" type="xml">
             <field name="check_next_number" position="after">
                 <field name="check_print_auto"/>
-	        <field name="check_layout_id"/>
+                <field name="check_layout_id"/>
             </field>
         </field>
     </record>
