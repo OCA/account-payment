@@ -17,6 +17,11 @@
     "website": "https://github.com/OCA/account-payment",
     "depends": ["account_check_printing",
                 "report_wkhtmltopdf_param"],
+    'external_dependencies': {
+        'python': [
+            'num2words',
+        ],
+    },
     "data": [
         "security/ir.model.access.csv",
         "data/report_paperformat.xml",

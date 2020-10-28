@@ -7,6 +7,7 @@
 import time
 from odoo import api, models
 from odoo.tools import float_is_zero
+from . import lang
 
 
 class ReportCheckPrint(models.AbstractModel):
@@ -118,3 +119,28 @@ class ReportCheckPrint(models.AbstractModel):
 class ReportCheckPrintA4(models.AbstractModel):
     _name = 'report.account_check_printing_report_base.report_check_base_a4'
     _inherit = 'report.account_check_printing_report_base.report_check_base'
+
+
+class ReportPromissoryNotePrint(models.AbstractModel):
+    _name = 'report.account_check_printing_report_base.promissory_footer_a4'
+    _inherit = 'report.account_check_printing_report_base.report_check_base_a4'
+
+    def fill_stars(self, amount_in_word):
+        if amount_in_word and len(amount_in_word) < 100:
+            stars = 100 - len(amount_in_word)
+            return ' '.join([amount_in_word, '* ' * stars])
+        else:
+            return amount_in_word
+
+    def amount2words(self, amount):
+        return lang.num2words_custom(
+            amount, to='currency', lang=self.env.context.get('lang', 'en_US'))
+
+    @api.model
+    def _get_report_values(self, docids, data=None):
+        res = super()._get_report_values(docids, data=data)
+        res.update({
+            'fill_stars': self.fill_stars,
+            'num2words': self.amount2words,
+        })
+        return res
