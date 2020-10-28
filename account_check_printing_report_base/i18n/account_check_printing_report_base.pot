@@ -91,6 +91,7 @@ msgstr ""
 
 #. module: account_check_printing_report_base
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_payment_check_report__display_name
+#: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_promissory_footer_a4__display_name
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_report_check_base__display_name
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_report_check_base_a4__display_name
 msgid "Display Name"
@@ -104,6 +105,7 @@ msgstr ""
 
 #. module: account_check_printing_report_base
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_payment_check_report__id
+#: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_promissory_footer_a4__id
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_report_check_base__id
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_report_check_base_a4__id
 msgid "ID"
@@ -121,6 +123,7 @@ msgstr ""
 
 #. module: account_check_printing_report_base
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_payment_check_report____last_update
+#: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_promissory_footer_a4____last_update
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_report_check_base____last_update
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_report_check_base_a4____last_update
 msgid "Last Modified on"
@@ -190,6 +193,11 @@ msgstr ""
 #. module: account_check_printing_report_base
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
 msgid "We attach the list of invoices paid with this check with amount of"
+msgstr ""
+
+#. module: account_check_printing_report_base
+#: model:ir.model,name:account_check_printing_report_base.model_report_account_check_printing_report_base_promissory_footer_a4
+msgid "report.account_check_printing_report_base.promissory_footer_a4"
 msgstr ""
 
 #. module: account_check_printing_report_base
