@@ -30,7 +30,7 @@ def num2words_custom(number, ordinal=False, lang='en', to='cardinal', **kwargs):
         return num2words(number, ordinal, lang, to, **kwargs)
     else:
         # Fixed implementation
-        converter = num2words_by_lang[lang]()
+        converter = globals()[num2words_by_lang[lang]]()
         if ordinal:
             return converter.to_ordinal(number)
         if to not in CONVERTES_TYPES:
