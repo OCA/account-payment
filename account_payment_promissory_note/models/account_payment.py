@@ -6,7 +6,8 @@ from odoo import api, fields, models
 
 
 class AccountPayment(models.Model):
-    _inherit = "account.payment"
+    _name = "account.payment"
+    _inherit = ["account.payment", "account.promissory.note.mixin"]
 
     promissory_note = fields.Boolean(
         readonly=True, states={"draft": [("readonly", False)]},
@@ -23,8 +24,6 @@ class AccountPayment(models.Model):
     def _onchange_promissory_note(self):
         super()._onchange_promissory_note()
         if not self.date_due and self.promissory_note:
-            invoices = False
-            if self._name == "account.payment":
-                invoices = self.invoice_ids
+            invoices = self.invoice_ids
             if invoices:
-                self.date_due = max(invoices.mapped("date_due"))
+                self.date_due = max(invoices.mapped("invoice_date_due"))
