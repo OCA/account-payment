@@ -6,29 +6,25 @@ from odoo import api, fields, models
 
 
 class AccountPayment(models.Model):
-    _inherit = 'account.payment'
+    _inherit = "account.payment"
 
     promissory_note = fields.Boolean(
-        readonly=True,
-        states={'draft': [('readonly', False)]},
+        readonly=True, states={"draft": [("readonly", False)]},
     )
-    date_due = fields.Date(
-        readonly=True,
-        states={'draft': [('readonly', False)]},
-    )
+    date_due = fields.Date(readonly=True, states={"draft": [("readonly", False)]},)
 
     def _get_liquidity_move_line_vals(self, amount):
         res = super()._get_liquidity_move_line_vals(amount)
         if self.promissory_note:
-            res['date_maturity'] = self.date_due
+            res["date_maturity"] = self.date_due
         return res
 
-    @api.onchange('promissory_note')
+    @api.onchange("promissory_note")
     def _onchange_promissory_note(self):
         super()._onchange_promissory_note()
         if not self.date_due and self.promissory_note:
             invoices = False
-            if self._name == 'account.payment':
+            if self._name == "account.payment":
                 invoices = self.invoice_ids
             if invoices:
-                self.date_due = max(invoices.mapped('date_due'))
+                self.date_due = max(invoices.mapped("date_due"))
