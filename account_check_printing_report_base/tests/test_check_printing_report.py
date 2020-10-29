@@ -11,7 +11,7 @@ from odoo.tests.common import TransactionCase
 
 class TestAccountCheckPrintingReportBase(TransactionCase):
     def setUp(self):
-        super(TestAccountCheckPrintingReportBase, self).setUp()
+        super().setUp()
         self.account_invoice_model = self.env["account.move"]
         self.journal_model = self.env["account.journal"]
         self.payment_method_model = self.env["account.payment.method"]
