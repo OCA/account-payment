@@ -6,16 +6,12 @@ from odoo import api, fields, models
 
 
 class AccountAbstractPayment(models.AbstractModel):
-    _inherit = 'account.abstract.payment'
+    _inherit = "account.abstract.payment"
 
-    promissory_note = fields.Boolean(
-        string='Promissory Note',
-    )
-    date_due = fields.Date(
-        string='Due Date',
-    )
+    promissory_note = fields.Boolean(string="Promissory Note",)
+    date_due = fields.Date(string="Due Date",)
 
-    @api.onchange('promissory_note')
+    @api.onchange("promissory_note")
     def _onchange_promissory_note(self):
         if not self.promissory_note:
             self.date_due = False
