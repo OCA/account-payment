@@ -32,8 +32,8 @@ class TestAccountPaymentPromissoryNote(TransactionCase):
                         {
                             "company_id": self.company.id,
                             "partner_id": partner.id,
-                            "date_invoice": "2020-09-14",
-                            "date_due": "2020-09-23",
+                            "invoice_date": "2020-09-14",
+                            "invoice_date_due": "2020-09-23",
                             "type": "out_invoice",
                         },
                     ),
@@ -43,8 +43,8 @@ class TestAccountPaymentPromissoryNote(TransactionCase):
                         {
                             "company_id": self.company.id,
                             "partner_id": partner.id,
-                            "date_invoice": "2020-09-14",
-                            "date_due": "2020-09-22",
+                            "invoice_date": "2020-09-14",
+                            "invoice_date_due": "2020-09-22",
                             "type": "out_invoice",
                         },
                     ),

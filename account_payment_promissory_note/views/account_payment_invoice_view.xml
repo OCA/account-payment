@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="view_account_payment_from_invoices" model="ir.ui.view">
-        <field name="model">account.register.payments</field>
-        <field name="inherit_id" ref="account.view_account_payment_from_invoices" />
+    <record id="view_account_payment_form_multi" model="ir.ui.view">
+        <field name="model">account.payment.register</field>
+        <field name="inherit_id" ref="account.view_account_payment_form_multi" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='payment_date']" position="after">
                 <field name="promissory_note" />
