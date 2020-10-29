@@ -6,13 +6,14 @@ from odoo import api, models
 
 
 class AccountRegisterPayments(models.TransientModel):
-    _inherit = "account.register.payments"
+    _name = "account.payment.register"
+    _inherit = ["account.payment.register", "account.promissory.note.mixin"]
 
     def get_payments_vals(self):
         vals = super(AccountRegisterPayments, self).get_payments_vals()
         for val in vals:
             val.update(
-                {"promissory_note": self.promissory_note, "date_due": self.date_due,}
+                {"promissory_note": self.promissory_note, "date_due": self.date_due}
             )
         return vals
 
@@ -20,9 +21,7 @@ class AccountRegisterPayments(models.TransientModel):
     def _onchange_promissory_note(self):
         super()._onchange_promissory_note()
         if not self.date_due and self.promissory_note:
-            invoices = False
-            if self._name == "account.register.payments":
-                active_ids = self._context.get("active_ids")
-                invoices = self.env["account.invoice"].browse(active_ids)
+            active_ids = self._context.get("active_ids")
+            invoices = self.env["account.move"].browse(active_ids)
             if invoices:
-                self.date_due = max(invoices.mapped("date_due"))
+                self.date_due = max(invoices.mapped("invoice_date_due"))
