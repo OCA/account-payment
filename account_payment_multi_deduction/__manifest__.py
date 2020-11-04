@@ -12,6 +12,6 @@
     'data': ['security/ir.model.access.csv',
              'views/account_payment_view.xml'],
     'installable': True,
-    'development_status': 'alpha',
+    'development_status': 'Alpha',
     'maintainers': ['kittiu'],
 }
