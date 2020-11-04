@@ -93,6 +93,7 @@ class ReportCheckPrint(models.AbstractModel):
                 paid_amt = self._get_paid_amount(payment, aml)
                 line = {
                     "date_due": date_due,
+                    "date": aml.date,
                     "reference": aml.display_name,
                     "number": aml.name,
                     "amount_total": total_amt,
