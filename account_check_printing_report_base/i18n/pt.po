@@ -124,6 +124,11 @@ msgid "Invoice / Reference"
 msgstr ""
 
 #. module: account_check_printing_report_base
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
+msgid "Invoice date"
+msgstr ""
+
+#. module: account_check_printing_report_base
 #: model:ir.model,name:account_check_printing_report_base.model_account_journal
 msgid "Journal"
 msgstr "Diário"
