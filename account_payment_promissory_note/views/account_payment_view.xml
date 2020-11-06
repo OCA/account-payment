@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_account_payment_form" model="ir.ui.view">
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='payment_date']" position="after">
+                <field name="promissory_note" />
+                <field
+                    name="date_due"
+                    attrs="{'invisible': [('promissory_note','=', False)]}"
+                />
+            </xpath>
+        </field>
+    </record>
+    <record id="view_account_payment_search" model="ir.ui.view">
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='state_sent']" position="after">
+                <filter
+                    name='promissory_note'
+                    string="Promissory Note"
+                    domain="[('promissory_note', '=', True)]"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
