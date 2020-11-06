@@ -14,6 +14,7 @@ setuptools.setup(
         'odoo13-addon-account_due_list_days_overdue',
         'odoo13-addon-account_due_list_payment_mode',
         'odoo13-addon-account_payment_multi_deduction',
+        'odoo13-addon-account_payment_promissory_note',
         'odoo13-addon-account_payment_return',
         'odoo13-addon-account_payment_return_import',
         'odoo13-addon-account_payment_return_import_iso20022',
