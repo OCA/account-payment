@@ -14,7 +14,7 @@ class TestPaymentTerm(TransactionCase):
         # reported in the logs, which would cause a failed test status.
         with self.assertRaises(IntegrityError):
             self.env["account.payment.term"].create(
-                {"name": "Unittest payment term", "early_payment_discount": True,}
+                {"name": "Unittest payment term", "early_payment_discount": True}
             )
 
     def test_constraint__good(self):
