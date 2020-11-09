@@ -40,12 +40,14 @@
                 <field
                     name="discount_amount"
                     invisible="context.get('default_type') != 'out_invoice'"
-                    sum="Total" optional="show"
+                    sum="Total"
+                    optional="show"
                 />
                 <field
                     name="amount_total_with_discount"
                     invisible="context.get('default_type') != 'out_invoice'"
-                    sum="Total" optional="show"
+                    sum="Total"
+                    optional="show"
                 />
                 <field
                     name="discount_due_date_readonly"
