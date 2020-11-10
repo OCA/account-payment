@@ -12,6 +12,7 @@
             <field name="active" position="after">
                 <field name="discount_percent" />
                 <field name="discount_delay" />
+                <field name="discount_option" />
             </field>
         </field>
     </record>

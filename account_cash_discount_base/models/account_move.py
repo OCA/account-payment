@@ -3,6 +3,8 @@
 
 from datetime import timedelta
 
+from dateutil.relativedelta import relativedelta
+
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
 
@@ -42,6 +44,13 @@ class AccountMove(models.Model):
     )
     discount_delay = fields.Integer(
         string="Discount Delay (days)", readonly=True, states=READONLY_STATES
+    )
+    discount_option = fields.Selection(
+        selection=[
+            ("day_after_invoice_date", "days after the invoice date"),
+            ("day_following_month", "of the following month"),
+        ],
+        default="day_after_invoice_date",
     )
     discount_due_date = fields.Date(readonly=True, states=READONLY_STATES)
     discount_due_date_readonly = fields.Date(compute="_compute_discount_due_date",)
@@ -128,7 +137,13 @@ class AccountMove(models.Model):
                 rec.discount_base_date = fields.Date.context_today(rec)
 
     @api.onchange(
-        "has_discount", "discount_base_date", "discount_amount", "discount_delay",
+        "has_discount",
+        "discount_base_date",
+        "discount_amount",
+        "discount_percent",
+        "discount_delay",
+        "discount_option",
+        "type",
     )
     def _onchange_discount_delay(self):
         for rec in self:
@@ -139,8 +154,12 @@ class AccountMove(models.Model):
             )
             if skip:
                 continue
-            discount_base_date = fields.Date.from_string(rec.discount_base_date)
-            due_date = discount_base_date + timedelta(days=rec.discount_delay)
+            discount_base_date = rec.discount_base_date
+            if rec.discount_option == "day_following_month":
+                next_first_date = discount_base_date + relativedelta(day=1, months=1)
+                due_date = next_first_date + relativedelta(days=rec.discount_delay - 1)
+            else:  # day_after_invoice_date
+                due_date = discount_base_date + timedelta(days=rec.discount_delay)
             rec.discount_due_date = due_date
 
     @api.onchange(
@@ -162,6 +181,12 @@ class AccountMove(models.Model):
         if payment_term and self.type in DISCOUNT_ALLOWED_TYPES:
             self.discount_percent = payment_term.discount_percent
             self.discount_delay = payment_term.discount_delay
+            self.discount_option = payment_term.discount_option
+            # As Odoo disable recursive onchange for account.move
+            # we have to call this manually.
+            # We can not add "invoice_payment_term_id" in onchange of this
+            # onchange because these second one could be called first
+            self._onchange_discount_delay()
 
     def _get_payment_move_lines(self):
         self.ensure_one()
