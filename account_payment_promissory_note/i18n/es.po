@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-14 08:53+0000\n"
-"PO-Revision-Date: 2020-10-14 10:55+0200\n"
+"POT-Creation-Date: 2020-11-18 14:51+0000\n"
+"PO-Revision-Date: 2020-11-18 15:55+0100\n"
 "Last-Translator: Carlos <carlos.roca@tecnativa.com>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -18,9 +18,25 @@ msgstr ""
 "X-Generator: Poedit 2.0.6\n"
 
 #. module: account_payment_promissory_note
+#: model_terms:ir.ui.view,arch_db:account_payment_promissory_note.view_account_payment_form_multi
+msgid ""
+"<span class=\"text-muted\" attrs=\"{'invisible': [('promissory_note','=', "
+"False)]}\">\n"
+"                    Set date due to all payments or empty to select last "
+"date due of each partner invoices group\n"
+"                </span>"
+msgstr ""
+"<span class=\"text-muted\" attrs=\"{'invisible': [('promissory_note','=', "
+"False)]}\">\n"
+"                   Selecciona una fecha de vencimiento para todos los pagos "
+"o dejalo vacío para que se seleccione la última fecha de vencimiento para "
+"cada agrupación de facturas de un partner.\n"
+"                </span>"
+
+#. module: account_payment_promissory_note
 #: model:ir.model.fields,field_description:account_payment_promissory_note.field_account_promissory_note_mixin__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Mostrar Nombre"
 
 #. module: account_payment_promissory_note
 #: model:ir.model.fields,field_description:account_payment_promissory_note.field_account_payment__date_due
@@ -32,12 +48,12 @@ msgstr "Fecha de Vencimiento"
 #. module: account_payment_promissory_note
 #: model:ir.model.fields,field_description:account_payment_promissory_note.field_account_promissory_note_mixin__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_payment_promissory_note
 #: model:ir.model.fields,field_description:account_payment_promissory_note.field_account_promissory_note_mixin____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última modificación en"
 
 #. module: account_payment_promissory_note
 #: model:ir.model,name:account_payment_promissory_note.model_account_payment
@@ -60,7 +76,7 @@ msgstr ""
 #. module: account_payment_promissory_note
 #: model:ir.model,name:account_payment_promissory_note.model_account_payment_register
 msgid "Register Payment"
-msgstr ""
+msgstr "Registrar pago"
 
 #~ msgid ""
 #~ "Contains the logic shared between models which allows to register payments"

@@ -14,6 +14,14 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_payment_promissory_note
+#: model_terms:ir.ui.view,arch_db:account_payment_promissory_note.view_account_payment_form_multi
+msgid ""
+"<span class=\"text-muted\" attrs=\"{'invisible': [('promissory_note','=', False)]}\">\n"
+"                    Set date due to all payments or empty to select last date due of each partner invoices group\n"
+"                </span>"
+msgstr ""
+
+#. module: account_payment_promissory_note
 #: model:ir.model.fields,field_description:account_payment_promissory_note.field_account_promissory_note_mixin__display_name
 msgid "Display Name"
 msgstr ""
