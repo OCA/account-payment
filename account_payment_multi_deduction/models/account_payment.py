@@ -49,8 +49,8 @@ class AccountPayment(models.Model):
             )
 
     def _prepare_payment_moves(self):
-        """ If payment handling is reconcile_multi_deduct, modify line_ids
-            using multi deduction table """
+        """If payment handling is reconcile_multi_deduct, modify line_ids
+        using multi deduction table"""
 
         x_payments = self.filtered(
             lambda l: l.payment_type != "transfer"
@@ -123,7 +123,10 @@ class AccountPayment(models.Model):
         )
         wo_amount_currency = deduct.amount
         wo_amount = self.currency_id._convert(
-            wo_amount_currency, company_currency, self.company_id, self.payment_date,
+            wo_amount_currency,
+            company_currency,
+            self.company_id,
+            self.payment_date,
         )
         return {
             "name": deduct.name,
