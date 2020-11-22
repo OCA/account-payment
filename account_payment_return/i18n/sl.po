@@ -420,7 +420,6 @@ msgstr "Sklic plačila"
 #: model:ir.actions.act_window,name:account_payment_return.payment_return_reason_action
 #: model:ir.ui.menu,name:account_payment_return.payment_return_reason_menu
 #, fuzzy
-#| msgid "Payment return reason"
 msgid "Payment Return Reasons"
 msgstr "Razlog vračila plačila"
 
@@ -472,7 +471,6 @@ msgstr "Razlog"
 #: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_import_journal_creation__return_auto_reconcile
 #: model:ir.model.fields,field_description:account_payment_return.field_account_journal__return_auto_reconcile
 #, fuzzy
-#| msgid "Payment return"
 msgid "Reconcile payment returns"
 msgstr "Vračilo plačila"
 
@@ -513,7 +511,6 @@ msgstr "Razlog vračila"
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__reason_additional_information
 #, fuzzy
-#| msgid "Return reason"
 msgid "Return reason (info)"
 msgstr "Razlog vračila"
 

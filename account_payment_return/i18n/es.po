@@ -406,7 +406,6 @@ msgstr "Referencia de cobro"
 #: model:ir.actions.act_window,name:account_payment_return.payment_return_reason_action
 #: model:ir.ui.menu,name:account_payment_return.payment_return_reason_menu
 #, fuzzy
-#| msgid "Payment return reason"
 msgid "Payment Return Reasons"
 msgstr "Motivos de devolución"
 
@@ -460,7 +459,6 @@ msgstr "Motivo"
 #: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_import_journal_creation__return_auto_reconcile
 #: model:ir.model.fields,field_description:account_payment_return.field_account_journal__return_auto_reconcile
 #, fuzzy
-#| msgid "Payment return"
 msgid "Reconcile payment returns"
 msgstr "Devolución de cobro"
 
@@ -501,7 +499,6 @@ msgstr "Motivo de la devolución"
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__reason_additional_information
 #, fuzzy
-#| msgid "Return reason"
 msgid "Return reason (info)"
 msgstr "Motivo de la devolución"
 
@@ -541,7 +538,6 @@ msgstr ""
 #. module: account_payment_return
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
 #, fuzzy
-#| msgid "Charges Amount"
 msgid "Total charges amount"
 msgstr "Importe de la comisión"
 
