@@ -195,7 +195,6 @@ msgstr "Datoteka vračila plačila"
 #. module: account_payment_return_import
 #: model:ir.model,name:account_payment_return_import.model_payment_return
 #, fuzzy
-#| msgid "Payment return lines"
 msgid "Payment return"
 msgstr "Postavke vračil plačil"
 
