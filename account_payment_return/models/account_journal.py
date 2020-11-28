@@ -15,7 +15,6 @@ class AccountJournal(models.Model):
     default_expense_partner_id = fields.Many2one(
         comodel_name="res.partner",
         string="Default Charges Partner",
-        domain=[("supplier", "=", True)],
         help="Default partner for charge expenses",
     )
     return_auto_reconcile = fields.Boolean(
