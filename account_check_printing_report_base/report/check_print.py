@@ -125,13 +125,6 @@ class ReportPromissoryNotePrint(models.AbstractModel):
     _name = 'report.account_check_printing_report_base.promissory_footer_a4'
     _inherit = 'report.account_check_printing_report_base.report_check_base_a4'
 
-    def fill_stars(self, amount_in_word):
-        if amount_in_word and len(amount_in_word) < 100:
-            stars = 100 - len(amount_in_word)
-            return ' '.join([amount_in_word, '* ' * stars])
-        else:
-            return amount_in_word
-
     def amount2words(self, amount):
         return lang.num2words_custom(
             amount, to='currency', lang=self.env.context.get('lang', 'en_US'))
