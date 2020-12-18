@@ -28,7 +28,7 @@ class AccountPayment(models.Model):
         super()._onchange_promissory_note()
         if not self.date_due and self.promissory_note:
             invoices = self.invoice_ids
-            partner = invoices[0].partner_id
+            partner = invoices[:1].partner_id
             same_partner = True
             for invoice in invoices:
                 if invoice.partner_id != partner:
