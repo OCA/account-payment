@@ -6,8 +6,9 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
     def setUp(self):
         super(TestAccountPaymentTermMultiDay, self).setUp()
         # disable _constrains_date_sequence()
-        self.env['ir.config_parameter'].sudo().set_param(
-            'sequence.mixin.constraint_start_date', '2100-01-01')
+        self.env["ir.config_parameter"].sudo().set_param(
+            "sequence.mixin.constraint_start_date", "2100-01-01"
+        )
         self.payment_term_model = self.env["account.payment.term"]
         self.invoice_model = self.env["account.move"]
         journal_model = self.env["account.journal"]
