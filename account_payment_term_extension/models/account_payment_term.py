@@ -1,7 +1,7 @@
-# Copyright 2013-2016 Camptocamp SA (Yannick Vaucher)
-# Copyright 2004-2016 Odoo S.A. (www.odoo.com)
-# Copyright 2015-2016 Akretion
-# (Alexis de Lattre <alexis.delattre@akretion.com>)
+# Copyright 2013-2020 Camptocamp SA (Yannick Vaucher)
+# Copyright 2004-2020 Odoo S.A. (www.odoo.com)
+# Copyright 2015-2020 Akretion
+# @author: Alexis de Lattre <alexis.delattre@akretion.com>
 # Copyright 2018 Simone Rubino - Agile Business Group
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -76,6 +76,12 @@ class AccountPaymentTermLine(models.Model):
     )
     months = fields.Integer(string="Number of Months")
     weeks = fields.Integer(string="Number of Weeks")
+    payment_days = fields.Char(
+        string="Payment day(s)",
+        help="Put here the day or days when the partner makes the payment. "
+        "Separate each possible payment day with dashes (-), commas (,) "
+        "or spaces ( ).",
+    )
 
     def compute_line_amount(self, total_amount, remaining_amount, precision_digits):
         """Compute the amount for a payment term line.
@@ -119,13 +125,6 @@ class AccountPaymentTermLine(models.Model):
                 error = True
             if error:
                 raise exceptions.Warning(_("Payment days field format is not valid."))
-
-    payment_days = fields.Char(
-        string="Payment day(s)",
-        help="Put here the day or days when the partner makes the payment. "
-        "Separate each possible payment day with dashes (-), commas (,) "
-        "or spaces ( ).",
-    )
 
 
 class AccountPaymentTerm(models.Model):
@@ -183,7 +182,7 @@ class AccountPaymentTerm(models.Model):
         if not currency and self.env.context.get("currency_id"):
             currency = self.env["res.currency"].browse(self.env.context["currency_id"])
         else:
-            currency = self.env.user.company_id.currency_id
+            currency = self.env.company.currency_id
         precision_digits = currency.decimal_places
         next_date = fields.Date.from_string(date_ref)
         for line in self.line_ids:

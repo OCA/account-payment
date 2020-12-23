@@ -5,17 +5,19 @@ from odoo import fields
 class TestAccountPaymentTermMultiDay(common.TransactionCase):
     def setUp(self):
         super(TestAccountPaymentTermMultiDay, self).setUp()
+        # disable _constrains_date_sequence()
+        self.env['ir.config_parameter'].sudo().set_param(
+            'sequence.mixin.constraint_start_date', '2100-01-01')
         self.payment_term_model = self.env["account.payment.term"]
         self.invoice_model = self.env["account.move"]
         journal_model = self.env["account.journal"]
-        self.journal = journal_model.search([("type", "=", "purchase")])
+        self.journal = journal_model.search([("type", "=", "purchase")], limit=1)
         self.partner = self.env.ref("base.res_partner_3")
         self.product = self.env.ref("product.product_product_5")
         self.prod_account = self.env.ref("account.demo_office_furniture_account")
         self.payment_term_0_day_5 = self.payment_term_model.create(
             {
                 "name": "Normal payment in day 5",
-                "active": True,
                 "line_ids": [
                     (
                         0,
@@ -33,7 +35,6 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
         self.payment_term_0_days_5_10 = self.payment_term_model.create(
             {
                 "name": "Payment for days 5 and 10",
-                "active": True,
                 "line_ids": [
                     (0, 0, {"value": "balance", "days": 0, "payment_days": "5,10"})
                 ],
@@ -42,7 +43,6 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
         self.payment_term_0_days_15_20_then_5_10 = self.payment_term_model.create(
             {
                 "name": "Payment for days 15 and 20 then 5 and 10",
-                "active": True,
                 "sequential_lines": True,
                 "line_ids": [
                     (
@@ -72,7 +72,6 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
         self.payment_term_round = self.payment_term_model.create(
             {
                 "name": "Payment for days 15 and 20 then 5 and 10 with round",
-                "active": True,
                 "sequential_lines": True,
                 "line_ids": [
                     (
@@ -108,7 +107,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                 "partner_id": self.partner.id,
                 "invoice_payment_term_id": self.payment_term_0_day_5.id,
                 "invoice_date": "%s-01-01" % fields.datetime.now().year,
-                "type": "in_invoice",
+                "move_type": "in_invoice",
                 "name": "Invoice for normal payment on day 5",
                 "invoice_line_ids": [
                     (
@@ -125,7 +124,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                 ],
             }
         )
-        invoice.post()
+        invoice.action_post()
         for line in invoice.line_ids:
             if line.date_maturity:
                 self.assertEqual(
@@ -141,7 +140,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                 "partner_id": self.partner.id,
                 "invoice_payment_term_id": self.payment_term_0_days_5_10.id,
                 "invoice_date": "%s-01-01" % fields.datetime.now().year,
-                "type": "in_invoice",
+                "move_type": "in_invoice",
                 "name": "Invoice for payment on days 5 and 10 (1)",
                 "invoice_line_ids": [
                     (
@@ -158,7 +157,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                 ],
             }
         )
-        invoice.post()
+        invoice.action_post()
         for line in invoice.line_ids:
             if line.date_maturity:
                 self.assertEqual(
@@ -175,7 +174,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                 "partner_id": self.partner.id,
                 "invoice_payment_term_id": self.payment_term_0_days_5_10.id,
                 "invoice_date": "%s-01-06" % fields.datetime.now().year,
-                "type": "in_invoice",
+                "move_type": "in_invoice",
                 "name": "Invoice for payment on days 5 and 10 (2)",
                 "invoice_line_ids": [
                     (
@@ -192,7 +191,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                 ],
             }
         )
-        invoice.post()
+        invoice.action_post()
         for line in invoice.line_ids:
             if line.date_maturity:
                 self.assertEqual(
@@ -209,7 +208,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                 "partner_id": self.partner.id,
                 "invoice_payment_term_id": self.payment_term_0_days_15_20_then_5_10.id,
                 "invoice_date": "%s-01-01" % fields.datetime.now().year,
-                "type": "in_invoice",
+                "move_type": "in_invoice",
                 "name": "Invoice for payment on days 15 and 20 then 5 and 10 (1)",
                 "invoice_line_ids": [
                     (
@@ -226,7 +225,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                 ],
             }
         )
-        invoice.post()
+        invoice.action_post()
         dates_maturity = []
         for line in invoice.line_ids:
             if line.date_maturity:
@@ -252,7 +251,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                 "partner_id": self.partner.id,
                 "invoice_payment_term_id": self.payment_term_0_days_15_20_then_5_10.id,
                 "invoice_date": "%s-01-18" % fields.datetime.now().year,
-                "type": "in_invoice",
+                "move_type": "in_invoice",
                 "name": "Invoice for payment on days 15 and 20 then 5 and 10 (2)",
                 "invoice_line_ids": [
                     (
@@ -269,7 +268,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                 ],
             }
         )
-        invoice.post()
+        invoice.action_post()
         dates_maturity = []
         for line in invoice.line_ids:
             if line.date_maturity:
@@ -295,7 +294,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                 "partner_id": self.partner.id,
                 "invoice_payment_term_id": self.payment_term_0_days_15_20_then_5_10.id,
                 "invoice_date": "%s-01-25" % fields.datetime.now().year,
-                "type": "in_invoice",
+                "move_type": "in_invoice",
                 "name": "Invoice for payment on days 15 and 20 then 5 and 10 (3)",
                 "invoice_line_ids": [
                     (
@@ -312,7 +311,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                 ],
             }
         )
-        invoice.post()
+        invoice.action_post()
         dates_maturity = []
         for line in invoice.line_ids:
             if line.date_maturity:
@@ -338,7 +337,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                 "partner_id": self.partner.id,
                 "invoice_payment_term_id": self.payment_term_round.id,
                 "invoice_date": "%s-01-25" % fields.datetime.now().year,
-                "type": "in_invoice",
+                "move_type": "in_invoice",
                 "name": "Invoice for payment on days 15 and 20 then 5 and 10 (round)",
                 "invoice_line_ids": [
                     (
@@ -355,7 +354,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                 ],
             }
         )
-        invoice.post()
+        invoice.action_post()
         amounts = []
         for line in invoice.line_ids:
             if line.date_maturity:

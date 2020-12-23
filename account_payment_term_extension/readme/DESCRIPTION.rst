@@ -1,4 +1,4 @@
-This module extends the functionality of payment terms to :
+This module extends the functionality of payment terms to:
 
 * support rounding, months and weeks on payment term lines
 * allow to set more than one day of payment in payment terms
