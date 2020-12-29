@@ -21,13 +21,13 @@ msgstr ""
 "%100==4 ? 2 : 3);\n"
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:267
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:266
 #, python-format
 msgid "%d transactions had already been imported and were ignored."
 msgstr "%d transakcij je bilo že uvoženih in so bile spregledane."
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:270
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:269
 #, python-format
 msgid "1 transaction had already been imported and was ignored."
 msgstr "1 transakcija je bila že uvožena in je bila spregledana."
@@ -50,7 +50,7 @@ msgstr ""
 "biti izbran ročno."
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:273
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:272
 #, python-format
 msgid "Already imported items"
 msgstr "Že uvožene postavke"
@@ -67,13 +67,13 @@ msgid "Bank account from the imported file"
 msgstr ""
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:214
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:213
 #, python-format
 msgid "Can not determine journal for import."
 msgstr "Ni mogoče določiti dnevnika za uvoz."
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:207
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:206
 #, python-format
 msgid "Can not find the account number %s."
 msgstr "Ni mogoče najti številke računa %s."
