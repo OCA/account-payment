@@ -188,8 +188,8 @@ class PaymentReturnImport(models.TransientModel):
             bank_account = bank_model.browse(bank_account_id)
             if journal_id:
                 if (
-                    bank_account.journal_id.id
-                    and bank_account.journal_id.id != journal_id
+                    bank_account.journal_id
+                    and journal_id not in bank_account.journal_id.ids
                 ):
                     raise UserError(
                         _(
