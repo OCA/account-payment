@@ -11,4 +11,15 @@
                       ]"
         />
     </record>
+    <record id="amount_untaxed_lines" model="account.payment.term">
+        <field name="name">10% + 40% + Balance</field>
+        <field name="sequential_lines" eval="True" />
+        <field
+            name="line_ids"
+            eval="[(5, 0), (0, 0, {'option': 'day_after_invoice_date', 'sequence': 10, 'value': 'percent_amount_untaxed', 'value_amount': 10}),
+                      (0,0, {'option': 'day_after_invoice_date', 'sequence': 20, 'value': 'percent_amount_untaxed', 'value_amount': 40}),
+                      (0,0, {'option': 'day_after_invoice_date', 'sequence': 30, 'value': 'balance', 'value_amount': 0})
+                      ]"
+        />
+    </record>
 </odoo>
