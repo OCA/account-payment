@@ -19,6 +19,11 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #. module: account_payment_term_extension
+#: model:account.payment.term,name:account_payment_term_extension.amount_untaxed_lines
+msgid "10% + 40% + Balance"
+msgstr ""
+
+#. module: account_payment_term_extension
 #: model:account.payment.term,name:account_payment_term_extension.sixty_days_end_of_month
 #: model:account.payment.term,note:account_payment_term_extension.sixty_days_end_of_month
 msgid "60 Days End of Month"
@@ -84,6 +89,11 @@ msgid "ID"
 msgstr "ID"
 
 #. module: account_payment_term_extension
+#: model:ir.model,name:account_payment_term_extension.model_account_move
+msgid "Journal Entries"
+msgstr ""
+
+#. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday____last_update
 msgid "Last Modified on"
 msgstr "最終更新日"
@@ -140,6 +150,17 @@ msgid "Payment days field format is not valid."
 msgstr ""
 
 #. module: account_payment_term_extension
+#: model:ir.model.fields.selection,name:account_payment_term_extension.selection__account_payment_term_line__value__percent_amount_untaxed
+msgid "Percent (Untaxed amount)"
+msgstr ""
+
+#. module: account_payment_term_extension
+#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
+#, python-format
+msgid "Percentages on the Payment Terms lines must be between 0 and 100."
+msgstr ""
+
+#. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__date_postponed
 msgid "Postponed date"
 msgstr ""
@@ -152,6 +173,11 @@ msgid ""
 msgstr ""
 
 #. module: account_payment_term_extension
+#: model:ir.model.fields,help:account_payment_term_extension.field_account_payment_term_line__value
+msgid "Select here the kind of valuation related to this payment terms line."
+msgstr ""
+
+#. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term__sequential_lines
 msgid "Sequential lines"
 msgstr ""
@@ -161,6 +187,11 @@ msgstr ""
 msgid ""
 "Sets the amount so that it is a multiple of this value.\n"
 "To have amounts that end in 0.99, set rounding 1, surcharge -0.01"
+msgstr ""
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__value
+msgid "Type"
 msgstr ""
 
 #. module: account_payment_term_extension

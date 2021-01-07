@@ -7,6 +7,7 @@
 
   * Pedro M. Baeza
   * Vicent Cubells
+  * Víctor Martínez
 
 * `Domatix <https://domatix.com>`:
 
