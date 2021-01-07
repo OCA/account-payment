@@ -3,6 +3,7 @@
 # Copyright 2015-2016 Akretion
 # (Alexis de Lattre <alexis.delattre@akretion.com>)
 # Copyright 2018 Simone Rubino - Agile Business Group
+# Copyright 2021 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import calendar
@@ -11,7 +12,7 @@ from functools import reduce
 from dateutil.relativedelta import relativedelta
 
 from odoo import _, api, exceptions, fields, models
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 from odoo.tools.float_utils import float_is_zero, float_round
 
 
@@ -76,6 +77,26 @@ class AccountPaymentTermLine(models.Model):
     )
     months = fields.Integer(string="Number of Months")
     weeks = fields.Integer(string="Number of Weeks")
+    value = fields.Selection(
+        selection_add=[
+            ("percent_amount_untaxed", "Percent (Untaxed amount)"),
+            ("fixed",),
+        ]
+    )
+
+    @api.constrains("value", "value_amount")
+    def _check_value_amount_untaxed(self):
+        for term_line in self:
+            if (
+                term_line.value == "percent_amount_untaxed"
+                and not 0 <= term_line.value_amount <= 100
+            ):
+                raise ValidationError(
+                    _(
+                        "Percentages on the Payment Terms lines "
+                        "must be between 0 and 100."
+                    )
+                )
 
     def compute_line_amount(self, total_amount, remaining_amount, precision_digits):
         """Compute the amount for a payment term line.
@@ -90,8 +111,8 @@ class AccountPaymentTermLine(models.Model):
         self.ensure_one()
         if self.value == "fixed":
             return float_round(self.value_amount, precision_digits=precision_digits)
-        elif self.value == "percent":
-            amt = total_amount * (self.value_amount / 100.0)
+        elif self.value in ("percent", "percent_amount_untaxed"):
+            amt = total_amount * self.value_amount / 100.0
             if self.amount_round:
                 amt = float_round(amt, precision_rounding=self.amount_round)
             return float_round(amt, precision_digits=precision_digits)
@@ -173,21 +194,36 @@ class AccountPaymentTerm(models.Model):
         return date
 
     def compute(self, value, date_ref=False, currency=None):
-        """Complete overwrite of compute method to add rounding on line
-        computing and also to handle weeks and months
-        """
+        """Complete overwrite of compute method for adding extra options."""
+        # FIXME: Find an inheritable way of doing this
         self.ensure_one()
+        last_account_move = self.env.context.get("last_account_move", False)
         date_ref = date_ref or fields.Date.today()
         amount = value
         result = []
-        if not currency and self.env.context.get("currency_id"):
-            currency = self.env["res.currency"].browse(self.env.context["currency_id"])
-        else:
-            currency = self.env.user.company_id.currency_id
+        if not currency:
+            if self.env.context.get("currency_id"):
+                currency = self.env["res.currency"].browse(
+                    self.env.context["currency_id"]
+                )
+            else:
+                currency = self.env.user.company_id.currency_id
         precision_digits = currency.decimal_places
         next_date = fields.Date.from_string(date_ref)
         for line in self.line_ids:
-            amt = line.compute_line_amount(value, amount, precision_digits)
+            if line.value == "percent_amount_untaxed" and last_account_move:
+                if last_account_move.company_id.currency_id == currency:
+                    amount_untaxed = -last_account_move.amount_untaxed_signed
+                else:
+                    raise UserError(
+                        _(
+                            "Percentage of amount untaxed can't be used with foreign "
+                            "currencies"
+                        )
+                    )
+                amt = line.compute_line_amount(amount_untaxed, amount, precision_digits)
+            else:
+                amt = line.compute_line_amount(value, amount, precision_digits)
             if not self.sequential_lines:
                 # For all lines, the beginning date is `date_ref`
                 next_date = fields.Date.from_string(date_ref)
