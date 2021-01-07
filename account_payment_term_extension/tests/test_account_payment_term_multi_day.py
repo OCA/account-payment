@@ -1,5 +1,7 @@
 import odoo.tests.common as common
 from odoo import fields
+from odoo.exceptions import ValidationError
+from odoo.tests.common import Form
 
 
 class TestAccountPaymentTermMultiDay(common.TransactionCase):
@@ -100,6 +102,74 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                 ],
             }
         )
+        self.amount_untaxed_lines = self.payment_term_model.create(
+            {
+                "name": "10 percent + 40 percent + Balance",
+                "active": True,
+                "sequential_lines": True,
+                "line_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "value": "percent_amount_untaxed",
+                            "value_amount": 10.0,
+                            "option": "day_after_invoice_date",
+                        },
+                    ),
+                    (
+                        0,
+                        0,
+                        {
+                            "value": "percent_amount_untaxed",
+                            "value_amount": 40.0,
+                            "option": "day_after_invoice_date",
+                        },
+                    ),
+                    (0, 0, {"value": "balance", "option": "day_after_invoice_date"}),
+                ],
+            }
+        )
+
+    def test_amount_untaxed_payment_term_error(self):
+        payment_term_form = Form(self.payment_term_model)
+        payment_term_form.name = "10 percent + 40 percent + Balance"
+        payment_term_form.sequential_lines = True
+        with payment_term_form.line_ids.new() as line_form:
+            line_form.value = "percent_amount_untaxed"
+            line_form.value_amount = 110
+            line_form.option = "day_after_invoice_date"
+        with self.assertRaises(ValidationError):
+            payment_term_form.save()
+
+    def test_account_invoice_with_custom_payment_term(self):
+        invoice = self.invoice_model.create(
+            {
+                "journal_id": self.journal.id,
+                "partner_id": self.partner.id,
+                "invoice_payment_term_id": self.amount_untaxed_lines.id,
+                "invoice_date": "%s-01-01" % fields.datetime.now().year,
+                "type": "in_invoice",
+                "name": "10 percent + 40 percent + Balance",
+                "invoice_line_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "product_id": self.product.id,
+                            "name": "Test",
+                            "quantity": 10.0,
+                            "price_unit": 100.00,
+                            "account_id": self.prod_account.id,
+                        },
+                    )
+                ],
+            }
+        )
+        invoice.post()
+        self.assertEqual(invoice.line_ids[1].credit, 100.0)
+        self.assertEqual(invoice.line_ids[2].credit, 400.0)
+        self.assertEqual(invoice.line_ids[3].credit, 500.0)
 
     def test_invoice_normal_payment_term(self):
         invoice = self.invoice_model.create(

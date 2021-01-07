@@ -81,6 +81,14 @@
             <xpath expr="//form/div[2]" position="attributes">
                 <attribute name="invisible">True</attribute>
             </xpath>
+            <xpath
+                expr="//field[@name='value_amount']/following-sibling::span"
+                position="attributes"
+            >
+                <attribute
+                    name="attrs"
+                >{'invisible':[('value', 'not in', ['percent', 'percent_amount_untaxed'])]}</attribute>
+            </xpath>
         </field>
     </record>
     <record id="view_payment_term_line_tree" model="ir.ui.view">
