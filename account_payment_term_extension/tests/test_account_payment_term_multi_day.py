@@ -9,11 +9,8 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
         super(TestAccountPaymentTermMultiDay, self).setUp()
         self.payment_term_model = self.env["account.payment.term"]
         self.invoice_model = self.env["account.move"]
-        journal_model = self.env["account.journal"]
-        self.journal = journal_model.search([("type", "=", "purchase")])
-        self.partner = self.env.ref("base.res_partner_3")
-        self.product = self.env.ref("product.product_product_5")
-        self.prod_account = self.env.ref("account.demo_office_furniture_account")
+        self.partner = self.env["res.partner"].create({"name": "Test Partner"})
+        self.product = self.env["product.product"].create({"name": "Test product"})
         self.payment_term_0_day_5 = self.payment_term_model.create(
             {
                 "name": "Normal payment in day 5",
@@ -130,6 +127,29 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                 ],
             }
         )
+        self.tax = self.env["account.tax"].create(
+            {
+                "name": "Test tax",
+                "amount_type": "percent",
+                "amount": 10,
+                "type_tax_use": "purchase",
+            }
+        )
+
+    def _create_invoice(
+        self, payment_term, date, quantity, price_unit, move_type="in_invoice"
+    ):
+        invoice_form = Form(self.invoice_model.with_context(default_type=move_type))
+        invoice_form.partner_id = self.partner
+        invoice_form.invoice_payment_term_id = payment_term
+        invoice_form.invoice_date = date
+        with invoice_form.invoice_line_ids.new() as line_form:
+            line_form.product_id = self.product
+            line_form.quantity = quantity
+            line_form.price_unit = price_unit
+            line_form.tax_ids.clear()
+        invoice = invoice_form.save()
+        return invoice
 
     def test_amount_untaxed_payment_term_error(self):
         payment_term_form = Form(self.payment_term_model)
@@ -142,159 +162,68 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
         with self.assertRaises(ValidationError):
             payment_term_form.save()
 
-    def test_account_invoice_with_custom_payment_term(self):
-        invoice = self.invoice_model.create(
-            {
-                "journal_id": self.journal.id,
-                "partner_id": self.partner.id,
-                "invoice_payment_term_id": self.amount_untaxed_lines.id,
-                "invoice_date": "%s-01-01" % fields.datetime.now().year,
-                "type": "in_invoice",
-                "name": "10 percent + 40 percent + Balance",
-                "invoice_line_ids": [
-                    (
-                        0,
-                        0,
-                        {
-                            "product_id": self.product.id,
-                            "name": "Test",
-                            "quantity": 10.0,
-                            "price_unit": 100.00,
-                            "account_id": self.prod_account.id,
-                        },
-                    )
-                ],
-            }
-        )
+    def test_invoice_amount_untaxed_payment_term(self):
+        invoice = self._create_invoice(self.amount_untaxed_lines, "2020-01-01", 10, 100)
+        with Form(invoice) as invoice_form:
+            with invoice_form.invoice_line_ids.edit(0) as line_form:
+                line_form.tax_ids.add(self.tax)
         invoice.post()
         self.assertEqual(invoice.line_ids[1].credit, 100.0)
         self.assertEqual(invoice.line_ids[2].credit, 400.0)
-        self.assertEqual(invoice.line_ids[3].credit, 500.0)
+        self.assertEqual(invoice.line_ids[3].credit, 600.0)
+
+    def test_out_invoice_amount_untaxed_payment_term(self):
+        invoice = self._create_invoice(
+            self.amount_untaxed_lines, "2020-01-01", 10, 100, move_type="out_invoice"
+        )
+        with Form(invoice) as invoice_form:
+            with invoice_form.invoice_line_ids.edit(0) as line_form:
+                line_form.tax_ids.add(self.tax)
+        invoice.post()
+        self.assertEqual(invoice.line_ids[1].debit, 100.0)
+        self.assertEqual(invoice.line_ids[2].debit, 400.0)
+        self.assertEqual(invoice.line_ids[3].debit, 600.0)
 
     def test_invoice_normal_payment_term(self):
-        invoice = self.invoice_model.create(
-            {
-                "journal_id": self.journal.id,
-                "partner_id": self.partner.id,
-                "invoice_payment_term_id": self.payment_term_0_day_5.id,
-                "invoice_date": "%s-01-01" % fields.datetime.now().year,
-                "type": "in_invoice",
-                "name": "Invoice for normal payment on day 5",
-                "invoice_line_ids": [
-                    (
-                        0,
-                        0,
-                        {
-                            "product_id": self.product.id,
-                            "name": "Test",
-                            "quantity": 10.0,
-                            "price_unit": 100.00,
-                            "account_id": self.prod_account.id,
-                        },
-                    )
-                ],
-            }
-        )
+        invoice = self._create_invoice(self.payment_term_0_day_5, "2020-01-01", 10, 100)
         invoice.post()
         for line in invoice.line_ids:
             if line.date_maturity:
                 self.assertEqual(
                     fields.Date.to_string(line.date_maturity),
-                    "%s-02-05" % fields.datetime.now().year,
-                    "Incorrect due date for invoice with normal payment day " "on 5",
+                    "2020-02-05",
+                    "Incorrect due date for invoice with normal payment day on 5",
                 )
 
     def test_invoice_multi_payment_term_day_1(self):
-        invoice = self.invoice_model.create(
-            {
-                "journal_id": self.journal.id,
-                "partner_id": self.partner.id,
-                "invoice_payment_term_id": self.payment_term_0_days_5_10.id,
-                "invoice_date": "%s-01-01" % fields.datetime.now().year,
-                "type": "in_invoice",
-                "name": "Invoice for payment on days 5 and 10 (1)",
-                "invoice_line_ids": [
-                    (
-                        0,
-                        0,
-                        {
-                            "product_id": self.product.id,
-                            "name": "Test",
-                            "quantity": 10.0,
-                            "price_unit": 100.00,
-                            "account_id": self.prod_account.id,
-                        },
-                    )
-                ],
-            }
+        invoice = self._create_invoice(
+            self.payment_term_0_days_5_10, "2020-01-01", 10, 100
         )
         invoice.post()
         for line in invoice.line_ids:
             if line.date_maturity:
                 self.assertEqual(
                     fields.Date.to_string(line.date_maturity),
-                    "%s-01-05" % fields.datetime.now().year,
-                    "Incorrect due date for invoice with payment days on 5 "
-                    "and 10 (1)",
+                    "2020-01-05",
+                    "Incorrect due date for invoice with payment days on 5 and 10 (1)",
                 )
 
     def test_invoice_multi_payment_term_day_6(self):
-        invoice = self.invoice_model.create(
-            {
-                "journal_id": self.journal.id,
-                "partner_id": self.partner.id,
-                "invoice_payment_term_id": self.payment_term_0_days_5_10.id,
-                "invoice_date": "%s-01-06" % fields.datetime.now().year,
-                "type": "in_invoice",
-                "name": "Invoice for payment on days 5 and 10 (2)",
-                "invoice_line_ids": [
-                    (
-                        0,
-                        0,
-                        {
-                            "product_id": self.product.id,
-                            "name": "Test",
-                            "quantity": 10.0,
-                            "price_unit": 100.00,
-                            "account_id": self.prod_account.id,
-                        },
-                    )
-                ],
-            }
+        invoice = self._create_invoice(
+            self.payment_term_0_days_5_10, "2020-01-06", 10, 100
         )
         invoice.post()
         for line in invoice.line_ids:
             if line.date_maturity:
                 self.assertEqual(
                     fields.Date.to_string(line.date_maturity),
-                    "%s-01-10" % fields.datetime.now().year,
-                    "Incorrect due date for invoice with payment days on 5 "
-                    "and 10 (2)",
+                    "2020-01-10",
+                    "Incorrect due date for invoice with payment days on 5 and 10 (2)",
                 )
 
     def test_invoice_multi_payment_term_sequential_day_1(self):
-        invoice = self.invoice_model.create(
-            {
-                "journal_id": self.journal.id,
-                "partner_id": self.partner.id,
-                "invoice_payment_term_id": self.payment_term_0_days_15_20_then_5_10.id,
-                "invoice_date": "%s-01-01" % fields.datetime.now().year,
-                "type": "in_invoice",
-                "name": "Invoice for payment on days 15 and 20 then 5 and 10 (1)",
-                "invoice_line_ids": [
-                    (
-                        0,
-                        0,
-                        {
-                            "product_id": self.product.id,
-                            "name": "Test",
-                            "quantity": 10.0,
-                            "price_unit": 100.00,
-                            "account_id": self.prod_account.id,
-                        },
-                    )
-                ],
-            }
+        invoice = self._create_invoice(
+            self.payment_term_0_days_15_20_then_5_10, "2020-01-01", 10, 100
         )
         invoice.post()
         dates_maturity = []
@@ -304,40 +233,20 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
         dates_maturity.sort()
         self.assertEqual(
             fields.Date.to_string(dates_maturity[0]),
-            "%s-01-15" % fields.datetime.now().year,
+            "2020-01-15",
             "Incorrect due date for invoice with payment days on "
             "15 and 20 then 5 and 10 (1)",
         )
         self.assertEqual(
             fields.Date.to_string(dates_maturity[1]),
-            "%s-02-05" % fields.datetime.now().year,
+            "2020-02-05",
             "Incorrect due date for invoice with payment days on "
             "15 and 20 then 5 and 10 (1)",
         )
 
     def test_invoice_multi_payment_term_sequential_day_18(self):
-        invoice = self.invoice_model.create(
-            {
-                "journal_id": self.journal.id,
-                "partner_id": self.partner.id,
-                "invoice_payment_term_id": self.payment_term_0_days_15_20_then_5_10.id,
-                "invoice_date": "%s-01-18" % fields.datetime.now().year,
-                "type": "in_invoice",
-                "name": "Invoice for payment on days 15 and 20 then 5 and 10 (2)",
-                "invoice_line_ids": [
-                    (
-                        0,
-                        0,
-                        {
-                            "product_id": self.product.id,
-                            "name": "Test",
-                            "quantity": 10.0,
-                            "price_unit": 100.00,
-                            "account_id": self.prod_account.id,
-                        },
-                    )
-                ],
-            }
+        invoice = self._create_invoice(
+            self.payment_term_0_days_15_20_then_5_10, "2020-01-18", 10, 100
         )
         invoice.post()
         dates_maturity = []
@@ -347,40 +256,20 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
         dates_maturity.sort()
         self.assertEqual(
             fields.Date.to_string(dates_maturity[0]),
-            "%s-01-20" % fields.datetime.now().year,
+            "2020-01-20",
             "Incorrect due date for invoice with payment days on "
             "15 and 20 then 5 and 10 (2)",
         )
         self.assertEqual(
             fields.Date.to_string(dates_maturity[1]),
-            "%s-02-05" % fields.datetime.now().year,
+            "2020-02-05",
             "Incorrect due date for invoice with payment days on "
             "15 and 20 then 5 and 10 (2)",
         )
 
     def test_invoice_multi_payment_term_sequential_day_25(self):
-        invoice = self.invoice_model.create(
-            {
-                "journal_id": self.journal.id,
-                "partner_id": self.partner.id,
-                "invoice_payment_term_id": self.payment_term_0_days_15_20_then_5_10.id,
-                "invoice_date": "%s-01-25" % fields.datetime.now().year,
-                "type": "in_invoice",
-                "name": "Invoice for payment on days 15 and 20 then 5 and 10 (3)",
-                "invoice_line_ids": [
-                    (
-                        0,
-                        0,
-                        {
-                            "product_id": self.product.id,
-                            "name": "Test",
-                            "quantity": 10.0,
-                            "price_unit": 100.00,
-                            "account_id": self.prod_account.id,
-                        },
-                    )
-                ],
-            }
+        invoice = self._create_invoice(
+            self.payment_term_0_days_15_20_then_5_10, "2020-01-25", 10, 100
         )
         invoice.post()
         dates_maturity = []
@@ -390,40 +279,20 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
         dates_maturity.sort()
         self.assertEqual(
             fields.Date.to_string(dates_maturity[0]),
-            "%s-02-15" % fields.datetime.now().year,
+            "2020-02-15",
             "Incorrect due date for invoice with payment days on "
             "15 and 20 then 5 and 10 (3)",
         )
         self.assertEqual(
             fields.Date.to_string(dates_maturity[1]),
-            "%s-03-05" % fields.datetime.now().year,
+            "2020-03-05",
             "Incorrect due date for invoice with payment days on "
             "15 and 20 then 5 and 10 (3)",
         )
 
     def test_invoice_multi_payment_term_round(self):
-        invoice = self.invoice_model.create(
-            {
-                "journal_id": self.journal.id,
-                "partner_id": self.partner.id,
-                "invoice_payment_term_id": self.payment_term_round.id,
-                "invoice_date": "%s-01-25" % fields.datetime.now().year,
-                "type": "in_invoice",
-                "name": "Invoice for payment on days 15 and 20 then 5 and 10 (round)",
-                "invoice_line_ids": [
-                    (
-                        0,
-                        0,
-                        {
-                            "product_id": self.product.id,
-                            "name": "Test",
-                            "quantity": 10.0,
-                            "price_unit": 100.01,
-                            "account_id": self.prod_account.id,
-                        },
-                    )
-                ],
-            }
+        invoice = self._create_invoice(
+            self.payment_term_round, "2020-01-25", 10, 100.01
         )
         invoice.post()
         amounts = []
