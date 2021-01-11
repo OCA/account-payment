@@ -1,4 +1,4 @@
-This module extends the functionality of payment terms to :
+This module extends the functionality of payment terms to:
 
 * select "Percent (untaxed amount)" type in lines for using the base amount instead of the total (with taxes) one.
 * support rounding, months and weeks on payment term lines

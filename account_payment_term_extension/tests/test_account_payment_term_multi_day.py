@@ -4,14 +4,15 @@ from odoo.exceptions import ValidationError
 from odoo.tests.common import Form
 
 
-class TestAccountPaymentTermMultiDay(common.TransactionCase):
-    def setUp(self):
-        super(TestAccountPaymentTermMultiDay, self).setUp()
-        self.payment_term_model = self.env["account.payment.term"]
-        self.invoice_model = self.env["account.move"]
-        self.partner = self.env["res.partner"].create({"name": "Test Partner"})
-        self.product = self.env["product.product"].create({"name": "Test product"})
-        self.payment_term_0_day_5 = self.payment_term_model.create(
+class TestAccountPaymentTermMultiDay(common.SavepointCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.payment_term_model = cls.env["account.payment.term"]
+        cls.invoice_model = cls.env["account.move"]
+        cls.partner = cls.env["res.partner"].create({"name": "Test Partner"})
+        cls.product = cls.env["product.product"].create({"name": "Test product"})
+        cls.payment_term_0_day_5 = cls.payment_term_model.create(
             {
                 "name": "Normal payment in day 5",
                 "active": True,
@@ -29,7 +30,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                 ],
             }
         )
-        self.payment_term_0_days_5_10 = self.payment_term_model.create(
+        cls.payment_term_0_days_5_10 = cls.payment_term_model.create(
             {
                 "name": "Payment for days 5 and 10",
                 "active": True,
@@ -38,7 +39,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                 ],
             }
         )
-        self.payment_term_0_days_15_20_then_5_10 = self.payment_term_model.create(
+        cls.payment_term_0_days_15_20_then_5_10 = cls.payment_term_model.create(
             {
                 "name": "Payment for days 15 and 20 then 5 and 10",
                 "active": True,
@@ -68,7 +69,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                 ],
             }
         )
-        self.payment_term_round = self.payment_term_model.create(
+        cls.payment_term_round = cls.payment_term_model.create(
             {
                 "name": "Payment for days 15 and 20 then 5 and 10 with round",
                 "active": True,
@@ -99,7 +100,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                 ],
             }
         )
-        self.amount_untaxed_lines = self.payment_term_model.create(
+        cls.amount_untaxed_lines = cls.payment_term_model.create(
             {
                 "name": "10 percent + 40 percent + Balance",
                 "active": True,
@@ -127,7 +128,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                 ],
             }
         )
-        self.tax = self.env["account.tax"].create(
+        cls.tax = cls.env["account.tax"].create(
             {
                 "name": "Test tax",
                 "amount_type": "percent",
@@ -139,7 +140,9 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
     def _create_invoice(
         self, payment_term, date, quantity, price_unit, move_type="in_invoice"
     ):
-        invoice_form = Form(self.invoice_model.with_context(default_type=move_type))
+        invoice_form = Form(
+            self.invoice_model.with_context(default_move_type=move_type)
+        )
         invoice_form.partner_id = self.partner
         invoice_form.invoice_payment_term_id = payment_term
         invoice_form.invoice_date = date
@@ -167,7 +170,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
         with Form(invoice) as invoice_form:
             with invoice_form.invoice_line_ids.edit(0) as line_form:
                 line_form.tax_ids.add(self.tax)
-        invoice.post()
+        invoice.action_post()
         self.assertEqual(invoice.line_ids[1].credit, 100.0)
         self.assertEqual(invoice.line_ids[2].credit, 400.0)
         self.assertEqual(invoice.line_ids[3].credit, 600.0)
@@ -179,14 +182,14 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
         with Form(invoice) as invoice_form:
             with invoice_form.invoice_line_ids.edit(0) as line_form:
                 line_form.tax_ids.add(self.tax)
-        invoice.post()
+        invoice.action_post()
         self.assertEqual(invoice.line_ids[1].debit, 100.0)
         self.assertEqual(invoice.line_ids[2].debit, 400.0)
         self.assertEqual(invoice.line_ids[3].debit, 600.0)
 
     def test_invoice_normal_payment_term(self):
         invoice = self._create_invoice(self.payment_term_0_day_5, "2020-01-01", 10, 100)
-        invoice.post()
+        invoice.action_post()
         for line in invoice.line_ids:
             if line.date_maturity:
                 self.assertEqual(
@@ -199,7 +202,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
         invoice = self._create_invoice(
             self.payment_term_0_days_5_10, "2020-01-01", 10, 100
         )
-        invoice.post()
+        invoice.action_post()
         for line in invoice.line_ids:
             if line.date_maturity:
                 self.assertEqual(
@@ -212,7 +215,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
         invoice = self._create_invoice(
             self.payment_term_0_days_5_10, "2020-01-06", 10, 100
         )
-        invoice.post()
+        invoice.action_post()
         for line in invoice.line_ids:
             if line.date_maturity:
                 self.assertEqual(
@@ -225,7 +228,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
         invoice = self._create_invoice(
             self.payment_term_0_days_15_20_then_5_10, "2020-01-01", 10, 100
         )
-        invoice.post()
+        invoice.action_post()
         dates_maturity = []
         for line in invoice.line_ids:
             if line.date_maturity:
@@ -248,7 +251,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
         invoice = self._create_invoice(
             self.payment_term_0_days_15_20_then_5_10, "2020-01-18", 10, 100
         )
-        invoice.post()
+        invoice.action_post()
         dates_maturity = []
         for line in invoice.line_ids:
             if line.date_maturity:
@@ -271,7 +274,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
         invoice = self._create_invoice(
             self.payment_term_0_days_15_20_then_5_10, "2020-01-25", 10, 100
         )
-        invoice.post()
+        invoice.action_post()
         dates_maturity = []
         for line in invoice.line_ids:
             if line.date_maturity:
@@ -294,7 +297,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
         invoice = self._create_invoice(
             self.payment_term_round, "2020-01-25", 10, 100.01
         )
-        invoice.post()
+        invoice.action_post()
         amounts = []
         for line in invoice.line_ids:
             if line.date_maturity:
