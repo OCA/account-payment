@@ -2,21 +2,22 @@
 # (Alexis de Lattre <alexis.delattre@akretion.com>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo.exceptions import ValidationError
-from odoo.tests.common import TransactionCase
+from odoo.tests.common import SavepointCase
 
 
-class TestAccountPaymentTerm(TransactionCase):
-    def setUp(self):
-        super(TestAccountPaymentTerm, self).setUp()
-        self.account_payment_term = self.env["account.payment.term"]
-        self.sixty_days_end_of_month = self.env.ref(
+class TestAccountPaymentTerm(SavepointCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.account_payment_term = cls.env["account.payment.term"]
+        cls.sixty_days_end_of_month = cls.env.ref(
             "account_payment_term_extension.sixty_days_end_of_month"
         )
-        self.account_payment_term_holiday = self.env["account.payment.term.holiday"]
+        cls.account_payment_term_holiday = cls.env["account.payment.term.holiday"]
 
     def test_00_compute(self):
         res = self.sixty_days_end_of_month.compute(10, date_ref="2015-01-30")
-        self.assertEquals(
+        self.assertEqual(
             res[0][0],
             "2015-03-31",
             "Error in the compute of payment terms with months",
@@ -41,7 +42,7 @@ class TestAccountPaymentTerm(TransactionCase):
             }
         )
         res = two_week_payterm.compute(10, date_ref="2015-03-02")
-        self.assertEquals(
+        self.assertEqual(
             res[0][0],
             "2015-03-16",
             "Error in the compute of payment terms with weeks",
@@ -52,7 +53,7 @@ class TestAccountPaymentTerm(TransactionCase):
         res = self.env.ref("account.account_payment_term_15days").compute(
             0.2, date_ref="2015-03-01", currency=self.env.ref("base.EUR")
         )
-        self.assertEquals(
+        self.assertEqual(
             res[0][0],
             "2015-03-16",
             "Error in the compute of payment terms 15 days",
@@ -90,7 +91,7 @@ class TestAccountPaymentTerm(TransactionCase):
             }
         )
         res = two_week_payterm.compute(10, date_ref=str_date_invoice)
-        self.assertEquals(
+        self.assertEqual(
             res[0][0],
             str_date_postponed,
             "Error in the compute of payment terms with weeks",
