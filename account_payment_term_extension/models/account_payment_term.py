@@ -70,10 +70,7 @@ class AccountPaymentTermLine(models.Model):
     amount_round = fields.Float(
         string="Amount Rounding",
         digits="Account",
-        # TODO : I don't understand this help msg ; what is surcharge ?
-        help="Sets the amount so that it is a multiple of this value.\n"
-        "To have amounts that end in 0.99, set rounding 1, "
-        "surcharge -0.01",
+        help="Sets the amount so that it is a multiple of this value.",
     )
     months = fields.Integer(string="Number of Months")
     weeks = fields.Integer(string="Number of Weeks")
@@ -81,7 +78,8 @@ class AccountPaymentTermLine(models.Model):
         selection_add=[
             ("percent_amount_untaxed", "Percent (Untaxed amount)"),
             ("fixed",),
-        ]
+        ],
+        ondelete={"percent_amount_untaxed": lambda r: r.write({"value": "percent"})},
     )
 
     @api.constrains("value", "value_amount")
@@ -207,7 +205,7 @@ class AccountPaymentTerm(models.Model):
                     self.env.context["currency_id"]
                 )
             else:
-                currency = self.env.user.company_id.currency_id
+                currency = self.env.company.currency_id
         precision_digits = currency.decimal_places
         next_date = fields.Date.from_string(date_ref)
         for line in self.line_ids:
