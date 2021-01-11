@@ -78,16 +78,18 @@ class AccountPaymentTermLine(models.Model):
     months = fields.Integer(string="Number of Months")
     weeks = fields.Integer(string="Number of Weeks")
     value = fields.Selection(
-        selection_add=[("amount_untaxed", "Percent (Untaxed amount)")]
+        selection_add=[
+            ("percent_amount_untaxed", "Percent (Untaxed amount)"),
+            ("fixed",),
+        ]
     )
-    value_amount_untaxed = fields.Float(string="Untaxed amount (Percent)")
 
-    @api.constrains("value", "value_amount_untaxed")
+    @api.constrains("value", "value_amount")
     def _check_value_amount_untaxed(self):
         for term_line in self:
             if (
-                term_line.value == "amount_untaxed"
-                and not 0 <= term_line.value_amount_untaxed <= 100
+                term_line.value == "percent_amount_untaxed"
+                and not 0 <= term_line.value_amount <= 100
             ):
                 raise ValidationError(
                     _(
@@ -109,13 +111,8 @@ class AccountPaymentTermLine(models.Model):
         self.ensure_one()
         if self.value == "fixed":
             return float_round(self.value_amount, precision_digits=precision_digits)
-        elif self.value == "percent":
-            amt = total_amount * (self.value_amount / 100.0)
-            if self.amount_round:
-                amt = float_round(amt, precision_rounding=self.amount_round)
-            return float_round(amt, precision_digits=precision_digits)
-        elif self.value == "amount_untaxed":
-            amt = total_amount * self.value_amount_untaxed / 100.0
+        elif self.value in ("percent", "percent_amount_untaxed"):
+            amt = total_amount * self.value_amount / 100.0
             if self.amount_round:
                 amt = float_round(amt, precision_rounding=self.amount_round)
             return float_round(amt, precision_digits=precision_digits)

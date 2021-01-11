@@ -38,12 +38,6 @@
         <field name="model">account.payment.term.line</field>
         <field name="inherit_id" ref="account.view_payment_term_line_form" />
         <field name="arch" type="xml">
-            <field name="value_amount" position="after">
-                <field
-                    name="value_amount_untaxed"
-                    attrs="{'invisible':[('value','!=', 'amount_untaxed')]}"
-                />
-            </field>
             <xpath expr="//div[hasclass('o_row')]" position="after">
                 <br />
                 <div attrs="{'invisible':[('value','=', 'balance')]}" class="o_row">
@@ -86,6 +80,14 @@
             </field>
             <xpath expr="//form/div[2]" position="attributes">
                 <attribute name="invisible">True</attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='value_amount']/following-sibling::span"
+                position="attributes"
+            >
+                <attribute
+                    name="attrs"
+                >{'invisible':[('value', 'not in', ['percent', 'percent_amount_untaxed'])]}</attribute>
             </xpath>
         </field>
     </record>

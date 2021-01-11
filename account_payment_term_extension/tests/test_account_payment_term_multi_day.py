@@ -112,8 +112,8 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                         0,
                         0,
                         {
-                            "value": "amount_untaxed",
-                            "value_amount_untaxed": 10.0,
+                            "value": "percent_amount_untaxed",
+                            "value_amount": 10.0,
                             "option": "day_after_invoice_date",
                         },
                     ),
@@ -121,8 +121,8 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                         0,
                         0,
                         {
-                            "value": "amount_untaxed",
-                            "value_amount_untaxed": 40.0,
+                            "value": "percent_amount_untaxed",
+                            "value_amount": 40.0,
                             "option": "day_after_invoice_date",
                         },
                     ),
@@ -136,7 +136,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
         payment_term_form.name = "10 percent + 40 percent + Balance"
         payment_term_form.sequential_lines = True
         with payment_term_form.line_ids.new() as line_form:
-            line_form.value = "amount_untaxed"
+            line_form.value = "percent_amount_untaxed"
             line_form.value_amount = 110
             line_form.option = "day_after_invoice_date"
         with self.assertRaises(ValidationError):
