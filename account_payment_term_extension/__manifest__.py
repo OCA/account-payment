@@ -14,7 +14,7 @@
     "Agile Business Group, "
     "Odoo Community Association (OCA)",
     "maintainer": "OCA",
-    "website": "https://github.com/OCA/account-payment/",
+    "website": "https://github.com/OCA/account-payment",
     "license": "AGPL-3",
     "depends": ["account"],
     "data": ["security/ir.model.access.csv", "views/account_payment_term.xml"],
