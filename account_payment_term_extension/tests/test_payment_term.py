@@ -42,7 +42,9 @@ class TestAccountPaymentTerm(TransactionCase):
         )
         res = two_week_payterm.compute(10, date_ref="2015-03-02")
         self.assertEquals(
-            res[0][0], "2015-03-16", "Error in the compute of payment terms with weeks",
+            res[0][0],
+            "2015-03-16",
+            "Error in the compute of payment terms with weeks",
         )
 
     def test_02_compute(self):
@@ -51,7 +53,9 @@ class TestAccountPaymentTerm(TransactionCase):
             0.2, date_ref="2015-03-01", currency=self.env.ref("base.EUR")
         )
         self.assertEquals(
-            res[0][0], "2015-03-16", "Error in the compute of payment terms 15 days",
+            res[0][0],
+            "2015-03-16",
+            "Error in the compute of payment terms 15 days",
         )
 
     def test_postpone_holiday(self):
