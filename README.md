@@ -24,7 +24,23 @@ You can find complementary modules for handling bank payment related tasks on:
 
 [//]: # (addons)
 
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+Available addons
+----------------
+addon | version | summary
+--- | --- | ---
+[account_check_date](account_check_date/) | 13.0.1.0.0 | Add check date on payment for check printing
+[account_check_printing_report_base](account_check_printing_report_base/) | 13.0.2.0.1 | Account Check Printing Report Base
+[account_due_list](account_due_list/) | 13.0.1.0.0 | List of open credits and debits, with due date
+[account_due_list_days_overdue](account_due_list_days_overdue/) | 13.0.1.0.1 | Payments Due list days overdue
+[account_due_list_payment_mode](account_due_list_payment_mode/) | 13.0.1.0.0 | Payment Due List Payment Mode
+[account_payment_multi_deduction](account_payment_multi_deduction/) | 13.0.1.1.0 | Payment Register with Multiple Deduction
+[account_payment_promissory_note](account_payment_promissory_note/) | 13.0.1.0.0 | Account Payment Promissory Note
+[account_payment_return](account_payment_return/) | 13.0.1.0.2 | Manage the return of your payments
+[account_payment_return_import](account_payment_return_import/) | 13.0.1.0.2 | This module adds a generic wizard to import payment returnfile formats. Is only the base to be extended by anothermodules
+[account_payment_return_import_iso20022](account_payment_return_import_iso20022/) | 13.0.1.0.0 | This addon allows to import payment returns from ISO 20022 files like PAIN or CAMT.
+[account_payment_term_extension](account_payment_term_extension/) | 13.0.1.0.0 | Adds rounding, months, weeks and multiple payment days properties on payment term lines
+[partner_aging](partner_aging/) | 13.0.1.0.0 | Aging as a view - invoices and credits
+[sale_payment_mgmt](sale_payment_mgmt/) | 13.0.1.0.0 | List and create customer payments for salesmen
 
 [//]: # (end addons)
 
