@@ -3,6 +3,7 @@
 # Copyright 2015-2016 Akretion
 # (Alexis de Lattre <alexis.delattre@akretion.com>)
 # Copyright 2018 Simone Rubino - Agile Business Group
+# Copyright 2021 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import calendar
@@ -76,6 +77,24 @@ class AccountPaymentTermLine(models.Model):
     )
     months = fields.Integer(string="Number of Months")
     weeks = fields.Integer(string="Number of Weeks")
+    value = fields.Selection(
+        selection_add=[("amount_untaxed", "Percent (Untaxed amount)")]
+    )
+    value_amount_untaxed = fields.Float(string="Untaxed amount (Percent)")
+
+    @api.constrains("value", "value_amount_untaxed")
+    def _check_value_amount_untaxed(self):
+        for term_line in self:
+            if (
+                term_line.value == "amount_untaxed"
+                and not 0 <= term_line.value_amount_untaxed <= 100
+            ):
+                raise ValidationError(
+                    _(
+                        "Percentages on the Payment Terms lines "
+                        "must be between 0 and 100."
+                    )
+                )
 
     def compute_line_amount(self, total_amount, remaining_amount, precision_digits):
         """Compute the amount for a payment term line.
@@ -92,6 +111,11 @@ class AccountPaymentTermLine(models.Model):
             return float_round(self.value_amount, precision_digits=precision_digits)
         elif self.value == "percent":
             amt = total_amount * (self.value_amount / 100.0)
+            if self.amount_round:
+                amt = float_round(amt, precision_rounding=self.amount_round)
+            return float_round(amt, precision_digits=precision_digits)
+        elif self.value == "amount_untaxed":
+            amt = total_amount * self.value_amount_untaxed / 100.0
             if self.amount_round:
                 amt = float_round(amt, precision_rounding=self.amount_round)
             return float_round(amt, precision_digits=precision_digits)
@@ -173,10 +197,10 @@ class AccountPaymentTerm(models.Model):
         return date
 
     def compute(self, value, date_ref=False, currency=None):
-        """Complete overwrite of compute method to add rounding on line
-        computing and also to handle weeks and months
-        """
+        """Complete overwrite of compute method for adding extra options."""
+        # FIXME: Find an inheritable way of doing this
         self.ensure_one()
+        last_stock_move = self.env.context.get("last_stock_move", False)
         date_ref = date_ref or fields.Date.today()
         amount = value
         result = []
@@ -187,7 +211,12 @@ class AccountPaymentTerm(models.Model):
         precision_digits = currency.decimal_places
         next_date = fields.Date.from_string(date_ref)
         for line in self.line_ids:
-            amt = line.compute_line_amount(value, amount, precision_digits)
+            if line.value == "amount_untaxed" and last_stock_move:
+                amt = line.compute_line_amount(
+                    last_stock_move.amount_untaxed, amount, precision_digits
+                )
+            else:
+                amt = line.compute_line_amount(value, amount, precision_digits)
             if not self.sequential_lines:
                 # For all lines, the beginning date is `date_ref`
                 next_date = fields.Date.from_string(date_ref)
