@@ -152,7 +152,7 @@ msgid "Payment days field format is not valid."
 msgstr "O formato do campo Dias de pagamento não é válido."
 
 #. module: account_payment_term_extension
-#: model:ir.model.fields.selection,name:account_payment_term_extension.selection__account_payment_term_line__value__amount_untaxed
+#: model:ir.model.fields.selection,name:account_payment_term_extension.selection__account_payment_term_line__value__percent_amount_untaxed
 msgid "Percent (Untaxed amount)"
 msgstr ""
 
@@ -199,11 +199,6 @@ msgstr ""
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__value
 msgid "Type"
-msgstr ""
-
-#. module: account_payment_term_extension
-#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__value_amount_untaxed
-msgid "Untaxed amount (Percent)"
 msgstr ""
 
 #. module: account_payment_term_extension
