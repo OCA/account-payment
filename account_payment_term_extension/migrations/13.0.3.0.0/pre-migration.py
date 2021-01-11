@@ -3,13 +3,16 @@
 
 
 def migrate(cr, version):
-    cr.execute(
-        """UPDATE account_payment_term_line
-        SET value_amount = value_amount_untaxed
-        WHERE value = 'amount_untaxed'"""
-    )
-    cr.execute(
-        """UPDATE account_payment_term_line
-        SET value = 'percent_amount_untaxed'
-        WHERE value = 'amount_untaxed'"""
-    )
+    try:
+        cr.execute(
+            """UPDATE account_payment_term_line
+            SET value_amount = value_amount_untaxed
+            WHERE value = 'amount_untaxed'"""
+        )
+        cr.execute(
+            """UPDATE account_payment_term_line
+            SET value = 'percent_amount_untaxed'
+            WHERE value = 'amount_untaxed'"""
+        )
+    except Exception:
+        pass  # no previous version was installed
