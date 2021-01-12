@@ -152,12 +152,23 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
         with self.assertRaises(ValidationError):
             payment_term_form.save()
 
-    def test_account_invoice_with_custom_payment_term(self):
+    def test_invoice_amount_untaxed_payment_term(self):
         invoice = self._create_invoice(self.amount_untaxed_lines, "2020-01-01", 10, 100)
+        tax = self.env["account.tax"].create(
+            {
+                "name": "Test tax",
+                "amount_type": "percent",
+                "amount": 10,
+                "type_tax_use": "purchase",
+            }
+        )
+        with Form(invoice) as invoice_form:
+            with invoice_form.invoice_line_ids.edit(0) as line_form:
+                line_form.tax_ids.add(tax)
         invoice.post()
         self.assertEqual(invoice.line_ids[1].credit, 100.0)
         self.assertEqual(invoice.line_ids[2].credit, 400.0)
-        self.assertEqual(invoice.line_ids[3].credit, 500.0)
+        self.assertEqual(invoice.line_ids[3].credit, 600.0)
 
     def test_invoice_normal_payment_term(self):
         invoice = self._create_invoice(self.payment_term_0_day_5, "2020-01-01", 10, 100)

@@ -197,7 +197,7 @@ class AccountPaymentTerm(models.Model):
         """Complete overwrite of compute method for adding extra options."""
         # FIXME: Find an inheritable way of doing this
         self.ensure_one()
-        last_stock_move = self.env.context.get("last_stock_move", False)
+        last_account_move = self.env.context.get("last_account_move", False)
         date_ref = date_ref or fields.Date.today()
         amount = value
         result = []
@@ -208,9 +208,9 @@ class AccountPaymentTerm(models.Model):
         precision_digits = currency.decimal_places
         next_date = fields.Date.from_string(date_ref)
         for line in self.line_ids:
-            if line.value == "amount_untaxed" and last_stock_move:
+            if line.value == "percent_amount_untaxed" and last_account_move:
                 amt = line.compute_line_amount(
-                    last_stock_move.amount_untaxed, amount, precision_digits
+                    last_account_move.amount_untaxed, amount, precision_digits
                 )
             else:
                 amt = line.compute_line_amount(value, amount, precision_digits)

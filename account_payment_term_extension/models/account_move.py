@@ -10,5 +10,5 @@ class AccountMove(models.Model):
 
     def _recompute_payment_terms_lines(self):
         super(
-            AccountMove, self.with_context(last_stock_move=self)
+            AccountMove, self.with_context(last_account_move=self)
         )._recompute_payment_terms_lines()
