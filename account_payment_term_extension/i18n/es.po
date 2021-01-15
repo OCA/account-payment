@@ -156,6 +156,12 @@ msgstr "Porcentaje (Base imponible)"
 #. module: account_payment_term_extension
 #: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
+msgid "Percentage of amount untaxed can't be used with foreign currencies"
+msgstr ""
+
+#. module: account_payment_term_extension
+#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
+#, python-format
 msgid "Percentages on the Payment Terms lines must be between 0 and 100."
 msgstr ""
 "Los porcentajes en las líneas de Condiciones de pago deben estar entre 0 y "
