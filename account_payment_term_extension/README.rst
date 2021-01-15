@@ -68,11 +68,6 @@ Select any payment term and set a date in invoice.
 
 You must see the due date based on this payment term.
 
-Known issues / Roadmap
-======================
-
-* Add support for percentage of untaxed amount with foreign currency.
-
 Bug Tracker
 ===========
 
