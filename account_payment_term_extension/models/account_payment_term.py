@@ -4,6 +4,7 @@
 # (Alexis de Lattre <alexis.delattre@akretion.com>)
 # Copyright 2018 Simone Rubino - Agile Business Group
 # Copyright 2021 Tecnativa - Víctor Martínez
+# Copyright 2021 Tecnativa - Pedro M. Baeza
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import calendar
@@ -12,7 +13,7 @@ from functools import reduce
 from dateutil.relativedelta import relativedelta
 
 from odoo import _, api, exceptions, fields, models
-from odoo.exceptions import ValidationError
+from odoo.exceptions import UserError, ValidationError
 from odoo.tools.float_utils import float_is_zero, float_round
 
 
@@ -201,17 +202,27 @@ class AccountPaymentTerm(models.Model):
         date_ref = date_ref or fields.Date.today()
         amount = value
         result = []
-        if not currency and self.env.context.get("currency_id"):
-            currency = self.env["res.currency"].browse(self.env.context["currency_id"])
-        else:
-            currency = self.env.user.company_id.currency_id
+        if not currency:
+            if self.env.context.get("currency_id"):
+                currency = self.env["res.currency"].browse(
+                    self.env.context["currency_id"]
+                )
+            else:
+                currency = self.env.user.company_id.currency_id
         precision_digits = currency.decimal_places
         next_date = fields.Date.from_string(date_ref)
         for line in self.line_ids:
             if line.value == "percent_amount_untaxed" and last_account_move:
-                amt = line.compute_line_amount(
-                    last_account_move.amount_untaxed, amount, precision_digits
-                )
+                if last_account_move.company_id.currency_id == currency:
+                    amount_untaxed = -last_account_move.amount_untaxed_signed
+                else:
+                    raise UserError(
+                        _(
+                            "Percentage of amount untaxed can't be used with foreign "
+                            "currencies"
+                        )
+                    )
+                amt = line.compute_line_amount(amount_untaxed, amount, precision_digits)
             else:
                 amt = line.compute_line_amount(value, amount, precision_digits)
             if not self.sequential_lines:

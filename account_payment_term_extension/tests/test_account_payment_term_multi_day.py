@@ -127,9 +127,19 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                 ],
             }
         )
+        self.tax = self.env["account.tax"].create(
+            {
+                "name": "Test tax",
+                "amount_type": "percent",
+                "amount": 10,
+                "type_tax_use": "purchase",
+            }
+        )
 
-    def _create_invoice(self, payment_term, date, quantity, price_unit):
-        invoice_form = Form(self.invoice_model.with_context(default_type="in_invoice"))
+    def _create_invoice(
+        self, payment_term, date, quantity, price_unit, move_type="in_invoice"
+    ):
+        invoice_form = Form(self.invoice_model.with_context(default_type=move_type))
         invoice_form.partner_id = self.partner
         invoice_form.invoice_payment_term_id = payment_term
         invoice_form.invoice_date = date
@@ -154,21 +164,25 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
 
     def test_invoice_amount_untaxed_payment_term(self):
         invoice = self._create_invoice(self.amount_untaxed_lines, "2020-01-01", 10, 100)
-        tax = self.env["account.tax"].create(
-            {
-                "name": "Test tax",
-                "amount_type": "percent",
-                "amount": 10,
-                "type_tax_use": "purchase",
-            }
-        )
         with Form(invoice) as invoice_form:
             with invoice_form.invoice_line_ids.edit(0) as line_form:
-                line_form.tax_ids.add(tax)
+                line_form.tax_ids.add(self.tax)
         invoice.post()
         self.assertEqual(invoice.line_ids[1].credit, 100.0)
         self.assertEqual(invoice.line_ids[2].credit, 400.0)
         self.assertEqual(invoice.line_ids[3].credit, 600.0)
+
+    def test_out_invoice_amount_untaxed_payment_term(self):
+        invoice = self._create_invoice(
+            self.amount_untaxed_lines, "2020-01-01", 10, 100, move_type="out_invoice"
+        )
+        with Form(invoice) as invoice_form:
+            with invoice_form.invoice_line_ids.edit(0) as line_form:
+                line_form.tax_ids.add(self.tax)
+        invoice.post()
+        self.assertEqual(invoice.line_ids[1].debit, 100.0)
+        self.assertEqual(invoice.line_ids[2].debit, 400.0)
+        self.assertEqual(invoice.line_ids[3].debit, 600.0)
 
     def test_invoice_normal_payment_term(self):
         invoice = self._create_invoice(self.payment_term_0_day_5, "2020-01-01", 10, 100)
