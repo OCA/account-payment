@@ -2,6 +2,7 @@
 from num2words import num2words
 from num2words import CONVERTER_CLASSES, CONVERTES_TYPES
 from num2words.lang_ES import Num2Word_ES
+from num2words.base import Num2Word_Base
 
 num2words_by_lang = {
     'es': 'Num2WordESCustom'
@@ -9,15 +10,15 @@ num2words_by_lang = {
 
 
 class Num2WordESCustom(Num2Word_ES):
-    # Replace centavo to céntimo. Original method copy
+    CURRENCY_FORMS = Num2Word_ES.CURRENCY_FORMS.copy()
+    CURRENCY_FORMS.update({
+        'EUR': (('euro', 'euros'), ('céntimo', 'céntimos')),
+    })
+
+    # TODO: PR to remove overwrite in num2words code and use CURRENCY_FORMS
     def to_currency(self, val, longval=True, old=False):
-        hightxt, lowtxt = "euro/s", u"céntimo/s"
-        if old:
-            hightxt, lowtxt = "peso/s", "peseta/s"
-        result = self.to_splitnum(val, hightxt=hightxt, lowtxt=lowtxt,
-                                  divisor=1, jointxt="y", longval=longval)
-        # Handle exception, in spanish is "un euro" and not "uno euro"
-        return result.replace("uno", "un")
+        return Num2Word_Base.to_currency(self, val, currency='EUR', cents=True,
+                                         seperator=' con', adjective=False)
 
 
 def num2words_custom(number, ordinal=False, lang='en', to='cardinal', **kwargs):
