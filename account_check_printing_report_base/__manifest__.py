@@ -7,7 +7,7 @@
 
 {
     "name": "Account Check Printing Report Base",
-    "version": "12.0.2.0.2",
+    "version": "12.0.2.0.3",
     "license": "AGPL-3",
     "author": "Eficent,"
               "Serpent Consulting Services Pvt. Ltd.,"
