@@ -16,7 +16,7 @@
             <field name="date_maturity" position="after">
                 <field name="payment_mode_id" />
             </field>
-            <filter name="group_by_month" position="after">
+            <filter name="group_by_salesperson" position="after">
                 <filter
                     name="payment_mode"
                     string="Payment Mode"
