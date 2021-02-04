@@ -1,0 +1,70 @@
+<?xml version="1.0" ?>
+<odoo>
+    <!-- Inherit Tree View Account Payment Term -->
+    <record id="view_payment_term_disc_tree" model="ir.ui.view">
+        <field name="name">account.payment.term.disc.tree</field>
+        <field name="model">account.payment.term</field>
+        <field name="inherit_id" ref="account.view_payment_term_tree" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="is_discount" />
+                <field name="is_exclude_shipping_lines" />
+                <field name="is_exclude_taxes_discount" />
+                <field name="active" />
+            </field>
+        </field>
+    </record>
+
+    <!-- Inherit Form View Account Payment Term -->
+    <record id="view_payment_term_disc_form" model="ir.ui.view">
+        <field name="name">account.payment.term.disc.form</field>
+        <field name="model">account.payment.term</field>
+        <field name="inherit_id" ref="account.view_payment_term_form" />
+        <field name="arch" type="xml">
+            <xpath expr="/form/sheet/group/group/field[@name='name']" position="after">
+                <field name="is_discount" />
+                <field name="is_exclude_shipping_lines" />
+                <field name="is_exclude_taxes_discount" />
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit Tree View Account Payment Term Line-->
+    <record id="view_payment_term_line_disc_tree" model="ir.ui.view">
+        <field name="name">account.payment.term.line.disc.tree</field>
+        <field name="model">account.payment.term.line</field>
+        <field name="inherit_id" ref="account.view_payment_term_line_tree" />
+        <field name="arch" type="xml">
+           <xpath expr="/tree/field[@name='days']" position="after">
+                <field name="discount" />
+                <field name="discount_days" />
+                <field name="discount_expense_account_id" />
+                <field name="discount_income_account_id" />
+                <field name="is_discount" invisible="1" />
+            </xpath>
+        </field>
+    </record>
+
+    <!-- Inherit Form View Account Payment Term Line-->
+    <record id="view_payment_term_line_disc_form" model="ir.ui.view">
+        <field name="name">account.payment.term.line.disc.form</field>
+        <field name="model">account.payment.term.line</field>
+        <field name="inherit_id" ref="account.view_payment_term_line_form" />
+        <field name="arch" type="xml">
+           <xpath expr="/form/group" position="inside">
+                <group
+                    colspan="4"
+                    col="4"
+                    attrs="{'invisible': [('is_discount', '=', False)]}"
+                >
+                    <separator string="Discount Computation" colspan="4" />
+                    <field name="discount" />
+                    <field name="discount_days" />
+                    <field name="is_discount" invisible="1" />
+                    <field name="discount_expense_account_id" />
+                    <field name="discount_income_account_id" class="oe_inline" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
