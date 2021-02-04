@@ -16,7 +16,7 @@
     "maintainer": "OCA",
     "website": "https://github.com/OCA/account-payment",
     "license": "AGPL-3",
-    "depends": ["account"],
+    "depends": ["account", "purchase"],
     "data": ["security/ir.model.access.csv", "views/account_payment_term.xml"],
     "demo": ["demo/account_demo.xml"],
     "installable": True,
