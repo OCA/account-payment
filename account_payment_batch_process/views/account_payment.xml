@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <!-- Payment Tree View -->
+    <record id="view_account_supplier_payment_tree_nocreate" model="ir.ui.view">
+        <field name="name">account.supplier.payment.tree.nocreate</field>
+        <field name="model">account.payment</field>
+        <field name="arch" type="xml">
+            <tree
+                decoration-info="state=='draft'"
+                decoration-muted="state=='reconciled'"
+                edit="false"
+                create="false"
+            >
+                <field name="date" />
+                <field name="name" />
+                <field name="journal_id" />
+                <field name="payment_method_id" />
+                <field name="partner_id" />
+                <field name="amount" />
+                <field name="company_id" groups="base.group_multi_company" />
+                <field name="state" />
+                <field name="currency_id" invisible="1" />
+                <field name="partner_type" invisible="1" />
+            </tree>
+        </field>
+    </record>
+
+</odoo>

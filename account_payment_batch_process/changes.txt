@@ -1,0 +1,14 @@
+Revision
+    12.0.1.1.0
+Editor: Bhavesh Odedra <bodedra@opensourceintegrators.com>
+Task Ref: FUL-02-00-1909-17533
+Description:
+        * Remove menu "Batch Payments" from Vendors and Customers
+        * Remove menu "Register Payment" from batch invoices.
+
+init
+    12.0.1.0.0
+Editor: Mayank Gosai <mgosai@opensourceintegrators.com>
+Task Ref:
+Description:
+        * Initial File
