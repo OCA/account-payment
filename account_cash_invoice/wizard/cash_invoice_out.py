@@ -1,4 +1,4 @@
-# Copyright (C) 2017 Creu Blanca
+# Copyright (C) 2017-2021 Creu Blanca
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
 from odoo import api, fields, models
@@ -6,7 +6,8 @@ from odoo import api, fields, models
 
 class CashInvoiceOut(models.TransientModel):
     _name = "cash.invoice.out"
-    _inherit = "cash.box.in"
+    _inherit = "cash.box.out"
+    _description = "Cash invoice out"
 
     def _default_value(self, default_function):
         active_model = self.env.context.get("active_model", False)
@@ -26,16 +27,16 @@ class CashInvoiceOut(models.TransientModel):
 
     def _default_journal(self):
         journals = self._default_journals()
-        if journals and len(journals.ids) > 0:
-            return self.env["account.journal"].browse(journals.ids[0]).ensure_one()
+        if journals and len(journals) > 0:
+            return fields.first(journals).ensure_one()
 
     def _default_journal_count(self):
         return len(self._default_journals())
 
     invoice_id = fields.Many2one(
-        comodel_name="account.invoice", string="Invoice", required=True,
+        comodel_name="account.move", string="Invoice", required=True,
     )
-    name = fields.Char(related="invoice_id.number",)
+    name = fields.Char(related="invoice_id.name",)
     company_id = fields.Many2one(
         comodel_name="res.company",
         default=lambda self: self._default_company(),
@@ -66,17 +67,17 @@ class CashInvoiceOut(models.TransientModel):
     )
 
     def default_company(self, active_model, active_ids):
-        return self.env[active_model].browse(active_ids)[0].company_id
+        return fields.first(self.env[active_model].browse(active_ids)).company_id
 
     def default_currency(self, active_model, active_ids):
         return self.default_company(active_model, active_ids).currency_id
 
     def default_journals(self, active_model, active_ids):
-        return self.env[active_model].browse(active_ids)[0].journal_id
+        return fields.first(self.env[active_model].browse(active_ids)).journal_id
 
     @api.onchange("journal_ids")
     def compute_journal_count(self):
-        self.journal_count = len(self.journal_ids.ids)
+        self.journal_count = len(self.journal_ids)
 
     @api.onchange("journal_id")
     def _onchange_journal(self):
@@ -86,13 +87,16 @@ class CashInvoiceOut(models.TransientModel):
 
     @api.onchange("invoice_id")
     def _onchange_invoice(self):
-        self.amount = self.invoice_id.residual
+        if self.invoice_id:
+            self.amount = self.invoice_id.amount_residual_signed
 
-    @api.multi
     def _calculate_values_for_statement_line(self, record):
         res = super()._calculate_values_for_statement_line(record)
-        res["invoice_id"] = self.invoice_id.id
-        res["account_id"] = self.invoice_id.account_id.id
-        res["ref"] = self.invoice_id.number
-        res["partner_id"] = self.invoice_id.partner_id.id
+        res.update(
+            {
+                "invoice_id": self.invoice_id.id,
+                "ref": self.invoice_id.name,
+                "partner_id": self.invoice_id.partner_id.id,
+            }
+        )
         return res
