@@ -7,7 +7,7 @@
 
 {
     "name": "Payment Term Extension",
-    "version": "13.0.3.0.3",
+    "version": "13.0.3.0.4",
     "category": "Accounting & Finance",
     "summary": "Adds rounding, months, weeks and multiple payment days "
     "properties on payment term lines",
