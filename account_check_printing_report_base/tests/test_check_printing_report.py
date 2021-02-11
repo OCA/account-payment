@@ -12,6 +12,11 @@ from odoo.tests.common import TransactionCase
 class TestAccountCheckPrintingReportBase(TransactionCase):
     def setUp(self):
         super().setUp()
+        self.langs = ("en_US", "es_ES")
+        self.rl = self.env["res.lang"]
+        for lang in self.langs:
+            if not self.rl.search([("code", "=", lang)]):
+                self.rl.load_lang(lang)
         self.account_invoice_model = self.env["account.move"]
         self.journal_model = self.env["account.journal"]
         self.payment_method_model = self.env["account.payment.method"]
@@ -64,6 +69,27 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
                 ],
             }
         )
+        self.acc_payable = self._create_account(
+            "account payable test", "ACPRB1", self.acc_payable, True
+        )
+        self.vendor_bill = self._create_vendor_bill(self.acc_payable)
+        self.acc_expense = self._create_account(
+            "account expense test", "ACPRB2", self.acc_expense, False
+        )
+        self._create_invoice_line(self.acc_expense, self.vendor_bill)
+
+        self.vendor_bill.action_post()
+        # Pay the invoice using a bank journal associated to the main company
+        ctx = {"active_model": "account.move", "active_ids": [self.vendor_bill.id]}
+        register_payments = self.payment_model.with_context(ctx).create(
+            {
+                "payment_date": time.strftime("%Y") + "-07-15",
+                "journal_id": self.bank_journal.id,
+                "payment_method_id": self.payment_method_check.id,
+            }
+        )
+        register_payments.post()
+        self.payment = self.payment_model.search([], order="id desc", limit=1)
 
     def _create_account(self, name, code, user_type, reconcile):
         account = self.account_account_model.create(
@@ -113,39 +139,18 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
     def test_01_check_printing_no_layout(self):
         """Test if the exception raises when no layout is set for a
         company or for the journal."""
-        acc_payable = self._create_account(
-            "account payable test", "ACPRB1", self.acc_payable, True
-        )
-        vendor_bill = self._create_vendor_bill(acc_payable)
-        acc_expense = self._create_account(
-            "account expense test", "ACPRB2", self.acc_expense, False
-        )
-        self._create_invoice_line(acc_expense, vendor_bill)
-
-        vendor_bill.action_post()
-        # Pay the invoice using a bank journal associated to the main company
-        ctx = {"active_model": "account.move", "active_ids": [vendor_bill.id]}
-        register_payments = self.payment_model.with_context(ctx).create(
-            {
-                "payment_date": time.strftime("%Y") + "-07-15",
-                "journal_id": self.bank_journal.id,
-                "payment_method_id": self.payment_method_check.id,
-            }
-        )
-        register_payments.post()
-        payment = self.payment_model.search([], order="id desc", limit=1)
         with self.assertRaises(UserError):
-            payment.print_checks()
+            self.payment.print_checks()
 
         # Set check layout verification by journal
         ICPSudo = self.env["ir.config_parameter"].sudo()
         ICPSudo.set_param(
             "account_check_printing_report_base.check_layout_verification", "by_journal"
         )
-        self.assertFalse(payment.journal_id.check_layout_id)
+        self.assertFalse(self.payment.journal_id.check_layout_id)
         with self.assertRaises(UserError):
-            payment.print_checks()
-        content = self.action_check_report.render_qweb_pdf(payment.id)
+            self.payment.print_checks()
+        content = self.action_check_report.render_qweb_pdf(self.payment.id)
         self.assertEquals(content[1], "html")
 
     def test_02_check_printing_with_layout(self):
@@ -153,35 +158,15 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
         company and journal."""
 
         self.company.check_layout_id = self.check_report
-        acc_payable = self._create_account(
-            "account payable test", "ACPRB1", self.acc_payable, True
-        )
-        vendor_bill = self._create_vendor_bill(acc_payable)
-        acc_expense = self._create_account(
-            "account expense test", "ACPRB2", self.acc_expense, False
-        )
-        self._create_invoice_line(acc_expense, vendor_bill)
-        vendor_bill.action_post()
-        ctx = {"active_model": "account.move", "active_ids": [vendor_bill.id]}
-        register_payments = self.payment_model.with_context(ctx).create(
-            {
-                "payment_date": time.strftime("%Y") + "-07-15",
-                "journal_id": self.bank_journal.id,
-                "payment_method_id": self.payment_method_check.id,
-            }
-        )
-        register_payments.post()
-        payment = self.payment_model.search([], order="id desc", limit=1)
-        payment.journal_id.check_layout_id = self.check_report_by_journal
-
+        self.payment.journal_id.check_layout_id = self.check_report_by_journal
         e = False
         try:
-            payment.print_checks()
+            self.payment.print_checks()
         except UserError as e:
             e = e.name
         self.assertEquals(e, False)
 
-        content = self.action_check_report.render_qweb_pdf(payment.id)
+        content = self.action_check_report.render_qweb_pdf(self.payment.id)
         self.assertEquals(content[1], "html")
 
     def test_03_fotmat_form(self):
@@ -198,3 +183,18 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
         amount2 = self.report.fill_stars(amount_in_word)
         self.assertEquals(amount1, "***** %s *" % amount)
         self.assertEquals(amount2, "{} {}".format(amount_in_word, ("*" * stars)))
+
+    def test_num2words(self):
+        report_model = "report.account_check_printing_report_base.promissory_footer_a4"
+        words_number = (
+            self.env[report_model].with_context(lang="en_US").amount2words(4.9)
+        )
+        self.assertEqual(words_number, "four euro, ninety cents")
+        words_number = (
+            self.env[report_model].with_context(lang="es_ES").amount2words(4.9)
+        )
+        self.assertEqual(words_number, "cuatro euros con noventa céntimos")
+        words_number = (
+            self.env[report_model].with_context(lang="es_ES").amount2words(4.95)
+        )
+        self.assertEqual(words_number, "cuatro euros con noventa y cinco céntimos")
