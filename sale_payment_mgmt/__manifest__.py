@@ -2,7 +2,7 @@
 
 {
     "name": "Sale Payment Management",
-    "version": "13.0.1.0.0",
+    "version": "13.0.1.0.1",
     "category": "Sales/Sales",
     "development_status": "Production/Stable",
     "author": "Tecnativa, Odoo Community Association (OCA)",
