@@ -40,7 +40,7 @@ addon | version | summary
 [account_payment_return_import_iso20022](account_payment_return_import_iso20022/) | 13.0.1.0.0 | This addon allows to import payment returns from ISO 20022 files like PAIN or CAMT.
 [account_payment_term_extension](account_payment_term_extension/) | 13.0.3.0.4 | Adds rounding, months, weeks and multiple payment days properties on payment term lines
 [partner_aging](partner_aging/) | 13.0.1.0.0 | Aging as a view - invoices and credits
-[sale_payment_mgmt](sale_payment_mgmt/) | 13.0.1.0.0 | List and create customer payments for salesmen
+[sale_payment_mgmt](sale_payment_mgmt/) | 13.0.1.0.1 | List and create customer payments for salesmen
 
 [//]: # (end addons)
 
