@@ -69,7 +69,7 @@ class TestSalePaymentMgmt(SavepointCase):
         cls.res_partner = cls.env["res.partner"].create({"name": "Test customer"})
         # account_payment_method
         cls.account_payment_method = cls.env["account.payment.method"].create(
-            {"name": "Test", "code": "test", "payment_type": "inbound", "active": True}
+            {"name": "Test", "code": "test", "payment_type": "inbound"}
         )
         # account_account
         cls.account_account = cls.env["account.account"].create(
@@ -104,7 +104,7 @@ class TestSalePaymentMgmt(SavepointCase):
         # account_payment
         cls.account_payment = (
             cls.env["account.payment"]
-            .sudo(cls.user_sale_salesman.id)
+            .with_user(cls.user_sale_salesman.id)
             .create(cls.account_payment_vals)
         )
 
