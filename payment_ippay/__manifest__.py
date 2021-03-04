@@ -18,7 +18,7 @@
         "data/account_payment_method.xml",
         "views/account_portal_templates.xml",
     ],
-    "development_status": "beta",
+    "development_status": "Beta",
     "installable": True,
     "external_dependencies": {"python": ["xmltodict"]},
 }
