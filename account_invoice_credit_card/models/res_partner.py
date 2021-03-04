@@ -4,8 +4,9 @@ from odoo import models, fields
 
 
 class ResPartner(models.Model):
-    _inherit = 'res.partner'
+    _inherit = "res.partner"
 
     payment_token_id = fields.Many2one(
-        comodel_name='payment.token',
-        string='Default Payment Method')
+        comodel_name="payment.token",
+        string="Default Payment Method"
+    )

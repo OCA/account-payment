@@ -6,27 +6,27 @@ from odoo.exceptions import UserError
 
 
 BRAND_NAMES = {
-    '3': 'americanexpress',
-    '4': 'visa',
-    '5': 'mastercard',
-    '6': 'discovercard'
+    "3": "americanexpress",
+    "4": "visa",
+    "5": "mastercard",
+    "6": "discovercard",
 }
 
 
 class AddCreditCardToken(models.TransientModel):
-    _name = 'add.credit.card.token'
-    _description = 'Add Credit Card Token'
+    _name = "add.credit.card.token"
+    _description = "Add Credit Card Token"
 
-    @api.depends('provider_id')
+    @api.depends("provider_id")
     def _compute_provider_type(self):
         for rec in self:
             provider = rec.provider_id.provider
             if not provider:
-                self.provider_type = ''
-            elif provider.endswith('_ach'):
-                self.provider_type = 'ach'
+                self.provider_type = ""
+            elif provider.endswith("_ach"):
+                self.provider_type = "ach"
             else:
-                self.provider_type = 'cc'
+                self.provider_type = "cc"
 
     cc_number = fields.Char("Card Number", size=16)
     partner_id = fields.Many2one("res.partner", string="Partner")
@@ -35,24 +35,24 @@ class AddCreditCardToken(models.TransientModel):
     cc_cvc = fields.Char("CVC", size=4)
     cc_brand = fields.Char("Brand", default="")
     provider_id = fields.Many2one(
-        'payment.acquirer', "Provider",
+        "payment.acquirer",
+        "Provider",
         required=True,
         domain="[('website_published', '=', True)]",
     )
     provider_type = fields.Selection(
-        [('cc', 'Credit Card'),
-         ('ach', 'ACH eCheck')],
-        compute=_compute_provider_type)
+        [("cc", "Credit Card"), ("ach", "ACH eCheck")],
+        compute=_compute_provider_type
+    )
     # provider = fields.Selection(
     #     "Related provider", related="provider_id.provider")
     bank_acc_number = fields.Char("Account Number")
     aba = fields.Char("ABA")
     replaced_token_id = fields.Many2one(
-        "payment.token",
-        string="Replaces Payment Token",
-        readonly=True)
+        "payment.token", string="Replaces Payment Token", readonly=True
+    )
 
-    @api.onchange('cc_number')
+    @api.onchange("cc_number")
     def onchange_cc_number(self):
         # Check the Card Brand
         if self.cc_number:
@@ -64,6 +64,7 @@ class AddCreditCardToken(models.TransientModel):
         Validate if the Credit Card number
         Is valid as per Luhn's algorithm or not
         """
+
         def sum_digits(digit):
             if digit < 10:
                 res = digit
@@ -86,8 +87,7 @@ class AddCreditCardToken(models.TransientModel):
 
         # add the digits if any number is more than 9
         doubled_second_digit_list = [
-            sum_digits(x)
-            for x in doubled_second_digit_list]
+            sum_digits(x) for x in doubled_second_digit_list]
         # sum all digits
         sum_of_digits = sum(doubled_second_digit_list)
         # return True or False
@@ -99,45 +99,48 @@ class AddCreditCardToken(models.TransientModel):
         if self.cc_number:
             # Validate the credit card number
             if not self.validate(self.cc_number):
-                raise UserError(_(
-                    "Error: Not Valid Credit Card Number!"
-                ))
-        if not (self.partner_id.zip
-                and self.partner_id.street
-                and self.partner_id.city
-                and self.partner_id.country_id):
-            raise UserError(_(
-                "Address Validation: Please verify partner address "
-                "(street, city, zip, country)!"
-            ))
+                raise UserError(_("Error: Not Valid Credit Card Number!"))
+        if not (
+            self.partner_id.zip
+            and self.partner_id.street
+            and self.partner_id.city
+            and self.partner_id.country_id
+        ):
+            raise UserError(
+                _(
+                    "Address Validation: Please verify partner address "
+                    "(street, city, zip, country)!"
+                )
+            )
         # creating payment token data
-        if str(self.provider_id.provider).endswith('_ach'):
+        if str(self.provider_id.provider).endswith("_ach"):
             payment_token_data = {
-                'acquirer_id': self.provider_id.id,
-                'bank_acc_number': self.bank_acc_number,
-                'aba': self.aba,
-                'ch_holder_name': self.partner_id.name,
+                "acquirer_id": self.provider_id.id,
+                "bank_acc_number": self.bank_acc_number,
+                "aba": self.aba,
+                "ch_holder_name": self.partner_id.name,
             }
         else:
             expiry = "%s/%s" % (self.cc_expiry_month, self.cc_expiry_year)
             # If you're on year 2100, fix this!
             expiry_date_day1 = fields.Date.to_date(
-                '20%s-%s-01' % (self.cc_expiry_year, self.cc_expiry_month))
-            expiry_date_eom = fields.Date.end_of(expiry_date_day1, 'month')
+                "20%s-%s-01" % (self.cc_expiry_year, self.cc_expiry_month)
+            )
+            expiry_date_eom = fields.Date.end_of(expiry_date_day1, "month")
             payment_token_data = {
-                'acquirer_id': self.provider_id.id,
-                'partner_id': self.partner_id.id,
-                'expiry_date': expiry_date_eom,
-                'cc_number': self.cc_number,
-                'cc_expiry_month': self.cc_expiry_month,
-                'cc_expiry_year': self.cc_expiry_year,
-                'cc_expiry': expiry,
-                'cc_brand': self.cc_brand,
-                'cc_cvc': self.cc_cvc,
-                'cc_holder_name': self.partner_id.name,
+                "acquirer_id": self.provider_id.id,
+                "partner_id": self.partner_id.id,
+                "expiry_date": expiry_date_eom,
+                "cc_number": self.cc_number,
+                "cc_expiry_month": self.cc_expiry_month,
+                "cc_expiry_year": self.cc_expiry_year,
+                "cc_expiry": expiry,
+                "cc_brand": self.cc_brand,
+                "cc_cvc": self.cc_cvc,
+                "cc_holder_name": self.partner_id.name,
             }
             # create payment token
-        token_id = self.env['payment.token'].sudo().create(
+        token_id = self.env["payment.token"].sudo().create(
             payment_token_data)
         if self.replaced_token_id:
             self.replaced_token_id.active = False

@@ -10,10 +10,11 @@
     "maintainer": "Open Source Integrators",
     "website": "http://www.opensourceintegrators.com",
     "category": "Accounting",
-    "depends": ['payment'],
+    "depends": ["payment"],
     "data": [
         "security/payment_security.xml",
         "wizards/add_cc_token_wizard_view.xml",
+        "wizards/account_register_payments_view.xml",
         "views/res_partner_view.xml",
         "views/account_invoice_view.xml",
         "views/payment_token_view.xml",
