@@ -23,13 +23,16 @@ class PaymentTansaction(models.Model):
                 and acquirer.ippay_save_token):
             self.payment_token_id.unlink()
         amount = format(self.amount, ".2f").replace(".", "")
+        transaction_type = invoice.type == "out_invoice" and "SALE" \
+                           or "CREDIT"
         request = """
             <ippay>
-                <TransactionType>SALE</TransactionType>
+                <TransactionType>%s</TransactionType>
                 <TerminalID>%s</TerminalID>
                 <Token>%s</Token>
                 <TotalAmount>%s</TotalAmount>
             </ippay>""" % (
+            transaction_type,
             acquirer.ippay_terminal_id,
             acquirer_ref,
             amount,
@@ -70,5 +73,5 @@ class PaymentTansaction(models.Model):
         for transaction in self:
             inv_rec = self.invoice_ids
             for inv in inv_rec:
-                if inv.type == "out_invoice":
+                if inv.type in ["out_invoice", "out_refund"]:
                     self._ippay_s2s_do_payment(invoice=inv)
