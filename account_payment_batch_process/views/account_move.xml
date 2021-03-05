@@ -21,6 +21,4 @@
         <field name="action" eval="False" />
     </record>
 
-    <!-- <delete model="ir.actions.act_window" id="account.action_account_payment_from_invoices"/> -->
-
 </odoo>
