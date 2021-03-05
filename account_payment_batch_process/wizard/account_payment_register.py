@@ -300,7 +300,8 @@ class AccountPaymentRegister(models.TransientModel):
                                 "receiving_amt": inv.amount_residual or 0.0,
                                 "payment_difference": 0.0,
                                 "payment_difference_handling": "reconcile",
-                                "writeoff_account_id": inv.invoice_payment_term_id.line_ids[
+                                "writeoff_account_id": 
+                                inv.invoice_payment_term_id.line_ids[
                                     0
                                 ].discount_income_account_id.id,
                             },
@@ -322,7 +323,8 @@ class AccountPaymentRegister(models.TransientModel):
                                 "paying_amt": inv.amount_residual or 0.0,
                                 "payment_difference": 0.0,
                                 "payment_difference_handling": "reconcile",
-                                "writeoff_account_id": inv.invoice_payment_term_id.line_ids[
+                                "writeoff_account_id": 
+                                inv.invoice_payment_term_id.line_ids[
                                     0
                                 ].discount_expense_account_id.id,
                             },
