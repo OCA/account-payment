@@ -18,6 +18,7 @@
         "account_check_printing",
         "account_batch_payment",
         "account_payment_order",
+        "account_payment_term_discount",
     ],
     "data": [
         "security/ir.model.access.csv",
