@@ -13,12 +13,4 @@
         </field>
     </record>
 
-    <record model="ir.ui.menu" id="account_batch_payment.menu_batch_payment_purchases">
-        <field name="action" eval="False" />
-    </record>
-
-    <record model="ir.ui.menu" id="account_batch_payment.menu_batch_payment_sales">
-        <field name="action" eval="False" />
-    </record>
-
 </odoo>

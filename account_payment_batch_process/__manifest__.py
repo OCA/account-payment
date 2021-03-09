@@ -16,7 +16,6 @@
     "depends": [
         "account",
         "account_check_printing",
-        "account_batch_payment",
         "account_payment_order",
     ],
     "data": [
