@@ -11,7 +11,7 @@
               "Odoo Community Association (OCA)",
     'category': 'Generic Modules/Accounting',
     'website': "https://github.com/OCA/account-payment",
-    'depends': [],
+    'depends': ["account"],
     'data': [
         'report/account_check_report.xml',
     ],
