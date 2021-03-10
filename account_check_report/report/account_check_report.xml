@@ -21,11 +21,13 @@
                                     style="padding-right:100mm;float:right;"
                                     t-esc="'Date: {}'.format(_format_date_to_partner_lang(o.date, o.partner_id.id))"
                                 />
-                                <span
-                                    name='check_number'
-                                    style="position:absolute; right:35mm;"
-                                    t-esc="'Check #: {}'.format(o.check_number)"
-                                />
+                                <t t-if="o.check_number">
+                                    <span
+                                        name='check_number'
+                                        style="position:absolute; right:35mm;"
+                                        t-esc="'Check #: {}'.format(o.check_number)"
+                                    />
+                                </t>
                             </strong>
                             <table
                                 class="oe_mt32 table table-condensed"
@@ -49,12 +51,12 @@
                                         <tr style="text-align:left;border-top: 0px;">
                                             <td style="padding-top:2mm;">
                                                 <span
-                                                    t-esc="_format_date_to_partner_lang(line.date_maturity, o.partner_id.id)"
+                                                    t-esc="_format_date_to_partner_lang(line[0].date, o.partner_id.id)"
                                                 />
                                             </td>
                                             <td
                                                 style="max-width: 55mm;"
-                                                t-esc="line.display_name"
+                                                t-esc="line[0].display_name"
                                             />
                                             <td>
                                                 <span
