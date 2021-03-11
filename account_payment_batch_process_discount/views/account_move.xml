@@ -1,0 +1,31 @@
+<?xml version="1.0" ?>
+<odoo>
+
+    <record id="account_move_form_discount_date" model="ir.ui.view">
+        <field name="name">account.move.form.discount.date</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="valid_discount_date" invisible="1" />
+            </field>
+        </field>
+    </record>
+
+    <record id="account_move_search_discount_date" model="ir.ui.view">
+        <field name="name">account.move.search.discount.date</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_account_invoice_filter" />
+        <field name="arch" type="xml">
+            <xpath expr="//filter[@name='late']" position="after">
+                <filter
+                    string="Discount Invoice"
+                    name="valid_discount_dates"
+                    domain="[('state', '=', 'open'), ('valid_discount_date', '&gt;',  (context_today()-datetime.timedelta(days=1)).strftime('%%Y-%%m-%%d'))]"
+                    help="Filter invoices with early payment discounts"
+                />
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
