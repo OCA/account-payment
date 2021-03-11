@@ -92,7 +92,6 @@ class AccountPaymentRegister(models.TransientModel):
                     },
                 )
             )
-
         return payment_lines
 
     def get_invoice_vendor_payments(self, invoice):
@@ -116,7 +115,6 @@ class AccountPaymentRegister(models.TransientModel):
                     },
                 )
             )
-
         return payment_lines
 
     @api.model
@@ -132,17 +130,12 @@ class AccountPaymentRegister(models.TransientModel):
         if not active_model or not active_ids:
             raise UserError(
                 _(
-                    "The wizard is executed without "
-                    "active_model or active_ids in the "
-                    "context."
+                    "The wizard is executed without active_model or active_ids in the context."
                 )
             )
         if active_model != "account.move":
             raise UserError(
-                _(
-                    """The expected model for """
-                    """this action is 'account.move', not '%s'."""
-                )
+                _("The expected model for this action is 'account.move', not '%s'.")
                 % active_model
             )
         # Checks on received invoice records
@@ -152,16 +145,12 @@ class AccountPaymentRegister(models.TransientModel):
             or invoice.payment_state not in ["not_paid", "partial"]
             for invoice in invoices
         ):
-            raise UserError(
-                _("""You can only register payments """ """for open invoices.""")
-            )
+            raise UserError(_("You can only register payments for open invoices."))
 
         if any(inv.payment_mode_id != invoices[0].payment_mode_id for inv in invoices):
             raise UserError(
                 _(
-                    "You can only register a batch payment for"
-                    "invoices with the same"
-                    " payment mode."
+                    "You can only register a batch payment for invoices with the same payment mode."
                 )
             )
 
@@ -172,17 +161,13 @@ class AccountPaymentRegister(models.TransientModel):
         ):
             raise UserError(
                 _(
-                    "You cannot mix customer invoices and vendor"
-                    "bills in a single "
-                    "payment."
+                    "You cannot mix customer invoices and vendor bills in a single payment."
                 )
             )
         if any(inv.currency_id != invoices[0].currency_id for inv in invoices):
             raise UserError(
                 _(
-                    "In order to pay multiple bills at once, "
-                    "they must use the same "
-                    "currency."
+                    "In order to pay multiple bills at once, they must use the same currency."
                 )
             )
 
@@ -205,9 +190,7 @@ class AccountPaymentRegister(models.TransientModel):
             ):
                 raise UserError(
                     _(
-                        "You cannot mix customer invoices and vendor"
-                        "bills in a single"
-                        " payment."
+                        "You cannot mix customer invoices and vendor bills in a single payment."
                     )
                 )
 
@@ -257,9 +240,7 @@ class AccountPaymentRegister(models.TransientModel):
         if float_compare(self.total_customer_pay_amount, self.cheque_amount, 2) != 0:
             raise ValidationError(
                 _(
-                    "The pay amount of the invoices and the batch"
-                    "payment total do "
-                    "not match."
+                    "The pay amount of the invoices and the batch payment total do not match."
                 )
             )
 
@@ -267,9 +248,7 @@ class AccountPaymentRegister(models.TransientModel):
         if float_compare(self.total_pay_amount, self.cheque_amount, 2) != 0:
             raise ValidationError(
                 _(
-                    "The pay amount of the invoices and the batch payment"
-                    "total do"
-                    " not match."
+                    "The pay amount of the invoices and the batch payment total do not match."
                 )
             )
 
@@ -286,7 +265,6 @@ class AccountPaymentRegister(models.TransientModel):
             memo = (
                 group_data[partner_id]["memo"] + " : " + str(data_get.invoice_id.name)
             )
-
         return memo
 
     def get_partner_amt_words(self, old_total, data_get):
@@ -299,7 +277,6 @@ class AccountPaymentRegister(models.TransientModel):
             total_chq_amt_in_words += _(" and %s/100") % str(
                 int(round(float_round(decimals * 100, precision_rounding=1)))
             )
-
         return total_chq_amt_in_words
 
     def update_partner_inv_val(self, data_get, group_data, partner_id, name):
@@ -368,11 +345,9 @@ class AccountPaymentRegister(models.TransientModel):
             total_chq_amt_in_words += _(" and %s/100") % str(
                 int(round(float_round(decimals * 100, precision_rounding=1)))
             )
-
         return total_chq_amt_in_words
 
     def get_customer_receiving_amt(self, memo, group_data, data_get):
-
         data_get.payment_difference = data_get.balance_amt - data_get.receiving_amt
         if data_get.payment_difference_handling:
             data_get.invoice_id.discount_taken = data_get.payment_difference
@@ -421,7 +396,6 @@ class AccountPaymentRegister(models.TransientModel):
         )
         invoices.append(data_get.invoice_id.id)
         partner_invoices.update({data_get.invoice_id.partner_id.id: invoices})
-
         return partner_invoices
 
     def total_pay_p_amt_in_words(self, old_total, data_get):
@@ -668,7 +642,6 @@ class AccountPaymentRegister(models.TransientModel):
                         }
                     )
                     remaining_amt -= payline.balance_amt
-
             return remaining_amt
 
     def get_inv_paymts_rming_amt(self, remaining_amt, count):
@@ -712,7 +685,6 @@ class AccountPaymentRegister(models.TransientModel):
                         }
                     )
                     remaining_amt -= payline.balance_amt
-
             return remaining_amt
 
     def auto_fill_payments(self):
