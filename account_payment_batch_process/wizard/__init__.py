@@ -3,5 +3,4 @@
 from . import (
     account_payment_register,
     invoice_payment_line,
-    invoice_customer_payment_line,
 )

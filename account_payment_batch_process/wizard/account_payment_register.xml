@@ -12,11 +12,11 @@
                 <group invisible="not context.get('batch', False)">
                     <field name="is_customer" invisible="1" />
                     <group
-                        string="List of Supplier Invoices to Pay"
+                        string="Vendor Bills to Pay"
                         attrs="{'invisible': [('is_customer', '=', True)]}"
                     />
                     <group
-                        string="List of Customer Invoices to Receive"
+                        string="Customer Invoices Being Paid"
                         attrs="{'invisible': [('is_customer', '=', False)]}"
                     />
                 </group>
@@ -31,7 +31,6 @@
                         name="invoice_payments"
                         colspan="4"
                         nolabel="1"
-                        attrs="{'invisible': [('is_customer', '=', True)]}"
                     >
                         <tree editable="bottom" create="false">
                             <field
@@ -42,8 +41,8 @@
                                 name="invoice_id"
                                 options="{'no_create_edit': True}"
                             />
-                            <field name="balance_amt" />
-                            <field name="paying_amt" />
+                            <field name="balance" />
+                            <field name="amount" />
                             <field name="check_amount_in_words" invisible="1" />
                             <field name="payment_difference_handling" />
                             <field name="payment_difference" />
@@ -61,56 +60,12 @@
                             />
                         </tree>
                     </field>
-                    <field
-                        name="invoice_customer_payments"
-                        colspan="4"
-                        nolabel="1"
-                        attrs="{'invisible': [('is_customer','=',False)]}"
-                    >
-                        <tree editable="bottom" create="false">
-                            <field
-                                name="partner_id"
-                                options="{'no_create_edit': True}"
-                            />
-                            <field
-                                name="invoice_id"
-                                options="{'no_create_edit': True}"
-                            />
-                            <field name="balance_amt" />
-                            <field name="receiving_amt" />
-                            <field name="check_amount_in_words" invisible="1" />
-                            <field
-                                name="payment_method_id"
-                                domain="[('payment_type','=','inbound')]"
-                                options="{'no_create': True, 'no_open': True}"
-                            />
-                            <field name="payment_difference" />
-                            <field name="payment_difference_handling" />
-                            <field
-                                name="writeoff_account_id"
-                                string="Post Difference In"
-                                attrs="{'required': [('payment_difference_handling', '=', 'reconcile'),
-                                                    ('payment_difference', '!=', 0.0)]}"
-                            />
-                            <field name="reason_code" />
-                            <field
-                                name="note"
-                                attrs="{'required': [('payment_difference_handling', '=', 'reconcile'),
-                                                    ('payment_difference', '!=', 0.0)]}"
-                            />
-                       </tree>
-                    </field>
                 </group>
                 <group invisible="not context.get('batch', False)" col="6">
                     <group colspan="4" />
                     <group>
                         <field
-                            name="total_pay_amount"
-                            attrs="{'invisible': [('is_customer','=',True)]}"
-                        />
-                        <field
-                            name="total_customer_pay_amount"
-                            attrs="{'invisible': [('is_customer','=',False)]}"
+                            name="total_amount"
                         />
                     </group>
                 </group>

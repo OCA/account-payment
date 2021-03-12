@@ -37,18 +37,18 @@ class InvoicePaymentLine(models.TransientModel):
     _description = "Invoice Payment Line"
     _rec_name = "invoice_id"
 
-    @api.depends("paying_amt")
+    @api.depends("amount")
     def _compute_payment_difference(self):
         for rec in self:
-            rec.payment_difference = rec.balance_amt - rec.paying_amt
+            rec.payment_difference = rec.balance - rec.amount
 
     invoice_id = fields.Many2one(
         "account.move", string="Supplier Invoice", required=True
     )
     partner_id = fields.Many2one("res.partner", string="Supplier Name", required=True)
-    balance_amt = fields.Float("Balance Amount", required=True)
+    balance = fields.Float("Balance Amount", required=True)
     wizard_id = fields.Many2one("account.payment.register", string="Wizard")
-    paying_amt = fields.Float("Pay Amount", required=True)
+    amount = fields.Float("Amount", required=True)
     check_amount_in_words = fields.Char(string="Amount in Words")
     payment_difference = fields.Float(
         compute="_compute_payment_difference", string="Difference Amount"
@@ -68,18 +68,18 @@ class InvoicePaymentLine(models.TransientModel):
     reason_code = fields.Many2one("payment.adjustment.reason", string="Reason Code")
     note = fields.Text("Note")
 
-    @api.onchange("paying_amt")
+    @api.onchange("amount")
     def _onchange_amount(self):
         check_amount_in_words = num2words(
-            math.floor(self.paying_amt), lang="en"
+            math.floor(self.amount), lang="en"
         ).title()
-        decimals = self.paying_amt % 1
+        decimals = self.amount % 1
         if decimals >= 10 ** -2:
             check_amount_in_words += _(" and %s/100") % str(
                 int(round(float_round(decimals * 100, precision_rounding=1)))
             )
         self.check_amount_in_words = check_amount_in_words
-        self.payment_difference = self.balance_amt - self.paying_amt
+        self.payment_difference = self.balance - self.amount
 
     @api.onchange("invoice_id")
     def _onchange_invoice_id(self):
@@ -93,10 +93,10 @@ class InvoicePaymentLine(models.TransientModel):
         """
         Raise warning while the Customer is changed.
         """
-        raise ValidationError(_("Customer is unchangeable!"))
+        raise ValidationError(_("Partner is unchangeable!"))
 
-    @api.onchange("balance_amt")
-    def _onchange_balance_amt(self):
+    @api.onchange("balance")
+    def _onchange_balance(self):
         """
         Raise warning while the Balance Amount is changed.
         """
