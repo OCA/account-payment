@@ -157,6 +157,7 @@ class AccountPaymentRegister(models.TransientModel):
         rec.update(
             {
                 "amount": abs(total_amount),
+                "journal_id": invoices[0].payment_method_id.id  ,
                 "currency_id": invoices[0].currency_id.id,
                 "payment_type": total_amount > 0 and "inbound" or "outbound",
                 "partner_id": invoices[0].commercial_partner_id.id,
@@ -166,8 +167,19 @@ class AccountPaymentRegister(models.TransientModel):
         )
         return rec
 
-    def get_payment_batch_vals(self, group_data=None):
+    def get_payment_values(self, group_data=None):
+        res = {}
         if group_data:
+            writeoff_amount = 0
+            writeoff_account_id = False
+            writeoff_name = False
+            for invoice_id in list(group_data["inv_val"]):
+                values = group_data["inv_val"][invoice_id]
+                if not self.currency_id.is_zero(values["payment_difference"]) \
+                        and values["payment_difference_handling"] == 'reconcile':
+                    writeoff_name = writeoff_name or values["line_name"]
+                    writeoff_account_id = writeoff_account_id or values["writeoff_account_id"]
+                    writeoff_amount += values["payment_difference"]
             res = {
                 "journal_id": self.journal_id.id,
                 "payment_method_id": "payment_method_id" in group_data
@@ -180,17 +192,14 @@ class AccountPaymentRegister(models.TransientModel):
                 "currency_id": self.currency_id.id,
                 "partner_id": int(group_data["partner_id"]),
                 "partner_type": group_data["partner_type"],
+                "check_amount_in_words": group_data["check_amount_in_words"],
+                "write_off_line_vals": {
+                    "name": writeoff_name,
+                    "account_id": writeoff_account_id,
+                    "amount": writeoff_amount,
+                },
             }
-            if self.payment_method_id == self.env.ref(
-                "account_check_printing.account_payment_method_check"
-            ):
-                res.update(
-                    {
-                        "check_amount_in_words": group_data["total_chq_amt_in_words"]
-                        or "",
-                    }
-                )
-            return res
+        return res
 
     def _check_amounts(self):
         if float_compare(self.total_amount, self.cheque_amount, 2) != 0:
@@ -215,24 +224,14 @@ class AccountPaymentRegister(models.TransientModel):
             )
         return memo
 
-    def update_partner_inv(self, partner_invoices, data_get):
-        invoices = (
-            partner_invoices
-            and partner_invoices[data_get.invoice_id.partner_id.id]
-            or []
-        )
-        invoices.append(data_get.invoice_id.id)
-        partner_invoices.update({data_get.invoice_id.partner_id.id: invoices})
-        return partner_invoices
-
     def total_amount_in_words(self, data_get, old_total=0):
-        total_check_amount_in_words = num2words(math.floor(old_total + data_get.amount)).title()
+        check_amount_in_words = num2words(math.floor(old_total + data_get.amount)).title()
         decimals = (old_total + data_get.amount) % 1
         if decimals >= 10 ** -2:
-            total_check_amount_in_words += _(" and %s/100") % str(
+            check_amount_in_words += _(" and %s/100") % str(
                 int(round(float_round(decimals * 100, precision_rounding=1)))
             )
-        return total_check_amount_in_words
+        return check_amount_in_words
 
     def get_payment_invoice_value(self, name, data_get):
         return {
@@ -246,7 +245,7 @@ class AccountPaymentRegister(models.TransientModel):
         }
 
     def update_group_pay_data(
-        self, partner_id, group_data, data_get, total_check_amount_in_words
+        self, partner_id, group_data, data_get, check_amount_in_words
     ):
         # build memo value
         if self.communication:
@@ -277,19 +276,19 @@ class AccountPaymentRegister(models.TransientModel):
                         data_get.invoice_id.move_type
                     ],
                     "total": data_get.amount,
-                    "total_check_amount_in_words": total_check_amount_in_words,
+                    "check_amount_in_words": check_amount_in_words,
                     "memo": memo,
                     "temp_invoice": data_get.invoice_id.id,
-                    "inv_val": {str(data_get.invoice_id.id): inv_val},
+                    "inv_val": {data_get.invoice_id.id: inv_val},
                 }
             }
         )
 
-    def get_amount(self, memo, group_data, data_get):
-        data_get.payment_difference = data_get.balance - data_get.amount
-        if data_get.payment_difference_handling:
-            data_get.invoice_id.discount_taken = data_get.payment_difference
-        partner_id = str(data_get.invoice_id.partner_id.id)
+    def get_amount(self, memo, group_data, line):
+        line.payment_difference = line.balance - line.amount
+        if line.payment_difference_handling:
+            line.invoice_id.discount_taken = line.payment_difference
+        partner_id = line.invoice_id.partner_id.id
         if partner_id in group_data:
             old_total = group_data[partner_id]["total"]
             # build memo value
@@ -299,47 +298,47 @@ class AccountPaymentRegister(models.TransientModel):
                     + " : "
                     + self.communication
                     + "-"
-                    + str(data_get.invoice_id.name)
+                    + str(line.invoice_id.name)
                 )
             else:
                 memo = (
                     group_data[partner_id]["memo"]
                     + " : "
-                    + str(data_get.invoice_id.name)
+                    + str(line.invoice_id.name)
                 )
             # Calculate amount in words
-            total_check_amount_in_words = self.total_amount_in_words(data_get, old_total)
+            check_amount_in_words = self.total_amount_in_words(line, old_total)
             group_data[partner_id].update(
                 {
                     "partner_id": partner_id,
                     "partner_type": MAP_INVOICE_TYPE_PARTNER_TYPE[
-                        data_get.invoice_id.move_type
+                        line.invoice_id.move_type
                     ],
-                    "total": old_total + data_get.amount,
+                    "total": old_total + line.amount,
                     "memo": memo,
-                    "temp_invoice": data_get.invoice_id.id,
-                    "total_chq_amt_in_words": total_check_amount_in_words,
+                    "temp_invoice": line.invoice_id.id,
+                    "check_amount_in_words": check_amount_in_words,
                 }
             )
             # prepare name
             name = ""
-            if data_get.reason_code:
-                name = str(data_get.reason_code.code)
-            if data_get.note:
-                name = name + ": " + str(data_get.note)
+            if line.reason_code:
+                name = str(line.reason_code.code)
+            if line.note:
+                name = name + ": " + str(line.note)
             if not name:
                 name = "Counterpart"
             # Update with payment diff data
-            inv_val = self.get_payment_invoice_value(name, data_get)
+            inv_val = self.get_payment_invoice_value(name, line)
             group_data[partner_id]["inv_val"].update(
-                {str(data_get.invoice_id.id): inv_val}
+                {line.invoice_id.id: inv_val}
             )
         else:
             # calculate amount in words
-            total_check_amount_in_words = self.total_amount_in_words(data_get, 0)
+            check_amount_in_words = self.total_amount_in_words(line, 0)
             # prepare name
             self.update_group_pay_data(
-                partner_id, group_data, data_get, total_check_amount_in_words
+                partner_id, group_data, line, check_amount_in_words
             )
 
     def make_payments(self):
@@ -350,10 +349,9 @@ class AccountPaymentRegister(models.TransientModel):
         partner_invoices = {}
         context.update({"is_customer": self.is_customer})
         self._check_amounts()
-        for data_get in self.invoice_payments:
-            partner_invoices = self.update_partner_inv(partner_invoices, data_get)
-            if data_get.amount > 0:
-                self.get_amount(memo, group_data, data_get)
+        for invoice_payment_line in self.invoice_payments:
+            if invoice_payment_line.amount > 0:
+                self.get_amount(memo, group_data, invoice_payment_line)
 
         # update context
         context.update({"group_data": group_data})
@@ -362,13 +360,13 @@ class AccountPaymentRegister(models.TransientModel):
         for partner in list(group_data):
             # update active_ids with active invoice id
             if context.get("active_ids", False) and group_data[partner].get(
-                "temp_invoice", False
+                "inv_val", False
             ):
-                context.update({"active_ids": group_data[partner]["temp_invoice"]})
+                context.update({"active_ids": list(group_data[partner]["inv_val"])})
             payment = (
                 self.env["account.payment"]
                 .with_context(context)
-                .create(self.get_payment_batch_vals(group_data=group_data[partner]))
+                .create(self.get_payment_values(group_data=group_data[partner]))
             )
             payment_ids.append(payment.id)
             payment.action_post()
@@ -379,7 +377,7 @@ class AccountPaymentRegister(models.TransientModel):
                 ("reconciled", "=", False),
             ]
             payment_lines = payment.line_ids.filtered_domain(domain)
-            invoices = self.env["account.move"].browse(partner_invoices[int(partner)])
+            invoices = self.env["account.move"].browse(context.get("active_ids"))
             lines = invoices.line_ids.filtered_domain(domain)
             for account in payment_lines.account_id:
                 (payment_lines + lines).filtered_domain(
@@ -388,7 +386,7 @@ class AccountPaymentRegister(models.TransientModel):
 
         view_id = self.env["ir.model.data"].get_object_reference(
             "account_payment_batch_process",
-            "view_account_supplier_payment_tree_nocreate",
+            "view_account_payment_tree_nocreate",
         )[1]
         return {
             "name": _("Payments"),
