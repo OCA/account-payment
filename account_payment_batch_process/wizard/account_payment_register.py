@@ -155,18 +155,21 @@ class AccountPaymentRegister(models.TransientModel):
             inv.amount_residual * MAP_INVOICE_TYPE_PAYMENT_SIGN[inv.move_type]
             for inv in invoices
         )
-        return res.update(
+        date_format = self.env['res.lang']._lang_get(self.env.user.lang).date_format
+        communication = "Batch payment of %s" % fields.Date.today().strftime(date_format)
+        res.update(
             {
                 "amount": abs(total_amount),
                 "journal_id": invoices[0].payment_method_id.id,
                 "currency_id": invoices[0].currency_id.id,
-                "payment_type": is_customer and "inbound" or "outbound",
+                "payment_type": is_customer and "outbound" or "inbound",
                 "partner_id": invoices[0].commercial_partner_id.id,
                 "partner_type": MAP_INVOICE_TYPE_PARTNER_TYPE[invoices[0].move_type],
                 "company_id": self.env.user.company_id,
-                "communication": "Batch payment of %s" % fields.Date.today(),
+                "communication": communication,
             }
         )
+        return res
 
     def get_payment_values(self, group_data=None):
         res = {}
@@ -347,7 +350,6 @@ class AccountPaymentRegister(models.TransientModel):
         context = dict(self._context or {})
         group_data = {}
         memo = self.communication or " "
-        partner_invoices = {}
         context.update({"is_customer": self.is_customer})
         self._check_amounts()
         for invoice_payment_line in self.invoice_payments:
@@ -359,7 +361,7 @@ class AccountPaymentRegister(models.TransientModel):
         # making partner wise payment
         payment_ids = []
         for partner in list(group_data):
-            # update active_ids with active invoice id
+            # update active_ids with active invoice ids
             if context.get("active_ids", False) and group_data[partner].get(
                 "inv_val", False
             ):
