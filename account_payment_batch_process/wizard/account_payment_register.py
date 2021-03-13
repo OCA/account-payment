@@ -160,11 +160,11 @@ class AccountPaymentRegister(models.TransientModel):
                 "amount": abs(total_amount),
                 "journal_id": invoices[0].payment_method_id.id,
                 "currency_id": invoices[0].currency_id.id,
-                "payment_type": is_customer and "outbound" or "inbound",
+                "payment_type": is_customer and "inbound" or "outbound",
                 "partner_id": invoices[0].commercial_partner_id.id,
                 "partner_type": MAP_INVOICE_TYPE_PARTNER_TYPE[invoices[0].move_type],
                 "company_id": self.env.user.company_id,
-                "communication": "Batch payment of %s" % self.payment_date,
+                "communication": "Batch payment of %s" % fields.Date.today(),
             }
         )
         return rec
