@@ -86,13 +86,13 @@ class AccountPaymentTermLine(models.Model):
     discount_days = fields.Integer("Discount Days")
     discount_income_account_id = fields.Many2one(
         "account.account",
-        string="Discount Income Account",
-        help="This account will be used to post the discount income",
+        string="Discount on Purchases Account",
+        help="This account will be used to post the discount on purchases.",
     )
     discount_expense_account_id = fields.Many2one(
         "account.account",
-        string="Discount Expense Account",
-        help="This account will be used to post the discount expense",
+        string="Discount on Sales Account",
+        help="This account will be used to post the discount on sales.",
     )
 
     @api.onchange("discount")
