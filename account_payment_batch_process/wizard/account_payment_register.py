@@ -59,10 +59,10 @@ class AccountPaymentRegister(models.TransientModel):
     )
     total_amount = fields.Float("Total Invoices:", compute="_compute_total")
 
-    def get_invoice_payment_line(self, invoice, customer=True):
+    def get_invoice_payment_line(self, invoice):
         account = \
             invoice.invoice_payment_term_id and (
-            customer and
+            (MAP_INVOICE_TYPE_PARTNER_TYPE[invoice.move_type] == "customer") and
             invoice.invoice_payment_term_id.line_ids[0].discount_income_account_id or
             invoice.invoice_payment_term_id.line_ids[0].discount_expense_account_id)
         return (0, 0, {
@@ -73,6 +73,7 @@ class AccountPaymentRegister(models.TransientModel):
             "payment_difference": 0.0,
             "payment_difference_handling": "reconcile",
             "writeoff_account_id": account.id,
+            "note": "Payment of invoice %s" % invoice.name,
         })
 
     def get_invoice_payments(self, invoices):
@@ -157,12 +158,13 @@ class AccountPaymentRegister(models.TransientModel):
         rec.update(
             {
                 "amount": abs(total_amount),
-                "journal_id": invoices[0].payment_method_id.id  ,
+                "journal_id": invoices[0].payment_method_id.id,
                 "currency_id": invoices[0].currency_id.id,
-                "payment_type": total_amount > 0 and "inbound" or "outbound",
+                "payment_type": is_customer and "outbound" or "inbound",
                 "partner_id": invoices[0].commercial_partner_id.id,
                 "partner_type": MAP_INVOICE_TYPE_PARTNER_TYPE[invoices[0].move_type],
                 "company_id": self.env.user.company_id,
+                "communication": "Batch payment of %s" % self.payment_date,
             }
         )
         return rec
