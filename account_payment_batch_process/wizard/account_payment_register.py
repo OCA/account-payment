@@ -83,10 +83,10 @@ class AccountPaymentRegister(models.TransientModel):
         return res
 
     @api.model
-    def default_get(self, fields):
+    def default_get(self, fields_list):
         if self.env.context and not self.env.context.get("batch", False):
-            return super().default_get(fields)
-        rec = super().default_get(fields)
+            return super().default_get(fields_list)
+        res = super().default_get(fields_list)
         context = dict(self._context or {})
         active_model = context.get("active_model")
         active_ids = context.get("active_ids")
@@ -137,7 +137,7 @@ class AccountPaymentRegister(models.TransientModel):
         if "batch" in context and context.get("batch"):
             is_customer = (MAP_INVOICE_TYPE_PARTNER_TYPE[invoices[0].move_type] == "customer")
             payment_lines = self.get_invoice_payments(invoices)
-            rec.update({"invoice_payments": payment_lines, "is_customer": is_customer})
+            res.update({"invoice_payments": payment_lines, "is_customer": is_customer})
         else:
             # Checks on received invoice records
             if any(
@@ -155,7 +155,7 @@ class AccountPaymentRegister(models.TransientModel):
             inv.amount_residual * MAP_INVOICE_TYPE_PAYMENT_SIGN[inv.move_type]
             for inv in invoices
         )
-        rec.update(
+        return res.update(
             {
                 "amount": abs(total_amount),
                 "journal_id": invoices[0].payment_method_id.id,
@@ -167,7 +167,6 @@ class AccountPaymentRegister(models.TransientModel):
                 "communication": "Batch payment of %s" % fields.Date.today(),
             }
         )
-        return rec
 
     def get_payment_values(self, group_data=None):
         res = {}
