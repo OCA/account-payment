@@ -1,4 +1,5 @@
 # Copyright 2012 Open Source Integrators
+# Copyright 2021 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from datetime import datetime, timedelta
@@ -27,8 +28,11 @@ class TestPartnerAging(common.TransactionCase):
         self.partner_3 = self.env.ref("base.res_partner_3")
         self.partner_18 = self.env.ref("base.res_partner_18")
 
-        self.journal = self.account_journal_obj.create(
+        self.journal_sale = self.account_journal_obj.create(
             {"name": "sale_0", "code": "SALE0", "type": "sale"}
+        )
+        self.journal_purchase = self.account_journal_obj.create(
+            {"name": "purchase_0", "code": "PRCHASE0", "type": "purchase"}
         )
 
         self.account_id = self.account_account_obj.create(
@@ -42,24 +46,69 @@ class TestPartnerAging(common.TransactionCase):
 
         invoice_data_list = [
             # Customer Invoice Data
-            ["out_invoice", self.get_date(30), self.partner_12.id],
-            ["out_invoice", self.get_date(60), self.partner_2.id],
-            ["out_invoice", self.get_date(90), self.partner_18.id],
-            ["out_invoice", self.get_date(119), self.partner_3.id],
-            ["out_invoice", self.get_date(124), self.partner_10.id],
+            [
+                "out_invoice",
+                self.get_date(30),
+                self.partner_12.id,
+                self.journal_sale.id,
+            ],
+            ["out_invoice", self.get_date(60), self.partner_2.id, self.journal_sale.id],
+            [
+                "out_invoice",
+                self.get_date(90),
+                self.partner_18.id,
+                self.journal_sale.id,
+            ],
+            [
+                "out_invoice",
+                self.get_date(119),
+                self.partner_3.id,
+                self.journal_sale.id,
+            ],
+            [
+                "out_invoice",
+                self.get_date(124),
+                self.partner_10.id,
+                self.journal_sale.id,
+            ],
             # Supplier Invoice Data
-            ["in_invoice", self.get_date(30), self.partner_12.id],
-            ["in_invoice", self.get_date(60), self.partner_2.id],
-            ["in_invoice", self.get_date(90), self.partner_18.id],
-            ["in_invoice", self.get_date(119), self.partner_3.id],
-            ["in_invoice", self.get_date(124), self.partner_10.id],
+            [
+                "in_invoice",
+                self.get_date(30),
+                self.partner_12.id,
+                self.journal_purchase.id,
+            ],
+            [
+                "in_invoice",
+                self.get_date(60),
+                self.partner_2.id,
+                self.journal_purchase.id,
+            ],
+            [
+                "in_invoice",
+                self.get_date(90),
+                self.partner_18.id,
+                self.journal_purchase.id,
+            ],
+            [
+                "in_invoice",
+                self.get_date(119),
+                self.partner_3.id,
+                self.journal_purchase.id,
+            ],
+            [
+                "in_invoice",
+                self.get_date(124),
+                self.partner_10.id,
+                self.journal_purchase.id,
+            ],
         ]
         for invoice in invoice_data_list:
             self._create_invoice_with_reference(invoice)
 
     def _create_invoice_with_reference(self, invoice_data):
         invoice = self.account_invoice_obj.with_context(
-            default_journal_id=self.journal.id, test_no_refuse_ref=True
+            default_journal_id=invoice_data[3], test_no_refuse_ref=True
         ).create(
             {
                 "ref": "reference",
