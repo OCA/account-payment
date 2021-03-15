@@ -6,7 +6,7 @@
 {
     "name": "Account Payment Return Import",
     "category": "Accounting",
-    "version": "13.0.1.0.2",
+    "version": "13.0.1.0.3",
     "summary": "This module adds a generic wizard to import payment return"
     "file formats. Is only the base to be extended by another"
     "modules",
