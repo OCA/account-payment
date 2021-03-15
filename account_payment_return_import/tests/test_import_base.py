@@ -1,4 +1,5 @@
-# Copyright 2017 David Vidal <david.vidal@tecnativa.com>
+# Copyright 2017 Tecnativa - David Vidal
+# Copyright 2021 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo.exceptions import UserError
@@ -31,8 +32,10 @@ class TestImportBase(TestPaymentReturnFile):
                 "bank_account_id": cls.acc_bank.id,
             }
         )
-
         cls.journal.bank_account_id = cls.acc_bank
+        cls.journal_sale = cls.env["account.journal"].create(
+            {"name": "Test Sale Journal", "code": "SALE", "type": "sale"}
+        )
         cls.partner = cls.env["res.partner"].create({"name": "Test partner"})
         cls.reason = cls.env["payment.return.reason"].create(
             {"code": "RTEST", "name": "Reason Test"}
@@ -62,7 +65,7 @@ class TestImportBase(TestPaymentReturnFile):
         cls.invoice = cls.env["account.move"].create(
             {
                 "type": "out_invoice",
-                "journal_id": cls.journal.id,
+                "journal_id": cls.journal_sale.id,
                 "company_id": cls.env.user.company_id.id,
                 "currency_id": cls.env.user.company_id.currency_id.id,
                 "partner_id": cls.partner.id,
