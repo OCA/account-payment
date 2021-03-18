@@ -1,13 +1,13 @@
 # Copyright 2011-2012 7 i TRIA <http://www.7itria.cat>
 # Copyright 2011-2012 Avanzosc <http://www.avanzosc.com>
-# Copyright 2013 Pedro M. Baeza <pedro.baeza@tecnativa.com>
+# Copyright 2013 Tecnativa - Pedro M. Baeza
 # Copyright 2014 Markus Schneider <markus.schneider@initos.com>
-# Copyright 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
-# Copyright 2017 Luis M. Ontalba <luis.martinez@tecnativa.com>
+# Copyright 2016 Tecnativa - Carlos Dauden
+# Copyright 2017 Tecnativa - Luis M. Ontalba
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
-from odoo.exceptions import ValidationError, Warning as UserError
+from odoo.exceptions import UserError, ValidationError
 from odoo.tools import float_compare
 
 
@@ -68,7 +68,7 @@ class PaymentReturn(models.Model):
         string="State",
         readonly=True,
         default="draft",
-        track_visibility="onchange",
+        tracking=True,
     )
     auto_reconcile_failure = fields.Boolean(
         string="Automatic reconciliation failure",
@@ -176,7 +176,7 @@ class PaymentReturn(models.Model):
             "name": move.ref,
             "debit": 0.0,
             "credit": total_amount,
-            "account_id": self.journal_id.default_credit_account_id.id,
+            "account_id": self.journal_id.default_account_id.id,
             "move_id": move.id,
             "journal_id": move.journal_id.id,
         }
@@ -225,12 +225,18 @@ class PaymentReturn(models.Model):
         move = self.env["account.move"].create(self._prepare_return_move_vals())
         total_amount = 0.0
         all_move_lines = self.env["account.move.line"]
+        # First loop to generate the move lines and compute the total amount
         for return_line in self.line_ids:
             move_line2_vals = return_line._prepare_return_move_line_vals(move)
             move_line2 = move_line_model.with_context(check_move_validity=False).create(
                 move_line2_vals
             )
             total_amount += move_line2.debit
+        move_line_vals = self._prepare_move_line(move, total_amount)
+        # credit_move_line: credit on transfer or bank account
+        credit_move_line = move_line_model.create(move_line_vals)
+        move._post()
+        for return_line in self.line_ids:
             for move_line in return_line.move_line_ids:
                 # move_line: credit on customer account (from payment move)
                 # returned_moves: debit on customer account (from invoice move)
@@ -251,14 +257,10 @@ class PaymentReturn(models.Model):
                 )
             extra_lines_vals = return_line._prepare_extra_move_lines(move)
             move_line_model.create(extra_lines_vals)
-        move_line_vals = self._prepare_move_line(move, total_amount)
-        # credit_move_line: credit on transfer or bank account
-        credit_move_line = move_line_model.create(move_line_vals)
         # Reconcile (if option enabled)
         self._auto_reconcile(credit_move_line, all_move_lines, total_amount)
         # Write directly because we returned payments just now
         invoices.write(self._prepare_invoice_returned_vals())
-        move.post()
         self.write({"state": "done", "move_id": move.id})
         return True
 
@@ -361,7 +363,7 @@ class PaymentReturnLine(models.Model):
     def match_invoice(self):
         for line in self:
             domain = line.partner_id and [("partner_id", "=", line.partner_id.id)] or []
-            domain += [("name", "=", line.reference), ("type", "=", "out_invoice")]
+            domain += [("name", "=", line.reference), ("move_type", "=", "out_invoice")]
             invoice = self.env["account.move"].search(domain)
             if invoice:
                 invoice_line_ids = invoice.line_ids.filtered(
@@ -385,7 +387,7 @@ class PaymentReturnLine(models.Model):
             if line.return_id.journal_id:
                 domain += [
                     ("journal_id", "=", line.return_id.journal_id.id),
-                    ("move_id.type", "=", "entry"),
+                    ("move_id.move_type", "=", "entry"),
                 ]
             domain.extend(
                 [
@@ -407,7 +409,7 @@ class PaymentReturnLine(models.Model):
     def match_move(self):
         for line in self:
             domain = line.partner_id and [("partner_id", "=", line.partner_id.id)] or []
-            domain += [("name", "=", line.reference), ("type", "=", "entry")]
+            domain += [("name", "=", line.reference), ("move_type", "=", "entry")]
             move = self.env["account.move"].search(domain)
             if move:
                 line.move_line_ids = move.line_ids.filtered(
@@ -454,7 +456,7 @@ class PaymentReturnLine(models.Model):
                 "debit": 0.0,
                 "credit": self.expense_amount,
                 "partner_id": self.expense_partner_id.id,
-                "account_id": self.return_id.journal_id.default_credit_account_id.id,
+                "account_id": self.return_id.journal_id.default_account_id.id,
             },
             {
                 "move_id": move.id,

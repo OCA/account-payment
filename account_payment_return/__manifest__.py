@@ -1,16 +1,17 @@
 # Copyright 2011-2012 7 i TRIA <http://www.7itria.cat>
 # Copyright 2011-2012 Avanzosc <http://www.avanzosc.com>
-# Copyright 2013 Pedro M. Baeza <pedro.baeza@tecnativa.com>
+# Copyright 2013 Tecnativa - Pedro M. Baeza
 # Copyright 2014 Markus Schneider <markus.schneider@initos.com>
-# Copyright 2015 Sergio Teruel <sergio.teruel@tecnativa.com>
-# Copyright 2015-2017 Pedro M. Baeza <pedro.baeza@tecnativa.com>
-# Copyright 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
-# Copyright 2017 David Vidal <david.vidal@tecnativa.com>
+# Copyright 2015 Tecnativa - Sergio Teruel
+# Copyright 2015-2017 Tecnativa - Pedro M. Baeza
+# Copyright 2016 Tecnativa - Carlos Dauden
+# Copyright 2017 Tecnativa - David Vidal
+# Copyright 2021 Tecnativa - João Marques
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
     "name": "Account Payment Returns",
-    "version": "13.0.1.0.2",
+    "version": "14.0.1.0.0",
     "summary": "Manage the return of your payments",
     "license": "AGPL-3",
     "depends": ["mail", "account"],
