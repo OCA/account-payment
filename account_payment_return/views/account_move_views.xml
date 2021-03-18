@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<!-- Copyright 2015 Pedro M. Baeza <pedro.baeza@tecnativa.com>
-     Copyright 2015 Sergio Teruel <sergio.teruel@tecnativa.com>
-     Copyright 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
+<!-- Copyright 2015 Tecnativa - Pedro M. Baeza
+     Copyright 2015 Tecnativa - Sergio Teruel
+     Copyright 2016 Tecnativa - Carlos Dauden
      License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl-3). -->
 <odoo>
     <record id="view_move_form" model="ir.ui.view">
