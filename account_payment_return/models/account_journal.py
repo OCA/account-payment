@@ -1,4 +1,4 @@
-# Copyright 2017 luis M. Ontalba <luis.martinez@tecnativa.com>
+# Copyright 2017 Tecnativa - luis M. Ontalba
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import fields, models
