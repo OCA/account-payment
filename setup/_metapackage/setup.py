@@ -8,6 +8,7 @@ setuptools.setup(
     description="Meta package for oca-account-payment Odoo addons",
     version=version,
     install_requires=[
+        'odoo14-addon-account_payment_return',
         'odoo14-addon-account_payment_term_extension',
     ],
     classifiers=[
