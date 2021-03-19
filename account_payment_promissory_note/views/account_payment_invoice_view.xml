@@ -10,6 +10,12 @@
                     name="date_due"
                     attrs="{'invisible': [('promissory_note','=', False)]}"
                 />
+                <span
+                    class="text-muted"
+                    attrs="{'invisible': [('promissory_note','=', False)]}"
+                >
+                    Set date due to all payments or empty to select last date due of each partner invoices group
+                </span>
             </xpath>
         </field>
     </record>
