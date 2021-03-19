@@ -19,6 +19,7 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
+[account_payment_return](account_payment_return/) | 14.0.1.0.0 | Manage the return of your payments
 [account_payment_term_extension](account_payment_term_extension/) | 14.0.1.0.1 | Adds rounding, months, weeks and multiple payment days properties on payment term lines
 
 [//]: # (end addons)
