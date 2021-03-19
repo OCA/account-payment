@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!-- Copyright 2016 Tecnativa - Carlos Dauden
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl-3). -->
+<templates xml:space="preserve">
+    <t t-extend="ShowPaymentInfo">
+        <t t-jquery=".js_payment_info" t-operation="replace">
+            <a
+                role="button"
+                tabindex="0"
+                t-attf-class="js_payment_info fa fa-#{line.returned and 'warning' or 'info-circle'}"
+                t-att-index="line.index"
+                style="margin-right:5px;"
+                aria-label="Info"
+                title="Payment Info"
+                data-toggle="tooltip"
+            />
+        </t>
+        <t t-jquery=".o_field_widget" t-operation="replace">
+            <i class="o_field_widget text-right o_payment_label">
+                <t t-esc="line.returned and 'Returned on ' or 'Paid on '" />
+                <t t-esc="line.date" />
+            </i>
+        </t>
+    </t>
+</templates>
