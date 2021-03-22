@@ -45,6 +45,10 @@ class PaymentReturn(models.Model):
         comodel_name='account.journal', string='Bank journal', required=True,
         states={'done': [('readonly', True)],
                 'cancelled': [('readonly', True)]})
+    return_journal_id = fields.Many2one(
+        comodel_name='account.journal', string='Return journal',
+        states={'done': [('readonly', True)],
+                'cancelled': [('readonly', True)]})
     move_id = fields.Many2one(
         comodel_name='account.move',
         string='Reference to the created journal entry',
@@ -158,10 +162,16 @@ class PaymentReturn(models.Model):
         :return: Dictionary with the record values.
         """
         self.ensure_one()
+
+        if self.return_journal_id:
+            move_journal_id = self.return_journal_id
+        else:
+            move_journal_id = self.journal_id
+
         return {
             'name': '/',
             'ref': _('Return %s') % self.name,
-            'journal_id': self.journal_id.id,
+            'journal_id': move_journal_id.id,
             'date': self.date,
             'company_id': self.company_id.id,
         }
@@ -173,7 +183,7 @@ class PaymentReturn(models.Model):
             'name': move.ref,
             'debit': 0.0,
             'credit': total_amount,
-            'account_id': self.journal_id.default_credit_account_id.id,
+            'account_id': move.journal_id.default_credit_account_id.id,
             'move_id': move.id,
             'journal_id': move.journal_id.id,
         }
@@ -428,7 +438,7 @@ class PaymentReturnLine(models.Model):
             'credit': 0.0,
             'account_id': self.move_line_ids[0].account_id.id,
             'partner_id': self.partner_id.id,
-            'journal_id': self.return_id.journal_id.id,
+            'journal_id': move.journal_id.id,
             'move_id': move.id,
         }
 

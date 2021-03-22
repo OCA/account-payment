@@ -28,6 +28,7 @@
                     <group>
                         <field name="name"/>
                         <field name="journal_id" domain="[('type', 'in', ['bank', 'cash'])]"/>
+                        <field name="return_journal_id" domain="[('type', 'in', ['bank', 'cash', 'general'])]"/>
                         <field name="date"/>
                         <field name="company_id" groups="base.group_multi_company"/>
                         <field name="move_id" readonly="True"/>
