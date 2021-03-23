@@ -50,7 +50,7 @@ class AccountMove(models.Model):
                 else:
                     invoice.discount_amt = 0.0
 
-    @api.onchange("invoice_date", "invoice_payment_term_id")
+    @api.depends("invoice_date", "invoice_payment_term_id")
     def _compute_discount_date(self):
         "This will retain a value based on invoice date and discount term"
         for invoice in self:
@@ -67,7 +67,7 @@ class AccountMove(models.Model):
                 disc_date <= fields.Date.today() or invoice.discount_taken != 0
             ):
                 disc_date = False
-            invoice.write({"discount_date": disc_date})
+            invoice.discount_date = disc_date
 
     @api.onchange("amount_residual", "invoice_payment_term_id", "invoice_date")
     def _compute_payment_disc(self):
