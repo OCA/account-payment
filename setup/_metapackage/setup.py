@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo14-addon-account_payment_return',
+        'odoo14-addon-account_payment_term_discount',
         'odoo14-addon-account_payment_term_extension',
     ],
     classifiers=[
