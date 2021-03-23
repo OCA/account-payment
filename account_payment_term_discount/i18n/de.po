@@ -1,0 +1,100 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* account_cash_discount_61
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.1rc1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-01-23 22:02+0000\n"
+"PO-Revision-Date: 2012-01-24 01:26+0000\n"
+"Last-Translator: Joël Grand-Guillaume @ CampToCamp "
+"<joel.grandguillaume@camptocamp.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Launchpad-Export-Date: 2012-10-23 05:13+0000\n"
+"X-Generator: Launchpad (build 16179)\n"
+
+#. module: account_cash_discount_61
+#: constraint:account.payment.term.line:0
+msgid ""
+"Percentages for Payment Term Line must be between 0 and 1, Example: 0.02 for "
+"2% "
+msgstr ""
+"Prozentwert für eine Position der Zahlungsbedingung muss zwischen 0 und 1 "
+"sein, z.B. 0.02 für 2% "
+
+#. module: account_cash_discount_61
+#: view:account.payment.term.line:0
+msgid "Discount Computation"
+msgstr "Discount Computation"
+
+#. module: account_cash_discount_61
+#: constraint:account.move:0
+msgid ""
+"You can not create more than one move per period on centralized journal"
+msgstr ""
+"Sie können nur eine Buchung je Periode für zentralisierte Journale erzeugen"
+
+#. module: account_cash_discount_61
+#: model:ir.model,name:account_cash_discount_61.model_account_move
+msgid "Account Entry"
+msgstr "Buchungssatz"
+
+#. module: account_cash_discount_61
+#: help:account.payment.term.line,discount_income_account_id:0
+msgid "This account will be used to post the cash discount income"
+msgstr "This account will be used to post the cash discount income"
+
+#. module: account_cash_discount_61
+#: help:account.payment.term.line,discount_expense_account_id:0
+msgid "This account will be used to post the cash discount expense"
+msgstr "This account will be used to post the cash discount expense"
+
+#. module: account_cash_discount_61
+#: model:ir.model,name:account_cash_discount_61.model_account_voucher
+msgid "Accounting Voucher"
+msgstr "Buchung Zahlungsbelege"
+
+#. module: account_cash_discount_61
+#: view:account.payment.term:0
+#: model:ir.model,name:account_cash_discount_61.model_account_payment_term
+msgid "Payment Term"
+msgstr "Zahlungsbedingung"
+
+#. module: account_cash_discount_61
+#: field:account.payment.term,is_discount:0
+#: field:account.payment.term.line,is_discount:0
+msgid "Is Cash Discount"
+msgstr "Is Cash Discount"
+
+#. module: account_cash_discount_61
+#: model:ir.model,name:account_cash_discount_61.model_account_payment_term_line
+msgid "Payment Term Line"
+msgstr "Zahlungsbedingungen"
+
+#. module: account_cash_discount_61
+#: help:account.payment.term,is_discount:0
+msgid ""
+"Check this box if this payment term is a cash discount. If cash discount is "
+"used the remaining amount of the invoice will not be paid"
+msgstr ""
+"Check this box if this payment term is a cash discount. If cash discount is "
+"used the remaining amount of the invoice will not be paid"
+
+#. module: account_cash_discount_61
+#: field:account.payment.term.line,discount_expense_account_id:0
+msgid "Discount Expense Account"
+msgstr "Discount Expense Account"
+
+#. module: account_cash_discount_61
+#: field:account.payment.term.line,discount_income_account_id:0
+msgid "Discount Income Account"
+msgstr "Discount Income Account"
+
+#. module: account_cash_discount_61
+#: field:account.payment.term.line,discount:0
+msgid "Discount (%)"
+msgstr "Discount (%)"
