@@ -47,9 +47,7 @@ class AccountPaymentRegister(models.TransientModel):
                     days=line.discount_days
                 )
                 payment_date = fields.Date.from_string(self.payment_date)
-                discount_amt = round(
-                    (self.invoice_id.amount_untaxed_signed * line.discount) / 100.0, 2
-                )
+                discount_amt = self.invoice_id.discount_amt
 
                 payment_difference = self.payment_difference
                 self.payment_difference = 0.0
