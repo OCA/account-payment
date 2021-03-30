@@ -1,18 +1,15 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-# * account_due_list
+# 	* account_due_list
 #
-# Translators:
 msgid ""
 msgstr ""
-"Project-Id-Version: account-payment (8.0)\n"
+"Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-02 06:22+0000\n"
-"PO-Revision-Date: 2021-12-13 10:39+0000\n"
+"PO-Revision-Date: 2021-04-13 10:46+0000\n"
 "Last-Translator: Yves Le Doeuff <yld@alliasys.fr>\n"
-"Language-Team: French (http://www.transifex.com/oca/OCA-account-payment-8-0/"
-"language/fr/)\n"
-"Language: fr\n"
+"Language-Team: none\n"
+"Language: fr_FR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
@@ -40,6 +37,11 @@ msgid "Date invoice"
 msgstr "Date de facture"
 
 #. module: account_due_list
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line__display_name
+msgid "Display Name"
+msgstr "Nom affiché"
+
+#. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "From invoices"
 msgstr "Des factures"
@@ -53,6 +55,11 @@ msgstr "Lettré entièrement"
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Group By"
 msgstr "Grouper par"
+
+#. module: account_due_list
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line__id
+msgid "ID"
+msgstr ""
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -74,6 +81,11 @@ msgstr "Vendeur"
 #: model:ir.model,name:account_due_list.model_account_move_line
 msgid "Journal Item"
 msgstr "Ligne d'écriture"
+
+#. module: account_due_list
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -197,13 +209,3 @@ msgstr "Non validé"
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Unreconciled"
 msgstr "Non lettré"
-
-#~ msgid "Due Date"
-#~ msgstr "Date d'échéance"
-
-#~ msgid "Month"
-#~ msgstr "Mois"
-
-#, fuzzy
-#~ msgid "Stored Invoice"
-#~ msgstr "Facture"

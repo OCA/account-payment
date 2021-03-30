@@ -47,7 +47,12 @@
                 />
                 <field name="debit" readonly="1" sum="Total Debit" optional="hide" />
                 <field name="credit" readonly="1" sum="Total Credit" optional="hide" />
-                <field name="balance" readonly="1" sum="Total Balance" optional="show" />
+                <field
+                    name="balance"
+                    readonly="1"
+                    sum="Total Balance"
+                    optional="show"
+                />
                 <field
                     name="amount_currency"
                     sum="Total amount currency"
@@ -88,7 +93,7 @@
                 <filter
                     name="from_invoices"
                     string="From invoices"
-                    domain="[('move_id.type', 'not in', ['entry', 'out_receipt', 'in_receipt'])]"
+                    domain="[('move_id.move_type', 'not in', ['entry', 'out_receipt', 'in_receipt'])]"
                 />
                 <separator />
                 <filter
