@@ -11,3 +11,4 @@
 * Jordi Ballester <jordi.ballester@forgeflow.com> (Odoo v9 port)
 * Maxime Chambreuil <mchambreuil@ursainfosystems.com>
 * Javi Dios <javi@ozonomultimedia.com> (Odoo v11 port)
+* Simone Vanin <simone.vanin@agilebg.com>
