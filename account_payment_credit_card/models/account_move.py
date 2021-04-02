@@ -7,7 +7,7 @@ from odoo import models
 class AccountMove(models.Model):
     _inherit = "account.move"
 
-    def post(self):
+    def _post(self, soft=False):
         for move in self:
             result = []
             # Check whether journal has Transfer AP to Credit Card
@@ -37,4 +37,4 @@ class AccountMove(models.Model):
                     # Create new move lines
                     for vals in result:
                         self.env["account.move.line"].create(vals)
-        return super(AccountMove, self).post()
+        return super(AccountMove, self)._post(soft)
