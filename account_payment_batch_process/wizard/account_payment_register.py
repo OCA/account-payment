@@ -58,7 +58,9 @@ class AccountPaymentRegister(models.TransientModel):
         readonly=False,
     )
     total_amount = fields.Float("Total Invoices:", compute="_compute_total")
-    communication = fields.Char(string='Memo', readonly=True, states={'draft': [('readonly', False)]})
+    communication = fields.Char(
+        string="Memo", readonly=True, states={"draft": [("readonly", False)]}
+    )
     currency_id = fields.Many2one(comodel_name="res.currency")
 
     def get_invoice_payment_line(self, invoice):
@@ -76,7 +78,8 @@ class AccountPaymentRegister(models.TransientModel):
                 # "writeoff_account_id": account.id,
                 "note": "Payment of invoice %s" % invoice.name,
                 "communication": res["communication"],
-        })
+            },
+        )
 
     def get_invoice_payments(self, invoices):
         res = []
@@ -96,7 +99,10 @@ class AccountPaymentRegister(models.TransientModel):
         if not active_model or not active_ids:
             raise UserError(
                 _(
-                    "The wizard is executed without active_model or active_ids in the context."
+                    """
+                    The wizard is executed without active_model
+                     or active_ids in the context.
+                """
                 )
             )
         if active_model != "account.move":
@@ -116,7 +122,10 @@ class AccountPaymentRegister(models.TransientModel):
         if any(inv.payment_mode_id != invoices[0].payment_mode_id for inv in invoices):
             raise UserError(
                 _(
-                    "You can only register a batch payment for invoices with the same payment mode."
+                    """
+                    You can only register a batch payment for invoices with
+                    the same payment mode.
+                """
                 )
             )
         if any(
@@ -126,18 +135,24 @@ class AccountPaymentRegister(models.TransientModel):
         ):
             raise UserError(
                 _(
-                    "You cannot mix customer invoices and vendor bills in a single payment."
+                    """
+                    You cannot mix customer invoices and vendor bills in a
+                    single payment.
+                """
                 )
             )
         if any(inv.currency_id != invoices[0].currency_id for inv in invoices):
             raise UserError(
                 _(
-                    "In order to pay multiple bills at once, they must use the same currency."
+                    """
+                    In order to pay multiple bills at once, they must use
+                    the same currency.
+                """
                 )
             )
 
         if "batch" in context and context.get("batch"):
-            is_customer = (MAP_INVOICE_TYPE_PARTNER_TYPE[invoices[0].type] == "customer")
+            is_customer = MAP_INVOICE_TYPE_PARTNER_TYPE[invoices[0].type] == "customer"
             payment_lines = self.get_invoice_payments(invoices)
             res.update({"invoice_payments": payment_lines, "is_customer": is_customer})
         else:
@@ -149,7 +164,10 @@ class AccountPaymentRegister(models.TransientModel):
             ):
                 raise UserError(
                     _(
-                        "You cannot mix customer invoices and vendor bills in a single payment."
+                        """
+                        You cannot mix customer invoices and vendor bills in a
+                        single payment.
+                    """
                     )
                 )
 
@@ -157,8 +175,10 @@ class AccountPaymentRegister(models.TransientModel):
             inv.amount_residual * MAP_INVOICE_TYPE_PAYMENT_SIGN[inv.type]
             for inv in invoices
         )
-        date_format = self.env['res.lang']._lang_get(self.env.user.lang).date_format
-        communication = "Batch payment of %s" % fields.Date.today().strftime(date_format)
+        date_format = self.env["res.lang"]._lang_get(self.env.user.lang).date_format
+        communication = "Batch payment of %s" % fields.Date.today().strftime(
+            date_format
+        )
         res.update(
             {
                 "total_amount": abs(total_amount),
@@ -176,10 +196,15 @@ class AccountPaymentRegister(models.TransientModel):
             writeoff_name = False
             for invoice_id in list(group_data["inv_val"]):
                 values = group_data["inv_val"][invoice_id]
-                if self.currency_id and not self.currency_id.is_zero(values["payment_difference"]) \
-                        and values["payment_difference_handling"] == 'reconcile':
+                if (
+                    self.currency_id
+                    and not self.currency_id.is_zero(values["payment_difference"])
+                    and values["payment_difference_handling"] == "reconcile"
+                ):
                     writeoff_name = writeoff_name or values["line_name"]
-                    writeoff_account_id = writeoff_account_id or values["writeoff_account_id"]
+                    writeoff_account_id = (
+                        writeoff_account_id or values["writeoff_account_id"]
+                    )
                     writeoff_amount += values["payment_difference"]
             res = {
                 "journal_id": self.journal_id.id,
@@ -196,7 +221,7 @@ class AccountPaymentRegister(models.TransientModel):
                 "check_amount_in_words": group_data["check_amount_in_words"],
                 "writeoff_label": writeoff_name,
                 "writeoff_account_id": writeoff_account_id,
-                    # "amount": writeoff_amount,
+                # "amount": writeoff_amount,
             }
         return res
 
@@ -204,7 +229,10 @@ class AccountPaymentRegister(models.TransientModel):
         if float_compare(self.total_amount, self.cheque_amount, 2) != 0:
             raise ValidationError(
                 _(
-                    "The pay amount of the invoices and the batch payment total do not match."
+                    """
+                    The pay amount of the invoices and the batch payment
+                    total do not match.
+                """
                 )
             )
 
@@ -224,7 +252,9 @@ class AccountPaymentRegister(models.TransientModel):
         return memo
 
     def total_amount_in_words(self, data_get, old_total=0):
-        check_amount_in_words = num2words(math.floor(old_total + data_get.amount)).title()
+        check_amount_in_words = num2words(
+            math.floor(old_total + data_get.amount)
+        ).title()
         decimals = (old_total + data_get.amount) % 1
         if decimals >= 10 ** -2:
             check_amount_in_words += _(" and %s/100") % str(
@@ -301,18 +331,14 @@ class AccountPaymentRegister(models.TransientModel):
                 )
             else:
                 memo = (
-                    group_data[partner_id]["memo"]
-                    + " : "
-                    + str(line.invoice_id.name)
+                    group_data[partner_id]["memo"] + " : " + str(line.invoice_id.name)
                 )
             # Calculate amount in words
             check_amount_in_words = self.total_amount_in_words(line, old_total)
             group_data[partner_id].update(
                 {
                     "partner_id": partner_id,
-                    "partner_type": MAP_INVOICE_TYPE_PARTNER_TYPE[
-                        line.invoice_id.type
-                    ],
+                    "partner_type": MAP_INVOICE_TYPE_PARTNER_TYPE[line.invoice_id.type],
                     "total": old_total + line.amount,
                     "memo": memo,
                     "temp_invoice": line.invoice_id.id,
@@ -329,9 +355,7 @@ class AccountPaymentRegister(models.TransientModel):
                 name = "Counterpart"
             # Update with payment diff data
             inv_val = self.get_payment_invoice_value(name, line)
-            group_data[partner_id]["inv_val"].update(
-                {line.invoice_id.id: inv_val}
-            )
+            group_data[partner_id]["inv_val"].update({line.invoice_id.id: inv_val})
         else:
             # calculate amount in words
             check_amount_in_words = self.total_amount_in_words(line, 0)
@@ -383,8 +407,7 @@ class AccountPaymentRegister(models.TransientModel):
                 ).reconcile()
 
         view_id = self.env["ir.model.data"].get_object_reference(
-            "account_payment_batch_process",
-            "view_account_payment_tree_nocreate",
+            "account_payment_batch_process", "view_account_payment_tree_nocreate",
         )[1]
         return {
             "name": _("Payments"),
@@ -419,12 +442,17 @@ class AccountPaymentRegister(models.TransientModel):
                     "payment_difference": vals.get("payment_difference", False) or 0.0,
                     "writeoff_account_id": vals.get("writeoff_account_id", False),
                     "payment_difference_handling": vals.get(
-                        "payment_difference_handling", False),
+                        "payment_difference_handling", False
+                    ),
                     "note": vals.get("note", False),
                 }
             )
-            # Special Case: If full amount payment, then make diff handling as 'reconcile'
-            if payline.payment_difference_handling == "reconcile" and payline.payment_difference == 0.0:
+            # Special Case: If full amount payment, then make diff handling
+            # as 'reconcile'
+            if (
+                payline.payment_difference_handling == "reconcile"
+                and payline.payment_difference == 0.0
+            ):
                 # Change handling difference
                 payline.payment_difference_handling = "open"
                 total += amount

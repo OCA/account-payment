@@ -13,18 +13,12 @@
     "category": "Extra",
     "maintainer": "Open Source Integrators",
     "website": "https://github.com/OCA/account-payment",
-    "depends": [
-        "account",
-        "account_check_printing",
-        "account_payment_order",
-    ],
+    "depends": ["account", "account_check_printing", "account_payment_order"],
     "data": [
         "wizard/account_payment_register.xml",
         # "views/account_move.xml",
         "views/account_payment.xml",
     ],
-    "external_dependencies": {
-        "python": ["num2words"],
-    },
+    "external_dependencies": {"python": ["num2words"]},
     "installable": True,
 }

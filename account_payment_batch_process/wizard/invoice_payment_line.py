@@ -66,14 +66,12 @@ class InvoicePaymentLine(models.TransientModel):
         copy=False,
     )
     reason_code = fields.Many2one("payment.adjustment.reason", string="Reason Code")
-    communication = fields.Char(string='Memo')
+    communication = fields.Char(string="Memo")
     note = fields.Text("Note")
 
     @api.onchange("amount")
     def _onchange_amount(self):
-        check_amount_in_words = num2words(
-            math.floor(self.amount), lang="en"
-        ).title()
+        check_amount_in_words = num2words(math.floor(self.amount), lang="en").title()
         decimals = self.amount % 1
         if decimals >= 10 ** -2:
             check_amount_in_words += _(" and %s/100") % str(
