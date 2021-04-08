@@ -13,10 +13,14 @@ class TestPaymentTermDiscount(common.TransactionCase):
         # Refs
         self.main_company = self.env.ref("base.main_company")
         self.partner_id = self.env.ref("base.res_partner_4")
-        self.journalrec = self.env["account.journal"].search([("type", "=", "sale")])[0]
+
+        Journal = self.env["account.journal"]
+        journal_sale = Journal.search([("type", "=", "sale")], limit=1)
+        journal_purchase = Journal.search([("type", "=", "purchase")], limit=1)
         res_users_account_manager = self.env.ref("account.group_account_manager")
         partner_manager = self.env.ref("base.group_partner_manager")
         account_user_type_expenses = self.env.ref("account.data_account_type_expenses")
+        account_user_type_revenue = self.env.ref("account.data_account_type_revenue")
         account_user_type_receivable = self.env.ref(
             "account.data_account_type_receivable"
         )
@@ -42,8 +46,8 @@ class TestPaymentTermDiscount(common.TransactionCase):
             )
         )
 
-        # Create expense account for discount
-        self.account_discount_id = self.account_model.with_user(
+        # Create account for invoice discount
+        self.account_discount = self.account_model.with_user(
             self.account_manager.id
         ).create(
             dict(
@@ -54,6 +58,17 @@ class TestPaymentTermDiscount(common.TransactionCase):
             )
         )
 
+        # Create account for bill discount
+        self.account_discount_bill = self.account_model.with_user(
+            self.account_manager.id
+        ).create(
+            dict(
+                code="bill_acc_discount",
+                name="Discount Income",
+                user_type_id=account_user_type_revenue.id,
+                reconcile=True,
+            )
+        )
         # Income account
         self.income_account = self.account_model.with_user(
             self.account_manager.id
@@ -96,7 +111,8 @@ class TestPaymentTermDiscount(common.TransactionCase):
                             "value": "balance",
                             "discount": 5.0,
                             "discount_days": 10,
-                            "discount_expense_account_id": self.account_discount_id.id,
+                            "discount_expense_account_id": self.account_discount.id,
+                            "discount_income_account_id": self.account_discount_bill.id,
                             "days": 30,
                         },
                     )
@@ -113,7 +129,7 @@ class TestPaymentTermDiscount(common.TransactionCase):
                 move_type="out_invoice",
                 invoice_date=fields.Date.today(),
                 invoice_payment_term_id=self.payment_term.id,
-                journal_id=self.journalrec.id,
+                journal_id=journal_sale.id,
                 partner_id=self.partner_id.id,
             )
         )
@@ -138,9 +154,44 @@ class TestPaymentTermDiscount(common.TransactionCase):
         # Validate customer invoice
         self.customer_invoice.action_post()
 
+        # Create vendor bill
+        self.bill = self.account_invoice_model.with_user(
+            self.account_manager.id
+        ).create(
+            dict(
+                name="Vendor Bill",
+                move_type="in_invoice",
+                invoice_date=fields.Date.today(),
+                invoice_payment_term_id=self.payment_term.id,
+                journal_id=journal_purchase.id,
+                partner_id=self.partner_id.id,
+            )
+        )
+        # Prepare invoice line values
+        self.bill.write(
+            {
+                "invoice_line_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "product_id": self.env.ref("product.product_product_5").id,
+                            "quantity": 10.0,
+                            "account_id": self.income_account.id,
+                            "name": "Bill Line",
+                            "price_unit": 100.00,
+                        },
+                    )
+                ]
+            }
+        )
+        # Validate customer invoice
+        self.bill.action_post()
+
     def _do_payment(self, invoice, amount, date):
         """
-        Create Payment wizard helper function
+        Create Payment wizard helper function.
+        Returns the transient record used.
         """
         ctx = {
             "active_ids": [invoice.id],
@@ -153,7 +204,8 @@ class TestPaymentTermDiscount(common.TransactionCase):
             f.amount = amount
             f.payment_date = date
         payment = f.save()
-        return payment.action_create_payments()
+        payment.action_create_payments()
+        return payment
 
     def test_customer_invoice_payment_term_discount(self):
         """Test customer invoice and payment term discount"""
@@ -172,3 +224,15 @@ class TestPaymentTermDiscount(common.TransactionCase):
         self.assertIn(
             self.customer_invoice.payment_state, ["partial", "in_payment", "paid"]
         )
+
+    def test_bill_payment_term_discount(self):
+        """Vendor Bill applies discount on Expense account"""
+        # Update payment date that's match with condition within 10 days
+        payment_date = self.bill.invoice_date + relativedelta(days=9)
+        payment = self._do_payment(self.bill, 950.0, payment_date)
+        # Verify that bill discount account was proposed
+        self.assertEqual(
+            payment.writeoff_account_id.code, self.account_discount_bill.code
+        )
+        # Verify that invoice is now in Paid state
+        self.assertIn(self.bill.payment_state, ["partial", "in_payment", "paid"])
