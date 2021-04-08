@@ -12,7 +12,7 @@
                 edit="false"
                 create="false"
             >
-                <field name="date" />
+                <!-- <field name="date" /> -->
                 <field name="name" />
                 <field name="journal_id" />
                 <field name="payment_method_id" />

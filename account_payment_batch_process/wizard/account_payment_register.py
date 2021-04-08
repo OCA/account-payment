@@ -58,22 +58,24 @@ class AccountPaymentRegister(models.TransientModel):
         readonly=False,
     )
     total_amount = fields.Float("Total Invoices:", compute="_compute_total")
+    communication = fields.Char(string='Memo', readonly=True, states={'draft': [('readonly', False)]})
+    currency_id = fields.Many2one(comodel_name="res.currency")
 
     def get_invoice_payment_line(self, invoice):
-        account = \
-            invoice.invoice_payment_term_id and (
-            (MAP_INVOICE_TYPE_PARTNER_TYPE[invoice.move_type] == "customer") and
-            invoice.invoice_payment_term_id.line_ids[0].discount_income_account_id or
-            invoice.invoice_payment_term_id.line_ids[0].discount_expense_account_id)
-        return (0, 0, {
-            "partner_id": invoice.partner_id.id,
-            "invoice_id": invoice.id,
-            "balance": invoice.amount_residual or 0.0,
-            "amount": invoice.amount_residual or 0.0,
-            "payment_difference": 0.0,
-            "payment_difference_handling": "reconcile",
-            "writeoff_account_id": account.id,
-            "note": "Payment of invoice %s" % invoice.name,
+        res = self._prepare_payment_vals(invoice)
+        return (
+            0,
+            0,
+            {
+                "partner_id": invoice.partner_id.id,
+                "invoice_id": invoice.id,
+                "balance": invoice.amount_residual or 0.0,
+                "amount": invoice.amount_residual or 0.0,
+                "payment_difference": 0.0,
+                "payment_difference_handling": "reconcile",
+                # "writeoff_account_id": account.id,
+                "note": "Payment of invoice %s" % invoice.name,
+                "communication": res["communication"],
         })
 
     def get_invoice_payments(self, invoices):
@@ -106,7 +108,7 @@ class AccountPaymentRegister(models.TransientModel):
         invoices = self.env[active_model].browse(active_ids)
         if any(
             invoice.state != "posted"
-            or invoice.payment_state not in ["not_paid", "partial"]
+            or invoice.invoice_payment_state not in ["not_paid", "partial"]
             for invoice in invoices
         ):
             raise UserError(_("You can only register payments for open invoices."))
@@ -118,8 +120,8 @@ class AccountPaymentRegister(models.TransientModel):
                 )
             )
         if any(
-            MAP_INVOICE_TYPE_PARTNER_TYPE[inv.move_type]
-            != MAP_INVOICE_TYPE_PARTNER_TYPE[invoices[0].move_type]
+            MAP_INVOICE_TYPE_PARTNER_TYPE[inv.type]
+            != MAP_INVOICE_TYPE_PARTNER_TYPE[invoices[0].type]
             for inv in invoices
         ):
             raise UserError(
@@ -135,14 +137,14 @@ class AccountPaymentRegister(models.TransientModel):
             )
 
         if "batch" in context and context.get("batch"):
-            is_customer = (MAP_INVOICE_TYPE_PARTNER_TYPE[invoices[0].move_type] == "customer")
+            is_customer = (MAP_INVOICE_TYPE_PARTNER_TYPE[invoices[0].type] == "customer")
             payment_lines = self.get_invoice_payments(invoices)
             res.update({"invoice_payments": payment_lines, "is_customer": is_customer})
         else:
             # Checks on received invoice records
             if any(
-                MAP_INVOICE_TYPE_PARTNER_TYPE[inv.move_type]
-                != MAP_INVOICE_TYPE_PARTNER_TYPE[invoices[0].move_type]
+                MAP_INVOICE_TYPE_PARTNER_TYPE[inv.type]
+                != MAP_INVOICE_TYPE_PARTNER_TYPE[invoices[0].type]
                 for inv in invoices
             ):
                 raise UserError(
@@ -152,20 +154,15 @@ class AccountPaymentRegister(models.TransientModel):
                 )
 
         total_amount = sum(
-            inv.amount_residual * MAP_INVOICE_TYPE_PAYMENT_SIGN[inv.move_type]
+            inv.amount_residual * MAP_INVOICE_TYPE_PAYMENT_SIGN[inv.type]
             for inv in invoices
         )
         date_format = self.env['res.lang']._lang_get(self.env.user.lang).date_format
         communication = "Batch payment of %s" % fields.Date.today().strftime(date_format)
         res.update(
             {
-                "amount": abs(total_amount),
-                "journal_id": invoices[0].payment_method_id.id,
+                "total_amount": abs(total_amount),
                 "currency_id": invoices[0].currency_id.id,
-                "payment_type": is_customer and "outbound" or "inbound",
-                "partner_id": invoices[0].commercial_partner_id.id,
-                "partner_type": MAP_INVOICE_TYPE_PARTNER_TYPE[invoices[0].move_type],
-                "company_id": self.env.user.company_id,
                 "communication": communication,
             }
         )
@@ -179,7 +176,7 @@ class AccountPaymentRegister(models.TransientModel):
             writeoff_name = False
             for invoice_id in list(group_data["inv_val"]):
                 values = group_data["inv_val"][invoice_id]
-                if not self.currency_id.is_zero(values["payment_difference"]) \
+                if self.currency_id and not self.currency_id.is_zero(values["payment_difference"]) \
                         and values["payment_difference_handling"] == 'reconcile':
                     writeoff_name = writeoff_name or values["line_name"]
                     writeoff_account_id = writeoff_account_id or values["writeoff_account_id"]
@@ -189,19 +186,17 @@ class AccountPaymentRegister(models.TransientModel):
                 "payment_method_id": "payment_method_id" in group_data
                 and group_data["payment_method_id"]
                 or self.payment_method_id.id,
-                "date": self.payment_date,
-                "ref": group_data["memo"],
-                "payment_type": self.payment_type,
+                "payment_date": self.payment_date,
+                "payment_reference": group_data["memo"],
+                # "payment_type": self.payment_type,
                 "amount": group_data["total"],
-                "currency_id": self.currency_id.id,
+                "currency_id": (self.currency_id.id or self.env.company.currency_id.id),
                 "partner_id": int(group_data["partner_id"]),
                 "partner_type": group_data["partner_type"],
                 "check_amount_in_words": group_data["check_amount_in_words"],
-                "write_off_line_vals": {
-                    "name": writeoff_name,
-                    "account_id": writeoff_account_id,
-                    "amount": writeoff_amount,
-                },
+                "writeoff_label": writeoff_name,
+                "writeoff_account_id": writeoff_account_id,
+                    # "amount": writeoff_amount,
             }
         return res
 
@@ -277,7 +272,7 @@ class AccountPaymentRegister(models.TransientModel):
                 partner_id: {
                     "partner_id": partner_id,
                     "partner_type": MAP_INVOICE_TYPE_PARTNER_TYPE[
-                        data_get.invoice_id.move_type
+                        data_get.invoice_id.type
                     ],
                     "total": data_get.amount,
                     "check_amount_in_words": check_amount_in_words,
@@ -316,7 +311,7 @@ class AccountPaymentRegister(models.TransientModel):
                 {
                     "partner_id": partner_id,
                     "partner_type": MAP_INVOICE_TYPE_PARTNER_TYPE[
-                        line.invoice_id.move_type
+                        line.invoice_id.type
                     ],
                     "total": old_total + line.amount,
                     "memo": memo,
@@ -372,14 +367,14 @@ class AccountPaymentRegister(models.TransientModel):
                 .create(self.get_payment_values(group_data=group_data[partner]))
             )
             payment_ids.append(payment.id)
-            payment.action_post()
+            payment.post()
 
             # Reconciliation
             domain = [
                 ("account_internal_type", "in", ("receivable", "payable")),
                 ("reconciled", "=", False),
             ]
-            payment_lines = payment.line_ids.filtered_domain(domain)
+            payment_lines = payment.move_line_ids.filtered_domain(domain)
             invoices = self.env["account.move"].browse(context.get("active_ids"))
             lines = invoices.line_ids.filtered_domain(domain)
             for account in payment_lines.account_id:

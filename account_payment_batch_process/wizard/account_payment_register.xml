@@ -6,7 +6,7 @@
         <field name="name">account.payment.register.wizard.batch.inherited
         </field>
         <field name="model">account.payment.register</field>
-        <field name="inherit_id" ref="account.view_account_payment_register_form" />
+        <field name="inherit_id" ref="account.view_account_payment_form_multi" />
         <field name="arch" type="xml">
             <xpath expr="//group" position="after">
                 <group invisible="not context.get('batch', False)">
@@ -52,6 +52,7 @@
                                 attrs="{'required': [('payment_difference_handling', '=', 'reconcile'),
                                                     ('payment_difference', '!=', 0.0)]}"
                             />
+                            <field name="communication" />
                             <field name="reason_code" />
                             <field
                                 name="note"
@@ -71,13 +72,13 @@
                 </group>
             </xpath>
             <xpath
-                expr="//button[@name='action_create_payments']"
+                expr="//button[@name='create_payments']"
                 position="attributes"
             >
                 <attribute name="invisible">context.get('batch', False)</attribute>
             </xpath>
             <xpath
-                expr="//form/footer/button[@name='action_create_payments']"
+                expr="//form/footer/button[@name='create_payments']"
                 position="after"
             >
                 <button
@@ -88,15 +89,15 @@
                     invisible="not context.get('batch', False)"
                 />
             </xpath>
-            <xpath expr="//field[@name='amount']" position="attributes">
+            <!-- <xpath expr="//field[@name='amount']" position="attributes">
                 <attribute name="invisible">context.get('batch', False)</attribute>
-            </xpath>
-            <xpath expr="//field[@name='payment_method_id']" position="attributes">
+            </xpath> -->
+            <!-- <xpath expr="//field[@name='payment_method_id']" position="attributes">
                 <attribute
                     name="domain"
                 >[('payment_type', '=', payment_type)]</attribute>
-            </xpath>
-            <xpath expr="//field[@name='communication']" position="after">
+            </xpath> -->
+            <xpath expr="//field[@name='group_payment']" position="after">
                 <field
                     name="cheque_amount"
                     invisible="not context.get('batch', False)"

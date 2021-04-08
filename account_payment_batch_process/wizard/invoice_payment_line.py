@@ -66,6 +66,7 @@ class InvoicePaymentLine(models.TransientModel):
         copy=False,
     )
     reason_code = fields.Many2one("payment.adjustment.reason", string="Reason Code")
+    communication = fields.Char(string='Memo')
     note = fields.Text("Note")
 
     @api.onchange("amount")
