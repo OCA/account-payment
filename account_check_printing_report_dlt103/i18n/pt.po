@@ -6,65 +6,67 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2021-04-12 13:46+0000\n"
+"Last-Translator: alvarorib <alvaro.ribeiro@exo.pt>\n"
 "Language-Team: none\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_check_printing_report_dlt103
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_dlt103.report_check_dlt103
 msgid "<b>Check Amount: </b>"
-msgstr ""
+msgstr "<b>Valor do Cheque: </b>"
 
 #. module: account_check_printing_report_dlt103
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_dlt103.report_check_dlt103
 msgid "Balance Due"
-msgstr ""
+msgstr "Saldo em Dívida"
 
 #. module: account_check_printing_report_dlt103
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_dlt103.report_check_dlt103
 msgid "Description"
-msgstr ""
+msgstr "Descrição"
 
 #. module: account_check_printing_report_dlt103
 #: model:ir.model.fields,field_description:account_check_printing_report_dlt103.field_report_account_check_printing_report_dlt103_report_check_dlt103__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome a Exibir"
 
 #. module: account_check_printing_report_dlt103
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_dlt103.report_check_dlt103
 msgid "Due Date"
-msgstr ""
+msgstr "Data de Vencimento"
 
 #. module: account_check_printing_report_dlt103
 #: model:ir.model.fields,field_description:account_check_printing_report_dlt103.field_report_account_check_printing_report_dlt103_report_check_dlt103__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_check_printing_report_dlt103
 #: model:ir.model.fields,field_description:account_check_printing_report_dlt103.field_report_account_check_printing_report_dlt103_report_check_dlt103____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificação em"
 
 #. module: account_check_printing_report_dlt103
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_dlt103.report_check_dlt103
 msgid "Original Amount"
-msgstr ""
+msgstr "Valor Original"
 
 #. module: account_check_printing_report_dlt103
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_dlt103.report_check_dlt103
 msgid "Payment"
-msgstr ""
+msgstr "Pagamento"
 
 #. module: account_check_printing_report_dlt103
 #: model:ir.actions.report,name:account_check_printing_report_dlt103.action_report_check_dlt103
 msgid "Payment Check DLT103"
-msgstr ""
+msgstr "Cheque de Pagamento DLT103"
 
 #. module: account_check_printing_report_dlt103
 #: model:ir.model,name:account_check_printing_report_dlt103.model_report_account_check_printing_report_dlt103_report_check_dlt103
 msgid "report.account_check_printing_report_dlt103.report_check_dlt103"
-msgstr ""
+msgstr "report.account_check_printing_report_dlt103.report_check_dlt103"
