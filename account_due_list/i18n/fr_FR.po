@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2021-04-10 16:46+0000\n"
+"PO-Revision-Date: 2021-04-13 10:46+0000\n"
 "Last-Translator: Yves Le Doeuff <yld@alliasys.fr>\n"
 "Language-Team: none\n"
 "Language: fr_FR\n"
@@ -39,7 +39,7 @@ msgstr "Date de facture"
 #. module: account_due_list
 #: model:ir.model.fields,field_description:account_due_list.field_account_move_line__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nom affiché"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -85,7 +85,7 @@ msgstr "Ligne d'écriture"
 #. module: account_due_list
 #: model:ir.model.fields,field_description:account_due_list.field_account_move_line____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Dernière modification"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -163,7 +163,7 @@ msgstr "Chercher les paiements"
 #. module: account_due_list
 #: model:ir.model.fields,field_description:account_due_list.field_account_move_line__invoice_origin
 msgid "Source Doc"
-msgstr ""
+msgstr "Doc origine"
 
 #. module: account_due_list
 #: model:ir.model.fields,help:account_due_list.field_account_move_line__invoice_origin
