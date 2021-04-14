@@ -167,9 +167,9 @@ class ResPartnerAgingSupplier(models.Model):
                 type = 'payable')
                 AND aml.date <= '{}'
                 AND ai.state = 'posted' AND
-                (ai.invoice_payment_state != 'paid' OR
+                (ai.payment_state != 'paid' OR
                 aml.full_reconcile_id IS NULL)
-                AND ai.type = 'in_invoice'
+                AND ai.move_type = 'in_invoice'
                 GROUP BY aml.partner_id, aml.id, ai.name, days_due,
                 ai.invoice_user_id, ai.id
                 UNION
@@ -388,7 +388,7 @@ class ResPartnerAgingSupplier(models.Model):
 
     def open_document(self):
         """
-            @description  Open form view of Supplier Invoice
+        @description  Open form view of Supplier Invoice
         """
         action = self.env.ref("account.action_move_in_invoice_type").read()[0]
         action["views"] = [(self.env.ref("account.view_move_form").id, "form")]

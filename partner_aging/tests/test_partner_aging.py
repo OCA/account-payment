@@ -112,7 +112,7 @@ class TestPartnerAging(common.TransactionCase):
         ).create(
             {
                 "ref": "reference",
-                "type": invoice_data[0],
+                "move_type": invoice_data[0],
                 "invoice_date": invoice_data[1],
                 "invoice_date_due": invoice_data[1],
                 "partner_id": invoice_data[2],
