@@ -13,7 +13,7 @@ class Num2WordESCustom(Num2Word_ES):
     # TODO: PR to remove overwrite in num2words code and use CURRENCY_FORMS
     def to_currency(self, val, longval=True, old=False):
         return Num2Word_Base.to_currency(
-            self, val, currency="EUR", cents=True, seperator=" con", adjective=False
+            self, val, currency="EUR", cents=True, separator=" con", adjective=False
         )
 
 
