@@ -87,7 +87,8 @@ class TestPaymentReturn(SavepointCase):
             )
         )
         cls.payment = payment_register.save()._create_payments()
-        cls.payment.action_post()
+        if cls.payment.state != "posted":
+            cls.payment.action_post()
         cls.payment_move = cls.payment.move_id
         cls.payment_line = cls.payment_move.line_ids.filtered(
             lambda x: x.account_id.internal_type == "receivable"

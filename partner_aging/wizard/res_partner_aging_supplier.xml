@@ -52,7 +52,6 @@
                 <field name="invoice_id" />
                 <button
                     name="open_document"
-                    string="Open Document"
                     type="object"
                     icon="fa-list-alt"
                     attrs="{'invisible':[('invoice_id', '=', False)]}"
