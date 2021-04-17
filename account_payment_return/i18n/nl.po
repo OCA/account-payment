@@ -8,51 +8,52 @@ msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-22 16:30+0000\n"
-"PO-Revision-Date: 2016-04-08 17:47+0000\n"
-"Last-Translator: <>\n"
+"PO-Revision-Date: 2021-04-23 23:47+0000\n"
+"Last-Translator: Bosd <c5e2fd43-d292-4c90-9d1f-74ff3436329a@anonaddy.me>\n"
 "Language-Team: Dutch (http://www.transifex.com/oca/OCA-account-payment-8-0/"
 "language/nl/)\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_needaction
 msgid "Action Needed"
-msgstr ""
+msgstr "Actie vereist"
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return_line__reason_additional_information
 msgid "Additional information on return reason."
-msgstr ""
+msgstr "Aanvullende informatie over reden terugboeking."
 
 #. module: account_payment_return
 #: code:addons/account_payment_return/models/payment_return.py:0
 #, python-format
 msgid "All payments must be owned by the same partner"
-msgstr ""
+msgstr "Alle betalingen moeten van dezelfde relatie zijn"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__amount
 msgid "Amount"
-msgstr ""
+msgstr "Bedrag"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
+msgstr "Aantal bijlagen"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__auto_reconcile_failure
 msgid "Automatic reconciliation failure"
-msgstr ""
+msgstr "Automatisch afletteringsfout"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__journal_id
 msgid "Bank journal"
-msgstr ""
+msgstr "Dagboek"
 
 #. module: account_payment_return
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
@@ -62,74 +63,75 @@ msgstr "Annuleren"
 #. module: account_payment_return
 #: model:ir.model.fields.selection,name:account_payment_return.selection__payment_return__state__cancelled
 msgid "Cancelled"
-msgstr ""
+msgstr "geannuleerd"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__expense_account
 msgid "Charges Account"
-msgstr ""
+msgstr "Belaste rekening"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__expense_amount
 msgid "Charges Amount"
-msgstr ""
+msgstr "belast bedrag"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__expense_partner_id
 msgid "Charges Partner"
-msgstr ""
+msgstr "belaste partner"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__code
 msgid "Code"
-msgstr ""
+msgstr "Code"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__company_id
 msgid "Company"
-msgstr ""
+msgstr "Bedrijf"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__concept
 msgid "Concept"
-msgstr ""
+msgstr "Concept"
 
 #. module: account_payment_return
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
 msgid "Confirm"
-msgstr ""
+msgstr "Bevestig"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__create_uid
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__create_uid
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Aangemaakt door"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__create_date
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__create_date
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Aangemaakt op"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__partner_id
 msgid "Customer"
-msgstr ""
+msgstr "Klant"
 
 #. module: account_payment_return
 #: model:ir.actions.act_window,name:account_payment_return.payment_return_action
 #: model:ir.ui.menu,name:account_payment_return.payment_return_menu
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_tree_view
 msgid "Customer Payment Returns"
-msgstr ""
+msgstr "Klant betalingen terugboeken"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_import_journal_creation__default_expense_account_id
 #: model:ir.model.fields,field_description:account_payment_return.field_account_journal__default_expense_account_id
+#, fuzzy
 msgid "Default Charges Account"
-msgstr ""
+msgstr "Standaard kosten rekening"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_import_journal_creation__default_expense_partner_id
@@ -154,18 +156,18 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__display_name
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__display_name
 msgid "Display Name"
-msgstr "Te tonen naam"
+msgstr "Weergavenaam"
 
 #. module: account_payment_return
 #: model:ir.model.fields.selection,name:account_payment_return.selection__payment_return__state__done
 msgid "Done"
-msgstr ""
+msgstr "Gereed"
 
 #. module: account_payment_return
 #: model:ir.model.fields.selection,name:account_payment_return.selection__payment_return__state__draft
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
 msgid "Draft"
-msgstr ""
+msgstr "Concept"
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_account_bank_statement_import_journal_creation__return_auto_reconcile
@@ -175,33 +177,36 @@ msgid ""
 "used only when working with transfer accounts, not if working directly with "
 "bank accounts."
 msgstr ""
+"Schakel automatische aflettering van terugboekingen in. Deze optie is alleen "
+"bedoeld om te worden gebruikt bij het werken met tussensrekeningen, niet als "
+"u rechtstreeks met bankrekeningen werkt."
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_follower_ids
 msgid "Followers"
-msgstr ""
+msgstr "Volgers"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_channel_ids
 msgid "Followers (Channels)"
-msgstr ""
+msgstr "Volgers (Kanalen)"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_partner_ids
 msgid "Followers (Partners)"
-msgstr ""
+msgstr "Volgers (Relaties)"
 
 #. module: account_payment_return
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_search_view
 msgid "Group By"
-msgstr ""
+msgstr "Groepeer op"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__id
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__id
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return__message_needaction
@@ -218,14 +223,14 @@ msgstr ""
 #. module: account_payment_return
 #: model:ir.model.fields.selection,name:account_payment_return.selection__payment_return__state__imported
 msgid "Imported"
-msgstr ""
+msgstr "geimporteerd"
 
 #. module: account_payment_return
 #. openerp-web
 #: code:addons/account_payment_return/static/src/xml/account_payment_return.xml:0
 #, python-format
 msgid "Info"
-msgstr ""
+msgstr "Info"
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_account_move__returned_payment
@@ -236,7 +241,7 @@ msgstr ""
 #: code:addons/account_payment_return/models/payment_return.py:0
 #, python-format
 msgid "Invoice: %s"
-msgstr ""
+msgstr "factuur: %s"
 
 #. module: account_payment_return
 #: model_terms:ir.ui.view,arch_db:account_payment_return.view_account_invoice_filter
@@ -246,7 +251,7 @@ msgstr ""
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_is_follower
 msgid "Is Follower"
-msgstr ""
+msgstr "is volger"
 
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_account_journal
@@ -276,29 +281,29 @@ msgstr "Laatst bijgewerkt op"
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__write_uid
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Laatst bijgewerkt door"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__write_date
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__write_date
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Laatst bijgewerkt op"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__line_ids
 msgid "Line"
-msgstr ""
+msgstr "Regel"
 
 #. module: account_payment_return
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
 msgid "Lines"
-msgstr ""
+msgstr "Regels"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_main_attachment_id
 msgid "Main Attachment"
-msgstr ""
+msgstr "Hoofdbijlage"
 
 #. module: account_payment_return
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
@@ -313,29 +318,29 @@ msgstr ""
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_ids
 msgid "Messages"
-msgstr ""
+msgstr "Berichten"
 
 #. module: account_payment_return
 #: code:addons/account_payment_return/models/payment_return.py:0
 #, python-format
 msgid "Move lines: %s"
-msgstr ""
+msgstr "mutatie regels: %s"
 
 #. module: account_payment_return
 #: code:addons/account_payment_return/models/payment_return.py:0
 #, python-format
 msgid "Move: %s"
-msgstr ""
+msgstr "Mutatie: %s"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_needaction_counter
 msgid "Number of Actions"
-msgstr ""
+msgstr "Aantal acties"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_has_error_counter
 msgid "Number of errors"
-msgstr ""
+msgstr "Aantal fouten"
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return__message_needaction_counter
@@ -355,7 +360,7 @@ msgstr ""
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return_line__date
 msgid "Only for reference"
-msgstr ""
+msgstr "Enkel ter referentie"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_account_partial_reconcile__origin_returned_move_ids
@@ -365,7 +370,7 @@ msgstr ""
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_account_partial_reconcile
 msgid "Partial Reconcile"
-msgstr ""
+msgstr "gedeeltelijke aflettering"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_account_move_line__partial_reconcile_returned_ids
@@ -375,14 +380,14 @@ msgstr ""
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__partner_name
 msgid "Partner name"
-msgstr ""
+msgstr "Relatie naam"
 
 #. module: account_payment_return
 #. openerp-web
 #: code:addons/account_payment_return/static/src/xml/account_payment_return.xml:0
 #, python-format
 msgid "Payment Info"
-msgstr ""
+msgstr "Betalingsinfo"
 
 #. module: account_payment_return
 #: code:addons/account_payment_return/models/payment_return.py:0
@@ -393,7 +398,7 @@ msgstr ""
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__move_line_ids
 msgid "Payment Reference"
-msgstr ""
+msgstr "Betaal referentie"
 
 #. module: account_payment_return
 #: code:addons/account_payment_return/models/payment_return.py:0
@@ -435,7 +440,7 @@ msgstr ""
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__name
 msgid "Reason"
-msgstr ""
+msgstr "reden"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_import_journal_creation__return_auto_reconcile
@@ -447,7 +452,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__name
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__reference
 msgid "Reference"
-msgstr ""
+msgstr "Referentie"
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return_line__reference
@@ -469,12 +474,12 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__date
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__date
 msgid "Return date"
-msgstr ""
+msgstr "Terugboekingsdatum"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__reason_id
 msgid "Return reason"
-msgstr ""
+msgstr "Terugboekingsreden"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__reason_additional_information
@@ -500,7 +505,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__state
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_search_view
 msgid "State"
-msgstr ""
+msgstr "Status"
 
 #. module: account_payment_return
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
@@ -517,7 +522,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_tree_view
 msgid "Total amount"
-msgstr ""
+msgstr "Totaal bedrag"
 
 #. module: account_payment_return
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
@@ -527,7 +532,7 @@ msgstr ""
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_unread
 msgid "Unread Messages"
-msgstr ""
+msgstr "Ongelezen berichten"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_unread_counter
