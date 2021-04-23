@@ -29,6 +29,10 @@ env:
     - VERSION="13.0" TESTS="0" LINT_CHECK="0" MAKEPOT="0"
 
 install:
+  #  FIXME: 2 lines to remove when PR806 is merged
+  - git clone --branch bai_13.0_account_payment_order_date_inheritance
+    https://github.com/acsone/bank-payment.git PR806
+  - rm -rf account_payment_order && cp -ar PR806/account_payment_order .
   - git clone --depth=1 https://github.com/OCA/maintainer-quality-tools.git
     ${HOME}/maintainer-quality-tools
   - export PATH=${HOME}/maintainer-quality-tools/travis:${PATH}

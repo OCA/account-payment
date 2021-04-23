@@ -140,3 +140,11 @@ class PaymentLine(models.Model):
         self._check_toggle_pay_with_discount_allowed()
         self.pay_with_discount = not self.pay_with_discount
         self._onchange_pay_with_discount()
+
+    def get_requested_date(self, default_date):
+        order = self.order_id
+        if order.date_prefered == "due":
+            discount_due_date = self.discount_due_date
+            if discount_due_date and discount_due_date >= default_date:
+                return discount_due_date
+        return super().get_requested_date(default_date)
