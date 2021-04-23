@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-22 16:30+0000\n"
-"PO-Revision-Date: 2021-04-17 18:46+0000\n"
+"PO-Revision-Date: 2021-04-23 23:47+0000\n"
 "Last-Translator: Bosd <c5e2fd43-d292-4c90-9d1f-74ff3436329a@anonaddy.me>\n"
 "Language-Team: Dutch (http://www.transifex.com/oca/OCA-account-payment-8-0/"
 "language/nl/)\n"
@@ -129,8 +129,9 @@ msgstr "Klant betalingen terugboeken"
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_import_journal_creation__default_expense_account_id
 #: model:ir.model.fields,field_description:account_payment_return.field_account_journal__default_expense_account_id
+#, fuzzy
 msgid "Default Charges Account"
-msgstr ""
+msgstr "Standaard kosten rekening"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_import_journal_creation__default_expense_partner_id
@@ -176,6 +177,9 @@ msgid ""
 "used only when working with transfer accounts, not if working directly with "
 "bank accounts."
 msgstr ""
+"Schakel automatische aflettering van terugboekingen in. Deze optie is alleen "
+"bedoeld om te worden gebruikt bij het werken met tussensrekeningen, niet als "
+"u rechtstreeks met bankrekeningen werkt."
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_follower_ids
@@ -219,7 +223,7 @@ msgstr ""
 #. module: account_payment_return
 #: model:ir.model.fields.selection,name:account_payment_return.selection__payment_return__state__imported
 msgid "Imported"
-msgstr ""
+msgstr "geimporteerd"
 
 #. module: account_payment_return
 #. openerp-web
@@ -366,7 +370,7 @@ msgstr ""
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_account_partial_reconcile
 msgid "Partial Reconcile"
-msgstr ""
+msgstr "gedeeltelijke aflettering"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_account_move_line__partial_reconcile_returned_ids
