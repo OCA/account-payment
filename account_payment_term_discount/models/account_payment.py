@@ -27,7 +27,7 @@ class AccountPaymentRegister(models.TransientModel):
             res["discount_amt"] = record.discount_amt
         return res
 
-    @api.onchange("amount", "payment_difference", "payment_date")
+    @api.onchange("amount", "payment_difference", "payment_date", "group_payment")
     def onchange_payment_amount(self):
         self.payment_difference_handling = "open"
         self.writeoff_account_id = False
@@ -35,64 +35,67 @@ class AccountPaymentRegister(models.TransientModel):
         total_payment_difference = 0.0
         payment_date = fields.Date.from_string(self.payment_date)
 
-        for invoice in self.line_ids:
-            if (
-                invoice.move_id
-                and invoice.move_id.invoice_payment_term_id
-                and invoice.move_id.invoice_payment_term_id.is_discount
-                and invoice.move_id.invoice_payment_term_id.line_ids
-            ):
-                invoice_date = fields.Date.from_string(invoice.move_id.invoice_date)
-                discount_amt = invoice.move_id.discount_amt
+        # Single Invoice Payment or Grouped Payments
+        if self.invoice_id or self.group_payment:
+            for invoice in self.line_ids:
+                if (
+                    invoice.move_id
+                    and invoice.move_id.invoice_payment_term_id
+                    and invoice.move_id.invoice_payment_term_id.is_discount
+                    and invoice.move_id.invoice_payment_term_id.line_ids
+                ):
+                    invoice_date = fields.Date.from_string(invoice.move_id.invoice_date)
+                    discount_amt = invoice.move_id.discount_amt
 
-                for line in invoice.move_id.invoice_payment_term_id.line_ids:
-                    payment_difference = total_payment_difference
-                    # Check payment date discount validation
-                    till_discount_date = invoice_date + relativedelta(
-                        days=line.discount_days
-                    )
+                    for line in invoice.move_id.invoice_payment_term_id.line_ids:
+                        payment_difference = total_payment_difference
+                        # Check payment date discount validation
+                        till_discount_date = invoice_date + relativedelta(
+                            days=line.discount_days
+                        )
 
-                    if payment_date <= till_discount_date:
-                        # changing payment date
-                        if not payment_difference and discount_amt:
-                            total_payment_difference += discount_amt
-                            self.payment_difference_handling = "reconcile"
-                            self.writeoff_account_id = (
-                                line.discount_expense_account_id.id
-                            )
-                            self.writeoff_label = "Payment Discount"
+                        if payment_date <= till_discount_date:
+                            # changing payment date
+                            if not payment_difference and discount_amt:
+                                total_payment_difference += discount_amt
+                                self.payment_difference_handling = "reconcile"
+                                self.writeoff_account_id = (
+                                    line.discount_expense_account_id.id
+                                )
+                                self.writeoff_label = "Payment Discount"
 
-                        # customer is paying more
-                        elif abs(payment_difference) < discount_amt:
-                            total_payment_difference += abs(payment_difference)
-                            self.payment_difference_handling = "reconcile"
-                            self.writeoff_account_id = (
-                                line.discount_expense_account_id.id
-                            )
-                            self.writeoff_label = "Payment Discount"
+                            # customer is paying more
+                            elif abs(payment_difference) < discount_amt:
+                                total_payment_difference += abs(payment_difference)
+                                self.payment_difference_handling = "reconcile"
+                                self.writeoff_account_id = (
+                                    line.discount_expense_account_id.id
+                                )
+                                self.writeoff_label = "Payment Discount"
 
-                        # customer paying more than discount_amt
-                        elif abs(payment_difference) > discount_amt:
-                            total_payment_difference += abs(payment_difference)
-                            self.payment_difference_handling = "open"
-                            self.writeoff_label = False
+                            # customer paying more than discount_amt
+                            elif abs(payment_difference) > discount_amt:
+                                total_payment_difference += abs(payment_difference)
+                                self.payment_difference_handling = "open"
+                                self.writeoff_label = False
 
-                        # customer paying more than discount_amt
-                        elif (
-                            abs(payment_difference) == discount_amt and discount_amt > 0
-                        ):
-                            total_payment_difference += abs(payment_difference)
-                            self.payment_difference_handling = "reconcile"
-                            self.writeoff_account_id = (
-                                line.discount_expense_account_id.id
-                            )
-                            self.writeoff_label = "Payment Discount"
-                    else:
-                        total_payment_difference += payment_difference
+                            # customer paying more than discount_amt
+                            elif (
+                                abs(payment_difference) == discount_amt
+                                and discount_amt > 0
+                            ):
+                                total_payment_difference += abs(payment_difference)
+                                self.payment_difference_handling = "reconcile"
+                                self.writeoff_account_id = (
+                                    line.discount_expense_account_id.id
+                                )
+                                self.writeoff_label = "Payment Discount"
+                        else:
+                            total_payment_difference += payment_difference
 
-        self.discount_amt = total_payment_difference
-        self.payment_difference = total_payment_difference
-        self.amount = self.source_amount - total_payment_difference
+            self.discount_amt = total_payment_difference
+            self.payment_difference = total_payment_difference
+            self.amount = self.source_amount - total_payment_difference
 
     def action_create_payments(self):
         res = super(AccountPaymentRegister, self).action_create_payments()
