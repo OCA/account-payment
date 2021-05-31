@@ -28,6 +28,7 @@ Available addons
 ----------------
 addon | version | summary
 --- | --- | ---
+[account_cash_invoice](account_cash_invoice/) | 13.0.1.0.0 | Pay and receive invoices from bank statements
 [account_check_date](account_check_date/) | 13.0.1.0.0 | Add check date on payment for check printing
 [account_check_printing_report_base](account_check_printing_report_base/) | 13.0.2.1.0 | Account Check Printing Report Base
 [account_due_list](account_due_list/) | 13.0.2.0.1 | List of open credits and debits, with due date
