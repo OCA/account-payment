@@ -119,6 +119,22 @@ class AccountRegisterPayments(models.TransientModel):
         "Total Invoices", compute="_compute_customer_pay_total"
     )
 
+    @api.depends("invoice_ids.partner_id", "group_invoices")
+    def _compute_show_communication_field(self):
+        """We allow choosing a common communication for payments if the group
+        option has been activated, and all the invoices relate to the same
+        partner.
+        """
+
+        for record in self:
+            record.show_communication_field = (
+                len(record.invoice_ids) == 1
+                or record.group_invoices
+                and len(record.mapped("invoice_ids.partner_id.commercial_partner_id"))
+                == 1
+                or record._context.get("active_ids")
+            )
+
     @api.model
     def default_get(self, pfields):
         """
