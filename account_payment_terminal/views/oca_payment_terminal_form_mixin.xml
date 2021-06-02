@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record id="oca_payment_terminal_form_mixin_form_view" model="ir.ui.view">
+    <field name="model">oca.payment.terminal.form.mixin</field>
+    <field name="priority">9999</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <p class="terminal-message">Please check the payment terminal</p>
+        </sheet>
+        <footer />
+      </form>
+    </field>
+  </record>
+</odoo>
