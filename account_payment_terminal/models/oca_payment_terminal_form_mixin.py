@@ -69,4 +69,4 @@ class OcaPaymentTerminalFormMixin(models.AbstractModel):
         }
 
     def action_confirm_payment(self, payment_reference):
-        pass
+        raise NotImplementedError()
