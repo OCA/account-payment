@@ -14,27 +14,23 @@ class AccountPaymentRegister(models.TransientModel):
     @api.depends("journal_id")
     def _compute_need_payment_terminal(self):
         for rec in self:
-            if rec.journal_id.use_payment_terminal:
-                rec.need_payment_terminal = True
-            else:
-                rec.need_payment_terminal = False
+            rec.need_payment_terminal = bool(rec.journal_id.use_payment_terminal)
 
     @api.onchange("journal_id")
     def _unset_payment_terminal_on_journal_change(self):
         self.update({"account_payment_terminal_id": False})
 
     def get_payment_info(self):
-        res = super().get_payment_info()
-        res.update(
-            {
-                "amount": self.amount,
-                "currency_iso": self.currency_id.name,
-                "currency_decimals": self.currency_id.decimal_places,
-                "payment_id": self.id,
-                "order_id": self.communication,
-            }
-        )
-        return res
+        return {
+            "proxy_ip": self.account_payment_terminal_id.proxy_ip,
+            "oca_payment_terminal_id": self.account_payment_terminal_id.oca_payment_terminal_id,
+            "payment_mode": "card",  # TODO: Add check mode?
+            "amount": self.amount,
+            "currency_iso": self.currency_id.name,
+            "currency_decimals": self.currency_id.decimal_places,
+            "payment_id": self.id,
+            "order_id": self.communication,
+        }
 
     def action_confirm_payment(self, payment_reference):
         self.write({"communication": payment_reference})

@@ -8,7 +8,6 @@ class AccountPaymentTerminal(models.Model):
 
     _name = "account.payment.terminal"
     _description = "Account Payment Terminal"
-    _inherit = "mail.thread"
 
     name = fields.Char(required=True)
     proxy_ip = fields.Char(
