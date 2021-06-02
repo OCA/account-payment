@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+  <template id="assets_backend" inherit_id="web.assets_backend">
+    <xpath expr="." position="inside">
+      <script
+                type="text/javascript"
+                src="/account_payment_terminal/static/src/js/views/payment_terminal_form/payment_terminal_form_controller.js"
+            />
+      <script
+                type="text/javascript"
+                src="/account_payment_terminal/static/src/js/views/payment_terminal_form/payment_terminal_form_view.js"
+            />
+    </xpath>
+  </template>
+</odoo>
