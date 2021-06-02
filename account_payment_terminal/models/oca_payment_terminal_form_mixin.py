@@ -62,11 +62,7 @@ class OcaPaymentTerminalFormMixin(models.AbstractModel):
 
     # To define in the heir model
     def get_payment_info(self):
-        return {
-            "proxy_ip": self.account_payment_terminal_id.proxy_ip,
-            "oca_payment_terminal_id": self.account_payment_terminal_id.oca_payment_terminal_id,
-            "payment_mode": "card",  # TODO: Add check mode?
-        }
+        raise NotImplementedError()
 
     def action_confirm_payment(self, payment_reference):
         raise NotImplementedError()
