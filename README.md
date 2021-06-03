@@ -20,7 +20,7 @@ Available addons
 addon | version | summary
 --- | --- | ---
 [account_due_list](account_due_list/) | 14.0.1.0.0 | List of open credits and debits, with due date
-[account_payment_return](account_payment_return/) | 14.0.1.0.0 | Manage the return of your payments
+[account_payment_return](account_payment_return/) | 14.0.1.0.1 | Manage the return of your payments
 [account_payment_term_discount](account_payment_term_discount/) | 14.0.1.1.0 | Account Payment Terms Discount
 [account_payment_term_extension](account_payment_term_extension/) | 14.0.1.0.1 | Adds rounding, months, weeks and multiple payment days properties on payment term lines
 
