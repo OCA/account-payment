@@ -1,0 +1,237 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_payment_term_discount
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2021-04-16 17:46+0000\n"
+"Last-Translator: Ignacio Buioli <ibuioli@gmail.com>\n"
+"Language-Team: none\n"
+"Language: es_AR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
+
+#. module: account_payment_term_discount
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_bank_statement_line__check_payment_discount
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_move__check_payment_discount
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment__check_payment_discount
+msgid "Check Payment Discount"
+msgstr "Verificar Descuento de Pago"
+
+#. module: account_payment_term_discount
+#: model:ir.model.fields,help:account_payment_term_discount.field_account_payment_term__is_discount
+#: model:ir.model.fields,help:account_payment_term_discount.field_account_payment_term_line__is_discount
+msgid ""
+"Check this box if this payment term has a discount. If discount is used the "
+"remaining amount of the invoice will not be paid"
+msgstr ""
+"Marque esta casilla si este término de pago tiene descuento. Si se utiliza "
+"el descuento, no se pagará el monto restante de la factura"
+
+#. module: account_payment_term_discount
+#: model:ir.model.fields,help:account_payment_term_discount.field_product_product__is_exclude_shipping_amount
+#: model:ir.model.fields,help:account_payment_term_discount.field_product_template__is_exclude_shipping_amount
+msgid "Check this box if want to exclude shipping charges from discount"
+msgstr "Marque esta casilla si quiere excluir gastos de envío en el descuento"
+
+#. module: account_payment_term_discount
+#: model:ir.model.fields,help:account_payment_term_discount.field_account_payment_term__is_exclude_taxes_discount
+msgid "Check this box if want to exclude taxes from discount"
+msgstr "Marque esta casilla si quiere excluir impuestos del descuento"
+
+#. module: account_payment_term_discount
+#: model:ir.model.fields,help:account_payment_term_discount.field_account_payment_term__is_exclude_shipping_lines
+msgid "Check this box if you want to exclude shipping charges from discount"
+msgstr "Marque esta casilla si quiere excluir gastos de envío en el descuento"
+
+#. module: account_payment_term_discount
+#: model:ir.model.fields,help:account_payment_term_discount.field_account_bank_statement_line__discount_date
+#: model:ir.model.fields,help:account_payment_term_discount.field_account_move__discount_date
+#: model:ir.model.fields,help:account_payment_term_discount.field_account_payment__discount_date
+msgid ""
+"Compute discount on the invoice based on the payment term discount "
+"percentage.and the current date"
+msgstr ""
+"Calcula el descuento en la factura según el porcentaje de descuento del "
+"término de pago y la fecha actual"
+
+#. module: account_payment_term_discount
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment_term_line__discount
+msgid "Discount (%)"
+msgstr "Descuento (%)"
+
+#. module: account_payment_term_discount
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment_register__discount_amt
+msgid "Discount Amt"
+msgstr "Descuento Amt"
+
+#. module: account_payment_term_discount
+#: model_terms:ir.ui.view,arch_db:account_payment_term_discount.view_payment_term_line_disc_form
+msgid "Discount Computation"
+msgstr "Computación del Descuento"
+
+#. module: account_payment_term_discount
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_bank_statement_line__discount_date
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_move__discount_date
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment__discount_date
+msgid "Discount Date"
+msgstr "Fecha del Descuento"
+
+#. module: account_payment_term_discount
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment_term_line__discount_days
+msgid "Discount Days"
+msgstr "Días del Descuento"
+
+#. module: account_payment_term_discount
+#: model_terms:ir.ui.view,arch_db:account_payment_term_discount.invoice_form_discounts
+msgid "Discount Details"
+msgstr "Detalles del Descuento"
+
+#. module: account_payment_term_discount
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_bank_statement_line__discount_amt
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_move__discount_amt
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment__discount_amt
+msgid "Discount Possible"
+msgstr "Descuento Posible"
+
+#. module: account_payment_term_discount
+#: model:ir.model.fields,help:account_payment_term_discount.field_account_bank_statement_line__discount_amt
+#: model:ir.model.fields,help:account_payment_term_discount.field_account_move__discount_amt
+#: model:ir.model.fields,help:account_payment_term_discount.field_account_payment__discount_amt
+msgid "Discount amount possible with the given payment term"
+msgstr "Monto de descuento posible con el término de pago dado"
+
+#. module: account_payment_term_discount
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment_term_line__discount_income_account_id
+msgid "Discount on Purchases Account"
+msgstr "Descuento en Cuenta de Compras"
+
+#. module: account_payment_term_discount
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment_term_line__discount_expense_account_id
+msgid "Discount on Sales Account"
+msgstr "Descuento en Cuenta de Ventas"
+
+#. module: account_payment_term_discount
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_bank_statement_line__discount_taken
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_move__discount_taken
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment__discount_taken
+msgid "Discount taken"
+msgstr "Descuento tomado"
+
+#. module: account_payment_term_discount
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_move__display_name
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment_register__display_name
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment_term__display_name
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment_term_line__display_name
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_product_template__display_name
+msgid "Display Name"
+msgstr "Mostrar Nombre"
+
+#. module: account_payment_term_discount
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment_term__is_discount
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment_term_line__is_discount
+msgid "Early Payment Discount"
+msgstr "Descuento por Pago Adelantado"
+
+#. module: account_payment_term_discount
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment_term__is_exclude_shipping_lines
+msgid "Exclude Shipping from Discount"
+msgstr "Excluir Envío del Descuento"
+
+#. module: account_payment_term_discount
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_product_product__is_exclude_shipping_amount
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_product_template__is_exclude_shipping_amount
+msgid "Exclude Shippling Amount"
+msgstr "Excluir Monto del Envío"
+
+#. module: account_payment_term_discount
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment_term__is_exclude_taxes_discount
+msgid "Exclude Taxes from Discount"
+msgstr "Excluir Impuestos del Descuento"
+
+#. module: account_payment_term_discount
+#: model:ir.model.fields,help:account_payment_term_discount.field_account_bank_statement_line__shipping_lines_total
+#: model:ir.model.fields,help:account_payment_term_discount.field_account_move__shipping_lines_total
+#: model:ir.model.fields,help:account_payment_term_discount.field_account_payment__shipping_lines_total
+msgid "Exclude shipping lines total from discount if applicable in terms"
+msgstr ""
+"Excluir líneas del total de envío del desceunto si son aplicables en los "
+"términos"
+
+#. module: account_payment_term_discount
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_move__id
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment_register__id
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment_term__id
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment_term_line__id
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_product_template__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_payment_term_discount
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment_register__invoice_id
+msgid "Invoice"
+msgstr "Factura"
+
+#. module: account_payment_term_discount
+#: model:ir.model,name:account_payment_term_discount.model_account_move
+msgid "Journal Entry"
+msgstr "Apunte Contable"
+
+#. module: account_payment_term_discount
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_move____last_update
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment_register____last_update
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment_term____last_update
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment_term_line____last_update
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_product_template____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: account_payment_term_discount
+#: model:ir.model,name:account_payment_term_discount.model_account_payment_term
+msgid "Payment Terms"
+msgstr "Plazos de Pago"
+
+#. module: account_payment_term_discount
+#: model:ir.model,name:account_payment_term_discount.model_account_payment_term_line
+msgid "Payment Terms Line"
+msgstr "Línea de Plazos de Pago"
+
+#. module: account_payment_term_discount
+#: model:ir.model,name:account_payment_term_discount.model_product_template
+msgid "Product Template"
+msgstr "Plantilla de Producto"
+
+#. module: account_payment_term_discount
+#: model:ir.model,name:account_payment_term_discount.model_account_payment_register
+msgid "Register Payment"
+msgstr "Registrar Pago"
+
+#. module: account_payment_term_discount
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_bank_statement_line__shipping_lines_total
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_move__shipping_lines_total
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment__shipping_lines_total
+msgid "Shippling Lines Total"
+msgstr "Total de Líneas de Envío"
+
+#. module: account_payment_term_discount
+#: model:ir.model.fields,help:account_payment_term_discount.field_account_payment_term_line__discount_income_account_id
+msgid "This account will be used to post the discount on purchases."
+msgstr "Esta cuenta se utilizará para publicar el descuento en compras."
+
+#. module: account_payment_term_discount
+#: model:ir.model.fields,help:account_payment_term_discount.field_account_payment_term_line__discount_expense_account_id
+msgid "This account will be used to post the discount on sales."
+msgstr "Esta cuenta se utilizará para publicar el descuento en ventas."
+
+#. module: account_payment_term_discount
+#: code:addons/account_payment_term_discount/models/account_payment.py:0
+#, python-format
+msgid ""
+"This method should only be called to process a single invoice's payment."
+msgstr ""
+"Este método solo debe invocarse para procesar el pago de una única factura."
