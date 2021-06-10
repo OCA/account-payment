@@ -6,9 +6,8 @@
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_in_invoice_tree" />
         <field name="arch" type="xml">
-            <field name="state" position="replace" />
             <field name="partner_id" position="after">
-                <field name="state" />
+                <field name="state" position="move" />
             </field>
         </field>
     </record>
