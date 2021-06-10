@@ -60,21 +60,19 @@ class AccountPaymentRegister(models.TransientModel):
     total_amount = fields.Float("Total Invoices:", compute="_compute_total")
 
     def get_invoice_payment_line(self, invoice):
-        account = \
-            invoice.invoice_payment_term_id and (
-            (MAP_INVOICE_TYPE_PARTNER_TYPE[invoice.move_type] == "customer") and
-            invoice.invoice_payment_term_id.line_ids[0].discount_income_account_id or
-            invoice.invoice_payment_term_id.line_ids[0].discount_expense_account_id)
-        return (0, 0, {
-            "partner_id": invoice.partner_id.id,
-            "invoice_id": invoice.id,
-            "balance": invoice.amount_residual or 0.0,
-            "amount": invoice.amount_residual or 0.0,
-            "payment_difference": 0.0,
-            "payment_difference_handling": "reconcile",
-            "writeoff_account_id": account.id,
-            "note": "Payment of invoice %s" % invoice.name,
-        })
+        return (
+            0,
+            0,
+            {
+                "partner_id": invoice.partner_id.id,
+                "invoice_id": invoice.id,
+                "balance": invoice.amount_residual or 0.0,
+                "amount": invoice.amount_residual or 0.0,
+                "payment_difference": 0.0,
+                "payment_difference_handling": "reconcile",
+                "note": "Payment of invoice %s" % invoice.name,
+            },
+        )
 
     def get_invoice_payments(self, invoices):
         res = []
@@ -114,7 +112,8 @@ class AccountPaymentRegister(models.TransientModel):
         if any(inv.payment_mode_id != invoices[0].payment_mode_id for inv in invoices):
             raise UserError(
                 _(
-                    "You can only register a batch payment for invoices with the same payment mode."
+                    "You can only register a batch payment for"
+                    " invoices with the same payment mode."
                 )
             )
         if any(
@@ -135,7 +134,9 @@ class AccountPaymentRegister(models.TransientModel):
             )
 
         if "batch" in context and context.get("batch"):
-            is_customer = (MAP_INVOICE_TYPE_PARTNER_TYPE[invoices[0].move_type] == "customer")
+            is_customer = (
+                MAP_INVOICE_TYPE_PARTNER_TYPE[invoices[0].move_type] == "customer"
+            )
             payment_lines = self.get_invoice_payments(invoices)
             res.update({"invoice_payments": payment_lines, "is_customer": is_customer})
         else:
@@ -155,12 +156,13 @@ class AccountPaymentRegister(models.TransientModel):
             inv.amount_residual * MAP_INVOICE_TYPE_PAYMENT_SIGN[inv.move_type]
             for inv in invoices
         )
-        date_format = self.env['res.lang']._lang_get(self.env.user.lang).date_format
-        communication = "Batch payment of %s" % fields.Date.today().strftime(date_format)
+        date_format = self.env["res.lang"]._lang_get(self.env.user.lang).date_format
+        communication = "Batch payment of %s" % fields.Date.today().strftime(
+            date_format
+        )
         res.update(
             {
                 "amount": abs(total_amount),
-                "journal_id": invoices[0].payment_method_id.id,
                 "currency_id": invoices[0].currency_id.id,
                 "payment_type": is_customer and "outbound" or "inbound",
                 "partner_id": invoices[0].commercial_partner_id.id,
@@ -179,10 +181,15 @@ class AccountPaymentRegister(models.TransientModel):
             writeoff_name = False
             for invoice_id in list(group_data["inv_val"]):
                 values = group_data["inv_val"][invoice_id]
-                if not self.currency_id.is_zero(values["payment_difference"]) \
-                        and values["payment_difference_handling"] == 'reconcile':
+                if (
+                    self.currency_id
+                    and not self.currency_id.is_zero(values["payment_difference"])
+                    and values["payment_difference_handling"] == "reconcile"
+                ):
                     writeoff_name = writeoff_name or values["line_name"]
-                    writeoff_account_id = writeoff_account_id or values["writeoff_account_id"]
+                    writeoff_account_id = (
+                        writeoff_account_id or values["writeoff_account_id"]
+                    )
                     writeoff_amount += values["payment_difference"]
             res = {
                 "journal_id": self.journal_id.id,
@@ -229,7 +236,9 @@ class AccountPaymentRegister(models.TransientModel):
         return memo
 
     def total_amount_in_words(self, data_get, old_total=0):
-        check_amount_in_words = num2words(math.floor(old_total + data_get.amount)).title()
+        check_amount_in_words = num2words(
+            math.floor(old_total + data_get.amount)
+        ).title()
         decimals = (old_total + data_get.amount) % 1
         if decimals >= 10 ** -2:
             check_amount_in_words += _(" and %s/100") % str(
@@ -290,8 +299,6 @@ class AccountPaymentRegister(models.TransientModel):
 
     def get_amount(self, memo, group_data, line):
         line.payment_difference = line.balance - line.amount
-        if line.payment_difference_handling:
-            line.invoice_id.discount_taken = line.payment_difference
         partner_id = line.invoice_id.partner_id.id
         if partner_id in group_data:
             old_total = group_data[partner_id]["total"]
@@ -306,9 +313,7 @@ class AccountPaymentRegister(models.TransientModel):
                 )
             else:
                 memo = (
-                    group_data[partner_id]["memo"]
-                    + " : "
-                    + str(line.invoice_id.name)
+                    group_data[partner_id]["memo"] + " : " + str(line.invoice_id.name)
                 )
             # Calculate amount in words
             check_amount_in_words = self.total_amount_in_words(line, old_total)
@@ -334,15 +339,46 @@ class AccountPaymentRegister(models.TransientModel):
                 name = "Counterpart"
             # Update with payment diff data
             inv_val = self.get_payment_invoice_value(name, line)
-            group_data[partner_id]["inv_val"].update(
-                {line.invoice_id.id: inv_val}
-            )
+            group_data[partner_id]["inv_val"].update({line.invoice_id.id: inv_val})
         else:
             # calculate amount in words
             check_amount_in_words = self.total_amount_in_words(line, 0)
             # prepare name
             self.update_group_pay_data(
                 partner_id, group_data, line, check_amount_in_words
+            )
+
+    def _reconcile_open_invoices(
+        self,
+        line,
+        inv,
+        amount_residual,
+        amount_residual_currency,
+        reconciled,
+        amount,
+        debit_amount_currency,
+        credit_amount_currency,
+    ):
+        acc_part_recnc_obj = self.env["account.partial.reconcile"]
+        line.update(
+            {
+                "amount_residual": amount_residual,
+                "amount_residual_currency": amount_residual_currency,
+                "reconciled": reconciled,
+            }
+        )
+        if inv.move_type == "out_invoice":
+            part_rec_domain = [("debit_move_id", "=", line.id)]
+        elif inv.move_type == "in_invoice":
+            part_rec_domain = [("credit_move_id", "=", line.id)]
+        partial = acc_part_recnc_obj.search(part_rec_domain, limit=1)
+        if partial:
+            partial.update(
+                {
+                    "amount": amount,
+                    "debit_amount_currency": debit_amount_currency,
+                    "credit_amount_currency": credit_amount_currency,
+                }
             )
 
     def make_payments(self):
@@ -355,7 +391,6 @@ class AccountPaymentRegister(models.TransientModel):
         for invoice_payment_line in self.invoice_payments:
             if invoice_payment_line.amount > 0:
                 self.get_amount(memo, group_data, invoice_payment_line)
-
         # update context
         context.update({"group_data": group_data})
         # making partner wise payment
@@ -373,7 +408,6 @@ class AccountPaymentRegister(models.TransientModel):
             )
             payment_ids.append(payment.id)
             payment.action_post()
-
             # Reconciliation
             domain = [
                 ("account_internal_type", "in", ("receivable", "payable")),
@@ -386,6 +420,68 @@ class AccountPaymentRegister(models.TransientModel):
                 (payment_lines + lines).filtered_domain(
                     [("account_id", "=", account.id), ("reconciled", "=", False)]
                 ).reconcile()
+            if any(
+                group_data[partner]["inv_val"][inv.id]["payment_difference_handling"]
+                == "open"
+                for inv in invoices
+            ):
+                for inv in invoices:
+                    if (
+                        group_data[partner]["inv_val"][inv.id][
+                            "payment_difference_handling"
+                        ]
+                        == "open"
+                    ):
+                        payment_state = "partial"
+                    else:
+                        payment_state = "paid"
+                    for line in inv.line_ids:
+                        if line.amount_residual > 0 and payment_state == "paid":
+                            line_amount = 0.0
+                            partial_amount = group_data[partner]["inv_val"][inv.id][
+                                "amount"
+                            ]
+                            self._reconcile_open_invoices(
+                                line,
+                                inv,
+                                line_amount,
+                                line_amount,
+                                True,
+                                partial_amount,
+                                partial_amount,
+                                partial_amount,
+                            )
+                            continue
+                        if line.reconciled and payment_state == "partial":
+                            line_amount = group_data[partner]["inv_val"][inv.id][
+                                "payment_difference"
+                            ]
+                            partial_amount = group_data[partner]["inv_val"][inv.id][
+                                "amount"
+                            ]
+                            self._reconcile_open_invoices(
+                                line,
+                                inv,
+                                line_amount,
+                                line_amount,
+                                False,
+                                partial_amount,
+                                partial_amount,
+                                partial_amount,
+                            )
+                            continue
+                    inv.update(
+                        {
+                            "payment_state": payment_state,
+                            "amount_residual": group_data[partner]["inv_val"][inv.id][
+                                "payment_difference"
+                            ],
+                            "amount_residual_signed": group_data[partner]["inv_val"][
+                                inv.id
+                            ]["payment_difference"],
+                        }
+                    )
+                    inv._compute_payments_widget_reconciled_info()
 
         view_id = self.env["ir.model.data"].get_object_reference(
             "account_payment_batch_process",
@@ -418,21 +514,19 @@ class AccountPaymentRegister(models.TransientModel):
             if remaining_amount < 0.0:
                 break
             amount = vals.get("amt", False) or payline.balance
+            total += amount
             payline.write(
                 {
                     "amount": vals.get("amount", False) or payline.balance,
                     "payment_difference": vals.get("payment_difference", False) or 0.0,
                     "writeoff_account_id": vals.get("writeoff_account_id", False),
                     "payment_difference_handling": vals.get(
-                        "payment_difference_handling", False),
+                        "payment_difference_handling", False
+                    )
+                    or "open",
                     "note": vals.get("note", False),
                 }
             )
-            # Special Case: If full amount payment, then make diff handling as 'reconcile'
-            if payline.payment_difference_handling == "reconcile" and payline.payment_difference == 0.0:
-                # Change handling difference
-                payline.payment_difference_handling = "open"
-                total += amount
         self.cheque_amount = total
 
     def auto_fill_payments(self):

@@ -27,11 +27,7 @@
                         type="object"
                         class="oe_highlight"
                     />
-                   <field
-                        name="invoice_payments"
-                        colspan="4"
-                        nolabel="1"
-                    >
+                   <field name="invoice_payments" colspan="4" nolabel="1">
                         <tree editable="bottom" create="false">
                             <field
                                 name="partner_id"
@@ -49,14 +45,12 @@
                             <field
                                 name="writeoff_account_id"
                                 string="Post Difference In"
-                                attrs="{'required': [('payment_difference_handling', '=', 'reconcile'),
-                                                    ('payment_difference', '!=', 0.0)]}"
+                                attrs="{'required': [('payment_difference_handling', '=', 'reconcile'),('payment_difference', '!=', 0.0)]}"
                             />
                             <field name="reason_code" />
                             <field
                                 name="note"
-                                attrs="{'required': [('payment_difference_handling', '=', 'reconcile'),
-                                                    ('payment_difference', '!=', 0.0)]}"
+                                attrs="{'required': [('payment_difference_handling', '=', 'reconcile'),('payment_difference', '!=', 0.0)]}"
                             />
                         </tree>
                     </field>
@@ -64,9 +58,7 @@
                 <group invisible="not context.get('batch', False)" col="6">
                     <group colspan="4" />
                     <group>
-                        <field
-                            name="total_amount"
-                        />
+                        <field name="total_amount" />
                     </group>
                 </group>
             </xpath>
