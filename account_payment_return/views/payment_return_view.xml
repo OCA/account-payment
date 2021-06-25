@@ -51,7 +51,7 @@
                         <field name="name" />
                         <field
                             name="journal_id"
-                            domain="[('type', 'in', ['bank', 'cash'])]"
+                            domain="[('type', 'in', ['bank', 'cash', 'general'])]"
                         />
                         <field name="date" />
                         <field name="company_id" groups="base.group_multi_company" />
