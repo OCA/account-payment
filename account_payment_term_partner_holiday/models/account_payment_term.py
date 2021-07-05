@@ -3,15 +3,14 @@
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class AccountPaymentTerm(models.Model):
     _inherit = "account.payment.term"
 
-    @api.one
-    def compute(self, value, date_ref=False):
-        result = super().compute(value=value, date_ref=date_ref)[0]
+    def compute(self, value, date_ref=False, currency=None):
+        result = super().compute(value=value, date_ref=date_ref, currency=currency)
         ctx = self.env.context
         partner_id = ctx.get("move_partner_id", ctx.get("default_partner_id"))
         if partner_id:
