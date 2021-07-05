@@ -65,6 +65,24 @@ class TestPartnerHoliday(common.TransactionCase):
         self.product = self.env["product.product"].create(
             {"name": "Test product", "type": "service"}
         )
+        self.env["account.account"].create(
+            {
+                "name": "Test Account",
+                "code": "TEST",
+                "user_type_id": self.env.ref("account.data_account_type_receivable").id,
+                "reconcile": True,
+            }
+        )
+        self.env["account.account"].create(
+            {
+                "name": "Test Account",
+                "code": "ACC",
+                "user_type_id": self.env.ref(
+                    "account.data_account_type_other_income"
+                ).id,
+                "reconcile": True,
+            }
+        )
 
     def test_check_dates_in_partner_1(self):
         self.assertEqual(
@@ -99,38 +117,60 @@ class TestPartnerHoliday(common.TransactionCase):
             self.partner_2.is_date_in_holiday(fields.Date.from_string("2021-03-01"))
         )
 
-    def test_invoice_payment_term_partner_1(self):
+    def _create_invoice_form(self, partner_id):
         invoice_form = Form(
-            self.env["account.invoice"].with_context(
+            self.env["account.move"].with_context(
                 default_journal_id=self.journal.id,
-                default_partner_id=self.partner_1.id,
-                default_date_invoice="2021-02-01",
+                default_partner_id=partner_id,
+                default_type="out_invoice",
+                default_invoice_date="2021-02-01",
             ),
-            view="account.invoice_form",
         )
-        invoice_form.payment_term_id = self.payment_term_immediate
-        self.assertEqual(invoice_form.date_due, fields.Date.from_string("2021-03-01"))
-        invoice_form.payment_term_id = self.payment_term_10_days
-        self.assertEqual(invoice_form.date_due, fields.Date.from_string("2021-03-01"))
-        # Save invoice and check action_invoice_open function
         with invoice_form.invoice_line_ids.new() as line:
             line.product_id = self.product
-        invoice = invoice_form.save()
-        invoice.date_due = "2021-02-01"
-        self.assertEqual(invoice.date_due, fields.Date.from_string("2021-02-01"))
-        invoice.action_invoice_open()
-        self.assertEqual(invoice.date_due, fields.Date.from_string("2021-03-01"))
+        return invoice_form
 
-    def test_invoice_payment_term_partner_2(self):
-        invoice_form = Form(
-            self.env["account.invoice"].with_context(
-                default_journal_id=self.journal.id,
-                default_partner_id=self.partner_2.id,
-                default_date_invoice="2021-02-01",
-            ),
-            view="account.invoice_form",
+    def test_invoice_payment_term_partner_1_payment_term_immediate(self):
+        invoice_form = self._create_invoice_form(self.partner_1.id)
+        invoice_form.invoice_payment_term_id = self.payment_term_immediate
+        invoice = invoice_form.save()
+        invoice_move_line = invoice.line_ids.filtered("date_maturity")
+        self.assertEqual(
+            invoice_move_line.date_maturity, fields.Date.from_string("2021-03-01")
         )
-        invoice_form.payment_term_id = self.payment_term_immediate
-        self.assertEqual(invoice_form.date_due, fields.Date.from_string("2021-02-01"))
-        invoice_form.payment_term_id = self.payment_term_10_days
-        self.assertEqual(invoice_form.date_due, fields.Date.from_string("2021-02-11"))
+
+    def test_invoice_payment_term_partner_1_payment_term_10_days(self):
+        invoice_form = self._create_invoice_form(self.partner_1.id)
+        invoice_form.invoice_payment_term_id = self.payment_term_10_days
+        invoice = invoice_form.save()
+        invoice_move_line = invoice.line_ids.filtered("date_maturity")
+        self.assertEqual(
+            invoice_move_line.date_maturity, fields.Date.from_string("2021-03-01")
+        )
+
+    def test_invoice_payment_term_partner_1_default(self):
+        invoice_form = self._create_invoice_form(self.partner_1.id)
+        invoice_form.invoice_date_due = "2021-02-01"
+        invoice = invoice_form.save()
+        invoice_move_line = invoice.line_ids.filtered("date_maturity")
+        self.assertEqual(
+            invoice_move_line.date_maturity, fields.Date.from_string("2021-02-01")
+        )
+
+    def test_invoice_payment_term_partner_2_payment_term_immediate(self):
+        invoice_form = self._create_invoice_form(self.partner_2.id)
+        invoice_form.invoice_payment_term_id = self.payment_term_immediate
+        invoice = invoice_form.save()
+        invoice_move_line = invoice.line_ids.filtered("date_maturity")
+        self.assertEqual(
+            invoice_move_line.date_maturity, fields.Date.from_string("2021-02-01")
+        )
+
+    def test_invoice_payment_term_partner_2_payment_term_10_days(self):
+        invoice_form = self._create_invoice_form(self.partner_2.id)
+        invoice_form.invoice_payment_term_id = self.payment_term_10_days
+        invoice = invoice_form.save()
+        invoice_move_line = invoice.line_ids.filtered("date_maturity")
+        self.assertEqual(
+            invoice_move_line.date_maturity, fields.Date.from_string("2021-02-11")
+        )
