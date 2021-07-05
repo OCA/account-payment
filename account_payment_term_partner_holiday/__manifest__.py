@@ -12,8 +12,5 @@
     "depends": ["account"],
     "maintainers": ["victoralmau"],
     "development_status": "Production/Stable",
-    "data": [
-        "security/ir.model.access.csv",
-        "views/res_partner_view.xml"
-    ],
+    "data": ["security/ir.model.access.csv", "views/res_partner_view.xml"],
 }
