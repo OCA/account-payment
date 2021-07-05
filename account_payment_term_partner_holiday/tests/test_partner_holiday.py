@@ -6,6 +6,8 @@ from odoo.tests.common import Form
 from odoo import fields
 
 
+@common.at_install(False)
+@common.post_install(True)
 class TestPartnerHoliday(common.TransactionCase):
     def setUp(self):
         super().setUp()
