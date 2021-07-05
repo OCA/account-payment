@@ -34,7 +34,7 @@ class ResPartner(models.Model):
                     res_date_to = fields.Date.from_string(
                         "%s-%s-%s" % (date.year, res.month_to, day_to)
                     )
-                except:
+                except ValueError:
                     day_to -= 1
             return [
                 fields.Date.from_string(
