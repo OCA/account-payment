@@ -1,14 +1,15 @@
 # Copyright 2021 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, models
 from dateutil.relativedelta import relativedelta
+
+from odoo import api, models
 
 
 class AccountInvoice(models.Model):
     _inherit = "account.invoice"
 
-    @api.onchange('payment_term_id', 'date_invoice')
+    @api.onchange("payment_term_id", "date_invoice")
     def _onchange_payment_term_date_invoice(self):
         _self = self
         if self.partner_id:
