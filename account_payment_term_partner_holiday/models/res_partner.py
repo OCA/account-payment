@@ -13,15 +13,17 @@ class ResPartner(models.Model):
         inverse_name="partner_id",
         string="Payment Terms Holidays",
         copy=True,
-        auto_join=True
+        auto_join=True,
     )
 
     def is_date_in_holiday(self, date):
         if isinstance(date, str):
             date = fields.Date.from_string(date)
         res = self.holiday_ids.filtered(
-            lambda x: int(x.month_from) <= date.month and int(x.month_to) >= date.month
-            and int(x.day_from) <= date.day and int(x.day_to) >= date.day
+            lambda x: int(x.month_from) <= date.month
+            and int(x.month_to) >= date.month
+            and int(x.day_from) <= date.day
+            and int(x.day_to) >= date.day
         )
         if bool(res):
             res = res[0]
@@ -37,7 +39,8 @@ class ResPartner(models.Model):
             return [
                 fields.Date.from_string(
                     "%s-%s-%s" % (date.year, res.month_from, res.day_from)
-                ), res_date_to
+                ),
+                res_date_to,
             ]
         return False
 
@@ -65,7 +68,7 @@ class ResPartnerHoliday(models.Model):
             ("9", _("September")),
             ("10", _("October")),
             ("11", _("November")),
-            ("12", _("December"))
+            ("12", _("December")),
         ]
 
     partner_id = fields.Many2one(
@@ -74,27 +77,19 @@ class ResPartnerHoliday(models.Model):
         required=True,
         ondelete="cascade",
         index=True,
-        copy=False
+        copy=False,
     )
     day_from = fields.Selection(
-        selection="_selection_days",
-        string="Day from",
-        required=True,
+        selection="_selection_days", string="Day from", required=True,
     )
     month_from = fields.Selection(
-        selection="_selection_months",
-        string="Month from",
-        required=True,
+        selection="_selection_months", string="Month from", required=True,
     )
     day_to = fields.Selection(
-        selection="_selection_days",
-        string="Day to",
-        required=True,
+        selection="_selection_days", string="Day to", required=True,
     )
     month_to = fields.Selection(
-        selection="_selection_months",
-        string="Month to",
-        required=True,
+        selection="_selection_months", string="Month to", required=True,
     )
 
     @api.constrains("day_from", "month_from", "day_to", "month_to")
