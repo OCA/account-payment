@@ -139,15 +139,15 @@ msgid "Early Payment Discount"
 msgstr "Descuento por Pago Adelantado"
 
 #. module: account_payment_term_discount
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_product_product__is_exclude_shipping_amount
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_product_template__is_exclude_shipping_amount
+msgid "Exclude Shipping Amount"
+msgstr ""
+
+#. module: account_payment_term_discount
 #: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment_term__is_exclude_shipping_lines
 msgid "Exclude Shipping from Discount"
 msgstr "Excluir Envío del Descuento"
-
-#. module: account_payment_term_discount
-#: model:ir.model.fields,field_description:account_payment_term_discount.field_product_product__is_exclude_shipping_amount
-#: model:ir.model.fields,field_description:account_payment_term_discount.field_product_template__is_exclude_shipping_amount
-msgid "Exclude Shippling Amount"
-msgstr "Excluir Monto del Envío"
 
 #. module: account_payment_term_discount
 #: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment_term__is_exclude_taxes_discount
@@ -235,3 +235,6 @@ msgid ""
 "This method should only be called to process a single invoice's payment."
 msgstr ""
 "Este método solo debe invocarse para procesar el pago de una única factura."
+
+#~ msgid "Exclude Shippling Amount"
+#~ msgstr "Excluir Monto del Envío"

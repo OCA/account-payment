@@ -143,15 +143,15 @@ msgid "Early Payment Discount"
 msgstr "Escompte pour paiement anticipé"
 
 #. module: account_payment_term_discount
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_product_product__is_exclude_shipping_amount
+#: model:ir.model.fields,field_description:account_payment_term_discount.field_product_template__is_exclude_shipping_amount
+msgid "Exclude Shipping Amount"
+msgstr ""
+
+#. module: account_payment_term_discount
 #: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment_term__is_exclude_shipping_lines
 msgid "Exclude Shipping from Discount"
 msgstr "Frais d'expédition non pris en compte dans l'escompte"
-
-#. module: account_payment_term_discount
-#: model:ir.model.fields,field_description:account_payment_term_discount.field_product_product__is_exclude_shipping_amount
-#: model:ir.model.fields,field_description:account_payment_term_discount.field_product_template__is_exclude_shipping_amount
-msgid "Exclude Shippling Amount"
-msgstr "Exclure le montant des frais de port"
 
 #. module: account_payment_term_discount
 #: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment_term__is_exclude_taxes_discount
@@ -240,3 +240,6 @@ msgid ""
 msgstr ""
 "Cette méthode ne doit être appelée que pour traiter le paiement d'une seule "
 "facture."
+
+#~ msgid "Exclude Shippling Amount"
+#~ msgstr "Exclure le montant des frais de port"
