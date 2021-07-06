@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_invoice_payment_line,invoice.payment.line,model_invoice_payment_line,base.group_user,1,1,1,0
+access_payment_adjustment_reason_manager,payment.adjustment.reason,model_payment_adjustment_reason,account.group_account_manager,1,1,1,1
+access_payment_adjustment_reason_user,payment.adjustment.reason,model_payment_adjustment_reason,account.group_account_user,1,0,0,0
+access_payment_adjustment_reason_invoice,payment.adjustment.reason,model_payment_adjustment_reason,account.group_account_invoice,1,0,0,0

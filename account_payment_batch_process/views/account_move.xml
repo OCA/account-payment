@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--  Supplier move tree -->
+    <record id="batch_move_supplier_tree" model="ir.ui.view">
+        <field name="name">account.move.batch.supplier.tree</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_in_invoice_tree" />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="state" position="move" />
+            </field>
+        </field>
+    </record>
+
+</odoo>
