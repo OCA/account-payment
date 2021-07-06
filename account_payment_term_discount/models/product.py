@@ -8,6 +8,6 @@ class ProductTemplate(models.Model):
     _inherit = "product.template"
 
     is_exclude_shipping_amount = fields.Boolean(
-        string="Exclude Shippling Amount",
+        string="Exclude Shipping Amount",
         help="Check this box if want to exclude shipping charges from discount",
     )
