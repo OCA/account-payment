@@ -13,6 +13,7 @@ setuptools.setup(
         'odoo14-addon-account_payment_return',
         'odoo14-addon-account_payment_term_discount',
         'odoo14-addon-account_payment_term_extension',
+        'odoo14-addon-account_payment_view_check_number',
     ],
     classifiers=[
         'Programming Language :: Python',
