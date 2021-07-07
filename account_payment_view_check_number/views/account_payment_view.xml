@@ -5,7 +5,7 @@
         <field name="inherit_id" ref="account.view_account_supplier_payment_tree" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='payment_method_id']" position="after">
-                <field name="check_number" />
+                <field name="check_number" optional="hide" />
             </xpath>
         </field>
     </record>
