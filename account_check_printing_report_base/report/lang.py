@@ -1,4 +1,3 @@
-# pylint: disable=missing-import-error
 from num2words import CONVERTER_CLASSES, CONVERTES_TYPES, num2words
 from num2words.base import Num2Word_Base
 from num2words.lang_ES import Num2Word_ES
@@ -12,9 +11,15 @@ class Num2WordESCustom(Num2Word_ES):
 
     # TODO: PR to remove overwrite in num2words code and use CURRENCY_FORMS
     def to_currency(self, val, longval=True, old=False):
-        return Num2Word_Base.to_currency(
-            self, val, currency="EUR", cents=True, separator=" con", adjective=False
-        )
+        try:
+            # On older versions we need to use "seperator" instead of "separator"
+            return Num2Word_Base.to_currency(
+                self, val, currency="EUR", cents=True, seperator=" con", adjective=False
+            )
+        except TypeError:
+            return Num2Word_Base.to_currency(
+                self, val, currency="EUR", cents=True, separator=" con", adjective=False
+            )
 
 
 def num2words_custom(number, ordinal=False, lang="en", to="cardinal", **kwargs):
