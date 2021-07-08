@@ -21,6 +21,7 @@ setuptools.setup(
         'odoo13-addon-account_payment_return_import_iso20022',
         'odoo13-addon-account_payment_show_invoice',
         'odoo13-addon-account_payment_term_extension',
+        'odoo13-addon-account_payment_term_partner_holiday',
         'odoo13-addon-partner_aging',
         'odoo13-addon-sale_payment_mgmt',
     ],
