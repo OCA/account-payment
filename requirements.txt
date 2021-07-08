@@ -1,2 +1,2 @@
 # generated from manifests external_dependencies
-num2words==0.5.10
+num2words
