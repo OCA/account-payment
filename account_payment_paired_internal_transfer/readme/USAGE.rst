@@ -1,0 +1,4 @@
+- Create a Payment.
+- Select the button "Internal Transfer"
+- Select Destination Journal.
+- Post the Payment.
