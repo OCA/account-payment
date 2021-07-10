@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record model="ir.ui.view" id="account_payment_form">
+        <field name="name">account_payment.form</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="after">
+                <field name="paired_internal_transfer_payment_id" invisible="1" />
+                <div
+                    class="alert alert-info text-center"
+                    role="alert"
+                    attrs="{'invisible': ['|',('paired_internal_transfer_payment_id','!=',False),('is_internal_transfer','=',False)]}"
+                >
+                        A second payment will be created automatically in the destination journal.
+                </div>
+            </xpath>
+            <xpath expr="//field[@name='journal_id']" position="after">
+                <field
+                    name="destination_journal_id"
+                    attrs="{
+                        'invisible': [('is_internal_transfer', '=', False)],
+                        'readonly': [('state', '!=', 'draft')],
+                        'required': [('is_internal_transfer', '=', True)]
+                    }"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
