@@ -6,7 +6,10 @@
         <field name="inherit_id" ref="account.view_partner_property_form" />
         <field name="arch" type="xml">
             <field name="property_payment_term_id" position="after">
-                <field name="holiday_ids">
+                <field
+                    name="holiday_ids"
+                    attrs="{'invisible': [('parent_id','!=', False)]}"
+                >
                     <tree editable="bottom">
                         <field name="day_from" />
                         <field name="month_from" />
