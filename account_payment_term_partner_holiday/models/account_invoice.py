@@ -2,7 +2,6 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 from odoo import api, models
-from dateutil.relativedelta import relativedelta
 
 
 class AccountInvoice(models.Model):
@@ -17,12 +16,8 @@ class AccountInvoice(models.Model):
 
     @api.onchange("date_due")
     def _onchange_date_due_account_payment_term_partner_holiday(self):
-        if self.date_due and self.payment_term_id and self.partner_id:
-            new_date_due = self.date_due
-            is_date_in_holiday = self.partner_id.is_date_in_holiday(new_date_due)
-            if is_date_in_holiday:
-                res_date_end = is_date_in_holiday[1]
-                new_date_due = res_date_end + relativedelta(days=1)
+        if self.date_due and self.partner_id:
+            new_date_due = self.partner_id._get_valid_due_date(self.date_due)
             if new_date_due != self.date_due:
                 self.date_due = new_date_due
 
