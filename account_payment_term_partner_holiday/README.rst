@@ -44,6 +44,11 @@ To use this module, you need to:
    Invoices' and create or edit some record.
 #. If the computed due date is inside a holidays period, it's moved to the first available date.
 
+Known issues / Roadmap
+======================
+
+* Due dates for invoices are not updated when new holidays are created after.
+
 Bug Tracker
 ===========
 

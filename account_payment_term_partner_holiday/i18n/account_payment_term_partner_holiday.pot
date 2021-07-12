@@ -128,6 +128,11 @@ msgid "Month from"
 msgstr ""
 
 #. module: account_payment_term_partner_holiday
+#: model:ir.model.constraint,message:account_payment_term_partner_holiday.constraint_res_partner_holiday_month_consistency
+msgid "Month from should be higher than month from"
+msgstr ""
+
+#. module: account_payment_term_partner_holiday
 #: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__month_to
 msgid "Month to"
 msgstr ""
