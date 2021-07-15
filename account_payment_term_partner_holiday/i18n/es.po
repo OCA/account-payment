@@ -18,14 +18,12 @@ msgstr ""
 "X-Generator: Poedit 2.3\n"
 
 #. module: account_payment_term_partner_holiday
-#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:60
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:67
 #, python-format
 msgid "April"
 msgstr "Abril"
 
 #. module: account_payment_term_partner_holiday
-#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:64
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:71
 #, python-format
 msgid "August"
@@ -57,7 +55,6 @@ msgid "Day to"
 msgstr "Día hasta"
 
 #. module: account_payment_term_partner_holiday
-#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:68
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:75
 #, python-format
 msgid "December"
@@ -69,7 +66,6 @@ msgid "Display Name"
 msgstr "Nombre a mostrar"
 
 #. module: account_payment_term_partner_holiday
-#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:58
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:65
 #, python-format
 msgid "February"
@@ -86,21 +82,18 @@ msgid "Invoice"
 msgstr "Factura"
 
 #. module: account_payment_term_partner_holiday
-#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:57
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:64
 #, python-format
 msgid "January"
 msgstr "Enero"
 
 #. module: account_payment_term_partner_holiday
-#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:63
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:70
 #, python-format
 msgid "July"
 msgstr "Julio"
 
 #. module: account_payment_term_partner_holiday
-#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:62
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:69
 #, python-format
 msgid "June"
@@ -122,14 +115,12 @@ msgid "Last Updated on"
 msgstr "Última actualización el"
 
 #. module: account_payment_term_partner_holiday
-#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:59
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:66
 #, python-format
 msgid "March"
 msgstr "Marzo"
 
 #. module: account_payment_term_partner_holiday
-#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:61
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:68
 #, python-format
 msgid "May"
@@ -151,14 +142,12 @@ msgid "Month to"
 msgstr "Mes hasta"
 
 #. module: account_payment_term_partner_holiday
-#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:67
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:74
 #, python-format
 msgid "November"
 msgstr "Noviembre"
 
 #. module: account_payment_term_partner_holiday
-#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:66
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:73
 #, python-format
 msgid "October"
@@ -186,14 +175,12 @@ msgid "Payment Terms Holidays"
 msgstr "Vacaciones de términos de pago"
 
 #. module: account_payment_term_partner_holiday
-#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:65
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:72
 #, python-format
 msgid "September"
 msgstr "Septiembre"
 
 #. module: account_payment_term_partner_holiday
-#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:108
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:123
 #, python-format
 msgid "You can't set the ending holidays period before the beginning."
