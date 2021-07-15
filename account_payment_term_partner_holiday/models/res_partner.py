@@ -61,15 +61,15 @@ class ResPartnerHoliday(models.Model):
     @api.model
     def _selection_months(self):
         return [
-            ("1", _("January")),
-            ("2", _("February")),
-            ("3", _("March")),
-            ("4", _("April")),
-            ("5", _("May")),
-            ("6", _("June")),
-            ("7", _("July")),
-            ("8", _("August")),
-            ("9", _("September")),
+            ("01", _("January")),
+            ("02", _("February")),
+            ("03", _("March")),
+            ("04", _("April")),
+            ("05", _("May")),
+            ("06", _("June")),
+            ("07", _("July")),
+            ("08", _("August")),
+            ("09", _("September")),
             ("10", _("October")),
             ("11", _("November")),
             ("12", _("December"))

@@ -15,24 +15,24 @@ class TestPartnerHoliday(common.TransactionCase):
             "name": "Partner test 1",
             "holiday_ids": [(0, 0, {
                 "day_from": "1",
-                "month_from": "2",
+                "month_from": "02",
                 "day_to": "31",
-                "month_to": "2",
+                "month_to": "02",
             }), (0, 0, {
                 "day_from": "1",
-                "month_from": "3",
+                "month_from": "03",
                 "day_to": "1",
-                "month_to": "4",
+                "month_to": "04",
             }), (0, 0, {
                 "day_from": "12",
-                "month_from": "6",
+                "month_from": "06",
                 "day_to": "13",
-                "month_to": "6",
+                "month_to": "06",
             }), (0, 0, {
                 "day_from": "15",
-                "month_from": "6",
+                "month_from": "06",
                 "day_to": "16",
-                "month_to": "6",
+                "month_to": "06",
             })]
         })
         self.partner_1_child = self.env["res.partner"].create({
@@ -73,7 +73,7 @@ class TestPartnerHoliday(common.TransactionCase):
             "day_from": "1",
             "month_from": "12",
             "day_to": "1",
-            "month_to": "1",
+            "month_to": "01",
         }
         with self.assertRaises(psycopg2.IntegrityError), mute_logger('odoo.sql_db'):
             self.env["res.partner.holiday"].create(vals)
@@ -98,7 +98,7 @@ class TestPartnerHoliday(common.TransactionCase):
     def test_check_dates_in_partner_1_only_february(self):
         self.assertEqual(len(self.partner_1.holiday_ids), 4)
         self.partner_1.holiday_ids.filtered(
-            lambda x: x.month_from == "3"
+            lambda x: x.month_from == "03"
         ).unlink()
         self.assertEqual(len(self.partner_1.holiday_ids), 3)
         self.assertEqual(
