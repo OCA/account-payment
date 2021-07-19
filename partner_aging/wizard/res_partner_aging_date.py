@@ -24,7 +24,6 @@ class ResPartnerAgingDate(models.TransientModel):
             action["domain"] = [("total", "<>", 0.0000000)]
             action["context"] = ctx
             return action
-        return True
 
     def open_supplier_aging(self):
         supplier_aging = self.env["res.partner.aging.supplier"]
@@ -50,4 +49,3 @@ class ResPartnerAgingDate(models.TransientModel):
             ]
             action["context"] = ctx
             return action
-        return True
