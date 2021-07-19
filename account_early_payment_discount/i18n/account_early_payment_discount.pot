@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 11.0\n"
+"Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
@@ -15,29 +15,29 @@ msgstr ""
 
 #. module: account_early_payment_discount
 #: sql_constraint:account.payment.term:0
-#: code:addons/account_early_payment_discount/models/account_payment_term.py:34
+#: code:addons/account_early_payment_discount/models/account_payment_term.py:33
 #, python-format
 msgid "'Number of day(s)' and 'Discount' fields must be filled if 'Early Payment Discount' is checked"
 msgstr ""
 
 #. module: account_early_payment_discount
-#: model:ir.model.fields,field_description:account_early_payment_discount.field_account_payment_term_company_currency
+#: model:ir.model.fields,field_description:account_early_payment_discount.field_account_payment_term__company_currency
 msgid "Company Currency"
 msgstr ""
 
 #. module: account_early_payment_discount
-#: model:ir.model.fields,field_description:account_early_payment_discount.field_account_payment_term_epd_discount
+#: model:ir.model.fields,field_description:account_early_payment_discount.field_account_payment_term__epd_discount
 msgid "Discount"
 msgstr ""
 
 #. module: account_early_payment_discount
-#: model:ir.model.fields,field_description:account_early_payment_discount.field_account_payment_term_early_payment_discount
-#: model:ir.ui.view,arch_db:account_early_payment_discount.view_payment_term_form
+#: model:ir.model.fields,field_description:account_early_payment_discount.field_account_payment_term__early_payment_discount
+#: model_terms:ir.ui.view,arch_db:account_early_payment_discount.view_payment_term_form
 msgid "Early Payment Discount"
 msgstr ""
 
 #. module: account_early_payment_discount
-#: model:ir.model.fields,field_description:account_early_payment_discount.field_account_payment_term_epd_nb_days
+#: model:ir.model.fields,field_description:account_early_payment_discount.field_account_payment_term__epd_nb_days
 msgid "Number of day(s)"
 msgstr ""
 
@@ -47,7 +47,7 @@ msgid "Payment Terms"
 msgstr ""
 
 #. module: account_early_payment_discount
-#: model:ir.model.fields,field_description:account_early_payment_discount.field_account_payment_term_epd_tolerance
+#: model:ir.model.fields,field_description:account_early_payment_discount.field_account_payment_term__epd_tolerance
 msgid "Tolerance"
 msgstr ""
 
