@@ -17,6 +17,7 @@ setuptools.setup(
         'odoo12-addon-account_due_list_aging_comment',
         'odoo12-addon-account_due_list_days_overdue',
         'odoo12-addon-account_due_list_payment_mode',
+        'odoo12-addon-account_early_payment_discount',
         'odoo12-addon-account_move_line_auto_reconcile_hook',
         'odoo12-addon-account_payment_credit_card',
         'odoo12-addon-account_payment_multi_deduction',
