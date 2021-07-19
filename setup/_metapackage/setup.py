@@ -14,6 +14,7 @@ setuptools.setup(
         'odoo14-addon-account_payment_term_discount',
         'odoo14-addon-account_payment_term_extension',
         'odoo14-addon-account_payment_view_check_number',
+        'odoo14-addon-partner_aging',
     ],
     classifiers=[
         'Programming Language :: Python',
