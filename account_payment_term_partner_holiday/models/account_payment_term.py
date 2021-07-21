@@ -1,8 +1,6 @@
 # Copyright 2021 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from dateutil.relativedelta import relativedelta
-
 from odoo import fields, models
 
 
@@ -17,12 +15,9 @@ class AccountPaymentTerm(models.Model):
             partner = self.env["res.partner"].browse(partner_id)
             result2 = []
             for item in result:
-                date_item = item[0]
-                is_date_in_holiday = partner.is_date_in_holiday(date_item)
-                if is_date_in_holiday:
-                    next_date = is_date_in_holiday[1]
-                    next_date += relativedelta(days=1)
-                    result2.append((fields.Date.to_string(next_date), item[1]))
+                new_date_item = partner._get_valid_due_date(item[0])
+                if new_date_item != item[0]:
+                    result2.append((fields.Date.to_string(new_date_item), item[1]))
                 else:
                     result2.append(item)
             result = result2
