@@ -161,7 +161,7 @@ class TestPaymentTermDiscount(common.TransactionCase):
         payment_date = self.customer_invoice.invoice_date + relativedelta(days=9)
         self._do_payment(self.customer_invoice, 950.0, payment_date)
         # Verify that invoice is now in Paid state
-        self.assertEqual(self.customer_invoice.payment_state, "paid")
+        self.assertIn(self.customer_invoice.payment_state, ["in_payment", "paid"])
 
     def test_customer_invoice_payment_term_no_discount(self):
         """ Create customer invoice and verify workflow without discount """
@@ -169,4 +169,6 @@ class TestPaymentTermDiscount(common.TransactionCase):
         payment_date = self.customer_invoice.invoice_date + relativedelta(days=15)
         self._do_payment(self.customer_invoice, 950.0, payment_date)
         # Verify that invoice is now in Partial state
-        self.assertEqual(self.customer_invoice.payment_state, "paid")
+        self.assertIn(
+            self.customer_invoice.payment_state, ["partial", "in_payment", "paid"]
+        )
