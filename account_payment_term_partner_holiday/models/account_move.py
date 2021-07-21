@@ -15,7 +15,19 @@ class AccountMove(models.Model):
 
     @api.onchange("invoice_date_due")
     def _onchange_invoice_date_due_account_payment_term_partner_holiday(self):
-        if self.invoice_date_due and self.partner_id:
+        """Recompute the due date to the next available date according to
+        the holiday periods set in the partner.
+
+        It must only be re-calculated when a payment term is not set.
+        This prevents the due date to be changed again and that another
+        given number of days are added according to what is set on the
+        payment term.
+        """
+        if (
+            self.invoice_date_due
+            and self.partner_id
+            and not self.invoice_payment_term_id
+        ):
             new_invoice_date_due = self.partner_id._get_valid_due_date(
                 self.invoice_date_due
             )
