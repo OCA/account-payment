@@ -9,7 +9,7 @@
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["account"],
+    "depends": ["account_payment_term_extension"],
     "maintainers": ["victoralmau"],
     "development_status": "Production/Stable",
     "data": [
