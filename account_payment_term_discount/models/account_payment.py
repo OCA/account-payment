@@ -22,7 +22,7 @@ class AccountPaymentRegister(models.TransientModel):
         #                                                res.get('invoice_id'))
         active_id = self.env.context.get("active_ids", [])
         record = self.env["account.move"].browse(active_id)
-        if active_id and len(active_id) == 1:
+        if record:
             res["invoice_id"] = record.id
             res["discount_amt"] = record.discount_amt
         return res
