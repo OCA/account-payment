@@ -1,4 +1,3 @@
-<?xml version="1.0" ?>
 <odoo>
     <!-- Inherit Tree View Account Payment Term -->
     <record id="view_payment_term_disc_tree" model="ir.ui.view">
