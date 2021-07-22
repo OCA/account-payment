@@ -1,4 +1,3 @@
-<?xml version="1.0" ?>
 <odoo>
     <record id="invoice_form_discounts" model="ir.ui.view">
         <field name="name">account.invoice.form.discount</field>
