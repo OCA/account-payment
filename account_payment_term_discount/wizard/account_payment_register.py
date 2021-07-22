@@ -17,14 +17,14 @@ class AccountPaymentRegister(models.TransientModel):
 
     @api.model
     def default_get(self, fields):
-        res = super(AccountPaymentRegister, self).default_get(fields)
-        # invoice_defaults = self.resolve_2many_commands('invoice_id',
-        #                                                res.get('invoice_id'))
+        res = super().default_get(fields)
         active_id = self.env.context.get("active_ids", [])
-        record = self.env["account.move"].browse(active_id)
-        if record:
-            res["invoice_id"] = record.id
-            res["discount_amt"] = record.discount_amt
+        if (
+            self.env.context.get("active_model") == "account.move"
+            and len(active_id) == 1
+        ):
+            record = self.env["account.move"].browse(active_id)
+            res.update({"invoice_id": record.id, "discount_amt": record.discount_amt})
         return res
 
     @api.onchange("amount", "payment_difference", "payment_date")
@@ -90,7 +90,7 @@ class AccountPaymentRegister(models.TransientModel):
     def action_create_payments(self):
         active_id = self.env.context.get("active_ids", [])
 
-        if any(len(active_id) != 1 for record in self):
+        if (not isinstance(active_id, int)) and len(active_id) != 1:
             # For multiple invoices, there is account.register.payments wizard
             raise UserError(
                 _(
@@ -98,7 +98,7 @@ class AccountPaymentRegister(models.TransientModel):
                     "single invoice's payment."
                 )
             )
-        res = super(AccountPaymentRegister, self).action_create_payments()
+        res = super().action_create_payments()
         for payment in self:
             if payment.payment_difference_handling == "reconcile":
                 payment.invoice_id.write(
@@ -107,5 +107,4 @@ class AccountPaymentRegister(models.TransientModel):
                         "discount_amt": 0,
                     }
                 )
-
         return res
