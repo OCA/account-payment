@@ -4,7 +4,7 @@
 
 {
     "name": "Account Payment Terms Discount",
-    "version": "14.0.1.1.2",
+    "version": "14.0.1.1.3",
     "license": "AGPL-3",
     "category": "Accounting & Finance",
     "depends": ["purchase", "account"],
@@ -13,11 +13,11 @@
     "data": [
         "security/ir.model.access.csv",
         "views/account_payment_term_view.xml",
-        "views/account_payment_view.xml",
+        "wizard/account_payment_register.xml",
         "views/account_move_view.xml",
         "views/product_view.xml",
     ],
     "installable": True,
     "development_status": "Beta",
-    "maintainers": ["hardik-osi"],
+    "maintainers": ["bodedra"],
 }
