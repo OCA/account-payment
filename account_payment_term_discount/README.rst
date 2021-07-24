@@ -100,13 +100,13 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-.. |maintainer-hardik-osi| image:: https://github.com/hardik-osi.png?size=40px
-    :target: https://github.com/hardik-osi
-    :alt: hardik-osi
+.. |maintainer-bodedra| image:: https://github.com/bodedra.png?size=40px
+    :target: https://github.com/bodedra
+    :alt: bodedra
 
 Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
-|maintainer-hardik-osi| 
+|maintainer-bodedra| 
 
 This module is part of the `OCA/account-payment <https://github.com/OCA/account-payment/tree/14.0/account_payment_term_discount>`_ project on GitHub.
 
