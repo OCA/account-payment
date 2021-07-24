@@ -23,7 +23,7 @@ addon | version | summary
 [account_payment_batch_process](account_payment_batch_process/) | 14.0.1.0.0 | Account Batch Payments Processing for Customers Invoices and Supplier Invoices
 [account_payment_multi_deduction](account_payment_multi_deduction/) | 14.0.1.0.0 | Payment Register with Multiple Deduction
 [account_payment_return](account_payment_return/) | 14.0.1.0.2 | Manage the return of your payments
-[account_payment_term_discount](account_payment_term_discount/) | 14.0.1.1.2 | Account Payment Terms Discount
+[account_payment_term_discount](account_payment_term_discount/) | 14.0.1.1.3 | Account Payment Terms Discount
 [account_payment_term_extension](account_payment_term_extension/) | 14.0.1.0.2 | Adds rounding, months, weeks and multiple payment days properties on payment term lines
 [account_payment_view_check_number](account_payment_view_check_number/) | 14.0.1.0.0 | Account Payment View Check Number
 [partner_aging](partner_aging/) | 14.0.1.0.1 | Aging as a view - invoices and credits
