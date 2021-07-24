@@ -19,9 +19,8 @@ class AccountPaymentRegister(models.TransientModel):
     def default_get(self, fields):
         res = super().default_get(fields)
         active_id = self.env.context.get("active_ids", [])
-        if (
-            self.env.context.get("active_model") == "account.move"
-            and len(active_id) == 1
+        if self.env.context.get("active_model") == "account.move" and (
+            isinstance(active_id, int) or len(active_id) == 1
         ):
             record = self.env["account.move"].browse(active_id)
             res.update({"invoice_id": record.id, "discount_amt": record.discount_amt})
