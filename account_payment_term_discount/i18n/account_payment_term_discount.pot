@@ -220,7 +220,7 @@ msgid "This account will be used to post the discount on sales."
 msgstr ""
 
 #. module: account_payment_term_discount
-#: code:addons/account_payment_term_discount/models/account_payment.py:0
+#: code:addons/account_payment_term_discount/wizard/account_payment_register.py:0
 #, python-format
 msgid ""
 "This method should only be called to process a single invoice's payment."
