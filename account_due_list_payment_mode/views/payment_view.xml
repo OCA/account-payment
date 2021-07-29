@@ -5,7 +5,7 @@
         <field name="inherit_id" ref="account_due_list.view_payments_tree" />
         <field name="arch" type="xml">
             <field name="partner_ref" position="after">
-                <field name="payment_mode_id" readonly="1" />
+                <field name="payment_mode_id" readonly="1" optional="show" />
             </field>
         </field>
     </record>
