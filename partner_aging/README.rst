@@ -25,12 +25,14 @@ Interactive Partner Aging at any date
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
 
-This module creates new customer / supplier aging as of a given date.
+This module creates a new customer / supplier aging report as of a given date.
 
-The default Aged Partner balance report is related to specific date and a
+The default Aged Partner balance report is related to a specific date and a
 static PDF that is based on the difference between credits and debits, not
-based on documents such as Invoices and Payments.
+based on documents such as Invoices/Bills and Payments.
+
 This module provides an interactive view with details of the invoice.
+
 This module does not consider unapplied credits.
 
 **Table of contents**
