@@ -57,6 +57,27 @@ class TestPartnerHoliday(common.TransactionCase):
                 "option": "day_after_invoice_date"
             })]
         })
+        self.payment_term_with_holidays = self.env["account.payment.term"].create({
+            "name": "Immediate (with holidays)",
+            "line_ids": [(0, 0, {
+                "value": "balance",
+                "days": 0,
+                "option": "day_after_invoice_date"
+            })],
+            "holiday_ids": [(0, 0, {
+                "holiday": "2021-06-14",
+                "date_postponed": "2021-07-08"
+            })]
+        })
+        self.payment_term_immediate_custom = self.env["account.payment.term"].create({
+            "name": "Immediate (with custom payment days)",
+            "line_ids": [(0, 0, {
+                "value": "balance",
+                "days": 0,
+                "option": "day_after_invoice_date",
+                "payment_days": "5,10"
+            })]
+        })
         self.journal = self.env["account.journal"].create({
             "name": "Test sale",
             "type": "sale",
@@ -154,6 +175,14 @@ class TestPartnerHoliday(common.TransactionCase):
         invoice_form.payment_term_id = self.payment_term_10_days
         self.assertEqual(invoice_form.date_due, fields.Date.from_string("2021-04-11"))
 
+    def test_invoice_payment_term_custom_partner_1(self):
+        invoice_form = self._set_invoice_form(self.partner_1.id, "2021-06-12")
+        invoice_form.payment_term_id = self.payment_term_with_holidays
+        self.assertEqual(invoice_form.date_due, fields.Date.from_string("2021-07-08"))
+        invoice_form = self._set_invoice_form(self.partner_1.id, "2021-02-01")
+        invoice_form.payment_term_id = self.payment_term_immediate_custom
+        self.assertEqual(invoice_form.date_due, fields.Date.from_string("2021-04-05"))
+
     def test_invoice_payment_term_partner_1_child(self):
         invoice_form = self._set_invoice_form(self.partner_1_child.id, "2021-02-01")
         invoice_form.payment_term_id = self.payment_term_immediate
@@ -173,12 +202,31 @@ class TestPartnerHoliday(common.TransactionCase):
         invoice_form.payment_term_id = self.payment_term_10_days
         self.assertEqual(invoice_form.date_due, fields.Date.from_string("2021-04-11"))
 
+    def test_invoice_payment_term_custom_partner_1_child(self):
+        invoice_form = self._set_invoice_form(self.partner_1_child.id, "2021-06-12")
+        invoice_form.payment_term_id = self.payment_term_with_holidays
+        self.assertEqual(invoice_form.date_due, fields.Date.from_string("2021-07-08"))
+        invoice_form = self._set_invoice_form(self.partner_1_child.id, "2021-02-01")
+        invoice_form.payment_term_id = self.payment_term_immediate_custom
+        self.assertEqual(invoice_form.date_due, fields.Date.from_string("2021-04-05"))
+
     def test_invoice_payment_term_partner_2(self):
         invoice_form = self._set_invoice_form(self.partner_2.id, "2021-02-01")
         invoice_form.payment_term_id = self.payment_term_immediate
         self.assertEqual(invoice_form.date_due, fields.Date.from_string("2021-02-01"))
         invoice_form.payment_term_id = self.payment_term_10_days
         self.assertEqual(invoice_form.date_due, fields.Date.from_string("2021-02-11"))
+
+    def test_invoice_payment_term_custom_partner_2(self):
+        invoice_form = self._set_invoice_form(self.partner_2.id, "2021-06-12")
+        invoice_form.payment_term_id = self.payment_term_with_holidays
+        self.assertEqual(invoice_form.date_due, fields.Date.from_string("2021-06-12"))
+        invoice_form = self._set_invoice_form(self.partner_2.id, "2021-06-14")
+        invoice_form.payment_term_id = self.payment_term_with_holidays
+        self.assertEqual(invoice_form.date_due, fields.Date.from_string("2021-07-08"))
+        invoice_form = self._set_invoice_form(self.partner_2.id, "2021-02-01")
+        invoice_form.payment_term_id = self.payment_term_immediate_custom
+        self.assertEqual(invoice_form.date_due, fields.Date.from_string("2021-02-05"))
 
     def test_partner_1_invoice_date_june_13(self):
         invoice_form = self._set_invoice_form(self.partner_1.id, "2021-06-13")
