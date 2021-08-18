@@ -17,7 +17,7 @@
         "account_payment_return",
         "account_payment_return_import",
         # OCA/bank-payment
-        "account_payment_order",
+        # "account_payment_order", ??
     ],
     "data": ["data/payment.return.reason.csv"],
 }
