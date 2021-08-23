@@ -4,7 +4,7 @@
 
 {
     "name": "Account Payment Terms Discount",
-    "version": "14.0.1.1.4",
+    "version": "14.0.1.1.5",
     "license": "AGPL-3",
     "category": "Accounting & Finance",
     "depends": ["purchase", "account"],
