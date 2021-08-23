@@ -9,10 +9,7 @@ from odoo.exceptions import UserError
 class AccountPaymentRegister(models.TransientModel):
     _inherit = "account.payment.register"
 
-    invoice_id = fields.Many2one(
-        comodel_name="account.move",
-        string="Invoice",
-    )
+    invoice_id = fields.Many2one(comodel_name="account.move", string="Invoice")
     discount_amt = fields.Monetary(store=True)
 
     @api.model
@@ -52,19 +49,24 @@ class AccountPaymentRegister(models.TransientModel):
                 self.payment_difference = 0.0
 
                 if payment_date <= till_discount_date:
+                    discount_account = (
+                        line.discount_income_account_id
+                        if self.invoice_id.is_purchase_document()
+                        else line.discount_expense_account_id
+                    )
                     # changing payment date
                     if not payment_difference and discount_amt:
 
                         self.payment_difference = discount_amt
                         self.payment_difference_handling = "reconcile"
-                        self.writeoff_account_id = line.discount_expense_account_id.id
+                        self.writeoff_account_id = discount_account.id
                         self.writeoff_label = "Payment Discount"
                     # customer is paying more
                     elif abs(payment_difference) < discount_amt:
 
                         self.payment_difference = abs(payment_difference)
                         self.payment_difference_handling = "reconcile"
-                        self.writeoff_account_id = line.discount_expense_account_id.id
+                        self.writeoff_account_id = discount_account.id
                         self.writeoff_label = "Payment Discount"
                     # ocustomer paying more than discount_amt
                     elif abs(payment_difference) > discount_amt:
@@ -77,7 +79,7 @@ class AccountPaymentRegister(models.TransientModel):
 
                         self.payment_difference = abs(payment_difference)
                         self.payment_difference_handling = "reconcile"
-                        self.writeoff_account_id = line.discount_expense_account_id.id
+                        self.writeoff_account_id = discount_account.id
                         self.writeoff_label = "Payment Discount"
                 else:
                     self.payment_difference = payment_difference
