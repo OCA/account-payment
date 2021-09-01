@@ -21,7 +21,7 @@ addon | version | maintainers | summary
 --- | --- | --- | ---
 [account_due_list](account_due_list/) | 14.0.1.0.0 |  | List of open credits and debits, with due date
 [account_payment_batch_process](account_payment_batch_process/) | 14.0.1.0.0 |  | Account Batch Payments Processing for Customers Invoices and Supplier Invoices
-[account_payment_multi_deduction](account_payment_multi_deduction/) | 14.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Payment Register with Multiple Deduction
+[account_payment_multi_deduction](account_payment_multi_deduction/) | 14.0.1.0.1 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Payment Register with Multiple Deduction
 [account_payment_return](account_payment_return/) | 14.0.1.0.2 |  | Manage the return of your payments
 [account_payment_term_discount](account_payment_term_discount/) | 14.0.1.1.5 | [![bodedra](https://github.com/bodedra.png?size=30px)](https://github.com/bodedra) | Account Payment Terms Discount
 [account_payment_term_extension](account_payment_term_extension/) | 14.0.1.0.2 |  | Adds rounding, months, weeks and multiple payment days properties on payment term lines
