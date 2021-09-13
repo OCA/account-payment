@@ -4,6 +4,7 @@ from dateutil.relativedelta import relativedelta
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+from odoo.tools.float_utils import float_round
 
 
 class AccountPaymentRegister(models.TransientModel):
@@ -43,7 +44,10 @@ class AccountPaymentRegister(models.TransientModel):
                     days=line.discount_days
                 )
                 payment_date = fields.Date.from_string(self.payment_date)
-                discount_amt = self.invoice_id.discount_amt
+                discount_amt = float_round(
+                    self.invoice_id.discount_amt,
+                    precision_rounding=self.currency_id.rounding,
+                )
 
                 amount_residual = self.invoice_id.amount_residual
                 if self.invoice_id.currency_id.id != self.currency_id.id:
