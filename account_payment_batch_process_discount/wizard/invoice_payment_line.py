@@ -57,8 +57,8 @@ class InvoicePaymentLine(models.TransientModel):
                 rec.note = "Early Pay Discount"
 
         # cannot apply discount
-        else:
-            rec.payment_difference = due_or_balance
-            rec.payment_difference_handling = "open"
-            rec.writeoff_account_id = False
-            rec.note = False
+        # else:
+        #     rec.payment_difference = due_or_balance
+        #     rec.payment_difference_handling = "open"
+        #     rec.writeoff_account_id = False
+        #     rec.note = False
