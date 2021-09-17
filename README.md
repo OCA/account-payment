@@ -20,6 +20,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [account_due_list](account_due_list/) | 14.0.1.0.0 |  | List of open credits and debits, with due date
+[account_due_list_aging_comment](account_due_list_aging_comment/) | 14.0.1.0.0 |  | Account Due List Aging Comment
 [account_payment_batch_process](account_payment_batch_process/) | 14.0.1.0.0 |  | Account Batch Payments Processing for Customers Invoices and Supplier Invoices
 [account_payment_multi_deduction](account_payment_multi_deduction/) | 14.0.1.0.1 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Payment Register with Multiple Deduction
 [account_payment_return](account_payment_return/) | 14.0.1.0.2 |  | Manage the return of your payments
