@@ -14,7 +14,8 @@ class ResCompany(models.Model):
         default="untaxed",
     )
     cash_discount_use_tax_adjustment = fields.Boolean(
-        compute="_compute_cash_discount_tax_adjustment", store=True,
+        compute="_compute_cash_discount_tax_adjustment",
+        store=True,
     )
 
     @api.model
@@ -24,7 +25,9 @@ class ResCompany(models.Model):
             ("total", _("Including all taxes")),
         ]
 
-    @api.depends("cash_discount_base_amount_type",)
+    @api.depends(
+        "cash_discount_base_amount_type",
+    )
     def _compute_cash_discount_tax_adjustment(self):
         for rec in self:
             rec.cash_discount_use_tax_adjustment = (

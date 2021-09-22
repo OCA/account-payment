@@ -15,7 +15,8 @@ class TestAccountCashDiscountBase(TestAccountCashDiscountCommon):
     def create_simple_invoice(self, amount):
         invoice_form = Form(
             self.AccountMove.with_context(
-                default_type="in_invoice", default_company_id=self.company.id,
+                default_type="in_invoice",
+                default_company_id=self.company.id,
             )
         )
         invoice_form.partner_id = self.partner_agrolait
