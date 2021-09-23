@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo14-addon-account_due_list',
         'odoo14-addon-account_due_list_aging_comment',
+        'odoo14-addon-account_due_list_payment_mode',
         'odoo14-addon-account_payment_batch_process',
         'odoo14-addon-account_payment_multi_deduction',
         'odoo14-addon-account_payment_return',
