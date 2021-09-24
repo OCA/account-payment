@@ -10,7 +10,9 @@ class PaymentLine(models.Model):
 
     _inherit = "account.payment.line"
 
-    pay_with_discount = fields.Boolean(default=False,)
+    pay_with_discount = fields.Boolean(
+        default=False,
+    )
     pay_with_discount_allowed = fields.Boolean(
         compute="_compute_pay_with_discount_allowed",
     )
@@ -18,10 +20,12 @@ class PaymentLine(models.Model):
         compute="_compute_toggle_pay_with_discount_allowed",
     )
     discount_due_date = fields.Date(
-        related="move_line_id.move_id.discount_due_date", readonly=True,
+        related="move_line_id.move_id.discount_due_date",
+        readonly=True,
     )
     discount_amount = fields.Monetary(
-        related="move_line_id.move_id.real_discount_amount", readonly=True,
+        related="move_line_id.move_id.real_discount_amount",
+        readonly=True,
     )
 
     def _compute_pay_with_discount_allowed(self):
@@ -46,7 +50,8 @@ class PaymentLine(models.Model):
             )
 
     @api.constrains(
-        "pay_with_discount", "move_line_id",
+        "pay_with_discount",
+        "move_line_id",
     )
     def _check_pay_with_discount(self):
         for rec in self:
@@ -61,7 +66,9 @@ class PaymentLine(models.Model):
                 )
 
     @api.onchange(
-        "discount_amount", "move_line_id", "pay_with_discount",
+        "discount_amount",
+        "move_line_id",
+        "pay_with_discount",
     )
     def _onchange_pay_with_discount(self):
         """
@@ -92,7 +99,9 @@ class PaymentLine(models.Model):
         elif change_base_amount:
             self.amount_currency = invoice.amount_residual
 
-    @api.onchange("amount_currency",)
+    @api.onchange(
+        "amount_currency",
+    )
     def _onchange_amount_with_discount(self):
         """
         This method will disable the pay_with_discount flag if the amount has
