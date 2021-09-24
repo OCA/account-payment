@@ -45,7 +45,8 @@ class TestAccountCashDiscountWriteOff(TestAccountCashDiscountPaymentCommon):
         )
 
         payment_line_wizard = self.PaymentLineCreate.with_context(
-            active_model=payment_order._name, active_id=payment_order.id,
+            active_model=payment_order._name,
+            active_id=payment_order.id,
         ).create(
             {
                 "cash_discount_date": discount_due_date,
@@ -138,7 +139,8 @@ class TestAccountCashDiscountWriteOff(TestAccountCashDiscountPaymentCommon):
         )
 
         payment_line_wizard = self.PaymentLineCreate.with_context(
-            active_model=payment_order._name, active_id=payment_order.id,
+            active_model=payment_order._name,
+            active_id=payment_order.id,
         ).create(
             {
                 "cash_discount_date": discount_due_date,
@@ -233,7 +235,8 @@ class TestAccountCashDiscountWriteOff(TestAccountCashDiscountPaymentCommon):
         )
 
         payment_line_wizard = self.PaymentLineCreate.with_context(
-            active_model=payment_order._name, active_id=payment_order.id,
+            active_model=payment_order._name,
+            active_id=payment_order.id,
         ).create(
             {
                 "cash_discount_date": discount_due_date,
