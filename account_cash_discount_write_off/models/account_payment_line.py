@@ -84,7 +84,7 @@ class PaymentLine(models.Model):
         if tax_adjustment:
             refund_moves = (
                 invoice._get_payment_move_lines()
-                .filtered(lambda line: line.move_id.type == "in_refund")
+                .filtered(lambda line: line.move_id.move_type == "in_refund")
                 .mapped("move_id")
             )
             target_move_ids = refund_moves.ids + [move_line.move_id.id]

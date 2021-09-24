@@ -106,7 +106,7 @@ class TestAccountCashDiscountWriteOff(TestAccountCashDiscountPaymentCommon):
         self.assertEqual(
             write_off_base_line.account_id, self.cash_discount_writeoff_account
         )
-        self.assertEqual(invoice.invoice_payment_state, "paid")
+        self.assertEqual(invoice.payment_state, "paid")
 
     def test_cash_discount_with_write_off_with_taxes(self):
         woff_account = self.cash_discount_writeoff_account
@@ -156,7 +156,7 @@ class TestAccountCashDiscountWriteOff(TestAccountCashDiscountPaymentCommon):
         payment_order.open2generated()
         payment_order.generated2uploaded()
 
-        self.assertEqual(invoice.invoice_payment_state, "paid")
+        self.assertEqual(invoice.payment_state, "paid")
 
         discount_writeoff_move_lines = self.MoveLine.search(
             [("journal_id", "=", self.cash_discount_writeoff_journal.id)]
@@ -255,4 +255,4 @@ class TestAccountCashDiscountWriteOff(TestAccountCashDiscountPaymentCommon):
         payment_order.open2generated()
         payment_order.generated2uploaded()
 
-        self.assertEqual(invoice.invoice_payment_state, "paid")
+        self.assertEqual(invoice.payment_state, "paid")
