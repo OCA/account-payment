@@ -8,5 +8,8 @@ class AccountPaymentTerm(models.Model):
 
     _inherit = "account.payment.term"
 
-    discount_percent = fields.Float(string="Discount (%)", digits="Discount",)
+    discount_percent = fields.Float(
+        string="Discount (%)",
+        digits="Discount",
+    )
     discount_delay = fields.Integer(string="Discount Delay (days)")

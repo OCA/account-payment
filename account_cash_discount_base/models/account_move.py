@@ -24,7 +24,10 @@ class AccountMove(models.Model):
         compute="_compute_is_cash_discount_allowed",
     )
     discount_percent = fields.Float(
-        string="Discount (%)", readonly=True, states=READONLY_STATES, digits="Discount",
+        string="Discount (%)",
+        readonly=True,
+        states=READONLY_STATES,
+        digits="Discount",
     )
     amount_total_with_discount = fields.Monetary(
         string="Total (with discount)",
@@ -32,29 +35,45 @@ class AccountMove(models.Model):
         store=True,
     )
     residual_with_discount = fields.Monetary(compute="_compute_residual_with_discount")
-    discount_amount = fields.Monetary(compute="_compute_discount_amount", store=True,)
+    discount_amount = fields.Monetary(
+        compute="_compute_discount_amount",
+        store=True,
+    )
     real_discount_amount = fields.Monetary(
         compute="_compute_real_discount_amount",
         string="Discount amount (minus related refunds amount)",
     )
     refunds_discount_amount = fields.Monetary(
-        compute="_compute_refunds_discount_amount", store=True,
+        compute="_compute_refunds_discount_amount",
+        store=True,
     )
     discount_delay = fields.Integer(
         string="Discount Delay (days)", readonly=True, states=READONLY_STATES
     )
     discount_due_date = fields.Date(readonly=True, states=READONLY_STATES)
-    discount_due_date_readonly = fields.Date(compute="_compute_discount_due_date",)
-    has_discount = fields.Boolean(compute="_compute_has_discount", store=True,)
-    discount_base_date = fields.Date(compute="_compute_discount_base_date",)
+    discount_due_date_readonly = fields.Date(
+        compute="_compute_discount_due_date",
+    )
+    has_discount = fields.Boolean(
+        compute="_compute_has_discount",
+        store=True,
+    )
+    discount_base_date = fields.Date(
+        compute="_compute_discount_base_date",
+    )
 
-    @api.depends("type",)
+    @api.depends(
+        "type",
+    )
     def _compute_is_cash_discount_allowed(self):
         for rec in self:
             rec.is_cash_discount_allowed = rec.type in DISCOUNT_ALLOWED_TYPES
 
     @api.depends(
-        "amount_total", "amount_untaxed", "discount_percent", "company_id",
+        "amount_total",
+        "amount_untaxed",
+        "discount_percent",
+        "company_id",
     )
     def _compute_discount_amount(self):
         for rec in self:
@@ -70,7 +89,9 @@ class AccountMove(models.Model):
             rec.discount_amount = discount_amount
 
     @api.depends(
-        "amount_total", "refunds_discount_amount", "amount_residual",
+        "amount_total",
+        "refunds_discount_amount",
+        "amount_residual",
     )
     def _compute_residual_with_discount(self):
         for rec in self:
@@ -90,26 +111,31 @@ class AccountMove(models.Model):
             rec.refunds_discount_amount = rec._get_refunds_amount_total()["discount"]
 
     @api.depends(
-        "discount_amount", "refunds_discount_amount",
+        "discount_amount",
+        "refunds_discount_amount",
     )
     def _compute_real_discount_amount(self):
         for rec in self:
             rec.real_discount_amount = rec.discount_amount - rec.refunds_discount_amount
 
     @api.depends(
-        "amount_total", "discount_amount",
+        "amount_total",
+        "discount_amount",
     )
     def _compute_amount_total_with_discount(self):
         for rec in self:
             rec.amount_total_with_discount = rec.amount_total - rec.discount_amount
 
-    @api.depends("discount_due_date",)
+    @api.depends(
+        "discount_due_date",
+    )
     def _compute_discount_due_date(self):
         for rec in self:
             rec.discount_due_date_readonly = rec.discount_due_date
 
     @api.depends(
-        "discount_amount", "discount_due_date",
+        "discount_amount",
+        "discount_due_date",
     )
     def _compute_has_discount(self):
         for rec in self:
@@ -128,7 +154,10 @@ class AccountMove(models.Model):
                 rec.discount_base_date = fields.Date.context_today(rec)
 
     @api.onchange(
-        "has_discount", "discount_base_date", "discount_amount", "discount_delay",
+        "has_discount",
+        "discount_base_date",
+        "discount_amount",
+        "discount_delay",
     )
     def _onchange_discount_delay(self):
         for rec in self:
@@ -144,7 +173,8 @@ class AccountMove(models.Model):
             rec.discount_due_date = due_date
 
     @api.onchange(
-        "partner_id", "company_id",
+        "partner_id",
+        "company_id",
     )
     def _onchange_partner_id(self):
         old_payment_term_id = self.invoice_payment_term_id
@@ -156,7 +186,9 @@ class AccountMove(models.Model):
             self._onchange_payment_term_discount_options()
         return res
 
-    @api.onchange("invoice_payment_term_id",)
+    @api.onchange(
+        "invoice_payment_term_id",
+    )
     def _onchange_payment_term_discount_options(self):
         payment_term = self.invoice_payment_term_id
         if payment_term and self.type in DISCOUNT_ALLOWED_TYPES:
