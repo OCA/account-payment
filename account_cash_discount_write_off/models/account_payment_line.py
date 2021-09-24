@@ -132,7 +132,8 @@ class PaymentLine(models.Model):
         )
         if amount_left:
             writeoff_amount = float_round(
-                abs(discount_amount_credit), precision_rounding=rounding,
+                abs(discount_amount_credit),
+                precision_rounding=rounding,
             )
             lines_values.append(
                 {
