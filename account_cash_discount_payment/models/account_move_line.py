@@ -8,8 +8,14 @@ class AccountMoveLine(models.Model):
 
     _inherit = "account.move.line"
 
-    discount_due_date = fields.Date(related="move_id.discount_due_date", readonly=True,)
-    discount_amount = fields.Monetary(related="move_id.discount_amount", readonly=True,)
+    discount_due_date = fields.Date(
+        related="move_id.discount_due_date",
+        readonly=True,
+    )
+    discount_amount = fields.Monetary(
+        related="move_id.discount_amount",
+        readonly=True,
+    )
 
     def _prepare_payment_line_vals(self, payment_order):
         self.ensure_one()
