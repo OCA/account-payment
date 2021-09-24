@@ -10,6 +10,7 @@ class AccountPaymentLineCreate(models.TransientModel):
 
     date_type = fields.Selection(
         selection_add=[("discount_due_date", _("Discount Due Date"))],
+        ondelete={"discount_due_date": "cascade"},
     )
     cash_discount_date = fields.Date(
         default=lambda self: fields.Date.today(),

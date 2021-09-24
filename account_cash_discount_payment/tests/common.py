@@ -36,7 +36,7 @@ class TestAccountCashDiscountPaymentCommon(TestAccountCashDiscountCommon):
 
         invoice_form = Form(
             self.AccountMove.with_context(
-                default_type="in_invoice",
+                default_move_type="in_invoice",
                 default_company_id=self.company.id,
                 default_journal_id=self.purchase_journal.id,
                 default_payment_mode_id=payment_mode.id,
