@@ -62,12 +62,10 @@ class AccountMove(models.Model):
         compute="_compute_discount_base_date",
     )
 
-    @api.depends(
-        "type",
-    )
+    @api.depends("move_type")
     def _compute_is_cash_discount_allowed(self):
         for rec in self:
-            rec.is_cash_discount_allowed = rec.type in DISCOUNT_ALLOWED_TYPES
+            rec.is_cash_discount_allowed = rec.move_type in DISCOUNT_ALLOWED_TYPES
 
     @api.depends(
         "amount_total",
@@ -101,9 +99,9 @@ class AccountMove(models.Model):
 
     @api.depends(
         "amount_total",
-        "line_ids.matched_credit_ids.credit_move_id.move_id.type",
+        "line_ids.matched_credit_ids.credit_move_id.move_id.move_type",
         "line_ids.matched_credit_ids.credit_move_id.move_id.discount_amount",
-        "line_ids.matched_debit_ids.debit_move_id.move_id.type",
+        "line_ids.matched_debit_ids.debit_move_id.move_id.move_type",
         "line_ids.matched_credit_ids.debit_move_id.move_id.discount_amount",
     )
     def _compute_refunds_discount_amount(self):
@@ -142,7 +140,7 @@ class AccountMove(models.Model):
             rec.has_discount = (
                 rec.discount_amount != 0
                 and rec.discount_due_date != 0
-                and rec.type in DISCOUNT_ALLOWED_TYPES
+                and rec.move_type in DISCOUNT_ALLOWED_TYPES
             )
 
     @api.depends("invoice_date")
@@ -164,7 +162,7 @@ class AccountMove(models.Model):
             skip = (
                 rec.discount_amount == 0
                 or rec.discount_delay == 0
-                or rec.type not in DISCOUNT_ALLOWED_TYPES
+                or rec.move_type not in DISCOUNT_ALLOWED_TYPES
             )
             if skip:
                 continue
@@ -191,7 +189,7 @@ class AccountMove(models.Model):
     )
     def _onchange_payment_term_discount_options(self):
         payment_term = self.invoice_payment_term_id
-        if payment_term and self.type in DISCOUNT_ALLOWED_TYPES:
+        if payment_term and self.move_type in DISCOUNT_ALLOWED_TYPES:
             self.discount_percent = payment_term.discount_percent
             self.discount_delay = payment_term.discount_delay
 
@@ -210,20 +208,20 @@ class AccountMove(models.Model):
         self.ensure_one()
         refunds_discount_total = 0.0
         refunds_amount_total = 0.0
-        inv_type = self.type
+        inv_type = self.move_type
         expected_refund_type = False
         if inv_type in DISCOUNT_ALLOWED_TYPES and inv_type.endswith("invoice"):
             expected_refund_type = inv_type.replace("invoice", "refund")
         for pmove_line in self._get_payment_move_lines():
             pmove_line_move = pmove_line.move_id
-            if pmove_line_move and pmove_line_move.type == expected_refund_type:
+            if pmove_line_move and pmove_line_move.move_type == expected_refund_type:
                 refunds_discount_total += pmove_line_move.discount_amount
                 refunds_amount_total += pmove_line_move.amount_total
         return {"discount": refunds_discount_total, "total": refunds_amount_total}
 
     def action_post(self):
         for move in self:
-            if move.type not in DISCOUNT_ALLOWED_TYPES:
+            if move.move_type not in DISCOUNT_ALLOWED_TYPES:
                 continue
             move._onchange_discount_delay()
             if not move.discount_due_date and move.discount_amount != 0.0:
@@ -239,7 +237,7 @@ class AccountMove(models.Model):
     def _reverse_move_vals(self, default_values, cancel=True):
         res = super(AccountMove, self)._reverse_move_vals(default_values, cancel=cancel)
         partner_id = self.partner_id
-        if self.type in DISCOUNT_ALLOWED_TYPES and partner_id:
+        if self.move_type in DISCOUNT_ALLOWED_TYPES and partner_id:
             partner = self.env["res.partner"].browse(partner_id)
             payment_term = partner.property_supplier_payment_term_id
             res["invoice_payment_term_id"] = payment_term.id
