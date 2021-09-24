@@ -20,7 +20,8 @@ class TestAccountCashDiscountPayment(TestAccountCashDiscountPaymentCommon):
         )
 
         payment_line_wizard = self.PaymentLineCreate.with_context(
-            active_model=payment_order._name, active_id=payment_order.id,
+            active_model=payment_order._name,
+            active_id=payment_order.id,
         ).create(
             {
                 "cash_discount_date": invoice_date,
