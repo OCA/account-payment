@@ -6,7 +6,7 @@
 {
     "name": "Account Payment Return Import",
     "category": "Accounting",
-    "version": "13.0.1.0.3",
+    "version": "14.0.1.0.0",
     "summary": "This module adds a generic wizard to import payment return"
     "file formats. Is only the base to be extended by another"
     "modules",
@@ -14,6 +14,6 @@
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-payment",
     "depends": ["account_payment_return"],
-    "data": ["views/payment_return_view.xml", "wizard/payment_return_import_view.xml"],
+    "data": ["security/ir.model.access.csv","views/payment_return_view.xml", "wizard/payment_return_import_view.xml"],
     "installable": True,
 }
