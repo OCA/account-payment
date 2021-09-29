@@ -14,10 +14,12 @@ class AccountPayment(models.Model):
     )
     date_due = fields.Date(readonly=True, states={"draft": [("readonly", False)]},)
 
-    def _get_liquidity_move_line_vals(self, amount):
-        res = super()._get_liquidity_move_line_vals(amount)
+    def _prepare_payment_moves(self):
+        res = super()._prepare_payment_moves()
         if self.promissory_note:
-            res["date_maturity"] = self.date_due
+            for vals in res:
+                for line in vals["line_ids"]:
+                    line[2]["date_maturity"] = self.date_due
         return res
 
     @api.onchange("promissory_note")
