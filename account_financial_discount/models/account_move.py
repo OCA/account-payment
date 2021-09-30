@@ -29,6 +29,28 @@ class AccountMove(models.Model):
         help="Allows group-by but has no logic linked to it",
     )
 
+    def _financial_discount_query(self):
+        self.env.cr.execute(
+            r"""
+            SELECT
+                move.move_type AS move_type,
+                move.currency_id AS currency_id,
+                move.force_financial_discount AS force_financial_discount,
+                line.date_discount AS date_discount,
+                SUM(line.amount_discount) as amount_discount,
+                SUM(line.amount_discount_currency) as amount_discount_currency
+            FROM account_move move
+            LEFT JOIN account_move_line line ON line.move_id = move.id
+            LEFT JOIN account_account account ON account.id = line.account_id
+            LEFT JOIN account_account_type account_type ON account_type.id = account.user_type_id
+            WHERE move.id IN %s
+            AND account_type.type IN ('receivable', 'payable')
+            GROUP BY move.id, move.move_type, line.date_discount
+        """,
+            [tuple(self.ids)],
+        )
+        return self._cr.dictfetchall()
+
     # TODO refactor the two functions below together
     def _get_discount_available(self):
         self.ensure_one()

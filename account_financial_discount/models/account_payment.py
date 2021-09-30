@@ -25,27 +25,7 @@ class AccountPayment(models.Model):
         currency = currency or journal.currency_id or company.currency_id
         date = date or fields.Date.today()
 
-        self.env.cr.execute(
-            r"""
-            SELECT
-                move.type AS type,
-                move.currency_id AS currency_id,
-                move.force_financial_discount AS force_financial_discount,
-                line.date_discount AS date_discount,
-                SUM(line.amount_discount) as amount_discount,
-                SUM(line.amount_discount_currency) as amount_discount_currency
-            FROM account_move move
-            LEFT JOIN account_move_line line ON line.move_id = move.id
-            LEFT JOIN account_account account ON account.id = line.account_id
-            LEFT JOIN account_account_type account_type
-                ON account_type.id = account.user_type_id
-            WHERE move.id IN %s
-            AND account_type.type IN ('receivable', 'payable')
-            GROUP BY move.id, move.type, line.date_discount
-        """,
-            [tuple(invoices.ids)],
-        )
-        query_res = self._cr.dictfetchall()
+        query_res = invoices._financial_discount_query()
         for res in query_res:
             # force_financial_discount should be handled differently according
             # to the context in which _compute_payment_amount is called:
