@@ -4,66 +4,26 @@
         id="report_payment_receipt_document"
         inherit_id="account.report_payment_receipt_document"
     >
-        <xpath expr="//table/thead/tr/th[3]" position="after">
-            <th class="text-right">
-                <span>Discount</span>
+        <xpath expr="//table/thead/tr/th[hasclass('text-right')][2]" position="after">
+            <t
+                t-set="any_inv_not_entry"
+                t-value="any(partial[2].move_id.move_type != entry for partial in o.move_id._get_reconciled_invoices_partials())"
+            />
+            <th t-if="any_inv_not_entry" class="text-right">
+                <span>Written-off</span>
             </th>
         </xpath>
-        <xpath expr="//table/tbody/tr/td[3]" position="after">
+        <xpath expr="//table/tbody/tr//td[hasclass('text-right')][2]" position="after">
+            <t t-set="inv_move_line_discount" t-value="rec[2].amount_discount" />
             <td class="text-right">
                 <span
-                    t-esc="o.get_discount_for_invoices(inv)"
+                    t-esc="inv_move_line_discount"
                     t-options="{'widget': 'monetary', 'display_currency': inv.currency_id}"
                 />
             </td>
         </xpath>
-        <xpath
-            expr="//span[@t-esc='o._get_invoice_payment_amount(inv)']"
-            position="attributes"
-        >
-            <attribute
-                name="t-esc"
-            >o._get_invoice_payment_amount(inv) + o.get_discount_for_invoices(inv)</attribute>
-        </xpath>
-        <xpath expr="//tbody" position="after">
-            <t t-set="invoices" t-value="o.reconciled_invoice_ids" />
-            <tfooter t-if="invoices">
-                <tr style="font-weight: bold">
-                    <t t-set="curr" t-value="invoices[0].currency_id" />
-                    <t
-                        t-set="total_paid"
-                        t-value="sum(o._get_invoice_payment_amount(inv) for inv in invoices)"
-                    />
-                    <td />
-                    <td />
-                    <td />
-                    <td />
-                    <td class="text-right">
-                        <span
-                            t-esc="o.get_discount_for_invoices(invoices)"
-                            t-options="{'widget': 'monetary', 'display_currency': curr}"
-                        />
-                    </td>
-                    <td class="text-right">
-                        <span
-                            t-esc="sum(invoices.mapped('amount_total'))"
-                            t-options="{'widget': 'monetary', 'display_currency': curr}"
-                        />
-                    </td>
-                    <td class="text-right">
-                        <span
-                            t-esc="total_paid + o.get_discount_for_invoices(invoices)"
-                            t-options="{'widget': 'monetary', 'display_currency': curr}"
-                        />
-                    </td>
-                    <td class="text-right">
-                        <span
-                            t-esc="sum(invoices.mapped('amount_residual'))"
-                            t-options="{'widget': 'monetary', 'display_currency': curr}"
-                        />
-                    </td>
-                </tr>
-            </tfooter>
+        <xpath expr="//span[@t-esc='amount']" position="attributes">
+            <attribute name="t-esc">amount - inv_move_line_discount</attribute>
         </xpath>
     </template>
 </odoo>

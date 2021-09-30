@@ -5,16 +5,17 @@
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_invoice_tree" />
         <field name="arch" type="xml">
-            <field name="type" position="after">
+            <field name="move_type" position="after">
                 <field name="has_discount_available" invisible="1" />
             </field>
             <xpath expr="//tree[1]" position="attributes">
                 <attribute
                     name="decoration-success"
-                >has_discount_available and state == 'posted' and invoice_payment_state != 'paid'</attribute>
+                >has_discount_available and state == 'posted' and payment_state != 'paid'</attribute>
             </xpath>
         </field>
     </record>
+
     <record id="view_account_invoice_filter_inherit" model="ir.ui.view">
         <field name="name">account.invoice.select.inherit</field>
         <field name="model">account.move</field>
@@ -30,6 +31,7 @@
             </xpath>
         </field>
     </record>
+
     <record id="view_move_form_inherit" model="ir.ui.view">
         <field name="name">account.move.form.inherit</field>
         <field name="model">account.move</field>
@@ -77,9 +79,6 @@
                     optional="hide"
                 />
             </xpath>
-            <field name="ref" position="after">
-                <field name="payment_blocked" />
-            </field>
         </field>
     </record>
 </odoo>
