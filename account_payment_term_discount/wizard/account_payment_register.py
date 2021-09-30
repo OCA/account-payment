@@ -90,8 +90,24 @@ class AccountPaymentRegister(models.TransientModel):
 
     def action_create_payments(self):
         active_id = self.env.context.get("active_ids", [])
+        move_obj = self.env["account.move"]
+        moves_ids = move_obj.browse(active_id)
+        flag = False
+        # Check if Invoices have ACH IN/OUT payment method, to avoid any
+        # conflict
+        if (
+            "payment_mode_id" in move_obj._fields
+            and moves_ids
+            and moves_ids.filtered(
+                lambda p: p.payment_mode_id.payment_method_code in ("ACH-In", "ACH-Out")
+            )
+        ):
+            flag = True
 
-        if (not isinstance(active_id, int)) and len(active_id) != 1:
+        if self.filtered(lambda p: p.payment_method_id.code in ("ACH-In", "ACH-Out")):
+            flag = True
+
+        if (not isinstance(active_id, int)) and len(active_id) != 1 and flag:
             # For multiple invoices, there is account.register.payments wizard
             raise UserError(
                 _(
