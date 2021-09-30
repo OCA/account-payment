@@ -320,7 +320,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
 
     def test_register_payment_with_discount_available(self):
         """Test register payment for multiple vendor bills with available discount"""
-        invoice4 = self.invoice1.copy()
+        invoice4 = self.invoice1.copy({"invoice_date": "2019-04-01"})
         self.assertTrue(invoice4.has_discount_available)
         invoices = self.invoice1 | invoice4
         invoices.post()
@@ -335,7 +335,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         )
         self.assertEqual(payment_wizard_form.journal_id, self.bank_journal)
         payment_wizard = payment_wizard_form.save()
-        payment_wizard.create_payments()
+        payment_wizard.action_create_payments()
         invoice1_payment_lines = self._get_payment_lines(self.invoice1)
         invoice1_payment = invoice1_payment_lines.mapped("payment_id")
         self.assertEqual(invoice1_payment.amount, self.amount_with_discount)
@@ -374,7 +374,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         self.assertEqual(payment_wizard_form.journal_id, self.bank_journal)
         payment_wizard_form.group_payment = True
         payment_wizard = payment_wizard_form.save()
-        payment_wizard.create_payments()
+        payment_wizard.action_create_payments()
         invoice1_payment_lines = self._get_payment_lines(self.invoice1)
         invoice1_payment = invoice1_payment_lines.mapped("payment_id")
         invoice4_payment_lines = self._get_payment_lines(invoice4)
@@ -407,7 +407,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         )
         self.assertEqual(payment_wizard_form.journal_id, self.bank_journal)
         payment_wizard = payment_wizard_form.save()
-        payment_wizard.create_payments()
+        payment_wizard.action_create_payments()
         invoice2_payment_lines = self._get_payment_lines(self.invoice2)
         invoice2_payment = invoice2_payment_lines.mapped("payment_id")
         self.assertEqual(invoice2_payment.amount, self.amount_without_discount)
@@ -442,7 +442,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         )
         self.assertEqual(payment_wizard_form.journal_id, self.bank_journal)
         payment_wizard = payment_wizard_form.save()
-        payment_wizard.create_payments()
+        payment_wizard.action_create_payments()
         invoice2_payment_lines = self._get_payment_lines(self.invoice2)
         invoice2_payment = invoice2_payment_lines.mapped("payment_id")
         self.assertEqual(invoice2_payment.amount, self.amount_without_discount)
@@ -481,7 +481,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         )
         self.assertEqual(payment_wizard_form.journal_id, self.bank_journal)
         payment_wizard = payment_wizard_form.save()
-        payment_wizard.create_payments()
+        payment_wizard.action_create_payments()
         invoice2_payment_lines = self._get_payment_lines(self.invoice2)
         invoice2_payment = invoice2_payment_lines.mapped("payment_id")
         self.assertEqual(invoice2_payment.amount, self.amount_with_discount)

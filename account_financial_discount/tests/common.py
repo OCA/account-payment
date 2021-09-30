@@ -14,7 +14,7 @@ class TestAccountFinancialDiscountCommon(SavepointCase):
         invoice_date_due=None,
         currency=None,
     ):
-        move_form = Form(cls.env["account.move"].with_context(default_type=move_type))
+        move_form = Form(cls.env["account.move"].with_context(default_move_type=move_type))
         move_form.partner_id = partner
         move_form.invoice_payment_term_id = payment_term
         move_form.invoice_date = invoice_date

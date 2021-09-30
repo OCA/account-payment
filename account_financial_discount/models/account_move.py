@@ -129,8 +129,8 @@ class AccountMove(models.Model):
                 and payment_term.percent_discount
                 and len(tax_line) <= 1
                 and (
-                    (move.type == "out_invoice" and payment_term_line.debit)
-                    or (move.type == "in_invoice" and payment_term_line.credit)
+                    (move.move_type == "out_invoice" and payment_term_line.debit)
+                    or (move.move_type == "in_invoice" and payment_term_line.credit)
                 )
             ):
                 pay_term_vals = move._prepare_discount_vals(payment_term)
@@ -138,7 +138,7 @@ class AccountMove(models.Model):
                     tax_discount_amount = move._get_discount_amount(
                         tax_line.debit or tax_line.credit
                     )
-                    if move.type == "in_invoice":
+                    if move.move_type == "in_invoice":
                         tax_discount_amount = -tax_discount_amount
                     pay_term_vals.update(
                         {
@@ -176,13 +176,13 @@ class AccountMove(models.Model):
                     self.company_id,
                     date_invoice,
                 )
-            if self.type == "out_invoice":
+            if self.move_type == "out_invoice":
                 if diff_currency:
                     vals["amount_discount"] = amount_discount_company_currency
                     vals["amount_discount_currency"] = amount_discount_invoice_currency
                 else:
                     vals["amount_discount"] = amount_discount_invoice_currency
-            elif self.type == "in_invoice":
+            elif self.move_type == "in_invoice":
                 if diff_currency:
                     vals["amount_discount"] = -amount_discount_company_currency
                     vals["amount_discount_currency"] = -amount_discount_invoice_currency

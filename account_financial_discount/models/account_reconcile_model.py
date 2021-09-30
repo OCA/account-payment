@@ -35,7 +35,7 @@ class AccountReconcileModel(models.Model):
         "rule_type",
         "apply_financial_discounts",
         "match_total_amount",
-        "strict_match_total_amount",
+        # "strict_match_total_amount",
         "financial_discount_label",
         "financial_discount_revenue_account_id",
         "financial_discount_expense_account_id",
@@ -49,8 +49,8 @@ class AccountReconcileModel(models.Model):
             errors = []
             if not rec.match_total_amount or rec.match_total_amount_param != 100.0:
                 errors.append(_("Amount Matching must be set to 100%"))
-            if not rec.strict_match_total_amount:
-                errors.append(_("Strict amount matching must be set"))
+            # if not rec.strict_match_total_amount:
+            #     errors.append(_("Strict amount matching must be set"))
             # FIXME: Restrict application of financial discount if currencies
             #  are different while odoo hasn't fixed their mess
             #  cf https://github.com/odoo/odoo/pull/52529#pullrequestreview-427812393
