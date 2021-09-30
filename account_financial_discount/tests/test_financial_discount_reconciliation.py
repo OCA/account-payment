@@ -27,7 +27,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         cls.reconciliation_model.write(
             {
                 "match_partner": False,
-                "strict_match_total_amount": True,
+                # "strict_match_total_amount": True,
                 "apply_financial_discounts": True,
                 "financial_discount_tolerance": 0.05,
             }
@@ -40,7 +40,6 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
                 "currency_id": cls.eur_currency.id,
             }
         )
-        cls.reconciliation_widget = cls.env["account.reconciliation.widget"]
 
         cls.amount_taxed_without_discount = 1150.0
         cls.amount_taxed_discount = 23.0
@@ -60,11 +59,10 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         return bank_statement_form.save()
 
     def _create_bank_statement_line(self, bank_statement, label, amount):
-        statement_line_form = Form(self.env["account.bank.statement.line"])
-        statement_line_form.statement_id = bank_statement
-        statement_line_form.name = label
-        statement_line_form.amount = amount
-        return statement_line_form.save()
+        with Form(bank_statement) as statement_form:
+            with statement_form.line_ids.new() as statement_line_form:
+                statement_line_form.payment_ref = label
+                statement_line_form.amount = amount
 
     def test_client_invoice_with_tax_bank_reconciliation(self):
         invoice = self.init_invoice(
@@ -75,20 +73,34 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
             invoice_date_due="2019-06-01",
         )
         self.init_invoice_line(invoice, 1.0, self.amount_untaxed_without_discount)
-        invoice.post()
+        invoice.action_post()
+        invoice_receivable_line = invoice._get_first_payment_term_line()
+        invoice_tax_line = invoice.line_ids.filtered(lambda l: l.tax_line_id)
         bank_statement = self._create_bank_statement()
-        statement_line = self._create_bank_statement_line(
+        self._create_bank_statement_line(
             bank_statement, invoice.name, self.amount_taxed_with_discount
         )
-        rec_widget_data = self.reconciliation_widget.get_bank_statement_line_data(
-            statement_line.ids
+        st_line = bank_statement.line_ids
+        matching_amls = self.reconciliation_model._apply_rules(st_line)
+        self.assertEqual(
+            matching_amls.get(st_line.id).get("aml_ids"), [invoice_receivable_line.id]
         )
-        rec_widget_statement_data = rec_widget_data.get("lines")[0]
-        self.assertTrue(rec_widget_statement_data.get("write_off"))
-        prop = rec_widget_statement_data.get("reconciliation_proposition")[0]
-        self.assertTrue(prop.get("financial_discount_available"))
-        self.assertEqual(prop.get("amount_discount"), self.amount_taxed_discount)
-        self.assertEqual(prop.get("amount_discount_tax"), self.amount_discount_tax)
+        self.assertEqual(matching_amls.get(st_line.id).get("status"), "write_off")
+        write_off_vals = matching_amls.get(st_line.id).get("write_off_vals")
+        self.assertEqual(
+            write_off_vals[0].get("name"),
+            self.reconciliation_model.financial_discount_label,
+        )
+        self.assertEqual(
+            write_off_vals[0].get("account_id"),
+            self.reconciliation_model.financial_discount_expense_account_id.id,
+        )
+        self.assertEqual(write_off_vals[0].get("debit"), self.amount_untaxed_discount)
+        self.assertEqual(write_off_vals[1].get("name"), invoice_tax_line.name)
+        self.assertEqual(
+            write_off_vals[1].get("account_id"), invoice_tax_line.account_id.id
+        )
+        self.assertEqual(write_off_vals[1].get("debit"), self.amount_discount_tax)
 
     def test_client_invoice_without_tax_bank_reconciliation(self):
         invoice = self.init_invoice(
@@ -101,20 +113,28 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         self.init_invoice_line(
             invoice, 1.0, self.amount_untaxed_without_discount, with_tax=False
         )
-        invoice.post()
+        invoice.action_post()
+        invoice_receivable_line = invoice._get_first_payment_term_line()
         bank_statement = self._create_bank_statement()
-        statement_line = self._create_bank_statement_line(
+        self._create_bank_statement_line(
             bank_statement, invoice.name, self.amount_untaxed_with_discount
         )
-        rec_widget_data = self.reconciliation_widget.get_bank_statement_line_data(
-            statement_line.ids
+        st_line = bank_statement.line_ids
+        matching_amls = self.reconciliation_model._apply_rules(st_line)
+        self.assertEqual(
+            matching_amls.get(st_line.id).get("aml_ids"), [invoice_receivable_line.id]
         )
-        rec_widget_statement_data = rec_widget_data.get("lines")[0]
-        self.assertTrue(rec_widget_statement_data.get("write_off"))
-        prop = rec_widget_statement_data.get("reconciliation_proposition")[0]
-        self.assertTrue(prop.get("financial_discount_available"))
-        self.assertEqual(prop.get("amount_discount"), self.amount_untaxed_discount)
-        self.assertEqual(prop.get("amount_discount_tax"), 0)
+        self.assertEqual(matching_amls.get(st_line.id).get("status"), "write_off")
+        write_off_vals = matching_amls.get(st_line.id).get("write_off_vals")
+        self.assertEqual(
+            write_off_vals[0].get("name"),
+            self.reconciliation_model.financial_discount_label,
+        )
+        self.assertEqual(
+            write_off_vals[0].get("account_id"),
+            self.reconciliation_model.financial_discount_expense_account_id.id,
+        )
+        self.assertEqual(write_off_vals[0].get("debit"), self.amount_untaxed_discount)
 
     def test_vendor_bill_with_tax_bank_reconciliation(self):
         vendor_bill = self.init_invoice(
@@ -123,22 +143,39 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
             payment_term=self.payment_term,
             invoice_date="2019-05-01",
             invoice_date_due="2019-06-01",
+            payment_reference="VENDOR-BILL-REF-0001",
         )
         self.init_invoice_line(vendor_bill, 1.0, self.amount_untaxed_without_discount)
-        vendor_bill.post()
+        vendor_bill.action_post()
+        vendor_bill_payable_line = vendor_bill._get_first_payment_term_line()
+        vendor_bill_tax_line = vendor_bill.line_ids.filtered(lambda l: l.tax_line_id)
         bank_statement = self._create_bank_statement()
-        statement_line = self._create_bank_statement_line(
-            bank_statement, vendor_bill.name, -self.amount_taxed_with_discount
+        self._create_bank_statement_line(
+            bank_statement,
+            vendor_bill.payment_reference,
+            -self.amount_taxed_with_discount,
         )
-        rec_widget_data = self.reconciliation_widget.get_bank_statement_line_data(
-            statement_line.ids
+        st_line = bank_statement.line_ids
+        matching_amls = self.reconciliation_model._apply_rules(st_line)
+        self.assertEqual(
+            matching_amls.get(st_line.id).get("aml_ids"), [vendor_bill_payable_line.id]
         )
-        rec_widget_statement_data = rec_widget_data.get("lines")[0]
-        self.assertTrue(rec_widget_statement_data.get("write_off"))
-        prop = rec_widget_statement_data.get("reconciliation_proposition")[0]
-        self.assertTrue(prop.get("financial_discount_available"))
-        self.assertEqual(prop.get("amount_discount"), -self.amount_taxed_discount)
-        self.assertEqual(prop.get("amount_discount_tax"), -self.amount_discount_tax)
+        self.assertEqual(matching_amls.get(st_line.id).get("status"), "write_off")
+        write_off_vals = matching_amls.get(st_line.id).get("write_off_vals")
+        self.assertEqual(
+            write_off_vals[0].get("name"),
+            self.reconciliation_model.financial_discount_label,
+        )
+        self.assertEqual(
+            write_off_vals[0].get("account_id"),
+            self.reconciliation_model.financial_discount_revenue_account_id.id,
+        )
+        self.assertEqual(write_off_vals[0].get("credit"), self.amount_untaxed_discount)
+        self.assertEqual(write_off_vals[1].get("name"), vendor_bill_tax_line.name)
+        self.assertEqual(
+            write_off_vals[1].get("account_id"), vendor_bill_tax_line.account_id.id
+        )
+        self.assertEqual(write_off_vals[1].get("credit"), self.amount_discount_tax)
 
     def test_vendor_bill_without_tax_bank_reconciliation(self):
         vendor_bill = self.init_invoice(
@@ -147,24 +184,38 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
             payment_term=self.payment_term,
             invoice_date="2019-05-01",
             invoice_date_due="2019-06-01",
+            payment_reference="VENDOR-BILL-REF-0001",
         )
         self.init_invoice_line(
-            vendor_bill, 1.0, self.amount_untaxed_without_discount, with_tax=False,
+            vendor_bill,
+            1.0,
+            self.amount_untaxed_without_discount,
+            with_tax=False,
         )
-        vendor_bill.post()
+        vendor_bill.action_post()
+        vendor_bill_payable_line = vendor_bill._get_first_payment_term_line()
         bank_statement = self._create_bank_statement()
-        statement_line = self._create_bank_statement_line(
-            bank_statement, vendor_bill.name, -self.amount_untaxed_with_discount,
+        self._create_bank_statement_line(
+            bank_statement,
+            vendor_bill.payment_reference,
+            -self.amount_untaxed_with_discount,
         )
-        rec_widget_data = self.reconciliation_widget.get_bank_statement_line_data(
-            statement_line.ids
+        st_line = bank_statement.line_ids
+        matching_amls = self.reconciliation_model._apply_rules(st_line)
+        self.assertEqual(
+            matching_amls.get(st_line.id).get("aml_ids"), [vendor_bill_payable_line.id]
         )
-        rec_widget_statement_data = rec_widget_data.get("lines")[0]
-        self.assertTrue(rec_widget_statement_data.get("write_off"))
-        prop = rec_widget_statement_data.get("reconciliation_proposition")[0]
-        self.assertTrue(prop.get("financial_discount_available"))
-        self.assertEqual(prop.get("amount_discount"), -self.amount_untaxed_discount)
-        self.assertEqual(prop.get("amount_discount_tax"), 0)
+        self.assertEqual(matching_amls.get(st_line.id).get("status"), "write_off")
+        write_off_vals = matching_amls.get(st_line.id).get("write_off_vals")
+        self.assertEqual(
+            write_off_vals[0].get("name"),
+            self.reconciliation_model.financial_discount_label,
+        )
+        self.assertEqual(
+            write_off_vals[0].get("account_id"),
+            self.reconciliation_model.financial_discount_revenue_account_id.id,
+        )
+        self.assertEqual(write_off_vals[0].get("credit"), self.amount_untaxed_discount)
 
     def test_client_invoice_with_tax_late_bank_reconciliation(self):
         invoice = self.init_invoice(
@@ -175,17 +226,18 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
             invoice_date_due="2019-04-01",
         )
         self.init_invoice_line(invoice, 1.0, self.amount_untaxed_without_discount)
-        invoice.post()
+        invoice.action_post()
+        invoice_receivable_line = invoice._get_first_payment_term_line()
         bank_statement = self._create_bank_statement()
-        statement_line = self._create_bank_statement_line(
+        self._create_bank_statement_line(
             bank_statement, invoice.name, self.amount_taxed_with_discount
         )
-        rec_widget_data = self.reconciliation_widget.get_bank_statement_line_data(
-            statement_line.ids
+        st_line = bank_statement.line_ids
+        matching_amls = self.reconciliation_model._apply_rules(st_line)
+        self.assertEqual(
+            matching_amls.get(st_line.id).get("aml_ids"), [invoice_receivable_line.id]
         )
-        rec_widget_statement_data = rec_widget_data.get("lines")[0]
-        self.assertFalse(rec_widget_statement_data.get("write_off"))
-        self.assertFalse(rec_widget_statement_data.get("reconciliation_proposition"))
+        self.assertFalse(matching_amls.get(st_line.id).get("status"))
 
     def test_vendor_bill_with_tax_late_bank_reconciliation(self):
         vendor_bill = self.init_invoice(
@@ -194,19 +246,23 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
             payment_term=self.payment_term,
             invoice_date="2019-03-01",
             invoice_date_due="2019-04-01",
+            payment_reference="VENDOR-BILL-REF-0001",
         )
         self.init_invoice_line(vendor_bill, 1.0, self.amount_untaxed_without_discount)
-        vendor_bill.post()
+        vendor_bill.action_post()
+        vendor_bill_payable_line = vendor_bill._get_first_payment_term_line()
         bank_statement = self._create_bank_statement()
-        statement_line = self._create_bank_statement_line(
-            bank_statement, vendor_bill.name, -self.amount_taxed_with_discount
+        self._create_bank_statement_line(
+            bank_statement,
+            vendor_bill.payment_reference,
+            -self.amount_taxed_with_discount,
         )
-        rec_widget_data = self.reconciliation_widget.get_bank_statement_line_data(
-            statement_line.ids
+        st_line = bank_statement.line_ids
+        matching_amls = self.reconciliation_model._apply_rules(st_line)
+        self.assertEqual(
+            matching_amls.get(st_line.id).get("aml_ids"), [vendor_bill_payable_line.id]
         )
-        rec_widget_statement_data = rec_widget_data.get("lines")[0]
-        self.assertFalse(rec_widget_statement_data.get("write_off"))
-        self.assertFalse(rec_widget_statement_data.get("reconciliation_proposition"))
+        self.assertFalse(matching_amls.get(st_line.id).get("status"))
 
     def test_client_invoice_with_tax_late_forced_bank_reconciliation(self):
         invoice = self.init_invoice(
@@ -217,21 +273,35 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
             invoice_date_due="2019-04-01",
         )
         self.init_invoice_line(invoice, 1.0, self.amount_untaxed_without_discount)
-        invoice.post()
+        invoice.action_post()
+        invoice_receivable_line = invoice._get_first_payment_term_line()
+        invoice_tax_line = invoice.line_ids.filtered(lambda l: l.tax_line_id)
         invoice.force_financial_discount = True
         bank_statement = self._create_bank_statement()
-        statement_line = self._create_bank_statement_line(
+        self._create_bank_statement_line(
             bank_statement, invoice.name, self.amount_taxed_with_discount
         )
-        rec_widget_data = self.reconciliation_widget.get_bank_statement_line_data(
-            statement_line.ids
+        st_line = bank_statement.line_ids
+        matching_amls = self.reconciliation_model._apply_rules(st_line)
+        self.assertEqual(
+            matching_amls.get(st_line.id).get("aml_ids"), [invoice_receivable_line.id]
         )
-        rec_widget_statement_data = rec_widget_data.get("lines")[0]
-        self.assertTrue(rec_widget_statement_data.get("write_off"))
-        prop = rec_widget_statement_data.get("reconciliation_proposition")[0]
-        self.assertTrue(prop.get("financial_discount_available"))
-        self.assertEqual(prop.get("amount_discount"), self.amount_taxed_discount)
-        self.assertEqual(prop.get("amount_discount_tax"), self.amount_discount_tax)
+        self.assertEqual(matching_amls.get(st_line.id).get("status"), "write_off")
+        write_off_vals = matching_amls.get(st_line.id).get("write_off_vals")
+        self.assertEqual(
+            write_off_vals[0].get("name"),
+            self.reconciliation_model.financial_discount_label,
+        )
+        self.assertEqual(
+            write_off_vals[0].get("account_id"),
+            self.reconciliation_model.financial_discount_expense_account_id.id,
+        )
+        self.assertEqual(write_off_vals[0].get("debit"), self.amount_untaxed_discount)
+        self.assertEqual(write_off_vals[1].get("name"), invoice_tax_line.name)
+        self.assertEqual(
+            write_off_vals[1].get("account_id"), invoice_tax_line.account_id.id
+        )
+        self.assertEqual(write_off_vals[1].get("debit"), self.amount_discount_tax)
 
     def test_vendor_bill_with_tax_late_forced_bank_reconciliation(self):
         vendor_bill = self.init_invoice(
@@ -240,23 +310,40 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
             payment_term=self.payment_term,
             invoice_date="2019-03-01",
             invoice_date_due="2019-04-01",
+            payment_reference="VENDOR-BILL-REF-0001",
         )
         self.init_invoice_line(vendor_bill, 1.0, self.amount_untaxed_without_discount)
+        vendor_bill.action_post()
+        vendor_bill_payable_line = vendor_bill._get_first_payment_term_line()
+        vendor_bill_tax_line = vendor_bill.line_ids.filtered(lambda l: l.tax_line_id)
         vendor_bill.force_financial_discount = True
-        vendor_bill.post()
         bank_statement = self._create_bank_statement()
-        statement_line = self._create_bank_statement_line(
-            bank_statement, vendor_bill.name, -self.amount_taxed_with_discount
+        self._create_bank_statement_line(
+            bank_statement,
+            vendor_bill.payment_reference,
+            -self.amount_taxed_with_discount,
         )
-        rec_widget_data = self.reconciliation_widget.get_bank_statement_line_data(
-            statement_line.ids
+        st_line = bank_statement.line_ids
+        matching_amls = self.reconciliation_model._apply_rules(st_line)
+        self.assertEqual(
+            matching_amls.get(st_line.id).get("aml_ids"), [vendor_bill_payable_line.id]
         )
-        rec_widget_statement_data = rec_widget_data.get("lines")[0]
-        self.assertTrue(rec_widget_statement_data.get("write_off"))
-        prop = rec_widget_statement_data.get("reconciliation_proposition")[0]
-        self.assertTrue(prop.get("financial_discount_available"))
-        self.assertEqual(prop.get("amount_discount"), -self.amount_taxed_discount)
-        self.assertEqual(prop.get("amount_discount_tax"), -self.amount_discount_tax)
+        self.assertEqual(matching_amls.get(st_line.id).get("status"), "write_off")
+        write_off_vals = matching_amls.get(st_line.id).get("write_off_vals")
+        self.assertEqual(
+            write_off_vals[0].get("name"),
+            self.reconciliation_model.financial_discount_label,
+        )
+        self.assertEqual(
+            write_off_vals[0].get("account_id"),
+            self.reconciliation_model.financial_discount_revenue_account_id.id,
+        )
+        self.assertEqual(write_off_vals[0].get("credit"), self.amount_untaxed_discount)
+        self.assertEqual(write_off_vals[1].get("name"), vendor_bill_tax_line.name)
+        self.assertEqual(
+            write_off_vals[1].get("account_id"), vendor_bill_tax_line.account_id.id
+        )
+        self.assertEqual(write_off_vals[1].get("credit"), self.amount_discount_tax)
 
     def test_client_invoice_eur_with_tax_bank_reconciliation(self):
         invoice = self.init_invoice(
@@ -268,32 +355,43 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
             currency=self.eur_currency,
         )
         self.init_invoice_line(invoice, 1.0, self.amount_untaxed_without_discount)
-        invoice.post()
+        invoice.action_post()
+        invoice_receivable_line = invoice._get_first_payment_term_line()
+        invoice_tax_line = invoice.line_ids.filtered(lambda l: l.tax_line_id)
         bank_statement = self._create_bank_statement(journal=self.eur_bank_journal)
-        statement_line = self._create_bank_statement_line(
+        self._create_bank_statement_line(
             bank_statement, invoice.name, self.amount_taxed_with_discount
         )
-        rec_widget_data = self.reconciliation_widget.get_bank_statement_line_data(
-            statement_line.ids
-        )
-        rec_widget_statement_data = rec_widget_data.get("lines")[0]
-        self.assertTrue(rec_widget_statement_data.get("write_off"))
-        prop = rec_widget_statement_data.get("reconciliation_proposition")[0]
-        self.assertTrue(prop.get("financial_discount_available"))
+        st_line = bank_statement.line_ids
+        matching_amls = self.reconciliation_model._apply_rules(st_line)
         self.assertEqual(
-            prop.get("amount_discount"),
+            matching_amls.get(st_line.id).get("aml_ids"), [invoice_receivable_line.id]
+        )
+        self.assertEqual(matching_amls.get(st_line.id).get("status"), "write_off")
+        write_off_vals = matching_amls.get(st_line.id).get("write_off_vals")
+        self.assertEqual(
+            write_off_vals[0].get("name"),
+            self.reconciliation_model.financial_discount_label,
+        )
+        self.assertEqual(
+            write_off_vals[0].get("account_id"),
+            self.reconciliation_model.financial_discount_expense_account_id.id,
+        )
+        self.assertEqual(
+            write_off_vals[0].get("debit"),
             self.eur_currency._convert(
-                self.amount_taxed_discount,
+                self.amount_untaxed_discount,
                 self.usd_currency,
                 invoice.company_id,
                 invoice.invoice_date,
             ),
         )
+        self.assertEqual(write_off_vals[1].get("name"), invoice_tax_line.name)
         self.assertEqual(
-            prop.get("amount_discount_currency"), self.amount_taxed_discount
+            write_off_vals[1].get("account_id"), invoice_tax_line.account_id.id
         )
         self.assertEqual(
-            prop.get("amount_discount_tax"),
+            write_off_vals[1].get("debit"),
             self.eur_currency._convert(
                 self.amount_discount_tax,
                 self.usd_currency,
@@ -310,41 +408,83 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
             invoice_date="2019-05-01",
             invoice_date_due="2019-06-01",
             currency=self.eur_currency,
+            payment_reference="VENDOR-BILL-REF-0001",
         )
         self.init_invoice_line(vendor_bill, 1.0, self.amount_untaxed_without_discount)
-        vendor_bill.post()
+        vendor_bill.action_post()
+        vendor_bill_payable_line = vendor_bill._get_first_payment_term_line()
+        vendor_bill_tax_line = vendor_bill.line_ids.filtered(lambda l: l.tax_line_id)
         bank_statement = self._create_bank_statement(journal=self.eur_bank_journal)
-        statement_line = self._create_bank_statement_line(
-            bank_statement, vendor_bill.name, -self.amount_taxed_with_discount
+        self._create_bank_statement_line(
+            bank_statement,
+            vendor_bill.payment_reference,
+            -self.amount_taxed_with_discount,
         )
-        rec_widget_data = self.reconciliation_widget.get_bank_statement_line_data(
-            statement_line.ids
-        )
-        rec_widget_statement_data = rec_widget_data.get("lines")[0]
-        self.assertTrue(rec_widget_statement_data.get("write_off"))
-        prop = rec_widget_statement_data.get("reconciliation_proposition")[0]
-        self.assertTrue(prop.get("financial_discount_available"))
+        st_line = bank_statement.line_ids
+        matching_amls = self.reconciliation_model._apply_rules(st_line)
         self.assertEqual(
-            prop.get("amount_discount"),
+            matching_amls.get(st_line.id).get("aml_ids"), [vendor_bill_payable_line.id]
+        )
+        self.assertEqual(matching_amls.get(st_line.id).get("status"), "write_off")
+        write_off_vals = matching_amls.get(st_line.id).get("write_off_vals")
+        self.assertEqual(
+            write_off_vals[0].get("name"),
+            self.reconciliation_model.financial_discount_label,
+        )
+        self.assertEqual(
+            write_off_vals[0].get("account_id"),
+            self.reconciliation_model.financial_discount_revenue_account_id.id,
+        )
+        self.assertEqual(
+            write_off_vals[0].get("credit"),
             self.eur_currency._convert(
-                -self.amount_taxed_discount,
+                self.amount_untaxed_discount,
                 self.usd_currency,
                 vendor_bill.company_id,
                 vendor_bill.invoice_date,
             ),
         )
+        self.assertEqual(write_off_vals[1].get("name"), vendor_bill_tax_line.name)
         self.assertEqual(
-            prop.get("amount_discount_currency"), -self.amount_taxed_discount
+            write_off_vals[1].get("account_id"), vendor_bill_tax_line.account_id.id
         )
         self.assertEqual(
-            prop.get("amount_discount_tax"),
+            write_off_vals[1].get("credit"),
             self.eur_currency._convert(
-                -self.amount_discount_tax,
+                self.amount_discount_tax,
                 self.usd_currency,
                 vendor_bill.company_id,
                 vendor_bill.invoice_date,
             ),
         )
+        # rec_widget_data = self.reconciliation_widget.get_bank_statement_line_data(
+        #     bank_statement.line_ids.ids
+        # )
+        # rec_widget_statement_data = rec_widget_data.get("lines")[0]
+        # self.assertTrue(rec_widget_statement_data.get("write_off"))
+        # prop = rec_widget_statement_data.get("reconciliation_proposition")[0]
+        # self.assertTrue(prop.get("financial_discount_available"))
+        # self.assertEqual(
+        #     prop.get("amount_discount"),
+        #     self.eur_currency._convert(
+        #         -self.amount_taxed_discount,
+        #         self.usd_currency,
+        #         vendor_bill.company_id,
+        #         vendor_bill.invoice_date,
+        #     ),
+        # )
+        # self.assertEqual(
+        #     prop.get("amount_discount_currency"), -self.amount_taxed_discount
+        # )
+        # self.assertEqual(
+        #     prop.get("amount_discount_tax"),
+        #     self.eur_currency._convert(
+        #         -self.amount_discount_tax,
+        #         self.usd_currency,
+        #         vendor_bill.company_id,
+        #         vendor_bill.invoice_date,
+        #     ),
+        # )
 
     # TODO add more tests with banking reconciliation:
     #  - Auto-reconcile on the model
