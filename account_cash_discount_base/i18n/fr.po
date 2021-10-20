@@ -1,0 +1,136 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_cash_discount_base
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 13.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-08-17 10:32+0000\n"
+"PO-Revision-Date: 2020-08-17 10:32+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_cash_discount_base
+#: model_terms:ir.ui.view,arch_db:account_cash_discount_base.report_invoice_document_inherit
+msgid "% discount for payment before"
+msgstr "% d'escompte pour un paiement avant le"
+
+#. module: account_cash_discount_base
+#: model_terms:ir.ui.view,arch_db:account_cash_discount_base.res_company_form_view
+msgid "Base Amount Type"
+msgstr "Montant de base"
+
+#. module: account_cash_discount_base
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_res_company__cash_discount_base_amount_type
+msgid "Cash Discount Base Amount Type"
+msgstr "Montant de base pour l'escompte"
+
+#. module: account_cash_discount_base
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_res_company__cash_discount_use_tax_adjustment
+msgid "Cash Discount Use Tax Adjustment"
+msgstr "Utiliser l'ajustement de tax pour l'escompte"
+
+#. module: account_cash_discount_base
+#: model:ir.model,name:account_cash_discount_base.model_res_company
+msgid "Companies"
+msgstr "Sociétés"
+
+#. module: account_cash_discount_base
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_move__discount_percent
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_payment_term__discount_percent
+msgid "Discount (%)"
+msgstr "Escompte (%)"
+
+#. module: account_cash_discount_base
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_move__discount_amount
+msgid "Discount Amount"
+msgstr "Montant de l'escompte"
+
+#. module: account_cash_discount_base
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_move__discount_base_date
+msgid "Discount Base Date"
+msgstr "Date d'échéance de l'escompte"
+
+#. module: account_cash_discount_base
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_move__discount_delay
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_payment_term__discount_delay
+msgid "Discount Delay (days)"
+msgstr "Délai de l'escompte (jours)"
+
+#. module: account_cash_discount_base
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_move__discount_due_date
+#: model_terms:ir.ui.view,arch_db:account_cash_discount_base.account_move_form
+msgid "Discount Due Date"
+msgstr "Date d'échéance de l'escompte"
+
+#. module: account_cash_discount_base
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_move__discount_due_date_readonly
+msgid "Discount Due Date Readonly"
+msgstr "Date d'échéance de l'escompte (lecture seule)"
+
+#. module: account_cash_discount_base
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_move__real_discount_amount
+msgid "Discount amount (minus related refunds amount)"
+msgstr ""
+
+#. module: account_cash_discount_base
+#: code:addons/account_cash_discount_base/models/res_company.py:0
+#, python-format
+msgid "Excluding tax"
+msgstr ""
+
+#. module: account_cash_discount_base
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_move__has_discount
+msgid "Has Discount"
+msgstr "A une escompte"
+
+#. module: account_cash_discount_base
+#: code:addons/account_cash_discount_base/models/res_company.py:0
+#, python-format
+msgid "Including all taxes"
+msgstr "Prix TTC"
+
+#. module: account_cash_discount_base
+#: model:ir.model,name:account_cash_discount_base.model_account_move
+msgid "Journal Entries"
+msgstr ""
+
+#. module: account_cash_discount_base
+#: model:ir.model,name:account_cash_discount_base.model_account_payment_term
+msgid "Payment Terms"
+msgstr ""
+
+#. module: account_cash_discount_base
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_move__refunds_discount_amount
+msgid "Refunds Discount Amount"
+msgstr ""
+
+#. module: account_cash_discount_base
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_move__residual_with_discount
+msgid "Residual With Discount"
+msgstr "Résiduel (avec l'escompte)"
+
+#. module: account_cash_discount_base
+#: model:ir.model.fields,field_description:account_cash_discount_base.field_account_move__amount_total_with_discount
+msgid "Total (with discount)"
+msgstr "Total (avec escompte)"
+
+#. module: account_cash_discount_base
+#: model_terms:ir.ui.view,arch_db:account_cash_discount_base.report_invoice_document_inherit
+msgid "Total With a"
+msgstr "Total avec"
+
+#. module: account_cash_discount_base
+#: code:addons/account_cash_discount_base/models/account_move.py:0
+#, python-format
+msgid ""
+"You can't set a discount amount if there is no discount due date. (Move ID: "
+"%s)"
+msgstr ""
+"Vous ne pouvez pas définir un montant d'escompte si il n'y a pas de de date "
+"d'échéance d'escompte. (Facture ID: %s)"
