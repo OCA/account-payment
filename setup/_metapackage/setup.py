@@ -8,6 +8,7 @@ setuptools.setup(
     description="Meta package for oca-account-payment Odoo addons",
     version=version,
     install_requires=[
+        'odoo14-addon-account_cash_discount_base',
         'odoo14-addon-account_due_list',
         'odoo14-addon-account_due_list_aging_comment',
         'odoo14-addon-account_due_list_payment_mode',
