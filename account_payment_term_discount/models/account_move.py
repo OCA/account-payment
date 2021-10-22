@@ -27,7 +27,7 @@ class AccountMove(models.Model):
         "Check Payment Discount", compute="_compute_payment_disc"
     )
     shipping_lines_total = fields.Monetary(
-        "Shippling Lines Total",
+        "Shipping Lines Total",
         help="Exclude shipping lines total from discount if applicable " "in terms",
         compute="_compute_shipping_lines_total",
     )
