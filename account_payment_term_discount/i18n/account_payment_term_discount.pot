@@ -206,7 +206,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_payment_term_discount.field_account_bank_statement_line__shipping_lines_total
 #: model:ir.model.fields,field_description:account_payment_term_discount.field_account_move__shipping_lines_total
 #: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment__shipping_lines_total
-msgid "Shippling Lines Total"
+msgid "Shipping Lines Total"
 msgstr ""
 
 #. module: account_payment_term_discount
