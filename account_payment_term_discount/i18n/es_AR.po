@@ -215,8 +215,8 @@ msgstr "Registrar Pago"
 #: model:ir.model.fields,field_description:account_payment_term_discount.field_account_bank_statement_line__shipping_lines_total
 #: model:ir.model.fields,field_description:account_payment_term_discount.field_account_move__shipping_lines_total
 #: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment__shipping_lines_total
-msgid "Shippling Lines Total"
-msgstr "Total de Líneas de Envío"
+msgid "Shipping Lines Total"
+msgstr ""
 
 #. module: account_payment_term_discount
 #: model:ir.model.fields,help:account_payment_term_discount.field_account_payment_term_line__discount_income_account_id
@@ -235,6 +235,9 @@ msgid ""
 "This method should only be called to process a single invoice's payment."
 msgstr ""
 "Este método solo debe invocarse para procesar el pago de una única factura."
+
+#~ msgid "Shippling Lines Total"
+#~ msgstr "Total de Líneas de Envío"
 
 #~ msgid "Exclude Shippling Amount"
 #~ msgstr "Excluir Monto del Envío"
