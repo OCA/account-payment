@@ -28,10 +28,8 @@ class AccountPaymentRegister(models.TransientModel):
     def action_create_payments(self):
         if self.payment_difference_handling == "reconcile_multi_deduct":
             self = self.with_context(
-                {
-                    "skip_account_move_synchronization": True,
-                    "dont_redirect_to_payments": True,
-                }
+                skip_account_move_synchronization=True,
+                dont_redirect_to_payments=True,
             )
         return super().action_create_payments()
 
@@ -65,7 +63,6 @@ class AccountPaymentRegister(models.TransientModel):
             self.payment_difference
             and self.payment_difference_handling == "reconcile_multi_deduct"
         ):
-            self.with_context({"test": 2})
             payment_vals["write_off_line_vals"] = [
                 self._prepare_deduct_move_line(deduct)
                 for deduct in self.deduction_ids.filtered(lambda l: not l.open)
