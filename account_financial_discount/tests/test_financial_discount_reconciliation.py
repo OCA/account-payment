@@ -77,7 +77,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
             invoice_date_due="2019-06-01",
         )
         self.init_invoice_line(invoice, 1.0, self.amount_untaxed_without_discount)
-        invoice.post()
+        invoice.action_post()
         bank_statement = self._create_bank_statement()
         self._create_bank_statement_line(
             bank_statement, invoice.name, self.amount_taxed_with_discount
@@ -103,7 +103,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         self.init_invoice_line(
             invoice, 1.0, self.amount_untaxed_without_discount, with_tax=False
         )
-        invoice.post()
+        invoice.action_post()
         bank_statement = self._create_bank_statement()
         self._create_bank_statement_line(
             bank_statement, invoice.name, self.amount_untaxed_with_discount
@@ -127,7 +127,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
             invoice_date_due="2019-06-01",
         )
         self.init_invoice_line(vendor_bill, 1.0, self.amount_untaxed_without_discount)
-        vendor_bill.post()
+        vendor_bill.action_post()
         bank_statement = self._create_bank_statement()
         self._create_bank_statement_line(
             bank_statement, vendor_bill.name, -self.amount_taxed_with_discount
@@ -153,7 +153,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         self.init_invoice_line(
             vendor_bill, 1.0, self.amount_untaxed_without_discount, with_tax=False,
         )
-        vendor_bill.post()
+        vendor_bill.action_post()
         bank_statement = self._create_bank_statement()
         self._create_bank_statement_line(
             bank_statement,
@@ -179,7 +179,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
             invoice_date_due="2019-04-01",
         )
         self.init_invoice_line(invoice, 1.0, self.amount_untaxed_without_discount)
-        invoice.post()
+        invoice.action_post()
         bank_statement = self._create_bank_statement()
         self._create_bank_statement_line(
             bank_statement, invoice.name, self.amount_taxed_with_discount
@@ -200,7 +200,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
             invoice_date_due="2019-04-01",
         )
         self.init_invoice_line(vendor_bill, 1.0, self.amount_untaxed_without_discount)
-        vendor_bill.post()
+        vendor_bill.action_post()
         bank_statement = self._create_bank_statement()
         self._create_bank_statement_line(
             bank_statement, vendor_bill.name, -self.amount_taxed_with_discount
@@ -221,7 +221,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
             invoice_date_due="2019-04-01",
         )
         self.init_invoice_line(invoice, 1.0, self.amount_untaxed_without_discount)
-        invoice.post()
+        invoice.action_post()
         invoice.force_financial_discount = True
         bank_statement = self._create_bank_statement()
         self._create_bank_statement_line(
@@ -247,7 +247,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         )
         self.init_invoice_line(vendor_bill, 1.0, self.amount_untaxed_without_discount)
         vendor_bill.force_financial_discount = True
-        vendor_bill.post()
+        vendor_bill.action_post()
         bank_statement = self._create_bank_statement()
         self._create_bank_statement_line(
             bank_statement, vendor_bill.name, -self.amount_taxed_with_discount
@@ -272,7 +272,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
             currency=self.eur_currency,
         )
         self.init_invoice_line(invoice, 1.0, self.amount_untaxed_without_discount)
-        invoice.post()
+        invoice.action_post()
         bank_statement = self._create_bank_statement(journal=self.eur_bank_journal)
         self._create_bank_statement_line(
             bank_statement, invoice.name, self.amount_taxed_with_discount
@@ -316,7 +316,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
             currency=self.eur_currency,
         )
         self.init_invoice_line(vendor_bill, 1.0, self.amount_untaxed_without_discount)
-        vendor_bill.post()
+        vendor_bill.action_post()
         bank_statement = self._create_bank_statement(journal=self.eur_bank_journal)
         self._create_bank_statement_line(
             bank_statement, vendor_bill.name, -self.amount_taxed_with_discount

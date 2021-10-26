@@ -119,8 +119,8 @@ class AccountMove(models.Model):
                 rec._get_display_force_financial_discount()
             )
 
-    def post(self):
-        res = super().post()
+    def _post(self, soft=True):
+        res = super()._post(soft=soft)
         self._store_financial_discount()
         return res
 

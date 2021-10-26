@@ -98,7 +98,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         # self.assertEqual(invoice.date, fields.Date.to_date("2019-04-01"))
         # self.assertFalse(invoice.invoice_date)
         with freeze_time("2019-04-15"):
-            invoice.post()
+            invoice.action_post()
             self.assertEqual(invoice.date, fields.Date.to_date("2019-04-15"))
             self.assertEqual(invoice.invoice_date, fields.Date.to_date("2019-04-15"))
             self.assertTrue(invoice.has_discount_available)
@@ -115,7 +115,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         self.assertEqual(invoice.date, fields.Date.to_date("2019-04-01"))
         self.assertFalse(invoice.invoice_date)
         with freeze_time("2019-04-15"):
-            invoice.post()
+            invoice.action_post()
             self.assertEqual(invoice.date, fields.Date.to_date("2019-04-15"))
             self.assertEqual(invoice.invoice_date, fields.Date.to_date("2019-04-15"))
             self.assertTrue(invoice.has_discount_available)
@@ -141,7 +141,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         # self.assertEqual(invoice.date, fields.Date.to_date("2019-04-01"))
         # self.assertFalse(invoice.invoice_date)
         with freeze_time("2019-04-15"):
-            invoice.post()
+            invoice.action_post()
             self.assertEqual(invoice.date, fields.Date.to_date("2019-04-15"))
             self.assertEqual(invoice.invoice_date, fields.Date.to_date("2019-04-15"))
             self.assertTrue(invoice.has_discount_available)
@@ -172,7 +172,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         self.assertEqual(invoice.date, fields.Date.to_date("2019-04-01"))
         self.assertFalse(invoice.invoice_date)
         with freeze_time("2019-04-15"):
-            invoice.post()
+            invoice.action_post()
             self.assertEqual(invoice.date, fields.Date.to_date("2019-04-15"))
             self.assertEqual(invoice.invoice_date, fields.Date.to_date("2019-04-15"))
             self.assertTrue(invoice.has_discount_available)
@@ -193,7 +193,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
 
     def test_single_invoice_payment_with_discount_available(self):
         """Test register payment for a vendor bill with available discount"""
-        self.invoice1.post()
+        self.invoice1.action_post()
         payment_wizard_form = Form(
             self.env["account.payment.register"].with_context(
                 active_model="account.move",
@@ -224,7 +224,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
             currency=self.eur_currency,
         )
         self.init_invoice_line(invoice, 1.0, 1000.0)
-        invoice.post()
+        invoice.action_post()
         payment_wizard_form = Form(
             self.env["account.payment.register"].with_context(
                 active_model="account.move",
@@ -267,7 +267,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
 
     def test_single_invoice_payment_with_discount_late(self):
         """Test register payment for a vendor bill with late discount"""
-        self.invoice2.post()
+        self.invoice2.action_post()
         payment_wizard_form = Form(
             self.env["account.payment.register"].with_context(
                 active_model="account.move",
@@ -290,7 +290,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
 
     def test_single_invoice_payment_with_discount_late_forced(self):
         """Test register payment for a vendor bill with late discount forced"""
-        self.invoice2.post()
+        self.invoice2.action_post()
         self.invoice2.force_financial_discount = True
         payment_wizard_form = Form(
             self.env["account.payment.register"].with_context(
@@ -316,7 +316,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
 
     def test_single_invoice_payment_without_discount(self):
         """Test register payment for a vendor bill without discount"""
-        self.invoice3.post()
+        self.invoice3.action_post()
         payment_wizard_form = Form(
             self.env["account.payment.register"].with_context(
                 active_model="account.move",
@@ -353,7 +353,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         invoice4 = self.invoice1.copy({"invoice_date": "2019-04-01"})
         self.assertTrue(invoice4.has_discount_available)
         invoices = self.invoice1 | invoice4
-        invoices.post()
+        invoices.action_post()
         payment_wizard_form = Form(
             self.env["account.payment.register"].with_context(
                 active_ids=invoices.ids, active_model="account.move"
@@ -376,7 +376,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         invoice4 = self.invoice1.copy({"invoice_date": "2019-04-01"})
         self.assertTrue(invoice4.has_discount_available)
         invoices = self.invoice1 | invoice4
-        invoices.post()
+        invoices.action_post()
         payment_wizard_form = Form(
             self.env["account.payment.register"].with_context(
                 active_ids=invoices.ids, active_model="account.move"
@@ -423,7 +423,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         invoice4 = self.invoice2.copy({"invoice_date": self.invoice2.invoice_date})
         self.assertFalse(invoice4.has_discount_available)
         invoices = self.invoice2 | invoice4
-        invoices.post()
+        invoices.action_post()
         payment_wizard_form = Form(
             self.env["account.payment.register"].with_context(
                 active_ids=invoices.ids, active_model="account.move"
@@ -454,7 +454,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         invoice4.force_financial_discount = True
         self.assertTrue(invoice4.has_discount_available)
         invoices = self.invoice2 | invoice4
-        invoices.post()
+        invoices.action_post()
         payment_wizard_form = Form(
             self.env["account.payment.register"].with_context(
                 active_ids=invoices.ids, active_model="account.move"
@@ -484,7 +484,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         invoice4.force_financial_discount = True
         self.assertTrue(invoice4.has_discount_available)
         invoices = self.invoice2 | invoice4
-        invoices.post()
+        invoices.action_post()
         payment_wizard_form = Form(
             self.env["account.payment.register"].with_context(
                 active_ids=invoices.ids, active_model="account.move"
@@ -506,7 +506,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
 
     def test_customer_manual_payment_with_discount_available(self):
         """Test register payment for a customer invoice with available discount"""
-        self.client_invoice1.post()
+        self.client_invoice1.action_post()
         payment_wizard_form = Form(
             self.env["account.payment.register"].with_context(
                 active_model="account.move",
@@ -528,7 +528,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
 
     def test_customer_manual_payment_with_discount_late(self):
         """Test register payment for a customer invoice with late discount"""
-        self.client_invoice2.post()
+        self.client_invoice2.action_post()
         payment_wizard_form = Form(
             self.env["account.payment.register"].with_context(
                 active_model="account.move",
@@ -552,7 +552,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
 
     def test_customer_manual_payment_with_discount_late_forced(self):
         """Test register payment for a customer invoice with late discount forced"""
-        self.client_invoice2.post()
+        self.client_invoice2.action_post()
         self.client_invoice2.force_financial_discount = True
         payment_wizard_form = Form(
             self.env["account.payment.register"].with_context(
@@ -579,7 +579,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
 
     def test_customer_manual_payment_without_discount(self):
         """Test register payment for a customer invoice without discount"""
-        self.client_invoice3.post()
+        self.client_invoice3.action_post()
         payment_wizard_form = Form(
             self.env["account.payment.register"].with_context(
                 active_model="account.move",
