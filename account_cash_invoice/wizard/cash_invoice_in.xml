@@ -22,7 +22,7 @@
                         domain="[('company_id', '=', company_id),
                            ('state', '=', 'posted'),
                            ('currency_id', '=', currency_id),
-                           ('type', 'in', ['in_invoice', 'out_refund'])]"
+                           ('move_type', 'in', ['in_invoice', 'out_refund'])]"
                         options="{'no_create': True, 'no_open':True}"
                     />
                     <label for="amount" />
