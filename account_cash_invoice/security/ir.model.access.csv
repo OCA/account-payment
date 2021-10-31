@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_cash_invoice_in,access_cash_invoice_in,model_cash_invoice_in,base.group_user,1,1,1,1
+access_cash_invoice_out,access_cash_invoice_out,model_cash_invoice_out,base.group_user,1,1,1,1
