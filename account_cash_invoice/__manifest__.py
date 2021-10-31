@@ -10,5 +10,9 @@
     "summary": "Pay and receive invoices from bank statements",
     "license": "LGPL-3",
     "depends": ["account"],
-    "data": ["wizard/cash_invoice_out.xml", "wizard/cash_invoice_in.xml"],
+    "data": [
+        "security/ir.model.access.csv",
+        "wizard/cash_invoice_out.xml",
+        "wizard/cash_invoice_in.xml",
+    ],
 }

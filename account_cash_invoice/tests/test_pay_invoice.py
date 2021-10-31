@@ -9,6 +9,7 @@ class TestSessionPayInvoice(SavepointCase):
     def setUpClass(cls):
         super().setUpClass()
         cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
+        cls.AccountMove = cls.env["account.move"]
         cls.company = cls.env.ref("base.main_company")
         partner = cls.env.ref("base.partner_demo")
         cls.product = cls.env.ref("product.product_delivery_02")
@@ -21,12 +22,12 @@ class TestSessionPayInvoice(SavepointCase):
                 "reconcile": True,
             }
         )
-        cls.invoice_out = cls.env["account.move"].create(
+        cls.invoice_out = cls.AccountMove.create(
             {
                 "company_id": cls.company.id,
                 "partner_id": partner.id,
                 "date": "2016-03-12",
-                "type": "out_invoice",
+                "move_type": "out_invoice",
                 "invoice_line_ids": [
                     (
                         0,
@@ -45,12 +46,13 @@ class TestSessionPayInvoice(SavepointCase):
         cls.invoice_out._onchange_invoice_line_ids()
         cls.invoice_out.action_post()
         cls.invoice_out.name = "2999/99999"
-        cls.invoice_in = cls.env["account.move"].create(
+        cls.invoice_in = cls.AccountMove.create(
             {
                 "partner_id": partner.id,
                 "company_id": cls.company.id,
-                "type": "in_invoice",
+                "move_type": "in_invoice",
                 "date": "2016-03-12",
+                "invoice_date": "2016-03-12",
                 "invoice_line_ids": [
                     (
                         0,
@@ -99,13 +101,16 @@ class TestSessionPayInvoice(SavepointCase):
             self.assertEqual(out_invoice.journal_count, 1)
         invoice_out_obj.browse(out_invoice.id).run()
         statement.balance_end_real = statement.balance_start
-        action = statement.check_confirm_bank()
-        if action:
-            self.env[action.get("res_model")].with_context(
-                active_id=statement.id,
-                active_ids=statement.ids,
-                active_model=statement._name,
-            ).validate()
+        statement.button_post()
+        inv_lines = self.invoice_in.line_ids.filtered(
+            lambda line: line.account_id.user_type_id.type in ("receivable", "payable")
+        )
+        inv_lines |= self.invoice_out.line_ids.filtered(
+            lambda line: line.account_id.user_type_id.type in ("receivable", "payable")
+        )
+        for st_line, inv_line in zip(statement.line_ids, inv_lines):
+            st_line.reconcile([{"id": inv_line.id}], [])
+        statement.button_validate()
         self.invoice_out.refresh()
         self.assertEqual(self.invoice_out.amount_residual, 0.0)
         self.invoice_in.refresh()
