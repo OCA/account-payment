@@ -34,7 +34,9 @@ class CashInvoiceIn(models.TransientModel):
         return len(self._default_journals().ids)
 
     invoice_id = fields.Many2one(
-        comodel_name="account.move", string="Invoice", required=True,
+        comodel_name="account.move",
+        string="Invoice",
+        required=True,
     )
     name = fields.Char(related="invoice_id.name", readonly=True)
     company_id = fields.Many2one(
@@ -63,7 +65,8 @@ class CashInvoiceIn(models.TransientModel):
         string="Journal",
     )
     journal_count = fields.Integer(
-        default=lambda self: self._default_journal_count(), readonly=True,
+        default=lambda self: self._default_journal_count(),
+        readonly=True,
     )
 
     def default_company(self, active_model, active_ids):
