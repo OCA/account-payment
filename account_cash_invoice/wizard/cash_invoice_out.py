@@ -37,6 +37,7 @@ class CashInvoiceOut(models.TransientModel):
         comodel_name="account.move",
         string="Invoice",
         required=True,
+        domain=[("payment_state", "in", ["not_paid", "partial"])],
     )
     name = fields.Char(
         related="invoice_id.name",
