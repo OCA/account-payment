@@ -62,7 +62,11 @@ class TestPaymentReturnFile(SavepointCase):
         return_model = self.env["payment.return"]
         return_path = get_module_resource(module_name, "test_files", file_name)
         return_file = base64.b64encode(open(return_path, "rb").read())
-        bank_return_id = import_model.create(dict(data_file=return_file,))
+        bank_return_id = import_model.create(
+            dict(
+                data_file=return_file,
+            )
+        )
         bank_return_id.import_file()
         if local_account:
             bank_account_id = import_model._find_bank_account_id(local_account)
