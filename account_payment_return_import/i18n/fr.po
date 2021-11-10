@@ -224,6 +224,3 @@ msgstr ""
 #, python-format
 msgid "You have already imported this file."
 msgstr ""
-
-#~ msgid "or"
-#~ msgstr "ou"
