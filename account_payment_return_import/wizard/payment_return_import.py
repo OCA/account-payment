@@ -20,7 +20,7 @@ class PaymentReturnImport(models.TransientModel):
     _description = "Import Payment Return"
 
     def _compute_hide_journal_field(self):
-        """ Return False if the journal_id can't be provided by the parsed
+        """Return False if the journal_id can't be provided by the parsed
         file and must be provided by the wizard."""
         self.hide_journal_field = True
 
@@ -122,7 +122,7 @@ class PaymentReturnImport(models.TransientModel):
 
     @api.model
     def _parse_file(self, data_file):
-        """ Each module adding a file support must extends this method. It
+        """Each module adding a file support must extends this method. It
         processes the file if it can, returns super otherwise, resulting in a
         chain of responsability.
         This method parses the given file and returns the data required by
@@ -238,7 +238,7 @@ class PaymentReturnImport(models.TransientModel):
 
     @api.model
     def _create_payment_return(self, payret_vals):
-        """ Create bank payment return from imported values, filtering out
+        """Create bank payment return from imported values, filtering out
         already imported transactions, and return data used by the
         reconciliation widget
         """
