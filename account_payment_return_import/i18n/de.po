@@ -234,31 +234,3 @@ msgstr "XML-Rohdaten sind zur Fehler-/Prüfung abgespeichert"
 #, python-format
 msgid "You have already imported this file."
 msgstr "Sie haben diese Datei bereits importiert."
-
-#~ msgid "1. Download your Payment Return file from your bank website."
-#~ msgstr ""
-#~ "1. Laden Sie die Datei Zahlungsrückläufer von Ihrer Bank-Webseite "
-#~ "herunter."
-
-#~ msgid ""
-#~ "2. Make sure you have installed the right module to support the file "
-#~ "format."
-#~ msgstr ""
-#~ "2. Stellen Sie sicher, dass Sie das passende Modul für Ihr Dateiformat "
-#~ "installiert haben."
-
-#~ msgid "3. Select the file and click 'Import'."
-#~ msgstr "3. Wählen Sie die Datei aus und klicken 'Import'."
-
-#~ msgid ""
-#~ "<br/><br/><b> How to import your payment return :</b>\n"
-#~ "                <br/>"
-#~ msgstr ""
-#~ "<br/><br/><b> Wie Sie Ihre Zahlungsrückläufer importieren:</b>\n"
-#~ "                <br/>"
-
-#~ msgid "Import Payment Returns"
-#~ msgstr "Importiere Zahlungsrückläufer"
-
-#~ msgid "or"
-#~ msgstr "oder"

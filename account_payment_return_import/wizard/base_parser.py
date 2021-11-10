@@ -1,4 +1,4 @@
-# Copyright 2017 David Vidal <david.vidal@tecnativa.com>
+# Copyright 2017 Tecnativa - David Vidal
 # Copyright 2018 Tecnativa - Luis M. Ontalba
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
