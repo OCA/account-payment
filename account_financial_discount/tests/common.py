@@ -13,6 +13,7 @@ class TestAccountFinancialDiscountCommon(SavepointCase):
         invoice_date=None,
         invoice_date_due=None,
         currency=None,
+        payment_reference=None,
     ):
         move_form = Form(cls.env["account.move"].with_context(default_move_type=move_type))
         move_form.partner_id = partner
@@ -21,6 +22,8 @@ class TestAccountFinancialDiscountCommon(SavepointCase):
         move_form.invoice_date_due = invoice_date_due
         if currency is not None:
             move_form.currency_id = currency
+        if payment_reference is not None:
+            move_form.payment_reference = payment_reference
         return move_form.save()
 
     @classmethod

@@ -8,7 +8,7 @@
     "author": "Camptocamp, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "installable": True,
-    "depends": ["account", "account_reconcile_model_strict_match_amount"],
+    "depends": ["account"],
     "data": [
         "views/assets.xml",
         "views/payment_term_form.xml",
