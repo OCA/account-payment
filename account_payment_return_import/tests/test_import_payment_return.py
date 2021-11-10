@@ -1,4 +1,4 @@
-# Copyright 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
+# Copyright 2016 Tecnativa - Carlos Dauden
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo.tests.common import TransactionCase
@@ -6,7 +6,7 @@ from odoo.tests.common import TransactionCase
 
 class TestAccountPaymentReturnImport(TransactionCase):
     def setUp(self):
-        super(TestAccountPaymentReturnImport, self).setUp()
+        super().setUp()
         self.return_import_model = self.env["payment.return.import"]
         self.company = self.env.ref("base.main_company")
         self.acc_number = "NL77ABNA0574908765"

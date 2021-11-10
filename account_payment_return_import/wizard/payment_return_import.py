@@ -1,5 +1,5 @@
-# Copyright 2016 Carlos Dauden <carlos.dauden@tecnativa.com>
-# © 2016 Pedro M. Baeza <pedro.baeza@tecnativa.com>
+# Copyright 2016 Tecnativa - Carlos Dauden
+# Copyright 2016 Tecnativa - Pedro M. Baeza
 # Copyright 2018 Tecnativa - Luis M. Ontalba
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -8,7 +8,7 @@ from io import BytesIO
 from zipfile import BadZipfile, ZipFile  # BadZipFile in Python >= 3.2
 
 from odoo import _, api, fields, models
-from odoo.exceptions import Warning as UserError
+from odoo.exceptions import UserError
 
 from odoo.addons.base_iban.models.res_partner_bank import pretty_iban
 
@@ -25,7 +25,7 @@ class PaymentReturnImport(models.TransientModel):
         self.hide_journal_field = True
 
     journal_id = fields.Many2one(
-        "account.journal",
+        comodel_name="account.journal",
         string="Journal",
         help="Accounting journal related to the bank payment return you're "
         "importing. It has be be manually chosen for payment return formats "
@@ -36,7 +36,7 @@ class PaymentReturnImport(models.TransientModel):
         compute="_compute_hide_journal_field",
     )
     data_file = fields.Binary(
-        "Payment Return File",
+        string="Payment Return File",
         required=True,
         help="Get you bank payment returns in electronic format from your "
         "bank and select them here.",
@@ -274,13 +274,11 @@ class PaymentReturnImport(models.TransientModel):
                 {
                     "type": "warning",
                     "message": _(
-                        "%d transactions had already been imported and " "were ignored."
+                        "%d transactions had already been imported and were ignored."
                     )
                     % num_ignored
                     if num_ignored > 1
-                    else _(
-                        "1 transaction had already been imported and " "was ignored."
-                    ),
+                    else _("1 transaction had already been imported and was ignored."),
                     "details": {
                         "name": _("Already imported items"),
                         "model": "payment.return.line",
