@@ -74,7 +74,9 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
     def _assert_payment_line_with_discount_from_invoice(self, invoice):
         invoice_payment_line = self._get_payment_lines(invoice)
         # The payment move line must have full amount to set invoice as paid
-        self.assertEqual(invoice_payment_line.amount_currency, self.amount_without_discount)
+        self.assertEqual(
+            invoice_payment_line.amount_currency, self.amount_without_discount
+        )
         invoice_payment = invoice_payment_line.mapped("payment_id")
         # The payment must have the amount with discount
         self.assertEqual(invoice_payment.amount, self.amount_with_discount)
@@ -83,17 +85,23 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
                 continue
             elif payment_line.account_id in (self.write_off_rev, self.write_off_exp):
                 # Write off line must have the discount amount and label
-                self.assertEqual(payment_line.amount_currency,
-                                 -self.amount_discount)
+                self.assertEqual(payment_line.amount_currency, -self.amount_discount)
                 self.assertEqual(payment_line.name, "Financial Discount")
             else:
                 # Oustanding payment line must have the amount with discount
-                self.assertEqual(payment_line.amount_currency, -self.amount_with_discount)
+                self.assertEqual(
+                    payment_line.amount_currency, -self.amount_with_discount
+                )
 
     def test_invoice_discount_term_line(self):
         """Test saving of discount on payment term line for vendor bills"""
-        invoice = self.init_invoice(self.partner, "in_invoice", self.payment_term, invoice_date="2019-04-15",
-            invoice_date_due="2019-05-15",)
+        invoice = self.init_invoice(
+            self.partner,
+            "in_invoice",
+            self.payment_term,
+            invoice_date="2019-04-15",
+            invoice_date_due="2019-05-15",
+        )
         self.init_invoice_line(invoice, 1.0, 1000.0)
         # self.assertEqual(invoice.date, fields.Date.to_date("2019-04-01"))
         # self.assertFalse(invoice.invoice_date)
@@ -110,7 +118,11 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
 
     def test_customer_invoice_discount_term_line(self):
         """Test saving of discount on payment term line for customer invoice"""
-        invoice = self.init_invoice(self.customer, "out_invoice", self.payment_term, )
+        invoice = self.init_invoice(
+            self.customer,
+            "out_invoice",
+            self.payment_term,
+        )
         self.init_invoice_line(invoice, 1.0, 1000.0)
         self.assertEqual(invoice.date, fields.Date.to_date("2019-04-01"))
         self.assertFalse(invoice.invoice_date)
@@ -166,7 +178,10 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         invoice
         """
         invoice = self.init_invoice(
-            self.customer, "out_invoice", self.payment_term, currency=self.eur_currency,
+            self.customer,
+            "out_invoice",
+            self.payment_term,
+            currency=self.eur_currency,
         )
         self.init_invoice_line(invoice, 1.0, 1000.0)
         self.assertEqual(invoice.date, fields.Date.to_date("2019-04-01"))
@@ -204,8 +219,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         self.assertEqual(payment_wizard_form.show_force_financial_discount, False)
         self.assertEqual(payment_wizard_form.force_financial_discount, False)
         self.assertEqual(payment_wizard_form.amount, self.amount_with_discount)
-        self.assertEqual(payment_wizard_form.payment_difference,
-                         self.amount_discount)
+        self.assertEqual(payment_wizard_form.payment_difference, self.amount_discount)
         self.assertEqual(payment_wizard_form.payment_difference_handling, "reconcile")
         self.assertEqual(payment_wizard_form.writeoff_account_id, self.write_off_rev)
         self.assertEqual(payment_wizard_form.writeoff_label, "Financial Discount")
@@ -361,7 +375,8 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         )
         self.assertFalse(payment_wizard_form.show_force_financial_discount)
         self.assertEqual(
-            payment_wizard_form.payment_method_id, self.payment_method_manual_out,
+            payment_wizard_form.payment_method_id,
+            self.payment_method_manual_out,
         )
         self.assertEqual(payment_wizard_form.journal_id, self.bank_journal)
         payment_wizard = payment_wizard_form.save()
@@ -384,13 +399,15 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         )
         self.assertFalse(payment_wizard_form.show_force_financial_discount)
         self.assertEqual(
-            payment_wizard_form.payment_method_id, self.payment_method_manual_out,
+            payment_wizard_form.payment_method_id,
+            self.payment_method_manual_out,
         )
         self.assertEqual(payment_wizard_form.journal_id, self.bank_journal)
         payment_wizard_form.group_payment = True
         self.assertEqual(payment_wizard_form.amount, self.amount_with_discount * 2)
-        self.assertEqual(payment_wizard_form.payment_difference,
-                         self.amount_discount * 2)
+        self.assertEqual(
+            payment_wizard_form.payment_difference, self.amount_discount * 2
+        )
         self.assertEqual(payment_wizard_form.payment_difference_handling, "reconcile")
         self.assertEqual(payment_wizard_form.writeoff_account_id, self.write_off_rev)
         self.assertEqual(payment_wizard_form.writeoff_label, "Financial Discount")
@@ -400,7 +417,9 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         invoice4_payment_line = self._get_payment_lines(invoice4)
         self.assertEqual(invoice1_payment_line, invoice4_payment_line)
         # The payment move lines must have full amount to set invoices as paid
-        self.assertEqual(invoice1_payment_line.amount_currency, self.amount_without_discount * 2)
+        self.assertEqual(
+            invoice1_payment_line.amount_currency, self.amount_without_discount * 2
+        )
         invoice_payment = invoice1_payment_line.mapped("payment_id")
         # The payment must have the amount with discount
         self.assertEqual(invoice_payment.amount, self.amount_with_discount * 2)
@@ -409,12 +428,15 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
                 continue
             elif payment_line.account_id in (self.write_off_rev, self.write_off_exp):
                 # Write off line must have the discount amount and label
-                self.assertEqual(payment_line.amount_currency,
-                                 -self.amount_discount * 2)
+                self.assertEqual(
+                    payment_line.amount_currency, -self.amount_discount * 2
+                )
                 self.assertEqual(payment_line.name, "Financial Discount")
             else:
                 # Oustanding payment line must have the amount with discount
-                self.assertEqual(payment_line.amount_currency, -self.amount_with_discount * 2)
+                self.assertEqual(
+                    payment_line.amount_currency, -self.amount_with_discount * 2
+                )
         self.assertIn(self.invoice1.payment_state, ("paid", "in_payment"))
         self.assertIn(invoice4.payment_state, ("paid", "in_payment"))
 
@@ -432,7 +454,8 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         self.assertTrue(payment_wizard_form.show_force_financial_discount)
         self.assertFalse(payment_wizard_form.force_financial_discount)
         self.assertEqual(
-            payment_wizard_form.payment_method_id, self.payment_method_manual_out,
+            payment_wizard_form.payment_method_id,
+            self.payment_method_manual_out,
         )
         self.assertEqual(payment_wizard_form.journal_id, self.bank_journal)
         payment_wizard = payment_wizard_form.save()
@@ -448,7 +471,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
 
     def test_multi_invoice_payment_with_discount_late_forced(self):
         """Test register payment for multiple vendor bills with late discount forced
-         at invoice level"""
+        at invoice level"""
         invoice4 = self.invoice2.copy({"invoice_date": self.invoice2.invoice_date})
         self.assertFalse(invoice4.has_discount_available)
         invoice4.force_financial_discount = True
@@ -463,7 +486,8 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         self.assertTrue(payment_wizard_form.show_force_financial_discount)
         self.assertFalse(payment_wizard_form.force_financial_discount)
         self.assertEqual(
-            payment_wizard_form.payment_method_id, self.payment_method_manual_out,
+            payment_wizard_form.payment_method_id,
+            self.payment_method_manual_out,
         )
         self.assertEqual(payment_wizard_form.journal_id, self.bank_journal)
         payment_wizard = payment_wizard_form.save()
@@ -475,10 +499,9 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         self._assert_payment_line_with_discount_from_invoice(invoice4)
         self.assertIn(invoice4.payment_state, ("paid", "in_payment"))
 
-
     def test_multi_invoice_payment_with_discount_late_forced_wizard(self):
         """Test register payment grouped for multiple vendor bills with late discount
-         forced at wizard level"""
+        forced at wizard level"""
         invoice4 = self.invoice2.copy({"invoice_date": self.invoice2.invoice_date})
         self.assertFalse(invoice4.has_discount_available)
         invoice4.force_financial_discount = True
@@ -494,7 +517,8 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         self.assertFalse(payment_wizard_form.force_financial_discount)
         payment_wizard_form.force_financial_discount = True
         self.assertEqual(
-            payment_wizard_form.payment_method_id, self.payment_method_manual_out,
+            payment_wizard_form.payment_method_id,
+            self.payment_method_manual_out,
         )
         self.assertEqual(payment_wizard_form.journal_id, self.bank_journal)
         payment_wizard = payment_wizard_form.save()
@@ -523,8 +547,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         self.assertEqual(payment_wizard_form.writeoff_label, "Financial Discount")
         payment_wizard = payment_wizard_form.save()
         payment_wizard.action_create_payments()
-        self.assertIn(self.client_invoice1.payment_state,
-                      ("paid", "in_payment"))
+        self.assertIn(self.client_invoice1.payment_state, ("paid", "in_payment"))
 
     def test_customer_manual_payment_with_discount_late(self):
         """Test register payment for a customer invoice with late discount"""
@@ -547,8 +570,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         self.assertEqual(payment_wizard_form.writeoff_label, "Financial Discount")
         payment_wizard = payment_wizard_form.save()
         payment_wizard.action_create_payments()
-        self.assertIn(self.client_invoice2.payment_state,
-                      ("paid", "in_payment"))
+        self.assertIn(self.client_invoice2.payment_state, ("paid", "in_payment"))
 
     def test_customer_manual_payment_with_discount_late_forced(self):
         """Test register payment for a customer invoice with late discount forced"""
@@ -574,8 +596,7 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         self.assertEqual(payment_wizard_form.writeoff_label, "Financial Discount")
         payment_wizard = payment_wizard_form.save()
         payment_wizard.action_create_payments()
-        self.assertIn(self.client_invoice2.payment_state,
-                      ("paid", "in_payment"))
+        self.assertIn(self.client_invoice2.payment_state, ("paid", "in_payment"))
 
     def test_customer_manual_payment_without_discount(self):
         """Test register payment for a customer invoice without discount"""

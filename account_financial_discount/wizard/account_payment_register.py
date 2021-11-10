@@ -13,7 +13,9 @@ class AccountPaymentRegister(models.TransientModel):
         "Note that financial discounts will be applied for invoices having"
         "the flag set, even if this checkbox is not marked.",
     )
-    show_force_financial_discount = fields.Boolean(compute="_compute_show_force_financial_discount")
+    show_force_financial_discount = fields.Boolean(
+        compute="_compute_show_force_financial_discount"
+    )
     with_financial_discount = fields.Boolean(compute="_compute_with_financial_discount")
 
     @api.depends("force_financial_discount", "line_ids", "payment_date")
@@ -29,15 +31,23 @@ class AccountPaymentRegister(models.TransientModel):
                 wizard.with_financial_discount = True
                 continue
             lines_with_discount = wizard.line_ids.filtered(lambda l: l.amount_discount)
-            lines_with_discount_before_payment_date = lines_with_discount.filtered(lambda l: l.date_discount <= wizard.payment_date)
-            lines_with_forced_discount = lines_with_discount.mapped("move_id.force_financial_discount")
-            wizard.with_financial_discount = bool(lines_with_discount_before_payment_date or lines_with_forced_discount)
+            lines_with_discount_before_payment_date = lines_with_discount.filtered(
+                lambda l: l.date_discount <= wizard.payment_date
+            )
+            lines_with_forced_discount = lines_with_discount.mapped(
+                "move_id.force_financial_discount"
+            )
+            wizard.with_financial_discount = bool(
+                lines_with_discount_before_payment_date or lines_with_forced_discount
+            )
 
     @api.depends("line_ids")
     def _compute_show_force_financial_discount(self):
         for wizard in self:
             # If at least one invoice has discounts on its move lines
-            any_invoice_with_discount = wizard.line_ids.filtered(lambda l: l.amount_discount)
+            any_invoice_with_discount = wizard.line_ids.filtered(
+                lambda l: l.amount_discount
+            )
             # If not all invoices have discounts available
             not_all_invoices_with_discounts_available = not all(
                 wizard.line_ids.mapped("move_id.has_discount_available")
@@ -57,17 +67,25 @@ class AccountPaymentRegister(models.TransientModel):
     def _compute_from_lines(self):
         return super()._compute_from_lines()
 
-    @api.depends("source_amount", "source_amount_currency",
-                 "source_currency_id", "company_id", "currency_id",
-                 "payment_date", "with_financial_discount")
+    @api.depends(
+        "source_amount",
+        "source_amount_currency",
+        "source_currency_id",
+        "company_id",
+        "currency_id",
+        "payment_date",
+        "with_financial_discount",
+    )
     def _compute_amount(self):
         for wizard in self:
             if not wizard.with_financial_discount:
                 super(AccountPaymentRegister, wizard)._compute_amount()
             else:
-                wizard.amount = wizard._get_financial_discount_values_from_wizard()["amount"]
+                wizard.amount = wizard._get_financial_discount_values_from_wizard()[
+                    "amount"
+                ]
 
-    @api.depends('amount', 'with_financial_discount')
+    @api.depends("amount", "with_financial_discount")
     def _compute_payment_difference(self):
         super()._compute_payment_difference()
         for wizard in self:
@@ -91,9 +109,7 @@ class AccountPaymentRegister(models.TransientModel):
                 self.payment_difference_handling = financial_discount_values.get(
                     "payment_difference_handling"
                 )
-                self.writeoff_label = financial_discount_values.get(
-                    "writeoff_label"
-                )
+                self.writeoff_label = financial_discount_values.get("writeoff_label")
                 self.writeoff_account_id = financial_discount_values.get(
                     "writeoff_account_id"
                 )
@@ -101,13 +117,21 @@ class AccountPaymentRegister(models.TransientModel):
     def _create_payment_vals_from_batch(self, batch_result):
         res = super()._create_payment_vals_from_batch(batch_result)
         if self.with_financial_discount:
-            financial_discount_values = self._get_financial_discount_values_from_batch(batch_result)
+            financial_discount_values = self._get_financial_discount_values_from_batch(
+                batch_result
+            )
             currency = self.env["res.currency"].browse(res.get("currency_id"))
             # TODO Check with multicurrency
-            payment_difference = res.get("amount") - financial_discount_values.get("amount_discount")
+            payment_difference = res.get("amount") - financial_discount_values.get(
+                "amount_discount"
+            )
             amount_discount = financial_discount_values.get("amount_discount")
             # TODO use payment_difference or amount_discount or assert equals?
-            if not currency.is_zero(payment_difference) and financial_discount_values.get("payment_difference_handling") == "reconcile":
+            if (
+                not currency.is_zero(payment_difference)
+                and financial_discount_values.get("payment_difference_handling")
+                == "reconcile"
+            ):
                 res["write_off_line_vals"] = {
                     "name": financial_discount_values.get("writeoff_label"),
                     "amount": amount_discount,
@@ -157,13 +181,16 @@ class AccountPaymentRegister(models.TransientModel):
         else:
             # Foreign currency on payment different than the one set on the journal entries.
             res["amount"] = self.company_id.currency_id._convert(
-                discount_amounts.get("amount_currency"), self.currency_id, self.company_id,
-                self.payment_date
+                discount_amounts.get("amount_currency"),
+                self.currency_id,
+                self.company_id,
+                self.payment_date,
             )
             res["amount_discount"] = self.company_id.currency_id._convert(
-                discount_amounts.get("amount_discount_currency"), self.currency_id,
+                discount_amounts.get("amount_discount_currency"),
+                self.currency_id,
                 self.company_id,
-                self.payment_date
+                self.payment_date,
             )
         return res
 
@@ -178,7 +205,9 @@ class AccountPaymentRegister(models.TransientModel):
             batch_values = self._get_wizard_values_from_batch(batch_result)
             amount_currency = batch_values.get("source_amount_currency")
             amount = batch_values.get("source_amount")
-            currency = self.env["res.currency"].browse(batch_values.get("source_currency_id"))
+            currency = self.env["res.currency"].browse(
+                batch_values.get("source_currency_id")
+            )
         invoices = invoice_lines.mapped("move_id")
         query_res = invoices._financial_discount_query()
         date = self.payment_date or fields.Date.context_today()
@@ -196,7 +225,10 @@ class AccountPaymentRegister(models.TransientModel):
                 )
             ):
                 # TODO Check coverage on multicurrency test
-                if res_line["currency_id"] == currency.id and res_line["currency_id"] == company.currency_id.id:
+                if (
+                    res_line["currency_id"] == currency.id
+                    and res_line["currency_id"] == company.currency_id.id
+                ):
                     amount -= abs(res_line["amount_discount"])
                     amount_currency -= abs(res_line["amount_discount"])
                     amount_discount += abs(res_line["amount_discount"])
@@ -205,7 +237,9 @@ class AccountPaymentRegister(models.TransientModel):
                     amount -= abs(res_line["amount_discount"])
                     amount_currency -= abs(res_line["amount_discount_currency"])
                     amount_discount += abs(res_line["amount_discount"])
-                    amount_discount_currency += abs(res_line["amount_discount_currency"])
+                    amount_discount_currency += abs(
+                        res_line["amount_discount_currency"]
+                    )
                     # TODO: check with multicurrency test
         return {
             "amount": amount,
