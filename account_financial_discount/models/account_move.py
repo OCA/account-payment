@@ -42,7 +42,8 @@ class AccountMove(models.Model):
             FROM account_move move
             LEFT JOIN account_move_line line ON line.move_id = move.id
             LEFT JOIN account_account account ON account.id = line.account_id
-            LEFT JOIN account_account_type account_type ON account_type.id = account.user_type_id
+            LEFT JOIN account_account_type account_type
+                ON account_type.id = account.user_type_id
             WHERE move.id IN %s
             AND account_type.type IN ('receivable', 'payable')
             GROUP BY move.id, move.move_type, line.date_discount

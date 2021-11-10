@@ -23,9 +23,12 @@ class AccountPaymentRegister(models.TransientModel):
         """Check if a financial discount is applied on the wizard
 
         A financial discount is applied if:
-        - Financial discount is available on any invoice and its Date is before actual payment date.
-        - Financial discount is available on any invoice and invoice is marked with force financial discount.
-        - Financial discount is available on any invoice and wizard is marked with force financial discount."""
+        - Financial discount is available on any invoice and its Date is before
+          actual payment date.
+        - Financial discount is available on any invoice and invoice is marked
+          with force financial discount.
+        - Financial discount is available on any invoice and wizard is marked
+          with force financial discount."""
         for wizard in self:
             if wizard.force_financial_discount:
                 wizard.with_financial_discount = True

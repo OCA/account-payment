@@ -14,6 +14,6 @@
         "views/account_move.xml",
         "views/account_payment.xml",
         "views/res_config_settings.xml",
-        # "views/payment_receipt.xml",  TODO Fix report
+        "views/payment_receipt.xml",
     ],
 }
