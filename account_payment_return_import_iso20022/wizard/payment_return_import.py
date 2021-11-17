@@ -59,4 +59,4 @@ class PaymentReturnImport(models.TransientModel):
                     "Payment return file is not a ISO20022 " "supported file.",
                     exc_info=True,
                 )
-                return super(PaymentReturnImport, self)._parse_file(data_file)
+                return super()._parse_file(data_file)
