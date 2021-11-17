@@ -12,7 +12,7 @@ class TestImport(TestPaymentReturnFile):
 
     @classmethod
     def setUpClass(cls):
-        super(TestImport, cls).setUpClass()
+        super().setUpClass()
         cls.company = cls.env.ref("base.main_company")
         cls.acc_number = "NL77ABNA0574908765"
         cls.acc_bank = cls.env["res.partner.bank"].create(
