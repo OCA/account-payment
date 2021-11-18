@@ -53,7 +53,9 @@ class AccountPaymentRegister(models.TransientModel):
             )
             # If not all invoices have discounts available
             not_all_invoices_with_discounts_available = not all(
-                wizard.line_ids.mapped("move_id.has_discount_available")
+                wizard.with_context(discount_date=wizard.payment_date).line_ids.mapped(
+                    "move_id.has_discount_available"
+                )
             )
             # If any invoice has force_financial_discount
             any_invoice_with_forced_discount = any(

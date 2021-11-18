@@ -73,7 +73,12 @@ class AccountMove(models.Model):
                 return True
         elif self.state == "posted":
             disc_date = self._get_first_payment_term_line().date_discount
-            if disc_date and disc_date >= date.today() or self.force_financial_discount:
+            discount_date = self.env.context.get("discount_date") or date.today()
+            if (
+                disc_date
+                and disc_date >= discount_date
+                or self.force_financial_discount
+            ):
                 return True
         return False
 
