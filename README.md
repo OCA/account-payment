@@ -28,6 +28,7 @@ addon | version | maintainers | summary
 [account_payment_batch_process_discount](account_payment_batch_process_discount/) | 14.0.1.0.0 | [![mgosai](https://github.com/mgosai.png?size=30px)](https://github.com/mgosai) | Discount on batch payments
 [account_payment_multi_deduction](account_payment_multi_deduction/) | 14.0.1.0.2 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Payment Register with Multiple Deduction
 [account_payment_return](account_payment_return/) | 14.0.1.0.2 |  | Manage the return of your payments
+[account_payment_return_import](account_payment_return_import/) | 14.0.1.0.0 |  | This module adds a generic wizard to import payment returnfile formats. Is only the base to be extended by anothermodules
 [account_payment_term_discount](account_payment_term_discount/) | 14.0.1.1.6 | [![bodedra](https://github.com/bodedra.png?size=30px)](https://github.com/bodedra) | Account Payment Terms Discount
 [account_payment_term_extension](account_payment_term_extension/) | 14.0.1.0.2 |  | Adds rounding, months, weeks and multiple payment days properties on payment term lines
 [account_payment_view_check_number](account_payment_view_check_number/) | 14.0.1.0.0 |  | Account Payment View Check Number
