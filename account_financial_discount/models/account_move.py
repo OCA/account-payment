@@ -131,7 +131,8 @@ class AccountMove(models.Model):
             raise UserError(_("Invalid domain right operand %s", value))
         operator_funcs = {"=": equals, "!=": not_equals}
         move_ids = [
-            move.id for move in self.search([])
+            move.id
+            for move in self.search([])
             if operator_funcs[operator](value, move.has_discount_available)
         ]
         return [("id", "in", move_ids)]
