@@ -13,6 +13,7 @@
         "views/payment_term_form.xml",
         "views/account_move.xml",
         "views/account_payment.xml",
+        "views/account_reconcile_model.xml",
         "views/res_config_settings.xml",
         "views/payment_receipt.xml",
     ],
