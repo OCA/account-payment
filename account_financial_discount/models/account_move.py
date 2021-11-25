@@ -113,6 +113,7 @@ class AccountMove(models.Model):
         "invoice_payment_term_id.days_discount",
         "invoice_payment_term_id.percent_discount",
         "force_financial_discount",
+        "state",
     )
     def _compute_financial_discount_data(self):
         """Compute discount financial discount fields"""
