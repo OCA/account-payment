@@ -20,7 +20,7 @@ class AccountMove(models.Model):
         compute="_compute_financial_discount_data"
     )
     force_financial_discount = fields.Boolean(
-        "Force financial discount?",
+        "Force financial discount",
         default=False,
         help="If marked, financial discount will be applied even if the "
         "discount date is passed",
