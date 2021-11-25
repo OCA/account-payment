@@ -1,8 +1,10 @@
 # Copyright 2019-2020 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from datetime import date
+from operator import eq as equals, ne as not_equals
 
-from odoo import api, fields, models
+from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
 
 class AccountMove(models.Model):
@@ -11,8 +13,8 @@ class AccountMove(models.Model):
     has_discount_available = fields.Boolean(
         "Has discount available",
         compute="_compute_financial_discount_data",
-        # TODO implement read_group + search because we cannot store the field
-        #  as it depends on actual date
+        search="_search_has_financial_discount",
+        # TODO implement read_group?
     )
     display_force_financial_discount = fields.Boolean(
         compute="_compute_financial_discount_data"
@@ -124,6 +126,19 @@ class AccountMove(models.Model):
             rec.display_force_financial_discount = (
                 rec._get_display_force_financial_discount()
             )
+
+    def _search_has_financial_discount(self, operator, value):
+        # Inspired by mrp.production _search_is_planned
+        if operator not in ("=", "!="):
+            raise UserError(_("Invalid domain operator %s", operator))
+        if value not in (False, True):
+            raise UserError(_("Invalid domain right operand %s", value))
+        operator_funcs = {"=": equals, "!=": not_equals}
+        move_ids = [
+            move.id for move in self.search([])
+            if operator_funcs[operator](value, move.has_discount_available)
+        ]
+        return [("id", "in", move_ids)]
 
     def _post(self, soft=True):
         res = super()._post(soft=soft)
