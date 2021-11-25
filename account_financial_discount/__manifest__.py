@@ -15,6 +15,6 @@
         "views/account_reconcile_model.xml",
         "views/res_config_settings.xml",
         "views/payment_receipt.xml",
-        "views/account_payment_register.xml",
+        "wizard/account_payment_register.xml",
     ],
 }
