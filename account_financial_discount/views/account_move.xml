@@ -79,9 +79,6 @@
                     optional="hide"
                 />
             </xpath>
-            <field name="ref" position="after">
-                <field name="payment_blocked" />
-            </field>
         </field>
     </record>
 </odoo>

@@ -25,11 +25,6 @@ class AccountMove(models.Model):
         help="If marked, financial discount will be applied even if the "
         "discount date is passed",
     )
-    payment_blocked = fields.Boolean(
-        "Is payment blocked",
-        default=False,
-        help="Allows group-by but has no logic linked to it",
-    )
 
     def _financial_discount_query(self):
         self.env.cr.execute(
