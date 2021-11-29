@@ -217,11 +217,15 @@ class AccountMove(models.Model):
                     date_invoice,
                 )
             if self.move_type == "out_invoice":
-                vals["amount_discount"] = amount_discount_company_currency
                 if diff_currency:
+                    vals["amount_discount"] = amount_discount_company_currency
                     vals["amount_discount_currency"] = amount_discount_invoice_currency
+                else:
+                    vals["amount_discount"] = amount_discount_invoice_currency
             elif self.move_type == "in_invoice":
-                vals["amount_discount"] = -amount_discount_company_currency
                 if diff_currency:
+                    vals["amount_discount"] = -amount_discount_company_currency
                     vals["amount_discount_currency"] = -amount_discount_invoice_currency
+                else:
+                    vals["amount_discount"] = -amount_discount_invoice_currency
         return vals
