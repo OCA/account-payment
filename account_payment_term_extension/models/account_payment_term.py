@@ -5,6 +5,7 @@
 # Copyright 2018 Simone Rubino - Agile Business Group
 # Copyright 2021 Tecnativa - Víctor Martínez
 # Copyright 2021 Tecnativa - Pedro M. Baeza
+# Copyright 2021 Noviat
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import calendar
@@ -245,7 +246,9 @@ class AccountPaymentTerm(models.Model):
                 # Getting 1st of next month
                 next_first_date = next_date + relativedelta(day=1, months=1)
                 # Then add days
-                next_date = next_first_date + relativedelta(days=line.days - 1)
+                next_date = next_first_date + relativedelta(
+                    days=line.days - 1, weeks=line.weeks, months=line.months
+                )
             next_date = self.apply_payment_days(line, next_date)
             next_date = self.apply_holidays(next_date)
             if not float_is_zero(amt, precision_digits=precision_digits):
