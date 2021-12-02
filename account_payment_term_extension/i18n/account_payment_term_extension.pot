@@ -46,6 +46,7 @@ msgstr ""
 
 #. module: account_payment_term_extension
 #: code:addons/account_payment_term_extension/models/account_payment_term.py:0
+#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Date %s cannot is both a holiday and a Postponed date"
 msgstr ""
@@ -62,11 +63,13 @@ msgstr ""
 
 #. module: account_payment_term_extension
 #: code:addons/account_payment_term_extension/models/account_payment_term.py:0
+#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Holiday %s can only be postponed into the future"
 msgstr ""
 
 #. module: account_payment_term_extension
+#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Holiday %s is duplicated in current payment term"
@@ -140,6 +143,7 @@ msgstr ""
 
 #. module: account_payment_term_extension
 #: code:addons/account_payment_term_extension/models/account_payment_term.py:0
+#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Payment days field format is not valid."
 msgstr ""
@@ -151,11 +155,13 @@ msgstr ""
 
 #. module: account_payment_term_extension
 #: code:addons/account_payment_term_extension/models/account_payment_term.py:0
+#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Percentage of amount untaxed can't be used with foreign currencies"
 msgstr ""
 
 #. module: account_payment_term_extension
+#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Percentages on the Payment Terms lines must be between 0 and 100."
