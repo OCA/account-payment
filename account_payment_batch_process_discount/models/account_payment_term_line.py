@@ -17,7 +17,7 @@ class AccountPaymentTermLine(models.Model):
                 invoice_ids = self.env["account.move"].search(
                     [
                         ("state", "=", "posted"),
-                        ("payment_term_id", "=", item.payment_id.id),
+                        ("invoice_payment_term_id", "=", item.payment_id.id),
                     ]
                 )
                 for inv in invoice_ids:
