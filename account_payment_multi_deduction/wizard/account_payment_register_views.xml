@@ -15,6 +15,7 @@
             </xpath>
             <xpath expr="/form/group/group[@name='group3']" position="after">
                 <group
+                    colspan="4"
                     attrs="{'invisible': [('payment_difference_handling', '!=', 'reconcile_multi_deduct')]}"
                 >
                     <field name="deduct_residual" invisible="1" />
