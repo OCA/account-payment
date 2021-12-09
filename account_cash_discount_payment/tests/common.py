@@ -40,6 +40,7 @@ class TestAccountCashDiscountPaymentCommon(TestAccountCashDiscountCommon):
                 default_company_id=self.company.id,
                 default_journal_id=self.purchase_journal.id,
                 default_payment_mode_id=payment_mode.id,
+                default_ref="reference",
             )
         )
         invoice_form.partner_id = self.partner_agrolait
