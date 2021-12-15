@@ -1,9 +1,9 @@
-<?xml version="1.0"?>
+<?xml version="1.0" ?>
 <odoo>
 
     <template id="check_report">
         <t t-call="web.html_container">
-            <div class="header"/>
+            <div class="header" />
             <div class="article">
                 <t t-foreach="docs" t-as="o">
                     <div class="page">
@@ -12,14 +12,25 @@
                         </div>
                         <div name='invoice_data_block' class="oe_mt32">
                             <strong name='invoice_data_header'>
-                                <span name='partner'
-                                      t-esc="'Partner: {}'.format(o.partner_id.name)"/>
-                                <span name='payment_date' style="padding-right:100mm;float:right;"
-                                      t-esc="'Date: {}'.format(_format_date_to_partner_lang(o.payment_date, o.partner_id.id))"/>
-                                <span name='check_number' style="position:absolute; right:35mm;"
-                                      t-esc="'Check #: {}'.format(o.check_number)"/>
+                                <span
+                                    name='partner'
+                                    t-esc="'Partner: {}'.format(o.partner_id.name)"
+                                />
+                                <span
+                                    name='payment_date'
+                                    style="padding-right:100mm;float:right;"
+                                    t-esc="'Date: {}'.format(_format_date_to_partner_lang(o.payment_date, o.partner_id.id))"
+                                />
+                                <span
+                                    name='check_number'
+                                    style="position:absolute; right:35mm;"
+                                    t-esc="'Check #: {}'.format(o.check_number)"
+                                />
                             </strong>
-                            <table class="oe_mt32 table table-condensed" name="invoice_details">
+                            <table
+                                class="oe_mt32 table table-condensed"
+                                name="invoice_details"
+                            >
                                 <thead>
                                     <tr style="text-align:left;">
                                         <th style="padding-top:3mm;">Due Date</th>
@@ -30,24 +41,38 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <t name="paid_lines_loop" t-foreach="paid_lines(o)" t-as="line">
+                                    <t
+                                        name="paid_lines_loop"
+                                        t-foreach="paid_lines(o)"
+                                        t-as="line"
+                                    >
                                         <tr style="text-align:left;border-top: 0px;">
                                             <td style="padding-top:2mm;">
-                                                <span t-esc="_format_date_to_partner_lang(line.date_maturity, o.partner_id.id)"/>
+                                                <span
+                                                    t-esc="_format_date_to_partner_lang(line.date_maturity, o.partner_id.id)"
+                                                />
                                             </td>
-                                            <td style="max-width: 55mm;"
-                                                t-esc="line.display_name"/>
+                                            <td
+                                                style="max-width: 55mm;"
+                                                t-esc="line.display_name"
+                                            />
                                             <td>
-                                                <span t-esc="total_amount(o, line)"
-                                                      t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                                                <span
+                                                    t-esc="total_amount(o, line)"
+                                                    t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
+                                                />
                                             </td>
                                             <td>
-                                                <span t-esc="residual_amount(o, line)"
-                                                      t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                                                <span
+                                                    t-esc="residual_amount(o, line)"
+                                                    t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
+                                                />
                                             </td>
                                             <td>
-                                                <span t-esc="paid_amount(o, line)"
-                                                      t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                                                <span
+                                                    t-esc="paid_amount(o, line)"
+                                                    t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
+                                                />
                                             </td>
                                         </tr>
                                     </t>
@@ -56,7 +81,9 @@
                         </div>
                         <div name='check_amount' class="oe_mt32" align="right">
                             <b>Check Amount: </b><span
-                                t-field='o.amount' t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"/>
+                                t-field='o.amount'
+                                t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
+                            />
                         </div>
                     </div>
                 </t>
@@ -70,6 +97,7 @@
         string="Payment Check Report"
         report_type="qweb-pdf"
         name="account_check_report.check_report"
-        file="account_check_report.check_report"/>
+        file="account_check_report.check_report"
+    />
 
 </odoo>
