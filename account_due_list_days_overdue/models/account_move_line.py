@@ -8,11 +8,6 @@ from lxml import etree
 
 from odoo import api, fields, models
 
-from odoo.addons.base.models.ir_ui_view import (
-    transfer_modifiers_to_node,
-    transfer_node_to_modifiers,
-)
-
 
 class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
@@ -73,7 +68,7 @@ class AccountMoveLine(models.Model):
     def fields_view_get(
         self, view_id=None, view_type="form", toolbar=False, submenu=False
     ):
-        result = super(AccountMoveLine, self).fields_view_get(
+        result = super().fields_view_get(
             view_id, view_type, toolbar=toolbar, submenu=submenu,
         )
 
@@ -85,25 +80,19 @@ class AccountMoveLine(models.Model):
                 ):
                     elem = etree.Element(
                         "field",
-                        {"name": str(overdue_term.tech_name), "readonly": "True"},
-                    )
-                    modifiers = {}
-                    transfer_node_to_modifiers(elem, modifiers)
-                    transfer_modifiers_to_node(elem, modifiers)
-                    placeholder.addnext(elem)
-                    result["fields"].update(
                         {
-                            overdue_term.tech_name: {
-                                "domain": [],
-                                "string": overdue_term.name,
-                                "context": {},
-                                "type": "float",
-                                "sum": "Total",
-                            }
-                        }
+                            "name": str(overdue_term.tech_name),
+                            "readonly": "True",
+                            "sum": "Total",
+                        },
                     )
-
+                    placeholder.addnext(elem)
                 result["arch"] = etree.tostring(doc)
+            xarch, xfields = self.env["ir.ui.view"].postprocess_and_fields(
+                self._name, etree.fromstring(result["arch"]), view_id
+            )
+            result["arch"] = xarch
+            result["fields"] = xfields
         return result
 
     @api.model
