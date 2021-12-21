@@ -3,7 +3,6 @@ odoo.define("account_payment_widget_amount.payment", function (require) {
 
     var AbstractField = require("web.AbstractField");
     var core = require("web.core");
-    var field_registry = require("web.field_registry");
     var field_utils = require("web.field_utils");
     var account_payment = require("account.payment");
 
@@ -87,9 +86,9 @@ odoo.define("account_payment_widget_amount.payment", function (require) {
                 paid_amount: payment_amount,
             };
             this._rpc({
-                model: "account.invoice",
-                method: "assign_outstanding_credit",
-                args: [JSON.parse(this.value).invoice_id, id],
+                model: "account.move",
+                method: "js_assign_outstanding_line",
+                args: [JSON.parse(this.value).move_id, id],
                 context: context,
             }).then(function () {
                 self.trigger_up("reload");

@@ -15,9 +15,7 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
         self.account_account_model = self.env["account.account"]
         self.account_payment_model = self.env["account.payment"]
         self.account_journal_model = self.env["account.journal"]
-        self.account_invoice_model = self.env["account.invoice"]
-        self.account_move_line_model = self.env["account.move.line"]
-        self.invoice_line_model = self.env["account.invoice.line"]
+        self.account_move_model = self.env["account.move"]
         # Records
         self.company = self.env.ref("base.main_company")
 
@@ -25,24 +23,35 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
             {
                 "name": "Test Bank",
                 "type": "liquidity",
+                "internal_group": "asset",
             }
         )
         self.account_type_receivable = self.account_account_type_model.create(
             {
                 "name": "Test Receivable",
                 "type": "receivable",
+                "internal_group": "asset",
             }
         )
         self.account_type_payable = self.account_account_type_model.create(
             {
                 "name": "Test Payable",
                 "type": "receivable",
+                "internal_group": "liability",
             }
         )
-        self.account_type_regular = self.account_account_type_model.create(
+        self.account_type_regular_income = self.account_account_type_model.create(
             {
-                "name": "Test Regular",
+                "name": "Test Regular Income",
                 "type": "other",
+                "internal_group": "income",
+            }
+        )
+        self.account_type_regular_expense = self.account_account_type_model.create(
+            {
+                "name": "Test Regular Expense",
+                "type": "other",
+                "internal_group": "expense",
             }
         )
         self.account_bank = self.account_account_model.create(
@@ -78,7 +87,7 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
             {
                 "name": "Test Income",
                 "code": "TEST_IN",
-                "user_type_id": self.account_type_regular.id,
+                "user_type_id": self.account_type_regular_income.id,
                 "reconcile": False,
                 "company_id": self.company.id,
             }
@@ -87,7 +96,7 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
             {
                 "name": "Test Expense",
                 "code": "TEST_EX",
-                "user_type_id": self.account_type_regular.id,
+                "user_type_id": self.account_type_regular_expense.id,
                 "reconcile": False,
                 "company_id": self.company.id,
             }
@@ -124,29 +133,31 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
         - The residual amount of the invoice is reduced by the amount assigned.
         - The residual amount of the payment is reduced by the amount assigned.
         """
-        invoice = self.account_invoice_model.create(
+        invoice = self.account_move_model.create(
             {
                 "name": "Test Customer Invoice",
                 "journal_id": self.sale_journal.id,
                 "partner_id": self.partner.id,
-                "account_id": self.account_receivable.id,
                 "company_id": self.company.id,
                 "currency_id": self.company.currency_id.id,
+                "move_type": "out_invoice",
+                "invoice_line_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": "Line 1",
+                            "price_unit": 200.0,
+                            "account_id": self.account_income.id,
+                            "quantity": 1,
+                        },
+                    )
+                ],
             }
         )
 
-        self.invoice_line_model.create(
-            {
-                "invoice_id": invoice.id,
-                "name": "Line 1",
-                "price_unit": 200.0,
-                "account_id": self.account_income.id,
-                "quantity": 1,
-                "company_id": self.company.id,
-            }
-        )
         # Open invoice
-        invoice.action_invoice_open()
+        invoice.action_post()
         # Create a payment
         payment = self.account_payment_model.create(
             {
@@ -158,22 +169,26 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
                 "partner_id": self.partner.id,
                 "amount": 1000.0,
                 "currency_id": self.company.currency_id.id,
-                "payment_date": time.strftime("%Y-%m-%d"),
+                "date": time.strftime("%Y-%m-%d"),
                 "journal_id": self.bank_journal.id,
                 "company_id": self.company.id,
             }
         )
-        payment.post()
-        payment_ml = payment.move_line_ids.filtered(
+        payment.action_post()
+        payment_ml = payment.line_ids.filtered(
             lambda l: l.account_id == self.account_receivable
         )
-        invoice.with_context(paid_amount=100.0).assign_outstanding_credit(payment_ml.id)
-        self.assertEqual(invoice.residual, 100.0)
-        self.assertFalse(payment.move_reconciled)
-        invoice.with_context(paid_amount=100.0).assign_outstanding_credit(payment_ml.id)
-        self.assertEqual(invoice.residual, 0.0)
-        self.assertEqual(invoice.state, "paid")
-        self.assertFalse(payment.move_reconciled)
+        invoice.with_context(paid_amount=100.0).js_assign_outstanding_line(
+            payment_ml.id
+        )
+        self.assertEqual(invoice.amount_residual, 100.0)
+        self.assertFalse(payment_ml.reconciled)
+        invoice.with_context(paid_amount=100.0).js_assign_outstanding_line(
+            payment_ml.id
+        )
+        self.assertEqual(invoice.amount_residual, 0.0)
+        self.assertIn(invoice.payment_state, ("paid", "in_payment"))
+        self.assertFalse(payment_ml.reconciled)
 
     def test_02(self):
         """Tests that I can create an invoice in foreign currency,
@@ -186,29 +201,31 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
         self.company.currency_id.rate_ids = False
         # The invoice is for 200 in the new currency, which translates in 100
         # in company currency.
-        invoice = self.account_invoice_model.create(
+        invoice = self.account_move_model.create(
             {
+                "move_type": "out_invoice",
                 "name": "Test Customer Invoice",
                 "journal_id": self.sale_journal.id,
                 "partner_id": self.partner.id,
-                "account_id": self.account_receivable.id,
                 "company_id": self.company.id,
                 "currency_id": self.new_usd.id,
+                "invoice_line_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": "Line 1",
+                            "price_unit": 200.0,
+                            "account_id": self.account_income.id,
+                            "quantity": 1,
+                        },
+                    )
+                ],
             }
         )
 
-        self.invoice_line_model.create(
-            {
-                "invoice_id": invoice.id,
-                "name": "Line 1",
-                "price_unit": 200.0,
-                "account_id": self.account_income.id,
-                "quantity": 1,
-                "company_id": self.company.id,
-            }
-        )
         # Open invoice
-        invoice.action_invoice_open()
+        invoice.action_post()
         # Create a payment
         payment = self.account_payment_model.create(
             {
@@ -220,21 +237,23 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
                 "partner_id": self.partner.id,
                 "amount": 1000.0,
                 "currency_id": self.company.currency_id.id,
-                "payment_date": time.strftime("%Y-%m-%d"),
+                "date": time.strftime("%Y-%m-%d"),
                 "journal_id": self.bank_journal.id,
                 "company_id": self.company.id,
             }
         )
-        payment.post()
-        payment_ml = payment.move_line_ids.filtered(
+        payment.action_post()
+        payment_ml = payment.line_ids.filtered(
             lambda l: l.account_id == self.account_receivable
         )
         # We pay 100 in the currency of the invoice. Which means that in
         # company currency we are paying 50.
-        invoice.with_context(paid_amount=100.0).assign_outstanding_credit(payment_ml.id)
-        self.assertEqual(invoice.residual_signed, 100.0)
-        self.assertEqual(invoice.state, "open")
-        self.assertFalse(payment.move_reconciled)
+        invoice.with_context(paid_amount=100.0).js_assign_outstanding_line(
+            payment_ml.id
+        )
+        self.assertEqual(invoice.amount_residual, 100.0)
+        self.assertEqual(invoice.payment_state, "partial")
+        self.assertFalse(payment_ml.reconciled)
         self.assertEqual(payment_ml.amount_residual, -950.0)
 
     def test_03(self):
@@ -248,30 +267,31 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
         self.company.currency_id.rate_ids = False
         # The invoice is for 200 in the new currency, which translates in 100
         # in company currency.
-        invoice = self.account_invoice_model.create(
+        invoice = self.account_move_model.create(
             {
                 "name": "Test Customer Invoice",
-                "type": "out_refund",
+                "move_type": "out_refund",
                 "journal_id": self.sale_journal.id,
                 "partner_id": self.partner.id,
-                "account_id": self.account_receivable.id,
                 "company_id": self.company.id,
                 "currency_id": self.new_usd.id,
+                "invoice_line_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": "Line 1",
+                            "price_unit": 200.0,
+                            "account_id": self.account_income.id,
+                            "quantity": 1,
+                        },
+                    )
+                ],
             }
         )
 
-        self.invoice_line_model.create(
-            {
-                "invoice_id": invoice.id,
-                "name": "Line 1",
-                "price_unit": 200.0,
-                "account_id": self.account_income.id,
-                "quantity": 1,
-                "company_id": self.company.id,
-            }
-        )
         # Open invoice
-        invoice.action_invoice_open()
+        invoice.action_post()
         # Create a payment
         payment = self.account_payment_model.create(
             {
@@ -283,21 +303,23 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
                 "partner_id": self.partner.id,
                 "amount": 1000.0,
                 "currency_id": self.company.currency_id.id,
-                "payment_date": time.strftime("%Y-%m-%d"),
+                "date": time.strftime("%Y-%m-%d"),
                 "journal_id": self.bank_journal.id,
                 "company_id": self.company.id,
             }
         )
-        payment.post()
-        payment_ml = payment.move_line_ids.filtered(
+        payment.action_post()
+        payment_ml = payment.line_ids.filtered(
             lambda l: l.account_id == self.account_receivable
         )
         # We collect 100 in the currency of the refund. Which means that in
         # company currency we are reconciling 50.
-        invoice.with_context(paid_amount=100.0).assign_outstanding_credit(payment_ml.id)
-        self.assertEqual(invoice.residual_signed, -100.0)
-        self.assertEqual(invoice.state, "open")
-        self.assertFalse(payment.move_reconciled)
+        invoice.with_context(paid_amount=100.0).js_assign_outstanding_line(
+            payment_ml.id
+        )
+        self.assertEqual(invoice.amount_residual, 100.0)
+        self.assertEqual(invoice.payment_state, "partial")
+        self.assertFalse(payment_ml.reconciled)
         self.assertEqual(payment_ml.amount_residual, 950.0)
 
     def test_04(self):
@@ -309,29 +331,31 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
         - The residual amount of the payment is reduced by the amount assigned.
         """
         self.company.currency_id.rate_ids = False
-        invoice = self.account_invoice_model.create(
+        invoice = self.account_move_model.create(
             {
+                "move_type": "out_invoice",
                 "name": "Test Customer Invoice",
                 "journal_id": self.sale_journal.id,
                 "partner_id": self.partner.id,
-                "account_id": self.account_receivable.id,
                 "company_id": self.company.id,
                 "currency_id": self.company.currency_id.id,
+                "invoice_line_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": "Line 1",
+                            "price_unit": 200.0,
+                            "account_id": self.account_income.id,
+                            "quantity": 1,
+                        },
+                    )
+                ],
             }
         )
 
-        self.invoice_line_model.create(
-            {
-                "invoice_id": invoice.id,
-                "name": "Line 1",
-                "price_unit": 200.0,
-                "account_id": self.account_income.id,
-                "quantity": 1,
-                "company_id": self.company.id,
-            }
-        )
         # Open invoice
-        invoice.action_invoice_open()
+        invoice.action_post()
         # Create a payment for 1000 of foreign currency, which translates
         # to 500 in company currency.
         payment = self.account_payment_model.create(
@@ -344,26 +368,30 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
                 "partner_id": self.partner.id,
                 "amount": 1000.0,
                 "currency_id": self.new_usd.id,
-                "payment_date": time.strftime("%Y-%m-%d"),
+                "date": time.strftime("%Y-%m-%d"),
                 "journal_id": self.bank_journal.id,
                 "company_id": self.company.id,
             }
         )
-        payment.post()
-        payment_ml = payment.move_line_ids.filtered(
+        payment.action_post()
+        payment_ml = payment.line_ids.filtered(
             lambda l: l.account_id == self.account_receivable
         )
         # We pay 100 in the currency of the invoice, which is the
         # company currency
-        invoice.with_context(paid_amount=100.0).assign_outstanding_credit(payment_ml.id)
-        self.assertEqual(invoice.residual_signed, 100.0)
-        self.assertEqual(invoice.state, "open")
-        self.assertFalse(payment.move_reconciled)
+        invoice.with_context(paid_amount=100.0).js_assign_outstanding_line(
+            payment_ml.id
+        )
+        self.assertEqual(invoice.amount_residual, 100.0)
+        self.assertEqual(invoice.payment_state, "partial")
+        self.assertFalse(payment_ml.reconciled)
         self.assertEqual(payment_ml.amount_residual, -400.0)
         self.assertEqual(payment_ml.amount_residual_currency, -800.0)
-        invoice.with_context(paid_amount=100.0).assign_outstanding_credit(payment_ml.id)
-        self.assertEqual(invoice.residual_signed, 0.0)
-        self.assertEqual(invoice.state, "paid")
+        invoice.with_context(paid_amount=100.0).js_assign_outstanding_line(
+            payment_ml.id
+        )
+        self.assertEqual(invoice.amount_residual, 0.0)
+        self.assertIn(invoice.payment_state, ("paid", "in_payment"))
         self.assertEqual(payment_ml.amount_residual, -300.0)
         self.assertEqual(payment_ml.amount_residual_currency, -600.0)
 
@@ -375,30 +403,32 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
         - The residual amount of the invoice is reduced by the amount assigned.
         - The residual amount of the payment is reduced by the amount assigned.
         """
-        invoice = self.account_invoice_model.create(
+        invoice = self.account_move_model.create(
             {
                 "name": "Test Vendor Bill",
-                "type": "in_invoice",
+                "move_type": "in_invoice",
                 "journal_id": self.purchase_journal.id,
                 "partner_id": self.partner.id,
-                "account_id": self.account_payable.id,
                 "company_id": self.company.id,
+                "invoice_date": time.strftime("%Y-%m-%d"),
                 "currency_id": self.company.currency_id.id,
+                "invoice_line_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": "Line 1",
+                            "price_unit": 200.0,
+                            "account_id": self.account_expense.id,
+                            "quantity": 1,
+                        },
+                    )
+                ],
             }
         )
 
-        self.invoice_line_model.create(
-            {
-                "invoice_id": invoice.id,
-                "name": "Line 1",
-                "price_unit": 200.0,
-                "account_id": self.account_expense.id,
-                "quantity": 1,
-                "company_id": self.company.id,
-            }
-        )
         # Open invoice
-        invoice.action_invoice_open()
+        invoice.action_post()
         # Create a payment
         payment = self.account_payment_model.create(
             {
@@ -410,19 +440,23 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
                 "partner_id": self.partner.id,
                 "amount": 1000.0,
                 "currency_id": self.company.currency_id.id,
-                "payment_date": time.strftime("%Y-%m-%d"),
+                "date": time.strftime("%Y-%m-%d"),
                 "journal_id": self.bank_journal.id,
                 "company_id": self.company.id,
             }
         )
-        payment.post()
-        payment_ml = payment.move_line_ids.filtered(
+        payment.action_post()
+        payment_ml = payment.line_ids.filtered(
             lambda l: l.account_id == self.account_payable
         )
-        invoice.with_context(paid_amount=100.0).assign_outstanding_credit(payment_ml.id)
-        self.assertEqual(invoice.residual, 100.0)
-        self.assertFalse(payment.move_reconciled)
-        invoice.with_context(paid_amount=100.0).assign_outstanding_credit(payment_ml.id)
-        self.assertEqual(invoice.residual, 0.0)
-        self.assertEqual(invoice.state, "paid")
-        self.assertFalse(payment.move_reconciled)
+        invoice.with_context(paid_amount=100.0).js_assign_outstanding_line(
+            payment_ml.id
+        )
+        self.assertEqual(invoice.amount_residual, 100.0)
+        self.assertFalse(payment_ml.reconciled)
+        invoice.with_context(paid_amount=100.0).js_assign_outstanding_line(
+            payment_ml.id
+        )
+        self.assertEqual(invoice.amount_residual, 0.0)
+        self.assertIn(invoice.payment_state, ("paid", "in_payment"))
+        self.assertFalse(payment_ml.reconciled)
