@@ -3,14 +3,14 @@
 {
     "name": "Account Payment Widget Amount",
     "summary": "Extends the payment widget to be able to choose the payment " "amount",
-    "version": "12.0.1.0.0",
+    "version": "14.0.1.0.0",
     "category": "Account-payment",
     "website": "https://github.com/OCA/account-payment",
     "author": "Eficent, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,
     "installable": True,
-    "depends": ["account_move_line_auto_reconcile_hook"],
+    "depends": ["account"],
     "data": [
         "views/account.xml",
     ],

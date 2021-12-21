@@ -1,81 +1,83 @@
 # Copyright 2018 Eficent Business and IT Consulting Services S.L.
 
-from odoo import _, api, fields, models
-from odoo.exceptions import UserError
+from odoo import models
+from odoo.tools import float_compare
+
+
+class AccountMove(models.Model):
+
+    _inherit = "account.move"
+
+    def js_assign_outstanding_line(self, line_id):
+        self.ensure_one()
+        if "paid_amount" in self.env.context:
+            return super(
+                AccountMove,
+                self.with_context(
+                    move_id=self.id,
+                    line_id=line_id,
+                ),
+            ).js_assign_outstanding_line(line_id)
+        return super(AccountMove, self).js_assign_outstanding_line(line_id)
 
 
 class AccountMoveLine(models.Model):
+
     _inherit = "account.move.line"
 
-    @api.model
-    def update_amount_reconcile(
-        self,
-        temp_amount_residual,
-        temp_amount_residual_currency,
-        amount_reconcile,
-        credit_move,
-        debit_move,
-    ):
-
-        super(AccountMoveLine, self).update_amount_reconcile(
-            temp_amount_residual,
-            temp_amount_residual_currency,
-            amount_reconcile,
-            credit_move,
-            debit_move,
-        )
-        # Check if amount is positive
-        paid_amt = self.env.context.get("paid_amount", 0.0)
-        if not paid_amt:
-            return temp_amount_residual, temp_amount_residual_currency, amount_reconcile
-        paid_amt = float(paid_amt)
-        if paid_amt < 0:
-            raise UserError(_("The specified amount has to be strictly positive"))
-
-        # We need those temporary value otherwise the computation might
-        # be wrong below
-
-        # Compute paid_amount currency
-        if debit_move.amount_residual_currency or credit_move.amount_residual_currency:
-
-            temp_amount_residual_currency = min(
-                debit_move.amount_residual_currency,
-                -credit_move.amount_residual_currency,
-                paid_amt,
-            )
-        else:
-            temp_amount_residual_currency = 0.0
-
-        # If previous value is not 0 we compute paid amount in the company
-        # currency taking into account the rate
-        if temp_amount_residual_currency:
-            paid_amt = debit_move.currency_id._convert(
-                paid_amt,
-                debit_move.company_id.currency_id,
-                debit_move.company_id,
-                credit_move.date or fields.Date.today(),
-            )
-        temp_amount_residual = min(
-            debit_move.amount_residual, -credit_move.amount_residual, paid_amt
-        )
-        amount_reconcile = temp_amount_residual_currency or temp_amount_residual
-
-        return temp_amount_residual, temp_amount_residual_currency, amount_reconcile
-
-    @api.model
-    def _check_remove_debit_move(self, amount_reconcile, debit_move, field):
-        res = super(AccountMoveLine, self)._check_remove_debit_move(
-            amount_reconcile, debit_move, field
-        )
-        if not isinstance(self.env.context.get("paid_amount", False), bool):
-            return True
-        return res
-
-    @api.model
-    def _check_remove_credit_move(self, amount_reconcile, credit_move, field):
-        res = super(AccountMoveLine, self)._check_remove_credit_move(
-            amount_reconcile, credit_move, field
-        )
-        if not isinstance(self.env.context.get("paid_amount", False), bool):
-            return True
-        return res
+    def _prepare_reconciliation_partials(self):
+        am_model = self.env["account.move"]
+        aml_model = self.env["account.move.line"]
+        partials = super(AccountMoveLine, self)._prepare_reconciliation_partials()
+        if self.env.context.get("paid_amount", 0.0):
+            total_paid = self.env.context.get("paid_amount", 0.0)
+            current_am = am_model.browse(self.env.context.get("move_id"))
+            current_aml = aml_model.browse(self.env.context.get("line_id"))
+            decimal_places = current_am.company_id.currency_id.decimal_places
+            if current_am.currency_id.id != current_am.company_currency_id.id:
+                total_paid = current_am.currency_id._convert(
+                    total_paid,
+                    current_aml.currency_id,
+                    current_am.company_id,
+                    current_aml.date,
+                )
+            for partial in partials:
+                debit_line = self.browse(partial.get("debit_move_id"))
+                credit_line = self.browse(partial.get("credit_move_id"))
+                different_currency = (
+                    debit_line.currency_id.id != credit_line.currency_id.id
+                )
+                to_apply = min(total_paid, partial.get("amount", 0.0))
+                partial.update(
+                    {
+                        "amount": to_apply,
+                    }
+                )
+                if different_currency:
+                    partial.update(
+                        {
+                            "debit_amount_currency": credit_line.company_currency_id._convert(
+                                to_apply,
+                                debit_line.currency_id,
+                                credit_line.company_id,
+                                credit_line.date,
+                            ),
+                            "credit_amount_currency": debit_line.company_currency_id._convert(
+                                to_apply,
+                                credit_line.currency_id,
+                                debit_line.company_id,
+                                debit_line.date,
+                            ),
+                        }
+                    )
+                else:
+                    partial.update(
+                        {
+                            "debit_amount_currency": to_apply,
+                            "credit_amount_currency": to_apply,
+                        }
+                    )
+                total_paid -= to_apply
+                if float_compare(total_paid, 0.0, precision_digits=decimal_places) <= 0:
+                    break
+        return partials
