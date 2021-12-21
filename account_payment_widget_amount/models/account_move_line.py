@@ -1,4 +1,4 @@
-# Copyright 2018 Eficent Business and IT Consulting Services S.L.
+# Copyright 2018-2021 ForgeFlow S.L.
 
 from odoo import models
 from odoo.tools import float_compare
