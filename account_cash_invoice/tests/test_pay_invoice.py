@@ -108,10 +108,10 @@ class TestSessionPayInvoice(SavepointCase):
         inv_lines |= self.invoice_out.line_ids.filtered(
             lambda line: line.account_id.user_type_id.type in ("receivable", "payable")
         )
-        for st_line, inv_line in zip(statement.line_ids, inv_lines):
-            st_line.reconcile([{"id": inv_line.id}], [])
         statement.button_validate()
+        self.invoice_out.flush()
         self.invoice_out.refresh()
         self.assertEqual(self.invoice_out.amount_residual, 0.0)
+        self.invoice_in.flush()
         self.invoice_in.refresh()
         self.assertEqual(self.invoice_in.amount_residual, 0.0)

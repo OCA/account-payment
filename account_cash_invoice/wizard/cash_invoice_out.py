@@ -102,6 +102,9 @@ class CashInvoiceOut(models.TransientModel):
                 "invoice_id": self.invoice_id.id,
                 "ref": self.invoice_id.name,
                 "partner_id": self.invoice_id.partner_id.id,
+                "counterpart_account_id": self.invoice_id.line_ids.filtered(
+                    lambda l: l.account_internal_type in ("receivable", "payable")
+                ).account_id.id,
             }
         )
         return res
