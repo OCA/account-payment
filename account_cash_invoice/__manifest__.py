@@ -3,7 +3,7 @@
 
 {
     "name": "Account cash invoice",
-    "version": "14.0.1.1.0",
+    "version": "14.0.1.2.0",
     "category": "Accounting",
     "author": "Creu Blanca,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-payment",

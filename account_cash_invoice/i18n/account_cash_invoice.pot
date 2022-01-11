@@ -20,6 +20,11 @@ msgid "Amount"
 msgstr ""
 
 #. module: account_cash_invoice
+#: model:ir.model,name:account_cash_invoice.model_account_bank_statement
+msgid "Bank Statement"
+msgstr ""
+
+#. module: account_cash_invoice
 #: model:ir.model,name:account_cash_invoice.model_account_bank_statement_line
 msgid "Bank Statement Line"
 msgstr ""
@@ -70,6 +75,7 @@ msgid "Currency"
 msgstr ""
 
 #. module: account_cash_invoice
+#: model:ir.model.fields,field_description:account_cash_invoice.field_account_bank_statement__display_name
 #: model:ir.model.fields,field_description:account_cash_invoice.field_account_bank_statement_line__display_name
 #: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in__display_name
 #: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out__display_name
@@ -77,6 +83,7 @@ msgid "Display Name"
 msgstr ""
 
 #. module: account_cash_invoice
+#: model:ir.model.fields,field_description:account_cash_invoice.field_account_bank_statement__id
 #: model:ir.model.fields,field_description:account_cash_invoice.field_account_bank_statement_line__id
 #: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in__id
 #: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out__id
@@ -109,6 +116,7 @@ msgid "Journals"
 msgstr ""
 
 #. module: account_cash_invoice
+#: model:ir.model.fields,field_description:account_cash_invoice.field_account_bank_statement____last_update
 #: model:ir.model.fields,field_description:account_cash_invoice.field_account_bank_statement_line____last_update
 #: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in____last_update
 #: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out____last_update
