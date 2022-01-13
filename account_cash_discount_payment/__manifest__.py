@@ -5,7 +5,7 @@
     "name": "Account Cash Discount Payment",
     "version": "13.0.1.0.0",
     "author": "ACSONE SA/NV," "Odoo Community Association (OCA)",
-    "website": "https://github.com/acsone/account-payment",
+    "website": "https://github.com/OCA/account-payment",
     "license": "AGPL-3",
     "category": "Accounting",
     "depends": ["account_cash_discount_base", "account_payment_order"],

@@ -30,7 +30,6 @@ class TestAccountCashDiscountWriteOff(TestAccountCashDiscountPaymentCommon):
         payment_mode = self.payment_mode_out
         payment_mode.post_move = True
         discount_due_date = Date.today()
-
         invoice = self.create_supplier_invoice(
             discount_due_date, payment_mode, 1000, 10, []
         )
@@ -110,6 +109,44 @@ class TestAccountCashDiscountWriteOff(TestAccountCashDiscountPaymentCommon):
     def test_cash_discount_with_write_off_with_taxes(self):
         woff_account = self.cash_discount_writeoff_account
         woff_journal = self.cash_discount_writeoff_journal
+        woff_account.tax_ids = self.tax_10_p | self.tax_15_p
+        expected_audit = "+II.A. base 15% (701)"
+        expected_audit_base = "+II.D.1. for business purposes: base 17% (721)"
+        self.tax_15_p.invoice_repartition_line_ids.filtered(
+            lambda r: r.repartition_type == "base"
+        ).write(
+            {
+                "tag_ids": [
+                    (
+                        0,
+                        False,
+                        {
+                            "name": expected_audit_base,
+                            "applicability": "taxes",
+                            "country_id": self.partner_agrolait.country_id.id,
+                        },
+                    )
+                ],
+            }
+        )
+        self.tax_15_p.invoice_repartition_line_ids.filtered(
+            lambda r: r.repartition_type == "tax"
+        ).write(
+            {
+                "tag_ids": [
+                    (
+                        0,
+                        False,
+                        {
+                            "name": expected_audit,
+                            "applicability": "taxes",
+                            "country_id": self.partner_agrolait.country_id.id,
+                        },
+                    )
+                ],
+                "account_id": self.exp_account.id,
+            }
+        )
         self.company.write(
             {
                 "default_cash_discount_writeoff_account_id": woff_account.id,
@@ -178,6 +215,8 @@ class TestAccountCashDiscountWriteOff(TestAccountCashDiscountPaymentCommon):
         )
         self.assertEqual(len(tax_15_move_line), 1)
         self.assertEqual(tax_15_move_line.credit, 15)
+        self.assertTrue(tax_15_move_line.tag_ids)
+        self.assertIn(expected_audit, tax_15_move_line.tax_audit)
 
     def test_cash_discount_with_refund(self):
         woff_account = self.cash_discount_writeoff_account

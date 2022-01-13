@@ -109,11 +109,30 @@ class PaymentLine(models.Model):
                 elif tax_move_line.debit > 0:
                     discount_amount_credit -= amount
 
-                if tax_move_line.tax_line_id:
+                tax = tax_move_line.tax_line_id
+                values = {}
+                tag_ids = []
+                if tax:
                     account = tax_move_line.account_id
+                    is_refund = "refund" in tax_invoice.type
+                    tax_vals = tax.compute_all(
+                        tax_move_line.price_unit,
+                        currency=tax_move_line.currency_id,
+                        quantity=tax_move_line.quantity,
+                        product=tax_move_line.product_id,
+                        partner=tax_move_line.partner_id,
+                        is_refund=is_refund,
+                    )
+                    for t_vals in tax_vals.get("taxes", []):
+                        if t_vals.get("account_id") == account.id:
+                            tag_ids.extend(t_vals.get("tag_ids"))
+                    tag_ids = list(set(tag_ids))
                 else:
                     account = woff_account
-                lines_values.append(
+                    tag_ids = tax_move_line.tax_ids.get_tax_tags(
+                        is_refund=False, repartition_type="base"
+                    ).ids
+                values.update(
                     {
                         "partner_id": partner.id,
                         "name": move_line_name,
@@ -124,8 +143,10 @@ class PaymentLine(models.Model):
                             tax_move_line.tax_repartition_line_id.id
                         ),
                         "tax_ids": [(6, 0, tax_move_line.tax_ids.ids)],
+                        "tag_ids": [(6, 0, tag_ids)],
                     }
                 )
+                lines_values.append(values)
 
         amount_left = not float_is_zero(
             discount_amount_credit, precision_rounding=rounding
