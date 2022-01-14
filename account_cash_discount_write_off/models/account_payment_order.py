@@ -9,9 +9,11 @@ class AccountPaymentOrder(models.Model):
     _inherit = "account.payment.order"
 
     def generated2uploaded(self):
-        res = super(AccountPaymentOrder, self).generated2uploaded()
+        # Generate the discount first
         for order in self:
             order._create_cash_discount_write_off()
+
+        res = super().generated2uploaded()
         return res
 
     def _create_cash_discount_write_off(self):
