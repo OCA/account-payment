@@ -124,6 +124,7 @@ class PaymentLine(models.Model):
                             tax_move_line.tax_repartition_line_id.id
                         ),
                         "tax_ids": [(6, 0, tax_move_line.tax_ids.ids)],
+                        "tax_tag_ids": [(6, 0, tax_move_line.tax_tag_ids.ids)],
                     }
                 )
 
