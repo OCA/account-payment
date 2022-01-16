@@ -1,0 +1,39 @@
+<odoo>
+    <record id="view_account_payment_register_form" model="ir.ui.view">
+        <field name="name">account.payment.register.form</field>
+        <field name="model">account.payment.register</field>
+        <field
+            name="inherit_id"
+            ref="account_payment_multi_deduction.view_account_payment_register_form"
+        />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='deduction_ids']" position="before">
+                <field name="deduct_analytic_account_id" invisible="1" />
+                <field name="deduct_analytic_tag_ids" invisible="1" />
+            </xpath>
+            <xpath expr="//field[@name='deduction_ids']" position="attributes">
+                <attribute name="context">{
+                    'default_amount': deduct_residual,
+                    'default_analytic_account_id': deduct_analytic_account_id,
+                    'default_analytic_tag_ids': deduct_analytic_tag_ids}
+                </attribute>
+            </xpath>
+            <xpath
+                expr="//field[@name='deduction_ids']/tree/field[@name='account_id']"
+                position="after"
+            >
+                <field
+                    name="analytic_account_id"
+                    optional="show"
+                    groups="analytic.group_analytic_accounting"
+                />
+                <field
+                    name="analytic_tag_ids"
+                    widget="many2many_tags"
+                    optional="show"
+                    groups="analytic.group_analytic_tags"
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
