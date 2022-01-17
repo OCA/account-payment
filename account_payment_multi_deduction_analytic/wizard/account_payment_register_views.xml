@@ -4,7 +4,7 @@
         <field name="model">account.payment.register</field>
         <field
             name="inherit_id"
-            ref="account_payment_multi_deduction.view_account_payment_register_form"
+            ref="account_payment_multi_deduction_analytic.view_account_payment_register_form"
         />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='deduction_ids']" position="attributes">
