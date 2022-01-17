@@ -4,14 +4,18 @@
         <field name="model">account.payment.register</field>
         <field
             name="inherit_id"
-            ref="account_payment_multi_deduction_analytic.view_account_payment_register_form"
+            ref="account_payment_multi_deduction.view_account_payment_register_form"
         />
         <field name="arch" type="xml">
+            <xpath expr="//field[@name='deduction_ids']" position="before">
+                <field name="deduct_analytic_account_id" invisible="1" />
+                <field name="deduct_analytic_tag_ids" invisible="1" />
+            </xpath>
             <xpath expr="//field[@name='deduction_ids']" position="attributes">
                 <attribute name="context">{
                     'default_amount': deduct_residual,
-                    'default_analytic_account_id': writeoff_analytic_account_id,
-                    'default_analytic_tag_ids': writeoff_analytic_tag_ids}
+                    'default_analytic_account_id': deduct_analytic_account_id,
+                    'default_analytic_tag_ids': deduct_analytic_tag_ids}
                 </attribute>
             </xpath>
             <xpath

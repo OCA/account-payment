@@ -10,7 +10,7 @@
     "category": "Accounting",
     "depends": [
         "account_payment_multi_deduction",
-        "account_payment_deduction_analytic",
+        "analytic",
     ],
     "data": ["wizard/account_payment_register_views.xml"],
     "installable": True,
