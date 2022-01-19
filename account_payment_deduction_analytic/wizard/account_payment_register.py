@@ -18,7 +18,7 @@ class AccountPaymentRegister(models.TransientModel):
     )
 
     @api.onchange("payment_difference", "payment_difference_handling")
-    def _onchange_payment_difference_handling(self):
+    def _onchange_default_writeoff_analytic(self):
         if self.payment_difference_handling == "reconcile":
             active_ids = self.env.context.get("active_ids", [])
             moves = self.env["account.move"].browse(active_ids)
