@@ -54,7 +54,7 @@ class AccountPaymentRegister(models.TransientModel):
             payment_vals["write_off_line_vals"][
                 "analytic_account_id"
             ] = self.writeoff_analytic_account_id.id
-            payment_vals["write_off_line_vals"][
-                "analytic_tag_ids"
-            ] = self.writeoff_analytic_tag_ids.ids
+            payment_vals["write_off_line_vals"]["analytic_tag_ids"] = [
+                (6, 0, self.writeoff_analytic_tag_ids.ids)
+            ]
         return payment_vals

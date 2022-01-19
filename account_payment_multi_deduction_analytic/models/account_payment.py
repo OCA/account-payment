@@ -7,15 +7,33 @@ from odoo import models
 class AccountPayment(models.Model):
     _inherit = "account.payment"
 
+    def _get_check_key_multi_list(self):
+        return ["name", "account_id"]
+
+    def _get_update_key_multi_list(self):
+        return ["analytic_account_id", "analytic_tag_ids"]
+
+    def _update_vals_multi_writeoff(
+        self, write_off_line_vals, line_vals_list, check_keys, update_keys
+    ):
+        for line_vals in line_vals_list:
+            if all(
+                line_vals[check_key] == write_off_line_vals[check_key]
+                for check_key in check_keys
+            ):
+                for update_key in update_keys:
+                    line_vals[update_key] = write_off_line_vals[update_key]
+                break
+
     def _prepare_move_line_default_vals(self, write_off_line_vals=None):
         self.ensure_one()
         line_vals_list = super()._prepare_move_line_default_vals(write_off_line_vals)
         # multi deduction writeoff
         if isinstance(write_off_line_vals, list) and write_off_line_vals:
-            check_keys = self._get_check_key_list()
-            update_keys = self._get_update_key_list()
+            check_keys = self._get_check_key_multi_list()
+            update_keys = self._get_update_key_multi_list()
             for writeoff_line in write_off_line_vals:
-                self._update_vals_writeoff(
+                self._update_vals_multi_writeoff(
                     writeoff_line, line_vals_list, check_keys, update_keys
                 )
         return line_vals_list
