@@ -27,8 +27,7 @@ class AccountPaymentRegister(models.TransientModel):
             .mapped("account_id")
         )
         moves_without_tax = move_lines.filtered(
-            lambda l: l.account_id.user_type_id.type
-            not in ("payable", "receivable")
+            lambda l: l.account_id.user_type_id.type not in ("payable", "receivable")
             and l.account_id.id not in taxes_account.ids
         )
         default_tag = (
