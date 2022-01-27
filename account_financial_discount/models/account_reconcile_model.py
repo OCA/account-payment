@@ -119,6 +119,7 @@ class AccountReconcileModel(models.Model):
                 precision_rounding=move_lines.currency_id.rounding,
             )
             == 0
+            and st_line.currency_id == move_lines.mapped("company_id.currency_id")
         ):
             fin_disc_write_off_vals = self._prepare_financial_discount_write_off_values(
                 st_line, move_lines, residual_balance
