@@ -367,7 +367,6 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         self.assertEqual(
             matching_amls.get(st_line.id).get("aml_ids"), [invoice_receivable_line.id]
         )
-        self.assertEqual(matching_amls.get(st_line.id).get("status"), "write_off")
         write_off_vals = matching_amls.get(st_line.id).get("write_off_vals")
         self.assertEqual(
             write_off_vals[0].get("name"),
@@ -425,7 +424,6 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         self.assertEqual(
             matching_amls.get(st_line.id).get("aml_ids"), [vendor_bill_payable_line.id]
         )
-        self.assertEqual(matching_amls.get(st_line.id).get("status"), "write_off")
         write_off_vals = matching_amls.get(st_line.id).get("write_off_vals")
         self.assertEqual(
             write_off_vals[0].get("name"),
@@ -457,34 +455,6 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
                 vendor_bill.invoice_date,
             ),
         )
-        # rec_widget_data = self.reconciliation_widget.get_bank_statement_line_data(
-        #     bank_statement.line_ids.ids
-        # )
-        # rec_widget_statement_data = rec_widget_data.get("lines")[0]
-        # self.assertTrue(rec_widget_statement_data.get("write_off"))
-        # prop = rec_widget_statement_data.get("reconciliation_proposition")[0]
-        # self.assertTrue(prop.get("financial_discount_available"))
-        # self.assertEqual(
-        #     prop.get("amount_discount"),
-        #     self.eur_currency._convert(
-        #         -self.amount_taxed_discount,
-        #         self.usd_currency,
-        #         vendor_bill.company_id,
-        #         vendor_bill.invoice_date,
-        #     ),
-        # )
-        # self.assertEqual(
-        #     prop.get("amount_discount_currency"), -self.amount_taxed_discount
-        # )
-        # self.assertEqual(
-        #     prop.get("amount_discount_tax"),
-        #     self.eur_currency._convert(
-        #         -self.amount_discount_tax,
-        #         self.usd_currency,
-        #         vendor_bill.company_id,
-        #         vendor_bill.invoice_date,
-        #     ),
-        # )
 
     # TODO add more tests with banking reconciliation:
     #  - Auto-reconcile on the model
