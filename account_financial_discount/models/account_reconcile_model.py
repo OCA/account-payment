@@ -119,6 +119,7 @@ class AccountReconcileModel(models.Model):
                 precision_rounding=move_lines.currency_id.rounding,
             )
             == 0
+            and st_line.currency_id == move_lines.mapped("company_id.currency_id")
         ):
             fin_disc_write_off_vals = self._prepare_financial_discount_write_off_values(
                 st_line, move_lines, residual_balance
@@ -131,31 +132,16 @@ class AccountReconcileModel(models.Model):
     ):
         """Prepare financial discount write-off"""
         res = []
-        # Copied from odoo v13.0
-        # TODO Check code from v14.0 to mimic?
-        line_residual = (
-            st_line.currency_id and st_line.amount_currency or st_line.amount
-        )
         line_currency = (
             st_line.currency_id
             or st_line.journal_id.currency_id
             or st_line.company_id.currency_id
         )
-        total_residual = (
-            move_lines
-            and sum(
-                aml.currency_id and aml.amount_residual_currency or aml.amount_residual
-                for aml in move_lines
-            )
-            or 0.0
-        )
-        balance = total_residual - line_residual
 
-        if float_is_zero(balance, precision_rounding=line_currency.rounding):
+        if float_is_zero(residual_balance, precision_rounding=line_currency.rounding):
             return res
         for line in move_lines:
 
-            # discount = sum(aml.amount_discount_currency if aml.currency_id else aml.amount_discount)
             discount = line.amount_discount
 
             write_off_account = (
@@ -170,8 +156,8 @@ class AccountReconcileModel(models.Model):
                 "debit": discount > 0 and discount or 0,
                 "credit": discount < 0 and -discount or 0,
                 "reconcile_model_id": self.id,
-                # TODO Check if this is right
                 "balance": abs(discount),
+                "currency_id": line_currency.id,
             }
             res.append(fin_disc_write_off_vals)
             tax_discount = line.amount_discount_tax
@@ -181,14 +167,15 @@ class AccountReconcileModel(models.Model):
             tax_line = line.discount_tax_line_id
             if not tax_line:
                 continue
+
             tax_write_off_vals = {
                 "name": tax_line.name,
                 "account_id": tax_line.account_id.id,
                 "debit": tax_line.credit and line.amount_discount_tax or 0,
                 "credit": tax_line.debit and -line.amount_discount_tax or 0,
                 "reconcile_model_id": self.id,
-                # TODO Check if this is right
                 "balance": abs(line.amount_discount_tax),
+                "currency_id": line_currency.id,
             }
             # Deduce tax amount from fin. disc. write-off
             if fin_disc_write_off_vals.get("credit"):
