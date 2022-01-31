@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_cash_invoice
+# 	* account_cash_invoice
 #
 msgid ""
 msgstr ""
@@ -23,6 +23,11 @@ msgid "Amount"
 msgstr "Valor"
 
 #. module: account_cash_invoice
+#: model:ir.model,name:account_cash_invoice.model_account_bank_statement
+msgid "Bank Statement"
+msgstr ""
+
+#. module: account_cash_invoice
 #: model:ir.model,name:account_cash_invoice.model_account_bank_statement_line
 msgid "Bank Statement Line"
 msgstr "Linha de Extrato Bancário"
@@ -34,15 +39,19 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #. module: account_cash_invoice
+#: model:ir.model,name:account_cash_invoice.model_cash_invoice_in
+msgid "Cash invoice in"
+msgstr ""
+
+#. module: account_cash_invoice
+#: model:ir.model,name:account_cash_invoice.model_cash_invoice_out
+msgid "Cash invoice out"
+msgstr ""
+
+#. module: account_cash_invoice
 #: model:ir.actions.act_window,name:account_cash_invoice.action_cash_invoice_out_from_statement
 msgid "Collect Payment from Invoice"
 msgstr "Coletar Pagamento da Fatura"
-
-#. module: account_cash_invoice
-#: model_terms:ir.ui.view,arch_db:account_cash_invoice.cash_invoice_out_form
-msgid "Collect payment from customer invoice or supplier refund"
-msgstr ""
-"Coletar pagamento a partir de fatura de cliente ou crédito de fornecedor"
 
 #. module: account_cash_invoice
 #: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in__company_id
@@ -69,12 +78,16 @@ msgid "Currency"
 msgstr "Moeda"
 
 #. module: account_cash_invoice
+#: model:ir.model.fields,field_description:account_cash_invoice.field_account_bank_statement__display_name
+#: model:ir.model.fields,field_description:account_cash_invoice.field_account_bank_statement_line__display_name
 #: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in__display_name
 #: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out__display_name
 msgid "Display Name"
 msgstr "Nome a Apresentar"
 
 #. module: account_cash_invoice
+#: model:ir.model.fields,field_description:account_cash_invoice.field_account_bank_statement__id
+#: model:ir.model.fields,field_description:account_cash_invoice.field_account_bank_statement_line__id
 #: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in__id
 #: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out__id
 msgid "ID"
@@ -106,6 +119,8 @@ msgid "Journals"
 msgstr "Diários"
 
 #. module: account_cash_invoice
+#: model:ir.model.fields,field_description:account_cash_invoice.field_account_bank_statement____last_update
+#: model:ir.model.fields,field_description:account_cash_invoice.field_account_bank_statement_line____last_update
 #: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in____last_update
 #: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out____last_update
 msgid "Last Modified on"
@@ -130,32 +145,22 @@ msgid "Pay invoice"
 msgstr "Pagar fatura"
 
 #. module: account_cash_invoice
-#: model_terms:ir.ui.view,arch_db:account_cash_invoice.cash_invoice_in_form
-msgid "Pay supplier invoice or customer refund"
-msgstr "Pagar fatura de fornecedor ou crédito a cliente"
-
-#. module: account_cash_invoice
 #: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_in__name
 #: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out__name
 msgid "Reason"
 msgstr "Motivo"
 
 #. module: account_cash_invoice
-#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_invoice_out__ref
-msgid "Reference"
-msgstr "Referência"
-
-#. module: account_cash_invoice
 #: model_terms:ir.ui.view,arch_db:account_cash_invoice.cash_invoice_out_form
 msgid "Register"
 msgstr "Registar"
 
-#. module: account_cash_invoice
-#: model:ir.model,name:account_cash_invoice.model_cash_invoice_in
-msgid "cash.invoice.in"
-msgstr ""
+#~ msgid "Collect payment from customer invoice or supplier refund"
+#~ msgstr ""
+#~ "Coletar pagamento a partir de fatura de cliente ou crédito de fornecedor"
 
-#. module: account_cash_invoice
-#: model:ir.model,name:account_cash_invoice.model_cash_invoice_out
-msgid "cash.invoice.out"
-msgstr ""
+#~ msgid "Pay supplier invoice or customer refund"
+#~ msgstr "Pagar fatura de fornecedor ou crédito a cliente"
+
+#~ msgid "Reference"
+#~ msgstr "Referência"
