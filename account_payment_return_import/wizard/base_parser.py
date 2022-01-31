@@ -10,7 +10,7 @@ from odoo.exceptions import UserError
 
 
 class BaseParser(object):
-    """ Base parser to allow csv imports. """
+    """Base parser to allow csv imports."""
 
     def parse_payment_return(self, row):
         """Parse a single payment return row"""
