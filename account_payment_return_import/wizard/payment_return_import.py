@@ -51,21 +51,22 @@ class PaymentReturnImport(models.TransientModel):
         payment_returns, notifications = self.with_context(
             active_id=self.id
         )._import_file(data_file)
-        result = self.env.ref("account_payment_return.payment_return_action").read()[0]
+        xmlid = "account_payment_return.payment_return_action"
+        action = self.env["ir.actions.act_window"]._for_xml_id(xmlid)
         if self.match_after_import:
             payment_returns.button_match()
         if len(payment_returns) != 1:
-            result["domain"] = "[('id', 'in', %s)]" % payment_returns.ids
+            action["domain"] = "[('id', 'in', %s)]" % payment_returns.ids
         else:
             form_view = self.env.ref("account_payment_return.payment_return_form_view")
-            result.update(
+            action.update(
                 {
                     "views": [(form_view.id, "form")],
                     "res_id": payment_returns.id,
                     "context": {"notifications": notifications},
                 }
             )
-        return result
+        return action
 
     @api.model
     def _parse_all_files(self, data_file):
@@ -102,7 +103,7 @@ class PaymentReturnImport(models.TransientModel):
 
     @api.model
     def _import_file(self, data_file):
-        """ Create bank payment return(s) from file."""
+        """Create bank payment return(s) from file."""
         # The appropriate implementation module returns the required data
         payment_returns = self.env["payment.return"]
         notifications = []
@@ -156,7 +157,7 @@ class PaymentReturnImport(models.TransientModel):
 
     @api.model
     def _check_parsed_data(self, payment_returns):
-        """ Basic and structural verifications """
+        """Basic and structural verifications"""
         if not payment_returns:
             raise UserError(_("This file doesn't contain any payment return."))
         for payret_vals in payment_returns:
@@ -167,7 +168,7 @@ class PaymentReturnImport(models.TransientModel):
 
     @api.model
     def _find_bank_account_id(self, account_number):
-        """ Get res.partner.bank ID """
+        """Get res.partner.bank ID"""
         bank_account_id = None
         if account_number and len(account_number) > 4:
             iban_number = pretty_iban(account_number)
@@ -180,7 +181,7 @@ class PaymentReturnImport(models.TransientModel):
 
     @api.model
     def _get_journal(self, bank_account_id):
-        """ Find the journal """
+        """Find the journal"""
         bank_model = self.env["res.partner.bank"]
         # Find the journal from context, wizard or bank account
         journal_id = self.env.context.get("journal_id") or self.journal_id.id
