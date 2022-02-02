@@ -364,7 +364,8 @@ class ResPartnerAgingCustomer(models.Model):
         """
         @description  Open form view of Customer Invoice
         """
-        action = self.env.ref("account.action_move_out_invoice_type").read()[0]
+        xmlid = "account.action_move_out_invoice_type"
+        action = self.env["ir.actions.act_window"]._for_xml_id(xmlid)
         action["views"] = [(self.env.ref("account.view_move_form").id, "form")]
         action["res_id"] = self.invoice_id.id
         return action

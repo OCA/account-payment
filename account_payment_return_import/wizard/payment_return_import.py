@@ -51,21 +51,22 @@ class PaymentReturnImport(models.TransientModel):
         payment_returns, notifications = self.with_context(
             active_id=self.id
         )._import_file(data_file)
-        result = self.env.ref("account_payment_return.payment_return_action").read()[0]
+        xmlid = "account_payment_return.payment_return_action"
+        action = self.env["ir.actions.act_window"]._for_xml_id(xmlid)
         if self.match_after_import:
             payment_returns.button_match()
         if len(payment_returns) != 1:
-            result["domain"] = "[('id', 'in', %s)]" % payment_returns.ids
+            action["domain"] = "[('id', 'in', %s)]" % payment_returns.ids
         else:
             form_view = self.env.ref("account_payment_return.payment_return_form_view")
-            result.update(
+            action.update(
                 {
                     "views": [(form_view.id, "form")],
                     "res_id": payment_returns.id,
                     "context": {"notifications": notifications},
                 }
             )
-        return result
+        return action
 
     @api.model
     def _parse_all_files(self, data_file):
