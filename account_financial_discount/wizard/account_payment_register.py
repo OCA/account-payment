@@ -17,6 +17,33 @@ class AccountPaymentRegister(models.TransientModel):
         compute="_compute_show_force_financial_discount"
     )
     with_financial_discount = fields.Boolean(compute="_compute_with_financial_discount")
+    payment_method_id = fields.Many2one(compute="_compute_payment_method_id")
+
+    @api.depends(
+        "payment_type",
+        "journal_id.inbound_payment_method_ids",
+        "journal_id.outbound_payment_method_ids",
+    )
+    def _compute_payment_method_id(self):
+        # method to compute payment_method_id with same way as in origin method
+        # but do not erase it after as complex chain of dependency introduced
+        # here causes erasing selected payment)method_id on change of payment_date
+        for wizard in self:
+            if not wizard.payment_method_id:
+                if wizard.payment_type == "inbound":
+                    available_payment_methods = (
+                        wizard.journal_id.inbound_payment_method_ids
+                    )
+                else:
+                    available_payment_methods = (
+                        wizard.journal_id.outbound_payment_method_ids
+                    )
+
+                # Select the first available one by default.
+                if available_payment_methods:
+                    wizard.payment_method_id = available_payment_methods[0]._origin
+                else:
+                    wizard.payment_method_id = False
 
     @api.depends("force_financial_discount", "line_ids", "payment_date")
     def _compute_with_financial_discount(self):
