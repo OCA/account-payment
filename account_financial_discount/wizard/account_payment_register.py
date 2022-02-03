@@ -68,17 +68,11 @@ class AccountPaymentRegister(models.TransientModel):
                 and not_all_invoices_with_discounts_available
             )
 
-    @api.depends("line_ids", "with_financial_discount", "force_financial_discount")
+    @api.depends("with_financial_discount", "force_financial_discount")
     def _compute_from_lines(self):
         return super()._compute_from_lines()
 
     @api.depends(
-        "source_amount",
-        "source_amount_currency",
-        "source_currency_id",
-        "company_id",
-        "currency_id",
-        "payment_date",
         "with_financial_discount",
     )
     def _compute_amount(self):
