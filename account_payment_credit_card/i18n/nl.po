@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2021-04-23 23:47+0000\n"
+"PO-Revision-Date: 2022-02-05 11:40+0000\n"
 "Last-Translator: Bosd <c5e2fd43-d292-4c90-9d1f-74ff3436329a@anonaddy.me>\n"
 "Language-Team: none\n"
 "Language: nl\n"
@@ -35,6 +35,5 @@ msgstr "Boekingsregel"
 #. module: account_payment_credit_card
 #: model:ir.model.fields,field_description:account_payment_credit_card.field_account_bank_statement_import_journal_creation__credit_card
 #: model:ir.model.fields,field_description:account_payment_credit_card.field_account_journal__credit_card
-#, fuzzy
 msgid "Transfer AP to Credit Card Company"
-msgstr "Verplaats de verplichting naar de Credit Card Maatschappij"
+msgstr "Verplaats de crediteurenrekening  naar de Credit Card Maatschappij"
