@@ -2,10 +2,10 @@
 # (Alexis de Lattre <alexis.delattre@akretion.com>)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo.exceptions import ValidationError
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestAccountPaymentTerm(SavepointCase):
+class TestAccountPaymentTerm(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

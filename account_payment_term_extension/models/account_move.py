@@ -9,6 +9,6 @@ class AccountMove(models.Model):
     _inherit = "account.move"
 
     def _recompute_payment_terms_lines(self):
-        super(
+        return super(
             AccountMove, self.with_context(last_account_move=self)
         )._recompute_payment_terms_lines()
