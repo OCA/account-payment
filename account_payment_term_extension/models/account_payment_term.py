@@ -151,7 +151,6 @@ class AccountPaymentTerm(models.Model):
     _inherit = "account.payment.term"
 
     sequential_lines = fields.Boolean(
-        string="Sequential lines",
         default=False,
         help="Allows to apply a chronological order on lines.",
     )
