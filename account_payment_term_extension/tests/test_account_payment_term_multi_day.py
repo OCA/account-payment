@@ -4,7 +4,7 @@ from odoo.exceptions import ValidationError
 from odoo.tests.common import Form
 
 
-class TestAccountPaymentTermMultiDay(common.SavepointCase):
+class TestAccountPaymentTermMultiDay(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()

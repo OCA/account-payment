@@ -12,3 +12,7 @@
 * `Domatix <https://domatix.com>`:
 
   * Carlos Martínez
+
+* `Sygel <https://sygel.es>`:
+
+  * Manuel Regidor
