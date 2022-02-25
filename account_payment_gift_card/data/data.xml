@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <record id="payment_acquirer_gift_card" model="payment.acquirer">
+            <field name="name">Gift Card Payment</field>
+            <field name="provider">gift_card</field>
+            <field name="state">enabled</field>
+            <field name="journal_id" ref="gift_card.gift_card_journal" />
+        </record>
+    </data>
+</odoo>
