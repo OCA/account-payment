@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+        <record id="gift_card_as_refund" model="gift.card.template">
+                <field name="name">Gift Card - Refund</field>
+                <field name="sale_ok">False</field>
+                <field name="type">service</field>
+                <field name="is_divisible">True</field>
+                <field name="duration">0</field>
+                <field name="code_mask" />
+                <field name="uom_id" ref="uom.product_uom_unit" />
+        </record>
+</odoo>

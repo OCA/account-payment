@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record model="ir.ui.view" id="gift_card_refund_form_view">
+        <field name="name">Gift Cards Refund form</field>
+        <field name="model">gift.card</field>
+        <field name="inherit_id" ref="gift_card.gift_card_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='sale_id']" position="after">
+                        <field name="invoice_id" readonly="1" optional="show" />
+            </xpath>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="gift_card_refund_tree_view">
+        <field name="name">Gift Cards Refund tree</field>
+        <field name="model">gift.card</field>
+        <field name="inherit_id" ref="gift_card.gift_card_tree_view" />
+        <field name="arch" type="xml">
+             <xpath expr="//field[@name='sale_id']" position="after">
+                        <field name="invoice_id" readonly="1" optional="show" />
+            </xpath>
+        </field>
+    </record>
+
+    <record id="gift_card_view_search_reverse" model="ir.ui.view">
+            <field name="name">gift card search</field>
+            <field name="model">gift.card</field>
+            <field name="inherit_id" ref="gift_card.gift_card_view_search" />
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='soldout']" position="after">
+                    <separator />
+                    <filter
+                    string="From Sale"
+                    name="from_sale"
+                    domain="[('sale_id', '!=', False)]"
+                />
+                    <filter
+                    string="From Refund"
+                    name="from_refund"
+                    domain="[('invoice_id', '!=', False)]"
+                />
+                </xpath>
+            </field>
+        </record>
+
+</odoo>
