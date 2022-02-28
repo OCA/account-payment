@@ -8,7 +8,7 @@ from .common import TestAccountFinancialDiscountCommon
 
 
 @freeze_time("2019-05-01")
-class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountCommon):
+class TestAccountFinancialDiscountReconciliation(TestAccountFinancialDiscountCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -458,4 +458,3 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
 
     # TODO add more tests with banking reconciliation:
     #  - Auto-reconcile on the model
-    #  - Test JS?

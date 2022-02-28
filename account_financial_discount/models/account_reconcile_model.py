@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
-from odoo.tools import float_compare, float_is_zero, float_round
+from odoo.tools import float_is_zero, float_round
 
 
 class AccountReconcileModel(models.Model):
@@ -104,8 +104,7 @@ class AccountReconcileModel(models.Model):
         move_lines = self.env["account.move.line"].browse(
             self.env.context.get("_prepare_reconciliation_aml_ids")
         )
-
-        # TODO Check condition
+        currency_rounding = fields.first(move_lines).company_id.currency_id.rounding
         if (
             move_lines
             and any(
@@ -113,14 +112,18 @@ class AccountReconcileModel(models.Model):
                     "move_id.has_discount_available"
                 )
             )
-            and float_compare(
-                move_lines.amount_discount,
-                residual_balance,
-                precision_rounding=move_lines.currency_id.rounding,
+            and float_round(
+                abs(
+                    sum(move_lines.mapped("amount_discount"))
+                    - float_round(
+                        residual_balance, precision_rounding=currency_rounding
+                    )
+                ),
+                precision_rounding=currency_rounding,
             )
-            == 0
-            and st_line.currency_id == move_lines.mapped("company_id.currency_id")
+            <= self.financial_discount_tolerance
         ):
+
             fin_disc_write_off_vals = self._prepare_financial_discount_write_off_values(
                 st_line, move_lines, residual_balance
             )
@@ -140,26 +143,25 @@ class AccountReconcileModel(models.Model):
 
         if float_is_zero(residual_balance, precision_rounding=line_currency.rounding):
             return res
+
+        write_off_account = (
+            self.financial_discount_expense_account_id
+            if residual_balance > 0
+            else self.financial_discount_revenue_account_id
+        )
+
+        fin_disc_write_off_vals = {
+            "name": self.financial_discount_label,
+            "account_id": write_off_account.id,
+            "debit": residual_balance > 0 and residual_balance or 0,
+            "credit": residual_balance < 0 and -residual_balance or 0,
+            "reconcile_model_id": self.id,
+            "balance": residual_balance,
+            "currency_id": line_currency.id,
+        }
+        res.append(fin_disc_write_off_vals)
+
         for line in move_lines:
-
-            discount = line.amount_discount
-
-            write_off_account = (
-                self.financial_discount_expense_account_id
-                if discount > 0
-                else self.financial_discount_revenue_account_id
-            )
-
-            fin_disc_write_off_vals = {
-                "name": self.financial_discount_label,
-                "account_id": write_off_account.id,
-                "debit": discount > 0 and discount or 0,
-                "credit": discount < 0 and -discount or 0,
-                "reconcile_model_id": self.id,
-                "balance": abs(discount),
-                "currency_id": line_currency.id,
-            }
-            res.append(fin_disc_write_off_vals)
             tax_discount = line.amount_discount_tax
 
             if not tax_discount:
@@ -174,7 +176,7 @@ class AccountReconcileModel(models.Model):
                 "debit": tax_line.credit and line.amount_discount_tax or 0,
                 "credit": tax_line.debit and -line.amount_discount_tax or 0,
                 "reconcile_model_id": self.id,
-                "balance": abs(line.amount_discount_tax),
+                "balance": line.amount_discount_tax,
                 "currency_id": line_currency.id,
             }
             # Deduce tax amount from fin. disc. write-off
@@ -188,7 +190,6 @@ class AccountReconcileModel(models.Model):
                     fin_disc_write_off_vals["debit"] - line.amount_discount_tax,
                     precision_rounding=st_line.company_id.currency_id.rounding,
                 )
-            # fin_disc_write_off_vals["balance"] -= line.amount_discount_tax
             fin_disc_write_off_vals["balance"] = float_round(
                 fin_disc_write_off_vals["balance"] - line.amount_discount_tax,
                 precision_rounding=st_line.company_id.currency_id.rounding,
