@@ -46,11 +46,14 @@ Installation
 ============
 
 To install this module, you need to install a patched version of
-hal_codec (and its dependencies). This is easy using pip::
+hal_codec (and its dependencies, notably coreapi), as well as the
+iso8601 python library. This is easy using pip::
 
-  python3 -m pip install git+https://github.com/fcayre/python-hal-codec.git@unique-link-keys
+  python3 -m pip install -r requirements.txt
 
-You also need the `iso8601`, `requests` and `phonenumbers` modules.
+Note other python libraries are required by the odoo modules the
+present module requires, like the phonenumber.
+
 
 Configuration
 =============
