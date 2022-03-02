@@ -1,6 +1,5 @@
 import logging
 
-from iso8601 import parse_date
 from coreapi.exceptions import ErrorMessage
 
 from odoo import models, fields, api, _
