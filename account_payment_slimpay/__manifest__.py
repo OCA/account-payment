@@ -1,4 +1,4 @@
-# Copyright 2020 Commown SCIC SAS (https://commown.coop)
+# Copyright 2022-today Commown SCIC (https://commown.coop)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Slimpay Payment base",
@@ -7,7 +7,7 @@
     "development_status": "Beta",
     "category": "Accounting",
     "website": "https://github.com/OCA/account-payment",
-    "author": "Commown SCIC SAS, Odoo Community Association (OCA)",
+    "author": "Commown SCIC, Odoo Community Association (OCA)",
     "maintainers": ["fcayre"],
     "license": "AGPL-3",
     "application": False,
