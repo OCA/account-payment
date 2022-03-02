@@ -5,7 +5,6 @@ from coreapi.exceptions import ErrorMessage
 
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
-from odoo.tools.safe_eval import safe_eval
 
 from .slimpay_utils import SlimpayClient
 

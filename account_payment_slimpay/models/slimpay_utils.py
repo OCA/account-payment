@@ -15,7 +15,8 @@ _logger = logging.getLogger(__name__)
 
 
 def get_token(api_url, app_id, app_secret):
-    auth = b64encode(b':'.join((bytes(app_id, 'utf-8'), bytes(app_secret, 'utf-8'))))
+    auth = b64encode(b':'.join((bytes(app_id, 'utf-8'),
+                                bytes(app_secret, 'utf-8'))))
     resp = requests.post(
         '%s/oauth/token' % api_url,
         headers={'Accept': 'application/json',
