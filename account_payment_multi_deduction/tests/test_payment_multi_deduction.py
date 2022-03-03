@@ -83,7 +83,7 @@ class TestPaymentMultiDeduction(SavepointCase):
         )
 
     def test_one_invoice_payment(self):
-        """ Validate 1 invoice and make payment with 2 deduction """
+        """Validate 1 invoice and make payment with 2 deduction"""
         self.cust_invoice.action_post()  # total amount 450.0
         ctx = {
             "active_ids": [self.cust_invoice.id],
@@ -92,7 +92,7 @@ class TestPaymentMultiDeduction(SavepointCase):
         }
         with self.assertRaises(UserError):  # Deduct only 20.0, throw error
             with Form(
-                self.payment_register_model.with_context(ctx),
+                self.payment_register_model.with_context(**ctx),
                 view=self.register_view_id,
             ) as f:
                 f.amount = 400.0
@@ -103,7 +103,7 @@ class TestPaymentMultiDeduction(SavepointCase):
                     f2.amount = 20.0
             f.save()
         with Form(
-            self.payment_register_model.with_context(ctx), view=self.register_view_id
+            self.payment_register_model.with_context(**ctx), view=self.register_view_id
         ) as f:
             f.amount = 400.0  # Reduce to 400.0, and mark fully paid (multi)
             f.payment_difference_handling = "reconcile_multi_deduct"
@@ -149,7 +149,7 @@ class TestPaymentMultiDeduction(SavepointCase):
         )
 
     def test_one_invoice_payment_foreign_currency(self):
-        """ Validate 1 invoice and make payment with 2 deduction """
+        """Validate 1 invoice and make payment with 2 deduction"""
         self.cust_invoice.action_post()  # total amount 450.0
         ctx = {
             "active_ids": [self.cust_invoice.id],
@@ -157,7 +157,7 @@ class TestPaymentMultiDeduction(SavepointCase):
             "active_model": "account.move",
         }
         with Form(
-            self.payment_register_model.with_context(ctx), view=self.register_view_id
+            self.payment_register_model.with_context(**ctx), view=self.register_view_id
         ) as f:
             f.currency_id = self.currency_2x
             f.amount = 800.0  # 400 -> 800 as we use currency 2x
@@ -227,7 +227,7 @@ class TestPaymentMultiDeduction(SavepointCase):
             "active_model": "account.move",
         }
         with Form(
-            self.payment_register_model.with_context(ctx), view=self.register_view_id
+            self.payment_register_model.with_context(**ctx), view=self.register_view_id
         ) as f:
             f.amount = 400.0  # Reduce to 400.0, and mark fully paid (multi)
             f.payment_difference_handling = "reconcile_multi_deduct"

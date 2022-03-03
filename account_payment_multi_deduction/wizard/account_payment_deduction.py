@@ -25,7 +25,7 @@ class AccountPaymentDeduction(models.TransientModel):
         domain=[("deprecated", "=", False)],
         required=False,
     )
-    open = fields.Boolean(string="Open", help="Keep this line open")
+    open = fields.Boolean(help="Keep this line open")
     amount = fields.Monetary(string="Deduction Amount", required=True)
     name = fields.Char(string="Label", required=True)
 
