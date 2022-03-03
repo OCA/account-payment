@@ -2,10 +2,10 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 from odoo import fields
 from odoo.exceptions import UserError
-from odoo.tests.common import Form, SavepointCase
+from odoo.tests.common import Form, TransactionCase
 
 
-class TestPaymentMultiDeduction(SavepointCase):
+class TestPaymentMultiDeduction(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -75,7 +75,7 @@ class TestPaymentMultiDeduction(SavepointCase):
                         0,
                         {
                             "name": fields.Date.today(),
-                            "rate": cls.company_currency.rate * 2,
+                            "company_rate": cls.company_currency.rate * 2,
                         },
                     )
                 ],
@@ -122,7 +122,9 @@ class TestPaymentMultiDeduction(SavepointCase):
         self.assertEqual(payment.state, "posted")
 
         move_lines = self.move_line_model.search([("payment_id", "=", payment.id)])
-        bank_account = payment.journal_id.payment_debit_account_id
+        bank_account = (
+            payment.journal_id.company_id.account_journal_payment_debit_account_id
+        )
         self.assertEqual(self.cust_invoice.payment_state, "paid")
         self.assertRecordValues(
             move_lines,
@@ -179,7 +181,9 @@ class TestPaymentMultiDeduction(SavepointCase):
         move_lines = self.env["account.move.line"].search(
             [("payment_id", "=", payment.id)]
         )
-        bank_account = payment.journal_id.payment_debit_account_id
+        bank_account = (
+            payment.journal_id.company_id.account_journal_payment_debit_account_id
+        )
         self.assertEqual(self.cust_invoice.payment_state, "paid")
         self.assertRecordValues(
             move_lines,
@@ -245,7 +249,9 @@ class TestPaymentMultiDeduction(SavepointCase):
         move_lines = self.env["account.move.line"].search(
             [("payment_id", "=", payment.id)]
         )
-        bank_account = payment.journal_id.payment_debit_account_id
+        bank_account = (
+            payment.journal_id.company_id.account_journal_payment_debit_account_id
+        )
         self.assertEqual(self.cust_invoice.payment_state, "partial")
         self.assertEqual(self.cust_invoice.amount_residual, 30)
         self.assertRecordValues(
