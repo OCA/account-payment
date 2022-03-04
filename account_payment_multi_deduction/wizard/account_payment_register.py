@@ -35,12 +35,10 @@ class AccountPaymentRegister(models.TransientModel):
     )
     deduct_analytic_account_id = fields.Many2one(
         comodel_name="account.analytic.account",
-        string="Analytic Account",
         compute="_compute_default_analytic",
     )
     deduct_analytic_tag_ids = fields.Many2many(
         comodel_name="account.analytic.tag",
-        string="Analytic Tags",
         compute="_compute_default_analytic",
     )
 
