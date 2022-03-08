@@ -25,7 +25,7 @@ class AccountPaymentTermLine(models.Model):
                     invoice_date = fields.Date.from_string(inv.invoice_date)
                     # Update discount validity days
                     for line in inv.invoice_payment_term_id.line_ids:
-                        inv.valid_discount_date = invoice_date + relativedelta(
+                        inv.discount_date = invoice_date + relativedelta(
                             days=line.discount_days
                         )
         return res
