@@ -120,7 +120,7 @@ class AccountPaymentRegister(models.TransientModel):
             if payment.payment_difference_handling == "reconcile":
                 payment.invoice_id.write(
                     {
-                        "discount_taken": abs(payment.payment_difference),
+                        "discount_taken": abs(self.discount_amt),
                         "discount_amt": 0,
                     }
                 )
