@@ -24,6 +24,7 @@ class AccountPaymentRegister(models.TransientModel):
         return {
             "proxy_ip": self.account_payment_terminal_id.proxy_ip,
             "oca_payment_terminal_id": self.account_payment_terminal_id.oca_payment_terminal_id,
+            "terminal_id": self.account_payment_terminal_id.oca_payment_terminal_id,
             "payment_mode": "card",  # TODO: Add check mode?
             "amount": self.amount,
             "currency_iso": self.currency_id.name,
