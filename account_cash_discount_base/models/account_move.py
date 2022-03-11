@@ -242,3 +242,9 @@ class AccountMove(models.Model):
             payment_term = partner.property_supplier_payment_term_id
             res["invoice_payment_term_id"] = payment_term.id
         return res
+
+    @api.model
+    def create(self, values):
+        rec = super().create(values)
+        rec._onchange_payment_term_discount_options()
+        return rec
