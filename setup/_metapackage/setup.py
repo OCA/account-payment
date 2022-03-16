@@ -24,6 +24,7 @@ setuptools.setup(
         'odoo14-addon-account_payment_return_import_iso20022',
         'odoo14-addon-account_payment_term_discount',
         'odoo14-addon-account_payment_term_extension',
+        'odoo14-addon-account_payment_terminal',
         'odoo14-addon-account_payment_view_check_number',
         'odoo14-addon-partner_aging',
     ],
