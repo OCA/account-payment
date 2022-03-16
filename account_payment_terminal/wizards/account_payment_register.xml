@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2021 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+  <record id="account_payment_register_payment_terminal_form_view" model="ir.ui.view">
+    <field name="model">account.payment.register</field>
+    <field name="priority">9999</field>
+    <field name="arch" type="xml">
+      <form>
+        <sheet>
+          <p class="terminal-message">Please check the payment terminal</p>
+        </sheet>
+        <footer />
+      </form>
+    </field>
+  </record>
+  <record model="ir.ui.view" id="account_payment_register_form_view">
+    <field name="model">account.payment.register</field>
+    <field name="inherit_id" ref="account.view_account_payment_register_form" />
+    <field name="arch" type="xml">
+      <xpath expr="//field[@name='journal_id']" position="after">
+        <field name="need_payment_terminal" invisible="1" />
+        <field
+                    name="account_payment_terminal_id"
+                    attrs="{'required': [('need_payment_terminal', '=', True)], 'invisible': [('need_payment_terminal', '=', False)]}"
+                    options="{'no_create': True}"
+                />
+      </xpath>
+      <xpath expr="//button[@name='action_create_payments']" position="attributes">
+        <attribute name="attrs">
+          {'invisible': [('need_payment_terminal', '=', True)]}
+        </attribute>
+      </xpath>
+      <xpath expr="//button[@name='action_create_payments']" position="after">
+        <button
+                    string="Create Payment"
+                    name="action_payment_terminal_transaction_start"
+                    type="object"
+                    class="oe_highlight"
+                    attrs="{'invisible': [('need_payment_terminal', '=', False)]}"
+                />
+      </xpath>
+    </field>
+  </record>
+</odoo>
