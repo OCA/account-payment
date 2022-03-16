@@ -5,6 +5,7 @@ from operator import eq as equals, ne as not_equals
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+from odoo.tools import float_round
 
 
 class AccountMove(models.Model):
@@ -162,27 +163,34 @@ class AccountMove(models.Model):
         for move in self:
             payment_term = move.invoice_payment_term_id
             payment_term_line = move._get_first_payment_term_line()
-            tax_line = move._get_taxes_lines()
+            tax_lines = move._get_taxes_lines()
             # check if we have a discount on the payment term
             if (
                 payment_term.days_discount
                 and payment_term.percent_discount
-                and len(tax_line) <= 1
+                and len(tax_lines.mapped("tax_line_id")) <= 1
                 and (
                     (move.move_type == "out_invoice" and payment_term_line.debit)
                     or (move.move_type == "in_invoice" and payment_term_line.credit)
                 )
             ):
                 pay_term_vals = move._prepare_discount_vals(payment_term)
-                if tax_line:
-                    tax_discount_amount = move._get_discount_amount(
-                        tax_line.debit or tax_line.credit
+                if tax_lines:
+                    bigger_tax_line = fields.first(
+                        tax_lines.sorted(lambda l: abs(l.price_subtotal))
+                    )
+                    tax_discount_amount = float_round(
+                        move._get_discount_amount(
+                            abs(sum(tax_lines.mapped("balance")))
+                        ),
+                        precision_rounding=bigger_tax_line.company_currency_id.rounding,
                     )
                     if move.move_type == "in_invoice":
                         tax_discount_amount = -tax_discount_amount
+
                     pay_term_vals.update(
                         {
-                            "discount_tax_line_id": tax_line.id,
+                            "discount_tax_line_id": bigger_tax_line.id,
                             "amount_discount_tax": tax_discount_amount,
                         }
                     )

@@ -206,6 +206,25 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
             )
             self.assertEqual(term_line.amount_discount_currency, self.amount_discount)
 
+    def test_store_financial_discount_with_cash_rounding(self):
+        five_cents_rounding = self.env["account.cash.rounding"].create(
+            {
+                "name": "5 cts rounding",
+                "rounding": 0.05,
+                "strategy": "biggest_tax",
+                "rounding_method": "HALF-UP",
+            }
+        )
+        self.init_invoice_line(self.invoice1, 1.0, 9.95)
+        self.invoice1.invoice_cash_rounding_id = five_cents_rounding
+        self.invoice1.action_post()
+        payment_term_line = self.invoice1._get_first_payment_term_line()
+        self.assertAlmostEqual(
+            payment_term_line.amount_discount,
+            -self.invoice1.amount_total * self.payment_term.percent_discount / 100,
+            delta=0.01,
+        )
+
     def test_single_invoice_payment_with_discount_available(self):
         """Test register payment for a vendor bill with available discount"""
         self.invoice1.action_post()
