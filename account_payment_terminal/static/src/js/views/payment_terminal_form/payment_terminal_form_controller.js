@@ -17,13 +17,11 @@ odoo.define("account_payment_terminal.OCAPaymentTerminalFormController", functio
             this._super.apply(this, arguments);
         },
         _show_error: function (error_message) {
-            this.$el.find("p").text(error_message);
-            this.$el.find("p").css("color", "red");
+            this.$el.find("p").css("color", "red").text(error_message);
             console.error(error_message);
         },
         _show_success: function (success_message) {
-            this.$el.find("p").text(success_message);
-            this.$el.find("p").css("color", "green");
+            this.$el.find("p").css("color", "green").text(success_message);
         },
         _proxy_call: function (service, data, timeout) {
             return $.ajax({
