@@ -158,6 +158,7 @@ class AccountReconcileModel(models.Model):
             "reconcile_model_id": self.id,
             "balance": residual_balance,
             "currency_id": line_currency.id,
+            "journal_id": False,
         }
         res.append(fin_disc_write_off_vals)
 
@@ -178,6 +179,7 @@ class AccountReconcileModel(models.Model):
                 "reconcile_model_id": self.id,
                 "balance": line.amount_discount_tax,
                 "currency_id": line_currency.id,
+                "journal_id": False,
             }
             # Deduce tax amount from fin. disc. write-off
             if fin_disc_write_off_vals.get("credit"):
