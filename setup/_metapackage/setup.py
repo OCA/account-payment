@@ -26,6 +26,7 @@ setuptools.setup(
         'odoo14-addon-account_payment_term_extension',
         'odoo14-addon-account_payment_terminal',
         'odoo14-addon-account_payment_view_check_number',
+        'odoo14-addon-account_payment_widget_amount',
         'odoo14-addon-partner_aging',
     ],
     classifiers=[
