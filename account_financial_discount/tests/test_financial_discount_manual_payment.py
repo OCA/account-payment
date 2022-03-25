@@ -547,6 +547,507 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         self._assert_payment_line_with_discount_from_invoice(invoice4)
         self.assertIn(invoice4.payment_state, ("paid", "in_payment"))
 
+    def test_multi_invoice_eur_payment_eur_with_discount_available(self):
+        """Test register payment for multiple vendor bills with discount"""
+        invoice1 = self.init_invoice(
+            self.partner,
+            "in_invoice",
+            payment_term=self.payment_term,
+            invoice_date="2019-04-01",
+            invoice_date_due="2019-05-01",
+            currency=self.eur_currency,
+        )
+        self.init_invoice_line(invoice1, 1.0, 1000.0)
+        self.assertTrue(invoice1.has_discount_available)
+        invoice2 = invoice1.copy({"invoice_date": "2019-04-01"})
+        self.assertTrue(invoice2.has_discount_available)
+        invoices = invoice1 | invoice2
+        invoices.action_post()
+        payment_wizard_form = Form(
+            self.env["account.payment.register"].with_context(
+                active_ids=invoices.ids, active_model="account.move"
+            )
+        )
+        self.assertFalse(payment_wizard_form.show_force_financial_discount)
+        self.assertEqual(
+            payment_wizard_form.payment_method_id,
+            self.payment_method_manual_out,
+        )
+        payment_wizard_form.journal_id = self.eur_bank_journal
+        self.assertFalse(payment_wizard_form.group_payment)
+        payment_wizard = payment_wizard_form.save()
+        payment_wizard.action_create_payments()
+        self._assert_payment_line_with_discount_from_invoice(invoice1)
+        self.assertIn(invoice1.payment_state, ("paid", "in_payment"))
+        self._assert_payment_line_with_discount_from_invoice(invoice2)
+        self.assertIn(invoice2.payment_state, ("paid", "in_payment"))
+
+    def test_multi_invoice_eur_payment_eur_with_discount_available_grouped(self):
+        """Test register payment for multiple vendor bills with discount"""
+        invoice1 = self.init_invoice(
+            self.partner,
+            "in_invoice",
+            payment_term=self.payment_term,
+            invoice_date="2019-04-01",
+            invoice_date_due="2019-05-01",
+            currency=self.eur_currency,
+        )
+        self.init_invoice_line(invoice1, 1.0, 1000.0)
+        self.assertTrue(invoice1.has_discount_available)
+        invoice2 = invoice1.copy({"invoice_date": "2019-04-01"})
+        self.assertTrue(invoice2.has_discount_available)
+        invoices = invoice1 | invoice2
+        invoices.action_post()
+        payment_wizard_form = Form(
+            self.env["account.payment.register"].with_context(
+                active_ids=invoices.ids, active_model="account.move"
+            )
+        )
+        self.assertFalse(payment_wizard_form.show_force_financial_discount)
+        self.assertEqual(
+            payment_wizard_form.payment_method_id,
+            self.payment_method_manual_out,
+        )
+        payment_wizard_form.journal_id = self.eur_bank_journal
+        self.assertFalse(payment_wizard_form.group_payment)
+        payment_wizard_form.group_payment = True
+        payment_wizard = payment_wizard_form.save()
+        payment_wizard.action_create_payments()
+        self.assertEqual(payment_wizard_form.amount, self.amount_with_discount * 2)
+        self.assertEqual(
+            payment_wizard_form.payment_difference, self.amount_discount * 2
+        )
+        self.assertEqual(payment_wizard_form.payment_difference_handling, "reconcile")
+        self.assertEqual(payment_wizard_form.writeoff_account_id, self.write_off_rev)
+        self.assertEqual(payment_wizard_form.writeoff_label, "Financial Discount")
+        payment_wizard = payment_wizard_form.save()
+        payment_wizard.action_create_payments()
+        invoice1_payment_line = self._get_payment_lines(invoice1)
+        invoice2_payment_line = self._get_payment_lines(invoice2)
+        self.assertEqual(invoice1_payment_line, invoice2_payment_line)
+        # The payment move lines must have full amount to set invoices as paid
+        self.assertEqual(
+            invoice2_payment_line.amount_currency, self.amount_without_discount * 2
+        )
+        invoice_payment = invoice1_payment_line.mapped("payment_id")
+        # The payment must have the amount with discount
+        self.assertEqual(invoice_payment.amount, self.amount_with_discount * 2)
+        for payment_line in invoice1_payment_line.move_id.line_ids:
+            if payment_line == invoice1_payment_line:
+                continue
+            elif payment_line.account_id in (self.write_off_rev, self.write_off_exp):
+                # Write off line must have the discount amount and label
+                self.assertEqual(
+                    payment_line.amount_currency, -self.amount_discount * 2
+                )
+                self.assertEqual(payment_line.name, "Financial Discount")
+            else:
+                # Oustanding payment line must have the amount with discount
+                self.assertEqual(
+                    payment_line.amount_currency, -self.amount_with_discount * 2
+                )
+        self.assertIn(invoice1.payment_state, ("paid", "in_payment"))
+        self.assertIn(invoice2.payment_state, ("paid", "in_payment"))
+
+    def test_multi_invoice_eur_payment_eur_with_discount_late(self):
+        """Test register payment for multiple vendor bills with force discount"""
+        invoice1 = self.init_invoice(
+            self.partner,
+            "in_invoice",
+            payment_term=self.payment_term,
+            invoice_date="2019-04-01",
+            invoice_date_due="2019-05-01",
+            currency=self.eur_currency,
+        )
+        self.init_invoice_line(invoice1, 1.0, 1000.0)
+        self.assertTrue(invoice1.has_discount_available)
+        invoice2 = self.init_invoice(
+            self.partner,
+            "in_invoice",
+            payment_term=self.payment_term,
+            invoice_date="2019-02-15",
+            invoice_date_due="2019-03-15",
+            currency=self.eur_currency,
+        )
+        self.init_invoice_line(invoice2, 1.0, 1000.0)
+        self.assertFalse(invoice2.has_discount_available)
+        invoices = invoice1 | invoice2
+        invoices.action_post()
+        payment_wizard_form = Form(
+            self.env["account.payment.register"].with_context(
+                active_ids=invoices.ids, active_model="account.move"
+            )
+        )
+        self.assertTrue(payment_wizard_form.show_force_financial_discount)
+        self.assertFalse(payment_wizard_form.force_financial_discount)
+        self.assertEqual(
+            payment_wizard_form.payment_method_id,
+            self.payment_method_manual_out,
+        )
+        payment_wizard_form.journal_id = self.eur_bank_journal
+        self.assertFalse(payment_wizard_form.group_payment)
+        payment_wizard = payment_wizard_form.save()
+        payment_wizard.action_create_payments()
+        self._assert_payment_line_with_discount_from_invoice(invoice1)
+        self.assertIn(invoice1.payment_state, ("paid", "in_payment"))
+        invoice2_payment_line = self._get_payment_lines(invoice2)
+        invoice2_payment = invoice2_payment_line.mapped("payment_id")
+        self.assertEqual(invoice2_payment.amount, self.amount_without_discount)
+        self.assertIn(invoice2.payment_state, ("paid", "in_payment"))
+
+    def test_multi_invoice_eur_payment_eur_with_discount_late_forced(self):
+        """Test register payment for multiple vendor bills with discount"""
+        invoice1 = self.init_invoice(
+            self.partner,
+            "in_invoice",
+            payment_term=self.payment_term,
+            invoice_date="2019-04-01",
+            invoice_date_due="2019-05-01",
+            currency=self.eur_currency,
+        )
+        self.init_invoice_line(invoice1, 1.0, 1000.0)
+        self.assertTrue(invoice1.has_discount_available)
+        invoice2 = self.init_invoice(
+            self.partner,
+            "in_invoice",
+            payment_term=self.payment_term,
+            invoice_date="2019-02-15",
+            invoice_date_due="2019-03-15",
+            currency=self.eur_currency,
+        )
+        self.init_invoice_line(invoice2, 1.0, 1000.0)
+        self.assertFalse(invoice2.has_discount_available)
+        invoice2.force_financial_discount = True
+        self.assertTrue(invoice2.has_discount_available)
+        invoices = invoice1 | invoice2
+        invoices.action_post()
+        payment_wizard_form = Form(
+            self.env["account.payment.register"].with_context(
+                active_ids=invoices.ids, active_model="account.move"
+            )
+        )
+        self.assertTrue(payment_wizard_form.show_force_financial_discount)
+        self.assertFalse(payment_wizard_form.force_financial_discount)
+        self.assertEqual(
+            payment_wizard_form.payment_method_id,
+            self.payment_method_manual_out,
+        )
+        payment_wizard_form.journal_id = self.eur_bank_journal
+        self.assertFalse(payment_wizard_form.group_payment)
+        payment_wizard = payment_wizard_form.save()
+        payment_wizard.action_create_payments()
+        self._assert_payment_line_with_discount_from_invoice(invoice1)
+        self.assertIn(invoice1.payment_state, ("paid", "in_payment"))
+        self._assert_payment_line_with_discount_from_invoice(invoice2)
+        self.assertIn(invoice2.payment_state, ("paid", "in_payment"))
+
+    def test_multi_invoice_eur_payment_eur_with_discount_late_forced_wizard(self):
+        """Test register payment for multiple vendor bills with discount"""
+        invoice1 = self.init_invoice(
+            self.partner,
+            "in_invoice",
+            payment_term=self.payment_term,
+            invoice_date="2019-04-01",
+            invoice_date_due="2019-05-01",
+            currency=self.eur_currency,
+        )
+        self.init_invoice_line(invoice1, 1.0, 1000.0)
+        self.assertTrue(invoice1.has_discount_available)
+        invoice2 = self.init_invoice(
+            self.partner,
+            "in_invoice",
+            payment_term=self.payment_term,
+            invoice_date="2019-02-15",
+            invoice_date_due="2019-03-15",
+            currency=self.eur_currency,
+        )
+        self.init_invoice_line(invoice2, 1.0, 1000.0)
+        self.assertFalse(invoice2.has_discount_available)
+        invoices = invoice1 | invoice2
+        invoices.action_post()
+        payment_wizard_form = Form(
+            self.env["account.payment.register"].with_context(
+                active_ids=invoices.ids, active_model="account.move"
+            )
+        )
+        self.assertTrue(payment_wizard_form.show_force_financial_discount)
+        self.assertFalse(payment_wizard_form.force_financial_discount)
+        payment_wizard_form.force_financial_discount = True
+        self.assertEqual(
+            payment_wizard_form.payment_method_id,
+            self.payment_method_manual_out,
+        )
+        payment_wizard_form.journal_id = self.eur_bank_journal
+        self.assertFalse(payment_wizard_form.group_payment)
+        payment_wizard = payment_wizard_form.save()
+        payment_wizard.action_create_payments()
+        self._assert_payment_line_with_discount_from_invoice(invoice1)
+        self.assertIn(invoice1.payment_state, ("paid", "in_payment"))
+        self._assert_payment_line_with_discount_from_invoice(invoice2)
+        self.assertIn(invoice2.payment_state, ("paid", "in_payment"))
+
+    def test_multi_invoice_chf_payment_eur_with_discount_available(self):
+        """Test register payment for multiple vendor bills with discount"""
+        invoice1 = self.init_invoice(
+            self.partner,
+            "in_invoice",
+            payment_term=self.payment_term,
+            invoice_date="2019-04-01",
+            invoice_date_due="2019-05-01",
+            currency=self.chf_currency,
+        )
+        self.init_invoice_line(invoice1, 1.0, 1000.0)
+        self.assertTrue(invoice1.has_discount_available)
+        invoice2 = invoice1.copy({"invoice_date": "2019-04-01"})
+        self.assertTrue(invoice2.has_discount_available)
+        invoices = invoice1 | invoice2
+        invoices.action_post()
+        payment_wizard_form = Form(
+            self.env["account.payment.register"].with_context(
+                active_ids=invoices.ids, active_model="account.move"
+            )
+        )
+        self.assertFalse(payment_wizard_form.show_force_financial_discount)
+        self.assertEqual(
+            payment_wizard_form.payment_method_id,
+            self.payment_method_manual_out,
+        )
+        payment_wizard_form.journal_id = self.eur_bank_journal
+        self.assertFalse(payment_wizard_form.group_payment)
+        payment_wizard = payment_wizard_form.save()
+        payment_wizard.action_create_payments()
+        self._assert_payment_line_with_discount_from_invoice(invoice1)
+        self.assertIn(invoice1.payment_state, ("paid", "in_payment"))
+        self._assert_payment_line_with_discount_from_invoice(invoice2)
+        self.assertIn(invoice2.payment_state, ("paid", "in_payment"))
+
+    def test_multi_invoice_chf_payment_eur_with_discount_available_grouped(self):
+        """Test register payment for multiple vendor bills with discount"""
+        invoice1 = self.init_invoice(
+            self.partner,
+            "in_invoice",
+            payment_term=self.payment_term,
+            invoice_date="2019-04-01",
+            invoice_date_due="2019-05-01",
+            currency=self.chf_currency,
+        )
+        self.init_invoice_line(invoice1, 1.0, 1000.0)
+        self.assertTrue(invoice1.has_discount_available)
+        invoice2 = invoice1.copy({"invoice_date": "2019-04-01"})
+        self.assertTrue(invoice2.has_discount_available)
+        invoices = invoice1 | invoice2
+        invoices.action_post()
+        payment_wizard_form = Form(
+            self.env["account.payment.register"].with_context(
+                active_ids=invoices.ids, active_model="account.move"
+            )
+        )
+        self.assertFalse(payment_wizard_form.show_force_financial_discount)
+        self.assertEqual(
+            payment_wizard_form.payment_method_id,
+            self.payment_method_manual_out,
+        )
+        payment_wizard_form.journal_id = self.eur_bank_journal
+        self.assertFalse(payment_wizard_form.group_payment)
+        payment_wizard_form.group_payment = True
+        self.assertEqual(payment_wizard_form.currency_id, self.eur_currency)
+        amount_with_discount_chf_to_eur = self.chf_currency._convert(
+            self.amount_with_discount * 2,
+            self.eur_currency,
+            invoice1.company_id,
+            payment_wizard_form.payment_date,
+        )
+        amount_discount_chf_to_eur = self.chf_currency._convert(
+            self.amount_discount * 2,
+            self.eur_currency,
+            invoice1.company_id,
+            payment_wizard_form.payment_date,
+        )
+        self.assertAlmostEqual(
+            payment_wizard_form.amount, amount_with_discount_chf_to_eur, delta=0.01
+        )
+        self.assertAlmostEqual(
+            payment_wizard_form.payment_difference,
+            amount_discount_chf_to_eur,
+            delta=0.01,
+        )
+        self.assertEqual(payment_wizard_form.payment_difference_handling, "reconcile")
+        self.assertEqual(payment_wizard_form.writeoff_account_id, self.write_off_rev)
+        self.assertEqual(payment_wizard_form.writeoff_label, "Financial Discount")
+        payment_wizard = payment_wizard_form.save()
+        payment_wizard.action_create_payments()
+        invoice1_payment_line = self._get_payment_lines(invoice1)
+        invoice2_payment_line = self._get_payment_lines(invoice2)
+        self.assertEqual(invoice1_payment_line, invoice2_payment_line)
+        # The payment move lines must have full amount to set invoices as paid
+        amount_without_discount_chf_to_eur = self.chf_currency._convert(
+            self.amount_without_discount * 2,
+            self.eur_currency,
+            invoice1.company_id,
+            payment_wizard_form.payment_date,
+        )
+        self.assertAlmostEqual(
+            invoice2_payment_line.amount_currency,
+            amount_without_discount_chf_to_eur,
+            delta=0.01,
+        )
+        invoice_payment = invoice1_payment_line.mapped("payment_id")
+        # The payment must have the amount with discount
+        self.assertEqual(invoice_payment.amount, amount_with_discount_chf_to_eur)
+        for payment_line in invoice1_payment_line.move_id.line_ids:
+            if payment_line == invoice1_payment_line:
+                continue
+            elif payment_line.account_id in (self.write_off_rev, self.write_off_exp):
+                # Write off line must have the discount amount and label
+                self.assertEqual(
+                    payment_line.amount_currency, -amount_discount_chf_to_eur
+                )
+                self.assertEqual(payment_line.name, "Financial Discount")
+            else:
+                # Oustanding payment line must have the amount with discount
+                self.assertEqual(
+                    payment_line.amount_currency, -amount_with_discount_chf_to_eur
+                )
+        self.assertIn(invoice1.payment_state, ("paid", "in_payment"))
+        self.assertIn(invoice2.payment_state, ("paid", "in_payment"))
+
+    def test_multi_invoice_chf_payment_eur_with_discount_late(self):
+        """Test register payment for multiple vendor bills with force discount"""
+        invoice1 = self.init_invoice(
+            self.partner,
+            "in_invoice",
+            payment_term=self.payment_term,
+            invoice_date="2019-04-01",
+            invoice_date_due="2019-05-01",
+            currency=self.chf_currency,
+        )
+        self.init_invoice_line(invoice1, 1.0, 1000.0)
+        self.assertTrue(invoice1.has_discount_available)
+        invoice2 = self.init_invoice(
+            self.partner,
+            "in_invoice",
+            payment_term=self.payment_term,
+            invoice_date="2019-02-15",
+            invoice_date_due="2019-03-15",
+            currency=self.eur_currency,
+        )
+        self.init_invoice_line(invoice2, 1.0, 1000.0)
+        self.assertFalse(invoice2.has_discount_available)
+        invoices = invoice1 | invoice2
+        invoices.action_post()
+        payment_wizard_form = Form(
+            self.env["account.payment.register"].with_context(
+                active_ids=invoices.ids, active_model="account.move"
+            )
+        )
+        self.assertTrue(payment_wizard_form.show_force_financial_discount)
+        self.assertFalse(payment_wizard_form.force_financial_discount)
+        self.assertEqual(
+            payment_wizard_form.payment_method_id,
+            self.payment_method_manual_out,
+        )
+        payment_wizard_form.journal_id = self.eur_bank_journal
+        self.assertFalse(payment_wizard_form.group_payment)
+        payment_wizard = payment_wizard_form.save()
+        payment_wizard.action_create_payments()
+        self._assert_payment_line_with_discount_from_invoice(invoice1)
+        self.assertIn(invoice1.payment_state, ("paid", "in_payment"))
+        invoice2_payment_line = self._get_payment_lines(invoice2)
+        invoice2_payment = invoice2_payment_line.mapped("payment_id")
+        self.assertEqual(invoice2_payment.amount, self.amount_without_discount)
+        self.assertIn(invoice2.payment_state, ("paid", "in_payment"))
+
+    def test_multi_invoice_chf_payment_eur_with_discount_late_forced(self):
+        """Test register payment for multiple vendor bills with discount"""
+        invoice1 = self.init_invoice(
+            self.partner,
+            "in_invoice",
+            payment_term=self.payment_term,
+            invoice_date="2019-04-01",
+            invoice_date_due="2019-05-01",
+            currency=self.chf_currency,
+        )
+        self.init_invoice_line(invoice1, 1.0, 1000.0)
+        self.assertTrue(invoice1.has_discount_available)
+        invoice2 = self.init_invoice(
+            self.partner,
+            "in_invoice",
+            payment_term=self.payment_term,
+            invoice_date="2019-02-15",
+            invoice_date_due="2019-03-15",
+            currency=self.chf_currency,
+        )
+        self.init_invoice_line(invoice2, 1.0, 1000.0)
+        self.assertFalse(invoice2.has_discount_available)
+        invoice2.force_financial_discount = True
+        self.assertTrue(invoice2.has_discount_available)
+        invoices = invoice1 | invoice2
+        invoices.action_post()
+        payment_wizard_form = Form(
+            self.env["account.payment.register"].with_context(
+                active_ids=invoices.ids, active_model="account.move"
+            )
+        )
+        self.assertTrue(payment_wizard_form.show_force_financial_discount)
+        self.assertFalse(payment_wizard_form.force_financial_discount)
+        self.assertEqual(
+            payment_wizard_form.payment_method_id,
+            self.payment_method_manual_out,
+        )
+        payment_wizard_form.journal_id = self.eur_bank_journal
+        self.assertFalse(payment_wizard_form.group_payment)
+        payment_wizard = payment_wizard_form.save()
+        payment_wizard.action_create_payments()
+        self._assert_payment_line_with_discount_from_invoice(invoice1)
+        self.assertIn(invoice1.payment_state, ("paid", "in_payment"))
+        self._assert_payment_line_with_discount_from_invoice(invoice2)
+        self.assertIn(invoice2.payment_state, ("paid", "in_payment"))
+
+    def test_multi_invoice_chf_payment_eur_with_discount_late_forced_wizard(self):
+        """Test register payment for multiple vendor bills with discount"""
+        invoice1 = self.init_invoice(
+            self.partner,
+            "in_invoice",
+            payment_term=self.payment_term,
+            invoice_date="2019-04-01",
+            invoice_date_due="2019-05-01",
+            currency=self.chf_currency,
+        )
+        self.init_invoice_line(invoice1, 1.0, 1000.0)
+        self.assertTrue(invoice1.has_discount_available)
+        invoice2 = self.init_invoice(
+            self.partner,
+            "in_invoice",
+            payment_term=self.payment_term,
+            invoice_date="2019-02-15",
+            invoice_date_due="2019-03-15",
+            currency=self.chf_currency,
+        )
+        self.init_invoice_line(invoice2, 1.0, 1000.0)
+        self.assertFalse(invoice2.has_discount_available)
+        invoices = invoice1 | invoice2
+        invoices.action_post()
+        payment_wizard_form = Form(
+            self.env["account.payment.register"].with_context(
+                active_ids=invoices.ids, active_model="account.move"
+            )
+        )
+        self.assertTrue(payment_wizard_form.show_force_financial_discount)
+        self.assertFalse(payment_wizard_form.force_financial_discount)
+        payment_wizard_form.force_financial_discount = True
+        self.assertEqual(
+            payment_wizard_form.payment_method_id,
+            self.payment_method_manual_out,
+        )
+        payment_wizard_form.journal_id = self.eur_bank_journal
+        self.assertFalse(payment_wizard_form.group_payment)
+        payment_wizard = payment_wizard_form.save()
+        payment_wizard.action_create_payments()
+        self._assert_payment_line_with_discount_from_invoice(invoice1)
+        self.assertIn(invoice1.payment_state, ("paid", "in_payment"))
+        self._assert_payment_line_with_discount_from_invoice(invoice2)
+        self.assertIn(invoice2.payment_state, ("paid", "in_payment"))
+
     def test_customer_manual_payment_with_discount_available(self):
         """Test register payment for a customer invoice with available discount"""
         self.client_invoice1.action_post()

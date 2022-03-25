@@ -32,14 +32,6 @@ class TestAccountFinancialDiscountReconciliation(TestAccountFinancialDiscountCom
                 "financial_discount_tolerance": 0.05,
             }
         )
-        cls.eur_bank_journal = cls.env["account.journal"].create(
-            {
-                "name": "Bank EUR",
-                "type": "bank",
-                "code": "BNK-EUR",
-                "currency_id": cls.eur_currency.id,
-            }
-        )
 
         cls.amount_taxed_without_discount = 1150.0
         cls.amount_taxed_discount = 23.0

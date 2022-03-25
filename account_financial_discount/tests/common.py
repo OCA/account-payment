@@ -45,6 +45,11 @@ class TestAccountFinancialDiscountCommon(SavepointCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+
+        cls.usd_currency = cls.env.ref("base.USD")
+        cls.eur_currency = cls.env.ref("base.EUR")
+        cls.chf_currency = cls.env.ref("base.CHF")
+
         cls.partner = cls.env["res.partner"].create(
             {"name": "Peter Muster AG", "supplier_rank": 1}
         )
@@ -98,6 +103,14 @@ class TestAccountFinancialDiscountCommon(SavepointCase):
             [("company_id", "=", cls.env.company.id), ("type", "=", "bank")],
             limit=1,
         )
+        cls.eur_bank_journal = cls.env["account.journal"].create(
+            {
+                "name": "Bank EUR",
+                "type": "bank",
+                "code": "BNK2",
+                "currency_id": cls.eur_currency.id,
+            }
+        )
 
         cls.exp = cls.env["account.account"].create(
             {
@@ -113,6 +126,3 @@ class TestAccountFinancialDiscountCommon(SavepointCase):
         cls.payment_method_manual_out = cls.env.ref(
             "account.account_payment_method_manual_out"
         )
-
-        cls.usd_currency = cls.env.ref("base.USD")
-        cls.eur_currency = cls.env.ref("base.EUR")
