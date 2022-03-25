@@ -62,20 +62,21 @@ class AccountPaymentRegister(models.TransientModel):
                         self.writeoff_account_id = discount_account.id
                         self.writeoff_label = "Payment Discount"
                     # customer is paying more
-                    elif abs(payment_difference) < discount_amt:
-
-                        self.payment_difference = abs(payment_difference)
-                        self.payment_difference_handling = "reconcile"
-                        self.writeoff_account_id = discount_account.id
-                        self.writeoff_label = "Payment Discount"
+                    elif payment_difference < discount_amt:
+                        if payment_difference > 0:
+                            self.payment_difference = discount_amt
+                            self.payment_difference_handling = "reconcile"
+                            self.writeoff_account_id = discount_account.id
+                            self.writeoff_label = "Payment Discount"
+                        elif payment_difference < 0:
+                            self.payment_difference = payment_difference
                     # ocustomer paying more than discount_amt
-                    elif abs(payment_difference) > discount_amt:
-
-                        self.payment_difference = abs(payment_difference)
+                    elif payment_difference > discount_amt:
+                        self.payment_difference = payment_difference
                         self.payment_difference_handling = "open"
                         self.writeoff_label = False
                     # customer paying more than discount_amt
-                    elif abs(payment_difference) == discount_amt and discount_amt > 0:
+                    elif payment_difference == discount_amt and discount_amt > 0:
 
                         self.payment_difference = abs(payment_difference)
                         self.payment_difference_handling = "reconcile"
@@ -84,7 +85,7 @@ class AccountPaymentRegister(models.TransientModel):
                 else:
                     self.payment_difference = payment_difference
 
-                self.amount = self.invoice_id.amount_residual - abs(
+                self.amount = self.invoice_id.amount_residual - (
                     self.payment_difference
                 )
 
