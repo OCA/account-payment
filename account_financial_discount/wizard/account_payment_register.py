@@ -142,19 +142,24 @@ class AccountPaymentRegister(models.TransientModel):
 
     def _create_payment_vals_from_batch(self, batch_result):
         res = super()._create_payment_vals_from_batch(batch_result)
-        if self.with_financial_discount:
+        if any(batch_result.get("lines").mapped("amount_discount")):
             financial_discount_values = self._get_financial_discount_values_from_batch(
                 batch_result
             )
-            currency = self.env["res.currency"].browse(res.get("currency_id"))
-            # TODO Check with multicurrency
-            payment_difference = res.get("amount") - financial_discount_values.get(
-                "amount_discount"
-            )
-            amount_discount = financial_discount_values.get("amount_discount")
-            # TODO use payment_difference or amount_discount or assert equals?
+            lines_currency = self.env["res.currency"].browse(res.get("currency_id"))
+            if lines_currency == self.company_id.currency_id:
+                amount = financial_discount_values.get("amount")
+                amount_discount = financial_discount_values.get("amount_discount")
+            else:
+                amount = financial_discount_values.get("amount_currency")
+                amount_discount = financial_discount_values.get(
+                    "amount_discount_currency"
+                )
+            payment_difference = res.get("amount") - amount
+            res["amount"] = amount
             if (
-                not currency.is_zero(payment_difference)
+                amount_discount == payment_difference
+                and not self.currency_id.is_zero(payment_difference)
                 and financial_discount_values.get("payment_difference_handling")
                 == "reconcile"
             ):
@@ -163,7 +168,7 @@ class AccountPaymentRegister(models.TransientModel):
                     "amount": amount_discount,
                     "account_id": financial_discount_values.get("writeoff_account_id"),
                 }
-            res["amount"] = financial_discount_values.get("amount")
+
         return res
 
     def _get_common_financial_discount_values(self):
@@ -194,8 +199,6 @@ class AccountPaymentRegister(models.TransientModel):
         self.ensure_one()
         res = self._get_common_financial_discount_values()
         discount_amounts = self._get_financial_discount_amounts()
-        # TODO: Check multicurrency condition
-        # Multicurrency conditions according to _compute_payment_difference
         if self.currency_id == self.source_currency_id:
             # Same currency.
             res["amount"] = discount_amounts.get("amount_currency")
@@ -206,13 +209,13 @@ class AccountPaymentRegister(models.TransientModel):
             res["amount_discount"] = discount_amounts.get("amount_discount")
         else:
             # Foreign currency on payment different than the one set on the journal entries.
-            res["amount"] = self.company_id.currency_id._convert(
+            res["amount"] = self.source_currency_id._convert(
                 discount_amounts.get("amount_currency"),
                 self.currency_id,
                 self.company_id,
                 self.payment_date,
             )
-            res["amount_discount"] = self.company_id.currency_id._convert(
+            res["amount_discount"] = self.source_currency_id._convert(
                 discount_amounts.get("amount_discount_currency"),
                 self.currency_id,
                 self.company_id,
@@ -266,7 +269,6 @@ class AccountPaymentRegister(models.TransientModel):
                     amount_discount_currency += abs(
                         res_line["amount_discount_currency"]
                     )
-                    # TODO: check with multicurrency test
         return {
             "amount": amount,
             "amount_currency": amount_currency,
