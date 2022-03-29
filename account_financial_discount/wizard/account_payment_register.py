@@ -1,6 +1,7 @@
 # Copyright 2019-2021 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
 from odoo import _, api, fields, models
+from odoo.tools import float_compare
 
 
 class AccountPaymentRegister(models.TransientModel):
@@ -124,13 +125,18 @@ class AccountPaymentRegister(models.TransientModel):
         # Only override the writeoff configuration in case the wizard
         #  is not edited yet
         if self.with_financial_discount and isinstance(self.id, models.NewId):
+            payment_difference = self.payment_difference
             financial_discount_values = (
                 self._get_financial_discount_values_from_wizard()
             )
             if (
-                self.payment_difference
-                and financial_discount_values.get("amount_discount")
-                == self.payment_difference
+                payment_difference
+                and float_compare(
+                    financial_discount_values.get("amount_discount"),
+                    payment_difference,
+                    precision_rounding=self.currency_id.rounding,
+                )
+                == 0
             ):
                 self.payment_difference_handling = financial_discount_values.get(
                     "payment_difference_handling"
@@ -158,7 +164,12 @@ class AccountPaymentRegister(models.TransientModel):
             payment_difference = res.get("amount") - amount
             res["amount"] = amount
             if (
-                amount_discount == payment_difference
+                float_compare(
+                    amount_discount,
+                    payment_difference,
+                    precision_rounding=lines_currency.rounding,
+                )
+                == 0
                 and not self.currency_id.is_zero(payment_difference)
                 and financial_discount_values.get("payment_difference_handling")
                 == "reconcile"
