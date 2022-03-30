@@ -72,7 +72,7 @@ class InvoicePaymentLine(models.TransientModel):
     def _onchange_amount(self):
         check_amount_in_words = num2words(math.floor(self.amount), lang="en").title()
         decimals = self.amount % 1
-        if decimals >= 10 ** -2:
+        if decimals >= 10**-2:
             check_amount_in_words += _(" and %s/100") % str(
                 int(round(float_round(decimals * 100, precision_rounding=1)))
             )
