@@ -240,7 +240,7 @@ class AccountPaymentRegister(models.TransientModel):
             math.floor(old_total + data_get.amount)
         ).title()
         decimals = (old_total + data_get.amount) % 1
-        if decimals >= 10 ** -2:
+        if decimals >= 10**-2:
             check_amount_in_words += _(" and %s/100") % str(
                 int(round(float_round(decimals * 100, precision_rounding=1)))
             )
