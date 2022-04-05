@@ -17,6 +17,7 @@
     "excludes": [],
     "data": [
         "views/account_journal_views.xml",
+        "views/res_config_settings_views.xml",
     ],
     "demo": [],
     "qweb": [],
