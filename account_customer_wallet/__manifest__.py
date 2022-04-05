@@ -11,9 +11,13 @@
     "author": "Coop IT Easy SCRLfs",
     "license": "AGPL-3",
     "application": False,
-    "depends": [],
+    "depends": [
+        "account",
+    ],
     "excludes": [],
-    "data": [],
+    "data": [
+        "views/account_journal_views.xml",
+    ],
     "demo": [],
     "qweb": [],
 }
