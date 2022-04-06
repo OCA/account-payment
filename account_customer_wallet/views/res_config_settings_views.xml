@@ -19,10 +19,7 @@
                         <div class="text-muted">
                             Let customers pay from a wallet account
                         </div>
-                        <div
-                            class="content-group"
-                            attrs="{'invisible': [('account_customer_wallet', '=', False)]}"
-                        >
+                        <div class="content-group">
                             <div class="row mt16">
                                 <label
                                     for="customer_wallet_journal_id"
