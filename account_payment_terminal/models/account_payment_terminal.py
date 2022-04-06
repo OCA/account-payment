@@ -23,3 +23,10 @@ class AccountPaymentTerminal(models.Model):
             "Leave empty if the proxy has only one terminal connected."
         ),
     )
+
+    company_id = fields.Many2one(
+        comodel_name="res.company",
+        string="Company",
+        required=True,
+        default=lambda self: self.env.company,
+    )

@@ -11,6 +11,7 @@
     "website": "https://github.com/OCA/account-payment",
     "depends": ["account"],
     "data": [
+        "security/account_payment_terminal_rule.xml",
         "security/account_payment_terminal.xml",
         "views/webclient_templates.xml",
         "views/account_payment_terminal.xml",

@@ -11,6 +11,7 @@
             <field name="name" />
             <field name="proxy_ip" />
             <field name="oca_payment_terminal_id" />
+            <field name="company_id" />
           </group>
         </sheet>
       </form>
@@ -23,6 +24,7 @@
         <field name="name" />
         <field name="proxy_ip" />
         <field name="oca_payment_terminal_id" />
+        <field name="company_id" />
       </tree>
     </field>
   </record>

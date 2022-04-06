@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+  Copyright 2022 Acsone SA
+  License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+-->
+<odoo noupdate="1">
+
+
+<record id="account_payment_terminal_rule" model="ir.rule">
+    <field name="name">Account Payment Terminal multi-company</field>
+    <field name="model_id" ref="model_account_payment_terminal" />
+    <field
+            name="domain_force"
+        >['|', ('company_id', '=', False), ('company_id', 'in', company_ids)]</field>
+</record>
+
+
+</odoo>
