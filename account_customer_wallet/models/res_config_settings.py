@@ -8,29 +8,29 @@ from odoo.tools.translate import _
 class ResConfigSettings(models.TransientModel):
     _inherit = "res.config.settings"
 
-    account_customer_wallet = fields.Boolean(
-        string="Account Customer Wallet",
-        config_parameter="account_customer_wallet.account_customer_wallet",
+    customer_wallet = fields.Boolean(
+        string="Customer Wallet",
+        config_parameter="account_customer_wallet.customer_wallet",
         help="Let customers pay from a wallet account",
     )
-    customer_wallet_journal_id = fields.Many2one(
-        comodel_name="account.journal",
-        string="Customer Wallet Journal",
+    customer_wallet_account_id = fields.Many2one(
+        comodel_name="account.account",
+        string="Customer Wallet Account",
     )
 
-    @api.onchange("account_customer_wallet", "customer_wallet_journal_id")
+    @api.onchange("customer_wallet", "customer_wallet_account_id")
     def _onchange_customer_wallet(self):
-        """Do not allow *account_customer_wallet* to be enabled without defining
-        *customer_wallet_journal_id*. There is probably a better way to do this.
+        """Do not allow *customer_wallet* to be enabled without defining
+        *customer_wallet_account_id*. There is probably a better way to do this.
         """
         res = {}
-        if self.account_customer_wallet and not self.customer_wallet_journal_id:
-            self.account_customer_wallet = False
+        if self.customer_wallet and not self.customer_wallet_account_id:
+            self.customer_wallet = False
             res["warning"] = {
                 "title": _("Error!"),
                 "message": _(
                     "You cannot enable this setting without defining a customer"
-                    " wallet journal."
+                    " wallet account."
                 ),
             }
         return res
