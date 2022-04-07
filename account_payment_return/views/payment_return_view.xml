@@ -160,4 +160,15 @@
         action="payment_return_action"
         sequence="20"
     />
+
+    <record id="payment_return_view_form" model="ir.ui.view">
+        <field name="name">payment.return.view.form</field>
+        <field name="model">payment.return</field>
+        <field name="inherit_id" ref="account_payment_return.payment_return_form_view" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='journal_id']" position="after">
+                <field name="payment_credit_account_id" />
+            </xpath>
+        </field>
+    </record>
 </odoo>

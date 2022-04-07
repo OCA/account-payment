@@ -1,0 +1,558 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_payment_return
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-04-06 08:44+0000\n"
+"PO-Revision-Date: 2022-04-06 08:44+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_needaction
+msgid "Action Needed"
+msgstr "Cal fer alguna acció"
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_payment_return_line__reason_additional_information
+msgid "Additional information on return reason."
+msgstr "Informació addicional de la raó de devolució"
+
+#. module: account_payment_return
+#: code:addons/account_payment_return/models/payment_return.py:0
+#, python-format
+msgid "All payments must be owned by the same partner"
+msgstr "Tots els pagaments han de ser propietat del mateix soci"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__amount
+msgid "Amount"
+msgstr "Quantitat"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_attachment_count
+msgid "Attachment Count"
+msgstr "Nombre d'adjunts"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__auto_reconcile_failure
+msgid "Automatic reconciliation failure"
+msgstr "Error de reconciliació automàtica"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__journal_id
+msgid "Bank journal"
+msgstr "Diari bancari"
+
+#. module: account_payment_return
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
+msgid "Cancel"
+msgstr "Cancel·la"
+
+#. module: account_payment_return
+#: model:ir.model.fields.selection,name:account_payment_return.selection__payment_return__state__cancelled
+msgid "Cancelled"
+msgstr "Cancel·lat"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__expense_account
+msgid "Charges Account"
+msgstr "Compte de càrrecs"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__expense_amount
+msgid "Charges Amount"
+msgstr "Import dels càrrecs"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__expense_partner_id
+msgid "Charges Partner"
+msgstr "Càrrecs empresa"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__code
+msgid "Code"
+msgstr "Codi"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__company_id
+msgid "Company"
+msgstr "Companyia"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__concept
+msgid "Concept"
+msgstr "Concepte"
+
+#. module: account_payment_return
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
+msgid "Confirm"
+msgstr "Confirmar"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__create_uid
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__create_uid
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__create_uid
+msgid "Created by"
+msgstr "Creat per"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__create_date
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__create_date
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__create_date
+msgid "Created on"
+msgstr "Creat el"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__partner_id
+msgid "Customer"
+msgstr "Clients"
+
+#. module: account_payment_return
+#: model:ir.actions.act_window,name:account_payment_return.payment_return_action
+#: model:ir.ui.menu,name:account_payment_return.payment_return_menu
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_tree_view
+msgid "Customer Payment Returns"
+msgstr "Devolucions de pagament del client"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_journal__default_expense_account_id
+msgid "Default Charges Account"
+msgstr "Compte de càrrecs predeterminat"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_journal__default_expense_partner_id
+msgid "Default Charges Partner"
+msgstr "Soci de càrrecs predeterminat"
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_account_journal__default_expense_account_id
+msgid "Default account for bank charges"
+msgstr "Compte predeterminat per a càrrecs bancaris"
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_account_journal__default_expense_partner_id
+msgid "Default partner for charge expenses"
+msgstr "Soci per defecte per a les despeses de càrrec"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__display_name
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__display_name
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__display_name
+msgid "Display Name"
+msgstr "Nom a mostrar"
+
+#. module: account_payment_return
+#: model:ir.model.fields.selection,name:account_payment_return.selection__payment_return__state__done
+msgid "Done"
+msgstr "Fet"
+
+#. module: account_payment_return
+#: model:ir.model.fields.selection,name:account_payment_return.selection__payment_return__state__draft
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
+msgid "Draft"
+msgstr "Esborrany"
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_account_journal__return_auto_reconcile
+msgid ""
+"Enable automatic payment return reconciliation. This option is meant to be "
+"used only when working with transfer accounts, not if working directly with "
+"bank accounts."
+msgstr "Activa la conciliació automàtica de devolució de pagament. Aquesta opció només s'ha d'utilitzar "
+"quan es treballa amb comptes de transferència, no si es treballa directament amb "
+"comptes bancaris."
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_follower_ids
+msgid "Followers"
+msgstr "Seguidors"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_partner_ids
+msgid "Followers (Partners)"
+msgstr "Seguidores (Contactos)"
+
+#. module: account_payment_return
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_search_view
+msgid "Group By"
+msgstr "Agrupar per"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__has_message
+msgid "Has Message"
+msgstr "Tiene un mensaje"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__id
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__id
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_payment_return__message_needaction
+#: model:ir.model.fields,help:account_payment_return.field_payment_return__message_unread
+msgid "If checked, new messages require your attention."
+msgstr "Si està marcat, hi ha nous missatges que requereixen la vostra atenció."
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_payment_return__message_has_error
+#: model:ir.model.fields,help:account_payment_return.field_payment_return__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr "Si està marcat, alguns missatges tenen un error de lliurament."
+
+#. module: account_payment_return
+#: model:ir.model.fields.selection,name:account_payment_return.selection__payment_return__state__imported
+msgid "Imported"
+msgstr "Importat"
+
+#. module: account_payment_return
+#. openerp-web
+#: code:addons/account_payment_return/static/src/xml/account_payment_return.xml:0
+#, python-format
+msgid "Info"
+msgstr "Info"
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_account_bank_statement_line__returned_payment
+#: model:ir.model.fields,help:account_payment_return.field_account_move__returned_payment
+#: model:ir.model.fields,help:account_payment_return.field_account_payment__returned_payment
+msgid "Invoice has been included on a payment that has been returned later."
+msgstr "La factura s'ha inclòs en un pagament que s'ha retornat posteriorment."
+
+#. module: account_payment_return
+#: code:addons/account_payment_return/models/payment_return.py:0
+#, python-format
+msgid "Invoice: %s"
+msgstr "Factura: %s"
+
+#. module: account_payment_return
+#: model_terms:ir.ui.view,arch_db:account_payment_return.view_account_invoice_filter
+msgid "Invoices whose payment has been returned"
+msgstr "Factures el pagament de les quals hagi estat retornat"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_is_follower
+msgid "Is Follower"
+msgstr "És seguidor"
+
+#. module: account_payment_return
+#: model:ir.model,name:account_payment_return.model_account_journal
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_search_view
+msgid "Journal"
+msgstr "Diari"
+
+#. module: account_payment_return
+#: model:ir.model,name:account_payment_return.model_account_move
+msgid "Journal Entry"
+msgstr "Assentament comptable"
+
+#. module: account_payment_return
+#: model:ir.model,name:account_payment_return.model_account_move_line
+msgid "Journal Item"
+msgstr "Apunt comptable"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return____last_update
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line____last_update
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason____last_update
+msgid "Last Modified on"
+msgstr "Última modificació el"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__write_uid
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__write_uid
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__write_uid
+msgid "Last Updated by"
+msgstr "Darrera Actualització per"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__write_date
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__write_date
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__write_date
+msgid "Last Updated on"
+msgstr "Darrera Actualització el"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__line_ids
+msgid "Line"
+msgstr "Línia"
+
+#. module: account_payment_return
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
+msgid "Lines"
+msgstr "Línies"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_main_attachment_id
+msgid "Main Attachment"
+msgstr "Adjunt principal"
+
+#. module: account_payment_return
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
+msgid "Match"
+msgstr "Coincideix"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_has_error
+msgid "Message Delivery error"
+msgstr "Error d'entrega del missatge"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_ids
+msgid "Messages"
+msgstr "Missatges"
+
+#. module: account_payment_return
+#: code:addons/account_payment_return/models/payment_return.py:0
+#, python-format
+msgid "Move lines: %s"
+msgstr "Apunts: %s"
+
+#. module: account_payment_return
+#: code:addons/account_payment_return/models/payment_return.py:0
+#, python-format
+msgid "Move: %s"
+msgstr "Assentament: %s"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_needaction_counter
+msgid "Number of Actions"
+msgstr "Nombre d'accions"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_has_error_counter
+msgid "Number of errors"
+msgstr "Nombre d'errors"
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_payment_return__message_needaction_counter
+msgid "Number of messages which requires an action"
+msgstr "Nombre de missatges que requereixen una acció"
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_payment_return__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr "Nombre de missatges amb error d'entrega"
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_payment_return__message_unread_counter
+msgid "Number of unread messages"
+msgstr "Nombre de missatges no llegits"
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_payment_return_line__date
+msgid "Only for reference"
+msgstr "Només per referència"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_partial_reconcile__origin_returned_move_ids
+msgid "Origin Returned Move"
+msgstr "Moviment retornat a l'origen"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__payment_credit_account_id
+msgid "Outstanding Payments Account"
+msgstr "Compte de pagaments pendents"
+
+#. module: account_payment_return
+#: model:ir.model,name:account_payment_return.model_account_partial_reconcile
+msgid "Partial Reconcile"
+msgstr "Conciliació parcial"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_move_line__partial_reconcile_returned_ids
+msgid "Partial Reconcile Returned"
+msgstr "Reconciliació parcial retornada"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__partner_name
+msgid "Partner name"
+msgstr "Nom de l'empresa"
+
+#. module: account_payment_return
+#. openerp-web
+#: code:addons/account_payment_return/static/src/xml/account_payment_return.xml:0
+#, python-format
+msgid "Payment Info"
+msgstr "Info de pagament"
+
+#. module: account_payment_return
+#: code:addons/account_payment_return/models/payment_return.py:0
+#, python-format
+msgid "Payment Line: %s (%s) in Payment Return: %s"
+msgstr "Línea de pagament: %s (%s) en la devolució de pagament: %s"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__move_line_ids
+msgid "Payment Reference"
+msgstr "Referència de pagament"
+
+#. module: account_payment_return
+#: code:addons/account_payment_return/models/payment_return.py:0
+#, python-format
+msgid "Payment reference must be unique\n%s"
+msgstr "La referència de pagament ha de ser única\n%s"
+
+#. module: account_payment_return
+#: model:ir.model,name:account_payment_return.model_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__return_id
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
+msgid "Payment return"
+msgstr "Devolució de pagament"
+
+#. module: account_payment_return
+#: model:ir.model,name:account_payment_return.model_payment_return_line
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
+msgid "Payment return lines"
+msgstr "Línies de retorn de pagament"
+
+#. module: account_payment_return
+#: model:ir.model,name:account_payment_return.model_payment_return_reason
+msgid "Payment return reason"
+msgstr "Motiu de devolució del pagament"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_line__returned_payment
+#: model:ir.model.fields,field_description:account_payment_return.field_account_move__returned_payment
+#: model:ir.model.fields,field_description:account_payment_return.field_account_payment__returned_payment
+msgid "Payment returned"
+msgstr "Pagament retornat"
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_payment_return_line__concept
+#: model:ir.model.fields,help:account_payment_return.field_payment_return_line__partner_name
+msgid "Read from imported file. Only for reference."
+msgstr "Llegir des del fitxer importat. Només per referència."
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__name
+msgid "Reason"
+msgstr "Raó"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_journal__return_auto_reconcile
+msgid "Reconcile payment returns"
+msgstr "Conciliar les devolucions de pagament"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__name
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__reference
+msgid "Reference"
+msgstr "Referència"
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_payment_return_line__reference
+msgid "Reference to match moves from related documents"
+msgstr "Referència per fer coincidir els moviments de documents relacionats"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__move_id
+msgid "Reference to the created journal entry"
+msgstr "Referència a l'entrada de diari creada"
+
+#. module: account_payment_return
+#: code:addons/account_payment_return/models/payment_return.py:0
+#: code:addons/account_payment_return/models/payment_return.py:0
+#, python-format
+msgid "Return %s"
+msgstr "Devolució %s"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__date
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__date
+msgid "Return date"
+msgstr "Data de devolució"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__reason_id
+msgid "Return reason"
+msgstr "Raó de devolució"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__reason_additional_information
+msgid "Return reason (info)"
+msgstr "Raó de devolució (info)"
+
+#. module: account_payment_return
+#: model_terms:ir.ui.view,arch_db:account_payment_return.view_account_invoice_filter
+msgid "Returned"
+msgstr "Retornat"
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_payment_return_line__amount
+msgid "Returned amount. Can be different from the move amount"
+msgstr "Import retornat. Pot ser diferent de la quantitat de moviment"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr "Error de lliurament SMS"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__state
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_search_view
+msgid "State"
+msgstr "Estat/Província"
+
+#. module: account_payment_return
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
+msgid "The payment return could not be automatically reconciled."
+msgstr "La devolució del pagament no s'ha pogut conciliar automàticament."
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_payment_return__date
+msgid "This date will be used as the account entry date."
+msgstr "Aquesta data s'utilitzarà com a data d'entrada del compte."
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__total_amount
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_tree_view
+msgid "Total amount"
+msgstr "Import total"
+
+#. module: account_payment_return
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
+msgid "Total charges amount"
+msgstr "Import total dels càrrecs"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_unread
+msgid "Unread Messages"
+msgstr "Missatges no llegits"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_unread_counter
+msgid "Unread Messages Counter"
+msgstr "Nombre de missatges no llegits"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__website_message_ids
+msgid "Website Messages"
+msgstr "Missatges del lloc web"
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_payment_return__website_message_ids
+msgid "Website communication history"
+msgstr "Historial de comunicacions del lloc web"
+
+#. module: account_payment_return
+#: code:addons/account_payment_return/models/payment_return.py:0
+#, python-format
+msgid "You can not remove a payment return if state is 'Done'"
+msgstr "No podeu eliminar una devolució de pagament si l'estat és 'Fet'"
+
+#. module: account_payment_return
+#: code:addons/account_payment_return/models/payment_return.py:0
+#, python-format
+msgid "You must input all moves references in the payment return."
+msgstr "Heu d'introduir totes les referències de moviments a la devolució del pagament."
