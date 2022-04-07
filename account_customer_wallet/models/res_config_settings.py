@@ -8,6 +8,7 @@ from odoo.tools.translate import _
 class ResConfigSettings(models.TransientModel):
     _inherit = "res.config.settings"
 
+    # TODO: Should this be defined per-company?
     customer_wallet = fields.Boolean(
         string="Customer Wallet",
         config_parameter="account_customer_wallet.customer_wallet",
@@ -15,7 +16,12 @@ class ResConfigSettings(models.TransientModel):
     )
     customer_wallet_account_id = fields.Many2one(
         comodel_name="account.account",
+        related="company_id.customer_wallet_account_id",
+        readonly=False,
+        # TODO: Filter domain on type?
+        domain="[('company_id', '=', company_id)]",
         string="Customer Wallet Account",
+        help="The account where all wallet transactions will be recorded",
     )
 
     @api.onchange("customer_wallet", "customer_wallet_account_id")
