@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<template id="template">
+    <t t-extend="PaymentScreenWidget">
+        <t t-jquery=".payment-buttons" t-operation="after">
+            <div class="balance-container">
+                <!-- TODO: For some reason this if-statement is always false. -->
+                <!-- <t t-if="widget.pos.config.customer_wallet"> -->
+                    <h3 class="balance-header">
+                        <t t-if="widget.pos.get_client()">
+                            Customer Wallet Balance
+                        </t>
+                    </h3>
+                    <div class='balance'>
+                        <t t-if="widget.pos.get_client()">
+                            <t
+                            t-esc="widget.format_currency(widget.pos.get_client().customer_wallet_balance)"
+                        />
+                        </t>
+                    </div>
+                <!-- </t> -->
+            </div>
+        </t>
+    </t>
+</template>

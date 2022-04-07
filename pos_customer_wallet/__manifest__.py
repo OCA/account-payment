@@ -16,7 +16,11 @@
         "account_customer_wallet",
     ],
     "excludes": [],
-    "data": [],
+    "data": [
+        "templates/assets.xml",
+    ],
     "demo": [],
-    "qweb": [],
+    "qweb": [
+        "static/src/xml/pos.xml",
+    ],
 }

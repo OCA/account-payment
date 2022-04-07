@@ -1,0 +1,25 @@
+.balance-container {
+    display: inline-block;
+    width: 50%;
+    box-sizing: border-box;
+    padding: 16px;
+    padding-top: 0;
+    padding-left: 0;
+    float: right;
+}
+
+.balance-header {
+    text-align: center;
+    margin-top: 0;
+}
+
+.balance-header:empty {
+    margin: 0;
+}
+
+.balance {
+    text-align: center;
+    font-size: 40px;
+    color: #43996e;
+    text-shadow: 0px 2px white, 0px 2px 2px rgba(0, 0, 0, 0.27);
+}
