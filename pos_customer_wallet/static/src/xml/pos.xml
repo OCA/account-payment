@@ -3,8 +3,11 @@
     <t t-extend="PaymentScreenWidget">
         <t t-jquery=".payment-buttons" t-operation="after">
             <div class="balance-container">
-                <!-- TODO: For some reason this if-statement is always false. -->
-                <!-- <t t-if="widget.pos.config.customer_wallet"> -->
+                <!--
+                    TODO: The div and h3 will be undefined if this is false.
+                    What happens if the toggle is later enabled?
+                -->
+                <t t-if="widget.pos.config.is_enabled_customer_wallet">
                     <h3 class="balance-header">
                         <t t-if="widget.pos.get_client()">
                             Customer Wallet Balance
@@ -13,11 +16,11 @@
                     <div class='balance'>
                         <t t-if="widget.pos.get_client()">
                             <t
-                            t-esc="widget.format_currency(widget.pos.get_client().customer_wallet_balance)"
-                        />
+                                t-esc="widget.format_currency(widget.pos.get_client().customer_wallet_balance)"
+                            />
                         </t>
                     </div>
-                <!-- </t> -->
+                </t>
             </div>
         </t>
     </t>
