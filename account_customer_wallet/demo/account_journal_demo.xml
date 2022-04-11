@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+   <record id="account_journal_customer_wallet_demo" model="account.journal">
+            <field name="name">Customer Wallet</field>
+            <field name="code">WLLT</field>
+            <field name="type">bank</field>
+            <field name="is_customer_wallet_journal" eval="True" />
+            <field
+            name="default_debit_account_id"
+            eval="account_account_customer_wallet_demo"
+        />
+            <field
+            name="default_credit_account_id"
+            eval="account_account_customer_wallet_demo"
+        />
+            <field name="sequence">30</field>
+   </record>
+
+</odoo>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+   <record id="account_account_customer_wallet_demo" model="account.account">
+            <field name="name">Customer Wallet</field>
+            <field name="code">101565</field>
+            <field name="user_type_id" ref="account.data_account_type_liquidity" />
+   </record>
+
+</odoo>
