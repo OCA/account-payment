@@ -19,7 +19,9 @@
     "data": [
         "templates/assets.xml",
     ],
-    "demo": [],
+    "demo": [
+        "demo/account_journal_demo.xml",
+    ],
     "qweb": [
         "static/src/xml/pos.xml",
     ],
