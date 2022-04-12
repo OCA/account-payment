@@ -40,10 +40,10 @@ class AccountMoveLine(models.Model):
             [("module", "=", "account_due_list"), ("name", "=", "view_payments_tree")]
         )
         if ids:
-            view_payments_tree_id = model_data_obj.get_object_reference(
-                "account_due_list", "view_payments_tree"
+            view_payments_tree_id = model_data_obj._xmlid_to_res_id(
+                "account_due_list.view_payments_tree"
             )
-        if ids and view_id == view_payments_tree_id[1]:
+        if ids and view_id == view_payments_tree_id:
             # Use due list
             result = super(models.Model, self).fields_view_get(
                 view_id, view_type, toolbar=toolbar, submenu=submenu
