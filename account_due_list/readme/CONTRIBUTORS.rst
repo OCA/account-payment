@@ -7,6 +7,7 @@
 
     * Pedro M. Baeza
     * Carlos Dauden
+    * Luis Daniel Lafaurie
 
 * Jordi Ballester <jordi.ballester@forgeflow.com> (Odoo v9 port)
 * Maxime Chambreuil <mchambreuil@ursainfosystems.com>
