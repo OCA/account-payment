@@ -8,7 +8,6 @@
         <field name="priority" eval="20" />
         <field name="arch" type="xml">
             <tree
-                string="Payments"
                 decoration-success="full_reconcile_id!=False"
                 decoration-muted="reconciled!=False and full_reconcile_id==False"
                 decoration-warning="parent_state!='posted'"
