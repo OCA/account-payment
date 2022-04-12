@@ -1,3 +1,6 @@
-To use this module, you need to :
+To use this module, you need to:
 
-Go to Settings > Manage Access Rights > (Select your user) > Activate "Show Full Accounting Features"
+#. Activate developer mode.
+#. Go to *Settings > Users & Companies > Groups*.
+#. Search for and choose "Technical / Show Full Accounting Features".
+#. Edit it, and add your user on the "Users" tab
