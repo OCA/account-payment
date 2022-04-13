@@ -7,7 +7,7 @@
         <field name="arch" type="xml">
             <xpath expr="//page[@name='sales_purchases']/group" position="inside">
                 <group string="Customer Wallet" priority="99" name="customer_wallet">
-                    <field name="customer_wallet_balance" />
+                    <field name="customer_wallet_balance" widget="monetary" />
                 </group>
             </xpath>
         </field>
