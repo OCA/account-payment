@@ -101,3 +101,21 @@ class TestBalance(SavepointCase):
         self._create_move(debit=50)
 
         self.assertEqual(self.partner.customer_wallet_balance, 50)
+
+    def test_no_wallet_account(self):
+        """If no wallet account is set, expect the global toggle to be turned off,
+        and other functionality to not crash and break.
+        """
+        self._create_move(credit=100)
+
+        self.env["ir.config_parameter"].set_param(
+            "account_customer_wallet.customer_wallet_account_id",
+            None,
+        )
+        self.assertFalse(
+            self.env["ir.config_parameter"].get_param(
+                "account_customer_wallet.customer_wallet"
+            )
+        )
+
+        self.assertEqual(self.partner.customer_wallet_balance, 0)
