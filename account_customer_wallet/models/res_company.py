@@ -7,6 +7,10 @@ from odoo import fields, models
 class Company(models.Model):
     _inherit = "res.company"
 
+    customer_wallet = fields.Boolean(
+        string="Customer Wallet Enabled",
+        default=False,
+    )
     customer_wallet_account_id = fields.Many2one(
         comodel_name="account.account",
         string="Customer Wallet Account",

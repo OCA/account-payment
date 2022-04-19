@@ -20,13 +20,9 @@ class TestBalance(SavepointCase):
             [("user_type_id.type", "=", "liquidity")], limit=1
         )
 
-        cls.env["ir.config_parameter"].set_param(
-            "account_customer_wallet.customer_wallet_account_id",
-            cls.customer_wallet_account.id,
-        )
-        cls.env["ir.config_parameter"].set_param(
-            "account_customer_wallet.customer_wallet", True
-        )
+        cls.company_id = cls.env.user.company_id
+        cls.company_id.customer_wallet_account_id = cls.customer_wallet_account
+        cls.company_id.customer_wallet = True
 
     def _create_move(self, debit=0, credit=0, partner=None):
         if partner is None:
@@ -108,14 +104,7 @@ class TestBalance(SavepointCase):
         """
         self._create_move(credit=100)
 
-        self.env["ir.config_parameter"].set_param(
-            "account_customer_wallet.customer_wallet_account_id",
-            None,
-        )
-        self.assertFalse(
-            self.env["ir.config_parameter"].get_param(
-                "account_customer_wallet.customer_wallet"
-            )
-        )
+        self.company_id.customer_wallet_account_id = None
+        self.assertFalse(self.company_id.customer_wallet)
 
         self.assertEqual(self.partner.customer_wallet_balance, 0)

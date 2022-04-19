@@ -7,8 +7,6 @@ from odoo import api, fields, models
 class Partner(models.Model):
     _inherit = "res.partner"
 
-    # TODO: What if this setting is changed during runtime? Does res.partner
-    # detect the change?
     customer_wallet_account_id = fields.Many2one(
         comodel_name="account.account",
         compute="_compute_customer_wallet_account_id",
@@ -30,13 +28,11 @@ class Partner(models.Model):
         store=True,
     )
 
+    @api.depends("company_id.customer_wallet_account_id")
     def _compute_customer_wallet_account_id(self):
-        account_id = self.env["ir.config_parameter"].get_param(
-            "account_customer_wallet.customer_wallet_account_id"
-        )
-        result = self.env["account.account"].browse(int(account_id))
         for partner in self:
-            partner.customer_wallet_account_id = result
+            company = partner.company_id
+            partner.customer_wallet_account_id = company.customer_wallet_account_id
 
     @api.depends("customer_wallet_account_id.move_line_ids")
     def _compute_customer_wallet_balance(self):
