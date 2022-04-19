@@ -37,15 +37,12 @@ class Partner(models.Model):
     @api.depends("customer_wallet_account_id.move_line_ids")
     def _compute_customer_wallet_balance(self):
         for partner in self:
-            # TODO: Use filtered or search?
-            move_lines = partner.customer_wallet_account_id.move_line_ids.filtered(
-                lambda line: line.partner_id == partner
+            move_lines = self.env["account.move.line"].search(
+                [
+                    ("account_id", "=", partner.customer_wallet_account_id.id),
+                    ("partner_id", "=", partner.id),
+                ]
             )
-            # move_lines = self.env["account.move.line"].search([
-            #     ("account_id", "=", partner.customer_wallet_account_id.id),
-            #     ("partner_id", "=", partner.id),
-            # ])
 
-            # TODO: Is this correct?
             balance = sum(-line.balance for line in move_lines)
             partner.customer_wallet_balance = balance
