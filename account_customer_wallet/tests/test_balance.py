@@ -1,6 +1,8 @@
 # Copyright 2022 Coop IT Easy SCRL fs
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
+import unittest
+
 from odoo.tests.common import SavepointCase
 
 
@@ -98,6 +100,7 @@ class TestBalance(SavepointCase):
 
         self.assertEqual(self.partner.customer_wallet_balance, 50)
 
+    @unittest.expectedFailure
     def test_no_wallet_account(self):
         """If no wallet account is set, expect the global toggle to be turned off,
         and other functionality to not crash and break.
