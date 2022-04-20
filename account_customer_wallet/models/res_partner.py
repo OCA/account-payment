@@ -34,7 +34,11 @@ class Partner(models.Model):
             company = partner.company_id
             partner.customer_wallet_account_id = company.customer_wallet_account_id
 
-    @api.depends("customer_wallet_account_id.move_line_ids")
+    @api.depends(
+        "customer_wallet_account_id",
+        "customer_wallet_account_id.move_line_ids",
+        "customer_wallet_account_id.move_line_ids.balance",
+    )
     def _compute_customer_wallet_balance(self):
         for partner in self:
             move_lines = self.env["account.move.line"].search(
