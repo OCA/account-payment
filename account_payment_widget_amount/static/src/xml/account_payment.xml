@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+
+    <t t-name="PaymentAmountPopOver">
+        <div class="js_payment_amount_div">
+            <table>
+                <tr>
+                    <td style="padding-right:20px;"><strong
+                            style="white-space: nowrap;"
+                        >Paid Amount: </strong></td>
+                    <td t-if="position == 'before'"><t t-esc="currency" /></td>
+                    <td style="text-align:right;">
+                        <input
+                            type="number"
+                            name="currency-field"
+                            id="paid_amount"
+                            class="o_website_form_input"
+                            data-type="number"
+                            placeholder=""
+                            t-att-amount="amount"
+                        />
+                    </td>
+                    <td t-if="position == 'after'"><t t-esc="currency" /></td>
+                </tr>
+            </table>
+        </div>
+        <button
+            class="btn btn-xs btn-primary js_payment_amount pull-right"
+            t-att-id="id"
+            style="margin-top:5px; margin-bottom:5px;"
+        >Apply</button>
+    </t>
+
+</templates>
