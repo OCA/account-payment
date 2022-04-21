@@ -5,10 +5,11 @@
 
 {
     "name": "Payment Term Extension",
-    "version": "14.0.1.0.2",
+    "version": "14.0.1.0.3",
     "category": "Accounting & Finance",
     "summary": "Adds rounding, months, weeks and multiple payment days "
     "properties on payment term lines",
+    "development_status": "Production/Stable",
     "author": "Camptocamp,"
     "Tecnativa,"
     "Agile Business Group, "
