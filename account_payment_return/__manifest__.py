@@ -11,10 +11,11 @@
 
 {
     "name": "Account Payment Returns",
-    "version": "14.0.1.0.3",
+    "version": "14.0.1.0.5",
     "summary": "Manage the return of your payments",
     "license": "AGPL-3",
     "depends": ["mail", "account"],
+    "development_status": "Mature",
     "author": "Odoo Community Association (OCA),"
     "7 i TRIA, "
     "Tecnativa, "
