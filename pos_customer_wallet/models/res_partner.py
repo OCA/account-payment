@@ -33,3 +33,6 @@ class Partner(models.Model):
             partner.customer_wallet_balance += sum(
                 -line.amount for line in statement_lines
             )
+
+            # This is needed by pos_refresh_customer.
+            partner.write({"write_date": fields.Datetime.now()})
