@@ -71,5 +71,13 @@ odoo.define("pos_customer_wallet.screens", function (require) {
 
             return true;
         },
+        finalize_validation: function () {
+            var wallet_amount = this.amount_paid_with_customer_wallet();
+            var client = this.pos.get_client();
+
+            client.customer_wallet_balance -= wallet_amount;
+
+            this._super();
+        },
     });
 });
