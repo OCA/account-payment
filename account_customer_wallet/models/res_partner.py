@@ -11,21 +11,10 @@ class Partner(models.Model):
         comodel_name="account.account",
         compute="_compute_customer_wallet_account_id",
     )
-    # TODO: Is Monetary the correct field? What is behaviour with multiple
-    # currencies?
     customer_wallet_balance = fields.Monetary(
         string="Customer Wallet Balance",
-        currency_field="company_currency_id",
         compute="_compute_customer_wallet_balance",
         readonly=True,
-    )
-    company_currency_id = fields.Many2one(
-        comodel_name="res.currency",
-        related="company_id.currency_id",
-        string="Company Currency",
-        help="Utility field to express amount currency",
-        readonly=True,
-        store=True,
     )
 
     @api.depends("company_id.customer_wallet_account_id")

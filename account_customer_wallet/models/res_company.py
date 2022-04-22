@@ -14,5 +14,4 @@ class Company(models.Model):
     customer_wallet_account_id = fields.Many2one(
         comodel_name="account.account",
         string="Customer Wallet Account",
-        # TODO: Filter domain on type?
     )

@@ -8,7 +8,6 @@ from odoo.tools.translate import _
 class ResConfigSettings(models.TransientModel):
     _inherit = "res.config.settings"
 
-    # TODO: Should this be defined per-company?
     customer_wallet = fields.Boolean(
         related="company_id.customer_wallet",
         readonly=False,
