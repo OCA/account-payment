@@ -21,7 +21,6 @@ class TestBalance(SavepointCase):
         )
 
         cls.company_id = cls.env.user.company_id
-        cls.company_id.customer_wallet_account_id = cls.customer_wallet_account
         cls.company_id.customer_wallet = True
 
     def _create_move(self, debit=0, credit=0, partner=None):

@@ -23,6 +23,7 @@
     "demo": [
         "demo/account_account_demo.xml",
         "demo/account_journal_demo.xml",
+        "demo/res_company_demo.xml",
     ],
     "qweb": [],
 }
