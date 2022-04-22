@@ -19,13 +19,50 @@ class Partner(models.Model):
     )
 
     def _compute_customer_wallet_balance(self):
-        for partner in self:
-            move_lines = self.env["account.move.line"].search(
-                [
-                    ("account_id", "=", partner.customer_wallet_account_id.id),
-                    ("partner_id", "=", partner.id),
-                ]
-            )
+        account_move_line = self.env["account.move.line"]
+        if not self.ids:
+            return True
 
-            balance = sum(-line.balance for line in move_lines)
-            partner.customer_wallet_balance = balance
+        all_partners_and_children = {}
+        all_partner_ids = []
+        all_account_ids = set()
+        for partner in self:
+            all_partners_and_children[partner] = (
+                self.with_context(active_test=False)
+                .search([("id", "child_of", partner.id)])
+                .ids
+            )
+            all_partner_ids += all_partners_and_children[partner]
+            all_account_ids.add(partner.customer_wallet_account_id.id)
+
+        # generate where clause to include multicompany rules
+        where_query = account_move_line._where_calc(
+            [
+                ("partner_id", "in", all_partner_ids),
+                # TODO: Filter on state?
+                # ("state", "not in", ["draft", "cancel"]),
+                # FIXME: This should ideally be something like
+                # `("account_id", "=", partner.customer_wallet_account_id)`,
+                # but that may not be possible.
+                ("account_id", "in", list(all_account_ids)),
+            ]
+        )
+        account_move_line._apply_ir_rules(where_query, "read")
+        from_clause, where_clause, where_clause_params = where_query.get_sql()
+
+        # balance is in the company currency
+        query = (
+            """
+            SELECT SUM(balance) as total, partner_id
+            FROM account_move_line account_move_line
+            WHERE %s
+            GROUP BY partner_id
+            """
+            % where_clause
+        )
+        self.env.cr.execute(query, where_clause_params)
+        totals = self.env.cr.dictfetchall()
+        for partner, child_ids in all_partners_and_children.items():
+            partner.customer_wallet_balance = sum(
+                -total["total"] for total in totals if total["partner_id"] in child_ids
+            )
