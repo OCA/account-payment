@@ -31,6 +31,18 @@ class TestAccountBalance(TestBalance):
 
         self.assertEqual(self.partner.customer_wallet_balance, -100)
 
+    def test_balance_to_parent(self):
+        """Credit child partner should impact parent partner balance"""
+        self._create_move(credit=1000)
+        self.assertEqual(self.partner.customer_wallet_balance, 1000)
+        self.assertEqual(self.partner.parent_id.customer_wallet_balance, 1000)
+
+    def test_balance_to_child(self):
+        """Credit parent partner should impact child partner balance"""
+        self._create_move(credit=2000, partner=self.partner.parent_id)
+        self.assertEqual(self.partner.customer_wallet_balance, 2000)
+        self.assertEqual(self.partner.parent_id.customer_wallet_balance, 2000)
+
     def test_different_partner(self):
         """Move lines for other partners do not affect the balances of all
         clients.
