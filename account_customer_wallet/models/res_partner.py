@@ -1,7 +1,7 @@
 # Copyright 2022 Coop IT Easy SCRL fs
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-from odoo import api, fields, models
+from odoo import fields, models
 
 
 class Partner(models.Model):
@@ -18,11 +18,6 @@ class Partner(models.Model):
         readonly=True,
     )
 
-    @api.depends(
-        "customer_wallet_account_id",
-        "customer_wallet_account_id.move_line_ids",
-        "customer_wallet_account_id.move_line_ids.balance",
-    )
     def _compute_customer_wallet_balance(self):
         for partner in self:
             move_lines = self.env["account.move.line"].search(
