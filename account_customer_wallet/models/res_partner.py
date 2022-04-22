@@ -9,19 +9,14 @@ class Partner(models.Model):
 
     customer_wallet_account_id = fields.Many2one(
         comodel_name="account.account",
-        compute="_compute_customer_wallet_account_id",
+        related="company_id.customer_wallet_account_id",
+        readonly=True,
     )
     customer_wallet_balance = fields.Monetary(
         string="Customer Wallet Balance",
         compute="_compute_customer_wallet_balance",
         readonly=True,
     )
-
-    @api.depends("company_id.customer_wallet_account_id")
-    def _compute_customer_wallet_account_id(self):
-        for partner in self:
-            company = partner.company_id
-            partner.customer_wallet_account_id = company.customer_wallet_account_id
 
     @api.depends(
         "customer_wallet_account_id",
