@@ -24,7 +24,7 @@ class Partner(models.Model):
             return True
 
         all_partners_and_children = {}
-        all_partner_ids = []
+        all_partner_ids = set()
         all_account_ids = set()
         for partner in self:
             all_partners_and_children[partner] = (
@@ -32,13 +32,13 @@ class Partner(models.Model):
                 .search([("id", "child_of", partner.id)])
                 .ids
             )
-            all_partner_ids += all_partners_and_children[partner]
+            all_partner_ids |= set(all_partners_and_children[partner])
             all_account_ids.add(partner.customer_wallet_account_id.id)
 
         # generate where clause to include multicompany rules
         where_query = account_move_line._where_calc(
             [
-                ("partner_id", "in", all_partner_ids),
+                ("partner_id", "in", list(all_partner_ids)),
                 # TODO: Filter on state?
                 # ("state", "not in", ["draft", "cancel"]),
                 # FIXME: This should ideally be something like
