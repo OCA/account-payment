@@ -1,7 +1,6 @@
 # Copyright 2022 Coop IT Easy SCRL fs
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
-import unittest
 
 from .common import TestBalance
 
@@ -49,14 +48,11 @@ class TestAccountBalance(TestBalance):
 
         self.assertEqual(self.partner.customer_wallet_balance, 50)
 
-    @unittest.expectedFailure
     def test_no_wallet_account(self):
-        """If no wallet account is set, expect the global toggle to be turned off,
-        and other functionality to not crash and break.
-        """
+        """If no wallet account is set, expect balances to be zero."""
         self._create_move(credit=100)
 
         self.company_id.customer_wallet_account_id = None
-        self.assertFalse(self.company_id.customer_wallet)
 
+        self.assertFalse(self.company_id.is_enabled_customer_wallet)
         self.assertEqual(self.partner.customer_wallet_balance, 0)

@@ -11,20 +11,14 @@
             -->
             <xpath expr="//div[@id='account_followup']/.." position="inside">
                 <div class="col-12 col-lg-6 o_setting_box" id="account_customer_wallet">
-                    <div class="o_setting_left_pane">
-                        <field name="customer_wallet" />
-                    </div>
+                    <div class="o_setting_left_pane" />
                     <div class="o_setting_right_pane">
-                        <label for="customer_wallet" />
+                        <label for="customer_wallet_account_id" />
                         <div class="text-muted">
                             Let customers pay from a wallet account
                         </div>
                         <div class="content-group">
-                            <div class="row mt16">
-                                <label
-                                    for="customer_wallet_account_id"
-                                    class="col-lg-3 o_light_label"
-                                />
+                            <div class="row mt16 ml4">
                                 <field name="customer_wallet_account_id" />
                             </div>
                         </div>

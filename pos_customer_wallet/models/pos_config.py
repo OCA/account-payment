@@ -8,6 +8,6 @@ class PosConfig(models.Model):
     _inherit = "pos.config"
 
     is_enabled_customer_wallet = fields.Boolean(
-        related="company_id.customer_wallet",
+        related="company_id.is_enabled_customer_wallet",
         string="Is Customer Wallet Enabled",
     )
