@@ -35,7 +35,7 @@ class AccountMoveLine(models.Model):
     def fields_view_get(
         self, view_id=None, view_type="form", toolbar=False, submenu=False
     ):
-        model_data_obj = self.env["ir.model.data"]
+        model_data_obj = self.env["ir.model.data"].sudo()
         ids = model_data_obj.search(
             [("module", "=", "account_due_list"), ("name", "=", "view_payments_tree")]
         )
