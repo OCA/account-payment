@@ -18,21 +18,26 @@ class Partner(models.Model):
         readonly=True,
     )
 
+    def get_topmost_parent_id(self):
+        if not self.parent_id:
+            return self
+        return self.parent_id.get_topmost_parent_id()
+
     def _compute_customer_wallet_balance(self):
         account_move_line = self.env["account.move.line"]
         if not self.ids:
             return True
 
-        all_partners_and_children = {}
+        all_partners_in_family = {}
         all_partner_ids = set()
         all_account_ids = set()
         for partner in self:
-            all_partners_and_children[partner] = (
+            all_partners_in_family[partner] = (
                 self.with_context(active_test=False)
-                .search([("id", "child_of", partner.id)])
+                .search([("id", "child_of", partner.get_topmost_parent_id().id)])
                 .ids
             )
-            all_partner_ids |= set(all_partners_and_children[partner])
+            all_partner_ids |= set(all_partners_in_family[partner])
             all_account_ids.add(partner.customer_wallet_account_id.id)
 
         # generate where clause to include multicompany rules
@@ -62,7 +67,7 @@ class Partner(models.Model):
         )
         self.env.cr.execute(query, where_clause_params)
         totals = self.env.cr.dictfetchall()
-        for partner, child_ids in all_partners_and_children.items():
+        for partner, child_ids in all_partners_in_family.items():
             partner.customer_wallet_balance = sum(
                 -total["total"] for total in totals if total["partner_id"] in child_ids
             )
