@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <template id="sslm102">
-         <t t-call="web.html_container">
-             <div class="header" />
-             <div class="article">
+        <t t-call="web.html_container">
+            <div class="article">
                 <t t-foreach="docs" t-as="o">
                     <div class="page">
                         <div
@@ -19,9 +18,10 @@
                             style="position:absolute; top:80mm; right:22mm;"
                             align="right"
                         >
-                            <b>Check Amount: </b><span
+                            <b>Check Amount: </b>
+                            <span
                                 t-field='o.amount'
-                                t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'
+                                t-field-options='{"widget": "monetary", "display_currency": o.currency_id}'
                             />
                         </div>
                         <div name='middle_block'>
@@ -42,14 +42,15 @@
                             style="position:absolute; top:250mm; right:22mm;"
                             align="right"
                         >
-                            <b>Check Amount: </b><span
+                            <b>Check Amount: </b>
+                            <span
                                 t-field='o.amount'
-                                t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}'
+                                t-field-options='{"widget": "monetary", "display_currency": o.currency_id}'
                             />
                         </div>
                     </div>
                 </t>
-             </div>
+            </div>
         </t>
     </template>
 
@@ -59,12 +60,12 @@
                 name='amount_in_words'
                 style="position:absolute; right:20mm; top:115mm;"
             >
-                <strong><span t-esc="fill_stars(o.check_amount_in_words)" /></strong>
+                <strong>
+                    <span t-esc="fill_stars(o.check_amount_in_words)" />
+                </strong>
             </div>
             <div name='payment_date' style="position:absolute; right:60mm; top:128mm;">
-                <span
-                    t-esc="_format_date_to_partner_lang(o.payment_date, o.partner_id.id)"
-                />
+                <span t-esc="_format_date_to_partner_lang(o.date, o.partner_id.id)" />
             </div>
             <div
                 name='payment_amount'
@@ -84,7 +85,7 @@
                 name='communication'
                 style="position:absolute; left:20mm; top:150mm;max-width: 100mm;max-height: 10mm;"
             >
-                <span t-field="o.communication" />
+                <span t-field="o.ref" />
             </div>
         </div>
     </template>
@@ -96,7 +97,7 @@
                 <span
                     name='payment_date'
                     style="padding-right:100mm;float:right;"
-                    t-esc="'Date: {}'.format(_format_date_to_partner_lang(o.payment_date, o.partner_id.id))"
+                    t-esc="'Date: {}'.format(_format_date_to_partner_lang(o.date, o.partner_id.id))"
                 />
                 <span
                     name='check_number'
@@ -123,25 +124,33 @@
                     <t name="paid_lines_loop" t-foreach="paid_lines[o.id]" t-as="line">
                         <t name="line_count_condition" t-if="line_count &lt; 7">
                             <tr style="text-align:left;border-top: 0px;">
-                                <td style="padding-top:2mm;"><span
+                                <td style="padding-top:2mm;">
+                                    <span
                                         t-esc="_format_date_to_partner_lang(line['date_due'], o.partner_id.id)"
-                                    /></td>
+                                    />
+                                </td>
                                 <td
                                     style="max-width: 55mm;"
                                     t-esc="line['reference'] or line['number']"
                                 />
-                                <td><span
+                                <td>
+                                    <span
                                         t-esc="line['amount_total']"
-                                        t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'
-                                    /></td>
-                                <td><span
+                                        t-esc-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                    />
+                                </td>
+                                <td>
+                                    <span
                                         t-esc="line['residual']"
-                                        t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'
-                                    /></td>
-                                <td><span
+                                        t-esc-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                    />
+                                </td>
+                                <td>
+                                    <span
                                         t-esc="line['paid_amount']"
-                                        t-esc-options='{"widget": "monetary", "display_currency": "o.currency_id"}'
-                                    /></td>
+                                        t-esc-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                    />
+                                </td>
                             </tr>
                         </t>
                         <t t-set="line_count" t-value="line_count+1" />
