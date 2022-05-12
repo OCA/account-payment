@@ -6,7 +6,7 @@
 {
     "name": "Account Check Printing Report SSLM102",
     "summary": "Allows you to print SSLM102 lined checks.",
-    "version": "12.0.1.0.0",
+    "version": "14.0.1.0.0",
     "license": "AGPL-3",
     "author": "Eficent," "Odoo Community Association (OCA)",
     "category": "Generic Modules/Accounting",
