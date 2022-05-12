@@ -7,8 +7,8 @@ from odoo import api, models
 
 
 class ReportCheckPrint(models.AbstractModel):
-    _name = 'report.account_check_printing_report_sslm102.sslm102'
-    _inherit = 'report.account_check_printing_report_base.report_check_base'
+    _name = "report.account_check_printing_report_sslm102.sslm102"
+    _inherit = "report.account_check_printing_report_base.report_check_base"
     _description = "Check sslm102"
 
     @api.model
