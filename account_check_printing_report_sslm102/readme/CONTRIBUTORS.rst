@@ -1,2 +1,3 @@
-* Eficent Business and IT Consulting Services, S.L.
-    * Jordi Ballester Alomar <jordi.ballester@eficent.com>
+* Copyright 2023 ForgeFlow S.L.
+    * Jordi Ballester Alomar <jordi.ballester@forgeflow.com>
+    * Juany Davila <juany.davila@forgeflow.com>
