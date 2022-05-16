@@ -45,6 +45,6 @@
     <menuitem
         action="action_account_overdue_term_form"
         id="menu_action_account_overdue_term_form"
-        parent="account.menu_finance_configuration"
+        parent="account.account_invoicing_menu"
     />
 </odoo>

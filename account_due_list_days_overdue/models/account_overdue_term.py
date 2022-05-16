@@ -28,13 +28,13 @@ class AccountDaysOverdue(models.Model):
 
     @api.model
     def create(self, vals):
-        res = super(AccountDaysOverdue, self).create(vals)
+        res = super().create(vals)
         if self.env["account.move.line"]._register_hook():
             Registry(self.env.cr.dbname).registry_invalidated = True
         return res
 
     def write(self, vals):
-        res = super(AccountDaysOverdue, self).write(vals)
+        res = super().write(vals)
         if self.env["account.move.line"]._register_hook():
             Registry(self.env.cr.dbname).registry_invalidated = True
         return res
@@ -46,11 +46,11 @@ class AccountDaysOverdue(models.Model):
             date_domain = [
                 ("from_day", "<=", rec.to_day),
                 ("to_day", ">=", rec.from_day),
+                ("id", "!=", self.id),
             ]
-
-            overlap = self.search(date_domain + [("id", "!=", self.id)])
-
+            overlap = self.search(date_domain)
             if overlap:
                 raise exceptions.ValidationError(
-                    _("Overdue Term %s overlaps with %s") % (rec.name, overlap[0].name)
+                    _("Overdue Term %s overlaps with %s")
+                    % (rec.name, fields.first(overlap).name)
                 )
