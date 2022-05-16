@@ -164,39 +164,19 @@ class AccountReconcileModel(models.Model):
 
         for line in move_lines:
             tax_discount = line.amount_discount_tax
-
             if not tax_discount:
                 continue
             tax_line = line.discount_tax_line_id
             if not tax_line:
                 continue
+            tax = tax_line.tax_line_id
 
-            tax_write_off_vals = {
-                "name": tax_line.name,
-                "account_id": tax_line.account_id.id,
-                "debit": tax_line.credit and line.amount_discount_tax or 0,
-                "credit": tax_line.debit and -line.amount_discount_tax or 0,
-                "reconcile_model_id": self.id,
-                "balance": line.amount_discount_tax,
-                "currency_id": line_currency.id,
-                "journal_id": False,
-            }
-            # Deduce tax amount from fin. disc. write-off
-            if fin_disc_write_off_vals.get("credit"):
-                fin_disc_write_off_vals["credit"] = float_round(
-                    fin_disc_write_off_vals["credit"] + line.amount_discount_tax,
-                    precision_rounding=st_line.company_id.currency_id.rounding,
-                )
-            if fin_disc_write_off_vals.get("debit"):
-                fin_disc_write_off_vals["debit"] = float_round(
-                    fin_disc_write_off_vals["debit"] - line.amount_discount_tax,
-                    precision_rounding=st_line.company_id.currency_id.rounding,
-                )
-            fin_disc_write_off_vals["balance"] = float_round(
-                fin_disc_write_off_vals["balance"] - line.amount_discount_tax,
-                precision_rounding=st_line.company_id.currency_id.rounding,
+            tax_write_off_vals = self._get_taxes_move_lines_dict(
+                tax.with_context(force_price_include=True), fin_disc_write_off_vals
             )
-            res.append(tax_write_off_vals)
+            fin_disc_write_off_vals["tax_ids"] = [(6, None, tax.ids)]
+            res += tax_write_off_vals
+
         return res
 
     # flake8: noqa
