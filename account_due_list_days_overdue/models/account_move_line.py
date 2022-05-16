@@ -92,7 +92,7 @@ class AccountMoveLine(models.Model):
                     placeholder.addnext(elem)
                 result["arch"] = etree.tostring(doc)
             xarch, xfields = self.env["ir.ui.view"].postprocess_and_fields(
-                self._name, etree.fromstring(result["arch"]), view_id
+                etree.fromstring(result["arch"]), self._name
             )
             result["arch"] = xarch
             result["fields"] = xfields
@@ -116,4 +116,4 @@ class AccountMoveLine(models.Model):
             self._add_terms(field_name, term.name)
         self._setup_fields()
         self._setup_complete()
-        return super(AccountMoveLine, self)._register_hook()
+        return super()._register_hook()
