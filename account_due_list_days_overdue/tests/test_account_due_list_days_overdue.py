@@ -12,7 +12,7 @@ from odoo.tests.common import TransactionCase
 
 class TestAccountDueListDaysOverdue(TransactionCase):
     def setUp(self):
-        super(TestAccountDueListDaysOverdue, self).setUp()
+        super().setUp()
         self.overdue_term_model = self.env["account.overdue.term"]
         self.account_user_type = self.env.ref("account.data_account_type_receivable")
         self.revenue_user_type = self.env.ref("account.data_account_type_revenue")
@@ -45,7 +45,7 @@ class TestAccountDueListDaysOverdue(TransactionCase):
             "currency_id": self.currency_usd.id,
             "invoice_date": fields.Date.to_string(inv_date),
             "journal_id": self.sale_journal.id,
-            "type": "out_invoice",
+            "move_type": "out_invoice",
             "invoice_payment_term_id": self.payment_term.id,
             "invoice_line_ids": [],
         }
@@ -58,7 +58,7 @@ class TestAccountDueListDaysOverdue(TransactionCase):
         }
         inv_data["invoice_line_ids"].append((0, 0, line_data))
         self.invoice = self.account_move_model.create(inv_data)
-        self.invoice.post()
+        self.invoice.action_post()
 
     def _create_account_type(self):
         # Create receivable and sales test account
