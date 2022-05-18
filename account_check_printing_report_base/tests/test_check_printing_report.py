@@ -44,7 +44,8 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
             {"name": "Test Check Layout By Journal"}
         )
         self.payment_method_check = self.payment_method_model.search(
-            [("code", "=", "check_printing")], limit=1,
+            [("code", "=", "check_printing")],
+            limit=1,
         )
         if not self.payment_method_check:
             self.payment_method_check = self.payment_method_model.create(
@@ -154,7 +155,7 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
         self.assertEquals(content[1], "html")
 
     def test_02_check_printing_with_layout(self):
-        """ Test if the check is printed when the layout is specified for a
+        """Test if the check is printed when the layout is specified for a
         company and journal."""
 
         self.company.check_layout_id = self.check_report
