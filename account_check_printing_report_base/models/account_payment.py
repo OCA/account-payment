@@ -10,8 +10,8 @@ from odoo import models
 class AccountRegisterPayments(models.TransientModel):
     _inherit = "account.payment.register"
 
-    def create_payment(self):
-        res = super(AccountRegisterPayments, self).create_payment()
+    def action_create_payments(self):
+        res = super(AccountRegisterPayments, self).action_create_payments()
         if (
             self.journal_id.check_print_auto
             and self.payment_method_id.code == "check_printing"
@@ -51,8 +51,8 @@ class AccountPayment(models.Model):
 
         return super(AccountPayment, self).do_print_checks()
 
-    def post(self):
-        res = super(AccountPayment, self).post()
+    def action_post(self):
+        res = super(AccountPayment, self).action_post()
         recs = self.filtered(
             lambda x: x.journal_id.check_print_auto
             and x.payment_method_id.code == "check_printing"

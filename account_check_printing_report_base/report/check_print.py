@@ -38,18 +38,24 @@ class ReportCheckPrint(models.AbstractModel):
         amt = line.amount_residual
         if amt < 0.0:
             amt *= -1
-        amt = payment.company_id.currency_id.with_context(
-            date=payment.payment_date
-        ).compute(amt, payment.currency_id)
+        amt = payment.company_id.currency_id._convert(
+            amt,
+            payment.currency_id,
+            self.env.company,
+            payment.date,
+        )
         return amt
 
     def _get_total_amount(self, payment, line):
         amt = line.balance
         if amt < 0.0:
             amt *= -1
-        amt = payment.company_id.currency_id.with_context(
-            date=payment.payment_date
-        ).compute(amt, payment.currency_id)
+        amt = payment.company_id.currency_id._convert(
+            amt,
+            payment.currency_id,
+            self.env.company,
+            payment.date,
+        )
         return amt
 
     def _get_paid_amount(self, payment, line):
@@ -62,9 +68,12 @@ class ReportCheckPrint(models.AbstractModel):
         elif line.matched_debit_ids:
             amount = sum([p.amount for p in line.matched_debit_ids])
 
-        amount_to_show = payment.company_id.currency_id.with_context(
-            date=payment.payment_date
-        ).compute(amount, payment.currency_id)
+        amount_to_show = payment.company_id.currency_id._convert(
+            amount,
+            payment.currency_id,
+            self.env.company,
+            payment.date,
+        )
         if not float_is_zero(
             amount_to_show, precision_rounding=payment.currency_id.rounding
         ):
@@ -76,10 +85,10 @@ class ReportCheckPrint(models.AbstractModel):
         for payment in payments:
             lines[payment.id] = []
             pay_acc = (
-                payment.journal_id.default_debit_account_id
-                or payment.journal_id.default_credit_account_id
+                payment.journal_id.payment_credit_account_id
+                or payment.journal_id.payment_credit_account_id
             )
-            rec_lines = payment.move_line_ids.filtered(
+            rec_lines = payment.line_ids.filtered(
                 lambda x: x.account_id.reconcile and x.account_id != pay_acc
             )
             amls = rec_lines.mapped(
@@ -108,9 +117,10 @@ class ReportCheckPrint(models.AbstractModel):
         model = self.env.context.get("active_model", "account.payment")
         objects = self.env[model].browse(docids)
         paid_lines = self.get_paid_lines(objects)
+
         docargs = {
             "doc_ids": docids,
-            "doc_model": models,
+            "doc_model": model,
             "docs": objects,
             "time": time,
             "fill_stars": self.fill_stars,
@@ -131,6 +141,13 @@ class ReportPromissoryNotePrint(models.AbstractModel):
     _name = "report.account_check_printing_report_base.promissory_footer_a4"
     _inherit = "report.account_check_printing_report_base.report_check_base_a4"
     _description = "Report Promissory Note Print for A4"
+
+    def fill_stars(self, amount_in_word):
+        if amount_in_word and len(amount_in_word) < 100:
+            stars = 100 - len(amount_in_word)
+            return " ".join([amount_in_word, "* " * stars])
+        else:
+            return amount_in_word
 
     def amount2words(self, amount):
         return lang.num2words_custom(

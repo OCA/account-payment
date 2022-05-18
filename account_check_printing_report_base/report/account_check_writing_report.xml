@@ -1,4 +1,3 @@
-<?xml version="1.0" ?>
 <odoo>
     <report
         id="action_report_check_base"

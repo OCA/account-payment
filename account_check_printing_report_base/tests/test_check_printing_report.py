@@ -12,11 +12,6 @@ from odoo.tests.common import TransactionCase
 class TestAccountCheckPrintingReportBase(TransactionCase):
     def setUp(self):
         super().setUp()
-        self.langs = ("en_US", "es_ES")
-        self.rl = self.env["res.lang"]
-        for lang in self.langs:
-            if not self.rl.search([("code", "=", lang)]):
-                self.rl.load_lang(lang)
         self.account_invoice_model = self.env["account.move"]
         self.journal_model = self.env["account.journal"]
         self.payment_method_model = self.env["account.payment.method"]
@@ -70,27 +65,6 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
                 ],
             }
         )
-        self.acc_payable = self._create_account(
-            "account payable test", "ACPRB1", self.acc_payable, True
-        )
-        self.vendor_bill = self._create_vendor_bill(self.acc_payable)
-        self.acc_expense = self._create_account(
-            "account expense test", "ACPRB2", self.acc_expense, False
-        )
-        self._create_invoice_line(self.acc_expense, self.vendor_bill)
-
-        self.vendor_bill.action_post()
-        # Pay the invoice using a bank journal associated to the main company
-        ctx = {"active_model": "account.move", "active_ids": [self.vendor_bill.id]}
-        register_payments = self.payment_model.with_context(ctx).create(
-            {
-                "payment_date": time.strftime("%Y") + "-07-15",
-                "journal_id": self.bank_journal.id,
-                "payment_method_id": self.payment_method_check.id,
-            }
-        )
-        register_payments.post()
-        self.payment = self.payment_model.search([], order="id desc", limit=1)
 
     def _create_account(self, name, code, user_type, reconcile):
         account = self.account_account_model.create(
@@ -107,11 +81,12 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
     def _create_vendor_bill(self, account):
         vendor_bill = self.account_invoice_model.create(
             {
-                "type": "in_invoice",
+                "move_type": "in_invoice",
                 "partner_id": self.partner1.id,
                 "currency_id": self.company.currency_id.id,
                 "journal_id": self.purchase_journal.id,
                 "company_id": self.company.id,
+                "invoice_date": fields.Date.today(),
             }
         )
         return vendor_bill
@@ -137,65 +112,77 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
 
         return invoice
 
-    def test_01_check_printing_no_layout(self):
-        """Test if the exception raises when no layout is set for a
-        company or for the journal."""
-        with self.assertRaises(UserError):
-            self.payment.print_checks()
-
-        # Set check layout verification by journal
-        ICPSudo = self.env["ir.config_parameter"].sudo()
-        ICPSudo.set_param(
-            "account_check_printing_report_base.check_layout_verification", "by_journal"
-        )
-        self.assertFalse(self.payment.journal_id.check_layout_id)
-        with self.assertRaises(UserError):
-            self.payment.print_checks()
-        content = self.action_check_report.render_qweb_pdf(self.payment.id)
-        self.assertEquals(content[1], "html")
-
     def test_02_check_printing_with_layout(self):
         """Test if the check is printed when the layout is specified for a
         company and journal."""
 
         self.company.check_layout_id = self.check_report
-        self.payment.journal_id.check_layout_id = self.check_report_by_journal
+        acc_payable = self._create_account(
+            "account payable test", "ACPRB1", self.acc_payable, True
+        )
+        vendor_bill = self._create_vendor_bill(acc_payable)
+        acc_expense = self._create_account(
+            "account expense test", "ACPRB2", self.acc_expense, False
+        )
+        self._create_invoice_line(acc_expense, vendor_bill)
+        vendor_bill.action_post()
+        ctx = {"active_model": "account.move", "active_ids": [vendor_bill.id]}
+        register_payments = self.payment_model.with_context(ctx).create(
+            {
+                "date": time.strftime("%Y") + "-07-15",
+                "journal_id": self.bank_journal.id,
+                "payment_method_id": self.payment_method_check.id,
+            }
+        )
+        register_payments.action_post()
+        payment = self.payment_model.search([], order="id desc", limit=1)
+        payment.journal_id.check_layout_id = self.check_report_by_journal
+
         e = False
         try:
-            self.payment.print_checks()
+            payment.print_checks()
         except UserError as e:
             e = e.name
-        self.assertEquals(e, False)
+        self.assertEqual(e, False)
 
-        content = self.action_check_report.render_qweb_pdf(self.payment.id)
-        self.assertEquals(content[1], "html")
+        content = self.action_check_report._render_qweb_pdf(payment.id)
+        self.assertEqual(content[1], "html")
 
     def test_03_fotmat_form(self):
-        """ Test formatting on check form"""
+        """Test formatting on check form"""
         # Convert date to formatting from partner : 2020-01-20 > 01/20/2020
         today = fields.Date.today()
         date = self.report._format_date_to_partner_lang(today, self.partner1.id)
-        self.assertEquals(date, today.strftime("%m/%d/%Y"))
+        self.assertEqual(date, today.strftime("%m/%d/%Y"))
         # Fill starts in amount
         amount = 100.0
         amount_in_word = "One Hundred Euro"
         stars = 100 - len(amount_in_word)
+        amount_in_word = "One Hundred Euro"
+        large_amount_in_word = "ten hundred billion  ten hundred million  \
+            fifty thousand eleven hundred  eleven ruppes eleven cent euro"
         amount1 = self.report.fill_stars_number(str(amount))
         amount2 = self.report.fill_stars(amount_in_word)
-        self.assertEquals(amount1, "***** %s *" % amount)
-        self.assertEquals(amount2, "{} {}".format(amount_in_word, ("*" * stars)))
+        amount3 = self.report.fill_stars(large_amount_in_word)
+        self.assertEqual(amount1, "***** %s *" % amount)
+        self.assertEqual(amount2, "{} {}".format(amount_in_word, ("*" * stars)))
+        self.assertEqual(amount3, large_amount_in_word)
 
-    def test_num2words(self):
-        report_model = "report.account_check_printing_report_base.promissory_footer_a4"
-        words_number = (
-            self.env[report_model].with_context(lang="en_US").amount2words(4.9)
+    def test_03_res_amount(self):
+        register_payments = self.payment_model.create(
+            {
+                "date": time.strftime("%Y") + "-07-15",
+                "journal_id": self.bank_journal.id,
+                "payment_method_id": self.payment_method_check.id,
+                "amount": 1000,
+            }
         )
-        self.assertEqual(words_number, "four euro, ninety cents")
-        words_number = (
-            self.env[report_model].with_context(lang="es_ES").amount2words(4.9)
-        )
-        self.assertEqual(words_number, "cuatro euros con noventa céntimos")
-        words_number = (
-            self.env[report_model].with_context(lang="es_ES").amount2words(4.95)
-        )
-        self.assertEqual(words_number, "cuatro euros con noventa y cinco céntimos")
+        register_payments.action_post()
+        payment = self.payment_model.search([], order="id desc", limit=1)
+        for aml in payment.line_ids:
+            total_amt = self.report._get_total_amount(payment, aml)
+            residual_amt = self.report._get_residual_amount(payment, aml)
+            paid_amt = self.report._get_paid_amount(payment, aml)
+            self.assertEqual(paid_amt, 0)
+            self.assertEqual(residual_amt, 1000)
+            self.assertEqual(total_amt, 1000)

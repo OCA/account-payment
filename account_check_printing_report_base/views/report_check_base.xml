@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <odoo>
     <template id="report_check_base">
         <t t-call="web.html_container">
@@ -13,7 +12,7 @@
                                     t-field="o.partner_id"
                                     t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true, "no_tag_br": true}'
                                 />
-                                <span t-esc="o.payment_date" />
+                                <span t-esc="o.date" />
                                 <br />
                                 <span
                                     t-field="o.amount"
@@ -32,7 +31,7 @@
                                 <strong t-field="o.partner_id.name" />
                             </div>
                             <div class="col-4">
-                                <strong t-field="o.payment_date" />
+                                <strong t-field="o.date" />
                             </div>
                         </div>
                         <t t-foreach="range(2)" t-as="i">
