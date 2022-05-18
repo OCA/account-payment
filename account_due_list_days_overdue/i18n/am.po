@@ -39,6 +39,7 @@ msgid "Days overdue"
 msgstr ""
 
 #. module: account_due_list_days_overdue
+#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_move_line__display_name
 #: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term__display_name
 msgid "Display Name"
 msgstr ""
@@ -49,6 +50,7 @@ msgid "From day"
 msgstr ""
 
 #. module: account_due_list_days_overdue
+#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_move_line__id
 #: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term__id
 msgid "ID"
 msgstr "ID"
@@ -59,6 +61,7 @@ msgid "Journal Item"
 msgstr ""
 
 #. module: account_due_list_days_overdue
+#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_move_line____last_update
 #: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term____last_update
 msgid "Last Modified on"
 msgstr ""
