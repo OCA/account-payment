@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_account_overdue_term_search" model="ir.ui.view">
+        <field name="name">account.overdue.term.search</field>
+        <field name="model">account.overdue.term</field>
+        <field name="arch" type="xml">
+            <search string="Overdue Term">
+                <field name="name" string="Overdue Term" />
+                <field name="from_day" />
+                <field name="to_day" />
+            </search>
+        </field>
+    </record>
+    <record id="view_account_overdue_term_form" model="ir.ui.view">
+        <field name="name">account.overdue.term.form</field>
+        <field name="model">account.overdue.term</field>
+        <field name="arch" type="xml">
+            <form string="Overdue Term">
+                <group col="4">
+                    <field name="name" />
+                    <field name="from_day" />
+                    <field name="to_day" />
+                    <field name="tech_name" />
+                </group>
+            </form>
+        </field>
+    </record>
+    <record id="view_account_overdue_term_tree" model="ir.ui.view">
+        <field name="name">account.overdue.term.tree</field>
+        <field name="model">account.overdue.term</field>
+        <field name="arch" type="xml">
+            <tree string="Overdue Term">
+                <field name="name" />
+                <field name="from_day" />
+                <field name="to_day" />
+            </tree>
+        </field>
+    </record>
+    <record id="action_account_overdue_term_form" model="ir.actions.act_window">
+        <field name="name">Overdue Terms</field>
+        <field name="res_model">account.overdue.term</field>
+        <field name="view_mode">tree,form</field>
+        <field name="search_view_id" ref="view_account_overdue_term_search" />
+    </record>
+    <menuitem
+        action="action_account_overdue_term_form"
+        id="menu_action_account_overdue_term_form"
+        parent="account.account_invoicing_menu"
+    />
+</odoo>

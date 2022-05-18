@@ -1,0 +1,108 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_due_list_days_overdue
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 8.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-02 06:22+0000\n"
+"PO-Revision-Date: 2016-11-02 06:22+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"Language-Team: Korean (https://www.transifex.com/oca/teams/23907/ko/)\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+
+#. module: account_due_list_days_overdue
+#: model:ir.model,name:account_due_list_days_overdue.model_account_overdue_term
+msgid "Account Overdue Term"
+msgstr ""
+
+#. module: account_due_list_days_overdue
+#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term__create_uid
+msgid "Created by"
+msgstr "작성자"
+
+#. module: account_due_list_days_overdue
+#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term__create_date
+msgid "Created on"
+msgstr "작성일"
+
+#. module: account_due_list_days_overdue
+#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_move_line__days_overdue
+msgid "Days overdue"
+msgstr ""
+
+#. module: account_due_list_days_overdue
+#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term__display_name
+msgid "Display Name"
+msgstr "표시 이름"
+
+#. module: account_due_list_days_overdue
+#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term__from_day
+msgid "From day"
+msgstr ""
+
+#. module: account_due_list_days_overdue
+#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_due_list_days_overdue
+#: model:ir.model,name:account_due_list_days_overdue.model_account_move_line
+msgid "Journal Item"
+msgstr ""
+
+#. module: account_due_list_days_overdue
+#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term____last_update
+msgid "Last Modified on"
+msgstr "최근 수정"
+
+#. module: account_due_list_days_overdue
+#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term__write_uid
+msgid "Last Updated by"
+msgstr "최근 갱신한 사람"
+
+#. module: account_due_list_days_overdue
+#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term__write_date
+msgid "Last Updated on"
+msgstr "최근 갱신 날짜"
+
+#. module: account_due_list_days_overdue
+#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term__name
+msgid "Name"
+msgstr "이름"
+
+#. module: account_due_list_days_overdue
+#: model_terms:ir.ui.view,arch_db:account_due_list_days_overdue.view_account_overdue_term_form
+#: model_terms:ir.ui.view,arch_db:account_due_list_days_overdue.view_account_overdue_term_search
+#: model_terms:ir.ui.view,arch_db:account_due_list_days_overdue.view_account_overdue_term_tree
+msgid "Overdue Term"
+msgstr ""
+
+#. module: account_due_list_days_overdue
+#: code:addons/account_due_list_days_overdue/models/account_overdue_term.py:0
+#, python-format
+msgid "Overdue Term %s overlaps with %s"
+msgstr ""
+
+#. module: account_due_list_days_overdue
+#: model:ir.actions.act_window,name:account_due_list_days_overdue.action_account_overdue_term_form
+#: model:ir.ui.menu,name:account_due_list_days_overdue.menu_action_account_overdue_term_form
+msgid "Overdue Terms"
+msgstr ""
+
+#. module: account_due_list_days_overdue
+#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term__tech_name
+msgid "Technical name"
+msgstr ""
+
+#. module: account_due_list_days_overdue
+#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term__to_day
+msgid "To day"
+msgstr ""
