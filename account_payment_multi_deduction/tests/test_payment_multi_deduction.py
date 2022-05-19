@@ -96,6 +96,7 @@ class TestPaymentMultiDeduction(SavepointCase):
         view_id = ('account_payment_multi_deduction.'
                    'view_account_payment_from_invoices')
         with Form(PaymentWizard.with_context(ctx), view=view_id) as f:
+            f.group_invoices = True
             f.amount = 600.0  # Reduce to 600.0, and mark fully paid (multi)
             f.payment_difference_handling = 'reconcile_multi_deduct'
             with f.deduction_ids.new() as f2:

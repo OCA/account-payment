@@ -136,21 +136,25 @@ msgid "Customer Payment Returns"
 msgstr ""
 
 #. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_import_journal_creation__default_expense_account_id
 #: model:ir.model.fields,field_description:account_payment_return.field_account_journal__default_expense_account_id
 msgid "Default Charges Account"
 msgstr ""
 
 #. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_import_journal_creation__default_expense_partner_id
 #: model:ir.model.fields,field_description:account_payment_return.field_account_journal__default_expense_partner_id
 msgid "Default Charges Partner"
 msgstr ""
 
 #. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_account_bank_statement_import_journal_creation__default_expense_account_id
 #: model:ir.model.fields,help:account_payment_return.field_account_journal__default_expense_account_id
 msgid "Default account for bank charges"
 msgstr ""
 
 #. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_account_bank_statement_import_journal_creation__default_expense_partner_id
 #: model:ir.model.fields,help:account_payment_return.field_account_journal__default_expense_partner_id
 msgid "Default partner for charge expenses"
 msgstr ""
@@ -174,6 +178,7 @@ msgid "Draft"
 msgstr "Bozza"
 
 #. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_account_bank_statement_import_journal_creation__return_auto_reconcile
 #: model:ir.model.fields,help:account_payment_return.field_account_journal__return_auto_reconcile
 msgid ""
 "Enable automatic payment return reconciliation. This option is meant to be "
@@ -404,6 +409,12 @@ msgid "Payment Reference"
 msgstr ""
 
 #. module: account_payment_return
+#: model:ir.actions.act_window,name:account_payment_return.payment_return_reason_action
+#: model:ir.ui.menu,name:account_payment_return.payment_return_reason_menu
+msgid "Payment Return Reasons"
+msgstr ""
+
+#. module: account_payment_return
 #: code:addons/account_payment_return/models/payment_return.py:113
 #, python-format
 msgid ""
@@ -426,6 +437,8 @@ msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_payment_return_reason
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_reason_form_view
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_reason_tree_view
 msgid "Payment return reason"
 msgstr ""
 
@@ -446,6 +459,7 @@ msgid "Reason"
 msgstr "Motivo"
 
 #. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_import_journal_creation__return_auto_reconcile
 #: model:ir.model.fields,field_description:account_payment_return.field_account_journal__return_auto_reconcile
 msgid "Reconcile payment returns"
 msgstr ""

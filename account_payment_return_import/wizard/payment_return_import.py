@@ -184,15 +184,14 @@ class PaymentReturnImport(models.TransientModel):
         if bank_account_id:
             bank_account = bank_model.browse(bank_account_id)
             if journal_id:
-                if (bank_account.journal_id.id and
-                        bank_account.journal_id.id != journal_id):
+                if (bank_account.journal_id and
+                        journal_id not in bank_account.journal_id.ids):
                     raise UserError(
                         _('The account of this payment return is linked to '
                           'another journal.'))
-                if not bank_account.journal_id.id:
+                if not bank_account.journal_id:
                     bank_model.write({'journal_id': journal_id})
-            else:
-                if bank_account.journal_id.id:
+            elif bank_account.journal_id:
                     journal_id = bank_account.journal_id.id
         return journal_id
 

@@ -7,7 +7,7 @@
 
 {
     "name": "Account Check Printing Report Base",
-    "version": "12.0.1.1.1",
+    "version": "12.0.2.0.3",
     "license": "AGPL-3",
     "author": "Eficent,"
               "Serpent Consulting Services Pvt. Ltd.,"
@@ -17,6 +17,11 @@
     "website": "https://github.com/OCA/account-payment",
     "depends": ["account_check_printing",
                 "report_wkhtmltopdf_param"],
+    'external_dependencies': {
+        'python': [
+            'num2words',
+        ],
+    },
     "data": [
         "security/ir.model.access.csv",
         "data/report_paperformat.xml",

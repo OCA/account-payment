@@ -1,0 +1,169 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_payment_multi_deduction
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2021-04-12 13:46+0000\n"
+"Last-Translator: alvarorib <alvaro.ribeiro@exo.pt>\n"
+"Language-Team: none\n"
+"Language: pt\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.3.2\n"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__account_id
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_register_payment_deduction__account_id
+msgid "Account"
+msgstr "Conta"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model,name:account_payment_multi_deduction.model_account_abstract_payment
+msgid "Contains the logic shared between models which allows to register payments"
+msgstr ""
+"Contém a lógica partilhada pelos modelos que permitem registar os pagamentos"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__create_uid
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_register_payment_deduction__create_uid
+msgid "Created by"
+msgstr "Criado por"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__create_date
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_register_payment_deduction__create_date
+msgid "Created on"
+msgstr "Criado em"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__currency_id
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_register_payment_deduction__currency_id
+msgid "Currency"
+msgstr "Moeda"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__amount
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_register_payment_deduction__amount
+msgid "Deduction Amount"
+msgstr "Valor a deduzir"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment__deduction_ids
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_register_payments__deduction_ids
+msgid "Deductions"
+msgstr "Deduções"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__display_name
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_register_payment_deduction__display_name
+msgid "Display Name"
+msgstr "Nome a Exibir"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__id
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_register_payment_deduction__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_payment_multi_deduction
+#: selection:account.abstract.payment,payment_difference_handling:0
+#: selection:account.payment,payment_difference_handling:0
+#: selection:account.register.payments,payment_difference_handling:0
+msgid "Keep open"
+msgstr "Manter em aberto"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__name
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_register_payment_deduction__name
+msgid "Label"
+msgstr "Etiqueta"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction____last_update
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_register_payment_deduction____last_update
+msgid "Last Modified on"
+msgstr "Última Modificação em"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__write_uid
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_register_payment_deduction__write_uid
+msgid "Last Updated by"
+msgstr "Última Atualização por"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__write_date
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_register_payment_deduction__write_date
+msgid "Last Updated on"
+msgstr "Última Atualização em"
+
+#. module: account_payment_multi_deduction
+#: selection:account.abstract.payment,payment_difference_handling:0
+#: selection:account.payment,payment_difference_handling:0
+#: selection:account.register.payments,payment_difference_handling:0
+msgid "Mark invoice as fully paid"
+msgstr "Marcar a fatura como integralmente paga"
+
+#. module: account_payment_multi_deduction
+#: selection:account.abstract.payment,payment_difference_handling:0
+#: selection:account.payment,payment_difference_handling:0
+#: selection:account.register.payments,payment_difference_handling:0
+msgid "Mark invoice as fully paid (multi deduct)"
+msgstr "Marcar a fatura como integralmente paga(multi dedução)"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__payment_id
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_register_payment_deduction__payment_id
+msgid "Payment"
+msgstr "Pagamento"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model,name:account_payment_multi_deduction.model_account_payment_deduction
+#: model:ir.model,name:account_payment_multi_deduction.model_account_register_payment_deduction
+msgid "Payment Deduction"
+msgstr "Dedução ao Pagamento"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_abstract_payment__payment_difference_handling
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment__payment_difference_handling
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_register_payments__payment_difference_handling
+msgid "Payment Difference Handling"
+msgstr "Tratamento das Diferenças de Pagamento"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model,name:account_payment_multi_deduction.model_account_payment
+msgid "Payments"
+msgstr "Pagamentos"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model,name:account_payment_multi_deduction.model_account_register_payments
+msgid "Register Payments"
+msgstr "Registar Pagamentos"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment__deduct_residual
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_register_payments__deduct_residual
+msgid "Remainings"
+msgstr "Restos"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,help:account_payment_multi_deduction.field_account_payment__deduction_ids
+#: model:ir.model.fields,help:account_payment_multi_deduction.field_account_register_payments__deduction_ids
+msgid "Sum of deduction amount(s) must equal to the payment difference"
+msgstr "A soma dos valores deduzidos deve igualar a diferença do pagamento"
+
+#. module: account_payment_multi_deduction
+#: code:addons/account_payment_multi_deduction/models/account_payment.py:23
+#, python-format
+msgid "The total deduction should be %s"
+msgstr "A dedução total deve ser %s"
+
+#. module: account_payment_multi_deduction
+#: model_terms:ir.ui.view,arch_db:account_payment_multi_deduction.view_account_payment_from_invoices
+#: model_terms:ir.ui.view,arch_db:account_payment_multi_deduction.view_account_payment_invoice_form
+msgid "Total Deduction"
+msgstr "Dedução Total"

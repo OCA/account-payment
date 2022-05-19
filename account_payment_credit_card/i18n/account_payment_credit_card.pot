@@ -14,6 +14,7 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_payment_credit_card
+#: model:ir.model.fields,field_description:account_payment_credit_card.field_account_bank_statement_import_journal_creation__partner_id
 #: model:ir.model.fields,field_description:account_payment_credit_card.field_account_journal__partner_id
 msgid "Credit Card Company"
 msgstr ""
@@ -29,6 +30,7 @@ msgid "Journal Entries"
 msgstr ""
 
 #. module: account_payment_credit_card
+#: model:ir.model.fields,field_description:account_payment_credit_card.field_account_bank_statement_import_journal_creation__credit_card
 #: model:ir.model.fields,field_description:account_payment_credit_card.field_account_journal__credit_card
 msgid "Transfer AP to Credit Card Company"
 msgstr ""

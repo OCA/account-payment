@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2020-10-01 12:00+0000\n"
+"Last-Translator: oihane <oihanecruce@gmail.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.10\n"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC09
@@ -22,17 +24,17 @@ msgstr ""
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC01
 msgid "Account number is invalid or missing."
-msgstr ""
+msgstr "Identificador de cuenta incorrecto."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC04
 msgid "Account number specified has been closed on the bank of account's books. "
-msgstr ""
+msgstr "Cuenta cancelada. "
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC06
 msgid "Account specified is blocked, prohibiting posting of transactions against it."
-msgstr ""
+msgstr "Cuenta bloqueada."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC12
@@ -73,7 +75,7 @@ msgstr ""
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM04
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM07
 msgid "Amount of funds available to cover specified message amount is insufficient."
-msgstr ""
+msgstr "Saldo insuficiente."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM09
@@ -109,11 +111,13 @@ msgstr ""
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AG02
 msgid "Bank Operation code specified in the message is not valid for receiver"
 msgstr ""
+"Código de operación, código de transacción o tipo de secuencia incorrecto, "
+"formato de fichero no válido"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RC01
 msgid "Bank identifier code specified in the message has an incorrect format (formerly IncorrectFormatForRoutingCode)."
-msgstr ""
+msgstr "Identificador de la entidad incorrecto (BIC no válido)."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RC02
@@ -304,6 +308,7 @@ msgstr ""
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CNOR
 msgid "Creditor bank is not registered under this BIC in the CSM"
 msgstr ""
+"El banco del acreedor no consta con ese BIC en el sistema de compensación"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE11
@@ -383,12 +388,12 @@ msgstr ""
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RC03
 msgid "Debtor bank identifier is invalid or missing"
-msgstr ""
+msgstr "FFf"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DNOR
 msgid "Debtor bank is not registered under this BIC in the CSM"
-msgstr ""
+msgstr "El banco del deudor no consta con ese BIC en el sistema de compensación"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE10
@@ -423,7 +428,7 @@ msgstr ""
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_SL01
 msgid "Due to specific service offered by the Debtor Agent"
-msgstr ""
+msgstr "Servicios específicos ofrecidos por la entidad del deudor"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM05
@@ -448,7 +453,7 @@ msgstr ""
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_MD07
 msgid "End customer is deceased."
-msgstr ""
+msgstr "Deudor fallecido."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE06
@@ -473,7 +478,7 @@ msgstr ""
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_FF01
 msgid "File Format incomplete or invalid"
-msgstr ""
+msgstr "Formato de fichero no válido o incompleto"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS18
@@ -503,7 +508,7 @@ msgstr ""
 #. module: account_payment_return_import_iso20022
 #: model:ir.model,name:account_payment_return_import_iso20022.model_payment_return_import
 msgid "Import Payment Return"
-msgstr ""
+msgstr "Importar devolución de cobros"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_G003
@@ -684,7 +689,7 @@ msgstr ""
 #. module: account_payment_return_import_iso20022
 #: model:ir.model,name:account_payment_return_import_iso20022.model_payment_return_line
 msgid "Payment return lines"
-msgstr ""
+msgstr "Líneas de la devolución"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_FF07

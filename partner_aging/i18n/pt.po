@@ -6,45 +6,45 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2020-02-22 13:13+0000\n"
-"Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>\n"
+"PO-Revision-Date: 2021-04-12 13:46+0000\n"
+"Last-Translator: alvarorib <alvaro.ribeiro@exo.pt>\n"
 "Language-Team: none\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.10\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__days_due_121togr
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_supplier__days_due_121togr
 msgid "+121"
-msgstr ""
+msgstr "+121"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__days_due_01to30
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_supplier__days_due_01to30
 msgid "1/30"
-msgstr ""
+msgstr "1/30"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__days_due_31to60
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_supplier__days_due_31to60
 msgid "31/60"
-msgstr ""
+msgstr "31/60"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__days_due_61to90
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_supplier__days_due_61to90
 msgid "61/90"
-msgstr ""
+msgstr "61/90"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__days_due_91to120
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_supplier__days_due_91to120
 msgid "91/120"
-msgstr ""
+msgstr "91/120"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_date__age_date
@@ -107,7 +107,7 @@ msgstr "Antiguidade de Clientes"
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_customer_aging_ad_search
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_customer_aging_ad_tree
 msgid "Customer Aging Date wise"
-msgstr ""
+msgstr "Data Normal de Antiguidade do Cliente"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__date
@@ -147,7 +147,7 @@ msgstr "Agrupar Por..."
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_date__id
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_supplier__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__invoice_id
@@ -250,7 +250,7 @@ msgstr "Antiguidade de Fornecedores"
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_supplier_aging_ad_search
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_supplier_aging_ad_tree
 msgid "Supplier Aging Date wise"
-msgstr ""
+msgstr "Data Normal de Antiguidade ao Fornecedor"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_supplier__invoice_ref
@@ -265,7 +265,7 @@ msgstr "Fatura Deles"
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_supplier_aging_ad_search
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_supplier_aging_ad_tree
 msgid "Total"
-msgstr ""
+msgstr "Total"
 
 #. module: partner_aging
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_partner_aging_date

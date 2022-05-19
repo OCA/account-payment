@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-02 06:22+0000\n"
-"PO-Revision-Date: 2019-08-18 01:44+0000\n"
-"Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>\n"
+"PO-Revision-Date: 2021-04-12 13:46+0000\n"
+"Last-Translator: alvarorib <alvaro.ribeiro@exo.pt>\n"
 "Language-Team: Portuguese (http://www.transifex.com/oca/"
 "OCA-account-payment-8-0/language/pt/)\n"
 "Language: pt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Weblate 3.7.1\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -160,7 +160,7 @@ msgstr "Débito Total"
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
 msgid "Total Residual"
-msgstr ""
+msgstr "Saldo Residual"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree

@@ -21,13 +21,13 @@ msgstr ""
 "X-Generator: Weblate 3.7.1\n"
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:267
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:266
 #, python-format
 msgid "%d transactions had already been imported and were ignored."
 msgstr "%d transacciones ya han sido importadas y serán ignoradas."
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:270
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:269
 #, python-format
 msgid "1 transaction had already been imported and was ignored."
 msgstr "1 transacción ya ha sido importada y será ignorada."
@@ -49,7 +49,7 @@ msgstr ""
 "permiten la detección automática del diario."
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:273
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:272
 #, python-format
 msgid "Already imported items"
 msgstr "Elementos ya importados"
@@ -66,13 +66,13 @@ msgid "Bank account from the imported file"
 msgstr "Cuenta bancaria del archivo importado"
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:214
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:213
 #, python-format
 msgid "Can not determine journal for import."
 msgstr "No puede determinarse el diario para importar."
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:207
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:206
 #, python-format
 msgid "Can not find the account number %s."
 msgstr "No se puede encontrar el número de cuenta %s."

@@ -1,0 +1,37 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_payment_residual_amount
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2021-03-15 00:46+0000\n"
+"Last-Translator: Marcel Savegnago <marcel.savegnago@gmail.com>\n"
+"Language-Team: none\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.3.2\n"
+
+#. module: account_payment_residual_amount
+#: model:ir.model,name:account_payment_residual_amount.model_account_payment
+msgid "Payments"
+msgstr "Pagamentos"
+
+#. module: account_payment_residual_amount
+#: model:ir.model.fields,field_description:account_payment_residual_amount.field_account_payment__amount_residual
+msgid "Residual Amount"
+msgstr "Valor Residual"
+
+#. module: account_payment_residual_amount
+#: model:ir.model.fields,help:account_payment_residual_amount.field_account_payment__amount_residual
+msgid "The residual amount on a journal item expressed in the company currency."
+msgstr "O valor residual em um item diário expresso na moeda da empresa."
+
+#. module: account_payment_residual_amount
+#: model_terms:ir.ui.view,arch_db:account_payment_residual_amount.view_account_supplier_payment_tree
+msgid "Total"
+msgstr "Total"

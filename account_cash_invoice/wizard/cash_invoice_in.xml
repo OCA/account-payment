@@ -12,7 +12,7 @@
                     <field name="journal_count" invisible="1"/>
                     <field name="journal_id"
                            class="oe_inline"
-                           domain="[('id', 'in', journal_ids[0][2])]"
+                           domain="[('id', 'in', journal_ids)]"
                            options="{'no_create': True, 'no_open':True}"
                            attrs="{'invisible':[('journal_count', '&lt;', 2)]}"
                     />

@@ -3,7 +3,7 @@
 
 {
     'name': 'Payment Register with Multiple Deduction',
-    'version': '12.0.1.0.0',
+    'version': '12.0.1.0.1',
     'author': 'Ecosoft,Odoo Community Association (OCA)',
     'license': 'AGPL-3',
     'website': 'https://github.com/OCA/account-payment/',
@@ -12,6 +12,6 @@
     'data': ['security/ir.model.access.csv',
              'views/account_payment_view.xml'],
     'installable': True,
-    'development_status': 'alpha',
+    'development_status': 'Alpha',
     'maintainers': ['kittiu'],
 }

@@ -131,21 +131,25 @@ msgid "Customer Payment Returns"
 msgstr "Devoluciones de cobros"
 
 #. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_import_journal_creation__default_expense_account_id
 #: model:ir.model.fields,field_description:account_payment_return.field_account_journal__default_expense_account_id
 msgid "Default Charges Account"
 msgstr "Cuenta por defecto para comisiones"
 
 #. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_import_journal_creation__default_expense_partner_id
 #: model:ir.model.fields,field_description:account_payment_return.field_account_journal__default_expense_partner_id
 msgid "Default Charges Partner"
 msgstr "Empresa por defecto para comisiones"
 
 #. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_account_bank_statement_import_journal_creation__default_expense_account_id
 #: model:ir.model.fields,help:account_payment_return.field_account_journal__default_expense_account_id
 msgid "Default account for bank charges"
 msgstr "Cuenta por defecto para comisiones"
 
 #. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_account_bank_statement_import_journal_creation__default_expense_partner_id
 #: model:ir.model.fields,help:account_payment_return.field_account_journal__default_expense_partner_id
 #, fuzzy
 msgid "Default partner for charge expenses"
@@ -170,6 +174,7 @@ msgid "Draft"
 msgstr "Borrador"
 
 #. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_account_bank_statement_import_journal_creation__return_auto_reconcile
 #: model:ir.model.fields,help:account_payment_return.field_account_journal__return_auto_reconcile
 msgid ""
 "Enable automatic payment return reconciliation. This option is meant to be "
@@ -398,6 +403,13 @@ msgid "Payment Reference"
 msgstr "Referencia de cobro"
 
 #. module: account_payment_return
+#: model:ir.actions.act_window,name:account_payment_return.payment_return_reason_action
+#: model:ir.ui.menu,name:account_payment_return.payment_return_reason_menu
+#, fuzzy
+msgid "Payment Return Reasons"
+msgstr "Motivos de devolución"
+
+#. module: account_payment_return
 #: code:addons/account_payment_return/models/payment_return.py:113
 #, python-format
 msgid ""
@@ -422,6 +434,8 @@ msgstr "Líneas de la devolución"
 
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_payment_return_reason
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_reason_form_view
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_reason_tree_view
 msgid "Payment return reason"
 msgstr "Motivos de devolución"
 
@@ -442,9 +456,9 @@ msgid "Reason"
 msgstr "Motivo"
 
 #. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_import_journal_creation__return_auto_reconcile
 #: model:ir.model.fields,field_description:account_payment_return.field_account_journal__return_auto_reconcile
 #, fuzzy
-#| msgid "Payment return"
 msgid "Reconcile payment returns"
 msgstr "Devolución de cobro"
 
@@ -485,7 +499,6 @@ msgstr "Motivo de la devolución"
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__reason_additional_information
 #, fuzzy
-#| msgid "Return reason"
 msgid "Return reason (info)"
 msgstr "Motivo de la devolución"
 
@@ -525,7 +538,6 @@ msgstr ""
 #. module: account_payment_return
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
 #, fuzzy
-#| msgid "Charges Amount"
 msgid "Total charges amount"
 msgstr "Importe de la comisión"
 

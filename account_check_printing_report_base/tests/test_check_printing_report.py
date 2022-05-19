@@ -11,6 +11,11 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
 
     def setUp(self):
         super(TestAccountCheckPrintingReportBase, self).setUp()
+        self.langs = ("en_US", "es_ES")
+        self.rl = self.env["res.lang"]
+        for lang in self.langs:
+            if not self.rl.search([("code", "=", lang)]):
+                self.rl.load_lang(lang)
         self.account_invoice_model = self.env['account.invoice']
         self.journal_model = self.env['account.journal']
         self.register_payments_model = self.env['account.register.payments']
@@ -55,6 +60,24 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
             'outbound_payment_method_ids': [(4, self.payment_method_check.id,
                                              None)],
         })
+        self.acc_payable = self._create_account(
+            'account payable test', 'ACPRB1', self.acc_payable, True)
+        self.vendor_bill = self._create_vendor_bill(self.acc_payable)
+        self.acc_expense = self._create_account(
+            'account expense test', 'ACPRB2', self.acc_expense, False)
+        self._create_invoice_line(self.acc_expense, self.vendor_bill)
+        self.vendor_bill.action_invoice_open()
+        # Pay the invoice using a bank journal associated to the main company
+        ctx = {'active_model': 'account.invoice', 'active_ids': [
+            self.vendor_bill.id]}
+        register_payments = \
+            self.register_payments_model.with_context(ctx).create({
+                'payment_date': time.strftime('%Y') + '-07-15',
+                'journal_id': self.bank_journal.id,
+                'payment_method_id': self.payment_method_check.id
+            })
+        register_payments.create_payments()
+        self.payment = self.payment_model.search([], order="id desc", limit=1)
 
     def _create_account(self, name, code, user_type, reconcile):
         account = self.account_account_model.create({
@@ -91,64 +114,41 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
     def test_check_printing_no_layout(self):
         '''Test if the exception raises when no layout is set for a
         company or for the journal.'''
-        acc_payable = self._create_account('account payable test', 'ACPRB1',
-                                           self.acc_payable, True)
-        vendor_bill = self._create_vendor_bill(acc_payable)
-        acc_expense = self._create_account('account expense test', 'ACPRB2',
-                                           self.acc_expense, False)
-        self._create_invoice_line(acc_expense, vendor_bill)
-
-        vendor_bill.action_invoice_open()
-        # Pay the invoice using a bank journal associated to the main company
-        ctx = {'active_model': 'account.invoice', 'active_ids': [
-            vendor_bill.id]}
-        register_payments = \
-            self.register_payments_model.with_context(ctx).create({
-                'payment_date': time.strftime('%Y') + '-07-15',
-                'journal_id': self.bank_journal.id,
-                'payment_method_id': self.payment_method_check.id
-            })
-        register_payments.create_payments()
-        payment = self.payment_model.search([], order="id desc", limit=1)
         with self.assertRaises(UserError):
-            payment.print_checks()
+            self.payment.print_checks()
 
         # Set check layout verification by journal
         ICPSudo = self.env['ir.config_parameter'].sudo()
         ICPSudo.set_param(
             'account_check_printing_report_base.check_layout_verification',
             'by_journal')
-        self.assertFalse(payment.journal_id.check_layout_id)
+        self.assertFalse(self.payment.journal_id.check_layout_id)
         with self.assertRaises(UserError):
-            payment.print_checks()
+            self.payment.print_checks()
 
     def test_check_printing_with_layout(self):
         ''' Test if the check is printed when the layout is specified for a
         company and journal.'''
 
         self.company.check_layout_id = self.check_report
-        acc_payable = self._create_account('account payable test', 'ACPRB1',
-                                           self.acc_payable, True)
-        vendor_bill = self._create_vendor_bill(acc_payable)
-        acc_expense = self._create_account('account expense test', 'ACPRB2',
-                                           self.acc_expense, False)
-        self._create_invoice_line(acc_expense, vendor_bill)
-        vendor_bill.action_invoice_open()
-        ctx = {'active_model': 'account.invoice', 'active_ids': [
-            vendor_bill.id]}
-        register_payments = \
-            self.register_payments_model.with_context(ctx).create({
-                'payment_date': time.strftime('%Y') + '-07-15',
-                'journal_id': self.bank_journal.id,
-                'payment_method_id': self.payment_method_check.id
-            })
-        register_payments.create_payments()
-        payment = self.payment_model.search([], order="id desc", limit=1)
-        payment.journal_id.check_layout_id = self.check_report_by_journal
-
+        self.payment.journal_id.check_layout_id = self.check_report_by_journal
         e = False
         try:
-            payment.print_checks()
+            self.payment.print_checks()
         except UserError as e:
             pass
         self.assertEquals(e, False)
+
+    def test_num2words(self):
+        report_model = (
+            "report.account_check_printing_report_base.promissory_footer_a4")
+        words_number = self.env[report_model].with_context(
+            lang='en_US').amount2words(4.9)
+        self.assertEqual(words_number, "four euro, ninety cents")
+        words_number = self.env[report_model].with_context(
+            lang='es_ES').amount2words(4.9)
+        self.assertEqual(words_number, "cuatro euros con noventa céntimos")
+        words_number = self.env[report_model].with_context(
+            lang='es_ES').amount2words(4.95)
+        self.assertEqual(
+            words_number, "cuatro euros con noventa y cinco céntimos")

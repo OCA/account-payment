@@ -20,13 +20,13 @@ msgstr ""
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:267
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:266
 #, python-format
 msgid "%d transactions had already been imported and were ignored."
 msgstr ""
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:270
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:269
 #, python-format
 msgid "1 transaction had already been imported and was ignored."
 msgstr ""
@@ -45,7 +45,7 @@ msgid ""
 msgstr ""
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:273
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:272
 #, python-format
 msgid "Already imported items"
 msgstr ""
@@ -62,13 +62,13 @@ msgid "Bank account from the imported file"
 msgstr ""
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:214
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:213
 #, python-format
 msgid "Can not determine journal for import."
 msgstr ""
 
 #. module: account_payment_return_import
-#: code:addons/account_payment_return_import/wizard/payment_return_import.py:207
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:206
 #, python-format
 msgid "Can not find the account number %s."
 msgstr ""

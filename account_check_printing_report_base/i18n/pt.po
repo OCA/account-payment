@@ -1,20 +1,20 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_check_printing_report_base
+# 	* account_check_printing_report_base
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2019-08-18 01:44+0000\n"
-"Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>\n"
+"PO-Revision-Date: 2021-04-12 13:46+0000\n"
+"Last-Translator: alvarorib <alvaro.ribeiro@exo.pt>\n"
 "Language-Team: none\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.7.1\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_check_printing_report_base
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
@@ -27,6 +27,7 @@ msgid "Account Payment Check Report"
 msgstr "Relatório de Impressão de Cheques"
 
 #. module: account_check_printing_report_base
+#: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_bank_statement_import_journal_creation__check_print_auto
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_journal__check_print_auto
 msgid "Automatic check printing"
 msgstr "Impressão automática de cheques"
@@ -49,6 +50,7 @@ msgid "Check Layouts"
 msgstr "Layouts de Cheques"
 
 #. module: account_check_printing_report_base
+#: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_bank_statement_import_journal_creation__check_layout_id
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_journal__check_layout_id
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_res_company__check_layout_id
 msgid "Check format"
@@ -75,8 +77,16 @@ msgid "Created on"
 msgstr "Criado em"
 
 #. module: account_check_printing_report_base
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
+msgid "Dear partner"
+msgstr "Caro parceiro"
+
+#. module: account_check_printing_report_base
+#: model:ir.model.fields,help:account_check_printing_report_base.field_account_bank_statement_import_journal_creation__check_print_auto
 #: model:ir.model.fields,help:account_check_printing_report_base.field_account_journal__check_print_auto
-msgid "Default check for the company is printed automatically when invoice payment is validated"
+msgid ""
+"Default check for the company is printed automatically when invoice payment "
+"is validated"
 msgstr ""
 "Predefinição - o cheque para a empresa é impresso automaticamente quando o "
 "pagamento da fatura é validado"
@@ -88,20 +98,30 @@ msgstr "Descrição"
 
 #. module: account_check_printing_report_base
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_payment_check_report__display_name
+#: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_promissory_footer_a4__display_name
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_report_check_base__display_name
+#: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_report_check_base_a4__display_name
 msgid "Display Name"
 msgstr "Nome a Exibir"
 
 #. module: account_check_printing_report_base
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
 msgid "Due Date"
 msgstr "Data de Vencimento"
 
 #. module: account_check_printing_report_base
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_payment_check_report__id
+#: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_promissory_footer_a4__id
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_report_check_base__id
+#: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_report_check_base_a4__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
+
+#. module: account_check_printing_report_base
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
+msgid "Invoice / Reference"
+msgstr "Fatura / Referência"
 
 #. module: account_check_printing_report_base
 #: model:ir.model,name:account_check_printing_report_base.model_account_journal
@@ -110,14 +130,16 @@ msgstr "Diário"
 
 #. module: account_check_printing_report_base
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_payment_check_report____last_update
+#: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_promissory_footer_a4____last_update
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_report_check_base____last_update
+#: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_report_check_base_a4____last_update
 msgid "Last Modified on"
 msgstr "Última Modific. em"
 
 #. module: account_check_printing_report_base
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_payment_check_report__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última Atualização por"
 
 #. module: account_check_printing_report_base
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_payment_check_report__write_date
@@ -131,6 +153,7 @@ msgstr "Nome"
 
 #. module: account_check_printing_report_base
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
 msgid "Original Amount"
 msgstr "Montante Original"
 
@@ -143,6 +166,11 @@ msgstr "Pagamento"
 #: model:ir.actions.report,name:account_check_printing_report_base.action_report_check_base
 msgid "Payment Check Base"
 msgstr "Base do Cheque de Pagamento"
+
+#. module: account_check_printing_report_base
+#: model:ir.actions.report,name:account_check_printing_report_base.action_report_check_base_a4
+msgid "Payment Check Base A4"
+msgstr "Base A4 para Cheque de Pagamento"
 
 #. module: account_check_printing_report_base
 #: model:ir.model,name:account_check_printing_report_base.model_account_payment
@@ -163,3 +191,23 @@ msgstr "Imprimir Relatório de Cheque"
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_payment_check_report__report
 msgid "Report name"
 msgstr "Nome do relatório"
+
+#. module: account_check_printing_report_base
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
+msgid "Waiting for your agreement, regards."
+msgstr "Aguardamos pela sua aprovação, cumprimentos."
+
+#. module: account_check_printing_report_base
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
+msgid "We attach the list of invoices paid with this check with amount of"
+msgstr "Anexámos a lista de faturas pagas por este cheque no valor de"
+
+#. module: account_check_printing_report_base
+#: model:ir.model,name:account_check_printing_report_base.model_report_account_check_printing_report_base_promissory_footer_a4
+msgid "report.account_check_printing_report_base.promissory_footer_a4"
+msgstr "report.account_check_printing_report_base.promissory_footer_a4"
+
+#. module: account_check_printing_report_base
+#: model:ir.model,name:account_check_printing_report_base.model_report_account_check_printing_report_base_report_check_base_a4
+msgid "report.account_check_printing_report_base.report_check_base_a4"
+msgstr "report.account_check_printing_report_base.report_check_base_a4"
