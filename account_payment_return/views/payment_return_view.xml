@@ -93,7 +93,7 @@
                                         widget="many2many_tags"
                                         options="{'no_create': True}"
                                         domain="[('partner_id', '=', partner_id),
-                                                    ('journal_id', '=', parent.journal_id),
+                                                    ('credit', '>', 0.0),
                                                     ('account_id.account_type', '=', 'asset_receivable'),
                                                     ('reconciled', '=', True)]"
                                     />
