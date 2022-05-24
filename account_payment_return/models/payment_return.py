@@ -325,8 +325,7 @@ class PaymentReturnLine(models.Model):
             invoice = self.env["account.move"].search(domain)
             if invoice:
                 invoice_line_ids = invoice.line_ids.filtered(
-                    lambda line: line.account_id.account_type
-                    in ("asset_receivable", "liability_payable")
+                    lambda line: line.account_id.account_type == "asset_receivable"
                 )
                 payment_lines = invoice_line_ids.mapped(
                     "matched_debit_ids.debit_move_id"
@@ -335,7 +334,8 @@ class PaymentReturnLine(models.Model):
                     "matched_credit_ids.credit_move_id"
                 )
                 if payment_lines:
-                    line.move_line_ids = payment_lines[0].ids
+                    # Get last payment if several payments
+                    line.move_line_ids = payment_lines[-1].ids
                     if not line.concept:
                         line.concept = _("Invoice: %s") % invoice.name
 
@@ -344,7 +344,7 @@ class PaymentReturnLine(models.Model):
             domain = line.partner_id and [("partner_id", "=", line.partner_id.id)] or []
             if line.return_id.journal_id:
                 domain += [
-                    ("journal_id", "=", line.return_id.journal_id.id),
+                    ("credit", ">", 0.0),
                     ("move_id.move_type", "=", "entry"),
                 ]
             domain.extend(
