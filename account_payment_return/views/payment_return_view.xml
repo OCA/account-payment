@@ -79,10 +79,12 @@
                                         name="move_line_ids"
                                         widget="many2many_tags"
                                         options="{'no_create': True}"
-                                        domain="[('partner_id', '=', partner_id),
-                                                    ('journal_id', '=', parent.journal_id),
-                                                    ('account_id.internal_type', '=', 'receivable'),
-                                                    ('reconciled', '=', True)]"
+                                        domain="[
+                                            ('partner_id', '=', partner_id),
+                                            ('credit', '>', 0.0),
+                                            ('account_internal_type', '=', 'receivable'),
+                                            ('reconciled', '=', True)
+                                        ]"
                                     />
                                     <field name="amount" sum="Total amount" />
                                     <field
