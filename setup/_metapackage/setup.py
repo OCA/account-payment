@@ -8,6 +8,9 @@ setuptools.setup(
     description="Meta package for oca-account-payment Odoo addons",
     version=version,
     install_requires=[
+        'odoo13-addon-account_cash_discount_base',
+        'odoo13-addon-account_cash_discount_payment',
+        'odoo13-addon-account_cash_discount_write_off',
         'odoo13-addon-account_cash_invoice',
         'odoo13-addon-account_check_date',
         'odoo13-addon-account_check_printing_report_base',
