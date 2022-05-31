@@ -1,5 +1,4 @@
-from ..exceptions import SlimpayPartnerFieldError
-
+from odoo.exceptions import UserError
 from odoo.tests.common import TransactionCase, at_install, post_install
 
 
@@ -16,7 +15,7 @@ class PartnerTC(TransactionCase):
     def test_zip(self):
         'Zip must have 5 figures when country is France'
         p = self.env['res.partner'].create(self.partner_data(zip='67000'))
-        with self.assertRaises(SlimpayPartnerFieldError):
+        with self.assertRaises(UserError):
             p.update({'zip': '0'})
 
     def test_zip_no_country(self):

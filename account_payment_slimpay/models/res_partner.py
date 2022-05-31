@@ -2,7 +2,7 @@ import re
 
 from odoo import api, models, _
 
-from ..exceptions import SlimpayPartnerFieldError
+from odoo.exceptions import UserError
 
 
 class SlimpayPartner(models.Model):
@@ -12,10 +12,9 @@ class SlimpayPartner(models.Model):
 
     @api.model
     def _slimpay_check_zip(self, value, country_id=None, **kw):
-        """Raise a `SlimpayPartnerFieldError` if given zip `value` is not
-        suitable as a Slimpay zip code for country of id `country_id`
-        (only restrictive for France).
-
+        """ Raise an `UserError` if given zip `value` is not suitable as a
+        Slimpay zip code for country of id `country_id` (only
+        restrictive for France).
         """
         try:
             country_id = int(country_id)
@@ -23,9 +22,8 @@ class SlimpayPartner(models.Model):
             return
         country = self.env['res.country'].browse(int(country_id))
         if country.code == 'FR':
-            if not self.SLIMPAY_FR_ZIP.match(value):
-                raise SlimpayPartnerFieldError(
-                    'zip', _('Incorrect zip code (should be 5 figures)'))
+            if not self.SLIMPAY_FR_ZIP.match(value or ""):
+                raise UserError(_('Incorrect zip code (should be 5 figures)'))
 
     @api.model
     def slimpay_checks(self, values):
@@ -45,8 +43,8 @@ class SlimpayPartner(models.Model):
             if checker is not None:
                 try:
                     checker(values[fieldname], **values)
-                except SlimpayPartnerFieldError as exc:
-                    errors[fieldname] = exc.msg
+                except UserError as exc:
+                    errors[fieldname] = exc.name
         return errors
 
     @api.constrains("zip")
