@@ -1,0 +1,73 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_payment_paired_internal_transfer
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_payment_paired_internal_transfer
+#: code:addons/account_payment_paired_internal_transfer/models/account_payment.py:0
+#, python-format
+msgid ""
+"A second payment has been created: <a href=# data-oe-model=account.payment "
+"data-oe-id=%(id)s>%(name)s</a>"
+msgstr ""
+
+#. module: account_payment_paired_internal_transfer
+#: model_terms:ir.ui.view,arch_db:account_payment_paired_internal_transfer.account_payment_form
+msgid ""
+"A second payment will be created automatically in the destination journal."
+msgstr ""
+
+#. module: account_payment_paired_internal_transfer
+#: model:ir.model.fields,field_description:account_payment_paired_internal_transfer.field_account_payment__destination_journal_id
+msgid "Destination Journal"
+msgstr ""
+
+#. module: account_payment_paired_internal_transfer
+#: model:ir.model.fields,field_description:account_payment_paired_internal_transfer.field_account_payment__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_payment_paired_internal_transfer
+#: model:ir.model.fields,field_description:account_payment_paired_internal_transfer.field_account_payment__id
+msgid "ID"
+msgstr ""
+
+#. module: account_payment_paired_internal_transfer
+#: model:ir.model.fields,field_description:account_payment_paired_internal_transfer.field_account_payment____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_payment_paired_internal_transfer
+#: model:ir.model.fields,field_description:account_payment_paired_internal_transfer.field_account_payment__paired_internal_transfer_payment_id
+msgid "Paired Internal Transfer Payment"
+msgstr ""
+
+#. module: account_payment_paired_internal_transfer
+#: model:ir.model,name:account_payment_paired_internal_transfer.model_account_payment
+msgid "Payments"
+msgstr ""
+
+#. module: account_payment_paired_internal_transfer
+#: code:addons/account_payment_paired_internal_transfer/models/account_payment.py:0
+#, python-format
+msgid ""
+"This payment has been created from <a href=# data-oe-model=account.payment "
+"data-oe-id=%(id)s>%(name)s</a>"
+msgstr ""
+
+#. module: account_payment_paired_internal_transfer
+#: model:ir.model.fields,help:account_payment_paired_internal_transfer.field_account_payment__paired_internal_transfer_payment_id
+msgid ""
+"When an internal transfer is posted, a paired payment is created. They cross"
+" referenced trough this field"
+msgstr ""
