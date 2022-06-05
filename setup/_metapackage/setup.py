@@ -20,6 +20,7 @@ setuptools.setup(
         'odoo14-addon-account_payment_batch_process_discount',
         'odoo14-addon-account_payment_credit_card',
         'odoo14-addon-account_payment_multi_deduction',
+        'odoo14-addon-account_payment_paired_internal_transfer',
         'odoo14-addon-account_payment_return',
         'odoo14-addon-account_payment_return_import',
         'odoo14-addon-account_payment_return_import_iso20022',
