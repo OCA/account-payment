@@ -7,16 +7,16 @@
 # Copyright 2016 Tecnativa - Carlos Dauden
 # Copyright 2017 Tecnativa - David Vidal
 # Copyright 2021 Tecnativa - João Marques
+# Copyright 2022 Tecnativa - Luis D. Lafaurie
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
     "name": "Account Payment Returns",
-    "version": "14.0.1.0.4",
+    "version": "15.0.1.0.0",
     "summary": "Manage the return of your payments",
     "license": "AGPL-3",
     "depends": ["mail", "account"],
-    "development_status": "Mature",
-    "author": "Odoo Community Association (OCA),"
+    "author": "Odoo Community Association (OCA), "
     "7 i TRIA, "
     "Tecnativa, "
     "initOS GmbH & Co., ",
@@ -24,12 +24,18 @@
     "data": [
         "security/ir.model.access.csv",
         "security/account_payment_return_security.xml",
-        "views/assets.xml",
         "views/payment_return_view.xml",
         "views/account_journal_view.xml",
         "data/ir_sequence_data.xml",
         "views/account_move_views.xml",
     ],
-    "qweb": ["static/src/xml/account_payment_return.xml"],
+    "assets": {
+        "web.assets_backend": [
+            "/account_payment_return/static/src/scss/account_payment_return.scss"
+        ],
+        "web.assets_qweb": [
+            "/account_payment_return/static/src/xml/account_payment_return.xml"
+        ],
+    },
     "installable": True,
 }

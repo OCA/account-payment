@@ -414,7 +414,9 @@ msgstr "Sklic plačila"
 msgid ""
 "Payment reference must be unique\n"
 "%s"
-msgstr "Sklic plačila"
+msgstr ""
+"Sklic plačila\n"
+"%s"
 
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_payment_return

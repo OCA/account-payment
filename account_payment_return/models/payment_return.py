@@ -53,7 +53,6 @@ class PaymentReturn(models.Model):
         states={"done": [("readonly", True)], "cancelled": [("readonly", True)]},
     )
     total_amount = fields.Float(
-        string="Total amount",
         compute="_compute_total_amount",
         readonly=True,
         store=False,
@@ -65,7 +64,6 @@ class PaymentReturn(models.Model):
             ("done", "Done"),
             ("cancelled", "Cancelled"),
         ],
-        string="State",
         readonly=True,
         default="draft",
         tracking=True,
@@ -94,7 +92,7 @@ class PaymentReturn(models.Model):
     def _check_duplicate_move_line(self):
         def append_error(error_line):
             error_list.append(
-                _("Payment Line: %s (%s) in Payment Return: %s")
+                _("%(placeholder)s")
                 % (
                     ", ".join(error_line.mapped("move_line_ids.name")),
                     error_line.partner_id.name,
@@ -296,24 +294,19 @@ class PaymentReturnLine(models.Model):
         required=True,
         ondelete="cascade",
     )
-    concept = fields.Char(
-        string="Concept", help="Read from imported file. Only for reference."
-    )
+    concept = fields.Char(help="Read from imported file. Only for reference.")
     reason_id = fields.Many2one(
         comodel_name="payment.return.reason", string="Return reason"
     )
     reason_additional_information = fields.Char(
         string="Return reason (info)", help="Additional information on return reason."
     )
-    reference = fields.Char(
-        string="Reference", help="Reference to match moves from related documents"
-    )
+    reference = fields.Char(help="Reference to match moves from related documents")
     move_line_ids = fields.Many2many(
         comodel_name="account.move.line", string="Payment Reference"
     )
     date = fields.Date(string="Return date", help="Only for reference")
     partner_name = fields.Char(
-        string="Partner name",
         readonly=True,
         help="Read from imported file. Only for reference.",
     )
@@ -323,7 +316,6 @@ class PaymentReturnLine(models.Model):
         domain="[('customer_rank', '>', 0)]",
     )
     amount = fields.Float(
-        string="Amount",
         help="Returned amount. Can be different from the move amount",
         digits="Account",
     )
