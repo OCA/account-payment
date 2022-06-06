@@ -1,5 +1,5 @@
 # Do NOT update manually; changes here will be overwritten by Copier
-_commit: v1.5.2
+_commit: v1.7.0
 _src_path: gh:oca/oca-addons-repo-template
 ci: GitHub
 dependency_installation_mode: PIP
@@ -15,3 +15,4 @@ repo_slug: account-payment
 repo_website: https://github.com/OCA/account-payment
 travis_apt_packages: []
 travis_apt_sources: []
+
