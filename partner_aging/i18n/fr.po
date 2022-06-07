@@ -6,125 +6,127 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2022-06-07 13:05+0000\n"
+"Last-Translator: Yann Papouin <ypa@decgroupe.com>\n"
 "Language-Team: none\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__days_due_121togr
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_supplier__days_due_121togr
 msgid "+121"
-msgstr ""
+msgstr "+121"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__days_due_01to30
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_supplier__days_due_01to30
 msgid "1/30"
-msgstr ""
+msgstr "1/30"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__days_due_31to60
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_supplier__days_due_31to60
 msgid "31/60"
-msgstr ""
+msgstr "31/60"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__days_due_61to90
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_supplier__days_due_61to90
 msgid "61/90"
-msgstr ""
+msgstr "61/90"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__days_due_91to120
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_supplier__days_due_91to120
 msgid "91/120"
-msgstr ""
+msgstr "91/120"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_date__age_date
 msgid "Aging Date"
-msgstr ""
+msgstr "Date d’échéance"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__avg_days_overdue
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_supplier__avg_days_overdue
 msgid "Avg Days Overdue"
-msgstr ""
+msgstr "Durée moyenne de retard"
 
 #. module: partner_aging
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_partner_aging_date
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_supplier_aging_date
 msgid "Cancel"
-msgstr ""
+msgstr "Annuler"
 
 #. module: partner_aging
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_supplier_aging_date
 msgid "Choose date for Supplier Aging"
-msgstr ""
+msgstr "Choisir une date pour la balance âgée des fournisseurs"
 
 #. module: partner_aging
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_partner_aging_date
 msgid "Choose date for partner Aging"
-msgstr ""
+msgstr "Choisir une date pour la balance âgée des clients"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_date__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Créé par"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_date__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Créé le"
 
 #. module: partner_aging
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_customer_aging_ad_tree
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_supplier_aging_ad_tree
 msgid "Current"
-msgstr ""
+msgstr "Actuel"
 
 #. module: partner_aging
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_customer_aging_ad_search
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_customer_aging_ad_tree
 msgid "Customer"
-msgstr ""
+msgstr "Client"
 
 #. module: partner_aging
 #: model:ir.actions.act_window,name:partner_aging.action_partner_aging_date
 #: model:ir.ui.menu,name:partner_aging.menu_customer_aging_wizard
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_partner_aging_date
 msgid "Customer Aging"
-msgstr ""
+msgstr "Balance âgée des clients"
 
 #. module: partner_aging
 #: model:ir.actions.act_window,name:partner_aging.action_customer_aging_tree
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_customer_aging_ad_search
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_customer_aging_ad_tree
 msgid "Customer Aging Date wise"
-msgstr ""
+msgstr "Balance âgée des clients par échéances"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__date
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_supplier__date
 msgid "Date"
-msgstr ""
+msgstr "Date"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__max_days_overdue
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_supplier__max_days_overdue
 msgid "Days Outstanding"
-msgstr ""
+msgstr "Jours exceptionnels"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__display_name
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_date__display_name
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_supplier__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nom d'affichage"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__date_due
@@ -132,26 +134,26 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_customer_aging_ad_tree
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_supplier_aging_ad_tree
 msgid "Due Date"
-msgstr ""
+msgstr "Date d'échéance"
 
 #. module: partner_aging
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_customer_aging_ad_search
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_supplier_aging_ad_search
 msgid "Group By..."
-msgstr ""
+msgstr "Regrouper par..."
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__id
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_date__id
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_supplier__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__invoice_id
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_supplier__invoice_id
 msgid "Invoice"
-msgstr ""
+msgstr "Facture"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__inv_date_due
@@ -159,47 +161,47 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_customer_aging_ad_tree
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_supplier_aging_ad_tree
 msgid "Invoice Date"
-msgstr ""
+msgstr "Date de la facture"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer____last_update
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_date____last_update
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_supplier____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Dernière modification le"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_date__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Dernière modification par"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_date__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Mis à jour le"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__not_due
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_supplier__not_due
 msgid "Not Due Yet"
-msgstr ""
+msgstr "Pas encore dû"
 
 #. module: partner_aging
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_customer_aging_ad_tree
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_supplier_aging_ad_tree
 msgid "Open Document"
-msgstr ""
+msgstr "Ouvrir le document"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__invoice_ref
 msgid "Our Invoice"
-msgstr ""
+msgstr "Nos factures"
 
 #. module: partner_aging
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_customer_aging_ad_search
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_supplier_aging_ad_search
 msgid "Overdue"
-msgstr ""
+msgstr "Retard"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__partner_id
@@ -207,34 +209,34 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_customer_aging_ad_search
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_supplier_aging_ad_search
 msgid "Partner"
-msgstr ""
+msgstr "Partenaire"
 
 #. module: partner_aging
 #: model:ir.model,name:partner_aging.model_res_partner_aging_customer
 msgid "Res Partner Aging Customer"
-msgstr ""
+msgstr "Res Partner Balance Agée Client"
 
 #. module: partner_aging
 #: model:ir.model,name:partner_aging.model_res_partner_aging_date
 msgid "Res Partner Aging Date"
-msgstr ""
+msgstr "Res Partner Balance Agée Date"
 
 #. module: partner_aging
 #: model:ir.model,name:partner_aging.model_res_partner_aging_supplier
 msgid "Res Partner Aging Supplier"
-msgstr ""
+msgstr "Res Partner Balance Agée Fournisseur"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__salesman
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_supplier__salesman
 msgid "Sales Rep"
-msgstr ""
+msgstr "Commercial"
 
 #. module: partner_aging
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_supplier_aging_ad_search
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_supplier_aging_ad_tree
 msgid "Supplier"
-msgstr ""
+msgstr "Fournisseur"
 
 #. module: partner_aging
 #: model:ir.actions.act_window,name:partner_aging.action_supplier_aging_date
@@ -242,18 +244,18 @@ msgstr ""
 #: model:ir.ui.menu,name:partner_aging.menu_supplier_aging_wizard
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_supplier_aging_date
 msgid "Supplier Aging"
-msgstr ""
+msgstr "Balance âgée des fournisseurs"
 
 #. module: partner_aging
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_supplier_aging_ad_search
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_supplier_aging_ad_tree
 msgid "Supplier Aging Date wise"
-msgstr ""
+msgstr "Balance âgée des fournisseurs par échéances"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_supplier__invoice_ref
 msgid "Their Invoice"
-msgstr ""
+msgstr "Leurs factures"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__total
@@ -263,10 +265,10 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_supplier_aging_ad_search
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_supplier_aging_ad_tree
 msgid "Total"
-msgstr ""
+msgstr "Total"
 
 #. module: partner_aging
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_partner_aging_date
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_supplier_aging_date
 msgid "or"
-msgstr ""
+msgstr "ou"
