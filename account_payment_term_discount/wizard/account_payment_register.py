@@ -23,7 +23,7 @@ class AccountPaymentRegister(models.TransientModel):
             res.update({"invoice_id": record.id, "discount_amt": record.discount_amt})
         return res
 
-    @api.onchange("amount", "payment_difference", "payment_date")
+    @api.onchange("amount", "payment_difference", "payment_date", "currency_id")
     def onchange_payment_amount(self):
         if (
             self.invoice_id
@@ -38,13 +38,26 @@ class AccountPaymentRegister(models.TransientModel):
 
             for line in self.invoice_id.invoice_payment_term_id.line_ids:
                 # Check payment date discount validation
-                invoice_date = fields.Date.from_string(self.invoice_id.invoice_date)
+                invoice_date = self.invoice_id.invoice_date
                 till_discount_date = invoice_date + relativedelta(
                     days=line.discount_days
                 )
-                payment_date = fields.Date.from_string(self.payment_date)
+                payment_date = self.payment_date
                 discount_amt = self.invoice_id.discount_amt
-
+                amount_residual = self.invoice_id.amount_residual
+                if self.invoice_id.currency_id.id != self.currency_id.id:
+                    discount_amt = self.invoice_id.currency_id._convert(
+                        discount_amt,
+                        self.currency_id,
+                        company=self.invoice_id.company_id,
+                        date=self.invoice_id.date,
+                    )
+                    amount_residual = self.invoice_id.currency_id._convert(
+                        amount_residual,
+                        self.currency_id,
+                        company=self.invoice_id.company_id,
+                        date=self.invoice_id.date,
+                    )
                 payment_difference = self.payment_difference
                 self.payment_difference = 0.0
 
@@ -84,9 +97,7 @@ class AccountPaymentRegister(models.TransientModel):
                 else:
                     self.payment_difference = payment_difference
 
-                self.amount = self.invoice_id.amount_residual - abs(
-                    self.payment_difference
-                )
+                self.amount = amount_residual - abs(self.payment_difference)
 
     def action_create_payments(self):
         active_id = self.env.context.get("active_ids", [])
