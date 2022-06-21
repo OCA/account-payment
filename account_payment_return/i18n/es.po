@@ -7,14 +7,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-27 10:34+0000\n"
-"PO-Revision-Date: 2018-03-27 10:34+0000\n"
-"Last-Translator: <>\n"
+"PO-Revision-Date: 2022-06-21 22:05+0000\n"
+"Last-Translator: Luis D. Lafaurie <luislafaurie@hotmail.com>\n"
 "Language-Team: \n"
-"Language: \n"
+"Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_needaction
@@ -380,9 +381,9 @@ msgstr "Nombre del cliente"
 #. module: account_payment_return
 #. openerp-web
 #: code:addons/account_payment_return/static/src/xml/account_payment_return.xml:0
-#, fuzzy, python-format
+#, python-format
 msgid "Payment Info"
-msgstr "Devolución de cobro"
+msgstr "Información de pago"
 
 #. module: account_payment_return
 #: code:addons/account_payment_return/models/payment_return.py:0
