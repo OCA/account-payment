@@ -11,19 +11,6 @@ from .slimpay_utils import SlimpayClient
 _logger = logging.getLogger(__name__)
 
 
-class AccountPayment(models.Model):
-    _inherit = 'account.payment'
-
-    def _do_payment(self):
-        """Add current payment in the context for use in the payment
-        transaction, that may make good use of:
-        - the in or out direction
-        - the `communication` field
-        """
-        _self = self.with_context({'tx_from_payment': self})
-        return super(AccountPayment, _self)._do_payment()
-
-
 class PaymentAcquirerSlimpay(models.Model):
     _inherit = 'payment.acquirer'
 
@@ -111,15 +98,15 @@ class SlimpayTransaction(models.Model):
 
     def _is_out_transaction(self):
         self.ensure_one()
-        payment = self.env.context.get('tx_from_payment')
+        payment = self.payment_id
         return bool(payment) and payment.payment_type == 'outbound'
 
     @api.multi
     def _label(self):
         """Try hard to return a useful label, using:
         - the 'slimpay_payin_label' of the context, if any
-        - the `communication` field of the payment found in
-          'tx_from_payment' key of the context, if any
+        - the `communication` field of the payment found in the
+          transaction's payment, if any
         - the `reference` field of current transaction, if not empty
         - 'TR%d' % self.id as a last resort.
         """
@@ -127,7 +114,7 @@ class SlimpayTransaction(models.Model):
         if 'slimpay_payin_label' in context:
             return context['slimpay_payin_label']
         else:
-            payment = context.get('tx_from_payment')
+            payment = self.payment_id
             if payment and payment.communication:
                 return payment.communication
             return self.reference or 'TR%d' % self.id
