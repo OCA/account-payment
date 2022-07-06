@@ -67,10 +67,12 @@
                                 widget="one2many_list"
                                 context="{'default_date': date}"
                             >>
-                                <tree string="Payment return lines" editable="top">
+                                <tree string="Payment return lines" editable="top"
+                                        decoration-success="reason_nature=='success'" decoration-danger="reason_nature!='success'">
                                     <field name="date" />
                                     <field name="concept" />
                                     <field name="reason_id" />
+                                    <field name="reason_nature" invisible="1" />
                                     <field name="reason_additional_information" />
                                     <field name="partner_name" invisible="1" />
                                     <field name="partner_id" />

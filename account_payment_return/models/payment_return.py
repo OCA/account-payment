@@ -213,7 +213,7 @@ class PaymentReturn(models.Model):
                 return
             lines_to_reconcile.reconcile()
 
-    def action_confirm(self):
+    def action_confirm(self, return_line_filter=lambda retln: not retln.reason_id or retln.reason_id.reason_nature!='success'):
         self.ensure_one()
         # Check for incomplete lines
         if self.line_ids.filtered(lambda x: not x.move_line_ids):
@@ -225,7 +225,7 @@ class PaymentReturn(models.Model):
         move = self.env["account.move"].create(self._prepare_return_move_vals())
         total_amount = 0.0
         all_move_lines = self.env["account.move.line"]
-        for return_line in self.line_ids:
+        for return_line in self.line_ids.filtered(return_line_filter):
             move_line2_vals = return_line._prepare_return_move_line_vals(move)
             move_line2 = move_line_model.with_context(check_move_validity=False).create(
                 move_line2_vals
@@ -300,6 +300,7 @@ class PaymentReturnLine(models.Model):
     reason_id = fields.Many2one(
         comodel_name="payment.return.reason", string="Return reason"
     )
+    reason_nature = fields.Selection(related="reason_id.reason_nature", store=True)
     reason_additional_information = fields.Char(
         string="Return reason (info)", help="Additional information on return reason."
     )

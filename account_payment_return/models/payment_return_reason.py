@@ -10,6 +10,10 @@ class PaymentReturnReason(models.Model):
 
     code = fields.Char()
     name = fields.Char(string="Reason", translate=True)
+    reason_nature = fields.Selection([
+        ('success',             'Success'),
+        ('generic_failure',     'Generic Failure'),
+        ], string="Return reason nature", required=True, default='generic_failure',)
 
     @api.model
     def name_search(self, name, args=None, operator="ilike", limit=100):
