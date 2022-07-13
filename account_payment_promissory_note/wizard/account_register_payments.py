@@ -26,10 +26,11 @@ class AccountRegisterPayments(models.TransientModel):
 
     @api.onchange("promissory_note")
     def _onchange_promissory_note(self):
-        super()._onchange_promissory_note()
+        result = super()._onchange_promissory_note()
         if not self.date_due and self.promissory_note:
             active_ids = self._context.get("active_ids")
             invoices = self.env["account.move"].browse(active_ids)
             same_partner = len(invoices.mapped("partner_id")) == 1
             if invoices and self.group_payment and same_partner:
                 self.date_due = max(invoices.mapped("invoice_date_due"))
+        return result

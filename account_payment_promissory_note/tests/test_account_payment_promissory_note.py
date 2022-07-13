@@ -9,9 +9,7 @@ from odoo.tests.common import TransactionCase
 class TestAccountPaymentPromissoryNote(TransactionCase):
     def setUp(self):
         super().setUp()
-        self.payment_method = self.env["account.payment.method"].create(
-            {"name": "Test_MTH", "code": "TST", "payment_type": "inbound"}
-        )
+        self.payment_method = self.env.ref("account.account_payment_method_manual_in")
         self.company = self.env.ref("base.main_company")
         partner = self.env.ref("base.partner_demo")
         self.invoice_1 = self.env["account.move"].create(
@@ -20,7 +18,7 @@ class TestAccountPaymentPromissoryNote(TransactionCase):
                 "partner_id": partner.id,
                 "invoice_date": "2020-09-14",
                 "invoice_date_due": "2020-09-23",
-                "type": "out_invoice",
+                "move_type": "out_invoice",
                 "invoice_line_ids": [(0, 0, {"name": "Test", "price_unit": 20})],
             }
         )
@@ -31,7 +29,7 @@ class TestAccountPaymentPromissoryNote(TransactionCase):
                 "partner_id": partner.id,
                 "invoice_date": "2020-09-14",
                 "invoice_date_due": "2020-09-22",
-                "type": "out_invoice",
+                "move_type": "out_invoice",
                 "invoice_line_ids": [(0, 0, {"name": "Test", "price_unit": 20})],
             }
         )
@@ -39,7 +37,7 @@ class TestAccountPaymentPromissoryNote(TransactionCase):
         self.payment_1 = self.env["account.payment"].create(
             {
                 "payment_type": "inbound",
-                "payment_method_id": self.payment_method.id,
+                "payment_method_line_id": self.payment_method.id,
                 "amount": 50.00,
                 "journal_id": self.env["account.journal"]
                 .search([("type", "=", "sale")], limit=1)
@@ -50,7 +48,7 @@ class TestAccountPaymentPromissoryNote(TransactionCase):
             {
                 "invoice_ids": [(4, self.invoice_1.id), (4, self.invoice_2.id)],
                 "payment_type": "inbound",
-                "payment_method_id": self.payment_method.id,
+                "payment_method_line_id": self.payment_method.id,
                 "amount": 50.00,
                 "journal_id": self.env["account.journal"]
                 .search([("type", "=", "sale")], limit=1)
@@ -88,7 +86,7 @@ class TestAccountPaymentPromissoryNote(TransactionCase):
                 active_ids=[self.invoice_1.id, self.invoice_2.id],
             )
         )
-        wiz_form.payment_method_id = self.payment_method
+        wiz_form.payment_method_line_id = self.payment_method
         wiz_form.promissory_note = True
         wiz_form.group_payment = True
         wiz_form.date_due = datetime.datetime.strptime("2020-09-23", "%Y-%m-%d").date()

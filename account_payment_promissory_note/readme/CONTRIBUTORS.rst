@@ -3,3 +3,4 @@
   * Sergio Teruel
   * Alexandre Díaz
   * Carlos Roca
+  * César A. Sánchez
