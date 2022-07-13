@@ -10,9 +10,13 @@ class AccountPayment(models.Model):
     _inherit = ["account.payment", "account.promissory.note.mixin"]
 
     promissory_note = fields.Boolean(
-        readonly=True, states={"draft": [("readonly", False)]},
+        readonly=True,
+        states={"draft": [("readonly", False)]},
     )
-    date_due = fields.Date(readonly=True, states={"draft": [("readonly", False)]},)
+    date_due = fields.Date(
+        readonly=True,
+        states={"draft": [("readonly", False)]},
+    )
 
     def _prepare_payment_moves(self):
         res = super()._prepare_payment_moves()

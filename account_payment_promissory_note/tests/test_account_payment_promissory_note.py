@@ -96,4 +96,4 @@ class TestAccountPaymentPromissoryNote(TransactionCase):
         action_vals = wiz.create_payments()
         payment = self.env["account.payment"].search(action_vals["domain"])
         for line in payment.move_line_ids:
-            self.assertEquals(line.date_maturity, payment.date_due)
+            self.assertEqual(line.date_maturity, payment.date_due)
