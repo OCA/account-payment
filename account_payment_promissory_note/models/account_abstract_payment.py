@@ -9,9 +9,7 @@ class AccountAbstractPayment(models.AbstractModel):
     _name = "account.promissory.note.mixin"
     _description = "Promissory Note Mixin"
 
-    promissory_note = fields.Boolean(
-        string="Promissory Note",
-    )
+    promissory_note = fields.Boolean()
     date_due = fields.Date(
         string="Due Date",
     )

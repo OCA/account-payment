@@ -28,9 +28,10 @@ class AccountPayment(models.Model):
 
     @api.onchange("promissory_note")
     def _onchange_promissory_note(self):
-        super()._onchange_promissory_note()
+        result = super()._onchange_promissory_note()
         if not self.date_due and self.promissory_note:
             invoices = self.invoice_ids
             same_partner = len(invoices.mapped("partner_id")) == 1
             if invoices and same_partner:
                 self.date_due = max(invoices.mapped("invoice_date_due"))
+        return result

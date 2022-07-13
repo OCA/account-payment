@@ -2,9 +2,9 @@
 <odoo>
     <record id="view_account_payment_form_multi" model="ir.ui.view">
         <field name="model">account.payment.register</field>
-        <field name="inherit_id" ref="account.view_account_payment_form_multi" />
+        <field name="inherit_id" ref="account.view_account_payment_register_form" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='payment_date']" position="after">
+            <field name="payment_date" position="after">
                 <field name="promissory_note" />
                 <field
                     name="date_due"
@@ -16,7 +16,7 @@
                 >
                     Set date due to all payments or empty to select last date due of each partner invoices group
                 </span>
-            </xpath>
+            </field>
         </field>
     </record>
 </odoo>
