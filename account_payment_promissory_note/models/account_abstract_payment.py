@@ -9,8 +9,12 @@ class AccountAbstractPayment(models.AbstractModel):
     _name = "account.promissory.note.mixin"
     _description = "Promissory Note Mixin"
 
-    promissory_note = fields.Boolean(string="Promissory Note",)
-    date_due = fields.Date(string="Due Date",)
+    promissory_note = fields.Boolean(
+        string="Promissory Note",
+    )
+    date_due = fields.Date(
+        string="Due Date",
+    )
 
     @api.onchange("promissory_note")
     def _onchange_promissory_note(self):
