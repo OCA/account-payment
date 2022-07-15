@@ -247,12 +247,10 @@ class AccountMove(models.Model):
     def create(self, values):
         rec = super().create(values)
         payment_term = rec.invoice_payment_term_id
-        if not payment_term or self.move_type not in DISCOUNT_ALLOWED_TYPES:
+        if not payment_term or rec.move_type not in DISCOUNT_ALLOWED_TYPES:
             return rec
 
-        if not rec.discount_percent:
-            rec.discount_percent = payment_term.discount_percent
-
-        if not rec.discount_delay:
-            rec.discount_delay = payment_term.discount_delay
+        for field in ("discount_percent", "discount_delay"):
+            if field not in values:
+                rec[field] = payment_term[field]
         return rec
