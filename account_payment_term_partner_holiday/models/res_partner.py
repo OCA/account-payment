@@ -87,22 +87,18 @@ class ResPartnerHoliday(models.Model):
     )
     day_from = fields.Selection(
         selection="_selection_days",
-        string="Day from",
         required=True,
     )
     month_from = fields.Selection(
         selection="_selection_months",
-        string="Month from",
         required=True,
     )
     day_to = fields.Selection(
         selection="_selection_days",
-        string="Day to",
         required=True,
     )
     month_to = fields.Selection(
         selection="_selection_months",
-        string="Month to",
         required=True,
     )
 
