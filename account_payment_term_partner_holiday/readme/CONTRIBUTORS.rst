@@ -2,3 +2,4 @@
 
   * Víctor Martínez
   * Pedro M. Baeza
+  * Luis D. Lafaurie
