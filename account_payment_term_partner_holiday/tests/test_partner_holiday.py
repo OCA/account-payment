@@ -220,7 +220,7 @@ class TestPartnerHoliday(common.TransactionCase):
             self.env["account.move"].with_context(
                 default_journal_id=self.journal.id,
                 default_partner_id=partner_id,
-                default_type="out_invoice",
+                default_move_type="out_invoice",
                 default_invoice_date=date,
             ),
         )

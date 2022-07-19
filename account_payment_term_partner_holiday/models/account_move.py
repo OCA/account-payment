@@ -11,7 +11,7 @@ class AccountMove(models.Model):
         _self = self
         if self.partner_id:
             _self = self.with_context(move_partner_id=self.partner_id.id)
-        super(AccountMove, _self)._recompute_payment_terms_lines()
+        return super(AccountMove, _self)._recompute_payment_terms_lines()
 
     @api.onchange("invoice_date_due")
     def _onchange_invoice_date_due_account_payment_term_partner_holiday(self):
@@ -35,11 +35,9 @@ class AccountMove(models.Model):
                 self.invoice_date_due = new_invoice_date_due
 
     def action_post(self):
-        """Inject a context for getting the partner when computing payment term.
-        The trade-off is that we should split the call to super record per record,
-        but it shouldn't impact in performance.
-        """
-        for item in self:
-            _item = item.with_context(move_partner_id=item.partner_id.id)
-            super(AccountMove, _item).action_post()
-        return True
+        """Inject a context for getting the partner when computing payment term."""
+        for move in self:
+            super(
+                AccountMove, self.with_context(move_partner_id=move.partner_id.id)
+            ).action_post()
+        return False
