@@ -7,20 +7,20 @@ Account Payment Term Partner Holiday
    !! changes will be overwritten.                   !!
    !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 
-.. |badge1| image:: https://img.shields.io/badge/maturity-Production%2FStable-green.png
+.. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
-    :alt: Production/Stable
+    :alt: Beta
 .. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--payment-lightgray.png?logo=github
-    :target: https://github.com/OCA/account-payment/tree/13.0/account_payment_term_partner_holiday
+    :target: https://github.com/OCA/account-payment/tree/15.0/account_payment_term_partner_holiday
     :alt: OCA/account-payment
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/account-payment-13-0/account-payment-13-0-account_payment_term_partner_holiday
+    :target: https://translation.odoo-community.org/projects/account-payment-15-0/account-payment-15-0-account_payment_term_partner_holiday
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
-    :target: https://runbot.odoo-community.org/runbot/96/13.0
+    :target: https://runbot.odoo-community.org/runbot/96/15.0
     :alt: Try me on Runbot
 
 |badge1| |badge2| |badge3| |badge4| |badge5| 
@@ -38,16 +38,16 @@ Usage
 
 To use this module, you need to:
 
-#. Go to 'Contacts' and create or edit some record.
-#. Go to 'Sales & Purchases' tab and create some holidays records.
+#. Go to 'Contacts' and create a record or edit an existing one.
+#. Go to 'Sales & Purchase' tab and create some holiday periods.
 #. Go to 'Invoicing > Customers > Invoices' or to 'Invoicing > Vendors >
-   Invoices' and create or edit some record.
-#. If the computed due date is inside a holidays period, it's moved to the first available date.
+   Invoices' and create or edit a record.
+#. If the computed due date is within a holiday period, it's moved to the first available date.
 
 Known issues / Roadmap
 ======================
 
-* Due dates for invoices are not updated when new holidays are created after.
+* Due dates for invoices are not updated when new holiday periods are created.
 
 Bug Tracker
 ===========
@@ -55,7 +55,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/account-payment/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/account-payment/issues/new?body=module:%20account_payment_term_partner_holiday%0Aversion:%2013.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/account-payment/issues/new?body=module:%20account_payment_term_partner_holiday%0Aversion:%2015.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -74,6 +74,7 @@ Contributors
 
   * Víctor Martínez
   * Pedro M. Baeza
+  * Luis D. Lafaurie
 
 Maintainers
 ~~~~~~~~~~~
@@ -96,6 +97,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-victoralmau| 
 
-This module is part of the `OCA/account-payment <https://github.com/OCA/account-payment/tree/13.0/account_payment_term_partner_holiday>`_ project on GitHub.
+This module is part of the `OCA/account-payment <https://github.com/OCA/account-payment/tree/15.0/account_payment_term_partner_holiday>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
