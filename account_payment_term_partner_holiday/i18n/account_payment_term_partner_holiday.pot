@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 13.0\n"
+"Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -42,12 +42,12 @@ msgstr ""
 
 #. module: account_payment_term_partner_holiday
 #: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__day_from
-msgid "Day from"
+msgid "Day From"
 msgstr ""
 
 #. module: account_payment_term_partner_holiday
 #: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__day_to
-msgid "Day to"
+msgid "Day To"
 msgstr ""
 
 #. module: account_payment_term_partner_holiday
@@ -80,7 +80,7 @@ msgstr ""
 
 #. module: account_payment_term_partner_holiday
 #: model:ir.model,name:account_payment_term_partner_holiday.model_account_move
-msgid "Journal Entries"
+msgid "Journal Entry"
 msgstr ""
 
 #. module: account_payment_term_partner_holiday
@@ -124,17 +124,17 @@ msgstr ""
 
 #. module: account_payment_term_partner_holiday
 #: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__month_from
-msgid "Month from"
+msgid "Month From"
+msgstr ""
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__month_to
+msgid "Month To"
 msgstr ""
 
 #. module: account_payment_term_partner_holiday
 #: model:ir.model.constraint,message:account_payment_term_partner_holiday.constraint_res_partner_holiday_month_consistency
 msgid "Month from should be higher than month from"
-msgstr ""
-
-#. module: account_payment_term_partner_holiday
-#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__month_to
-msgid "Month to"
 msgstr ""
 
 #. module: account_payment_term_partner_holiday
