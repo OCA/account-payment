@@ -1,0 +1,23 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="view_res_partner_form_holiday_ids" model="ir.ui.view">
+        <field name="name">res.partner.holiday_ids</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.view_partner_property_form" />
+        <field name="arch" type="xml">
+            <field name="property_payment_term_id" position="after">
+                <field
+                    name="holiday_ids"
+                    attrs="{'invisible': [('parent_id','!=', False)]}"
+                >
+                    <tree editable="bottom">
+                        <field name="day_from" />
+                        <field name="month_from" />
+                        <field name="day_to" />
+                        <field name="month_to" />
+                    </tree>
+                </field>
+            </field>
+        </field>
+    </record>
+</odoo>
