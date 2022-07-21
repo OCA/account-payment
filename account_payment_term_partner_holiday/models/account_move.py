@@ -41,4 +41,5 @@ class AccountMove(models.Model):
         """
         for item in self:
             _item = item.with_context(move_partner_id=item.partner_id.id)
-            return super(AccountMove, _item).action_post()
+            super(AccountMove, _item).action_post()
+        return True
