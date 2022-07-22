@@ -3,7 +3,7 @@
 
 {
     "name": "Account Payment Term Partner Holiday",
-    "version": "13.0.1.2.0",
+    "version": "13.0.1.2.1",
     "website": "https://github.com/OCA/account-payment",
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "license": "AGPL-3",
