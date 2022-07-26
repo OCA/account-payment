@@ -12,6 +12,7 @@ class AccountMove(models.Model):
     returned_payment = fields.Boolean(
         string="Payment returned",
         help="Invoice has been included on a payment that has been returned later.",
+        copy=False,
     )
 
     def check_payment_return(self):
@@ -79,6 +80,7 @@ class AccountMoveLine(models.Model):
         relation="account_partial_reconcile_account_move_line_rel",
         column1="move_line_id",
         column2="partial_reconcile_id",
+        copy=False,
     )
 
 
