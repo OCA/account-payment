@@ -78,7 +78,7 @@ Contributors
 * Maxime Chambreuil <mchambreuil@opensourceintegrators.com>
 * Nikul Chaudhary <nikul.chaudhary.serpentcs@gmail.com>
 * Ammar Offcewala <aofficewala@opensourceintegrators.com>
-* Hardik Suthat <hsuthar@opensourceintegrators.com>
+* Hardik Suthar <hsuthar@opensourceintegrators.com>
 
 Other credits
 ~~~~~~~~~~~~~
