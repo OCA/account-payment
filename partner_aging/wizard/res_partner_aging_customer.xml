@@ -42,7 +42,6 @@
             <tree
                 create="false"
                 delete="false"
-                string="Customer Aging Date wise"
                 decoration-danger="max_days_overdue > 0 and total > 0"
             >
                 <field name="partner_id" string="Customer" />

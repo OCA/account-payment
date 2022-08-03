@@ -1,4 +1,4 @@
-# Copyright 2012 Open Source Integrators
+# Copyright 2022 Open Source Integrators
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import fields, models, tools
@@ -11,11 +11,11 @@ class ResPartnerAgingCustomer(models.Model):
     _order = "partner_id"
 
     partner_id = fields.Many2one("res.partner", "Partner", readonly=True)
-    avg_days_overdue = fields.Integer("Avg Days Overdue", readonly=True)
-    date = fields.Date("Date", readonly=True)
+    avg_days_overdue = fields.Integer(readonly=True)
+    date = fields.Date(readonly=True)
     date_due = fields.Date("Due Date", readonly=True)
     inv_date_due = fields.Date("Invoice Date", readonly=True)
-    total = fields.Float("Total", readonly=True)
+    total = fields.Float(readonly=True)
     not_due = fields.Float("Not Due Yet", readonly=True)
     days_due_01to30 = fields.Float("1/30", readonly=True)
     days_due_31to60 = fields.Float("31/60", readonly=True)
@@ -372,4 +372,4 @@ class ResPartnerAgingCustomer(models.Model):
 
     def init(self):
         self.execute_aging_query()
-        super(ResPartnerAgingCustomer, self).init()
+        return super(ResPartnerAgingCustomer, self).init()
