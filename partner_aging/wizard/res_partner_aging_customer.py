@@ -152,12 +152,11 @@ class ResPartnerAgingCustomer(models.Model):
                 ON DaysDue.id = aml.id
                 LEFT JOIN account_move as ai ON ai.id = aml.move_id
                 WHERE ac.user_type_id in
-                    (select id from account_account_type where
-                    type = 'receivable') and aml.date
-                    <= '{}' AND ai.state = 'posted' AND
-                    (ai.payment_state != 'paid' OR
-                    aml.full_reconcile_id IS NULL) AND ai.move_type = 'out_invoice'
-                    and ai.partner_id IS NOT NULL
+                    (select id from account_account_type where type = 'receivable') AND
+                    aml.date <= '{}' AND ai.state = 'posted' AND
+                    (ai.payment_state != 'paid' OR aml.full_reconcile_id IS NULL) AND
+                    ai.move_type IN ('out_invoice', 'out_refund') AND
+                    ai.partner_id IS NOT NULL
                     GROUP BY aml.partner_id,
                     aml.id, ai.name, days_due, ai.invoice_user_id, ai.id UNION
                     SELECT aml.id, aml.partner_id as partner_id,

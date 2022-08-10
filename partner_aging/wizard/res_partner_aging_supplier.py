@@ -164,13 +164,12 @@ class ResPartnerAgingSupplier(models.Model):
                 LEFT JOIN account_move as ai ON ai.id = aml.move_id
                 WHERE
                 ac.user_type_id in (select id from account_account_type where
-                type = 'payable')
-                AND aml.date <= '{}'
-                AND ai.state = 'posted' AND
-                (ai.payment_state != 'paid' OR
-                aml.full_reconcile_id IS NULL)
-                AND ai.move_type = 'in_invoice'
-                and ai.partner_id IS NOT NULL
+                type = 'payable') AND
+                aml.date <= '{}' AND
+                ai.state = 'posted' AND
+                (ai.payment_state != 'paid' OR aml.full_reconcile_id IS NULL) AND
+                ai.move_type IN ('in_invoice', 'in_refund') AND
+                ai.partner_id IS NOT NULL
                 GROUP BY aml.partner_id, aml.id, ai.name, days_due,
                 ai.invoice_user_id, ai.id
                 UNION
@@ -306,11 +305,11 @@ class ResPartnerAgingSupplier(models.Model):
                 LEFT JOIN account_move as ai ON ai.id = aml.move_id
                 WHERE
                 ac.user_type_id in (select id from account_account_type where
-                type = 'payable')
-                AND aml.date <= '{}'
-                AND aml.partner_id IS NULL 
-                and ai.partner_id IS NOT NULL
-                AND aml.full_reconcile_id is NULL
+                type = 'payable') AND
+                aml.date <= '{}' AND
+                aml.partner_id IS NULL AND
+                ai.partner_id IS NOT NULL AND
+                aml.full_reconcile_id is NULL
                 GROUP BY aml.partner_id, aml.id, ai.name, days_due,
                 ai.invoice_user_id, ai.id
                 UNION
