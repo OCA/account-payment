@@ -45,7 +45,7 @@ class InvoicePaymentLine(models.TransientModel):
         due_or_balance = rec.balance - rec.amount
 
         # apply discount
-        if due_or_balance <= discount_amount:
+        if round(due_or_balance, 2) <= discount_amount:
             overpayment = discount_amount - due_or_balance
             rec.payment_difference = discount_amount - overpayment
             rec.payment_difference_handling = "reconcile"
