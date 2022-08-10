@@ -156,7 +156,7 @@ class ResPartnerAgingCustomer(models.Model):
                     type = 'receivable') and aml.date
                     <= '{}' AND ai.state = 'posted' AND
                     (ai.payment_state != 'paid' OR
-                    aml.full_reconcile_id IS NULL) AND ai.move_type = 'out_invoice'
+                    aml.full_reconcile_id IS NULL) AND ai.move_type IN ('out_invoice' , 'out_refund')
                     GROUP BY aml.partner_id,
                     aml.id, ai.name, days_due, ai.invoice_user_id, ai.id UNION
                     SELECT aml.id, aml.partner_id as partner_id,
