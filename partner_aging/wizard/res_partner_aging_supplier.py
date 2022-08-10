@@ -168,7 +168,7 @@ class ResPartnerAgingSupplier(models.Model):
                 AND aml.date <= '{}'
                 AND ai.state = 'posted' AND
                 (ai.payment_state != 'paid' OR aml.full_reconcile_id IS NULL) AND
-                ai.move_type IN ('in_invoice' , 'in_refund') AND
+                ai.move_type IN ('in_invoice', 'in_refund') AND
                 ai.partner_id IS NOT NULL
                 GROUP BY aml.partner_id, aml.id, ai.name, days_due,
                 ai.invoice_user_id, ai.id
