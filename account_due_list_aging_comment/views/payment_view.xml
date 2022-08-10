@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2015-2017 Eficent Business and IT Consulting Services
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+        <record id="view_payments_tree" model="ir.ui.view">
+            <field name="name">Payments</field>
+            <field name="model">account.move.line</field>
+            <field name="inherit_id" ref="account_due_list.view_payments_tree" />
+            <field name="arch" type="xml">
+                <tree position="attributes">
+                    <attribute name="editable">top</attribute>
+                </tree>
+                <field name="reconciled" position="after">
+                    <field name="aging_comments" />
+                </field>
+            </field>
+        </record>
+
+</odoo>

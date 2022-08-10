@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2021-07-09 21:49+0000\n"
+"PO-Revision-Date: 2021-10-23 18:35+0000\n"
 "Last-Translator: Ignacio Buioli <ibuioli@gmail.com>\n"
 "Language-Team: none\n"
 "Language: es_AR\n"
@@ -215,7 +215,7 @@ msgstr "Registrar Pago"
 #: model:ir.model.fields,field_description:account_payment_term_discount.field_account_bank_statement_line__shipping_lines_total
 #: model:ir.model.fields,field_description:account_payment_term_discount.field_account_move__shipping_lines_total
 #: model:ir.model.fields,field_description:account_payment_term_discount.field_account_payment__shipping_lines_total
-msgid "Shippling Lines Total"
+msgid "Shipping Lines Total"
 msgstr "Total de Líneas de Envío"
 
 #. module: account_payment_term_discount
@@ -235,6 +235,9 @@ msgid ""
 "This method should only be called to process a single invoice's payment."
 msgstr ""
 "Este método solo debe invocarse para procesar el pago de una única factura."
+
+#~ msgid "Shippling Lines Total"
+#~ msgstr "Total de Líneas de Envío"
 
 #~ msgid "Exclude Shippling Amount"
 #~ msgstr "Excluir Monto del Envío"
