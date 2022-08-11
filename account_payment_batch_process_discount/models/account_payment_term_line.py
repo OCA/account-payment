@@ -17,15 +17,15 @@ class AccountPaymentTermLine(models.Model):
                 invoice_ids = self.env["account.move"].search(
                     [
                         ("state", "=", "posted"),
-                        ("payment_term_id", "=", item.payment_id.id),
+                        ("invoice_payment_term_id", "=", item.payment_id.id),
                     ]
                 )
                 for inv in invoice_ids:
                     # Check payment date discount validation
-                    invoice_date = fields.Date.from_string(inv.date_invoice)
+                    invoice_date = fields.Date.from_string(inv.invoice_date)
                     # Update discount validity days
                     for line in inv.invoice_payment_term_id.line_ids:
-                        inv.valid_discount_date = invoice_date + relativedelta(
+                        inv.discount_date = invoice_date + relativedelta(
                             days=line.discount_days
                         )
         return res
