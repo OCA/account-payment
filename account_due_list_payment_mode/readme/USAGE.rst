@@ -1,2 +1,2 @@
-#. Go to *Invoicing > Accounting > Payments and due list* and you will see the new
-   field payment mode in the due list.
+#. Go to **Invoicing > Accounting > Payments and due list** and you will find
+   the new field *Payment Mode*.
