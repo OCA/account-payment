@@ -11,7 +11,7 @@
 
 {
     "name": "Account Payment Returns",
-    "version": "14.0.1.0.4",
+    "version": "15.0.1.0.0",
     "summary": "Manage the return of your payments",
     "license": "AGPL-3",
     "depends": ["mail", "account"],
@@ -24,12 +24,16 @@
     "data": [
         "security/ir.model.access.csv",
         "security/account_payment_return_security.xml",
-        "views/assets.xml",
         "views/payment_return_view.xml",
         "views/account_journal_view.xml",
         "data/ir_sequence_data.xml",
         "views/account_move_views.xml",
     ],
     "qweb": ["static/src/xml/account_payment_return.xml"],
+    "assets": {
+        "web.assets_backend": [
+            "account_payment_return/static/src/scss/account_payment_return.scss",
+        ],
+    },
     "installable": True,
 }
