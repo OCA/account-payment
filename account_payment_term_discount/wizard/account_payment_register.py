@@ -4,7 +4,7 @@ from dateutil.relativedelta import relativedelta
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
-from odoo.tools.float_utils import float_round
+from odoo.tools.float_utils import float_compare, float_round
 
 
 class AccountPaymentRegister(models.TransientModel):
@@ -12,6 +12,7 @@ class AccountPaymentRegister(models.TransientModel):
 
     invoice_id = fields.Many2one(comodel_name="account.move", string="Invoice")
     discount_amt = fields.Monetary(store=True)
+    amount_helper = fields.Float(string="Amount helper", required=False)
 
     @api.model
     def default_get(self, fields):
@@ -26,8 +27,17 @@ class AccountPaymentRegister(models.TransientModel):
 
     @api.onchange("amount", "payment_difference", "payment_date", "currency_id")
     def onchange_payment_amount(self):
+        amount_change = (
+            float_compare(
+                self.amount,
+                self.amount_helper,
+                precision_rounding=self.currency_id.rounding,
+            )
+            != 0
+        )
         if (
-            self.invoice_id
+            amount_change
+            and self.invoice_id
             and self.invoice_id.invoice_payment_term_id
             and self.invoice_id.invoice_payment_term_id.is_discount
             and self.invoice_id.invoice_payment_term_id.line_ids
@@ -104,6 +114,8 @@ class AccountPaymentRegister(models.TransientModel):
                     self.payment_difference = payment_difference
 
                 self.amount = amount_residual - self.payment_difference
+
+                self.amount_helper = self.amount
 
     def action_create_payments(self):
         active_id = self.env.context.get("active_ids", [])

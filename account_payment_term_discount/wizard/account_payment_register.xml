@@ -8,6 +8,9 @@
                 <field name="invoice_id" invisible="1" />
                 <field name="discount_amt" invisible="1" />
             </field>
+            <field name="amount" position="after">
+                <field name="amount_helper" invisible="1" />
+            </field>
         </field>
     </record>
 </odoo>
