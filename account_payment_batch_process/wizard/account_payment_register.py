@@ -193,9 +193,9 @@ class AccountPaymentRegister(models.TransientModel):
                     writeoff_amount += values["payment_difference"]
             res = {
                 "journal_id": self.journal_id.id,
-                "payment_method_id": "payment_method_id" in group_data
-                and group_data["payment_method_id"]
-                or self.payment_method_id.id,
+                "payment_method_line_id": "payment_method_line_id" in group_data
+                and group_data["payment_method_line_id"]
+                or self.payment_method_line_id.id,
                 "date": self.payment_date,
                 "ref": group_data["memo"],
                 "payment_type": self.payment_type,
