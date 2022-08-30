@@ -3,17 +3,17 @@
 from dateutil.relativedelta import relativedelta
 
 from odoo import fields
-from odoo.tests import common,tagged
+from odoo.tests import common, tagged
+
 
 @tagged("post_install", "-at_install")
-
 class TestPaymentTermDiscount(common.TransactionCase):
     def setUp(self):
         super().setUp()
 
         # Refs
         self.main_company = self.env.ref("base.main_company")
-        self.partner_id =self.env["res.partner"].create({"name": "Test"})
+        self.partner_id = self.env["res.partner"].create({"name": "Test"})
         self.account_account_type_model = self.env["account.account.type"]
         self.account_account_model = self.env["account.account"]
 
@@ -63,8 +63,6 @@ class TestPaymentTermDiscount(common.TransactionCase):
                 "taxes_id": False,
             }
         )
-
-
 
         Journal = self.env["account.journal"]
         journal_sale = Journal.search([("type", "=", "sale")], limit=1)
@@ -268,7 +266,7 @@ class TestPaymentTermDiscount(common.TransactionCase):
         self.assertIn(self.customer_invoice.payment_state, ["in_payment", "paid"])
 
     def test_customer_invoice_payment_term_no_discount(self):
-        """ Create customer invoice and verify workflow without discount """
+        """Create customer invoice and verify workflow without discount"""
         # Update payment date that does not match with condition within 10 days
         payment_date = self.customer_invoice.invoice_date + relativedelta(days=15)
         self._do_payment(self.customer_invoice, 950.0, payment_date)
