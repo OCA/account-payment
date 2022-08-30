@@ -1,0 +1,1 @@
+odoo-addon-account_payment_term_discount @ git+https://github.com/OCA/account-payment@refs/pull/652/head#subdirectory=setup/account_payment_term_discount
