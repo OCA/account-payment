@@ -3,8 +3,9 @@
 from dateutil.relativedelta import relativedelta
 
 from odoo import fields
-from odoo.tests import common
+from odoo.tests import common,tagged
 
+@tagged("post_install", "-at_install")
 
 class TestPaymentTermDiscount(common.TransactionCase):
     def setUp(self):
@@ -12,7 +13,58 @@ class TestPaymentTermDiscount(common.TransactionCase):
 
         # Refs
         self.main_company = self.env.ref("base.main_company")
-        self.partner_id = self.env.ref("base.res_partner_4")
+        self.partner_id =self.env["res.partner"].create({"name": "Test"})
+        self.account_account_type_model = self.env["account.account.type"]
+        self.account_account_model = self.env["account.account"]
+
+        # Create account type
+        self.account_type_receivable = self.account_account_type_model.create(
+            {
+                "name": "Test Receivable",
+                "type": "receivable",
+                "internal_group": "asset",
+            }
+        )
+        self.account_type_payable = self.account_account_type_model.create(
+            {
+                "name": "Test Payable",
+                "type": "receivable",
+                "internal_group": "liability",
+            }
+        )
+
+        self.account_receivable = self.account_account_model.create(
+            {
+                "name": "Test Receivable",
+                "code": "TEST_AR",
+                "user_type_id": self.account_type_receivable.id,
+                "reconcile": True,
+                "company_id": self.main_company.id,
+            }
+        )
+        self.account_payable = self.account_account_model.create(
+            {
+                "name": "Test Payable",
+                "code": "TEST_AP",
+                "user_type_id": self.account_type_payable.id,
+                "reconcile": True,
+                "company_id": self.main_company.id,
+            }
+        )
+        # Assign account to partner
+        self.partner_id.property_account_receivable_id = self.account_receivable
+        self.partner_id.property_account_payable_id = self.account_payable
+
+        self.product = self.env["product.product"].create(
+            {
+                "name": "Test Product",
+                "type": "service",
+                "list_price": 100,
+                "taxes_id": False,
+            }
+        )
+
+
 
         Journal = self.env["account.journal"]
         journal_sale = Journal.search([("type", "=", "sale")], limit=1)
@@ -141,7 +193,7 @@ class TestPaymentTermDiscount(common.TransactionCase):
                         0,
                         0,
                         {
-                            "product_id": self.env.ref("product.product_product_5").id,
+                            "product_id": self.product.id,
                             "quantity": 10.0,
                             "account_id": self.income_account.id,
                             "name": "product test 5",
@@ -175,7 +227,7 @@ class TestPaymentTermDiscount(common.TransactionCase):
                         0,
                         0,
                         {
-                            "product_id": self.env.ref("product.product_product_5").id,
+                            "product_id": self.product.id,
                             "quantity": 10.0,
                             "account_id": self.income_account.id,
                             "name": "Bill Line",
@@ -216,7 +268,7 @@ class TestPaymentTermDiscount(common.TransactionCase):
         self.assertIn(self.customer_invoice.payment_state, ["in_payment", "paid"])
 
     def test_customer_invoice_payment_term_no_discount(self):
-        """Create customer invoice and verify workflow without discount"""
+        """ Create customer invoice and verify workflow without discount """
         # Update payment date that does not match with condition within 10 days
         payment_date = self.customer_invoice.invoice_date + relativedelta(days=15)
         self._do_payment(self.customer_invoice, 950.0, payment_date)
