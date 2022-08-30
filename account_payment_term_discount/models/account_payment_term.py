@@ -83,7 +83,7 @@ class AccountPaymentTermLine(models.Model):
         related="payment_id.is_discount", string="Early Payment Discount", readonly=True
     )
     discount = fields.Float("Discount (%)", digits=(4, 2))
-    discount_days = fields.Integer("Discount Days")
+    discount_days = fields.Integer()
     discount_income_account_id = fields.Many2one(
         "account.account",
         string="Discount on Purchases Account",
