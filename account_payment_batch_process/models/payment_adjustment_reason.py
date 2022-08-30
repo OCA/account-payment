@@ -9,9 +9,9 @@ class PaymentAdjustmentReason(models.Model):
     _rec_name = "code"
     _description = "Payment Adjustment Reason"
 
-    code = fields.Char(string="Code", required=True, copy=False)
-    account_id = fields.Many2one("account.account", string="Account")
-    reason = fields.Text(string="Reason", copy=False)
+    code = fields.Char(required=True, copy=False)
+    account_id = fields.Many2one("account.account")
+    reason = fields.Text(copy=False)
 
     def name_get(self):
         result = []
