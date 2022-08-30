@@ -4,10 +4,10 @@
 
 {
     "name": "Account Payment Terms Discount",
-    "version": "14.0.1.1.7",
+    "version": "15.0.1.1.5",
     "license": "AGPL-3",
     "category": "Accounting & Finance",
-    "depends": ["purchase", "account"],
+    "depends": ["purchase", "account", "stock"],
     "author": "Open Source Integrators, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-payment",
     "data": [
@@ -18,6 +18,5 @@
         "views/product_view.xml",
     ],
     "installable": True,
-    "development_status": "Beta",
     "maintainers": ["bodedra"],
 }
