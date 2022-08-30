@@ -48,7 +48,7 @@ class InvoicePaymentLine(models.TransientModel):
     partner_id = fields.Many2one("res.partner", string="Supplier Name", required=True)
     balance = fields.Float("Balance Amount", required=True)
     wizard_id = fields.Many2one("account.payment.register", string="Wizard")
-    amount = fields.Float("Amount", required=True)
+    amount = fields.Float(required=True)
     check_amount_in_words = fields.Char(string="Amount in Words")
     payment_difference = fields.Float(
         compute="_compute_payment_difference", string="Difference Amount"
@@ -65,8 +65,8 @@ class InvoicePaymentLine(models.TransientModel):
         domain=[("deprecated", "!=", True)],
         copy=False,
     )
-    reason_code = fields.Many2one("payment.adjustment.reason", string="Reason Code")
-    note = fields.Text("Note")
+    reason_code = fields.Many2one("payment.adjustment.reason")
+    note = fields.Text()
 
     @api.onchange("amount")
     def _onchange_amount(self):

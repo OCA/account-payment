@@ -402,7 +402,7 @@ class AccountPaymentRegister(models.TransientModel):
             ):
                 context.update({"active_ids": list(group_data[partner]["inv_val"])})
             payment = (
-                self.env["account.payment"]
+                self.env["account.payment"]  # pylint: disable=context-overridden
                 .with_context(context)
                 .create(self.get_payment_values(group_data=group_data[partner]))
             )
