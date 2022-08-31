@@ -3,17 +3,17 @@
 from dateutil.relativedelta import relativedelta
 
 from odoo import fields
-from odoo.tests import common,tagged
+from odoo.tests import common, tagged
+
 
 @tagged("post_install", "-at_install")
-
 class TestPaymentTermDiscount(common.TransactionCase):
     def setUp(self):
         super().setUp()
 
         # Refs
         self.main_company = self.env.ref("base.main_company")
-        self.partner_id =self.env["res.partner"].create({"name": "Test"})
+        self.partner_id = self.env["res.partner"].create({"name": "Test"})
         self.account_account_type_model = self.env["account.account.type"]
         self.account_account_model = self.env["account.account"]
 
@@ -64,8 +64,6 @@ class TestPaymentTermDiscount(common.TransactionCase):
             }
         )
 
-
-
         Journal = self.env["account.journal"]
         journal_sale = Journal.search([("type", "=", "sale")], limit=1)
         journal_purchase = Journal.search([("type", "=", "purchase")], limit=1)
@@ -87,7 +85,7 @@ class TestPaymentTermDiscount(common.TransactionCase):
 
         # Create users
         self.account_manager = self.user_model.with_context(
-            {"no_reset_password": True}
+            no_reset_password=True
         ).create(
             dict(
                 name="Adviser",
@@ -252,7 +250,7 @@ class TestPaymentTermDiscount(common.TransactionCase):
         }
         PaymentWizard = self.env["account.payment.register"]
         view = "account.view_account_payment_register_form"
-        with common.Form(PaymentWizard.with_context(ctx), view=view) as f:
+        with common.Form(PaymentWizard.with_context(**ctx), view=view) as f:
             f.amount = amount
             f.payment_date = date
         payment = f.save()
@@ -268,7 +266,7 @@ class TestPaymentTermDiscount(common.TransactionCase):
         self.assertIn(self.customer_invoice.payment_state, ["in_payment", "paid"])
 
     def test_customer_invoice_payment_term_no_discount(self):
-        """ Create customer invoice and verify workflow without discount """
+        """Create customer invoice and verify workflow without discount"""
         # Update payment date that does not match with condition within 10 days
         payment_date = self.customer_invoice.invoice_date + relativedelta(days=15)
         self._do_payment(self.customer_invoice, 950.0, payment_date)
