@@ -16,3 +16,10 @@ class Payment(models.Model):
         if self.force_destination_account_id:
             vals['account_id'] = self.force_destination_account_id.id
         return vals
+
+    @api.multi
+    def action_draft(self):
+        res = super(Payment, self).action_draft()
+        for p in self:
+            if not p.force_destination_account_id and p.destination_account_id:
+                p.force_destination_account_id = p.destination_account_id.id
