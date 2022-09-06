@@ -1,10 +1,10 @@
 # Copyright 2017-2021 Creu Blanca <https://creublanca.es/>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
-from odoo.tests.common import Form, SavepointCase
+from odoo.tests.common import Form, TransactionCase
 
 
-class TestSessionPayInvoice(SavepointCase):
+class TestSessionPayInvoice(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
