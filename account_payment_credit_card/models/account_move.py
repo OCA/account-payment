@@ -36,5 +36,8 @@ class AccountMove(models.Model):
                 if result:
                     # Create new move lines
                     for vals in result:
-                        self.env["account.move.line"].create(vals)
+                        self.env["account.move.line"].with_context(
+                            check_move_validity=False,
+                            skip_account_move_synchronization=True,
+                        ).create(vals)
         return super(AccountMove, self)._post(soft)
