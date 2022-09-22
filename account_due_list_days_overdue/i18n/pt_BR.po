@@ -11,16 +11,16 @@ msgstr ""
 "Project-Id-Version: Odoo Server 8.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-02 06:22+0000\n"
-"PO-Revision-Date: 2019-08-26 15:01+0000\n"
-"Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
-"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
-"teams/23907/pt_BR/)\n"
+"PO-Revision-Date: 2022-09-22 18:07+0000\n"
+"Last-Translator: Douglas Custódio <douglascstd@yahoo.com>\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/teams/"
+"23907/pt_BR/)\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.8\n"
+"X-Generator: Weblate 4.3.2\n"
 
 #. module: account_due_list_days_overdue
 #: model:ir.model,name:account_due_list_days_overdue.model_account_overdue_term
@@ -45,7 +45,7 @@ msgstr "Dias de atraso"
 #. module: account_due_list_days_overdue
 #: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term__display_name
 msgid "Display Name"
-msgstr "Mostrar Nome"
+msgstr "Nome para Mostrar"
 
 #. module: account_due_list_days_overdue
 #: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term__from_day
