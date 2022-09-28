@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 Moduon Team S.L.
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl). -->
+<data>
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">Settings for payment notification</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <div id="account_batch_payment" position="after">
+                <div
+                    class="col-xs-12 col-md-6 o_setting_box"
+                    id="account_payment_notification"
+                >
+                    <div class="o_setting_left_pane">
+                        <field name="account_payment_notification_required" />
+                    </div>
+                    <div class="o_setting_right_pane">
+                        <div class="content-group">
+                            <label for="account_payment_notification_required" />
+                            <span
+                                class="fa fa-lg fa-building-o"
+                                title="Values set here are company-specific."
+                                aria-label="Values set here are company-specific."
+                                groups="base.group_multi_company"
+                                role="img"
+                            />
+                            <div class="text-muted">
+                                Enable to forbid marking payments as sent if they cannot be notified using the chosen method.
+                            </div>
+                        </div>
+                        <div class="content-group mt16">
+                            <label for="account_payment_notification_method" />
+                            <span
+                                class="fa fa-lg fa-building-o"
+                                title="Values set here are company-specific."
+                                aria-label="Values set here are company-specific."
+                                groups="base.group_multi_company"
+                                role="img"
+                            />
+                            <div class="text-muted">
+                                Choose the method to notify payments automatically when marked as sent.
+                            </div>
+                            <field name="account_payment_notification_method" />
+                        </div>
+                        <div class="content-group mt16">
+                            <label for="account_payment_notification_automatic" />
+                            <span
+                                class="fa fa-lg fa-building-o"
+                                title="Values set here are company-specific."
+                                aria-label="Values set here are company-specific."
+                                groups="base.group_multi_company"
+                                role="img"
+                            />
+                            <div class="text-muted">
+                                Choose the automatism level when notifying sent payments.
+                            </div>
+                            <field name="account_payment_notification_automatic" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </field>
+    </record>
+
+</data>
