@@ -482,11 +482,9 @@ class AccountPaymentRegister(models.TransientModel):
                         }
                     )
                     inv._compute_payments_widget_reconciled_info()
-
-        view_id = self.env["ir.model.data"].get_object_reference(
-            "account_payment_batch_process",
-            "view_account_payment_tree_nocreate",
-        )[1]
+        view_id = self.env.ref(
+            "account_payment_batch_process.view_account_payment_tree_nocreate"
+        ).id
         return {
             "name": _("Payments"),
             "view_type": "form",
