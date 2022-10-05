@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-04 15:41+0000\n"
-"PO-Revision-Date: 2020-11-04 16:45+0100\n"
+"POT-Creation-Date: 2022-10-05 07:47+0000\n"
+"PO-Revision-Date: 2022-10-05 09:51+0200\n"
 "Last-Translator: Carlos <carlos.roca@tecnativa.com>\n"
 "Language-Team: \n"
 "Language: es\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 2.3\n"
 
 #. module: account_check_printing_report_base
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
@@ -23,44 +23,21 @@ msgid "<b>Check Amount:</b>"
 msgstr "<b>Cantidad:</b>"
 
 #. module: account_check_printing_report_base
-#: model:ir.model,name:account_check_printing_report_base.model_account_payment_check_report
-msgid "Account Payment Check Report"
-msgstr ""
-
-#. module: account_check_printing_report_base
-#: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_bank_statement_import_journal_creation__check_print_auto
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_journal__check_print_auto
 msgid "Automatic check printing"
 msgstr "Impresión de cheque automático"
 
 #. module: account_check_printing_report_base
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
 msgid "Balance Due"
 msgstr "Saldo a pagar"
 
 #. module: account_check_printing_report_base
-#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.account_payment_check_report_form
-#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.account_payment_check_report_tree
+#: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_journal__account_check_printing_layout
+#: model:ir.model.fields,field_description:account_check_printing_report_base.field_res_company__account_check_printing_layout
 msgid "Check Layout"
 msgstr "Plantilla de cheque"
-
-#. module: account_check_printing_report_base
-#: model:ir.actions.act_window,name:account_check_printing_report_base.action_account_payment_check_report
-#: model:ir.ui.menu,name:account_check_printing_report_base.account_payment_check_report_menu
-msgid "Check Layouts"
-msgstr "Plantillas de cheque"
-
-#. module: account_check_printing_report_base
-#: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_bank_statement_import_journal_creation__check_layout_id
-#: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_journal__check_layout_id
-#: model:ir.model.fields,field_description:account_check_printing_report_base.field_res_company__check_layout_id
-msgid "Check format"
-msgstr "Formato de cheque"
-
-#. module: account_check_printing_report_base
-#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.res_company_form_view_inherited
-msgid "Check printing layout"
-msgstr "Plantillas de cheque"
 
 #. module: account_check_printing_report_base
 #: model:ir.model,name:account_check_printing_report_base.model_res_company
@@ -68,22 +45,11 @@ msgid "Companies"
 msgstr "Compañías"
 
 #. module: account_check_printing_report_base
-#: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_payment_check_report__create_uid
-msgid "Created by"
-msgstr "Creado por"
-
-#. module: account_check_printing_report_base
-#: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_payment_check_report__create_date
-msgid "Created on"
-msgstr "Creado el"
-
-#. module: account_check_printing_report_base
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
 msgid "Dear partner"
 msgstr "Estimado proveedor"
 
 #. module: account_check_printing_report_base
-#: model:ir.model.fields,help:account_check_printing_report_base.field_account_bank_statement_import_journal_creation__check_print_auto
 #: model:ir.model.fields,help:account_check_printing_report_base.field_account_journal__check_print_auto
 msgid ""
 "Default check for the company is printed automatically when invoice payment "
@@ -98,26 +64,10 @@ msgid "Description"
 msgstr "Descripción"
 
 #. module: account_check_printing_report_base
-#: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_payment_check_report__display_name
-#: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_promissory_footer_a4__display_name
-#: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_report_check_base__display_name
-#: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_report_check_base_a4__display_name
-msgid "Display Name"
-msgstr "Nombre Mostrado"
-
-#. module: account_check_printing_report_base
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
 msgid "Due Date"
 msgstr "Fecha de vencimiento"
-
-#. module: account_check_printing_report_base
-#: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_payment_check_report__id
-#: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_promissory_footer_a4__id
-#: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_report_check_base__id
-#: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_report_check_base_a4__id
-msgid "ID"
-msgstr "ID"
 
 #. module: account_check_printing_report_base
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
@@ -135,29 +85,6 @@ msgid "Journal"
 msgstr "Diario"
 
 #. module: account_check_printing_report_base
-#: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_payment_check_report____last_update
-#: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_promissory_footer_a4____last_update
-#: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_report_check_base____last_update
-#: model:ir.model.fields,field_description:account_check_printing_report_base.field_report_account_check_printing_report_base_report_check_base_a4____last_update
-msgid "Last Modified on"
-msgstr "Última modificación en"
-
-#. module: account_check_printing_report_base
-#: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_payment_check_report__write_uid
-msgid "Last Updated by"
-msgstr "Última actualización por"
-
-#. module: account_check_printing_report_base
-#: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_payment_check_report__write_date
-msgid "Last Updated on"
-msgstr "Última actualización el"
-
-#. module: account_check_printing_report_base
-#: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_payment_check_report__name
-msgid "Name"
-msgstr "Nombre"
-
-#. module: account_check_printing_report_base
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
 msgid "Original Amount"
@@ -165,6 +92,7 @@ msgstr "Importe"
 
 #. module: account_check_printing_report_base
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
 msgid "Payment"
 msgstr "Pago"
 
@@ -184,6 +112,22 @@ msgid "Payments"
 msgstr "Pagos"
 
 #. module: account_check_printing_report_base
+#: model:ir.model.fields.selection,name:account_check_printing_report_base.selection__account_journal__account_check_printing_layout__account_check_printing_report_base_action_report_check_base
+#: model:ir.model.fields.selection,name:account_check_printing_report_base.selection__res_company__account_check_printing_layout__account_check_printing_report_base_action_report_check_base
+#, fuzzy
+#| msgid "Payment Check Base"
+msgid "Print Check Base"
+msgstr "Cheque de pago Base"
+
+#. module: account_check_printing_report_base
+#: model:ir.model.fields.selection,name:account_check_printing_report_base.selection__account_journal__account_check_printing_layout__account_check_printing_report_base_action_report_check_base_a4
+#: model:ir.model.fields.selection,name:account_check_printing_report_base.selection__res_company__account_check_printing_layout__account_check_printing_report_base_action_report_check_base_a4
+#, fuzzy
+#| msgid "Payment Check Base A4"
+msgid "Print Check Base A4"
+msgstr "Cheque de pago Base A4"
+
+#. module: account_check_printing_report_base
 #: model:ir.model,name:account_check_printing_report_base.model_account_payment_register
 msgid "Register Payment"
 msgstr "Registrar pago"
@@ -201,17 +145,23 @@ msgstr "Cheque de pago Base A4"
 #. module: account_check_printing_report_base
 #: model:ir.model,name:account_check_printing_report_base.model_report_account_check_printing_report_base_promissory_footer_a4
 msgid "Report Promissory Note Print for A4"
-msgstr ""
+msgstr "Informe de impresión de pagarés para A4"
 
 #. module: account_check_printing_report_base
-#: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_payment_check_report__report
-msgid "Report name"
-msgstr "Nombre del reporte"
+#: model:ir.model.fields,help:account_check_printing_report_base.field_account_journal__account_check_printing_layout
+#: model:ir.model.fields,help:account_check_printing_report_base.field_res_company__account_check_printing_layout
+msgid ""
+"Select the format corresponding to the check paper you will be printing your "
+"checks on.\n"
+"In order to disable the printing feature, select 'None'."
+msgstr ""
+"Seleccione el tamaño correspondiente al tamaño de cheque que va a imprimir.\n"
+"Para desactivar la función de impresión, seleccione 'Ninguno'."
 
 #. module: account_check_printing_report_base
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
 msgid "Waiting for your agreement, regards."
-msgstr "Esperando su acuerdo, saludos"
+msgstr "Esperando su acuerdo, saludos."
 
 #. module: account_check_printing_report_base
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
