@@ -7,7 +7,7 @@
 
 {
     "name": "Account Check Printing Report Base",
-    "version": "13.0.2.1.2",
+    "version": "15.0.1.0.0",
     "license": "AGPL-3",
     "author": "Eficent,"
     "Serpent Consulting Services Pvt. Ltd.,"
@@ -20,11 +20,8 @@
     "data": [
         "security/ir.model.access.csv",
         "data/report_paperformat.xml",
-        "data/account_payment_check_report_data.xml",
         "views/account_journal_view.xml",
         "views/report_check_base.xml",
-        "views/res_company_view.xml",
-        "views/account_payment_check_report_view.xml",
         "report/account_check_writing_report.xml",
     ],
     "installable": True,
