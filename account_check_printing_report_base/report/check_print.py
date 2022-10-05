@@ -57,10 +57,10 @@ class ReportCheckPrint(models.AbstractModel):
         total_amount_to_show = 0.0
         # We pay out
         if line.matched_credit_ids:
-            amount = sum([p.amount for p in line.matched_credit_ids])
+            amount = sum(p.amount for p in line.matched_credit_ids)
         # We receive payment
         elif line.matched_debit_ids:
-            amount = sum([p.amount for p in line.matched_debit_ids])
+            amount = sum(p.amount for p in line.matched_debit_ids)
 
         amount_to_show = payment.company_id.currency_id.with_context(
             date=payment.payment_date
