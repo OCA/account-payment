@@ -44,7 +44,8 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
             {"name": "Test Check Layout By Journal"}
         )
         self.payment_method_check = self.payment_method_model.search(
-            [("code", "=", "check_printing")], limit=1,
+            [("code", "=", "check_printing")],
+            limit=1,
         )
         if not self.payment_method_check:
             self.payment_method_check = self.payment_method_model.create(
@@ -151,10 +152,10 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
         with self.assertRaises(UserError):
             self.payment.print_checks()
         content = self.action_check_report.render_qweb_pdf(self.payment.id)
-        self.assertEquals(content[1], "html")
+        self.assertEqual(content[1], "html")
 
     def test_02_check_printing_with_layout(self):
-        """ Test if the check is printed when the layout is specified for a
+        """Test if the check is printed when the layout is specified for a
         company and journal."""
 
         self.company.check_layout_id = self.check_report
@@ -164,25 +165,25 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
             self.payment.print_checks()
         except UserError as e:
             e = e.name
-        self.assertEquals(e, False)
+        self.assertEqual(e, False)
 
         content = self.action_check_report.render_qweb_pdf(self.payment.id)
-        self.assertEquals(content[1], "html")
+        self.assertEqual(content[1], "html")
 
     def test_03_fotmat_form(self):
-        """ Test formatting on check form"""
+        """Test formatting on check form"""
         # Convert date to formatting from partner : 2020-01-20 > 01/20/2020
         today = fields.Date.today()
         date = self.report._format_date_to_partner_lang(today, self.partner1.id)
-        self.assertEquals(date, today.strftime("%m/%d/%Y"))
+        self.assertEqual(date, today.strftime("%m/%d/%Y"))
         # Fill starts in amount
         amount = 100.0
         amount_in_word = "One Hundred Euro"
         stars = 100 - len(amount_in_word)
         amount1 = self.report.fill_stars_number(str(amount))
         amount2 = self.report.fill_stars(amount_in_word)
-        self.assertEquals(amount1, "***** %s *" % amount)
-        self.assertEquals(amount2, "{} {}".format(amount_in_word, ("*" * stars)))
+        self.assertEqual(amount1, "***** %s *" % amount)
+        self.assertEqual(amount2, "{} {}".format(amount_in_word, ("*" * stars)))
 
     def test_num2words(self):
         report_model = "report.account_check_printing_report_base.promissory_footer_a4"
