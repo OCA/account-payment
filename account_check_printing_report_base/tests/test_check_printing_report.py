@@ -5,7 +5,7 @@
 import time
 
 from odoo import fields
-from odoo.exceptions import UserError
+from odoo.exceptions import RedirectWarning
 from odoo.tests.common import TransactionCase
 
 
@@ -33,15 +33,14 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
         self.acc_payable = self.env.ref("account.data_account_type_payable")
         self.acc_expense = self.env.ref("account.data_account_type_expenses")
         self.product = self.env.ref("product.product_product_4")
-        self.check_report = self.env.ref(
-            "account_check_printing_report_base.account_payment_check_report_base"
+        self.check_report = (
+            "account_check_printing_report_base.action_report_check_base"
+        )
+        self.check_report_a4 = (
+            "account_check_printing_report_base.action_report_check_base_a4"
         )
         self.action_check_report = self.env.ref(
             "account_check_printing_report_base.action_report_check_base"
-        )
-
-        self.check_report_by_journal = self.check_report.copy(
-            {"name": "Test Check Layout By Journal"}
         )
         self.payment_method_check = self.payment_method_model.search(
             [("code", "=", "check_printing")],
@@ -65,15 +64,16 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
                 "type": "bank",
                 "code": "bank",
                 "check_manual_sequencing": True,
-                "outbound_payment_method_ids": [
-                    (4, self.payment_method_check.id, None)
-                ],
+                # "outbound_payment_method_ids": [
+                #     (4, self.payment_method_check.id, None)
+                # ],
             }
         )
         self.acc_payable = self._create_account(
             "account payable test", "ACPRB1", self.acc_payable, True
         )
         self.vendor_bill = self._create_vendor_bill(self.acc_payable)
+        self.vendor_bill.invoice_date = time.strftime("%Y") + "-07-15"
         self.acc_expense = self._create_account(
             "account expense test", "ACPRB2", self.acc_expense, False
         )
@@ -82,14 +82,14 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
         self.vendor_bill.action_post()
         # Pay the invoice using a bank journal associated to the main company
         ctx = {"active_model": "account.move", "active_ids": [self.vendor_bill.id]}
-        register_payments = self.payment_model.with_context(ctx).create(
+        register_payments = self.payment_model.with_context(**ctx).create(
             {
-                "payment_date": time.strftime("%Y") + "-07-15",
+                "date": time.strftime("%Y") + "-07-15",
                 "journal_id": self.bank_journal.id,
-                "payment_method_id": self.payment_method_check.id,
+                "payment_method_line_id": self.payment_method_check.id,
             }
         )
-        register_payments.post()
+        register_payments.action_post()
         self.payment = self.payment_model.search([], order="id desc", limit=1)
 
     def _create_account(self, name, code, user_type, reconcile):
@@ -107,7 +107,7 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
     def _create_vendor_bill(self, account):
         vendor_bill = self.account_invoice_model.create(
             {
-                "type": "in_invoice",
+                "move_type": "in_invoice",
                 "partner_id": self.partner1.id,
                 "currency_id": self.company.currency_id.id,
                 "journal_id": self.purchase_journal.id,
@@ -140,34 +140,34 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
     def test_01_check_printing_no_layout(self):
         """Test if the exception raises when no layout is set for a
         company or for the journal."""
-        with self.assertRaises(UserError):
-            self.payment.print_checks()
+        with self.assertRaises(RedirectWarning):
+            self.payment.do_print_checks()
 
         # Set check layout verification by journal
         ICPSudo = self.env["ir.config_parameter"].sudo()
         ICPSudo.set_param(
             "account_check_printing_report_base.check_layout_verification", "by_journal"
         )
-        self.assertFalse(self.payment.journal_id.check_layout_id)
-        with self.assertRaises(UserError):
-            self.payment.print_checks()
-        content = self.action_check_report.render_qweb_pdf(self.payment.id)
+        self.assertFalse(self.payment.journal_id.account_check_printing_layout)
+        with self.assertRaises(RedirectWarning):
+            self.payment.do_print_checks()
+        content = self.action_check_report._render_qweb_pdf(self.payment.id)
         self.assertEqual(content[1], "html")
 
     def test_02_check_printing_with_layout(self):
         """Test if the check is printed when the layout is specified for a
         company and journal."""
 
-        self.company.check_layout_id = self.check_report
-        self.payment.journal_id.check_layout_id = self.check_report_by_journal
+        self.company.account_check_printing_layout = self.check_report
+        self.payment.journal_id.account_check_printing_layout = self.check_report_a4
         e = False
         try:
-            self.payment.print_checks()
-        except UserError as e:
+            self.payment.do_print_checks()
+        except RedirectWarning as e:
             e = e.name
         self.assertEqual(e, False)
 
-        content = self.action_check_report.render_qweb_pdf(self.payment.id)
+        content = self.action_check_report._render_qweb_pdf(self.payment.id)
         self.assertEqual(content[1], "html")
 
     def test_03_fotmat_form(self):

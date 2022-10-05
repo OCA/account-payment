@@ -5,10 +5,19 @@
 
 from odoo import fields, models
 
+REPORTS_DEFINED = [
+    ("account_check_printing_report_base.action_report_check_base", "Print Check Base"),
+    (
+        "account_check_printing_report_base.action_report_check_base_a4",
+        "Print Check Base A4",
+    ),
+]
+REPORTS_DEFINED_ONDELETE = {r[0]: "set default" for r in REPORTS_DEFINED}
+
 
 class ResCompany(models.Model):
     _inherit = "res.company"
 
-    check_layout_id = fields.Many2one(
-        comodel_name="account.payment.check.report", string="Check format"
+    account_check_printing_layout = fields.Selection(
+        selection_add=REPORTS_DEFINED, ondelete=REPORTS_DEFINED_ONDELETE
     )

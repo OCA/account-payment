@@ -10,16 +10,20 @@ from odoo import models
 class AccountRegisterPayments(models.TransientModel):
     _inherit = "account.payment.register"
 
-    def create_payment(self):
-        res = super(AccountRegisterPayments, self).create_payment()
+    def action_create_payments(self):
+        res = super().action_create_payments()
         if (
             self.journal_id.check_print_auto
-            and self.payment_method_id.code == "check_printing"
+            and self.payment_method_line_id.code == "check_printing"
         ):
             payment = self.env["account.payment"].search(
                 [
                     ("journal_id", "=", self.journal_id.id),
-                    ("payment_method_id.name", "like", self.payment_method_id.name),
+                    (
+                        "payment_method_line_id.name",
+                        "like",
+                        self.payment_method_line_id.name,
+                    ),
                 ],
                 order="id desc",
                 limit=1,
@@ -32,30 +36,20 @@ class AccountPayment(models.Model):
     _inherit = "account.payment"
 
     def do_print_checks(self):
-
         for rec in self:
-
-            if rec.journal_id.check_layout_id:
-                return (
-                    self.env["ir.actions.report"]
-                    ._get_report_from_name(rec.journal_id.check_layout_id.report)
-                    .report_action(self)
+            if rec.journal_id.account_check_printing_layout:
+                report_action = self.env.ref(
+                    rec.journal_id.account_check_printing_layout, False
                 )
+                self.write({"is_move_sent": True})
+                return report_action.report_action(self)
+        return super().do_print_checks()
 
-            elif rec.company_id.check_layout_id:
-                return (
-                    self.env["ir.actions.report"]
-                    ._get_report_from_name(rec.company_id.check_layout_id.report)
-                    .report_action(self)
-                )
-
-        return super(AccountPayment, self).do_print_checks()
-
-    def post(self):
-        res = super(AccountPayment, self).post()
+    def action_post(self):
+        res = super().action_post()
         recs = self.filtered(
             lambda x: x.journal_id.check_print_auto
-            and x.payment_method_id.code == "check_printing"
+            and x.payment_method_line_id.code == "check_printing"
         )
         if recs:
             return recs.do_print_checks()
