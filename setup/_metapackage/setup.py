@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo-addon-account_due_list>=15.0dev,<15.1dev',
+        'odoo-addon-account_payment_notification>=15.0dev,<15.1dev',
         'odoo-addon-account_payment_term_extension>=15.0dev,<15.1dev',
         'odoo-addon-account_payment_term_partner_holiday>=15.0dev,<15.1dev',
         'odoo-addon-account_payment_widget_amount>=15.0dev,<15.1dev',
