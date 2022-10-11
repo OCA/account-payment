@@ -2,10 +2,13 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
     "name": "Account financial discount",
+    "summary": "Handle financial discounts for early payments",
     "version": "14.0.1.0.0",
+    "development_status": "Production/Stable",
     "category": "Account",
     "website": "https://github.com/OCA/account-payment",
     "author": "Camptocamp, Odoo Community Association (OCA)",
+    "maintainers": ["grindtildeath"],
     "license": "AGPL-3",
     "installable": True,
     "depends": ["account"],
