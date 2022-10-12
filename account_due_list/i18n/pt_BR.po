@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-12-03 00:13+0000\n"
-"PO-Revision-Date: 2022-09-22 18:07+0000\n"
+"PO-Revision-Date: 2022-10-12 02:35+0000\n"
 "Last-Translator: Douglas Custódio <douglascstd@yahoo.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/oca/"
 "OCA-account-payment-8-0/language/pt_BR/)\n"
@@ -74,7 +74,7 @@ msgstr "Fatura comercial"
 #. module: account_due_list
 #: model:ir.model,name:account_due_list.model_account_move_line
 msgid "Journal Item"
-msgstr "Itens Diários"
+msgstr "Item de Diário"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
