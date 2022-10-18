@@ -4,6 +4,7 @@
 # Copyright 2014 Markus Schneider <markus.schneider@initos.com>
 # Copyright 2016 Tecnativa - Carlos Dauden
 # Copyright 2017 Tecnativa - Luis M. Ontalba
+# Copyright 2022 NuoBiT Solutions, S.L. - Eric Antones <eantones@nuobit.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
@@ -226,17 +227,20 @@ class PaymentReturn(models.Model):
         total_amount = 0.0
         all_move_lines = self.env["account.move.line"]
         # First loop to generate the move lines and compute the total amount
+        return_line_map = {}
         for return_line in self.line_ids:
             move_line2_vals = return_line._prepare_return_move_line_vals(move)
             move_line2 = move_line_model.with_context(check_move_validity=False).create(
                 move_line2_vals
             )
             total_amount += move_line2.debit
+            return_line_map[return_line] = move_line2
         move_line_vals = self._prepare_move_line(move, total_amount)
         # credit_move_line: credit on transfer or bank account
         credit_move_line = move_line_model.create(move_line_vals)
         move._post()
         for return_line in self.line_ids:
+            move_line2 = return_line_map[return_line]
             for move_line in return_line.move_line_ids:
                 # move_line: credit on customer account (from payment move)
                 # returned_moves: debit on customer account (from invoice move)

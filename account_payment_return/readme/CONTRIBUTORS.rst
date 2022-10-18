@@ -10,3 +10,6 @@
   * Luis M. Ontalba
   * Ernesto Tejeda
   * João Marques
+* `NuoBiT Solutions, S.L. <https://www.nuobit.com>`_:
+
+  * Eric Antones <eantones@nuobit.com>
