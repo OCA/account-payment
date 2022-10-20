@@ -22,6 +22,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [account_due_list](account_due_list/) | 15.0.1.0.1 |  | List of open credits and debits, with due date
+[account_due_list_payment_mode](account_due_list_payment_mode/) | 15.0.1.0.0 |  | Payment Due List Payment Mode
 [account_payment_batch_process](account_payment_batch_process/) | 15.0.1.0.0 |  | Account Batch Payments Processing for Customers Invoices and Supplier Invoices
 [account_payment_notification](account_payment_notification/) | 15.0.1.0.0 | [![yajo](https://github.com/yajo.png?size=30px)](https://github.com/yajo) | Notifiy upcoming payments
 [account_payment_term_extension](account_payment_term_extension/) | 15.0.1.0.0 |  | Adds rounding, months, weeks and multiple payment days properties on payment term lines
