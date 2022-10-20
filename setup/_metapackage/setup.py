@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo-addon-account_due_list>=15.0dev,<15.1dev',
+        'odoo-addon-account_due_list_payment_mode>=15.0dev,<15.1dev',
         'odoo-addon-account_payment_batch_process>=15.0dev,<15.1dev',
         'odoo-addon-account_payment_notification>=15.0dev,<15.1dev',
         'odoo-addon-account_payment_term_extension>=15.0dev,<15.1dev',
