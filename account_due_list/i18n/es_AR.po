@@ -37,11 +37,6 @@ msgid "Date invoice"
 msgstr "Fecha de factura"
 
 #. module: account_due_list
-#: model:ir.model.fields,field_description:account_due_list.field_account_move_line__display_name
-msgid "Display Name"
-msgstr "Mostrar Nombre"
-
-#. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "From invoices"
 msgstr "Desde facturas"
@@ -55,11 +50,6 @@ msgstr "Completamente reconciliado"
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Group By"
 msgstr "Agrupar por"
-
-#. module: account_due_list
-#: model:ir.model.fields,field_description:account_due_list.field_account_move_line__id
-msgid "ID"
-msgstr "ID"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -81,11 +71,6 @@ msgstr "Vendedor de factura"
 #: model:ir.model,name:account_due_list.model_account_move_line
 msgid "Journal Item"
 msgstr "Apunte Contable"
-
-#. module: account_due_list
-#: model:ir.model.fields,field_description:account_due_list.field_account_move_line____last_update
-msgid "Last Modified on"
-msgstr "Última modificación en"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -121,11 +106,6 @@ msgstr "A Pagar"
 #: model:ir.model.fields,field_description:account_due_list.field_account_move_line__payment_term_id
 msgid "Payment Terms"
 msgstr "Plazos de Pago"
-
-#. module: account_due_list
-#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
-msgid "Payments"
-msgstr "Pagos"
 
 #. module: account_due_list
 #: model:ir.actions.act_window,name:account_due_list.action_invoice_payments
@@ -209,3 +189,15 @@ msgstr "Sin Publicar"
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Unreconciled"
 msgstr "Sin reconciliar"
+
+#~ msgid "Display Name"
+#~ msgstr "Mostrar Nombre"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última modificación en"
+
+#~ msgid "Payments"
+#~ msgstr "Pagos"
