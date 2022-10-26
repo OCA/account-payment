@@ -32,16 +32,10 @@
                 <field name="payment_term_id" readonly="1" optional="show" />
                 <field name="account_id" readonly="1" />
                 <field
-                    name="analytic_account_id"
+                    name="analytic_distribution"
                     readonly="1"
-                    groups="account.group_account_user"
-                    optional="hide"
-                />
-                <field
-                    name="analytic_tag_ids"
-                    readonly="1"
-                    widget="many2many_tags"
-                    groups="analytic.group_analytic_tags"
+                    widget="analytic_distribution"
+                    groups="analytic.group_analytic_accounting"
                     optional="hide"
                 />
                 <field name="debit" readonly="1" sum="Total Debit" optional="hide" />
@@ -97,12 +91,12 @@
                 <separator />
                 <filter
                     string="Receivable"
-                    domain="[('account_id.internal_type','=','receivable')]"
+                    domain="[('account_id.account_type','=','asset_receivable')]"
                     name="receivable"
                 />
                 <filter
                     string="Payable"
-                    domain="[('account_id.internal_type','=','payable')]"
+                    domain="[('account_id.account_type','=','liability_payable')]"
                     name="payable"
                 />
                 <separator />
@@ -152,7 +146,7 @@
                 <field name="date_maturity" />
                 <field name="amount_residual" />
                 <field name="amount_residual_currency" />
-                <field name="analytic_account_id" />
+                <field name="analytic_distribution" />
                 <field name="partner_ref" />
                 <field name="payment_term_id" />
                 <group expand="0" string="Group By">
@@ -241,7 +235,7 @@
         <field name="search_view_id" ref="view_payments_filter" />
         <field
             name="domain"
-        >[('account_id.internal_type', 'in', ['receivable', 'payable']), ('balance', '!=', 0)]</field>
+        >[('account_id.account_type', 'in', ['asset_receivable', 'liability_payable']), ('balance', '!=', 0)]</field>
     </record>
     <menuitem
         name="Payments and due list"
