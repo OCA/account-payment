@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!--****************************** PAYMENTS ***********************************-->
+    <record id="view_payments_tree" model="ir.ui.view">
+        <field name="name">Payments</field>
+        <field name="model">account.move.line</field>
+        <field name="field_parent">partner_id</field>
+        <field name="priority" eval="20" />
+        <field name="arch" type="xml">
+            <tree
+                decoration-success="full_reconcile_id!=False"
+                decoration-muted="reconciled!=False and full_reconcile_id==False"
+                decoration-warning="parent_state!='posted'"
+                decoration-danger="reconciled==False and date_maturity&lt;current_date and parent_state=='posted'"
+                create="false"
+                delete="false"
+            >
+                <field name="date" readonly="1" optional="hide" />
+                <field name="invoice_date" readonly="1" optional="show" />
+                <field
+                    name="company_id"
+                    readonly="1"
+                    groups="base.group_multi_company"
+                    optional="hide"
+                />
+                <field name="journal_id" readonly="1" optional="hide" />
+                <field name="move_id" string="Invoice" readonly="1" optional="show" />
+                <field name="invoice_origin" readonly="1" optional="show" />
+                <field name="name" readonly="1" optional="show" />
+                <field name="partner_id" readonly="1" optional="show" />
+                <field name="partner_ref" readonly="1" optional="hide" />
+                <field name="payment_term_id" readonly="1" optional="show" />
+                <field name="account_id" readonly="1" />
+                <field
+                    name="analytic_distribution"
+                    readonly="1"
+                    widget="analytic_distribution"
+                    groups="analytic.group_analytic_accounting"
+                    optional="hide"
+                />
+                <field name="debit" readonly="1" sum="Total Debit" optional="hide" />
+                <field name="credit" readonly="1" sum="Total Credit" optional="hide" />
+                <field
+                    name="balance"
+                    readonly="1"
+                    sum="Total Balance"
+                    optional="show"
+                />
+                <field
+                    name="amount_currency"
+                    sum="Total amount currency"
+                    groups="base.group_multi_currency"
+                    optional="hide"
+                />
+                <field name="amount_residual" sum="Total Residual" />
+                <field
+                    name="amount_residual_currency"
+                    sum="Total Residual Currency"
+                    groups="base.group_multi_currency"
+                    optional="show"
+                />
+                <field name="date_maturity" optional="show" />
+                <field name="reconciled" readonly="1" optional="hide" />
+                <field name="full_reconcile_id" readonly="1" optional="hide" />
+                <field name="parent_state" invisible="1" />
+            </tree>
+        </field>
+    </record>
+    <record id="view_payments_filter" model="ir.ui.view">
+        <field name="name">Payments Selection</field>
+        <field name="model">account.move.line</field>
+        <field name="priority" eval="20" />
+        <field name="arch" type="xml">
+            <search string="Search Payments">
+                <filter
+                    name="posted_moves"
+                    string="Posted"
+                    domain="[('parent_state', '=', 'posted')]"
+                />
+                <filter
+                    name="unposted_moves"
+                    string="Unposted"
+                    domain="[('parent_state', '!=', 'posted')]"
+                />
+                <separator />
+                <filter
+                    name="from_invoices"
+                    string="From invoices"
+                    domain="[('move_id.move_type', 'not in', ['entry', 'out_receipt', 'in_receipt'])]"
+                />
+                <separator />
+                <filter
+                    string="Receivable"
+                    domain="[('account_id.account_type','=','asset_receivable')]"
+                    name="receivable"
+                />
+                <filter
+                    string="Payable"
+                    domain="[('account_id.account_type','=','liability_payable')]"
+                    name="payable"
+                />
+                <separator />
+                <filter
+                    name="unreconciled"
+                    string="Unreconciled"
+                    domain="[('reconciled','=',False)]"
+                />
+                <filter
+                    name="partial_reconciled"
+                    string="Partial reconciled"
+                    domain="[('reconciled','=',False), '|', ('matched_credit_ids','!=',False), ('matched_debit_ids','!=',False)]"
+                />
+                <filter
+                    name="reconciled"
+                    string="Reconciled"
+                    domain="[('reconciled','=',True)]"
+                />
+                <separator />
+                <filter
+                    name="not_full_reconciled"
+                    string="Not Full Reconciled"
+                    domain="[('full_reconcile_id','=',False)]"
+                />
+                <filter
+                    name="full_reconciled"
+                    string="Full reconciled"
+                    domain="[('full_reconcile_id','!=',False)]"
+                />
+                <separator />
+                <filter
+                    string="Overdue"
+                    domain="[('date_maturity','&lt;',time.strftime('%%Y-%%m-%%d'))]"
+                    name="overdue"
+                />
+                <separator />
+                <filter string="Date due" name="date_maturity" date="date_maturity" />
+                <filter string="Date invoice" name="invoice_date" date="invoice_date" />
+                <filter string="Date" name="date" date="date" />
+                <separator />
+                <field name="account_id" />
+                <field name="name" />
+                <field name="partner_id" />
+                <field name="move_id" />
+                <field name="invoice_user_id" />
+                <field name="invoice_origin" />
+                <field name="date_maturity" />
+                <field name="amount_residual" />
+                <field name="amount_residual_currency" />
+                <field name="analytic_distribution" />
+                <field name="partner_ref" />
+                <field name="payment_term_id" />
+                <group expand="0" string="Group By">
+                    <filter
+                        string="Partner"
+                        domain="[]"
+                        context="{'group_by':'partner_id'}"
+                        name="group_by_partner"
+                    />
+                    <filter
+                        string="Account"
+                        domain="[]"
+                        context="{'group_by':'account_id'}"
+                        name="group_by_account"
+                    />
+                    <filter
+                        string="Invoice"
+                        domain="[]"
+                        context="{'group_by':'move_id'}"
+                        name="group_by_invoice"
+                    />
+                    <filter
+                        string="Date due"
+                        domain="[]"
+                        context="{'group_by':'date_maturity'}"
+                        name="group_by_date_maturity"
+                    />
+                    <filter
+                        string="Date invoice"
+                        domain="[]"
+                        context="{'group_by':'invoice_date'}"
+                        name="group_by_invoice_date"
+                    />
+                    <filter
+                        string="Date"
+                        domain="[]"
+                        context="{'group_by':'date'}"
+                        name="group_by_date"
+                    />
+                    <filter
+                        string="Salesperson"
+                        domain="[]"
+                        context="{'group_by':'invoice_user_id'}"
+                        name="group_by_salesperson"
+                    />
+                </group>
+            </search>
+        </field>
+    </record>
+    <record id="view_payments_pivot" model="ir.ui.view">
+        <field name="name">account.move.line.pivot</field>
+        <field name="model">account.move.line</field>
+        <field name="arch" type="xml">
+            <pivot string="Payments and due list">
+                <field name="journal_id" type="row" />
+                <field name="date_maturity" type="col" />
+                <field name="amount_residual" type="measure" />
+            </pivot>
+        </field>
+    </record>
+    <record id="view_payments_graph" model="ir.ui.view">
+        <field name="name">account.move.line.graph</field>
+        <field name="model">account.move.line</field>
+        <field name="arch" type="xml">
+            <graph string="Payments and due list">
+                <field name="date_maturity" type="row" />
+                <field name="amount_residual" type="measure" />
+            </graph>
+        </field>
+    </record>
+    <!-- Invoice Payments -->
+    <record model="ir.actions.act_window" id="action_invoice_payments">
+        <field name="name">Payments and due list</field>
+        <field name="res_model">account.move.line</field>
+        <field name="view_mode">tree,form,pivot,graph</field>
+        <field
+            name="context"
+        >{'search_default_posted_moves': 1, 'search_default_from_invoices': 1, 'search_default_not_full_reconciled': 1}</field>
+        <field
+            name="view_ids"
+            eval="[(5, 0, 0),
+                                      (0, 0, {'view_mode': 'tree', 'view_id': ref('view_payments_tree')}),
+                                      (0, 0, {'view_mode': 'pivot', 'view_id': ref('view_payments_pivot')}),
+                                      (0, 0, {'view_mode': 'graph', 'view_id': ref('view_payments_graph')})]"
+        />
+        <field name="search_view_id" ref="view_payments_filter" />
+        <field
+            name="domain"
+        >[('account_id.account_type', 'in', ['asset_receivable', 'liability_payable']), ('balance', '!=', 0)]</field>
+    </record>
+    <menuitem
+        name="Payments and due list"
+        parent="account.menu_finance_entries"
+        action="action_invoice_payments"
+        id="menu_action_invoice_payments"
+        sequence="50"
+    />
+</odoo>

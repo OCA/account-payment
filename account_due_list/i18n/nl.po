@@ -1,0 +1,212 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_due_list
+#
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: account-payment (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-12-03 00:13+0000\n"
+"PO-Revision-Date: 2021-04-23 23:47+0000\n"
+"Last-Translator: Bosd <c5e2fd43-d292-4c90-9d1f-74ff3436329a@anonaddy.me>\n"
+"Language-Team: Dutch (http://www.transifex.com/oca/OCA-account-payment-8-0/"
+"language/nl/)\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Account"
+msgstr "Rekening"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Date"
+msgstr "Datum"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Date due"
+msgstr "Vervaldatum"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Date invoice"
+msgstr "Factuurdatum"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "From invoices"
+msgstr "van Facturen"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Full reconciled"
+msgstr "Volledig afgeletterd"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Group By"
+msgstr "Groeperen op"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
+msgid "Invoice"
+msgstr "Factuur"
+
+#. module: account_due_list
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line__invoice_date
+msgid "Invoice Date"
+msgstr "Factuurdatum"
+
+#. module: account_due_list
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line__invoice_user_id
+msgid "Invoice salesperson"
+msgstr "Verkoper contactpersoon"
+
+#. module: account_due_list
+#: model:ir.model,name:account_due_list.model_account_move_line
+msgid "Journal Item"
+msgstr ""
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Not Full Reconciled"
+msgstr "Onvolledig afgeletterd"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Overdue"
+msgstr "Openstaand"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Partial reconciled"
+msgstr "Deels afgeletterd"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Partner"
+msgstr "Relatie"
+
+#. module: account_due_list
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line__partner_ref
+msgid "Partner Ref"
+msgstr "Relatie referentie"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Payable"
+msgstr "openstaand"
+
+#. module: account_due_list
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line__payment_term_id
+msgid "Payment Terms"
+msgstr "Betalingscondities"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
+msgid "Payments"
+msgstr "Betalingen"
+
+#. module: account_due_list
+#: model:ir.actions.act_window,name:account_due_list.action_invoice_payments
+#: model:ir.ui.menu,name:account_due_list.menu_action_invoice_payments
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_graph
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_pivot
+#, fuzzy
+msgid "Payments and due list"
+msgstr "Betalingen en openstaand lijst"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Posted"
+msgstr "Geboekt"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Receivable"
+msgstr "Te Ontvangen"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Reconciled"
+msgstr "Afgeletterd"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Salesperson"
+msgstr "Verkoper"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Search Payments"
+msgstr "Doorzoek betalingen"
+
+#. module: account_due_list
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line__invoice_origin
+msgid "Source Doc"
+msgstr "Bron Document"
+
+#. module: account_due_list
+#: model:ir.model.fields,help:account_due_list.field_account_move_line__invoice_origin
+msgid "The document(s) that generated the invoice."
+msgstr "Het documeent wat de factuur genereerde."
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
+msgid "Total Balance"
+msgstr "Totaal"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
+msgid "Total Credit"
+msgstr "Totaal Krediet"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
+msgid "Total Debit"
+msgstr "Totaal Debit"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
+msgid "Total Residual"
+msgstr "Totaal resterend"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
+#, fuzzy
+msgid "Total Residual Currency"
+msgstr "Totaal resterend bedrag"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
+#, fuzzy
+msgid "Total amount currency"
+msgstr "Totaal bedrag"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Unposted"
+msgstr "ongeboekt"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Unreconciled"
+msgstr "Niet afgeletterd"
+
+#~ msgid "Due Date"
+#~ msgstr "Vervaldatum"
+
+#~ msgid "Month"
+#~ msgstr "Maand"
+
+#, fuzzy
+#~ msgid "Stored Invoice"
+#~ msgstr "Factuur"
