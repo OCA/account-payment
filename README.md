@@ -17,7 +17,11 @@ TODO: add repo description.
 
 [//]: # (addons)
 
-This part will be replaced when running the oca-gen-addons-table script from OCA/maintainer-tools.
+Available addons
+----------------
+addon | version | maintainers | summary
+--- | --- | --- | ---
+[account_due_list](account_due_list/) | 16.0.1.0.1 |  | List of open credits and debits, with due date
 
 [//]: # (end addons)
 
