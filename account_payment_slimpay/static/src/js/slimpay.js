@@ -9,24 +9,14 @@ odoo.define('account_payment_slimpay.slimpay', function(require) {
 
     require('web.dom_ready');
 
-    var token = ($("input[name='access_token']").val()
-                 || $("input[name='token']").val()
-                 || '');
+    var access_token = ($("input[name='access_token']").val()
+                        || $("input[name='token']").val()
+                        || '');
     var acquirer_id = parseInt($(
       'form[provider="slimpay"] #acquirer_slimpay').val());
 
-    // Search if the user wants to save the credit card information
-    var form_save_token = $(
-        '#o_payment_form_acq_' + acquirer_id + ' ' +
-        'input[name="o_payment_form_save_token"]').prop('checked');
-
-    var params = {
-      tx_type: form_save_token ? 'form_save' : 'form',
-      token: token,
-    };
-
     ajax.jsonRpc('/payment/slimpay_transaction/' + acquirer_id,
-                 'call', params)
+                 'call', {access_token: access_token})
         .done(function (data) {
             window.location.href = data;
         })
