@@ -1,4 +1,3 @@
-# -*- coding: utf-8 -*-
 # Copyright (C) 2022 Open Source Integrators
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
@@ -242,8 +241,7 @@ class PartnerAgingSupplierAD(models.Model):
         """
         @description  Create link to view each listed invoice
         """
-        view = \
-            self.env["ir.model.data"].xmlid_to_object("account.invoice_form")
+        view = self.env["ir.model.data"].xmlid_to_object("account.invoice_form")
         view_id = view and view.id or False
         return {
             "name": ("Supplier Invoices"),
@@ -258,19 +256,19 @@ class PartnerAgingSupplierAD(models.Model):
             "res_id": self.invoice_id.id,
         }
 
-    partner_id = fields.Many2one("res.partner", u"Partner", readonly=True)
-    max_days_overdue = fields.Integer(u"Days Outstanding", readonly=True)
-    avg_days_overdue = fields.Integer(u"Avg Days Overdue", readonly=True)
-    date = fields.Date(u"Date", readonly=True)
-    date_due = fields.Date(u"Due Date", readonly=True)
-    inv_date_due = fields.Date(u"Invoice Date", readonly=True)
-    total = fields.Float(u"Total", readonly=True)
-    not_due = fields.Float(u"Not Due Yet", readonly=True)
-    days_due_01to30 = fields.Float(u"1/30", readonly=True)
-    days_due_31to60 = fields.Float(u"31/60", readonly=True)
-    days_due_61to90 = fields.Float(u"61/90", readonly=True)
-    days_due_91to120 = fields.Float(u"91/120", readonly=True)
-    days_due_121togr = fields.Float(u"+121", readonly=True)
+    partner_id = fields.Many2one("res.partner", "Partner", readonly=True)
+    max_days_overdue = fields.Integer("Days Outstanding", readonly=True)
+    avg_days_overdue = fields.Integer("Avg Days Overdue", readonly=True)
+    date = fields.Date("Date", readonly=True)
+    date_due = fields.Date("Due Date", readonly=True)
+    inv_date_due = fields.Date("Invoice Date", readonly=True)
+    total = fields.Float("Total", readonly=True)
+    not_due = fields.Float("Not Due Yet", readonly=True)
+    days_due_01to30 = fields.Float("1/30", readonly=True)
+    days_due_31to60 = fields.Float("31/60", readonly=True)
+    days_due_61to90 = fields.Float("61/90", readonly=True)
+    days_due_91to120 = fields.Float("91/120", readonly=True)
+    days_due_121togr = fields.Float("+121", readonly=True)
     invoice_ref = fields.Char("Their Invoice", size=25, readonly=True)
     invoice_id = fields.Many2one("account.move", "Invoice", readonly=True)
 
