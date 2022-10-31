@@ -29,7 +29,7 @@ msgstr "Impresión de cheque automático"
 
 #. module: account_check_printing_report_base
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
-#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4_document
 msgid "Balance Due"
 msgstr "Saldo a pagar"
 
@@ -45,7 +45,7 @@ msgid "Companies"
 msgstr "Compañías"
 
 #. module: account_check_printing_report_base
-#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4_document
 msgid "Dear partner"
 msgstr "Estimado proveedor"
 
@@ -65,17 +65,17 @@ msgstr "Descripción"
 
 #. module: account_check_printing_report_base
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
-#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4_document
 msgid "Due Date"
 msgstr "Fecha de vencimiento"
 
 #. module: account_check_printing_report_base
-#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4_document
 msgid "Invoice / Reference"
 msgstr "Factura / Referencia"
 
 #. module: account_check_printing_report_base
-#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4_document
 msgid "Invoice date"
 msgstr "Fecha de factura"
 
@@ -86,13 +86,13 @@ msgstr "Diario"
 
 #. module: account_check_printing_report_base
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
-#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4_document
 msgid "Original Amount"
 msgstr "Importe"
 
 #. module: account_check_printing_report_base
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
-#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4_document
 msgid "Payment"
 msgstr "Pago"
 
@@ -115,7 +115,6 @@ msgstr "Pagos"
 #: model:ir.model.fields.selection,name:account_check_printing_report_base.selection__account_journal__account_check_printing_layout__account_check_printing_report_base_action_report_check_base
 #: model:ir.model.fields.selection,name:account_check_printing_report_base.selection__res_company__account_check_printing_layout__account_check_printing_report_base_action_report_check_base
 #, fuzzy
-#| msgid "Payment Check Base"
 msgid "Print Check Base"
 msgstr "Cheque de pago Base"
 
@@ -123,7 +122,6 @@ msgstr "Cheque de pago Base"
 #: model:ir.model.fields.selection,name:account_check_printing_report_base.selection__account_journal__account_check_printing_layout__account_check_printing_report_base_action_report_check_base_a4
 #: model:ir.model.fields.selection,name:account_check_printing_report_base.selection__res_company__account_check_printing_layout__account_check_printing_report_base_action_report_check_base_a4
 #, fuzzy
-#| msgid "Payment Check Base A4"
 msgid "Print Check Base A4"
 msgstr "Cheque de pago Base A4"
 
@@ -159,12 +157,12 @@ msgstr ""
 "Para desactivar la función de impresión, seleccione 'Ninguno'."
 
 #. module: account_check_printing_report_base
-#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4_document
 msgid "Waiting for your agreement, regards."
 msgstr "Esperando su acuerdo, saludos."
 
 #. module: account_check_printing_report_base
-#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4_document
 msgid "We attach the list of invoices paid with this check with amount of"
 msgstr ""
 "Adjuntamos el listado de facturas pagadas con este cheque con precio de"
