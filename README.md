@@ -21,6 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
+[account_check_printing_report_base](account_check_printing_report_base/) | 15.0.1.0.0 |  | Account Check Printing Report Base
 [account_due_list](account_due_list/) | 15.0.1.0.1 |  | List of open credits and debits, with due date
 [account_due_list_payment_mode](account_due_list_payment_mode/) | 15.0.1.0.0 |  | Payment Due List Payment Mode
 [account_payment_batch_process](account_payment_batch_process/) | 15.0.1.0.0 |  | Account Batch Payments Processing for Customers Invoices and Supplier Invoices
