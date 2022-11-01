@@ -150,7 +150,8 @@ class ResPartnerAgingSupplier(models.Model):
                      aml.amount_residual END AS total,
                 ai.id as invoice_id,
                 ai.invoice_date_due as inv_date_due
-                FROM account_account ac, account_move_line aml
+                FROM account_move_line aml
+                LEFT JOIN account_account ac on ac.id = aml.account_id
                 INNER JOIN
                   (
                    SELECT lt.id,
@@ -169,7 +170,8 @@ class ResPartnerAgingSupplier(models.Model):
                 AND ai.state = 'posted' AND
                 (ai.payment_state != 'paid' OR
                 aml.full_reconcile_id IS NULL)
-                AND ai.move_type = 'in_invoice'
+                AND ai.move_type IN ('in_invoice' , 'in_refund')
+                and ai.partner_id IS NOT NULL
                 GROUP BY aml.partner_id, aml.id, ai.name, days_due,
                 ai.invoice_user_id, ai.id
                 UNION
@@ -291,7 +293,8 @@ class ResPartnerAgingSupplier(models.Model):
                      aml.amount_residual END AS total,
                 ai.id as invoice_id,
                 ai.invoice_date_due as inv_date_due
-                FROM account_account ac, account_move_line aml
+                FROM account_move_line aml
+                LEFT JOIN account_account ac on ac.id = aml.account_id
                 INNER JOIN
                   (
                    SELECT lt.id,
@@ -308,6 +311,7 @@ class ResPartnerAgingSupplier(models.Model):
                 type = 'payable')
                 AND aml.date <= '{}'
                 AND aml.partner_id IS NULL
+                and ai.partner_id IS NOT NULL
                 AND aml.full_reconcile_id is NULL
                 GROUP BY aml.partner_id, aml.id, ai.name, days_due,
                 ai.invoice_user_id, ai.id
@@ -338,9 +342,10 @@ class ResPartnerAgingSupplier(models.Model):
                        null as invoice_id,
                        aml.date as inv_date_due
                 from account_move_line aml
+                LEFT JOIN account_account ac on ac.id = aml.account_id
                 where aml.date <= '{}'
                 and aml.full_reconcile_id IS NOT NULL
-                and aml.account_id in (select id from account_account_type
+                and ac.user_type_id in (select id from account_account_type
                 where type = 'payable')
                 and aml.debit > 0
               """.format(
