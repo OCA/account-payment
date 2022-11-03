@@ -1,0 +1,88 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_payment_promissory_note
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-11-18 14:51+0000\n"
+"PO-Revision-Date: 2020-11-18 15:55+0100\n"
+"Last-Translator: Carlos <carlos.roca@tecnativa.com>\n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 2.0.6\n"
+
+#. module: account_payment_promissory_note
+#: model_terms:ir.ui.view,arch_db:account_payment_promissory_note.view_account_payment_form_multi
+msgid ""
+"<span class=\"text-muted\" attrs=\"{'invisible': [('promissory_note','=', "
+"False)]}\">\n"
+"                    Set date due to all payments or empty to select last "
+"date due of each partner invoices group\n"
+"                </span>"
+msgstr ""
+"<span class=\"text-muted\" attrs=\"{'invisible': [('promissory_note','=', "
+"False)]}\">\n"
+"                   Selecciona una fecha de vencimiento para todos los pagos "
+"o dejalo vacío para que se seleccione la última fecha de vencimiento para "
+"cada agrupación de facturas de un partner.\n"
+"                </span>"
+
+#. module: account_payment_promissory_note
+#: model:ir.model.fields,field_description:account_payment_promissory_note.field_account_promissory_note_mixin__display_name
+msgid "Display Name"
+msgstr "Mostrar Nombre"
+
+#. module: account_payment_promissory_note
+#: model:ir.model.fields,field_description:account_payment_promissory_note.field_account_payment__date_due
+#: model:ir.model.fields,field_description:account_payment_promissory_note.field_account_payment_register__date_due
+#: model:ir.model.fields,field_description:account_payment_promissory_note.field_account_promissory_note_mixin__date_due
+msgid "Due Date"
+msgstr "Fecha de Vencimiento"
+
+#. module: account_payment_promissory_note
+#: model:ir.model.fields,field_description:account_payment_promissory_note.field_account_promissory_note_mixin__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_payment_promissory_note
+#: model:ir.model.fields,field_description:account_payment_promissory_note.field_account_promissory_note_mixin____last_update
+msgid "Last Modified on"
+msgstr "Última modificación en"
+
+#. module: account_payment_promissory_note
+#: model:ir.model,name:account_payment_promissory_note.model_account_payment
+msgid "Payments"
+msgstr "Pagos"
+
+#. module: account_payment_promissory_note
+#: model:ir.model.fields,field_description:account_payment_promissory_note.field_account_payment__promissory_note
+#: model:ir.model.fields,field_description:account_payment_promissory_note.field_account_payment_register__promissory_note
+#: model:ir.model.fields,field_description:account_payment_promissory_note.field_account_promissory_note_mixin__promissory_note
+#: model_terms:ir.ui.view,arch_db:account_payment_promissory_note.view_account_payment_search
+msgid "Promissory Note"
+msgstr "Pagaré"
+
+#. module: account_payment_promissory_note
+#: model:ir.model,name:account_payment_promissory_note.model_account_promissory_note_mixin
+msgid "Promissory Note Mixin"
+msgstr ""
+
+#. module: account_payment_promissory_note
+#: model:ir.model,name:account_payment_promissory_note.model_account_payment_register
+msgid "Register Payment"
+msgstr "Registrar pago"
+
+#~ msgid ""
+#~ "Contains the logic shared between models which allows to register payments"
+#~ msgstr ""
+#~ "Contiene la lógica compartida entre los modelos que permiten el registro "
+#~ "de pagos"
+
+#~ msgid "Register Payments"
+#~ msgstr "Registrar pagos"
