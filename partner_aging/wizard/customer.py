@@ -199,9 +199,10 @@ class PartnerAgingDate(models.TransientModel):
         tools.drop_view_if_exists(
             self.env.cr, "%s" % (customer_aging._name.replace(".", "_"))
         )
+        # pylint: disable=sql-injection
         self.env.cr.execute(
             """
-                      CREATE OR REPLACE VIEW %s AS ( %s)
+                CREATE OR REPLACE VIEW %s AS ( %s)
         """
             % (customer_aging._name.replace(".", "_"), query)
         )
@@ -440,6 +441,7 @@ class AccountAgingCustomerAD(models.Model):
               """
 
         tools.drop_view_if_exists(cr, "%s" % (self._name.replace(".", "_")))
+        # pylint: disable=sql-injection
         cr.execute(
             """
                       CREATE OR REPLACE VIEW %s AS ( %s)
