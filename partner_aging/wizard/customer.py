@@ -273,11 +273,11 @@ class AccountAgingCustomerAD(models.Model):
         }
 
     partner_id = fields.Many2one("res.partner", "Partner", readonly=True)
-    avg_days_overdue = fields.Integer("Avg Days Overdue", readonly=True)
-    date = fields.Date("Date", readonly=True)
+    avg_days_overdue = fields.Integer(readonly=True)
+    date = fields.Date(readonly=True)
     date_due = fields.Date("Due Date", readonly=True)
     inv_date_due = fields.Date("Invoice Date", readonly=True)
-    total = fields.Float("Total", readonly=True)
+    total = fields.Float(readonly=True)
     not_due = fields.Float("Current", readonly=True)
     days_due_01to30 = fields.Float("1/30", readonly=True)
     days_due_31to60 = fields.Float("31/60", readonly=True)
