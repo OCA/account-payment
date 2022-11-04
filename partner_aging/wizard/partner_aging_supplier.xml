@@ -41,12 +41,7 @@
         <field name="model">partner.aging.supplier.ad</field>
         <field name="type">tree</field>
         <field name="arch" type="xml">
-            <tree
-                create="false"
-                delete="false"
-                string="Supplier Aging Date wise"
-                decoration-danger="max_days_overdue"
-            >
+            <tree create="false" delete="false" decoration-danger="max_days_overdue">
                 <field name="partner_id" string="Supplier" />
                 <field name="date" string="Invoice Date" />
                 <field name="date_due" string="Due Date" />

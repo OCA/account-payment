@@ -11,9 +11,9 @@ from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 class TestPartnerAging(common.TransactionCase):
     def setUp(self):
         super(TestPartnerAging, self).setUp()
-        self.partner_aging_date_model = self.env["res.partner.aging.date"]
-        self.partner_aging_supplier_model = self.env["res.partner.aging.supplier"]
-        self.partner_aging_customer_model = self.env["res.partner.aging.customer"]
+        self.partner_aging_date_model = self.env["partner.aging.date"]
+        self.partner_aging_supplier_model = self.env["partner.aging.supplier.ad"]
+        self.partner_aging_customer_model = self.env["partner.aging.customer.ad"]
         self.current_date = fields.Date.today()
         self.account_invoice_obj = self.env["account.move"]
         self.account_move_line_obj = self.env["account.move.line"]

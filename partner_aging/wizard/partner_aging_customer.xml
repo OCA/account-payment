@@ -41,12 +41,7 @@
         <field name="model">partner.aging.customer.ad</field>
         <field name="type">tree</field>
         <field name="arch" type="xml">
-            <tree
-                create="false"
-                delete="false"
-                string="Customer Aging Date wise"
-                decoration-danger="max_days_overdue"
-            >
+            <tree create="false" delete="false" decoration-danger="max_days_overdue">
                 <field name="partner_id" string="Customer" />
                 <field name="salesman" />
                 <field name="date" string="Invoice Date" />
