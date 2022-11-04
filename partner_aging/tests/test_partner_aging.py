@@ -139,20 +139,20 @@ class TestPartnerAging(common.TransactionCase):
         partner_aging_date = self.partner_aging_date_model.create(
             {"age_date": self.current_date}
         )
-        res = partner_aging_date.open_customer_aging()
+        res = partner_aging_date.open_partner_aging()
         self.assertEqual(res["context"]["age_date"], self.current_date)
         partner_aging_customer_rec = self.partner_aging_customer_model.search(
             [("invoice_id", "!=", False)], limit=1
         )
-        partner_aging_customer_rec.open_document()
+        partner_aging_customer_rec.docopen()
 
     def test_partner_aging_supplier(self):
         partner_aging_date = self.partner_aging_date_model.create(
             {"age_date": self.current_date}
         )
-        res = partner_aging_date.open_supplier_aging()
+        res = partner_aging_date.open_partner_aging()
         self.assertEqual(res["context"]["age_date"], self.current_date)
         partner_aging_supplier_rec = self.partner_aging_supplier_model.search(
             [("invoice_id", "!=", False)], limit=1
         )
-        partner_aging_supplier_rec.open_document()
+        partner_aging_supplier_rec.invopen()
