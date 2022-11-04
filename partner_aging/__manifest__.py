@@ -9,7 +9,7 @@
     "category": "Accounting & Finance",
     "maintainer": "Open Source Integrators",
     "website": "https://github.com/OCA/account-payment",
-    "depends": ["account", "account_accountant"],
+    "depends": ["account"],
     "license": "AGPL-3",
     "data": [
         "wizard/partner_aging_customer.xml",
