@@ -1,122 +1,121 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <data>
 
-        <!-- Supplier Aging search/filters -->
-        <record id="view_supplier_aging_ad_search" model="ir.ui.view">
-            <field name="name">supplier.aging.ad.search</field>
-            <field name="model">partner.aging.supplier.ad</field>
-            <field name="arch" type="xml">
-                <search string="Supplier Aging Date wise">
+    <!-- Supplier Aging search/filters -->
+    <record id="view_supplier_aging_ad_search" model="ir.ui.view">
+        <field name="name">supplier.aging.ad.search</field>
+        <field name="model">partner.aging.supplier.ad</field>
+        <field name="arch" type="xml">
+            <search string="Supplier Aging Date wise">
+                <filter
+                    string="Overdue"
+                    name="overdue"
+                    help="Overdue"
+                    domain="['|','|','|','|',
+                                             ('days_due_01to30','&gt;',0),
+                                             ('days_due_31to60','&gt;',0),
+                                             ('days_due_61to90','&gt;',0),
+                                             ('days_due_91to120','&gt;',0),
+                                             ('days_due_121togr','&gt;',0)
+                                             ]"
+                />
+                <field name="partner_id" string="Supplier" />
+                <field name="invoice_id" />
+                <field name="invoice_ref" />
+                <field name="total" sum="Total" />
+                <group expand="0" string="Group By...">
                     <filter
-                        string="Overdue"
-                        name="overdue"
-                        help="Overdue"
-                        domain="['|','|','|','|',
-							                     ('days_due_01to30','&gt;',0),
-							                     ('days_due_31to60','&gt;',0),
-							                     ('days_due_61to90','&gt;',0),
-							                     ('days_due_91to120','&gt;',0),
-							                     ('days_due_121togr','&gt;',0)
-							                     ]"
+                        string="Partner"
+                        name="partner"
+                        domain="[]"
+                        context="{'group_by':'partner_id'}"
                     />
-                    <field name="partner_id" string="Supplier" />
-                    <field name="invoice_id" />
-                    <field name="invoice_ref" />
-                    <field name="total" sum="Total" />
-                    <group expand="0" string="Group By...">
-                        <filter
-                            string="Partner"
-                            name="partner"
-                            domain="[]"
-                            context="{'group_by':'partner_id'}"
-                        />
-                    </group>
-                </search>
-            </field>
-        </record>
+                </group>
+            </search>
+        </field>
+    </record>
 
-        <!-- Supplier Aging Tree -->
-        <record id="view_supplier_aging_ad_tree" model="ir.ui.view">
-            <field name="name">supplier.aging.ad.tree</field>
-            <field name="model">partner.aging.supplier.ad</field>
-            <field name="type">tree</field>
-            <field name="arch" type="xml">
-                <tree
-                    create="false"
-                    delete="false"
-                    string="Supplier Aging Date wise"
-                    decoration-danger="max_days_overdue"
-                >
-                    <field name="partner_id" string="Supplier" />
-                    <field name="date" string="Invoice Date" />
-                    <field name="date_due" string="Due Date" />
-                    <field name="max_days_overdue" />
-                    <field name="invoice_id" />
+    <!-- Supplier Aging Tree -->
+    <record id="view_supplier_aging_ad_tree" model="ir.ui.view">
+        <field name="name">supplier.aging.ad.tree</field>
+        <field name="model">partner.aging.supplier.ad</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree
+                create="false"
+                delete="false"
+                string="Supplier Aging Date wise"
+                decoration-danger="max_days_overdue"
+            >
+                <field name="partner_id" string="Supplier" />
+                <field name="date" string="Invoice Date" />
+                <field name="date_due" string="Due Date" />
+                <field name="max_days_overdue" />
+                <field name="invoice_id" />
+                <button
+                    name="invopen"
+                    type="object"
+                    attrs="{'invisible':[('invoice_id', '=', False)]}"
+                />
+                <field name="invoice_ref" />
+                <field name="not_due" string="Current" sum="Total" />
+                <field name="days_due_01to30" sum="Total" />
+                <field name="days_due_31to60" sum="Total" />
+                <field name="days_due_61to90" sum="Total" />
+                <field name="days_due_91to120" sum="Total" />
+                <field name="days_due_121togr" sum="Total" />
+                <field name="total" sum="Total" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- Supplier Aging action -->
+    <record id="action_supplier_aging_ad" model="ir.actions.act_window">
+        <field name="name">Supplier Aging</field>
+        <field name="res_model">partner.aging.supplier.ad</field>
+        <field name="view_id" ref="view_supplier_aging_ad_tree" />
+        <field name="search_view_id" ref="view_supplier_aging_ad_search" />
+        <field name="view_mode">tree,form</field>
+        <field name="limit">99999999</field>
+        <field name="help" />
+    </record>
+
+    <record id="view_supplier_aging_date" model="ir.ui.view">
+        <field name="name">Supplier Aging Date</field>
+        <field name="model">supplier.aging.date</field>
+        <field name="arch" type="xml">
+            <form string="Choose date for Supplier Aging">
+                <group>
+                    <field name="age_date" />
+                </group>
+                <footer>
                     <button
-                        name="invopen"
+                        name="open_partner_aging"
+                        string="Supplier Aging"
                         type="object"
-                        attrs="{'invisible':[('invoice_id', '=', False)]}"
+                        class="oe_highlight"
                     />
-                    <field name="invoice_ref" />
-                    <field name="not_due" string="Current" sum="Total" />
-                    <field name="days_due_01to30" sum="Total" />
-                    <field name="days_due_31to60" sum="Total" />
-                    <field name="days_due_61to90" sum="Total" />
-                    <field name="days_due_91to120" sum="Total" />
-                    <field name="days_due_121togr" sum="Total" />
-                    <field name="total" sum="Total" />
-                </tree>
-            </field>
-        </record>
+                    or
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
 
-        <!-- Supplier Aging action -->
-        <record id="action_supplier_aging_ad" model="ir.actions.act_window">
-            <field name="name">Supplier Aging</field>
-            <field name="res_model">partner.aging.supplier.ad</field>
-            <field name="view_id" ref="view_supplier_aging_ad_tree" />
-            <field name="search_view_id" ref="view_supplier_aging_ad_search" />
-            <field name="view_mode">tree,form</field>
-            <field name="limit">99999999</field>
-            <field name="help" />
-        </record>
+    <record id="action_supplier_aging_date" model="ir.actions.act_window">
+        <field name="name">Supplier Aging by Date</field>
+        <field name="res_model">supplier.aging.date</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_supplier_aging_date" />
+        <field name="target">new</field>
+    </record>
 
-        <record id="view_supplier_aging_date" model="ir.ui.view">
-            <field name="name">Supplier Aging Date</field>
-            <field name="model">supplier.aging.date</field>
-            <field name="arch" type="xml">
-                <form string="Choose date for Supplier Aging">
-                    <group>
-                        <field name="age_date" />
-                    </group>
-                    <footer>
-                        <button
-                            name="open_partner_aging"
-                            string="Supplier Aging"
-                            type="object"
-                            class="oe_highlight"
-                        />
-                        or
-                        <button string="Cancel" class="oe_link" special="cancel" />
-                    </footer>
-                </form>
-            </field>
-        </record>
+    <!-- Supplier Aging Menuitem -->
+    <menuitem
+        action="action_supplier_aging_date"
+        id="menu_supplier_aging_wizard"
+        parent="account.menu_finance_payables"
+        sequence="201"
+    />
 
-        <record id="action_supplier_aging_date" model="ir.actions.act_window">
-            <field name="name">Supplier Aging by Date</field>
-            <field name="res_model">supplier.aging.date</field>
-            <field name="view_mode">form</field>
-            <field name="view_id" ref="view_supplier_aging_date" />
-            <field name="target">new</field>
-        </record>
-
-        <!-- Supplier Aging Menuitem -->
-        <menuitem
-            action="action_supplier_aging_date"
-            id="menu_supplier_aging_wizard"
-            parent="account.menu_finance_payables"
-            sequence="201"
-        />
-  </data>
 </odoo>
