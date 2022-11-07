@@ -231,7 +231,6 @@ class AccountAgingCustomerAD(models.Model):
                       unapplied payment or outstanding balance on this line
         """
 
-        models = self.env["ir.model.data"]
         # Get this line's invoice id
         inv_id = self.id
         # if this is an unapplied payment
@@ -242,17 +241,15 @@ class AccountAgingCustomerAD(models.Model):
             # Get referenced customer payment (invoice_ref field is actually a
             # -payment for these)
             move_id = payment_pool.search([("name", "=", self.invoice_ref)])[0]
-            view = models.xmlid_to_object("account.view_move_form")
             # Set values for form
-            view_id = view and view.id or False
+            view_id = self.env.ref('account.view_move_form').id or False
             name = "Customer Payments"
             res_model = "account.move"
             ctx = "{}"
             doc_id = move_id
         # otherwise get the invoice
         else:
-            view = models.xmlid_to_object("account.view_move_form")
-            view_id = view and view.id or False
+            view_id = self.env.ref('account.view_move_form').id or False
             name = "Customer Invoices"
             res_model = "account.move"
             ctx = "{'type':'out_invoice'}"

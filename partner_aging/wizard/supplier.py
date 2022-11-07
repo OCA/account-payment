@@ -242,8 +242,7 @@ class PartnerAgingSupplierAD(models.Model):
         """
         @description  Create link to view each listed invoice
         """
-        view = self.env["ir.model.data"].xmlid_to_object("account.invoice_form")
-        view_id = view and view.id or False
+        view_id = self.env.ref('account.view_move_form').id or False
         return {
             "name": ("Supplier Invoices"),
             "view_type": "form",
@@ -260,7 +259,7 @@ class PartnerAgingSupplierAD(models.Model):
     partner_id = fields.Many2one("res.partner", "Partner", readonly=True)
     max_days_overdue = fields.Integer("Days Outstanding", readonly=True)
     avg_days_overdue = fields.Integer(readonly=True)
-    date = fields.Date(eadonly=True)
+    date = fields.Date(readonly=True)
     date_due = fields.Date("Due Date", readonly=True)
     inv_date_due = fields.Date("Invoice Date", readonly=True)
     total = fields.Float(readonly=True)
