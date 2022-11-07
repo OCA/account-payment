@@ -242,14 +242,14 @@ class AccountAgingCustomerAD(models.Model):
             # -payment for these)
             move_id = payment_pool.search([("name", "=", self.invoice_ref)])[0]
             # Set values for form
-            view_id = self.env.ref('account.view_move_form').id or False
+            view_id = self.env.ref("account.view_move_form").id or False
             name = "Customer Payments"
             res_model = "account.move"
             ctx = "{}"
             doc_id = move_id
         # otherwise get the invoice
         else:
-            view_id = self.env.ref('account.view_move_form').id or False
+            view_id = self.env.ref("account.view_move_form").id or False
             name = "Customer Invoices"
             res_model = "account.move"
             ctx = "{'type':'out_invoice'}"
