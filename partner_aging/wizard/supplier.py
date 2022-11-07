@@ -242,7 +242,7 @@ class PartnerAgingSupplierAD(models.Model):
         """
         @description  Create link to view each listed invoice
         """
-        view_id = self.env.ref('account.view_move_form').id or False
+        view_id = self.env.ref("account.view_move_form").id or False
         return {
             "name": ("Supplier Invoices"),
             "view_type": "form",
