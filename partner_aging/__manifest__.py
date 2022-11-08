@@ -1,21 +1,21 @@
-# Copyright (C) 2022 Open Source Integrators
+# Copyright 2012 - 2022 Open Source Integrators
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
-
 {
-    "name": "Interactive Partner Aging for any date",
+    "name": "Interactive Partner Aging at any date",
+    "summary": "Aging as a view - invoices and credits",
     "version": "15.0.1.0.0",
+    "license": "AGPL-3",
     "author": "Open Source Integrators, Odoo Community Association (OCA)",
-    "summary": "Aging as a view - invoices and credits (OSI)",
     "category": "Accounting & Finance",
-    "maintainer": "Open Source Integrators",
     "website": "https://github.com/OCA/account-payment",
     "depends": ["account"],
-    "license": "AGPL-3",
     "data": [
-        "wizard/partner_aging_customer.xml",
-        "wizard/partner_aging_supplier.xml",
         "security/ir.model.access.csv",
+        "wizard/res_partner_aging_customer.xml",
+        "wizard/res_partner_aging_supplier.xml",
     ],
     "installable": True,
     "application": True,
+    "development_status": "Production/Stable",
+    "maintainers": ["Urvisha-OSI"],
 }
