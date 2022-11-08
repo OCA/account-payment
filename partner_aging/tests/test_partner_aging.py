@@ -1,4 +1,5 @@
-# Copyright 2022 Open Source Integrators
+# Copyright 2012 Open Source Integrators
+# Copyright 2021 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from datetime import datetime, timedelta
@@ -11,9 +12,9 @@ from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 class TestPartnerAging(common.TransactionCase):
     def setUp(self):
         super(TestPartnerAging, self).setUp()
-        self.partner_aging_date_model = self.env["partner.aging.date"]
-        self.partner_aging_supplier_model = self.env["partner.aging.supplier.ad"]
-        self.partner_aging_customer_model = self.env["partner.aging.customer.ad"]
+        self.partner_aging_date_model = self.env["res.partner.aging.date"]
+        self.partner_aging_supplier_model = self.env["res.partner.aging.supplier"]
+        self.partner_aging_customer_model = self.env["res.partner.aging.customer"]
         self.current_date = fields.Date.today()
         self.account_invoice_obj = self.env["account.move"]
         self.account_move_line_obj = self.env["account.move.line"]
@@ -139,20 +140,20 @@ class TestPartnerAging(common.TransactionCase):
         partner_aging_date = self.partner_aging_date_model.create(
             {"age_date": self.current_date}
         )
-        res = partner_aging_date.open_partner_aging()
-        self.assertEqual(res["context"]["age_date"].date(), self.current_date)
+        res = partner_aging_date.open_customer_aging()
+        self.assertEqual(res["context"]["age_date"], self.current_date)
         partner_aging_customer_rec = self.partner_aging_customer_model.search(
             [("invoice_id", "!=", False)], limit=1
         )
-        partner_aging_customer_rec.docopen()
+        partner_aging_customer_rec.open_document()
 
     def test_partner_aging_supplier(self):
         partner_aging_date = self.partner_aging_date_model.create(
             {"age_date": self.current_date}
         )
-        res = partner_aging_date.open_partner_aging()
-        self.assertEqual(res["context"]["age_date"].date(), self.current_date)
+        res = partner_aging_date.open_supplier_aging()
+        self.assertEqual(res["context"]["age_date"], self.current_date)
         partner_aging_supplier_rec = self.partner_aging_supplier_model.search(
             [("invoice_id", "!=", False)], limit=1
         )
-        partner_aging_supplier_rec.invopen()
+        partner_aging_supplier_rec.open_document()
