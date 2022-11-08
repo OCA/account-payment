@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.0\n"
+"Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
 "PO-Revision-Date: 2019-08-18 01:44+0000\n"
 "Last-Translator: Pedro Castro Silva <pedrocs@exo.pt>\n"
@@ -14,7 +14,6 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.7.1\n"
 
 #. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__days_due_121togr
