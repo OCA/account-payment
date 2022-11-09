@@ -54,13 +54,16 @@ class AccountPayment(models.Model):
     def _notify_sent_payments_email(self):
         """Notify sent payments by email."""
         mt_comment = self.env.ref("mail.mt_comment")
-        tpl = self.env.ref(
-            "account_payment_notification.mail_template_notification"
-        ).with_context(default_subtype_id=mt_comment.id)
+        tpl = self.env.ref("account_payment_notification.mail_template_notification")
         assert tpl.model == self._name, "Template has wrong model!?"
         for payment in self:
             # TODO Batch per lang if possible
-            tpl.send_mail(payment.id, force_send=False)
+            payment.message_post_with_template(
+                tpl.id,
+                composition_mode="mass_post",
+                subtype_id=mt_comment.id,
+                notify=True,
+            )
 
     def _notify_sent_payments_sms(self):
         """Notify sent payments by sms."""
