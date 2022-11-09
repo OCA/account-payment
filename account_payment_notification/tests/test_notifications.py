@@ -51,6 +51,7 @@ class NotificationCase(TestAccountReconciliationCommon):
         mt_comment = self.env.ref("mail.mt_comment")
         for payment in self.payments.filtered(lambda rec: rec.partner_id in partners):
             expected_values = []
+            expected_message_notifications = []
             if sms:
                 expected_values.append(
                     {
@@ -60,20 +61,41 @@ class NotificationCase(TestAccountReconciliationCommon):
                         ),
                     }
                 )
+                expected_message_notifications.append(
+                    {
+                        "res_partner_id": payment.partner_id.id,
+                        "notification_type": "sms",
+                        "notification_status": "ready",
+                    }
+                )
             if email:
                 expected_values.append(
                     {
-                        "message_type": "email",
+                        "message_type": "notification",
                         "description": "{} Payment Notification (Ref {})".format(
                             payment.company_id.name, payment.name
                         ),
                         "subtype_id": mt_comment.id,
                     }
                 )
+                expected_message_notifications.append(
+                    {
+                        "res_partner_id": payment.partner_id.id,
+                        "notification_type": "email",
+                        "notification_status": "ready",
+                    }
+                )
             if expected_values:
                 self.assertRecordValues(payment.message_ids, expected_values)
             else:
                 self.assertFalse(payment.message_ids)
+            # Assert notifications, so UI displays the envelope icon and send status
+            if expected_message_notifications:
+                self.assertRecordValues(
+                    payment.message_ids.notification_ids, expected_message_notifications
+                )
+            else:
+                self.assertFalse(payment.message_ids.notification_ids)
 
     @mute_logger("odoo.tests.common.onchange")
     def test_auto_all(self):
@@ -166,8 +188,8 @@ class NotificationCase(TestAccountReconciliationCommon):
             self.payments.message_ids,
             [
                 {"message_type": "sms", "description": "English SMS"},
-                {"message_type": "email", "description": "English mail"},
+                {"message_type": "notification", "description": "English mail"},
                 {"message_type": "sms", "description": "Spanish SMS"},
-                {"message_type": "email", "description": "Spanish mail"},
+                {"message_type": "notification", "description": "Spanish mail"},
             ],
         )
