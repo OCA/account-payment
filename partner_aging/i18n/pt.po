@@ -104,7 +104,6 @@ msgstr "Antiguidade de Clientes"
 #. module: partner_aging
 #: model:ir.actions.act_window,name:partner_aging.action_customer_aging_tree
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_customer_aging_ad_search
-#: model_terms:ir.ui.view,arch_db:partner_aging.view_customer_aging_ad_tree
 msgid "Customer Aging Date wise"
 msgstr ""
 
@@ -186,12 +185,6 @@ msgid "Not Due Yet"
 msgstr "Vincendo"
 
 #. module: partner_aging
-#: model_terms:ir.ui.view,arch_db:partner_aging.view_customer_aging_ad_tree
-#: model_terms:ir.ui.view,arch_db:partner_aging.view_supplier_aging_ad_tree
-msgid "Open Document"
-msgstr ""
-
-#. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__invoice_ref
 msgid "Our Invoice"
 msgstr "Nossa Fatura"
@@ -247,7 +240,6 @@ msgstr "Antiguidade de Fornecedores"
 
 #. module: partner_aging
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_supplier_aging_ad_search
-#: model_terms:ir.ui.view,arch_db:partner_aging.view_supplier_aging_ad_tree
 msgid "Supplier Aging Date wise"
 msgstr ""
 

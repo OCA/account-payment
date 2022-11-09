@@ -104,7 +104,6 @@ msgstr "Balance âgée des clients"
 #. module: partner_aging
 #: model:ir.actions.act_window,name:partner_aging.action_customer_aging_tree
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_customer_aging_ad_search
-#: model_terms:ir.ui.view,arch_db:partner_aging.view_customer_aging_ad_tree
 msgid "Customer Aging Date wise"
 msgstr "Balance âgée des clients par échéances"
 
@@ -241,7 +240,6 @@ msgstr "Balance âgée des fournisseurs"
 
 #. module: partner_aging
 #: model_terms:ir.ui.view,arch_db:partner_aging.view_supplier_aging_ad_search
-#: model_terms:ir.ui.view,arch_db:partner_aging.view_supplier_aging_ad_tree
 msgid "Supplier Aging Date wise"
 msgstr "Balance âgée des fournisseurs par échéances"
 
