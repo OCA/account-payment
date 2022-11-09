@@ -141,7 +141,8 @@ class ResPartnerAgingCustomer(models.Model):
                     aml.amount_residual END AS total,
                     ai.id as invoice_id,
                     ai.invoice_date_due as inv_date_due
-                FROM account_account ac,account_move_line aml
+                FROM account_move_line aml
+                LEFT JOIN account_account ac on ac.id = aml.account_id
                 INNER JOIN
                     (SELECT lt.id,
                     CASE WHEN inv.invoice_date_due is null then 0
@@ -156,7 +157,9 @@ class ResPartnerAgingCustomer(models.Model):
                     type = 'receivable') and aml.date
                     <= '{}' AND ai.state = 'posted' AND
                     (ai.payment_state != 'paid' OR
-                    aml.full_reconcile_id IS NULL) AND ai.move_type = 'out_invoice'
+                    aml.full_reconcile_id IS NULL) AND
+                    ai.move_type IN ('out_invoice', 'out_refund')
+                    and ai.partner_id IS NOT NULL
                     GROUP BY aml.partner_id,
                     aml.id, ai.name, days_due, ai.invoice_user_id, ai.id UNION
                     SELECT aml.id, aml.partner_id as partner_id,
@@ -270,7 +273,8 @@ class ResPartnerAgingCustomer(models.Model):
                     aml.amount_residual END AS total,
                     ai.id as invoice_id,
                     ai.invoice_date_due as inv_date_due
-                    FROM account_account ac,account_move_line aml
+                    FROM account_move_line aml
+                    LEFT JOIN account_account ac on ac.id = aml.account_id
                     INNER JOIN
                       (
                        SELECT lt.id,
@@ -286,6 +290,7 @@ class ResPartnerAgingCustomer(models.Model):
                 where type = 'receivable')
                 AND aml.date <= '{}'
                 AND aml.partner_id IS NULL
+                AND ai.partner_id IS not NULL
                 AND aml.full_reconcile_id is NULL
                 GROUP BY aml.partner_id, aml.id, ai.name, days_due,
                 ai.invoice_user_id, ai.id UNION
@@ -312,9 +317,11 @@ class ResPartnerAgingCustomer(models.Model):
                         l.date<='{}')) ELSE 0 END AS total,
                         null as invoice_id, aml.date as inv_date_due
                 from account_move_line aml
+                LEFT JOIN account_account ac on ac.id = aml.account_id
                 where aml.date <= '{}'
+                and aml.partner_id IS NOT NULL
                 and aml.full_reconcile_id IS NOT NULL
-                and aml.account_id in (select id from
+                and ac.user_type_id in (select id from
                 account_account_type where type = 'receivable')
                 and aml.credit > 0
               """.format(
