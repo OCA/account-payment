@@ -11,4 +11,5 @@ class AccountBankStatementLine(models.Model):
         comodel_name="account.move",
         string="Invoice",
         readonly=True,
+        index=True,
     )
