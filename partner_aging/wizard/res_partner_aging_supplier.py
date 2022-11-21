@@ -50,6 +50,8 @@ class ResPartnerAgingSupplier(models.Model):
                         from account_partial_reconcile apr where
                         (apr.credit_move_id =aml.id or
                         apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual=0) THEN 0
                         WHEN (aml.full_reconcile_id is NOT NULL) THEN
                         aml.amount_residual END ELSE 0 END AS days_due_01to30,
 
@@ -66,6 +68,8 @@ class ResPartnerAgingSupplier(models.Model):
                         account_partial_reconcile apr where
                         (apr.credit_move_id =aml.id or
                         apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual=0) THEN 0
                         WHEN (aml.full_reconcile_id is NOT NULL) THEN
                         aml.amount_residual END ELSE 0 END AS days_due_31to60,
 
@@ -82,6 +86,8 @@ class ResPartnerAgingSupplier(models.Model):
                         from account_partial_reconcile apr where
                         (apr.credit_move_id =aml.id or
                         apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual=0) THEN 0
                         WHEN (aml.full_reconcile_id is NOT NULL) THEN
                         aml.amount_residual END ELSE 0 END AS days_due_61to90,
 
@@ -98,6 +104,8 @@ class ResPartnerAgingSupplier(models.Model):
                         account_partial_reconcile apr where (
                         apr.credit_move_id =aml.id or
                         apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual=0) THEN 0
                         WHEN (aml.full_reconcile_id is NOT NULL) THEN
                         aml.amount_residual END ELSE 0 END AS days_due_91to120,
 
@@ -114,6 +122,8 @@ class ResPartnerAgingSupplier(models.Model):
                         account_partial_reconcile apr where (
                         apr.credit_move_id =aml.id or
                         apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual=0) THEN 0
                         WHEN (aml.full_reconcile_id is NOT NULL) THEN
                         aml.amount_residual END ELSE 0 END AS days_due_121togr,
 
@@ -133,6 +143,8 @@ class ResPartnerAgingSupplier(models.Model):
                         account_partial_reconcile apr where (
                         apr.credit_move_id =aml.id or
                         apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual=0) THEN 0
                         WHEN (aml.full_reconcile_id is NOT NULL) THEN
                         aml.amount_residual END ELSE 0 END AS not_due,
 
@@ -148,6 +160,8 @@ class ResPartnerAgingSupplier(models.Model):
                      account_partial_reconcile apr where (
                      apr.credit_move_id =aml.id or
                      apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual=0) THEN 0
                      WHEN (aml.full_reconcile_id is NOT NULL) THEN
                      aml.amount_residual END AS total,
                 ai.id as invoice_id,
@@ -189,6 +203,8 @@ class ResPartnerAgingSupplier(models.Model):
                         account_partial_reconcile apr where (
                         apr.credit_move_id =aml.id or
                         apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual=0) THEN 0
                         WHEN (aml.full_reconcile_id is NOT NULL) THEN
                         aml.amount_residual END ELSE 0 END AS days_due_01to30,
 
@@ -205,6 +221,8 @@ class ResPartnerAgingSupplier(models.Model):
                         account_partial_reconcile apr where (
                         apr.credit_move_id =aml.id or
                         apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual=0) THEN 0
                         WHEN (aml.full_reconcile_id is NOT NULL) THEN
                         aml.amount_residual END ELSE 0 END AS days_due_31to60,
 
@@ -221,6 +239,8 @@ class ResPartnerAgingSupplier(models.Model):
                         account_partial_reconcile apr where (
                         apr.credit_move_id =aml.id or
                         apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual=0) THEN 0
                         WHEN (aml.full_reconcile_id is NOT NULL) THEN
                         aml.amount_residual END ELSE 0 END AS days_due_61to90,
 
@@ -237,6 +257,8 @@ class ResPartnerAgingSupplier(models.Model):
                         account_partial_reconcile apr where (
                         apr.credit_move_id =aml.id or
                         apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual=0) THEN 0
                         WHEN (aml.full_reconcile_id is NOT NULL) THEN
                         aml.amount_residual END ELSE 0 END AS days_due_91to120,
 
@@ -253,6 +275,8 @@ class ResPartnerAgingSupplier(models.Model):
                         account_partial_reconcile apr where (
                         apr.credit_move_id =aml.id or
                         apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual=0) THEN 0
                         WHEN (aml.full_reconcile_id is NOT NULL) THEN
                         aml.amount_residual END ELSE 0 END AS days_due_121togr,
 
@@ -272,6 +296,8 @@ class ResPartnerAgingSupplier(models.Model):
                         account_partial_reconcile apr where (
                         apr.credit_move_id =aml.id or
                         apr.debit_move_id=aml.id) and apr.create_date <= '%s'))
+                    WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual=0) THEN 0
                         WHEN (aml.full_reconcile_id is NOT NULL) THEN
                         aml.amount_residual END ELSE 0 END AS not_due,
 
@@ -287,6 +313,8 @@ class ResPartnerAgingSupplier(models.Model):
                      account_partial_reconcile apr where (
                      apr.credit_move_id =aml.id or apr.debit_move_id=aml.id
                      ) and apr.create_date <= '%s'))
+                    WHEN (aml.full_reconcile_id is NULL and
+                    aml.amount_residual=0) THEN 0
                      WHEN (aml.full_reconcile_id is NOT NULL) THEN
                      aml.amount_residual END AS total,
                 ai.id as invoice_id,
@@ -339,8 +367,8 @@ class ResPartnerAgingSupplier(models.Model):
                        aml.date as inv_date_due
                 from account_move_line aml
                 where aml.date <= '%s'
-                and aml.full_reconcile_id IS NOT NULL
-                and aml.account_id in (select id from account_account_type
+                and aml.full_reconcile_id IS NULL
+                and aml.user_type_id in (select id from account_account_type
                 where type = 'payable')
                 and aml.debit > 0
               """ % (
@@ -362,7 +390,7 @@ class ResPartnerAgingSupplier(models.Model):
     @api.multi
     def open_document(self):
         """
-            @description  Open form view of Supplier Invoice
+        @description  Open form view of Supplier Invoice
         """
         action = self.env.ref('account.action_invoice_tree2').read()[0]
         action['views'] = [
