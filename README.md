@@ -45,7 +45,7 @@ addon | version | maintainers | summary
 [account_payment_terminal](account_payment_terminal/) | 14.0.1.0.0 | [![sbejaoui](https://github.com/sbejaoui.png?size=30px)](https://github.com/sbejaoui) | This addon allows to pay invoices using payment terminal
 [account_payment_view_check_number](account_payment_view_check_number/) | 14.0.1.0.0 |  | Account Payment View Check Number
 [account_payment_widget_amount](account_payment_widget_amount/) | 14.0.1.0.0 | [![ChrisOForgeFlow](https://github.com/ChrisOForgeFlow.png?size=30px)](https://github.com/ChrisOForgeFlow) | Extends the payment widget to be able to choose the payment amount
-[partner_aging](partner_aging/) | 14.0.1.0.3 | [![smangukiya](https://github.com/smangukiya.png?size=30px)](https://github.com/smangukiya) | Aging as a view - invoices and credits
+[partner_aging](partner_aging/) | 14.0.1.0.4 | [![smangukiya](https://github.com/smangukiya.png?size=30px)](https://github.com/smangukiya) | Aging as a view - invoices and credits
 
 [//]: # (end addons)
 
