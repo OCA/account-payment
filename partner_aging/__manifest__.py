@@ -3,7 +3,7 @@
 {
     "name": "Interactive Partner Aging at any date",
     "summary": "Aging as a view - invoices and credits",
-    "version": "14.0.1.0.2",
+    "version": "14.0.1.0.4",
     "license": "AGPL-3",
     "author": "Open Source Integrators, Odoo Community Association (OCA)",
     "category": "Accounting & Finance",
