@@ -2,10 +2,10 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 from odoo import fields
 from odoo.exceptions import UserError
-from odoo.tests.common import Form, SavepointCase
+from odoo.tests.common import Form, TransactionCase
 
 
-class TestPaymentMultiDeduction(SavepointCase):
+class TestPaymentMultiDeduction(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -75,7 +75,7 @@ class TestPaymentMultiDeduction(SavepointCase):
                         0,
                         {
                             "name": fields.Date.today(),
-                            "rate": cls.company_currency.rate * 2,
+                            "company_rate": cls.company_currency.rate * 2,
                         },
                     )
                 ],
@@ -92,7 +92,7 @@ class TestPaymentMultiDeduction(SavepointCase):
         }
         with self.assertRaises(UserError):  # Deduct only 20.0, throw error
             with Form(
-                self.payment_register_model.with_context(ctx),
+                self.payment_register_model.with_context(**ctx),
                 view=self.register_view_id,
             ) as f:
                 f.amount = 400.0
@@ -103,7 +103,7 @@ class TestPaymentMultiDeduction(SavepointCase):
                     f2.amount = 20.0
             f.save()
         with Form(
-            self.payment_register_model.with_context(ctx), view=self.register_view_id
+            self.payment_register_model.with_context(**ctx), view=self.register_view_id
         ) as f:
             f.amount = 400.0  # Reduce to 400.0, and mark fully paid (multi)
             f.payment_difference_handling = "reconcile_multi_deduct"
@@ -122,7 +122,9 @@ class TestPaymentMultiDeduction(SavepointCase):
         self.assertEqual(payment.state, "posted")
 
         move_lines = self.move_line_model.search([("payment_id", "=", payment.id)])
-        bank_account = payment.journal_id.payment_debit_account_id
+        bank_account = (
+            payment.journal_id.company_id.account_journal_payment_debit_account_id
+        )
         self.assertEqual(self.cust_invoice.payment_state, "paid")
         self.assertRecordValues(
             move_lines,
@@ -157,7 +159,7 @@ class TestPaymentMultiDeduction(SavepointCase):
             "active_model": "account.move",
         }
         with Form(
-            self.payment_register_model.with_context(ctx), view=self.register_view_id
+            self.payment_register_model.with_context(**ctx), view=self.register_view_id
         ) as f:
             f.currency_id = self.currency_2x
             f.amount = 800.0  # 400 -> 800 as we use currency 2x
@@ -179,7 +181,9 @@ class TestPaymentMultiDeduction(SavepointCase):
         move_lines = self.env["account.move.line"].search(
             [("payment_id", "=", payment.id)]
         )
-        bank_account = payment.journal_id.payment_debit_account_id
+        bank_account = (
+            payment.journal_id.company_id.account_journal_payment_debit_account_id
+        )
         self.assertEqual(self.cust_invoice.payment_state, "paid")
         self.assertRecordValues(
             move_lines,
@@ -227,7 +231,7 @@ class TestPaymentMultiDeduction(SavepointCase):
             "active_model": "account.move",
         }
         with Form(
-            self.payment_register_model.with_context(ctx), view=self.register_view_id
+            self.payment_register_model.with_context(**ctx), view=self.register_view_id
         ) as f:
             f.amount = 400.0  # Reduce to 400.0, and mark fully paid (multi)
             f.payment_difference_handling = "reconcile_multi_deduct"
@@ -245,7 +249,9 @@ class TestPaymentMultiDeduction(SavepointCase):
         move_lines = self.env["account.move.line"].search(
             [("payment_id", "=", payment.id)]
         )
-        bank_account = payment.journal_id.payment_debit_account_id
+        bank_account = (
+            payment.journal_id.company_id.account_journal_payment_debit_account_id
+        )
         self.assertEqual(self.cust_invoice.payment_state, "partial")
         self.assertEqual(self.cust_invoice.amount_residual, 30)
         self.assertRecordValues(

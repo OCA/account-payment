@@ -9,23 +9,20 @@ class AccountPaymentDeduction(models.TransientModel):
 
     payment_id = fields.Many2one(
         comodel_name="account.payment.register",
-        string="Payment",
         readonly=True,
         ondelete="cascade",
     )
     currency_id = fields.Many2one(
         comodel_name="res.currency",
-        string="Currency",
         related="payment_id.currency_id",
         readonly=True,
     )
     account_id = fields.Many2one(
         comodel_name="account.account",
-        string="Account",
         domain=[("deprecated", "=", False)],
         required=False,
     )
-    open = fields.Boolean(string="Open", help="Keep this line open")
+    open = fields.Boolean(help="Keep this line open")
     amount = fields.Monetary(string="Deduction Amount", required=True)
     name = fields.Char(string="Label", required=True)
 
