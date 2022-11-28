@@ -7,10 +7,10 @@
 import json
 
 from odoo.exceptions import UserError, ValidationError
-from odoo.tests.common import Form, SavepointCase
+from odoo.tests.common import Form, TransactionCase
 
 
-class TestPaymentReturn(SavepointCase):
+class TestPaymentReturn(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
