@@ -112,7 +112,7 @@ class SlimpayClient(object):
             action=action, validate=validate, params=params)
 
     def approval_url(self, tx_ref, order_id, locale, amount, currency,
-                     decimal_places, subscriber, notify_url):
+                     decimal_places, subscriber, return_url):
         """ Return the URL a final user must visit to perform a mandate
         signature with a first payment.
 
@@ -121,11 +121,11 @@ class SlimpayClient(object):
         `amount` and `currency` designate the initial payment value
         `subscriber` designate a dict with keys 'reference' and 'signatory' as
         obtained using with `subscriber_from_partner`.
-        `notify_url` is the URL to be notified at the end of the operation.
+        `return_url` is the URL where the user is redirected after checkout.
         """
         params = self._repr_order(
             tx_ref, order_id, locale, amount, currency, decimal_places,
-            subscriber, notify_url)
+            subscriber, return_url)
         _logger.debug("slimpay approval_url parameters: %s", params)
         order = self.action('POST', 'create-orders', params=params)
         url = order.links[self.method_name('user-approval')].url
@@ -206,22 +206,21 @@ class SlimpayClient(object):
         }
 
     def _repr_order(self, tx_ref, order_id, locale, amount, currency,
-                    decimal_places, subscriber, notify_url):
+                    decimal_places, subscriber, return_url):
         return {
             'reference': tx_ref,
             'locale': locale,
             'creditor': {'reference': self.creditor},
             'subscriber': {'reference': subscriber['reference']},
             'started': True,
+            'returnUrl': return_url,
             'items': [
                 self._repr_mandate(subscriber),
-                self._repr_payment(order_id, amount, currency, decimal_places,
-                                   notify_url),
+                self._repr_payment(order_id, amount, currency, decimal_places),
             ],
         }
 
-    def _repr_payment(self, label, amount, currency, decimal_places,
-                      notify_url):
+    def _repr_payment(self, label, amount, currency, decimal_places):
         return {
             'type': 'payment',
             'action': 'create',
@@ -231,6 +230,5 @@ class SlimpayClient(object):
                 'amount': round(amount, decimal_places),
                 'currency': currency,
                 'label': label,
-                'notifyUrl': notify_url,
             }
         }
