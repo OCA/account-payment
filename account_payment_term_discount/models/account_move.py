@@ -15,19 +15,16 @@ class AccountMove(models.Model):
         store=True,
     )
     discount_date = fields.Date(
-        "Discount Date",
         compute="_compute_discount_date",
         help="Compute discount on the invoice based on the payment term discount "
         "percentage."
         "and the current date",
         store=True,
     )
-    discount_taken = fields.Monetary("Discount taken", copy=False)
-    check_payment_discount = fields.Boolean(
-        "Check Payment Discount", compute="_compute_payment_disc"
-    )
+    discount_taken = fields.Monetary(copy=False)
+    check_payment_discount = fields.Boolean(compute="_compute_payment_disc")
     shipping_lines_total = fields.Monetary(
-        "Shipping Lines Total",
+        "Shippling Lines Total",
         help="Exclude shipping lines total from discount if applicable " "in terms",
         compute="_compute_shipping_lines_total",
     )

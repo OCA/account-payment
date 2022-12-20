@@ -38,8 +38,10 @@ class AccountPaymentTerm(models.Model):
                     days=line.discount_days
                 )
 
-                if line.discount and payment_date <= till_discount_date:
-                    payment_discount = round((amount * line.discount) / 100.0, 2)
+                if line.discount_percentage and payment_date <= till_discount_date:
+                    payment_discount = round(
+                        (amount * line.discount_percentage) / 100.0, 2
+                    )
                     if invoice.move_type in ("out_invoice", "in_refund"):
                         discount_account_id = line.discount_expense_account_id.id
                     else:
@@ -82,8 +84,6 @@ class AccountPaymentTermLine(models.Model):
     is_discount = fields.Boolean(
         related="payment_id.is_discount", string="Early Payment Discount", readonly=True
     )
-    discount = fields.Float("Discount (%)", digits=(4, 2))
-    discount_days = fields.Integer("Discount Days")
     discount_income_account_id = fields.Many2one(
         "account.account",
         string="Discount on Purchases Account",
