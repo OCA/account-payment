@@ -2,9 +2,9 @@
 
 {
     "name": "Payments Due list",
-    "version": "16.0.1.0.1",
+    "version": "16.0.1.0.2",
     "category": "Generic Modules/Payment",
-    "development_status": "Beta",
+    "development_status": "Production/Stable",
     "author": "Odoo Community Association (OCA)",
     "summary": "List of open credits and debits, with due date",
     "website": "https://github.com/OCA/account-payment",
