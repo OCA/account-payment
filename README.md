@@ -21,7 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[account_due_list](account_due_list/) | 16.0.1.0.1 |  | List of open credits and debits, with due date
+[account_due_list](account_due_list/) | 16.0.1.0.2 |  | List of open credits and debits, with due date
 
 [//]: # (end addons)
 
