@@ -204,12 +204,20 @@ class AccountPaymentRegister(models.TransientModel):
                 "partner_id": int(group_data["partner_id"]),
                 "partner_type": group_data["partner_type"],
                 "check_amount_in_words": group_data["check_amount_in_words"],
-                "write_off_line_vals": {
-                    "name": writeoff_name,
-                    "account_id": writeoff_account_id,
-                    "amount": writeoff_amount,
-                },
             }
+            if writeoff_amount > 0:
+                res.update(
+                    {
+                        "write_off_line_vals": [
+                            {
+                                "name": writeoff_name,
+                                "account_id": writeoff_account_id,
+                                "amount_currency": int(writeoff_amount),
+                                "balance": group_data["total"],
+                            }
+                        ]
+                    }
+                )
         return res
 
     def _check_amounts(self):
@@ -410,7 +418,7 @@ class AccountPaymentRegister(models.TransientModel):
             payment.action_post()
             # Reconciliation
             domain = [
-                ("account_internal_type", "in", ("receivable", "payable")),
+                ("account_type", "in", ("receivable", "payable")),
                 ("reconciled", "=", False),
             ]
             payment_lines = payment.line_ids.filtered_domain(domain)
