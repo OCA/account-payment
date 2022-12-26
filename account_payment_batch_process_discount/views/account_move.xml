@@ -21,7 +21,7 @@
                 <filter
                     string="Discount Invoice"
                     name="valid_discount_dates"
-                    domain="[('state', '=', 'open'), ('valid_discount_date', '&gt;',  (context_today()-datetime.timedelta(days=1)).strftime('%%Y-%%m-%%d'))]"
+                    domain="[('state', '=', 'posted'), ('valid_discount_date', '&gt;',  (context_today()-datetime.timedelta(days=1)).strftime('%%Y-%%m-%%d'))]"
                     help="Filter invoices with early payment discounts"
                 />
             </xpath>
