@@ -8,7 +8,7 @@ from odoo import fields, models
 class AccountMove(models.Model):
     _inherit = "account.move"
 
-    valid_discount_date = fields.Date(string="Valid Discount Date")
+    valid_discount_date = fields.Date()
 
     def action_post(self):
         res = super().action_post()
