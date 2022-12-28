@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="action_account_payment_import_xlsx" model="ir.actions.act_window">
+        <field name="name">Import Excel</field>
+        <field name="res_model">import.xlsx.wizard</field>
+        <field name="binding_view_types">form</field>
+        <field name="binding_model_id" ref="payment.model_account_payment" />
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="context">
+            {
+                'template_domain': [('res_model', '=', 'account.payment'),
+                                    ('fname', '=', 'payment_detail.xlsx'),
+                                    ('gname', '=', False)],
+                'template_context': {},
+                'template_import_states': ["draft"],
+            }
+        </field>
+    </record>
+
+    <record id="account_payment_form_view" model="ir.ui.view">
+        <field name="name">account.payment.form.view</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_draft']" position="after">
+                <button
+                    name="%(action_account_payment_import_xlsx)d"
+                    class="btn"
+                    states="draft"
+                    string="Import Payment Distribution"
+                    type="action"
+                />
+            </xpath>
+        </field>
+    </record>
+
+
+</odoo>
