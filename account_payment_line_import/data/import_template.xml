@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+
+    <record id="payment_counterpart_line_xlsx_template" model="xlsx.template">
+        <field name="res_model">account.payment</field>
+        <field name="fname">payment_detail.xlsx</field>
+        <field name="name">Payment Distribution (import)</field>
+        <field name="description">Payment Distribution</field>
+        <field
+            name="import_action_id"
+            eval="ref('action_account_payment_import_xlsx')"
+        />
+        <field name="input_instruction">
+            {
+            '__IMPORT__': {
+            'payment_distribution': {
+            '_NODEL_line_payment_counterpart_ids': {
+            'A2': 'name',
+            'B2': 'move_id',
+            'C2': 'amount',
+            'D2': 'account_id',
+            'E2': 'analytic_account_id',
+            'F2': 'fully_paid',
+            }
+            }
+            },
+            '__POST_IMPORT__': '${object.post_import_process_lines()}',
+            }
+        </field>
+    </record>
+    <function model="xlsx.template" name="load_xlsx_template">
+        <value eval="[ref('payment_counterpart_line_xlsx_template')]" />
+    </function>
+</odoo>
