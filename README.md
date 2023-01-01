@@ -39,7 +39,7 @@ addon | version | maintainers | summary
 [account_payment_paired_internal_transfer](account_payment_paired_internal_transfer/) | 14.0.1.0.0 |  | Crete internal transfers in one move.
 [account_payment_return](account_payment_return/) | 14.0.1.0.5 |  | Manage the return of your payments
 [account_payment_return_import](account_payment_return_import/) | 14.0.1.0.2 |  | This module adds a generic wizard to import payment returnfile formats. Is only the base to be extended by anothermodules
-[account_payment_return_import_iso20022](account_payment_return_import_iso20022/) | 14.0.1.0.0 |  | This addon allows to import payment returns from ISO 20022 files like PAIN or CAMT.
+[account_payment_return_import_iso20022](account_payment_return_import_iso20022/) | 14.0.2.0.0 |  | This addon allows to import payment returns from ISO 20022 files like PAIN or CAMT.
 [account_payment_term_discount](account_payment_term_discount/) | 14.0.1.1.7 | [![bodedra](https://github.com/bodedra.png?size=30px)](https://github.com/bodedra) | Account Payment Terms Discount
 [account_payment_term_extension](account_payment_term_extension/) | 14.0.1.0.3 |  | Adds rounding, months, weeks and multiple payment days properties on payment term lines
 [account_payment_terminal](account_payment_terminal/) | 14.0.1.0.0 | [![sbejaoui](https://github.com/sbejaoui.png?size=30px)](https://github.com/sbejaoui) | This addon allows to pay invoices using payment terminal
