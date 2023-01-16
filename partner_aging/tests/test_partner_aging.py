@@ -21,7 +21,6 @@ class TestPartnerAging(common.TransactionCase):
         self.account_account_obj = self.env["account.account"]
         self.account_journal_obj = self.env["account.journal"]
 
-        self.account_receivable = self.env.ref("account.data_account_type_receivable")
         self.partner_12 = self.env.ref("base.res_partner_12")
         self.partner_2 = self.env.ref("base.res_partner_2")
         self.partner_10 = self.env.ref("base.res_partner_10")
@@ -39,7 +38,7 @@ class TestPartnerAging(common.TransactionCase):
             {
                 "code": "RA1000",
                 "name": "Test Receivable Account",
-                "user_type_id": self.account_receivable.id,
+                "account_type": "asset_receivable",
                 "reconcile": True,
             }
         )
@@ -125,7 +124,7 @@ class TestPartnerAging(common.TransactionCase):
                 "price_unit": 0,
                 "move_id": invoice.id,
                 "name": "product that cost 100",
-                "account_id": self.account_id.id,
+                # "account_id": self.account_id.id
             }
         )
         invoice.action_post()

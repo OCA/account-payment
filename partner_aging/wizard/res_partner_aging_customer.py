@@ -167,9 +167,8 @@ class ResPartnerAgingCustomer(models.Model):
             on lt.move_id = inv.id) DaysDue
             ON DaysDue.id = aml.id
         LEFT JOIN account_move as ai ON ai.id = aml.move_id
-        WHERE ac.user_type_id in
-            (select id FROM account_account_type WHERE
-            type = 'receivable') AND aml.date
+        WHERE ac.account_type = 'asset_receivable'
+            AND aml.date
             <= '{}' AND ai.state = 'posted' AND
             (ai.payment_state != 'paid' OR
             aml.full_reconcile_id IS NULL) AND
@@ -314,8 +313,7 @@ class ResPartnerAgingCustomer(models.Model):
             ) DaysDue
             ON DaysDue.id = aml.id
         LEFT JOIN account_move as ai ON ai.id = aml.move_id
-        WHERE ac.user_type_id in (select id FROM account_account_type
-            WHERE type = 'receivable')
+        WHERE ac.account_type = 'asset_receivable'
         AND aml.date <= '{}'
         AND aml.partner_id IS NULL
         AND ai.partner_id IS not NULL
@@ -351,8 +349,7 @@ class ResPartnerAgingCustomer(models.Model):
         WHERE aml.date <= '{}'
         AND aml.partner_id IS NOT NULL
         AND aml.full_reconcile_id IS NOT NULL
-        AND ac.user_type_id in (select id FROM
-        account_account_type WHERE type = 'receivable')
+        AND ac.account_type = 'asset_receivable'
         AND aml.credit > 0
               """.format(
             age_date,
