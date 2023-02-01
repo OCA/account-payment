@@ -24,10 +24,11 @@ class PaymentReturnLine(models.Model):
                 ],
             )
             if payments:
+                line.partner_id = payments[0].partner_id
                 matched += line
                 for payment in payments:
                     line.move_line_ids |= payment.move_id.line_ids.filtered(
-                        lambda x: x.account_id != payment.destination_account_id
+                        lambda x: x.account_id == payment.destination_account_id
                         and x.partner_id == payment.partner_id
                     )
         return super(PaymentReturnLine, self - matched)._find_match()
