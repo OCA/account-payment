@@ -176,7 +176,7 @@ class PaymentReturn(models.Model):
             "name": move.ref,
             "debit": 0.0,
             "credit": total_amount,
-            "account_id": self.journal_id.payment_credit_account_id.id,
+            "account_id": self.journal_id.payment_debit_account_id.id,
             "move_id": move.id,
             "journal_id": move.journal_id.id,
         }
