@@ -5,7 +5,7 @@ class PaymentAcquirer(models.Model):
     _inherit = "payment.acquirer"
 
     @api.model
-    def get_allowed_acquirer(self, acquirers, invoice_id=None, order_id=None):
+    def get_allowed_acquirers(self, acquirers, invoice_id=None, order_id=None):
         """
         Get allowed acquirers by the customer
         :param list acquirers: list of acquirers
@@ -23,4 +23,8 @@ class PaymentAcquirer(models.Model):
             return acquirers
         record = self.env[model].browse(rec_id)
         customer_acquirers = record.partner_id.allowed_acquirer_ids
-        return list(customer_acquirers) or acquirers
+        return (
+            list(set(acquirers) & set(customer_acquirers))
+            if customer_acquirers
+            else acquirers
+        )

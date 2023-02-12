@@ -10,7 +10,7 @@
             </t>
             <t
                 t-set="acquirers"
-                t-value="env['payment.acquirer'].get_allowed_acquirer(acquirers, invoice_id, order_id)"
+                t-value="env['payment.acquirer'].get_allowed_acquirers(acquirers, invoice_id, order_id)"
             />
         </form>
     </template>

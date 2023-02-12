@@ -6,9 +6,9 @@ class ResPartner(models.Model):
 
     allowed_acquirer_ids = fields.Many2many(
         comodel_name="payment.acquirer",
-        relation="partner_acquirere_allowed_rel",
+        relation="partner_acquirer_allowed_rel",
         column1="partner_id",
-        columnt2="acquirer_id",
+        column2="acquirer_id",
         string="Allowed Acquirers",
         domain=[("state", "in", ["enabled", "test"])],
     )
