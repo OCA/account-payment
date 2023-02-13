@@ -15,4 +15,3 @@ Open product form and go to "Sales" tab:
 *Note: Leaving this field empty will remove any restrictions and allow to select any acquirer.*
 
 *Note 2: Partner wide restriction will override product wide one.*
-
