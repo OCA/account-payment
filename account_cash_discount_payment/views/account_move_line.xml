@@ -11,11 +11,11 @@
         <field name="arch" type="xml">
             <field name="date_maturity" position="after">
                 <field
-                    name="discount_due_date"
+                    name="discount_date"
                     invisible="not context.get('tree_view_display_discount')"
                 />
                 <field
-                    name="discount_amount"
+                    name="discount_amount_currency"
                     invisible="not context.get('tree_view_display_discount')"
                 />
             </field>

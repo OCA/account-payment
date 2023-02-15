@@ -8,23 +8,15 @@ class AccountMoveLine(models.Model):
 
     _inherit = "account.move.line"
 
-    discount_due_date = fields.Date(
-        related="move_id.discount_due_date",
-        readonly=True,
-    )
-    discount_amount = fields.Monetary(
-        related="move_id.discount_amount",
-        readonly=True,
-    )
-
     def _prepare_payment_line_vals(self, payment_order):
         self.ensure_one()
-        values = super(AccountMoveLine, self)._prepare_payment_line_vals(payment_order)
+        values = super()._prepare_payment_line_vals(payment_order)
 
-        move = self.move_id
-        if move and move.discount_due_date and move.has_discount:
-            pay_with_discount = move._can_pay_invoice_with_discount()
+        if self.discount_date and self.discount_amount_currency:
+            today = fields.Date.today()
+            pay_with_discount = self.discount_date >= today
             values["pay_with_discount"] = pay_with_discount
             if pay_with_discount:
-                values["amount_currency"] = move.residual_with_discount
+                # apply discount
+                values["amount_currency"] = self.discount_amount_currency * -1
         return values
