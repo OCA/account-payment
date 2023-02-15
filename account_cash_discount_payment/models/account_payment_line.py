@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
-from odoo.exceptions import UserError, ValidationError
+from odoo.exceptions import UserError
 from odoo.tools import float_compare
 
 
@@ -10,60 +10,37 @@ class PaymentLine(models.Model):
 
     _inherit = "account.payment.line"
 
-    pay_with_discount = fields.Boolean(
-        default=False,
-    )
-    pay_with_discount_allowed = fields.Boolean(
-        compute="_compute_pay_with_discount_allowed",
+    discount_due_date = fields.Date(
+        related="move_line_id.discount_date",
+        readonly=True,
     )
     toggle_pay_with_discount_allowed = fields.Boolean(
         compute="_compute_toggle_pay_with_discount_allowed",
     )
-    discount_due_date = fields.Date(
-        related="move_line_id.move_id.discount_due_date",
-        readonly=True,
-    )
-    discount_amount = fields.Monetary(
-        related="move_line_id.move_id.real_discount_amount",
-        readonly=True,
+    discount_amount = fields.Monetary(compute="_compute_discount_amount")
+    pay_with_discount = fields.Boolean(
+        default=False,
     )
 
-    def _compute_pay_with_discount_allowed(self):
-        """
-        Discount can be used only when the invoice has not already
-        been paid partially or if the invoice has been reconciled only with
-        refunds
-        """
+    @api.depends(
+        "move_line_id.amount_residual",
+        "move_line_id.amount_residual_currency",
+        "move_line_id.discount_percentage",
+        "pay_with_discount",
+    )
+    def _compute_discount_amount(self):
         for rec in self:
-            allowed = False
-            move_line = rec.move_line_id
-            if move_line and move_line.move_id.has_discount:
-                invoice = move_line.move_id
-                allowed = invoice._can_pay_invoice_with_discount(check_due_date=False)
-            rec.pay_with_discount_allowed = allowed
+            sign = -1 if rec.order_id.payment_type == "outbound" else 1
+            amount_without_disc = rec.move_line_id.amount_residual_currency
+            rec.discount_amount = sign * (amount_without_disc) - rec.amount_currency
 
+    @api.depends("order_id.state")
     def _compute_toggle_pay_with_discount_allowed(self):
         for rec in self:
-            rec.toggle_pay_with_discount_allowed = (
-                rec.pay_with_discount_allowed
-                and rec.order_id.state not in ("uploaded", "cancelled")
+            rec.toggle_pay_with_discount_allowed = rec.order_id.state not in (
+                "uploaded",
+                "cancelled",
             )
-
-    @api.constrains(
-        "pay_with_discount",
-        "move_line_id",
-    )
-    def _check_pay_with_discount(self):
-        for rec in self:
-            if not rec.pay_with_discount:
-                continue
-            if not rec.pay_with_discount_allowed:
-                raise ValidationError(
-                    _(
-                        "You can't pay with a discount if the payment line is "
-                        "not linked to an invoice which has a discount."
-                    )
-                )
 
     @api.onchange(
         "discount_amount",
@@ -75,13 +52,13 @@ class PaymentLine(models.Model):
         This onchange should be executed completely only when the payment line
         is linked to a move line which is linked to an invoice which has a
         discount.
-
-        If the above condition is ok, the amount will change based on the
-        invoice total and invoice discount amount.
         """
-        self._check_pay_with_discount()
-        invoice = self.move_line_id.move_id
+        invoice_line = self.move_line_id
         currency = self.currency_id
+
+        # apply discount
+        amount_with_discount = invoice_line._prepare_discount()
+
         # When pay_with_discount is changed to False, we do not want to lose
         # the amount if the user changed it manually (related to the
         # _onchange_amount_with_discount which enable or disable the value
@@ -89,15 +66,20 @@ class PaymentLine(models.Model):
         change_base_amount = (
             float_compare(
                 self.amount_currency,
-                invoice.residual_with_discount,
+                amount_with_discount,
                 precision_rounding=currency.rounding,
             )
             == 0
         )
         if self.pay_with_discount:
-            self.amount_currency = invoice.residual_with_discount
+            # apply discount
+            self.amount_currency = amount_with_discount
         elif change_base_amount:
-            self.amount_currency = invoice.amount_residual
+            amount_currency = invoice_line.amount_residual_currency
+
+            if self.order_id.payment_type == "outbound":
+                amount_currency *= -1
+            self.amount_currency = amount_currency
 
     @api.onchange(
         "amount_currency",
@@ -105,21 +87,22 @@ class PaymentLine(models.Model):
     def _onchange_amount_with_discount(self):
         """
         This method will disable the pay_with_discount flag if the amount has
-        been changed and if it doesn't equal to the invoice total amount with
-        discount.
+        been changed and if it doesn't equal to the amount with discount.
         """
-        if not self.pay_with_discount_allowed or not self.pay_with_discount:
+        if not self.pay_with_discount:
             return
-        invoice = self.move_line_id.move_id
+        invoice_line = self.move_line_id
         currency = self.currency_id
+        amount_with_discount = invoice_line._prepare_discount()
         can_pay_with_discount = (
             float_compare(
                 self.amount_currency,
-                invoice.residual_with_discount,
+                amount_with_discount,
                 precision_rounding=currency.rounding,
             )
             == 0
         )
+
         if not can_pay_with_discount:
             self.pay_with_discount = False
             return {
