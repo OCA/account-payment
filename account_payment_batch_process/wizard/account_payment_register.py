@@ -422,6 +422,28 @@ class AccountPaymentRegister(models.TransientModel):
                 ).reconcile()
             if any(
                 group_data[partner]["inv_val"][inv.id]["payment_difference_handling"]
+                == "reconcile"
+                for inv in invoices
+            ):
+                for inv in invoices:
+                    if (
+                        group_data[partner]["inv_val"][inv.id][
+                            "payment_difference_handling"
+                        ]
+                        == "reconcile"
+                    ):
+                        inv.write(
+                            {
+                                "discount_taken": abs(
+                                    group_data[partner]["inv_val"][inv.id][
+                                        "payment_difference"
+                                    ]
+                                ),
+                                "discount_amt": 0,
+                            }
+                        )
+            if any(
+                group_data[partner]["inv_val"][inv.id]["payment_difference_handling"]
                 == "open"
                 for inv in invoices
             ):
