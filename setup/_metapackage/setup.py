@@ -28,6 +28,7 @@ setuptools.setup(
         'odoo13-addon-account_payment_term_security',
         'odoo13-addon-partner_aging',
         'odoo13-addon-sale_payment_mgmt',
+        'odoo13-addon-sale_payment_term_security',
     ],
     classifiers=[
         'Programming Language :: Python',
