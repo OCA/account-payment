@@ -2,10 +2,10 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 from lxml import etree
 
-from odoo.tests.common import SavepointCase, new_test_user, users
+from odoo.tests import TransactionCase, new_test_user, users
 
 
-class TestSalePaymentTermSecurity(SavepointCase):
+class TestSalePaymentTermSecurity(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
