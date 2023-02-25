@@ -1,0 +1,1 @@
+odoo13-addon-partner_restrict_payment_acquirer @ git+https://github.com/OCA/account-payment.git@refs/pull/593/head#subdirectory=setup/partner_restrict_payment_acquirer
