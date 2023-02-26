@@ -388,7 +388,7 @@ class ResPartnerAgingSupplier(models.Model):
 
     def open_document(self):
         """
-            @description  Open form view of Supplier Invoice
+        @description  Open form view of Supplier Invoice
         """
         action = self.env.ref("account.action_move_in_invoice_type").read()[0]
         action["views"] = [(self.env.ref("account.view_move_form").id, "form")]
