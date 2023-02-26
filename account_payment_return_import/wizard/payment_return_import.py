@@ -20,7 +20,7 @@ class PaymentReturnImport(models.TransientModel):
     _description = "Import Payment Return"
 
     def _compute_hide_journal_field(self):
-        """ Return False if the journal_id can't be provided by the parsed
+        """Return False if the journal_id can't be provided by the parsed
         file and must be provided by the wizard."""
         self.hide_journal_field = True
 
@@ -102,7 +102,7 @@ class PaymentReturnImport(models.TransientModel):
 
     @api.model
     def _import_file(self, data_file):
-        """ Create bank payment return(s) from file."""
+        """Create bank payment return(s) from file."""
         # The appropriate implementation module returns the required data
         payment_returns = self.env["payment.return"]
         notifications = []
@@ -122,7 +122,7 @@ class PaymentReturnImport(models.TransientModel):
 
     @api.model
     def _parse_file(self, data_file):
-        """ Each module adding a file support must extends this method. It
+        """Each module adding a file support must extends this method. It
         processes the file if it can, returns super otherwise, resulting in a
         chain of responsability.
         This method parses the given file and returns the data required by
@@ -156,7 +156,7 @@ class PaymentReturnImport(models.TransientModel):
 
     @api.model
     def _check_parsed_data(self, payment_returns):
-        """ Basic and structural verifications """
+        """Basic and structural verifications"""
         if not payment_returns:
             raise UserError(_("This file doesn't contain any payment return."))
         for payret_vals in payment_returns:
@@ -167,7 +167,7 @@ class PaymentReturnImport(models.TransientModel):
 
     @api.model
     def _find_bank_account_id(self, account_number):
-        """ Get res.partner.bank ID """
+        """Get res.partner.bank ID"""
         bank_account_id = None
         if account_number and len(account_number) > 4:
             iban_number = pretty_iban(account_number)
@@ -180,7 +180,7 @@ class PaymentReturnImport(models.TransientModel):
 
     @api.model
     def _get_journal(self, bank_account_id):
-        """ Find the journal """
+        """Find the journal"""
         bank_model = self.env["res.partner.bank"]
         # Find the journal from context, wizard or bank account
         journal_id = self.env.context.get("journal_id") or self.journal_id.id
@@ -238,7 +238,7 @@ class PaymentReturnImport(models.TransientModel):
 
     @api.model
     def _create_payment_return(self, payret_vals):
-        """ Create bank payment return from imported values, filtering out
+        """Create bank payment return from imported values, filtering out
         already imported transactions, and return data used by the
         reconciliation widget
         """
