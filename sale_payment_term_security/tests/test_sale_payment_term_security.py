@@ -17,7 +17,10 @@ class TestSalePaymentTermSecurity(SavepointCase):
         }
         sale_group = "sales_team.group_sale_salesman"
         new_test_user(
-            cls.env, login="test-sale-user", groups=sale_group, context=ctx,
+            cls.env,
+            login="test-sale-user",
+            groups=sale_group,
+            context=ctx,
         )
         payment_term_group = "account_payment_term_security.account_payment_term_mgmt"
         new_test_user(
