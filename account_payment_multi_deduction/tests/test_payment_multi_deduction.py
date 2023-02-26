@@ -77,7 +77,7 @@ class TestPaymentMultiDeduction(SavepointCase):
         )
 
     def test_one_invoice_payment(self):
-        """ Validate 1 invoice and make payment with 2 deduction """
+        """Validate 1 invoice and make payment with 2 deduction"""
         self.cust_invoice.post()  # total amount 450.0
         ctx = {
             "active_ids": [self.cust_invoice.id],
@@ -147,7 +147,7 @@ class TestPaymentMultiDeduction(SavepointCase):
         )
 
     def test_one_invoice_payment_foreign_currency(self):
-        """ Validate 1 invoice and make payment with 2 deduction """
+        """Validate 1 invoice and make payment with 2 deduction"""
         self.cust_invoice.post()  # total amount 450.0
         ctx = {
             "active_ids": [self.cust_invoice.id],
@@ -221,8 +221,8 @@ class TestPaymentMultiDeduction(SavepointCase):
         )
 
     def test_one_invoice_payment_with_keep_open(self):
-        """ Validate 1 invoice and make payment with 2 deduction,
-        one as normal deduct and another as keep open """
+        """Validate 1 invoice and make payment with 2 deduction,
+        one as normal deduct and another as keep open"""
         self.cust_invoice.post()  # total amount 450.0
         ctx = {
             "active_ids": [self.cust_invoice.id],
