@@ -8,7 +8,9 @@ class AccountBankStatementLine(models.Model):
     _inherit = "account.bank.statement.line"
 
     invoice_id = fields.Many2one(
-        comodel_name="account.move", string="Invoice", readonly=True,
+        comodel_name="account.move",
+        string="Invoice",
+        readonly=True,
     )
 
     def fast_counterpart_creation(self):
