@@ -23,7 +23,10 @@ class AccountPayment(models.Model):
         self, view_id=None, view_type="form", toolbar=False, submenu=False
     ):
         result = super(AccountPayment, self).fields_view_get(
-            view_id, view_type, toolbar=toolbar, submenu=submenu,
+            view_id,
+            view_type,
+            toolbar=toolbar,
+            submenu=submenu,
         )
         if view_type == "form":
             if self._is_sale_payment_managed():
