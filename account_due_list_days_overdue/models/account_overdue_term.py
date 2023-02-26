@@ -41,8 +41,7 @@ class AccountDaysOverdue(models.Model):
 
     @api.constrains("from_day", "to_day")
     def check_overlap(self):
-        """Check that overdue terms do not overlap
-        """
+        """Check that overdue terms do not overlap"""
         for rec in self:
             date_domain = [
                 ("from_day", "<=", rec.to_day),
