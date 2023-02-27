@@ -32,6 +32,7 @@ addon | version | maintainers | summary
 [account_payment_term_security](account_payment_term_security/) | 15.0.1.0.0 |  | Payment Term Security
 [account_payment_widget_amount](account_payment_widget_amount/) | 15.0.1.0.0 | [![ChrisOForgeFlow](https://github.com/ChrisOForgeFlow.png?size=30px)](https://github.com/ChrisOForgeFlow) | Extends the payment widget to be able to choose the payment amount
 [partner_aging](partner_aging/) | 15.0.1.0.0 | [![Urvisha-OSI](https://github.com/Urvisha-OSI.png?size=30px)](https://github.com/Urvisha-OSI) | Aging as a view - invoices and credits
+[sale_payment_term_security](sale_payment_term_security/) | 15.0.1.0.0 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Sale Payment Term Security
 
 [//]: # (end addons)
 
