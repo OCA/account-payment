@@ -1,10 +1,10 @@
 # Copyright 2018 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestAccountCashDiscountCommon(SavepointCase):
+class TestAccountCashDiscountCommon(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super(TestAccountCashDiscountCommon, cls).setUpClass()
