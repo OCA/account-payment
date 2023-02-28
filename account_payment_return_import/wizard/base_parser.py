@@ -42,5 +42,5 @@ class BaseParser(object):
                 if len(payment_return["transactions"]):
                     payment_returns.append(payment_return)
         except Exception:
-            raise UserError(_("Couldn't load file data"))
+            raise UserError(_("Couldn't load file data")) from Exception
         return payment_returns
