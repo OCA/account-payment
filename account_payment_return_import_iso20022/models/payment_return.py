@@ -16,9 +16,6 @@ class PaymentReturnLine(models.Model):
             move_id = int(line.reference) if line.reference.isdigit() else -1
             payments = self.env["account.payment"].search(
                 [
-                    "|",
-                    # Compatibility with old approach - To be removed on v16
-                    ("old_bank_payment_line_name", "=", line.reference),
                     ("move_id", "=", move_id),
                     ("payment_order_id", "!=", False),
                 ],
