@@ -7,12 +7,12 @@ import logging
 
 from odoo import fields
 from odoo.modules.module import get_module_resource
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 _logger = logging.getLogger(__name__)
 
 
-class TestPaymentReturnFile(SavepointCase):
+class TestPaymentReturnFile(TransactionCase):
     """Check whether payment returns with transactions correctly imported.
 
     No actual tests are done in this class, implementations are in
@@ -60,7 +60,7 @@ class TestPaymentReturnFile(SavepointCase):
         """Test correct creation of single return."""
         import_model = self.env["payment.return.import"]
         return_model = self.env["payment.return"]
-        return_path = get_module_resource(module_name, "test_files", file_name)
+        return_path = get_module_resource(module_name, "tests", "test_files", file_name)
         return_file = base64.b64encode(open(return_path, "rb").read())
         bank_return_id = import_model.create(
             dict(
