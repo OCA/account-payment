@@ -4,6 +4,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import base64
+import logging
 from io import BytesIO
 from zipfile import BadZipfile, ZipFile  # BadZipFile in Python >= 3.2
 
@@ -13,6 +14,8 @@ from odoo.exceptions import UserError
 from odoo.addons.base_iban.models.res_partner_bank import pretty_iban
 
 from .base_parser import BaseParser
+
+_logger = logging.getLogger(__name__)
 
 
 class PaymentReturnImport(models.TransientModel):
@@ -85,7 +88,7 @@ class PaymentReturnImport(models.TransientModel):
                     if not filename.endswith("/")
                 ]
         except BadZipfile:
-            pass
+            _logger.info("Invalid Zip file")
         # Parse the file(s)
         for import_file in files:
             # The appropriate implementation module(s) returns the payment
@@ -153,7 +156,7 @@ class PaymentReturnImport(models.TransientModel):
                     "Could not make sense of the given file.\n"
                     "Did you install the module to support this type of file?"
                 )
-            )
+            ) from Exception
 
     @api.model
     def _check_parsed_data(self, payment_returns):
