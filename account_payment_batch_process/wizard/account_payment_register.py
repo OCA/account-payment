@@ -301,16 +301,42 @@ class AccountPaymentRegister(models.TransientModel):
     def update_group_pay_data(
         self, partner_id, group_data, data_get, check_amount_in_words
     ):
-        inv_val = self.get_payment_invoice_value(data_get)
+        # build memo value
+        if self.communication:
+            memo = (
+                self.communication + "-" + self.get_invoice_reference_for_memo(data_get)
+            )
+        else:
+            memo = self.get_invoice_reference_for_memo(data_get)
+        name = ""
+        if data_get.reason_code:
+            name = str(data_get.reason_code.code)
+        if data_get.note:
+            name = name + ": " + str(data_get.note)
+        if not name:
+            name = "Counterpart"
+        inv_val = {
+            "line_name": name,
+            "amount": data_get.amount,
+            "payment_difference_handling": data_get.payment_difference_handling,
+            "payment_difference": data_get.payment_difference,
+            "writeoff_account_id": data_get.writeoff_account_id
+            and data_get.writeoff_account_id.id
+            or False,
+        }
         group_data.update(
             {
-                partner_id: self.prepare_partner_id_values(
-                    partner_id,
-                    data_get,
-                    check_amount_in_words=check_amount_in_words,
-                    inv_val=inv_val,
-                    memo=None,
-                )
+                partner_id: {
+                    "partner_id": partner_id,
+                    "partner_type": MAP_INVOICE_TYPE_PARTNER_TYPE[
+                        data_get.invoice_id.move_type
+                    ],
+                    "total": data_get.amount,
+                    "check_amount_in_words": check_amount_in_words,
+                    "memo": memo,
+                    "temp_invoice": data_get.invoice_id.id,
+                    "inv_val": {data_get.invoice_id.id: inv_val},
+                }
             }
         )
 
@@ -318,16 +344,44 @@ class AccountPaymentRegister(models.TransientModel):
         line.payment_difference = line.balance - line.amount
         partner_id = line.invoice_id.partner_id.id
         if partner_id in group_data:
-            group_data.update(
+            old_total = group_data[partner_id]["total"]
+            # build memo value
+            if self.communication:
+                memo = (
+                    group_data[partner_id]["memo"]
+                    + " : "
+                    + self.communication
+                    + "-"
+                    + str(self.get_invoice_reference_for_memo(line))
+                )
+            else:
+                memo = (
+                    group_data[partner_id]["memo"]
+                    + " : "
+                    + str(self.get_invoice_reference_for_memo(line))
+                )
+            # Calculate amount in words
+            check_amount_in_words = self.total_amount_in_words(line, old_total)
+            group_data[partner_id].update(
                 {
-                    partner_id: self.prepare_partner_id_values(
-                        partner_id,
-                        line,
-                        old_total=group_data[partner_id]["total"],
-                        memo=group_data[partner_id]["memo"],
-                    )
+                    "partner_id": partner_id,
+                    "partner_type": MAP_INVOICE_TYPE_PARTNER_TYPE[
+                        line.invoice_id.move_type
+                    ],
+                    "total": old_total + line.amount,
+                    "memo": memo,
+                    "temp_invoice": line.invoice_id.id,
+                    "check_amount_in_words": check_amount_in_words,
                 }
             )
+            # prepare name
+            name = ""
+            if line.reason_code:
+                name = str(line.reason_code.code)
+            if line.note:
+                name = name + ": " + str(line.note)
+            if not name:
+                name = "Counterpart"
             # Update with payment diff data
             inv_val = self.get_payment_invoice_value(line)
             group_data[partner_id]["inv_val"].update({line.invoice_id.id: inv_val})
