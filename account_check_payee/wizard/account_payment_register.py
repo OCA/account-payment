@@ -7,7 +7,8 @@ from odoo import api, fields, models
 class AccountPaymentRegister(models.TransientModel):
     _inherit = "account.payment.register"
 
-    payment_method_code = fields.Char(related="payment_method_id.code")
+    # T5879 code field's value passed through payment_method_line_id in 15.0
+    payment_method_code = fields.Char(related="payment_method_line_id.code")
     check_payee = fields.Char(
         string="Payee",
         compute="_compute_check_payee",
