@@ -7,9 +7,7 @@ from odoo import fields, models
 class AccountPaymentRegister(models.TransientModel):
     _inherit = "account.payment.register"
 
-    payment_method_code = fields.Char(related="payment_method_id.code")
     check_date = fields.Date(
-        string="Check Date",
         default=fields.Date.context_today,
     )
 

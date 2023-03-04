@@ -3,13 +3,18 @@
 
 {
     "name": "Account Check Date",
-    "version": "14.0.1.0.0",
+    "version": "15.0.0.1.0",
     "author": "Ecosoft, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-payment",
     "license": "AGPL-3",
     "category": "Accounting & Finance",
     "summary": "Add check date on payment for check printing",
-    "depends": ["account_check_printing"],
+    "depends": [
+        "account_check_printing",
+        # [T5871] Fixing: ValueError: Invalid field 'invoice_is_snailmail' on
+        # model 'res.config.settings' while doing configuration of account.journal
+        "snailmail_account",
+    ],
     "data": [
         "views/account_payment_views.xml",
         "wizard/account_payment_register_views.xml",

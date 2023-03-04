@@ -8,7 +8,6 @@ class AccountPayment(models.Model):
     _inherit = "account.payment"
 
     check_date = fields.Date(
-        string="Check Date",
         default=fields.Date.context_today,
         required=True,
         readonly=True,
