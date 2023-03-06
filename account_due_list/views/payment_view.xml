@@ -14,6 +14,7 @@
                 decoration-danger="reconciled==False and date_maturity&lt;current_date and parent_state=='posted'"
                 create="false"
                 delete="false"
+                default_order="date_maturity"
             >
                 <field name="date" readonly="1" optional="hide" />
                 <field name="invoice_date" readonly="1" optional="show" />
