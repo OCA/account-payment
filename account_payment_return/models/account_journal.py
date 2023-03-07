@@ -17,10 +17,3 @@ class AccountJournal(models.Model):
         string="Default Charges Partner",
         help="Default partner for charge expenses",
     )
-    return_auto_reconcile = fields.Boolean(
-        string="Reconcile payment returns",
-        help="Enable automatic payment return reconciliation. This option "
-        "is meant to be used only when working with transfer accounts, "
-        "not if working directly with bank accounts.",
-        default=False,
-    )
