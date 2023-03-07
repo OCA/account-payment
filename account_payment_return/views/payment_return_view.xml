@@ -38,25 +38,25 @@
                     />
                     <field name="state" widget="statusbar" />
                 </header>
-                <div
-                    class="alert alert-warning"
-                    attrs="{'invisible': [('auto_reconcile_failure', '=', False)]}"
-                    role="alert"
-                >
-                    The payment return could not be automatically reconciled.
-                </div>
                 <sheet string="Payment return">
-                    <field name="auto_reconcile_failure" invisible="1" />
                     <group>
-                        <field name="name" />
-                        <field
-                            name="journal_id"
-                            domain="[('type', 'in', ['bank', 'cash', 'general'])]"
-                        />
-                        <field name="date" />
-                        <field name="company_id" groups="base.group_multi_company" />
-                        <field name="move_id" readonly="True" />
-                        <field name="total_amount" />
+                        <group>
+                            <field name="name" />
+                            <field
+                                name="journal_id"
+                                domain="[('type', 'in', ['bank', 'cash', 'general'])]"
+                            />
+                            <field name="total_amount" />
+                            <field
+                                name="company_id"
+                                groups="base.group_multi_company"
+                            />
+                        </group>
+                        <group>
+                            <field name="date" />
+                            <field name="payment_method_line_id" />
+                            <field name="move_id" readonly="True" />
+                        </group>
                     </group>
                     <notebook colspan="4">
                         <page string="Lines">
@@ -67,7 +67,7 @@
                                 widget="one2many_list"
                                 context="{'default_date': date}"
                             >
-                                <tree string="Payment return lines" editable="top">
+                                <tree editable="top">
                                     <field name="date" />
                                     <field name="concept" />
                                     <field name="reason_id" />
@@ -114,7 +114,7 @@
         <field name="model">payment.return</field>
         <field name="type">tree</field>
         <field name="arch" type="xml">
-            <tree string="Customer Payment Returns">
+            <tree>
                 <field name="name" />
                 <field name="date" />
                 <field name="journal_id" />

@@ -2,13 +2,12 @@
 # Copyright 2011-2012 Avanzosc <http://www.avanzosc.com>
 # Copyright 2013 Tecnativa - Pedro M. Baeza
 # Copyright 2014 Markus Schneider <markus.schneider@initos.com>
-# Copyright 2016 Tecnativa - Carlos Dauden
+# Copyright 2016-2023 Tecnativa - Carlos Dauden
 # Copyright 2017 Tecnativa - Luis M. Ontalba
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError, ValidationError
-from odoo.tools import float_compare
 
 
 class PaymentReturn(models.Model):
@@ -53,7 +52,6 @@ class PaymentReturn(models.Model):
         states={"done": [("readonly", True)], "cancelled": [("readonly", True)]},
     )
     total_amount = fields.Float(
-        string="Total amount",
         compute="_compute_total_amount",
         readonly=True,
         store=False,
@@ -65,41 +63,28 @@ class PaymentReturn(models.Model):
             ("done", "Done"),
             ("cancelled", "Cancelled"),
         ],
-        string="State",
         readonly=True,
         default="draft",
         tracking=True,
     )
-    auto_reconcile_failure = fields.Boolean(
-        string="Automatic reconciliation failure",
-        compute="_compute_auto_reconcile_failure",
-        readonly=True,
-        store=False,
+    payment_method_line_id = fields.Many2one(
+        comodel_name="account.payment.method.line",
+        domain="[('payment_type', '=', 'inbound'), ('journal_id', '=', journal_id)]",
     )
-
-    def _compute_auto_reconcile_failure(self):
-        """
-        This method computes the auto_reconcile_failure field which is as flag
-        allowing to detect the unreconciled "done" payment returns with
-        automatic reconciliation enabled.
-        """
-        for rec in self:
-            if rec.state == "done" and rec.journal_id.return_auto_reconcile:
-                crdt_move_line = rec.move_id.line_ids.filtered(lambda l: l.credit)
-                rec.auto_reconcile_failure = not crdt_move_line.reconciled
-            else:
-                rec.auto_reconcile_failure = False
 
     @api.constrains("line_ids")
     def _check_duplicate_move_line(self):
         def append_error(error_line):
             error_list.append(
-                _("Payment Line: %s (%s) in Payment Return: %s")
-                % (
-                    ", ".join(error_line.mapped("move_line_ids.name")),
-                    error_line.partner_id.name,
-                    error_line.return_id.name,
+                _(
+                    "Payment Line: %(move_names)s (%(partner_name)s) "
+                    "in Payment Return: %(return_name)s"
                 )
+                % {
+                    "move_names": ", ".join(error_line.mapped("move_line_ids.name")),
+                    "partner_name": error_line.partner_id.name,
+                    "return_name": error_line.return_id.name,
+                }
             )
 
         error_list = []
@@ -176,42 +161,11 @@ class PaymentReturn(models.Model):
             "name": move.ref,
             "debit": 0.0,
             "credit": total_amount,
-            "account_id": self.journal_id.payment_debit_account_id.id,
+            "account_id": self.payment_method_line_id.payment_account_id.id
+            or self.company_id.account_journal_payment_debit_account_id.id,
             "move_id": move.id,
             "journal_id": move.journal_id.id,
         }
-
-    def _auto_reconcile(self, credit_move_line, all_move_lines, total_amount):
-        """
-        Reconcile the payment return if the option return_auto_reconcile is
-        enabled on the journal.
-        """
-        self.ensure_one()
-        if not self.journal_id.return_auto_reconcile:
-            return
-        rounding = self.env.user.company_id.currency_id.rounding
-        counterpart_move_lines = self.env["account.move.line"].browse()
-        for move_line in all_move_lines:
-            move = move_line.move_id
-            if len(move.line_ids) != 2:  # auto.reconciliation not possible
-                return
-            counterpart_move_lines |= move.line_ids.filtered(
-                lambda line: line != move_line
-            )
-        if (
-            counterpart_move_lines
-            and float_compare(
-                total_amount,
-                sum(counterpart_move_lines.mapped("debit")),
-                precision_rounding=rounding,
-            )
-            == 0
-            and not any(rec.reconciled for rec in counterpart_move_lines)
-        ):
-            lines_to_reconcile = credit_move_line | counterpart_move_lines
-            if len(lines_to_reconcile.mapped("account_id")) != 1:
-                return
-            lines_to_reconcile.reconcile()
 
     def action_confirm(self):
         self.ensure_one()
@@ -221,45 +175,53 @@ class PaymentReturn(models.Model):
                 _("You must input all moves references in the payment return.")
             )
         invoices = self.env["account.move"]
-        move_line_model = self.env["account.move.line"]
+        AccountMoveLine = self.env["account.move.line"]
         move = self.env["account.move"].create(self._prepare_return_move_vals())
         total_amount = 0.0
         all_move_lines = self.env["account.move.line"]
-        # First loop to generate the move lines and compute the total amount
+        to_reconcile_aml_list = []
         for return_line in self.line_ids:
-            move_line2_vals = return_line._prepare_return_move_line_vals(move)
-            move_line2 = move_line_model.with_context(check_move_validity=False).create(
-                move_line2_vals
+            return_aml_vals = return_line._prepare_return_move_line_vals(move)
+            return_aml = AccountMoveLine.with_context(check_move_validity=False).create(
+                return_aml_vals
             )
-            total_amount += move_line2.debit
-        move_line_vals = self._prepare_move_line(move, total_amount)
-        # credit_move_line: credit on transfer or bank account
-        credit_move_line = move_line_model.create(move_line_vals)
-        move._post()
-        for return_line in self.line_ids:
-            for move_line in return_line.move_line_ids:
-                # move_line: credit on customer account (from payment move)
-                # returned_moves: debit on customer account (from invoice move)
-                returned_moves = move_line.matched_debit_ids.mapped("debit_move_id")
-                all_move_lines |= move_line
-                invoices |= returned_moves.mapped("move_id")
-                move_line.remove_move_reconcile()
-                (move_line | move_line2).with_context(
-                    check_move_validity=False
-                ).reconcile()
-                return_line.move_line_ids.mapped("matched_debit_ids").write(
-                    {"origin_returned_move_ids": [(6, 0, returned_moves.ids)]}
+            total_amount += return_aml.debit
+            for payment_aml in return_line.move_line_ids:
+                # payment_aml: credit on customer account (from payment move)
+                # invoice_amls: debit on customer account (from invoice move)
+                invoice_amls = payment_aml.matched_debit_ids.mapped("debit_move_id")
+                all_move_lines |= payment_aml
+                invoices |= invoice_amls.mapped("move_id")
+                payment_aml.remove_move_reconcile()
+                to_reconcile_aml_list.append(
+                    {
+                        "payment_aml": payment_aml,
+                        "return_aml": return_aml,
+                        "invoice_amls": invoice_amls,
+                    }
                 )
             if return_line.expense_amount:
                 expense_lines_vals = return_line._prepare_expense_lines_vals(move)
-                move_line_model.with_context(check_move_validity=False).create(
+                AccountMoveLine.with_context(check_move_validity=False).create(
                     expense_lines_vals
                 )
             extra_lines_vals = return_line._prepare_extra_move_lines(move)
-            move_line_model.create(extra_lines_vals)
-        # Reconcile (if option enabled)
-        self._auto_reconcile(credit_move_line, all_move_lines, total_amount)
-        # Write directly because we returned payments just now
+            AccountMoveLine.create(extra_lines_vals)
+        move_line_vals = self._prepare_move_line(move, total_amount)
+        # credit_move_line: credit on transfer or bank account
+        AccountMoveLine.create(move_line_vals)
+        move._post()
+        for to_reconcile_aml_dic in to_reconcile_aml_list:
+            (
+                to_reconcile_aml_dic["payment_aml"] + to_reconcile_aml_dic["return_aml"]
+            ).reconcile()
+            to_reconcile_aml_dic["payment_aml"].mapped("matched_debit_ids").write(
+                {
+                    "origin_returned_move_ids": [
+                        (6, 0, to_reconcile_aml_dic["invoice_amls"].ids)
+                    ]
+                }
+            )
         invoices.write(self._prepare_invoice_returned_vals())
         self.write({"state": "done", "move_id": move.id})
         return True
@@ -296,24 +258,19 @@ class PaymentReturnLine(models.Model):
         required=True,
         ondelete="cascade",
     )
-    concept = fields.Char(
-        string="Concept", help="Read from imported file. Only for reference."
-    )
+    concept = fields.Char(help="Read from imported file. Only for reference.")
     reason_id = fields.Many2one(
         comodel_name="payment.return.reason", string="Return reason"
     )
     reason_additional_information = fields.Char(
         string="Return reason (info)", help="Additional information on return reason."
     )
-    reference = fields.Char(
-        string="Reference", help="Reference to match moves from related documents"
-    )
+    reference = fields.Char(help="Reference to match moves from related documents")
     move_line_ids = fields.Many2many(
         comodel_name="account.move.line", string="Payment Reference"
     )
     date = fields.Date(string="Return date", help="Only for reference")
     partner_name = fields.Char(
-        string="Partner name",
         readonly=True,
         help="Read from imported file. Only for reference.",
     )
@@ -323,7 +280,6 @@ class PaymentReturnLine(models.Model):
         domain="[('customer_rank', '>', 0)]",
     )
     amount = fields.Float(
-        string="Amount",
         help="Returned amount. Can be different from the move amount",
         digits="Account",
     )
