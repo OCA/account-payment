@@ -1,4 +1,4 @@
-#. Go to Invoicing > Sales > Customer Payment Returns, and create a new
+#. Go to Invoicing > Customers > Customer Payment Returns, and create a new
    record, register on each line a paid (reconciled) receivable journal item,
    and input the amount that is going to be returned.
 

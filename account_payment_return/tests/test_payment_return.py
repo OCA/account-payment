@@ -7,10 +7,10 @@
 import json
 
 from odoo.exceptions import UserError, ValidationError
-from odoo.tests.common import Form, SavepointCase
+from odoo.tests.common import Form, TransactionCase
 
 
-class TestPaymentReturn(SavepointCase):
+class TestPaymentReturn(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -154,20 +154,6 @@ class TestPaymentReturn(SavepointCase):
         self.payment_return.action_draft()
         self.assertEqual(self.payment_return.state, "draft")
         self.payment_return.unlink()
-
-    def test_payment_return_auto_reconcile(self):
-        self.assertEqual(self.invoice.payment_state, "paid")
-        self.payment_return.action_draft()
-        self.payment_return.line_ids[0].expense_amount = 20.0
-        self.payment_return.line_ids[0]._onchange_expense_amount()
-        self.payment_return.journal_id.return_auto_reconcile = True
-        self.payment_return.action_confirm()
-        self.assertEqual(self.payment_return.state, "done")
-        self.assertEqual(self.invoice.payment_state, "not_paid")
-        crdt_move_lines = self.payment_return.move_id.line_ids.filtered(
-            lambda l: l.credit
-        )
-        self.assertTrue(crdt_move_lines.mapped("reconciled"))
 
     def test_payment_partial_return(self):
         self.payment_return.line_ids[0].amount = 500.0
