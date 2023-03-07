@@ -4,8 +4,10 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 14.0\n"
+"Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-03-19 23:38+0000\n"
+"PO-Revision-Date: 2023-03-19 23:38+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -37,11 +39,6 @@ msgstr ""
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_attachment_count
 msgid "Attachment Count"
-msgstr ""
-
-#. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__auto_reconcile_failure
-msgid "Automatic reconciliation failure"
 msgstr ""
 
 #. module: account_payment_return
@@ -116,7 +113,6 @@ msgstr ""
 #. module: account_payment_return
 #: model:ir.actions.act_window,name:account_payment_return.payment_return_action
 #: model:ir.ui.menu,name:account_payment_return.payment_return_menu
-#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_tree_view
 msgid "Customer Payment Returns"
 msgstr ""
 
@@ -141,10 +137,6 @@ msgid "Default partner for charge expenses"
 msgstr ""
 
 #. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_account_journal__display_name
-#: model:ir.model.fields,field_description:account_payment_return.field_account_move__display_name
-#: model:ir.model.fields,field_description:account_payment_return.field_account_move_line__display_name
-#: model:ir.model.fields,field_description:account_payment_return.field_account_partial_reconcile__display_name
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__display_name
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__display_name
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__display_name
@@ -163,21 +155,8 @@ msgid "Draft"
 msgstr ""
 
 #. module: account_payment_return
-#: model:ir.model.fields,help:account_payment_return.field_account_journal__return_auto_reconcile
-msgid ""
-"Enable automatic payment return reconciliation. This option is meant to be "
-"used only when working with transfer accounts, not if working directly with "
-"bank accounts."
-msgstr ""
-
-#. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_follower_ids
 msgid "Followers"
-msgstr ""
-
-#. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_channel_ids
-msgid "Followers (Channels)"
 msgstr ""
 
 #. module: account_payment_return
@@ -191,10 +170,6 @@ msgid "Group By"
 msgstr ""
 
 #. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_account_journal__id
-#: model:ir.model.fields,field_description:account_payment_return.field_account_move__id
-#: model:ir.model.fields,field_description:account_payment_return.field_account_move_line__id
-#: model:ir.model.fields,field_description:account_payment_return.field_account_partial_reconcile__id
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__id
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__id
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__id
@@ -209,7 +184,6 @@ msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return__message_has_error
-#: model:ir.model.fields,help:account_payment_return.field_payment_return__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -265,10 +239,6 @@ msgid "Journal Item"
 msgstr ""
 
 #. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_account_journal____last_update
-#: model:ir.model.fields,field_description:account_payment_return.field_account_move____last_update
-#: model:ir.model.fields,field_description:account_payment_return.field_account_move_line____last_update
-#: model:ir.model.fields,field_description:account_payment_return.field_account_partial_reconcile____last_update
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return____last_update
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line____last_update
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason____last_update
@@ -378,7 +348,7 @@ msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__partner_name
-msgid "Partner name"
+msgid "Partner Name"
 msgstr ""
 
 #. module: account_payment_return
@@ -391,7 +361,14 @@ msgstr ""
 #. module: account_payment_return
 #: code:addons/account_payment_return/models/payment_return.py:0
 #, python-format
-msgid "Payment Line: %s (%s) in Payment Return: %s"
+msgid ""
+"Payment Line: %(move_names)s (%(partner_name)s) in Payment Return: "
+"%(return_name)s"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__payment_method_line_id
+msgid "Payment Method Line"
 msgstr ""
 
 #. module: account_payment_return
@@ -416,7 +393,6 @@ msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_payment_return_line
-#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
 msgid "Payment return lines"
 msgstr ""
 
@@ -441,11 +417,6 @@ msgstr ""
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__name
 msgid "Reason"
-msgstr ""
-
-#. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_account_journal__return_auto_reconcile
-msgid "Reconcile payment returns"
 msgstr ""
 
 #. module: account_payment_return
@@ -498,19 +469,9 @@ msgid "Returned amount. Can be different from the move amount"
 msgstr ""
 
 #. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr ""
-
-#. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__state
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_search_view
 msgid "State"
-msgstr ""
-
-#. module: account_payment_return
-#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
-msgid "The payment return could not be automatically reconciled."
 msgstr ""
 
 #. module: account_payment_return
@@ -520,6 +481,10 @@ msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__total_amount
+msgid "Total Amount"
+msgstr ""
+
+#. module: account_payment_return
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_tree_view
 msgid "Total amount"
