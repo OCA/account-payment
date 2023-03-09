@@ -16,3 +16,7 @@
 * `Sygel <https://sygel.es>`:
 
   * Manuel Regidor
+
+* `Trobz <https://trobz.com>`:
+
+  * Hoang <hoang@trobz.com>
