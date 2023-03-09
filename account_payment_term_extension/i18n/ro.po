@@ -26,7 +26,7 @@ msgstr ""
 
 #. module: account_payment_term_extension
 #: model:account.payment.term,name:account_payment_term_extension.sixty_days_end_of_month
-#: model:account.payment.term,note:account_payment_term_extension.sixty_days_end_of_month
+#: model_terms:account.payment.term,note:account_payment_term_extension.sixty_days_end_of_month
 msgid "60 Days End of Month"
 msgstr ""
 
@@ -51,6 +51,7 @@ msgid "Created on"
 msgstr "Creat la"
 
 #. module: account_payment_term_extension
+#. odoo-python
 #: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Date %s cannot is both a holiday and a Postponed date"
@@ -67,12 +68,14 @@ msgid "Holiday"
 msgstr ""
 
 #. module: account_payment_term_extension
+#. odoo-python
 #: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Holiday %s can only be postponed into the future"
 msgstr ""
 
 #. module: account_payment_term_extension
+#. odoo-python
 #: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Holiday %s is duplicated in current payment term"
@@ -90,11 +93,6 @@ msgid "ID"
 msgstr "ID"
 
 #. module: account_payment_term_extension
-#: model:ir.model,name:account_payment_term_extension.model_account_move
-msgid "Journal Entries"
-msgstr ""
-
-#. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday____last_update
 msgid "Last Modified on"
 msgstr "Ultima actualizare în"
@@ -108,16 +106,6 @@ msgstr "Ultima actualizare făcută de"
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__write_date
 msgid "Last Updated on"
 msgstr "Ultima actualizare la"
-
-#. module: account_payment_term_extension
-#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__months
-msgid "Number of Months"
-msgstr ""
-
-#. module: account_payment_term_extension
-#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__weeks
-msgid "Number of Weeks"
-msgstr ""
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__payment_id
@@ -145,6 +133,7 @@ msgid "Payment day(s)"
 msgstr ""
 
 #. module: account_payment_term_extension
+#. odoo-python
 #: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Payment days field format is not valid."
@@ -156,6 +145,14 @@ msgid "Percent (Untaxed amount)"
 msgstr ""
 
 #. module: account_payment_term_extension
+#. odoo-python
+#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
+#, python-format
+msgid "Percentage of amount untaxed can't be used with foreign currencies"
+msgstr ""
+
+#. module: account_payment_term_extension
+#. odoo-python
 #: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Percentages on the Payment Terms lines must be between 0 and 100."
@@ -180,19 +177,22 @@ msgstr ""
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term__sequential_lines
-msgid "Sequential lines"
+msgid "Sequential Lines"
 msgstr ""
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,help:account_payment_term_extension.field_account_payment_term_line__amount_round
-msgid ""
-"Sets the amount so that it is a multiple of this value.\n"
-"To have amounts that end in 0.99, set rounding 1, surcharge -0.01"
+msgid "Sets the amount so that it is a multiple of this value."
 msgstr ""
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__value
 msgid "Type"
+msgstr ""
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__weeks
+msgid "Weeks"
 msgstr ""
 
 #. module: account_payment_term_extension

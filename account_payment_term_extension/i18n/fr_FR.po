@@ -23,7 +23,7 @@ msgstr ""
 
 #. module: account_payment_term_extension
 #: model:account.payment.term,name:account_payment_term_extension.sixty_days_end_of_month
-#: model:account.payment.term,note:account_payment_term_extension.sixty_days_end_of_month
+#: model_terms:account.payment.term,note:account_payment_term_extension.sixty_days_end_of_month
 msgid "60 Days End of Month"
 msgstr "60 jours fin de mois"
 
@@ -48,16 +48,14 @@ msgid "Created on"
 msgstr "Created on"
 
 #. module: account_payment_term_extension
+#. odoo-python
 #: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Date %s cannot is both a holiday and a Postponed date"
 msgstr "La date %s ne peut être à la fois un congé et reportée"
 
 #. module: account_payment_term_extension
-#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_move__display_name
-#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term__display_name
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__display_name
-#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__display_name
 msgid "Display Name"
 msgstr "Nom affiché"
 
@@ -67,12 +65,14 @@ msgid "Holiday"
 msgstr "Congé"
 
 #. module: account_payment_term_extension
+#. odoo-python
 #: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Holiday %s can only be postponed into the future"
 msgstr "Le congé du %s ne peut être que reporté dans le futur"
 
 #. module: account_payment_term_extension
+#. odoo-python
 #: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Holiday %s is duplicated in current payment term"
@@ -85,23 +85,12 @@ msgid "Holidays"
 msgstr "Congés"
 
 #. module: account_payment_term_extension
-#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_move__id
-#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term__id
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__id
-#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__id
 msgid "ID"
 msgstr "ID"
 
 #. module: account_payment_term_extension
-#: model:ir.model,name:account_payment_term_extension.model_account_move
-msgid "Journal Entry"
-msgstr ""
-
-#. module: account_payment_term_extension
-#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_move____last_update
-#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term____last_update
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday____last_update
-#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line____last_update
 msgid "Last Modified on"
 msgstr "Last Modified on"
 
@@ -114,16 +103,6 @@ msgstr "Last Updated by"
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__write_date
 msgid "Last Updated on"
 msgstr "Last Updated on"
-
-#. module: account_payment_term_extension
-#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__months
-msgid "Number of Months"
-msgstr "Nombre de mois"
-
-#. module: account_payment_term_extension
-#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__weeks
-msgid "Number of Weeks"
-msgstr "Nombre de semaines"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__payment_id
@@ -151,6 +130,7 @@ msgid "Payment day(s)"
 msgstr "Jour(s) de paiement"
 
 #. module: account_payment_term_extension
+#. odoo-python
 #: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Payment days field format is not valid."
@@ -162,12 +142,14 @@ msgid "Percent (Untaxed amount)"
 msgstr ""
 
 #. module: account_payment_term_extension
+#. odoo-python
 #: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Percentage of amount untaxed can't be used with foreign currencies"
 msgstr ""
 
 #. module: account_payment_term_extension
+#. odoo-python
 #: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Percentages on the Payment Terms lines must be between 0 and 100."
@@ -194,8 +176,8 @@ msgstr ""
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term__sequential_lines
-msgid "Sequential lines"
-msgstr "Lignes séquentielles"
+msgid "Sequential Lines"
+msgstr ""
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,help:account_payment_term_extension.field_account_payment_term_line__amount_round
@@ -208,6 +190,11 @@ msgid "Type"
 msgstr ""
 
 #. module: account_payment_term_extension
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__weeks
+msgid "Weeks"
+msgstr ""
+
+#. module: account_payment_term_extension
 #: model_terms:ir.ui.view,arch_db:account_payment_term_extension.view_payment_term_form
 msgid ""
 "When a payment term coincides with a holiday, it is postponed to the chosen "
@@ -215,3 +202,12 @@ msgid ""
 msgstr ""
 "Lorsqu'un délai de paiement coïncide avec un congé, il est reporté à la date "
 "choisie."
+
+#~ msgid "Number of Months"
+#~ msgstr "Nombre de mois"
+
+#~ msgid "Number of Weeks"
+#~ msgstr "Nombre de semaines"
+
+#~ msgid "Sequential lines"
+#~ msgstr "Lignes séquentielles"

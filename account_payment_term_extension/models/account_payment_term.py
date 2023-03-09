@@ -7,13 +7,12 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import calendar
-from functools import reduce
 
 from dateutil.relativedelta import relativedelta
 
 from odoo import _, api, exceptions, fields, models
 from odoo.exceptions import UserError, ValidationError
-from odoo.tools.float_utils import float_is_zero, float_round
+from odoo.tools.float_utils import float_round
 
 
 class AccountPaymentTermHoliday(models.Model):
@@ -72,8 +71,7 @@ class AccountPaymentTermLine(models.Model):
         digits="Account",
         help="Sets the amount so that it is a multiple of this value.",
     )
-    months = fields.Integer(string="Number of Months")
-    weeks = fields.Integer(string="Number of Weeks")
+    weeks = fields.Integer()
     value = fields.Selection(
         selection_add=[
             ("percent_amount_untaxed", "Percent (Untaxed amount)"),
@@ -81,6 +79,18 @@ class AccountPaymentTermLine(models.Model):
         ],
         ondelete={"percent_amount_untaxed": lambda r: r.write({"value": "percent"})},
     )
+
+    def _get_due_date(self, date_ref):
+        """override to support weeks"""
+        self.ensure_one()
+        due_date = fields.Date.from_string(date_ref)
+        due_date += relativedelta(months=self.months)
+        due_date += relativedelta(weeks=self.weeks)
+        due_date += relativedelta(days=self.days)
+        if self.end_month:
+            due_date += relativedelta(day=31)
+            due_date += relativedelta(days=self.days_after)
+        return due_date
 
     @api.constrains("value", "value_amount")
     def _check_value_amount_untaxed(self):
@@ -165,7 +175,7 @@ class AccountPaymentTerm(models.Model):
             [("payment_id", "=", self.id), ("holiday", "=", date)]
         )
         if holiday:
-            return fields.Date.from_string(holiday.date_postponed)
+            return holiday.date_postponed
         return date
 
     def apply_payment_days(self, line, date):
@@ -190,68 +200,195 @@ class AccountPaymentTerm(models.Model):
                 return new_date
         return date
 
-    def compute(self, value, date_ref=False, currency=None):
+    @api.depends(
+        "example_amount",
+        "example_date",
+        "line_ids.value",
+        "line_ids.value_amount",
+        "line_ids.months",
+        "line_ids.days",
+        "line_ids.end_month",
+        "line_ids.days_after",
+        "sequential_lines",
+        "holiday_ids",
+    )
+    def _compute_example_preview(self):
+        """adding depends for new customized fields"""
+        return super(AccountPaymentTerm, self)._compute_example_preview()
+
+    def _compute_terms(
+        self,
+        date_ref,
+        currency,
+        company,
+        tax_amount,
+        tax_amount_currency,
+        sign,
+        untaxed_amount,
+        untaxed_amount_currency,
+    ):
         """Complete overwrite of compute method for adding extra options."""
         # FIXME: Find an inheritable way of doing this
         self.ensure_one()
-        last_account_move = self.env.context.get("last_account_move", False)
-        date_ref = date_ref or fields.Date.today()
-        amount = value
+        company_currency = company.currency_id
+        tax_amount_left = tax_amount
+        tax_amount_currency_left = tax_amount_currency
+        untaxed_amount_left = untaxed_amount
+        untaxed_amount_currency_left = untaxed_amount_currency
+
+        total_amount = remaining_amount = tax_amount + untaxed_amount
+        total_amount_currency = remaining_amount_currency = (
+            tax_amount_currency + untaxed_amount_currency
+        )
         result = []
-        if not currency:
-            if self.env.context.get("currency_id"):
-                currency = self.env["res.currency"].browse(
-                    self.env.context["currency_id"]
-                )
-            else:
-                currency = self.env.company.currency_id
         precision_digits = currency.decimal_places
-        next_date = fields.Date.from_string(date_ref)
-        for line in self.line_ids:
-            if line.value == "percent_amount_untaxed" and last_account_move:
-                if last_account_move.company_id.currency_id == currency:
-                    amount_untaxed = -last_account_move.amount_untaxed_signed
-                else:
+        company_precision_digits = company_currency.decimal_places
+        next_date = date_ref
+        for line in self.line_ids.sorted(lambda line: line.value == "balance"):
+            if not self.sequential_lines:
+                # For all lines, the beginning date is `date_ref`
+                next_date = line._get_due_date(date_ref)
+            else:
+                next_date = line._get_due_date(next_date)
+
+            next_date = self.apply_payment_days(line, next_date)
+            next_date = self.apply_holidays(next_date)
+
+            term_vals = {
+                "date": next_date,
+                "has_discount": line.discount_percentage,
+                "discount_date": None,
+                "discount_amount_currency": 0.0,
+                "discount_balance": 0.0,
+                "discount_percentage": line.discount_percentage,
+            }
+
+            if line.value == "fixed":
+                line_amount = line.compute_line_amount(
+                    total_amount, remaining_amount, precision_digits
+                )
+                company_line_amount = line.compute_line_amount(
+                    total_amount, remaining_amount, company_precision_digits
+                )
+                term_vals["company_amount"] = sign * company_line_amount
+                term_vals["foreign_amount"] = sign * line_amount
+                company_proportion = (
+                    tax_amount / untaxed_amount if untaxed_amount else 1
+                )
+                foreign_proportion = (
+                    tax_amount_currency / untaxed_amount_currency
+                    if untaxed_amount_currency
+                    else 1
+                )
+                line_tax_amount = (
+                    company_currency.round(line.value_amount * company_proportion)
+                    * sign
+                )
+                line_tax_amount_currency = (
+                    currency.round(line.value_amount * foreign_proportion) * sign
+                )
+                line_untaxed_amount = term_vals["company_amount"] - line_tax_amount
+                line_untaxed_amount_currency = (
+                    term_vals["foreign_amount"] - line_tax_amount_currency
+                )
+            elif line.value == "percent":
+                line_amount = line.compute_line_amount(
+                    total_amount, remaining_amount, precision_digits
+                )
+                company_line_amount = line.compute_line_amount(
+                    total_amount_currency,
+                    remaining_amount_currency,
+                    company_precision_digits,
+                )
+                term_vals["company_amount"] = company_line_amount
+                term_vals["foreign_amount"] = line_amount
+                line_tax_amount = company_currency.round(
+                    tax_amount * (line.value_amount / 100.0)
+                )
+                line_tax_amount_currency = currency.round(
+                    tax_amount_currency * (line.value_amount / 100.0)
+                )
+                line_untaxed_amount = term_vals["company_amount"] - line_tax_amount
+                line_untaxed_amount_currency = (
+                    term_vals["foreign_amount"] - line_tax_amount_currency
+                )
+
+            elif line.value == "percent_amount_untaxed":
+                if company_currency != currency:
                     raise UserError(
                         _(
                             "Percentage of amount untaxed can't be used with foreign "
                             "currencies"
                         )
                     )
-                amt = line.compute_line_amount(amount_untaxed, amount, precision_digits)
+                line_amount = line.compute_line_amount(
+                    untaxed_amount, untaxed_amount_left, precision_digits
+                )
+                company_line_amount = line.compute_line_amount(
+                    untaxed_amount_currency,
+                    untaxed_amount_currency_left,
+                    company_precision_digits,
+                )
+                term_vals["company_amount"] = company_line_amount
+                term_vals["foreign_amount"] = line_amount
+                line_tax_amount = company_currency.round(
+                    tax_amount * (line.value_amount / 100.0)
+                )
+                line_tax_amount_currency = currency.round(
+                    tax_amount_currency * (line.value_amount / 100.0)
+                )
+                line_untaxed_amount = term_vals["company_amount"] - line_tax_amount
+                line_untaxed_amount_currency = (
+                    term_vals["foreign_amount"] - line_tax_amount_currency
+                )
             else:
-                amt = line.compute_line_amount(value, amount, precision_digits)
-            if not self.sequential_lines:
-                # For all lines, the beginning date is `date_ref`
-                next_date = fields.Date.from_string(date_ref)
-                if float_is_zero(amt, precision_digits=precision_digits):
-                    continue
-            if line.option == "day_after_invoice_date":
-                next_date += relativedelta(
-                    days=line.days, weeks=line.weeks, months=line.months
+                line_tax_amount = (
+                    line_tax_amount_currency
+                ) = line_untaxed_amount = line_untaxed_amount_currency = 0.0
+
+            tax_amount_left -= line_tax_amount
+            tax_amount_currency_left -= line_tax_amount_currency
+            untaxed_amount_left -= line_untaxed_amount
+            untaxed_amount_currency_left -= line_untaxed_amount_currency
+            remaining_amount = tax_amount_left + untaxed_amount_left
+            remaining_amount_currency = (
+                tax_amount_currency_left + untaxed_amount_currency_left
+            )
+
+            if line.value == "balance":
+                term_vals["company_amount"] = tax_amount_left + untaxed_amount_left
+                term_vals["foreign_amount"] = (
+                    tax_amount_currency_left + untaxed_amount_currency_left
                 )
-            elif line.option == "day_following_month":
-                # Getting last day of next month
-                next_date += relativedelta(day=line.days, months=1)
-            elif line.option == "day_current_month":
-                # Getting last day of next month
-                next_date += relativedelta(day=line.days, months=0)
-            # From Odoo
-            elif line.option == "after_invoice_month":
-                # Getting 1st of next month
-                next_first_date = next_date + relativedelta(day=1, months=1)
-                # Then add days
-                next_date = next_first_date + relativedelta(
-                    days=line.days - 1, weeks=line.weeks, months=line.months
+                line_tax_amount = tax_amount_left
+                line_tax_amount_currency = tax_amount_currency_left
+                line_untaxed_amount = untaxed_amount_left
+                line_untaxed_amount_currency = untaxed_amount_currency_left
+
+            if line.discount_percentage:
+                if company.early_pay_discount_computation in ("excluded", "mixed"):
+                    term_vals["discount_balance"] = company_currency.round(
+                        term_vals["company_amount"]
+                        - line_untaxed_amount * line.discount_percentage / 100.0
+                    )
+                    term_vals["discount_amount_currency"] = currency.round(
+                        term_vals["foreign_amount"]
+                        - line_untaxed_amount_currency
+                        * line.discount_percentage
+                        / 100.0
+                    )
+                else:
+                    term_vals["discount_balance"] = company_currency.round(
+                        term_vals["company_amount"]
+                        * (1 - (line.discount_percentage / 100.0))
+                    )
+                    term_vals["discount_amount_currency"] = currency.round(
+                        term_vals["foreign_amount"]
+                        * (1 - (line.discount_percentage / 100.0))
+                    )
+                term_vals["discount_date"] = date_ref + relativedelta(
+                    days=line.discount_days
                 )
-            next_date = self.apply_payment_days(line, next_date)
-            next_date = self.apply_holidays(next_date)
-            if not float_is_zero(amt, precision_digits=precision_digits):
-                result.append((fields.Date.to_string(next_date), amt))
-                amount -= amt
-        amount = reduce(lambda x, y: x + y[1], result, 0.0)
-        dist = round(value - amount, precision_digits)
-        if dist:
-            last_date = result and result[-1][0] or fields.Date.today()
-            result.append((last_date, dist))
+
+            result.append(term_vals)
         return result
