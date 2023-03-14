@@ -1,10 +1,13 @@
 # Copyright 2020 Ecosoft Co., Ltd (http://ecosoft.co.th/)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
-from odoo import models
+
+from odoo import fields, models
 
 
 class AccountPayment(models.Model):
     _inherit = "account.payment"
+
+    is_multi_deduction = fields.Boolean()
 
     def _get_check_key_list(self):
         return ["name", "account_id"]
@@ -74,3 +77,12 @@ class AccountPayment(models.Model):
                 write_off_line_vals
             )
         return line_vals_list
+
+    def _synchronize_from_moves(self, changed_fields):
+        ctx = self._context.copy()
+        if all(rec.is_multi_deduction for rec in self):
+            ctx["skip_account_move_synchronization"] = True
+        return super(
+            AccountPayment,
+            self.with_context(**ctx),
+        )._synchronize_from_moves(changed_fields)
