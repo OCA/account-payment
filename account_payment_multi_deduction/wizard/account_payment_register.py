@@ -67,6 +67,7 @@ class AccountPaymentRegister(models.TransientModel):
                 self._prepare_deduct_move_line(deduct)
                 for deduct in self.deduction_ids.filtered(lambda l: not l.open)
             ]
+            payment_vals["is_multi_deduction"] = True
         return payment_vals
 
     def _prepare_deduct_move_line(self, deduct):
