@@ -23,7 +23,7 @@ Account Payment Returns
     :target: https://runbot.odoo-community.org/runbot/96/15.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5|
+|badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This module implements customer receivables returns and allows to send
 related reconciled account move lines back to a state where the debt is still
@@ -76,7 +76,7 @@ Authors
 * 7 i TRIA
 * Tecnativa
 * initOS GmbH & Co.
-*
+* 
 
 Contributors
 ~~~~~~~~~~~~
