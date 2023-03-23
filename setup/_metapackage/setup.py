@@ -15,6 +15,7 @@ setuptools.setup(
         'odoo-addon-account_payment_notification>=15.0dev,<15.1dev',
         'odoo-addon-account_payment_promissory_note>=15.0dev,<15.1dev',
         'odoo-addon-account_payment_return>=15.0dev,<15.1dev',
+        'odoo-addon-account_payment_return_import>=15.0dev,<15.1dev',
         'odoo-addon-account_payment_term_extension>=15.0dev,<15.1dev',
         'odoo-addon-account_payment_term_partner_holiday>=15.0dev,<15.1dev',
         'odoo-addon-account_payment_term_security>=15.0dev,<15.1dev',
