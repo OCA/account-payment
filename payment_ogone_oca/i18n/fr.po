@@ -1,0 +1,188 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* payment_ogone_oca
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-08-24 09:39+0000\n"
+"PO-Revision-Date: 2023-08-24 09:39+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: payment_ogone_oca
+#: model:ir.model.fields,field_description:payment_ogone_oca.field_payment_provider__ogone_userid
+msgid "API User ID"
+msgstr "Identifiant Utilisateur de l'API"
+
+#. module: payment_ogone_oca
+#: model:ir.model.fields,field_description:payment_ogone_oca.field_payment_provider__ogone_password
+msgid "API User Password"
+msgstr "Mot de passe Utilisateur de l'API"
+
+#. module: payment_ogone_oca
+#: model:ir.model.fields,field_description:payment_ogone_oca.field_payment_provider__code
+msgid "Code"
+msgstr "Code"
+
+#. module: payment_ogone_oca
+#: model:payment.provider,display_as:payment_ogone_oca.payment_provider_ogone
+msgid "Credit Card (powered by Ogone)"
+msgstr "Carte de crédit (fournie par Ogone)"
+
+#. module: payment_ogone_oca
+#: model:ir.model.fields,field_description:payment_ogone_oca.field_payment_provider__ogone_hash_function
+msgid "Hash function"
+msgstr "Fonction de hachage"
+
+#. module: payment_ogone_oca
+#: model:ir.model.fields.selection,name:payment_ogone_oca.selection__payment_provider__code__ogone
+#: model:payment.provider,name:payment_ogone_oca.payment_provider_ogone
+msgid "Ogone"
+msgstr "Ogone"
+
+#. module: payment_ogone_oca
+#. odoo-python
+#: code:addons/payment_ogone_oca/models/payment_provider.py:0
+#, python-format
+msgid "Ogone: Could not establish the connection to the API."
+msgstr "Ogone: Impossible d'établir la connexion avec l'API"
+
+#. module: payment_ogone_oca
+#. odoo-python
+#: code:addons/payment_ogone_oca/models/payment_transaction.py:0
+#, python-format
+msgid "Ogone: No transaction found matching reference %s."
+msgstr "Ogone: Aucune transaction trouvée correspondant à la référence %s"
+
+#. module: payment_ogone_oca
+#. odoo-python
+#: code:addons/payment_ogone_oca/models/payment_transaction.py:0
+#: code:addons/payment_ogone_oca/models/payment_transaction.py:0
+#, python-format
+msgid "Ogone: Received badly structured response from the API."
+msgstr "Ogone: Réception d'une réponse mal structurée de l'API."
+
+#. module: payment_ogone_oca
+#. odoo-python
+#: code:addons/payment_ogone_oca/models/payment_provider.py:0
+#, python-format
+msgid "Ogone: The communication with the API failed."
+msgstr "Ogone: La communication avec l'API a échoué."
+
+#. module: payment_ogone_oca
+#. odoo-python
+#: code:addons/payment_ogone_oca/models/payment_transaction.py:0
+#: code:addons/payment_ogone_oca/models/payment_transaction.py:0
+#, python-format
+msgid "Ogone: The transaction is not linked to a token."
+msgstr "Ogone: La transaction n'est pas associée à un jeton."
+
+#. module: payment_ogone_oca
+#: model:ir.model.fields,field_description:payment_ogone_oca.field_payment_provider__ogone_pspid
+msgid "PSPID"
+msgstr "PSPID"
+
+#. module: payment_ogone_oca
+#: model:ir.model,name:payment_ogone_oca.model_payment_provider
+msgid "Payment Provider"
+msgstr "Fournisseur de paiement"
+
+#. module: payment_ogone_oca
+#: model:ir.model,name:payment_ogone_oca.model_payment_transaction
+msgid "Payment Transaction"
+msgstr "Transaction"
+
+#. module: payment_ogone_oca
+#. odoo-python
+#: code:addons/payment_ogone_oca/models/payment_transaction.py:0
+#, python-format
+msgid "Received data with invalid payment status: %s"
+msgstr "Données reçues avec un statut de paiement invalide: %s"
+
+#. module: payment_ogone_oca
+#. odoo-python
+#: code:addons/payment_ogone_oca/models/payment_transaction.py:0
+#, python-format
+msgid "Reversal of: %s"
+msgstr "Extourne de: %s"
+
+#. module: payment_ogone_oca
+#: model:ir.model.fields,field_description:payment_ogone_oca.field_payment_provider__ogone_shakey_in
+msgid "SHA Key IN"
+msgstr "Clé SHA entrante"
+
+#. module: payment_ogone_oca
+#: model:ir.model.fields,field_description:payment_ogone_oca.field_payment_provider__ogone_shakey_out
+msgid "SHA Key OUT"
+msgstr "Clé SHA sortante"
+
+#. module: payment_ogone_oca
+#: model:ir.model.fields.selection,name:payment_ogone_oca.selection__payment_provider__ogone_hash_function__sha1
+msgid "SHA1"
+msgstr ""
+
+#. module: payment_ogone_oca
+#: model:ir.model.fields.selection,name:payment_ogone_oca.selection__payment_provider__ogone_hash_function__sha256
+msgid "SHA256"
+msgstr ""
+
+#. module: payment_ogone_oca
+#: model:ir.model.fields.selection,name:payment_ogone_oca.selection__payment_provider__ogone_hash_function__sha512
+msgid "SHA512"
+msgstr ""
+
+#. module: payment_ogone_oca
+#. odoo-python
+#: code:addons/payment_ogone_oca/models/payment_transaction.py:0
+#, python-format
+msgid "Storing your payment details is necessary for future use."
+msgstr "L'enregistrement de vos données de paiement est nécessaire pour une utilisation ultérieure."
+
+#. module: payment_ogone_oca
+#: model:ir.model.fields,help:payment_ogone_oca.field_payment_provider__ogone_userid
+msgid "The ID solely used to identify the API user with Ogone"
+msgstr "L'identifiant utilisé uniquement pour identifier l'utilisateur de l'API avec Ogone"
+
+#. module: payment_ogone_oca
+#: model:ir.model.fields,help:payment_ogone_oca.field_payment_provider__ogone_pspid
+msgid "The ID solely used to identify the account with Ogone"
+msgstr "L'identifiant utilisé uniquement pour identifier le compte avec Ogone"
+
+#. module: payment_ogone_oca
+#. odoo-python
+#: code:addons/payment_ogone_oca/models/payment_transaction.py:0
+#, python-format
+msgid "The payment has been declined: %s"
+msgstr "Le paiement a été refusé: %s"
+
+#. module: payment_ogone_oca
+#: model:ir.model.fields,help:payment_ogone_oca.field_payment_provider__code
+msgid "The technical code of this payment provider."
+msgstr "Le code technique de ce fournisseur de paiement."
+
+#. module: payment_ogone_oca
+#: model_terms:payment.provider,auth_msg:payment_ogone_oca.payment_provider_ogone
+msgid "Your payment has been authorized."
+msgstr "Votre paiement a été autorisé."
+
+#. module: payment_ogone_oca
+#: model_terms:payment.provider,cancel_msg:payment_ogone_oca.payment_provider_ogone
+msgid "Your payment has been cancelled."
+msgstr "Votre paiement a été annulé."
+
+#. module: payment_ogone_oca
+#: model_terms:payment.provider,pending_msg:payment_ogone_oca.payment_provider_ogone
+msgid ""
+"Your payment has been successfully processed but is waiting for approval."
+msgstr "Votre paiement a été traité avec succès mais est en attente d'approbation."
+
+#. module: payment_ogone_oca
+#: model_terms:payment.provider,done_msg:payment_ogone_oca.payment_provider_ogone
+msgid "Your payment has been successfully processed. Thank you!"
+msgstr "Votre paiement a été traité avec succès. Merci!"
