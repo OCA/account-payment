@@ -19,11 +19,6 @@ class TestPaymentTermDiscount(common.TransactionCase):
         journal_purchase = Journal.search([("type", "=", "purchase")], limit=1)
         res_users_account_manager = self.env.ref("account.group_account_manager")
         partner_manager = self.env.ref("base.group_partner_manager")
-        account_user_type_expenses = self.env.ref("account.data_account_type_expenses")
-        account_user_type_revenue = self.env.ref("account.data_account_type_revenue")
-        account_user_type_receivable = self.env.ref(
-            "account.data_account_type_receivable"
-        )
         self.payment_method = self.env.ref("account.account_payment_method_manual_in")
 
         # Get required Model
@@ -35,7 +30,7 @@ class TestPaymentTermDiscount(common.TransactionCase):
 
         # Create users
         self.account_manager = self.user_model.with_context(
-            {"no_reset_password": True}
+            **{"no_reset_password": True}
         ).create(
             dict(
                 name="Adviser",
@@ -51,9 +46,9 @@ class TestPaymentTermDiscount(common.TransactionCase):
             self.account_manager.id
         ).create(
             dict(
-                code="cust_acc_discount",
+                code="custaccdiscount",
                 name="Discount Expenses",
-                user_type_id=account_user_type_expenses.id,
+                account_type="expense",
                 reconcile=True,
             )
         )
@@ -63,9 +58,9 @@ class TestPaymentTermDiscount(common.TransactionCase):
             self.account_manager.id
         ).create(
             dict(
-                code="bill_acc_discount",
+                code="billaccdiscount",
                 name="Discount Income",
-                user_type_id=account_user_type_revenue.id,
+                account_type="income_other",
                 reconcile=True,
             )
         )
@@ -75,9 +70,9 @@ class TestPaymentTermDiscount(common.TransactionCase):
         ).search(
             [
                 (
-                    "user_type_id",
+                    "account_type",
                     "=",
-                    self.env.ref("account.data_account_type_revenue").id,
+                    "income_other",
                 )
             ],
             limit=1,
@@ -88,9 +83,9 @@ class TestPaymentTermDiscount(common.TransactionCase):
             self.account_manager.id
         ).create(
             dict(
-                code="cust_acc_rec",
+                code="custaccrec",
                 name="Customer invoice receivable",
-                user_type_id=account_user_type_receivable.id,
+                account_type="asset_receivable",
                 reconcile=True,
             )
         )
@@ -109,7 +104,7 @@ class TestPaymentTermDiscount(common.TransactionCase):
                         0,
                         {
                             "value": "balance",
-                            "discount": 5.0,
+                            "discount_percentage": 5.0,
                             "discount_days": 10,
                             "discount_expense_account_id": self.account_discount.id,
                             "discount_income_account_id": self.account_discount_bill.id,
@@ -200,7 +195,7 @@ class TestPaymentTermDiscount(common.TransactionCase):
         }
         PaymentWizard = self.env["account.payment.register"]
         view = "account.view_account_payment_register_form"
-        with common.Form(PaymentWizard.with_context(ctx), view=view) as f:
+        with common.Form(PaymentWizard.with_context(**ctx), view=view) as f:
             f.amount = amount
             f.payment_date = date
         payment = f.save()
