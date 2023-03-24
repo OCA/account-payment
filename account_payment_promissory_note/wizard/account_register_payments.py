@@ -14,9 +14,10 @@ class AccountRegisterPayments(models.TransientModel):
         for payment in payments:
             if not self.date_due:
                 invoices = payment.reconciled_invoice_ids
-                max_date = max(invoices.mapped("invoice_date_due"))
-                payment.promissory_note = self.promissory_note
-                payment.date_due = max_date
+                if invoices:
+                    max_date = max(invoices.mapped("invoice_date_due"))
+                    payment.promissory_note = self.promissory_note
+                    payment.date_due = max_date
             else:
                 payment.promissory_note = self.promissory_note
                 payment.date_due = self.date_due
