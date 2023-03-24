@@ -23,8 +23,8 @@ odoo.define('account_payment_slimpay.slimpay', function(require) {
         })
         .fail(function() {
             console.log('Slimpay transaction error! Args: ', arguments);
-            var msg = (arguments && arguments[1] && arguments[1].data &&
-                       arguments[1].data.message);
+            var msg = (arguments && arguments[0] && arguments[0].data &&
+                       arguments[0].data.message);
             var wizard = $(qweb.render(
               'slimpay.error', {'msg': msg || _t('Payment error')}));
             wizard.appendTo($('body')).modal({'keyboard': true});
