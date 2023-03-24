@@ -136,7 +136,13 @@ class SlimpayTransaction(models.Model):
                 self._label(), out=self._is_out_transaction())
             _logger.debug('Payment creation result: %s', acquirer_reference)
         except ErrorMessage as exc:
-            raise UserError(_(exc))
+            msg = _(exc)
+            try:
+                self.update({'state': 'error', 'state_message': msg})
+                self.env.cr.commit()
+            except:
+                pass
+            raise UserError(msg)
         self.update({'state': 'done' if acquirer_reference else 'error',
                      'acquirer_reference': acquirer_reference})
         return bool(acquirer_reference)
