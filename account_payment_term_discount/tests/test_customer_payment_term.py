@@ -35,7 +35,7 @@ class TestPaymentTermDiscount(common.TransactionCase):
 
         # Create users
         self.account_manager = self.user_model.with_context(
-            {"no_reset_password": True}
+            **{"no_reset_password": True}
         ).create(
             dict(
                 name="Adviser",
@@ -109,7 +109,7 @@ class TestPaymentTermDiscount(common.TransactionCase):
                         0,
                         {
                             "value": "balance",
-                            "discount": 5.0,
+                            "discount_percentage": 5.0,
                             "discount_days": 10,
                             "discount_expense_account_id": self.account_discount.id,
                             "discount_income_account_id": self.account_discount_bill.id,
@@ -200,7 +200,7 @@ class TestPaymentTermDiscount(common.TransactionCase):
         }
         PaymentWizard = self.env["account.payment.register"]
         view = "account.view_account_payment_register_form"
-        with common.Form(PaymentWizard.with_context(ctx), view=view) as f:
+        with common.Form(PaymentWizard.with_context(**ctx), view=view) as f:
             f.amount = amount
             f.payment_date = date
         payment = f.save()

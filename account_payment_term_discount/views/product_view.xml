@@ -4,11 +4,11 @@
         <field name="model">product.template</field>
         <field name="inherit_id" ref="product.product_template_form_view" />
         <field name="arch" type="xml">
-            <xpath expr="//div[@name='options']/div[2]" position="after">
-                <div>
+            <xpath expr="//div[@name='options']/span[2]" position="after">
+                <span class="d-inline-block">
                     <field name="is_exclude_shipping_amount" />
                     <label for="is_exclude_shipping_amount" />
-                </div>
+                </span>
             </xpath>
         </field>
     </record>
