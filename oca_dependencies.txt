@@ -1,2 +1,1 @@
 # See https://github.com/OCA/odoo-community.org/blob/master/website/Contribution/CONTRIBUTING.rst#oca_dependencies-txt
-odoo14-addon-account-payment-order @ git+https://github.com/OCA/bank-payment.git@refs/pull/451/head#subdirectory=setup/account_payment_order
