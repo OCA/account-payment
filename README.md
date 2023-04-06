@@ -22,7 +22,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [account_cash_discount_base](account_cash_discount_base/) | 14.0.1.0.0 |  | Account Cash Discount Base
-[account_cash_discount_payment](account_cash_discount_payment/) | 14.0.1.0.1 |  | Account Cash Discount Payment
+[account_cash_discount_payment](account_cash_discount_payment/) | 14.0.1.0.2 |  | Account Cash Discount Payment
 [account_cash_discount_write_off](account_cash_discount_write_off/) | 14.0.1.0.0 |  | Create an automatic writeoff for payment with discount on the payment order confirmation
 [account_cash_invoice](account_cash_invoice/) | 14.0.1.3.0 |  | Pay and receive invoices from bank statements
 [account_check_date](account_check_date/) | 14.0.1.0.0 | [![ps-tubtim](https://github.com/ps-tubtim.png?size=30px)](https://github.com/ps-tubtim) | Add check date on payment for check printing
