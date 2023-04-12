@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-01 00:05+0000\n"
-"PO-Revision-Date: 2021-02-01 01:08+0100\n"
-"Last-Translator: Carlos Dauden <carlos.dauden@tecnativa.com>\n"
+"PO-Revision-Date: 2023-04-12 11:33+0000\n"
+"Last-Translator: gelo joga Rodríguez <gelo.joga@factorlibre.com>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-payment-8-0/"
 "language/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -98,7 +98,7 @@ msgstr "Empresa"
 #. module: account_due_list
 #: model:ir.model.fields,field_description:account_due_list.field_account_move_line__partner_ref
 msgid "Partner Ref"
-msgstr "Partner Ref"
+msgstr "Campo \"Referencia\" del partner"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -156,7 +156,7 @@ msgstr "Referencia del documento que ha creado esta factura."
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
 msgid "Total Balance"
-msgstr ""
+msgstr "Saldo total"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
