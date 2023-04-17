@@ -2,7 +2,7 @@
 
 {
     "name": "Payment Due List Payment Mode",
-    "version": "15.0.1.0.0",
+    "version": "16.0.1.0.0",
     "category": "Generic Modules/Payment",
     "author": "Obertix Free Solutions, Tecnativa, Odoo Community Association (OCA),",
     "license": "AGPL-3",
