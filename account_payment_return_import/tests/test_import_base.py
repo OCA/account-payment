@@ -40,26 +40,23 @@ class TestImportBase(TestPaymentReturnFile):
         cls.reason = cls.env["payment.return.reason"].create(
             {"code": "RTEST", "name": "Reason Test"}
         )
-        cls.account_type = cls.env["account.account.type"].create(
-            {"name": "Test", "type": "receivable", "internal_group": "asset"}
-        )
+        # cls.account_type = cls.env["account.account.type"].create(
+        #     {"name": "Test", "type": "receivable", "internal_group": "asset"}
+        # )
         cls.account = cls.env["account.account"].create(
             {
-                "name": "Test account",
-                "code": "TEST",
-                "user_type_id": cls.account_type.id,
-                "reconcile": True,
+                # "company_id": cls.company_data["company"].id,
+                "name": "spreadsheet expense Company 1",
+                "code": "sp1234577",
+                "account_type": "expense",
             }
         )
         cls.account_income = cls.env["account.account"].create(
             {
+                # "company_id": cls.company_data["company"].id,
                 "name": "Test income account",
-                "code": "INCOME",
-                "user_type_id": cls.env["account.account.type"]
-                .create(
-                    {"name": "Test income", "type": "other", "internal_group": "income"}
-                )
-                .id,
+                "account_type": "income",
+                "code": "sp1234566",
             }
         )
         cls.invoice = cls.env["account.move"].create(
@@ -84,9 +81,9 @@ class TestImportBase(TestPaymentReturnFile):
             }
         )
         cls.invoice.action_post()
-        cls.receivable_line = cls.invoice.line_ids.filtered(
-            lambda x: x.account_id.internal_type == "receivable"
-        )
+        # cls.receivable_line = cls.invoice.line_ids.filtered(
+        #     lambda x: x.account_id.internal_type == "receivable"
+        # )
         # Create payment from invoice
         cls.payment_register_model = cls.env["account.payment.register"]
         payment_register = Form(
