@@ -10,15 +10,16 @@ msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-30 10:56+0000\n"
-"PO-Revision-Date: 2016-09-09 12:25+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"PO-Revision-Date: 2023-04-17 16:37+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-payment-8-0/"
 "language/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.14.1\n"
 
 #. module: account_payment_return_import
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
@@ -171,7 +172,7 @@ msgstr "Ultimo Aggiornamento di"
 #. module: account_payment_return_import
 #: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__write_date
 msgid "Last Updated on"
-msgstr "Ultimo Aggiornamento il"
+msgstr "Ultimo aggiornamento il"
 
 #. module: account_payment_return_import
 #: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__match_after_import
