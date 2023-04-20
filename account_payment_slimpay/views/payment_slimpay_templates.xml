@@ -4,6 +4,7 @@
 
         <template id="slimpay_acquirer_button">
           <input type="hidden" name="acquirer" t-att-value="acquirer.id" id="acquirer_slimpay"/>
+          <input type="hidden" name="tx_ref" t-att-value="reference" id="tx_ref"/>
           <script type="text/javascript">
             odoo.define(function (require) {
                 var ajax = require('web.ajax');

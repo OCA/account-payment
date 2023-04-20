@@ -9,10 +9,11 @@ odoo.define('account_payment_slimpay.slimpay', function(require) {
 
     require('web.dom_ready');
 
-    var acquirer_id = parseInt($(
-      'form[provider="slimpay"] #acquirer_slimpay').val());
+    var acquirer_id = parseInt($('form[provider="slimpay"] #acquirer_slimpay').val());
+    var tx_ref = $('form[provider="slimpay"] #tx_ref').val();
 
-    ajax.jsonRpc('/payment/slimpay_transaction/' + acquirer_id, 'call')
+    ajax.jsonRpc('/payment/slimpay_transaction/' + acquirer_id, 'call',
+                 {'tx_ref': tx_ref})
         .done(function (data) {
             window.location.href = data;
         })
