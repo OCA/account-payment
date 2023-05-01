@@ -1,0 +1,85 @@
+<odoo>
+    <record id="view_account_payment_register_form" model="ir.ui.view">
+        <field name="name">account.payment.register.form</field>
+        <field name="model">account.payment.register</field>
+        <field name="inherit_id" ref="account.view_account_payment_register_form" />
+        <field name="groups_id" eval="[(4, ref('account.group_account_invoice'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='writeoff_account_id']" position="after">
+                <div
+                    attrs="{'invisible': [('payment_difference_handling', '!=', 'reconcile')]}"
+                >
+                    <label
+                        for="writeoff_analytic_account_id"
+                        class="oe_edit_only"
+                        groups="analytic.group_analytic_accounting"
+                    />
+                    <field
+                        name="writeoff_analytic_account_id"
+                        groups="analytic.group_analytic_accounting"
+                    />
+                    <label
+                        for="writeoff_analytic_tag_ids"
+                        class="oe_edit_only"
+                        groups="analytic.group_analytic_tags"
+                    />
+                    <field
+                        name="writeoff_analytic_tag_ids"
+                        groups="analytic.group_analytic_tags"
+                        widget="many2many_tags"
+                    />
+                </div>
+            </xpath>
+            <xpath
+                expr="/form/group/group[@name='group3']/div/div"
+                position="attributes"
+            >
+                <attribute
+                    name="attrs"
+                >{'invisible': [('payment_difference_handling','!=','reconcile')]}</attribute>
+            </xpath>
+            <xpath expr="/form/group/group[@name='group3']" position="after">
+                <group
+                    colspan="4"
+                    attrs="{'invisible': [('payment_difference_handling', '!=', 'reconcile_multi_deduct')]}"
+                >
+                    <field name="deduct_residual" invisible="1" />
+                    <field name="deduct_analytic_account_id" invisible="1" />
+                    <field name="deduct_analytic_tag_ids" invisible="1" />
+                    <field
+                        name="deduction_ids"
+                        nolabel="1"
+                        colspan="2"
+                        context="{
+                            'default_amount': deduct_residual,
+                            'default_analytic_account_id': deduct_analytic_account_id,
+                            'default_analytic_tag_ids': deduct_analytic_tag_ids
+                        }"
+                    >
+                        <tree editable="bottom">
+                            <field name="currency_id" invisible="1" />
+                            <field name="open" />
+                            <field
+                                name="account_id"
+                                attrs="{'required': [('open', '=', False)]}"
+                            />
+                            <field
+                                name="analytic_account_id"
+                                optional="show"
+                                groups="analytic.group_analytic_accounting"
+                            />
+                            <field
+                                name="analytic_tag_ids"
+                                widget="many2many_tags"
+                                optional="show"
+                                groups="analytic.group_analytic_tags"
+                            />
+                            <field name="name" />
+                            <field name="amount" sum="Total Deduction" />
+                        </tree>
+                    </field>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
