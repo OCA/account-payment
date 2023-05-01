@@ -9,6 +9,7 @@ setuptools.setup(
     version=version,
     install_requires=[
         'odoo13-addon-account_cash_discount_base',
+        'odoo13-addon-account_cash_discount_base_sale',
         'odoo13-addon-account_cash_discount_payment',
         'odoo13-addon-account_cash_discount_write_off',
         'odoo13-addon-account_cash_invoice',
