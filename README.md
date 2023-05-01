@@ -31,6 +31,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [account_cash_discount_base](account_cash_discount_base/) | 13.0.1.0.0 |  | Account Cash Discount Base
+[account_cash_discount_base_sale](account_cash_discount_base_sale/) | 13.0.1.0.0 |  | Glue module between account_cash_discount_base and standard sale addon.
 [account_cash_discount_payment](account_cash_discount_payment/) | 13.0.1.0.0 |  | Account Cash Discount Payment
 [account_cash_discount_write_off](account_cash_discount_write_off/) | 13.0.1.0.0 |  | Create an automatic writeoff for payment with discount on the payment order confirmation
 [account_cash_invoice](account_cash_invoice/) | 13.0.1.0.1 |  | Pay and receive invoices from bank statements
