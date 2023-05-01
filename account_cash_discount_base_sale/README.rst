@@ -53,7 +53,7 @@ Authors
 Contributors
 ~~~~~~~~~~~~
 
-* Zina Rasoamanana <zina.rasoamanana@acsone.eu> 
+* Zina Rasoamanana <zina.rasoamanana@acsone.eu>
 
 Maintainers
 ~~~~~~~~~~~
