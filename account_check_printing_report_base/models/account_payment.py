@@ -1,5 +1,4 @@
-# Copyright 2016 Eficent Business and IT Consulting Services S.L.
-# (http://www.eficent.com)
+# Copyright 2023 ForgeFlow S.L. (http://www.forgeflow.com)
 # Copyright 2016 Serpent Consulting Services Pvt. Ltd.
 # Copyright 2018 iterativo.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
@@ -14,15 +13,15 @@ class AccountRegisterPayments(models.TransientModel):
         res = super().action_create_payments()
         if (
             self.journal_id.check_print_auto
-            and self.payment_method_line_id.code == "check_printing"
+            and self.payment_method_id.code == "check_printing"
         ):
             payment = self.env["account.payment"].search(
                 [
                     ("journal_id", "=", self.journal_id.id),
                     (
-                        "payment_method_line_id.name",
+                        "payment_method_id.name",
                         "like",
-                        self.payment_method_line_id.name,
+                        self.payment_method_id.name,
                     ),
                 ],
                 order="id desc",
@@ -49,7 +48,7 @@ class AccountPayment(models.Model):
         res = super().action_post()
         recs = self.filtered(
             lambda x: x.journal_id.check_print_auto
-            and x.payment_method_line_id.code == "check_printing"
+            and x.payment_method_id.code == "check_printing"
         )
         if recs:
             return recs.do_print_checks()

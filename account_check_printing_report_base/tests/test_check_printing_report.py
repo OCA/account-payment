@@ -1,4 +1,4 @@
-# © 2016 Eficent Business and IT Consulting Services S.L.
+# Copyright 2023 ForgeFlow S.L. (http://www.forgeflow.com)
 # Copyright 2018 iterativo.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
@@ -86,7 +86,7 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
             {
                 "date": time.strftime("%Y") + "-07-15",
                 "journal_id": self.bank_journal.id,
-                "payment_method_line_id": self.payment_method_check.id,
+                "payment_method_id": self.payment_method_check.id,
             }
         )
         register_payments.action_post()

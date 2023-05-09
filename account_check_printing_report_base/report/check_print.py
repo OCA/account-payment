@@ -1,5 +1,4 @@
-# Copyright 2016 Eficent Business and IT Consulting Services S.L.
-# (http://www.eficent.com)
+# Copyright 2023 ForgeFlow S.L. (http://www.forgeflow.com)
 # Copyright 2016 Serpent Consulting Services Pvt. Ltd.
 # Copyright 2018 iterativo.
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
@@ -75,7 +74,10 @@ class ReportCheckPrint(models.AbstractModel):
         lines = {}
         for payment in payments:
             lines[payment.id] = []
-            pay_acc = payment.outstanding_account_id
+            pay_acc = (
+                payment.journal_id.payment_debit_account_id
+                or payment.journal_id.payment_credit_account_id
+            )
             rec_lines = payment.line_ids.filtered(
                 lambda x: x.account_id.reconcile and x.account_id != pay_acc
             )

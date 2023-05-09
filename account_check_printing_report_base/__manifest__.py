@@ -1,5 +1,4 @@
-# Copyright 2016 Eficent Business and IT Consulting Services S.L.
-# (http://www.eficent.com)
+# Copyright 2023 ForgeFlow S.L. (http://www.forgeflow.com)
 # Copyright 2016 Serpent Consulting Services Pvt. Ltd.
 # Copyright 2017 Tecnativa.
 # Copyright 2018 iterativo.
@@ -7,9 +6,9 @@
 
 {
     "name": "Account Check Printing Report Base",
-    "version": "15.0.1.0.0",
+    "version": "14.0.1.0.0",
     "license": "AGPL-3",
-    "author": "Eficent,"
+    "author": "ForgeFlow,"
     "Serpent Consulting Services Pvt. Ltd.,"
     "Ursa Information Systems,"
     "Odoo Community Association (OCA)",
