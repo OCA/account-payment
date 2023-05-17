@@ -14,6 +14,7 @@ setuptools.setup(
         'odoo14-addon-account_cash_invoice',
         'odoo14-addon-account_check_date',
         'odoo14-addon-account_check_payee',
+        'odoo14-addon-account_check_printing_report_base',
         'odoo14-addon-account_due_list',
         'odoo14-addon-account_due_list_aging_comment',
         'odoo14-addon-account_due_list_days_overdue',
