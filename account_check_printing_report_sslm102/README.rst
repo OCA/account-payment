@@ -23,7 +23,7 @@ Account Check Printing Report SSLM102
     :target: https://runbot.odoo-community.org/runbot/96/14.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5|
+|badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This module allows you to print SSLM102 lined checks.
 
@@ -52,7 +52,6 @@ Usage
 * Go to 'Invoicing / Purchases / Payments'. Select one of the payments with
   type 'Check' and print the check.
 
-
 Bug Tracker
 ===========
 
@@ -74,7 +73,7 @@ Authors
 Contributors
 ~~~~~~~~~~~~
 
-* ForgeFlow S.L.
+* Copyright 2023 ForgeFlow S.L.
     * Jordi Ballester Alomar <jordi.ballester@forgeflow.com>
     * Juany Davila <juany.davila@forgeflow.com>
 
