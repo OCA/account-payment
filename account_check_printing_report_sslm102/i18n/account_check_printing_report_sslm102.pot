@@ -1,0 +1,75 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_check_printing_report_sslm102
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_check_printing_report_sslm102
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_sslm102.invoice_data
+msgid "(*) Not all invoices were printed"
+msgstr ""
+
+#. module: account_check_printing_report_sslm102
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_sslm102.sslm102
+msgid "<b>Check Amount: </b>"
+msgstr ""
+
+#. module: account_check_printing_report_sslm102
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_sslm102.invoice_data
+msgid "Balance Due"
+msgstr ""
+
+#. module: account_check_printing_report_sslm102
+#: model:ir.model,name:account_check_printing_report_sslm102.model_report_account_check_printing_report_sslm102_sslm102
+msgid "Check sslm102"
+msgstr ""
+
+#. module: account_check_printing_report_sslm102
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_sslm102.invoice_data
+msgid "Description"
+msgstr ""
+
+#. module: account_check_printing_report_sslm102
+#: model:ir.model.fields,field_description:account_check_printing_report_sslm102.field_report_account_check_printing_report_sslm102_sslm102__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_check_printing_report_sslm102
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_sslm102.invoice_data
+msgid "Due Date"
+msgstr ""
+
+#. module: account_check_printing_report_sslm102
+#: model:ir.model.fields,field_description:account_check_printing_report_sslm102.field_report_account_check_printing_report_sslm102_sslm102__id
+msgid "ID"
+msgstr ""
+
+#. module: account_check_printing_report_sslm102
+#: model:ir.model.fields,field_description:account_check_printing_report_sslm102.field_report_account_check_printing_report_sslm102_sslm102____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_check_printing_report_sslm102
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_sslm102.invoice_data
+msgid "Original Amount"
+msgstr ""
+
+#. module: account_check_printing_report_sslm102
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_sslm102.invoice_data
+msgid "Payment"
+msgstr ""
+
+#. module: account_check_printing_report_sslm102
+#: model:ir.actions.report,name:account_check_printing_report_sslm102.action_report_check_sslm102
+msgid "Payment Check SSLM102"
+msgstr ""
+
