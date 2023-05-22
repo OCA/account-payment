@@ -28,6 +28,7 @@ addon | version | maintainers | summary
 [account_check_date](account_check_date/) | 14.0.1.0.0 | [![ps-tubtim](https://github.com/ps-tubtim.png?size=30px)](https://github.com/ps-tubtim) | Add check date on payment for check printing
 [account_check_payee](account_check_payee/) | 14.0.1.0.0 | [![ps-tubtim](https://github.com/ps-tubtim.png?size=30px)](https://github.com/ps-tubtim) | Add payee on payment for check printing
 [account_check_printing_report_base](account_check_printing_report_base/) | 14.0.1.0.0 |  | Account Check Printing Report Base
+[account_check_printing_report_sslm102](account_check_printing_report_sslm102/) | 14.0.1.0.0 |  | Allows you to print SSLM102 lined checks.
 [account_due_list](account_due_list/) | 14.0.1.2.0 |  | List of open credits and debits, with due date
 [account_due_list_aging_comment](account_due_list_aging_comment/) | 14.0.1.0.0 |  | Account Due List Aging Comment
 [account_due_list_days_overdue](account_due_list_days_overdue/) | 14.0.1.0.0 |  | Payments Due list days overdue
