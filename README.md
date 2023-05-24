@@ -25,6 +25,7 @@ addon | version | maintainers | summary
 [account_due_list_payment_mode](account_due_list_payment_mode/) | 16.0.1.0.0 |  | Payment Due List Payment Mode
 [account_payment_promissory_note](account_payment_promissory_note/) | 16.0.1.0.0 |  | Account Payment Promissory Note
 [account_payment_term_extension](account_payment_term_extension/) | 16.0.1.0.0 |  | Adds rounding, months, weeks and multiple payment days properties on payment term lines
+[account_payment_widget_amount](account_payment_widget_amount/) | 16.0.1.0.0 |  | Extends the payment widget to be able to choose the payment amount
 
 [//]: # (end addons)
 

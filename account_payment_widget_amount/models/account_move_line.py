@@ -1,6 +1,6 @@
 # Copyright 2018-2021 ForgeFlow S.L.
 
-from odoo import models
+from odoo import api, models
 from odoo.tools import float_compare
 
 
@@ -25,10 +25,13 @@ class AccountMoveLine(models.Model):
 
     _inherit = "account.move.line"
 
-    def _prepare_reconciliation_partials(self):
+    @api.model
+    def _prepare_reconciliation_partials(self, vals_list):
         am_model = self.env["account.move"]
         aml_model = self.env["account.move.line"]
-        partials = super(AccountMoveLine, self)._prepare_reconciliation_partials()
+        partials = super(AccountMoveLine, self)._prepare_reconciliation_partials(
+            vals_list=vals_list
+        )
         if self.env.context.get("paid_amount", 0.0):
             total_paid = self.env.context.get("paid_amount", 0.0)
             current_am = am_model.browse(self.env.context.get("move_id"))
@@ -41,7 +44,7 @@ class AccountMoveLine(models.Model):
                     current_am.company_id,
                     current_aml.date,
                 )
-            for partial in partials:
+            for partial in partials[0]:
                 debit_line = self.browse(partial.get("debit_move_id"))
                 credit_line = self.browse(partial.get("credit_move_id"))
                 different_currency = (
