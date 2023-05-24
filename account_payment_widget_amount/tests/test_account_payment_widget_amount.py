@@ -11,7 +11,6 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
         super(TestAccountPaymentWidgetAmount, self).setUp()
         # Models
         self.partner = self.env["res.partner"].create({"name": "Test"})
-        self.account_account_type_model = self.env["account.account.type"]
         self.account_account_model = self.env["account.account"]
         self.account_payment_model = self.env["account.payment"]
         self.account_journal_model = self.env["account.journal"]
@@ -19,46 +18,11 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
         # Records
         self.company = self.env.ref("base.main_company")
 
-        self.account_type_bank = self.account_account_type_model.create(
-            {
-                "name": "Test Bank",
-                "type": "liquidity",
-                "internal_group": "asset",
-            }
-        )
-        self.account_type_receivable = self.account_account_type_model.create(
-            {
-                "name": "Test Receivable",
-                "type": "receivable",
-                "internal_group": "asset",
-            }
-        )
-        self.account_type_payable = self.account_account_type_model.create(
-            {
-                "name": "Test Payable",
-                "type": "receivable",
-                "internal_group": "liability",
-            }
-        )
-        self.account_type_regular_income = self.account_account_type_model.create(
-            {
-                "name": "Test Regular Income",
-                "type": "other",
-                "internal_group": "income",
-            }
-        )
-        self.account_type_regular_expense = self.account_account_type_model.create(
-            {
-                "name": "Test Regular Expense",
-                "type": "other",
-                "internal_group": "expense",
-            }
-        )
         self.account_bank = self.account_account_model.create(
             {
                 "name": "Test Bank",
-                "code": "TEST_BANK",
-                "user_type_id": self.account_type_bank.id,
+                "code": "TEST.BANK",
+                "account_type": "asset_cash",
                 "reconcile": False,
                 "company_id": self.company.id,
             }
@@ -66,8 +30,8 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
         self.account_receivable = self.account_account_model.create(
             {
                 "name": "Test Receivable",
-                "code": "TEST_AR",
-                "user_type_id": self.account_type_receivable.id,
+                "code": "TEST.AR",
+                "account_type": "asset_receivable",
                 "reconcile": True,
                 "company_id": self.company.id,
             }
@@ -75,8 +39,8 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
         self.account_payable = self.account_account_model.create(
             {
                 "name": "Test Payable",
-                "code": "TEST_AP",
-                "user_type_id": self.account_type_payable.id,
+                "code": "TEST.AP",
+                "account_type": "liability_payable",
                 "reconcile": True,
                 "company_id": self.company.id,
             }
@@ -86,8 +50,8 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
         self.account_income = self.account_account_model.create(
             {
                 "name": "Test Income",
-                "code": "TEST_IN",
-                "user_type_id": self.account_type_regular_income.id,
+                "code": "TEST.IN",
+                "account_type": "income",
                 "reconcile": False,
                 "company_id": self.company.id,
             }
@@ -95,8 +59,8 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
         self.account_expense = self.account_account_model.create(
             {
                 "name": "Test Expense",
-                "code": "TEST_EX",
-                "user_type_id": self.account_type_regular_expense.id,
+                "code": "TEST.EX",
+                "account_type": "expense",
                 "reconcile": False,
                 "company_id": self.company.id,
             }
@@ -150,12 +114,12 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
                             "price_unit": 200.0,
                             "account_id": self.account_income.id,
                             "quantity": 1,
+                            "tax_ids": False,
                         },
                     )
                 ],
             }
         )
-
         # Open invoice
         invoice.action_post()
         # Create a payment
@@ -218,6 +182,7 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
                             "price_unit": 200.0,
                             "account_id": self.account_income.id,
                             "quantity": 1,
+                            "tax_ids": False,
                         },
                     )
                 ],
@@ -284,6 +249,7 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
                             "price_unit": 200.0,
                             "account_id": self.account_income.id,
                             "quantity": 1,
+                            "tax_ids": False,
                         },
                     )
                 ],
@@ -348,6 +314,7 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
                             "price_unit": 200.0,
                             "account_id": self.account_income.id,
                             "quantity": 1,
+                            "tax_ids": False,
                         },
                     )
                 ],
@@ -421,6 +388,7 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
                             "price_unit": 200.0,
                             "account_id": self.account_expense.id,
                             "quantity": 1,
+                            "tax_ids": False,
                         },
                     )
                 ],
