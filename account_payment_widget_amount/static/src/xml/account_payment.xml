@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
 
-    <t t-name="PaymentAmountPopOver">
-        <div class="js_payment_amount_div">
+    <t t-name="PaymentAmountPopOver" owl="1">
+        <div class="js_payment_amount_div m-2">
+            <h3 t-if="props.title" class="o_popover_header"><t
+                    t-esc="props.title"
+                /></h3>
             <table>
                 <tr>
                     <td style="padding-right:20px;"><strong
@@ -16,19 +19,27 @@
                             id="paid_amount"
                             class="o_website_form_input"
                             data-type="number"
-                            placeholder=""
-                            t-att-amount="amount"
+                            t-att-placeholder="props.placeholder"
+                            t-att-amount="props.amount"
                         />
                     </td>
-                    <td t-if="position == 'after'"><t t-esc="currency" /></td>
                 </tr>
             </table>
         </div>
         <button
-            class="btn btn-xs btn-primary js_payment_amount pull-right"
-            t-att-id="id"
-            style="margin-top:5px; margin-bottom:5px;"
+            class="btn btn-xs btn-primary js_payment_amount pull-right m-2"
+            t-att-data-id="props.id"
+            t-att-data-move_id="props.move_id"
+            t-on-click.prevent="(ev) =>props._onOutstandingCreditAssign(ev)"
         >Apply</button>
+    </t>
+
+    <t t-inherit="account.AccountPaymentField" t-inherit-mode="extension">
+        <xpath expr="//table//a[hasclass('btn-secondary')]" position="attributes">
+            <attribute
+                name="t-on-click.prevent"
+            >(ev) => this.popoverPartialOutstanding(ev, line.id)</attribute>
+        </xpath>
     </t>
 
 </templates>

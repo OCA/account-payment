@@ -14,11 +14,9 @@
     "data": [],
     "maintainers": ["ChrisOForgeFlow"],
     "assets": {
-        "web.assets_qweb": [
-            "account_payment_widget_amount/static/src/xml/account_payment.xml",
-        ],
         "web.assets_backend": [
-            "account_payment_widget_amount/static/src/js/account_payment_field.js",
+            "account_payment_widget_amount/static/src/xml/account_payment.xml",
+            "account_payment_widget_amount/static/src/js/account_payment_field.esm.js",
         ],
     },
 }

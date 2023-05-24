@@ -14,7 +14,7 @@ Account Payment Widget Amount
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--payment-lightgray.png?logo=github
-    :target: https://github.com/OCA/account-payment/tree/15.0/account_payment_widget_amount
+    :target: https://github.com/OCA/account-payment/tree/16.0/account_payment_widget_amount
     :alt: OCA/account-payment
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
     :target: https://translation.odoo-community.org/projects/account-payment-15-0/account-payment-15-0-account_payment_widget_amount
@@ -76,6 +76,7 @@ Contributors
 * Adrià Gil Sorribes <adria.gil@eficent.com>
 * Jordi Ballester Alomar <jordi.ballester@eforgeflow.com>
 * Christopher Ormaza <chris.ormaza@eforgeflow.com>
+* Dhara Solanki <dhara.solanki@initos.com>
 
 Maintainers
 ~~~~~~~~~~~
@@ -98,6 +99,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-ChrisOForgeFlow| 
 
-This module is part of the `OCA/account-payment <https://github.com/OCA/account-payment/tree/15.0/account_payment_widget_amount>`_ project on GitHub.
+This module is part of the `OCA/account-payment <https://github.com/OCA/account-payment/tree/16.0/account_payment_widget_amount>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
