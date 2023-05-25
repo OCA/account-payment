@@ -22,21 +22,15 @@ msgid "Aging Comments"
 msgstr "Comentarios sobre Envejecimiento"
 
 #. module: account_due_list_aging_comment
-#: model:ir.model.fields,field_description:account_due_list_aging_comment.field_account_move_line__display_name
-msgid "Display Name"
-msgstr "Mostrar Nombre"
-
-#. module: account_due_list_aging_comment
-#: model:ir.model.fields,field_description:account_due_list_aging_comment.field_account_move_line__id
-msgid "ID"
-msgstr "ID"
-
-#. module: account_due_list_aging_comment
 #: model:ir.model,name:account_due_list_aging_comment.model_account_move_line
 msgid "Journal Item"
 msgstr "Apunte Contable"
 
-#. module: account_due_list_aging_comment
-#: model:ir.model.fields,field_description:account_due_list_aging_comment.field_account_move_line____last_update
-msgid "Last Modified on"
-msgstr "Última modificación en"
+#~ msgid "Display Name"
+#~ msgstr "Mostrar Nombre"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última modificación en"
