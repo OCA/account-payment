@@ -73,7 +73,6 @@ class TestPartnerHoliday(common.TransactionCase):
                         {
                             "value": "balance",
                             "days": 0,
-                            "option": "day_after_invoice_date",
                         },
                     )
                 ],
@@ -89,7 +88,6 @@ class TestPartnerHoliday(common.TransactionCase):
                         {
                             "value": "balance",
                             "days": 10,
-                            "option": "day_after_invoice_date",
                         },
                     )
                 ],
@@ -105,7 +103,6 @@ class TestPartnerHoliday(common.TransactionCase):
                         {
                             "value": "balance",
                             "days": 0,
-                            "option": "day_after_invoice_date",
                         },
                     )
                 ],
@@ -124,7 +121,6 @@ class TestPartnerHoliday(common.TransactionCase):
                         {
                             "value": "balance",
                             "days": 0,
-                            "option": "day_after_invoice_date",
                             "payment_days": "5,10",
                         },
                     )
@@ -141,7 +137,7 @@ class TestPartnerHoliday(common.TransactionCase):
             {
                 "name": "Test Account",
                 "code": "TEST",
-                "user_type_id": self.env.ref("account.data_account_type_receivable").id,
+                "account_type": "asset_receivable",
                 "reconcile": True,
             }
         )
@@ -149,9 +145,7 @@ class TestPartnerHoliday(common.TransactionCase):
             {
                 "name": "Test Account",
                 "code": "ACC",
-                "user_type_id": self.env.ref(
-                    "account.data_account_type_other_income"
-                ).id,
+                "account_type": "income_other",
                 "reconcile": True,
             }
         )
