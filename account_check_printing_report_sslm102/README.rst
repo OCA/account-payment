@@ -14,16 +14,16 @@ Account Check Printing Report SSLM102
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--payment-lightgray.png?logo=github
-    :target: https://github.com/OCA/account-payment/tree/14.0/account_check_printing_report_sslm102
+    :target: https://github.com/OCA/account-payment/tree/15.0/account_check_printing_report_sslm102
     :alt: OCA/account-payment
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/account-payment-14-0/account-payment-14-0-account_check_printing_report_sslm102
+    :target: https://translation.odoo-community.org/projects/account-payment-15-0/account-payment-15-0-account_check_printing_report_sslm102
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runbot-Try%20me-875A7B.png
-    :target: https://runbot.odoo-community.org/runbot/96/14.0
+    :target: https://runbot.odoo-community.org/runbot/96/15.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5|
+|badge1| |badge2| |badge3| |badge4| |badge5| 
 
 This module allows you to print SSLM102 lined checks.
 
@@ -52,14 +52,13 @@ Usage
 * Go to 'Invoicing / Purchases / Payments'. Select one of the payments with
   type 'Check' and print the check.
 
-
 Bug Tracker
 ===========
 
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/account-payment/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us smashing it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/account-payment/issues/new?body=module:%20account_check_printing_report_sslm102%0Aversion:%2014.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/account-payment/issues/new?body=module:%20account_check_printing_report_sslm102%0Aversion:%2015.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -74,7 +73,7 @@ Authors
 Contributors
 ~~~~~~~~~~~~
 
-* ForgeFlow S.L.
+* Copyright 2023 ForgeFlow S.L.
     * Jordi Ballester Alomar <jordi.ballester@forgeflow.com>
     * Juany Davila <juany.davila@forgeflow.com>
 
@@ -91,6 +90,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/account-payment <https://github.com/OCA/account-payment/tree/14.0/account_check_printing_report_sslm102>`_ project on GitHub.
+This module is part of the `OCA/account-payment <https://github.com/OCA/account-payment/tree/15.0/account_check_printing_report_sslm102>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
