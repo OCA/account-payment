@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="action_report_check_sslm102" model="ir.actions.report">
+        <field name="name">Payment Check SSLM102</field>
+        <field name="model">account.payment</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">account_check_printing_report_sslm102.sslm102</field>
+        <field name="report_file">account_check_printing_report_sslm102.sslm102</field>
+        <field
+            name="paperformat_id"
+            ref="account_check_printing_report_sslm102.paperformat_check_sslm102"
+        />
+        <field name="binding_model_id" ref="account.model_account_payment" />
+        <field name="binding_type">report</field>
+    </record>
+</odoo>
