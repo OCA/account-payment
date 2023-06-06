@@ -4,12 +4,12 @@
 
 {
     "name": "Account Check Report",
-    "version": "12.0.1.0.0",
+    "version": "16.0.1.0.0",
     "license": "AGPL-3",
     "author": "Eficent," "Odoo Community Association (OCA)",
     "category": "Generic Modules/Accounting",
     "website": "https://github.com/OCA/account-payment",
-    "depends": [],
+    "depends": ["account"],
     "data": [
         "report/account_check_report.xml",
     ],
