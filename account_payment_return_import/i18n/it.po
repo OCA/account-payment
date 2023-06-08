@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-02 06:22+0000\n"
-"PO-Revision-Date: 2023-06-07 11:13+0000\n"
+"PO-Revision-Date: 2023-06-08 09:14+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-payment-8-0/"
 "language/it/)\n"
@@ -165,12 +165,12 @@ msgstr "Ultima modifica il"
 #. module: account_payment_return_import
 #: field:payment.return.import,write_uid:0
 msgid "Last Updated by"
-msgstr "Ultimo Aggiornamento di"
+msgstr "Ultimo aggiornamento di"
 
 #. module: account_payment_return_import
 #: field:payment.return.import,write_date:0
 msgid "Last Updated on"
-msgstr "Ultimo Aggiornamento il"
+msgstr "Ultimo aggiornamento il"
 
 #. module: account_payment_return_import
 #: field:payment.return.import,match_after_import:0
