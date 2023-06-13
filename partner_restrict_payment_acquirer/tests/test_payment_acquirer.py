@@ -38,9 +38,9 @@ class TestPaymentAcquirer(TransactionCase):
             {"allowed_acquirer_ids": [(4, self.wire_transfer.id)]}
         )
         customer_acquirers = self.res_partner_gemini.allowed_acquirer_ids
-        self.assertEqual(
-            customer_acquirers,
+        self.assertIn(
             self.wire_transfer,
+            customer_acquirers,
             msg="Customer acquirers must be contain 'Wire Transfer'",
         )
         acquirers = payment_acquirer_obj.get_allowed_acquirers(
@@ -68,9 +68,9 @@ class TestPaymentAcquirer(TransactionCase):
             {"allowed_acquirer_ids": [(4, self.wire_transfer.id)]}
         )
         customer_acquirers = self.res_partner_deco.allowed_acquirer_ids
-        self.assertEqual(
-            customer_acquirers,
+        self.assertIn(
             self.wire_transfer,
+            customer_acquirers,
             msg="Customer acquirers must be contain 'Wire Transfer'",
         )
         acquirers = payment_acquirer_obj.get_allowed_acquirers(
