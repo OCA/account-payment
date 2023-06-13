@@ -4,8 +4,6 @@
 # Copyright 2017 Tecnativa - Luis M. Ontalba
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
-import json
-
 from odoo.exceptions import UserError, ValidationError
 from odoo.tests.common import Form, TransactionCase
 
@@ -17,14 +15,11 @@ class TestPaymentReturn(TransactionCase):
         cls.journal = cls.env["account.journal"].create(
             {"name": "Test Sales Journal", "code": "tVEN", "type": "sale"}
         )
-        cls.account_type = cls.env["account.account.type"].create(
-            {"name": "Test", "type": "receivable", "internal_group": "asset"}
-        )
         cls.account = cls.env["account.account"].create(
             {
                 "name": "Test account",
                 "code": "TEST",
-                "user_type_id": cls.account_type.id,
+                "account_type": "asset_receivable",
                 "reconcile": True,
             }
         )
@@ -42,15 +37,10 @@ class TestPaymentReturn(TransactionCase):
             {
                 "name": "Test income account",
                 "code": "INCOME",
-                "user_type_id": cls.env["account.account.type"]
-                .create(
-                    {"name": "Test income", "type": "other", "internal_group": "income"}
-                )
-                .id,
+                "account_type": "income_other",
             }
         )
         cls.partner = cls.env["res.partner"].create({"name": "Test"})
-        cls.partner_1 = cls.env["res.partner"].create({"name": "Test 1"})
         cls.invoice = cls.env["account.move"].create(
             {
                 "move_type": "out_invoice",
@@ -67,6 +57,7 @@ class TestPaymentReturn(TransactionCase):
                             "name": "Test line",
                             "price_unit": 50,
                             "quantity": 10,
+                            "tax_ids": False,
                         },
                     )
                 ],
@@ -77,7 +68,7 @@ class TestPaymentReturn(TransactionCase):
         )
         cls.invoice.action_post()
         cls.receivable_line = cls.invoice.line_ids.filtered(
-            lambda x: x.account_id.internal_type == "receivable"
+            lambda x: x.account_id.account_type == "asset_receivable"
         )
         # Create payment from invoice
         cls.payment_register_model = cls.env["account.payment.register"]
@@ -89,7 +80,7 @@ class TestPaymentReturn(TransactionCase):
         cls.payment = payment_register.save()._create_payments()
         cls.payment_move = cls.payment.move_id
         cls.payment_line = cls.payment_move.line_ids.filtered(
-            lambda x: x.account_id.internal_type == "receivable"
+            lambda x: x.account_id.account_type == "asset_receivable"
         )
         # Create payment return
         cls.payment_return = cls.env["payment.return"].create(
@@ -232,10 +223,10 @@ class TestPaymentReturn(TransactionCase):
             )
 
     def test_payments_widget(self):
-        info = json.loads(self.invoice.invoice_payments_widget)
-        self.assertEqual(len(info["content"]), 1)
+        widget_vals = self.invoice.invoice_payments_widget
+        self.assertEqual(len(widget_vals["content"]), 1)
         self.payment_return.action_confirm()
-        info = json.loads(self.invoice.invoice_payments_widget)
+        info = self.invoice.invoice_payments_widget
         self.assertEqual(len(info["content"]), 2)
         self.assertEqual(info["content"][1]["amount"], -500.0)
 
