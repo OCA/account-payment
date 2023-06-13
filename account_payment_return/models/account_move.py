@@ -1,9 +1,9 @@
 # Copyright 2016 Tecnativa Carlos Dauden
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from operator import itemgetter
 
-from odoo import fields, models
+from odoo import _, fields, models
+from odoo.tools import formatLang
 
 
 class AccountMove(models.Model):
@@ -27,48 +27,67 @@ class AccountMove(models.Model):
             {"returned_payment": False}
         )
 
-    def _get_reconciled_info_JSON_values(self):
-        values = super()._get_reconciled_info_JSON_values()
+    def prepare_values_returned_widget(self, line_id, amount, is_return=False):
+        try:
+            payment_method_name = line_id.payment_method_line_id.name
+        except AttributeError:
+            payment_method_name = False
+        return {
+            "name": line_id.name,
+            "journal_name": line_id.journal_id.name,
+            "amount": amount,
+            "date": line_id.date,
+            "partial_id": line_id.id,
+            "currency_id": line_id.currency_id,
+            "currency": line_id.currency_id.symbol,
+            "position": line_id.currency_id.position,
+            "move_id": line_id.move_id.id,
+            "amount_company_currency": formatLang(
+                self.env,
+                abs(amount),
+                currency_obj=line_id.currency_id,
+            ),
+            "payment_method_name": payment_method_name,
+            "ref": "{} ({})".format(line_id.move_id.name, line_id.ref),
+            "returned": is_return,
+        }
+
+    def _compute_payments_widget_reconciled_info(self):
         if not self.returned_payment:
-            return values
-        returned_reconciles = self.env["account.partial.reconcile"].search(
-            [("origin_returned_move_ids.move_id", "=", self.id)]
-        )
-        for returned_reconcile in returned_reconciles:
-            payment = returned_reconcile.credit_move_id
-            payment_ret = returned_reconcile.debit_move_id
-            values.append(
-                {
-                    "name": payment.name,
-                    "journal_name": payment.journal_id.name,
-                    "amount": returned_reconcile.amount,
-                    "currency": self.currency_id.symbol,
-                    "digits": [69, self.currency_id.decimal_places],
-                    "position": self.currency_id.position,
-                    "date": payment.date,
-                    "payment_id": payment.id,
-                    "move_id": payment.move_id.id,
-                    "ref": payment.move_id.name,
+            return super()._compute_payments_widget_reconciled_info()
+        else:
+            for move in self:
+                values_returned = []
+                payments_widget_vals = {
+                    "outstanding": False,
+                    "content": values_returned,
+                    "move_id": move.id,
+                    "title": _("Returned on"),
                 }
-            )
-            values.append(
-                {
-                    "name": payment_ret.name,
-                    "journal_name": payment_ret.journal_id.name,
-                    "amount": -returned_reconcile.amount,
-                    "currency": self.currency_id.symbol,
-                    "digits": [69, self.currency_id.decimal_places],
-                    "position": self.currency_id.position,
-                    "date": payment_ret.date,
-                    "payment_id": payment_ret.id,
-                    "move_id": payment_ret.move_id.id,
-                    "ref": "{} ({})".format(
-                        payment_ret.move_id.name, payment_ret.move_id.ref
-                    ),
-                    "returned": True,
-                }
-            )
-        return sorted(values, key=itemgetter("date"), reverse=True)
+                reconciled_payments = move._get_reconciled_payments()
+                domain = [("origin_returned_move_ids.move_id", "=", move.id)]
+                if len(reconciled_payments) > 0:
+                    for rec_payment in reconciled_payments:
+                        vals_rec_payment = self.prepare_values_returned_widget(
+                            rec_payment, rec_payment.amount
+                        )
+                        values_returned.append(vals_rec_payment)
+                move_reconciles = self.env["account.partial.reconcile"].search(domain)
+                for move_reconcile in move_reconciles:
+                    payment_ret = move_reconcile.debit_move_id
+                    payment = move_reconcile.credit_move_id
+                    vals_payment = self.prepare_values_returned_widget(
+                        payment, move_reconcile.amount
+                    )
+                    values_returned.append(vals_payment)
+                    vals_reconcile = self.prepare_values_returned_widget(
+                        payment_ret, -move_reconcile.amount, True
+                    )
+                    values_returned.append(vals_reconcile)
+                if payments_widget_vals["content"]:
+                    move.invoice_payments_widget = payments_widget_vals
+                else:
+                    move.invoice_payments_widget = False
 
 
 class AccountMoveLine(models.Model):
