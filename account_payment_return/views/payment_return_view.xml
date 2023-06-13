@@ -81,7 +81,7 @@
                                         options="{'no_create': True}"
                                         domain="[('partner_id', '=', partner_id),
                                                     ('journal_id', '=', parent.journal_id),
-                                                    ('account_id.internal_type', '=', 'receivable'),
+                                                    ('account_id.account_type', '=', 'asset_receivable'),
                                                     ('reconciled', '=', True)]"
                                     />
                                     <field name="amount" sum="Total amount" />

@@ -229,7 +229,7 @@ class PaymentReturn(models.Model):
     def action_cancel(self):
         invoices = self.env["account.move"]
         for move_line in self.mapped("move_id.line_ids").filtered(
-            lambda x: x.account_internal_type == "receivable"
+            lambda x: x.account_type == "asset_receivable"
         ):
             for partial_line in move_line.matched_credit_ids:
                 invoices |= partial_line.origin_returned_move_ids.mapped("move_id")
@@ -323,8 +323,8 @@ class PaymentReturnLine(models.Model):
             invoice = self.env["account.move"].search(domain)
             if invoice:
                 invoice_line_ids = invoice.line_ids.filtered(
-                    lambda line: line.account_id.user_type_id.type
-                    in ("receivable", "payable")
+                    lambda line: line.account_id.account_type
+                    in ("asset_receivable", "liability_payable")
                 )
                 payment_lines = invoice_line_ids.mapped(
                     "matched_debit_ids.debit_move_id"
@@ -347,7 +347,7 @@ class PaymentReturnLine(models.Model):
                 ]
             domain.extend(
                 [
-                    ("account_id.internal_type", "=", "receivable"),
+                    ("account_id.account_type", "=", "asset_receivable"),
                     ("reconciled", "=", True),
                     "|",
                     ("name", "=", line.reference),
@@ -369,7 +369,7 @@ class PaymentReturnLine(models.Model):
             move = self.env["account.move"].search(domain)
             if move:
                 line.move_line_ids = move.line_ids.filtered(
-                    lambda l: (l.account_internal_type == "receivable" and l.reconciled)
+                    lambda l: (l.account_type == "asset_receivable" and l.reconciled)
                 ).ids
                 if not line.concept:
                     line.concept = _("Move: %s") % move.ref
