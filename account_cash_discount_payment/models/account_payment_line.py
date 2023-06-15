@@ -22,13 +22,22 @@ class PaymentLine(models.Model):
         default=False,
     )
 
-    @api.depends("move_line_id.discount_amount_currency")
+    @api.depends(
+        "move_line_id.amount_residual",
+        "move_line_id.amount_residual_currency",
+        "move_line_id.discount_percentage",
+        "pay_with_discount",
+    )
     def _compute_discount_amount(self):
         for rec in self:
             sign = -1 if rec.order_id.payment_type == "outbound" else 1
+
+            if self.currency_id:
+                amount_without_disc = rec.move_line_id.amount_residual_currency
+            else:
+                amount_without_disc = rec.move_line_id.amount_residual
             rec.discount_amount = sign * (
-                rec.move_line_id.amount_currency
-                - rec.move_line_id.discount_amount_currency
+                amount_without_disc * rec.move_line_id.discount_percentage / 100
             )
 
     @api.depends("order_id.state")
@@ -52,6 +61,18 @@ class PaymentLine(models.Model):
         """
         invoice_line = self.move_line_id
         currency = self.currency_id
+
+        # compute discount amount
+        if self.currency_id:
+            amount_with_discount = invoice_line.amount_residual_currency
+        else:
+            amount_with_discount = invoice_line.amount_residual
+
+        if self.order_id.payment_type == "outbound":
+            amount_with_discount *= -1
+        # apply discount
+        amount_with_discount *= 1 - (invoice_line.discount_percentage / 100)
+
         # When pay_with_discount is changed to False, we do not want to lose
         # the amount if the user changed it manually (related to the
         # _onchange_amount_with_discount which enable or disable the value
@@ -59,13 +80,14 @@ class PaymentLine(models.Model):
         change_base_amount = (
             float_compare(
                 self.amount_currency,
-                invoice_line.discount_amount_currency * -1,
+                amount_with_discount,
                 precision_rounding=currency.rounding,
             )
             == 0
         )
         if self.pay_with_discount:
-            self.amount_currency = invoice_line.discount_amount_currency * -1
+            # apply discount
+            self.amount_currency = amount_with_discount
         elif change_base_amount:
             if self.currency_id:
                 amount_currency = invoice_line.amount_residual_currency
@@ -91,7 +113,7 @@ class PaymentLine(models.Model):
         can_pay_with_discount = (
             float_compare(
                 self.amount_currency,
-                invoice_line.discount_amount_currency * -1,
+                invoice_line.amount_residual * -1,
                 precision_rounding=currency.rounding,
             )
             == 0

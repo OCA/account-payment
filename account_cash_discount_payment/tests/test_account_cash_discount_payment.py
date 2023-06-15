@@ -46,6 +46,7 @@ class TestAccountCashDiscountPaymentCommon(TransactionCase):
                 "company_id": cls.company.id,
                 "name": "Test expense",
                 "code": "TE.1",
+                "reconcile": True,
             }
         )
 
@@ -66,7 +67,9 @@ class TestAccountCashDiscountPaymentCommon(TransactionCase):
             }
         )
 
-    def _create_supplier_invoice(self, ref):
+        cls.precision = cls.env["decimal.precision"].precision_get("Account")
+
+    def _create_supplier_invoice(self, ref, price_unit=100.0):
         invoice = self.env["account.move"].create(
             {
                 "partner_id": self.partner.id,
@@ -83,7 +86,34 @@ class TestAccountCashDiscountPaymentCommon(TransactionCase):
                         {
                             "product_id": self.env.ref("product.product_product_4").id,
                             "quantity": 1.0,
-                            "price_unit": 100.0,
+                            "price_unit": price_unit,
+                            "name": "product that cost 100",
+                            "account_id": self.account_expense.id,
+                        },
+                    )
+                ],
+            }
+        )
+
+        return invoice
+
+    def _create_supplier_refund(self, ref, price_unit=100.0):
+        invoice = self.env["account.move"].create(
+            {
+                "partner_id": self.partner.id,
+                "move_type": "in_refund",
+                "ref": ref,
+                "date": Date.today(),
+                "invoice_date": Date.today(),
+                "payment_mode_id": self.payment_mode_out.id,
+                "invoice_line_ids": [
+                    (
+                        0,
+                        None,
+                        {
+                            "product_id": self.env.ref("product.product_product_4").id,
+                            "quantity": 1.0,
+                            "price_unit": price_unit,
                             "name": "product that cost 100",
                             "account_id": self.account_expense.id,
                         },
@@ -155,5 +185,79 @@ class TestAccountCashDiscountPaymentCommon(TransactionCase):
             payment_line.move_line_id.discount_amount_currency * -1,
         )
 
-        self.assertAlmostEqual(payment_line.discount_amount, 28.75, 2)
-        self.assertAlmostEqual(payment_line.amount_currency, 86.25, 2)
+        self.assertAlmostEqual(payment_line.discount_amount, 28.75, self.precision)
+        self.assertAlmostEqual(payment_line.amount_currency, 86.25, self.precision)
+
+    def test_invoice_payment_refund_and_discount(self):
+        """
+        Try to do a payment when there is a refund
+        The refund should be taken into account on payment
+        And the discount is computed after taking into account the refund
+        """
+        invoice_date = Date.today()
+        invoice = self._create_supplier_invoice("test-ref", 100.0)
+        invoice.action_post()
+
+        refund = self._create_supplier_refund("test-refund", 20.0)
+        refund.action_post()
+
+        (refund + invoice).line_ids.filtered(
+            lambda x: x.account_id.account_type == "liability_payable"
+        ).reconcile()
+
+        payment_order = self.PaymentOrder.create(
+            {"payment_mode_id": self.payment_mode_out.id, "payment_type": "outbound"}
+        )
+
+        payment_line_wizard = self.PaymentLineCreate.with_context(
+            active_model=payment_order._name,
+            active_id=payment_order.id,
+        ).create(
+            {
+                "cash_discount_date": invoice_date,
+                "date_type": "discount_due_date",
+                "target_move": "posted",
+            }
+        )
+        self.assertEqual(payment_line_wizard.order_id, payment_order)
+
+        payment_line_wizard.populate()
+        move_lines = payment_line_wizard.move_line_ids
+        self.assertEqual(len(move_lines), 1)
+
+        payment_line_wizard.create_payment_lines()
+
+        self.assertEqual(len(payment_order.payment_line_ids), 1)
+        payment_line = payment_order.payment_line_ids[0]
+        self.assertTrue(payment_line.pay_with_discount)
+
+        # 115 - 23 (from refund) = 92 * 0.75 (discount) = 69
+        self.assertAlmostEqual(payment_line.amount_currency, 69)
+
+        # Change the amount of the line and trigger the onchange amount method
+        # and verify there is a warning
+        payment_line.amount_currency = 100
+        onchange_res = payment_line._onchange_amount_with_discount()
+        self.assertTrue("warning" in onchange_res)
+        self.assertFalse(payment_line.pay_with_discount)
+
+        # Change it back to use the discount
+        payment_line.pay_with_discount = True
+        payment_line._onchange_pay_with_discount()
+        self.assertAlmostEqual(payment_line.amount_currency, 69)
+
+        # Change pay_with_discount and check if discount amount is coherent
+        # with the invoice
+        payment_line.pay_with_discount = False
+        payment_line._onchange_pay_with_discount()
+        self.assertEqual(payment_line.amount_currency, invoice.amount_residual)
+
+        payment_line.pay_with_discount = True
+        payment_line._onchange_pay_with_discount()
+        self.assertEqual(
+            payment_line.amount_currency,
+            payment_line.move_line_id.amount_residual * 0.75 * -1,  # discount of 25
+        )
+
+        self.assertAlmostEqual(payment_line.discount_amount, 23.00, self.precision)
+        self.assertAlmostEqual(payment_line.amount_currency, 69.00, self.precision)

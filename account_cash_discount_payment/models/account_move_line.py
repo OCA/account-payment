@@ -12,11 +12,22 @@ class AccountMoveLine(models.Model):
         self.ensure_one()
         values = super()._prepare_payment_line_vals(payment_order)
 
-        if self.discount_date and self.discount_amount_currency:
+        if self.discount_date and self.discount_percentage:
             today = fields.Date.today()
             pay_with_discount = self.discount_date >= today
             values["pay_with_discount"] = pay_with_discount
             if pay_with_discount:
+
+                # compute discount amount
+                if self.currency_id:
+                    amount_with_discount = self.amount_residual_currency
+                else:
+                    amount_with_discount = self.amount_residual
+
+                if self.move_id.is_invoice():
+                    amount_with_discount *= -1
                 # apply discount
-                values["amount_currency"] = self.discount_amount_currency * -1
+                amount_with_discount *= 1 - (self.discount_percentage / 100)
+
+                values["amount_currency"] = amount_with_discount
         return values
