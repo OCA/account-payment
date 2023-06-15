@@ -1,10 +1,12 @@
 # Copyright 2020 Ecosoft Co., Ltd (http://ecosoft.co.th/)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
+
 from odoo import _, api, fields, models
 
 
 class AccountPaymentDeduction(models.TransientModel):
     _name = "account.payment.deduction"
+    _inherit = "analytic.mixin"
     _description = "Payment Deduction"
 
     payment_id = fields.Many2one(
@@ -22,31 +24,13 @@ class AccountPaymentDeduction(models.TransientModel):
         domain=[("deprecated", "=", False)],
         required=False,
     )
-    open = fields.Boolean(help="Keep this line open")
+    is_open = fields.Boolean(string="Open", help="Keep this line open")
     amount = fields.Monetary(string="Deduction Amount", required=True)
     name = fields.Char(string="Label", required=True)
-    analytic_account_id = fields.Many2one(
-        comodel_name="account.analytic.account",
-        string="Analytic Account",
-        compute="_compute_analytic_multi_deduction",
-        readonly=False,
-        store=True,
-        index=True,
-    )
-    analytic_tag_ids = fields.Many2many(
-        comodel_name="account.analytic.tag",
-        string="Analytic Tags",
-    )
 
-    @api.depends("payment_id")
-    def _compute_analytic_multi_deduction(self):
-        for rec in self:
-            rec.analytic_account_id = rec.payment_id.deduct_analytic_account_id
-            rec.analytic_tag_ids = rec.payment_id.deduct_analytic_tag_ids
-
-    @api.onchange("open")
+    @api.onchange("is_open")
     def _onchange_open(self):
-        if self.open:
+        if self.is_open:
             self.account_id = False
             self.name = _("Keep open")
         else:
@@ -55,4 +39,4 @@ class AccountPaymentDeduction(models.TransientModel):
     @api.onchange("account_id")
     def _onchange_account_id(self):
         if self.account_id:
-            self.open = False
+            self.is_open = False

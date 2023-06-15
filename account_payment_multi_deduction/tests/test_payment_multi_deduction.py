@@ -1,6 +1,7 @@
 # Copyright 2019 Ecosoft Co., Ltd (http://ecosoft.co.th/)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
-from odoo import fields
+
+from odoo import Command, fields
 from odoo.exceptions import UserError
 from odoo.tests.common import Form, TransactionCase
 
@@ -18,22 +19,14 @@ class TestPaymentMultiDeduction(TransactionCase):
         cls.account_receivable = cls.partner.property_account_receivable_id
         cls.account_revenue = cls.env["account.account"].search(
             [
-                (
-                    "user_type_id",
-                    "=",
-                    cls.env.ref("account.data_account_type_revenue").id,
-                ),
+                ("account_type", "=", "income"),
                 ("company_id", "=", cls.env.company.id),
             ],
             limit=1,
         )
         cls.account_expense = cls.env["account.account"].search(
             [
-                (
-                    "user_type_id",
-                    "=",
-                    cls.env.ref("account.data_account_type_expenses").id,
-                ),
+                ("account_type", "=", "expense"),
                 ("company_id", "=", cls.env.company.id),
             ],
             limit=1,
@@ -48,15 +41,14 @@ class TestPaymentMultiDeduction(TransactionCase):
                 .id,
                 "partner_id": cls.env.ref("base.res_partner_12").id,
                 "invoice_line_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "product_id": cls.env.ref("product.product_product_3").id,
                             "quantity": 1.0,
                             "account_id": cls.account_revenue.id,
                             "name": "[PCSC234] PC Assemble SC234",
                             "price_unit": 450.00,
+                            "tax_ids": False,
                         },
                     )
                 ],
@@ -178,9 +170,7 @@ class TestPaymentMultiDeduction(TransactionCase):
         payment = self.payment_model.browse(payment_id.id)
         self.assertEqual(payment.state, "posted")
 
-        move_lines = self.env["account.move.line"].search(
-            [("payment_id", "=", payment.id)]
-        )
+        move_lines = self.move_line_model.search([("payment_id", "=", payment.id)])
         bank_account = (
             payment.journal_id.company_id.account_journal_payment_debit_account_id
         )
@@ -240,15 +230,13 @@ class TestPaymentMultiDeduction(TransactionCase):
                 f2.name = "Expense 1"
                 f2.amount = 20.0
             with f.deduction_ids.new() as f2:  # Keep Open
-                f2.open = True
+                f2.is_open = True
                 f2.amount = 30.0
         payment_register = f.save()
         payment_id = payment_register._create_payments()
         payment = self.payment_model.browse(payment_id.id)
         self.assertEqual(payment.state, "posted")
-        move_lines = self.env["account.move.line"].search(
-            [("payment_id", "=", payment.id)]
-        )
+        move_lines = self.move_line_model.search([("payment_id", "=", payment.id)])
         bank_account = (
             payment.journal_id.company_id.account_journal_payment_debit_account_id
         )
@@ -271,3 +259,30 @@ class TestPaymentMultiDeduction(TransactionCase):
                 },
             ],
         )
+
+    def test_invoice_payment_fully_paid(self):
+        """Validate 1 invoice and make payment with 1 deduction"""
+        self.cust_invoice.action_post()  # total amount 450.0
+        ctx = {
+            "active_ids": [self.cust_invoice.id],
+            "active_id": self.cust_invoice.id,
+            "active_model": "account.move",
+        }
+        with Form(
+            self.payment_register_model.with_context(**ctx), view=self.register_view_id
+        ) as f:
+            f.amount = 400.0  # Reduce to 400.0, and mark fully paid (multi)
+            f.payment_difference_handling = "reconcile"
+            f.writeoff_account_id = self.account_expense
+        payment_register = f.save()
+        payment_id = payment_register._create_payments()
+        payment = self.payment_model.browse(payment_id.id)
+        self.assertEqual(payment.state, "posted")
+
+        move_lines = self.move_line_model.search(
+            [
+                ("payment_id", "=", payment.id),
+                ("account_id", "=", self.account_expense.id),
+            ]
+        )
+        self.assertEqual(len(move_lines), 1)
