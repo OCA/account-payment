@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-04-18 00:39+0000\n"
-"PO-Revision-Date: 2023-06-08 09:14+0000\n"
+"PO-Revision-Date: 2023-06-16 13:10+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-payment-8-0/"
 "language/it/)\n"
@@ -134,7 +134,7 @@ msgstr "ID"
 #. module: account_payment_return
 #: help:payment.return,message_unread:0
 msgid "If checked new messages require your attention."
-msgstr "If checked new messages require your attention."
+msgstr "Se selezionata, nuovi messaggi richiedono attenzione."
 
 #. module: account_payment_return
 #: selection:payment.return,state:0
