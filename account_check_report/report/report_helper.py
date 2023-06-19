@@ -1,5 +1,4 @@
-# Copyright 2016 Eficent Business and IT Consulting Services S.L.
-#   (http://www.eficent.com)
+# Copyright 2023 ForgeFlow S.L. <contact@forgeflow.com>
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 
 import time
@@ -18,7 +17,7 @@ class ReportCheckPrint(models.AbstractModel):
         return date.strftime(lang.date_format)
 
     def _get_paid_lines(self, payment):
-        rec_lines = payment.move_line_ids.filtered(
+        rec_lines = payment.line_ids.filtered(
             lambda x: x.account_id.reconcile
             and x.account_id == payment.destination_account_id
             and x.partner_id == payment.partner_id
@@ -37,7 +36,7 @@ class ReportCheckPrint(models.AbstractModel):
         # refunds. In order to solve that, we will just include all the move
         # lines associated to the invoices that the user intended to pay,
         # including refunds.
-        invoice_amls = payment.invoice_ids.payment_move_line_ids.filtered(
+        invoice_amls = payment.reconciled_invoice_ids.line_ids.filtered(
             lambda x: x.account_id.reconcile
             and x.account_id == payment.destination_account_id
             and x.partner_id == payment.partner_id
@@ -49,9 +48,9 @@ class ReportCheckPrint(models.AbstractModel):
         amt = line.amount_residual
         if amt < 0.0:
             amt *= -1
-        amt = payment.company_id.currency_id.with_context(
-            date=payment.payment_date
-        ).compute(amt, payment.currency_id)
+        amt = payment.company_id.currency_id.with_context(date=payment.date).compute(
+            amt, payment.currency_id
+        )
         return amt
 
     def _get_paid_amount(self, payment, line):
@@ -69,7 +68,7 @@ class ReportCheckPrint(models.AbstractModel):
             amount *= -1
 
         amount_to_show = payment.company_id.currency_id.with_context(
-            date=payment.payment_date
+            date=payment.date
         ).compute(amount, payment.currency_id)
         if not float_is_zero(
             amount_to_show, precision_rounding=payment.currency_id.rounding
@@ -81,9 +80,9 @@ class ReportCheckPrint(models.AbstractModel):
         amt = line.balance
         if amt < 0.0:
             amt *= -1
-        amt = payment.company_id.currency_id.with_context(
-            date=payment.payment_date
-        ).compute(amt, payment.currency_id)
+        amt = payment.company_id.currency_id.with_context(date=payment.date).compute(
+            amt, payment.currency_id
+        )
         return amt
 
     @api.model
