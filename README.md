@@ -48,6 +48,9 @@ addon | version | maintainers | summary
 [account_payment_show_invoice](account_payment_show_invoice/) | 13.0.1.0.1 |  | Extends the tree view of payments to show the paid invoices related to the payments using the vendor reference by default
 [account_payment_term_extension](account_payment_term_extension/) | 13.0.3.0.6 |  | Adds rounding, months, weeks and multiple payment days properties on payment term lines
 [account_payment_term_partner_holiday](account_payment_term_partner_holiday/) | 13.0.1.2.1 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Account Payment Term Partner Holiday
+[account_payment_term_restriction](account_payment_term_restriction/) | 13.0.1.0.0 |  | Restricts the usage of Payment Terms Journal Entries
+[account_payment_term_restriction_purchase](account_payment_term_restriction_purchase/) | 13.0.1.0.0 |  | Restricts the usage of Payment Terms on POs
+[account_payment_term_restriction_sale](account_payment_term_restriction_sale/) | 13.0.1.0.0 |  | Restricts the usage of Payment Terms on SOs
 [account_payment_term_security](account_payment_term_security/) | 13.0.1.0.0 |  | Payment Term Security
 [partner_aging](partner_aging/) | 13.0.1.0.1 | [![smangukiya](https://github.com/smangukiya.png?size=30px)](https://github.com/smangukiya) | Aging as a view - invoices and credits
 [sale_payment_mgmt](sale_payment_mgmt/) | 13.0.1.0.1 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | List and create customer payments for salesmen
