@@ -1,16 +1,15 @@
 # Copyright 2023 ForgeFlow S.L. (https://www.forgeflow.com)
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 
-import odoo.tests.common as common
 from odoo import exceptions
+from odoo.tests import tagged
 
 from odoo.addons.account_payment_term_restriction.tests import (
     test_account_payment_term_restriction,
 )
 
 
-@common.at_install(False)
-@common.post_install(True)
+@tagged("post_install", "-at_install")
 class TestAccountPaymentTermRestrictionPurchase(
     test_account_payment_term_restriction.TestAccountPaymentTermRestriction
 ):

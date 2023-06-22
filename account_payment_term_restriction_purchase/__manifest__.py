@@ -2,7 +2,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl.html).
 {
     "name": "Payment Term Restriction Purchase",
-    "version": "13.0.1.0.0",
+    "version": "15.0.1.0.0",
     "category": "Accounting & Finance",
     "summary": "Restricts the usage of Payment Terms on POs",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
