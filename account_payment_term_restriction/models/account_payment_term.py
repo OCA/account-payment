@@ -10,7 +10,6 @@ class AccountPaymentTerm(models.Model):
 
     applicable_on = fields.Selection(
         selection="_selection_applicable_on",
-        string="Applicable On",
         default=lambda self: self._get_default_applicable_on(),
     )
 

@@ -3,11 +3,11 @@
 
 import odoo.tests.common as common
 from odoo import exceptions
+from odoo.tests import tagged
 
 
-@common.at_install(False)
-@common.post_install(True)
-class TestAccountPaymentTermRestriction(common.SavepointCase):
+@tagged("post_install", "-at_install")
+class TestAccountPaymentTermRestriction(common.TransactionCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -37,7 +37,7 @@ class TestAccountPaymentTermRestriction(common.SavepointCase):
     @classmethod
     def _create_account_move(cls, name, move_type):
         return cls.acocunt_move_model.create(
-            {"name": name, "type": move_type, "currency_id": cls.currency_id.id}
+            {"name": name, "move_type": move_type, "currency_id": cls.currency_id.id}
         )
 
     def test_01_assign_payment_term_to_account_move(self):

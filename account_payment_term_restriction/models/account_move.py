@@ -30,7 +30,7 @@ class AccountMove(models.Model):
             **MOVE_TYPE_MAP,
             **{
                 type[0]: all_applicable_on
-                for type in self._fields["type"].selection
+                for type in self._fields["move_type"].selection
                 if type[0] not in MOVE_TYPE_MAP.keys()
             },
         }
@@ -40,6 +40,6 @@ class AccountMove(models.Model):
         applicable_on_type_mapping = self._get_payment_term_applicable_on_type_mapping()
         moves = self.filtered(lambda move: move.invoice_payment_term_id)
         for move in moves:
-            applicable_on = applicable_on_type_mapping.get(move.type)
+            applicable_on = applicable_on_type_mapping.get(move.move_type)
             move_pt = move.invoice_payment_term_id
             move_pt.check_not_applicable(applicable_on, record=move)
