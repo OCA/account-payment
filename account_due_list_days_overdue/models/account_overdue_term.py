@@ -51,6 +51,6 @@ class AccountDaysOverdue(models.Model):
             overlap = self.search(date_domain)
             if overlap:
                 raise exceptions.ValidationError(
-                    _("Overdue Term %s overlaps with %s")
-                    % (rec.name, fields.first(overlap).name)
+                    _("Overdue Term %(rec_name)s overlaps with %(overlap_name)s")
+                    % {"rec_name": rec.name, "overlap_name": fields.first(overlap).name}
                 )
