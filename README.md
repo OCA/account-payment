@@ -24,6 +24,7 @@ addon | version | maintainers | summary
 [account_due_list](account_due_list/) | 16.0.1.1.0 |  | List of open credits and debits, with due date
 [account_due_list_payment_mode](account_due_list_payment_mode/) | 16.0.1.0.0 |  | Payment Due List Payment Mode
 [account_payment_promissory_note](account_payment_promissory_note/) | 16.0.1.0.0 |  | Account Payment Promissory Note
+[account_payment_return](account_payment_return/) | 16.0.1.0.0 |  | Manage the return of your payments
 [account_payment_term_extension](account_payment_term_extension/) | 16.0.1.0.0 |  | Adds rounding, months, weeks and multiple payment days properties on payment term lines
 
 [//]: # (end addons)
