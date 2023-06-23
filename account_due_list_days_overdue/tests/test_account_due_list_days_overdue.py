@@ -14,8 +14,6 @@ class TestAccountDueListDaysOverdue(TransactionCase):
     def setUp(self):
         super().setUp()
         self.overdue_term_model = self.env["account.overdue.term"]
-        self.account_user_type = self.env.ref("account.data_account_type_receivable")
-        self.revenue_user_type = self.env.ref("account.data_account_type_revenue")
         self.account = self.env["account.account"]
         self.account_move_model = self.env["account.move"]
         self.account_move_line_model = self.env["account.move.line"]
@@ -65,18 +63,15 @@ class TestAccountDueListDaysOverdue(TransactionCase):
         self.receivable_account = self.account.create(
             {
                 "name": "Recv - Test",
-                "code": "test_recv",
-                "user_type_id": self.account_user_type.id,
-                "company_id": self.company.id,
-                "reconcile": True,
+                "code": "testrecv",
+                "account_type": "asset_receivable",
             }
         )
         self.sales_account = self.account.create(
             {
                 "name": "Local Sales - Test",
-                "code": "test_sales",
-                "user_type_id": self.revenue_user_type.id,
-                "company_id": self.company.id,
+                "code": "testsales",
+                "account_type": "income",
             }
         )
 
