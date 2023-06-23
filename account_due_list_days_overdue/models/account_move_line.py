@@ -65,15 +65,8 @@ class AccountMoveLine(models.Model):
                         line[overdue_term.tech_name] = line.amount_residual
 
     @api.model
-    def fields_view_get(
-        self, view_id=None, view_type="form", toolbar=False, submenu=False
-    ):
-        result = super().fields_view_get(
-            view_id,
-            view_type,
-            toolbar=toolbar,
-            submenu=submenu,
-        )
+    def get_view(self, view_id=None, view_type="form", **options):
+        result = super().get_view(view_id=view_id, view_type=view_type, **options)
 
         doc = etree.XML(result["arch"])
         if view_type == "tree":

@@ -29,7 +29,7 @@
         <field name="name">account.overdue.term.tree</field>
         <field name="model">account.overdue.term</field>
         <field name="arch" type="xml">
-            <tree string="Overdue Term">
+            <tree>
                 <field name="name" />
                 <field name="from_day" />
                 <field name="to_day" />
