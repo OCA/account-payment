@@ -7,8 +7,8 @@ from odoo import api, models
 
 
 class ReportCheckPrint(models.AbstractModel):
-    _name = 'report.account_check_printing_report_dlt103.report_check_dlt103'
-    _inherit = 'report.account_check_printing_report_base.report_check_base'
+    _name = "report.account_check_printing_report_dlt103.report_check_dlt103"
+    _inherit = "report.account_check_printing_report_base.report_check_base"
 
     @api.model
     def get_report_values(self, docids, data):

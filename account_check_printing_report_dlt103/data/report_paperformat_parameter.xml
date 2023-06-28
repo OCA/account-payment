@@ -1,11 +1,15 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8" ?>
 <!-- Copyright 2018 Eficent Business and IT Consulting Services S.L.
      License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl-3.0) -->
 <odoo>
-        <record id="paperformat_dlt103_parameter_disable_smart_shrinking"
-                model="report.paperformat.parameter">
-            <field name="paperformat_id"
-                   ref="account_check_printing_report_dlt103.paperformat_check_dlt103"/>
+        <record
+        id="paperformat_dlt103_parameter_disable_smart_shrinking"
+        model="report.paperformat.parameter"
+    >
+            <field
+            name="paperformat_id"
+            ref="account_check_printing_report_dlt103.paperformat_check_dlt103"
+        />
             <field name="name">--disable-smart-shrinking</field>
         </record>
 </odoo>
