@@ -53,10 +53,11 @@ class AccountMove(models.Model):
         }
 
     def _compute_payments_widget_reconciled_info(self):
-        if not self.returned_payment:
-            return super()._compute_payments_widget_reconciled_info()
-        else:
-            for move in self:
+        moves_to_compute = self.env["account.move"]
+        for move in self:
+            if not move.returned_payment:
+                moves_to_compute |= move
+            else:
                 values_returned = []
                 payments_widget_vals = {
                     "outstanding": False,
@@ -88,6 +89,10 @@ class AccountMove(models.Model):
                     move.invoice_payments_widget = payments_widget_vals
                 else:
                     move.invoice_payments_widget = False
+        if moves_to_compute:
+            return super(
+                AccountMove, moves_to_compute
+            )._compute_payments_widget_reconciled_info()
 
 
 class AccountMoveLine(models.Model):
