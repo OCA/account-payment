@@ -10,8 +10,8 @@ msgstr ""
 "POT-Creation-Date: 2019-01-30 10:56+0000\n"
 "PO-Revision-Date: 2021-10-11 10:34+0000\n"
 "Last-Translator: Matija Krolo <matija.krolo@ecodica.eu>\n"
-"Language-Team: Croatian (http://www.transifex.com/oca/"
-"OCA-account-payment-8-0/language/hr/)\n"
+"Language-Team: Croatian (http://www.transifex.com/oca/OCA-account-"
+"payment-8-0/language/hr/)\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -21,12 +21,14 @@ msgstr ""
 "X-Generator: Weblate 4.3.2\n"
 
 #. module: account_payment_return_import
+#. odoo-python
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "%d transactions had already been imported and were ignored."
 msgstr "%d transakcije su već uvezene i bile su ignorirane."
 
 #. module: account_payment_return_import
+#. odoo-python
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "1 transaction had already been imported and was ignored."
@@ -46,6 +48,7 @@ msgid ""
 msgstr ""
 
 #. module: account_payment_return_import
+#. odoo-python
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "Already imported items"
@@ -63,12 +66,14 @@ msgid "Bank account from the imported file"
 msgstr "Bankovni račun iz uvezene datoteke"
 
 #. module: account_payment_return_import
+#. odoo-python
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "Can not determine journal for import."
 msgstr "Temeljnica za import se ne može odrediti."
 
 #. module: account_payment_return_import
+#. odoo-python
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "Can not find the account number %s."
@@ -80,6 +85,7 @@ msgid "Cancel"
 msgstr "Odustani"
 
 #. module: account_payment_return_import
+#. odoo-python
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid ""
@@ -88,6 +94,7 @@ msgid ""
 msgstr ""
 
 #. module: account_payment_return_import
+#. odoo-python
 #: code:addons/account_payment_return_import/wizard/base_parser.py:0
 #, python-format
 msgid "Couldn't load file data"
@@ -199,18 +206,21 @@ msgid "Raw Import Data"
 msgstr ""
 
 #. module: account_payment_return_import
+#. odoo-python
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "The account of this payment return is linked to another journal."
 msgstr ""
 
 #. module: account_payment_return_import
+#. odoo-python
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "This file doesn't contain any payment return."
 msgstr "Datoteka ne sadrži povrate plaćanja."
 
 #. module: account_payment_return_import
+#. odoo-python
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "This file doesn't contain any transaction."
@@ -222,6 +232,7 @@ msgid "XML RAW data stored for debugging/check purposes"
 msgstr ""
 
 #. module: account_payment_return_import
+#. odoo-python
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "You have already imported this file."

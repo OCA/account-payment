@@ -20,12 +20,14 @@ msgstr ""
 "X-Generator: Weblate 3.1.1\n"
 
 #. module: account_payment_return_import
+#. odoo-python
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "%d transactions had already been imported and were ignored."
 msgstr "%d Geschäftsvorfälle waren bereits importiert und wurden ignoriert."
 
 #. module: account_payment_return_import
+#. odoo-python
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "1 transaction had already been imported and was ignored."
@@ -49,6 +51,7 @@ msgstr ""
 "werden, welches keine automatische Journalerkennung ermöglicht."
 
 #. module: account_payment_return_import
+#. odoo-python
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "Already imported items"
@@ -66,12 +69,14 @@ msgid "Bank account from the imported file"
 msgstr ""
 
 #. module: account_payment_return_import
+#. odoo-python
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "Can not determine journal for import."
 msgstr "Kann das Journal für den Import nicht bestimmen."
 
 #. module: account_payment_return_import
+#. odoo-python
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "Can not find the account number %s."
@@ -83,6 +88,7 @@ msgid "Cancel"
 msgstr "Abbrechen"
 
 #. module: account_payment_return_import
+#. odoo-python
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid ""
@@ -93,6 +99,7 @@ msgstr ""
 "Haben Sie das zugehörige Modul für diesen Dateityp installiert?"
 
 #. module: account_payment_return_import
+#. odoo-python
 #: code:addons/account_payment_return_import/wizard/base_parser.py:0
 #, python-format
 msgid "Couldn't load file data"
@@ -207,18 +214,21 @@ msgid "Raw Import Data"
 msgstr "Import Rohdaten"
 
 #. module: account_payment_return_import
+#. odoo-python
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "The account of this payment return is linked to another journal."
 msgstr "Das Konto dieser Rücklast ist mit einem anderen Journal verknüpft."
 
 #. module: account_payment_return_import
+#. odoo-python
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "This file doesn't contain any payment return."
 msgstr "Diese Datei enthält keine Rücklast."
 
 #. module: account_payment_return_import
+#. odoo-python
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "This file doesn't contain any transaction."
@@ -230,6 +240,7 @@ msgid "XML RAW data stored for debugging/check purposes"
 msgstr "XML-Rohdaten sind zur Fehler-/Prüfung abgespeichert"
 
 #. module: account_payment_return_import
+#. odoo-python
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "You have already imported this file."
