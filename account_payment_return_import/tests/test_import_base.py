@@ -40,14 +40,11 @@ class TestImportBase(TestPaymentReturnFile):
         cls.reason = cls.env["payment.return.reason"].create(
             {"code": "RTEST", "name": "Reason Test"}
         )
-        cls.account_type = cls.env["account.account.type"].create(
-            {"name": "Test", "type": "receivable", "internal_group": "asset"}
-        )
         cls.account = cls.env["account.account"].create(
             {
                 "name": "Test account",
                 "code": "TEST",
-                "user_type_id": cls.account_type.id,
+                "account_type": "asset_receivable",
                 "reconcile": True,
             }
         )
@@ -55,11 +52,7 @@ class TestImportBase(TestPaymentReturnFile):
             {
                 "name": "Test income account",
                 "code": "INCOME",
-                "user_type_id": cls.env["account.account.type"]
-                .create(
-                    {"name": "Test income", "type": "other", "internal_group": "income"}
-                )
-                .id,
+                "account_type": "income_other",
             }
         )
         cls.invoice = cls.env["account.move"].create(
@@ -78,6 +71,7 @@ class TestImportBase(TestPaymentReturnFile):
                             "name": "Test line",
                             "price_unit": 250.9,
                             "quantity": 1,
+                            "tax_ids": False,
                         },
                     )
                 ],
@@ -85,7 +79,7 @@ class TestImportBase(TestPaymentReturnFile):
         )
         cls.invoice.action_post()
         cls.receivable_line = cls.invoice.line_ids.filtered(
-            lambda x: x.account_id.internal_type == "receivable"
+            lambda x: x.account_id.account_type == "asset_receivable"
         )
         # Create payment from invoice
         cls.payment_register_model = cls.env["account.payment.register"]
