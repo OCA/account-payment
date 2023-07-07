@@ -33,7 +33,9 @@
         "web.assets_backend": [
             "account_payment_return/static/src/scss/account_payment_return.scss",
         ],
+        "web.assets_qweb": [
+            "account_payment_return/static/src/xml/account_payment_return.xml",
+        ],
     },
-    "qweb": ["static/src/xml/account_payment_return.xml"],
     "installable": True,
 }
