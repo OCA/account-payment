@@ -197,8 +197,8 @@ class AccountMove(models.Model):
         self.ensure_one()
         line_ids = []
         for line in self.line_ids:
-            account_type = line.account_id.user_type_id.type
-            if account_type not in ("receivable", "payable"):
+            account_type = line.account_id.account_type
+            if account_type not in ("asset_receivable", "liability_payable"):
                 continue
             line_ids.extend([rp.credit_move_id.id for rp in line.matched_credit_ids])
             line_ids.extend([rp.debit_move_id.id for rp in line.matched_debit_ids])

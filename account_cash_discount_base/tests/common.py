@@ -1,10 +1,10 @@
 # Copyright 2018 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import SavepointCase
+from odoo.tests.common import TransactionCase
 
 
-class TestAccountCashDiscountCommon(SavepointCase):
+class TestAccountCashDiscountCommon(TransactionCase):
     @classmethod
     def setUpClass(cls):
         super(TestAccountCashDiscountCommon, cls).setUpClass()
@@ -19,19 +19,14 @@ class TestAccountCashDiscountCommon(SavepointCase):
         cls.company = cls.env.ref("base.main_company")
         cls.partner_agrolait = cls.env.ref("base.res_partner_2")
 
-        cls.recv_account_type = cls.env.ref("account.data_account_type_receivable")
-        cls.pay_account_type = cls.env.ref("account.data_account_type_payable")
-        cls.exp_account_type = cls.env.ref("account.data_account_type_expenses")
-        cls.inc_account_type = cls.env.ref("account.data_account_type_other_income")
-
         cls.recv_account = cls.Account.search(
-            [("user_type_id", "=", cls.recv_account_type.id)], limit=1
+            [("account_type", "=", "asset_receivable")], limit=1
         )
         cls.pay_account = cls.Account.search(
-            [("user_type_id", "=", cls.pay_account_type.id)], limit=1
+            [("account_type", "=", "liability_payable")], limit=1
         )
         cls.exp_account = cls.Account.search(
-            [("user_type_id", "=", cls.exp_account_type.id)], limit=1
+            [("account_type", "=", "expense")], limit=1
         )
 
         cls.tax_10_p = cls.Tax.create(

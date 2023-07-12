@@ -26,7 +26,6 @@ class TestAccountCashDiscountBase(TestAccountCashDiscountCommon):
         with invoice_form.invoice_line_ids.new() as line_form:
             line_form.name = "test"
             line_form.quantity = 1
-            line_form.account_id = self.exp_account
             line_form.price_unit = amount
             line_form.tax_ids.clear()
             line_form.tax_ids.add(self.tax_10_p)
@@ -86,7 +85,7 @@ class TestAccountCashDiscountBase(TestAccountCashDiscountCommon):
         invoice._onchange_discount_delay()
         self.assertFalse(invoice.discount_due_date)
 
-        invoice.invalidate_cache()
+        invoice.invalidate_model()
         invoice.discount_percent = 10
         invoice._onchange_discount_delay()
         self.assertEqual(invoice.discount_due_date, today_10_days_later)
