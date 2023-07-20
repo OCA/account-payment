@@ -9,5 +9,5 @@
     "website": "https://github.com/OCA/account-payment",
     "license": "LGPL-3",
     "depends": ["account"],
-    "data": ["views/account_payment_term.xml"],
+    "data": ["views/account_payment_term_views.xml"],
 }

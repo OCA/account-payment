@@ -43,3 +43,16 @@ class AccountMove(models.Model):
             applicable_on = applicable_on_type_mapping.get(move.type)
             move_pt = move.invoice_payment_term_id
             move_pt.check_not_applicable(applicable_on, record=move)
+
+    @api.onchange("partner_id", "type")
+    def _onchange_type_partner_payment_term(self):
+        result = {}
+        apt_model = self.env["account.payment.term"]
+        applicable_on_type_mapping = self._get_payment_term_applicable_on_type_mapping()
+        if self.type:
+            applicable_on = applicable_on_type_mapping.get(self.type)
+            domain = ("applicable_on", "in", applicable_on)
+            result = apt_model.get_formated_onchange_result(
+                result, self, "invoice_payment_term_id", domain
+            )
+        return result

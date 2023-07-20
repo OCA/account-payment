@@ -68,3 +68,40 @@ class AccountPaymentTerm(models.Model):
             )
             raise ValidationError(_(msg))
         return True
+
+    @api.model
+    def build_filter_out_domain(self, *args):
+        """
+        :return: Given an amount of arguments, it returns a correctly build domain, if
+        wrong data is provided, False is returned.
+        """
+        domain = []
+        for arg in args:
+            if (arg not in ["&", "|"]) and (
+                not isinstance(arg, tuple) or len(arg) != 3
+            ):
+                return False
+            domain.append(arg)
+        return domain
+
+    @api.model
+    def get_formated_onchange_result(self, result, record, field_name, *args):
+        """
+        :return: result, correctly converted as it can have already some values
+        specified
+        Given a result coming from an onchange method, the record where the onchange is
+        being done, and a field name and certain amount of values, which will construct
+        the domain to assign to the result.
+        """
+        domain = self.build_filter_out_domain(*args)
+        if not domain:
+            return result
+        if not result:
+            return {"domain": {field_name: domain}}
+        existing_domain = result.get("domain", {})
+        if existing_domain:
+            existing_domain_ipt = existing_domain.get(field_name, False)
+            if existing_domain_ipt:
+                domain = existing_domain.append(domain)
+        result["domain"][field_name] = domain
+        return result

@@ -89,3 +89,19 @@ class TestAccountPaymentTermRestriction(common.SavepointCase):
         )
         # Check that it works for each case where it'd fail without the context
         invoice.write({"invoice_payment_term_id": self.purchase_payment_term.id})
+
+    def test_03_only_display_allowed_values_on_entries(self):
+        """
+        On a form view of a Journal Entry, the values are restricted based on the
+        values assigned. Test done for an Invoice.
+        """
+        invoice = self._create_account_move("Test Invoice", "out_invoice")
+        expected_domain = [("applicable_on", "in", ["sale", "all"])]
+        field_name = "type"
+        onchange = "1"
+        result = {}
+        invoice._onchange_eval(field_name, onchange, result)
+        returned_domain = result.get("domain", {}).get("invoice_payment_term_id", [])
+        self.assertEqual(
+            returned_domain, expected_domain, "The domains should be the same."
+        )
