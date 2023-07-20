@@ -15,3 +15,14 @@ class PurchaseOrder(models.Model):
         for purchase in self:
             purchase_pt = purchase.payment_term_id
             purchase_pt.check_not_applicable(purchase_applicable_on, record=purchase)
+
+    @api.onchange("partner_id")
+    def onchange_partner_id_payment_term(self):
+        result = {}
+        apt_model = self.env["account.payment.term"]
+        purchase_applicable_on = apt_model.get_purchase_applicable_on()
+        domain = ("applicable_on", "in", purchase_applicable_on)
+        result = apt_model.get_formated_onchange_result(
+            result, self, "payment_term_id", domain
+        )
+        return result
