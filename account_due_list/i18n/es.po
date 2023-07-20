@@ -10,15 +10,16 @@ msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2017-02-11 00:19+0000\n"
-"PO-Revision-Date: 2017-03-03 10:11+0000\n"
-"Last-Translator: Roberto Lizana <robertolizana@trey.es>\n"
+"PO-Revision-Date: 2023-07-20 10:09+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-payment-8-0/"
 "language/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
@@ -113,13 +114,13 @@ msgstr "Plazos de pago"
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_tree
 msgid "Payments"
-msgstr "Efectos"
+msgstr "pagos"
 
 #. module: account_due_list
 #: model:ir.actions.act_window,name:account_due_list.action_invoice_payments
 #: model:ir.ui.menu,name:account_due_list.menu_action_invoice_payments
 msgid "Payments and due list"
-msgstr "Efectos"
+msgstr "pagos y lista de adeudos"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
