@@ -25,54 +25,43 @@ class PaymentLine(models.Model):
         epd_aml_values_list = []
         aml = self.move_line_id
         date_for_discount = self.date
-        # force aml to be eligible for early payment_discount
-        date_for_discount = aml.discount_date
-        if (
-            aml._is_eligible_for_early_payment_discount(currency, date_for_discount)
-            or self.pay_with_discount
-        ):
-            epd_aml_values_list.append(
-                {
-                    "aml": aml,
-                    "amount_currency": -aml.amount_residual_currency,
-                    "balance": aml.company_currency_id.round(
-                        -aml.amount_residual_currency * conversion_rate
-                    ),
-                }
-            )
+        if self.pay_with_discount:
+            # force aml to be eligible for early payment_discount
+            date_for_discount = aml.discount_date
+            if aml._is_eligible_for_early_payment_discount(currency, date_for_discount):
+                epd_aml_values_list.append(
+                    {
+                        "aml": aml,
+                        "amount_currency": -aml.amount_residual_currency,
+                        "balance": aml.company_currency_id.round(
+                            -aml.amount_residual_currency * conversion_rate
+                        ),
+                    }
+                )
 
-            # compute open amount
-            invoice = self.move_line_id.move_id
-            refunds_amount_total = 0
-            sign = -1 if invoice.payment_mode_id.payment_type == "outbound" else 1
-            for invoice_line in invoice.line_ids:
-                # compute discount amount
-                if invoice_line.currency_id:
-                    amount_of_discount = invoice_line.amount_residual_currency
-                else:
-                    amount_of_discount = invoice_line.amount_residual
+                # compute open amount
+                invoice = self.move_line_id.move_id
+                refunds_amount_total = 0
+                sign = -1 if invoice.payment_mode_id.payment_type == "outbound" else 1
+                for invoice_line in invoice.line_ids:
+                    refunds_amount_total += (
+                        invoice_line.discount_amount_currency
+                    ) * sign
 
-                if invoice_line.move_id.is_invoice():
-                    amount_of_discount *= -1
+                open_amount_currency = (
+                    invoice.amount_total - refunds_amount_total
+                ) * sign
 
-                # apply discount
-                amount_of_discount *= 1 - (invoice_line.discount_percentage / 100)
-                refunds_amount_total += amount_of_discount
-
-            open_amount_currency = (
-                invoice.amount_residual - refunds_amount_total
-            ) * sign
-
-            open_balance = self.company_id.currency_id.round(
-                open_amount_currency * conversion_rate
-            )
-            early_payment_values = self.env[
-                "account.move"
-            ]._get_invoice_counterpart_amls_for_early_payment_discount(
-                epd_aml_values_list, open_balance
-            )
-            payment_vals["write_off_line_vals"] = []
-            for aml_values_list in early_payment_values.values():
-                payment_vals["write_off_line_vals"] += aml_values_list
+                open_balance = self.company_id.currency_id.round(
+                    open_amount_currency * conversion_rate
+                )
+                early_payment_values = self.env[
+                    "account.move"
+                ]._get_invoice_counterpart_amls_for_early_payment_discount(
+                    epd_aml_values_list, open_balance
+                )
+                payment_vals["write_off_line_vals"] = []
+                for aml_values_list in early_payment_values.values():
+                    payment_vals["write_off_line_vals"] += aml_values_list
 
         return payment_vals

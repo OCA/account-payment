@@ -95,33 +95,6 @@ class TestAccountCashDiscountWriteOff(TransactionCase):
 
         return invoice
 
-    def _create_supplier_refund(self, ref, price_unit=100.0):
-        invoice = self.env["account.move"].create(
-            {
-                "partner_id": self.partner.id,
-                "move_type": "in_refund",
-                "ref": ref,
-                "date": Date.today(),
-                "invoice_date": Date.today(),
-                "payment_mode_id": self.payment_mode_out.id,
-                "invoice_line_ids": [
-                    (
-                        0,
-                        None,
-                        {
-                            "product_id": self.env.ref("product.product_product_4").id,
-                            "quantity": 1.0,
-                            "price_unit": price_unit,
-                            "name": "product that cost 100",
-                            "account_id": self.account_expense.id,
-                        },
-                    )
-                ],
-            }
-        )
-
-        return invoice
-
     def test_cash_discount_with_write_off(self):
         payment_mode = self.payment_mode_out
         discount_due_date = Date.today()
@@ -169,72 +142,6 @@ class TestAccountCashDiscountWriteOff(TransactionCase):
 
         self.assertEqual(len(write_off_line), 1)
         self.assertEqual(write_off_line.credit, 25)
-
-        write_off_base_line = self.MoveLine.search(
-            [
-                ("id", "!=", write_off_line.id),
-                ("move_id", "=", write_off_line.move_id.id),
-            ]
-        )
-
-        self.assertTrue(write_off_base_line)
-
-        self.assertEqual(invoice.payment_state, "paid")
-
-    def test_cash_discount_with_write_off_with_refund(self):
-        payment_mode = self.payment_mode_out
-        discount_due_date = Date.today()
-
-        invoice = self._create_supplier_invoice("test-ref")
-        invoice.action_post()
-
-        refund = self._create_supplier_refund("test-refund", 20.0)
-        refund.action_post()
-
-        (refund + invoice).line_ids.filtered(
-            lambda x: x.account_id.account_type == "liability_payable"
-        ).reconcile()
-
-        payment_order = self.PaymentOrder.create(
-            {
-                "payment_mode_id": payment_mode.id,
-                "payment_type": "outbound",
-                "journal_id": self.bank_ing_journal.id,
-            }
-        )
-
-        payment_line_wizard = self.PaymentLineCreate.with_context(
-            active_model=payment_order._name,
-            active_id=payment_order.id,
-        ).create(
-            {
-                "cash_discount_date": discount_due_date,
-                "date_type": "discount_due_date",
-            }
-        )
-
-        payment_line_wizard.populate()
-        payment_line_wizard.create_payment_lines()
-
-        payment_order.draft2open()
-
-        payment_line = payment_order.payment_line_ids[0]
-        self.assertTrue(payment_line.pay_with_discount)
-
-        payment_order.open2generated()
-
-        payment_order.generated2uploaded()
-
-        payment_move_lines = payment_order.payment_line_ids.payment_ids.move_id.line_ids
-        write_off_line = self.MoveLine.search(
-            [
-                ("id", "in", payment_move_lines.ids),
-                ("name", "=", "Early Payment Discount"),
-            ]
-        )
-
-        self.assertEqual(len(write_off_line), 1)
-        self.assertEqual(write_off_line.credit, 20)  # 25% of 80  (100-20)
 
         write_off_base_line = self.MoveLine.search(
             [
