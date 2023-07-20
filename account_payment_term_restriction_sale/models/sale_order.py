@@ -13,3 +13,14 @@ class SaleOrder(models.Model):
         for sale in self:
             sale_pt = sale.payment_term_id
             sale_pt.check_not_applicable(sale_applicable_on, record=sale)
+
+    @api.onchange("partner_id")
+    def onchange_partner_id_payment_term(self):
+        result = {}
+        apt_model = self.env["account.payment.term"]
+        sale_applicable_on = apt_model.get_sale_applicable_on()
+        domain = ("applicable_on", "in", sale_applicable_on)
+        result = apt_model.get_formated_onchange_result(
+            result, self, "payment_term_id", domain
+        )
+        return result
