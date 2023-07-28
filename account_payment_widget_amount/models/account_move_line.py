@@ -36,7 +36,11 @@ class AccountMoveLine(models.Model):
             decimal_places = current_am.company_id.currency_id.decimal_places
             new_partials = []
             for partial in partials:
-                if current_am.currency_id.id != current_am.company_currency_id.id:
+                total_paid_payment_cur = total_paid_invoice_curr
+                if (
+                    current_am.currency_id != current_am.company_currency_id
+                    or current_aml.currency_id != current_am.currency_id
+                ):
                     total_paid_payment_cur = current_am.currency_id._convert(
                         total_paid_invoice_curr,
                         current_aml.currency_id,
@@ -64,19 +68,27 @@ class AccountMoveLine(models.Model):
                                 debit_line.date,
                             )
                         )
+                        debit_amount_currency = total_paid_payment_cur
                         if credit_amount_currency > paid_in_credit_amount_currency:
                             to_apply = paid_in_credit_amount_currency
-                            to_apply_company_curr = debit_line.currency_id._convert(
+                            to_apply_company_curr = credit_line.currency_id._convert(
                                 to_apply,
-                                debit_line.company_currency_id,
-                                debit_line.company_id,
-                                debit_line.date,
+                                credit_line.company_currency_id,
+                                credit_line.company_id,
+                                credit_line.date,
                             )
                         else:
                             to_apply = credit_amount_currency
                             to_apply_company_curr = partial_amount
+                            debit_amount_currency = credit_line.currency_id._convert(
+                                debit_amount_currency,
+                                debit_line.currency_id,
+                                credit_line.company_id,
+                                credit_line.date,
+                            )
+                        credit_amount_currency = to_apply
                     else:
-                        paid_in_dedit_amount_currency = (
+                        paid_in_debit_amount_currency = (
                             credit_line.currency_id._convert(
                                 total_paid_payment_cur,
                                 debit_line.currency_id,
@@ -84,22 +96,30 @@ class AccountMoveLine(models.Model):
                                 credit_line.date,
                             )
                         )
-                        if debit_amount_currency > paid_in_dedit_amount_currency:
-                            to_apply = paid_in_dedit_amount_currency
+                        if debit_amount_currency > paid_in_debit_amount_currency:
+                            to_apply = paid_in_debit_amount_currency
                             to_apply_company_curr = debit_line.currency_id._convert(
                                 to_apply,
                                 debit_line.company_currency_id,
                                 debit_line.company_id,
                                 debit_line.date,
                             )
+                            credit_amount_currency = total_paid_payment_cur
                         else:
                             to_apply = debit_amount_currency
                             to_apply_company_curr = partial_amount
+                            credit_amount_currency = debit_line.currency_id._convert(
+                                debit_amount_currency,
+                                credit_line.currency_id,
+                                debit_line.company_id,
+                                debit_line.date,
+                            )
+                        debit_amount_currency = to_apply
                     partial.update(
                         {
                             "amount": to_apply_company_curr,
-                            "debit_amount_currency": to_apply,
-                            "credit_amount_currency": to_apply,
+                            "debit_amount_currency": debit_amount_currency,
+                            "credit_amount_currency": credit_amount_currency,
                         }
                     )
                 # When Payment currency is the same with Invoice currency

@@ -23,7 +23,7 @@ Account Payment Widget Amount
     :target: https://runbot.odoo-community.org/runbot/96/15.0
     :alt: Try me on Runbot
 
-|badge1| |badge2| |badge3| |badge4| |badge5| 
+|badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module adds a popover widget in the invoice form view when there
 are outstanding payments that allows the user to select the amount
@@ -76,6 +76,7 @@ Contributors
 * Adrià Gil Sorribes <adria.gil@eficent.com>
 * Jordi Ballester Alomar <jordi.ballester@eforgeflow.com>
 * Christopher Ormaza <chris.ormaza@eforgeflow.com>
+* Hieu, Vo Minh Bao <hieu.vmb@komit-consulting.com>
 
 Maintainers
 ~~~~~~~~~~~
@@ -96,7 +97,7 @@ promote its widespread use.
 
 Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
-|maintainer-ChrisOForgeFlow| 
+|maintainer-ChrisOForgeFlow|
 
 This module is part of the `OCA/account-payment <https://github.com/OCA/account-payment/tree/15.0/account_payment_widget_amount>`_ project on GitHub.
 
