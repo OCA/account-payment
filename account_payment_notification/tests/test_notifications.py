@@ -20,9 +20,10 @@ class NotificationCase(TestAccountReconciliationCommon):
             {"email": False, "mobile": "+3 333 333 333", "name": "partner_c"}
         )
         # Restricted accountant should be able to do the rest of stuff
+
         self.env.user.groups_id = self.env.ref(
-            "account.group_account_user"
-        ) | self.env.ref("base.group_partner_manager")
+            "account.group_account_manager"
+        ) + self.env.ref("base.group_partner_manager")
         # Create invoices
         self.invoices = (
             self.create_invoice_partner(partner_id=self.partner_a.id)
@@ -56,7 +57,7 @@ class NotificationCase(TestAccountReconciliationCommon):
                 expected_values.append(
                     {
                         "message_type": "sms",
-                        "description": "Dear {}, the debit orde [...]".format(
+                        "description": "Dear {}, the [...]".format(
                             payment.partner_id.name
                         ),
                     }
