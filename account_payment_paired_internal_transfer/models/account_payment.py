@@ -44,6 +44,7 @@ class AccountPayment(models.Model):
                     "move_id": None,
                     "ref": payment.ref,
                     "paired_internal_transfer_payment_id": payment.id,
+                    "date": payment.date,
                 }
             )
             paired_payment.move_id._post(soft=False)
