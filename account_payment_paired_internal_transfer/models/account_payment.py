@@ -42,6 +42,7 @@ class AccountPayment(models.Model):
                     and "inbound"
                     or "outbound",
                     "move_id": None,
+                    "date": payment.date,
                     "ref": payment.ref,
                     "paired_internal_transfer_payment_id": payment.id,
                 }
