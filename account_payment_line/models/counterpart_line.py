@@ -59,7 +59,7 @@ class AccountPaymentCounterLinesAbstract(models.AbstractModel):
             rec.company_id = self.env.company.id
             rec.currency_id = self.env.company.currency_id.id
 
-    amount = fields.Monetary(string="Amount", required=True)
+    amount = fields.Monetary(required=True)
     amount_currency = fields.Monetary(
         string="Amount in Company Currency", compute="_compute_amounts"
     )
