@@ -147,10 +147,8 @@ class AccountPayment(models.Model):
                 )
                 if not write_off_account:
                     raise ValidationError(
-                        _(
-                            "Write-off account is not set for payment %s"
-                            % self.display_name
-                        )
+                        _("Write-off account is not set for payment %(name)s")
+                        % {"name": self.display_name}
                     )
                 # Fully Paid line
                 new_aml_lines.append(

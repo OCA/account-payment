@@ -5,64 +5,43 @@ import json
 
 from odoo import fields
 from odoo.exceptions import ValidationError
-from odoo.tests.common import Form, TransactionCase, tagged
+from odoo.tests.common import Form, tagged
+
+from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
 
 @tagged("post_install", "-at_install")
-class TestAccountPaymentLines(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.test_product = self.env["product.product"].create(
+class TestAccountPaymentLines(AccountTestInvoicingCommon):
+    @classmethod
+    def setUpClass(cls, chart_template_ref=None):
+        super().setUpClass(chart_template_ref=chart_template_ref)
+        cls.test_product = cls.env["product.product"].create(
             {
                 "name": "test_product",
                 "type": "service",
             }
         )
-        self.customer = self.env["res.partner"].create(
+        cls.customer = cls.env["res.partner"].create(
             {
                 "name": "test_customer",
             }
         )
-        self.customer2 = self.env["res.partner"].create(
+        cls.customer2 = cls.env["res.partner"].create(
             {
                 "name": "test_customer",
             }
         )
-        self.supplier = self.env["res.partner"].create(
+        cls.supplier = cls.env["res.partner"].create(
             {
                 "name": "test_vendor",
             }
         )
-        self.supplier2 = self.env["res.partner"].create(
+        cls.supplier2 = cls.env["res.partner"].create(
             {
                 "name": "test_vendor",
             }
         )
-        self.bank_journal = self.env["account.journal"].search(
-            [("type", "=", "bank")], limit=1
-        )
-        self.account_receivable = self.env["account.account"].search(
-            [
-                ("company_id", "=", self.env.company.id),
-                ("user_type_id.type", "=", "receivable"),
-            ],
-            limit=1,
-        )
-        self.account_payable = self.env["account.account"].search(
-            [
-                ("company_id", "=", self.env.company.id),
-                ("user_type_id.type", "=", "payable"),
-            ],
-            limit=1,
-        )
-        self.account_expense = self.env["account.account"].search(
-            [
-                ("company_id", "=", self.env.company.id),
-                ("user_type_id.type", "=", "other"),
-            ],
-            limit=1,
-        )
-        self.currency_2x = self.env["res.currency"].create(
+        cls.currency_2x = cls.env["res.currency"].create(
             {
                 "name": "2X",  # Foreign currency, 2 time
                 "symbol": "X",
@@ -72,13 +51,13 @@ class TestAccountPaymentLines(TransactionCase):
                         0,
                         {
                             "name": fields.Date.today(),
-                            "rate": self.env.company.currency_id.rate * 2,
+                            "rate": cls.env.company.currency_id.rate * 2,
                         },
                     )
                 ],
             }
         )
-        self.payment_terms_split = self.env["account.payment.term"].create(
+        cls.payment_terms_split = cls.env["account.payment.term"].create(
             {
                 "name": "50% Advance End of Following Month",
                 "note": "Payment terms: 30% Advance End of Following Month",
@@ -109,13 +88,19 @@ class TestAccountPaymentLines(TransactionCase):
             }
         )
 
+    def setUp(self):
+        super().setUp()
+        self.bank_journal = self.company_data["default_journal_bank"]
+        self.account_receivable = self.company_data["default_account_receivable"]
+        self.account_payable = self.company_data["default_account_payable"]
+        self.account_expense = self.company_data["default_account_expense"]
+
     def _create_invoice(
         self, move_type, partner, amount, currency=False, payment_term=False
     ):
         move_form = Form(
             self.env["account.move"].with_context(
                 default_move_type=move_type,
-                account_predictive_bills_disable_prediction=True,
             )
         )
         if not currency:
@@ -138,12 +123,13 @@ class TestAccountPaymentLines(TransactionCase):
         ctx = {"active_model": "account.move", "active_ids": [invoice.id]}
         move_reversal = (
             self.env["account.move.reversal"]
-            .with_context(ctx)
+            .with_context(**ctx)
             .create(
                 {
                     "date": fields.Date.today(),
                     "reason": "no reason",
                     "refund_method": refund_method,
+                    "journal_id": invoice.journal_id.id,
                 }
             )
         )
@@ -172,13 +158,6 @@ class TestAccountPaymentLines(TransactionCase):
         payment_form.payment_type = payment_type
         payment_form.partner_type = partner_type
         payment_form.amount = total_amount
-        account = (
-            partner_type == "customer"
-            and self.account_receivable
-            or partner_type == "supplier"
-            and self.account_payable
-        )
-        payment_form.destination_account_id = account
         if writeoff_account:
             payment_form.writeoff_account_id = writeoff_account
         if not currency:
