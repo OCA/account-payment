@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -37,10 +37,10 @@ msgid ""
 "                    <li t-out=\"bill.ref or bill.name\">INV/2022/00002</li>\n"
 "                </t>\n"
 "            </ul>\n"
-"            <p>Total amount: <strong t-field=\"object.amount\"/></p>\n"
+"            <p>Total amount: <strong t-field=\"object.amount\"></strong></p>\n"
 "            <div>\n"
 "                <p>Thanks for your cooperation!</p>\n"
-"                <p>--<br/><t t-out=\"object.company_id.name\"/></p>\n"
+"                <p>--<br><t t-out=\"object.company_id.name\"></t></p>\n"
 "                <p>\n"
 "                    <small>This is an automated notification. Replies will not be monitored nor answered. If you have questions, please contact us by the usual means.</small>\n"
 "                </p>\n"
@@ -82,6 +82,7 @@ msgid "By email if possible, by SMS otherwise"
 msgstr ""
 
 #. module: account_payment_notification
+#. odoo-python
 #: code:addons/account_payment_notification/models/account_payment.py:0
 #, python-format
 msgid "Cannot notify partners of these payments: %s"
