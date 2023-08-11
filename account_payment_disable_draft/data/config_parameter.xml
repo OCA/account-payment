@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="config_param_disable_reset_to_draft" model="ir.config_parameter">
+        <field name="key">account_payment.disable_reset_to_draft</field>
+        <field name="value">True</field>
+    </record>
+</odoo>
