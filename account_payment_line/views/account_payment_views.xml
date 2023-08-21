@@ -19,12 +19,6 @@
                     options="{'no_create': True}"
                     groups="analytic.group_analytic_accounting"
                 />
-                <field
-                    name="analytic_tag_ids"
-                    widget="many2many_tags"
-                    options="{'no_create': True}"
-                    groups="analytic.group_analytic_tags"
-                />
                 <field name="commercial_partner_id" invisible="1" />
                 <field
                     name="move_id"
@@ -39,7 +33,7 @@
                         ('move_id.state', '=', 'posted'),
                         ('move_id.payment_state', '!=', 'paid'),
                         ('amount_residual', '!=', 0.0),
-                        ('account_id.internal_type', 'in', ('receivable', 'payable'))]"
+                        ('account_id.account_type', 'in', ('asset_receivable', 'liability_payable'))]"
                 />
                 <field name="fully_paid" optional="hide" />
                 <field

@@ -63,7 +63,7 @@ class AccountPayment(models.Model):
             lambda x: x.partner_id.commercial_partner_id.id
             == self.partner_id.commercial_partner_id.id
             and x.amount_residual != 0
-            and x.account_id.internal_type in ("receivable", "payable")
+            and x.account_id.account_type in ("asset_receivable", "liability_payable")
         )
 
     def _hook_create_new_line(self, invoice, aml, amount_to_apply):
@@ -108,21 +108,18 @@ class AccountPayment(models.Model):
         if self.line_payment_counterpart_ids and self.state == "draft":
             self.line_payment_counterpart_ids = [(5, 0, 0)]
 
-    def _prepare_move_line_default_vals(self, write_off_line_vals=False):
+    def _prepare_move_line_default_vals(self, write_off_line_vals=None):
         res = super(AccountPayment, self)._prepare_move_line_default_vals(
             write_off_line_vals
         )
-        write_off_amount_currency = (
-            write_off_line_vals and write_off_line_vals.get("amount", 0.0) or 0.0
+        write_off_line_vals_list = write_off_line_vals or []
+        write_off_amount_currency = sum(
+            x["amount_currency"] for x in write_off_line_vals_list
         )
+        write_off_balance = sum(x["balance"] for x in write_off_line_vals_list)
+
         if self.payment_type == "outbound":
             write_off_amount_currency *= -1
-        write_off_balance = self.currency_id._convert(
-            write_off_amount_currency,
-            self.company_id.currency_id,
-            self.company_id,
-            self.date,
-        )
         new_aml_lines = []
         for line in self.line_payment_counterpart_ids.filtered(
             lambda x: not float_is_zero(
@@ -168,10 +165,6 @@ class AccountPayment(models.Model):
                         "currency_id": line.payment_id.currency_id.id,
                         "payment_id": self.id,
                         "payment_line_id": line.id,
-                        "analytic_account_id": line.analytic_account_id.id,
-                        "analytic_tag_ids": line.analytic_tag_ids
-                        and [(6, 0, line.analytic_tag_ids.ids)]
-                        or [],
                     }
                 )
                 # write-off line
@@ -192,10 +185,6 @@ class AccountPayment(models.Model):
                         "currency_id": line.payment_id.currency_id.id,
                         "payment_id": self.id,
                         "payment_line_id": line.id,
-                        "analytic_account_id": line.analytic_account_id.id,
-                        "analytic_tag_ids": line.analytic_tag_ids
-                        and [(6, 0, line.analytic_tag_ids.ids)]
-                        or [],
                     }
                 )
 
@@ -213,10 +202,6 @@ class AccountPayment(models.Model):
                         "currency_id": line.payment_id.currency_id.id,
                         "payment_id": self.id,
                         "payment_line_id": line.id,
-                        "analytic_account_id": line.analytic_account_id.id,
-                        "analytic_tag_ids": line.analytic_tag_ids
-                        and [(6, 0, line.analytic_tag_ids.ids)]
-                        or [],
                     }
                 )
         if len(res) >= 2 and new_aml_lines:
@@ -271,15 +256,6 @@ class AccountPaymentCounterLine(models.Model):
 
     payment_id = fields.Many2one(
         "account.payment", string="Payment", required=False, ondelete="cascade"
-    )
-    analytic_tag_ids = fields.Many2many(
-        comodel_name="account.analytic.tag",
-        relation="counterpart_line_analytic_tag_rel",
-        column1="line_id",
-        column2="tag_id",
-        string="Analytic Tags",
-        domain="['|', ('company_id', '=', False), ('company_id', '=', company_id)]",
-        check_company=True,
     )
 
     def _get_onchange_fields(self):
