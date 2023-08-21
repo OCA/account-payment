@@ -61,6 +61,7 @@ class TestAccountPaymentLines(AccountTestInvoicingCommon):
             {
                 "name": "50% Advance End of Following Month",
                 "note": "Payment terms: 30% Advance End of Following Month",
+                "sequence": 500,
                 "line_ids": [
                     (
                         0,
@@ -68,9 +69,7 @@ class TestAccountPaymentLines(AccountTestInvoicingCommon):
                         {
                             "value": "percent",
                             "value_amount": 50.0,
-                            "sequence": 400,
                             "days": 0,
-                            "option": "day_after_invoice_date",
                         },
                     ),
                     (
@@ -79,9 +78,7 @@ class TestAccountPaymentLines(AccountTestInvoicingCommon):
                         {
                             "value": "balance",
                             "value_amount": 0.0,
-                            "sequence": 500,
                             "days": 31,
-                            "option": "day_following_month",
                         },
                     ),
                 ],
@@ -106,7 +103,6 @@ class TestAccountPaymentLines(AccountTestInvoicingCommon):
         if not currency:
             currency = self.env.company.currency_id
         move_form.invoice_date = fields.Date.today()
-        move_form.date = move_form.invoice_date
         move_form.partner_id = partner
         move_form.currency_id = currency
         if payment_term:
@@ -156,7 +152,6 @@ class TestAccountPaymentLines(AccountTestInvoicingCommon):
         )
         payment_form.partner_id = main_partner
         payment_form.payment_type = payment_type
-        payment_form.partner_type = partner_type
         payment_form.amount = total_amount
         if writeoff_account:
             payment_form.writeoff_account_id = writeoff_account
@@ -434,7 +429,7 @@ class TestAccountPaymentLines(AccountTestInvoicingCommon):
             len(
                 new_invoice3.line_ids.filtered(
                     lambda x: x.partner_id.id == new_invoice3.partner_id.id
-                    and x.account_id.user_type_id.type == "receivable"
+                    and x.account_id.account_type == "asset_receivable"
                 )
             ),
             2,
@@ -546,7 +541,9 @@ class TestAccountPaymentLines(AccountTestInvoicingCommon):
         self.assertFalse(new_payment.is_reconciled)
         self.assertFalse(bool(new_payment.reconciled_invoice_ids))
         new_invoice = self._create_invoice("out_invoice", self.customer, 100.0)
-        payments = json.loads(new_invoice.invoice_outstanding_credits_debits_widget)
+        payments = json.loads(
+            json.dumps(new_invoice.invoice_outstanding_credits_debits_widget)
+        )
         self.assertEqual(sum(p.get("amount") for p in payments.get("content")), 50)
         new_invoice.js_assign_outstanding_line(payments.get("content", [])[0].get("id"))
         self.assertEqual(new_invoice.payment_state, "partial")
@@ -776,7 +773,6 @@ class TestAccountPaymentLines(AccountTestInvoicingCommon):
         )
         payment_form.partner_id = self.customer
         payment_form.payment_type = "inbound"
-        payment_form.partner_type = "customer"
         payment_form.amount = 50.0
         payment = payment_form.save()
         payment.action_propose_payment_distribution()
@@ -837,7 +833,6 @@ class TestAccountPaymentLines(AccountTestInvoicingCommon):
         )
         payment_form.partner_id = self.customer2
         payment_form.payment_type = "outbound"
-        payment_form.partner_type = "customer"
         payment_form.amount = 100.0
         payment = payment_form.save()
         payment.action_propose_payment_distribution()

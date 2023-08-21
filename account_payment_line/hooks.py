@@ -52,8 +52,8 @@ def post_load_hook():  # noqa: C901
                         )
                     )
 
-                if "receivable" in counterpart_lines.mapped(
-                    "account_id.user_type_id.type"
+                if "asset_receivable" in counterpart_lines.mapped(
+                    "account_id.account_type"
                 ):
                     partner_type = "customer"
                 else:
