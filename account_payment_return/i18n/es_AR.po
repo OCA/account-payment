@@ -317,8 +317,8 @@ msgstr "Número de errores"
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return__message_needaction_counter
-msgid "Number of messages which requires an action"
-msgstr "Número de mensajes que requieren una acción"
+msgid "Number of messages requiring action"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return__message_has_error_counter
@@ -534,6 +534,9 @@ msgstr "No puede remover una devolución de pago si su estado es 'Hecho'"
 msgid "You must input all moves references in the payment return."
 msgstr ""
 "Debe ingresar todas las referencias de movimientos en la devolución del pago."
+
+#~ msgid "Number of messages which requires an action"
+#~ msgstr "Número de mensajes que requieren una acción"
 
 #~ msgid "Automatic reconciliation failure"
 #~ msgstr "Reconciliación automática falló"
