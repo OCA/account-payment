@@ -39,6 +39,7 @@ setuptools.setup(
         'odoo14-addon-account_payment_widget_amount',
         'odoo14-addon-partner_aging',
         'odoo14-addon-partner_restrict_payment_acquirer',
+        'odoo14-addon-product_restrict_payment_acquirer',
     ],
     classifiers=[
         'Programming Language :: Python',
