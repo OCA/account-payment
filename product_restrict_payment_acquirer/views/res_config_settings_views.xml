@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.sale</field>
+        <field name="model">res.config.settings</field>
+        <field name="priority">99</field>
+        <field name="inherit_id" ref="base.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@id='sale_ebay']" position="after">
+                <h2>Payment Acquirer Restriction</h2>
+                <div
+                    class='row mt16 o_settings_container iap_portal'
+                    name="payment_acquirer_setting_container"
+                >
+                    <div
+                        class="col-12 col-lg-6 o_setting_box"
+                        id="payment_acquirer_container"
+                    >
+                        <div class='o_setting_right_pane'>
+                            <div class="o_form_label">
+                            Product based acquirer selection
+                            </div>
+                            <div class="text-muted">
+                                Leaving this field empty will disable product based acquirer selection
+                            </div>
+                            <div class="text-muted">
+                                <field
+                                    name="product_acquirer_restriction_mode"
+                                    class="oe_inline"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
