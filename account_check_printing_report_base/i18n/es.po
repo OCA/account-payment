@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2022-10-05 07:47+0000\n"
-"PO-Revision-Date: 2022-10-05 09:51+0200\n"
-"Last-Translator: Carlos <carlos.roca@tecnativa.com>\n"
+"PO-Revision-Date: 2023-09-20 20:29+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_check_printing_report_base
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
@@ -114,16 +114,14 @@ msgstr "Pagos"
 #. module: account_check_printing_report_base
 #: model:ir.model.fields.selection,name:account_check_printing_report_base.selection__account_journal__account_check_printing_layout__account_check_printing_report_base_action_report_check_base
 #: model:ir.model.fields.selection,name:account_check_printing_report_base.selection__res_company__account_check_printing_layout__account_check_printing_report_base_action_report_check_base
-#, fuzzy
 msgid "Print Check Base"
-msgstr "Cheque de pago Base"
+msgstr "Imprimir base de cheques"
 
 #. module: account_check_printing_report_base
 #: model:ir.model.fields.selection,name:account_check_printing_report_base.selection__account_journal__account_check_printing_layout__account_check_printing_report_base_action_report_check_base_a4
 #: model:ir.model.fields.selection,name:account_check_printing_report_base.selection__res_company__account_check_printing_layout__account_check_printing_report_base_action_report_check_base_a4
-#, fuzzy
 msgid "Print Check Base A4"
-msgstr "Cheque de pago Base A4"
+msgstr "Base de impresión A4"
 
 #. module: account_check_printing_report_base
 #: model:ir.model,name:account_check_printing_report_base.model_account_payment_register
