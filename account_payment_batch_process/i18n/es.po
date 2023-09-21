@@ -6,63 +6,65 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2023-09-21 16:38+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_payment_batch_process
 #: code:addons/account_payment_batch_process/wizard/account_payment_register.py:0
 #: code:addons/account_payment_batch_process/wizard/invoice_payment_line.py:0
 #, python-format
 msgid " and %s/100"
-msgstr ""
+msgstr " y %s/100"
 
 #. module: account_payment_batch_process
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__writeoff_account_id
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_payment_adjustment_reason__account_id
 msgid "Account"
-msgstr ""
+msgstr "Cuenta"
 
 #. module: account_payment_batch_process
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__payment_difference_handling
 msgid "Action"
-msgstr ""
+msgstr "Acción"
 
 #. module: account_payment_batch_process
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__amount
 msgid "Amount"
-msgstr ""
+msgstr "Importe"
 
 #. module: account_payment_batch_process
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__check_amount_in_words
 msgid "Amount in Words"
-msgstr ""
+msgstr "Cantidad en palabras"
 
 #. module: account_payment_batch_process
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_account_payment_register__is_auto_fill
 #: model_terms:ir.ui.view,arch_db:account_payment_batch_process.view_account_payment_from_invoices_batch_inherited
 msgid "Auto-Fill Pay Amount"
-msgstr ""
+msgstr "Autocompletar importe de pago"
 
 #. module: account_payment_batch_process
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__balance
 msgid "Balance Amount"
-msgstr ""
+msgstr "Importe del saldo"
 
 #. module: account_payment_batch_process
 #: code:addons/account_payment_batch_process/wizard/invoice_payment_line.py:0
 #, python-format
 msgid "Balance is unchangeable!"
-msgstr ""
+msgstr "¡El balance es incambiable!"
 
 #. module: account_payment_batch_process
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_account_payment_register__cheque_amount
 msgid "Batch Payment Total"
-msgstr ""
+msgstr "Total del pago por lotes"
 
 #. module: account_payment_batch_process
 #: code:addons/account_payment_batch_process/wizard/account_payment_register.py:0
@@ -70,161 +72,161 @@ msgstr ""
 #: model:ir.actions.act_window,name:account_payment_batch_process.action_invoice_invoice_batch_process
 #, python-format
 msgid "Batch Payments"
-msgstr ""
+msgstr "Pagos por lote"
 
 #. module: account_payment_batch_process
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_payment_adjustment_reason__code
 msgid "Code"
-msgstr ""
+msgstr "Código"
 
 #. module: account_payment_batch_process
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__create_uid
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_payment_adjustment_reason__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: account_payment_batch_process
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__create_date
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_payment_adjustment_reason__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado el"
 
 #. module: account_payment_batch_process
 #: model_terms:ir.ui.view,arch_db:account_payment_batch_process.view_account_payment_from_invoices_batch_inherited
 msgid "Customer Invoices Being Paid"
-msgstr ""
+msgstr "Facturas de clientes pagadas"
 
 #. module: account_payment_batch_process
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__payment_difference
 msgid "Difference Amount"
-msgstr ""
+msgstr "Importe de la diferencia"
 
 #. module: account_payment_batch_process
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__display_name
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_payment_adjustment_reason__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Mostrar Nombre"
 
 #. module: account_payment_batch_process
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__id
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_payment_adjustment_reason__id
 msgid "ID"
-msgstr ""
+msgstr "ID (identificación)"
 
 #. module: account_payment_batch_process
 #: code:addons/account_payment_batch_process/wizard/account_payment_register.py:0
 #, python-format
 msgid ""
 "In order to pay multiple bills at once, they must use the same currency."
-msgstr ""
+msgstr "Para pagar varias facturas a la vez, deben utilizar la misma divisa."
 
 #. module: account_payment_batch_process
 #: model:ir.model,name:account_payment_batch_process.model_invoice_payment_line
 msgid "Invoice Payment Line"
-msgstr ""
+msgstr "Línea de pago de facturas"
 
 #. module: account_payment_batch_process
 #: code:addons/account_payment_batch_process/wizard/invoice_payment_line.py:0
 #, python-format
 msgid "Invoice is unchangeable!"
-msgstr ""
+msgstr "¡La factura no se puede cambiar!"
 
 #. module: account_payment_batch_process
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_account_payment_register__is_customer
 msgid "Is Customer?"
-msgstr ""
+msgstr "¿Es cliente?"
 
 #. module: account_payment_batch_process
 #: model:ir.model.fields.selection,name:account_payment_batch_process.selection__invoice_payment_line__payment_difference_handling__open
 msgid "Keep open"
-msgstr ""
+msgstr "Mantener abierto"
 
 #. module: account_payment_batch_process
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line____last_update
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_payment_adjustment_reason____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación el"
 
 #. module: account_payment_batch_process
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__write_uid
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_payment_adjustment_reason__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última Actualzacíón por"
 
 #. module: account_payment_batch_process
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__write_date
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_payment_adjustment_reason__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última Actualización el"
 
 #. module: account_payment_batch_process
 #: model_terms:ir.ui.view,arch_db:account_payment_batch_process.view_account_payment_from_invoices_batch_inherited
 msgid "Make Payments"
-msgstr ""
+msgstr "Realizar pagos"
 
 #. module: account_payment_batch_process
 #: model:ir.model.fields.selection,name:account_payment_batch_process.selection__invoice_payment_line__payment_difference_handling__reconcile
 msgid "Mark invoice as fully paid"
-msgstr ""
+msgstr "Marcar factura como totalmente pagada"
 
 #. module: account_payment_batch_process
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__note
 msgid "Note"
-msgstr ""
+msgstr "Nota"
 
 #. module: account_payment_batch_process
 #: code:addons/account_payment_batch_process/wizard/invoice_payment_line.py:0
 #, python-format
 msgid "Partner is unchangeable!"
-msgstr ""
+msgstr "¡El socio es inmutable!"
 
 #. module: account_payment_batch_process
 #: model:ir.model,name:account_payment_batch_process.model_payment_adjustment_reason
 msgid "Payment Adjustment Reason"
-msgstr ""
+msgstr "Motivo del ajuste de pago"
 
 #. module: account_payment_batch_process
 #: code:addons/account_payment_batch_process/wizard/account_payment_register.py:0
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_account_payment_register__invoice_payments
 #, python-format
 msgid "Payments"
-msgstr ""
+msgstr "Pagos"
 
 #. module: account_payment_batch_process
 #: model_terms:ir.ui.view,arch_db:account_payment_batch_process.view_account_payment_from_invoices_batch_inherited
 msgid "Post Difference In"
-msgstr ""
+msgstr "Publicar diferencia en"
 
 #. module: account_payment_batch_process
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_payment_adjustment_reason__reason
 msgid "Reason"
-msgstr ""
+msgstr "Razón"
 
 #. module: account_payment_batch_process
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__reason_code
 msgid "Reason Code"
-msgstr ""
+msgstr "Código del motivo"
 
 #. module: account_payment_batch_process
 #: model:ir.model,name:account_payment_batch_process.model_account_payment_register
 msgid "Register Payment"
-msgstr ""
+msgstr "Registrar Pago"
 
 #. module: account_payment_batch_process
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__invoice_id
 msgid "Supplier Invoice"
-msgstr ""
+msgstr "Factura de proveedor"
 
 #. module: account_payment_batch_process
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__partner_id
 msgid "Supplier Name"
-msgstr ""
+msgstr "Nombre del proveedor"
 
 #. module: account_payment_batch_process
 #: code:addons/account_payment_batch_process/wizard/account_payment_register.py:0
 #, python-format
 msgid "The expected model for this action is 'account.move', not '%s'."
-msgstr ""
+msgstr "El modelo esperado para esta acción es 'account.move', no '%s'."
 
 #. module: account_payment_batch_process
 #: code:addons/account_payment_batch_process/wizard/account_payment_register.py:0
@@ -232,28 +234,30 @@ msgstr ""
 msgid ""
 "The pay amount of the invoices and the batch payment total do not match."
 msgstr ""
+"El importe del pago de las facturas y el total del pago por lotes no "
+"coinciden."
 
 #. module: account_payment_batch_process
 #: code:addons/account_payment_batch_process/wizard/account_payment_register.py:0
 #, python-format
 msgid ""
 "The wizard is executed without active_model or active_ids in the context."
-msgstr ""
+msgstr "El asistente se ejecuta sin active_model o active_ids en el contexto."
 
 #. module: account_payment_batch_process
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_account_payment_register__total_amount
 msgid "Total Invoices:"
-msgstr ""
+msgstr "Total de facturas:"
 
 #. module: account_payment_batch_process
 #: model_terms:ir.ui.view,arch_db:account_payment_batch_process.view_account_payment_from_invoices_batch_inherited
 msgid "Vendor Bills to Pay"
-msgstr ""
+msgstr "Facturas de proveedores por pagar"
 
 #. module: account_payment_batch_process
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__wizard_id
 msgid "Wizard"
-msgstr ""
+msgstr "Asistente"
 
 #. module: account_payment_batch_process
 #: code:addons/account_payment_batch_process/wizard/account_payment_register.py:0
@@ -262,12 +266,14 @@ msgid ""
 "You can only register a batch payment for invoices with the same payment "
 "mode."
 msgstr ""
+"Sólo puede registrar un pago por lotes para facturas con el mismo modo de "
+"pago."
 
 #. module: account_payment_batch_process
 #: code:addons/account_payment_batch_process/wizard/account_payment_register.py:0
 #, python-format
 msgid "You can only register payments for open invoices."
-msgstr ""
+msgstr "Sólo puedes registrar pagos para facturas abiertas."
 
 #. module: account_payment_batch_process
 #: code:addons/account_payment_batch_process/wizard/account_payment_register.py:0
@@ -275,3 +281,5 @@ msgstr ""
 #, python-format
 msgid "You cannot mix customer invoices and vendor bills in a single payment."
 msgstr ""
+"No se pueden mezclar facturas de clientes y facturas de proveedores en un "
+"solo pago."
