@@ -57,6 +57,11 @@ msgstr "Gruppierung..."
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Incoming"
+msgstr ""
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
 msgid "Invoice"
 msgstr "Rechnung"
@@ -79,6 +84,11 @@ msgstr "Journal-Posten"
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Not Full Reconciled"
+msgstr ""
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Outgoing"
 msgstr ""
 
 #. module: account_due_list
@@ -110,11 +120,6 @@ msgstr "Kreditor"
 #: model:ir.model.fields,field_description:account_due_list.field_account_move_line__payment_term_id
 msgid "Payment Terms"
 msgstr "Zahlungsbedingungen"
-
-#. module: account_due_list
-#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
-msgid "Payments"
-msgstr "Zahlungen"
 
 #. module: account_due_list
 #: model:ir.actions.act_window,name:account_due_list.action_invoice_payments
@@ -199,6 +204,9 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Unreconciled"
 msgstr "Offene Posten"
+
+#~ msgid "Payments"
+#~ msgstr "Zahlungen"
 
 #~ msgid "Due Date"
 #~ msgstr "Fälligkeitsdatum"

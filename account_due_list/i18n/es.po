@@ -56,6 +56,11 @@ msgstr "Agrupar por"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Incoming"
+msgstr "A recibir"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
 msgid "Invoice"
 msgstr "Factura"
@@ -79,11 +84,6 @@ msgstr "Apunte contable"
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Not Full Reconciled"
 msgstr "No conciliado completamente"
-
-#. module: account_due_list
-#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
-msgid "Incoming"
-msgstr "A recibir"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -119,11 +119,6 @@ msgstr "Pagos"
 #: model:ir.model.fields,field_description:account_due_list.field_account_move_line__payment_term_id
 msgid "Payment Terms"
 msgstr "Plazos de pago"
-
-#. module: account_due_list
-#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
-msgid "Payments"
-msgstr "Pagos"
 
 #. module: account_due_list
 #: model:ir.actions.act_window,name:account_due_list.action_invoice_payments
@@ -207,3 +202,6 @@ msgstr "Sin asentar"
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Unreconciled"
 msgstr "No conciliado"
+
+#~ msgid "Payments"
+#~ msgstr "Pagos"
