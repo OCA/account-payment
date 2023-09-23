@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2023-09-23 19:36+0000\n"
+"Last-Translator: Gil Arasa Verge <gilarasaverge@gmail.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_payment_widget_amount
 #. openerp-web
@@ -25,7 +27,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_payment_widget_amount.field_account_move__display_name
 #: model:ir.model.fields,field_description:account_payment_widget_amount.field_account_move_line__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre a mostrar"
 
 #. module: account_payment_widget_amount
 #: model:ir.model.fields,field_description:account_payment_widget_amount.field_account_move__id
@@ -54,4 +56,4 @@ msgstr ""
 #: code:addons/account_payment_widget_amount/static/src/xml/account_payment.xml:0
 #, python-format
 msgid "Paid Amount:"
-msgstr ""
+msgstr "Cantidad pagada:"
