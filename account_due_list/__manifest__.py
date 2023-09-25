@@ -2,7 +2,7 @@
 
 {
     "name": "Payments Due list",
-    "version": "16.0.1.1.0",
+    "version": "16.0.1.2.0",
     "category": "Generic Modules/Payment",
     "development_status": "Production/Stable",
     "author": "Odoo Community Association (OCA)",
