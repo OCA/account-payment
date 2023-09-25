@@ -100,6 +100,8 @@
                     domain="[('account_id.account_type','=','liability_payable')]"
                     name="payable"
                 />
+                <filter string="Incoming" domain="[('debit','>',0)]" name="incoming" />
+                <filter string="Outgoing" domain="[('credit','>',0)]" name="outgoing" />
                 <separator />
                 <filter
                     name="unreconciled"
@@ -236,7 +238,7 @@
         <field name="search_view_id" ref="view_payments_filter" />
         <field
             name="domain"
-        >[('account_id.account_type', 'in', ['asset_receivable', 'liability_payable']), ('balance', '!=', 0)]</field>
+        >[('account_id.reconcile', '=', True), ('balance', '!=', 0)]</field>
     </record>
     <menuitem
         name="Payments and due list"
