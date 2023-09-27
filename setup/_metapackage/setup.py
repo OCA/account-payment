@@ -29,6 +29,7 @@ setuptools.setup(
         'odoo14-addon-account_payment_line_import',
         'odoo14-addon-account_payment_multi_deduction',
         'odoo14-addon-account_payment_paired_internal_transfer',
+        'odoo14-addon-account_payment_register_keep_amount',
         'odoo14-addon-account_payment_return',
         'odoo14-addon-account_payment_return_import',
         'odoo14-addon-account_payment_return_import_iso20022',
