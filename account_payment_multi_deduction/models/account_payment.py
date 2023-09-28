@@ -37,8 +37,18 @@ class AccountPayment(models.Model):
         self.ensure_one()
         check_keys = self._get_check_key_list()
         update_keys = self._get_update_key_list()
+        writeoff_lines = self._seek_for_lines()[2]
         # payment difference
         if isinstance(write_off_line_vals, dict) and write_off_line_vals:
+            # update writeoff when edit value in payment
+            if not write_off_line_vals.get("analytic_account_id", False):
+                write_off_line_vals[
+                    "analytic_account_id"
+                ] = writeoff_lines.analytic_account_id.id
+            if not write_off_line_vals.get("analytic_tag_ids", False):
+                write_off_line_vals[
+                    "analytic_tag_ids"
+                ] = writeoff_lines.analytic_tag_ids.ids
             line_vals_list = super()._prepare_move_line_default_vals(
                 write_off_line_vals
             )
@@ -86,3 +96,11 @@ class AccountPayment(models.Model):
             AccountPayment,
             self.with_context(**ctx),
         )._synchronize_from_moves(changed_fields)
+
+    def write(self, vals):
+        """Skip move synchronization when
+        edit payment with multi deduction
+        """
+        if any(rec.is_multi_deduction for rec in self):
+            self = self.with_context(skip_account_move_synchronization=True)
+        return super().write(vals)
