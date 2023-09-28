@@ -86,3 +86,11 @@ class AccountPayment(models.Model):
             AccountPayment,
             self.with_context(**ctx),
         )._synchronize_from_moves(changed_fields)
+
+    def write(self, vals):
+        """Skip move synchronization when
+        edit payment with multi deduction
+        """
+        if any(rec.is_multi_deduction for rec in self):
+            self = self.with_context(skip_account_move_synchronization=True)
+        return super().write(vals)
