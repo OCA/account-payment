@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_payment_widget_amount
+# 	* account_payment_widget_amount
 #
 msgid ""
 msgstr ""
@@ -18,10 +18,15 @@ msgstr ""
 
 #. module: account_payment_widget_amount
 #. openerp-web
-#: code:addons/account_payment_widget_amount/static/src/xml/account_payment.xml:19
+#: code:addons/account_payment_widget_amount/static/src/xml/account_payment.xml:0
 #, python-format
 msgid "Apply"
 msgstr "Aplicar"
+
+#. module: account_payment_widget_amount
+#: model:ir.model,name:account_payment_widget_amount.model_account_move
+msgid "Journal Entry"
+msgstr ""
 
 #. module: account_payment_widget_amount
 #: model:ir.model,name:account_payment_widget_amount.model_account_move_line
@@ -30,13 +35,11 @@ msgstr "Item de Diário"
 
 #. module: account_payment_widget_amount
 #. openerp-web
-#: code:addons/account_payment_widget_amount/static/src/xml/account_payment.xml:9
+#: code:addons/account_payment_widget_amount/static/src/xml/account_payment.xml:0
 #, python-format
 msgid "Paid Amount:"
 msgstr "Montante Pago:"
 
-#. module: account_payment_widget_amount
-#: code:addons/account_payment_widget_amount/models/account_move_line.py:25
 #, python-format
-msgid "The specified amount has to be strictly positive"
-msgstr "O valor especificado tem que ser estritamente positivo"
+#~ msgid "The specified amount has to be strictly positive"
+#~ msgstr "O valor especificado tem que ser estritamente positivo"
