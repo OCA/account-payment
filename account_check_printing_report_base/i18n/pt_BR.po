@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_check_printing_report_base
+# 	* account_check_printing_report_base
 #
 msgid ""
 msgstr ""
@@ -82,7 +82,9 @@ msgstr ""
 #. module: account_check_printing_report_base
 #: model:ir.model.fields,help:account_check_printing_report_base.field_account_bank_statement_import_journal_creation__check_print_auto
 #: model:ir.model.fields,help:account_check_printing_report_base.field_account_journal__check_print_auto
-msgid "Default check for the company is printed automatically when invoice payment is validated"
+msgid ""
+"Default check for the company is printed automatically when invoice payment "
+"is validated"
 msgstr ""
 
 #. module: account_check_printing_report_base

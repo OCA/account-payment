@@ -201,7 +201,8 @@ msgstr "Esperando su acuerdo, saludos."
 #. module: account_check_printing_report_base
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4
 msgid "We attach the list of invoices paid with this check with amount of"
-msgstr "Adjuntamos el listado de facturas pagadas con este cheque con precio de"
+msgstr ""
+"Adjuntamos el listado de facturas pagadas con este cheque con precio de"
 
 #. module: account_check_printing_report_base
 #: model:ir.model,name:account_check_printing_report_base.model_report_account_check_printing_report_base_promissory_footer_a4
