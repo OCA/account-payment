@@ -46,13 +46,13 @@ msgstr "Creado e"
 
 #. module: account_payment_term_partner_holiday
 #: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__day_from
-msgid "Day from"
-msgstr "Día desde"
+msgid "Day From"
+msgstr ""
 
 #. module: account_payment_term_partner_holiday
 #: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__day_to
-msgid "Day to"
-msgstr "Día hasta"
+msgid "Day To"
+msgstr ""
 
 #. module: account_payment_term_partner_holiday
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
@@ -84,8 +84,8 @@ msgstr "Enero"
 
 #. module: account_payment_term_partner_holiday
 #: model:ir.model,name:account_payment_term_partner_holiday.model_account_move
-msgid "Journal Entries"
-msgstr "Entradas diarias"
+msgid "Journal Entry"
+msgstr ""
 
 #. module: account_payment_term_partner_holiday
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
@@ -128,18 +128,18 @@ msgstr "Mayo"
 
 #. module: account_payment_term_partner_holiday
 #: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__month_from
-msgid "Month from"
-msgstr "Mes desde"
+msgid "Month From"
+msgstr ""
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__month_to
+msgid "Month To"
+msgstr ""
 
 #. module: account_payment_term_partner_holiday
 #: model:ir.model.constraint,message:account_payment_term_partner_holiday.constraint_res_partner_holiday_month_consistency
 msgid "Month from should be higher than month from"
 msgstr "El mes desde debe ser mayor que el mes desde"
-
-#. module: account_payment_term_partner_holiday
-#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__month_to
-msgid "Month to"
-msgstr "Mes hasta"
 
 #. module: account_payment_term_partner_holiday
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
@@ -186,6 +186,21 @@ msgstr "Septiembre"
 msgid "You can't set the ending holidays period before the beginning."
 msgstr ""
 "No puede establecer el final del período de vacaciones antes del comienzo."
+
+#~ msgid "Day from"
+#~ msgstr "Día desde"
+
+#~ msgid "Day to"
+#~ msgstr "Día hasta"
+
+#~ msgid "Journal Entries"
+#~ msgstr "Entradas diarias"
+
+#~ msgid "Month from"
+#~ msgstr "Mes desde"
+
+#~ msgid "Month to"
+#~ msgstr "Mes hasta"
 
 #~ msgid "Invoice"
 #~ msgstr "Factura"
