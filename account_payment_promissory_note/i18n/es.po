@@ -34,26 +34,11 @@ msgstr ""
 "                </span>"
 
 #. module: account_payment_promissory_note
-#: model:ir.model.fields,field_description:account_payment_promissory_note.field_account_promissory_note_mixin__display_name
-msgid "Display Name"
-msgstr "Mostrar Nombre"
-
-#. module: account_payment_promissory_note
 #: model:ir.model.fields,field_description:account_payment_promissory_note.field_account_payment__date_due
 #: model:ir.model.fields,field_description:account_payment_promissory_note.field_account_payment_register__date_due
 #: model:ir.model.fields,field_description:account_payment_promissory_note.field_account_promissory_note_mixin__date_due
 msgid "Due Date"
 msgstr "Fecha de Vencimiento"
-
-#. module: account_payment_promissory_note
-#: model:ir.model.fields,field_description:account_payment_promissory_note.field_account_promissory_note_mixin__id
-msgid "ID"
-msgstr "ID"
-
-#. module: account_payment_promissory_note
-#: model:ir.model.fields,field_description:account_payment_promissory_note.field_account_promissory_note_mixin____last_update
-msgid "Last Modified on"
-msgstr "Última modificación en"
 
 #. module: account_payment_promissory_note
 #: model:ir.model,name:account_payment_promissory_note.model_account_payment
@@ -77,6 +62,15 @@ msgstr "Mezcla de pagarés"
 #: model:ir.model,name:account_payment_promissory_note.model_account_payment_register
 msgid "Register Payment"
 msgstr "Registrar pago"
+
+#~ msgid "Display Name"
+#~ msgstr "Mostrar Nombre"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última modificación en"
 
 #~ msgid ""
 #~ "Contains the logic shared between models which allows to register payments"
