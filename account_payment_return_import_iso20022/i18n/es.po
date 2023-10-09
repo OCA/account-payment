@@ -424,6 +424,12 @@ msgid "Debtor or Ultimate Debtor identification code missing or invalid"
 msgstr ""
 
 #. module: account_payment_return_import_iso20022
+#: model:ir.model.fields,field_description:account_payment_return_import_iso20022.field_payment_return_import__display_name
+#: model:ir.model.fields,field_description:account_payment_return_import_iso20022.field_payment_return_line__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_SL14
 msgid ""
 "Due to Maximum allowed Direct Debit Transaction amount service offered by "
@@ -518,6 +524,12 @@ msgstr ""
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DT04
 msgid "Future date not supported"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:ir.model.fields,field_description:account_payment_return_import_iso20022.field_payment_return_import__id
+#: model:ir.model.fields,field_description:account_payment_return_import_iso20022.field_payment_return_line__id
+msgid "ID"
 msgstr ""
 
 #. module: account_payment_return_import_iso20022
@@ -616,6 +628,12 @@ msgstr ""
 msgid ""
 "Invalid or missing identification required within a particular country or "
 "payment type."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:ir.model.fields,field_description:account_payment_return_import_iso20022.field_payment_return_import____last_update
+#: model:ir.model.fields,field_description:account_payment_return_import_iso20022.field_payment_return_line____last_update
+msgid "Last Modified on"
 msgstr ""
 
 #. module: account_payment_return_import_iso20022
