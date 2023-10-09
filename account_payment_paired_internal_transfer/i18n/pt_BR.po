@@ -75,8 +75,8 @@ msgstr ""
 #. module: account_payment_paired_internal_transfer
 #: model:ir.model.fields,help:account_payment_paired_internal_transfer.field_account_payment__paired_internal_transfer_payment_id
 msgid ""
-"When an internal transfer is posted, a paired payment is created. They cross"
-" referenced trough this field"
+"When an internal transfer is posted, a paired payment is created. They cross "
+"referenced trough this field"
 msgstr ""
 "Quando uma transferência interna é postada, um pagamento emparelhado é "
 "criado. Eles são referenciados por meio deste campo"
