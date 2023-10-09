@@ -11,8 +11,8 @@ msgstr ""
 "POT-Creation-Date: 2016-07-29 12:02+0000\n"
 "PO-Revision-Date: 2023-03-18 13:22+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
-"Language-Team: Slovenian (http://www.transifex.com/oca/"
-"OCA-account-payment-8-0/language/sl/)\n"
+"Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-"
+"payment-8-0/language/sl/)\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -42,6 +42,11 @@ msgid "Date invoice"
 msgstr "Datum računa"
 
 #. module: account_due_list
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "From invoices"
 msgstr "Iz računov"
@@ -55,6 +60,11 @@ msgstr "Polno usklajeno"
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Group By"
 msgstr "Združi po"
+
+#. module: account_due_list
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line__id
+msgid "ID"
+msgstr ""
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -76,6 +86,11 @@ msgstr "Obračunski prodajalec"
 #: model:ir.model,name:account_due_list.model_account_move_line
 msgid "Journal Item"
 msgstr "Dnevniška postavka"
+
+#. module: account_due_list
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line____last_update
+msgid "Last Modified on"
+msgstr ""
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
