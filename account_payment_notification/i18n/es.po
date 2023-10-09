@@ -183,6 +183,12 @@ msgstr ""
 #. module: account_payment_notification
 #: model:ir.model.fields,help:account_payment_notification.field_res_company__account_payment_notification_required
 #: model:ir.model.fields,help:account_payment_notification.field_res_config_settings__account_payment_notification_required
+msgid ""
+"Enable to forbid marking payments as sent if they cannot be notified using "
+"the chosen method(s)."
+msgstr ""
+
+#. module: account_payment_notification
 #: model_terms:ir.ui.view,arch_db:account_payment_notification.res_config_settings_view_form
 msgid ""
 "Enable to forbid marking payments as sent if they cannot be notified using "
@@ -237,11 +243,6 @@ msgid "Notify automatically"
 msgstr "Notificar automáticamente"
 
 #. module: account_payment_notification
-#: model:ir.model.fields.selection,name:account_payment_notification.selection__res_company__account_payment_notification_automatic__auto_required
-msgid "Notify automatically, require a notification method"
-msgstr "Notificar automáticamente, exigiendo un método de notificación"
-
-#. module: account_payment_notification
 #: model:ir.model.fields.selection,name:account_payment_notification.selection__res_company__account_payment_notification_automatic__manual
 msgid "Notify manually"
 msgstr "Notificar manualmente"
@@ -283,3 +284,6 @@ msgid ""
 msgstr ""
 "{{ object.company_id.name }} Notificación de pago (Ref {{ object.name or 'n/"
 "a' }})"
+
+#~ msgid "Notify automatically, require a notification method"
+#~ msgstr "Notificar automáticamente, exigiendo un método de notificación"
