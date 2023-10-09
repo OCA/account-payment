@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_due_list_payment_mode
+# 	* account_due_list_payment_mode
 #
 msgid ""
 msgstr ""
