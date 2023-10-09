@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_check_printing_report_dlt103
+# 	* account_check_printing_report_dlt103
 #
 msgid ""
 msgstr ""
