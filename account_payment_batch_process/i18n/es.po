@@ -277,7 +277,6 @@ msgstr "Sólo puedes registrar pagos para facturas abiertas."
 
 #. module: account_payment_batch_process
 #: code:addons/account_payment_batch_process/wizard/account_payment_register.py:0
-#: code:addons/account_payment_batch_process/wizard/account_payment_register.py:0
 #, python-format
 msgid "You cannot mix customer invoices and vendor bills in a single payment."
 msgstr ""
