@@ -236,7 +236,8 @@ msgstr "Información"
 #: model:ir.model.fields,help:account_payment_return.field_account_move__returned_payment
 #: model:ir.model.fields,help:account_payment_return.field_account_payment__returned_payment
 msgid "Invoice has been included on a payment that has been returned later."
-msgstr "La factura se ha incluido en un pago que se ha devuelto posteriormente."
+msgstr ""
+"La factura se ha incluido en un pago que se ha devuelto posteriormente."
 
 #. module: account_payment_return
 #: code:addons/account_payment_return/models/payment_return.py:0
@@ -473,7 +474,6 @@ msgid "Reference to the created journal entry"
 msgstr "Referencia para el asiento contable creado"
 
 #. module: account_payment_return
-#: code:addons/account_payment_return/models/payment_return.py:0
 #: code:addons/account_payment_return/models/payment_return.py:0
 #, python-format
 msgid "Return %s"

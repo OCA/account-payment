@@ -127,30 +127,30 @@ msgid "Customer Payment Returns"
 msgstr "Retours de paiement Clients"
 
 #. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_import_journal_creation__default_expense_account_id
 #: model:ir.model.fields,field_description:account_payment_return.field_account_journal__default_expense_account_id
 msgid "Default Charges Account"
 msgstr "Compte de frais par défaut"
 
 #. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_import_journal_creation__default_expense_partner_id
 #: model:ir.model.fields,field_description:account_payment_return.field_account_journal__default_expense_partner_id
 msgid "Default Charges Partner"
 msgstr "Partenaire de frais par défaut"
 
 #. module: account_payment_return
-#: model:ir.model.fields,help:account_payment_return.field_account_bank_statement_import_journal_creation__default_expense_account_id
 #: model:ir.model.fields,help:account_payment_return.field_account_journal__default_expense_account_id
 msgid "Default account for bank charges"
 msgstr "Compte par défaut pour les frais bancaires"
 
 #. module: account_payment_return
-#: model:ir.model.fields,help:account_payment_return.field_account_bank_statement_import_journal_creation__default_expense_partner_id
 #: model:ir.model.fields,help:account_payment_return.field_account_journal__default_expense_partner_id
 msgid "Default partner for charge expenses"
 msgstr "Partenaire par défaut pour les frais"
 
 #. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_journal__display_name
+#: model:ir.model.fields,field_description:account_payment_return.field_account_move__display_name
+#: model:ir.model.fields,field_description:account_payment_return.field_account_move_line__display_name
+#: model:ir.model.fields,field_description:account_payment_return.field_account_partial_reconcile__display_name
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__display_name
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__display_name
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__display_name
@@ -169,7 +169,6 @@ msgid "Draft"
 msgstr "Brouillon"
 
 #. module: account_payment_return
-#: model:ir.model.fields,help:account_payment_return.field_account_bank_statement_import_journal_creation__return_auto_reconcile
 #: model:ir.model.fields,help:account_payment_return.field_account_journal__return_auto_reconcile
 msgid ""
 "Enable automatic payment return reconciliation. This option is meant to be "
@@ -201,6 +200,10 @@ msgid "Group By"
 msgstr "Groupé par"
 
 #. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_journal__id
+#: model:ir.model.fields,field_description:account_payment_return.field_account_move__id
+#: model:ir.model.fields,field_description:account_payment_return.field_account_move_line__id
+#: model:ir.model.fields,field_description:account_payment_return.field_account_partial_reconcile__id
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__id
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__id
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__id
@@ -234,7 +237,9 @@ msgid "Info"
 msgstr ""
 
 #. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_account_bank_statement_line__returned_payment
 #: model:ir.model.fields,help:account_payment_return.field_account_move__returned_payment
+#: model:ir.model.fields,help:account_payment_return.field_account_payment__returned_payment
 msgid "Invoice has been included on a payment that has been returned later."
 msgstr ""
 "Une facture a été incluse dans un paiement qui a été retourné ultérieurement."
@@ -263,8 +268,8 @@ msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_account_move
-msgid "Journal Entries"
-msgstr "Pièces comptables"
+msgid "Journal Entry"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_account_move_line
@@ -272,6 +277,10 @@ msgid "Journal Item"
 msgstr "Lignes d'écriture"
 
 #. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_journal____last_update
+#: model:ir.model.fields,field_description:account_payment_return.field_account_move____last_update
+#: model:ir.model.fields,field_description:account_payment_return.field_account_move_line____last_update
+#: model:ir.model.fields,field_description:account_payment_return.field_account_partial_reconcile____last_update
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return____last_update
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line____last_update
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason____last_update
@@ -431,7 +440,9 @@ msgid "Payment return reason"
 msgstr "Raison du retour de paiement"
 
 #. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_line__returned_payment
 #: model:ir.model.fields,field_description:account_payment_return.field_account_move__returned_payment
+#: model:ir.model.fields,field_description:account_payment_return.field_account_payment__returned_payment
 msgid "Payment returned"
 msgstr "Paiement retourné"
 
@@ -447,7 +458,6 @@ msgid "Reason"
 msgstr "Raison"
 
 #. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_import_journal_creation__return_auto_reconcile
 #: model:ir.model.fields,field_description:account_payment_return.field_account_journal__return_auto_reconcile
 msgid "Reconcile payment returns"
 msgstr "Lettrer les retours de paiement"
@@ -567,6 +577,9 @@ msgid "You must input all moves references in the payment return."
 msgstr ""
 "Vous devez mettre toutes les références des factures sur le retour de "
 "paiement."
+
+#~ msgid "Journal Entries"
+#~ msgstr "Pièces comptables"
 
 #~ msgid "Invoice"
 #~ msgstr "Facture"

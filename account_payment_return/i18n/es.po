@@ -125,31 +125,31 @@ msgid "Customer Payment Returns"
 msgstr "Devoluciones de cobros"
 
 #. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_import_journal_creation__default_expense_account_id
 #: model:ir.model.fields,field_description:account_payment_return.field_account_journal__default_expense_account_id
 msgid "Default Charges Account"
 msgstr "Cuenta por defecto para comisiones"
 
 #. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_import_journal_creation__default_expense_partner_id
 #: model:ir.model.fields,field_description:account_payment_return.field_account_journal__default_expense_partner_id
 msgid "Default Charges Partner"
 msgstr "Empresa por defecto para comisiones"
 
 #. module: account_payment_return
-#: model:ir.model.fields,help:account_payment_return.field_account_bank_statement_import_journal_creation__default_expense_account_id
 #: model:ir.model.fields,help:account_payment_return.field_account_journal__default_expense_account_id
 msgid "Default account for bank charges"
 msgstr "Cuenta por defecto para comisiones"
 
 #. module: account_payment_return
-#: model:ir.model.fields,help:account_payment_return.field_account_bank_statement_import_journal_creation__default_expense_partner_id
 #: model:ir.model.fields,help:account_payment_return.field_account_journal__default_expense_partner_id
 #, fuzzy
 msgid "Default partner for charge expenses"
 msgstr "Empresa por defecto para comisiones"
 
 #. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_journal__display_name
+#: model:ir.model.fields,field_description:account_payment_return.field_account_move__display_name
+#: model:ir.model.fields,field_description:account_payment_return.field_account_move_line__display_name
+#: model:ir.model.fields,field_description:account_payment_return.field_account_partial_reconcile__display_name
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__display_name
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__display_name
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__display_name
@@ -168,7 +168,6 @@ msgid "Draft"
 msgstr "Borrador"
 
 #. module: account_payment_return
-#: model:ir.model.fields,help:account_payment_return.field_account_bank_statement_import_journal_creation__return_auto_reconcile
 #: model:ir.model.fields,help:account_payment_return.field_account_journal__return_auto_reconcile
 msgid ""
 "Enable automatic payment return reconciliation. This option is meant to be "
@@ -197,6 +196,10 @@ msgid "Group By"
 msgstr ""
 
 #. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_journal__id
+#: model:ir.model.fields,field_description:account_payment_return.field_account_move__id
+#: model:ir.model.fields,field_description:account_payment_return.field_account_move_line__id
+#: model:ir.model.fields,field_description:account_payment_return.field_account_partial_reconcile__id
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__id
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__id
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__id
@@ -228,7 +231,9 @@ msgid "Info"
 msgstr ""
 
 #. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_account_bank_statement_line__returned_payment
 #: model:ir.model.fields,help:account_payment_return.field_account_move__returned_payment
+#: model:ir.model.fields,help:account_payment_return.field_account_payment__returned_payment
 msgid "Invoice has been included on a payment that has been returned later."
 msgstr "La factura ha sido incluida en un pago que ha sido devuelto más tarde."
 
@@ -256,9 +261,8 @@ msgstr "Diario"
 
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_account_move
-#, fuzzy
-msgid "Journal Entries"
-msgstr "Apunte contable"
+msgid "Journal Entry"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_account_move_line
@@ -266,6 +270,10 @@ msgid "Journal Item"
 msgstr "Apunte contable"
 
 #. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_journal____last_update
+#: model:ir.model.fields,field_description:account_payment_return.field_account_move____last_update
+#: model:ir.model.fields,field_description:account_payment_return.field_account_move_line____last_update
+#: model:ir.model.fields,field_description:account_payment_return.field_account_partial_reconcile____last_update
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return____last_update
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line____last_update
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason____last_update
@@ -425,7 +433,9 @@ msgid "Payment return reason"
 msgstr "Motivos de devolución"
 
 #. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_line__returned_payment
 #: model:ir.model.fields,field_description:account_payment_return.field_account_move__returned_payment
+#: model:ir.model.fields,field_description:account_payment_return.field_account_payment__returned_payment
 msgid "Payment returned"
 msgstr "Devolución de cobro"
 
@@ -441,7 +451,6 @@ msgid "Reason"
 msgstr "Motivo"
 
 #. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_import_journal_creation__return_auto_reconcile
 #: model:ir.model.fields,field_description:account_payment_return.field_account_journal__return_auto_reconcile
 #, fuzzy
 msgid "Reconcile payment returns"
@@ -561,6 +570,10 @@ msgstr "No puede borrar una devolución de pagos en estado 'Realizado'"
 #, python-format
 msgid "You must input all moves references in the payment return."
 msgstr "Debes informar todas las referencias de cobro."
+
+#, fuzzy
+#~ msgid "Journal Entries"
+#~ msgstr "Apunte contable"
 
 #~ msgid "Add"
 #~ msgstr "Añadir"
