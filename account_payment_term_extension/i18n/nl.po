@@ -26,7 +26,7 @@ msgstr "10% + 40% + saldo"
 
 #. module: account_payment_term_extension
 #: model:account.payment.term,name:account_payment_term_extension.sixty_days_end_of_month
-#: model:account.payment.term,note:account_payment_term_extension.sixty_days_end_of_month
+#: model_terms:account.payment.term,note:account_payment_term_extension.sixty_days_end_of_month
 msgid "60 Days End of Month"
 msgstr "60 Dagen Eind van de Maand"
 
@@ -92,8 +92,8 @@ msgstr "ID"
 
 #. module: account_payment_term_extension
 #: model:ir.model,name:account_payment_term_extension.model_account_move
-msgid "Journal Entries"
-msgstr "Boekingen"
+msgid "Journal Entry"
+msgstr ""
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday____last_update
@@ -159,6 +159,12 @@ msgstr "Percentage (onbelast bedrag)"
 #. module: account_payment_term_extension
 #: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
+msgid "Percentage of amount untaxed can't be used with foreign currencies"
+msgstr ""
+
+#. module: account_payment_term_extension
+#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
+#, python-format
 msgid "Percentages on the Payment Terms lines must be between 0 and 100."
 msgstr ""
 "Percentages op de regels voor betalingsvoorwaarden moeten tussen 0 en 100 "
@@ -185,18 +191,13 @@ msgstr ""
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term__sequential_lines
-msgid "Sequential lines"
-msgstr "Opeenvolgende regels"
+msgid "Sequential Lines"
+msgstr ""
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,help:account_payment_term_extension.field_account_payment_term_line__amount_round
-msgid ""
-"Sets the amount so that it is a multiple of this value.\n"
-"To have amounts that end in 0.99, set rounding 1, surcharge -0.01"
+msgid "Sets the amount so that it is a multiple of this value."
 msgstr ""
-"Stelt het bedrag zo in dat het een veelvoud is van deze waarde.\n"
-"Om bedragen te hebben die eindigen op 0,99, stelt u afronding 1 in, toeslag "
-"-0,01"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__value
@@ -211,3 +212,17 @@ msgid ""
 msgstr ""
 "Wanneer een betalingstermijn samenvalt met een vakantie, wordt deze "
 "uitgesteld naar de gekozen datum."
+
+#~ msgid "Journal Entries"
+#~ msgstr "Boekingen"
+
+#~ msgid "Sequential lines"
+#~ msgstr "Opeenvolgende regels"
+
+#~ msgid ""
+#~ "Sets the amount so that it is a multiple of this value.\n"
+#~ "To have amounts that end in 0.99, set rounding 1, surcharge -0.01"
+#~ msgstr ""
+#~ "Stelt het bedrag zo in dat het een veelvoud is van deze waarde.\n"
+#~ "Om bedragen te hebben die eindigen op 0,99, stelt u afronding 1 in, "
+#~ "toeslag -0,01"

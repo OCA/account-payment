@@ -23,7 +23,7 @@ msgstr ""
 
 #. module: account_payment_term_extension
 #: model:account.payment.term,name:account_payment_term_extension.sixty_days_end_of_month
-#: model:account.payment.term,note:account_payment_term_extension.sixty_days_end_of_month
+#: model_terms:account.payment.term,note:account_payment_term_extension.sixty_days_end_of_month
 msgid "60 Days End of Month"
 msgstr "60 jours fin de mois"
 
@@ -54,10 +54,7 @@ msgid "Date %s cannot is both a holiday and a Postponed date"
 msgstr "La date %s ne peut être à la fois un congé et reportée"
 
 #. module: account_payment_term_extension
-#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_move__display_name
-#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term__display_name
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__display_name
-#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__display_name
 msgid "Display Name"
 msgstr "Nom affiché"
 
@@ -85,10 +82,7 @@ msgid "Holidays"
 msgstr "Congés"
 
 #. module: account_payment_term_extension
-#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_move__id
-#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term__id
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__id
-#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__id
 msgid "ID"
 msgstr "ID"
 
@@ -98,10 +92,7 @@ msgid "Journal Entry"
 msgstr ""
 
 #. module: account_payment_term_extension
-#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_move____last_update
-#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term____last_update
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday____last_update
-#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line____last_update
 msgid "Last Modified on"
 msgstr "Last Modified on"
 
@@ -194,8 +185,8 @@ msgstr ""
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term__sequential_lines
-msgid "Sequential lines"
-msgstr "Lignes séquentielles"
+msgid "Sequential Lines"
+msgstr ""
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,help:account_payment_term_extension.field_account_payment_term_line__amount_round
@@ -215,3 +206,6 @@ msgid ""
 msgstr ""
 "Lorsqu'un délai de paiement coïncide avec un congé, il est reporté à la date "
 "choisie."
+
+#~ msgid "Sequential lines"
+#~ msgstr "Lignes séquentielles"
