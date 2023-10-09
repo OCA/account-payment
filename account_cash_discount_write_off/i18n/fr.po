@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_cash_discount_write_off
+# 	* account_cash_discount_write_off
 #
 msgid ""
 msgstr ""
@@ -8,24 +8,25 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
 #. module: account_cash_discount_write_off
-#: code:addons/account_cash_discount_write_off/models/account_payment_line.py:71
+#: code:addons/account_cash_discount_write_off/models/account_payment_line.py:0
 #, python-format
 msgid "Cash Discount Write-Off"
 msgstr "Escompte (écart)"
 
 #. module: account_cash_discount_write_off
-#: model:ir.model.fields,field_description:account_cash_discount_write_off.field_res_company_default_cash_discount_writeoff_account_id
+#: model:ir.model.fields,field_description:account_cash_discount_write_off.field_res_company__default_cash_discount_writeoff_account_id
 msgid "Cash Discount Write-Off Account"
 msgstr "Compte d'écart de l'escompte"
 
 #. module: account_cash_discount_write_off
-#: model:ir.model.fields,field_description:account_cash_discount_write_off.field_res_company_default_cash_discount_writeoff_journal_id
+#: model:ir.model.fields,field_description:account_cash_discount_write_off.field_res_company__default_cash_discount_writeoff_journal_id
 msgid "Cash Discount Write-Off Journal"
 msgstr "Journal d'écart de l'escompte"
 
@@ -55,9 +56,11 @@ msgid "Write-Off Journal"
 msgstr "Journal d'écart"
 
 #. module: account_cash_discount_write_off
-#: code:addons/account_cash_discount_write_off/models/account_payment_line.py:67
+#: code:addons/account_cash_discount_write_off/models/account_payment_line.py:0
 #, python-format
-msgid "You have to fill in journal and account for cash discount write-off on the company."
+msgid ""
+"You have to fill in journal and account for cash discount write-off on the "
+"company."
 msgstr ""
 "Vous devez remplir un journal et un compte d'écart pour les escomptes sur la "
 "société."
