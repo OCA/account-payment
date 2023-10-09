@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_payment_multi_deduction
+# 	* account_payment_multi_deduction
 #
 msgid ""
 msgstr ""
@@ -24,7 +24,8 @@ msgstr "Conta"
 
 #. module: account_payment_multi_deduction
 #: model:ir.model,name:account_payment_multi_deduction.model_account_abstract_payment
-msgid "Contains the logic shared between models which allows to register payments"
+msgid ""
+"Contains the logic shared between models which allows to register payments"
 msgstr ""
 "Contém a lógica partilhada pelos modelos que permitem registar os pagamentos"
 
