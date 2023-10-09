@@ -185,7 +185,8 @@ msgstr ""
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE19
 msgid "Charge bearer code for transaction type is invalid"
-msgstr "El código de portador de cargo para el tipo de transacción no es válido"
+msgstr ""
+"El código de portador de cargo para el tipo de transacción no es válido"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_FF09
@@ -1208,8 +1209,8 @@ msgid ""
 "The transmission of the file was not successful – it had to be aborted (for "
 "technical reasons)"
 msgstr ""
-"La transmisión del fichero no ha tenido éxito - ha tenido que ser abortada ("
-"por razones técnicas)"
+"La transmisión del fichero no ha tenido éxito - ha tenido que ser abortada "
+"(por razones técnicas)"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS27
@@ -1355,8 +1356,8 @@ msgid ""
 "Unique End-to-end Transaction Reference (UETR) relating to a payment has "
 "been prevent from traveling across a messaging network."
 msgstr ""
-"Se ha impedido la referencia única de transacción de extremo a extremo (UETR)"
-" relativa a un pago viaje a través de una red de mensajería."
+"Se ha impedido la referencia única de transacción de extremo a extremo "
+"(UETR) relativa a un pago viaje a través de una red de mensajería."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH11
