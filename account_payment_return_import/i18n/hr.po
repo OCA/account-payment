@@ -10,8 +10,8 @@ msgstr ""
 "POT-Creation-Date: 2019-01-30 10:56+0000\n"
 "PO-Revision-Date: 2021-10-11 10:34+0000\n"
 "Last-Translator: Matija Krolo <matija.krolo@ecodica.eu>\n"
-"Language-Team: Croatian (http://www.transifex.com/oca/"
-"OCA-account-payment-8-0/language/hr/)\n"
+"Language-Team: Croatian (http://www.transifex.com/oca/OCA-account-"
+"payment-8-0/language/hr/)\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -104,7 +104,9 @@ msgid "Created on"
 msgstr "Kreirano"
 
 #. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return__display_name
 #: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__display_name
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_line__display_name
 msgid "Display Name"
 msgstr "Naziv "
 
@@ -132,7 +134,9 @@ msgid ""
 msgstr ""
 
 #. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return__id
 #: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__id
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_line__id
 msgid "ID"
 msgstr "ID"
 
@@ -159,7 +163,9 @@ msgid "Journal"
 msgstr "Temeljnica"
 
 #. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return____last_update
 #: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import____last_update
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_line____last_update
 msgid "Last Modified on"
 msgstr "Zadnje modificirano"
 

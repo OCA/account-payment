@@ -105,7 +105,9 @@ msgid "Created on"
 msgstr "Creato il"
 
 #. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return__display_name
 #: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__display_name
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_line__display_name
 msgid "Display Name"
 msgstr "Nome visualizzato"
 
@@ -133,7 +135,9 @@ msgid ""
 msgstr ""
 
 #. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return__id
 #: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__id
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_line__id
 msgid "ID"
 msgstr "ID"
 
@@ -160,7 +164,9 @@ msgid "Journal"
 msgstr "Registro"
 
 #. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return____last_update
 #: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import____last_update
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_line____last_update
 msgid "Last Modified on"
 msgstr "Ultima modifica il"
 
