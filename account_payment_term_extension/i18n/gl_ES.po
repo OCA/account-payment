@@ -57,7 +57,10 @@ msgid "Date %s cannot is both a holiday and a Postponed date"
 msgstr ""
 
 #. module: account_payment_term_extension
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_move__display_name
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term__display_name
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__display_name
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__display_name
 msgid "Display Name"
 msgstr ""
 
@@ -85,17 +88,23 @@ msgid "Holidays"
 msgstr ""
 
 #. module: account_payment_term_extension
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_move__id
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term__id
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__id
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__id
 msgid "ID"
 msgstr "ID"
 
 #. module: account_payment_term_extension
 #: model:ir.model,name:account_payment_term_extension.model_account_move
-msgid "Journal Entries"
+msgid "Journal Entry"
 msgstr ""
 
 #. module: account_payment_term_extension
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_move____last_update
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term____last_update
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday____last_update
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line____last_update
 msgid "Last Modified on"
 msgstr ""
 
@@ -158,6 +167,12 @@ msgstr ""
 #. module: account_payment_term_extension
 #: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
+msgid "Percentage of amount untaxed can't be used with foreign currencies"
+msgstr ""
+
+#. module: account_payment_term_extension
+#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
+#, python-format
 msgid "Percentages on the Payment Terms lines must be between 0 and 100."
 msgstr ""
 
@@ -185,9 +200,7 @@ msgstr ""
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,help:account_payment_term_extension.field_account_payment_term_line__amount_round
-msgid ""
-"Sets the amount so that it is a multiple of this value.\n"
-"To have amounts that end in 0.99, set rounding 1, surcharge -0.01"
+msgid "Sets the amount so that it is a multiple of this value."
 msgstr ""
 
 #. module: account_payment_term_extension
