@@ -81,7 +81,8 @@ msgstr "Cheque de pago SSLM102"
 #: model:ir.model.fields,help:account_check_printing_report_sslm102.field_account_journal__account_check_printing_layout
 #: model:ir.model.fields,help:account_check_printing_report_sslm102.field_res_company__account_check_printing_layout
 msgid ""
-"Select the format corresponding to the check paper you will be printing your checks on.\n"
+"Select the format corresponding to the check paper you will be printing your "
+"checks on.\n"
 "In order to disable the printing feature, select 'None'."
 msgstr ""
 "Seleccione el tamaño correspondiente al tamaño de cheque que va a imprimir.\n"
