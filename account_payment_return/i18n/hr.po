@@ -46,11 +46,6 @@ msgid "Attachment Count"
 msgstr ""
 
 #. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__auto_reconcile_failure
-msgid "Automatic reconciliation failure"
-msgstr ""
-
-#. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__journal_id
 msgid "Bank journal"
 msgstr ""
@@ -122,30 +117,25 @@ msgstr "Kupac"
 #. module: account_payment_return
 #: model:ir.actions.act_window,name:account_payment_return.payment_return_action
 #: model:ir.ui.menu,name:account_payment_return.payment_return_menu
-#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_tree_view
 msgid "Customer Payment Returns"
 msgstr ""
 
 #. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_import_journal_creation__default_expense_account_id
 #: model:ir.model.fields,field_description:account_payment_return.field_account_journal__default_expense_account_id
 msgid "Default Charges Account"
 msgstr ""
 
 #. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_import_journal_creation__default_expense_partner_id
 #: model:ir.model.fields,field_description:account_payment_return.field_account_journal__default_expense_partner_id
 msgid "Default Charges Partner"
 msgstr ""
 
 #. module: account_payment_return
-#: model:ir.model.fields,help:account_payment_return.field_account_bank_statement_import_journal_creation__default_expense_account_id
 #: model:ir.model.fields,help:account_payment_return.field_account_journal__default_expense_account_id
 msgid "Default account for bank charges"
 msgstr ""
 
 #. module: account_payment_return
-#: model:ir.model.fields,help:account_payment_return.field_account_bank_statement_import_journal_creation__default_expense_partner_id
 #: model:ir.model.fields,help:account_payment_return.field_account_journal__default_expense_partner_id
 msgid "Default partner for charge expenses"
 msgstr ""
@@ -169,22 +159,8 @@ msgid "Draft"
 msgstr ""
 
 #. module: account_payment_return
-#: model:ir.model.fields,help:account_payment_return.field_account_bank_statement_import_journal_creation__return_auto_reconcile
-#: model:ir.model.fields,help:account_payment_return.field_account_journal__return_auto_reconcile
-msgid ""
-"Enable automatic payment return reconciliation. This option is meant to be "
-"used only when working with transfer accounts, not if working directly with "
-"bank accounts."
-msgstr ""
-
-#. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_follower_ids
 msgid "Followers"
-msgstr ""
-
-#. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_channel_ids
-msgid "Followers (Channels)"
 msgstr ""
 
 #. module: account_payment_return
@@ -195,6 +171,11 @@ msgstr ""
 #. module: account_payment_return
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_search_view
 msgid "Group By"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__has_message
+msgid "Has Message"
 msgstr ""
 
 #. module: account_payment_return
@@ -229,7 +210,9 @@ msgid "Info"
 msgstr ""
 
 #. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_account_bank_statement_line__returned_payment
 #: model:ir.model.fields,help:account_payment_return.field_account_move__returned_payment
+#: model:ir.model.fields,help:account_payment_return.field_account_payment__returned_payment
 msgid "Invoice has been included on a payment that has been returned later."
 msgstr ""
 
@@ -257,7 +240,7 @@ msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_account_move
-msgid "Journal Entries"
+msgid "Journal Entry"
 msgstr ""
 
 #. module: account_payment_return
@@ -375,7 +358,7 @@ msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__partner_name
-msgid "Partner name"
+msgid "Partner Name"
 msgstr ""
 
 #. module: account_payment_return
@@ -388,7 +371,14 @@ msgstr ""
 #. module: account_payment_return
 #: code:addons/account_payment_return/models/payment_return.py:0
 #, python-format
-msgid "Payment Line: %s (%s) in Payment Return: %s"
+msgid ""
+"Payment Line: %(move_names)s (%(partner_name)s) in Payment Return: "
+"%(return_name)s"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__payment_method_line_id
+msgid "Payment Method Line"
 msgstr ""
 
 #. module: account_payment_return
@@ -413,7 +403,6 @@ msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_payment_return_line
-#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
 msgid "Payment return lines"
 msgstr ""
 
@@ -423,7 +412,9 @@ msgid "Payment return reason"
 msgstr ""
 
 #. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_line__returned_payment
 #: model:ir.model.fields,field_description:account_payment_return.field_account_move__returned_payment
+#: model:ir.model.fields,field_description:account_payment_return.field_account_payment__returned_payment
 msgid "Payment returned"
 msgstr ""
 
@@ -436,12 +427,6 @@ msgstr ""
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__name
 msgid "Reason"
-msgstr ""
-
-#. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_import_journal_creation__return_auto_reconcile
-#: model:ir.model.fields,field_description:account_payment_return.field_account_journal__return_auto_reconcile
-msgid "Reconcile payment returns"
 msgstr ""
 
 #. module: account_payment_return
@@ -504,17 +489,16 @@ msgid "State"
 msgstr ""
 
 #. module: account_payment_return
-#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
-msgid "The payment return could not be automatically reconciled."
-msgstr ""
-
-#. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return__date
 msgid "This date will be used as the account entry date."
 msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__total_amount
+msgid "Total Amount"
+msgstr ""
+
+#. module: account_payment_return
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_tree_view
 msgid "Total amount"
