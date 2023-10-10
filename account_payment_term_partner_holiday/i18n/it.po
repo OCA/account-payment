@@ -1,6 +1,6 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_payment_term_partner_holiday
+# 	* account_payment_term_partner_holiday
 #
 msgid ""
 msgstr ""
@@ -183,4 +183,5 @@ msgstr "Settembre"
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:123
 #, python-format
 msgid "You can't set the ending holidays period before the beginning."
-msgstr "Non si può impostare la fine del periodo delle ferie prima dell'inizio."
+msgstr ""
+"Non si può impostare la fine del periodo delle ferie prima dell'inizio."
