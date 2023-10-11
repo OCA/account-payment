@@ -1,0 +1,30 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_due_list_aging_comments
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-07-29 12:02+0000\n"
+"PO-Revision-Date: 2016-07-29 12:02+0000\n"
+"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2016\n"
+"Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_due_list_aging_comment
+#: model:ir.model.fields,field_description:account_due_list_aging_comment.field_account_move_line__aging_comments
+msgid "Aging Comments"
+msgstr ""
+
+#. module: account_due_list_aging_comment
+#: model:ir.model,name:account_due_list_aging_comment.model_account_move_line
+#, fuzzy
+msgid "Journal Item"
+msgstr "Voci sezionale"
