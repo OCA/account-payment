@@ -6,7 +6,7 @@
     "summary": """
         This addon allows to import payment returns from ISO 20022 files
         like PAIN or CAMT.""",
-    "version": "15.0.1.0.2",
+    "version": "15.0.1.0.3",
     "development_status": "Mature",
     "license": "AGPL-3",
     "author": "Odoo Community Association (OCA),Tecnativa,ACSONE SA/NV",
