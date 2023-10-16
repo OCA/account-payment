@@ -19,6 +19,20 @@ class TestPaymentReturnFile(TransactionCase):
     subclasses in actual import modules.
     """
 
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.env = cls.env(
+            context=dict(
+                cls.env.context,
+                mail_create_nolog=True,
+                mail_create_nosubscribe=True,
+                mail_notrack=True,
+                no_reset_password=True,
+                tracking_disable=True,
+            )
+        )
+
     def _test_transaction(
         self, return_obj, reference=False, returned_amount=False, reason_add_info=False
     ):
