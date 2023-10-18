@@ -5,7 +5,7 @@
         <field name="name">Import Excel</field>
         <field name="res_model">import.xlsx.wizard</field>
         <field name="binding_view_types">form</field>
-        <field name="binding_model_id" ref="payment.model_account_payment" />
+        <field name="binding_model_id" ref="account.model_account_payment" />
         <field name="view_mode">form</field>
         <field name="target">new</field>
         <field name="context">
