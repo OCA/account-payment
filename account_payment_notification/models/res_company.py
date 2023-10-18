@@ -23,10 +23,7 @@ class ResCompany(models.Model):
         default="email_only",
         selection=[
             ("email_only", "By email"),
-            ("email_or_sms", "By email if possible, by SMS otherwise"),
-            ("sms_only", "By SMS"),
-            ("sms_or_email", "By SMS if possible, by email otherwise"),
-            ("all", "By all possible notification means"),
+            ("no", "No notifications"),
         ],
         help="Choose the method to notify payments automatically when marked as sent.",
     )

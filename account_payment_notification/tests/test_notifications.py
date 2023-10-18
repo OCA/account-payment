@@ -3,7 +3,6 @@
 
 from odoo.exceptions import ValidationError
 from odoo.tests.common import Form, tagged
-from odoo.tools import mute_logger
 
 from odoo.addons.account.tests.common import TestAccountReconciliationCommon
 
@@ -11,7 +10,7 @@ from odoo.addons.account.tests.common import TestAccountReconciliationCommon
 @tagged("post_install", "-at_install")
 class NotificationCase(TestAccountReconciliationCommon):
     def setUp(self):
-        super().setUp()
+        super(NotificationCase, self).setUp()
         self.company = self.company_data["company"]
         # Partners with different communication methods
         self.partner_a.write({"email": "a@example.com", "mobile": "+1 111 111 111"})
@@ -46,28 +45,12 @@ class NotificationCase(TestAccountReconciliationCommon):
         form.account_payment_notification_method = mode
         form.save()
 
-    def assert_notifications(self, partners, email=False, sms=False):
+    def assert_notifications(self, partners, email=False):
         """Assert the notifications are sent as expected."""
         mt_comment = self.env.ref("mail.mt_comment")
         for payment in self.payments.filtered(lambda rec: rec.partner_id in partners):
             expected_values = []
             expected_message_notifications = []
-            if sms:
-                expected_values.append(
-                    {
-                        "message_type": "sms",
-                        "description": "Dear {}, the debit orde [...]".format(
-                            payment.partner_id.name
-                        ),
-                    }
-                )
-                expected_message_notifications.append(
-                    {
-                        "res_partner_id": payment.partner_id.id,
-                        "notification_type": "sms",
-                        "notification_status": "ready",
-                    }
-                )
             if email:
                 expected_values.append(
                     {
@@ -97,15 +80,13 @@ class NotificationCase(TestAccountReconciliationCommon):
             else:
                 self.assertFalse(payment.message_ids.notification_ids)
 
-    @mute_logger("odoo.tests.common.onchange")
     def test_auto_all(self):
         """Emails and SMS are sent to customers."""
         self.set_mode("all")
         self.assertFalse(self.payments.message_ids)
         self.payments.mark_as_sent()
-        self.assert_notifications(self.partner_a, email=True, sms=True)
+        self.assert_notifications(self.partner_a, email=True)
         self.assert_notifications(self.partner_b, email=True)
-        self.assert_notifications(self.partner_c, sms=True)
 
     def test_auto_disabled(self):
         """Nothing is automatically sent to customers."""
@@ -127,25 +108,13 @@ class NotificationCase(TestAccountReconciliationCommon):
         self.assert_notifications(self.partner_b, email=True)
         self.assert_notifications(self.partner_c)
 
-    @mute_logger("odoo.tests.common.onchange")
     def test_auto_email_or_sms(self):
         """Emails are preferably sent to customers."""
         self.set_mode("email_or_sms")
         self.payments.mark_as_sent()
         self.assert_notifications(self.partner_a, email=True)
         self.assert_notifications(self.partner_b, email=True)
-        self.assert_notifications(self.partner_c, sms=True)
 
-    @mute_logger("odoo.tests.common.onchange")
-    def test_auto_sms_only(self):
-        """Only SMS are sent to customers."""
-        self.set_mode("sms_only")
-        self.payments.mark_as_sent()
-        self.assert_notifications(self.partner_a, sms=True)
-        self.assert_notifications(self.partner_b)
-        self.assert_notifications(self.partner_c, sms=True)
-
-    @mute_logger("odoo.tests.common.onchange")
     def test_auto_sms_or_email(self):
         """SMS are preferably sent to customers."""
         self.set_mode("sms_or_email")
@@ -154,7 +123,6 @@ class NotificationCase(TestAccountReconciliationCommon):
         self.assert_notifications(self.partner_b, email=True)
         self.assert_notifications(self.partner_c, sms=True)
 
-    @mute_logger("odoo.tests.common.onchange")
     def test_no_contact(self):
         """Partners without contact means make it fail."""
         self.partner_b.email = False
@@ -169,27 +137,21 @@ class NotificationCase(TestAccountReconciliationCommon):
         ):
             self.payments.mark_as_sent()
 
-    @mute_logger("odoo.tests.common.onchange")
     def test_multilang(self):
         """Multiple notifications sent in each partner email."""
         self.env["res.lang"].sudo()._activate_lang("es_ES")
         mail_tpl = self.env.ref(
             "account_payment_notification.mail_template_notification"
         )
-        sms_tpl = self.env.ref("account_payment_notification.sms_template_notification")
         mail_tpl.subject = "English mail"
-        sms_tpl.sudo().body = "English SMS"
         mail_tpl.with_context(lang="es_ES").subject = "Spanish mail"
-        sms_tpl.with_context(lang="es_ES").sudo().body = "Spanish SMS"
         self.partner_a.lang = "es_ES"
         self.set_mode("all")
         self.payments.mark_as_sent()
         self.assertRecordValues(
             self.payments.message_ids,
             [
-                {"message_type": "sms", "description": "English SMS"},
                 {"message_type": "notification", "description": "English mail"},
-                {"message_type": "sms", "description": "Spanish SMS"},
                 {"message_type": "notification", "description": "Spanish mail"},
             ],
         )

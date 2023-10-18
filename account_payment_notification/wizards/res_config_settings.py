@@ -4,8 +4,8 @@
 from odoo import fields, models
 
 
-class ResConfigSettings(models.TransientModel):
-    _inherit = "res.config.settings"
+class AccountConfigSettings(models.TransientModel):
+    _inherit = 'account.config.settings'
 
     account_payment_notification_automatic = fields.Selection(
         related="company_id.account_payment_notification_automatic",

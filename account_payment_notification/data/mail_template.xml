@@ -6,12 +6,11 @@
     <record id="mail_template_notification" model="mail.template">
         <field name="name">Payment notification</field>
         <field name="auto_delete" eval="False" />
-        <field name="lang">{{ object.partner_id.lang }}</field>
         <field name="model_id" ref="account.model_account_payment" />
-        <field name="partner_to">{{ object.partner_id.id }}</field>
-        <field
-            name="subject"
-        >{{ object.company_id.name }} Payment Notification (Ref {{ object.name or 'n/a' }})</field>
+        <field name="email_from">${object.company_id.email or ''}</field>
+        <field name="subject">${object.company_id.name: Payment Notification (Ref object.name)}</field>
+        <field name="email_to">${object.get_email_to() or  ''}</field>
+        <field name="lang">${object.get_contact_address().lang or 'en_US'}</field>
         <field name="body_html" type="html">
             <p>Dear <t t-out="object.partner_id.name or ''">Azure Interior</t>,</p>
             <p t-if="object.payment_type == 'inbound'">
