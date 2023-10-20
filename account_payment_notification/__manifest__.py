@@ -14,6 +14,7 @@
     "depends": [
         "account",
         "mail",
+        "account_check_report",
     ],
     "data": [
         "data/mail_template.xml",

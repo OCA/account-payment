@@ -82,3 +82,11 @@ class AccountPayment(models.Model):
             return partner_obj.browse(add_id)       
         else:
             return partner
+
+    @api.model
+    def get_invoice_names(self):
+        res = ""
+        for inv in self.mapped("invoice_ids"):
+            res += inv.number
+            res += "\n"
+        return res
