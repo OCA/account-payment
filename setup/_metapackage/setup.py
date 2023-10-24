@@ -19,6 +19,7 @@ setuptools.setup(
         'odoo14-addon-account_due_list',
         'odoo14-addon-account_due_list_aging_comment',
         'odoo14-addon-account_due_list_days_overdue',
+        'odoo14-addon-account_due_list_edit_inline',
         'odoo14-addon-account_due_list_payment',
         'odoo14-addon-account_due_list_payment_mode',
         'odoo14-addon-account_financial_discount',
