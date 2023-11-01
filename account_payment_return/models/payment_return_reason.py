@@ -10,6 +10,11 @@ class PaymentReturnReason(models.Model):
 
     code = fields.Char()
     name = fields.Char(string='Reason', translate=True)
+    block_move_lines = fields.Boolean(
+        company_dependent=True,
+        help="Check 'No Follow-up' on journal items that used to be "
+             "reconciled with a payment returned with this code.",
+    )
 
     @api.model
     def name_search(self, name, args=None, operator='ilike', limit=100):
