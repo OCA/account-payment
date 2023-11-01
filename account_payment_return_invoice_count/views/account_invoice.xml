@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+
+<odoo>
+
+    <record model="ir.ui.view" id="account_invoice_form_view">
+        <field name="name">account.invoice.form (in account_payment_return_invoice_count)</field>
+        <field name="model">account.invoice</field>
+        <field name="inherit_id" ref="account_payment_return.invoice_return_form"/>
+        <field name="arch" type="xml">
+            <field name="returned_payment" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </field>
+            <field name="returned_payment" position="before">
+                <field name="returned_payment_count" attrs="{'invisible': [('returned_payment', '=', False)]}"/>
+            </field>
+        </field>
+    </record>
+
+
+
+</odoo>
