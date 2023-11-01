@@ -74,7 +74,7 @@ class TestImport(TestPaymentReturnFile):
             date='2016-10-08'
         )
 
-    def test_payment_return_import_camt(self):
+    def test_payment_return_import_camt_053(self):
         """Test correct creation of single payment return."""
         transactions = [
             {
@@ -85,7 +85,24 @@ class TestImport(TestPaymentReturnFile):
         ]
         self._test_return_import(
             'account_payment_return_import_iso20022',
-            'test-sepa-camt-unpaid.xml',
+            'test-sepa-camt-053-unpaid.xml',
+            'ZY08XXXXXXIS634C',
+            local_account='NL77ABNA0574908765',
+            date='2016-10-08', transactions=transactions
+        )
+
+    def test_payment_return_import_camt_054(self):
+        """Test correct creation of single payment return."""
+        transactions = [
+            {
+                'returned_amount': 100.00,
+                'reference': 'E2EID1',
+                'reason_add_info': '/RTYP/RTRN',
+            },
+        ]
+        self._test_return_import(
+            'account_payment_return_import_iso20022',
+            'test-sepa-camt-054-unpaid.xml',
             'ZY08XXXXXXIS634C',
             local_account='NL77ABNA0574908765',
             date='2016-10-08', transactions=transactions

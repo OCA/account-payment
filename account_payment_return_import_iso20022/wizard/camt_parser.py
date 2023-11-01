@@ -10,7 +10,9 @@ RE_CAMT = re.compile(
 )
 RE_CAMT_VERSION = re.compile(
     r'(^urn:iso:std:iso:20022:tech:xsd:camt.054.001.02'
-    r'|^ISO:camt.054.001.02)'
+    r'|^ISO:camt.054.001.02'
+    r'|^urn:iso:std:iso:20022:tech:xsd:camt.053.001.02'
+    r'|^ISO:camt.053.001.02)'
 )
 
 
@@ -24,7 +26,8 @@ class CamtParser(object):
             return 0.0
         amount = 0.0
         amount_node = node.xpath(
-            './ns:AmtDtls/ns:InstdAmt/ns:Amt', namespaces={'ns': ns})
+            './ns:AmtDtls/ns:InstdAmt/ns:Amt | ./ns:AmtDtls/ns:TxAmt/ns:Amt',
+            namespaces={'ns': ns})
         if amount_node:
             amount = float(amount_node[0].text)
         return amount
@@ -86,6 +89,7 @@ class CamtParser(object):
         """
         details_nodes = node.xpath(
             './ns:NtryDtls/ns:TxDtls', namespaces={'ns': ns})
+        entry_date = node.xpath('./ns:BookgDt/ns:Dt', namespaces={'ns': ns})
         for details_node in details_nodes:
             return_info = details_node.xpath(
                 './ns:RtrInf', namespaces={'ns': ns})
@@ -95,6 +99,8 @@ class CamtParser(object):
             transaction['amount'] = self.parse_amount(ns, details_node)
             self.parse_transaction_details(ns, details_node, transaction)
             transaction['raw_import_data'] = etree.tostring(details_node)
+            if not transaction.get('date'):
+                transaction['date'] = entry_date
             transactions.append(transaction)
         return transactions
 
@@ -105,7 +111,7 @@ class CamtParser(object):
         return_date = self.parse_date(ns, node)
         payment_returns = []
         notification_nodes = node.xpath(
-            './ns:Ntfctn', namespaces={'ns': ns})
+            './ns:Ntfctn | ./ns:Stmt', namespaces={'ns': ns})
         for notification_node in notification_nodes:
             entry_nodes = notification_node.xpath(
                 './ns:Ntry', namespaces={'ns': ns})
@@ -135,7 +141,7 @@ class CamtParser(object):
 
     def check_version(self, ns, root):
         """
-        Check whether the validity of the camt.054.001.02 file.
+        Check whether the validity of the camt file.
         :raise: ValueError if not valid
         """
         # Check whether it's a CAMT Bank to Customer Debit Credit Notification
@@ -151,7 +157,7 @@ class CamtParser(object):
 
     def parse(self, data):
         """
-        Parse a camt.054.001.02 file.
+        Parse camt.054.001.02 file and camt.053 .001.02 files.
         :param data:
         :return: account.payment.return records list
         :raise: ValueError if parsing failed
