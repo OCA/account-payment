@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Copyright 2020 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl-3). -->
+<odoo>
+
+    <record model="ir.ui.view" id="payment_return_reason_form_view">
+        <field name="model">payment.return.reason</field>
+        <field name="inherit_id"
+               ref="account_payment_return.payment_return_reason_form_view"/>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="revoke_mandates"/>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
