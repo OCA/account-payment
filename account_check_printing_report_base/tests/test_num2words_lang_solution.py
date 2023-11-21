@@ -3,12 +3,13 @@ from odoo.tests.common import TransactionCase
 
 
 class TestNum2WordsLangSolution(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.propissory_note_amount = self.env[
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.propissory_note_amount = cls.env[
             "report.account_check_printing_report_base.promissory_footer_a4"
         ]
-        self.amount = 3.09
+        cls.amount = 3.09
 
     def test_num2words_es_correction(self):
         amount_in_word = self.propissory_note_amount.with_context(
