@@ -10,6 +10,7 @@ setuptools.setup(
     install_requires=[
         'odoo14-addon-account_cash_discount_base',
         'odoo14-addon-account_cash_discount_payment',
+        'odoo14-addon-account_cash_discount_reconcile_write_off',
         'odoo14-addon-account_cash_discount_write_off',
         'odoo14-addon-account_cash_invoice',
         'odoo14-addon-account_check_date',
