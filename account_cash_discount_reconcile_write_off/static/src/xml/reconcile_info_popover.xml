@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<templates xml:space="preserve">
+<t
+        t-name="reconciliation.line.mv_line.details"
+        t-inherit="account_reconciliation_widget.reconciliation.line.mv_line.details"
+        t-inherit-mode="extension"
+    >
+    <xpath expr="//tr[last()]" position="after">
+        <tr t-if="line.has_discount">
+            <td>Discount Amount</td><td><t t-esc="line.discount_amount" /></td>
+        </tr>
+        <tr t-if="line.has_discount">
+            <td>Discount Due Date</td>
+            <td><t t-esc="line.discount_due_date" /></td>
+        </tr>
+    </xpath>
+</t>
+</templates>
