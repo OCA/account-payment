@@ -14,6 +14,13 @@ class PaymentLine(models.Model):
         """
         payment_vals = super()._prepare_account_payment_vals()
 
+        conversion_rate = self.env["res.currency"]._get_conversion_rate(
+            self.currency_id,
+            self.company_currency_id,
+            self.company_id,
+            payment_vals["date"],
+        )
+
         epd_aml_values_list = []
         for rec in self:
             if rec.pay_with_discount:
@@ -22,11 +29,13 @@ class PaymentLine(models.Model):
                     {
                         "aml": aml,
                         "amount_currency": -aml.amount_residual_currency,
-                        "balance": -aml.amount_residual_currency,
+                        "balance": aml.company_currency_id.round(
+                            -aml.amount_residual_currency * conversion_rate
+                        ),
                     }
                 )
 
-        open_balance = self._get_open_balance()
+        open_balance = self._get_open_balance(conversion_rate)
 
         if epd_aml_values_list:
             early_payment_values = rec.env[
@@ -40,7 +49,7 @@ class PaymentLine(models.Model):
 
         return payment_vals
 
-    def _get_open_balance(self):
+    def _get_open_balance(self, conversion_rate):
         open_balance = 0
         for invoice in self.mapped("move_line_id").mapped("move_id"):
             payment_sign = (
@@ -59,5 +68,7 @@ class PaymentLine(models.Model):
                 invoice.amount_residual - refunds_amount_total
             ) * payment_sign
 
-            open_balance += open_amount_currency
+            open_balance += self.company_currency_id.round(
+                open_amount_currency * conversion_rate
+            )
         return open_balance
