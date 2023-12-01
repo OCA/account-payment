@@ -1,2 +1,1 @@
-
-odoo-addon-account_payment_order @ git+https://github.com/OCA/bank-payment.git@refs/pull/1036/head#subdirectory=setup/account_payment_order
+odoo-addon-account_cash_discount_payment @ git+https://github.com/OCA/account-payment.git@refs/pull/588/head#subdirectory=setup/account_cash_discount_payment
