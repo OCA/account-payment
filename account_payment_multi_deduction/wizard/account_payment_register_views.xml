@@ -1,0 +1,63 @@
+<odoo>
+    <record id="view_account_payment_register_form" model="ir.ui.view">
+        <field name="name">account.payment.register.form</field>
+        <field name="model">account.payment.register</field>
+        <field name="inherit_id" ref="account.view_account_payment_register_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='writeoff_account_id']" position="after">
+                <div
+                    attrs="{'invisible': [('payment_difference_handling', '!=', 'reconcile')]}"
+                    groups="analytic.group_analytic_accounting"
+                >
+                    <label for="analytic_distribution" class="oe_edit_only" />
+                    <field
+                        name="analytic_distribution"
+                        widget="analytic_distribution"
+                        groups="analytic.group_analytic_accounting"
+                        options="{'product_field': 'product_id', 'account_field': 'account_id', 'business_domain': 'expense'}"
+                    />
+                </div>
+            </xpath>
+            <xpath
+                expr="/form/group/group[@name='group3']/div/div"
+                position="attributes"
+            >
+                <attribute
+                    name="attrs"
+                >{'invisible': [('payment_difference_handling','!=','reconcile')]}</attribute>
+            </xpath>
+            <xpath expr="/form/group/group[@name='group3']" position="after">
+                <group
+                    colspan="4"
+                    attrs="{'invisible': [('payment_difference_handling', '!=', 'reconcile_multi_deduct')]}"
+                >
+                    <field name="deduct_residual" invisible="1" />
+                    <field name="deduct_analytic_distribution" invisible="1" />
+                    <field
+                        name="deduction_ids"
+                        nolabel="1"
+                        colspan="2"
+                        context="{'default_amount': deduct_residual, 'default_analytic_distribution': deduct_analytic_distribution}"
+                    >
+                        <tree editable="bottom">
+                            <field name="currency_id" invisible="1" />
+                            <field name="is_open" />
+                            <field
+                                name="account_id"
+                                attrs="{'required': [('is_open', '=', False)]}"
+                            />
+                            <field
+                                name="analytic_distribution"
+                                widget="analytic_distribution"
+                                groups="analytic.group_analytic_accounting"
+                                options="{'product_field': 'product_id', 'account_field': 'account_id', 'business_domain': 'expense'}"
+                            />
+                            <field name="name" />
+                            <field name="amount" sum="Total Deduction" />
+                        </tree>
+                    </field>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
