@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <template inherit_id="payment.payment_tokens_list" id="payment_tokens_list">
+        <form position="before">
+            <t t-if="sale_order and not order_id">
+                <t t-set="order_id" t-value="sale_order.id" />
+            </t>
+            <t t-if="invoice and not invoice_id">
+                <t t-set="invoice_id" t-value="invoice.id" />
+            </t>
+            <t
+                t-set="acquirers"
+                t-value="env['payment.acquirer'].get_allowed_acquirers(acquirers, invoice_id, order_id)"
+            />
+        </form>
+    </template>
+</odoo>
