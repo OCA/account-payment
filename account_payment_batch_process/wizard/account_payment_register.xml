@@ -20,14 +20,14 @@
                         attrs="{'invisible': [('is_customer', '=', False)]}"
                     />
                 </group>
-                <group invisible="not context.get('batch', False)">
+                <div invisible="not context.get('batch', False)">
                     <button
                         name="auto_fill_payments"
                         string="Auto-Fill Pay Amount"
                         type="object"
-                        class="oe_highlight"
+                        class="oe_highlight btn"
                     />
-                   <field name="invoice_payments" colspan="4" nolabel="1">
+                    <field name="invoice_payments" nolabel="1">
                         <tree editable="bottom" create="false">
                             <field
                                 name="partner_id"
@@ -54,13 +54,15 @@
                             />
                         </tree>
                     </field>
-                </group>
-                <group invisible="not context.get('batch', False)" col="6">
-                    <group colspan="4" />
-                    <group>
-                        <field name="total_amount" />
-                    </group>
-                </group>
+                    <div class="oe_right mt-xl-1">
+                        <label
+                            for="total_amount"
+                            string="Total Invoices:"
+                            class="text-dark"
+                        />
+                        <field name="total_amount" no_label="1" />
+                    </div>
+                </div>
             </xpath>
             <xpath
                 expr="//button[@name='action_create_payments']"

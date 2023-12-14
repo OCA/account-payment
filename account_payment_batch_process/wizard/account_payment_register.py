@@ -174,42 +174,56 @@ class AccountPaymentRegister(models.TransientModel):
         return res
 
     def get_payment_values(self, group_data=None):
-        res = {}
-        if group_data:
-            writeoff_amount = 0
-            writeoff_account_id = False
-            writeoff_name = False
-            for invoice_id in list(group_data["inv_val"]):
-                values = group_data["inv_val"][invoice_id]
-                if (
-                    self.currency_id
-                    and not self.currency_id.is_zero(values["payment_difference"])
-                    and values["payment_difference_handling"] == "reconcile"
-                ):
-                    writeoff_name = writeoff_name or values["line_name"]
-                    writeoff_account_id = (
-                        writeoff_account_id or values["writeoff_account_id"]
-                    )
-                    writeoff_amount += values["payment_difference"]
-            res = {
-                "journal_id": self.journal_id.id,
-                "payment_method_line_id": "payment_method_line_id" in group_data
-                and group_data["payment_method_line_id"]
-                or self.payment_method_line_id.id,
-                "date": self.payment_date,
-                "ref": group_data["memo"],
-                "payment_type": self.payment_type,
-                "amount": group_data["total"],
-                "currency_id": self.currency_id.id,
-                "partner_id": int(group_data["partner_id"]),
-                "partner_type": group_data["partner_type"],
-                "check_amount_in_words": group_data["check_amount_in_words"],
-                "write_off_line_vals": {
-                    "name": writeoff_name,
-                    "account_id": writeoff_account_id,
-                    "amount": writeoff_amount,
-                },
-            }
+        if not group_data:
+            return {}
+        res = {
+            "journal_id": self.journal_id.id,
+            "payment_method_line_id": "payment_method_line_id" in group_data
+            and group_data["payment_method_line_id"]
+            or self.payment_method_line_id.id,
+            "date": self.payment_date,
+            "ref": group_data["memo"],
+            "payment_type": self.payment_type,
+            "amount": group_data["total"],
+            "currency_id": self.currency_id.id,
+            "partner_bank_id": self.partner_bank_id.id,
+            "partner_id": int(group_data["partner_id"]),
+            "partner_type": group_data["partner_type"],
+            "check_amount_in_words": group_data["check_amount_in_words"],
+            "write_off_line_vals": [],
+        }
+        conversion_rate = self.env["res.currency"]._get_conversion_rate(
+            self.currency_id,
+            self.company_id.currency_id,
+            self.company_id,
+            self.payment_date,
+        )
+        for invoice_id in list(group_data["inv_val"]):
+            values = group_data["inv_val"][invoice_id]
+            if (
+                self.currency_id
+                and not self.currency_id.is_zero(values["payment_difference"])
+                and values["payment_difference_handling"] == "reconcile"
+            ):
+                writeoff_name = values.get("line_name", False)
+                writeoff_account_id = values.get("writeoff_account_id", False)
+                if self.payment_type == "inbound":
+                    write_off_amount_currency = values["payment_difference"]
+                else:
+                    write_off_amount_currency = -values["payment_difference"]
+                write_off_balance = self.company_id.currency_id.round(
+                    write_off_amount_currency * conversion_rate
+                )
+                res["write_off_line_vals"].append(
+                    {
+                        "name": writeoff_name,
+                        "account_id": writeoff_account_id,
+                        "partner_id": self.partner_id.id,
+                        "currency_id": self.currency_id.id,
+                        "amount_currency": write_off_amount_currency,
+                        "balance": write_off_balance,
+                    }
+                )
         return res
 
     def _check_amounts(self):
@@ -408,14 +422,20 @@ class AccountPaymentRegister(models.TransientModel):
             )
             payment_ids.append(payment.id)
             payment.action_post()
+
             # Reconciliation
-            domain = [
-                ("account_internal_type", "in", ("receivable", "payable")),
-                ("reconciled", "=", False),
-            ]
-            payment_lines = payment.line_ids.filtered_domain(domain)
+            def _get_line_filter(line):
+                line_filter = (
+                    line.account_id
+                    and line.account_id.account_type
+                    in ("asset_receivable", "liability_payable")
+                    and not line.reconciled
+                )
+                return line_filter
+
+            payment_lines = payment.line_ids.filtered(_get_line_filter)
             invoices = self.env["account.move"].browse(context.get("active_ids"))
-            lines = invoices.line_ids.filtered_domain(domain)
+            lines = invoices.line_ids.filtered(_get_line_filter)
             for account in payment_lines.account_id:
                 (payment_lines + lines).filtered_domain(
                     [("account_id", "=", account.id), ("reconciled", "=", False)]
