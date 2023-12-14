@@ -6,33 +6,35 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2023-12-14 23:34+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_payment_terminal
 #: model:ir.model,name:account_payment_terminal.model_account_payment_terminal
 msgid "Account Payment Terminal"
-msgstr ""
+msgstr "Terminal de Pago a Cuenta"
 
 #. module: account_payment_terminal
 #: model_terms:ir.ui.view,arch_db:account_payment_terminal.account_payment_register_form_view
 msgid "Create Payment"
-msgstr ""
+msgstr "Crear Pago"
 
 #. module: account_payment_terminal
 #: model:ir.model.fields,field_description:account_payment_terminal.field_account_payment_terminal__create_uid
 msgid "Created by"
-msgstr ""
+msgstr "Creado por"
 
 #. module: account_payment_terminal
 #: model:ir.model.fields,field_description:account_payment_terminal.field_account_payment_terminal__create_date
 msgid "Created on"
-msgstr ""
+msgstr "Creado el"
 
 #. module: account_payment_terminal
 #: model:ir.model.fields,field_description:account_payment_terminal.field_account_journal__display_name
@@ -40,21 +42,21 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_payment_terminal.field_account_payment_terminal__display_name
 #: model:ir.model.fields,field_description:account_payment_terminal.field_oca_payment_terminal_form_mixin__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Mostrar Nombre"
 
 #. module: account_payment_terminal
 #. openerp-web
 #: code:addons/account_payment_terminal/static/src/js/views/payment_terminal_form/payment_terminal_form_controller.js:0
 #, python-format
 msgid "Error querying terminal driver status"
-msgstr ""
+msgstr "Error al consultar el estado del controlador del terminal"
 
 #. module: account_payment_terminal
 #. openerp-web
 #: code:addons/account_payment_terminal/static/src/js/views/payment_terminal_form/payment_terminal_form_controller.js:0
 #, python-format
 msgid "Error starting payment transaction"
-msgstr ""
+msgstr "Error al iniciar la operación de pago"
 
 #. module: account_payment_terminal
 #. openerp-web
@@ -64,6 +66,8 @@ msgid ""
 "Failed to send the amount to pay to the payment terminal. Press the red "
 "button on the payment terminal and try again."
 msgstr ""
+"No se ha podido enviar el importe a pagar al terminal de pago. Pulse el "
+"botón rojo del terminal de pago e inténtelo de nuevo."
 
 #. module: account_payment_terminal
 #: model:ir.model.fields,field_description:account_payment_terminal.field_account_journal__id
@@ -71,17 +75,17 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_payment_terminal.field_account_payment_terminal__id
 #: model:ir.model.fields,field_description:account_payment_terminal.field_oca_payment_terminal_form_mixin__id
 msgid "ID"
-msgstr ""
+msgstr "ID (identificación)"
 
 #. module: account_payment_terminal
 #: model:ir.model.fields,field_description:account_payment_terminal.field_account_payment_terminal__proxy_ip
 msgid "IP Address"
-msgstr ""
+msgstr "Dirección IP"
 
 #. module: account_payment_terminal
 #: model:ir.model,name:account_payment_terminal.model_account_journal
 msgid "Journal"
-msgstr ""
+msgstr "Diario"
 
 #. module: account_payment_terminal
 #: model:ir.model.fields,field_description:account_payment_terminal.field_account_journal____last_update
@@ -89,52 +93,52 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_payment_terminal.field_account_payment_terminal____last_update
 #: model:ir.model.fields,field_description:account_payment_terminal.field_oca_payment_terminal_form_mixin____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación el"
 
 #. module: account_payment_terminal
 #: model:ir.model.fields,field_description:account_payment_terminal.field_account_payment_terminal__write_uid
 msgid "Last Updated by"
-msgstr ""
+msgstr "Última actualización por"
 
 #. module: account_payment_terminal
 #: model:ir.model.fields,field_description:account_payment_terminal.field_account_payment_terminal__write_date
 msgid "Last Updated on"
-msgstr ""
+msgstr "Última Actualización el"
 
 #. module: account_payment_terminal
 #: model:ir.model.fields,field_description:account_payment_terminal.field_account_payment_terminal__name
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #. module: account_payment_terminal
 #: model:ir.model.fields,field_description:account_payment_terminal.field_account_payment_register__need_payment_terminal
 msgid "Need Payment Terminal"
-msgstr ""
+msgstr "Necesita un Terminal de Pago"
 
 #. module: account_payment_terminal
 #: code:addons/account_payment_terminal/models/account_journal.py:0
 #, python-format
 msgid "OCA Payment Terminal"
-msgstr ""
+msgstr "Terminal de pago OCA"
 
 #. module: account_payment_terminal
 #: model:ir.model,name:account_payment_terminal.model_oca_payment_terminal_form_mixin
 msgid "OCA Payment Terminal Form Mixin"
-msgstr ""
+msgstr "Mezcla de formularios de terminal de pago OCA"
 
 #. module: account_payment_terminal
 #. openerp-web
 #: code:addons/account_payment_terminal/static/src/js/views/payment_terminal_form/payment_terminal_form_controller.js:0
 #, python-format
 msgid "Payment Successful"
-msgstr ""
+msgstr "Pago efectuado con éxito"
 
 #. module: account_payment_terminal
 #. openerp-web
 #: code:addons/account_payment_terminal/static/src/js/views/payment_terminal_form/payment_terminal_form_controller.js:0
 #, python-format
 msgid "Payment Successful but couldn't confirm it in odoo"
-msgstr ""
+msgstr "Pago Exitoso pero no se pudo confirmar en odoo"
 
 #. module: account_payment_terminal
 #: code:addons/account_payment_terminal/models/oca_payment_terminal_form_mixin.py:0
@@ -142,20 +146,20 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_payment_terminal.field_oca_payment_terminal_form_mixin__account_payment_terminal_id
 #, python-format
 msgid "Payment Terminal"
-msgstr ""
+msgstr "Terminal de pago"
 
 #. module: account_payment_terminal
 #. openerp-web
 #: code:addons/account_payment_terminal/static/src/js/views/payment_terminal_form/payment_terminal_form_view.js:0
 #, python-format
 msgid "Payment Terminal Form"
-msgstr ""
+msgstr "Formulario de Terminal de Pago"
 
 #. module: account_payment_terminal
 #: model:ir.actions.act_window,name:account_payment_terminal.account_payment_terminal_act_window
 #: model:ir.ui.menu,name:account_payment_terminal.account_payment_terminal_menu
 msgid "Payment Terminals"
-msgstr ""
+msgstr "Terminales de Pago"
 
 #. module: account_payment_terminal
 #: code:addons/account_payment_terminal/models/oca_payment_terminal_form_mixin.py:0
@@ -164,32 +168,34 @@ msgid ""
 "Payment terminal is not correctly configured. Please contact your "
 "administrator."
 msgstr ""
+"El terminal de pago no está correctamente configurado. Por favor, póngase en "
+"contacto con su administrador."
 
 #. module: account_payment_terminal
 #: model_terms:ir.ui.view,arch_db:account_payment_terminal.account_payment_register_payment_terminal_form_view
 #: model_terms:ir.ui.view,arch_db:account_payment_terminal.oca_payment_terminal_form_mixin_form_view
 msgid "Please check the payment terminal"
-msgstr ""
+msgstr "Por favor, compruebe el terminal de pago"
 
 #. module: account_payment_terminal
 #: model:ir.model.fields,help:account_payment_terminal.field_account_journal__use_payment_terminal
 msgid "Record payments with a terminal on this journal."
-msgstr ""
+msgstr "Registre los pagos con un terminal en este diario."
 
 #. module: account_payment_terminal
 #: model:ir.model,name:account_payment_terminal.model_account_payment_register
 msgid "Register Payment"
-msgstr ""
+msgstr "Registrar Pago"
 
 #. module: account_payment_terminal
 #: model:ir.model.fields,field_description:account_payment_terminal.field_account_payment_terminal__oca_payment_terminal_id
 msgid "Terminal identifier"
-msgstr ""
+msgstr "Identificador de Terminal"
 
 #. module: account_payment_terminal
 #: model:ir.model.fields,help:account_payment_terminal.field_account_payment_terminal__proxy_ip
 msgid "The hostname or ip address of the hardware proxy"
-msgstr ""
+msgstr "El nombre de host o la dirección IP del proxy de hardware"
 
 #. module: account_payment_terminal
 #: model:ir.model.fields,help:account_payment_terminal.field_account_payment_terminal__oca_payment_terminal_id
@@ -197,15 +203,17 @@ msgid ""
 "The identifier of the terminal as known by the hardware proxy. Leave empty "
 "if the proxy has only one terminal connected."
 msgstr ""
+"El identificador del terminal tal y como lo conoce el proxy de hardware. "
+"Dejar vacío si el proxy sólo tiene un terminal conectado."
 
 #. module: account_payment_terminal
 #. openerp-web
 #: code:addons/account_payment_terminal/static/src/js/views/payment_terminal_form/payment_terminal_form_controller.js:0
 #, python-format
 msgid "Transaction cancelled"
-msgstr ""
+msgstr "Transacción cancelada"
 
 #. module: account_payment_terminal
 #: model:ir.model.fields,field_description:account_payment_terminal.field_account_journal__use_payment_terminal
 msgid "Use a Payment Terminal"
-msgstr ""
+msgstr "Utilizar un Terminal de Pago"
