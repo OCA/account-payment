@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-12-15 19:33+0000\n"
+"PO-Revision-Date: 2023-12-15 22:33+0000\n"
 "Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
@@ -269,12 +269,14 @@ msgid ""
 "You can only register a batch payment for invoices with the same payment "
 "mode."
 msgstr ""
+"Sólo puede registrar un pago por lotes para facturas con el mismo modo de "
+"pago."
 
 #. module: account_payment_batch_process
 #: code:addons/account_payment_batch_process/wizard/account_payment_register.py:0
 #, python-format
 msgid "You can only register payments for open invoices."
-msgstr ""
+msgstr "Sólo puedes registrar pagos para facturas abiertas."
 
 #. module: account_payment_batch_process
 #: code:addons/account_payment_batch_process/wizard/account_payment_register.py:0
@@ -282,3 +284,5 @@ msgstr ""
 #, python-format
 msgid "You cannot mix customer invoices and vendor bills in a single payment."
 msgstr ""
+"No se pueden mezclar facturas de clientes y facturas de proveedores en un "
+"solo pago."
