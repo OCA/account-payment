@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2023-12-18 00:18+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_financial_discount
 #: model_terms:ir.ui.view,arch_db:account_financial_discount.view_account_config_settings
@@ -21,6 +23,9 @@ msgid ""
 "specific.\" aria-label=\"Values set here are company-specific.\" "
 "groups=\"base.group_multi_company\" role=\"img\"/>"
 msgstr ""
+"<span class=\"fa fa-lg fa-building\" title=\"Values set here are company-"
+"specific.\" aria-label=\"Values set here are company-specific.\" groups="
+"\"base.group_multi_company\" role=\"img\"/>"
 
 #. module: account_financial_discount
 #: model_terms:ir.ui.view,arch_db:account_financial_discount.view_account_config_settings
@@ -29,82 +34,88 @@ msgid ""
 "specific.\" aria-label=\"Values set here are company-specific.\" "
 "groups=\"base.group_multi_company\" role=\"img\"/>"
 msgstr ""
+"<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-"
+"specific.\" aria-label=\"Values set here are company-specific.\" groups="
+"\"base.group_multi_company\" role=\"img\"/>"
 
 #. module: account_financial_discount
 #: model_terms:ir.ui.view,arch_db:account_financial_discount.report_payment_receipt_document
 msgid "<span>Written-off</span>"
-msgstr ""
+msgstr "<span>Cancelado</span>"
 
 #. module: account_financial_discount
 #: code:addons/account_financial_discount/models/account_reconcile_model.py:0
 #, python-format
 msgid "A financial discount expense account must be set on the company"
 msgstr ""
+"Debe establecerse una cuenta de gastos de descuento financiero en la empresa"
 
 #. module: account_financial_discount
 #: code:addons/account_financial_discount/models/account_reconcile_model.py:0
 #, python-format
 msgid "A financial discount label must be set"
-msgstr ""
+msgstr "Debe fijarse una etiqueta de descuento financiero"
 
 #. module: account_financial_discount
 #: code:addons/account_financial_discount/models/account_reconcile_model.py:0
 #, python-format
 msgid "A financial discount revenue account must be set on the company"
 msgstr ""
+"Debe establecerse una cuenta de ingresos por descuentos financieros en la "
+"empresa"
 
 #. module: account_financial_discount
 #: model:ir.model.fields,field_description:account_financial_discount.field_account_move_line__amount_discount_tax
 msgid "Amount Discount Tax"
-msgstr ""
+msgstr "Importe Impuesto de descuento"
 
 #. module: account_financial_discount
 #: code:addons/account_financial_discount/models/account_reconcile_model.py:0
 #, python-format
 msgid "Amount Matching must be set to 100%"
-msgstr ""
+msgstr "El importe de la igualación debe ser del 100%"
 
 #. module: account_financial_discount
 #: model:ir.model.fields,field_description:account_financial_discount.field_account_payment_register__force_financial_discount
 msgid "Apply Financial Discount Past Date"
-msgstr ""
+msgstr "Aplicar Descuento Financiero Fecha Pasada"
 
 #. module: account_financial_discount
 #: model:ir.model,name:account_financial_discount.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Compañías"
 
 #. module: account_financial_discount
 #: model:ir.model,name:account_financial_discount.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Ajustes de config"
 
 #. module: account_financial_discount
 #: model:ir.model.fields,field_description:account_financial_discount.field_account_reconcile_model__apply_financial_discounts
 msgid "Consider financial discounts"
-msgstr ""
+msgstr "Considere los descuentos financieros"
 
 #. module: account_financial_discount
 #: model:ir.model.fields,field_description:account_financial_discount.field_account_payment_term__days_discount
 msgid "Days for discount"
-msgstr ""
+msgstr "Días de descuento"
 
 #. module: account_financial_discount
 #: model:ir.model.fields,field_description:account_financial_discount.field_account_move_line__discount_tax_line_id
 msgid "Discount Tax Line"
-msgstr ""
+msgstr "Línea de Descuento de Impuestos"
 
 #. module: account_financial_discount
 #: model:ir.model.fields,field_description:account_financial_discount.field_account_payment_term__percent_discount
 msgid "Discount percentage"
-msgstr ""
+msgstr "Porcentaje de Descuento"
 
 #. module: account_financial_discount
 #: model:ir.model.fields,field_description:account_financial_discount.field_account_bank_statement_line__display_force_financial_discount
 #: model:ir.model.fields,field_description:account_financial_discount.field_account_move__display_force_financial_discount
 #: model:ir.model.fields,field_description:account_financial_discount.field_account_payment__display_force_financial_discount
 msgid "Display Force Financial Discount"
-msgstr ""
+msgstr "Forzar Visualización Descuento Financiero"
 
 #. module: account_financial_discount
 #: model:ir.model.fields,field_description:account_financial_discount.field_account_move__display_name
@@ -115,23 +126,23 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_financial_discount.field_res_company__display_name
 #: model:ir.model.fields,field_description:account_financial_discount.field_res_config_settings__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nombre para Mostrar"
 
 #. module: account_financial_discount
 #: model:ir.model.fields,field_description:account_financial_discount.field_account_reconcile_model__financial_discount_expense_account_id
 msgid "Expense write-off account"
-msgstr ""
+msgstr "Cuenta de amortización de gastos"
 
 #. module: account_financial_discount
 #: code:addons/account_financial_discount/wizard/account_payment_register.py:0
 #, python-format
 msgid "Financial Discount"
-msgstr ""
+msgstr "Descuento Financiero"
 
 #. module: account_financial_discount
 #: model:ir.model.fields,field_description:account_financial_discount.field_account_reconcile_model__financial_discount_tolerance
 msgid "Financial Discount Tolerance"
-msgstr ""
+msgstr "Tolerancia al Descuento Financiero"
 
 #. module: account_financial_discount
 #: model:ir.model.fields,field_description:account_financial_discount.field_account_move_line__amount_discount_currency
@@ -139,58 +150,60 @@ msgid ""
 "Financial Discount amount in an optional other currency if it is a multi-"
 "currency entry."
 msgstr ""
+"Financiero Importe del descuento en otra divisa opcional si se trata de un "
+"asiento multidivisa."
 
 #. module: account_financial_discount
 #: model:ir.model.fields,field_description:account_financial_discount.field_account_move_line__amount_discount
 msgid "Financial Discount amount in company currency"
-msgstr ""
+msgstr "Financiero Importe del descuento en la moneda de la empresa"
 
 #. module: account_financial_discount
 #: model:ir.model.fields,field_description:account_financial_discount.field_account_move_line__date_discount
 msgid "Financial Discount date"
-msgstr ""
+msgstr "Fecha de Descuento Financiero"
 
 #. module: account_financial_discount
 #: model_terms:ir.ui.view,arch_db:account_financial_discount.view_account_reconcile_model_form
 msgid "Financial discount"
-msgstr ""
+msgstr "Descuento Financiero"
 
 #. module: account_financial_discount
 #: model_terms:ir.ui.view,arch_db:account_financial_discount.view_account_config_settings
 msgid "Financial discount expense account"
-msgstr ""
+msgstr "Cuenta de gastos por descuentos financieros"
 
 #. module: account_financial_discount
 #: model:ir.model.fields,field_description:account_financial_discount.field_res_config_settings__financial_discount_expense_account_id
 msgid "Financial discount expense write-off account"
-msgstr ""
+msgstr "Cuenta de amortización de gastos por descuentos financieros"
 
 #. module: account_financial_discount
 #: model_terms:ir.ui.view,arch_db:account_financial_discount.view_account_config_settings
 msgid "Financial discount revenue account"
-msgstr ""
+msgstr "Cuenta de ingresos de descuento financiero"
 
 #. module: account_financial_discount
 #: model:ir.model.fields,field_description:account_financial_discount.field_res_config_settings__financial_discount_revenue_account_id
 msgid "Financial discount revenue write-off account"
-msgstr ""
+msgstr "Cuenta de cancelación de ingresos por descuentos financieros"
 
 #. module: account_financial_discount
 #: model:ir.model.fields,field_description:account_financial_discount.field_res_company__financial_discount_expense_account_id
 msgid "Financial discount writeoff expense account"
-msgstr ""
+msgstr "Cuenta de gastos de amortización de descuentos financieros"
 
 #. module: account_financial_discount
 #: model:ir.model.fields,field_description:account_financial_discount.field_res_company__financial_discount_revenue_account_id
 msgid "Financial discount writeoff revenue account"
-msgstr ""
+msgstr "Cuenta de pérdidas y ganancias por descuentos financieros"
 
 #. module: account_financial_discount
 #: model:ir.model.fields,field_description:account_financial_discount.field_account_bank_statement_line__force_financial_discount
 #: model:ir.model.fields,field_description:account_financial_discount.field_account_move__force_financial_discount
 #: model:ir.model.fields,field_description:account_financial_discount.field_account_payment__force_financial_discount
 msgid "Force financial discount"
-msgstr ""
+msgstr "Forzar el descuento financiero"
 
 #. module: account_financial_discount
 #: model:ir.model.fields,help:account_financial_discount.field_account_payment_register__force_financial_discount
@@ -198,18 +211,22 @@ msgid ""
 "Force financial discount even if the date is past and the flag is not set on the invoices.\n"
 "Note that financial discounts will be applied for invoices havingthe flag set, even if this checkbox is not marked."
 msgstr ""
+"Forzar descuento financiero incluso si la fecha es pasada y el indicador no "
+"está activado en las facturas.\n"
+"Tenga en cuenta que los descuentos financieros se aplicarán a las facturas "
+"que tengan el indicador activado, aunque esta casilla no esté marcada."
 
 #. module: account_financial_discount
 #: model:ir.model.fields,field_description:account_financial_discount.field_account_bank_statement_line__has_discount_available
 #: model:ir.model.fields,field_description:account_financial_discount.field_account_move__has_discount_available
 #: model:ir.model.fields,field_description:account_financial_discount.field_account_payment__has_discount_available
 msgid "Has discount available"
-msgstr ""
+msgstr "Tiene descuento disponible"
 
 #. module: account_financial_discount
 #: model_terms:ir.ui.view,arch_db:account_financial_discount.view_account_invoice_filter_inherit
 msgid "Has financial discount"
-msgstr ""
+msgstr "Tiene descuento financiero"
 
 #. module: account_financial_discount
 #: model:ir.model.fields,field_description:account_financial_discount.field_account_move__id
@@ -220,7 +237,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_financial_discount.field_res_company__id
 #: model:ir.model.fields,field_description:account_financial_discount.field_res_config_settings__id
 msgid "ID"
-msgstr ""
+msgstr "ID (Identificación)"
 
 #. module: account_financial_discount
 #: model:ir.model.fields,help:account_financial_discount.field_account_bank_statement_line__force_financial_discount
@@ -230,28 +247,30 @@ msgid ""
 "If marked, financial discount will be applied even if the discount date is "
 "passed"
 msgstr ""
+"Si se marca, se aplicará el descuento financiero aunque haya pasado la fecha "
+"de descuento"
 
 #. module: account_financial_discount
 #: code:addons/account_financial_discount/models/account_move.py:0
 #, python-format
 msgid "Invalid domain operator %s"
-msgstr ""
+msgstr "Dominio inválido para el operante %s"
 
 #. module: account_financial_discount
 #: code:addons/account_financial_discount/models/account_move.py:0
 #, python-format
 msgid "Invalid domain right operand %s"
-msgstr ""
+msgstr "Dominio inválido para el operante derecho %s"
 
 #. module: account_financial_discount
 #: model:ir.model,name:account_financial_discount.model_account_move
 msgid "Journal Entry"
-msgstr ""
+msgstr "Entrada en Diario"
 
 #. module: account_financial_discount
 #: model:ir.model,name:account_financial_discount.model_account_move_line
 msgid "Journal Item"
-msgstr ""
+msgstr "Artículo del diario"
 
 #. module: account_financial_discount
 #: model:ir.model.fields,field_description:account_financial_discount.field_account_move____last_update
@@ -262,7 +281,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_financial_discount.field_res_company____last_update
 #: model:ir.model.fields,field_description:account_financial_discount.field_res_config_settings____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación el"
 
 #. module: account_financial_discount
 #: model:ir.model.fields,help:account_financial_discount.field_account_payment_register__payment_method_id
@@ -273,22 +292,37 @@ msgid ""
 "Batch Deposit: Encase several customer checks at once by generating a batch deposit to submit to your bank. When encoding the bank statement in Odoo, you are suggested to reconcile the transaction with the batch deposit.To enable batch deposit, module account_batch_payment must be installed.\n"
 "SEPA Credit Transfer: Pay bill from a SEPA Credit Transfer file you submit to your bank. To enable sepa credit transfer, module account_sepa must be installed "
 msgstr ""
+"Manual: Recibe el pago en efectivo, cheque o cualquier otro método fuera de "
+"Odoo.\n"
+"Electrónico: Recibir el pago automáticamente a través de un adquirente de "
+"pagos solicitando una transacción en una tarjeta guardada por el cliente al "
+"comprar o suscribirse en línea (token de pago).\n"
+"Cheque: Pague la factura con un cheque e imprímalo desde Odoo.\n"
+"Depósito por lotes: Codifique varios cheques de clientes a la vez generando "
+"un depósito por lotes para enviarlo a su banco. Al codificar el extracto "
+"bancario en Odoo, se sugiere conciliar la transacción con el depósito por "
+"lotes.Para habilitar el depósito por lotes, el módulo account_batch_payment "
+"debe estar instalado.\n"
+"Transferencia de Crédito SEPA: Pague la factura de un archivo de "
+"transferencia de crédito SEPA que envíe a su banco. Para activar la "
+"transferencia SEPA, debe estar instalado el módulo account_sepa. "
 
 #. module: account_financial_discount
 #: model:ir.model.fields,field_description:account_financial_discount.field_account_payment_register__payment_method_id
 msgid "Payment Method"
-msgstr ""
+msgstr "Método de Pago"
 
 #. module: account_financial_discount
 #: model:ir.model,name:account_financial_discount.model_account_payment_term
 msgid "Payment Terms"
-msgstr ""
+msgstr "Términos de Pago"
 
 #. module: account_financial_discount
 #: model:ir.model,name:account_financial_discount.model_account_reconcile_model
 msgid ""
 "Preset to create journal entries during a invoices and payments matching"
 msgstr ""
+"Preajuste para crear asientos durante la conciliación de facturas y pagos"
 
 #. module: account_financial_discount
 #: code:addons/account_financial_discount/models/account_reconcile_model.py:0
@@ -297,27 +331,29 @@ msgid ""
 "Reconciliation model %s is set to consider financial discount. However to "
 "function properly:\n"
 msgstr ""
+"El modelo de conciliación %s está configurado para considerar el descuento "
+"financiero. Sin embargo para que funcione correctamente:\n"
 
 #. module: account_financial_discount
 #: model:ir.model,name:account_financial_discount.model_account_payment_register
 msgid "Register Payment"
-msgstr ""
+msgstr "Registrar Pago"
 
 #. module: account_financial_discount
 #: model:ir.model.fields,field_description:account_financial_discount.field_account_reconcile_model__financial_discount_revenue_account_id
 msgid "Revenue write-off account"
-msgstr ""
+msgstr "Cuenta de pérdidas y ganancias"
 
 #. module: account_financial_discount
 #: code:addons/account_financial_discount/models/account_reconcile_model.py:0
 #, python-format
 msgid "Same currency matching must be set"
-msgstr ""
+msgstr "Debe ajustarse la misma divisa"
 
 #. module: account_financial_discount
 #: model:ir.model.fields,field_description:account_financial_discount.field_account_payment_register__show_force_financial_discount
 msgid "Show Force Financial Discount"
-msgstr ""
+msgstr "Mostrar el descuento de Force Financial"
 
 #. module: account_financial_discount
 #: model:ir.model.fields,help:account_financial_discount.field_account_reconcile_model__financial_discount_tolerance
@@ -325,16 +361,19 @@ msgid ""
 "Tolerance for the application of financial discounts. Use 0.05 toapply "
 "discount up to a difference of 5 cts between statement lineand move lines."
 msgstr ""
+"Tolerancia para la aplicación de descuentos financieros. Utilice 0,05 para "
+"aplicar el descuento hasta una diferencia de 5 cts entre la línea de "
+"extracto y las líneas de movimiento."
 
 #. module: account_financial_discount
 #: model:ir.model.fields,field_description:account_financial_discount.field_account_payment_register__with_financial_discount
 msgid "With Financial Discount"
-msgstr ""
+msgstr "Con Descuento Financiero"
 
 #. module: account_financial_discount
 #: model:ir.model.fields,field_description:account_financial_discount.field_account_reconcile_model__financial_discount_label
 msgid "Write-off label"
-msgstr ""
+msgstr "Etiqueta de cancelación"
 
 #. module: account_financial_discount
 #: code:addons/account_financial_discount/models/account_payment_term.py:0
@@ -343,3 +382,5 @@ msgid ""
 "You cannot change the discount on payment term %s since some posted journal "
 "entries already exist"
 msgstr ""
+"No se puede modificar el descuento sobre el plazo de pago %s puesto que ya "
+"existen algunos asientos contabilizados"
