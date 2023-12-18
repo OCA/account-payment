@@ -8,16 +8,16 @@ msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-02-01 00:05+0000\n"
-"PO-Revision-Date: 2021-02-01 01:08+0100\n"
-"Last-Translator: Carlos Dauden <carlos.dauden@tecnativa.com>\n"
+"PO-Revision-Date: 2023-12-18 19:33+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: Spanish (http://www.transifex.com/oca/OCA-account-payment-8-0/"
 "language/es/)\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -42,7 +42,7 @@ msgstr "Fecha factura"
 #. module: account_due_list
 #: model:ir.model.fields,field_description:account_due_list.field_account_move_line__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Mostrar nombre"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -62,7 +62,7 @@ msgstr "Agrupar por"
 #. module: account_due_list
 #: model:ir.model.fields,field_description:account_due_list.field_account_move_line__id
 msgid "ID"
-msgstr ""
+msgstr "ID (identificación)"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -88,7 +88,7 @@ msgstr "Apunte contable"
 #. module: account_due_list
 #: model:ir.model.fields,field_description:account_due_list.field_account_move_line____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Última Modificación el"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -113,7 +113,7 @@ msgstr "Empresa"
 #. module: account_due_list
 #: model:ir.model.fields,field_description:account_due_list.field_account_move_line__partner_ref
 msgid "Partner Ref"
-msgstr "Partner Ref"
+msgstr "Ref de Socio"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -176,7 +176,7 @@ msgstr "Referencia del documento que ha creado esta factura."
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
 msgid "Total Balance"
-msgstr ""
+msgstr "Saldo Total"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
