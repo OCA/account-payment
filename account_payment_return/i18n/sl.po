@@ -221,7 +221,6 @@ msgstr "Označeno pomeni, da nova sporočila zahtevajo vašo pozornost."
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return__message_has_error
-#: model:ir.model.fields,help:account_payment_return.field_payment_return__message_has_sms_error
 #, fuzzy
 msgid "If checked, some messages have a delivery error."
 msgstr "Označeno pomeni, da nova sporočila zahtevajo vašo pozornost."
@@ -515,11 +514,6 @@ msgstr "Vrnjeno"
 #: model:ir.model.fields,help:account_payment_return.field_payment_return_line__amount
 msgid "Returned amount. Can be different from the move amount"
 msgstr "Vrnjeni znesek. Lahko se razlikuje od zneska premika"
-
-#. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__state

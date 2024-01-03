@@ -215,7 +215,6 @@ msgstr "Si está marcado, los nuevos mensajes requieren su atención."
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return__message_has_error
-#: model:ir.model.fields,help:account_payment_return.field_payment_return__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Si está marcado, algunos mensajes tienen errores de entrega."
 
@@ -506,11 +505,6 @@ msgid "Returned amount. Can be different from the move amount"
 msgstr "Moto devuelto. Puede ser diferente del monto del movimiento"
 
 #. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr "Error de Entrega de SMS"
-
-#. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__state
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_search_view
 msgid "State"
@@ -570,3 +564,6 @@ msgstr "No puede remover una devolución de pago si su estado es 'Hecho'"
 msgid "You must input all moves references in the payment return."
 msgstr ""
 "Debe ingresar todas las referencias de movimientos en la devolución del pago."
+
+#~ msgid "SMS Delivery error"
+#~ msgstr "Error de Entrega de SMS"
