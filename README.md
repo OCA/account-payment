@@ -22,7 +22,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [account_check_printing_report_base](account_check_printing_report_base/) | 15.0.1.0.0 |  | Account Check Printing Report Base
-[account_check_printing_report_sslm102](account_check_printing_report_sslm102/) | 15.0.1.0.0 |  | Allows you to print SSLM102 lined checks.
+[account_check_printing_report_sslm102](account_check_printing_report_sslm102/) | 15.0.1.0.1 |  | Allows you to print SSLM102 lined checks.
 [account_check_report](account_check_report/) | 15.0.1.0.0 |  | Account Check Report
 [account_due_list](account_due_list/) | 15.0.1.2.0 |  | List of open credits and debits, with due date
 [account_due_list_payment_mode](account_due_list_payment_mode/) | 15.0.1.0.0 |  | Payment Due List Payment Mode
