@@ -7,8 +7,6 @@ from odoo import api, fields, models
 class AccountPaymentRegister(models.TransientModel):
     _inherit = "account.payment.register"
 
-    # T5879 code field's value passed through payment_method_line_id in 15.0
-    payment_method_code = fields.Char(related="payment_method_line_id.code")
     check_payee = fields.Char(
         string="Payee",
         compute="_compute_check_payee",
@@ -23,8 +21,8 @@ class AccountPaymentRegister(models.TransientModel):
         for rec in self:
             rec.check_payee = rec.partner_id.name or "-"
 
-    def _create_payment_vals_from_wizard(self):
-        payment_vals = super()._create_payment_vals_from_wizard()
+    def _create_payment_vals_from_wizard(self, batch_result):
+        payment_vals = super()._create_payment_vals_from_wizard(batch_result)
         payment_vals["check_payee"] = self.check_payee or "-"
         return payment_vals
 

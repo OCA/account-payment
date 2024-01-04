@@ -5,8 +5,7 @@ from odoo import SUPERUSER_ID, api
 
 
 def assign_payees(cr, registry):
-    with api.Environment.manage():
-        env = api.Environment(cr, SUPERUSER_ID, {})
-        payments = env["account.payment"].search([])
-        for payment in payments:
-            payment.write({"check_payee": payment.partner_id.name or "-"})
+    env = api.Environment(cr, SUPERUSER_ID, {})
+    payments = env["account.payment"].search([])
+    for payment in payments:
+        payment.write({"check_payee": payment.partner_id.name or "-"})
