@@ -21,6 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
+[account_check_date](account_check_date/) | 15.0.0.1.0 | [![ps-tubtim](https://github.com/ps-tubtim.png?size=30px)](https://github.com/ps-tubtim) | Add check date on payment for check printing
 [account_check_payee](account_check_payee/) | 15.0.1.0.0 | [![ps-tubtim](https://github.com/ps-tubtim.png?size=30px)](https://github.com/ps-tubtim) | Add payee on payment for check printing
 [account_check_printing_report_base](account_check_printing_report_base/) | 15.0.1.0.0 |  | Account Check Printing Report Base
 [account_check_printing_report_sslm102](account_check_printing_report_sslm102/) | 15.0.1.0.1 |  | Allows you to print SSLM102 lined checks.
