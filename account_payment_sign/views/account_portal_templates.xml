@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <template
+        id="portal_invoice_page"
+        name="Sign Dialog on Invoice Portal Template"
+        inherit_id="account.portal_invoice_page"
+    >
+        <xpath expr="//div[hasclass('o_portal_html_view')]" position="before">
+             <!-- modal relative to the actions sign and pay -->
+             <div role="dialog" class="modal fade" id="modalaccept">
+                <div class="modal-dialog" t-if="invoice.has_to_be_signed(True)">
+                    <form
+                        id="accept"
+                        method="POST"
+                        t-att-data-order-id="invoice.id"
+                        t-att-data-token="invoice.access_token"
+                        class="js_accept_json modal-content js_website_submit_form"
+                    >
+                        <input
+                            type="hidden"
+                            name="csrf_token"
+                            t-att-value="request.csrf_token()"
+                        />
+                        <header class="modal-header">
+                            <h4 class="modal-title">Validate Order</h4>
+                            <button
+                                type="button"
+                                class="close"
+                                data-dismiss="modal"
+                                aria-label="Close"
+                            >×</button>
+                        </header>
+                        <main class="modal-body" id="sign-dialog">
+                            <p>
+                                <span
+                                >By signing this proposal, I agree to the following terms:</span>
+                                <ul>
+                                    <li><span>Accepted on the behalf of:</span> <b
+                                            t-field="invoice.partner_id.commercial_partner_id"
+                                        /></li>
+                                    <li><span>For an amount of:</span> <b
+                                            data-id="total_amount"
+                                            t-field="invoice.amount_total"
+                                        /></li>
+                                    <li t-if="invoice.invoice_payment_term_id"><span
+                                        >With payment terms:</span> <b
+                                            t-field="invoice.invoice_payment_term_id.note"
+                                        /></li>
+                                </ul>
+                            </p>
+                            <t t-call="portal.signature_form">
+                                <t
+                                    t-set="call_url"
+                                    t-value="invoice.get_portal_url(suffix='/sign')"
+                                />
+                                <t
+                                    t-set="default_name"
+                                    t-value="invoice.partner_id.name"
+                                />
+                            </t>
+                        </main>
+                    </form>
+                </div>
+
+                <div
+                    class="modal-dialog"
+                    t-if="not invoice.has_to_be_signed(True) and invoice.has_to_be_paid(True)"
+                >
+                    <div class="modal-content">
+                        <header class="modal-header">
+                            <h4 class="modal-title">Validate Invoice</h4>
+                            <button
+                                type="button"
+                                class="close"
+                                data-dismiss="modal"
+                                aria-label="Close"
+                            >×</button>
+                        </header>
+                        <main class="modal-body" id="sign-dialog">
+                            <p>
+                                <span
+                                >By paying this proposal, I agree to the following terms:</span>
+                                <ul>
+                                    <li><span>Accepted on the behalf of:</span> <b
+                                            t-field="invoice.partner_id.commercial_partner_id"
+                                        /></li>
+                                    <li><span>For an amount of:</span> <b
+                                            data-id="total_amount"
+                                            t-field="invoice.amount_total"
+                                        /></li>
+                                    <li t-if="invoice.invoice_payment_term_id"><span
+                                        >With payment terms:</span> <b
+                                            t-field="invoice.invoice_payment_term_id.note"
+                                        /></li>
+                                </ul>
+                            </p>
+                            <div
+                                t-if="acquirers or tokens"
+                                id="payment_method"
+                                class="text-left"
+                            >
+                                <h3 class="mb24">Pay with</h3>
+                                <t t-call="payment.checkout" />
+                            </div>
+                            <div t-else="" class="alert alert-warning">
+                                <strong
+                                >No suitable payment option could be found.</strong><br
+                                />
+                                If you believe that it is an error, please contact the website administrator.
+                            </div>
+                        </main>
+                    </div>
+                </div>
+            </div>
+        </xpath>
+    </template>
+
+    <template
+        id="portal_invoice_page_inherit_payment"
+        name="Sign Payment on My Invoices"
+        inherit_id="account_payment.portal_invoice_page_inherit_payment"
+        priority="333"
+    >
+        <xpath expr="//a[@data-target='#pay_with']" position="replace">
+            <a
+                href="#"
+                t-if="invoice.has_to_be_signed(True) and invoice.has_to_be_paid(True)"
+                class="btn btn-primary btn-block mb-2"
+                data-toggle="modal"
+                data-target="#modalaccept"
+            >
+                <i class="fa fa-fw fa-arrow-circle-right" /> Sign &amp; Pay Now
+            </a>
+            <a
+                href="#"
+                t-else="invoice.has_to_be_paid(True)"
+                class="btn btn-primary btn-block mb-2"
+                data-toggle="modal"
+                data-target="#pay_with"
+            >
+                <i class="fa fa-fw fa-arrow-circle-right" /> Pay Now
+            </a>
+        </xpath>
+    </template>
+
+    <template
+        id="portal_my_invoices_payment"
+        name="Sign Payment on My Invoices"
+        inherit_id="account_payment.portal_my_invoices_payment"
+        priority="333"
+    >
+        <xpath expr="//td[last()-1]/a" position="replace">
+            <a
+                t-if="invoice.has_to_be_signed(True) and invoice.has_to_be_paid(True)"
+                t-att-href="invoice.get_portal_url(anchor='portal_pay')"
+                title="Sign &amp; Pay Now"
+                aria-label="Sign &amp; Pay now"
+                class="btn btn-sm btn-primary"
+                role="button"
+            >
+                <i class="fa fa-arrow-circle-right" /><span
+                    class='d-none d-md-inline'
+                > Sign &amp; Pay Now</span>
+            </a>
+            <a
+                t-else="invoice.has_to_be_paid(True)"
+                t-att-href="invoice.get_portal_url(anchor='portal_pay')"
+                title="Pay Now"
+                aria-label="Pay now"
+                class="btn btn-sm btn-primary"
+                role="button"
+            >
+                <i class="fa fa-arrow-circle-right" /><span
+                    class='d-none d-md-inline'
+                > Pay Now</span>
+            </a>
+        </xpath>
+    </template>
+
+</odoo>
