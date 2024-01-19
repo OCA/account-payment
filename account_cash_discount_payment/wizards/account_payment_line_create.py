@@ -30,15 +30,14 @@ class AccountPaymentLineCreate(models.TransientModel):
         "cash_discount_date",
     )
     def move_line_filters_change(self):
-        return super(AccountPaymentLineCreate, self).move_line_filters_change()
+        return super().move_line_filters_change()
 
     def _prepare_move_line_domain(self):
         self.ensure_one()
-        domain = super(AccountPaymentLineCreate, self)._prepare_move_line_domain()
+        domain = super()._prepare_move_line_domain()
 
         if self.date_type == "discount_due_date":
-            due_date = self.cash_discount_date
             domain += [
-                ("move_id.discount_due_date", ">=", due_date),
+                ("discount_date", ">=", self.cash_discount_date),
             ]
         return domain

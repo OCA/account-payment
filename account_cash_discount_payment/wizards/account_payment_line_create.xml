@@ -27,9 +27,9 @@
                 expr="//field[@name='move_line_ids']/tree/field[@name='company_currency_id']"
                 position="after"
             >
-                <field name="discount_due_date" />
-                <field name="discount_amount" />
-            </xpath>
+            <field name="discount_date" />
+            <field name="discount_amount_currency" />
+        </xpath>
         </field>
     </record>
 </odoo>
