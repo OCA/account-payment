@@ -134,7 +134,16 @@
             </a>
             <a
                 href="#"
-                t-else="invoice.has_to_be_paid(True)"
+                t-elif="invoice.has_to_be_signed(True)"
+                class="btn btn-primary btn-block mb-2"
+                data-toggle="modal"
+                data-target="#modalaccept"
+            >
+                <i class="fa fa-fw fa-arrow-circle-right" /> Sign
+            </a>
+            <a
+                href="#"
+                t-elif="invoice.has_to_be_paid(True)"
                 class="btn btn-primary btn-block mb-2"
                 data-toggle="modal"
                 data-target="#pay_with"
@@ -164,7 +173,19 @@
                 > Sign &amp; Pay Now</span>
             </a>
             <a
-                t-else="invoice.has_to_be_paid(True)"
+                t-elif="invoice.has_to_be_signed(True)"
+                t-att-href="invoice.get_portal_url(anchor='portal_pay')"
+                title="Sign"
+                aria-label="Sign &amp; Pay now"
+                class="btn btn-sm btn-primary"
+                role="button"
+            >
+                <i class="fa fa-arrow-circle-right" /><span
+                    class='d-none d-md-inline'
+                > Sign</span>
+            </a>
+            <a
+                t-elif="invoice.has_to_be_paid(True)"
                 t-att-href="invoice.get_portal_url(anchor='portal_pay')"
                 title="Pay Now"
                 aria-label="Pay now"
