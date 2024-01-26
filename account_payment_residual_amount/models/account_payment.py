@@ -8,7 +8,7 @@ class AccountPayment(models.Model):
     _inherit = "account.payment"
 
     amount_residual = fields.Monetary(
-        compute='_amount_residual',
+        compute='_compute_amount_residual',
         string='Residual Amount', store=True,
         currency_field='currency_id',
         help="The residual amount on a journal item "
@@ -18,7 +18,7 @@ class AccountPayment(models.Model):
     @api.depends('move_line_ids',
                  'move_line_ids.amount_residual',
                  'move_line_ids.amount_residual_currency')
-    def _amount_residual(self):
+    def _compute_amount_residual(self):
         for payment in self:
             amount_residual = 0.0
             amount_residual_currency = 0.0

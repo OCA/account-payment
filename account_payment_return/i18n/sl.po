@@ -425,11 +425,11 @@ msgstr "Razlog vračila plačila"
 
 #. module: account_payment_return
 #: code:addons/account_payment_return/models/payment_return.py:113
-#, fuzzy, python-format
+#, python-format
 msgid ""
 "Payment reference must be unique\n"
 "%s"
-msgstr "Sklic plačila"
+msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_payment_return

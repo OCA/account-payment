@@ -7,13 +7,14 @@
     'name': 'Account Payment Return Import',
     'category': 'Accounting',
     'version': '12.0.1.0.1',
+    'development_status': 'Mature',
     'summary': 'This module adds a generic wizard to import payment return'
                'file formats. Is only the base to be extended by another'
                'modules',
     'license': 'AGPL-3',
     'author': 'Odoo Community Association (OCA),'
               'Tecnativa',
-    'website': 'https://github.com/OCA/account-payment/tree/12.0/'
+    'website': 'https://github.com/OCA/account-payment'
                'account_payment_return_import',
     'depends': ['account_payment_return'],
     'data': [

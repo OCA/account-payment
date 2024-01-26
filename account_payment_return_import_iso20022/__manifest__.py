@@ -10,7 +10,7 @@
     'development_status': 'Production/Stable',
     'license': 'AGPL-3',
     'author': 'Odoo Community Association (OCA),Tecnativa,ACSONE SA/NV',
-    'website': 'https://github.com/OCA/account-payment/tree/12.0/'
+    'website': 'https://github.com/OCA/account-payment'
                'account_payment_return_import_iso20022',
     'depends': [
         # OCA/account-payment
