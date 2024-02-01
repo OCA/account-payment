@@ -2,23 +2,20 @@
 <odoo>
     <template
         id="report_invoice_document_inherit"
-        inherit_id="account.report_invoice_document"
+        inherit_id="account.document_tax_totals"
     >
-        <xpath expr="//span[@t-field='o.amount_total']" position="after">
+        <xpath expr="//tr[hasclass('o_total')]//td[2]" position="inside">
             <tr
                 name="discount_information"
-                t-if="o.discount_percent and o.discount_due_date and o.discount_amount"
+                t-if="all(k in tax_totals for k in ['discount_percent','discount_due_date','amount_total_with_discount']) and tax_totals['discount_percent'] and tax_totals['discount_due_date'] and tax_totals['amount_total_with_discount']"
             >
                 <td>Total With a <span
-                        t-field="o.discount_percent"
+                        t-esc="tax_totals['discount_percent']"
                     />% discount for payment before <span
-                        t-field="o.discount_due_date"
+                        t-esc="tax_totals['discount_due_date']"
                     /></td>
                 <td class="text-right">
-                    <span
-                        t-field="o.amount_total_with_discount"
-                        t-options='{"widget": "monetary", "display_currency": o.currency_id}'
-                    />
+                    <span t-esc="tax_totals['amount_total_with_discount']" />
                 </td>
             </tr>
         </xpath>

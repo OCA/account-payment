@@ -151,6 +151,19 @@ class AccountMove(models.Model):
             else:
                 rec.discount_base_date = fields.Date.context_today(rec)
 
+    @api.depends("amount_total_with_discount", "discount_percent", "discount_due_date")
+    def _compute_tax_totals(self):
+        ret = super()._compute_tax_totals()
+
+        for rec in self:
+            if rec.is_invoice(include_receipts=True):
+                total = rec.tax_totals
+                total["discount_percent"] = rec.discount_percent
+                total["discount_due_date"] = rec.discount_due_date
+                total["amount_total_with_discount"] = rec.amount_total_with_discount
+
+        return ret
+
     @api.onchange(
         "has_discount",
         "discount_base_date",
@@ -176,7 +189,7 @@ class AccountMove(models.Model):
     )
     def _onchange_partner_id(self):
         old_payment_term_id = self.invoice_payment_term_id
-        res = super(AccountMove, self)._onchange_partner_id()
+        res = super()._onchange_partner_id()
         if self.invoice_payment_term_id != old_payment_term_id:
             # be sure to load discount options based on the payment term.
             # It was not loaded when creating a vendor bill from a purchase
@@ -197,8 +210,8 @@ class AccountMove(models.Model):
         self.ensure_one()
         line_ids = []
         for line in self.line_ids:
-            account_type = line.account_id.user_type_id.type
-            if account_type not in ("receivable", "payable"):
+            account_type = line.account_id.account_type
+            if account_type not in ("asset_receivable", "liability_payable"):
                 continue
             line_ids.extend([rp.credit_move_id.id for rp in line.matched_credit_ids])
             line_ids.extend([rp.debit_move_id.id for rp in line.matched_debit_ids])
@@ -232,13 +245,4 @@ class AccountMove(models.Model):
                     )
                     % (move.id,)
                 )
-        return super(AccountMove, self).action_post()
-
-    def _reverse_move_vals(self, default_values, cancel=True):
-        res = super(AccountMove, self)._reverse_move_vals(default_values, cancel=cancel)
-        partner_id = self.partner_id
-        if self.move_type in DISCOUNT_ALLOWED_TYPES and partner_id:
-            partner = self.env["res.partner"].browse(partner_id)
-            payment_term = partner.property_supplier_payment_term_id
-            res["invoice_payment_term_id"] = payment_term.id
-        return res
+        return super().action_post()
