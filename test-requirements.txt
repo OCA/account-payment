@@ -1,0 +1,2 @@
+odoo-addon-account-cash-discount-base @ git+https://github.com/OCA/account-payment.git@refs/pull/706/head#subdirectory=setup/account_cash_discount_base
+odoo-addon-account-cash-discount-payment @ git+https://github.com/OCA/account-payment.git@refs/pull/707/head#subdirectory=setup/account_cash_discount_payment

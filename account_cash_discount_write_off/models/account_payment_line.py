@@ -109,24 +109,23 @@ class PaymentLine(models.Model):
                 elif tax_move_line.debit > 0:
                     discount_amount_credit -= amount
 
-                if tax_move_line.tax_line_id:
-                    account = tax_move_line.account_id
-                else:
+                # tax lines will be created automatically
+                if not tax_move_line.tax_line_id:
                     account = woff_account
-                lines_values.append(
-                    {
-                        "partner_id": partner.id,
-                        "name": move_line_name,
-                        "debit": tax_move_line.credit > 0 and amount or 0.0,
-                        "credit": tax_move_line.debit > 0 and amount or 0.0,
-                        "account_id": account.id,
-                        "tax_repartition_line_id": (
-                            tax_move_line.tax_repartition_line_id.id
-                        ),
-                        "tax_ids": [(6, 0, tax_move_line.tax_ids.ids)],
-                        "tax_tag_ids": [(6, 0, tax_move_line.tax_tag_ids.ids)],
-                    }
-                )
+                    lines_values.append(
+                        {
+                            "partner_id": partner.id,
+                            "name": move_line_name,
+                            "debit": tax_move_line.credit > 0 and amount or 0.0,
+                            "credit": tax_move_line.debit > 0 and amount or 0.0,
+                            "account_id": account.id,
+                            "tax_repartition_line_id": (
+                                tax_move_line.tax_repartition_line_id.id
+                            ),
+                            "tax_ids": [(6, 0, tax_move_line.tax_ids.ids)],
+                            "tax_tag_ids": [(6, 0, tax_move_line.tax_tag_ids.ids)],
+                        }
+                    )
 
         amount_left = not float_is_zero(
             discount_amount_credit, precision_rounding=rounding
