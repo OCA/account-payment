@@ -28,6 +28,7 @@ class PaymentLine(models.Model):
         readonly=True,
     )
 
+    @api.depends("move_line_id.move_id.has_discount")
     def _compute_pay_with_discount_allowed(self):
         """
         Discount can be used only when the invoice has not already

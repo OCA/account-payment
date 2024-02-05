@@ -19,7 +19,7 @@ class AccountMoveLine(models.Model):
 
     def _prepare_payment_line_vals(self, payment_order):
         self.ensure_one()
-        values = super(AccountMoveLine, self)._prepare_payment_line_vals(payment_order)
+        values = super()._prepare_payment_line_vals(payment_order)
 
         move = self.move_id
         if move and move.discount_due_date and move.has_discount:
