@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 Moduon Team S.L.
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl). -->
+<data>
+
+    <record id="action_notifiy_mail_single" model="ir.actions.act_window">
+        <field name="name">Notifiy by email</field>
+        <field
+            name="context"
+            eval="{
+                'custom_layout': 'mail.message_notification_email',
+                'default_composition_mode': 'comment',
+                'default_template_id': ref('mail_template_notification'),
+                'default_use_template': True,
+                'mail_post_autofollow': True,
+                'mailing_document_based': True,
+            }"
+        />
+        <field name="src_model">account.payment</field>
+        <field name="res_model">mail.compose.message</field>
+        <field name="target">new</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">form</field>
+        <field name="type">ir.actions.act_window</field>        
+    </record>
+
+    <record model="ir.values" id="account_print_checks">
+        <field name="model_id" ref="account.model_account_payment" />
+        <field name="name">Print Checks</field>
+        <field name="key2">client_action_multi</field>
+        <field name="value" eval="'ir.actions.act_window,' +str(ref('action_notifiy_mail_single'))" />
+        <field name="key">action</field>
+        <field name="model">account.payment</field>
+    </record>
+
+    <record id="action_notifiy_multi" model="ir.actions.server">
+        <field name="name">Notifiy partners</field>
+        <field name="model_id" ref="account.model_account_payment" />
+        <field name="binding_model_id" ref="account.model_account_payment" />
+        <field name="binding_view_types">list</field>
+        <field name="state">code</field>
+        <field name="code">records._notify_sent_payments_auto()</field>
+    </record>
+
+    <record id="view_account_payment_search" model="ir.ui.view">
+        <field name="name">Email filters</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_search" />
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <separator />
+                <filter
+                    name="has_email"
+                    string="Has email"
+                    domain="[('partner_id.email', '!=', False)]"
+                />
+                <filter
+                    name="has_no_email"
+                    string="Has no email"
+                    domain="[('partner_id.email', '=', False)]"
+                />
+            </field>
+        </field>
+    </record>
+
+</data>
