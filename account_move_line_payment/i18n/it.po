@@ -1,0 +1,42 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_move_line_payment
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-08-07 17:58+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: account_move_line_payment
+#: model:ir.model,name:account_move_line_payment.model_account_move_line
+msgid "Journal Item"
+msgstr "Movimento contabile"
+
+#. module: account_move_line_payment
+#: model_terms:ir.ui.view,arch_db:account_move_line_payment.view_account_move_line_filter
+msgid "Overdue"
+msgstr "Scaduta"
+
+#. module: account_move_line_payment
+#: model:ir.actions.act_window,name:account_move_line_payment.action_pay
+msgid "Register Payment"
+msgstr "Registra pagamento"
+
+#. module: account_move_line_payment
+#: model:ir.model.fields,field_description:account_move_line_payment.field_account_move_line__pending_due_date
+msgid "Remaining due days"
+msgstr "Giorni alla scadenza"
+
+#. module: account_move_line_payment
+#: model:ir.model.fields,help:account_move_line_payment.field_account_move_line__pending_due_date
+msgid "The date when the payment is due, or empty if it's done."
+msgstr "Data in cui scade il pagamento, o vuoto se eseguito."
