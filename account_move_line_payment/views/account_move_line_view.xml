@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2024 Moduon Team S.L.
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0) -->
+<data>
+    <record id="view_account_move_line_filter" model="ir.ui.view">
+        <field name="name">Allow quickly finding overdue lines</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_account_move_line_filter" />
+        <field name="arch" type="xml">
+            <filter name="trade_payable" position="before">
+                <filter
+                    string="Overdue"
+                    name="overdue"
+                    domain="[('date_maturity', '&lt;=', context_today()), ('matching_number', '=', False)]"
+                />
+                <separator />
+            </filter>
+        </field>
+    </record>
+
+    <record id="action_pay" model="ir.actions.act_window">
+        <field name="name">Register Payment</field>
+        <field name="res_model">account.payment.register</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="binding_model_id" ref="account.model_account_move_line" />
+        <field name="binding_view_types">list,form</field>
+    </record>
+</data>
