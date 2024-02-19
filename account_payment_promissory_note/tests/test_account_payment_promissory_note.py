@@ -2,14 +2,21 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 import datetime
 
-from odoo.tests import Form
+from odoo.tests import Form, tagged
 from odoo.tests.common import TransactionCase
 
 
+@tagged("-at_install", "post_install")
 class TestAccountPaymentPromissoryNote(TransactionCase):
     def setUp(self):
         super().setUp()
-        self.payment_method = self.env.ref("account.account_payment_method_manual_in")
+        self.company = self.env.user.company_id
+        self.default_journal_cash = self.env["account.journal"].search(
+            [("company_id", "=", self.company.id), ("type", "=", "cash")], limit=1
+        )
+        self.inbound_payment_method_line = (
+            self.default_journal_cash.inbound_payment_method_line_ids[0]
+        )
         self.company = self.env.ref("base.main_company")
         partner = self.env.ref("base.partner_demo")
         self.invoice_1 = self.env["account.move"].create(
@@ -39,11 +46,9 @@ class TestAccountPaymentPromissoryNote(TransactionCase):
         payment = self.env["account.payment"].create(
             {
                 "payment_type": "inbound",
-                "payment_method_line_id": self.payment_method.id,
+                "payment_method_line_id": self.inbound_payment_method_line.id,
                 "amount": 50.00,
-                "journal_id": self.env["account.journal"]
-                .search([("type", "=", "sale")], limit=1)
-                .id,
+                "journal_id": self.default_journal_cash.id,
             }
         )
         payment.date_due = "2020-09-21"
