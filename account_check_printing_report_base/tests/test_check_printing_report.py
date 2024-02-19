@@ -21,6 +21,7 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
         cls.account_invoice_model = cls.env["account.move"]
         cls.journal_model = cls.env["account.journal"]
         cls.payment_method_model = cls.env["account.payment.method"]
+        cls.payment_method_line_model = cls.env["account.payment.method.line"]
         cls.account_account_model = cls.env["account.account"]
         cls.payment_model = cls.env["account.payment"]
         cls.report = cls.env[
@@ -63,9 +64,13 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
                 "type": "bank",
                 "code": "bank",
                 "check_manual_sequencing": True,
-                # "outbound_payment_method_ids": [
-                #     (4, cls.payment_method_check.id, None)
-                # ],
+            }
+        )
+        cls.payment_method_line_check = cls.payment_method_line_model.create(
+            {
+                "name": "Check",
+                "payment_method_id": cls.payment_method_check.id,
+                "journal_id": cls.bank_journal.id,
             }
         )
         cls.acc_payable = cls._create_account(
@@ -85,7 +90,7 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
             {
                 "date": time.strftime("%Y") + "-07-15",
                 "journal_id": cls.bank_journal.id,
-                "payment_method_line_id": cls.payment_method_check.id,
+                "payment_method_line_id": cls.payment_method_line_check.id,
             }
         )
         register_payments.action_post()
