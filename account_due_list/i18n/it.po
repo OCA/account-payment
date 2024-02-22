@@ -12,8 +12,8 @@ msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-22 16:30+0000\n"
-"PO-Revision-Date: 2023-04-07 14:22+0000\n"
-"Last-Translator: Francesco Foresti <francesco.foresti@ooops404.com>\n"
+"PO-Revision-Date: 2024-02-22 14:34+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-payment-8-0/"
 "language/it/)\n"
 "Language: it\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -36,7 +36,7 @@ msgstr "Data"
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Date due"
-msgstr "Data di scadenza"
+msgstr "Scadenza"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -175,7 +175,7 @@ msgstr "Documento origine"
 #. module: account_due_list
 #: model:ir.model.fields,help:account_due_list.field_account_move_line__invoice_origin
 msgid "The document(s) that generated the invoice."
-msgstr "Riferimento del documento che ha generato questa fattura."
+msgstr "Documento(i) che ha generato la fattura"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
@@ -200,22 +200,22 @@ msgstr "Totale residuo"
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
 msgid "Total Residual Currency"
-msgstr "Totale residuo in valuta"
+msgstr "Valuta totale residuo"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
 msgid "Total amount currency"
-msgstr "Ammontare totale in valuta"
+msgstr "Valuta ammontare totale"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Unposted"
-msgstr "Non confermato"
+msgstr "Non registrato"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Unreconciled"
-msgstr "Non riconciliate"
+msgstr "Non riconciliati"
 
 #~ msgid "Due Date"
 #~ msgstr "Scadenza"
