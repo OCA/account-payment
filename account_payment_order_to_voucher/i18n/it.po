@@ -9,15 +9,16 @@ msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-03-05 05:04+0000\n"
-"PO-Revision-Date: 2016-03-11 15:12+0000\n"
-"Last-Translator: Paolo Valier\n"
+"PO-Revision-Date: 2024-02-23 14:36+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-payment-8-0/"
 "language/it/)\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_payment_order_to_voucher
 #: view:payment.order:account_payment_order_to_voucher.view_payment_order_form
@@ -33,7 +34,7 @@ msgstr "Ogni riga d'ordine deve avere la stessa valuta"
 #. module: account_payment_order_to_voucher
 #: model:ir.model,name:account_payment_order_to_voucher.model_payment_order
 msgid "Payment Order"
-msgstr "Ordine di Pagamento"
+msgstr "Ordine di pagamento"
 
 #. module: account_payment_order_to_voucher
 #: code:addons/account_payment_order_to_voucher/models/payment_order.py:19
