@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-22 16:30+0000\n"
-"PO-Revision-Date: 2024-02-22 14:34+0000\n"
+"PO-Revision-Date: 2024-02-23 14:34+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-payment-8-0/"
 "language/it/)\n"
@@ -46,7 +46,7 @@ msgstr "Data fattura"
 #. module: account_due_list
 #: model:ir.model.fields,field_description:account_due_list.field_account_move_line__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -66,7 +66,7 @@ msgstr "Raggruppa per"
 #. module: account_due_list
 #: model:ir.model.fields,field_description:account_due_list.field_account_move_line__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -92,7 +92,7 @@ msgstr "Movimento contabile"
 #. module: account_due_list
 #: model:ir.model.fields,field_description:account_due_list.field_account_move_line____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
