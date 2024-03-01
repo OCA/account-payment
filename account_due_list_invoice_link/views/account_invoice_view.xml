@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2023 Xtendoo - Manuel Calero
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.actions.act_window" id="action_invoice_payments">
+        <field name="name">Payments and due list</field>
+        <field name="res_model">account.move.line</field>
+        <field name="view_mode">tree,form,pivot,graph</field>
+        <field
+            name="context"
+        >{'search_default_posted_moves': 1, 'search_default_from_invoices': 1, 'search_default_not_full_reconciled': 1}</field>
+        <field
+            name="view_ids"
+            eval="[(5, 0, 0), (0, 0, {'view_mode': 'tree', 'view_id': ref('account_due_list.view_payments_tree')})]"
+        />
+        <field name="search_view_id" ref="account_due_list.view_payments_filter" />
+        <field
+            name="domain"
+        >[('account_id.reconcile', '=', True), ('balance', '!=', 0), ('move_id', 'in', active_ids)]</field>
+    </record>
+    <record model="ir.ui.view" id="account_move_line_invoice_list_view">
+        <field name="name">account.move.line.invoice.list.view</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//div[@name='button_box']" position="inside">
+                <button
+                    class="oe_stat_button"
+                    string="Payments and due list"
+                    name="account_due_list_invoice_link.action_invoice_payments"
+                    type="action"
+                    icon="fa-list"
+                >
+                </button>
+            </xpath>
+        </field>
+    </record>
+</odoo>
