@@ -28,14 +28,12 @@ Accounting Payment Access
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This add-on disables the "Register Payment" button on
-customer invoices and vendor bills.
+This module adds the group "Payments for invoices" and only users belonging to this group
+will be able to see these buttons and menus:
 
-It also disables the payments-related menus entries such as
-"Customer Payments", "Supplier Payments"
-
-More precisely, this module adds a group "Payments for Invoices"
-and only users in that group see these buttons and menus.
+- "Register payment" button on customer, supplier and corrective customer and supplier invoices.
+- Action > Register payment for lists.
+- Menus "Customer payments" and "Supplier payments".
 
 **Table of contents**
 
@@ -45,7 +43,9 @@ and only users in that group see these buttons and menus.
 Configuration
 =============
 
-Use new group "Payment for Invoices" to allow make payments.
+To use this functionality go to "Settings > Users" edit the user you are going to grant visibility to and activate the "Payments for Invoices" permission.
+
+It is also possible to edit the "Payments for Invoices" group under "Settings > Groups" and add as many users as necessary.
 
 Bug Tracker
 ===========
@@ -74,6 +74,9 @@ Contributors
 * Yannick Vaucher
 * Cristian Salamea <cs@prisehub.com>
 * Andrea Stirpe <a.stirpe@onestein.nl>
+* `Tecnativa <https://www.tecnativa.com>`_:
+
+  * Pilar Vargas
 
 Maintainers
 ~~~~~~~~~~~

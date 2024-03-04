@@ -1,8 +1,6 @@
-This add-on disables the "Register Payment" button on
-customer invoices and vendor bills.
+This module adds the group "Payments for invoices" and only users belonging to this group
+will be able to see these buttons and menus:
 
-It also disables the payments-related menus entries such as
-"Customer Payments", "Supplier Payments"
-
-More precisely, this module adds a group "Payments for Invoices"
-and only users in that group see these buttons and menus.
+- "Register payment" button on customer, supplier and corrective customer and supplier invoices.
+- Action > Register payment for lists.
+- Menus "Customer payments" and "Supplier payments".
