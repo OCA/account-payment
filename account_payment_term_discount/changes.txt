@@ -1,0 +1,5 @@
+    12.0.1.1.0
+Editor: Mayank Gosai <mgosai@opensourceintegrators.com>
+Task Ref:
+    FUL-01-00-2007-110863 CR 10: Add Discount Payment Field Adjustmentsmaya
+         Discounts details and discount dates readily available, made it viewable on the Invoice screen.

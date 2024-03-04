@@ -1,0 +1,89 @@
+# Translation of OpenERP Server.
+# This file contains the translation of the following modules:
+#	* account_cash_discount_61
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: OpenERP Server 6.1rc1\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-01-23 22:02+0000\n"
+"PO-Revision-Date: 2012-01-23 22:02+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_cash_discount_61
+#: constraint:account.payment.term.line:0
+msgid "Percentages for Payment Term Line must be between 0 and 1, Example: 0.02 for 2% "
+msgstr ""
+
+#. module: account_cash_discount_61
+#: view:account.payment.term.line:0
+msgid "Discount Computation"
+msgstr ""
+
+#. module: account_cash_discount_61
+#: constraint:account.move:0
+msgid "You can not create more than one move per period on centralized journal"
+msgstr ""
+
+#. module: account_cash_discount_61
+#: model:ir.model,name:account_cash_discount_61.model_account_move
+msgid "Account Entry"
+msgstr ""
+
+#. module: account_cash_discount_61
+#: help:account.payment.term.line,discount_income_account_id:0
+msgid "This account will be used to post the cash discount income"
+msgstr ""
+
+#. module: account_cash_discount_61
+#: help:account.payment.term.line,discount_expense_account_id:0
+msgid "This account will be used to post the cash discount expense"
+msgstr ""
+
+#. module: account_cash_discount_61
+#: model:ir.model,name:account_cash_discount_61.model_account_voucher
+msgid "Accounting Voucher"
+msgstr ""
+
+#. module: account_cash_discount_61
+#: view:account.payment.term:0
+#: model:ir.model,name:account_cash_discount_61.model_account_payment_term
+msgid "Payment Term"
+msgstr ""
+
+#. module: account_cash_discount_61
+#: field:account.payment.term,is_discount:0
+#: field:account.payment.term.line,is_discount:0
+msgid "Is Cash Discount"
+msgstr ""
+
+#. module: account_cash_discount_61
+#: model:ir.model,name:account_cash_discount_61.model_account_payment_term_line
+msgid "Payment Term Line"
+msgstr ""
+
+#. module: account_cash_discount_61
+#: help:account.payment.term,is_discount:0
+msgid "Check this box if this payment term is a cash discount. If cash discount is used the remaining amount of the invoice will not be paid"
+msgstr ""
+
+#. module: account_cash_discount_61
+#: field:account.payment.term.line,discount_expense_account_id:0
+msgid "Discount Expense Account"
+msgstr ""
+
+#. module: account_cash_discount_61
+#: field:account.payment.term.line,discount_income_account_id:0
+msgid "Discount Income Account"
+msgstr ""
+
+#. module: account_cash_discount_61
+#: field:account.payment.term.line,discount:0
+msgid "Discount (%)"
+msgstr ""
+
