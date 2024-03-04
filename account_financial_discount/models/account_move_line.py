@@ -18,7 +18,7 @@ class AccountMoveLine(models.Model):
         default=0.0,
     )
     date_discount = fields.Date("Financial Discount date")
-    discount_tax_line_id = fields.Many2one("account.move.line")
+    discount_tax_line_id = fields.Many2one("account.move.line", index=True)
     amount_discount_tax = fields.Monetary(
         currency_field="company_currency_id", default=0.0
     )
