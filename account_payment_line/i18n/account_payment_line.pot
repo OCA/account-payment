@@ -1,0 +1,333 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_payment_line
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_payment_line
+#: code:addons/account_payment_line/hooks.py:0
+#, python-format
+msgid "A payment must always belongs to a bank or cash journal."
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line__account_id
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line_abstract__account_id
+msgid "Account"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line__amount
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line_abstract__amount
+msgid "Amount"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line__aml_amount_residual
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line_abstract__aml_amount_residual
+msgid "Amount Residual"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line__aml_amount_residual_currency
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line_abstract__aml_amount_residual_currency
+msgid "Amount Residual Currency"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line__amount_currency
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line_abstract__amount_currency
+msgid "Amount in Company Currency"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line__analytic_account_id
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line_abstract__analytic_account_id
+msgid "Analytic Account"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line__analytic_tag_ids
+msgid "Analytic Tags"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line__commercial_partner_id
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line_abstract__commercial_partner_id
+msgid "Commercial Entity"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line__company_id
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line_abstract__company_id
+msgid "Company"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment__line_payment_counterpart_ids
+#: model_terms:ir.ui.view,arch_db:account_payment_line.view_inherit_account_payment_form
+msgid "Counterpart Lines"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model,name:account_payment_line.model_account_payment_counterpart_line
+msgid "Counterpart line payment"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model,name:account_payment_line.model_account_payment_counterpart_line_abstract
+msgid "Counterpart line payment Abstract"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line__currency_id
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line_abstract__currency_id
+msgid "Currency"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line__aml_date_maturity
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line_abstract__aml_date_maturity
+msgid "Date Maturity"
+msgstr ""
+
+#. module: account_payment_line
+#: model_terms:ir.ui.view,arch_db:account_payment_line.view_inherit_account_payment_form
+msgid "Delete Counterpart Lines"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line__name
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line_abstract__name
+msgid "Description"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_move_line__display_name
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment__display_name
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line__display_name
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line_abstract__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line__fully_paid
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line_abstract__fully_paid
+msgid "Fully Paid?"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_move_line__id
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment__id
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line__id
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line_abstract__id
+msgid "ID"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line__move_ids
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line_abstract__move_ids
+msgid "Journal Entries Created"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line__move_id
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line_abstract__move_id
+msgid "Journal Entry"
+msgstr ""
+
+#. module: account_payment_line
+#: code:addons/account_payment_line/hooks.py:0
+#, python-format
+msgid ""
+"Journal Entry %s is not valid. In order to proceed, the journal items must "
+"share the same currency."
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model,name:account_payment_line.model_account_move_line
+msgid "Journal Item"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line__aml_id
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line_abstract__aml_id
+msgid "Journal Item to Reconcile"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_move_line____last_update
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment____last_update
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line____last_update
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line_abstract____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line__partner_id
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line_abstract__partner_id
+msgid "Partner"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line__payment_id
+msgid "Payment"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_move_line__payment_line_id
+msgid "Payment line"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model,name:account_payment_line.model_account_payment
+msgid "Payments"
+msgstr ""
+
+#. module: account_payment_line
+#: model_terms:ir.ui.view,arch_db:account_payment_line.view_inherit_account_payment_form
+msgid "Propose Payment Distribution"
+msgstr ""
+
+#. module: account_payment_line
+#: model_terms:ir.ui.view,arch_db:account_payment_line.view_account_payment_line_tree
+msgid "Residual"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line__residual_after_payment
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line_abstract__residual_after_payment
+msgid "Residual After Payment"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line__residual_after_payment_currency
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line_abstract__residual_after_payment_currency
+msgid "Residual After Payment Currency"
+msgstr ""
+
+#. module: account_payment_line
+#: model_terms:ir.ui.view,arch_db:account_payment_line.view_account_payment_line_tree
+msgid "Residual Currency"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,help:account_payment_line.field_account_payment_counterpart_line__aml_date_maturity
+#: model:ir.model.fields,help:account_payment_line.field_account_payment_counterpart_line_abstract__aml_date_maturity
+msgid ""
+"This field is used for payable and receivable journal entries. You can put "
+"the limit date for the payment of this line."
+msgstr ""
+
+#. module: account_payment_line
+#: model_terms:ir.ui.view,arch_db:account_payment_line.view_account_payment_line_tree
+msgid "Total Amount"
+msgstr ""
+
+#. module: account_payment_line
+#: model_terms:ir.ui.view,arch_db:account_payment_line.view_account_payment_line_tree
+msgid "Total Amount Company Currency"
+msgstr ""
+
+#. module: account_payment_line
+#: model_terms:ir.ui.view,arch_db:account_payment_line.view_account_payment_line_tree
+msgid "Total Due"
+msgstr ""
+
+#. module: account_payment_line
+#: model_terms:ir.ui.view,arch_db:account_payment_line.view_account_payment_line_tree
+msgid "Total Due Currency"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,help:account_payment_line.field_account_payment__line_payment_counterpart_ids
+msgid ""
+"Use these lines to add matching lines, for example in a creditcard payment, "
+"financing interest or commission is added"
+msgstr ""
+
+#. module: account_payment_line
+#: model_terms:ir.ui.view,arch_db:account_payment_line.view_account_payment_line_tree
+msgid "Write-Off amount"
+msgstr ""
+
+#. module: account_payment_line
+#: model_terms:ir.ui.view,arch_db:account_payment_line.view_account_payment_line_tree
+msgid "Write-Off amount currency"
+msgstr ""
+
+#. module: account_payment_line
+#: code:addons/account_payment_line/models/account_payment.py:0
+#, python-format
+msgid "Write-off"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment__writeoff_account_id
+msgid "Write-off Account"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line__writeoff_account_id
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line_abstract__writeoff_account_id
+msgid "Write-off account"
+msgstr ""
+
+#. module: account_payment_line
+#: code:addons/account_payment_line/models/account_payment.py:0
+#, python-format
+msgid "Write-off account is not set for payment %s"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line__writeoff_amount
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line_abstract__writeoff_amount
+msgid "Writeoff Amount"
+msgstr ""
+
+#. module: account_payment_line
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line__writeoff_amount_currency
+#: model:ir.model.fields,field_description:account_payment_line.field_account_payment_counterpart_line_abstract__writeoff_amount_currency
+msgid "Writeoff Amount Currency"
+msgstr ""
+
+#. module: account_payment_line
+#: code:addons/account_payment_line/models/account_payment.py:0
+#, python-format
+msgid "You should set up write-off account on lines or in header to continue"
+msgstr ""
+
+#. module: account_payment_line
+#: code:addons/account_payment_line/models/counterpart_line.py:0
+#, python-format
+msgid "the amount exceeds the residual amount, please check the invoice %s"
+msgstr ""
