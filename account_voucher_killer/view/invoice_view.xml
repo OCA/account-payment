@@ -15,6 +15,21 @@
             </xpath>
         </field>
     </record>
+    <record id="view_invoice_tree" model="ir.ui.view">
+        <field name="name">Hide payment in invoice tree</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_invoice_tree" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//tree/header/button[@name='action_register_payment']"
+                position="attributes"
+            >
+                <attribute
+                    name="groups"
+                >account_voucher_killer.invoice_payment_user</attribute>
+            </xpath>
+        </field>
+    </record>
     <record id="account.menu_action_account_payments_receivable" model="ir.ui.menu">
         <field
             name="groups_id"
