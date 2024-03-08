@@ -167,7 +167,7 @@ class AccountPaymentRegister(models.TransientModel):
                 "payment_type": is_customer and "outbound" or "inbound",
                 "partner_id": invoices[0].commercial_partner_id.id,
                 "partner_type": MAP_INVOICE_TYPE_PARTNER_TYPE[invoices[0].move_type],
-                "company_id": self.env.user.company_id,
+                "company_id": self.env.user.company_id.id,
                 "communication": communication,
             }
         )
