@@ -6,7 +6,7 @@
                "amount",
     "version": "12.0.1.0.0",
     "category": "Account-payment",
-    "website": "https://odoo-community.org/",
+    "website": "https://github.com/OCA/account-payment",
     "author": "Eficent, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "application": False,

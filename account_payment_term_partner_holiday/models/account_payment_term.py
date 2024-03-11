@@ -7,7 +7,7 @@ from odoo import api, fields, models
 class AccountPaymentTerm(models.Model):
     _inherit = "account.payment.term"
 
-    @api.one
+    @api.multi
     def compute(self, value, date_ref=False):
         """Compute the due date taking into account the holiday periods
         set in the partner.
@@ -17,6 +17,7 @@ class AccountPaymentTerm(models.Model):
         Then, apply_payment_days() and apply_holidays() to prevent
         incompatibilities.
         """
+        self.ensure_one()
         result = super().compute(value=value, date_ref=date_ref)[0]
         ctx = self.env.context
         partner_id = ctx.get("move_partner_id", ctx.get("default_partner_id"))

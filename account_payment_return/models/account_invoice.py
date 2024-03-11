@@ -5,6 +5,7 @@
 
 import json
 from operator import itemgetter
+
 from odoo import _, api, fields, models
 
 
@@ -33,9 +34,10 @@ class AccountInvoice(models.Model):
         if vals:
             self.write(vals)
 
-    @api.one
+    @api.multi
     @api.depends('payment_move_line_ids.amount_residual')
     def _get_payment_info_JSON(self):
+        self.ensure_one()
         super(AccountInvoice, self)._get_payment_info_JSON()
         if not self.returned_payment:
             return True

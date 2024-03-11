@@ -17,6 +17,7 @@
         'mail',
         'account',
     ],
+    'development_status': 'Mature',
     'author': 'Odoo Community Association (OCA),'
               '7 i TRIA, '
               'Tecnativa, '

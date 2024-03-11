@@ -1,8 +1,8 @@
 # Copyright 2019 Ecosoft Co., Ltd (http://ecosoft.co.th/)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
-from odoo import models, fields, api, _
-from odoo.tools import float_compare
+from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+from odoo.tools import float_compare
 
 
 class AccountAbstractPayment(models.AbstractModel):
@@ -13,8 +13,9 @@ class AccountAbstractPayment(models.AbstractModel):
                         'Mark invoice as fully paid (multi deduct)')],
     )
 
-    @api.one
+    @api.multi
     def _check_deduction_amount(self):
+        self.ensure_one()
         prec_digits = self.env.user.company_id.currency_id.decimal_places
         if self.payment_difference_handling == 'reconcile_multi_deduct':
             if float_compare(self.payment_difference,
@@ -45,7 +46,7 @@ class AccountPayment(models.Model):
         help="Sum of deduction amount(s) must equal to the payment difference",
     )
 
-    @api.one
+    @api.multi
     @api.constrains('deduction_ids')
     def _check_deduction_amount(self):
         super()._check_deduction_amount()
@@ -145,7 +146,7 @@ class AccountRegisterPayments(models.TransientModel):
         help="Sum of deduction amount(s) must equal to the payment difference",
     )
 
-    @api.one
+    @api.multi
     @api.constrains('deduction_ids')
     def _check_deduction_amount(self):
         super()._check_deduction_amount()
