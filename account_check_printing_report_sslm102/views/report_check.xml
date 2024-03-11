@@ -21,7 +21,7 @@
                             <b>Check Amount: </b>
                             <span
                                 t-field='o.amount'
-                                t-field-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                t-options='{"widget": "monetary", "display_currency": o.currency_id}'
                             />
                         </div>
                         <div name='middle_block'>
@@ -45,7 +45,7 @@
                             <b>Check Amount: </b>
                             <span
                                 t-field='o.amount'
-                                t-field-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                t-options='{"widget": "monetary", "display_currency": o.currency_id}'
                             />
                         </div>
                     </div>
@@ -78,7 +78,7 @@
             <div name='partner_data' style="position:absolute; top:125mm; left:25mm;">
                 <div
                     t-field="o.partner_id"
-                    t-field-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
+                    t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
                 />
             </div>
             <div
@@ -136,19 +136,19 @@
                                 <td>
                                     <span
                                         t-esc="line['amount_total']"
-                                        t-esc-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                        t-options='{"widget": "monetary", "display_currency": o.currency_id}'
                                     />
                                 </td>
                                 <td>
                                     <span
                                         t-esc="line['residual']"
-                                        t-esc-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                        t-options='{"widget": "monetary", "display_currency": o.currency_id}'
                                     />
                                 </td>
                                 <td>
                                     <span
                                         t-esc="line['paid_amount']"
-                                        t-esc-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                        t-options='{"widget": "monetary", "display_currency": o.currency_id}'
                                     />
                                 </td>
                             </tr>
