@@ -4,7 +4,6 @@
     <record id="view_payments_tree" model="ir.ui.view">
         <field name="name">Payments</field>
         <field name="model">account.move.line</field>
-        <field name="field_parent">partner_id</field>
         <field name="priority" eval="20" />
         <field name="arch" type="xml">
             <tree
@@ -41,6 +40,8 @@
                 />
                 <field name="debit" readonly="1" sum="Total Debit" optional="hide" />
                 <field name="credit" readonly="1" sum="Total Credit" optional="hide" />
+                <!-- The company_currency_id field is necessary for the sum total fields to be displayed. -->
+                <field name="company_currency_id" invisible="1" readonly="1" />
                 <field
                     name="balance"
                     readonly="1"
