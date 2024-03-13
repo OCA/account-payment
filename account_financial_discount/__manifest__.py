@@ -3,7 +3,7 @@
 {
     "name": "Account financial discount",
     "summary": "Handle financial discounts for early payments",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "development_status": "Production/Stable",
     "category": "Account",
     "website": "https://github.com/OCA/account-payment",
