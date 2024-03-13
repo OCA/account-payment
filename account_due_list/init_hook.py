@@ -24,7 +24,6 @@ def pre_init_hook(cr):
 
 
 def store_field_invoice_user_id(cr):
-
     cr.execute(
         """SELECT column_name
     FROM information_schema.columns
