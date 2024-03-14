@@ -1,0 +1,213 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_due_list
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2021-04-18 04:46+0000\n"
+"Last-Translator: Ignacio Buioli <ibuioli@gmail.com>\n"
+"Language-Team: none\n"
+"Language: es_AR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Account"
+msgstr "Cuenta"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Date"
+msgstr "Fecha"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Date due"
+msgstr "Fecha de vencimiento"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Date invoice"
+msgstr "Fecha de factura"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "From invoices"
+msgstr "Desde facturas"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Full reconciled"
+msgstr "Completamente reconciliado"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Group By"
+msgstr "Agrupar por"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Incoming"
+msgstr ""
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
+msgid "Invoice"
+msgstr "Factura"
+
+#. module: account_due_list
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line__invoice_date
+msgid "Invoice Date"
+msgstr "Fecha de Factura"
+
+#. module: account_due_list
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line__invoice_user_id
+msgid "Invoice salesperson"
+msgstr "Vendedor de factura"
+
+#. module: account_due_list
+#: model:ir.model,name:account_due_list.model_account_move_line
+msgid "Journal Item"
+msgstr "Apunte Contable"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Not Full Reconciled"
+msgstr "No Completamente Reconciliado"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Outgoing"
+msgstr ""
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Overdue"
+msgstr "Atrasado"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Partial reconciled"
+msgstr "Parcialmente reconciliado"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Partner"
+msgstr "Contacto"
+
+#. module: account_due_list
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line__partner_ref
+msgid "Partner Ref"
+msgstr "Referencia de Contacto"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Payable"
+msgstr "A Pagar"
+
+#. module: account_due_list
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line__payment_term_id
+msgid "Payment Terms"
+msgstr "Plazos de Pago"
+
+#. module: account_due_list
+#: model:ir.actions.act_window,name:account_due_list.action_invoice_payments
+#: model:ir.ui.menu,name:account_due_list.menu_action_invoice_payments
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_graph
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_pivot
+msgid "Payments and due list"
+msgstr "Pagos y lista de vencimiento"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Posted"
+msgstr "Publicado"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Receivable"
+msgstr "A Cobrar"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Reconciled"
+msgstr "Reconciliado"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Salesperson"
+msgstr "Vendedor"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Search Payments"
+msgstr "Buscar Pagos"
+
+#. module: account_due_list
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line__invoice_origin
+msgid "Source Doc"
+msgstr "Documento de Origen"
+
+#. module: account_due_list
+#: model:ir.model.fields,help:account_due_list.field_account_move_line__invoice_origin
+msgid "The document(s) that generated the invoice."
+msgstr "El/los documento(s) que generó la factura."
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
+msgid "Total Balance"
+msgstr "Saldo Total"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
+msgid "Total Credit"
+msgstr "Crédito Total"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
+msgid "Total Debit"
+msgstr "Débito Total"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
+msgid "Total Residual"
+msgstr "Total Residual"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
+msgid "Total Residual Currency"
+msgstr "Moneda del Total Residual"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
+msgid "Total amount currency"
+msgstr "Moneda del total residual"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Unposted"
+msgstr "Sin Publicar"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Unreconciled"
+msgstr "Sin reconciliar"
+
+#~ msgid "Display Name"
+#~ msgstr "Mostrar Nombre"
+
+#~ msgid "ID"
+#~ msgstr "ID"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última modificación en"
+
+#~ msgid "Payments"
+#~ msgstr "Pagos"
