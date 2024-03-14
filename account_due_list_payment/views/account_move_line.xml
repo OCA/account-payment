@@ -40,7 +40,7 @@
                         name="action_register_payment"
                         type="object"
                         string="Register Payment"
-                        groups="account.group_account_user"
+                        groups="account.group_account_invoice"
                     />
                 </header>
             </field>
