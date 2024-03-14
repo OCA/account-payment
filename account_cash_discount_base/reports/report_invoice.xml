@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="report_invoice_document_inherit"
+        inherit_id="account.document_tax_totals"
+    >
+        <xpath expr="//tr[hasclass('o_total')]//td[2]" position="inside">
+            <tr
+                name="discount_information"
+                t-if="all(k in tax_totals for k in ['discount_percent','discount_due_date','amount_total_with_discount']) and tax_totals['discount_percent'] and tax_totals['discount_due_date'] and tax_totals['amount_total_with_discount']"
+            >
+                <td>Total With a <span
+                        t-esc="tax_totals['discount_percent']"
+                    />% discount for payment before <span
+                        t-esc="tax_totals['discount_due_date']"
+                    /></td>
+                <td class="text-right">
+                    <span t-esc="tax_totals['amount_total_with_discount']" />
+                </td>
+            </tr>
+        </xpath>
+    </template>
+</odoo>
