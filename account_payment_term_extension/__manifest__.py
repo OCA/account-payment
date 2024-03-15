@@ -5,7 +5,7 @@
 
 {
     "name": "Payment Term Extension",
-    "version": "16.0.1.0.1",
+    "version": "17.0.1.0.0",
     "category": "Accounting & Finance",
     "summary": "Adds rounding, months, weeks and multiple payment days "
     "properties on payment term lines",
@@ -17,7 +17,11 @@
     "website": "https://github.com/OCA/account-payment",
     "license": "AGPL-3",
     "depends": ["account", "purchase"],
-    "data": ["security/ir.model.access.csv", "views/account_payment_term.xml"],
+    "data": [
+        "security/ir.model.access.csv",
+        "views/account_payment_term.xml",
+        "views/res_config_settings_view.xml",
+    ],
     "demo": ["demo/account_demo.xml"],
     "installable": True,
 }
