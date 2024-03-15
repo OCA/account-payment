@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template
+        id="portal_my_invoices_payment"
+        name="Receipt Payment"
+        inherit_id="account_payment.portal_my_invoices_payment"
+    >
+        <xpath expr="//t[@t-set='pending_manual_txs']" position="after">
+                <a
+                t-if="invoice.state == 'posted' and invoice.payment_state in ('not_paid', 'partial') and invoice.amount_total and invoice.move_type == 'out_receipt' and (pending_manual_txs or not tx_ids or invoice.amount_residual)"
+                t-att-href="invoice.get_portal_url(anchor='portal_pay')"
+                title="Pay Now"
+                aria-label="Pay now"
+                class="btn btn-sm btn-primary"
+                role="button"
+            >
+                    <i class="fa fa-arrow-circle-right" /><span
+                    class='d-none d-md-inline'
+                > Pay Now</span>
+                </a>
+        </xpath>
+    </template>
+    <template
+        id="portal_invoice_page_inherit_payment"
+        name="Receipt Payment"
+        inherit_id="account_payment.portal_invoice_page_inherit_payment"
+    >
+        <xpath expr="//div/a[@data-target='#pay_with']" position="after">
+            <a
+                href="#"
+                t-if="invoice.state == 'posted' and invoice.payment_state in ('not_paid', 'partial') and invoice.amount_total and invoice.move_type == 'out_receipt' and (pending_manual_txs or not tx_ids or invoice.amount_residual)"
+                class="btn btn-primary btn-block mb-2"
+                data-toggle="modal"
+                data-target="#pay_with"
+            >
+                    <i class="fa fa-fw fa-arrow-circle-right" /> Pay Now
+            </a>
+        </xpath>
+    </template>
+</odoo>
