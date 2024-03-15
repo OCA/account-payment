@@ -12,3 +12,4 @@
   - Manuel Regidor
 - \`Trobz \<<https://trobz.com>\>\`:
   - Hoang \<<hoang@trobz.com>\>
+- Anaïs López \<<anais.lopez@forgeflow.com>\>
