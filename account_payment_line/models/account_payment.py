@@ -102,6 +102,8 @@ class AccountPayment(models.Model):
                     if pending_amount >= 0:
                         amount_to_apply = min(abs(amount_residual), pending_amount)
                         pending_amount -= abs(amount_residual)
+                    if rec.payment_type == "outbound":
+                        amount_to_apply *= -1
                     rec._hook_create_new_line(invoice, aml, amount_to_apply)
 
     def action_delete_counterpart_lines(self):
@@ -189,6 +191,7 @@ class AccountPayment(models.Model):
                 )
 
             else:
+                aml_value *= self.payment_type == "outbound" and -1 or 1
                 new_aml_lines.append(
                     {
                         "name": line.display_name,

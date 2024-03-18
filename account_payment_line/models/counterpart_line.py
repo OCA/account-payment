@@ -96,9 +96,10 @@ class AccountPaymentCounterLinesAbstract(models.AbstractModel):
                 date=payment_date,
             )
             rec.aml_amount_residual = rec.aml_id.amount_residual
+            min_max = rec.payment_id.payment_type == "outbound" and min or max
             rec.residual_after_payment = (
                 not rec.fully_paid
-                and max(abs(rec.aml_id.amount_residual) - rec.amount_currency, 0)
+                and min_max(rec.aml_id.amount_residual - rec.amount, 0)
                 or 0.0
             )
             rec.writeoff_amount = (
@@ -107,8 +108,8 @@ class AccountPaymentCounterLinesAbstract(models.AbstractModel):
             rec.aml_amount_residual_currency = rec.aml_id.amount_residual_currency
             rec.residual_after_payment_currency = (
                 not rec.fully_paid
-                and max(
-                    abs(rec.aml_id.amount_residual_currency) - rec.amount_currency, 0
+                and min_max(
+                    rec.aml_id.amount_residual_currency - rec.amount_currency, 0
                 )
                 or 0.0
             )
@@ -139,7 +140,7 @@ class AccountPaymentCounterLinesAbstract(models.AbstractModel):
     def _onchange_move_id(self):
         aml_model = self.env["account.move.line"]
         for rec in self:
-            type_move = dict_payment_type.get(rec.payment_id.payment_type, [])
+            dict_payment_type.get(rec.payment_id.payment_type, [])
             if rec.move_id and not rec.aml_id:
                 domain = [
                     ("move_id", "=", rec.move_id.id),
@@ -153,26 +154,13 @@ class AccountPaymentCounterLinesAbstract(models.AbstractModel):
             if rec.aml_id:
                 rec.move_id = rec.aml_id.move_id.id
                 rec.account_id = rec.aml_id.account_id.id
-                rec.amount = abs(rec.aml_id.amount_residual)
+                rec.amount = rec.aml_id.amount_residual
                 rec.partner_id = rec.aml_id.partner_id.id
                 if rec.move_id.move_type == "entry":
-                    if rec.payment_id.partner_type == "supplier":
-                        if rec.payment_id.payment_type == "outbound":
-                            rec.amount = -rec.aml_id.amount_residual
-                        else:
-                            rec.amount = rec.aml_id.amount_residual
+                    if rec.payment_id.payment_type == "outbound":
+                        rec.amount = -rec.aml_id.amount_residual
                     else:
-                        if rec.payment_id.payment_type == "outbound":
-                            rec.amount = -rec.aml_id.amount_residual
-                        else:
-                            rec.amount = rec.aml_id.amount_residual
-                else:
-                    if (
-                        type_move
-                        and rec.move_id.move_type not in type_move
-                        and rec.amount
-                    ):
-                        rec.amount *= -1
+                        rec.amount = rec.aml_id.amount_residual
 
     @api.constrains("amount", "aml_amount_residual")
     def constrains_amount_residual(self):
