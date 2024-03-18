@@ -328,7 +328,7 @@ class TestAccountPaymentLines(AccountTestInvoicingCommon):
             [
                 {
                     "move_id": new_invoice2,
-                    "amount": 50.0,
+                    "amount": -50.0,
                 }
             ],
             post=True,
@@ -806,11 +806,11 @@ class TestAccountPaymentLines(AccountTestInvoicingCommon):
             [
                 {
                     "move_id": new_out_invoice,
-                    "amount": -50.0,
+                    "amount": 50.0,
                 },
                 {
                     "move_id": new_out_refund,
-                    "amount": 100.0,
+                    "amount": -100.0,
                 },
             ],
             post=True,
@@ -838,7 +838,7 @@ class TestAccountPaymentLines(AccountTestInvoicingCommon):
         payment.action_propose_payment_distribution()
         self.assertEqual(len(payment.line_payment_counterpart_ids), 1)
         self.assertEqual(
-            sum(payment.line_payment_counterpart_ids.mapped("amount")), 100.0
+            sum(payment.line_payment_counterpart_ids.mapped("amount")), -100.0
         )
         self.assertEqual(
             payment.line_payment_counterpart_ids.mapped("move_id"), new_out_refund2
@@ -855,7 +855,7 @@ class TestAccountPaymentLines(AccountTestInvoicingCommon):
         payment.action_propose_payment_distribution()
         self.assertEqual(len(payment.line_payment_counterpart_ids), 1)
         self.assertEqual(
-            sum(payment.line_payment_counterpart_ids.mapped("amount")), 100.0
+            sum(payment.line_payment_counterpart_ids.mapped("amount")), -100.0
         )
         self.assertEqual(
             payment.line_payment_counterpart_ids.mapped("move_id"), new_in_invoice2
@@ -887,11 +887,11 @@ class TestAccountPaymentLines(AccountTestInvoicingCommon):
             [
                 {
                     "move_id": new_in_refund,
-                    "amount": -100.0,
+                    "amount": 100.0,
                 },
                 {
                     "move_id": new_in_invoice,
-                    "amount": 100.0,
+                    "amount": -100.0,
                 },
             ],
             post=True,
