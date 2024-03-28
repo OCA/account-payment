@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2018 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="account_payment_line_create_form_view">
+        <field
+            name="name"
+        >account.payment.line.create.form (in account_cash_discount_payment)</field>
+        <field name="model">account.payment.line.create</field>
+        <field
+            name="inherit_id"
+            ref="account_payment_order.account_payment_line_create_form"
+        />
+        <field name="arch" type="xml">
+            <field name="date_type" position="after">
+                <field
+                    name="cash_discount_date"
+                    attrs="{'invisible': [('date_type', '!=', 'discount_due_date')], 'required': [('date_type', '=', 'discount_due_date')]}"
+                />
+            </field>
+            <field name="move_line_ids" position="attributes">
+                <attribute
+                    name="context"
+                >{'tree_view_display_discount': True}</attribute>
+            </field>
+            <xpath
+                expr="//field[@name='move_line_ids']/tree/field[@name='company_currency_id']"
+                position="after"
+            >
+                <field name="discount_due_date" />
+                <field name="discount_amount" />
+            </xpath>
+        </field>
+    </record>
+</odoo>

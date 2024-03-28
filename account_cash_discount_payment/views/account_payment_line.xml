@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2018 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="account_payment_line_form_view">
+        <field
+            name="name"
+        >account.payment.line.form (account_cash_discount_payment)</field>
+        <field name="model">account.payment.line</field>
+        <field
+            name="inherit_id"
+            ref="account_payment_order.account_payment_line_form"
+        />
+        <field name="arch" type="xml">
+            <field name="date" position="after">
+                <field name="toggle_pay_with_discount_allowed" invisible="1" />
+                <field name="pay_with_discount_allowed" invisible="1" />
+                <field
+                    name="pay_with_discount"
+                    attrs="{'invisible': [('pay_with_discount_allowed', '=', False)]}"
+                />
+                <field
+                    name="discount_due_date"
+                    attrs="{'invisible': [('pay_with_discount_allowed', '=', False)]}"
+                />
+                <field
+                    name="discount_amount"
+                    attrs="{'invisible': [('pay_with_discount_allowed', '=', False)]}"
+                />
+            </field>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="account_payment_line_tree_view">
+        <field
+            name="name"
+        >account.payment.line.tree (account_cash_discount_payment)</field>
+        <field name="model">account.payment.line</field>
+        <field
+            name="inherit_id"
+            ref="account_payment_order.account_payment_line_tree"
+        />
+        <field name="arch" type="xml">
+            <field name="ml_maturity_date" position="after">
+                <field name="discount_due_date" />
+            </field>
+            <field name="amount_currency" position="after">
+                <field name="pay_with_discount_allowed" invisible="1" />
+                <field name="toggle_pay_with_discount_allowed" invisible="1" />
+                <field name="pay_with_discount" invisible="1" />
+                <field
+                    name="discount_amount"
+                    attrs="{'invisible': [('pay_with_discount_allowed', '=', False)]}"
+                />
+                <button
+                    name="toggle_pay_with_discount"
+                    help="Toggle Discount"
+                    string="Disable discount"
+                    type="object"
+                    icon="fa-check-square-o"
+                    attrs="{'invisible': ['|', ('toggle_pay_with_discount_allowed', '=', False), ('pay_with_discount', '=', False)]}"
+                />
+                <button
+                    name="toggle_pay_with_discount"
+                    help="Toggle Discount"
+                    string="Enable discount"
+                    type="object"
+                    icon="fa-square-o"
+                    attrs="{'invisible': ['|', ('toggle_pay_with_discount_allowed', '=', False), ('pay_with_discount', '=', True)]}"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
