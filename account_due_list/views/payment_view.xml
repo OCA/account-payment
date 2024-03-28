@@ -60,6 +60,11 @@
                     groups="base.group_multi_currency"
                     optional="show"
                 />
+                <field
+                    name="currency_id"
+                    groups="base.group_multi_currency"
+                    optional="hide"
+                />
                 <field name="date_maturity" optional="show" />
                 <field name="reconciled" readonly="1" optional="hide" />
                 <field name="full_reconcile_id" readonly="1" optional="hide" />
