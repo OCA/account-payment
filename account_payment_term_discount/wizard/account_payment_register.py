@@ -4,6 +4,7 @@ from dateutil.relativedelta import relativedelta
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
+from odoo.tools import float_round
 
 
 class AccountPaymentRegister(models.TransientModel):
@@ -45,7 +46,8 @@ class AccountPaymentRegister(models.TransientModel):
                 payment_date = fields.Date.from_string(self.payment_date)
                 discount_amt = self.invoice_id.discount_amt
 
-                payment_difference = self.payment_difference
+                rounding = self.invoice_id.currency_id.rounding
+                payment_difference = float_round(self.payment_difference, rounding)
                 self.payment_difference = 0.0
 
                 if payment_date <= till_discount_date:
@@ -103,9 +105,12 @@ class AccountPaymentRegister(models.TransientModel):
         res = super().action_create_payments()
         for payment in self:
             if payment.payment_difference_handling == "reconcile":
+                rounding = payment.invoice_id.currency_id.rounding
                 payment.invoice_id.write(
                     {
-                        "discount_taken": abs(payment.payment_difference),
+                        "discount_taken": abs(
+                            float_round(payment.payment_difference, rounding)
+                        ),
                         "discount_amt": 0,
                     }
                 )

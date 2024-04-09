@@ -3,6 +3,7 @@
 from dateutil.relativedelta import relativedelta
 
 from odoo import api, fields, models
+from odoo.tools import float_round
 
 
 class AccountMove(models.Model):
@@ -43,7 +44,10 @@ class AccountMove(models.Model):
                     )
                 )
                 if discount_information[0] > 0.0:
-                    invoice.discount_amt = abs(round(discount_information[0], 2))
+                    rounding = invoice.currency_id.rounding
+                    invoice.discount_amt = abs(
+                        float_round(discount_information[0], rounding)
+                    )
                     # If discount taken make disc amt to 0 as disc is no more valid
                     if invoice.discount_taken != 0:
                         invoice.discount_amt = 0
