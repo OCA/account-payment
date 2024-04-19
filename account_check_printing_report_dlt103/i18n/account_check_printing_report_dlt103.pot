@@ -1,12 +1,12 @@
 # Translation of Odoo Server.
 # This file contains the translation of the following modules:
-#	* account_check_printing_report_dlt103
+# 	* account_check_printing_report_dlt103
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: <>\n"
+"Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -20,7 +20,20 @@ msgstr ""
 
 #. module: account_check_printing_report_dlt103
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_dlt103.report_check_dlt103
-msgid "Balance Due"
+msgid ""
+"Balance\n"
+"                                                    Due"
+msgstr ""
+
+#. module: account_check_printing_report_dlt103
+#: model:ir.model.fields,field_description:account_check_printing_report_dlt103.field_account_journal__account_check_printing_layout
+#: model:ir.model.fields,field_description:account_check_printing_report_dlt103.field_res_company__account_check_printing_layout
+msgid "Check Layout"
+msgstr ""
+
+#. module: account_check_printing_report_dlt103
+#: model:ir.model,name:account_check_printing_report_dlt103.model_res_company
+msgid "Companies"
 msgstr ""
 
 #. module: account_check_printing_report_dlt103
@@ -29,28 +42,22 @@ msgid "Description"
 msgstr ""
 
 #. module: account_check_printing_report_dlt103
-#: model:ir.model.fields,field_description:account_check_printing_report_dlt103.field_report_account_check_printing_report_dlt103_report_check_dlt103__display_name
-msgid "Display Name"
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_dlt103.report_check_dlt103
+msgid ""
+"Due\n"
+"                                                    Date"
+msgstr ""
+
+#. module: account_check_printing_report_dlt103
+#: model:ir.model,name:account_check_printing_report_dlt103.model_account_journal
+msgid "Journal"
 msgstr ""
 
 #. module: account_check_printing_report_dlt103
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_dlt103.report_check_dlt103
-msgid "Due Date"
-msgstr ""
-
-#. module: account_check_printing_report_dlt103
-#: model:ir.model.fields,field_description:account_check_printing_report_dlt103.field_report_account_check_printing_report_dlt103_report_check_dlt103__id
-msgid "ID"
-msgstr ""
-
-#. module: account_check_printing_report_dlt103
-#: model:ir.model.fields,field_description:account_check_printing_report_dlt103.field_report_account_check_printing_report_dlt103_report_check_dlt103____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: account_check_printing_report_dlt103
-#: model_terms:ir.ui.view,arch_db:account_check_printing_report_dlt103.report_check_dlt103
-msgid "Original Amount"
+msgid ""
+"Original\n"
+"                                                    Amount"
 msgstr ""
 
 #. module: account_check_printing_report_dlt103
@@ -64,7 +71,20 @@ msgid "Payment Check DLT103"
 msgstr ""
 
 #. module: account_check_printing_report_dlt103
+#: model:ir.model.fields,help:account_check_printing_report_dlt103.field_account_journal__account_check_printing_layout
+#: model:ir.model.fields,help:account_check_printing_report_dlt103.field_res_company__account_check_printing_layout
+msgid ""
+"Select the format corresponding to the check paper you will be printing your checks on.\n"
+"In order to disable the printing feature, select 'None'."
+msgstr ""
+
+#. module: account_check_printing_report_dlt103
+#: model:ir.model.fields.selection,name:account_check_printing_report_dlt103.selection__account_journal__account_check_printing_layout__account_check_printing_report_dlt103_action_report_check_dlt103
+#: model:ir.model.fields.selection,name:account_check_printing_report_dlt103.selection__res_company__account_check_printing_layout__account_check_printing_report_dlt103_action_report_check_dlt103
+msgid "dlt103"
+msgstr ""
+
+#. module: account_check_printing_report_dlt103
 #: model:ir.model,name:account_check_printing_report_dlt103.model_report_account_check_printing_report_dlt103_report_check_dlt103
 msgid "report.account_check_printing_report_dlt103.report_check_dlt103"
 msgstr ""
-
