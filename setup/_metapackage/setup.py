@@ -11,6 +11,7 @@ setuptools.setup(
         'odoo-addon-account_check_date>=15.0dev,<15.1dev',
         'odoo-addon-account_check_payee>=15.0dev,<15.1dev',
         'odoo-addon-account_check_printing_report_base>=15.0dev,<15.1dev',
+        'odoo-addon-account_check_printing_report_dlt103>=15.0dev,<15.1dev',
         'odoo-addon-account_check_printing_report_sslm102>=15.0dev,<15.1dev',
         'odoo-addon-account_check_report>=15.0dev,<15.1dev',
         'odoo-addon-account_due_list>=15.0dev,<15.1dev',
