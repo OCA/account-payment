@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-07-02 08:02+0000\n"
-"PO-Revision-Date: 2021-07-02 10:03+0200\n"
-"Last-Translator: <>\n"
+"PO-Revision-Date: 2024-04-23 00:30+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: \n"
-"X-Generator: Poedit 2.3\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
 
 #. module: account_payment_term_partner_holiday
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
@@ -85,7 +85,7 @@ msgstr "Enero"
 #. module: account_payment_term_partner_holiday
 #: model:ir.model,name:account_payment_term_partner_holiday.model_account_move
 msgid "Journal Entries"
-msgstr ""
+msgstr "Entradas en Diario"
 
 #. module: account_payment_term_partner_holiday
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
@@ -134,7 +134,7 @@ msgstr "Mes desde"
 #. module: account_payment_term_partner_holiday
 #: model:ir.model.constraint,message:account_payment_term_partner_holiday.constraint_res_partner_holiday_month_consistency
 msgid "Month from should be higher than month from"
-msgstr ""
+msgstr "El mes desde debe ser mayor que el mes desde"
 
 #. module: account_payment_term_partner_holiday
 #: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__month_to
@@ -185,6 +185,7 @@ msgstr "Septiembre"
 #, python-format
 msgid "You can't set the ending holidays period before the beginning."
 msgstr ""
+"No puede establecer el final del período de vacaciones antes del comienzo."
 
 #~ msgid "Invoice"
 #~ msgstr "Factura"
