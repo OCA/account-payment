@@ -151,7 +151,8 @@ class TestAccountPaymentTerm(TransactionCase):
                 self.assertEqual(
                     payment_term_date,
                     "2015-05-31",
-                    "Error in the _compute_terms of payment terms with months after invoice month",
+                    "Error in the _compute_terms of payment terms with months after "
+                    "invoice month",
                 )
 
     def test_postpone_holiday(self):
