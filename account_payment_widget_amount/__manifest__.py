@@ -3,7 +3,7 @@
 {
     "name": "Account Payment Widget Amount",
     "summary": "Extends the payment widget to be able to choose the payment " "amount",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "category": "Account-payment",
     "website": "https://github.com/OCA/account-payment",
     "author": "ForgeFlow S.L., Odoo Community Association (OCA)",
