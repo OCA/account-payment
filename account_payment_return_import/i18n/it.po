@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-30 10:56+0000\n"
-"PO-Revision-Date: 2024-04-11 14:39+0000\n"
+"PO-Revision-Date: 2024-05-03 16:37+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-payment-8-0/"
 "language/it/)\n"
@@ -165,7 +165,7 @@ msgstr "Importa"
 #. module: account_payment_return_import
 #: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_line__unique_import_id
 msgid "Import ID"
-msgstr "ID Importazione"
+msgstr "ID importazione"
 
 #. module: account_payment_return_import
 #: model:ir.actions.act_window,name:account_payment_return_import.action_account_payment_return_import
