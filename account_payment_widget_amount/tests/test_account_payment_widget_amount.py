@@ -460,3 +460,72 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
         self.assertEqual(invoice.amount_residual, 0.0)
         self.assertIn(invoice.payment_state, ("paid", "in_payment"))
         self.assertFalse(payment_ml.reconciled)
+
+    def test_06(self):
+        """Tests that I can create an invoice in foreign currency,
+        register a payment in foreign currency, and then reconcile part
+        of the payment to the invoice.
+        I expect:
+        - The residual amount of the invoice is reduced by the amount assigned.
+        - The residual amount of the payment is reduced by the amount assigned.
+        """
+        self.company.currency_id.rate_ids = False
+        # The invoice is for 200 in the new currency, which translates in 100
+        # in company currency.
+        invoice = self.account_move_model.create(
+            {
+                "move_type": "out_invoice",
+                "name": "Test Customer Invoice",
+                "journal_id": self.sale_journal.id,
+                "partner_id": self.partner.id,
+                "company_id": self.company.id,
+                "currency_id": self.new_usd.id,
+                "invoice_line_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": "Line 1",
+                            "price_unit": 200.0,
+                            "account_id": self.account_income.id,
+                            "quantity": 1,
+                        },
+                    )
+                ],
+            }
+        )
+
+        # Open invoice
+        invoice.action_post()
+        self.assertEqual(invoice.amount_residual, 200.0)
+        # Create a payment for 1000 in the new currency, with translates in 500 in
+        # company currency
+        payment = self.account_payment_model.create(
+            {
+                "payment_type": "inbound",
+                "payment_method_id": self.env.ref(
+                    "account.account_payment_method_manual_in"
+                ).id,
+                "partner_type": "customer",
+                "partner_id": self.partner.id,
+                "amount": 1000.0,
+                "currency_id": self.new_usd.id,
+                "date": time.strftime("%Y-%m-%d"),
+                "journal_id": self.bank_journal.id,
+                "company_id": self.company.id,
+            }
+        )
+        payment.action_post()
+        payment_ml = payment.line_ids.filtered(
+            lambda l: l.account_id == self.account_receivable
+        )
+        # We pay 100 in the currency of the invoice. Which means that in
+        # company currency we are paying 50.
+        invoice.with_context(paid_amount=100.0).js_assign_outstanding_line(
+            payment_ml.id
+        )
+        self.assertEqual(invoice.amount_residual, 100.0)
+        self.assertEqual(invoice.payment_state, "partial")
+        self.assertFalse(payment_ml.reconciled)
+        self.assertEqual(payment_ml.amount_residual, -450.0)
+        self.assertEqual(payment_ml.amount_residual_currency, -900.0)

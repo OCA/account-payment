@@ -31,13 +31,14 @@ class AccountMoveLine(models.Model):
         partials = super(AccountMoveLine, self)._prepare_reconciliation_partials()
         if self.env.context.get("paid_amount", 0.0):
             total_paid = self.env.context.get("paid_amount", 0.0)
+            original_total_paid = total_paid
             current_am = am_model.browse(self.env.context.get("move_id"))
             current_aml = aml_model.browse(self.env.context.get("line_id"))
             decimal_places = current_am.company_id.currency_id.decimal_places
             if current_am.currency_id.id != current_am.company_currency_id.id:
                 total_paid = current_am.currency_id._convert(
                     total_paid,
-                    current_aml.currency_id,
+                    current_am.company_currency_id,
                     current_am.company_id,
                     current_aml.date,
                 )
@@ -68,6 +69,13 @@ class AccountMoveLine(models.Model):
                                 debit_line.company_id,
                                 debit_line.date,
                             ),
+                        }
+                    )
+                elif current_aml.currency_id == current_am.currency_id:
+                    partial.update(
+                        {
+                            "debit_amount_currency": original_total_paid,
+                            "credit_amount_currency": original_total_paid,
                         }
                     )
                 else:
