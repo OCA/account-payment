@@ -5,7 +5,7 @@
     "name": "Account Due List Payment",
     "summary": """
         Allows you to make payments directly from the due list view""",
-    "version": "14.0.1.0.0",
+    "version": "14.0.1.0.1",
     "license": "AGPL-3",
     "author": "Engenere.one,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-payment",
