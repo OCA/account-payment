@@ -157,7 +157,7 @@ class PaymentReturn(models.Model):
 
     def _prepare_move_line(self, move, total_amount):
         self.ensure_one()
-        return {
+        vals = {
             "name": move.ref,
             "debit": 0.0,
             "credit": total_amount,
@@ -166,6 +166,10 @@ class PaymentReturn(models.Model):
             "move_id": move.id,
             "journal_id": move.journal_id.id,
         }
+        partners = move.line_ids.partner_id
+        if len(partners) == 1:
+            vals["partner_id"] = partners.id
+        return vals
 
     def action_confirm(self):
         self.ensure_one()
