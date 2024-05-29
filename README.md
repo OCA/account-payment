@@ -37,7 +37,7 @@ addon | version | maintainers | summary
 [account_payment_return_import](account_payment_return_import/) | 15.0.1.0.1 |  | This module adds a generic wizard to import payment returnfile formats. Is only the base to be extended by anothermodules
 [account_payment_return_import_iso20022](account_payment_return_import_iso20022/) | 15.0.1.0.3 |  | This addon allows to import payment returns from ISO 20022 files like PAIN or CAMT.
 [account_payment_term_extension](account_payment_term_extension/) | 15.0.1.0.1 |  | Adds rounding, months, weeks and multiple payment days properties on payment term lines
-[account_payment_term_partner_holiday](account_payment_term_partner_holiday/) | 15.0.1.0.0 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Account Payment Term Partner Holiday
+[account_payment_term_partner_holiday](account_payment_term_partner_holiday/) | 15.0.1.0.1 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Account Payment Term Partner Holiday
 [account_payment_term_restriction](account_payment_term_restriction/) | 15.0.1.0.0 |  | Restricts the usage of Payment Terms Journal Entries
 [account_payment_term_security](account_payment_term_security/) | 15.0.1.0.0 |  | Payment Term Security
 [account_payment_widget_amount](account_payment_widget_amount/) | 15.0.1.0.0 | [![ChrisOForgeFlow](https://github.com/ChrisOForgeFlow.png?size=30px)](https://github.com/ChrisOForgeFlow) | Extends the payment widget to be able to choose the payment amount
