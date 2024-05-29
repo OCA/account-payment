@@ -3,21 +3,20 @@
 
 import psycopg2
 
-from odoo import fields
+from odoo import Command, fields
 from odoo.tests import Form, common
 from odoo.tools.misc import mute_logger
 
+from odoo.addons.base.tests.common import BaseCommon
 
-class TestPartnerHoliday(common.TransactionCase):
+class TestPartnerHoliday(BaseCommon):
     def setUp(self):
         super().setUp()
         self.partner_1 = self.env["res.partner"].create(
             {
                 "name": "Partner test 1",
                 "holiday_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "day_from": "1",
                             "month_from": "02",
@@ -25,9 +24,7 @@ class TestPartnerHoliday(common.TransactionCase):
                             "month_to": "02",
                         },
                     ),
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "day_from": "1",
                             "month_from": "03",
@@ -35,9 +32,7 @@ class TestPartnerHoliday(common.TransactionCase):
                             "month_to": "04",
                         },
                     ),
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "day_from": "12",
                             "month_from": "06",
@@ -45,9 +40,7 @@ class TestPartnerHoliday(common.TransactionCase):
                             "month_to": "06",
                         },
                     ),
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "day_from": "15",
                             "month_from": "06",
@@ -66,9 +59,7 @@ class TestPartnerHoliday(common.TransactionCase):
             {
                 "name": "Immediate",
                 "line_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "value": "percent",
                             "nb_days": 0,
@@ -81,9 +72,7 @@ class TestPartnerHoliday(common.TransactionCase):
             {
                 "name": "10 Days",
                 "line_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "value": "percent",
                             "nb_days": 10,
@@ -96,9 +85,7 @@ class TestPartnerHoliday(common.TransactionCase):
             {
                 "name": "Immediate (with holidays)",
                 "line_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "value": "percent",
                             "nb_days": 0,
@@ -106,7 +93,7 @@ class TestPartnerHoliday(common.TransactionCase):
                     )
                 ],
                 "holiday_ids": [
-                    (0, 0, {"holiday": "2021-06-14", "date_postponed": "2021-07-08"})
+                    Command.create({"holiday": "2021-06-14", "date_postponed": "2021-07-08"})
                 ],
             }
         )
@@ -114,9 +101,7 @@ class TestPartnerHoliday(common.TransactionCase):
             {
                 "name": "Immediate (with custom payment days)",
                 "line_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "value": "percent",
                             "nb_days": 0,
@@ -324,6 +309,37 @@ class TestPartnerHoliday(common.TransactionCase):
         invoice_form.invoice_payment_term_id = self.payment_term_immediate
         self.assertEqual(
             invoice_form.invoice_date_due, fields.Date.from_string("2021-06-14")
+        )
+
+    def test_partner_2_invoice_change_due_date_on_confirm(self):
+        """A partner's holidays could have changed since we created the invoice. Let's
+        ensure that the due dates are correct when we post it"""
+        invoice_form = self._set_invoice_form(self.partner_2.id, "2021-06-13")
+        invoice_form.invoice_payment_term_id = self.payment_term_immediate
+        self.assertEqual(
+            invoice_form.invoice_date_due, fields.Date.from_string("2021-06-13")
+        )
+        invoice = invoice_form.save()
+        self.partner_2.write(
+            {
+                "holiday_ids": [
+                    Command.create(
+                        {
+                            "day_from": "1",
+                            "month_from": "06",
+                            "day_to": "31",
+                            "month_to": "06",
+                        },
+                    ),
+                ]
+            }
+        )
+        self.assertEqual(
+            invoice.invoice_date_due, fields.Date.from_string("2021-06-13")
+        )
+        invoice.action_post()
+        self.assertEqual(
+            invoice.invoice_date_due, fields.Date.from_string("2021-07-01")
         )
 
     def test_partner_1_get_valid_due_date(self):
