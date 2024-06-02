@@ -164,8 +164,7 @@ class ResPartnerAgingSupplier(models.Model):
                 ON DaysDue.id = aml.id
                 LEFT JOIN account_move as ai ON ai.id = aml.move_id
                 WHERE
-                ac.user_type_id in (select id from account_account_type where
-                type = 'payable')
+                ac.account_type = 'liability_payable'
                 AND aml.date <= '{}'
                 AND ai.state = 'posted' AND
                 (ai.payment_state != 'paid' OR
@@ -307,8 +306,7 @@ class ResPartnerAgingSupplier(models.Model):
                 ON DaysDue.id = aml.id
                 LEFT JOIN account_move as ai ON ai.id = aml.move_id
                 WHERE
-                ac.user_type_id in (select id from account_account_type where
-                type = 'payable')
+                ac.account_type = 'liability_payable'
                 AND aml.date <= '{}'
                 AND aml.partner_id IS NULL
                 and ai.partner_id IS NOT NULL
@@ -345,8 +343,7 @@ class ResPartnerAgingSupplier(models.Model):
                 LEFT JOIN account_account ac on ac.id = aml.account_id
                 where aml.date <= '{}'
                 and aml.full_reconcile_id IS NOT NULL
-                and ac.user_type_id in (select id from account_account_type
-                where type = 'payable')
+                and ac.account_type = 'liability_payable'
                 and aml.debit > 0
               """.format(
             age_date,
