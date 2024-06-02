@@ -8,8 +8,15 @@ from odoo import fields
 from odoo.tests import common
 from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
 
+from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
-class TestPartnerAging(common.TransactionCase):
+
+@common.tagged("-at_install", "post_install")
+class TestPartnerAging(AccountTestInvoicingCommon):
+    @classmethod
+    def setUpClass(cls, chart_template_ref=None):
+        super().setUpClass(chart_template_ref=chart_template_ref)
+
     def setUp(self):
         super(TestPartnerAging, self).setUp()
         self.partner_aging_date_model = self.env["res.partner.aging.date"]
@@ -21,7 +28,6 @@ class TestPartnerAging(common.TransactionCase):
         self.account_account_obj = self.env["account.account"]
         self.account_journal_obj = self.env["account.journal"]
 
-        self.account_receivable = self.env.ref("account.data_account_type_receivable")
         self.partner_12 = self.env.ref("base.res_partner_12")
         self.partner_2 = self.env.ref("base.res_partner_2")
         self.partner_10 = self.env.ref("base.res_partner_10")
@@ -39,8 +45,31 @@ class TestPartnerAging(common.TransactionCase):
             {
                 "code": "RA1000",
                 "name": "Test Receivable Account",
-                "user_type_id": self.account_receivable.id,
+                "account_type": "asset_receivable",
                 "reconcile": True,
+            }
+        )
+
+        self.income_account_id = self.account_account_obj.create(
+            {
+                "code": "RA1001",
+                "name": "Test Income Account",
+                "account_type": "income",
+            }
+        )
+
+        self.expense_account_id = self.account_account_obj.create(
+            {
+                "code": "RA1002",
+                "name": "Test Expense Account",
+                "account_type": "expense",
+            }
+        )
+
+        self.env.ref("product.product_product_4").categ_id.write(
+            {
+                "property_account_income_categ_id": self.income_account_id.id,
+                "property_account_expense_categ_id": self.expense_account_id.id,
             }
         )
 
@@ -118,16 +147,18 @@ class TestPartnerAging(common.TransactionCase):
                 "partner_id": invoice_data[2],
             }
         )
-        self.account_move_line_obj.create(
-            {
-                "product_id": self.env.ref("product.product_product_4").id,
-                "quantity": 1.0,
-                "price_unit": 0,
-                "move_id": invoice.id,
-                "name": "product that cost 100",
-                "account_id": self.account_id.id,
-            }
-        )
+        invoice_form = common.Form(invoice)
+        with invoice_form.invoice_line_ids.new() as line_form:
+            line_form.product_id = self.env.ref("product.product_product_4")
+            line_form.quantity = 1
+            line_form.price_unit = 0
+            line_form.name = "product that cost 100"
+            line_form.account_id = (
+                invoice_data[0] == "out_invoice"
+                and self.income_account_id
+                or self.expense_account_id
+            )
+        invoice = invoice_form.save()
         invoice.action_post()
         return invoice
 

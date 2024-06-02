@@ -54,6 +54,7 @@
                     name="open_document"
                     type="object"
                     icon="fa-list-alt"
+                    title="Open Document"
                     attrs="{'invisible':[('invoice_id', '=', False)]}"
                 />
                 <field name="invoice_ref" />
