@@ -53,6 +53,7 @@ addon | version | maintainers | summary
 [account_payment_term_restriction_sale](account_payment_term_restriction_sale/) | 13.0.1.0.0 |  | Restricts the usage of Payment Terms on SOs
 [account_payment_term_security](account_payment_term_security/) | 13.0.1.0.0 |  | Payment Term Security
 [partner_aging](partner_aging/) | 13.0.1.0.1 | [![smangukiya](https://github.com/smangukiya.png?size=30px)](https://github.com/smangukiya) | Aging as a view - invoices and credits
+[partner_restrict_payment_acquirer](partner_restrict_payment_acquirer/) | 13.0.1.0.0 |  | Partner Restrict Payment Acquirer
 [sale_payment_mgmt](sale_payment_mgmt/) | 13.0.1.0.1 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | List and create customer payments for salesmen
 [sale_payment_term_security](sale_payment_term_security/) | 13.0.1.0.0 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Sale Payment Term Security
 
