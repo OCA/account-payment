@@ -9,17 +9,15 @@
         <field name="inherit_id" ref="account.view_account_payment_register_form" />
         <field name="arch" type="xml">
             <xpath expr="//group" position="after">
-                <group invisible="not context.get('batch', False)">
+                <div invisible="not context.get('batch', False)">
                     <field name="is_customer" invisible="1" />
-                    <group
-                        string="Vendor Bills to Pay"
+                    <h3
                         attrs="{'invisible': [('is_customer', '=', True)]}"
-                    />
-                    <group
-                        string="Customer Invoices Being Paid"
+                    >Vendor Bills to Pay</h3>
+                    <h3
                         attrs="{'invisible': [('is_customer', '=', False)]}"
-                    />
-                </group>
+                    >Customer Invoices Being Paid</h3>
+                </div>
                 <group invisible="not context.get('batch', False)">
                     <button
                         name="auto_fill_payments"
@@ -27,34 +25,46 @@
                         type="object"
                         class="oe_highlight"
                     />
-                   <field name="invoice_payments" colspan="4" nolabel="1">
-                        <tree editable="bottom" create="false">
-                            <field
-                                name="partner_id"
-                                options="{'no_create_edit': True}"
-                            />
-                            <field
-                                name="invoice_id"
-                                options="{'no_create_edit': True}"
-                            />
-                            <field name="balance" />
-                            <field name="amount" />
-                            <field name="check_amount_in_words" invisible="1" />
-                            <field name="payment_difference_handling" />
-                            <field name="payment_difference" />
-                            <field
-                                name="writeoff_account_id"
-                                string="Post Difference In"
-                                attrs="{'required': [('payment_difference_handling', '=', 'reconcile'),('payment_difference', '!=', 0.0)]}"
-                            />
-                            <field name="reason_code" />
-                            <field
-                                name="note"
-                                attrs="{'required': [('payment_difference_handling', '=', 'reconcile'),('payment_difference', '!=', 0.0)]}"
-                            />
-                        </tree>
-                    </field>
                 </group>
+                <notebook invisible="not context.get('batch', False)">
+                    <page name="invoice_payments" string="Invoice Payments">
+                        <field name="invoice_payments" nolabel="1">
+                            <tree editable="bottom" create="false">
+                                <field
+                                    name="partner_id"
+                                    options="{'no_create_edit': True}"
+                                />
+                                <field
+                                    name="invoice_id"
+                                    options="{'no_create_edit': True}"
+                                />
+                                <field
+                                    name="balance"
+                                    sum="Total Balance"
+                                    readonly="1"
+                                    force_save="1"
+                                />
+                                <field name="amount" sum="Total Amount" />
+                                <field name="check_amount_in_words" invisible="1" />
+                                <field name="payment_difference_handling" />
+                                <field
+                                    name="payment_difference"
+                                    sum="Total Difference"
+                                />
+                                <field
+                                    name="writeoff_account_id"
+                                    string="Post Difference In"
+                                    attrs="{'required': [('payment_difference_handling', '=', 'reconcile'),('payment_difference', '!=', 0.0)]}"
+                                />
+                                    <field name="reason_code" />
+                                    <field
+                                    name="note"
+                                    attrs="{'required': [('payment_difference_handling', '=', 'reconcile'),('payment_difference', '!=', 0.0)]}"
+                                />
+                                </tree>
+                            </field>
+                    </page>
+                </notebook>
                 <group invisible="not context.get('batch', False)" col="6">
                     <group colspan="4" />
                     <group>
