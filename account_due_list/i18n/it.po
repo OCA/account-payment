@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-09-22 16:30+0000\n"
-"PO-Revision-Date: 2024-02-05 00:24+0000\n"
+"PO-Revision-Date: 2024-06-12 21:35+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-payment-8-0/"
 "language/it/)\n"
@@ -147,7 +147,7 @@ msgstr "Riferimento del documento che ha generato questa fattura."
 #. module: account_due_list
 #: field:account.move.line,maturity_residual:0
 msgid "Residual Amount"
-msgstr "Ammontare residuo"
+msgstr "Importo residuo"
 
 #. module: account_due_list
 #: view:account.move.line:account_due_list.view_payments_filter
