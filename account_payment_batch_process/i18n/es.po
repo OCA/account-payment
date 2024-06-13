@@ -128,6 +128,11 @@ msgid "Invoice Payment Line"
 msgstr "Línea de Pago de Factura"
 
 #. module: account_payment_batch_process
+#: model_terms:ir.ui.view,arch_db:account_payment_batch_process.view_account_payment_from_invoices_batch_inherited
+msgid "Invoice Payments"
+msgstr ""
+
+#. module: account_payment_batch_process
 #: code:addons/account_payment_batch_process/wizard/invoice_payment_line.py:0
 #, python-format
 msgid "Invoice is unchangeable!"
@@ -248,6 +253,21 @@ msgid ""
 msgstr "El asistente se ejecuta sin active_model o active_ids en el contexto."
 
 #. module: account_payment_batch_process
+#: model_terms:ir.ui.view,arch_db:account_payment_batch_process.view_account_payment_from_invoices_batch_inherited
+msgid "Total Amount"
+msgstr ""
+
+#. module: account_payment_batch_process
+#: model_terms:ir.ui.view,arch_db:account_payment_batch_process.view_account_payment_from_invoices_batch_inherited
+msgid "Total Balance"
+msgstr ""
+
+#. module: account_payment_batch_process
+#: model_terms:ir.ui.view,arch_db:account_payment_batch_process.view_account_payment_from_invoices_batch_inherited
+msgid "Total Difference"
+msgstr ""
+
+#. module: account_payment_batch_process
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_account_payment_register__total_amount
 msgid "Total Invoices:"
 msgstr "Total de Facturas:"
@@ -279,7 +299,6 @@ msgid "You can only register payments for open invoices."
 msgstr "Sólo puedes registrar pagos para facturas abiertas."
 
 #. module: account_payment_batch_process
-#: code:addons/account_payment_batch_process/wizard/account_payment_register.py:0
 #: code:addons/account_payment_batch_process/wizard/account_payment_register.py:0
 #, python-format
 msgid "You cannot mix customer invoices and vendor bills in a single payment."
