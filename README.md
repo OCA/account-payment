@@ -37,7 +37,7 @@ addon | version | maintainers | summary
 [account_due_list_payment](account_due_list_payment/) | 14.0.1.0.1 |  | Allows you to make payments directly from the due list view
 [account_due_list_payment_mode](account_due_list_payment_mode/) | 14.0.1.0.0 |  | Payment Due List Payment Mode
 [account_financial_discount](account_financial_discount/) | 14.0.1.0.1 | [![grindtildeath](https://github.com/grindtildeath.png?size=30px)](https://github.com/grindtildeath) | Handle financial discounts for early payments
-[account_payment_batch_process](account_payment_batch_process/) | 14.0.1.0.0 |  | Account Batch Payments Processing for Customers Invoices and Supplier Invoices
+[account_payment_batch_process](account_payment_batch_process/) | 14.0.1.1.0 |  | Account Batch Payments Processing for Customers Invoices and Supplier Invoices
 [account_payment_batch_process_discount](account_payment_batch_process_discount/) | 14.0.1.0.1 | [![mgosai](https://github.com/mgosai.png?size=30px)](https://github.com/mgosai) | Discount on batch payments
 [account_payment_credit_card](account_payment_credit_card/) | 14.0.1.0.2 | [![max3903](https://github.com/max3903.png?size=30px)](https://github.com/max3903) | Add support for credit card payments
 [account_payment_line](account_payment_line/) | 14.0.1.0.0 | [![ChrisOForgeFlow](https://github.com/ChrisOForgeFlow.png?size=30px)](https://github.com/ChrisOForgeFlow) | Payment Counterpart Lines
