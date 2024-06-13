@@ -19,12 +19,15 @@
                     >Customer Invoices Being Paid</h3>
                 </div>
                 <group invisible="not context.get('batch', False)">
+                    <group>
+                    <field name="group_by_partner" />
                     <button
-                        name="auto_fill_payments"
-                        string="Auto-Fill Pay Amount"
-                        type="object"
-                        class="oe_highlight"
-                    />
+                            name="auto_fill_payments"
+                            string="Auto-Fill Pay Amount"
+                            type="object"
+                            class="oe_highlight"
+                        />
+                    </group>
                 </group>
                 <notebook invisible="not context.get('batch', False)">
                     <page name="invoice_payments" string="Invoice Payments">
