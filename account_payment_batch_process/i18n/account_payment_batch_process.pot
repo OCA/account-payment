@@ -125,6 +125,11 @@ msgid "Invoice Payment Line"
 msgstr ""
 
 #. module: account_payment_batch_process
+#: model_terms:ir.ui.view,arch_db:account_payment_batch_process.view_account_payment_from_invoices_batch_inherited
+msgid "Invoice Payments"
+msgstr ""
+
+#. module: account_payment_batch_process
 #: code:addons/account_payment_batch_process/wizard/invoice_payment_line.py:0
 #, python-format
 msgid "Invoice is unchangeable!"
@@ -240,6 +245,21 @@ msgstr ""
 #, python-format
 msgid ""
 "The wizard is executed without active_model or active_ids in the context."
+msgstr ""
+
+#. module: account_payment_batch_process
+#: model_terms:ir.ui.view,arch_db:account_payment_batch_process.view_account_payment_from_invoices_batch_inherited
+msgid "Total Amount"
+msgstr ""
+
+#. module: account_payment_batch_process
+#: model_terms:ir.ui.view,arch_db:account_payment_batch_process.view_account_payment_from_invoices_batch_inherited
+msgid "Total Balance"
+msgstr ""
+
+#. module: account_payment_batch_process
+#: model_terms:ir.ui.view,arch_db:account_payment_batch_process.view_account_payment_from_invoices_batch_inherited
+msgid "Total Difference"
 msgstr ""
 
 #. module: account_payment_batch_process
