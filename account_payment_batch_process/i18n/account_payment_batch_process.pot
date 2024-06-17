@@ -106,6 +106,16 @@ msgid "Display Name"
 msgstr ""
 
 #. module: account_payment_batch_process
+#: model:ir.model.fields,help:account_payment_batch_process.field_account_payment_register__group_by_partner
+msgid "Enable grouping payments by partner"
+msgstr ""
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_account_payment_register__group_by_partner
+msgid "Group By Partner"
+msgstr ""
+
+#. module: account_payment_batch_process
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_account_payment_register__id
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__id
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_payment_adjustment_reason__id
