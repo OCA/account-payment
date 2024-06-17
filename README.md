@@ -24,6 +24,7 @@ addon | version | maintainers | summary
 [account_due_list](account_due_list/) | 16.0.1.2.0 |  | List of open credits and debits, with due date
 [account_due_list_aging_comment](account_due_list_aging_comment/) | 16.0.1.0.0 |  | Account Due List Aging Comment
 [account_due_list_payment_mode](account_due_list_payment_mode/) | 16.0.1.0.0 |  | Payment Due List Payment Mode
+[account_payment_line](account_payment_line/) | 16.0.1.0.0 | [![ChrisOForgeFlow](https://github.com/ChrisOForgeFlow.png?size=30px)](https://github.com/ChrisOForgeFlow) | Payment Counterpart Lines
 [account_payment_multi_deduction](account_payment_multi_deduction/) | 16.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Payment Register with Multiple Deduction
 [account_payment_notification](account_payment_notification/) | 16.0.1.0.1 | [![yajo](https://github.com/yajo.png?size=30px)](https://github.com/yajo) | Notifiy upcoming payments
 [account_payment_promissory_note](account_payment_promissory_note/) | 16.0.1.0.1 |  | Account Payment Promissory Note
