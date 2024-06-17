@@ -109,6 +109,16 @@ msgid "Display Name"
 msgstr "Nome visualizzato"
 
 #. module: account_payment_batch_process
+#: model:ir.model.fields,help:account_payment_batch_process.field_account_payment_register__group_by_partner
+msgid "Enable grouping payments by partner"
+msgstr ""
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_account_payment_register__group_by_partner
+msgid "Group By Partner"
+msgstr ""
+
+#. module: account_payment_batch_process
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_account_payment_register__id
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__id
 #: model:ir.model.fields,field_description:account_payment_batch_process.field_payment_adjustment_reason__id
@@ -300,7 +310,6 @@ msgid "You can only register payments for open invoices."
 msgstr "Puoi registrare pagamenti solo per fatture aperte."
 
 #. module: account_payment_batch_process
-#: code:addons/account_payment_batch_process/wizard/account_payment_register.py:0
 #: code:addons/account_payment_batch_process/wizard/account_payment_register.py:0
 #, python-format
 msgid "You cannot mix customer invoices and vendor bills in a single payment."
