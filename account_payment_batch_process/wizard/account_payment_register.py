@@ -16,7 +16,6 @@ except ImportError:
     )
     num2words = None
 
-
 MAP_INVOICE_TYPE_PARTNER_TYPE = {
     "out_invoice": "customer",
     "out_refund": "customer",
@@ -58,6 +57,11 @@ class AccountPaymentRegister(models.TransientModel):
         readonly=False,
     )
     total_amount = fields.Float("Total Invoices:", compute="_compute_total")
+    group_by_partner = fields.Boolean(
+        string="Group By Partner",
+        default=False,
+        help="Enable grouping payments by partner",
+    )
 
     def get_invoice_payment_line(self, invoice):
         return (
@@ -258,7 +262,7 @@ class AccountPaymentRegister(models.TransientModel):
         }
 
     def update_group_pay_data(
-        self, partner_id, group_data, data_get, check_amount_in_words
+        self, group_id, group_data, data_get, check_amount_in_words
     ):
         # build memo value
         if self.communication:
@@ -283,8 +287,8 @@ class AccountPaymentRegister(models.TransientModel):
         }
         group_data.update(
             {
-                partner_id: {
-                    "partner_id": partner_id,
+                group_id: {
+                    "partner_id": data_get.invoice_id.partner_id.id,
                     "partner_type": MAP_INVOICE_TYPE_PARTNER_TYPE[
                         data_get.invoice_id.move_type
                     ],
@@ -299,27 +303,28 @@ class AccountPaymentRegister(models.TransientModel):
 
     def get_amount(self, memo, group_data, line):
         line.payment_difference = line.balance - line.amount
-        partner_id = line.invoice_id.partner_id.id
-        if partner_id in group_data:
-            old_total = group_data[partner_id]["total"]
+        group_id = line.invoice_id.id
+        if self.group_by_partner:
+            group_id = line.invoice_id.partner_id.id
+
+        if group_id in group_data:
+            old_total = group_data[group_id]["total"]
             # build memo value
             if self.communication:
                 memo = (
-                    group_data[partner_id]["memo"]
+                    group_data[group_id]["memo"]
                     + " : "
                     + self.communication
                     + "-"
                     + str(line.invoice_id.name)
                 )
             else:
-                memo = (
-                    group_data[partner_id]["memo"] + " : " + str(line.invoice_id.name)
-                )
+                memo = group_data[group_id]["memo"] + " : " + str(line.invoice_id.name)
             # Calculate amount in words
             check_amount_in_words = self.total_amount_in_words(line, old_total)
-            group_data[partner_id].update(
+            group_data[group_id].update(
                 {
-                    "partner_id": partner_id,
+                    "partner_id": line.invoice_id.partner_id.id,
                     "partner_type": MAP_INVOICE_TYPE_PARTNER_TYPE[
                         line.invoice_id.move_type
                     ],
@@ -339,13 +344,13 @@ class AccountPaymentRegister(models.TransientModel):
                 name = "Counterpart"
             # Update with payment diff data
             inv_val = self.get_payment_invoice_value(name, line)
-            group_data[partner_id]["inv_val"].update({line.invoice_id.id: inv_val})
+            group_data[group_id]["inv_val"].update({line.invoice_id.id: inv_val})
         else:
             # calculate amount in words
             check_amount_in_words = self.total_amount_in_words(line, 0)
             # prepare name
             self.update_group_pay_data(
-                partner_id, group_data, line, check_amount_in_words
+                group_id, group_data, line, check_amount_in_words
             )
 
     def _reconcile_open_invoices(
@@ -395,16 +400,16 @@ class AccountPaymentRegister(models.TransientModel):
         context.update({"group_data": group_data})
         # making partner wise payment
         payment_ids = []
-        for partner in list(group_data):
+        for group in list(group_data):
             # update active_ids with active invoice ids
-            if context.get("active_ids", False) and group_data[partner].get(
+            if context.get("active_ids", False) and group_data[group].get(
                 "inv_val", False
             ):
-                context.update({"active_ids": list(group_data[partner]["inv_val"])})
+                context.update({"active_ids": list(group_data[group]["inv_val"])})
             payment = (
                 self.env["account.payment"]
                 .with_context(context)
-                .create(self.get_payment_values(group_data=group_data[partner]))
+                .create(self.get_payment_values(group_data=group_data[group]))
             )
             payment_ids.append(payment.id)
             payment.action_post()
@@ -421,13 +426,13 @@ class AccountPaymentRegister(models.TransientModel):
                     [("account_id", "=", account.id), ("reconciled", "=", False)]
                 ).reconcile()
             if any(
-                group_data[partner]["inv_val"][inv.id]["payment_difference_handling"]
+                group_data[group]["inv_val"][inv.id]["payment_difference_handling"]
                 == "open"
                 for inv in invoices
             ):
                 for inv in invoices:
                     if (
-                        group_data[partner]["inv_val"][inv.id][
+                        group_data[group]["inv_val"][inv.id][
                             "payment_difference_handling"
                         ]
                         == "open"
@@ -438,7 +443,7 @@ class AccountPaymentRegister(models.TransientModel):
                     for line in inv.line_ids:
                         if line.amount_residual > 0 and payment_state == "paid":
                             line_amount = 0.0
-                            partial_amount = group_data[partner]["inv_val"][inv.id][
+                            partial_amount = group_data[group]["inv_val"][inv.id][
                                 "amount"
                             ]
                             self._reconcile_open_invoices(
@@ -453,10 +458,10 @@ class AccountPaymentRegister(models.TransientModel):
                             )
                             continue
                         if line.reconciled and payment_state == "partial":
-                            line_amount = group_data[partner]["inv_val"][inv.id][
+                            line_amount = group_data[group]["inv_val"][inv.id][
                                 "payment_difference"
                             ]
-                            partial_amount = group_data[partner]["inv_val"][inv.id][
+                            partial_amount = group_data[group]["inv_val"][inv.id][
                                 "amount"
                             ]
                             self._reconcile_open_invoices(
@@ -473,10 +478,10 @@ class AccountPaymentRegister(models.TransientModel):
                     inv.update(
                         {
                             "payment_state": payment_state,
-                            "amount_residual": group_data[partner]["inv_val"][inv.id][
+                            "amount_residual": group_data[group]["inv_val"][inv.id][
                                 "payment_difference"
                             ],
-                            "amount_residual_signed": group_data[partner]["inv_val"][
+                            "amount_residual_signed": group_data[group]["inv_val"][
                                 inv.id
                             ]["payment_difference"],
                         }
