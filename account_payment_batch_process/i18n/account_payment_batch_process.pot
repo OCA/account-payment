@@ -217,6 +217,16 @@ msgid "Register Payment"
 msgstr ""
 
 #. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__invoice_id
+msgid "Supplier Invoice"
+msgstr ""
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__partner_id
+msgid "Supplier Name"
+msgstr ""
+
+#. module: account_payment_batch_process
 #. odoo-python
 #: code:addons/account_payment_batch_process/wizard/account_payment_register.py:0
 #, python-format
