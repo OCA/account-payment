@@ -3,7 +3,7 @@
 
 {
     "name": "Account Payment Batch Processing",
-    "version": "14.0.1.1.0",
+    "version": "14.0.1.2.0",
     "license": "AGPL-3",
     "author": "Open Source Integrators, Odoo Community Association (OCA)",
     "summary": """
