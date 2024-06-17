@@ -1,0 +1,294 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_payment_batch_process
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-21 18:05+0000\n"
+"PO-Revision-Date: 2023-11-21 18:05+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_payment_batch_process
+#. odoo-python
+#: code:addons/account_payment_batch_process/wizard/account_payment_register.py:0
+#: code:addons/account_payment_batch_process/wizard/invoice_payment_line.py:0
+#, python-format
+msgid " and %s/100"
+msgstr " et %s/100"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__writeoff_account_id
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_payment_adjustment_reason__account_id
+msgid "Account"
+msgstr "Compte"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__payment_difference_handling
+msgid "Action"
+msgstr "Action"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__amount
+msgid "Amount"
+msgstr "Montant"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__check_amount_in_words
+msgid "Amount in Words"
+msgstr "Montant en lettres"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_account_payment_register__is_auto_fill
+#: model_terms:ir.ui.view,arch_db:account_payment_batch_process.view_account_payment_from_invoices_batch_inherited
+msgid "Auto-Fill Pay Amount"
+msgstr "Remplissage automatique du montant à payer"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__balance
+msgid "Balance Amount"
+msgstr "Montant du solde"
+
+#. module: account_payment_batch_process
+#. odoo-python
+#: code:addons/account_payment_batch_process/wizard/invoice_payment_line.py:0
+#, python-format
+msgid "Balance is unchangeable!"
+msgstr "Le solde est immuable !"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_account_payment_register__cheque_amount
+msgid "Batch Payment Total"
+msgstr "Total des paiements groupés"
+
+#. module: account_payment_batch_process
+#. odoo-python
+#: code:addons/account_payment_batch_process/wizard/account_payment_register.py:0
+#: model:ir.actions.act_window,name:account_payment_batch_process.action_invoice_batch_process
+#: model:ir.actions.act_window,name:account_payment_batch_process.action_invoice_invoice_batch_process
+#, python-format
+msgid "Batch Payments"
+msgstr "Paiements groupés"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_payment_adjustment_reason__code
+msgid "Code"
+msgstr "Code"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__create_uid
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_payment_adjustment_reason__create_uid
+msgid "Created by"
+msgstr "Créé par"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__create_date
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_payment_adjustment_reason__create_date
+msgid "Created on"
+msgstr "Créé le"
+
+#. module: account_payment_batch_process
+#: model_terms:ir.ui.view,arch_db:account_payment_batch_process.view_account_payment_from_invoices_batch_inherited
+msgid "Customer Invoices Being Paid"
+msgstr "Factures clients en cours de paiement"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__payment_difference
+msgid "Difference Amount"
+msgstr "Montant de différence"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__display_name
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_payment_adjustment_reason__display_name
+msgid "Display Name"
+msgstr "Nom d'affichage"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__id
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_payment_adjustment_reason__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_payment_batch_process
+#. odoo-python
+#: code:addons/account_payment_batch_process/wizard/account_payment_register.py:0
+#, python-format
+msgid ""
+"In order to pay multiple bills at once, they must use the same currency."
+msgstr "Pour payer plusieurs factures à la fois, elles doivent utiliser la même devise."
+
+#. module: account_payment_batch_process
+#: model:ir.model,name:account_payment_batch_process.model_invoice_payment_line
+msgid "Invoice Payment Line"
+msgstr "Ligne de paiement de facture"
+
+#. module: account_payment_batch_process
+#. odoo-python
+#: code:addons/account_payment_batch_process/wizard/invoice_payment_line.py:0
+#, python-format
+msgid "Invoice is unchangeable!"
+msgstr "La facture est immuable !"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_account_payment_register__is_customer
+msgid "Is Customer?"
+msgstr "Est un client ?"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields.selection,name:account_payment_batch_process.selection__invoice_payment_line__payment_difference_handling__open
+msgid "Keep open"
+msgstr "Garder ouvert"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line____last_update
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_payment_adjustment_reason____last_update
+msgid "Last Modified on"
+msgstr "Dernière modification le"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__write_uid
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_payment_adjustment_reason__write_uid
+msgid "Last Updated by"
+msgstr "Dernière mise à jour par"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__write_date
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_payment_adjustment_reason__write_date
+msgid "Last Updated on"
+msgstr "Dernière mise à jour le"
+
+#. module: account_payment_batch_process
+#: model_terms:ir.ui.view,arch_db:account_payment_batch_process.view_account_payment_from_invoices_batch_inherited
+msgid "Make Payments"
+msgstr "Effectuer les paiements"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields.selection,name:account_payment_batch_process.selection__invoice_payment_line__payment_difference_handling__reconcile
+msgid "Mark invoice as fully paid"
+msgstr "Marquer la facture comme entièrement payée"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__note
+msgid "Note"
+msgstr "Note"
+
+#. module: account_payment_batch_process
+#. odoo-python
+#: code:addons/account_payment_batch_process/wizard/invoice_payment_line.py:0
+#, python-format
+msgid "Partner is unchangeable!"
+msgstr "Le partenaire est immuable !"
+
+#. module: account_payment_batch_process
+#: model:ir.model,name:account_payment_batch_process.model_payment_adjustment_reason
+msgid "Payment Adjustment Reason"
+msgstr "Raison d'ajustement du paiement"
+
+#. module: account_payment_batch_process
+#. odoo-python
+#: code:addons/account_payment_batch_process/wizard/account_payment_register.py:0
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_account_payment_register__invoice_payments
+#, python-format
+msgid "Payments"
+msgstr "Paiements"
+
+#. module: account_payment_batch_process
+#: model_terms:ir.ui.view,arch_db:account_payment_batch_process.view_account_payment_from_invoices_batch_inherited
+msgid "Post Difference In"
+msgstr "Publier la différence dans"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_payment_adjustment_reason__reason
+msgid "Reason"
+msgstr "Raison"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__reason_code
+msgid "Reason Code"
+msgstr "Code de raison"
+
+#. module: account_payment_batch_process
+#: model:ir.model,name:account_payment_batch_process.model_account_payment_register
+msgid "Register Payment"
+msgstr "Enregistrer un paiement"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__invoice_id
+msgid "Supplier Invoice"
+msgstr "Facture fournisseur"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__partner_id
+msgid "Supplier Name"
+msgstr "Nom du fournisseur"
+
+#. module: account_payment_batch_process
+#. odoo-python
+#: code:addons/account_payment_batch_process/wizard/account_payment_register.py:0
+#, python-format
+msgid "The expected model for this action is 'account.move', not '%s'."
+msgstr "Le modèle attendu pour cette action est 'account.move', pas '%s'."
+
+#. module: account_payment_batch_process
+#. odoo-python
+#: code:addons/account_payment_batch_process/wizard/account_payment_register.py:0
+#, python-format
+msgid ""
+"The pay amount of the invoices and the batch payment total do not match."
+msgstr "Le montant des paiements des factures et le total des paiements groupés ne correspondent pas."
+
+#. module: account_payment_batch_process
+#. odoo-python
+#: code:addons/account_payment_batch_process/wizard/account_payment_register.py:0
+#, python-format
+msgid ""
+"The wizard is executed without active_model or active_ids in the context."
+msgstr "L'assistant est exécuté sans active_model ou active_ids dans le contexte."
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_account_payment_register__total_amount
+#: model_terms:ir.ui.view,arch_db:account_payment_batch_process.view_account_payment_from_invoices_batch_inherited
+msgid "Total Invoices:"
+msgstr "Total des factures : "
+
+#. module: account_payment_batch_process
+#: model_terms:ir.ui.view,arch_db:account_payment_batch_process.view_account_payment_from_invoices_batch_inherited
+msgid "Vendor Bills to Pay"
+msgstr "Factures de fournisseurs à payer"
+
+#. module: account_payment_batch_process
+#: model:ir.model.fields,field_description:account_payment_batch_process.field_invoice_payment_line__wizard_id
+msgid "Wizard"
+msgstr "Assistant"
+
+#. module: account_payment_batch_process
+#. odoo-python
+#: code:addons/account_payment_batch_process/wizard/account_payment_register.py:0
+#, python-format
+msgid ""
+"You can only register a batch payment for invoices with the same payment "
+"mode."
+msgstr ""
+"Vous ne pouvez enregistrer un paiement groupé que pour des factures avec le "
+"même mode de paiement."
+
+#. module: account_payment_batch_process
+#. odoo-python
+#: code:addons/account_payment_batch_process/wizard/account_payment_register.py:0
+#, python-format
+msgid "You can only register payments for open invoices."
+msgstr "Vous ne pouvez enregistrer des paiements que pour des factures ouvertes."
+
+#. module: account_payment_batch_process
+#. odoo-python
+#: code:addons/account_payment_batch_process/wizard/account_payment_register.py:0
+#: code:addons/account_payment_batch_process/wizard/account_payment_register.py:0
+#, python-format
+msgid "You cannot mix customer invoices and vendor bills in a single payment."
+msgstr "Vous ne pouvez pas mélanger des factures clients et des factures fournisseurs dans un seul paiement."
