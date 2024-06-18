@@ -11,7 +11,7 @@ from odoo.addons.account.models.account_payment import (
 
 def post_load_hook():  # noqa: C901
     def _synchronize_from_moves_new(self, changed_fields):
-        if not self.line_payment_counterpart_ids:
+        if "line_payment_counterpart_ids" not in self._fields:
             return self._synchronize_from_moves_original(changed_fields)
         if self._context.get("skip_account_move_synchronization"):
             return
