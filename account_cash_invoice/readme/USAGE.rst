@@ -1,11 +1,8 @@
 #.  Go to *Settings* and activate the developer mode.
 #.  Go to *Settings / Users & Companies / Users* and set the flag
     'Show Full Accounting Features'.
-#.  Go to *Invoicing / Dashboard* and create and/or open an existing
-    Cash Statement from a Cash Journal.
-#.  Press the button **Pay Invoice** to pay a Supplier Invoice or a Customer
-    Refund. You will need to select the expected Journal
-#.  Select **Collect Payment from Invoice** in to receive a payment of an
-    existing Customer Invoice or a Supplier Refund.
-#.  Press **Validate** on the statement. The payment will then be reconciled
+#.  Go to *Invoicing / Dashboard* from a Cash Journal.
+#.  On the Additional options, Press the button **Pay Invoice** to pay a Supplier a Customer Invoice/Refund.
+#.  Select the invoice type and select invoice to pay.
+#.  Press **Pay invoice** on the statement. The payment will then be reconciled
     with the invoice.

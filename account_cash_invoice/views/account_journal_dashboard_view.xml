@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="account_journal_dashboard_kanban_view" model="ir.ui.view">
+        <field name="name">account.journal.dashboard.kanban</field>
+        <field name="model">account.journal</field>
+        <field name="inherit_id" ref="account.account_journal_dashboard_kanban_view" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//div[hasclass('o_kanban_manage_reconciliation')]"
+                position="inside"
+            >
+                <div>
+                    <a
+                        role="menuitem"
+                        type="action"
+                        name="%(action_cash_pay_invoice_from_statement)d"
+                        attrs="{'invisible': [('type', '!=', 'cash')]}"
+                    >Pay Invoice</a>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
