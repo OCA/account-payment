@@ -3,7 +3,7 @@
 
 {
     "name": "Account cash invoice",
-    "version": "14.0.1.3.0",
+    "version": "16.0.1.0.0",
     "category": "Accounting",
     "author": "Creu Blanca,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-payment",
@@ -12,7 +12,7 @@
     "depends": ["account"],
     "data": [
         "security/ir.model.access.csv",
-        "wizard/cash_invoice_out.xml",
-        "wizard/cash_invoice_in.xml",
+        "wizard/cash_pay_invoice.xml",
+        "views/account_journal_dashboard_view.xml",
     ],
 }

@@ -1,24 +1,28 @@
 # Copyright 2017-2021 Creu Blanca <https://creublanca.es/>
+# Copyright (C) 2024 Tecnativa <https://tecnativa.com>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
 
-from odoo.tests.common import Form, SavepointCase
+from odoo.tests import tagged
+from odoo.tests.common import Form
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestSessionPayInvoice(SavepointCase):
+@tagged("post_install", "-at_install")
+class TestSessionPayInvoice(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(context=dict(cls.env.context, tracking_disable=True))
         cls.AccountMove = cls.env["account.move"]
         cls.company = cls.env.ref("base.main_company")
         partner = cls.env.ref("base.partner_demo")
         cls.product = cls.env.ref("product.product_delivery_02")
         account = cls.env["account.account"].create(
             {
-                "code": "test_cash_pay_invoice",
+                "code": "449000",
                 "company_id": cls.company.id,
                 "name": "Test",
-                "user_type_id": cls.env.ref("account.data_account_type_revenue").id,
+                "account_type": "income",
                 "reconcile": True,
             }
         )
@@ -38,12 +42,12 @@ class TestSessionPayInvoice(SavepointCase):
                             "name": "Producto de prueba",
                             "quantity": 1.0,
                             "price_unit": 100.0,
+                            "tax_ids": [],
                         },
                     )
                 ],
             }
         )
-        cls.invoice_out._onchange_invoice_line_ids()
         cls.invoice_out.action_post()
         cls.invoice_out.name = "2999/99999"
         cls.invoice_in = cls.AccountMove.create(
@@ -63,12 +67,12 @@ class TestSessionPayInvoice(SavepointCase):
                             "account_id": account.id,
                             "quantity": 1.0,
                             "price_unit": 100.0,
+                            "tax_ids": [],
                         },
                     )
                 ],
             }
         )
-        cls.invoice_in._onchange_invoice_line_ids()
         cls.invoice_in.action_post()
         cls.invoice_in.name = "2999/99999"
         cls.journal = (
@@ -80,38 +84,32 @@ class TestSessionPayInvoice(SavepointCase):
         )
 
     def test_bank_statement(self):
-        statement = self.env["account.bank.statement"].create(
-            {"name": "Statement", "journal_id": self.journal.id}
-        )
-        invoice_in_obj = self.env["cash.invoice.in"].with_context(
-            active_ids=statement.ids, active_model=statement._name
+        invoice_in_obj = self.env["cash.pay.invoice"].with_context(
+            active_ids=self.journal.ids, active_model=self.journal._name
         )
         with Form(invoice_in_obj) as in_invoice:
+            in_invoice.invoice_type = "vendor"
             in_invoice.invoice_id = self.invoice_in
             self.assertEqual(-100, in_invoice.amount)
-            self.assertEqual(in_invoice.journal_count, 1)
-        invoice_in_obj.browse(in_invoice.id).run()
+            self.assertEqual(in_invoice.journal_id, self.journal)
+        invoice_in_obj.browse(in_invoice.id).action_pay_invoice()
 
-        invoice_out_obj = self.env["cash.invoice.out"].with_context(
-            active_ids=statement.ids, active_model=statement._name
+        invoice_out_obj = self.env["cash.pay.invoice"].with_context(
+            active_ids=self.journal.ids, active_model=self.journal._name
         )
         with Form(invoice_out_obj) as out_invoice:
+            out_invoice.invoice_type = "customer"
             out_invoice.invoice_id = self.invoice_out
             self.assertEqual(100, out_invoice.amount)
-            self.assertEqual(out_invoice.journal_count, 1)
-        invoice_out_obj.browse(out_invoice.id).run()
-        statement.balance_end_real = statement.balance_start
-        statement.button_post()
+            self.assertEqual(in_invoice.journal_id, self.journal)
+        invoice_out_obj.browse(out_invoice.id).action_pay_invoice()
         inv_lines = self.invoice_in.line_ids.filtered(
-            lambda line: line.account_id.user_type_id.type in ("receivable", "payable")
+            lambda line: line.account_id.account_type
+            in ("asset_receivable", "liability_payable")
         )
         inv_lines |= self.invoice_out.line_ids.filtered(
-            lambda line: line.account_id.user_type_id.type in ("receivable", "payable")
+            lambda line: line.account_id.account_type
+            in ("asset_receivable", "liability_payable")
         )
-        statement.button_validate()
-        self.invoice_out.flush()
-        self.invoice_out.refresh()
         self.assertEqual(self.invoice_out.amount_residual, 0.0)
-        self.invoice_in.flush()
-        self.invoice_in.refresh()
         self.assertEqual(self.invoice_in.amount_residual, 0.0)
