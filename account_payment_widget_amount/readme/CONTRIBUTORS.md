@@ -2,3 +2,4 @@
 - Jordi Ballester Alomar \<<jordi.ballester@eforgeflow.com>\>
 - Christopher Ormaza \<<chris.ormaza@eforgeflow.com>\>
 - Dhara Solanki \<<dhara.solanki@initos.com>\>
+- Daryl Chen \<<dc@oerp.ca>\>

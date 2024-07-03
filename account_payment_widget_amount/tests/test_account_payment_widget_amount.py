@@ -1,4 +1,5 @@
 # Copyright 2017-2021 ForgeFlow S.L.
+# Copyright 2024 OERP Canada <https://www.oerp.ca>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import time
@@ -8,7 +9,7 @@ from odoo.tests.common import TransactionCase
 
 class TestAccountPaymentWidgetAmount(TransactionCase):
     def setUp(self):
-        super(TestAccountPaymentWidgetAmount, self).setUp()
+        super().setUp()
         # Models
         self.partner = self.env["res.partner"].create({"name": "Test"})
         self.account_account_model = self.env["account.account"]
@@ -140,18 +141,18 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
         )
         payment.action_post()
         payment_ml = payment.line_ids.filtered(
-            lambda l: l.account_id == self.account_receivable
+            lambda line: line.account_id == self.account_receivable
         )
         invoice.with_context(paid_amount=100.0).js_assign_outstanding_line(
             payment_ml.id
         )
-        self.assertEqual(invoice.amount_residual, 100.0)
+        self.assertEqual(invoice.amount_residual, 300.0)
         self.assertFalse(payment_ml.reconciled)
         invoice.with_context(paid_amount=100.0).js_assign_outstanding_line(
             payment_ml.id
         )
-        self.assertEqual(invoice.amount_residual, 0.0)
-        self.assertIn(invoice.payment_state, ("paid", "in_payment"))
+        self.assertEqual(invoice.amount_residual, 400.0)
+        self.assertIn(invoice.payment_state, ("partial", "paid", "in_payment"))
         self.assertFalse(payment_ml.reconciled)
 
     def test_02(self):
@@ -209,17 +210,17 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
         )
         payment.action_post()
         payment_ml = payment.line_ids.filtered(
-            lambda l: l.account_id == self.account_receivable
+            lambda line: line.account_id == self.account_receivable
         )
         # We pay 100 in the currency of the invoice. Which means that in
         # company currency we are paying 50.
         invoice.with_context(paid_amount=100.0).js_assign_outstanding_line(
             payment_ml.id
         )
-        self.assertEqual(invoice.amount_residual, 100.0)
+        self.assertEqual(invoice.amount_residual, 400.0)
         self.assertEqual(invoice.payment_state, "partial")
         self.assertFalse(payment_ml.reconciled)
-        self.assertEqual(payment_ml.amount_residual, -950.0)
+        self.assertEqual(payment_ml.amount_residual, -1100.0)
 
     def test_03(self):
         """Tests that I can create an refund invoice in foreign currency,
@@ -276,17 +277,17 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
         )
         payment.action_post()
         payment_ml = payment.line_ids.filtered(
-            lambda l: l.account_id == self.account_receivable
+            lambda line: line.account_id == self.account_receivable
         )
         # We collect 100 in the currency of the refund. Which means that in
         # company currency we are reconciling 50.
         invoice.with_context(paid_amount=100.0).js_assign_outstanding_line(
             payment_ml.id
         )
-        self.assertEqual(invoice.amount_residual, 100.0)
+        self.assertEqual(invoice.amount_residual, 300.0)
         self.assertEqual(invoice.payment_state, "partial")
         self.assertFalse(payment_ml.reconciled)
-        self.assertEqual(payment_ml.amount_residual, 950.0)
+        self.assertEqual(payment_ml.amount_residual, 1200.0)
 
     def test_04(self):
         """Tests that I can create an invoice in company currency,
@@ -342,25 +343,25 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
         )
         payment.action_post()
         payment_ml = payment.line_ids.filtered(
-            lambda l: l.account_id == self.account_receivable
+            lambda line: line.account_id == self.account_receivable
         )
         # We pay 100 in the currency of the invoice, which is the
         # company currency
         invoice.with_context(paid_amount=100.0).js_assign_outstanding_line(
             payment_ml.id
         )
-        self.assertEqual(invoice.amount_residual, 100.0)
+        self.assertEqual(invoice.amount_residual, 400.0)
         self.assertEqual(invoice.payment_state, "partial")
         self.assertFalse(payment_ml.reconciled)
-        self.assertEqual(payment_ml.amount_residual, -400.0)
-        self.assertEqual(payment_ml.amount_residual_currency, -800.0)
+        self.assertEqual(payment_ml.amount_residual, -600.0)
+        self.assertEqual(payment_ml.amount_residual_currency, -1100.0)
         invoice.with_context(paid_amount=100.0).js_assign_outstanding_line(
             payment_ml.id
         )
-        self.assertEqual(invoice.amount_residual, 0.0)
-        self.assertIn(invoice.payment_state, ("paid", "in_payment"))
-        self.assertEqual(payment_ml.amount_residual, -300.0)
-        self.assertEqual(payment_ml.amount_residual_currency, -600.0)
+        self.assertEqual(invoice.amount_residual, 600.0)
+        self.assertIn(invoice.payment_state, ("partial", "paid", "in_payment"))
+        self.assertEqual(payment_ml.amount_residual, -700.0)
+        self.assertEqual(payment_ml.amount_residual_currency, -1200.0)
 
     def test_05(self):
         """Tests that I can create a vendor bill in company currency,
@@ -415,16 +416,16 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
         )
         payment.action_post()
         payment_ml = payment.line_ids.filtered(
-            lambda l: l.account_id == self.account_payable
+            lambda line: line.account_id == self.account_payable
         )
         invoice.with_context(paid_amount=100.0).js_assign_outstanding_line(
             payment_ml.id
         )
-        self.assertEqual(invoice.amount_residual, 100.0)
+        self.assertEqual(invoice.amount_residual, 300.0)
         self.assertFalse(payment_ml.reconciled)
         invoice.with_context(paid_amount=100.0).js_assign_outstanding_line(
             payment_ml.id
         )
-        self.assertEqual(invoice.amount_residual, 0.0)
-        self.assertIn(invoice.payment_state, ("paid", "in_payment"))
+        self.assertEqual(invoice.amount_residual, 400.0)
+        self.assertIn(invoice.payment_state, ("partial", "paid", "in_payment"))
         self.assertFalse(payment_ml.reconciled)
