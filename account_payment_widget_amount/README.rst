@@ -17,24 +17,24 @@ Account Payment Widget Amount
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--payment-lightgray.png?logo=github
-    :target: https://github.com/OCA/account-payment/tree/16.0/account_payment_widget_amount
+    :target: https://github.com/OCA/account-payment/tree/17.0/account_payment_widget_amount
     :alt: OCA/account-payment
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/account-payment-16-0/account-payment-16-0-account_payment_widget_amount
+    :target: https://translation.odoo-community.org/projects/account-payment-17-0/account-payment-17-0-account_payment_widget_amount
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/account-payment&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/account-payment&target_branch=17.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module adds a popover widget in the invoice form view when there
-are outstanding payments that allows the user to select the amount
-of the selected payment that wants to assign to the invoice.
+are outstanding payments that allows the user to select the amount of
+the selected payment that wants to assign to the invoice.
 
-.. image:: https://raw.githubusercontent.com/OCA/account-payment/16.0/account_payment_widget_amount/static/description/payment_widget.png
-   :alt: Payment Widget
-   :width: 400 px
+|Payment Widget|
+
+.. |Payment Widget| image:: https://raw.githubusercontent.com/OCA/account-payment/17.0/account_payment_widget_amount/static/description/payment_widget.png
 
 **Table of contents**
 
@@ -46,14 +46,15 @@ Usage
 
 To use this module, you need to:
 
-#. Go to 'Invoicing > Purchases > Vendor Bills' or to 'Invoicing > Sales >
-   Customer Invoices'.
-#. If there are payments registered you will see the Add option.
-#. Press Add and enter the amount you want to add to invoice.
-#. Automatic reconciliation will be done with the specified amount.
+1. Go to 'Invoicing > Purchases > Vendor Bills' or to 'Invoicing > Sales
+   > Customer Invoices'.
+2. If there are payments registered you will see the Add option.
+3. Press Add and enter the amount you want to add to invoice.
+4. Automatic reconciliation will be done with the specified amount.
 
-.. image:: https://raw.githubusercontent.com/OCA/account-payment/16.0/account_payment_widget_amount/static/description/payment_widget_amount_reconciled.png
-   :alt: Payment Widget Amount Reconciled
+|Payment Widget Amount Reconciled|
+
+.. |Payment Widget Amount Reconciled| image:: https://raw.githubusercontent.com/OCA/account-payment/17.0/account_payment_widget_amount/static/description/payment_widget_amount_reconciled.png
 
 Bug Tracker
 ===========
@@ -61,7 +62,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/account-payment/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/account-payment/issues/new?body=module:%20account_payment_widget_amount%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/account-payment/issues/new?body=module:%20account_payment_widget_amount%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -69,20 +70,20 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * ForgeFlow S.L.
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Adrià Gil Sorribes <adria.gil@eficent.com>
-* Jordi Ballester Alomar <jordi.ballester@eforgeflow.com>
-* Christopher Ormaza <chris.ormaza@eforgeflow.com>
-* Dhara Solanki <dhara.solanki@initos.com>
+-  Adrià Gil Sorribes <adria.gil@eficent.com>
+-  Jordi Ballester Alomar <jordi.ballester@eforgeflow.com>
+-  Christopher Ormaza <chris.ormaza@eforgeflow.com>
+-  Dhara Solanki <dhara.solanki@initos.com>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -102,6 +103,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-ChrisOForgeFlow| 
 
-This module is part of the `OCA/account-payment <https://github.com/OCA/account-payment/tree/16.0/account_payment_widget_amount>`_ project on GitHub.
+This module is part of the `OCA/account-payment <https://github.com/OCA/account-payment/tree/17.0/account_payment_widget_amount>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

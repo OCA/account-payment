@@ -5,7 +5,6 @@ from odoo.tools import float_compare
 
 
 class AccountMove(models.Model):
-
     _inherit = "account.move"
 
     def js_assign_outstanding_line(self, line_id):
@@ -22,7 +21,6 @@ class AccountMove(models.Model):
 
 
 class AccountMoveLine(models.Model):
-
     _inherit = "account.move.line"
 
     @api.model
