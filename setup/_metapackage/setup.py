@@ -8,6 +8,7 @@ setuptools.setup(
     description="Meta package for oca-account-payment Odoo addons",
     version=version,
     install_requires=[
+        'odoo-addon-account_cash_invoice>=16.0dev,<16.1dev',
         'odoo-addon-account_due_list>=16.0dev,<16.1dev',
         'odoo-addon-account_due_list_aging_comment>=16.0dev,<16.1dev',
         'odoo-addon-account_due_list_payment_mode>=16.0dev,<16.1dev',
