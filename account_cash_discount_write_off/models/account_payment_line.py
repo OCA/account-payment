@@ -114,7 +114,7 @@ class PaymentLine(models.Model):
                 tag_ids = []
                 if tax:
                     account = tax_move_line.account_id
-                    is_refund = "refund" in tax_invoice.type
+                    is_refund = "refund" in invoice.type
                     tax_vals = tax.compute_all(
                         tax_move_line.price_unit,
                         currency=tax_move_line.currency_id,

@@ -221,6 +221,48 @@ class TestAccountCashDiscountWriteOff(TestAccountCashDiscountPaymentCommon):
     def test_cash_discount_with_refund(self):
         woff_account = self.cash_discount_writeoff_account
         woff_journal = self.cash_discount_writeoff_journal
+
+        expected_audit = "+II.D.1. for business purposes: base 17% (721)"
+        expected_refund_audit = "-II.D.1. for business purposes: base 17% (721)"
+
+        self.tax_17_p.invoice_repartition_line_ids.filtered(
+            lambda r: r.repartition_type == "tax"
+        ).write(
+            {
+                "tag_ids": [
+                    (
+                        0,
+                        False,
+                        {
+                            "name": expected_audit,
+                            "applicability": "taxes",
+                            "country_id": self.partner_agrolait.country_id.id,
+                        },
+                    )
+                ],
+                "account_id": self.exp_account.id,
+            }
+        )
+
+        self.tax_17_p.refund_repartition_line_ids.filtered(
+            lambda r: r.repartition_type == "tax"
+        ).write(
+            {
+                "tag_ids": [
+                    (
+                        0,
+                        False,
+                        {
+                            "name": expected_refund_audit,
+                            "applicability": "taxes",
+                            "country_id": self.partner_agrolait.country_id.id,
+                        },
+                    )
+                ],
+                "account_id": self.exp_account.id,
+            }
+        )
+
         self.company.write(
             {
                 "default_cash_discount_writeoff_account_id": woff_account.id,
@@ -292,3 +334,25 @@ class TestAccountCashDiscountWriteOff(TestAccountCashDiscountPaymentCommon):
         payment_order.generated2uploaded()
 
         self.assertEqual(invoice.invoice_payment_state, "paid")
+
+        discount_writeoff_move_lines = self.MoveLine.search(
+            [("journal_id", "=", self.cash_discount_writeoff_journal.id)]
+        )
+
+        self.assertEqual(len(discount_writeoff_move_lines), 5)
+        tax_10_move_line = self.MoveLine.search(
+            [("id", "in", discount_writeoff_move_lines.ids), ("tag_ids", "!=", False)]
+        )
+
+        self.assertEqual(len(tax_10_move_line), 2)
+
+        credit_line = tax_10_move_line.filtered(lambda r: r.credit > 0)
+        self.assertEqual(len(credit_line), 1)
+        tag_credit = credit_line.tag_ids
+
+        debit_line = tax_10_move_line.filtered(lambda r: r.debit > 0)
+        self.assertEqual(len(debit_line), 1)
+        tag_debit = debit_line.tag_ids
+
+        self.assertEqual(tag_credit, tag_debit)
+        self.assertEqual(tag_credit.name, expected_audit)
