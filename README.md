@@ -21,7 +21,7 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[account_cash_invoice](account_cash_invoice/) | 16.0.1.0.1 |  | Pay and receive invoices from bank statements
+[account_cash_invoice](account_cash_invoice/) | 16.0.1.0.2 |  | Pay and receive invoices from bank statements
 [account_due_list](account_due_list/) | 16.0.1.2.0 |  | List of open credits and debits, with due date
 [account_due_list_aging_comment](account_due_list_aging_comment/) | 16.0.1.0.0 |  | Account Due List Aging Comment
 [account_due_list_payment_mode](account_due_list_payment_mode/) | 16.0.1.0.0 |  | Payment Due List Payment Mode
