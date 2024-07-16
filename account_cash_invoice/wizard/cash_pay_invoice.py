@@ -102,6 +102,7 @@ class CashPayInvoice(models.TransientModel):
         ).filtered(
             lambda l: l.account_id.account_type
             in ("asset_receivable", "liability_payable")
+            and not l.reconciled
         )
         lines_to_reconcile.reconcile()
 
