@@ -17,15 +17,6 @@ class TestSessionPayInvoice(BaseCommon):
         cls.company = cls.env.ref("base.main_company")
         partner = cls.env.ref("base.partner_demo")
         cls.product = cls.env.ref("product.product_delivery_02")
-        account = cls.env["account.account"].create(
-            {
-                "code": "449000",
-                "company_id": cls.company.id,
-                "name": "Test",
-                "account_type": "income",
-                "reconcile": True,
-            }
-        )
         cls.invoice_out = cls.AccountMove.create(
             {
                 "company_id": cls.company.id,
@@ -38,7 +29,6 @@ class TestSessionPayInvoice(BaseCommon):
                         False,
                         {
                             "product_id": cls.product.id,
-                            "account_id": account.id,
                             "name": "Producto de prueba",
                             "quantity": 1.0,
                             "price_unit": 100.0,
@@ -64,7 +54,6 @@ class TestSessionPayInvoice(BaseCommon):
                         {
                             "product_id": cls.product.id,
                             "name": "Producto de prueba",
-                            "account_id": account.id,
                             "quantity": 1.0,
                             "price_unit": 100.0,
                             "tax_ids": [],
