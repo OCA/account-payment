@@ -4,3 +4,4 @@
 - Vicent Cubells \<<vicent.cubells@tecnativa.com>\>
 - Miquel Raïch \<<miquel.raich@forgeflow.com>\>
 - Omar Castiñeira Saavedra \<<omar@comunitea.com>\>
+- Carolina Fernandez \<<carolina.fernandez@tecnativa.com>\>
