@@ -15,19 +15,10 @@ class TestPaymentCreditCard(common.TransactionCase):
         self.account_move_line_obj = self.env["account.move.line"]
         self.account_account_obj = self.env["account.account"]
         self.account_journal_obj = self.env["account.journal"]
-        self.account_receivable = self.env.ref("account.data_account_type_receivable")
         self.partner_12 = self.env.ref("base.res_partner_12")
 
         self.journal_sale = self.account_journal_obj.create(
             {"name": "sale_0", "code": "SALE0", "type": "sale", "credit_card": True}
-        )
-        self.account_id = self.account_account_obj.create(
-            {
-                "code": "RA1000",
-                "name": "Test Receivable Account",
-                "user_type_id": self.account_receivable.id,
-                "reconcile": True,
-            }
         )
 
         self.invoice_data_list = [
@@ -60,7 +51,6 @@ class TestPaymentCreditCard(common.TransactionCase):
                     "price_unit": 0,
                     "move_id": invoice.id,
                     "name": "product that cost 100",
-                    "account_id": self.account_id.id,
                 }
             )
             invoice._post(soft=False)
