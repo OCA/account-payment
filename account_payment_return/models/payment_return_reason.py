@@ -13,6 +13,4 @@ class PaymentReturnReason(models.Model):
     name = fields.Char(string="Reason", translate=True)
 
     def name_get(self):
-        return [
-            (r.id, "[{code}] {name}".format(code=r.code, name=r.name)) for r in self
-        ]
+        return [(r.id, f"[{r.code}] {r.name}") for r in self]

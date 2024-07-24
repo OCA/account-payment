@@ -17,23 +17,23 @@ Account Payment Returns
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--payment-lightgray.png?logo=github
-    :target: https://github.com/OCA/account-payment/tree/16.0/account_payment_return
+    :target: https://github.com/OCA/account-payment/tree/17.0/account_payment_return
     :alt: OCA/account-payment
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/account-payment-16-0/account-payment-16-0-account_payment_return
+    :target: https://translation.odoo-community.org/projects/account-payment-17-0/account-payment-17-0-account_payment_return
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/account-payment&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/account-payment&target_branch=17.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
 This module implements customer receivables returns and allows to send
-related reconciled account move lines back to a state where the debt is still
-open, and letting history of it.
+related reconciled account move lines back to a state where the debt is
+still open, and letting history of it.
 
-This module can be extended adding importers that automatically fills the
-full returned payment record.
+This module can be extended adding importers that automatically fills
+the full returned payment record.
 
 **Table of contents**
 
@@ -43,22 +43,23 @@ full returned payment record.
 Usage
 =====
 
-#. Go to Invoicing > Customers > Customer Payment Returns, and create a new
-   record, register on each line a paid (reconciled) receivable journal item,
-   and input the amount that is going to be returned.
+1. Go to Invoicing > Customers > Customer Payment Returns, and create a
+   new record, register on each line a paid (reconciled) receivable
+   journal item, and input the amount that is going to be returned.
 
-   Another option to fill info is setting references and click match button to
-   find matches with invoices, move lines or moves. This functionality is extended
-   by other modules as *account_payment_return_import_sepa_pain*
+   Another option to fill info is setting references and click match
+   button to find matches with invoices, move lines or moves. This
+   functionality is extended by other modules as
+   *account_payment_return_import_sepa_pain*
 
-#. It's possible to add bank charges amount on each line.
+2. It's possible to add bank charges amount on each line.
 
-#. Next, press button "Confirm" to create a new move line that removes the
-   balance from the bank journal and reconcile items together to show payment
-   history through it.
+3. Next, press button "Confirm" to create a new move line that removes
+   the balance from the bank journal and reconcile items together to
+   show payment history through it.
 
-#. After confirmation you can access from the payment form view to the move
-   created.
+4. After confirmation you can access from the payment form view to the
+   move created.
 
 Bug Tracker
 ===========
@@ -66,7 +67,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/account-payment/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/account-payment/issues/new?body=module:%20account_payment_return%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/account-payment/issues/new?body=module:%20account_payment_return%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -74,7 +75,7 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * 7 i TRIA
 * Tecnativa
@@ -82,23 +83,23 @@ Authors
 * 
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* 7 i TRIA <http://www.7itria.cat>
-* Avanzosc <http://www.avanzosc.com>
-* Markus Schneider <markus.schneider@initos.com>
-* `Tecnativa <https://www.tecnativa.com>`_:
+-  7 i TRIA <http://www.7itria.cat>
+-  Avanzosc <http://www.avanzosc.com>
+-  Markus Schneider <markus.schneider@initos.com>
+-  `Tecnativa <https://www.tecnativa.com>`__:
 
-  * Pedro M. Baeza
-  * Sergio Teruel
-  * Carlos Dauden
-  * David Vidal
-  * Luis M. Ontalba
-  * Ernesto Tejeda
-  * João Marques
+   -  Pedro M. Baeza
+   -  Sergio Teruel
+   -  Carlos Dauden
+   -  David Vidal
+   -  Luis M. Ontalba
+   -  Ernesto Tejeda
+   -  João Marques
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -110,6 +111,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/account-payment <https://github.com/OCA/account-payment/tree/16.0/account_payment_return>`_ project on GitHub.
+This module is part of the `OCA/account-payment <https://github.com/OCA/account-payment/tree/17.0/account_payment_return>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
