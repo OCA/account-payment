@@ -48,7 +48,7 @@ class AccountMove(models.Model):
                 currency_obj=line_id.currency_id,
             ),
             "payment_method_name": payment_method_name,
-            "ref": "{} ({})".format(line_id.move_id.name, line_id.ref),
+            "ref": f"{line_id.move_id.name} ({line_id.ref})",
             "returned": is_return,
         }
 
