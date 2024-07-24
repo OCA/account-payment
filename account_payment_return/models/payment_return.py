@@ -44,6 +44,7 @@ class PaymentReturn(models.Model):
     move_id = fields.Many2one(
         comodel_name="account.move",
         string="Reference to the created journal entry",
+        copy=False,
     )
     total_amount = fields.Float(
         compute="_compute_total_amount",
