@@ -5,23 +5,15 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 from odoo.exceptions import UserError, ValidationError
-from odoo.tests.common import Form, TransactionCase
+from odoo.tests.common import Form
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestPaymentReturn(TransactionCase):
+class TestPaymentReturn(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(
-            context=dict(
-                cls.env.context,
-                mail_create_nolog=True,
-                mail_create_nosubscribe=True,
-                mail_notrack=True,
-                no_reset_password=True,
-                tracking_disable=True,
-            )
-        )
         cls.journal = cls.env["account.journal"].create(
             {"name": "Test Sales Journal", "code": "tVEN", "type": "sale"}
         )
