@@ -80,7 +80,10 @@
                                     <field name="date" />
                                     <field name="concept" />
                                     <field name="reason_id" />
-                                    <field name="reason_additional_information" />
+                                    <field
+                                        name="reason_additional_information"
+                                        optional="show"
+                                    />
                                     <field
                                         name="partner_name"
                                         column_invisible="True"
@@ -100,14 +103,17 @@
                                     <field
                                         name="expense_amount"
                                         sum="Total charges amount"
+                                        optional="show"
                                     />
                                     <field
                                         name="expense_account"
                                         required="expense_amount != 0"
+                                        optional="show"
                                     />
                                     <field
                                         name="expense_partner_id"
                                         required="expense_account"
+                                        optional="show"
                                     />
                                 </tree>
                             </field>
@@ -126,7 +132,7 @@
         <field name="model">payment.return</field>
         <field name="type">tree</field>
         <field name="arch" type="xml">
-            <tree>
+            <tree decoration-muted="state == 'cancelled'">
                 <field name="name" readonly="state in ['cancelled', 'done']" />
                 <field name="date" readonly="state in ['cancelled', 'done']" />
                 <field name="journal_id" readonly="state in ['cancelled', 'done']" />
