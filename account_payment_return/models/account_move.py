@@ -12,6 +12,7 @@ class AccountMove(models.Model):
     returned_payment = fields.Boolean(
         string="Payment returned",
         help="Invoice has been included on a payment that has been returned later.",
+        copy=False,
     )
 
     def check_payment_return(self):
