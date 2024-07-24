@@ -20,36 +20,30 @@ class PaymentReturn(models.Model):
         comodel_name="res.company",
         string="Company",
         required=True,
-        states={"done": [("readonly", True)], "cancelled": [("readonly", True)]},
         default=lambda self: self.env.company,
     )
     date = fields.Date(
         string="Return date",
         help="This date will be used as the account entry date.",
-        states={"done": [("readonly", True)], "cancelled": [("readonly", True)]},
-        default=lambda x: fields.Date.today(),
+        default=lambda x: fields.Date.context_today(x),
     )
     name = fields.Char(
         string="Reference",
         required=True,
-        states={"done": [("readonly", True)], "cancelled": [("readonly", True)]},
         default=lambda self: self.env["ir.sequence"].next_by_code("payment.return"),
     )
     line_ids = fields.One2many(
         comodel_name="payment.return.line",
         inverse_name="return_id",
-        states={"done": [("readonly", True)], "cancelled": [("readonly", True)]},
     )
     journal_id = fields.Many2one(
         comodel_name="account.journal",
         string="Bank journal",
         required=True,
-        states={"done": [("readonly", True)], "cancelled": [("readonly", True)]},
     )
     move_id = fields.Many2one(
         comodel_name="account.move",
         string="Reference to the created journal entry",
-        states={"done": [("readonly", True)], "cancelled": [("readonly", True)]},
     )
     total_amount = fields.Float(
         compute="_compute_total_amount",
@@ -133,7 +127,7 @@ class PaymentReturn(models.Model):
     def unlink(self):
         if self.filtered(lambda x: x.state == "done"):
             raise UserError(_("You can not remove a payment return if state is 'Done'"))
-        return super(PaymentReturn, self).unlink()
+        return super().unlink()
 
     def button_match(self):
         self.mapped("line_ids").filtered(
@@ -369,7 +363,9 @@ class PaymentReturnLine(models.Model):
             move = self.env["account.move"].search(domain)
             if move:
                 line.move_line_ids = move.line_ids.filtered(
-                    lambda l: (l.account_type == "asset_receivable" and l.reconciled)
+                    lambda aml: (
+                        aml.account_type == "asset_receivable" and aml.reconciled
+                    )
                 ).ids
                 if not line.concept:
                     line.concept = _("Move: %s") % move.ref
