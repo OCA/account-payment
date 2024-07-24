@@ -50,6 +50,7 @@ class PaymentReturn(models.Model):
         comodel_name="account.move",
         string="Reference to the created journal entry",
         states={"done": [("readonly", True)], "cancelled": [("readonly", True)]},
+        copy=False,
     )
     total_amount = fields.Float(
         compute="_compute_total_amount",
