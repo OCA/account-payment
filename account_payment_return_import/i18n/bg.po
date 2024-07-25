@@ -164,11 +164,6 @@ msgid "Journal"
 msgstr ""
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import____last_update
-msgid "Last Modified on"
-msgstr "Последно обновено на"
-
-#. module: account_payment_return_import
 #: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__write_uid
 msgid "Last Updated by"
 msgstr "Последно обновено от"
@@ -235,3 +230,6 @@ msgstr ""
 #, python-format
 msgid "You have already imported this file."
 msgstr ""
+
+#~ msgid "Last Modified on"
+#~ msgstr "Последно обновено на"
