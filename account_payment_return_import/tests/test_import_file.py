@@ -1,37 +1,25 @@
 # Copyright 2016 Tecnativa - Carlos Dauden
 # Copyright 2018 Tecnativa - Luis M. Ontalba
+# Copyright 2024 Tecnativa - Carolina Fernandez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import base64
 import logging
 
 from odoo import fields
-from odoo.modules.module import get_module_resource
-from odoo.tests.common import TransactionCase
+from odoo.tools.misc import file_open, file_path
+
+from odoo.addons.base.tests.common import BaseCommon
 
 _logger = logging.getLogger(__name__)
 
 
-class TestPaymentReturnFile(TransactionCase):
+class TestPaymentReturnFile(BaseCommon):
     """Check whether payment returns with transactions correctly imported.
 
     No actual tests are done in this class, implementations are in
     subclasses in actual import modules.
     """
-
-    @classmethod
-    def setUpClass(cls):
-        super().setUpClass()
-        cls.env = cls.env(
-            context=dict(
-                cls.env.context,
-                mail_create_nolog=True,
-                mail_create_nosubscribe=True,
-                mail_notrack=True,
-                no_reset_password=True,
-                tracking_disable=True,
-            )
-        )
 
     def _test_transaction(
         self, return_obj, reference=False, returned_amount=False, reason_add_info=False
@@ -74,8 +62,8 @@ class TestPaymentReturnFile(TransactionCase):
         """Test correct creation of single return."""
         import_model = self.env["payment.return.import"]
         return_model = self.env["payment.return"]
-        return_path = get_module_resource(module_name, "tests", "test_files", file_name)
-        return_file = base64.b64encode(open(return_path, "rb").read())
+        return_path = file_path(module_name + "/tests/test_files/" + file_name)
+        return_file = base64.b64encode(file_open(return_path, "rb").read())
         bank_return_id = import_model.create(
             dict(
                 data_file=return_file,
@@ -95,8 +83,8 @@ class TestPaymentReturnFile(TransactionCase):
             self.assertEqual(
                 fields.Date.to_string(return_obj.date),
                 date,
-                "Date %s not equal to expected %s"
-                % (fields.Date.to_string(return_obj.date), date),
+                f"Date {fields.Date.to_string(return_obj.date)}\
+                not equal to expected {date}",
             )
         if transactions:
             for transaction in transactions:

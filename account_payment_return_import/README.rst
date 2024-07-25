@@ -91,6 +91,7 @@ Contributors
    -  Luis M. Ontalba
    -  Ernesto Tejeda
    -  Yadier Quesada
+   -  Carolina Fernandez
 
 Maintainers
 -----------

@@ -1,23 +1,13 @@
 # Copyright 2016 Tecnativa - Carlos Dauden
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo.tests.common import TransactionCase
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestAccountPaymentReturnImport(TransactionCase):
+class TestAccountPaymentReturnImport(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(
-            context=dict(
-                cls.env.context,
-                mail_create_nolog=True,
-                mail_create_nosubscribe=True,
-                mail_notrack=True,
-                no_reset_password=True,
-                tracking_disable=True,
-            )
-        )
         cls.return_import_model = cls.env["payment.return.import"]
         cls.company = cls.env.ref("base.main_company")
         cls.acc_number = "NL77ABNA0574908765"

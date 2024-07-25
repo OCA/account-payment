@@ -22,7 +22,7 @@
                 <field
                     name="journal_id"
                     domain="[('type', '=', 'bank')]"
-                    attrs="{'invisible': [('hide_journal_field', '=', True)]}"
+                    invisible="hide_journal_field"
                     context="{'default_type':'bank'}"
                 />
                 <footer>
