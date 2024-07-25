@@ -11,7 +11,7 @@ RE_CAMT_VERSION = re.compile(
 )
 
 
-class CamtParser(object):
+class CamtParser:
     """Parser for CAMT Bank to Customer Debit Credit Notification."""
 
     @staticmethod
