@@ -193,7 +193,6 @@ msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return__message_has_error
-#: model:ir.model.fields,help:account_payment_return.field_payment_return__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -243,13 +242,6 @@ msgid "Journal Item"
 msgstr ""
 
 #. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return____last_update
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line____last_update
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason____last_update
-msgid "Last Modified on"
-msgstr ""
-
-#. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__write_uid
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__write_uid
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__write_uid
@@ -271,11 +263,6 @@ msgstr ""
 #. module: account_payment_return
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
 msgid "Lines"
-msgstr ""
-
-#. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_main_attachment_id
-msgid "Main Attachment"
 msgstr ""
 
 #. module: account_payment_return
@@ -476,11 +463,6 @@ msgstr ""
 #: code:addons/account_payment_return/models/account_move.py:0
 #, python-format
 msgid "Returned on"
-msgstr ""
-
-#. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_has_sms_error
-msgid "SMS Delivery error"
 msgstr ""
 
 #. module: account_payment_return
