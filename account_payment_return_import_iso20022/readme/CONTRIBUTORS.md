@@ -4,6 +4,7 @@
   > - Pedro M. Baeza
   > - David Vidal
   > - Víctor Martínez
+  > - Carolina Fernandez
 
 - [Acsone](https://acsone.eu)
 
