@@ -40,7 +40,7 @@ class CamtParser:
         If xpath_str is a list (or iterable), it will be seen as a series
         of search path's in order of preference. The first item that results
         in a found node will be used to set a value in the dictionary."""
-        if not isinstance(xpath_str, (list, tuple)):
+        if not isinstance(xpath_str, list | tuple):
             xpath_str = [xpath_str]
         for search_str in xpath_str:
             found_node = node.xpath(search_str, namespaces={"ns": ns})

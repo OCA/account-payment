@@ -1,4 +1,5 @@
 # Copyright 2019 ACSONE SA/NV
+# Copyright 2024 Tecnativa - Carolina Fernandez
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 {
@@ -6,7 +7,7 @@
     "summary": """
         This addon allows to import payment returns from ISO 20022 files
         like PAIN or CAMT.""",
-    "version": "16.0.1.0.1",
+    "version": "17.0.1.0.0",
     "development_status": "Mature",
     "license": "AGPL-3",
     "author": "Odoo Community Association (OCA),Tecnativa,ACSONE SA/NV",
