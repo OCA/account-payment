@@ -194,7 +194,6 @@ msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return__message_has_error
-#: model:ir.model.fields,help:account_payment_return.field_payment_return__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 "Si cette case est cochée, certains messages présentent une erreur d'envoi."
@@ -246,13 +245,6 @@ msgid "Journal Item"
 msgstr "Lignes d'écriture"
 
 #. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return____last_update
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line____last_update
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason____last_update
-msgid "Last Modified on"
-msgstr "Dernière modification le"
-
-#. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__write_uid
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__write_uid
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__write_uid
@@ -275,11 +267,6 @@ msgstr "Ligne"
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
 msgid "Lines"
 msgstr "Lignes"
-
-#. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_main_attachment_id
-msgid "Main Attachment"
-msgstr ""
 
 #. module: account_payment_return
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
@@ -484,11 +471,6 @@ msgid "Returned on"
 msgstr ""
 
 #. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr ""
-
-#. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__state
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_search_view
 msgid "State"
@@ -541,6 +523,9 @@ msgid "You must input all moves references in the payment return."
 msgstr ""
 "Vous devez mettre toutes les références des factures sur le retour de "
 "paiement."
+
+#~ msgid "Last Modified on"
+#~ msgstr "Dernière modification le"
 
 #~ msgid "Automatic reconciliation failure"
 #~ msgstr "Erreur de lettrage automatique"

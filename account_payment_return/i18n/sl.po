@@ -17,8 +17,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
-"%100==4 ? 2 : 3);\n"
+"Plural-Forms: nplurals=4; plural=(n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3);\n"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_needaction
@@ -197,7 +197,6 @@ msgstr "Označeno pomeni, da nova sporočila zahtevajo vašo pozornost."
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return__message_has_error
-#: model:ir.model.fields,help:account_payment_return.field_payment_return__message_has_sms_error
 #, fuzzy
 msgid "If checked, some messages have a delivery error."
 msgstr "Označeno pomeni, da nova sporočila zahtevajo vašo pozornost."
@@ -250,13 +249,6 @@ msgid "Journal Item"
 msgstr ""
 
 #. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return____last_update
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line____last_update
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason____last_update
-msgid "Last Modified on"
-msgstr "Zadnjič spremenjeno"
-
-#. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__write_uid
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__write_uid
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__write_uid
@@ -280,11 +272,6 @@ msgstr "Postavke"
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
 msgid "Lines"
 msgstr "Postavke"
-
-#. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_main_attachment_id
-msgid "Main Attachment"
-msgstr ""
 
 #. module: account_payment_return
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
@@ -489,11 +476,6 @@ msgid "Returned on"
 msgstr ""
 
 #. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr ""
-
-#. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__state
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_search_view
 msgid "State"
@@ -546,6 +528,9 @@ msgstr ""
 #, python-format
 msgid "You must input all moves references in the payment return."
 msgstr "V vračilo plačila morate vnesti vse sklice premikov."
+
+#~ msgid "Last Modified on"
+#~ msgstr "Zadnjič spremenjeno"
 
 #, fuzzy
 #~ msgid "Followers (Channels)"
