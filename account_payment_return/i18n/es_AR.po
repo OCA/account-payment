@@ -190,7 +190,6 @@ msgstr "Si está marcado, los nuevos mensajes requieren su atención."
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return__message_has_error
-#: model:ir.model.fields,help:account_payment_return.field_payment_return__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr "Si está marcado, algunos mensajes tienen errores de entrega."
 
@@ -241,13 +240,6 @@ msgid "Journal Item"
 msgstr "Apunte Contable"
 
 #. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return____last_update
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line____last_update
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason____last_update
-msgid "Last Modified on"
-msgstr "Última modificación en"
-
-#. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__write_uid
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__write_uid
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__write_uid
@@ -270,11 +262,6 @@ msgstr "Línea"
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
 msgid "Lines"
 msgstr "Líneas"
-
-#. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_main_attachment_id
-msgid "Main Attachment"
-msgstr "Adjunto Principal"
 
 #. module: account_payment_return
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
@@ -479,11 +466,6 @@ msgid "Returned on"
 msgstr ""
 
 #. module: account_payment_return
-#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_has_sms_error
-msgid "SMS Delivery error"
-msgstr "Error de Entrega de SMS"
-
-#. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__state
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_search_view
 msgid "State"
@@ -534,6 +516,15 @@ msgstr "No puede remover una devolución de pago si su estado es 'Hecho'"
 msgid "You must input all moves references in the payment return."
 msgstr ""
 "Debe ingresar todas las referencias de movimientos en la devolución del pago."
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última modificación en"
+
+#~ msgid "Main Attachment"
+#~ msgstr "Adjunto Principal"
+
+#~ msgid "SMS Delivery error"
+#~ msgstr "Error de Entrega de SMS"
 
 #~ msgid "Number of messages which requires an action"
 #~ msgstr "Número de mensajes que requieren una acción"
