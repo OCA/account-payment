@@ -31,7 +31,7 @@ addon | version | maintainers | summary
 [account_payment_multi_deduction](account_payment_multi_deduction/) | 16.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Payment Register with Multiple Deduction
 [account_payment_notification](account_payment_notification/) | 16.0.1.0.1 | [![yajo](https://github.com/yajo.png?size=30px)](https://github.com/yajo) | Notifiy upcoming payments
 [account_payment_promissory_note](account_payment_promissory_note/) | 16.0.1.0.1 |  | Account Payment Promissory Note
-[account_payment_return](account_payment_return/) | 16.0.1.0.2 |  | Manage the return of your payments
+[account_payment_return](account_payment_return/) | 16.0.1.1.0 |  | Manage the return of your payments
 [account_payment_return_import](account_payment_return_import/) | 16.0.1.0.1 |  | This module adds a generic wizard to import payment returnfile formats. Is only the base to be extended by anothermodules
 [account_payment_return_import_iso20022](account_payment_return_import_iso20022/) | 16.0.1.0.1 |  | This addon allows to import payment returns from ISO 20022 files like PAIN or CAMT.
 [account_payment_term_discount](account_payment_term_discount/) | 16.0.1.0.0 | [![bodedra](https://github.com/bodedra.png?size=30px)](https://github.com/bodedra) | Account Payment Terms Discount
