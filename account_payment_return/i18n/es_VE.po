@@ -1,0 +1,534 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_payment_return
+#
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: account-payment (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-08-15 18:00+0000\n"
+"PO-Revision-Date: 2016-04-08 17:47+0000\n"
+"Last-Translator: <>\n"
+"Language-Team: Spanish (Venezuela) (http://www.transifex.com/oca/OCA-account-"
+"payment-8-0/language/es_VE/)\n"
+"Language: es_VE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_needaction
+msgid "Action Needed"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_payment_return_line__reason_additional_information
+msgid "Additional information on return reason."
+msgstr ""
+
+#. module: account_payment_return
+#. odoo-python
+#: code:addons/account_payment_return/models/payment_return.py:0
+#, python-format
+msgid "All payments must be owned by the same partner"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__amount
+msgid "Amount"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_attachment_count
+msgid "Attachment Count"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__journal_id
+msgid "Bank journal"
+msgstr ""
+
+#. module: account_payment_return
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: account_payment_return
+#: model:ir.model.fields.selection,name:account_payment_return.selection__payment_return__state__cancelled
+msgid "Cancelled"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__expense_account
+msgid "Charges Account"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__expense_amount
+msgid "Charges Amount"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__expense_partner_id
+msgid "Charges Partner"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__code
+msgid "Code"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__company_id
+msgid "Company"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__concept
+msgid "Concept"
+msgstr ""
+
+#. module: account_payment_return
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
+msgid "Confirm"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__create_uid
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__create_uid
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__create_uid
+msgid "Created by"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__create_date
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__create_date
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__create_date
+msgid "Created on"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__partner_id
+msgid "Customer"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.actions.act_window,name:account_payment_return.payment_return_action
+#: model:ir.ui.menu,name:account_payment_return.payment_return_menu
+msgid "Customer Payment Returns"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_journal__default_expense_account_id
+msgid "Default Charges Account"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_journal__default_expense_partner_id
+msgid "Default Charges Partner"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_account_journal__default_expense_account_id
+msgid "Default account for bank charges"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_account_journal__default_expense_partner_id
+msgid "Default partner for charge expenses"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__display_name
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__display_name
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__display_name
+msgid "Display Name"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields.selection,name:account_payment_return.selection__payment_return__state__done
+msgid "Done"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields.selection,name:account_payment_return.selection__payment_return__state__draft
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
+msgid "Draft"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_follower_ids
+msgid "Followers"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_partner_ids
+msgid "Followers (Partners)"
+msgstr ""
+
+#. module: account_payment_return
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_search_view
+msgid "Group By"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__has_message
+msgid "Has Message"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__id
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__id
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__id
+msgid "ID"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_payment_return__message_needaction
+msgid "If checked, new messages require your attention."
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_payment_return__message_has_error
+#: model:ir.model.fields,help:account_payment_return.field_payment_return__message_has_sms_error
+msgid "If checked, some messages have a delivery error."
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields.selection,name:account_payment_return.selection__payment_return__state__imported
+msgid "Imported"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_account_bank_statement_line__returned_payment
+#: model:ir.model.fields,help:account_payment_return.field_account_move__returned_payment
+#: model:ir.model.fields,help:account_payment_return.field_account_payment__returned_payment
+msgid "Invoice has been included on a payment that has been returned later."
+msgstr ""
+
+#. module: account_payment_return
+#. odoo-python
+#: code:addons/account_payment_return/models/payment_return.py:0
+#, python-format
+msgid "Invoice: %s"
+msgstr ""
+
+#. module: account_payment_return
+#: model_terms:ir.ui.view,arch_db:account_payment_return.view_account_invoice_filter
+msgid "Invoices whose payment has been returned"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_is_follower
+msgid "Is Follower"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model,name:account_payment_return.model_account_journal
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_search_view
+msgid "Journal"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model,name:account_payment_return.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model,name:account_payment_return.model_account_move_line
+msgid "Journal Item"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return____last_update
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line____last_update
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason____last_update
+msgid "Last Modified on"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__write_uid
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__write_uid
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__write_uid
+msgid "Last Updated by"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__write_date
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__write_date
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__write_date
+msgid "Last Updated on"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__line_ids
+msgid "Line"
+msgstr ""
+
+#. module: account_payment_return
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
+msgid "Lines"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_main_attachment_id
+msgid "Main Attachment"
+msgstr ""
+
+#. module: account_payment_return
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
+msgid "Match"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_has_error
+msgid "Message Delivery error"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_ids
+msgid "Messages"
+msgstr ""
+
+#. module: account_payment_return
+#. odoo-python
+#: code:addons/account_payment_return/models/payment_return.py:0
+#, python-format
+msgid "Move lines: %s"
+msgstr ""
+
+#. module: account_payment_return
+#. odoo-python
+#: code:addons/account_payment_return/models/payment_return.py:0
+#, python-format
+msgid "Move: %s"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_needaction_counter
+msgid "Number of Actions"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_has_error_counter
+msgid "Number of errors"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_payment_return__message_needaction_counter
+msgid "Number of messages requiring action"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_payment_return__message_has_error_counter
+msgid "Number of messages with delivery error"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_payment_return_line__date
+msgid "Only for reference"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_partial_reconcile__origin_returned_move_ids
+msgid "Origin Returned Move"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model,name:account_payment_return.model_account_partial_reconcile
+msgid "Partial Reconcile"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_move_line__partial_reconcile_returned_ids
+msgid "Partial Reconcile Returned"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__partner_name
+msgid "Partner Name"
+msgstr ""
+
+#. module: account_payment_return
+#. odoo-javascript
+#: code:addons/account_payment_return/static/src/xml/account_payment_return.xml:0
+#, python-format
+msgid "Payment Info"
+msgstr ""
+
+#. module: account_payment_return
+#. odoo-python
+#: code:addons/account_payment_return/models/payment_return.py:0
+#, python-format
+msgid ""
+"Payment Line: %(move_names)s (%(partner_name)s) in Payment Return: "
+"%(return_name)s"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__payment_method_line_id
+msgid "Payment Method Line"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__move_line_ids
+msgid "Payment Reference"
+msgstr ""
+
+#. module: account_payment_return
+#. odoo-python
+#: code:addons/account_payment_return/models/payment_return.py:0
+#, python-format
+msgid ""
+"Payment reference must be unique\n"
+"%s"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model,name:account_payment_return.model_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__return_id
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
+msgid "Payment return"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model,name:account_payment_return.model_payment_return_line
+msgid "Payment return lines"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model,name:account_payment_return.model_payment_return_reason
+msgid "Payment return reason"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_line__returned_payment
+#: model:ir.model.fields,field_description:account_payment_return.field_account_move__returned_payment
+#: model:ir.model.fields,field_description:account_payment_return.field_account_payment__returned_payment
+msgid "Payment returned"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_payment_return_line__concept
+#: model:ir.model.fields,help:account_payment_return.field_payment_return_line__partner_name
+msgid "Read from imported file. Only for reference."
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__name
+msgid "Reason"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__name
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__reference
+msgid "Reference"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_payment_return_line__reference
+msgid "Reference to match moves from related documents"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__move_id
+msgid "Reference to the created journal entry"
+msgstr ""
+
+#. module: account_payment_return
+#. odoo-python
+#: code:addons/account_payment_return/models/payment_return.py:0
+#, python-format
+msgid "Return %s"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__date
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__date
+msgid "Return date"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__reason_id
+msgid "Return reason"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__reason_additional_information
+msgid "Return reason (info)"
+msgstr ""
+
+#. module: account_payment_return
+#: model_terms:ir.ui.view,arch_db:account_payment_return.view_account_invoice_filter
+msgid "Returned"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_payment_return_line__amount
+msgid "Returned amount. Can be different from the move amount"
+msgstr ""
+
+#. module: account_payment_return
+#. odoo-python
+#: code:addons/account_payment_return/models/account_move.py:0
+#, python-format
+msgid "Returned on"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_has_sms_error
+msgid "SMS Delivery error"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__state
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_search_view
+msgid "State"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_payment_return__date
+msgid "This date will be used as the account entry date."
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__total_amount
+msgid "Total Amount"
+msgstr ""
+
+#. module: account_payment_return
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_tree_view
+msgid "Total amount"
+msgstr ""
+
+#. module: account_payment_return
+#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
+msgid "Total charges amount"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__website_message_ids
+msgid "Website Messages"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,help:account_payment_return.field_payment_return__website_message_ids
+msgid "Website communication history"
+msgstr ""
+
+#. module: account_payment_return
+#. odoo-python
+#: code:addons/account_payment_return/models/payment_return.py:0
+#, python-format
+msgid "You can not remove a payment return if state is 'Done'"
+msgstr ""
+
+#. module: account_payment_return
+#. odoo-python
+#: code:addons/account_payment_return/models/payment_return.py:0
+#, python-format
+msgid "You must input all moves references in the payment return."
+msgstr ""
