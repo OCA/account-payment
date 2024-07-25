@@ -7,7 +7,7 @@ import re
 from lxml import etree
 
 
-class PainParser(object):
+class PainParser:
     """Parser for SEPA Direct Debit Unpaid Report import files."""
 
     def parse_amount(self, ns, node):
