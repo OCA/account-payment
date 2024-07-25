@@ -33,8 +33,7 @@ msgstr ""
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC06
 msgid ""
-"Account specified is blocked, prohibiting posting of transactions against "
-"it."
+"Account specified is blocked, prohibiting posting of transactions against it."
 msgstr ""
 
 #. module: account_payment_return_import_iso20022
@@ -64,8 +63,7 @@ msgstr ""
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS07
-msgid ""
-"All actions concerning the order could be done by the EBICS bank server"
+msgid "All actions concerning the order could be done by the EBICS bank server"
 msgstr ""
 
 #. module: account_payment_return_import_iso20022
@@ -342,8 +340,7 @@ msgstr ""
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_MD05
-msgid ""
-"Creditor or creditor's agent should not have collected the direct debit"
+msgid "Creditor or creditor's agent should not have collected the direct debit"
 msgstr ""
 
 #. module: account_payment_return_import_iso20022
@@ -478,8 +475,8 @@ msgstr ""
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE06
 msgid ""
-"End customer specified is not known at associated Sort/National Bank Code or"
-" does no longer exist in the books"
+"End customer specified is not known at associated Sort/National Bank Code or "
+"does no longer exist in the books"
 msgstr ""
 
 #. module: account_payment_return_import_iso20022
@@ -553,8 +550,8 @@ msgstr ""
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_G004
 msgid ""
 "In a FIToFI Customer Credit Transfer: Credit to the creditor’s account is "
-"pending, status Originator is waiting for funds provided via a cover. Update"
-" will follow from the Status Originator."
+"pending, status Originator is waiting for funds provided via a cover. Update "
+"will follow from the Status Originator."
 msgstr ""
 
 #. module: account_payment_return_import_iso20022
@@ -775,14 +772,12 @@ msgstr ""
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RR07
 msgid ""
-"Remittance information structure does not comply with rules for payment "
-"type."
+"Remittance information structure does not comply with rules for payment type."
 msgstr ""
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RR08
-msgid ""
-"Remittance information truncated to comply with rules for payment type."
+msgid "Remittance information truncated to comply with rules for payment type."
 msgstr ""
 
 #. module: account_payment_return_import_iso20022
@@ -866,8 +861,8 @@ msgstr ""
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE07
 msgid ""
-"Specification of debtor's address, which is required for payment, is "
-"missing/not correct."
+"Specification of debtor's address, which is required for payment, is missing/"
+"not correct."
 msgstr ""
 
 #. module: account_payment_return_import_iso20022
@@ -943,22 +938,21 @@ msgstr ""
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS13
 msgid ""
-"The authority of signer certification sending the certificate is unknown for"
-" the first signer."
+"The authority of signer certification sending the certificate is unknown for "
+"the first signer."
 msgstr ""
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS23
 msgid ""
-"The authority of signer certification sending the certificate is unknown for"
-" the second signer."
+"The authority of signer certification sending the certificate is unknown for "
+"the second signer."
 msgstr ""
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS0F
 msgid ""
-"The authority of the signer certification sending the certificate is "
-"unknown."
+"The authority of the signer certification sending the certificate is unknown."
 msgstr ""
 
 #. module: account_payment_return_import_iso20022
@@ -1052,11 +1046,11 @@ msgstr ""
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS16
 msgid ""
-"The public key version is not correct. This code is returned when a customer"
-" sends signature files to the financial institution after conversion from an"
-" older program version (old ES format) to a new program version (new ES "
-"format) without having carried out re-initialisation with regard to a public"
-" key change."
+"The public key version is not correct. This code is returned when a customer "
+"sends signature files to the financial institution after conversion from an "
+"older program version (old ES format) to a new program version (new ES "
+"format) without having carried out re-initialisation with regard to a public "
+"key change."
 msgstr ""
 
 #. module: account_payment_return_import_iso20022
@@ -1109,8 +1103,8 @@ msgstr ""
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS19
 msgid ""
-"The user’s rights (concerning his signature) are insufficient to execute the"
-" order"
+"The user’s rights (concerning his signature) are insufficient to execute the "
+"order"
 msgstr ""
 
 #. module: account_payment_return_import_iso20022
@@ -1198,9 +1192,9 @@ msgstr ""
 msgid ""
 "Unable to apply zero amount to designated account. For example, where the "
 "rules of a service allow the use of zero amount payments, however the back-"
-"office system is unable to apply the funds to the account. If the rules of a"
-" service prohibit the use of zero amount payments, then code AM01 is used to"
-" report the error condition."
+"office system is unable to apply the funds to the account. If the rules of a "
+"service prohibit the use of zero amount payments, then code AM01 is used to "
+"report the error condition."
 msgstr ""
 
 #. module: account_payment_return_import_iso20022
@@ -1225,22 +1219,22 @@ msgstr ""
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH03
 msgid ""
-"Value in Requested Execution Date or Requested Collection Date is too far in"
-" the future"
+"Value in Requested Execution Date or Requested Collection Date is too far in "
+"the future"
 msgstr ""
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH04
 msgid ""
-"Value in Requested Execution Date or Requested Collection Date is too far in"
-" the past"
+"Value in Requested Execution Date or Requested Collection Date is too far in "
+"the past"
 msgstr ""
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH19
 msgid ""
-"Values in Interbank Settlement Date or Requested Collection Date will be set"
-" to the next TARGET day"
+"Values in Interbank Settlement Date or Requested Collection Date will be set "
+"to the next TARGET day"
 msgstr ""
 
 #. module: account_payment_return_import_iso20022
