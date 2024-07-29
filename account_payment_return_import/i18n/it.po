@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-30 10:56+0000\n"
-"PO-Revision-Date: 2024-05-03 16:37+0000\n"
+"PO-Revision-Date: 2024-07-29 10:58+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-payment-8-0/"
 "language/it/)\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: account_payment_return_import
 #. odoo-python
@@ -207,12 +207,12 @@ msgstr "File pagamento rimborso"
 #. module: account_payment_return_import
 #: model:ir.model,name:account_payment_return_import.model_payment_return
 msgid "Payment return"
-msgstr "Pagamento rimborso"
+msgstr "Rimborso pagamento"
 
 #. module: account_payment_return_import
 #: model:ir.model,name:account_payment_return_import.model_payment_return_line
 msgid "Payment return lines"
-msgstr "Righe pagamento rimborso"
+msgstr "Righe rimborso pagamento"
 
 #. module: account_payment_return_import
 #: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_line__raw_import_data
