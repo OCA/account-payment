@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2015 Tecnativa - Pedro M. Baeza
+     Copyright 2015 Tecnativa - Sergio Teruel
+     Copyright 2016 Tecnativa - Carlos Dauden
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl-3). -->
+<odoo>
+    <record model="ir.ui.view" id="payment_return_form_view">
+        <field
+            name="name"
+        >payment.return.form (in account_payment_return_import)</field>
+        <field name="model">payment.return</field>
+        <field name="type">form</field>
+        <field
+            name="inherit_id"
+            ref="account_payment_return.payment_return_form_view"
+        />
+        <field name="arch" type="xml">
+            <field name="journal_id" position="after">
+                <field
+                    name="imported_bank_account_id"
+                    invisible="not imported_bank_account_id"
+                />
+            </field>
+        </field>
+    </record>
+    <record model="ir.ui.view" id="payment_return_search_view">
+        <field
+            name="name"
+        >payment.return.search (in account_payment_return_import)</field>
+        <field name="model">payment.return</field>
+        <field name="type">search</field>
+        <field
+            name="inherit_id"
+            ref="account_payment_return.payment_return_search_view"
+        />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="imported_bank_account_id" />
+            </field>
+            <filter name="group_by_journal" position="after">
+                <filter
+                    name="group_by_imported_bank_account"
+                    string="Bank account"
+                    domain="[]"
+                    context="{'group_by':'imported_bank_account_id'}"
+                />
+            </filter>
+        </field>
+    </record>
+</odoo>
