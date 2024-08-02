@@ -1,7 +1,7 @@
 # Copyright 2018 ACSONE SA/NV
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, models
+from odoo import _, api, models
 from odoo.exceptions import UserError
 from odoo.tools import float_compare, float_is_zero, float_round
 
@@ -40,6 +40,11 @@ class PaymentLine(models.Model):
             )
             == 0
         )
+
+    @api.model
+    def _get_tax_invoice_tax_percentage(self, tax_move_line):
+        tax_invoice = tax_move_line.move_id
+        return tax_invoice.discount_percent
 
     def get_cash_discount_writeoff_move_values(self):
         self.ensure_one()
@@ -99,9 +104,10 @@ class PaymentLine(models.Model):
             )
 
             for tax_move_line in tax_move_lines:
-                tax_invoice = tax_move_line.move_id
                 amount = float_round(
-                    abs(tax_move_line.balance) * tax_invoice.discount_percent / 100.0,
+                    abs(tax_move_line.balance)
+                    * self._get_tax_invoice_tax_percentage(tax_move_line)
+                    / 100.0,
                     precision_rounding=rounding,
                 )
                 if tax_move_line.credit > 0:
@@ -114,7 +120,7 @@ class PaymentLine(models.Model):
                 tag_ids = []
                 if tax:
                     account = tax_move_line.account_id
-                    is_refund = "refund" in tax_invoice.type
+                    is_refund = "refund" in invoice.type
                     tax_vals = tax.compute_all(
                         tax_move_line.price_unit,
                         currency=tax_move_line.currency_id,
