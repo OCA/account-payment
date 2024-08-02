@@ -1,10 +1,11 @@
 [project]
 name = "odoo-addons-oca-account-payment"
-version = "17.0.20240725.0"
+version = "17.0.20240802.0"
 dependencies = [
     "odoo-addon-account_due_list>=17.0dev,<17.1dev",
     "odoo-addon-account_due_list_payment_mode>=17.0dev,<17.1dev",
     "odoo-addon-account_payment_return>=17.0dev,<17.1dev",
+    "odoo-addon-account_payment_return_import>=17.0dev,<17.1dev",
     "odoo-addon-account_payment_term_extension>=17.0dev,<17.1dev",
 ]
 classifiers=[
