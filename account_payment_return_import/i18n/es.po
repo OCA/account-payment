@@ -179,11 +179,6 @@ msgid "Journal"
 msgstr "Diario del banco"
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import____last_update
-msgid "Last Modified on"
-msgstr "Última modificación el"
-
-#. module: account_payment_return_import
 #: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__write_uid
 msgid "Last Updated by"
 msgstr "Última actualización de"
@@ -250,3 +245,6 @@ msgstr "Datos XML en bruto guardados con propósito de depuración/chequeo"
 #, python-format
 msgid "You have already imported this file."
 msgstr "Ya ha importado este archivo."
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última modificación el"

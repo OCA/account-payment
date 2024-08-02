@@ -180,11 +180,6 @@ msgid "Journal"
 msgstr "Registro"
 
 #. module: account_payment_return_import
-#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import____last_update
-msgid "Last Modified on"
-msgstr "Ultima modifica il"
-
-#. module: account_payment_return_import
 #: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__write_uid
 msgid "Last Updated by"
 msgstr "Ultimo aggiornamento di"
@@ -224,7 +219,8 @@ msgstr "Dati grezzi importati"
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "The account of this payment return is linked to another journal."
-msgstr "Il conto di questo pagamento rimborso è collegato ad un altro registro."
+msgstr ""
+"Il conto di questo pagamento rimborso è collegato ad un altro registro."
 
 #. module: account_payment_return_import
 #. odoo-python
@@ -251,3 +247,6 @@ msgstr "Dati grezzi XML salvati per attività di debug/controllo"
 #, python-format
 msgid "You have already imported this file."
 msgstr "Questo file è già stato importato."
+
+#~ msgid "Last Modified on"
+#~ msgstr "Ultima modifica il"
