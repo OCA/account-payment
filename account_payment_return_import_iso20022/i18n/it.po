@@ -6,70 +6,77 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2024-08-27 09:06+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC09
 msgid "Account currency is invalid or missing"
-msgstr ""
+msgstr "La valuta del conto manco o non è valida"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC01
 msgid "Account number is invalid or missing."
-msgstr ""
+msgstr "Il numero del conto manca o non è valido."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC04
 msgid ""
 "Account number specified has been closed on the bank of account's books."
 msgstr ""
+"Il numero di conto indicato è stato chiuso nel registro dei conti bancari."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC06
 msgid ""
 "Account specified is blocked, prohibiting posting of transactions against it."
 msgstr ""
+"Il conto indicato è bloccato, è proibito fare registrazioni o transizioni."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC12
 msgid "Account type missing or invalid."
-msgstr ""
+msgstr "Tipo conto mancante o non valido."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AG04
 msgid "Agent country code is missing or invalid."
-msgstr ""
+msgstr "Il codice nazione dell'agente manca o non è valido."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AGNT
 msgid "Agent in the payment workflow is incorrect"
-msgstr ""
+msgstr "L'agente nel flusso di pagamento non è corretto"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AB07
 msgid "Agent of message is not online."
-msgstr ""
+msgstr "L'agente del messaggio non è online."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AG10
 msgid "Agent of message is suspended from the Real Time Payment system."
 msgstr ""
+"L'agente del messaggio è sospeso dal sistema di pagamento in tempo reale."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS07
 msgid "All actions concerning the order could be done by the EBICS bank server"
 msgstr ""
+"Tutte le azioni relative all'ordine possono essere eseguite dal server "
+"bancario EBICS"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM12
 msgid "Amount is invalid or missing"
-msgstr ""
+msgstr "Il valore manca o non è corretto"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM04
@@ -77,16 +84,18 @@ msgstr ""
 msgid ""
 "Amount of funds available to cover specified message amount is insufficient."
 msgstr ""
+"Il valore dei fondi disponibili per coprire il valore del massaggio indicato "
+"è insufficiente."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM09
 msgid "Amount received is not the amount agreed or expected"
-msgstr ""
+msgstr "Il valore ricevuto non è quello concordato o atteso"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS02
 msgid "An authorized user has cancelled the order"
-msgstr ""
+msgstr "Un utente autorizzato ha annullato l'ordine"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DT05
@@ -94,6 +103,9 @@ msgid ""
 "Associated message, payment information block or transaction was received "
 "after agreed processing cut-off date, i.e., date in the past."
 msgstr ""
+"Il messaggio associato, le informazioni di pagamento o la transazione è "
+"stata ricevuto dopo la data limite di elaborazione stabilita, i.e. data nel "
+"passato."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_TM01
@@ -101,21 +113,25 @@ msgid ""
 "Associated message, payment information block, or transaction was received "
 "after agreed processing cut-off time."
 msgstr ""
+"Il messaggio associato, il blocco informazione pagamento o la transazione "
+"sono stati ricevuti dopo l'ora di elaborazione stabilita."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RC05
 msgid "BIC identifier is invalid or missing."
-msgstr ""
+msgstr "L'identificatore BIC non è valido o manca."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_ED03
 msgid "Balance of payments complementary info is requested"
-msgstr ""
+msgstr "Sono richieste le informazioni complementari del bilancio dei pagamenti"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AG02
 msgid "Bank Operation code specified in the message is not valid for receiver"
 msgstr ""
+"Il codice operazione bancaria indicato nel messaggio non è valido per il "
+"ricevente"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RC01
@@ -123,11 +139,13 @@ msgid ""
 "Bank identifier code specified in the message has an incorrect format "
 "(formerly IncorrectFormatForRoutingCode)."
 msgstr ""
+"Il codice identificativo della banca indicato nel messaggio ha un formato "
+"errato (in precedenza IncorrectFormatForRoutingCode)."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RC02
 msgid "Bank identifier is invalid or missing."
-msgstr ""
+msgstr "L'identificatore bancario manca o non è valido."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_SL12
@@ -136,112 +154,118 @@ msgid ""
 "Creditor on his “Blacklist”. In the Blacklist the Debtor may list all "
 "Creditors not allowed to debit Debtor bank account"
 msgstr ""
+"Il servizio di blacklisting offerto da Debtor Agent, debitore incluso il "
+"creditore nella sua \"blacklist\". Nella blacklist il debitore può elencare "
+"tutti i creditori non autorizzati al conto bancario debito debitore"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC08
 msgid "Branch code is invalid or missing"
-msgstr ""
+msgstr "Il codice filiale non è valido o mancante"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CUST
 msgid "Cancellation requested by the Debtor"
-msgstr ""
+msgstr "Annullamento richiesto dal debitore"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_FF06
 msgid "Category Purpose code is missing or invalid"
-msgstr ""
+msgstr "Il codice categoria motivazione manca o è errato"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RR10
 msgid "Character set supplied not valid for the country and payment type."
 msgstr ""
+"Il set caratteri fornito non è valido per la nazione e il tipo pagamento."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE19
 msgid "Charge bearer code for transaction type is invalid"
-msgstr ""
+msgstr "Codice tipo di addebito per il tipo transazione non è valido"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_FF09
 msgid "Cheque number missing or invalid"
-msgstr ""
+msgstr "Il numero assegno manca o è errato"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AB02
 msgid "Clearing process aborted due to a fatal error.   "
-msgstr ""
+msgstr "Processo di liquidazione annullato per un errore grave.   "
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AB01
 msgid "Clearing process aborted due to timeout."
-msgstr ""
+msgstr "Processo di liquidazione annullato per tempo limite."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_FF11
 msgid "Clearing request rejected due it being subject to an abort operation."
 msgstr ""
+"Richiesta di liquidazione respinta perché soggetta ad una operazione di "
+"annullamento."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RC08
 msgid "ClearingSystemMemberidentifier is invalid or missing."
-msgstr ""
+msgstr "Il ClearingSystemMemberidentifier manca o è errato."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RCON
 msgid "Conflict with R-Message"
-msgstr ""
+msgstr "Conflitto con R-Message"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE18
 msgid "Contact details missing or invalid"
-msgstr ""
+msgstr "Dettagli contatto mancanti o errati"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH15
 msgid ""
 "Content Remittance Information/Structured includes more than 140 characters"
-msgstr ""
+msgstr "Informazioni/struttura contenuto rimessa includono più di 140 caratteri"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH16
 msgid "Content is incorrect"
-msgstr ""
+msgstr "Il contenuto non è corretto"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM16
 msgid "Control Sum at the Group level is invalid"
-msgstr ""
+msgstr "La somma di controllo a livello di gruppo non è valida"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM17
 msgid "Control Sum at the Payment Information level is invalid"
-msgstr ""
+msgstr "Somma di controllo a livello informazione di pagamento non è valida"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_ED01
 msgid "Correspondent bank not possible."
-msgstr ""
+msgstr "Banca corrispondente non possibile."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE09
 msgid "Country code is missing or Invalid."
-msgstr ""
+msgstr "Il codice nazione manca o è errato."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE14
 msgid "Country code of creditor's residence is missing or Invalid"
-msgstr ""
+msgstr "Il codice nazione della residenza creditore manca o è errato"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE13
 msgid "Country code of debtor's residence is missing or Invalid"
-msgstr ""
+msgstr "Il codice nazione della residenza debitore manca o è errato"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE12
 msgid "Country code of residence is missing or Invalid."
-msgstr ""
+msgstr "Il codice nazione della residenza manca o non è valido."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CERI
@@ -249,6 +273,8 @@ msgid ""
 "Credit transfer is not tagged as an Extended Remittance Information (ERI) "
 "transaction but contains ERI."
 msgstr ""
+"Il trasferimento di credito non è etichettato come transizione Informazione "
+"Rimessa Estesa (ERI) ma contiene ERI."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_NERI
@@ -256,27 +282,31 @@ msgid ""
 "Credit transfer is tagged as an Extended Remittance Information (ERI) "
 "transaction but does not contain ERI."
 msgstr ""
+"Il trasferimento di credito è etichettato come transizione Informazione "
+"Rimessa Estesa (ERI) ma non contiene ERI."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AB08
 msgid "Creditor Agent is not online."
-msgstr ""
+msgstr "L'agente creditore non è online."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AG11
 msgid ""
 "Creditor Agent of message is suspended from the Real Time Payment system."
 msgstr ""
+"L'agente creditore del messaggio è sospeso dal sistema di pagamento in tempo "
+"reale."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RC07
 msgid "Creditor BIC identifier is invalid or missing"
-msgstr ""
+msgstr "L'identificatore BIC del creditore manca o è errato"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RC10
 msgid "Creditor ClearingSystemMember identifier is invalid or missing"
-msgstr ""
+msgstr "L'identificatore ClearingSystemMember del creditore manca o è errato"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH12
