@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2024-08-27 15:06+0000\n"
+"PO-Revision-Date: 2024-08-28 11:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -465,6 +465,8 @@ msgid ""
 "Due to Maximum allowed Direct Debit Transaction amount service offered by "
 "the Debtor Agent."
 msgstr ""
+"A causa dell'importo massimo consentito per le transazioni di addebito "
+"diretto offerto dal servizio dell'agente debitore."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_SL13
@@ -472,41 +474,43 @@ msgid ""
 "Due to Maximum allowed Direct Debit Transactions per period service offered "
 "by the Debtor Agent."
 msgstr ""
+"A causa del numero massimo di transazioni di addebito diretto consentite per "
+"periodo di servizio offerto dall'agente debitore."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_SL02
 msgid "Due to specific service offered by the Creditor Agent"
-msgstr ""
+msgstr "Grazie al servizio specifico offerto dall'agente creditore"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_SL01
 msgid "Due to specific service offered by the Debtor Agent"
-msgstr ""
+msgstr "Grazie al servizio specifico offerto dall'agente debitore"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM05
 msgid "Duplication"
-msgstr ""
+msgstr "Duplicazione"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH17
 msgid "Element is not allowed"
-msgstr ""
+msgstr "L'elemento non è consentito"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH07
 msgid "Element is not to be used at B- and C-Level"
-msgstr ""
+msgstr "L'elemento non deve essere usato a livello B- e C-"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DU04
 msgid "End To End ID is not unique."
-msgstr ""
+msgstr "L'ID end to end non è univoco."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_MD07
 msgid "End customer is deceased."
-msgstr ""
+msgstr "Il cliente finale è diminuito."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE06
@@ -514,27 +518,31 @@ msgid ""
 "End customer specified is not known at associated Sort/National Bank Code or "
 "does no longer exist in the books"
 msgstr ""
+"Il cliente finale specificato non è noto al codice di ordinamento/banca "
+"nazionale associato o non esiste più nei libri contabili"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_FF08
 msgid "End to End Id missing or invalid"
-msgstr ""
+msgstr "ID end to end mancante o non valido"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DT06
 msgid ""
 "Execution Date has been modified in order for transaction to be processed"
 msgstr ""
+"La data di esecuzione è stata modificata per consentire l'elaborazione della "
+"transazione"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_ERIN
 msgid "Extended Remittance Information (ERI) option is not supported."
-msgstr ""
+msgstr "L'opzione ERI (Extended Remittance Information) non è supportata."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_FF01
 msgid "File Format incomplete or invalid"
-msgstr ""
+msgstr "Formato file incompleto o non valido"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS18
@@ -543,6 +551,9 @@ msgid ""
 "returned in the event of a malfunction during the signature check, e.g. not "
 "enough storage space."
 msgstr ""
+"Il file non può essere testato, l'ordine completo deve essere ripetuto. "
+"Questo codice viene restituito in caso di malfunzionamento durante il "
+"controllo della firma, es. spazio di archiviazione insufficiente."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_FF10
@@ -550,16 +561,18 @@ msgid ""
 "File or transaction cannot be processed due to technical issues at the bank "
 "side"
 msgstr ""
+"Il file o la transazione non possono essere elaborati a causa di problemi "
+"tecnici da parte della banca"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DT04
 msgid "Future date not supported"
-msgstr ""
+msgstr "Data futura non supportata"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE15
 msgid "Identification code missing or invalid."
-msgstr ""
+msgstr "Codice identificazione mancante o non valido."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE01
@@ -567,11 +580,13 @@ msgid ""
 "Identification of end customer is not consistent with associated account "
 "number. (formerly CreditorConsistency)."
 msgstr ""
+"L'identificazione del cliente finale non è coerente con il numero di conto "
+"associato. (in precedenza CreditorConsistency)."
 
 #. module: account_payment_return_import_iso20022
 #: model:ir.model,name:account_payment_return_import_iso20022.model_payment_return_import
 msgid "Import Payment Return"
-msgstr ""
+msgstr "Importa rimborso pagamento"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_G003
