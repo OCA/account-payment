@@ -22,18 +22,6 @@ msgid "Credit Card Company"
 msgstr "Compañía de Tarjeta de Crédito"
 
 #. module: account_payment_credit_card
-#: model:ir.model.fields,field_description:account_payment_credit_card.field_account_journal__display_name
-#: model:ir.model.fields,field_description:account_payment_credit_card.field_account_move__display_name
-msgid "Display Name"
-msgstr "Mostrar Nombre"
-
-#. module: account_payment_credit_card
-#: model:ir.model.fields,field_description:account_payment_credit_card.field_account_journal__id
-#: model:ir.model.fields,field_description:account_payment_credit_card.field_account_move__id
-msgid "ID"
-msgstr "ID (identificación)"
-
-#. module: account_payment_credit_card
 #: model:ir.model,name:account_payment_credit_card.model_account_journal
 msgid "Journal"
 msgstr "Diario"
@@ -44,12 +32,15 @@ msgid "Journal Entry"
 msgstr "Entrada en Diario"
 
 #. module: account_payment_credit_card
-#: model:ir.model.fields,field_description:account_payment_credit_card.field_account_journal____last_update
-#: model:ir.model.fields,field_description:account_payment_credit_card.field_account_move____last_update
-msgid "Last Modified on"
-msgstr "Última Modificación en"
-
-#. module: account_payment_credit_card
 #: model:ir.model.fields,field_description:account_payment_credit_card.field_account_journal__credit_card
 msgid "Transfer AP to Credit Card Company"
 msgstr "Transferir AP a la Compañía de la Tarjeta de Crédito"
+
+#~ msgid "Display Name"
+#~ msgstr "Mostrar Nombre"
+
+#~ msgid "ID"
+#~ msgstr "ID (identificación)"
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última Modificación en"
