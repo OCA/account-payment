@@ -40,6 +40,27 @@ msgid "Amount Rounding"
 msgstr ""
 
 #. module: account_payment_term_extension
+#: model:ir.model.fields,help:account_payment_term_extension.field_res_company__payment_terms_delay_type
+#: model:ir.model.fields,help:account_payment_term_extension.field_res_config_settings__payment_terms_delay_type
+msgid "Choose the type of delay when creating new payment terms."
+msgstr ""
+
+#. module: account_payment_term_extension
+#: model:ir.model,name:account_payment_term_extension.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: account_payment_term_extension
+#: model:ir.model,name:account_payment_term_extension.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: account_payment_term_extension
+#: model_terms:ir.ui.view,arch_db:account_payment_term_extension.res_config_settings_view_form
+msgid "Configure the type of delay for payment terms."
+msgstr ""
+
+#. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__create_uid
 msgid "Created by"
 msgstr "Vytvoril"
@@ -51,9 +72,34 @@ msgstr "Vytvorené"
 
 #. module: account_payment_term_extension
 #. odoo-python
-#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
+#: code:addons/account_payment_term_extension/models/account_payment_term_holiday.py:0
 #, python-format
 msgid "Date %s cannot is both a holiday and a Postponed date"
+msgstr ""
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields.selection,name:account_payment_term_extension.selection__res_company__payment_terms_delay_type__days
+msgid "Days"
+msgstr ""
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields.selection,name:account_payment_term_extension.selection__res_company__payment_terms_delay_type__months
+msgid "Days and Months"
+msgstr ""
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields.selection,name:account_payment_term_extension.selection__res_company__payment_terms_delay_type__weeks
+msgid "Days and Weeks"
+msgstr ""
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields.selection,name:account_payment_term_extension.selection__res_company__payment_terms_delay_type__weeks_and_months
+msgid "Days, Weeks and Months"
+msgstr ""
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__delay_type
+msgid "Delay Type"
 msgstr ""
 
 #. module: account_payment_term_extension
@@ -68,14 +114,14 @@ msgstr ""
 
 #. module: account_payment_term_extension
 #. odoo-python
-#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
+#: code:addons/account_payment_term_extension/models/account_payment_term_holiday.py:0
 #, python-format
 msgid "Holiday %s can only be postponed into the future"
 msgstr ""
 
 #. module: account_payment_term_extension
 #. odoo-python
-#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
+#: code:addons/account_payment_term_extension/models/account_payment_term_holiday.py:0
 #, python-format
 msgid "Holiday %s is duplicated in current payment term"
 msgstr ""
@@ -90,11 +136,6 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__id
 msgid "ID"
 msgstr "ID"
-
-#. module: account_payment_term_extension
-#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday____last_update
-msgid "Last Modified on"
-msgstr "Posledná modifikácia"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__write_uid
@@ -118,7 +159,13 @@ msgstr ""
 
 #. module: account_payment_term_extension
 #: model:ir.model,name:account_payment_term_extension.model_account_payment_term
+#: model_terms:ir.ui.view,arch_db:account_payment_term_extension.res_config_settings_view_form
 msgid "Payment Terms"
+msgstr ""
+
+#. module: account_payment_term_extension
+#: model_terms:ir.ui.view,arch_db:account_payment_term_extension.res_config_settings_view_form
+msgid "Payment Terms Delay Types"
 msgstr ""
 
 #. module: account_payment_term_extension
@@ -133,9 +180,15 @@ msgstr ""
 
 #. module: account_payment_term_extension
 #. odoo-python
-#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
+#: code:addons/account_payment_term_extension/models/account_payment_term_line.py:0
 #, python-format
 msgid "Payment days field format is not valid."
+msgstr ""
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_res_company__payment_terms_delay_type
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_res_config_settings__payment_terms_delay_type
+msgid "Payment terms Delay types"
 msgstr ""
 
 #. module: account_payment_term_extension
@@ -152,7 +205,7 @@ msgstr ""
 
 #. module: account_payment_term_extension
 #. odoo-python
-#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
+#: code:addons/account_payment_term_extension/models/account_payment_term_line.py:0
 #, python-format
 msgid "Percentages on the Payment Terms lines must be between 0 and 100."
 msgstr ""
@@ -175,6 +228,11 @@ msgid "Select here the kind of valuation related to this payment terms line."
 msgstr ""
 
 #. module: account_payment_term_extension
+#: model_terms:ir.ui.view,arch_db:account_payment_term_extension.res_config_settings_view_form
+msgid "Select the Delay Type options that will be available in Payment Terms."
+msgstr ""
+
+#. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term__sequential_lines
 msgid "Sequential Lines"
 msgstr ""
@@ -185,13 +243,15 @@ msgid "Sets the amount so that it is a multiple of this value."
 msgstr ""
 
 #. module: account_payment_term_extension
-#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__value
-msgid "Type"
+#. odoo-python
+#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
+#, python-format
+msgid "This module is not compatible with cash rounding"
 msgstr ""
 
 #. module: account_payment_term_extension
-#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__weeks
-msgid "Weeks"
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__value
+msgid "Value"
 msgstr ""
 
 #. module: account_payment_term_extension
@@ -200,3 +260,6 @@ msgid ""
 "When a payment term coincides with a holiday, it is postponed to the chosen "
 "date."
 msgstr ""
+
+#~ msgid "Last Modified on"
+#~ msgstr "Posledná modifikácia"
