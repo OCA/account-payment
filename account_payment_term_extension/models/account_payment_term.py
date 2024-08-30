@@ -226,8 +226,11 @@ class AccountPaymentTerm(models.Model):
         sign,
         untaxed_amount,
         untaxed_amount_currency,
+        cash_rounding=None,
     ):
         """Complete overwrite of compute method for adding extra options."""
+        if cash_rounding:
+            raise UserError(_("This module is not compatible with cash rounding"))
         # FIXME: Find an inheritable way of doing this
         self.ensure_one()
         company_currency = company.currency_id
