@@ -171,8 +171,8 @@ msgid ""
 "possible payment day with dashes (-), commas (,) or spaces ( )."
 msgstr ""
 "Ange här den dag eller de dagar då kontakten gör betalningen. Separera varje "
-"möjlig betalningsdag med bindestreck (-), kommatecken (,) eller mellanslag ( "
-")."
+"möjlig betalningsdag med bindestreck (-), kommatecken (,) eller mellanslag "
+"( )."
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,help:account_payment_term_extension.field_account_payment_term_line__value
@@ -190,6 +190,13 @@ msgstr "Sekventiella rader"
 #: model:ir.model.fields,help:account_payment_term_extension.field_account_payment_term_line__amount_round
 msgid "Sets the amount so that it is a multiple of this value."
 msgstr "Ställer in beloppet så att det är en multipel av detta värde."
+
+#. module: account_payment_term_extension
+#. odoo-python
+#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
+#, python-format
+msgid "This module is not compatible with cash rounding"
+msgstr ""
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__value

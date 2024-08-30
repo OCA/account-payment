@@ -191,6 +191,13 @@ msgid "Sets the amount so that it is a multiple of this value."
 msgstr "Establecer el importe del redondeo."
 
 #. module: account_payment_term_extension
+#. odoo-python
+#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
+#, python-format
+msgid "This module is not compatible with cash rounding"
+msgstr ""
+
+#. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__value
 msgid "Type"
 msgstr "TIpo"
@@ -225,8 +232,8 @@ msgstr ""
 #~ "Sets the amount so that it is a multiple of this value.\n"
 #~ "To have amounts that end in 0.99, set rounding 1, surcharge -0.01"
 #~ msgstr ""
-#~ "Establece la cantidad de manera que sea un múltiplo de este valor.'U"
-#~ "+23CE'\n"
+#~ "Establece la cantidad de manera que sea un múltiplo de este "
+#~ "valor.'U+23CE'\n"
 #~ "Para tener cantidades que terminan en 0,99, redondear el conjunto 1, "
 #~ "recargo -0,01"
 
