@@ -39,6 +39,27 @@ msgid "Amount Rounding"
 msgstr "Redondeo de la cantidad"
 
 #. module: account_payment_term_extension
+#: model:ir.model.fields,help:account_payment_term_extension.field_res_company__payment_terms_delay_type
+#: model:ir.model.fields,help:account_payment_term_extension.field_res_config_settings__payment_terms_delay_type
+msgid "Choose the type of delay when creating new payment terms."
+msgstr ""
+
+#. module: account_payment_term_extension
+#: model:ir.model,name:account_payment_term_extension.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: account_payment_term_extension
+#: model:ir.model,name:account_payment_term_extension.model_res_config_settings
+msgid "Config Settings"
+msgstr ""
+
+#. module: account_payment_term_extension
+#: model_terms:ir.ui.view,arch_db:account_payment_term_extension.res_config_settings_view_form
+msgid "Configure the type of delay for payment terms."
+msgstr ""
+
+#. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__create_uid
 msgid "Created by"
 msgstr "Creado por"
@@ -50,10 +71,35 @@ msgstr "Creado en"
 
 #. module: account_payment_term_extension
 #. odoo-python
-#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
+#: code:addons/account_payment_term_extension/models/account_payment_term_holiday.py:0
 #, python-format
 msgid "Date %s cannot is both a holiday and a Postponed date"
 msgstr "La fecha %s no puede ser un festivo y una fecha postpuesta"
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields.selection,name:account_payment_term_extension.selection__res_company__payment_terms_delay_type__days
+msgid "Days"
+msgstr ""
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields.selection,name:account_payment_term_extension.selection__res_company__payment_terms_delay_type__months
+msgid "Days and Months"
+msgstr ""
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields.selection,name:account_payment_term_extension.selection__res_company__payment_terms_delay_type__weeks
+msgid "Days and Weeks"
+msgstr ""
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields.selection,name:account_payment_term_extension.selection__res_company__payment_terms_delay_type__weeks_and_months
+msgid "Days, Weeks and Months"
+msgstr ""
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__delay_type
+msgid "Delay Type"
+msgstr ""
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__display_name
@@ -67,14 +113,14 @@ msgstr "Festivo"
 
 #. module: account_payment_term_extension
 #. odoo-python
-#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
+#: code:addons/account_payment_term_extension/models/account_payment_term_holiday.py:0
 #, python-format
 msgid "Holiday %s can only be postponed into the future"
 msgstr "El festivo %s solamente puede ser postpuesto al futuro"
 
 #. module: account_payment_term_extension
 #. odoo-python
-#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
+#: code:addons/account_payment_term_extension/models/account_payment_term_holiday.py:0
 #, python-format
 msgid "Holiday %s is duplicated in current payment term"
 msgstr "El festivo %s está duplicado en el plazo de pago actual"
@@ -89,11 +135,6 @@ msgstr "Festivos"
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__id
 msgid "ID"
 msgstr "ID (identificación)"
-
-#. module: account_payment_term_extension
-#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday____last_update
-msgid "Last Modified on"
-msgstr "Última modificación en"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__write_uid
@@ -117,8 +158,14 @@ msgstr "Plazos de pago en vacaciones"
 
 #. module: account_payment_term_extension
 #: model:ir.model,name:account_payment_term_extension.model_account_payment_term
+#: model_terms:ir.ui.view,arch_db:account_payment_term_extension.res_config_settings_view_form
 msgid "Payment Terms"
 msgstr "Plazos de pago"
+
+#. module: account_payment_term_extension
+#: model_terms:ir.ui.view,arch_db:account_payment_term_extension.res_config_settings_view_form
+msgid "Payment Terms Delay Types"
+msgstr ""
 
 #. module: account_payment_term_extension
 #: model:ir.model,name:account_payment_term_extension.model_account_payment_term_line
@@ -132,10 +179,16 @@ msgstr "Día(s) de pago"
 
 #. module: account_payment_term_extension
 #. odoo-python
-#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
+#: code:addons/account_payment_term_extension/models/account_payment_term_line.py:0
 #, python-format
 msgid "Payment days field format is not valid."
 msgstr "El campo días de pago no tiene un formato válido."
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_res_company__payment_terms_delay_type
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_res_config_settings__payment_terms_delay_type
+msgid "Payment terms Delay types"
+msgstr ""
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields.selection,name:account_payment_term_extension.selection__account_payment_term_line__value__percent_amount_untaxed
@@ -152,7 +205,7 @@ msgstr ""
 
 #. module: account_payment_term_extension
 #. odoo-python
-#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
+#: code:addons/account_payment_term_extension/models/account_payment_term_line.py:0
 #, python-format
 msgid "Percentages on the Payment Terms lines must be between 0 and 100."
 msgstr ""
@@ -181,6 +234,11 @@ msgstr ""
 "condiciones de pago."
 
 #. module: account_payment_term_extension
+#: model_terms:ir.ui.view,arch_db:account_payment_term_extension.res_config_settings_view_form
+msgid "Select the Delay Type options that will be available in Payment Terms."
+msgstr ""
+
+#. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term__sequential_lines
 msgid "Sequential Lines"
 msgstr "Vencimiento en función del vencimiento anterior"
@@ -191,14 +249,16 @@ msgid "Sets the amount so that it is a multiple of this value."
 msgstr "Establecer el importe del redondeo."
 
 #. module: account_payment_term_extension
-#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__value
-msgid "Type"
-msgstr "TIpo"
+#. odoo-python
+#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
+#, python-format
+msgid "This module is not compatible with cash rounding"
+msgstr ""
 
 #. module: account_payment_term_extension
-#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__weeks
-msgid "Weeks"
-msgstr "Semanas"
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__value
+msgid "Value"
+msgstr ""
 
 #. module: account_payment_term_extension
 #: model_terms:ir.ui.view,arch_db:account_payment_term_extension.view_payment_term_form
@@ -208,6 +268,15 @@ msgid ""
 msgstr ""
 "Cuando un plazo de pago coincide con un festivo, se pospone a la fecha "
 "elegida."
+
+#~ msgid "Last Modified on"
+#~ msgstr "Última modificación en"
+
+#~ msgid "Type"
+#~ msgstr "TIpo"
+
+#~ msgid "Weeks"
+#~ msgstr "Semanas"
 
 #~ msgid "Journal Entries"
 #~ msgstr "Asientos contables"
@@ -225,8 +294,8 @@ msgstr ""
 #~ "Sets the amount so that it is a multiple of this value.\n"
 #~ "To have amounts that end in 0.99, set rounding 1, surcharge -0.01"
 #~ msgstr ""
-#~ "Establece la cantidad de manera que sea un múltiplo de este valor.'U"
-#~ "+23CE'\n"
+#~ "Establece la cantidad de manera que sea un múltiplo de este "
+#~ "valor.'U+23CE'\n"
 #~ "Para tener cantidades que terminan en 0,99, redondear el conjunto 1, "
 #~ "recargo -0,01"
 
