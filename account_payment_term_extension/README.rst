@@ -84,6 +84,11 @@ Select any payment term and set a date in invoice.
 
 You must see the due date based on this payment term.
 
+Known issues / Roadmap
+======================
+
+This module is not compatible with cash rounding
+
 Bug Tracker
 ===========
 
