@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-30 02:46+0000\n"
-"PO-Revision-Date: 2024-02-21 17:34+0000\n"
+"PO-Revision-Date: 2024-09-06 14:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (https://www.transifex.com/oca/teams/23907/it/)\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: account_payment_term_extension
 #: model:account.payment.term,name:account_payment_term_extension.amount_untaxed_lines
@@ -45,21 +45,22 @@ msgstr "Importo Arrotondamento"
 #: model:ir.model.fields,help:account_payment_term_extension.field_res_config_settings__payment_terms_delay_type
 msgid "Choose the type of delay when creating new payment terms."
 msgstr ""
+"Scegliere il tipo di ritardo quando si creano nuovi termini di pagamento."
 
 #. module: account_payment_term_extension
 #: model:ir.model,name:account_payment_term_extension.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Aziende"
 
 #. module: account_payment_term_extension
 #: model:ir.model,name:account_payment_term_extension.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Impostazioni configurazione"
 
 #. module: account_payment_term_extension
 #: model_terms:ir.ui.view,arch_db:account_payment_term_extension.res_config_settings_view_form
 msgid "Configure the type of delay for payment terms."
-msgstr ""
+msgstr "Configurare il tipo di ritardo per i termini di pagamento."
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__create_uid
@@ -83,27 +84,27 @@ msgstr ""
 #. module: account_payment_term_extension
 #: model:ir.model.fields.selection,name:account_payment_term_extension.selection__res_company__payment_terms_delay_type__days
 msgid "Days"
-msgstr ""
+msgstr "Giorni"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields.selection,name:account_payment_term_extension.selection__res_company__payment_terms_delay_type__months
 msgid "Days and Months"
-msgstr ""
+msgstr "Giorni e mesi"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields.selection,name:account_payment_term_extension.selection__res_company__payment_terms_delay_type__weeks
 msgid "Days and Weeks"
-msgstr ""
+msgstr "Giorni e settimane"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields.selection,name:account_payment_term_extension.selection__res_company__payment_terms_delay_type__weeks_and_months
 msgid "Days, Weeks and Months"
-msgstr ""
+msgstr "Giorni, settimane e mesi"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__delay_type
 msgid "Delay Type"
-msgstr ""
+msgstr "Tipo ritardo"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__display_name
@@ -169,7 +170,7 @@ msgstr "Termini di pagamento"
 #. module: account_payment_term_extension
 #: model_terms:ir.ui.view,arch_db:account_payment_term_extension.res_config_settings_view_form
 msgid "Payment Terms Delay Types"
-msgstr ""
+msgstr "Tipi ritardo termini di pagamento"
 
 #. module: account_payment_term_extension
 #: model:ir.model,name:account_payment_term_extension.model_account_payment_term_line
@@ -192,7 +193,7 @@ msgstr "Il formato dei giorni di pagamento non è valido."
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_res_company__payment_terms_delay_type
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_res_config_settings__payment_terms_delay_type
 msgid "Payment terms Delay types"
-msgstr ""
+msgstr "Tipi ritardo termini di pagamento"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields.selection,name:account_payment_term_extension.selection__account_payment_term_line__value__percent_amount_untaxed
@@ -243,6 +244,8 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:account_payment_term_extension.res_config_settings_view_form
 msgid "Select the Delay Type options that will be available in Payment Terms."
 msgstr ""
+"Selezionare le opzioni tipo ritardo che saranno disponibili nei termini di "
+"pagamento."
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term__sequential_lines
@@ -259,12 +262,12 @@ msgstr "Impostare un valore multiplo di questo valore."
 #: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "This module is not compatible with cash rounding"
-msgstr ""
+msgstr "Questo modulo non è compatibile con l'arrotondamento contanti"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__value
 msgid "Value"
-msgstr ""
+msgstr "Valore"
 
 #. module: account_payment_term_extension
 #: model_terms:ir.ui.view,arch_db:account_payment_term_extension.view_payment_term_form
