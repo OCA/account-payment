@@ -205,7 +205,13 @@ class TestAccountCashDiscountWriteOff(TestAccountCashDiscountPaymentCommon):
 
         move_reversal = self.AccountMoveReversal.with_context(
             active_model=invoice._name, active_ids=invoice.ids
-        ).create({"reason": "no reason", "refund_method": "refund"})
+        ).create(
+            {
+                "reason": "no reason",
+                "refund_method": "refund",
+                "journal_id": self.purchase_journal.id,
+            }
+        )
         reversal = move_reversal.reverse_moves()
 
         refund = self.env["account.move"].browse(reversal["res_id"])
