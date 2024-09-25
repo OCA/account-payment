@@ -1,0 +1,17 @@
+<odoo>
+
+    <record id="account_invoice_view_form_inherit_payment" model="ir.ui.view">
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+
+            <!-- Other Info tab, Invoice group -->
+            <group name="sale_info_group" position="inside">
+                <field name="payment_token_id" />
+                <field name="has_payment_exception" />
+            </group>
+
+        </field>
+    </record>
+
+</odoo>
