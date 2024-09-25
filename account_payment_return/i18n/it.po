@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-15 18:00+0000\n"
-"PO-Revision-Date: 2024-07-29 10:58+0000\n"
+"PO-Revision-Date: 2024-09-25 09:06+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-payment-8-0/"
 "language/it/)\n"
@@ -66,17 +66,17 @@ msgstr "Annullato"
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__expense_account
 msgid "Charges Account"
-msgstr "Conto modifiche"
+msgstr "Conto spese"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__expense_amount
 msgid "Charges Amount"
-msgstr "Valore modifiche"
+msgstr "Importo spese"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__expense_partner_id
 msgid "Charges Partner"
-msgstr "Partner modifiche"
+msgstr "Partner spese"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__code
@@ -126,17 +126,17 @@ msgstr "Rimborsi pagamento cliente"
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_account_journal__default_expense_account_id
 msgid "Default Charges Account"
-msgstr "Conto modifiche predefinito"
+msgstr "Conto spese predefinito"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_account_journal__default_expense_partner_id
 msgid "Default Charges Partner"
-msgstr "Partner modifiche predefinito"
+msgstr "Partner spese predefinito"
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_account_journal__default_expense_account_id
 msgid "Default account for bank charges"
-msgstr "Conto predefinito per modifiche banca"
+msgstr "Conto predefinito per spese banca"
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_account_journal__default_expense_partner_id
@@ -457,7 +457,7 @@ msgstr "Motivo rimborso (informazioni)"
 #. module: account_payment_return
 #: model_terms:ir.ui.view,arch_db:account_payment_return.view_account_invoice_filter
 msgid "Returned"
-msgstr "Rimborsato"
+msgstr "Rimborsata"
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return_line__amount
@@ -520,7 +520,8 @@ msgstr "Non si può eliminare un rimborso pagamento se lo stato è \"Eseguito\""
 #: code:addons/account_payment_return/models/payment_return.py:0
 #, python-format
 msgid "You must input all moves references in the payment return."
-msgstr "Bisogna inserire tutti i riferimenti movimenti nel rimborso pagamento."
+msgstr ""
+"Bisogna inserire tutti i riferimenti dei movimenti nel rimborso pagamento."
 
 #~ msgid "Last Modified on"
 #~ msgstr "Ultima modifica il"
