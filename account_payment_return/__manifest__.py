@@ -23,13 +23,14 @@
               'initOS GmbH & Co., ',
     'website': 'https://github.com/OCA/account-payment',
     'data': [
+        'data/ir_sequence_data.xml',
         'security/ir.model.access.csv',
         'security/account_payment_return_security.xml',
         'views/payment_return_view.xml',
         'views/account_journal_view.xml',
-        'data/ir_sequence_data.xml',
         'views/account_invoice_view.xml',
         'views/payment_return_reason.xml',
+        'views/payment_return_reason_action_type.xml',
     ],
     'qweb': [
         "static/src/xml/account_payment.xml",
