@@ -10,6 +10,7 @@
                 <group>
                     <field name="code" required="True"/>
                     <field name="name" required="True"/>
+                    <field name="block_move_lines"/>
                 </group>
             </form>
         </field>

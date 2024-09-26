@@ -28,3 +28,5 @@ class AccountMoveLine(models.Model):
     @api.multi
     def _payment_returned(self, return_line):
         self.mapped('invoice_id')._payment_returned(return_line)
+        if return_line.reason_id.block_move_lines:
+            self.write({"blocked": True})
