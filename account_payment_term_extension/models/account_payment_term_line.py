@@ -23,7 +23,7 @@ class AccountPaymentTermLine(models.Model):
         help="Sets the amount so that it is a multiple of this value.",
     )
     delay_type = fields.Selection(
-        selection=lambda self: self._get_delay_type(),
+        selection=lambda self: self._selection_delay_type(),
         ondelete={
             "weeks_after": "set default",
             "weeks_after_end_of_month": "set default",
@@ -47,25 +47,25 @@ class AccountPaymentTermLine(models.Model):
         "or spaces ( ).",
     )
 
-    def _get_delay_type(self):
+    def _selection_delay_type(self):
         delay_setting = self.env.company.payment_terms_delay_type
         payment_terms_delay_type = delay_setting or False
 
         delay_type = [
-            ("days_after", "Days after invoice date"),
-            ("days_after_end_of_month", "Days after end of month"),
-            ("days_after_end_of_next_month", "Days after end of next month"),
-            ("days_end_of_month_on_the", "Days end of month on the"),
+            ("days_after", _("Days after invoice date")),
+            ("days_after_end_of_month", _("Days after end of month")),
+            ("days_after_end_of_next_month", _("Days after end of next month")),
+            ("days_end_of_month_on_the", _("Days end of month on the")),
         ]
 
         weeks_delay_type = [
-            ("weeks_after", "Weeks after invoice date"),
-            ("weeks_after_end_of_month", "Weeks after end of month"),
-            ("weeks_after_end_of_next_month", "Weeks after end of next month"),
+            ("weeks_after", _("Weeks after invoice date")),
+            ("weeks_after_end_of_month", _("Weeks after end of month")),
+            ("weeks_after_end_of_next_month", _("Weeks after end of next month")),
         ]
         months_delay_type = [
-            ("months_after", "Months after invoice date"),
-            ("months_after_end_of_month", "Months after end of month"),
+            ("months_after", _("Months after invoice date")),
+            ("months_after_end_of_month", _("Months after end of month")),
         ]
 
         if payment_terms_delay_type:
