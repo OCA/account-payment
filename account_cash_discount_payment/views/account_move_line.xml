@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2018 ACSONE SA/NV
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="account_move_line_tree_view">
+        <field
+            name="name"
+        >account.move.line.tree (in account_cash_discount_payment)</field>
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account.view_move_line_tree" />
+        <field name="arch" type="xml">
+            <field name="date_maturity" position="after">
+                <field
+                    name="discount_due_date"
+                    invisible="not context.get('tree_view_display_discount')"
+                />
+                <field
+                    name="discount_amount"
+                    invisible="not context.get('tree_view_display_discount')"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
