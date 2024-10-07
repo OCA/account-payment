@@ -39,7 +39,7 @@ class AccountPaymentTerm(models.Model):
                 )
 
                 if line.discount and payment_date <= till_discount_date:
-                    payment_discount = round((amount * line.discount) / 100.0, 2)
+                    payment_discount = (amount * line.discount) / 100.0
                     if invoice.move_type in ("out_invoice", "in_refund"):
                         discount_account_id = line.discount_expense_account_id.id
                     else:
@@ -99,4 +99,4 @@ class AccountPaymentTermLine(models.Model):
     def OnchangeDiscount(self):
         if not self.discount:
             return {}
-        self.value_amount = round(1 - (self.discount / 100.0), 2)
+        self.value_amount = 1 - (self.discount / 100.0)

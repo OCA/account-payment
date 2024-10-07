@@ -43,7 +43,7 @@ class AccountMove(models.Model):
                     )
                 )
                 if discount_information[0] > 0.0:
-                    invoice.discount_amt = abs(round(discount_information[0], 2))
+                    invoice.discount_amt = abs(discount_information[0])
                     # If discount taken make disc amt to 0 as disc is no more valid
                     if invoice.discount_taken != 0:
                         invoice.discount_amt = 0
