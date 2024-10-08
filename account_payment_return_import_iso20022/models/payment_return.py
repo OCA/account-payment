@@ -11,21 +11,20 @@ class PaymentReturnLine(models.Model):
 
     def _find_match(self):
         """Include in the matches the lines coming from payment orders."""
-        matched = self.env["payment.return.line"]
         for line in self.filtered(lambda x: not x.move_line_ids and x.reference):
-            move_id = int(line.reference) if line.reference.isdigit() else -1
+            if not line.reference.isdigit():
+                continue
             payments = self.env["account.payment"].search(
                 [
-                    ("move_id", "=", move_id),
+                    ("move_id", "=", int(line.reference)),
                     ("payment_order_id", "!=", False),
                 ],
             )
             if payments:
                 line.partner_id = payments[0].partner_id
-                matched += line
                 for payment in payments:
                     line.move_line_ids |= payment.move_id.line_ids.filtered(
                         lambda x: x.account_id == payment.destination_account_id
                         and x.partner_id == payment.partner_id
                     )
-        return super(PaymentReturnLine, self - matched)._find_match()
+        return super()._find_match()
