@@ -1,0 +1,4 @@
+id,group_id/id,name,model_id/id,perm_create,perm_read,perm_write,perm_unlink
+res_partner_aging_customer,account.group_account_invoice,AR can READ,partner_aging.model_res_partner_aging_customer,0,1,0,0
+res_partner_aging_supplier,account.group_account_invoice,AP can READ,partner_aging.model_res_partner_aging_supplier,0,1,0,0
+res_partner_aging_date,,Partner Aging Date,partner_aging.model_res_partner_aging_date,1,1,1,1
