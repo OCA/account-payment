@@ -6,7 +6,7 @@
         <field name="model">account.move.line</field>
         <field name="priority" eval="20" />
         <field name="arch" type="xml">
-            <tree
+            <list
                 decoration-success="full_reconcile_id!=False"
                 decoration-muted="reconciled!=False and full_reconcile_id==False"
                 decoration-warning="parent_state!='posted'"
@@ -65,7 +65,7 @@
                 <field name="reconciled" readonly="1" optional="hide" />
                 <field name="full_reconcile_id" readonly="1" optional="hide" />
                 <field name="parent_state" invisible="1" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="view_payments_filter" model="ir.ui.view">
@@ -225,14 +225,14 @@
     <record model="ir.actions.act_window" id="action_invoice_payments">
         <field name="name">Payments and due list</field>
         <field name="res_model">account.move.line</field>
-        <field name="view_mode">tree,form,pivot,graph</field>
+        <field name="view_mode">list,form,pivot,graph</field>
         <field
             name="context"
         >{'search_default_posted_moves': 1, 'search_default_from_invoices': 1, 'search_default_not_full_reconciled': 1}</field>
         <field
             name="view_ids"
             eval="[(5, 0, 0),
-                                      (0, 0, {'view_mode': 'tree', 'view_id': ref('view_payments_tree')}),
+                                      (0, 0, {'view_mode': 'list', 'view_id': ref('view_payments_tree')}),
                                       (0, 0, {'view_mode': 'pivot', 'view_id': ref('view_payments_pivot')}),
                                       (0, 0, {'view_mode': 'graph', 'view_id': ref('view_payments_graph')})]"
         />
