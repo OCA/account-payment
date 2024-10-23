@@ -1,0 +1,3 @@
+- On a draft Invoice, set the Payment Token, in the Other Info tab
+- Confirm the Invoice
+- The credit card payment will automatically be processed
