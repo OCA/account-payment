@@ -25,6 +25,7 @@ setuptools.setup(
         'odoo-addon-account_payment_term_discount>=16.0dev,<16.1dev',
         'odoo-addon-account_payment_term_extension>=16.0dev,<16.1dev',
         'odoo-addon-account_payment_widget_amount>=16.0dev,<16.1dev',
+        'odoo-addon-partner_aging>=16.0dev,<16.1dev',
     ],
     classifiers=[
         'Programming Language :: Python',
