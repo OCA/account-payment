@@ -85,11 +85,6 @@
             <xpath expr="//field[@name='amount']" position="attributes">
                 <attribute name="invisible">context.get('batch', False)</attribute>
             </xpath>
-            <xpath expr="//field[@name='payment_method_line_id']" position="attributes">
-                <attribute
-                    name="domain"
-                >[('payment_type', '=', payment_type)]</attribute>
-            </xpath>
             <xpath expr="//field[@name='communication']" position="after">
                 <field
                     name="cheque_amount"
