@@ -17,8 +17,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
-"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || n"
-"%100==4 ? 2 : 3;\n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3;\n"
 "X-Generator: Weblate 4.14.1\n"
 
 #. module: account_due_list_days_overdue
@@ -84,15 +84,15 @@ msgstr "Naziv"
 #. module: account_due_list_days_overdue
 #: model_terms:ir.ui.view,arch_db:account_due_list_days_overdue.view_account_overdue_term_form
 #: model_terms:ir.ui.view,arch_db:account_due_list_days_overdue.view_account_overdue_term_search
-#: model_terms:ir.ui.view,arch_db:account_due_list_days_overdue.view_account_overdue_term_tree
 msgid "Overdue Term"
 msgstr "Pogoj zapadlosti"
 
 #. module: account_due_list_days_overdue
+#. odoo-python
 #: code:addons/account_due_list_days_overdue/models/account_overdue_term.py:0
 #, python-format
-msgid "Overdue Term %s overlaps with %s"
-msgstr "Pogoj zapadlosti %s se prekriva s %s"
+msgid "Overdue Term %(rec_name)s overlaps with %(overlap_name)s"
+msgstr ""
 
 #. module: account_due_list_days_overdue
 #: model:ir.actions.act_window,name:account_due_list_days_overdue.action_account_overdue_term_form
@@ -109,3 +109,7 @@ msgstr "Tehnični naziv"
 #: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term__to_day
 msgid "To day"
 msgstr "Do dneva"
+
+#, python-format
+#~ msgid "Overdue Term %s overlaps with %s"
+#~ msgstr "Pogoj zapadlosti %s se prekriva s %s"
