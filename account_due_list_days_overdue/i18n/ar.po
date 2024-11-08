@@ -40,7 +40,6 @@ msgid "Days overdue"
 msgstr ""
 
 #. module: account_due_list_days_overdue
-#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_move_line__display_name
 #: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term__display_name
 msgid "Display Name"
 msgstr "اسم العرض"
@@ -51,7 +50,6 @@ msgid "From day"
 msgstr ""
 
 #. module: account_due_list_days_overdue
-#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_move_line__id
 #: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term__id
 msgid "ID"
 msgstr "المعرف"
@@ -63,7 +61,6 @@ msgid "Journal Item"
 msgstr "عناصر دفتر اليومية"
 
 #. module: account_due_list_days_overdue
-#: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_move_line____last_update
 #: model:ir.model.fields,field_description:account_due_list_days_overdue.field_account_overdue_term____last_update
 msgid "Last Modified on"
 msgstr "آخر تعديل في"
@@ -86,14 +83,14 @@ msgstr "الاسم"
 #. module: account_due_list_days_overdue
 #: model_terms:ir.ui.view,arch_db:account_due_list_days_overdue.view_account_overdue_term_form
 #: model_terms:ir.ui.view,arch_db:account_due_list_days_overdue.view_account_overdue_term_search
-#: model_terms:ir.ui.view,arch_db:account_due_list_days_overdue.view_account_overdue_term_tree
 msgid "Overdue Term"
 msgstr ""
 
 #. module: account_due_list_days_overdue
+#. odoo-python
 #: code:addons/account_due_list_days_overdue/models/account_overdue_term.py:0
 #, python-format
-msgid "Overdue Term %s overlaps with %s"
+msgid "Overdue Term %(rec_name)s overlaps with %(overlap_name)s"
 msgstr ""
 
 #. module: account_due_list_days_overdue
