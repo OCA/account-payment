@@ -1,7 +1,7 @@
 # Copyright 2020 Ecosoft Co., Ltd (http://ecosoft.co.th/)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 
 
 class AccountPaymentDeduction(models.TransientModel):
@@ -22,7 +22,6 @@ class AccountPaymentDeduction(models.TransientModel):
     account_id = fields.Many2one(
         comodel_name="account.account",
         domain=[("deprecated", "=", False)],
-        required=False,
     )
     is_open = fields.Boolean(string="Open", help="Keep this line open")
     amount = fields.Monetary(string="Deduction Amount", required=True)
@@ -32,7 +31,7 @@ class AccountPaymentDeduction(models.TransientModel):
     def _onchange_open(self):
         if self.is_open:
             self.account_id = False
-            self.name = _("Keep open")
+            self.name = self.env._("Keep open")
         else:
             self.name = False
 

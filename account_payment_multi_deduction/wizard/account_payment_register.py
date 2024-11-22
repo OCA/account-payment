@@ -1,7 +1,7 @@
 # Copyright 2019 Ecosoft Co., Ltd (http://ecosoft.co.th/)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools import float_compare
 
@@ -28,8 +28,9 @@ class AccountPaymentRegister(models.TransientModel):
     )
     deduct_analytic_distribution = fields.Json()
 
-    def _update_vals_deduction(self, moves):
-        move_lines = moves.mapped("line_ids")
+    def _update_vals_deduction(self, move_lines):
+        """For case `Mark as fully paid`,
+        Hook this method to update field wizard write-off from move lines"""
         analytic = {}
         [
             analytic.update(item)
@@ -38,8 +39,9 @@ class AccountPaymentRegister(models.TransientModel):
         ]
         self.analytic_distribution = analytic
 
-    def _update_vals_multi_deduction(self, moves):
-        move_lines = moves.mapped("line_ids")
+    def _update_vals_multi_deduction(self, move_lines):
+        """For case `Mark invoice as fully paid (multi deduct)`,
+        Hook this method to update field wizard deduct from move lines"""
         analytic = {}
         [
             analytic.update(item)
@@ -51,11 +53,17 @@ class AccountPaymentRegister(models.TransientModel):
     @api.onchange("payment_difference", "payment_difference_handling")
     def _onchange_default_deduction(self):
         active_ids = self.env.context.get("active_ids", [])
-        moves = self.env["account.move"].browse(active_ids)
+        move_lines = self.env["account.move.line"]
+        model = self.env.context.get("active_model", False)
+        if model == "account.move.line":
+            move_lines = move_lines.browse(active_ids)
+        elif model == "account.move":
+            move_lines = self.env["account.move"].browse(active_ids).line_ids
+
         if self.payment_difference_handling == "reconcile":
-            self._update_vals_deduction(moves)
+            self._update_vals_deduction(move_lines)
         if self.payment_difference_handling == "reconcile_multi_deduct":
-            self._update_vals_multi_deduction(moves)
+            self._update_vals_multi_deduction(move_lines)
 
     @api.constrains("deduction_ids", "payment_difference_handling")
     def _check_deduction_amount(self):
@@ -71,7 +79,9 @@ class AccountPaymentRegister(models.TransientModel):
                     != 0
                 ):
                     raise UserError(
-                        _("The total deduction should be %s") % rec.payment_difference
+                        self.env._(
+                            f"The total deduction should be {rec.payment_difference}"
+                        )
                     )
 
     @api.depends("payment_difference", "deduction_ids")
@@ -84,23 +94,27 @@ class AccountPaymentRegister(models.TransientModel):
     def _create_payment_vals_from_wizard(self, batch_result):
         payment_vals = super()._create_payment_vals_from_wizard(batch_result)
         # payment difference
-        if (
-            not self.currency_id.is_zero(self.payment_difference)
-            and self.payment_difference_handling == "reconcile"
+        if self.payment_difference_handling == "reconcile" and payment_vals.get(
+            "write_off_line_vals", []
         ):
-            payment_vals["write_off_line_vals"][0]["analytic_distribution"] = (
-                self.analytic_distribution
+            payment_vals["write_off_line_vals"][0].update(
+                {
+                    "analytic_distribution": self.analytic_distribution,
+                    "is_writeoff": True,
+                }
             )
+
         # multi deduction
-        elif (
+        if (
             self.payment_difference
             and self.payment_difference_handling == "reconcile_multi_deduct"
         ):
             payment_vals["write_off_line_vals"] = [
                 self._prepare_deduct_move_line(deduct)
-                for deduct in self.deduction_ids.filtered(lambda l: not l.is_open)
+                for deduct in self.deduction_ids.filtered(
+                    lambda deduct: not deduct.is_open
+                )
             ]
-            payment_vals["is_multi_deduction"] = True
         return payment_vals
 
     def _prepare_deduct_move_line(self, deduct):
@@ -124,4 +138,5 @@ class AccountPaymentRegister(models.TransientModel):
             "amount_currency": write_off_amount_currency,
             "balance": write_off_balance,
             "analytic_distribution": deduct.analytic_distribution,
+            "is_writeoff": True,
         }

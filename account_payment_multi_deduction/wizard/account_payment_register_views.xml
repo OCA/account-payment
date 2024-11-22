@@ -4,32 +4,39 @@
         <field name="model">account.payment.register</field>
         <field name="inherit_id" ref="account.view_account_payment_register_form" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='writeoff_account_id']" position="after">
+            <!-- Add analytic_distribution on wizard -->
+            <xpath expr="//group[@name='group1']/div/div" position="inside">
                 <div
-                    attrs="{'invisible': [('payment_difference_handling', '!=', 'reconcile')]}"
+                    class="o_wrap_field d-flex d-sm-contents flex-column mb-3 mb-sm-0"
+                    invisible="payment_difference_handling != 'reconcile'"
                     groups="analytic.group_analytic_accounting"
                 >
-                    <label for="analytic_distribution" class="oe_edit_only" />
-                    <field
-                        name="analytic_distribution"
-                        widget="analytic_distribution"
-                        groups="analytic.group_analytic_accounting"
-                        options="{'product_field': 'product_id', 'account_field': 'account_id', 'business_domain': 'expense'}"
-                    />
+                    <div class="o_cell o_wrap_label text-break text-900">
+                        <label for="analytic_distribution" class="oe_edit_only" />
+                    </div>
+                    <div class="o_cell o_wrap_input text-break">
+                        <field
+                            name="analytic_distribution"
+                            widget="analytic_distribution"
+                            groups="analytic.group_analytic_accounting"
+                            options="{'product_field': 'product_id', 'account_field': 'account_id', 'business_domain': 'expense'}"
+                        />
+                    </div>
                 </div>
             </xpath>
-            <xpath
-                expr="/form/group/group[@name='group3']/div/div"
-                position="attributes"
-            >
+            <!-- Hide write-off field when selected multi deduction -->
+            <xpath expr="//group[@name='group1']/div/div" position="attributes">
                 <attribute
-                    name="attrs"
-                >{'invisible': [('payment_difference_handling','!=','reconcile')]}</attribute>
+                    name="invisible"
+                    separator="or"
+                    add="payment_difference_handling != 'reconcile'"
+                />
             </xpath>
-            <xpath expr="/form/group/group[@name='group3']" position="after">
+            <!-- Add multi deduction -->
+            <xpath expr="//group[@name='group2']" position="after">
                 <group
                     colspan="4"
-                    attrs="{'invisible': [('payment_difference_handling', '!=', 'reconcile_multi_deduct')]}"
+                    invisible="payment_difference_handling != 'reconcile_multi_deduct'"
                 >
                     <field name="deduct_residual" invisible="1" />
                     <field name="deduct_analytic_distribution" invisible="1" />
@@ -39,13 +46,10 @@
                         colspan="2"
                         context="{'default_amount': deduct_residual, 'default_analytic_distribution': deduct_analytic_distribution}"
                     >
-                        <tree editable="bottom">
-                            <field name="currency_id" invisible="1" />
+                        <list editable="bottom">
+                            <field name="currency_id" column_invisible="1" />
                             <field name="is_open" />
-                            <field
-                                name="account_id"
-                                attrs="{'required': [('is_open', '=', False)]}"
-                            />
+                            <field name="account_id" required="not is_open" />
                             <field
                                 name="analytic_distribution"
                                 widget="analytic_distribution"
@@ -54,7 +58,7 @@
                             />
                             <field name="name" />
                             <field name="amount" sum="Total Deduction" />
-                        </tree>
+                        </list>
                     </field>
                 </group>
             </xpath>
