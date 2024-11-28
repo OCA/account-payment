@@ -52,6 +52,7 @@ class AccountMove(models.Model):
             "payment_method_name": payment_method_name,
             "ref": f"{line_id.move_id.name} ({ref})",
             "returned": is_return,
+            "is_exchange": False,
         }
 
     def _compute_payments_widget_reconciled_info(self):
