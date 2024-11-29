@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="name">account.move.form</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="after">
+                <div
+                    class="alert alert-warning mb-0"
+                    role="alert"
+                    attrs="{'invisible': [('payment_waiting_reconcile', '=', [])]}"
+                >
+                    This move created payment draft already: <field
+                        name="payment_waiting_reconcile"
+                        widget="many2many_tags"
+                        readonly="1"
+                    />
+                    <button
+                        id="link_payment_draft"
+                        name="action_view_payment_draft"
+                        string="⇒ View Payments"
+                        type="object"
+                        class="oe_link"
+                    />
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>

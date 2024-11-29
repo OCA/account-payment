@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <!-- Customer Payment -->
+            <xpath
+                expr="//div[@id='pay_invoice_online_setting_container']"
+                position="inside"
+            >
+                <div
+                    class="col-12 col-lg-6 o_setting_box"
+                    id="customer_payment_register_state"
+                >
+                    <div class="o_setting_left_pane" />
+                    <div class="o_setting_right_pane">
+                        <label for="register_customer_payment_state" />
+                        <div class="text-muted">
+                            Default state of the payment register when a payment is created.
+                        </div>
+                        <div class="mt16">
+                            <field
+                                name="register_customer_payment_state"
+                                class="o_light_label"
+                                widget="radio"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+            <!-- Vendor Payment -->
+            <xpath
+                expr="//div[@id='print_vendor_checks_setting_container']"
+                position="inside"
+            >
+                <div
+                    class="col-12 col-lg-6 o_setting_box"
+                    id="vendor_payment_register_state"
+                >
+                    <div class="o_setting_left_pane" />
+                    <div class="o_setting_right_pane">
+                        <label for="register_vendor_payment_state" />
+                        <div class="text-muted">
+                            Default state of the payment register when a payment is created.
+                        </div>
+                        <div class="mt16">
+                            <field
+                                name="register_vendor_payment_state"
+                                class="o_light_label"
+                                widget="radio"
+                            />
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
