@@ -9,7 +9,10 @@
         <field name="model">account.move</field>
         <field name="inherit_id" ref="account.view_move_form" />
         <field name="arch" type="xml">
-            <xpath expr="//field[@name='invoice_date_due']//.." position="after">
+            <xpath
+                expr="//group[@id='header_left_group']/field[@name='invoice_vendor_bill_id']"
+                position="after"
+            >
                 <field name="returned_payment" readonly="True" />
             </xpath>
         </field>
