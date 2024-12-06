@@ -1,7 +1,7 @@
 import odoo.tests.common as common
 from odoo import fields
 from odoo.exceptions import ValidationError
-from odoo.tests.common import Form
+from odoo.tests import Form
 
 
 class TestAccountPaymentTermMultiDay(common.TransactionCase):

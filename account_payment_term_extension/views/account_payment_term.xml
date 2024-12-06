@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <odoo>
-    <record id="view_payment_term_holiday_tree" model="ir.ui.view">
-        <field name="name">Tree view for account.payment.term.holiday</field>
+    <record id="view_payment_term_holiday_list" model="ir.ui.view">
+        <field name="name">List view for account.payment.term.holiday</field>
         <field name="model">account.payment.term.holiday</field>
         <field name="arch" type="xml">
-            <tree>
+            <list>
                 <field name="holiday" />
                 <field name="date_postponed" />
                 <field name="payment_id" />
-            </tree>
+            </list>
         </field>
     </record>
     <record id="view_payment_term_form" model="ir.ui.view">
@@ -26,10 +26,10 @@
                         When a payment term coincides with a holiday, it is postponed to the chosen date.
                     </p>
                     <field name="holiday_ids" colspan="12">
-                        <tree editable="top">
+                        <list editable="top">
                             <field name="holiday" />
                             <field name="date_postponed" />
-                        </tree>
+                        </list>
                     </field>
                 </xpath>
             </data>
