@@ -44,18 +44,24 @@ class AccountPayment(models.Model):
             self.to_auto_reconcile = False
         return super().action_cancel()
 
+    @api.model
+    def _get_origin_doc(self, move_lines):
+        return "move_id"
+
     def write(self, vals):
         # Get value of to_auto_reconcile before write
         move_lines = self.to_auto_reconcile
+        #  = self._get_document()
         res = super().write(vals)
         if vals.get("to_auto_reconcile"):
+            origin_doc = self._get_origin_doc(move_lines)
             val_to_reconcile = vals["to_auto_reconcile"][0][2]
             if val_to_reconcile:
                 move_lines = self.env["account.move.line"].browse(val_to_reconcile)
                 payment_vals = [(4, self.id)]
             else:
                 payment_vals = [(3, self.id)]
-            move_lines.mapped("move_id").write(
+            move_lines.mapped(origin_doc).write(
                 {"payment_waiting_reconcile": payment_vals}
             )
         return res
@@ -65,7 +71,8 @@ class AccountPayment(models.Model):
         payments = super().create(vals_list)
         for payment in payments:
             if payment.to_auto_reconcile:
-                payment.to_auto_reconcile.mapped("move_id").write(
+                origin_doc = payments._get_origin_doc(payment.to_auto_reconcile)
+                payment.to_auto_reconcile.mapped(origin_doc).write(
                     {"payment_waiting_reconcile": [(4, payment.id)]}
                 )
         return payments
