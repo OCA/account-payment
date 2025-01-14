@@ -31,7 +31,11 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
         cls.payment_term_model = cls.env["account.payment.term"]
         cls.invoice_model = cls.env["account.move"]
         cls.partner = cls.env["res.partner"].create({"name": "Test Partner"})
+        cls.foreign_partner = cls.env["res.partner"].create(
+            {"name": "Test Foreign Partner", "country_id": cls.env.ref("base.es").id}
+        )
         cls.product = cls.env["product.product"].create({"name": "Test product"})
+        cls.foreign_currency = cls.env["res.currency"].search([("name", "=", "EUR")])
         cls.payment_term_0_day_5 = cls.payment_term_model.create(
             {
                 "name": "Normal payment in day 5",
@@ -146,6 +150,32 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                 ],
             }
         )
+        cls.advance_60days = cls.payment_term_model.create(
+            {
+                "name": "30% Now, Balance 60 Days",
+                "active": True,
+                "line_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "value": "percent",
+                            "value_amount": 30.0,
+                            "days": 0,
+                        },
+                    ),
+                    (
+                        0,
+                        0,
+                        {
+                            "value": "balance",
+                            "value_amount": 0.0,
+                            "days": 60,
+                        },
+                    ),
+                ],
+            }
+        )
         cls.tax = cls.env["account.tax"].create(
             {
                 "name": "Test tax",
@@ -156,14 +186,24 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
         )
 
     def _create_invoice(
-        self, payment_term, date, quantity, price_unit, move_type="in_invoice"
+        self,
+        payment_term,
+        date,
+        quantity,
+        price_unit,
+        move_type="in_invoice",
+        foreing_partner=False,
     ):
         invoice_form = Form(
             self.invoice_model.with_context(default_move_type=move_type)
         )
-        invoice_form.partner_id = self.partner
+        invoice_form.partner_id = (
+            self.partner if not foreing_partner else self.foreign_partner
+        )
         invoice_form.invoice_payment_term_id = payment_term
         invoice_form.invoice_date = date
+        if foreing_partner:
+            invoice_form.currency_id = self.foreign_currency
         with invoice_form.invoice_line_ids.new() as line_form:
             line_form.product_id = self.product
             line_form.quantity = quantity
@@ -338,3 +378,30 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
         self.assertEqual(expected_days, model._decode_payment_days("5, 10"))
         self.assertEqual(expected_days, model._decode_payment_days("5 - 10"))
         self.assertEqual(expected_days, model._decode_payment_days("5    10"))
+
+    def test_invoice_advance_60days_payment_term(self):
+        invoice = self._create_invoice(
+            self.advance_60days, fields.Date.today(), 1, 900, foreing_partner=True
+        )
+        conversion_rate = self.env["res.currency"]._get_conversion_rate(
+            invoice.currency_id,
+            invoice.company_id.currency_id,
+            invoice.company_id,
+            invoice.date,
+        )
+        invoice.action_post()
+        self.assertNotEqual(invoice.currency_id, invoice.company_id.currency_id)
+        first_amount_original_currency = invoice.currency_id.round(
+            invoice.amount_total * 0.3
+        )
+        second_amount_original_currency = invoice.currency_id.round(
+            invoice.amount_total - first_amount_original_currency
+        )
+        expected_first_amount = invoice.currency_id.round(
+            first_amount_original_currency * conversion_rate
+        )
+        expected_second_amount = invoice.currency_id.round(
+            second_amount_original_currency * conversion_rate
+        )
+        self.assertEqual(invoice.line_ids[1].credit, expected_first_amount)
+        self.assertEqual(invoice.line_ids[2].credit, expected_second_amount)
