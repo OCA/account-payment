@@ -8,7 +8,8 @@
                 <field name="promissory_note" />
                 <field
                     name="date_due"
-                    attrs="{'invisible': [('promissory_note','=', False)]}"
+                    invisible="not promissory_note"
+                    readonly="state != 'draft'"
                 />
             </field>
         </field>

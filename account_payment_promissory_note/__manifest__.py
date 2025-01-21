@@ -3,7 +3,7 @@
 
 {
     "name": "Account Payment Promissory Note",
-    "version": "16.0.1.0.1",
+    "version": "17.0.1.0.0",
     "license": "AGPL-3",
     "author": "Tecnativa," "Odoo Community Association (OCA)",
     "category": "Invoicing Management",

@@ -94,5 +94,5 @@ class TestAccountPaymentPromissoryNote(TransactionCase):
         wiz_form.date_due = datetime.datetime.strptime("2020-09-23", "%Y-%m-%d").date()
         wiz = wiz_form.save()
         payment = wiz._create_payments()
-        for line in payment.line_ids:
+        for line in payment.move_id.line_ids:
             self.assertEqual(line.date_maturity, payment.date_due)
