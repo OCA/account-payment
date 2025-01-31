@@ -3,8 +3,8 @@ from odoo.tests import TransactionCase, tagged
 
 @tagged("post_install", "-at_install")
 class TestPaymentAcquirer(TransactionCase):
-    def setUp(self) -> None:
-        super(TestPaymentAcquirer, self).setUp()
+    def setUp(self):
+        super().setUp()
         self.invoice_test_1 = self.env.ref("l10n_generic_coa.demo_invoice_followup")
         self.order_test_1 = self.env.ref("sale.sale_order_7")
         self.res_partner_deco = self.env.ref("base.res_partner_2")
@@ -22,7 +22,8 @@ class TestPaymentAcquirer(TransactionCase):
         )
 
     def test_get_allowed_acquirers_order(self):
-        """This test covers acquirer selection based on partner settings for sale order"""
+        """This test covers acquirer selection based on
+        partner settings for sale order"""
         payment_acquirer_obj = self.env["payment.acquirer"]
 
         acquirers = payment_acquirer_obj.get_allowed_acquirers(
