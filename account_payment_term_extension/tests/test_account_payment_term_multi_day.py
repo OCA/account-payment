@@ -1,23 +1,14 @@
-import odoo.tests.common as common
 from odoo import fields
 from odoo.exceptions import ValidationError
-from odoo.tests.common import Form
+from odoo.tests import Form
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestAccountPaymentTermMultiDay(common.TransactionCase):
+class TestAccountPaymentTermMultiDay(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(
-            context=dict(
-                cls.env.context,
-                mail_create_nolog=True,
-                mail_create_nosubscribe=True,
-                mail_notrack=True,
-                no_reset_password=True,
-                tracking_disable=True,
-            )
-        )
         cls.payment_term_model = cls.env["account.payment.term"]
         cls.invoice_model = cls.env["account.move"]
         cls.partner = cls.env["res.partner"].create({"name": "Test Partner"})
@@ -27,16 +18,14 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                 "name": "Normal payment in day 5",
                 "active": True,
                 "line_ids": [
-                    (
-                        0,
-                        0,
+                    fields.Command.create(
                         {
                             "value": "percent",
                             "value_amount": 100.0,
                             "nb_days": 5,
                             "payment_days": "5",
                         },
-                    )
+                    ),
                 ],
             }
         )
@@ -45,16 +34,14 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                 "name": "Payment for days 5 and 10",
                 "active": True,
                 "line_ids": [
-                    (
-                        0,
-                        0,
+                    fields.Command.create(
                         {
                             "value": "percent",
                             "value_amount": 100.0,
                             "nb_days": 0,
                             "payment_days": "5,10",
                         },
-                    )
+                    ),
                 ],
             }
         )
@@ -64,9 +51,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                 "active": True,
                 "sequential_lines": True,
                 "line_ids": [
-                    (
-                        0,
-                        0,
+                    fields.Command.create(
                         {
                             "value": "percent",
                             "value_amount": 50.0,
@@ -74,9 +59,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                             "payment_days": "15,20",
                         },
                     ),
-                    (
-                        0,
-                        0,
+                    fields.Command.create(
                         {
                             "value": "percent",
                             "value_amount": 50.0,
@@ -93,9 +76,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                 "active": True,
                 "sequential_lines": True,
                 "line_ids": [
-                    (
-                        0,
-                        0,
+                    fields.Command.create(
                         {
                             "value": "percent",
                             "value_amount": 50.0,
@@ -104,9 +85,7 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                             "payment_days": "15,20",
                         },
                     ),
-                    (
-                        0,
-                        0,
+                    fields.Command.create(
                         {
                             "value": "percent",
                             "value_amount": 50.0,
@@ -123,26 +102,20 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
                 "active": True,
                 "sequential_lines": True,
                 "line_ids": [
-                    (
-                        0,
-                        0,
+                    fields.Command.create(
                         {
                             "value": "percent_amount_untaxed",
                             "value_amount": 10.0,
                         },
                     ),
-                    (
-                        0,
-                        0,
+                    fields.Command.create(
                         {
                             "value": "percent_amount_untaxed",
                             "value_amount": 40.0,
                             "nb_days": 1,
                         },
                     ),
-                    (
-                        0,
-                        0,
+                    fields.Command.create(
                         {"value": "percent", "value_amount": 100.0, "nb_days": 1},
                     ),
                 ],
@@ -175,14 +148,20 @@ class TestAccountPaymentTermMultiDay(common.TransactionCase):
         return invoice
 
     def test_amount_untaxed_payment_term_error(self):
-        payment_term_form = Form(self.payment_term_model)
-        payment_term_form.name = "10 percent + 40 percent + Balance"
-        payment_term_form.sequential_lines = True
-        with payment_term_form.line_ids.new() as line_form:
-            line_form.value = "percent_amount_untaxed"
-            line_form.value_amount = 110
+        vals = {
+            "name": "10 percent + 40 percent + Balance",
+            "sequential_lines": True,
+            "line_ids": [
+                fields.Command.create(
+                    {
+                        "value": "percent_amount_untaxed",
+                        "value_amount": 110,
+                    }
+                )
+            ],
+        }
         with self.assertRaises(ValidationError):
-            payment_term_form.save()
+            self.payment_term_model.create(vals)
 
     def test_invoice_amount_untaxed_payment_term(self):
         invoice = self._create_invoice(self.amount_untaxed_lines, "2020-01-01", 10, 100)

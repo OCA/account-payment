@@ -10,7 +10,7 @@ import calendar
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 
@@ -88,7 +88,9 @@ class AccountPaymentTerm(models.Model):
     ):
         """Complete overwrite of compute method for adding extra options."""
         if cash_rounding:
-            raise UserError(_("This module is not compatible with cash rounding"))
+            raise UserError(
+                self.env._("This module is not compatible with cash rounding")
+            )
         # FIXME: Find an inheritable way of doing this
         self.ensure_one()
         company_currency = company.currency_id
@@ -165,7 +167,7 @@ class AccountPaymentTerm(models.Model):
             elif line.value == "percent_amount_untaxed":
                 if company_currency != currency:
                     raise UserError(
-                        _(
+                        self.env._(
                             "Percentage of amount untaxed can't be used with foreign "
                             "currencies"
                         )

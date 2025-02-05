@@ -13,3 +13,4 @@
 - \`Trobz \<<https://trobz.com>\>\`:
   - Hoang \<<hoang@trobz.com>\>
 - Anaïs López \<<anais.lopez@forgeflow.com>\>
+- Marco Colombo \<<marco.colombo@phi.technology>\>
