@@ -7,7 +7,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -26,7 +26,7 @@ class AccountPaymentTermHoliday(models.Model):
                 record.date_postponed
             ) <= fields.Date.from_string(record.holiday):
                 raise ValidationError(
-                    _("Holiday %s can only be postponed into the future")
+                    self.env._("Holiday %s can only be postponed into the future")
                     % record.holiday
                 )
             if (
@@ -39,7 +39,7 @@ class AccountPaymentTermHoliday(models.Model):
                 > 1
             ):
                 raise ValidationError(
-                    _("Holiday %s is duplicated in current payment term")
+                    self.env._("Holiday %s is duplicated in current payment term")
                     % record.holiday
                 )
             if (
@@ -54,6 +54,6 @@ class AccountPaymentTermHoliday(models.Model):
                 >= 1
             ):
                 raise ValidationError(
-                    _("Date %s cannot is both a holiday and a Postponed date")
+                    self.env._("Date %s cannot is both a holiday and a Postponed date")
                     % record.holiday
                 )

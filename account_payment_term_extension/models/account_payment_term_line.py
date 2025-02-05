@@ -8,7 +8,7 @@
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import _, api, exceptions, fields, models
+from odoo import api, exceptions, fields, models
 from odoo.exceptions import ValidationError
 from odoo.tools import date_utils
 from odoo.tools.float_utils import float_round
@@ -97,7 +97,9 @@ class AccountPaymentTermLine(models.Model):
             except Exception:
                 error = True
             if error:
-                raise exceptions.Warning(_("Payment days field format is not valid."))
+                raise exceptions.UserError(
+                    self.env._("Payment days field format is not valid.")
+                )
 
     def _get_due_date(self, date_ref):
         res = super()._get_due_date(date_ref)
@@ -128,7 +130,7 @@ class AccountPaymentTermLine(models.Model):
                 and not 0 <= term_line.value_amount <= 100
             ):
                 raise ValidationError(
-                    _(
+                    self.env._(
                         "Percentages on the Payment Terms lines "
                         "must be between 0 and 100."
                     )

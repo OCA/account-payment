@@ -3,23 +3,14 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 from odoo import fields
 from odoo.exceptions import ValidationError
-from odoo.tests.common import TransactionCase
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestAccountPaymentTerm(TransactionCase):
+class TestAccountPaymentTerm(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(
-            context=dict(
-                cls.env.context,
-                mail_create_nolog=True,
-                mail_create_nosubscribe=True,
-                mail_notrack=True,
-                no_reset_password=True,
-                tracking_disable=True,
-            )
-        )
         cls.account_payment_term = cls.env["account.payment.term"]
         cls.currency = cls.env.company.currency_id
         cls.company = cls.env.company
@@ -63,16 +54,14 @@ class TestAccountPaymentTerm(TransactionCase):
                     {
                         "name": "2 weeks",
                         "line_ids": [
-                            (
-                                0,
-                                0,
+                            fields.Command.create(
                                 {
                                     "value": "percent",
                                     "value_amount": 100.0,
                                     "nb_days": 2,
                                     "delay_type": "weeks_after",
                                 },
-                            )
+                            ),
                         ],
                     }
                 )
@@ -123,16 +112,14 @@ class TestAccountPaymentTerm(TransactionCase):
                         {
                             "name": "2 months ",
                             "line_ids": [
-                                (
-                                    0,
-                                    0,
+                                fields.Command.create(
                                     {
                                         "value": "percent",
                                         "value_amount": 100.0,
                                         "nb_days": 2,
                                         "delay_type": "months_after_end_of_month",
                                     },
-                                )
+                                ),
                             ],
                         }
                     )
@@ -167,26 +154,22 @@ class TestAccountPaymentTerm(TransactionCase):
                     {
                         "name": "2 weeks",
                         "line_ids": [
-                            (
-                                0,
-                                0,
+                            fields.Command.create(
                                 {
                                     "value": "percent",
                                     "value_amount": 100.0,
                                     "nb_days": 2,
                                     "delay_type": "weeks_after",
                                 },
-                            )
+                            ),
                         ],
                         "holiday_ids": [
-                            (
-                                0,
-                                0,
+                            fields.Command.create(
                                 {
                                     "holiday": str_date_holiday,
                                     "date_postponed": str_date_postponed,
                                 },
-                            )
+                            ),
                         ],
                     }
                 )
@@ -219,26 +202,22 @@ class TestAccountPaymentTerm(TransactionCase):
                     {
                         "name": "2 weeks",
                         "line_ids": [
-                            (
-                                0,
-                                0,
+                            fields.Command.create(
                                 {
                                     "value": "percent",
                                     "value_amount": 100.0,
                                     "nb_days": 2,
                                     "delay_type": "weeks_after",
                                 },
-                            )
+                            ),
                         ],
                         "holiday_ids": [
-                            (
-                                0,
-                                0,
+                            fields.Command.create(
                                 {
                                     "holiday": str_date_holiday,
                                     "date_postponed": str_date_postponed,
                                 },
-                            )
+                            ),
                         ],
                     }
                 )
