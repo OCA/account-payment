@@ -7,8 +7,6 @@
         <field name="name">Payment return mapping company rule</field>
         <field name="model_id" ref="model_payment_return" />
         <field name="global" eval="True" />
-        <field
-            name="domain_force"
-        >['|',('company_id','=',False),('company_id','in',company_ids)]</field>
+        <field name="domain_force">[('company_id', 'in', company_ids + [False])]</field>
     </record>
 </odoo>

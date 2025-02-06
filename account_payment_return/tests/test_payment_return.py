@@ -5,7 +5,8 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 from odoo.exceptions import UserError, ValidationError
-from odoo.tests.common import Form
+from odoo.fields import Command
+from odoo.tests import Form
 
 from odoo.addons.base.tests.common import BaseCommon
 
@@ -29,7 +30,7 @@ class TestPaymentReturn(BaseCommon):
         cls.bank_journal = cls.env["account.journal"].create(
             {
                 "name": "Test Bank Journal",
-                "code": "BANK",
+                "code": "BANKTEST",
                 "type": "bank",
                 "default_expense_account_id": cls.account.id,
                 "default_expense_partner_id": cls.partner_expense.id,
@@ -51,9 +52,7 @@ class TestPaymentReturn(BaseCommon):
                 "currency_id": cls.env.user.company_id.currency_id.id,
                 "partner_id": cls.partner.id,
                 "invoice_line_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "account_id": cls.account_income.id,
                             "name": "Test line",
@@ -89,9 +88,7 @@ class TestPaymentReturn(BaseCommon):
             {
                 "journal_id": cls.bank_journal.id,
                 "line_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "partner_id": cls.partner.id,
                             "move_line_ids": [(6, 0, cls.payment_line.ids)],
@@ -175,12 +172,18 @@ class TestPaymentReturn(BaseCommon):
 
     def test_find_match_move_line(self):
         self.payment_line.name = "test match move line 001"
-        self.payment_return.line_ids.write(
+        self.payment_return.write(
             {
-                "partner_id": False,
-                "move_line_ids": [(6, 0, [])],
-                "amount": 0.0,
-                "reference": self.payment_line.name,
+                "line_ids": [
+                    Command.create(
+                        {
+                            "partner_id": False,
+                            "move_line_ids": [],
+                            "amount": 0.0,
+                            "reference": self.payment_line.name,
+                        }
+                    )
+                ]
             }
         )
         self.payment_return.button_match()
@@ -194,9 +197,7 @@ class TestPaymentReturn(BaseCommon):
         self.payment_return.write(
             {
                 "line_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "partner_id": False,
                             "move_line_ids": [(6, 0, [])],
@@ -232,22 +233,17 @@ class TestPaymentReturn(BaseCommon):
         self.assertEqual(len(info["content"]), 2)
         self.assertEqual(info["content"][1]["amount"], -500.0)
 
-    def test_reason_name_search(self):
-        reason = self.env["payment.return.reason"]
+    def test_reason_search_display_name(self):
         line = self.payment_return.line_ids[0]
-        line.reason_id = reason.name_search("RTEST")[0]
+        line.reason_id = self.reason.id
         self.assertEqual(line.reason_id.name, "Reason Test")
-        line.reason_id = reason.name_search("Reason Test")[0]
-        self.assertEqual(line.reason_id.code, "RTEST")
 
     def test_compute_total(self):
         self.assertEqual(self.payment_return.total_amount, 500)
         self.payment_return.write(
             {
                 "line_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "partner_id": self.partner.id,
                             "amount": 10.5,

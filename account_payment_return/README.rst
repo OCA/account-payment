@@ -85,18 +85,18 @@ Authors
 Contributors
 ------------
 
--  7 i TRIA <http://www.7itria.cat>
--  Avanzosc <http://www.avanzosc.com>
--  Markus Schneider <markus.schneider@initos.com>
--  `Tecnativa <https://www.tecnativa.com>`__:
+- 7 i TRIA <http://www.7itria.cat>
+- Avanzosc <http://www.avanzosc.com>
+- Markus Schneider <markus.schneider@initos.com>
+- `Tecnativa <https://www.tecnativa.com>`__:
 
-   -  Pedro M. Baeza
-   -  Sergio Teruel
-   -  Carlos Dauden
-   -  David Vidal
-   -  Luis M. Ontalba
-   -  Ernesto Tejeda
-   -  João Marques
+  - Pedro M. Baeza
+  - Sergio Teruel
+  - Carlos Dauden
+  - David Vidal
+  - Luis M. Ontalba
+  - Ernesto Tejeda
+  - João Marques
 
 Maintainers
 -----------
