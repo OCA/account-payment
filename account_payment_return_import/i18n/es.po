@@ -245,6 +245,3 @@ msgstr "Datos XML en bruto guardados con propósito de depuración/chequeo"
 #, python-format
 msgid "You have already imported this file."
 msgstr "Ya ha importado este archivo."
-
-#~ msgid "Last Modified on"
-#~ msgstr "Última modificación el"

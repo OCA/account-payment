@@ -247,6 +247,3 @@ msgstr "Dati grezzi XML salvati per attività di debug/controllo"
 #, python-format
 msgid "You have already imported this file."
 msgstr "Questo file è già stato importato."
-
-#~ msgid "Last Modified on"
-#~ msgstr "Ultima modifica il"

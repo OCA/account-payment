@@ -240,6 +240,3 @@ msgstr "XML-Rohdaten sind zur Fehler-/Prüfung abgespeichert"
 #, python-format
 msgid "You have already imported this file."
 msgstr "Sie haben diese Datei bereits importiert."
-
-#~ msgid "Last Modified on"
-#~ msgstr "Zuletzt geändert am"
