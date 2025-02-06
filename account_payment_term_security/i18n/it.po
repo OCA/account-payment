@@ -6,25 +6,27 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2025-02-06 11:06+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: account_payment_term_security
 #: model:res.groups,name:account_payment_term_security.account_payment_term_mgmt
 msgid "Change payment terms in partners and invoices"
-msgstr ""
+msgstr "Modifica i termini di pagamento nei partner e nelle fatture"
 
 #. module: account_payment_term_security
 #: model:ir.model,name:account_payment_term_security.model_res_partner
 msgid "Contact"
-msgstr ""
+msgstr "Contatto"
 
 #. module: account_payment_term_security
 #: model:ir.model,name:account_payment_term_security.model_account_move
 msgid "Journal Entry"
-msgstr ""
+msgstr "Registrazione contabile"
