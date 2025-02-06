@@ -47,8 +47,12 @@ class TestPaymentReturnFile(BaseCommon):
                 "WHERE return_id=%s",
                 (return_obj.id,),
             )
-            _logger.error("Transaction not found in %s" % str(self.cr.fetchall()))
-        self.assertTrue(ids, "Transaction %s not found after parse." % str(domain))
+            _logger.error(
+                self.env._("Transaction not found in %s") % str(self.cr.fetchall())
+            )
+        self.assertTrue(
+            ids, self.env._("Transaction %s not found after parse.") % str(domain)
+        )
 
     def _test_return_import(
         self,
@@ -74,10 +78,13 @@ class TestPaymentReturnFile(BaseCommon):
             bank_account_id = import_model._find_bank_account_id(local_account)
             journal_id = import_model._get_journal(bank_account_id)
             self.assertTrue(
-                journal_id, "Bank account %s has not journal assigned" % local_account
+                journal_id,
+                self.env._("Bank account %s has not journal assigned") % local_account,
             )
         ids = return_model.search([("name", "=", return_name)])
-        self.assertTrue(ids, "Payment return %s not found after parse." % return_name)
+        self.assertTrue(
+            ids, self.env._("Payment return %s not found after parse.") % return_name
+        )
         return_obj = ids[0]
         if date:
             self.assertEqual(
