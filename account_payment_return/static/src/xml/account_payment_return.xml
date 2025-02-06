@@ -4,7 +4,6 @@
 <templates xml:space="preserve">
 
     <t t-inherit="account.AccountPaymentField" t-inherit-mode="extension">
-
         <xpath
             expr="//a[@class='js_payment_info fa fa-info-circle']"
             position="attributes"
