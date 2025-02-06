@@ -6,8 +6,9 @@
 # Copyright 2017 Tecnativa - Luis M. Ontalba
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
+from odoo.tools.translate import _
 
 
 class PaymentReturn(models.Model):
@@ -71,7 +72,7 @@ class PaymentReturn(models.Model):
     def _check_duplicate_move_line(self):
         def append_error(error_line):
             error_list.append(
-                _(
+                self.env._(
                     "Payment Line: %(move_names)s (%(partner_name)s) "
                     "in Payment Return: %(return_name)s"
                 )
@@ -152,12 +153,17 @@ class PaymentReturn(models.Model):
 
     def _prepare_move_line(self, move, total_amount):
         self.ensure_one()
+        account = (
+            self.payment_method_line_id.payment_account_id
+            or self.journal_id.default_account_id
+        )
+        if not account:
+            raise UserError(_("No account found on the payment method or journal."))
         return {
             "name": move.ref,
             "debit": 0.0,
             "credit": total_amount,
-            "account_id": self.payment_method_line_id.payment_account_id.id
-            or self.company_id.account_journal_payment_debit_account_id.id,
+            "account_id": account.id,
             "move_id": move.id,
             "journal_id": move.journal_id.id,
         }
