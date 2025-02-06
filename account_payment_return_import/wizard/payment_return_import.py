@@ -8,7 +8,7 @@ import logging
 from io import BytesIO
 from zipfile import BadZipfile, ZipFile  # BadZipFile in Python >= 3.2
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 
 from odoo.addons.base_iban.models.res_partner_bank import pretty_iban
@@ -59,7 +59,7 @@ class PaymentReturnImport(models.TransientModel):
         if self.match_after_import:
             payment_returns.button_match()
         if len(payment_returns) != 1:
-            action["domain"] = "[('id', 'in', %s)]" % payment_returns.ids
+            action["domain"] = "[('id', 'in', {payment_returns.ids})]"
         else:
             form_view = self.env.ref("account_payment_return.payment_return_form_view")
             action.update(
@@ -121,7 +121,7 @@ class PaymentReturnImport(models.TransientModel):
                 payment_returns += payment_return
             notifications.extend(new_notifications)
         if not payment_returns:
-            raise UserError(_("You have already imported this file."))
+            raise UserError(self.env._("You have already imported this file."))
         return payment_returns, notifications
 
     @api.model
@@ -152,7 +152,7 @@ class PaymentReturnImport(models.TransientModel):
             return parser.parse(data_file)
         except Exception:
             raise UserError(
-                _(
+                self.env._(
                     "Could not make sense of the given file.\n"
                     "Did you install the module to support this type of file?"
                 )
@@ -162,12 +162,12 @@ class PaymentReturnImport(models.TransientModel):
     def _check_parsed_data(self, payment_returns):
         """Basic and structural verifications"""
         if not payment_returns:
-            raise UserError(_("This file doesn't contain any payment return."))
+            raise UserError(self.env._("This file doesn't contain any payment return."))
         for payret_vals in payment_returns:
             if payret_vals.get("transactions"):
                 return
         # If we get here, no transaction was found:
-        raise UserError(_("This file doesn't contain any transaction."))
+        raise UserError(self.env._("This file doesn't contain any transaction."))
 
     @api.model
     def _find_bank_account_id(self, account_number):
@@ -196,7 +196,7 @@ class PaymentReturnImport(models.TransientModel):
                     and journal_id not in bank_account.journal_id.ids
                 ):
                     raise UserError(
-                        _(
+                        self.env._(
                             "The account of this payment return is linked to "
                             "another journal."
                         )
@@ -215,7 +215,7 @@ class PaymentReturnImport(models.TransientModel):
             bank_account_id = self._find_bank_account_id(account_number)
             if not bank_account_id and account_number:
                 raise UserError(
-                    _("Can not find the account number %s.") % account_number
+                    self.env._("Can not find the account number %s.") % account_number
                 )
             payret_vals.update(
                 {
@@ -225,7 +225,7 @@ class PaymentReturnImport(models.TransientModel):
             )
             # By now journal and account_number must be known
             if not payret_vals["journal_id"]:
-                raise UserError(_("Can not determine journal for import."))
+                raise UserError(self.env._("Can not determine journal for import."))
         for line_vals in payret_vals["transactions"]:
             unique_import_id = line_vals.get("unique_import_id", False)
             if unique_import_id:
@@ -277,14 +277,16 @@ class PaymentReturnImport(models.TransientModel):
             notifications += [
                 {
                     "type": "warning",
-                    "message": _(
+                    "message": self.env._(
                         "%d transactions had already been imported and were ignored."
                     )
                     % num_ignored
                     if num_ignored > 1
-                    else _("1 transaction had already been imported and was ignored."),
+                    else self.env._(
+                        "1 transaction had already been imported and was ignored."
+                    ),
                     "details": {
-                        "name": _("Already imported items"),
+                        "name": self.env._("Already imported items"),
                         "model": "payment.return.line",
                         "ids": prl_model.search(
                             [("unique_import_id", "in", ignored_line_ids)]

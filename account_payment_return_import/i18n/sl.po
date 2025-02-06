@@ -243,6 +243,3 @@ msgstr "XML RAW podatki shranjeni za namene razhroščevanja/kontrole"
 #, python-format
 msgid "You have already imported this file."
 msgstr "To datoteko ste že uvozili"
-
-#~ msgid "Last Modified on"
-#~ msgstr "Zadnjič spremenjeno"

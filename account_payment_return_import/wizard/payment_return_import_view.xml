@@ -17,7 +17,6 @@
                     <field name="data_file" />
                     <field name="match_after_import" />
                 </group>
-                <field name="hide_journal_field" invisible="1" />
                 <label for="journal_id" />
                 <field
                     name="journal_id"

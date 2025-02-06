@@ -232,6 +232,3 @@ msgstr ""
 #, python-format
 msgid "You have already imported this file."
 msgstr "Datoteka je već uvezena."
-
-#~ msgid "Last Modified on"
-#~ msgstr "Zadnje modificirano"
