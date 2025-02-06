@@ -5,7 +5,8 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 from odoo.exceptions import UserError, ValidationError
-from odoo.tests.common import Form
+from odoo.fields import Command
+from odoo.tests import Form
 
 from odoo.addons.base.tests.common import BaseCommon
 
@@ -175,14 +176,21 @@ class TestPaymentReturn(BaseCommon):
 
     def test_find_match_move_line(self):
         self.payment_line.name = "test match move line 001"
-        self.payment_return.line_ids.write(
+        self.payment_return.write(
             {
-                "partner_id": False,
-                "move_line_ids": [(6, 0, [])],
-                "amount": 0.0,
-                "reference": self.payment_line.name,
+                "line_ids": [
+                    Command.create(
+                        {
+                            "partner_id": False,
+                            "move_line_ids": [],
+                            "amount": 0.0,
+                            "reference": self.payment_line.name,
+                        }
+                    )
+                ]
             }
         )
+
         self.payment_return.button_match()
         self.assertEqual(
             self.payment_return.line_ids[0].partner_id.id,
@@ -232,7 +240,7 @@ class TestPaymentReturn(BaseCommon):
         self.assertEqual(len(info["content"]), 2)
         self.assertEqual(info["content"][1]["amount"], -500.0)
 
-    def test_reason_name_search(self):
+    def test_reason_search_display_name(self):
         reason = self.env["payment.return.reason"]
         line = self.payment_return.line_ids[0]
         line.reason_id = reason.name_search("RTEST")[0]
