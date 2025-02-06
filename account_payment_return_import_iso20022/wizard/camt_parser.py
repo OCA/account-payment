@@ -131,12 +131,12 @@ class CamtParser:
                 subno = 0
                 for transaction in payment_return["transactions"]:
                     subno += 1
-                    transaction[
-                        "unique_import_id"
-                    ] = "{return_name}{entry_subno}{transaction_subno}".format(
-                        return_name=payment_return["name"],
-                        entry_subno=i,
-                        transaction_subno=subno,
+                    transaction["unique_import_id"] = (
+                        "{return_name}{entry_subno}{transaction_subno}".format(
+                            return_name=payment_return["name"],
+                            entry_subno=i,
+                            transaction_subno=subno,
+                        )
                     )
                 payment_returns.append(payment_return)
         return payment_returns
