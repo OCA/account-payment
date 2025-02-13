@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-11-02 06:22+0000\n"
-"PO-Revision-Date: 2016-11-22 12:26+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>\n"
+"PO-Revision-Date: 2025-02-13 21:06+0000\n"
+"Last-Translator: Ufuk Togay <ufuktogay@gmail.com>\n"
 "Language-Team: Turkish (http://www.transifex.com/oca/OCA-account-payment-8-0/"
 "language/tr/)\n"
 "Language: tr\n"
@@ -17,36 +17,37 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Weblate 5.6.2\n"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Account"
-msgstr ""
+msgstr "Hesap"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Date"
-msgstr ""
+msgstr "Tarih"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Date due"
-msgstr ""
+msgstr "Vade Tarihi"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Date invoice"
-msgstr ""
+msgstr "Fatura Tarihi"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "From invoices"
-msgstr ""
+msgstr "Faturalardan"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Full reconciled"
-msgstr ""
+msgstr "Tam Mutabakat Sağlandı"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -57,23 +58,23 @@ msgstr "Grupla..."
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Incoming"
-msgstr ""
+msgstr "Gelen"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
 msgid "Invoice"
-msgstr ""
+msgstr "Fatura"
 
 #. module: account_due_list
 #: model:ir.model.fields,field_description:account_due_list.field_account_move_line__invoice_date
 msgid "Invoice Date"
-msgstr ""
+msgstr "Fatura Tarihi"
 
 #. module: account_due_list
 #: model:ir.model.fields,field_description:account_due_list.field_account_move_line__invoice_user_id
 msgid "Invoice salesperson"
-msgstr ""
+msgstr "Fatura satıcı personeli"
 
 #. module: account_due_list
 #: model:ir.model,name:account_due_list.model_account_move_line
@@ -88,7 +89,7 @@ msgstr ""
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Outgoing"
-msgstr ""
+msgstr "Giden"
 
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
@@ -103,7 +104,7 @@ msgstr ""
 #. module: account_due_list
 #: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
 msgid "Partner"
-msgstr ""
+msgstr "Ortak"
 
 #. module: account_due_list
 #: model:ir.model.fields,field_description:account_due_list.field_account_move_line__partner_ref
