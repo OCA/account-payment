@@ -1,1 +1,1 @@
-from . import test_payment_acquirer
+from . import test_payment_provider

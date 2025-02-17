@@ -8,7 +8,7 @@
         <field name="arch" type="xml">
             <group name="sale" position="inside">
                 <field
-                    name="allowed_acquirer_ids"
+                    name="allowed_payment_provider_ids"
                     widget="many2many_tags"
                     groups="account.group_account_invoice"
                 />

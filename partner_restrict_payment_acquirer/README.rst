@@ -28,8 +28,8 @@ Partner Restrict Payment Acquirer
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module allows to restrict payment acquirers for partner. Only
-selected acquirers will be available for online payment in portal.
+This module allows to restrict payment providers for partner. Only
+selected providers will be available for online payment in portal.
 
 **Table of contents**
 
@@ -40,11 +40,11 @@ Usage
 =====
 
 Open partner form and go to "Sales & Purchases" tab. Add payment
-acquirers in "Allowed Acquirers" filed. When partner opens invoice in
-portal only allowed acquirers will be available for payment.
+providers in "Allowed Payment Providers" filed. When partner opens
+invoice in portal only allowed providers will be available for payment.
 
 Note: leaving this field empty will remove any restrictions and allow to
-select any acquirer.
+select any providers.
 
 Known issues / Roadmap
 ======================
@@ -82,17 +82,6 @@ This module is maintained by the OCA.
 OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
-
-.. |maintainer-geomer198| image:: https://github.com/geomer198.png?size=40px
-    :target: https://github.com/geomer198
-    :alt: geomer198
-.. |maintainer-CetmixGitDrone| image:: https://github.com/CetmixGitDrone.png?size=40px
-    :target: https://github.com/CetmixGitDrone
-    :alt: CetmixGitDrone
-
-Current `maintainers <https://odoo-community.org/page/maintainer-role>`__:
-
-|maintainer-geomer198| |maintainer-CetmixGitDrone| 
 
 This module is part of the `OCA/account-payment <https://github.com/OCA/account-payment/tree/17.0/partner_restrict_payment_acquirer>`_ project on GitHub.
 
