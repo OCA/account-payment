@@ -38,7 +38,7 @@ class ReportCheckPrint(models.AbstractModel):
         amt = line.amount_residual
         if amt < 0.0:
             amt *= -1
-        amt = payment.company_id.currency_id.with_context(date=payment.date).compute(
+        amt = payment.company_id.currency_id.with_context(date=payment.date)._convert(
             amt, payment.currency_id
         )
         return amt
@@ -47,7 +47,7 @@ class ReportCheckPrint(models.AbstractModel):
         amt = line.balance
         if amt < 0.0:
             amt *= -1
-        amt = payment.company_id.currency_id.with_context(date=payment.date).compute(
+        amt = payment.company_id.currency_id.with_context(date=payment.date)._convert(
             amt, payment.currency_id
         )
         return amt
@@ -64,7 +64,7 @@ class ReportCheckPrint(models.AbstractModel):
 
         amount_to_show = payment.company_id.currency_id.with_context(
             date=payment.date
-        ).compute(amount, payment.currency_id)
+        )._convert(amount, payment.currency_id)
         if not float_is_zero(
             amount_to_show, precision_rounding=payment.currency_id.rounding
         ):
@@ -76,8 +76,9 @@ class ReportCheckPrint(models.AbstractModel):
         for payment in payments:
             lines[payment.id] = []
             pay_acc = payment.outstanding_account_id
-            rec_lines = payment.line_ids.filtered(
-                lambda x: x.account_id.reconcile and x.account_id != pay_acc
+            rec_lines = payment.move_id.line_ids.filtered(
+                lambda x, pay_acc=pay_acc: x.account_id.reconcile
+                and x.account_id != pay_acc
             )
             amls = rec_lines.mapped(
                 "matched_credit_ids.credit_move_id"
@@ -102,12 +103,11 @@ class ReportCheckPrint(models.AbstractModel):
 
     @api.model
     def _get_report_values(self, docids, data=None):
-        model = self.env.context.get("active_model", "account.payment")
-        objects = self.env[model].browse(docids)
+        objects = self.env["account.payment"].browse(docids)
         paid_lines = self.get_paid_lines(objects)
         docargs = {
             "doc_ids": docids,
-            "doc_model": model,
+            "doc_model": "account.payment",
             "docs": objects,
             "time": time,
             "fill_stars": self.fill_stars,

@@ -6,7 +6,6 @@
             <div class="article">
                 <t t-foreach="docs" t-as="o">
                     <div class="page">
-                        <div class="oe_structure" />
                         <div class="row mb32 mt32" style="padding-top: 20mm;">
                             <div class="col-8">
                                 <address

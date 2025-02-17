@@ -8,9 +8,8 @@
             ref="account_check_printing.view_account_journal_form_inherited"
         />
         <field name="arch" type="xml">
-            <field name="check_next_number" position="after">
+            <field name="bank_check_printing_layout" position="before">
                 <field name="check_print_auto" />
-                <field name="account_check_printing_layout" />
             </field>
         </field>
     </record>

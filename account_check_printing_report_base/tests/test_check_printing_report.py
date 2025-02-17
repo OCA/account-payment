@@ -16,7 +16,7 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
         self.rl = self.env["res.lang"]
         for lang in self.langs:
             if not self.rl.search([("code", "=", lang)]):
-                self.rl.load_lang(lang)
+                self.rl._activate_lang(lang)
         self.account_invoice_model = self.env["account.move"]
         self.journal_model = self.env["account.journal"]
         self.payment_method_model = self.env["account.payment.method"]
@@ -31,8 +31,6 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
         self.company = self.env.ref("base.main_company")
         self.currency_usd_id = self.env.ref("base.USD").id
         self.currency_euro_id = self.env.ref("base.EUR").id
-        self.acc_payable = self.env.ref("account.data_account_type_payable")
-        self.acc_expense = self.env.ref("account.data_account_type_expenses")
         self.product = self.env.ref("product.product_product_4")
         self.check_report = (
             "account_check_printing_report_base.action_report_check_base"
@@ -75,12 +73,12 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
             }
         )
         self.acc_payable = self._create_account(
-            "account payable test", "ACPRB1", self.acc_payable, True
+            "account payable test", "ACPRB1", "liability_payable", True
         )
         self.vendor_bill = self._create_vendor_bill(self.acc_payable)
         self.vendor_bill.invoice_date = time.strftime("%Y") + "-07-15"
         self.acc_expense = self._create_account(
-            "account expense test", "ACPRB2", self.acc_expense, False
+            "account expense test", "ACPRB2", "expense", False
         )
         self._create_invoice_line(self.acc_expense, self.vendor_bill)
 
@@ -97,13 +95,12 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
         register_payments.action_post()
         self.payment = self.payment_model.search([], order="id desc", limit=1)
 
-    def _create_account(self, name, code, user_type, reconcile):
+    def _create_account(self, name, code, account_type, reconcile):
         account = self.account_account_model.create(
             {
                 "name": name,
                 "code": code,
-                "user_type_id": user_type.id,
-                "company_id": self.company.id,
+                "account_type": account_type,
                 "reconcile": reconcile,
             }
         )
@@ -153,10 +150,12 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
         ICPSudo.set_param(
             "account_check_printing_report_base.check_layout_verification", "by_journal"
         )
-        self.assertFalse(self.payment.journal_id.account_check_printing_layout)
+        self.assertFalse(self.payment.journal_id.bank_check_printing_layout)
         with self.assertRaises(RedirectWarning):
             self.payment.do_print_checks()
-        content = self.action_check_report._render_qweb_pdf(self.payment.id)
+        content = self.env["ir.actions.report"]._render_qweb_pdf(
+            self.action_check_report.xml_id, res_ids=self.payment.ids
+        )
         self.assertEqual(content[1], "html")
 
     def test_02_check_printing_with_layout(self):
@@ -164,15 +163,16 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
         company and journal."""
 
         self.company.account_check_printing_layout = self.check_report
-        self.payment.journal_id.account_check_printing_layout = self.check_report_a4
+        self.payment.journal_id.bank_check_printing_layout = self.check_report_a4
         e = False
         try:
             self.payment.do_print_checks()
         except RedirectWarning as e:
             e = e.name
         self.assertEqual(e, False)
-
-        content = self.action_check_report._render_qweb_pdf(self.payment.id)
+        content = self.env["ir.actions.report"]._render_qweb_pdf(
+            self.action_check_report.xml_id, res_ids=self.payment.ids
+        )
         self.assertEqual(content[1], "html")
 
     def test_03_fotmat_form(self):
@@ -187,7 +187,7 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
         stars = 100 - len(amount_in_word)
         amount1 = self.report.fill_stars_number(str(amount))
         amount2 = self.report.fill_stars(amount_in_word)
-        self.assertEqual(amount1, "***** %s *" % amount)
+        self.assertEqual(amount1, f"***** {amount} *")
         self.assertEqual(amount2, "{} {}".format(amount_in_word, ("*" * stars)))
 
     def test_num2words(self):
