@@ -37,11 +37,11 @@ class AccountPayment(models.Model):
 
     def do_print_checks(self):
         for rec in self:
-            if rec.journal_id.account_check_printing_layout:
+            if rec.journal_id.bank_check_printing_layout:
                 report_action = self.env.ref(
-                    rec.journal_id.account_check_printing_layout, False
+                    rec.journal_id.bank_check_printing_layout, False
                 )
-                self.write({"is_move_sent": True})
+                self.write({"is_sent": True})
                 return report_action.report_action(self)
         return super().do_print_checks()
 
