@@ -114,9 +114,9 @@
                         <p>
                             We attach the list of invoices paid with this check with amount of
                             <span
-                                t-field="o.amount"
-                                t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
-                            />
+                            t-field="o.amount"
+                            t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
+                        />
                         </p>
                         <table class="table table-sm table-borderless">
                             <thead>

@@ -37,4 +37,4 @@ def num2words_custom(number, ordinal=False, lang="en", to="cardinal", **kwargs):
             return converter.to_ordinal(number)
         if to not in CONVERTES_TYPES:
             raise NotImplementedError()
-        return getattr(converter, "to_{}".format(to))(number, **kwargs)
+        return getattr(converter, f"to_{to}")(number, **kwargs)
