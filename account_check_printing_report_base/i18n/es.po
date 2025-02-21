@@ -34,7 +34,6 @@ msgid "Balance Due"
 msgstr "Saldo a pagar"
 
 #. module: account_check_printing_report_base
-#: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_journal__account_check_printing_layout
 #: model:ir.model.fields,field_description:account_check_printing_report_base.field_res_company__account_check_printing_layout
 msgid "Check Layout"
 msgstr "Plantilla de cheque"
@@ -91,6 +90,11 @@ msgid "Original Amount"
 msgstr "Importe"
 
 #. module: account_check_printing_report_base
+#: model:ir.model,name:account_check_printing_report_base.model_account_payment_register
+msgid "Pay"
+msgstr ""
+
+#. module: account_check_printing_report_base
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
 #: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4_document
 msgid "Payment"
@@ -112,21 +116,14 @@ msgid "Payments"
 msgstr "Pagos"
 
 #. module: account_check_printing_report_base
-#: model:ir.model.fields.selection,name:account_check_printing_report_base.selection__account_journal__account_check_printing_layout__account_check_printing_report_base_action_report_check_base
 #: model:ir.model.fields.selection,name:account_check_printing_report_base.selection__res_company__account_check_printing_layout__account_check_printing_report_base_action_report_check_base
 msgid "Print Check Base"
 msgstr "Imprimir base de cheques"
 
 #. module: account_check_printing_report_base
-#: model:ir.model.fields.selection,name:account_check_printing_report_base.selection__account_journal__account_check_printing_layout__account_check_printing_report_base_action_report_check_base_a4
 #: model:ir.model.fields.selection,name:account_check_printing_report_base.selection__res_company__account_check_printing_layout__account_check_printing_report_base_action_report_check_base_a4
 msgid "Print Check Base A4"
 msgstr "Base de impresión A4"
-
-#. module: account_check_printing_report_base
-#: model:ir.model,name:account_check_printing_report_base.model_account_payment_register
-msgid "Register Payment"
-msgstr "Registrar pago"
 
 #. module: account_check_printing_report_base
 #: model:ir.model,name:account_check_printing_report_base.model_report_account_check_printing_report_base_report_check_base
@@ -144,7 +141,6 @@ msgid "Report Promissory Note Print for A4"
 msgstr "Informe de impresión de pagarés para A4"
 
 #. module: account_check_printing_report_base
-#: model:ir.model.fields,help:account_check_printing_report_base.field_account_journal__account_check_printing_layout
 #: model:ir.model.fields,help:account_check_printing_report_base.field_res_company__account_check_printing_layout
 msgid ""
 "Select the format corresponding to the check paper you will be printing your "
@@ -164,3 +160,6 @@ msgstr "Esperando su acuerdo, saludos."
 msgid "We attach the list of invoices paid with this check with amount of"
 msgstr ""
 "Adjuntamos el listado de facturas pagadas con este cheque con precio de"
+
+#~ msgid "Register Payment"
+#~ msgstr "Registrar pago"
