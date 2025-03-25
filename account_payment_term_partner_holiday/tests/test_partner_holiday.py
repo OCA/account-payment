@@ -3,22 +3,21 @@
 
 import psycopg2
 
-from odoo import fields
-from odoo.tests import common
+from odoo import Command, fields
 from odoo.tests.common import Form
 from odoo.tools.misc import mute_logger
 
+from odoo.addons.base.tests.common import BaseCommon
 
-class TestPartnerHoliday(common.TransactionCase):
+
+class TestPartnerHoliday(BaseCommon):
     def setUp(self):
         super().setUp()
         self.partner_1 = self.env["res.partner"].create(
             {
                 "name": "Partner test 1",
                 "holiday_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "day_from": "1",
                             "month_from": "02",
@@ -26,9 +25,7 @@ class TestPartnerHoliday(common.TransactionCase):
                             "month_to": "02",
                         },
                     ),
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "day_from": "1",
                             "month_from": "03",
@@ -36,9 +33,7 @@ class TestPartnerHoliday(common.TransactionCase):
                             "month_to": "04",
                         },
                     ),
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "day_from": "12",
                             "month_from": "06",
@@ -46,9 +41,7 @@ class TestPartnerHoliday(common.TransactionCase):
                             "month_to": "06",
                         },
                     ),
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "day_from": "15",
                             "month_from": "06",
@@ -67,13 +60,10 @@ class TestPartnerHoliday(common.TransactionCase):
             {
                 "name": "Immediate",
                 "line_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
-                            "value": "balance",
-                            "days": 0,
-                            "option": "day_after_invoice_date",
+                            "value": "percent",
+                            "nb_days": 0,
                         },
                     )
                 ],
@@ -83,13 +73,10 @@ class TestPartnerHoliday(common.TransactionCase):
             {
                 "name": "10 Days",
                 "line_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
-                            "value": "balance",
-                            "days": 10,
-                            "option": "day_after_invoice_date",
+                            "value": "percent",
+                            "nb_days": 10,
                         },
                     )
                 ],
@@ -99,18 +86,17 @@ class TestPartnerHoliday(common.TransactionCase):
             {
                 "name": "Immediate (with holidays)",
                 "line_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
-                            "value": "balance",
-                            "days": 0,
-                            "option": "day_after_invoice_date",
+                            "value": "percent",
+                            "nb_days": 0,
                         },
                     )
                 ],
                 "holiday_ids": [
-                    (0, 0, {"holiday": "2021-06-14", "date_postponed": "2021-07-08"})
+                    Command.create(
+                        {"holiday": "2021-06-14", "date_postponed": "2021-07-08"}
+                    )
                 ],
             }
         )
@@ -118,13 +104,10 @@ class TestPartnerHoliday(common.TransactionCase):
             {
                 "name": "Immediate (with custom payment days)",
                 "line_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
-                            "value": "balance",
-                            "days": 0,
-                            "option": "day_after_invoice_date",
+                            "value": "percent",
+                            "nb_days": 0,
                             "payment_days": "5,10",
                         },
                     )
@@ -141,7 +124,7 @@ class TestPartnerHoliday(common.TransactionCase):
             {
                 "name": "Test Account",
                 "code": "TEST",
-                "user_type_id": self.env.ref("account.data_account_type_receivable").id,
+                "account_type": "asset_receivable",
                 "reconcile": True,
             }
         )
@@ -149,9 +132,7 @@ class TestPartnerHoliday(common.TransactionCase):
             {
                 "name": "Test Account",
                 "code": "ACC",
-                "user_type_id": self.env.ref(
-                    "account.data_account_type_other_income"
-                ).id,
+                "account_type": "income_other",
                 "reconcile": True,
             }
         )
@@ -345,9 +326,7 @@ class TestPartnerHoliday(common.TransactionCase):
         self.partner_2.write(
             {
                 "holiday_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "day_from": "1",
                             "month_from": "06",
