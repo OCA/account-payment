@@ -48,7 +48,7 @@ class ResPartner(models.Model):
         # When the user selects a date that does not exist, assume the last day
         # for that month
         days = (day, max(calendar.monthrange(year, month)))
-        return fields.Date.from_string("%s-%s-%s" % (year, month, min(days)))
+        return fields.Date.from_string(f"{year}-{month}-{min(days)}")
 
 
 class ResPartnerHoliday(models.Model):
