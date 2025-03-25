@@ -1,3 +1,3 @@
-- Lois Rilo \<<lois.rilo@eficent.com>\>
+- Lois Rilo \<<lois.rilo@forgeflow.com>\>
 - Kitti Upariphutthiphong \<<kittiu@ecosoft.co.th>\>
 - Manuel Calero \<<manuelcalerosolis@gmail.com>\>
