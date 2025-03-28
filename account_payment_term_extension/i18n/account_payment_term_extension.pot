@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -68,7 +68,6 @@ msgstr ""
 #. module: account_payment_term_extension
 #. odoo-python
 #: code:addons/account_payment_term_extension/models/account_payment_term_holiday.py:0
-#, python-format
 msgid "Date %s cannot is both a holiday and a Postponed date"
 msgstr ""
 
@@ -110,14 +109,12 @@ msgstr ""
 #. module: account_payment_term_extension
 #. odoo-python
 #: code:addons/account_payment_term_extension/models/account_payment_term_holiday.py:0
-#, python-format
 msgid "Holiday %s can only be postponed into the future"
 msgstr ""
 
 #. module: account_payment_term_extension
 #. odoo-python
 #: code:addons/account_payment_term_extension/models/account_payment_term_holiday.py:0
-#, python-format
 msgid "Holiday %s is duplicated in current payment term"
 msgstr ""
 
@@ -176,7 +173,6 @@ msgstr ""
 #. module: account_payment_term_extension
 #. odoo-python
 #: code:addons/account_payment_term_extension/models/account_payment_term_line.py:0
-#, python-format
 msgid "Payment days field format is not valid."
 msgstr ""
 
@@ -194,14 +190,12 @@ msgstr ""
 #. module: account_payment_term_extension
 #. odoo-python
 #: code:addons/account_payment_term_extension/models/account_payment_term.py:0
-#, python-format
 msgid "Percentage of amount untaxed can't be used with foreign currencies"
 msgstr ""
 
 #. module: account_payment_term_extension
 #. odoo-python
 #: code:addons/account_payment_term_extension/models/account_payment_term_line.py:0
-#, python-format
 msgid "Percentages on the Payment Terms lines must be between 0 and 100."
 msgstr ""
 
@@ -240,7 +234,6 @@ msgstr ""
 #. module: account_payment_term_extension
 #. odoo-python
 #: code:addons/account_payment_term_extension/models/account_payment_term.py:0
-#, python-format
 msgid "This module is not compatible with cash rounding"
 msgstr ""
 
