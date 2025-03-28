@@ -9,7 +9,6 @@ class ResCompany(models.Model):
 
     payment_terms_delay_type = fields.Selection(
         string="Payment terms Delay types",
-        required=True,
         default="days",
         selection=[
             ("days", "Days"),

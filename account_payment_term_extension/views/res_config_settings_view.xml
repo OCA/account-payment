@@ -16,11 +16,7 @@
                         help="Select the Delay Type options that will be available in Payment Terms."
                         title="Configure the type of delay for payment terms."
                     >
-                        <field
-                            name="payment_terms_delay_type"
-                            widget="selection"
-                            on_change="1"
-                        />
+                        <field name="payment_terms_delay_type" />
                     </setting>
                 </block>
             </xpath>
