@@ -9,20 +9,20 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-01 02:42+0000\n"
-"PO-Revision-Date: 2020-02-12 10:13+0000\n"
-"Last-Translator: Martronic SA <info@martronic.ch>\n"
+"PO-Revision-Date: 2025-04-09 14:24+0000\n"
+"Last-Translator: EvaS595 <eva.saintier@horanet.com>\n"
 "Language-Team: French (https://www.transifex.com/oca/teams/23907/fr/)\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
-"X-Generator: Weblate 3.10\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: account_payment_term_extension
 #: model:account.payment.term,name:account_payment_term_extension.amount_untaxed_lines
 msgid "10% + 40% + Balance"
-msgstr ""
+msgstr "10% + 40% + Solde"
 
 #. module: account_payment_term_extension
 #: model:account.payment.term,name:account_payment_term_extension.sixty_days_end_of_month
@@ -43,12 +43,12 @@ msgstr "Arrondi du montant"
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__create_uid
 msgid "Created by"
-msgstr "Created by"
+msgstr "Créé par"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__create_date
 msgid "Created on"
-msgstr "Created on"
+msgstr "Créé le"
 
 #. module: account_payment_term_extension
 #: code:addons/account_payment_term_extension/models/account_payment_term.py:0
@@ -64,25 +64,26 @@ msgstr "Nom affiché"
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__holiday
 msgid "Holiday"
-msgstr "Congé"
+msgstr "Jour férié"
 
 #. module: account_payment_term_extension
 #: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Holiday %s can only be postponed into the future"
-msgstr "Le congé du %s ne peut être que reporté dans le futur"
+msgstr "Le jour férié du %s ne peut être que reporté dans le futur"
 
 #. module: account_payment_term_extension
 #: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Holiday %s is duplicated in current payment term"
-msgstr "Le congé %s est dupliqué dans les condition de paiement actuelles"
+msgstr ""
+"Le jour férié %s est en doublon dans les conditions de paiement actuelles"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term__holiday_ids
 #: model_terms:ir.ui.view,arch_db:account_payment_term_extension.view_payment_term_form
 msgid "Holidays"
-msgstr "Congés"
+msgstr "Jours fériés"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__id
@@ -92,22 +93,22 @@ msgstr "ID"
 #. module: account_payment_term_extension
 #: model:ir.model,name:account_payment_term_extension.model_account_move
 msgid "Journal Entries"
-msgstr ""
+msgstr "Écritures du journal"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday____last_update
 msgid "Last Modified on"
-msgstr "Last Modified on"
+msgstr "Dernière modification le"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__write_uid
 msgid "Last Updated by"
-msgstr "Last Updated by"
+msgstr "Dernière mise à jour par"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__write_date
 msgid "Last Updated on"
-msgstr "Last Updated on"
+msgstr "Dernière mise à jour le"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__months
@@ -127,7 +128,7 @@ msgstr "Paiement"
 #. module: account_payment_term_extension
 #: model:ir.model,name:account_payment_term_extension.model_account_payment_term_holiday
 msgid "Payment Term Holidays"
-msgstr "Congés des Conditions de paiement"
+msgstr "Jours fériés pour les conditions de paiement"
 
 #. module: account_payment_term_extension
 #: model:ir.model,name:account_payment_term_extension.model_account_payment_term
@@ -153,19 +154,23 @@ msgstr "Le format du champ Jours de paiement n'est pas valide."
 #. module: account_payment_term_extension
 #: model:ir.model.fields.selection,name:account_payment_term_extension.selection__account_payment_term_line__value__percent_amount_untaxed
 msgid "Percent (Untaxed amount)"
-msgstr ""
+msgstr "Pourcentage (montant HT)"
 
 #. module: account_payment_term_extension
 #: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Percentage of amount untaxed can't be used with foreign currencies"
 msgstr ""
+"Le pourcentage du montant HT ne peut pas être utilisé avec des devises "
+"étrangères"
 
 #. module: account_payment_term_extension
 #: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Percentages on the Payment Terms lines must be between 0 and 100."
 msgstr ""
+"Les pourcentages des lignes de conditions de paiement doivent être compris "
+"entre 0 et 100."
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__date_postponed
@@ -179,12 +184,15 @@ msgid ""
 "possible payment day with dashes (-), commas (,) or spaces ( )."
 msgstr ""
 "Entrez ici le jour ou les jours où le partenaire effectue le paiement. "
-"Séparezchaque jour possible avec des tirets (-), virgules (,) ou espaces ( )."
+"Séparez chaque jour possible avec des tirets (-), virgules (,) ou espaces ( "
+")."
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,help:account_payment_term_extension.field_account_payment_term_line__value
 msgid "Select here the kind of valuation related to this payment terms line."
 msgstr ""
+"Choisissez ici le type de valorisation à appliquer pour cette ligne de "
+"conditions de paiement."
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term__sequential_lines
@@ -204,7 +212,7 @@ msgstr ""
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__value
 msgid "Type"
-msgstr ""
+msgstr "Type"
 
 #. module: account_payment_term_extension
 #: model_terms:ir.ui.view,arch_db:account_payment_term_extension.view_payment_term_form
@@ -212,5 +220,5 @@ msgid ""
 "When a payment term coincides with a holiday, it is postponed to the chosen "
 "date."
 msgstr ""
-"Lorsqu'un délai de paiement coïncide avec un congé, il est reporté à la date "
-"choisie."
+"Lorsqu'un délai de paiement coïncide avec un jour férié, il est reporté à la "
+"date choisie."
