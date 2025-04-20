@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_partner_property_form" model="ir.ui.view">
+        <field name="name">res.partner.property.form.inherit (in account_payment_term_security)</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.view_partner_property_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='property_payment_term_id']" position="attributes">
+                <attribute name="readonly">not is_account_payment_term_mgmt</attribute>
+                <attribute name="force_save">not is_account_payment_term_mgmt</attribute>
+            </xpath>
+            <xpath expr="//field[@name='property_supplier_payment_term_id']" position="attributes">
+                <attribute name="readonly">not is_account_payment_term_mgmt</attribute>
+                <attribute name="force_save">not is_account_payment_term_mgmt</attribute>
+            </xpath>
+        </field>
+    </record>
+</odoo>
