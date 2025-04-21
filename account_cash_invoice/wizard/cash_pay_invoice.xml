@@ -23,7 +23,8 @@
                     />
                     <label for="amount" />
                     <div>
-                        <field name="amount" class="oe_inline" /><field
+                        <field name="amount" class="oe_inline" />
+                        <field
                             name="currency_id"
                             class="oe_inline"
                             options="{'no_open':True}"

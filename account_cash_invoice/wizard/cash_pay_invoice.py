@@ -100,17 +100,17 @@ class CashPayInvoice(models.TransientModel):
         lines_to_reconcile = (
             new_statement_line.invoice_id.line_ids | new_statement_line.move_id.line_ids
         ).filtered(
-            lambda l: l.account_id.account_type
+            lambda line: line.account_id.account_type
             in ("asset_receivable", "liability_payable")
-            and not l.reconciled
+            and not line.reconciled
         )
         lines_to_reconcile.reconcile()
 
     def _prepare_statement_line_vals(self):
         counterpart_move_line = self.invoice_id.line_ids.filtered(
-            lambda l: l.account_id.account_type
+            lambda line: line.account_id.account_type
             in ("asset_receivable", "liability_payable")
-            and not l.reconciled
+            and not line.reconciled
         )
         statement_line_vals = {
             "date": fields.Date.context_today(self),
