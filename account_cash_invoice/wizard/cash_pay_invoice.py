@@ -13,6 +13,7 @@ ALLOWED_TYPES = {
 class CashPayInvoice(models.TransientModel):
     _name = "cash.pay.invoice"
     _description = "Cash Pay invoice from bank statement"
+    _check_company_auto = True
 
     def _default_company(self):
         active_ids = self.env.context.get("active_ids")
@@ -31,6 +32,7 @@ class CashPayInvoice(models.TransientModel):
         compute="_compute_invoice_id",
         store=True,
         readonly=False,
+        check_company=True,
     )
     name = fields.Char(related="invoice_id.name", readonly=True)
     company_id = fields.Many2one(
@@ -51,6 +53,7 @@ class CashPayInvoice(models.TransientModel):
         readonly=True,
         default=lambda self: self.env.context.get("active_ids")[0],
         string="Journal",
+        check_company=True,
     )
     amount = fields.Monetary(compute="_compute_amount", store=True, readonly=False)
     invoice_type = fields.Selection(

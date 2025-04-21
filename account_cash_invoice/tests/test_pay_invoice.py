@@ -1,9 +1,8 @@
 # Copyright 2017-2021 Creu Blanca <https://creublanca.es/>
 # Copyright (C) 2024 Tecnativa <https://tecnativa.com>
 # License LGPL-3.0 or later (http://www.gnu.org/licenses/lgpl.html).
-
-from odoo.tests import tagged
-from odoo.tests.common import Form
+from odoo import Command
+from odoo.tests import Form, tagged
 
 from odoo.addons.base.tests.common import BaseCommon
 
@@ -13,7 +12,7 @@ class TestSessionPayInvoice(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        if not cls.env.company.chart_template_id:
+        if not cls.env.company.chart_template:
             # Load a CoA if there's none in current company
             coa = cls.env.ref("l10n_generic_coa.configurable_chart_template", False)
             if not coa:
@@ -33,9 +32,7 @@ class TestSessionPayInvoice(BaseCommon):
                 "date": "2016-03-12",
                 "move_type": "out_invoice",
                 "invoice_line_ids": [
-                    (
-                        0,
-                        False,
+                    Command.create(
                         {
                             "product_id": cls.product.id,
                             "name": "Producto de prueba",
@@ -57,9 +54,7 @@ class TestSessionPayInvoice(BaseCommon):
                 "date": "2016-03-12",
                 "invoice_date": "2016-03-12",
                 "invoice_line_ids": [
-                    (
-                        0,
-                        False,
+                    Command.create(
                         {
                             "product_id": cls.product.id,
                             "name": "Producto de prueba",
