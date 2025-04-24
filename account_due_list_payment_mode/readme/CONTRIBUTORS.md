@@ -5,3 +5,4 @@
 - Miquel Raïch \<<miquel.raich@forgeflow.com>\>
 - Omar Castiñeira Saavedra \<<omar@comunitea.com>\>
 - Carolina Fernandez \<<carolina.fernandez@tecnativa.com>\>
+- Juan Carlos Oñate \<<juancarlos.onate@tecnativa.com>\>
