@@ -5,7 +5,6 @@
 import csv
 from io import StringIO
 
-from odoo import _
 from odoo.exceptions import UserError
 
 
@@ -42,5 +41,5 @@ class BaseParser:
                 if len(payment_return["transactions"]):
                     payment_returns.append(payment_return)
         except Exception:
-            raise UserError(_("Couldn't load file data")) from Exception
+            raise UserError(self.env._("Couldn't load file data")) from Exception
         return payment_returns
