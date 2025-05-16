@@ -43,10 +43,14 @@ class TestAccountPaymentTermRestrictionPurchase(
         Partner
         """
         partner = self.partner_id
-        partner.write({"property_payment_term_id": self.all_payment_term.id})
-        partner.write({"property_payment_term_id": self.sale_payment_term.id})
+        partner.write({"property_supplier_payment_term_id": self.all_payment_term.id})
+        partner.write(
+            {"property_supplier_payment_term_id": self.purchase_payment_term.id}
+        )
         with self.assertRaises(exceptions.ValidationError):
-            partner.write({"property_payment_term_id": self.purchase_payment_term.id})
+            partner.write(
+                {"property_supplier_payment_term_id": self.sale_payment_term.id}
+            )
 
     def test_03_skip_check_if_context(self):
         """
