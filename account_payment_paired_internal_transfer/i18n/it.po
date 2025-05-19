@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2025-05-19 09:26+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: account_payment_paired_internal_transfer
 #: code:addons/account_payment_paired_internal_transfer/models/account_payment.py:0
@@ -21,42 +23,46 @@ msgid ""
 "A second payment has been created: <a href=# data-oe-model=account.payment "
 "data-oe-id=%(id)s>%(name)s</a>"
 msgstr ""
+"È stato creato un nuovo prodotto: <a href=# data-oe-model=account.payment "
+"data-oe-id=%(id)s>%(name)s</a>"
 
 #. module: account_payment_paired_internal_transfer
 #: model_terms:ir.ui.view,arch_db:account_payment_paired_internal_transfer.account_payment_form
 msgid ""
 "A second payment will be created automatically in the destination journal."
 msgstr ""
+"Verrà creato automaticamente un secondo pagamento nel registro di "
+"destinazione."
 
 #. module: account_payment_paired_internal_transfer
 #: model:ir.model.fields,field_description:account_payment_paired_internal_transfer.field_account_payment__destination_journal_id
 msgid "Destination Journal"
-msgstr ""
+msgstr "Registro di destinazione"
 
 #. module: account_payment_paired_internal_transfer
 #: model:ir.model.fields,field_description:account_payment_paired_internal_transfer.field_account_payment__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Nome visualizzato"
 
 #. module: account_payment_paired_internal_transfer
 #: model:ir.model.fields,field_description:account_payment_paired_internal_transfer.field_account_payment__id
 msgid "ID"
-msgstr ""
+msgstr "ID"
 
 #. module: account_payment_paired_internal_transfer
 #: model:ir.model.fields,field_description:account_payment_paired_internal_transfer.field_account_payment____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Ultima modifica il"
 
 #. module: account_payment_paired_internal_transfer
 #: model:ir.model.fields,field_description:account_payment_paired_internal_transfer.field_account_payment__paired_internal_transfer_payment_id
 msgid "Paired Internal Transfer Payment"
-msgstr ""
+msgstr "Pagamento trasferimento interno abbinato"
 
 #. module: account_payment_paired_internal_transfer
 #: model:ir.model,name:account_payment_paired_internal_transfer.model_account_payment
 msgid "Payments"
-msgstr ""
+msgstr "Pagamenti"
 
 #. module: account_payment_paired_internal_transfer
 #: code:addons/account_payment_paired_internal_transfer/models/account_payment.py:0
@@ -65,6 +71,8 @@ msgid ""
 "This payment has been created from <a href=# data-oe-model=account.payment "
 "data-oe-id=%(id)s>%(name)s</a>"
 msgstr ""
+"Questo pagamento è stato creato da <a href=# data-oe-model=account.payment "
+"data-oe-id=%(id)s>%(name)s</a>"
 
 #. module: account_payment_paired_internal_transfer
 #: model:ir.model.fields,help:account_payment_paired_internal_transfer.field_account_payment__paired_internal_transfer_payment_id
@@ -72,3 +80,5 @@ msgid ""
 "When an internal transfer is posted, a paired payment is created. They cross"
 " referenced trough this field"
 msgstr ""
+"Quando viene inserito un trasferimento interno, viene creato un pagamento "
+"abbinato. Sono collegati da questo campo"
