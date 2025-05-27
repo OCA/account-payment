@@ -39,6 +39,7 @@ patch(AccountPaymentField.prototype, "account_partial_outstanding_payment", {
         var move_id = parseInt($(ev.target).data("move_id"));
         var payment_amount =
             parseFloat(document.getElementById("paid_amount").value) || 0.0;
+        document.getElementById("apply_button").disabled = true;
         var context = {
             paid_amount: payment_amount,
         };

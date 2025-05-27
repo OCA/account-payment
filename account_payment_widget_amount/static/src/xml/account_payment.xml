@@ -27,6 +27,7 @@
             </table>
         </div>
         <button
+            id="apply_button"
             class="btn btn-xs btn-primary js_payment_amount pull-right m-2"
             t-att-data-id="props.id"
             t-att-data-move_id="props.move_id"
