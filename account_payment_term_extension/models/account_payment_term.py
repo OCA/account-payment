@@ -35,26 +35,30 @@ class AccountPaymentTerm(models.Model):
             return holiday.date_postponed
         return date
 
+    def _get_payment_days_due_date(self, date, payment_days):
+        if payment_days:
+            new_date = None
+            payment_days.sort()
+            days_in_month = calendar.monthrange(date.year, date.month)[1]
+            for day in payment_days:
+                if date.day <= day:
+                    if day > days_in_month:
+                        day = days_in_month
+                    new_date = date + relativedelta(day=day)
+                    break
+            if not new_date:
+                day = payment_days[0]
+                if day > days_in_month:
+                    day = days_in_month
+                new_date = date + relativedelta(day=day, months=1)
+            return new_date
+        return date
+
     def apply_payment_days(self, line, date):
         """Calculate the new date with days of payments"""
         if line.payment_days:
             payment_days = line._decode_payment_days(line.payment_days)
-            if payment_days:
-                new_date = None
-                payment_days.sort()
-                days_in_month = calendar.monthrange(date.year, date.month)[1]
-                for day in payment_days:
-                    if date.day <= day:
-                        if day > days_in_month:
-                            day = days_in_month
-                        new_date = date + relativedelta(day=day)
-                        break
-                if not new_date:
-                    day = payment_days[0]
-                    if day > days_in_month:
-                        day = days_in_month
-                    new_date = date + relativedelta(day=day, months=1)
-                return new_date
+            return self._get_payment_days_due_date(date, payment_days)
         return date
 
     @api.depends(
