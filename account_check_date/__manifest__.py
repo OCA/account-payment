@@ -3,7 +3,7 @@
 
 {
     "name": "Account Check Date",
-    "version": "15.0.0.1.0",
+    "version": "18.0.0.1.0",
     "author": "Ecosoft, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-payment",
     "license": "AGPL-3",

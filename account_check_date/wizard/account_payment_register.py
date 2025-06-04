@@ -11,8 +11,8 @@ class AccountPaymentRegister(models.TransientModel):
         default=fields.Date.context_today,
     )
 
-    def _create_payment_vals_from_wizard(self):
-        payment_vals = super()._create_payment_vals_from_wizard()
+    def _create_payment_vals_from_wizard(self, batch_result):
+        payment_vals = super()._create_payment_vals_from_wizard(batch_result)
         payment_vals["check_date"] = self.check_date or fields.Date.context_today(self)
         return payment_vals
 
