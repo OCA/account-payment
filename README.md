@@ -21,8 +21,8 @@ Available addons
 ----------------
 addon | version | maintainers | summary
 --- | --- | --- | ---
-[account_check_date](account_check_date/) | 15.0.0.1.0 | [![ps-tubtim](https://github.com/ps-tubtim.png?size=30px)](https://github.com/ps-tubtim) | Add check date on payment for check printing
-[account_check_payee](account_check_payee/) | 15.0.1.0.0 | [![ps-tubtim](https://github.com/ps-tubtim.png?size=30px)](https://github.com/ps-tubtim) | Add payee on payment for check printing
+[account_check_date](account_check_date/) | 15.0.0.1.0 | <a href='https://github.com/ps-tubtim'><img src='https://github.com/ps-tubtim.png' width='32' height='32' style='border-radius:50%;' alt='ps-tubtim'/></a> | Add check date on payment for check printing
+[account_check_payee](account_check_payee/) | 15.0.1.0.0 | <a href='https://github.com/ps-tubtim'><img src='https://github.com/ps-tubtim.png' width='32' height='32' style='border-radius:50%;' alt='ps-tubtim'/></a> | Add payee on payment for check printing
 [account_check_printing_report_base](account_check_printing_report_base/) | 15.0.1.0.2 |  | Account Check Printing Report Base
 [account_check_printing_report_dlt103](account_check_printing_report_dlt103/) | 15.0.1.0.1 |  | Account Check Printing Report DLT103
 [account_check_printing_report_sslm102](account_check_printing_report_sslm102/) | 15.0.1.0.2 |  | Allows you to print SSLM102 lined checks.
@@ -30,21 +30,21 @@ addon | version | maintainers | summary
 [account_due_list](account_due_list/) | 15.0.1.2.0 |  | List of open credits and debits, with due date
 [account_due_list_payment_mode](account_due_list_payment_mode/) | 15.0.1.0.0 |  | Payment Due List Payment Mode
 [account_payment_batch_process](account_payment_batch_process/) | 15.0.1.0.0 |  | Account Batch Payments Processing for Customers Invoices and Supplier Invoices
-[account_payment_multi_deduction](account_payment_multi_deduction/) | 15.0.1.0.0 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Payment Register with Multiple Deduction
-[account_payment_notification](account_payment_notification/) | 15.0.1.1.0 | [![yajo](https://github.com/yajo.png?size=30px)](https://github.com/yajo) [![elp](https://github.com/elp.png?size=30px)](https://github.com/elp) [![rafaelbn](https://github.com/rafaelbn.png?size=30px)](https://github.com/rafaelbn) | Notifiy upcoming payments
+[account_payment_multi_deduction](account_payment_multi_deduction/) | 15.0.1.0.0 | <a href='https://github.com/kittiu'><img src='https://github.com/kittiu.png' width='32' height='32' style='border-radius:50%;' alt='kittiu'/></a> | Payment Register with Multiple Deduction
+[account_payment_notification](account_payment_notification/) | 15.0.1.1.0 | <a href='https://github.com/yajo'><img src='https://github.com/yajo.png' width='32' height='32' style='border-radius:50%;' alt='yajo'/></a> <a href='https://github.com/elp'><img src='https://github.com/elp.png' width='32' height='32' style='border-radius:50%;' alt='elp'/></a> <a href='https://github.com/rafaelbn'><img src='https://github.com/rafaelbn.png' width='32' height='32' style='border-radius:50%;' alt='rafaelbn'/></a> | Notifiy upcoming payments
 [account_payment_promissory_note](account_payment_promissory_note/) | 15.0.1.0.2 |  | Account Payment Promissory Note
 [account_payment_return](account_payment_return/) | 15.0.1.0.4 |  | Manage the return of your payments
 [account_payment_return_import](account_payment_return_import/) | 15.0.1.0.1 |  | This module adds a generic wizard to import payment returnfile formats. Is only the base to be extended by anothermodules
 [account_payment_return_import_iso20022](account_payment_return_import_iso20022/) | 15.0.1.0.3 |  | This addon allows to import payment returns from ISO 20022 files like PAIN or CAMT.
 [account_payment_term_extension](account_payment_term_extension/) | 15.0.1.0.1 |  | Adds rounding, months, weeks and multiple payment days properties on payment term lines
-[account_payment_term_partner_holiday](account_payment_term_partner_holiday/) | 15.0.1.0.1 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Account Payment Term Partner Holiday
+[account_payment_term_partner_holiday](account_payment_term_partner_holiday/) | 15.0.1.0.1 | <a href='https://github.com/victoralmau'><img src='https://github.com/victoralmau.png' width='32' height='32' style='border-radius:50%;' alt='victoralmau'/></a> | Account Payment Term Partner Holiday
 [account_payment_term_restriction](account_payment_term_restriction/) | 15.0.1.0.0 |  | Restricts the usage of Payment Terms Journal Entries
 [account_payment_term_security](account_payment_term_security/) | 15.0.1.0.0 |  | Payment Term Security
-[account_payment_widget_amount](account_payment_widget_amount/) | 15.0.1.0.0 | [![ChrisOForgeFlow](https://github.com/ChrisOForgeFlow.png?size=30px)](https://github.com/ChrisOForgeFlow) | Extends the payment widget to be able to choose the payment amount
+[account_payment_widget_amount](account_payment_widget_amount/) | 15.0.1.0.0 | <a href='https://github.com/ChrisOForgeFlow'><img src='https://github.com/ChrisOForgeFlow.png' width='32' height='32' style='border-radius:50%;' alt='ChrisOForgeFlow'/></a> | Extends the payment widget to be able to choose the payment amount
 [account_voucher_killer](account_voucher_killer/) | 15.0.1.1.0 |  | Prevent the usage of payments from invoices
-[partner_aging](partner_aging/) | 15.0.1.0.0 | [![Urvisha-OSI](https://github.com/Urvisha-OSI.png?size=30px)](https://github.com/Urvisha-OSI) | Aging as a view - invoices and credits
+[partner_aging](partner_aging/) | 15.0.1.0.0 | <a href='https://github.com/Urvisha-OSI'><img src='https://github.com/Urvisha-OSI.png' width='32' height='32' style='border-radius:50%;' alt='Urvisha-OSI'/></a> | Aging as a view - invoices and credits
 [partner_restrict_payment_acquirer](partner_restrict_payment_acquirer/) | 15.0.1.0.0 |  | Partner Restrict Payment Acquirer
-[sale_payment_term_security](sale_payment_term_security/) | 15.0.1.0.0 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Sale Payment Term Security
+[sale_payment_term_security](sale_payment_term_security/) | 15.0.1.0.0 | <a href='https://github.com/victoralmau'><img src='https://github.com/victoralmau.png' width='32' height='32' style='border-radius:50%;' alt='victoralmau'/></a> | Sale Payment Term Security
 
 [//]: # (end addons)
 
