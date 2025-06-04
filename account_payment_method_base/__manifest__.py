@@ -13,6 +13,9 @@
     "development_status": "Mature",
     "website": "https://github.com/OCA/account-payment",
     "depends": ["account"],
-    "data": ["views/account_payment_method.xml"],
+    "data": [
+        "views/account_payment_method.xml",
+        "security/ir.model.access.csv",
+    ],
     "installable": True,
 }
