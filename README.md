@@ -40,22 +40,22 @@ addon | version | maintainers | summary
 [account_due_list](account_due_list/) | 13.0.2.0.1 |  | List of open credits and debits, with due date
 [account_due_list_days_overdue](account_due_list_days_overdue/) | 13.0.1.0.2 |  | Payments Due list days overdue
 [account_due_list_payment_mode](account_due_list_payment_mode/) | 13.0.2.0.0 |  | Payment Due List Payment Mode
-[account_payment_multi_deduction](account_payment_multi_deduction/) | 13.0.1.1.1 | [![kittiu](https://github.com/kittiu.png?size=30px)](https://github.com/kittiu) | Payment Register with Multiple Deduction
+[account_payment_multi_deduction](account_payment_multi_deduction/) | 13.0.1.1.1 | <a href='https://github.com/kittiu'><img src='https://github.com/kittiu.png' width='32' height='32' style='border-radius:50%;' alt='kittiu'/></a> | Payment Register with Multiple Deduction
 [account_payment_promissory_note](account_payment_promissory_note/) | 13.0.1.1.1 |  | Account Payment Promissory Note
 [account_payment_return](account_payment_return/) | 13.0.1.0.6 |  | Manage the return of your payments
 [account_payment_return_import](account_payment_return_import/) | 13.0.1.0.4 |  | This module adds a generic wizard to import payment returnfile formats. Is only the base to be extended by anothermodules
 [account_payment_return_import_iso20022](account_payment_return_import_iso20022/) | 13.0.1.0.0 |  | This addon allows to import payment returns from ISO 20022 files like PAIN or CAMT.
 [account_payment_show_invoice](account_payment_show_invoice/) | 13.0.1.0.1 |  | Extends the tree view of payments to show the paid invoices related to the payments using the vendor reference by default
 [account_payment_term_extension](account_payment_term_extension/) | 13.0.3.0.6 |  | Adds rounding, months, weeks and multiple payment days properties on payment term lines
-[account_payment_term_partner_holiday](account_payment_term_partner_holiday/) | 13.0.1.2.1 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Account Payment Term Partner Holiday
+[account_payment_term_partner_holiday](account_payment_term_partner_holiday/) | 13.0.1.2.1 | <a href='https://github.com/victoralmau'><img src='https://github.com/victoralmau.png' width='32' height='32' style='border-radius:50%;' alt='victoralmau'/></a> | Account Payment Term Partner Holiday
 [account_payment_term_restriction](account_payment_term_restriction/) | 13.0.1.0.0 |  | Restricts the usage of Payment Terms Journal Entries
 [account_payment_term_restriction_purchase](account_payment_term_restriction_purchase/) | 13.0.1.0.0 |  | Restricts the usage of Payment Terms on POs
 [account_payment_term_restriction_sale](account_payment_term_restriction_sale/) | 13.0.1.0.0 |  | Restricts the usage of Payment Terms on SOs
 [account_payment_term_security](account_payment_term_security/) | 13.0.1.0.0 |  | Payment Term Security
-[partner_aging](partner_aging/) | 13.0.1.0.1 | [![smangukiya](https://github.com/smangukiya.png?size=30px)](https://github.com/smangukiya) | Aging as a view - invoices and credits
+[partner_aging](partner_aging/) | 13.0.1.0.1 | <a href='https://github.com/smangukiya'><img src='https://github.com/smangukiya.png' width='32' height='32' style='border-radius:50%;' alt='smangukiya'/></a> | Aging as a view - invoices and credits
 [partner_restrict_payment_acquirer](partner_restrict_payment_acquirer/) | 13.0.1.0.0 |  | Partner Restrict Payment Acquirer
-[sale_payment_mgmt](sale_payment_mgmt/) | 13.0.1.0.1 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | List and create customer payments for salesmen
-[sale_payment_term_security](sale_payment_term_security/) | 13.0.1.0.0 | [![victoralmau](https://github.com/victoralmau.png?size=30px)](https://github.com/victoralmau) | Sale Payment Term Security
+[sale_payment_mgmt](sale_payment_mgmt/) | 13.0.1.0.1 | <a href='https://github.com/victoralmau'><img src='https://github.com/victoralmau.png' width='32' height='32' style='border-radius:50%;' alt='victoralmau'/></a> | List and create customer payments for salesmen
+[sale_payment_term_security](sale_payment_term_security/) | 13.0.1.0.0 | <a href='https://github.com/victoralmau'><img src='https://github.com/victoralmau.png' width='32' height='32' style='border-radius:50%;' alt='victoralmau'/></a> | Sale Payment Term Security
 
 [//]: # (end addons)
 
