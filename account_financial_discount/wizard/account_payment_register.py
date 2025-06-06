@@ -191,13 +191,13 @@ class AccountPaymentRegister(models.TransientModel):
             "payment_difference_handling": "reconcile",
         }
         if self.payment_type == "outbound":
-            res[
-                "writeoff_account_id"
-            ] = self.company_id.financial_discount_revenue_account_id.id
+            res["writeoff_account_id"] = (
+                self.company_id.financial_discount_revenue_account_id.id
+            )
         elif self.payment_type == "inbound":
-            res[
-                "writeoff_account_id"
-            ] = self.company_id.financial_discount_expense_account_id.id
+            res["writeoff_account_id"] = (
+                self.company_id.financial_discount_expense_account_id.id
+            )
         return res
 
     def _get_financial_discount_values_from_batch(self, batch_result):

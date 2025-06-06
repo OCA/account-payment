@@ -17,19 +17,19 @@ Account financial discount
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--payment-lightgray.png?logo=github
-    :target: https://github.com/OCA/account-payment/tree/14.0/account_financial_discount
+    :target: https://github.com/OCA/account-payment/tree/18.0/account_financial_discount
     :alt: OCA/account-payment
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/account-payment-14-0/account-payment-14-0-account_financial_discount
+    :target: https://translation.odoo-community.org/projects/account-payment-18-0/account-payment-18-0-account_financial_discount
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/account-payment&target_branch=14.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/account-payment&target_branch=18.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module adds functionality to handle financial discounts for early payments,
-and to generate proper write-offs during register payments.
+This module adds functionality to handle financial discounts for early
+payments, and to generate proper write-offs during register payments.
 
 **Table of contents**
 
@@ -39,33 +39,34 @@ and to generate proper write-offs during register payments.
 Configuration
 =============
 
-Go to Accounting > Configuration > Payment Terms, to define a payment term
-involving a financial discount:
+Go to Accounting > Configuration > Payment Terms, to define a payment
+term involving a financial discount:
 
-* Set a number of days while discount is available after posting
-* Set a discount percentage
+-  Set a number of days while discount is available after posting
+-  Set a discount percentage
 
 Usage
 =====
 
-When a payment term with discount is selected on an invoice (i.e Customers
-invoices or Vendor bills), the available discount will be stored on the first
-payment term line once the invoice is posted.
+When a payment term with discount is selected on an invoice (i.e
+Customers invoices or Vendor bills), the available discount will be
+stored on the first payment term line once the invoice is posted.
 
-The financial discount will then be applied using register payment wizard
-if the payment is done before the discount date, or if the "Force financial discount"
-is used on the invoice.
+The financial discount will then be applied using register payment
+wizard if the payment is done before the discount date, or if the "Force
+financial discount" is used on the invoice.
 
 Known issues / Roadmap
 ======================
 
-* Storage of available discount is only done if the invoice doesn't include
-  more than one account.tax.
-* Tax write-off is not only done automatically on register payment.
-* On payment term having multiple term lines, financial discount will be applied
-  even if the statement amount covers only first payment term line
-* Financial discount cannot be applied if the payment is done in another
-  currency than the invoice.
+-  Storage of available discount is only done if the invoice doesn't
+   include more than one account.tax.
+-  Tax write-off is not only done automatically on register payment.
+-  On payment term having multiple term lines, financial discount will
+   be applied even if the statement amount covers only first payment
+   term line
+-  Financial discount cannot be applied if the payment is done in
+   another currency than the invoice.
 
 Bug Tracker
 ===========
@@ -73,7 +74,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/account-payment/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/account-payment/issues/new?body=module:%20account_financial_discount%0Aversion:%2014.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/account-payment/issues/new?body=module:%20account_financial_discount%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -81,17 +82,17 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Camptocamp
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Akim Juillerat <akim.juillerat@camptocamp.com>
+-  Akim Juillerat <akim.juillerat@camptocamp.com>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -111,6 +112,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-grindtildeath| 
 
-This module is part of the `OCA/account-payment <https://github.com/OCA/account-payment/tree/14.0/account_financial_discount>`_ project on GitHub.
+This module is part of the `OCA/account-payment <https://github.com/OCA/account-payment/tree/18.0/account_financial_discount>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

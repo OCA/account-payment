@@ -123,7 +123,6 @@ class AccountReconcileModel(models.Model):
             )
             <= self.financial_discount_tolerance
         ):
-
             fin_disc_write_off_vals = self._prepare_financial_discount_write_off_values(
                 st_line, move_lines, residual_balance
             )
@@ -199,9 +198,7 @@ class AccountReconcileModel(models.Model):
                 WHEN abs(st_line.amount) > abs(aml.balance) + abs(aml.amount_discount) THEN (abs(aml.balance) + abs(aml.amount_discount)) / abs(st_line.amount) * 100
                 ELSE 100
             END >= {match_total_amount_param}
-                """.format(
-                match_total_amount_param=self.match_total_amount_param
-            )
+                """.format(match_total_amount_param=self.match_total_amount_param)
         )
         return comm_flag
 

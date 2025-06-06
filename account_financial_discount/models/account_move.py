@@ -1,7 +1,8 @@
 # Copyright 2019-2020 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 from datetime import date
-from operator import eq as equals, ne as not_equals
+from operator import eq as equals
+from operator import ne as not_equals
 
 from odoo import _, api, fields, models
 from odoo.exceptions import UserError
