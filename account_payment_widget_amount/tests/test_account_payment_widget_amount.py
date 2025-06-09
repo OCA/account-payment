@@ -1,9 +1,11 @@
 # Copyright 2017-2021 ForgeFlow S.L.
+# Copyright 2025 Aritz Olea <aritz.olea@factorlibre.com>
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 import time
 
 from odoo.tests.common import TransactionCase
+from odoo.tools import float_compare
 
 
 class TestAccountPaymentWidgetAmount(TransactionCase):
@@ -428,3 +430,136 @@ class TestAccountPaymentWidgetAmount(TransactionCase):
         self.assertEqual(invoice.amount_residual, 0.0)
         self.assertIn(invoice.payment_state, ("paid", "in_payment"))
         self.assertFalse(payment_ml.reconciled)
+
+    def test_06(self):
+        """Tests that I can create an invoice in company currency,
+        register a payment in company currency, and then try to reconcile more
+        than the quantity of the payment to the invoice.
+        I expect:
+        - The residual amount of the invoice is reduced by payment's amount.
+        - The residual amount of the payment is set to 0.
+        """
+        invoice = self.account_move_model.create(
+            {
+                "name": "Test Customer Invoice",
+                "journal_id": self.sale_journal.id,
+                "partner_id": self.partner.id,
+                "company_id": self.company.id,
+                "currency_id": self.company.currency_id.id,
+                "move_type": "out_invoice",
+                "invoice_line_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": "Line 1",
+                            "price_unit": 2000.0,
+                            "account_id": self.account_income.id,
+                            "quantity": 1,
+                            "tax_ids": False,
+                        },
+                    )
+                ],
+            }
+        )
+        # Open invoice
+        invoice.action_post()
+        # Create a payment
+        payment = self.account_payment_model.create(
+            {
+                "payment_type": "inbound",
+                "payment_method_id": self.env.ref(
+                    "account.account_payment_method_manual_in"
+                ).id,
+                "partner_type": "customer",
+                "partner_id": self.partner.id,
+                "amount": 1000.0,
+                "currency_id": self.company.currency_id.id,
+                "date": time.strftime("%Y-%m-%d"),
+                "journal_id": self.bank_journal.id,
+                "company_id": self.company.id,
+            }
+        )
+        payment.action_post()
+        payment_ml = payment.line_ids.filtered(
+            lambda l: l.account_id == self.account_receivable
+        )
+        # Payment is of 1000, so only 1000 with be reduced from residual amount
+        invoice.with_context(paid_amount=1200.0).js_assign_outstanding_line(
+            payment_ml.id
+        )
+        self.assertEqual(invoice.amount_residual, 1000.0)
+        # Payment reconciled, residual is 0 now
+        self.assertTrue(payment_ml.reconciled)
+
+    def test_07(self):
+        """Tests that I can create an invoice in company currency,
+        register a payment in foreign currency, and then try to reconcile more
+        than the quantity of the payment to the invoice.
+        I expect:
+        - The residual amount of the invoice is reduced by payment's amount.
+        - The residual amount of the payment is set to 0.
+        """
+        invoice = self.account_move_model.create(
+            {
+                "name": "Test Customer Invoice",
+                "journal_id": self.sale_journal.id,
+                "partner_id": self.partner.id,
+                "company_id": self.company.id,
+                "currency_id": self.company.currency_id.id,
+                "move_type": "out_invoice",
+                "invoice_line_ids": [
+                    (
+                        0,
+                        0,
+                        {
+                            "name": "Line 1",
+                            "price_unit": 2000.0,
+                            "account_id": self.account_income.id,
+                            "quantity": 1,
+                            "tax_ids": False,
+                        },
+                    )
+                ],
+            }
+        )
+        # Open invoice
+        invoice.action_post()
+        # Create a payment
+        payment = self.account_payment_model.create(
+            {
+                "payment_type": "inbound",
+                "payment_method_id": self.env.ref(
+                    "account.account_payment_method_manual_in"
+                ).id,
+                "partner_type": "customer",
+                "partner_id": self.partner.id,
+                "amount": 2000.0,
+                "currency_id": self.new_usd.id,
+                "date": time.strftime("%Y-%m-%d"),
+                "journal_id": self.bank_journal.id,
+                "company_id": self.company.id,
+            }
+        )
+        payment.action_post()
+        payment_ml = payment.line_ids.filtered(
+            lambda l: l.account_id == self.account_receivable
+        )
+        # Payment is of 1000, so only 1000 with be reduced from residual amount
+        invoice.with_context(paid_amount=2400.0).js_assign_outstanding_line(
+            payment_ml.id
+        )
+        payment_amount_company_currency = self.new_usd._convert(
+            payment.amount, self.company.currency_id, self.company, payment.date
+        )
+        new_amount_residual = invoice.amount_total - payment_amount_company_currency
+        self.assertEqual(
+            float_compare(
+                invoice.amount_residual,
+                new_amount_residual,
+                invoice.currency_id.rounding,
+            ),
+            0,
+        )
+        # Payment reconciled, residual is 0 now
+        self.assertTrue(payment_ml.reconciled)

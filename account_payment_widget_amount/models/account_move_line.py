@@ -1,7 +1,7 @@
 # Copyright 2018-2021 ForgeFlow S.L.
+# Copyright 2025 Aritz Olea <aritz.olea@factorlibre.com>
 
 from odoo import api, models
-from odoo.tools import float_compare
 
 
 class AccountMove(models.Model):
@@ -29,58 +29,51 @@ class AccountMoveLine(models.Model):
     def _prepare_reconciliation_partials(self, vals_list):
         am_model = self.env["account.move"]
         aml_model = self.env["account.move.line"]
-        partials = super(AccountMoveLine, self)._prepare_reconciliation_partials(
-            vals_list=vals_list
-        )
         if self.env.context.get("paid_amount", 0.0):
             total_paid = self.env.context.get("paid_amount", 0.0)
             current_am = am_model.browse(self.env.context.get("move_id"))
             current_aml = aml_model.browse(self.env.context.get("line_id"))
-            decimal_places = current_am.company_id.currency_id.decimal_places
-            if current_am.currency_id.id != current_am.company_currency_id.id:
-                total_paid = current_am.currency_id._convert(
-                    total_paid,
-                    current_aml.currency_id,
-                    current_am.company_id,
-                    current_aml.date,
-                )
-            for partial in partials[0]:
-                debit_line = self.browse(partial.get("debit_move_id"))
-                credit_line = self.browse(partial.get("credit_move_id"))
-                different_currency = (
-                    debit_line.currency_id.id != credit_line.currency_id.id
-                )
-                to_apply = min(total_paid, partial.get("amount", 0.0))
-                partial.update(
-                    {
-                        "amount": to_apply,
-                    }
-                )
-                if different_currency:
-                    partial.update(
-                        {
-                            "debit_amount_currency": credit_line.company_currency_id._convert(
-                                to_apply,
-                                debit_line.currency_id,
-                                credit_line.company_id,
-                                credit_line.date,
-                            ),
-                            "credit_amount_currency": debit_line.company_currency_id._convert(
-                                to_apply,
-                                credit_line.currency_id,
-                                debit_line.company_id,
-                                debit_line.date,
-                            ),
-                        }
+            for vals in vals_list:
+                aml = vals["record"]
+                if aml == current_aml:
+                    total_paid = current_am.currency_id._convert(
+                        total_paid,
+                        current_aml.currency_id,
+                        current_am.company_id,
+                        current_aml.move_id.date,
                     )
-                else:
-                    partial.update(
-                        {
-                            "debit_amount_currency": to_apply,
-                            "credit_amount_currency": to_apply,
-                        }
-                    )
-                total_paid -= to_apply
-                if float_compare(total_paid, 0.0, precision_digits=decimal_places) <= 0:
-                    break
-        return partials
+                    if aml.currency_id == vals["company"].currency_id:
+                        sign = 1 if vals["balance"] >= 0 else -1
+                        if (
+                            abs(vals["amount_residual"]) < total_paid
+                            or abs(vals["balance"]) < total_paid
+                        ):
+                            continue
+                        residual_prop = abs(total_paid / vals["amount_residual"])
+                        amount_prop = abs(total_paid / vals["balance"])
+                        vals["amount_residual"] = total_paid * sign
+                        vals["balance"] = total_paid * sign
+                        vals["amount_residual_currency"] = (
+                            vals["amount_residual_currency"] * residual_prop
+                        )
+                        vals["amount_currency"] = vals["amount_currency"] * amount_prop
+                    else:
+                        sign = 1 if vals["amount_currency"] >= 0 else -1
+                        if (
+                            abs(vals["amount_residual_currency"]) < total_paid
+                            or abs(vals["amount_currency"]) < total_paid
+                        ):
+                            continue
+                        residual_prop = abs(
+                            total_paid / vals["amount_residual_currency"]
+                        )
+                        amount_prop = abs(total_paid / vals["amount_currency"])
+                        vals["amount_residual_currency"] = total_paid * sign
+                        vals["amount_currency"] = total_paid * sign
+                        vals["amount_residual"] = (
+                            vals["amount_residual"] * residual_prop
+                        )
+                        vals["balance"] = vals["balance"] * amount_prop
+        return super(AccountMoveLine, self)._prepare_reconciliation_partials(
+            vals_list=vals_list
+        )
