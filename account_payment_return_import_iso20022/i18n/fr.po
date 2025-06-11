@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-06-10 13:25+0000\n"
+"PO-Revision-Date: 2025-06-11 18:26+0000\n"
 "Last-Translator: EvaS595 <eva.saintier@horanet.com>\n"
 "Language-Team: none\n"
 "Language: fr\n"
@@ -231,46 +231,49 @@ msgstr "Détails de contact manquants ou invalides"
 msgid ""
 "Content Remittance Information/Structured includes more than 140 characters"
 msgstr ""
+"Les informations de remise de fonds structurées contiennent plus de 140 "
+"caractères"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH16
 msgid "Content is incorrect"
-msgstr ""
+msgstr "Le contenu est incorrect"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM16
 msgid "Control Sum at the Group level is invalid"
-msgstr ""
+msgstr "La somme de contrôle au niveau de groupe est invalide"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM17
 msgid "Control Sum at the Payment Information level is invalid"
 msgstr ""
+"La somme de contrôle au niveau des informations de paiement est invalide"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_ED01
 msgid "Correspondent bank not possible."
-msgstr ""
+msgstr "Banque intermédiaire non disponible."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE09
 msgid "Country code is missing or Invalid."
-msgstr ""
+msgstr "Code pays manquant ou invalide."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE14
 msgid "Country code of creditor's residence is missing or Invalid"
-msgstr ""
+msgstr "Le code du pays de résidence du créancier est manquant ou invalide"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE13
 msgid "Country code of debtor's residence is missing or Invalid"
-msgstr ""
+msgstr "Le code du pays de résidence du débiteur est manquant ou invalide"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE12
 msgid "Country code of residence is missing or Invalid."
-msgstr ""
+msgstr "Le code du pays de résidence est manquant ou invalide."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CERI
@@ -278,6 +281,8 @@ msgid ""
 "Credit transfer is not tagged as an Extended Remittance Information (ERI) "
 "transaction but contains ERI."
 msgstr ""
+"Le virement de crédit n'est pas étiqueté comme une transaction d'Information "
+"de Remise Étendue (ERI) mais contient des ERI."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_NERI
@@ -285,17 +290,20 @@ msgid ""
 "Credit transfer is tagged as an Extended Remittance Information (ERI) "
 "transaction but does not contain ERI."
 msgstr ""
+"e virement de crédit est étiqueté comme une transaction d'Information de "
+"Remise Étendue (ERI) mais ne contient pas d'ERI."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AB08
 msgid "Creditor Agent is not online."
-msgstr ""
+msgstr "Banque du créancier hors ligne."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AG11
 msgid ""
 "Creditor Agent of message is suspended from the Real Time Payment system."
 msgstr ""
+"La banque du créancier a été suspendue du système de paiement temps réel."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RC07
