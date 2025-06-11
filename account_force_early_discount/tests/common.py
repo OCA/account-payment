@@ -1,9 +1,9 @@
 # Copyright 2020 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl)
-from odoo.tests.common import Form, SavepointCase
+from odoo.tests.common import Form, TransactionCase
 
 
-class TestAccountFinancialDiscountCommon(SavepointCase):
+class TestAccountFinancialDiscountCommon(TransactionCase):
     @classmethod
     def init_invoice(
         cls,
@@ -21,7 +21,7 @@ class TestAccountFinancialDiscountCommon(SavepointCase):
         move_form.partner_id = partner
         move_form.invoice_payment_term_id = payment_term
         move_form.invoice_date = invoice_date
-        move_form.invoice_date_due = invoice_date_due
+        # move_form.date = invoice_date
         if currency is not None:
             move_form.currency_id = currency
         if payment_reference is not None:
@@ -39,8 +39,8 @@ class TestAccountFinancialDiscountCommon(SavepointCase):
                 line_form.name = product and product.name or "test"
                 line_form.quantity = quantity
                 line_form.price_unit = unit_price
-                if not with_tax:
-                    line_form.tax_ids.clear()
+                if with_tax:
+                    line_form.tax_ids = cls.env.ref("account.1_sale_tax_template")
 
     @classmethod
     def setUpClass(cls):
@@ -48,7 +48,9 @@ class TestAccountFinancialDiscountCommon(SavepointCase):
 
         cls.usd_currency = cls.env.ref("base.USD")
         cls.eur_currency = cls.env.ref("base.EUR")
+        cls.eur_currency.active = True
         cls.chf_currency = cls.env.ref("base.CHF")
+        cls.chf_currency.active = True
 
         cls.partner = cls.env["res.partner"].create(
             {"name": "Peter Muster AG", "supplier_rank": 1}
@@ -57,47 +59,49 @@ class TestAccountFinancialDiscountCommon(SavepointCase):
             {"name": "Hans Muster GmbH & Co. KG", "customer_rank": 1}
         )
 
-        cls.write_off_rev = cls.env["account.account"].create(
-            {
-                "code": "wrtrev",
-                "name": "writeoff revenue",
-                "user_type_id": cls.env.ref("account.data_account_type_expenses").id,
-                "reconcile": False,
-            }
-        )
-        cls.write_off_exp = cls.env["account.account"].create(
-            {
-                "code": "wrtexp",
-                "name": "writeoff expenses",
-                "user_type_id": cls.env.ref("account.data_account_type_expenses").id,
-                "reconcile": False,
-            }
-        )
-        cls.env.company.financial_discount_expense_account_id = cls.write_off_exp
-        cls.env.company.financial_discount_revenue_account_id = cls.write_off_rev
+        # cls.write_off_rev = cls.env["account.account"].create(
+        #     {
+        #         "code": "wrtrev",
+        #         "name": "writeoff revenue",
+        #         "user_type_id": cls.env.ref("account.data_account_type_expenses").id,
+        #         "reconcile": False,
+        #     }
+        # )
+        # cls.write_off_exp = cls.env["account.account"].create(
+        #     {
+        #         "code": "wrtexp",
+        #         "name": "writeoff expenses",
+        #         "user_type_id": cls.env.ref("account.data_account_type_expenses").id,
+        #         "reconcile": False,
+        #     }
+        # )
+        # cls.env.company.financial_discount_expense_account_id = cls.write_off_exp
+        # cls.env.company.financial_discount_revenue_account_id = cls.write_off_rev
         cls.payment_term = cls.env["account.payment.term"].create(
             {
                 "name": "Skonto",
-                "days_discount": 10,
-                "percent_discount": 2.0,
+                "early_discount": True,
+                "discount_days": 10,
+                "discount_percentage": 2.0,
                 "line_ids": [
                     (
                         0,
                         0,
                         {
-                            "value": "balance",
-                            "days": 60,
-                            "option": "day_after_invoice_date",
+                            "value_amount": 100,
+                            "value": "percent",
+                            "nb_days": 60,
+                            "delay_type": "days_after",
                         },
                     )
                 ],
             }
         )
         cls.payable_account = cls.env["account.account"].search(
-            [("user_type_id.name", "=", "Payable")], limit=1
+            [("account_type", "=", "liability_payable")], limit=1
         )
         cls.receivable_account = cls.env["account.account"].search(
-            [("user_type_id.name", "=", "Receivable")], limit=1
+            [("account_type", "=", "asset_receivable")], limit=1
         )
         cls.bank_journal = cls.env["account.journal"].search(
             [("company_id", "=", cls.env.company.id), ("type", "=", "bank")],
@@ -116,7 +120,7 @@ class TestAccountFinancialDiscountCommon(SavepointCase):
             {
                 "code": "exp",
                 "name": "expenses",
-                "user_type_id": cls.env.ref("account.data_account_type_expenses").id,
+                "account_type": "expense",
                 "reconcile": True,
             }
         )

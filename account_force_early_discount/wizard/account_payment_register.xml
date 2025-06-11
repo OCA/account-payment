@@ -6,10 +6,9 @@
         <field name="inherit_id" ref="account.view_account_payment_register_form" />
         <field name="arch" type="xml">
             <xpath expr="//field[@name='journal_id']" position="after">
-                <field name="show_force_financial_discount" invisible="1" />
                 <field
-                    name="force_financial_discount"
-                    attrs="{'invisible': [('show_force_financial_discount', '=', False)]}"
+                    name="force_early_discount"
+                    invisible="not show_force_early_discount"
                 />
             </xpath>
         </field>

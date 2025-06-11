@@ -3,7 +3,7 @@
 {
     "name": "Account financial discount",
     "summary": "Handle financial discounts for early payments",
-    "version": "14.0.1.0.1",
+    "version": "18.0.1.0.1",
     "development_status": "Production/Stable",
     "category": "Account",
     "website": "https://github.com/OCA/account-payment",
@@ -13,11 +13,7 @@
     "installable": True,
     "depends": ["account"],
     "data": [
-        "views/payment_term_form.xml",
         "views/account_move.xml",
-        "views/account_reconcile_model.xml",
-        "views/res_config_settings.xml",
-        "views/payment_receipt.xml",
         "wizard/account_payment_register.xml",
     ],
 }

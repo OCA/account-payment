@@ -278,7 +278,7 @@ class TestAccountFinancialDiscountReconciliation(TestAccountFinancialDiscountCom
         invoice.action_post()
         invoice_receivable_line = invoice._get_first_payment_term_line()
         invoice_tax_line = invoice.line_ids.filtered(lambda l: l.tax_line_id)
-        invoice.force_financial_discount = True
+        invoice.force_early_discount = True
         bank_statement = self._create_bank_statement()
         self._create_bank_statement_line(
             bank_statement, invoice.name, self.amount_taxed_with_discount
@@ -323,7 +323,7 @@ class TestAccountFinancialDiscountReconciliation(TestAccountFinancialDiscountCom
         vendor_bill.action_post()
         vendor_bill_payable_line = vendor_bill._get_first_payment_term_line()
         vendor_bill_tax_line = vendor_bill.line_ids.filtered(lambda l: l.tax_line_id)
-        vendor_bill.force_financial_discount = True
+        vendor_bill.force_early_discount = True
         bank_statement = self._create_bank_statement()
         self._create_bank_statement_line(
             bank_statement,
