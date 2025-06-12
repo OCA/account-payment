@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 13.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-06-12 12:26+0000\n"
+"PO-Revision-Date: 2025-06-12 12:54+0000\n"
 "Last-Translator: EvaS595 <eva.saintier@horanet.com>\n"
 "Language-Team: none\n"
 "Language: fr\n"
@@ -208,8 +208,7 @@ msgstr ""
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_FF11
 msgid "Clearing request rejected due it being subject to an abort operation."
 msgstr ""
-"La demande de compensation a été rejetée étant sujette à une opération "
-"d'abandon."
+"La demande de compensation a été rejetée en raison d'une opération d'abandon."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RC08
@@ -290,20 +289,19 @@ msgid ""
 "Credit transfer is tagged as an Extended Remittance Information (ERI) "
 "transaction but does not contain ERI."
 msgstr ""
-"e virement de crédit est étiqueté comme une transaction d'Information de "
-"Remise Étendue (ERI) mais ne contient pas d'ERI."
+"Le virement est étiqueté comme une transaction d'Information de Remise "
+"Étendue (ERI) mais ne contient pas d'ERI."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AB08
 msgid "Creditor Agent is not online."
-msgstr "Banque du créancier hors ligne."
+msgstr "L'agent créancier est hors ligne."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AG11
 msgid ""
 "Creditor Agent of message is suspended from the Real Time Payment system."
-msgstr ""
-"La banque du créancier a été suspendue du système de paiement temps réel."
+msgstr "L'agent créancier a été suspendu du système de paiement temps réel."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RC07
@@ -329,7 +327,7 @@ msgstr "L'identifiant du schéma créditeur est invalide  ou manquant"
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC11
 msgid "Creditor account currency is invalid or missing"
-msgstr "La devise du compte créditeur est invalide ou manquant"
+msgstr "La devise du compte créancier est invalide ou manquant"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC07
@@ -413,6 +411,8 @@ msgstr "L'identifiant BIC du débiteur est invalide ou manquant"
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RC09
 msgid "Debtor ClearingSystemMember identifier is invalid or missing"
 msgstr ""
+"L’identifiant du membre du système de compensation du débiteur est invalide "
+"ou manquant"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AG07
@@ -1331,8 +1331,7 @@ msgstr "La référence de la transaction n'est pas unique dans le message."
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AB09
 msgid "Transaction stopped due to error at the Creditor Agent."
 msgstr ""
-"La transaction a été arrêtée en raison d'une erreur chez l'agent du "
-"créancier."
+"La transaction a été arrêtée en raison d'une erreur chez l'agent créancier."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AB10
@@ -1344,16 +1343,20 @@ msgstr ""
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AB05
 msgid "Transaction stopped due to timeout at the Creditor Agent."
 msgstr ""
+"La transaction a été arrêtée en raison d'un dépassement de délai chez "
+"l'agent créancier."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AB06
 msgid "Transaction stopped due to timeout at the Instructed Agent."
 msgstr ""
+"La transaction a été arrêtée en raison d'un dépassement de délai chez "
+"l'agent exécutant."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AG03
 msgid "Transaction type not supported/authorized on this account"
-msgstr ""
+msgstr "Le type de transaction n'est pas supporté/autorisé sur ce compte"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM22
@@ -1364,6 +1367,11 @@ msgid ""
 " service prohibit the use of zero amount payments, then code AM01 is used to"
 " report the error condition."
 msgstr ""
+"Impossible d’appliquer un montant nul au compte désigné. Par exemple, "
+"lorsque les règles du service autorisent des paiements d’un montant nul, "
+"mais que le système de back-office ne peut pas les affecter au compte. Si "
+"les règles du service interdisent les paiements d’un montant nul, le code "
+"AM01 est utilisé pour signaler cette cause d'erreur."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_S001
@@ -1371,6 +1379,8 @@ msgid ""
 "Unique End-to-end Transaction Reference (UETR) relating to a payment has "
 "been identified as being associated with a Request for Cancellation."
 msgstr ""
+"La référence unique bout à bout de la transaction (UETR) liée à un paiement "
+"a été identifiée comme associée à une demande d'annulation."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_S002
@@ -1378,11 +1388,13 @@ msgid ""
 "Unique End-to-end Transaction Reference (UETR) relating to a payment has "
 "been prevent from traveling across a messaging network."
 msgstr ""
+"La référence unique bout à bout de la transaction (UETR) liée à un paiement "
+"a été empêchée de transiter sur le réseau de messagerie."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH11
 msgid "Value in Creditor Identifier is incorrect"
-msgstr ""
+msgstr "La valeur dans l'identifiant créancier est incorrecte"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH03
@@ -1390,6 +1402,8 @@ msgid ""
 "Value in Requested Execution Date or Requested Collection Date is too far in"
 " the future"
 msgstr ""
+"La valeur de la date demandée d’exécution ou de prélèvement est trop "
+"éloignée dans le futur"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH04
@@ -1397,6 +1411,8 @@ msgid ""
 "Value in Requested Execution Date or Requested Collection Date is too far in"
 " the past"
 msgstr ""
+"La valeur de la date demandée d’exécution ou de prélèvement est trop "
+"éloignée dans le passé"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH19
@@ -1404,11 +1420,14 @@ msgid ""
 "Values in Interbank Settlement Date or Requested Collection Date will be set"
 " to the next TARGET day"
 msgstr ""
+"Les valeurs de la date de règlement interbancaire ou de la date de "
+"prélèvement demandée seront fixées au jour TARGET (Trans-European Automated "
+"Real-time Gross Settlement Express Transfer System) suivant"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS24
 msgid "Waiting time expired due to incomplete order"
-msgstr ""
+msgstr "Le délai d'attente est dépassé en raison d'un ordre incomplet"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_SL11
@@ -1417,3 +1436,7 @@ msgid ""
 "the Creditor on its “Whitelist” (yet). In the Whitelist the Debtor may list "
 "all allowed Creditors to debit Debtor bank account"
 msgstr ""
+"Service de liste blanche offert par l’agent débiteur : le débiteur n’a pas "
+"(encore) inclus le créancier dans sa « liste blanche ». Dans cette liste, le "
+"débiteur peut répertorier tous les créanciers autorisés à débiter son compte "
+"bancaire"
