@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 14.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2025-06-13 13:26+0000\n"
+"Last-Translator: Betül Öğmen <betulo@eska.biz>\n"
 "Language-Team: none\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: account_payment_paired_internal_transfer
 #: code:addons/account_payment_paired_internal_transfer/models/account_payment.py:0
@@ -21,22 +23,24 @@ msgid ""
 "A second payment has been created: <a href=# data-oe-model=account.payment "
 "data-oe-id=%(id)s>%(name)s</a>"
 msgstr ""
+"Bir ikinci ödeme oluşturuldu: <a href=# data-oe-model=account.payment data-"
+"oe-id=%(id)s>%(name)s</a>"
 
 #. module: account_payment_paired_internal_transfer
 #: model_terms:ir.ui.view,arch_db:account_payment_paired_internal_transfer.account_payment_form
 msgid ""
 "A second payment will be created automatically in the destination journal."
-msgstr ""
+msgstr "Hedef yevmiyede bir ikinci ödeme otomatik olarak oluşturulacak."
 
 #. module: account_payment_paired_internal_transfer
 #: model:ir.model.fields,field_description:account_payment_paired_internal_transfer.field_account_payment__destination_journal_id
 msgid "Destination Journal"
-msgstr ""
+msgstr "Hedef Yevmiye"
 
 #. module: account_payment_paired_internal_transfer
 #: model:ir.model.fields,field_description:account_payment_paired_internal_transfer.field_account_payment__display_name
 msgid "Display Name"
-msgstr ""
+msgstr "Görünüm Adı"
 
 #. module: account_payment_paired_internal_transfer
 #: model:ir.model.fields,field_description:account_payment_paired_internal_transfer.field_account_payment__id
@@ -46,17 +50,17 @@ msgstr ""
 #. module: account_payment_paired_internal_transfer
 #: model:ir.model.fields,field_description:account_payment_paired_internal_transfer.field_account_payment____last_update
 msgid "Last Modified on"
-msgstr ""
+msgstr "Son Düzenleme"
 
 #. module: account_payment_paired_internal_transfer
 #: model:ir.model.fields,field_description:account_payment_paired_internal_transfer.field_account_payment__paired_internal_transfer_payment_id
 msgid "Paired Internal Transfer Payment"
-msgstr ""
+msgstr "Eşlenmiş İç Transfer Ödeme"
 
 #. module: account_payment_paired_internal_transfer
 #: model:ir.model,name:account_payment_paired_internal_transfer.model_account_payment
 msgid "Payments"
-msgstr ""
+msgstr "Ödemeler"
 
 #. module: account_payment_paired_internal_transfer
 #: code:addons/account_payment_paired_internal_transfer/models/account_payment.py:0
@@ -65,6 +69,8 @@ msgid ""
 "This payment has been created from <a href=# data-oe-model=account.payment "
 "data-oe-id=%(id)s>%(name)s</a>"
 msgstr ""
+"Bu ödeme <a href=# data-oe-model=account.payment data-oe-id=%(id)s>%(name)s</"
+"a> tarafından oluştu"
 
 #. module: account_payment_paired_internal_transfer
 #: model:ir.model.fields,help:account_payment_paired_internal_transfer.field_account_payment__paired_internal_transfer_payment_id
@@ -72,3 +78,5 @@ msgid ""
 "When an internal transfer is posted, a paired payment is created. They cross"
 " referenced trough this field"
 msgstr ""
+"Eşlenmiş ödeme iç transfer işlendiğinde oluşur. İkisi bu alan üzerinden "
+"birbirine bağlanırlar"
