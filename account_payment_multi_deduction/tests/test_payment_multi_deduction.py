@@ -14,7 +14,6 @@ class TestPaymentMultiDeduction(TransactionCase):
         cls.move_line_model = cls.env["account.move.line"]
         cls.payment_model = cls.env["account.payment"]
         cls.payment_register_model = cls.env["account.payment.register"]
-        cls.register_view_id = "account.view_account_payment_register_form"
         cls.partner = cls.env.ref("base.res_partner_12")
         cls.account_receivable = cls.partner.property_account_receivable_id
         cls.account_revenue = cls.env["account.account"].search(
@@ -85,7 +84,6 @@ class TestPaymentMultiDeduction(TransactionCase):
         with self.assertRaises(UserError):  # Deduct only 20.0, throw error
             with Form(
                 self.payment_register_model.with_context(**ctx),
-                view=self.register_view_id,
             ) as f:
                 f.amount = 400.0
                 f.payment_difference_handling = "reconcile_multi_deduct"
@@ -95,7 +93,7 @@ class TestPaymentMultiDeduction(TransactionCase):
                     f2.amount = 20.0
             f.save()
         with Form(
-            self.payment_register_model.with_context(**ctx), view=self.register_view_id
+            self.payment_register_model.with_context(**ctx),
         ) as f:
             f.amount = 400.0  # Reduce to 400.0, and mark fully paid (multi)
             f.payment_difference_handling = "reconcile_multi_deduct"
@@ -117,6 +115,8 @@ class TestPaymentMultiDeduction(TransactionCase):
         bank_account = (
             payment.journal_id.company_id.account_journal_payment_debit_account_id
         )
+        self.env.cr.flush()
+        self.cust_invoice._compute_payment_state()
         self.assertEqual(self.cust_invoice.payment_state, "paid")
         self.assertRecordValues(
             move_lines,
@@ -151,7 +151,7 @@ class TestPaymentMultiDeduction(TransactionCase):
             "active_model": "account.move",
         }
         with Form(
-            self.payment_register_model.with_context(**ctx), view=self.register_view_id
+            self.payment_register_model.with_context(**ctx),
         ) as f:
             f.currency_id = self.currency_2x
             f.amount = 800.0  # 400 -> 800 as we use currency 2x
@@ -174,6 +174,8 @@ class TestPaymentMultiDeduction(TransactionCase):
         bank_account = (
             payment.journal_id.company_id.account_journal_payment_debit_account_id
         )
+        self.env.cr.flush()
+        self.cust_invoice._compute_payment_state()
         self.assertEqual(self.cust_invoice.payment_state, "paid")
         self.assertRecordValues(
             move_lines,
@@ -221,7 +223,7 @@ class TestPaymentMultiDeduction(TransactionCase):
             "active_model": "account.move",
         }
         with Form(
-            self.payment_register_model.with_context(**ctx), view=self.register_view_id
+            self.payment_register_model.with_context(**ctx),
         ) as f:
             f.amount = 400.0  # Reduce to 400.0, and mark fully paid (multi)
             f.payment_difference_handling = "reconcile_multi_deduct"
@@ -269,7 +271,7 @@ class TestPaymentMultiDeduction(TransactionCase):
             "active_model": "account.move",
         }
         with Form(
-            self.payment_register_model.with_context(**ctx), view=self.register_view_id
+            self.payment_register_model.with_context(**ctx),
         ) as f:
             f.amount = 400.0  # Reduce to 400.0, and mark fully paid (multi)
             f.payment_difference_handling = "reconcile"

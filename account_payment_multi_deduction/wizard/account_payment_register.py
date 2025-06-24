@@ -51,7 +51,7 @@ class AccountPaymentRegister(models.TransientModel):
     @api.onchange("payment_difference", "payment_difference_handling")
     def _onchange_default_deduction(self):
         active_ids = self.env.context.get("active_ids", [])
-        moves = self.env["account.move"].browse(active_ids)
+        moves = self.env["account.move"].browse(active_ids).exists()
         if self.payment_difference_handling == "reconcile":
             self._update_vals_deduction(moves)
         if self.payment_difference_handling == "reconcile_multi_deduct":
@@ -98,7 +98,7 @@ class AccountPaymentRegister(models.TransientModel):
         ):
             payment_vals["write_off_line_vals"] = [
                 self._prepare_deduct_move_line(deduct)
-                for deduct in self.deduction_ids.filtered(lambda l: not l.is_open)
+                for deduct in self.deduction_ids.filtered(lambda line: not line.is_open)
             ]
             payment_vals["is_multi_deduction"] = True
         return payment_vals
