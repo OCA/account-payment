@@ -27,7 +27,9 @@ class AccountPayment(models.Model):
                     line_vals[update_key] = write_off_line_vals[0][update_key]
                 break
 
-    def _prepare_move_line_default_vals(self, write_off_line_vals=None):
+    def _prepare_move_line_default_vals(
+        self, write_off_line_vals=None, force_balance=None
+    ):
         """Split amount to multi payment deduction
         Concept:
         * Process by payment difference 'Mark as fully paid' and keep value is paid
@@ -35,7 +37,10 @@ class AccountPayment(models.Model):
         * Combine all process and return list
         """
         self.ensure_one()
-        line_vals_list = super()._prepare_move_line_default_vals(write_off_line_vals)
+        line_vals_list = super()._prepare_move_line_default_vals(
+            write_off_line_vals,
+            force_balance=force_balance,
+        )
         # payment difference
         if not self.is_multi_deduction and write_off_line_vals:
             # update writeoff when edit value in payment

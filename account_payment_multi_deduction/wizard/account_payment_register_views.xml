@@ -6,7 +6,7 @@
         <field name="arch" type="xml">
             <xpath expr="//field[@name='writeoff_account_id']" position="after">
                 <div
-                    attrs="{'invisible': [('payment_difference_handling', '!=', 'reconcile')]}"
+                    invisible="payment_difference_handling != 'reconcile'"
                     groups="analytic.group_analytic_accounting"
                 >
                     <label for="analytic_distribution" class="oe_edit_only" />
@@ -22,14 +22,14 @@
                 expr="/form/group/group[@name='group3']/div/div"
                 position="attributes"
             >
-                <attribute
-                    name="attrs"
-                >{'invisible': [('payment_difference_handling','!=','reconcile')]}</attribute>
+                <attribute name="invisible">
+                    hide_writeoff_section or payment_difference_handling != 'reconcile'
+                </attribute>
             </xpath>
             <xpath expr="/form/group/group[@name='group3']" position="after">
                 <group
                     colspan="4"
-                    attrs="{'invisible': [('payment_difference_handling', '!=', 'reconcile_multi_deduct')]}"
+                    invisible="payment_difference_handling != 'reconcile_multi_deduct'"
                 >
                     <field name="deduct_residual" invisible="1" />
                     <field name="deduct_analytic_distribution" invisible="1" />
@@ -40,12 +40,9 @@
                         context="{'default_amount': deduct_residual, 'default_analytic_distribution': deduct_analytic_distribution}"
                     >
                         <tree editable="bottom">
-                            <field name="currency_id" invisible="1" />
+                            <field name="currency_id" column_invisible="1" />
                             <field name="is_open" />
-                            <field
-                                name="account_id"
-                                attrs="{'required': [('is_open', '=', False)]}"
-                            />
+                            <field name="account_id" required="is_open == False" />
                             <field
                                 name="analytic_distribution"
                                 widget="analytic_distribution"
