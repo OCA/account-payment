@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-28 10:49+0000\n"
-"PO-Revision-Date: 2025-06-04 15:25+0000\n"
+"PO-Revision-Date: 2025-06-26 17:25+0000\n"
 "Last-Translator: EvaS595 <eva.saintier@horanet.com>\n"
 "Language-Team: French (http://www.transifex.com/oca/OCA-account-payment-8-0/"
 "language/fr/)\n"
@@ -27,7 +27,7 @@ msgstr "Action nécessaire"
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return_line__reason_additional_information
 msgid "Additional information on return reason."
-msgstr "Informations complémentaires sur la raison du retour."
+msgstr "Informations complémentaires sur la raison du rejet."
 
 #. module: account_payment_return
 #: code:addons/account_payment_return/models/payment_return.py:0
@@ -124,7 +124,7 @@ msgstr "Client"
 #: model:ir.ui.menu,name:account_payment_return.payment_return_menu
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_tree_view
 msgid "Customer Payment Returns"
-msgstr "Retours des paiements clients"
+msgstr "Paiements clients rejetés"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_import_journal_creation__default_expense_account_id
@@ -234,7 +234,7 @@ msgstr "Info"
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_account_move__returned_payment
 msgid "Invoice has been included on a payment that has been returned later."
-msgstr "La facture a été incluse dans un paiement qui est revenu plus tard."
+msgstr "La facture contient un paiement qui a été rejeté."
 
 #. module: account_payment_return
 #: code:addons/account_payment_return/models/payment_return.py:0
@@ -245,7 +245,7 @@ msgstr "Facture : %s"
 #. module: account_payment_return
 #: model_terms:ir.ui.view,arch_db:account_payment_return.view_account_invoice_filter
 msgid "Invoices whose payment has been returned"
-msgstr "Factures dont le paiement est revenu"
+msgstr "Factures dont le paiement a été rejeté"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_is_follower
@@ -364,7 +364,7 @@ msgstr "Seulement pour information"
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_account_partial_reconcile__origin_returned_move_ids
 msgid "Origin Returned Move"
-msgstr "Origine du retour"
+msgstr "Origine du rejet"
 
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_account_partial_reconcile
@@ -374,7 +374,7 @@ msgstr "Réconciliation partielle"
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_account_move_line__partial_reconcile_returned_ids
 msgid "Partial Reconcile Returned"
-msgstr "Réconciliation partielle retournée"
+msgstr "Réconciliation partielle rejet"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__partner_name
@@ -414,23 +414,23 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__return_id
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
 msgid "Payment return"
-msgstr "Retour du paiement"
+msgstr "Rejet de paiement"
 
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_payment_return_line
 #: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_form_view
 msgid "Payment return lines"
-msgstr "Lignes de retour de paiement"
+msgstr "Lignes de rejet de paiement"
 
 #. module: account_payment_return
 #: model:ir.model,name:account_payment_return.model_payment_return_reason
 msgid "Payment return reason"
-msgstr "Motif de retour du paiement"
+msgstr "Motif de rejet du paiement"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_account_move__returned_payment
 msgid "Payment returned"
-msgstr "Paiement retourné"
+msgstr "Paiement rejeté"
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return_line__concept
@@ -469,33 +469,33 @@ msgstr "Référence à la pièce comptable créée"
 #: code:addons/account_payment_return/models/payment_return.py:0
 #, python-format
 msgid "Return %s"
-msgstr "Retour %s"
+msgstr "Rejet %s"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__date
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__date
 msgid "Return date"
-msgstr "Date du retour"
+msgstr "Date du rejet"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__reason_id
 msgid "Return reason"
-msgstr "Motif de retour"
+msgstr "Motif de rejet"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__reason_additional_information
 msgid "Return reason (info)"
-msgstr "Motif de retour (info)"
+msgstr "Motif de rejet (info)"
 
 #. module: account_payment_return
 #: model_terms:ir.ui.view,arch_db:account_payment_return.view_account_invoice_filter
 msgid "Returned"
-msgstr "Retourné"
+msgstr "Rejeté"
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return_line__amount
 msgid "Returned amount. Can be different from the move amount"
-msgstr "Montant retourné. Peut différer du montant de la pièce comptable"
+msgstr "Montant rejeté. Peut différer du montant de la pièce comptable"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_has_sms_error
@@ -554,14 +554,15 @@ msgstr "Historique de communication du site web"
 #: code:addons/account_payment_return/models/payment_return.py:0
 #, python-format
 msgid "You can not remove a payment return if state is 'Done'"
-msgstr "Vous ne pouvez pas retirer un retour de paiement si l'état est \"Fait\""
+msgstr ""
+"Vous ne pouvez pas retirer un rejet de paiement si l'état est \"Terminé\""
 
 #. module: account_payment_return
 #: code:addons/account_payment_return/models/payment_return.py:0
 #, python-format
 msgid "You must input all moves references in the payment return."
 msgstr ""
-"Vous devez saisir toutes les références d'écritures dans le retour de "
+"Vous devez saisir toutes les références d'écritures dans le rejet de "
 "paiement."
 
 #~ msgid "Invoice"
