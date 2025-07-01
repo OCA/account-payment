@@ -46,7 +46,7 @@ addon | version | maintainers | summary
 [account_payment_paired_internal_transfer](account_payment_paired_internal_transfer/) | 14.0.1.0.1 |  | Crete internal transfers in one move.
 [account_payment_promissory_note](account_payment_promissory_note/) | 14.0.1.0.0 |  | Account Payment Promissory Note
 [account_payment_register_keep_amount](account_payment_register_keep_amount/) | 14.0.1.0.0 |  | Keep set amount during Payment registration.
-[account_payment_return](account_payment_return/) | 14.0.1.0.7 |  | Manage the return of your payments
+[account_payment_return](account_payment_return/) | 14.0.1.0.8 |  | Manage the return of your payments
 [account_payment_return_import](account_payment_return_import/) | 14.0.1.0.2 |  | This module adds a generic wizard to import payment returnfile formats. Is only the base to be extended by anothermodules
 [account_payment_return_import_iso20022](account_payment_return_import_iso20022/) | 14.0.2.0.1 |  | This addon allows to import payment returns from ISO 20022 files like PAIN or CAMT.
 [account_payment_term_discount](account_payment_term_discount/) | 14.0.1.1.7 | <a href='https://github.com/bodedra'><img src='https://github.com/bodedra.png' width='32' height='32' style='border-radius:50%;' alt='bodedra'/></a> | Account Payment Terms Discount
