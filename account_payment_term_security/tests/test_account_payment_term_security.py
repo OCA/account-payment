@@ -1,71 +1,48 @@
 # Copyright 2023-2025 Tecnativa - Víctor Martínez
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
-from lxml import etree
-
 from odoo.tests import new_test_user, users
 
 from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestAccountPaymentTermSecurity(BaseCommon):
+class TestPaymentTermSecurity(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        account_group = "account.group_account_invoice"
+        group_account_term = (
+            "account_payment_term_security.account_payment_term_mgmt"
+        )
         new_test_user(
             cls.env,
-            login="test-account-user",
-            groups=account_group,
+            login="basic-user",
+            groups="base.group_user",
         )
-        payment_term_group = "account_payment_term_security.account_payment_term_mgmt"
         new_test_user(
             cls.env,
-            login="test-acount-payment_term_mgmt-user",
-            groups=f"{account_group},{payment_term_group}",
+            login="payment-term-mgmt-user",
+            groups=f"base.group_user,{group_account_term}",
         )
 
-    @users("test-account-user")
-    def test_res_partner_01(self):
-        view = self.env["res.partner"].get_view()
-        doc = etree.XML(view["arch"])
-        field_payment_term_id = doc.xpath("//field[@name='property_payment_term_id']")[
-            0
-        ]
-        self.assertTrue(field_payment_term_id.attrib["readonly"])
-        self.assertTrue(field_payment_term_id.attrib["force_save"])
-        field_payment_term_id = doc.xpath(
-            "//field[@name='property_supplier_payment_term_id']"
-        )[0]
-        self.assertTrue(field_payment_term_id.attrib["readonly"])
-        self.assertTrue(field_payment_term_id.attrib["force_save"])
+    @users("basic-user")
+    def test_account_move_without_group(self):
+        move = self.env["account.move"].new({})
+        move._compute_is_account_payment_term_mgmt()
+        self.assertFalse(move.is_account_payment_term_mgmt)
 
-    @users("test-acount-payment_term_mgmt-user")
-    def test_res_partner_02(self):
-        view = self.env["res.partner"].get_view()
-        doc = etree.XML(view["arch"])
-        field_payment_term_id = doc.xpath("//field[@name='property_payment_term_id']")[
-            0
-        ]
-        self.assertNotIn("readonly", field_payment_term_id.attrib)
-        self.assertNotIn("force_save", field_payment_term_id.attrib)
-        field_payment_term_id = doc.xpath(
-            "//field[@name='property_supplier_payment_term_id']"
-        )[0]
-        self.assertNotIn("readonly", field_payment_term_id.attrib)
-        self.assertNotIn("force_save", field_payment_term_id.attrib)
+    @users("payment-term-mgmt-user")
+    def test_account_move_with_group(self):
+        move = self.env["account.move"].new({})
+        move._compute_is_account_payment_term_mgmt()
+        self.assertTrue(move.is_account_payment_term_mgmt)
 
-    @users("test-account-user")
-    def test_account_move_01(self):
-        view = self.env["account.move"].get_view()
-        doc = etree.XML(view["arch"])
-        field_payment_term_id = doc.xpath("//field[@name='invoice_payment_term_id']")[0]
-        self.assertTrue(field_payment_term_id.attrib["readonly"])
-        self.assertTrue(field_payment_term_id.attrib["force_save"])
+    @users("basic-user")
+    def test_res_partner_without_group(self):
+        partner = self.env["res.partner"].new({})
+        partner._compute_is_account_payment_term_mgmt()
+        self.assertFalse(partner.is_account_payment_term_mgmt)
 
-    @users("test-acount-payment_term_mgmt-user")
-    def test_account_move_02(self):
-        view = self.env["account.move"].get_view()
-        doc = etree.XML(view["arch"])
-        field_payment_term_id = doc.xpath("//field[@name='invoice_payment_term_id']")[0]
-        self.assertNotEqual(field_payment_term_id.attrib["readonly"], "1")
-        self.assertNotIn("force_save", field_payment_term_id.attrib)
+    @users("payment-term-mgmt-user")
+    def test_res_partner_with_group(self):
+        partner = self.env["res.partner"].new({})
+        partner._compute_is_account_payment_term_mgmt()
+        self.assertTrue(partner.is_account_payment_term_mgmt)
