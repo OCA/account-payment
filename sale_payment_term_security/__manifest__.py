@@ -10,6 +10,9 @@
     "website": "https://github.com/OCA/account-payment",
     "license": "AGPL-3",
     "depends": ["account_payment_term_security", "sale"],
+    "data": [
+        "views/sale_order_views.xml",
+    ],
     "installable": True,
     "maintainers": ["victoralmau"],
 }
