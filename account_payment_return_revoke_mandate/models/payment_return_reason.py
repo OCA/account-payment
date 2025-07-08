@@ -5,7 +5,6 @@ from odoo import fields, models
 
 
 class PaymentReturnReason(models.Model):
-
-    _inherit = 'payment.return.reason'
+    _inherit = "payment.return.reason"
 
     revoke_mandates = fields.Boolean(company_dependent=True)

@@ -1,0 +1,2 @@
+- Quentin Groulard \<quentin.groulard@acsone.eu\>
+- Hughes Damry \<hughes.damry@acsone.eu\>

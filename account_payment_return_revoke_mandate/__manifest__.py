@@ -6,11 +6,10 @@
     "summary": """
         This addon adds an option on return codes
         in order to cancel mandates associated.""",
-    "version": "12.0.1.0.0",
+    "version": "18.0.1.0.0",
     "license": "AGPL-3",
     "author": "ACSONE SA/NV,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-payment",
     "depends": ["account_banking_mandate", "account_payment_return"],
-    "data": ["views/payment_return_reason.xml"],
-    "demo": [],
+    "installable": True,
 }
