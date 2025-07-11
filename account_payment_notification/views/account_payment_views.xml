@@ -2,7 +2,6 @@
 <!-- Copyright 2022 Moduon Team S.L.
      License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl). -->
 <data>
-
     <record id="action_notifiy_mail_single" model="ir.actions.act_window">
         <field name="name">Notifiy by email</field>
         <field
@@ -83,5 +82,4 @@
             </filter>
         </field>
     </record>
-
 </data>
