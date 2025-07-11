@@ -2,7 +2,6 @@
 <!-- Copyright 2022 Moduon Team S.L.
      License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl). -->
 <data noupdate="1">
-
     <record id="mail_template_notification" model="mail.template">
         <field name="name">Payment notification</field>
         <field name="auto_delete" eval="False" />
@@ -45,5 +44,4 @@
             </div>
         </field>
     </record>
-
 </data>

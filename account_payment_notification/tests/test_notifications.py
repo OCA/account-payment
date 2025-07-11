@@ -57,9 +57,7 @@ class NotificationCase(TestAccountReconciliationCommon):
                 expected_values.append(
                     {
                         "message_type": "sms",
-                        "description": "Dear {}, the [...]".format(
-                            payment.partner_id.name
-                        ),
+                        "description": f"Dear {payment.partner_id.name}, the [...]",
                     }
                 )
                 expected_message_notifications.append(
@@ -73,9 +71,7 @@ class NotificationCase(TestAccountReconciliationCommon):
                 expected_values.append(
                     {
                         "message_type": "notification",
-                        "description": "{} Payment Notification (Ref {})".format(
-                            payment.company_id.name, payment.name
-                        ),
+                        "description": f"{payment.company_id.name} Payment Notification (Ref {payment.name})",
                         "subtype_id": mt_comment.id,
                     }
                 )
@@ -164,9 +160,7 @@ class NotificationCase(TestAccountReconciliationCommon):
         self.set_mode("all")
         with self.assertRaises(
             ValidationError,
-            msg="Cannot notify partners of these payments: {}, {}".format(
-                self.payments[0].display_name, self.payments[1].display_name
-            ),
+            msg=f"Cannot notify partners of these payments: {self.payments[0].display_name}, {self.payments[1].display_name}",
         ):
             self.payments.mark_as_sent()
 

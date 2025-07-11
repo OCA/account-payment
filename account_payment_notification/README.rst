@@ -17,13 +17,13 @@ Account payment notification
     :target: http://www.gnu.org/licenses/lgpl-3.0-standalone.html
     :alt: License: LGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--payment-lightgray.png?logo=github
-    :target: https://github.com/OCA/account-payment/tree/16.0/account_payment_notification
+    :target: https://github.com/OCA/account-payment/tree/18.0/account_payment_notification
     :alt: OCA/account-payment
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/account-payment-16-0/account-payment-16-0-account_payment_notification
+    :target: https://translation.odoo-community.org/projects/account-payment-18-0/account-payment-18-0-account_payment_notification
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/account-payment&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/account-payment&target_branch=18.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
@@ -42,45 +42,47 @@ Configuration
 
 To configure automatic notifications, you need to:
 
-#. Go to *Settings*.
-#. Go to *Invoicing*.
-#. Choose if you want to *Require payment notifications*.
-#. Select the desired *Payment notification method*.
-#. Select the desired *Payment notifications automatism*.
+1. Go to *Settings*.
+2. Go to *Invoicing*.
+3. Choose if you want to *Require payment notifications*.
+4. Select the desired *Payment notification method*.
+5. Select the desired *Payment notifications automatism*.
 
 Usage
 =====
 
 To use this module, you need to:
 
-#. Go to *Invoicing* or *Accounting* app.
-#. Go to *Customers > Payments* or *Vendors > Payments*.
-#. Select one or more payments.
-#. Click on *Action*.
-#. Select *Notify partners*.
+1. Go to *Invoicing* or *Accounting* app.
+2. Go to *Customers > Payments* or *Vendors > Payments*.
+3. Select one or more payments.
+4. Click on *Action*.
+5. Select *Notify partners*.
 
 Odoo will use your preferred notification method, as defined in
 configuration (see that section), to notify all the chosen partners.
 
-Both email and SMS notifications are put in outgoing queues. They will be
-cleared automatically when their corresponding cron jobs are executed.
+Both email and SMS notifications are put in outgoing queues. They will
+be cleared automatically when their corresponding cron jobs are
+executed.
 
-If you do that same operation from a payment form view, you will have the option
-to choose between sending an email or an SMS. You will be able to edit the
-template before sending it.
+If you do that same operation from a payment form view, you will have
+the option to choose between sending an email or an SMS. You will be
+able to edit the template before sending it.
 
-💡 Tip: You have new filters in the payments list. Use them to select those
-that have (or not) email or mobile phone.
+💡 Tip: You have new filters in the payments list. Use them to select
+those that have (or not) email or mobile phone.
 
-⚠️ `Sending SMS is a paid service
-<https://www.odoo.com/documentation/15.0/applications/marketing/sms_marketing/pricing/pricing_and_faq.html>`__.
+⚠️ `Sending SMS is a paid
+service <https://www.odoo.com/documentation/15.0/applications/marketing/sms_marketing/pricing/pricing_and_faq.html>`__.
 
 Known issues / Roadmap
 ======================
 
-* Multiple SMS notifications to the same partner cannot be sent in batch.
-  Always group payments before notifying. Odoo considers these SMS as duplicated
-  and avoids sending more than one per batch. This behavior is hardcoded.
+- Multiple SMS notifications to the same partner cannot be sent in
+  batch. Always group payments before notifying. Odoo considers these
+  SMS as duplicated and avoids sending more than one per batch. This
+  behavior is hardcoded.
 
 Bug Tracker
 ===========
@@ -88,7 +90,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/account-payment/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/account-payment/issues/new?body=module:%20account_payment_notification%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/account-payment/issues/new?body=module:%20account_payment_notification%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -96,18 +98,18 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Moduon
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* Rafael Blasco (`Moduon <https://www.moduon.team/>`__)
-* Jairo Llopis (`Moduon <https://www.moduon.team/>`__)
+- Rafael Blasco (`Moduon <https://www.moduon.team/>`__)
+- Jairo Llopis (`Moduon <https://www.moduon.team/>`__)
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -127,6 +129,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-yajo| 
 
-This module is part of the `OCA/account-payment <https://github.com/OCA/account-payment/tree/16.0/account_payment_notification>`_ project on GitHub.
+This module is part of the `OCA/account-payment <https://github.com/OCA/account-payment/tree/18.0/account_payment_notification>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
