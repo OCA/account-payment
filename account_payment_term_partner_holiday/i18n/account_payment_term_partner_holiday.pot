@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.0\n"
+"Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -14,12 +14,14 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: account_payment_term_partner_holiday
+#. odoo-python
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
 #, python-format
 msgid "April"
 msgstr ""
 
 #. module: account_payment_term_partner_holiday
+#. odoo-python
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
 #, python-format
 msgid "August"
@@ -51,6 +53,7 @@ msgid "Day To"
 msgstr ""
 
 #. module: account_payment_term_partner_holiday
+#. odoo-python
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
 #, python-format
 msgid "December"
@@ -62,6 +65,7 @@ msgid "Display Name"
 msgstr ""
 
 #. module: account_payment_term_partner_holiday
+#. odoo-python
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
 #, python-format
 msgid "February"
@@ -73,6 +77,7 @@ msgid "ID"
 msgstr ""
 
 #. module: account_payment_term_partner_holiday
+#. odoo-python
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
 #, python-format
 msgid "January"
@@ -84,12 +89,14 @@ msgid "Journal Entry"
 msgstr ""
 
 #. module: account_payment_term_partner_holiday
+#. odoo-python
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
 #, python-format
 msgid "July"
 msgstr ""
 
 #. module: account_payment_term_partner_holiday
+#. odoo-python
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
 #, python-format
 msgid "June"
@@ -111,12 +118,14 @@ msgid "Last Updated on"
 msgstr ""
 
 #. module: account_payment_term_partner_holiday
+#. odoo-python
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
 #, python-format
 msgid "March"
 msgstr ""
 
 #. module: account_payment_term_partner_holiday
+#. odoo-python
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
 #, python-format
 msgid "May"
@@ -138,12 +147,14 @@ msgid "Month from should be higher than month from"
 msgstr ""
 
 #. module: account_payment_term_partner_holiday
+#. odoo-python
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
 #, python-format
 msgid "November"
 msgstr ""
 
 #. module: account_payment_term_partner_holiday
+#. odoo-python
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
 #, python-format
 msgid "October"
@@ -171,12 +182,14 @@ msgid "Payment Terms Holidays"
 msgstr ""
 
 #. module: account_payment_term_partner_holiday
+#. odoo-python
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
 #, python-format
 msgid "September"
 msgstr ""
 
 #. module: account_payment_term_partner_holiday
+#. odoo-python
 #: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
 #, python-format
 msgid "You can't set the ending holidays period before the beginning."
