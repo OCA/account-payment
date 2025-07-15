@@ -3,7 +3,7 @@
 {
     "name": "Account payment notification",
     "summary": "Notifiy upcoming payments",
-    "version": "16.0.1.0.1",
+    "version": "18.0.1.0.0",
     "development_status": "Beta",
     "category": "Accounting",
     "website": "https://github.com/OCA/account-payment",
