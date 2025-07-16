@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -26,7 +26,6 @@ msgstr ""
 #. module: account_payment_return
 #. odoo-python
 #: code:addons/account_payment_return/models/payment_return.py:0
-#, python-format
 msgid "All payments must be owned by the same partner"
 msgstr ""
 
@@ -198,14 +197,12 @@ msgstr ""
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_account_bank_statement_line__returned_payment
 #: model:ir.model.fields,help:account_payment_return.field_account_move__returned_payment
-#: model:ir.model.fields,help:account_payment_return.field_account_payment__returned_payment
 msgid "Invoice has been included on a payment that has been returned later."
 msgstr ""
 
 #. module: account_payment_return
 #. odoo-python
 #: code:addons/account_payment_return/models/payment_return.py:0
-#, python-format
 msgid "Invoice: %s"
 msgstr ""
 
@@ -277,15 +274,19 @@ msgstr ""
 #. module: account_payment_return
 #. odoo-python
 #: code:addons/account_payment_return/models/payment_return.py:0
-#, python-format
 msgid "Move lines: %s"
 msgstr ""
 
 #. module: account_payment_return
 #. odoo-python
 #: code:addons/account_payment_return/models/payment_return.py:0
-#, python-format
 msgid "Move: %s"
+msgstr ""
+
+#. module: account_payment_return
+#. odoo-python
+#: code:addons/account_payment_return/models/payment_return.py:0
+msgid "No account found on the payment method or journal."
 msgstr ""
 
 #. module: account_payment_return
@@ -336,14 +337,12 @@ msgstr ""
 #. module: account_payment_return
 #. odoo-javascript
 #: code:addons/account_payment_return/static/src/xml/account_payment_return.xml:0
-#, python-format
 msgid "Payment Info"
 msgstr ""
 
 #. module: account_payment_return
 #. odoo-python
 #: code:addons/account_payment_return/models/payment_return.py:0
-#, python-format
 msgid ""
 "Payment Line: %(move_names)s (%(partner_name)s) in Payment Return: "
 "%(return_name)s"
@@ -362,7 +361,6 @@ msgstr ""
 #. module: account_payment_return
 #. odoo-python
 #: code:addons/account_payment_return/models/payment_return.py:0
-#, python-format
 msgid ""
 "Payment reference must be unique\n"
 "%s"
@@ -388,7 +386,6 @@ msgstr ""
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_account_bank_statement_line__returned_payment
 #: model:ir.model.fields,field_description:account_payment_return.field_account_move__returned_payment
-#: model:ir.model.fields,field_description:account_payment_return.field_account_payment__returned_payment
 msgid "Payment returned"
 msgstr ""
 
@@ -422,8 +419,6 @@ msgstr ""
 #. module: account_payment_return
 #. odoo-python
 #: code:addons/account_payment_return/models/payment_return.py:0
-#: code:addons/account_payment_return/models/payment_return.py:0
-#, python-format
 msgid "Return %s"
 msgstr ""
 
@@ -456,7 +451,6 @@ msgstr ""
 #. module: account_payment_return
 #. odoo-python
 #: code:addons/account_payment_return/models/account_move.py:0
-#, python-format
 msgid "Returned on"
 msgstr ""
 
@@ -500,13 +494,11 @@ msgstr ""
 #. module: account_payment_return
 #. odoo-python
 #: code:addons/account_payment_return/models/payment_return.py:0
-#, python-format
 msgid "You can not remove a payment return if state is 'Done'"
 msgstr ""
 
 #. module: account_payment_return
 #. odoo-python
 #: code:addons/account_payment_return/models/payment_return.py:0
-#, python-format
 msgid "You must input all moves references in the payment return."
 msgstr ""
