@@ -56,14 +56,7 @@ class AccountPayment(models.Model):
         mt_comment = self.env.ref("mail.mt_comment")
         tpl = self.env.ref("account_payment_notification.mail_template_notification")
         assert tpl.model == self._name, "Template has wrong model!?"
-        for payment in self:
-            # TODO Batch per lang if possible
-            payment.message_post_with_template(
-                tpl.id,
-                composition_mode="mass_post",
-                subtype_id=mt_comment.id,
-                notify=True,
-            )
+        self.message_post_with_source(tpl, subtype_id=mt_comment.id)
 
     def _notify_sent_payments_sms(self):
         """Notify sent payments by sms."""

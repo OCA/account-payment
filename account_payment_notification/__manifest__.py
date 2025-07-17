@@ -8,7 +8,7 @@
     "category": "Accounting",
     "website": "https://github.com/OCA/account-payment",
     "author": "Moduon, Odoo Community Association (OCA)",
-    "maintainers": ["yajo"],
+    "maintainers": ["yajo", "rafaelbn"],
     "license": "LGPL-3",
     "installable": True,
     "depends": [

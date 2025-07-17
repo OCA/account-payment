@@ -48,10 +48,17 @@ To configure automatic notifications, you need to:
 4. Select the desired *Payment notification method*.
 5. Select the desired *Payment notifications automatism*.
 
+.. note::
+
+   Automated notifications will be sent or queued when the payment is
+   marked as *sent*, not as *paid*. A *sent* payment is one that has
+   been sent to the bank, while a *paid* payment is one that has been
+   reconciled with a bank statement.
+
 Usage
 =====
 
-To use this module, you need to:
+To send notifications manually, you need to:
 
 1. Go to *Invoicing* or *Accounting* app.
 2. Go to *Customers > Payments* or *Vendors > Payments*.
@@ -62,19 +69,41 @@ To use this module, you need to:
 Odoo will use your preferred notification method, as defined in
 configuration (see that section), to notify all the chosen partners.
 
-Both email and SMS notifications are put in outgoing queues. They will
-be cleared automatically when their corresponding cron jobs are
-executed.
+.. tip::
+
+   You have new filters in the payments list. Use them to select those
+   that have (or not) email or mobile phone.
+
+Both email and SMS notifications are put in outgoing queues if done
+massively. In that case, they will be cleared automatically when their
+corresponding cron jobs are executed.
+
+.. warning::
+
+   `Sending SMS is a paid
+   service <https://www.odoo.com/documentation/15.0/applications/marketing/sms_marketing/pricing/pricing_and_faq.html>`__.
 
 If you do that same operation from a payment form view, you will have
 the option to choose between sending an email or an SMS. You will be
 able to edit the template before sending it.
 
-💡 Tip: You have new filters in the payments list. Use them to select
-those that have (or not) email or mobile phone.
+.. note::
 
-⚠️ `Sending SMS is a paid
-service <https://www.odoo.com/documentation/15.0/applications/marketing/sms_marketing/pricing/pricing_and_faq.html>`__.
+   Sometimes notifications will be registered as notes, and sometimes as
+   messages, depending on whether they are sent in bulk or individually.
+   In any case, they are notified to the partner.
+
+To send notifications automatically, you need to:
+
+1. Go to *Invoicing* or *Accounting* app.
+2. Go to *Customers > Payments* or *Vendors > Payments*.
+3. Open one paymnt.
+4. Click on *Mark as Sent*.
+
+.. tip::
+
+   Odoo EE has a module named ``account_batch_payment`` that automates
+   that. If you use it, payment notifications will be queued when sent.
 
 Known issues / Roadmap
 ======================
@@ -124,10 +153,13 @@ promote its widespread use.
 .. |maintainer-yajo| image:: https://github.com/yajo.png?size=40px
     :target: https://github.com/yajo
     :alt: yajo
+.. |maintainer-rafaelbn| image:: https://github.com/rafaelbn.png?size=40px
+    :target: https://github.com/rafaelbn
+    :alt: rafaelbn
 
-Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
+Current `maintainers <https://odoo-community.org/page/maintainer-role>`__:
 
-|maintainer-yajo| 
+|maintainer-yajo| |maintainer-rafaelbn| 
 
 This module is part of the `OCA/account-payment <https://github.com/OCA/account-payment/tree/18.0/account_payment_notification>`_ project on GitHub.
 
