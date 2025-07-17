@@ -397,10 +397,17 @@ ul.auto-toc {
 <li>Select the desired <em>Payment notification method</em>.</li>
 <li>Select the desired <em>Payment notifications automatism</em>.</li>
 </ol>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Automated notifications will be sent or queued when the payment is
+marked as <em>sent</em>, not as <em>paid</em>. A <em>sent</em> payment is one that has
+been sent to the bank, while a <em>paid</em> payment is one that has been
+reconciled with a bank statement.</p>
+</div>
 </div>
 <div class="section" id="usage">
 <h1><a class="toc-backref" href="#toc-entry-2">Usage</a></h1>
-<p>To use this module, you need to:</p>
+<p>To send notifications manually, you need to:</p>
 <ol class="arabic simple">
 <li>Go to <em>Invoicing</em> or <em>Accounting</em> app.</li>
 <li>Go to <em>Customers &gt; Payments</em> or <em>Vendors &gt; Payments</em>.</li>
@@ -410,16 +417,40 @@ ul.auto-toc {
 </ol>
 <p>Odoo will use your preferred notification method, as defined in
 configuration (see that section), to notify all the chosen partners.</p>
-<p>Both email and SMS notifications are put in outgoing queues. They will
-be cleared automatically when their corresponding cron jobs are
-executed.</p>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">You have new filters in the payments list. Use them to select those
+that have (or not) email or mobile phone.</p>
+</div>
+<p>Both email and SMS notifications are put in outgoing queues if done
+massively. In that case, they will be cleared automatically when their
+corresponding cron jobs are executed.</p>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last"><a class="reference external" href="https://www.odoo.com/documentation/15.0/applications/marketing/sms_marketing/pricing/pricing_and_faq.html">Sending SMS is a paid
+service</a>.</p>
+</div>
 <p>If you do that same operation from a payment form view, you will have
 the option to choose between sending an email or an SMS. You will be
 able to edit the template before sending it.</p>
-<p>💡 Tip: You have new filters in the payments list. Use them to select
-those that have (or not) email or mobile phone.</p>
-<p>⚠️ <a class="reference external" href="https://www.odoo.com/documentation/15.0/applications/marketing/sms_marketing/pricing/pricing_and_faq.html">Sending SMS is a paid
-service</a>.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">Sometimes notifications will be registered as notes, and sometimes as
+messages, depending on whether they are sent in bulk or individually.
+In any case, they are notified to the partner.</p>
+</div>
+<p>To send notifications automatically, you need to:</p>
+<ol class="arabic simple">
+<li>Go to <em>Invoicing</em> or <em>Accounting</em> app.</li>
+<li>Go to <em>Customers &gt; Payments</em> or <em>Vendors &gt; Payments</em>.</li>
+<li>Open one paymnt.</li>
+<li>Click on <em>Mark as Sent</em>.</li>
+</ol>
+<div class="admonition tip">
+<p class="first admonition-title">Tip</p>
+<p class="last">Odoo EE has a module named <tt class="docutils literal">account_batch_payment</tt> that automates
+that. If you use it, payment notifications will be queued when sent.</p>
+</div>
 </div>
 <div class="section" id="known-issues-roadmap">
 <h1><a class="toc-backref" href="#toc-entry-3">Known issues / Roadmap</a></h1>
@@ -462,8 +493,8 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <p>OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.</p>
-<p>Current <a class="reference external" href="https://odoo-community.org/page/maintainer-role">maintainer</a>:</p>
-<p><a class="reference external image-reference" href="https://github.com/yajo"><img alt="yajo" src="https://github.com/yajo.png?size=40px" /></a></p>
+<p>Current <a class="reference external" href="https://odoo-community.org/page/maintainer-role">maintainers</a>:</p>
+<p><a class="reference external image-reference" href="https://github.com/yajo"><img alt="yajo" src="https://github.com/yajo.png?size=40px" /></a> <a class="reference external image-reference" href="https://github.com/rafaelbn"><img alt="rafaelbn" src="https://github.com/rafaelbn.png?size=40px" /></a></p>
 <p>This module is part of the <a class="reference external" href="https://github.com/OCA/account-payment/tree/18.0/account_payment_notification">OCA/account-payment</a> project on GitHub.</p>
 <p>You are welcome to contribute. To learn how please visit <a class="reference external" href="https://odoo-community.org/page/Contribute">https://odoo-community.org/page/Contribute</a>.</p>
 </div>
