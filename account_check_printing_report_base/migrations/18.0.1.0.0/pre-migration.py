@@ -6,14 +6,10 @@ from openupgradelib import openupgrade
 
 @openupgrade.migrate()
 def migrate(env, version):
-    openupgrade.rename_fields(
-        env,
-        [
-            (
-                "account.journal",
-                "account_journal",
-                "account_check_printing_layout",
-                "bank_check_printing_layout",
-            ),
-        ],
+    openupgrade.logged_query(
+        env.cr,
+        """
+            UPDATE account_journal
+            SET bank_check_printing_layout = account_check_printing_layout
+            """,
     )
