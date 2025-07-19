@@ -3,7 +3,7 @@
 
 {
     "name": "Account Payment Paired Internal Transfer",
-    "version": "14.0.1.0.1",
+    "version": "16.0.1.0.0",
     "summary": "Crete internal transfers in one move.",
     "license": "LGPL-3",
     "depends": ["account"],
