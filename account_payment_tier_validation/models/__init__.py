@@ -2,4 +2,3 @@
 
 from . import account_payment
 from . import tier_definition
-from . import account_move

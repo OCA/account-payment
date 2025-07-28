@@ -16,7 +16,7 @@
                 <filter
                     name="tier_validated"
                     string="Validated"
-                    domain="[('validated', '=', True)]"
+                    domain="[('validation_status', '=', 'validated')]"
                     help="Payments validated and ready to be confirmed"
                 />
             </filter>
@@ -24,11 +24,11 @@
     </record>
 
     <record id="view_account_payment_tree" model="ir.ui.view">
-        <field name="name">account.payment.list</field>
+        <field name="name">account.payment.tree</field>
         <field name="model">account.payment</field>
         <field name="inherit_id" ref="account.view_account_payment_tree" />
         <field name="arch" type="xml">
-            <list position="inside">
+            <tree position="inside">
                 <field
                     name="validation_status"
                     widget="badge"
@@ -37,7 +37,7 @@
                     decoration-danger="validation_status == 'rejected'"
                     decoration-success="validation_status == 'validated'"
                 />
-            </list>
+            </tree>
         </field>
     </record>
 </odoo>
