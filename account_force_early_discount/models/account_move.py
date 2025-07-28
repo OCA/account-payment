@@ -29,7 +29,7 @@ class AccountMove(models.Model):
             first_payment_term_line = self._get_first_payment_term_line()
             if (
                 first_payment_term_line.discount_date
-                and first_payment_term_line.discount_amount
+                and first_payment_term_line.discount_amount_currency
             ):
                 return True
         return False

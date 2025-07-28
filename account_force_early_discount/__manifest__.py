@@ -1,8 +1,8 @@
 # Copyright 2019 Camptocamp SA
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 {
-    "name": "Account financial discount",
-    "summary": "Handle financial discounts for early payments",
+    "name": "Account force early payment discount",
+    "summary": "Allow forcing financial discounts for early payments",
     "version": "18.0.1.0.1",
     "development_status": "Production/Stable",
     "category": "Account",
