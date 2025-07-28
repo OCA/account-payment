@@ -34,9 +34,9 @@ class AccountPaymentRegister(models.TransientModel):
                 wizard.with_forced_early_discount = True
                 continue
             lines_with_forced_discount_past_date = wizard.line_ids.filtered(
-                lambda l: l.discount_amount_currency
-                and l.discount_date < wizard.payment_date
-                and l.move_id.force_early_discount
+                lambda li: li.discount_amount_currency
+                and li.discount_date < wizard.payment_date  # noqa: B023
+                and li.move_id.force_early_discount
             )
             wizard.with_forced_early_discount = bool(
                 lines_with_forced_discount_past_date
@@ -47,12 +47,8 @@ class AccountPaymentRegister(models.TransientModel):
         for wizard in self:
             # If at least one invoice has late discounts on its move lines
             wizard.show_force_early_discount = wizard.line_ids.filtered(
-                lambda l: l.discount_amount_currency
-                and l.discount_date < wizard.payment_date
-            )
-            # If any invoice has force_early_discount
-            any_invoice_with_forced_discount = any(
-                wizard.line_ids.mapped("move_id.force_early_discount")
+                lambda li: li.discount_amount_currency
+                and li.discount_date < wizard.payment_date  # noqa: B023
             )
 
     @api.depends("with_forced_early_discount", "force_early_discount")
