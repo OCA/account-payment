@@ -11,7 +11,6 @@ class TestAccountFinancialDiscountCommon(TransactionCase):
         move_type,
         payment_term=None,
         invoice_date=None,
-        invoice_date_due=None,
         currency=None,
         payment_reference=None,
     ):
@@ -21,7 +20,6 @@ class TestAccountFinancialDiscountCommon(TransactionCase):
         move_form.partner_id = partner
         move_form.invoice_payment_term_id = payment_term
         move_form.invoice_date = invoice_date
-        # move_form.date = invoice_date
         if currency is not None:
             move_form.currency_id = currency
         if payment_reference is not None:
@@ -40,7 +38,11 @@ class TestAccountFinancialDiscountCommon(TransactionCase):
                 line_form.quantity = quantity
                 line_form.price_unit = unit_price
                 if with_tax:
-                    line_form.tax_ids = cls.env.ref("account.1_sale_tax_template")
+                    if invoice.move_type in ("out_invoice", "in_refund"):
+                        tax = cls.sale_tax
+                    elif invoice.move_type in ("in_invoice", "out_refund"):
+                        tax = cls.purchase_tax
+                    line_form.tax_ids = tax
 
     @classmethod
     def setUpClass(cls):
@@ -59,24 +61,6 @@ class TestAccountFinancialDiscountCommon(TransactionCase):
             {"name": "Hans Muster GmbH & Co. KG", "customer_rank": 1}
         )
 
-        # cls.write_off_rev = cls.env["account.account"].create(
-        #     {
-        #         "code": "wrtrev",
-        #         "name": "writeoff revenue",
-        #         "user_type_id": cls.env.ref("account.data_account_type_expenses").id,
-        #         "reconcile": False,
-        #     }
-        # )
-        # cls.write_off_exp = cls.env["account.account"].create(
-        #     {
-        #         "code": "wrtexp",
-        #         "name": "writeoff expenses",
-        #         "user_type_id": cls.env.ref("account.data_account_type_expenses").id,
-        #         "reconcile": False,
-        #     }
-        # )
-        # cls.env.company.financial_discount_expense_account_id = cls.write_off_exp
-        # cls.env.company.financial_discount_revenue_account_id = cls.write_off_rev
         cls.payment_term = cls.env["account.payment.term"].create(
             {
                 "name": "Skonto",
@@ -97,12 +81,10 @@ class TestAccountFinancialDiscountCommon(TransactionCase):
                 ],
             }
         )
-        cls.payable_account = cls.env["account.account"].search(
-            [("account_type", "=", "liability_payable")], limit=1
-        )
-        cls.receivable_account = cls.env["account.account"].search(
-            [("account_type", "=", "asset_receivable")], limit=1
-        )
+
+        cls.sale_tax = cls.env.company.account_sale_tax_id
+        cls.purchase_tax = cls.env.company.account_purchase_tax_id
+
         cls.bank_journal = cls.env["account.journal"].search(
             [("company_id", "=", cls.env.company.id), ("type", "=", "bank")],
             limit=1,
@@ -116,17 +98,4 @@ class TestAccountFinancialDiscountCommon(TransactionCase):
             }
         )
 
-        cls.exp = cls.env["account.account"].create(
-            {
-                "code": "exp",
-                "name": "expenses",
-                "account_type": "expense",
-                "reconcile": True,
-            }
-        )
-
         cls.payment_thirty_net = cls.env.ref("account.account_payment_term_30days")
-
-        cls.payment_method_manual_out = cls.env.ref(
-            "account.account_payment_method_manual_out"
-        )

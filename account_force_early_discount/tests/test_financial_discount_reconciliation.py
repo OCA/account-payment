@@ -12,14 +12,6 @@ class TestAccountFinancialDiscountReconciliation(TestAccountFinancialDiscountCom
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.client_invoice1 = cls.init_invoice(
-            cls.customer,
-            "out_invoice",
-            payment_term=cls.payment_term,
-            invoice_date="2019-05-01",
-            invoice_date_due="2019-06-01",
-        )
-        cls.init_invoice_line(cls.client_invoice1, 1.0, 1000.0)
 
         cls.reconciliation_model = cls.env["account.reconcile.model"].search(
             [("rule_type", "=", "invoice_matching")], limit=1
