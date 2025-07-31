@@ -27,9 +27,7 @@ class AccountRegisterPayments(models.TransientModel):
     def _onchange_promissory_note(self):
         result = super()._onchange_promissory_note()
         if not self.date_due and self.promissory_note:
-            active_ids = self.env.context.get("active_ids")
-            invoice_lines = self.env["account.move.line"].browse(active_ids)
-            same_partner = len(invoice_lines.move_id.partner_id) == 1
-            if invoice_lines and self.group_payment and same_partner:
-                self.date_due = max(invoice_lines.move_id.mapped("invoice_date_due"))
+            same_partner = len(self.line_ids.move_id.partner_id) == 1
+            if self.line_ids and self.group_payment and same_partner:
+                self.date_due = max(self.line_ids.move_id.mapped("invoice_date_due"))
         return result

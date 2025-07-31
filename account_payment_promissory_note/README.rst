@@ -73,6 +73,8 @@ Contributors
   - Carlos Roca
   - César A. Sánchez
 
+- Jairo Llopis (`Moduon <https://www.moduon.team/>`__)
+
 Maintainers
 -----------
 
