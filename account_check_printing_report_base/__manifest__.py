@@ -7,7 +7,7 @@
 
 {
     "name": "Account Check Printing Report Base",
-    "version": "18.0.1.0.0",
+    "version": "17.0.1.0.0",
     "license": "AGPL-3",
     "author": "Eficent,"
     "Serpent Consulting Services Pvt. Ltd.,"
@@ -25,4 +25,5 @@
         "report/account_check_writing_report.xml",
     ],
     "installable": True,
+    "odoo_version": "17.0",
 }
