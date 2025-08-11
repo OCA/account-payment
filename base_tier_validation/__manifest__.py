@@ -3,7 +3,7 @@
 {
     "name": "Base Tier Validation",
     "summary": "Implement a validation process based on tiers.",
-    "version": "18.0.3.0.0",
+    "version": "17.0.1.0.0",
     "development_status": "Mature",
     "maintainers": ["LoisRForgeFlow"],
     "category": "Tools",
@@ -31,4 +31,5 @@
             "base_tier_validation/static/src/js/**/*",
         ],
     },
+    "odoo_version": "17.0"
 }
