@@ -6,7 +6,7 @@
         <field name="name">tier.definition.list</field>
         <field name="model">tier.definition</field>
         <field name="arch" type="xml">
-            <list>
+            <tree>
                 <field name="sequence" widget="handle" />
                 <field name="model_id" />
                 <field name="name" />
@@ -23,7 +23,7 @@
                     optional="hide"
                 />
                 <field name="active" />
-            </list>
+            </tree>
         </field>
     </record>
     <record id="tier_definition_view_form" model="ir.ui.view">
