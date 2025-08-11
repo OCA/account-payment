@@ -6,7 +6,7 @@
         <field name="name">tier.validation.exception.list</field>
         <field name="model">tier.validation.exception</field>
         <field name="arch" type="xml">
-            <list>
+            <tree>
                 <field name="name" />
                 <field name="model_id" />
                 <field name="field_ids" widget="many2many_tags" optional="show" />
@@ -14,7 +14,7 @@
                 <field name="allowed_to_write_under_validation" />
                 <field name="allowed_to_write_after_validation" />
                 <field name="group_ids" widget="many2many_tags" />
-            </list>
+            </tree>
         </field>
     </record>
 
