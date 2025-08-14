@@ -186,6 +186,7 @@ msgstr ""
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return__message_has_error
+#: model:ir.model.fields,help:account_payment_return.field_payment_return__message_has_sms_error
 msgid "If checked, some messages have a delivery error."
 msgstr ""
 
@@ -452,6 +453,11 @@ msgstr ""
 #. odoo-python
 #: code:addons/account_payment_return/models/account_move.py:0
 msgid "Returned on"
+msgstr ""
+
+#. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_has_sms_error
+msgid "SMS Delivery error"
 msgstr ""
 
 #. module: account_payment_return
