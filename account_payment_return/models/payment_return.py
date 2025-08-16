@@ -417,7 +417,9 @@ class PaymentReturnLine(models.Model):
         self.filtered(lambda x: not x.amount)._compute_amount()
 
     def _prepare_invoice_returned_vals(self):
-        return self.return_id._prepare_invoice_returned_vals()
+        res = self.return_id._prepare_invoice_returned_vals()
+        res["last_returned_payment_reason_id"] = self.reason_id.id
+        return res
 
     @api.multi
     def _prepare_return_move_line_vals(self, move):
