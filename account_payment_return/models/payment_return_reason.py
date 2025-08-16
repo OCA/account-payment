@@ -10,6 +10,11 @@ class PaymentReturnReason(models.Model):
 
     code = fields.Char()
     name = fields.Char(string='Reason', translate=True)
+    next_action_type_id = fields.Many2one(
+        comodel_name="payment.return.reason.action.type",
+        string="Next Action",
+        company_dependent=True,
+    )
 
     @api.model
     def name_search(self, name, args=None, operator='ilike', limit=100):
