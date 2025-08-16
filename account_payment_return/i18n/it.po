@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-15 18:00+0000\n"
-"PO-Revision-Date: 2025-07-30 14:14+0000\n"
+"PO-Revision-Date: 2025-08-16 13:25+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-payment-8-0/"
 "language/it/)\n"
@@ -297,7 +297,7 @@ msgstr "Movimento: %s"
 #. odoo-python
 #: code:addons/account_payment_return/models/payment_return.py:0
 msgid "No account found on the payment method or journal."
-msgstr ""
+msgstr "Conto mancante nel metodo di pagamento e nel registro."
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_needaction_counter
@@ -471,7 +471,7 @@ msgstr "Rimborsato il"
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_has_sms_error
 msgid "SMS Delivery error"
-msgstr ""
+msgstr "Errore consegna SMS"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__state
