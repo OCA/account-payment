@@ -35,7 +35,7 @@ class AccountMoveLine(models.Model):
             days=value
         )
         if operator in ("!=", "<>", "in", "not in"):
-            raise ValueError("Invalid operator: {}".format(operator))
+            raise ValueError(f"Invalid operator: {operator}")
         if operator == ">":
             operator = "<"
         elif operator == "<":

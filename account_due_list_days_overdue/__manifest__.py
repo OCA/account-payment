@@ -5,7 +5,7 @@
 
 {
     "name": "Payments Due list days overdue",
-    "version": "16.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Accounting",
     "author": "Odoo Community Association (OCA), ForgeFlow",
     "website": "https://github.com/OCA/account-payment",
