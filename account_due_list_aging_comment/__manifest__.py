@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html).
 {
     "name": "Account Due List Aging Comment",
-    "version": "16.0.1.0.0",
+    "version": "17.0.1.0.0",
     "category": "Generic Modules/Payment",
     "author": "Eficent," "Odoo Community Association (OCA),",
     "website": "https://github.com/OCA/account-payment",
