@@ -59,7 +59,7 @@ class PaymentReturnImport(models.TransientModel):
         if self.match_after_import:
             payment_returns.button_match()
         if len(payment_returns) != 1:
-            action["domain"] = "[('id', 'in', {payment_returns.ids})]"
+            action["domain"] = f"[('id', 'in', {payment_returns.ids})]"
         else:
             form_view = self.env.ref("account_payment_return.payment_return_form_view")
             action.update(
