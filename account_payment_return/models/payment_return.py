@@ -409,6 +409,7 @@ class PaymentReturnLine(models.Model):
 
     def _prepare_invoice_returned_vals(self):
         res = self.return_id._prepare_invoice_returned_vals()
+        res["last_returned_payment_reason_id"] = self.reason_id.id
         return res
 
     def _prepare_expense_lines_vals(self, move):
