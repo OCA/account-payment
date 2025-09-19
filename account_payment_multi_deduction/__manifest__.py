@@ -15,5 +15,5 @@
     ],
     "installable": True,
     "development_status": "Alpha",
-    "maintainers": ["kittiu"],
+    "maintainers": ["kittiu","NelsonV93],
 }
