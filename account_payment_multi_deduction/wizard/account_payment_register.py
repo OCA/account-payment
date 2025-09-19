@@ -86,14 +86,17 @@ class AccountPaymentRegister(models.TransientModel):
         This is used to track how much is left to allocate in multi deduction mode.
         """
         for rec in self:
-            rec.deduct_residual = rec.payment_difference - sum(rec.deduction_ids.mapped("amount"))
+            rec.deduct_residual = rec.payment_difference - sum(
+                rec.deduction_ids.mapped("amount")
+            )
 
     def _create_payment_vals_from_wizard(self, batch_result):
         """
         Generates the payment values dictionary to be used for payment creation.
-        Adds analytic distribution to the write-off line if handling a single payment difference.
-        If handling multi deduction, replaces the write-off lines with the prepared deduction lines
-        and marks the payment as multi deduction. Returns the final payment values dict.
+        Adds analytic distribution to the write-off line if handling a single
+        payment difference. If handling multi deduction, replaces the write-off
+        lines with the prepared deduction lines and marks the payment as multi
+        deduction. Returns the final payment values dict.
         """
         payment_vals = super()._create_payment_vals_from_wizard(batch_result)
         # payment difference
@@ -107,14 +110,17 @@ class AccountPaymentRegister(models.TransientModel):
             if self.payment_difference:
                 payment_vals["write_off_line_vals"] = [
                     self._prepare_deduct_move_line(deduct)
-                    for deduct in self.deduction_ids.filtered(lambda l: not l.is_open)
+                    for deduct in self.deduction_ids.filtered(
+                        lambda deduction: not deduction.is_open
+                    )
                 ]
                 payment_vals["is_multi_deduction"] = True
         return payment_vals
 
     def _prepare_deduct_move_line(self, deduct):
         """
-        Prepares the dictionary for a single deduction line to be used as a write-off line in multi deduction payments.
+        Prepares the dictionary for a single deduction line to be used as a
+        write-off line in multi deduction payments.
         Calculates the amount, balance, and analytic distribution for the deduction.
         """
         conversion_rate = self.env["res.currency"]._get_conversion_rate(

@@ -18,13 +18,21 @@
                     />
                 </div>
             </xpath>
-            
-            <xpath expr="/form/group/group[@name='group3']/div/div" position="attributes">
-                <attribute name="invisible">payment_difference_handling != 'reconcile'</attribute>
+
+            <xpath
+                expr="/form/group/group[@name='group3']/div/div"
+                position="attributes"
+            >
+                <attribute
+                    name="invisible"
+                >payment_difference_handling != 'reconcile'</attribute>
             </xpath>
 
             <xpath expr="/form/group/group[@name='group3']" position="after">
-                <group colspan="4" invisible="payment_difference_handling != 'reconcile_multi_deduct'">
+                <group
+                    colspan="4"
+                    invisible="payment_difference_handling != 'reconcile_multi_deduct'"
+                >
                     <field name="deduct_residual" invisible="True" />
                     <field name="deduct_analytic_distribution" invisible="True" />
                     <field
