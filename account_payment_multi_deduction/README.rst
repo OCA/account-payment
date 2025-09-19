@@ -58,6 +58,10 @@ Note: this feature only works for 1 invoice payment
 
 Changelog
 =========
+17.0.1.0.0 (2025-09-19)
+~~~~~~~~~~~~~~~~~~~~~~~
+
+* Migration to version 17
 
 13.0.1.0.0 (2020-01-27)
 ~~~~~~~~~~~~~~~~~~~~~~~
@@ -93,6 +97,7 @@ Contributors
 
 * Kitti Upariphutthiphong. <kittiu@gmail.com> (http://ecosoft.co.th)
 * Saran Lim. <saranl@ecosoft.co.th>
+* Nelson Velez <nelson.avelez10@gmail.com>
 
 Maintainers
 ~~~~~~~~~~~
