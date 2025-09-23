@@ -33,6 +33,7 @@ class AccountMove(models.Model):
             payment_method_name = line_id.payment_method_line_id.name
         except AttributeError:
             payment_method_name = False
+        ref = line_id.memo if hasattr(line_id, "memo") else line_id.ref
         return {
             "name": line_id.name,
             "journal_name": line_id.journal_id.name,
@@ -49,7 +50,7 @@ class AccountMove(models.Model):
                 currency_obj=line_id.currency_id,
             ),
             "payment_method_name": payment_method_name,
-            "ref": f"{line_id.move_id.name} ({line_id.ref})",
+            "ref": f"{line_id.move_id.name} ({ref})",
             "returned": is_return,
         }
 
