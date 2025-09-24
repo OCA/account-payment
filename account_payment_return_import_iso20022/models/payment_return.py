@@ -30,4 +30,5 @@ class PaymentReturnLine(models.Model):
                         == payment.destination_account_id
                         and x.partner_id == payment.partner_id
                     )
+        matched.filtered(lambda x: not x.amount)._compute_amount()
         return super(PaymentReturnLine, self - matched)._find_match()
