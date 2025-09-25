@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-08-15 18:00+0000\n"
-"PO-Revision-Date: 2022-07-26 17:06+0000\n"
-"Last-Translator: jabelchi <jabelchi@gmail.com>\n"
+"PO-Revision-Date: 2025-09-25 21:43+0000\n"
+"Last-Translator: Pilar Vargas <pilar.vargas@tecnativa.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/oca/OCA-account-payment-8-0/"
 "language/ca/)\n"
 "Language: ca\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.3.2\n"
+"X-Generator: Weblate 5.10.4\n"
 
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_needaction
@@ -416,7 +416,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_payment_return.field_account_move__returned_payment
 #: model:ir.model.fields,field_description:account_payment_return.field_account_payment__returned_payment
 msgid "Payment returned"
-msgstr ""
+msgstr "Pagament retornat"
 
 #. module: account_payment_return
 #: model:ir.model.fields,help:account_payment_return.field_payment_return_line__concept
