@@ -5,20 +5,16 @@
 
 {
     "name": "Account Payment - Select Account",
-    "version": "12.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Accounting & Finance",
-    "description": """
-        Allow user to select the account on Register Payment of Invoice if
-        the default Debit / Credit account is not set in the selected Journal
-    """,
-    "author": "La Louve, Druidoo",
+    "author": "La Louve, Druidoo, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-payment",
     "license": "AGPL-3",
     "depends": [
         "account",
     ],
     "data": [
-        "views/account_payment_view.xml",
+        "wizard/account_payment_register_views.xml",
     ],
     "demo": [],
 }

@@ -1,2 +1,2 @@
 Allow user to select the account on Register Payment of Invoice if the
-default Debit / Credit account is not set in theselected Journal
+Outstanding Receipts / Payment account is not set in the selected Payment Method

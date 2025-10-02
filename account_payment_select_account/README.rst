@@ -29,7 +29,8 @@ Account Payment - Select Account
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
 Allow user to select the account on Register Payment of Invoice if the
-default Debit / Credit account is not set in theselected Journal
+Outstanding Receipts / Payment account is not set in the selected
+Payment Method
 
 **Table of contents**
 
@@ -54,6 +55,14 @@ Authors
 
 * La Louve
 * Druidoo
+
+Contributors
+------------
+
+- ajayjaviya
+- `Trobz <https://www.trobz.com>`__
+
+  - Phan Hong Phuc <phucph@trobz.com>
 
 Maintainers
 -----------
