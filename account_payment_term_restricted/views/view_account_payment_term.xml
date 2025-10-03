@@ -4,10 +4,10 @@
         <field name="model">account.payment.term</field>
         <field name="inherit_id" ref="account.view_payment_term_form" />
         <field name="arch" type="xml">
-            <field name="name" position="after">
+            <label for="early_discount" position="before">
                 <field name="for_customer" />
                 <field name="for_supplier" />
-            </field>
+            </label>
         </field>
     </record>
 </odoo>

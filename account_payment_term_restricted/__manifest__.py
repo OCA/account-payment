@@ -5,9 +5,9 @@
 
 {
     "name": "Account Payment Terms - Customer / Supplier Restrictions",
-    "version": "12.0.1.0.0",
+    "version": "18.0.1.0.0",
     "category": "Accounting",
-    "author": "Sylvain LE GAL, La Louve, Druidoo",
+    "author": "Sylvain LE GAL, La Louve, Druidoo, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-payment",
     "license": "AGPL-3",
     "depends": [

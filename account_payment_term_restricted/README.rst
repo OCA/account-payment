@@ -71,6 +71,9 @@ Contributors
 - Sylvain LE GAL
   <`https://twitter.com/legalsylvain\\> <https://twitter.com/legalsylvain\>>`__
 - Druidoo <`https://www.druidoo.io\\> <https://www.druidoo.io\>>`__
+- `Trobz <https://www.trobz.com>`__
+
+  - Phan Hong Phuc <phucph@trobz.com>
 
 Maintainers
 -----------

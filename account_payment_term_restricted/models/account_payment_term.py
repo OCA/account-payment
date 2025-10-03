@@ -9,5 +9,5 @@ from odoo import fields, models
 class AccountPaymentTerm(models.Model):
     _inherit = "account.payment.term"
 
-    for_customer = fields.Boolean(string="for Customers", default=True)
-    for_supplier = fields.Boolean(string="for Suppliers", default=True)
+    for_customer = fields.Boolean(default=True)
+    for_supplier = fields.Boolean(default=True)
