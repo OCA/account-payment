@@ -3,11 +3,11 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from odoo import models, fields
+from odoo import fields, models
 
 
 class AccountPaymentTerm(models.Model):
-    _inherit = 'account.payment.term'
+    _inherit = "account.payment.term"
 
-    for_customer = fields.Boolean(string='for Customers', default=True)
-    for_supplier = fields.Boolean(string='for Suppliers', default=True)
+    for_customer = fields.Boolean(string="for Customers", default=True)
+    for_supplier = fields.Boolean(string="for Suppliers", default=True)
