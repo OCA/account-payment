@@ -10,7 +10,5 @@ class AccountPayment(models.Model):
     check_date = fields.Date(
         default=fields.Date.context_today,
         required=True,
-        readonly=True,
-        states={"draft": [("readonly", False)]},
         copy=False,
     )
