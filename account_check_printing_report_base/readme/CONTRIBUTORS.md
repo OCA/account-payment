@@ -1,6 +1,6 @@
-- Jordi Ballester Alomar \<<jordi.ballester@eficent.com>\>
+- Jordi Ballester Alomar \<<jordi.ballester@forgeflow.com>\>
 
-- Lois Rilo Antelo \<<lois.rilo@eficent.com>\>
+- Lois Rilo Antelo \<<lois.rilo@forgeflow.com>\>
 
 - Sandip Mangukiya \<<smangukiya@ursainfosystems.com>\>
 
