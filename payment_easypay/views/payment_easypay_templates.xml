@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <!-- Redirect form - handles both Checkout and Single Payment flows -->
+    <template id="redirect_form">
+        <t t-if="easypay_payment_url">
+            <!-- Single Payment flow - redirect to hosted page -->
+            <form method="get" t-att-action="easypay_payment_url">
+                <input type="hidden" name="redirect" value="1" />
+            </form>
+        </t>
+        <t t-else="">
+            <!-- Checkout flow - SDK renders inline -->
+            <script
+                type="text/javascript"
+                src="https://cdn.easypay.pt/checkout/2.6.0/easypay-checkout.min.js"
+            />
+            <div id="easypay_redirect_form">
+                <input
+                    type="hidden"
+                    name="checkout_manifest"
+                    t-att-value="checkout_manifest"
+                />
+                <input type="hidden" name="checkout_id" t-att-value="checkout_id" />
+                <input type="hidden" name="api_url" t-att-value="api_url" />
+                <div id="easypay-checkout" />
+            </div>
+        </t>
+    </template>
+
+    <!-- Payment icon -->
+    <template id="easypay_icon" name="EasyPay Icon">
+        <span class="payment_icon_easypay">
+            <i class="fa fa-credit-card" />
+        </span>
+    </template>
+</odoo>

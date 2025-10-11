@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="0">
+    <record id="payment_provider_easypay" model="payment.provider">
+        <field name="state">test</field>
+        <field name="easypay_account_id">2b0f63e2-9fb5-4e52-aca0-b4bf0339bbe6</field>
+        <field name="easypay_api_key">eae4aa59-8e5b-4ec2-887d-b02768481a92</field>
+        <field name="easypay_payment_method">cc</field>
+        <field name="easypay_use_checkout">True</field>
+    </record>
+</odoo>

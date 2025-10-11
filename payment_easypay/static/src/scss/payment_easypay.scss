@@ -1,0 +1,39 @@
+/* Copyright 2025 Open Source Integrators
+ * License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
+ */
+
+.easypay_redirect_form {
+    text-align: center;
+    padding: 2rem;
+
+    .fa-spinner {
+        color: #00a09d;
+    }
+
+    span {
+        font-size: 1.2rem;
+        margin-top: 1rem;
+        display: block;
+    }
+}
+
+#easypay_checkout_container {
+    min-height: 400px;
+    padding: 1rem;
+}
+
+#easypay-checkout {
+    width: 100%;
+}
+
+.payment_icon_easypay {
+    display: inline-block;
+    padding: 0.5rem;
+    background-color: #00a09d;
+    color: white;
+    border-radius: 4px;
+
+    i {
+        font-size: 1.5rem;
+    }
+}
