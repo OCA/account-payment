@@ -17,7 +17,6 @@
             </filter>
         </field>
     </record>
-
     <record id="action_pay" model="ir.actions.act_window">
         <field name="name">Register Payment</field>
         <field name="res_model">account.payment.register</field>
