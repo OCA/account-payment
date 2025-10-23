@@ -27,11 +27,3 @@ class AccountMove(models.Model):
             )
             if new_invoice_date_due != self.invoice_date_due:
                 self.invoice_date_due = new_invoice_date_due
-
-    def action_post(self):
-        """Inject a context for getting the partner when computing payment term."""
-        for move in self:
-            super(
-                AccountMove, move.with_context(move_partner_id=move.partner_id.id)
-            ).action_post()
-        return False
