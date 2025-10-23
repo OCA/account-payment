@@ -7,12 +7,6 @@ from odoo import api, models
 class AccountMove(models.Model):
     _inherit = "account.move"
 
-    def _recompute_payment_terms_lines(self):
-        _self = self
-        if self.partner_id:
-            _self = self.with_context(move_partner_id=self.partner_id.id)
-        return super(AccountMove, _self)._recompute_payment_terms_lines()
-
     @api.onchange("invoice_date_due")
     def _onchange_invoice_date_due_account_payment_term_partner_holiday(self):
         """Recompute the due date to the next available date according to
@@ -33,11 +27,3 @@ class AccountMove(models.Model):
             )
             if new_invoice_date_due != self.invoice_date_due:
                 self.invoice_date_due = new_invoice_date_due
-
-    def action_post(self):
-        """Inject a context for getting the partner when computing payment term."""
-        for move in self:
-            super(
-                AccountMove, move.with_context(move_partner_id=move.partner_id.id)
-            ).action_post()
-        return False
