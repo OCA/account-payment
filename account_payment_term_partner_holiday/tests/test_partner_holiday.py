@@ -4,10 +4,11 @@
 import psycopg2
 
 from odoo import Command, fields
-from odoo.tests import Form, common
+from odoo.tests import Form
 from odoo.tools.misc import mute_logger
 
 from odoo.addons.base.tests.common import BaseCommon
+
 
 class TestPartnerHoliday(BaseCommon):
     def setUp(self):
@@ -93,7 +94,9 @@ class TestPartnerHoliday(BaseCommon):
                     )
                 ],
                 "holiday_ids": [
-                    Command.create({"holiday": "2021-06-14", "date_postponed": "2021-07-08"})
+                    Command.create(
+                        {"holiday": "2021-06-14", "date_postponed": "2021-07-08"}
+                    )
                 ],
             }
         )

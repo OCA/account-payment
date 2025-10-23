@@ -27,9 +27,3 @@ class AccountMove(models.Model):
             )
             if new_invoice_date_due != self.invoice_date_due:
                 self.invoice_date_due = new_invoice_date_due
-
-    def action_post(self):
-        """Ensure that the payment terms are up to date when we confirm the move"""
-        for move in self.filtered("invoice_date_due"):
-            move._recompute_payment_terms_lines()
-        return super().action_post()
