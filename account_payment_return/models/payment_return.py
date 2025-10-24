@@ -153,12 +153,13 @@ class PaymentReturn(models.Model):
 
     def _prepare_move_line(self, move, total_amount):
         self.ensure_one()
-        account = (
-            self.payment_method_line_id.payment_account_id
-            or self.journal_id.default_account_id
-        )
+        account = self.payment_method_line_id.payment_account_id
         if not account:
-            raise UserError(_("No account found on the payment method or journal."))
+            account = (
+                self.env["account.payment"]
+                .with_company(self.company_id)
+                ._get_outstanding_account("inbound")
+            )
         return {
             "name": move.ref,
             "debit": 0.0,
