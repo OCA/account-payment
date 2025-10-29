@@ -294,12 +294,6 @@ msgid "Move: %s"
 msgstr "Movimento: %s"
 
 #. module: account_payment_return
-#. odoo-python
-#: code:addons/account_payment_return/models/payment_return.py:0
-msgid "No account found on the payment method or journal."
-msgstr "Conto mancante nel metodo di pagamento e nel registro."
-
-#. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_needaction_counter
 msgid "Number of Actions"
 msgstr "Numero di azioni"
@@ -522,6 +516,9 @@ msgstr "Non si può eliminare un rimborso pagamento se lo stato è \"Eseguito\""
 msgid "You must input all moves references in the payment return."
 msgstr ""
 "Bisogna inserire tutti i riferimenti dei movimenti nel rimborso pagamento."
+
+#~ msgid "No account found on the payment method or journal."
+#~ msgstr "Conto mancante nel metodo di pagamento e nel registro."
 
 #~ msgid "Last Modified on"
 #~ msgstr "Ultima modifica il"

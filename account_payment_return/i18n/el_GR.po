@@ -290,12 +290,6 @@ msgid "Move: %s"
 msgstr ""
 
 #. module: account_payment_return
-#. odoo-python
-#: code:addons/account_payment_return/models/payment_return.py:0
-msgid "No account found on the payment method or journal."
-msgstr ""
-
-#. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__message_needaction_counter
 msgid "Number of Actions"
 msgstr ""
