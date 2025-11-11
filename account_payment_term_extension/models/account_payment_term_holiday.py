@@ -9,6 +9,7 @@
 
 from odoo import api, fields, models
 from odoo.exceptions import ValidationError
+from odoo.fields import Domain
 
 
 class AccountPaymentTermHoliday(models.Model):
@@ -24,36 +25,43 @@ class AccountPaymentTermHoliday(models.Model):
     @api.constrains("holiday", "date_postponed")
     def check_holiday(self):
         for record in self:
+            holiday_domain = Domain.AND(
+                [
+                    Domain("payment_id", "=", record.payment_id.id),
+                    Domain("holiday", "=", record.holiday),
+                ]
+            )
+            date_postponed_domain = (
+                Domain.AND(
+                    [
+                        Domain("payment_id", "=", record.payment_id.id),
+                        Domain.OR(
+                            [
+                                Domain("date_postponed", "=", record.holiday),
+                                Domain("holiday", "=", record.date_postponed),
+                            ]
+                        ),
+                    ]
+                ),
+            )
             if record.date_postponed <= record.holiday:
                 raise ValidationError(
-                    self.env._("Holiday %s can only be postponed into the future")
-                    % record.holiday
+                    self.env._(
+                        "Holiday %s can only be postponed into the future",
+                        record.holiday,
+                    )
                 )
-            if (
-                record.search_count(
-                    [
-                        ("payment_id", "=", record.payment_id.id),
-                        ("holiday", "=", record.holiday),
-                    ]
-                )
-                > 1
-            ):
+            if record.search_count(holiday_domain) > 1:
                 raise ValidationError(
-                    self.env._("Holiday %s is duplicated in current payment term")
-                    % record.holiday
+                    self.env._(
+                        "Holiday %s is duplicated in current payment term",
+                        record.holiday,
+                    )
                 )
-            if (
-                record.search_count(
-                    [
-                        ("payment_id", "=", record.payment_id.id),
-                        "|",
-                        ("date_postponed", "=", record.holiday),
-                        ("holiday", "=", record.date_postponed),
-                    ]
-                )
-                >= 1
-            ):
+            if record.search_count(date_postponed_domain) >= 1:
                 raise ValidationError(
-                    self.env._("Date %s cannot is both a holiday and a Postponed date")
-                    % record.holiday
+                    self.env._(
+                        "Date %s cannot is both a holiday and a Postponed date",
+                        record.holiday,
+                    )
                 )
