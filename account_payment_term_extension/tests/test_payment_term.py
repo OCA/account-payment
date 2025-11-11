@@ -14,8 +14,31 @@ class TestAccountPaymentTerm(BaseCommon):
         cls.account_payment_term = cls.env["account.payment.term"]
         cls.currency = cls.env.company.currency_id
         cls.company = cls.env.company
-        cls.sixty_days_end_of_month = cls.env.ref(
-            "account_payment_term_extension.sixty_days_end_of_month"
+        cls.sixty_days_end_of_month = cls.account_payment_term.create(
+            {
+                "name": "60 days end of month",
+                "note": "60 days end of month",
+                "sequential_lines": True,
+                "line_ids": [
+                    fields.Command.clear(),
+                    fields.Command.create(
+                        {
+                            "delay_type": "days_after_end_of_month",
+                            "nb_days": 60,
+                            "value": "fixed",
+                            "value_amount": 0,
+                        },
+                    ),
+                    fields.Command.create(
+                        {
+                            "delay_type": "days_after_end_of_month",
+                            "nb_days": 60,
+                            "value": "percent",
+                            "value_amount": 100,
+                        },
+                    ),
+                ],
+            }
         )
         cls.account_payment_term_holiday = cls.env["account.payment.term.holiday"]
 

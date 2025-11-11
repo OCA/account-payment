@@ -14,3 +14,5 @@
   - Hoang \<<hoang@trobz.com>\>
 - Anaïs López \<<anais.lopez@forgeflow.com>\>
 - Marco Colombo \<<marco.colombo@phi.technology>\>
+- \'Studio73, S.L. \<<https://studio73.es>\>\`:
+  - Pablo Cortés
