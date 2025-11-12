@@ -6,47 +6,49 @@ import time
 
 from odoo import fields
 from odoo.exceptions import RedirectWarning
-from odoo.tests.common import TransactionCase
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestAccountCheckPrintingReportBase(TransactionCase):
-    def setUp(self):
-        super().setUp()
-        self.langs = ("en_US", "es_ES")
-        self.rl = self.env["res.lang"]
-        for lang in self.langs:
-            if not self.rl.search([("code", "=", lang)]):
-                self.rl._activate_lang(lang)
-        self.account_invoice_model = self.env["account.move"]
-        self.journal_model = self.env["account.journal"]
-        self.payment_method_model = self.env["account.payment.method"]
-        self.payment_method_line_model = self.env["account.payment.method.line"]
-        self.account_account_model = self.env["account.account"]
-        self.payment_model = self.env["account.payment"]
-        self.report = self.env[
+class TestAccountCheckPrintingReportBase(BaseCommon):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.langs = ("en_US", "es_ES")
+        cls.rl = cls.env["res.lang"]
+        for lang in cls.langs:
+            if not cls.rl.search([("code", "=", lang)]):
+                cls.rl._activate_lang(lang)
+        cls.account_invoice_model = cls.env["account.move"]
+        cls.journal_model = cls.env["account.journal"]
+        cls.payment_method_model = cls.env["account.payment.method"]
+        cls.payment_method_line_model = cls.env["account.payment.method.line"]
+        cls.account_account_model = cls.env["account.account"]
+        cls.payment_model = cls.env["account.payment"]
+        cls.report = cls.env[
             "report.account_check_printing_report_base.report_check_base"
         ]
 
-        self.partner1 = self.env.ref("base.res_partner_1")
-        self.company = self.env.ref("base.main_company")
-        self.currency_usd_id = self.env.ref("base.USD").id
-        self.currency_euro_id = self.env.ref("base.EUR").id
-        self.product = self.env.ref("product.product_product_4")
-        self.check_report = (
-            "account_check_printing_report_base.action_report_check_base"
+        cls.partner1 = cls.env.ref("base.main_partner")
+        cls.company = cls.env.ref("base.main_company")
+        cls.currency_usd_id = cls.env.ref("base.USD").id
+        cls.currency_euro_id = cls.env.ref("base.EUR").id
+        cls.product = cls.env["product.product"].create(
+            {"name": "Test product", "type": "consu"}
         )
-        self.check_report_a4 = (
+        cls.check_report = "account_check_printing_report_base.action_report_check_base"
+        cls.check_report_a4 = (
             "account_check_printing_report_base.action_report_check_base_a4"
         )
-        self.action_check_report = self.env.ref(
+        cls.action_check_report = cls.env.ref(
             "account_check_printing_report_base.action_report_check_base"
         )
-        self.payment_method_check = self.payment_method_model.search(
+        cls.payment_method_check = cls.payment_method_model.search(
             [("code", "=", "check_printing")],
             limit=1,
         )
-        if not self.payment_method_check:
-            self.payment_method_check = self.payment_method_model.create(
+        if not cls.payment_method_check:
+            cls.payment_method_check = cls.payment_method_model.create(
                 {
                     "name": "Check",
                     "code": "check_printing",
@@ -54,49 +56,60 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
                     "check": True,
                 }
             )
-        self.purchase_journal = self.journal_model.create(
-            {"name": "Purchase Journal - Test", "type": "purchase", "code": "Test"}
+        cls.acc_payable = cls._create_account(
+            "account payable test", "ACPRB1", "liability_payable", True
         )
-        self.bank_journal = self.journal_model.create(
+        cls.acc_expense = cls._create_account(
+            "account expense test", "ACPRB2", "expense", False
+        )
+        cls.purchase_journal = cls.journal_model.create(
+            {
+                "name": "Purchase Journal - Test",
+                "type": "purchase",
+                "code": "Test",
+                "default_account_id": cls.acc_expense.id,
+                "company_id": cls.company.id,
+            }
+        )
+        cls.bank_journal = cls.journal_model.create(
             {
                 "name": "Cash Journal - Test",
                 "type": "bank",
                 "code": "bank",
                 "check_manual_sequencing": True,
+                "default_account_id": cls.acc_payable.id,
+                "company_id": cls.company.id,
             }
         )
-        self.payment_method_line_check = self.payment_method_line_model.create(
+        cls.payment_method_line_check = cls.payment_method_line_model.create(
             {
                 "name": "Check",
-                "payment_method_id": self.payment_method_check.id,
-                "journal_id": self.bank_journal.id,
+                "payment_method_id": cls.payment_method_check.id,
+                "journal_id": cls.bank_journal.id,
             }
         )
-        self.acc_payable = self._create_account(
-            "account payable test", "ACPRB1", "liability_payable", True
-        )
-        self.vendor_bill = self._create_vendor_bill(self.acc_payable)
-        self.vendor_bill.invoice_date = time.strftime("%Y") + "-07-15"
-        self.acc_expense = self._create_account(
-            "account expense test", "ACPRB2", "expense", False
-        )
-        self._create_invoice_line(self.acc_expense, self.vendor_bill)
+        cls.vendor_bill = cls._create_vendor_bill(cls.acc_payable)
+        cls.vendor_bill.invoice_date = time.strftime("%Y") + "-07-15"
+        cls._create_invoice_line(cls.acc_expense, cls.vendor_bill)
 
-        self.vendor_bill.action_post()
-        # Pay the invoice using a bank journal associated to the main company
-        ctx = {"active_model": "account.move", "active_ids": [self.vendor_bill.id]}
-        register_payments = self.payment_model.with_context(**ctx).create(
-            {
-                "date": time.strftime("%Y") + "-07-15",
-                "journal_id": self.bank_journal.id,
-                "payment_method_line_id": self.payment_method_line_check.id,
-            }
+        cls.vendor_bill.action_post()
+        register_payments = (
+            cls.env["account.payment.register"]
+            .with_context(active_model="account.move", active_ids=cls.vendor_bill.ids)
+            .create(
+                {
+                    "payment_method_line_id": cls.payment_method_line_check.id,
+                    "journal_id": cls.bank_journal.id,
+                }
+            )
+            ._create_payments()
         )
         register_payments.action_post()
-        self.payment = self.payment_model.search([], order="id desc", limit=1)
+        cls.payment = cls.payment_model.search([], order="id desc", limit=1)
 
-    def _create_account(self, name, code, account_type, reconcile):
-        account = self.account_account_model.create(
+    @classmethod
+    def _create_account(cls, name, code, account_type, reconcile):
+        account = cls.account_account_model.create(
             {
                 "name": name,
                 "code": code,
@@ -106,19 +119,21 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
         )
         return account
 
-    def _create_vendor_bill(self, account):
-        vendor_bill = self.account_invoice_model.create(
+    @classmethod
+    def _create_vendor_bill(cls, account):
+        vendor_bill = cls.account_invoice_model.create(
             {
                 "move_type": "in_invoice",
-                "partner_id": self.partner1.id,
-                "currency_id": self.company.currency_id.id,
-                "journal_id": self.purchase_journal.id,
-                "company_id": self.company.id,
+                "partner_id": cls.partner1.id,
+                "currency_id": cls.company.currency_id.id,
+                "journal_id": cls.purchase_journal.id,
+                "company_id": cls.company.id,
             }
         )
         return vendor_bill
 
-    def _create_invoice_line(self, account, invoice):
+    @classmethod
+    def _create_invoice_line(cls, account, invoice):
         invoice = invoice.write(
             {
                 "invoice_line_ids": [
@@ -130,7 +145,7 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
                             "account_id": account.id,
                             "quantity": 1.000,
                             "price_unit": 2.99,
-                            "product_id": self.product.id,
+                            "product_id": cls.product.id,
                         },
                     )
                 ]
@@ -190,7 +205,7 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
         self.assertEqual(amount1, f"***** {amount} *")
         self.assertEqual(amount2, "{} {}".format(amount_in_word, ("*" * stars)))
 
-    def test_num2words(self):
+    def test_04_num2words(self):
         report_model = "report.account_check_printing_report_base.promissory_footer_a4"
         words_number = (
             self.env[report_model].with_context(lang="en_US").amount2words(4.9)
@@ -204,3 +219,20 @@ class TestAccountCheckPrintingReportBase(TransactionCase):
             self.env[report_model].with_context(lang="es_ES").amount2words(4.95)
         )
         self.assertEqual(words_number, "cuatro euros con noventa y cinco céntimos")
+
+    def test_05_get_residual_amount(self):
+        line = self.vendor_bill.line_ids[0]
+        residual = self.report._get_residual_amount(self.payment, line)
+        self.assertEqual(residual, 0.0)
+
+    def test_06_get_total_amount(self):
+        line = self.vendor_bill.line_ids[0]
+        total = self.report._get_total_amount(self.payment, line)
+        self.assertEqual(total, abs(line.balance))
+
+    def test_08_get_report_values(self):
+        docids = [self.payment.id]
+        values = self.report._get_report_values(docids)
+        self.assertIn("doc_ids", values)
+        self.assertIn("paid_lines", values)
+        self.assertEqual(values["doc_ids"], docids)
