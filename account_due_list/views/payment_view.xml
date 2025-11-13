@@ -41,7 +41,7 @@
                 <field name="debit" readonly="1" sum="Total Debit" optional="hide" />
                 <field name="credit" readonly="1" sum="Total Credit" optional="hide" />
                 <!-- The company_currency_id field is necessary for the sum total fields to be displayed. -->
-                <field name="company_currency_id" invisible="1" readonly="1" />
+                <field name="company_currency_id" column_invisible="1" readonly="1" />
                 <field
                     name="balance"
                     readonly="1"
@@ -64,7 +64,7 @@
                 <field name="date_maturity" optional="show" />
                 <field name="reconciled" readonly="1" optional="hide" />
                 <field name="full_reconcile_id" readonly="1" optional="hide" />
-                <field name="parent_state" invisible="1" />
+                <field name="parent_state" column_invisible="1" />
             </list>
         </field>
     </record>
@@ -153,7 +153,7 @@
                 <field name="analytic_distribution" />
                 <field name="partner_ref" />
                 <field name="payment_term_id" />
-                <group expand="0" string="Group By">
+                <group>
                     <filter
                         string="Partner"
                         domain="[]"
