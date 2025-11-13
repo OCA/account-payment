@@ -1,6 +1,6 @@
-from odoo.tests import common
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestAccountDueList(common.TransactionCase):
+class TestAccountDueList(BaseCommon):
     def test_account_due_list(self):
         pass
