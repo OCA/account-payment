@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.tools import formatLang
 
 
@@ -85,7 +85,7 @@ class AccountMove(models.Model):
                     "outstanding": False,
                     "content": values_returned,
                     "move_id": move.id,
-                    "title": _("Returned on"),
+                    "title": self.env._("Returned on"),
                 }
                 domain = [("origin_returned_move_ids.move_id", "=", move.id)]
                 for reconciled_aml in move._get_reconciled_amls():
