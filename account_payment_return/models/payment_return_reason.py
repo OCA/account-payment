@@ -2,7 +2,7 @@
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
 from odoo import api, fields, models
-from odoo.osv import expression
+from odoo.fields import Domain
 
 
 class PaymentReturnReason(models.Model):
@@ -23,14 +23,11 @@ class PaymentReturnReason(models.Model):
 
     @api.model
     def _search_display_name(self, operator, value):
-        domain = []
+        domain = Domain.TRUE if operator in Domain.NEGATIVE_OPERATORS else Domain.FALSE
         for f_name in self._rec_names_search:
-            domain_item = [(f_name, operator, value)]
-            if domain == []:
-                domain = domain_item
+            cond = Domain(f_name, operator, value)
+            if operator in Domain.NEGATIVE_OPERATORS:
+                domain &= cond
             else:
-                if operator in expression.NEGATIVE_TERM_OPERATORS:
-                    domain = expression.AND([domain, domain_item])
-                else:
-                    domain = expression.OR([domain, domain_item])
+                domain |= cond
         return domain

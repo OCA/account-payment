@@ -7,10 +7,10 @@
         <field name="model">account.journal</field>
         <field name="inherit_id" ref="account.view_account_journal_form" />
         <field name="arch" type="xml">
-            <field name="default_account_id" position="after">
+            <xpath expr="//field[@name='suspense_account_id']" position="before">
                 <field name="default_expense_account_id" />
                 <field name="default_expense_partner_id" />
-            </field>
+            </xpath>
         </field>
     </record>
 </odoo>
