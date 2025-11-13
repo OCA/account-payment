@@ -8,7 +8,6 @@
 
 from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
-from odoo.tools.translate import _
 
 
 class PaymentReturn(models.Model):
@@ -74,13 +73,11 @@ class PaymentReturn(models.Model):
             error_list.append(
                 self.env._(
                     "Payment Line: %(move_names)s (%(partner_name)s) "
-                    "in Payment Return: %(return_name)s"
+                    "in Payment Return: %(return_name)s",
+                    move_names=", ".join(error_line.mapped("move_line_ids.name")),
+                    partner_name=error_line.partner_id.name,
+                    return_name=error_line.return_id.name,
                 )
-                % {
-                    "move_names": ", ".join(error_line.mapped("move_line_ids.name")),
-                    "partner_name": error_line.partner_id.name,
-                    "return_name": error_line.return_id.name,
-                }
             )
 
         error_list = []
@@ -102,21 +99,26 @@ class PaymentReturn(models.Model):
                     append_error(line)
         if error_list:
             raise ValidationError(
-                _("Payment reference must be unique" "\n%s") % "\n".join(error_list)
+                self.env._(
+                    "Payment reference must be unique\n%s", "\n".join(error_list)
+                )
             )
 
     @api.depends("line_ids.amount")
     def _compute_total_amount(self):
         return_line_model = self.env["payment.return.line"]
+        self.total_amount = 0.0
+        if not self.ids:
+            return
         domain = [("return_id", "in", self.ids)]
-        res = return_line_model.read_group(
-            domain=domain, fields=["return_id", "amount"], groupby=["return_id"]
+        res = return_line_model._read_group(
+            domain=domain,
+            aggregates=["amount:sum"],
+            groupby=["return_id"],
         )
         lines_dict = {}
-        for dic in res:
-            return_id = dic["return_id"][0]
-            total_amount = dic["amount"]
-            lines_dict[return_id] = total_amount
+        for return_rec, amount_sum in res:
+            lines_dict[return_rec.id] = amount_sum or 0.0
         for rec in self:
             rec.total_amount = lines_dict.get(rec.id, 0.0)
 
@@ -126,9 +128,14 @@ class PaymentReturn(models.Model):
     def _prepare_invoice_returned_vals(self):
         return {"returned_payment": True}
 
+    def _check_can_unlink(self):
+        if self.filtered(lambda r: r.state == "done"):
+            raise UserError(
+                self.env._("You can not remove a payment return if state is 'Done'")
+            )
+
     def unlink(self):
-        if self.filtered(lambda x: x.state == "done"):
-            raise UserError(_("You can not remove a payment return if state is 'Done'"))
+        self._check_can_unlink()
         return super().unlink()
 
     def button_match(self):
@@ -139,13 +146,12 @@ class PaymentReturn(models.Model):
 
     def _prepare_return_move_vals(self):
         """Prepare the values for the journal entry created from the return.
-
         :return: Dictionary with the record values.
         """
         self.ensure_one()
         return {
             "name": "/",
-            "ref": _("Return %s") % self.name,
+            "ref": self.env._("Return %s", self.name or ""),
             "journal_id": self.journal_id.id,
             "date": self.date,
             "company_id": self.company_id.id,
@@ -171,7 +177,7 @@ class PaymentReturn(models.Model):
         # Check for incomplete lines
         if self.line_ids.filtered(lambda x: not x.move_line_ids):
             raise UserError(
-                _("You must input all moves references in the payment return.")
+                self.env._("You must input all moves references in the payment return.")
             )
         invoices = self.env["account.move"]
         AccountMoveLine = self.env["account.move.line"]
@@ -300,7 +306,9 @@ class PaymentReturnLine(models.Model):
         for line in self.filtered(lambda x: not x.partner_id):
             partners = line.move_line_ids.mapped("partner_id")
             if len(partners) > 1:
-                raise UserError(_("All payments must be owned by the same partner"))
+                raise UserError(
+                    self.env._("All payments must be owned by the same partner")
+                )
             line.partner_id = partners[:1].id
             line.partner_name = partners[:1].name
 
@@ -334,7 +342,10 @@ class PaymentReturnLine(models.Model):
                     # Get last payment if several payments
                     line.move_line_ids = payment_lines[-1].ids
                     if not line.concept:
-                        line.concept = _("Invoice: %s") % invoice.name
+                        line.concept = self.env._(
+                            "Invoice: %s",
+                            invoice.name,
+                        )
 
     def match_move_lines(self):
         for line in self:
@@ -357,8 +368,9 @@ class PaymentReturnLine(models.Model):
             if move_lines:
                 line.move_line_ids = move_lines.ids
                 if not line.concept:
-                    line.concept = _("Move lines: %s") % ", ".join(
-                        move_lines.mapped("name")
+                    line.concept = self.env._(
+                        "Move lines: %(move_names)s",
+                        move_names=", ".join(move_lines.mapped("name")),
                     )
 
     def match_move(self):
@@ -373,7 +385,10 @@ class PaymentReturnLine(models.Model):
                     )
                 ).ids
                 if not line.concept:
-                    line.concept = _("Move: %s") % move.ref
+                    line.concept = self.env._(
+                        "Move: %(move_ref)s",
+                        move_ref=move.ref or "",
+                    )
 
     def _find_match(self):
         # we filter again to remove all ready matched lines in inheritance
@@ -395,7 +410,10 @@ class PaymentReturnLine(models.Model):
     def _prepare_return_move_line_vals(self, move):
         self.ensure_one()
         return {
-            "name": _("Return %s") % self.return_id.name,
+            "name": self.env._(
+                "Return %(return_name)s",
+                return_name=self.return_id.name or "",
+            ),
             "debit": self.return_id._get_move_amount(self),
             "credit": 0.0,
             "account_id": self.move_line_ids[0].account_id.id,

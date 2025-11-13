@@ -144,21 +144,18 @@
     <record model="ir.ui.view" id="payment_return_search_view">
         <field name="name">payment.return.search</field>
         <field name="model">payment.return</field>
-        <field name="type">search</field>
         <field name="arch" type="xml">
             <search>
                 <field name="name" />
-                <group expand="0" string="Group By">
+                <group>
                     <filter
                         name="group_by_journal"
                         string="Journal"
-                        domain="[]"
                         context="{'group_by':'journal_id'}"
                     />
                     <filter
                         name="group_by_state"
                         string="State"
-                        domain="[]"
                         context="{'group_by':'state'}"
                     />
                 </group>
