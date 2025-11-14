@@ -3,7 +3,7 @@
 
 {
     "name": "Payment Term - Partner Payment Days",
-    "version": "18.0.1.0.0",
+    "version": "17.0.1.0.0",
     "category": "Accounting & Finance",
     "summary": "Allows to define payment days for partners.",
     "author": "ForgeFlow, Odoo Community Association (OCA)",
