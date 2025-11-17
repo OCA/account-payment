@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="report_check_base">
+        <t t-call="web.html_container">
+            <div class="header" />
+            <div class="article">
+                <t t-foreach="docs" t-as="o">
+                    <div class="page">
+                        <div class="row mb32 mt32" style="padding-top: 20mm;">
+                            <div class="col-8">
+                                <address
+                                    t-field="o.partner_id"
+                                    t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true, "no_tag_br": true}'
+                                />
+                                <span t-esc="o.date" />
+                                <br />
+                                <span
+                                    t-field="o.amount"
+                                    t-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                />
+                                <br />
+                                <span t-esc="fill_stars(o.check_amount_in_words)" />
+                            </div>
+                        </div>
+                        <br />
+                        <br />
+                        <br />
+                        <br />
+                        <div class="row">
+                            <div class="col-8">
+                                <strong t-field="o.partner_id.name" />
+                            </div>
+                            <div class="col-4">
+                                <strong t-field="o.date" />
+                            </div>
+                        </div>
+                        <t t-foreach="range(2)" t-as="i">
+                            <table class="table table-sm table-borderless">
+                                <thead>
+                                    <tr>
+                                        <th>Due Date</th>
+                                        <th>Description</th>
+                                        <th class="text-right">Original Amount</th>
+                                        <th class="text-right">Balance Due</th>
+                                        <th class="text-right">Payment</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <t t-foreach="paid_lines[o.id]" t-as="line">
+                                        <tr>
+                                            <td>
+                                                <span t-esc="line['date_due']" />
+                                            </td>
+                                            <td>
+                                                <span
+                                                    t-esc="line['reference'] or line['number']"
+                                                />
+                                            </td>
+                                            <td class="text-right">
+                                                <span
+                                                    t-esc="line['amount_total']"
+                                                    t-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                                />
+                                            </td>
+                                            <td class="text-right">
+                                                <span
+                                                    t-esc="line['residual']"
+                                                    t-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                                />
+                                            </td>
+                                            <td class="text-right">
+                                                <span
+                                                    t-esc="line['paid_amount']"
+                                                    t-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                                />
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </tbody>
+                            </table>
+                            <div
+                                style="padding-right: 20mm; padding-top: 45mm; padding-bottom: 15mm;"
+                                align="right"
+                            >
+                                <b>Check Amount:</b>
+                                <span
+                                    t-field="o.amount"
+                                    t-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                />
+                            </div>
+                        </t>
+                    </div>
+                    <p style="page-break-before:always;" />
+                </t>
+            </div>
+        </t>
+    </template>
+    <template id="report_check_base_a4_document">
+        <t t-call="web.external_layout">
+            <t t-set="o" t-value="o.with_context(lang=o.partner_id.lang)" />
+            <div class="page">
+                <div id="check_body">
+                    <div
+                        style="text-align:right; position:absolute; left:0mm; top:15mm; right: 20mm;"
+                    >
+                        <address
+                            t-field="o.partner_id"
+                            t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true}'
+                        />
+                    </div>
+                    <div style="position:absolute; left:5mm; top:70mm; right: 5mm;">
+                        <p>Dear partner</p>
+                        <p>
+                            We attach the list of invoices paid with this check with amount of
+                            <span
+                            t-field="o.amount"
+                            t-options="{'widget': 'monetary', 'display_currency': o.currency_id}"
+                        />
+                        </p>
+                        <table class="table table-sm table-borderless">
+                            <thead>
+                                <tr>
+                                    <th>Invoice / Reference</th>
+                                    <th>Invoice date</th>
+                                    <th>Due Date</th>
+                                    <th class="text-right">Original Amount</th>
+                                    <th class="text-right">Balance Due</th>
+                                    <th class="text-right">Payment</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-foreach="paid_lines[o.id]" t-as="line">
+                                    <tr>
+                                        <td>
+                                            <span
+                                                t-esc="line['reference'] or line['number']"
+                                            />
+                                        </td>
+                                        <td>
+                                            <span t-esc="line['date']" />
+                                        </td>
+                                        <td>
+                                            <span t-esc="line['date_due']" />
+                                        </td>
+                                        <td class="text-right">
+                                            <span
+                                                t-esc="line['amount_total']"
+                                                t-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                            />
+                                        </td>
+                                        <td class="text-right">
+                                            <span
+                                                t-esc="line['residual']"
+                                                t-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                            />
+                                        </td>
+                                        <td class="text-right">
+                                            <span
+                                                t-esc="line['paid_amount']"
+                                                t-options='{"widget": "monetary", "display_currency": o.currency_id}'
+                                            />
+                                        </td>
+                                    </tr>
+                                </t>
+                            </tbody>
+                        </table>
+                        <div class="row">
+                            <div
+                                class="col-12 mt64"
+                            >Waiting for your agreement, regards.</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="report_check_base_a4">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t
+                    t-call="account_check_printing_report_base.report_check_base_a4_document"
+                    t-lang="o.partner_id.lang"
+                />
+            </t>
+        </t>
+    </template>
+</odoo>

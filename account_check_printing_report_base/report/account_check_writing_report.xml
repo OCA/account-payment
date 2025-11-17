@@ -1,0 +1,30 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="action_report_check_base" model="ir.actions.report">
+        <field name="name">Payment Check Base</field>
+        <field name="model">account.payment</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+            name="report_name"
+        >account_check_printing_report_base.report_check_base</field>
+        <field
+            name="report_file"
+        >account_check_printing_report_base.report_check_base</field>
+        <field
+            name="paperformat_id"
+            ref="account_check_printing_report_base.paperformat_check"
+        />
+    </record>
+    <record id="action_report_check_base_a4" model="ir.actions.report">
+        <field name="name">Payment Check Base A4</field>
+        <field name="model">account.payment</field>
+        <field name="report_type">qweb-pdf</field>
+        <field
+            name="report_name"
+        >account_check_printing_report_base.report_check_base_a4</field>
+        <field
+            name="report_file"
+        >account_check_printing_report_base.report_check_base_a4</field>
+        <field name="paperformat_id" ref="base.paperformat_euro" />
+    </record>
+</odoo>
