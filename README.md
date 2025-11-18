@@ -22,6 +22,7 @@ Available addons
 addon | version | maintainers | summary
 --- | --- | --- | ---
 [account_check_printing_report_base](account_check_printing_report_base/) | 19.0.1.0.0 |  | Account Check Printing Report Base
+[account_due_list](account_due_list/) | 19.0.1.0.0 |  | List of open credits and debits, with due date
 
 [//]: # (end addons)
 
