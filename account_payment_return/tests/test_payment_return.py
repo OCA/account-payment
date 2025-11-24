@@ -172,18 +172,12 @@ class TestPaymentReturn(BaseCommon):
 
     def test_find_match_move_line(self):
         self.payment_line.name = "test match move line 001"
-        self.payment_return.write(
+        self.payment_return.line_ids.update(
             {
-                "line_ids": [
-                    Command.create(
-                        {
-                            "partner_id": False,
-                            "move_line_ids": [],
-                            "amount": 0.0,
-                            "reference": self.payment_line.name,
-                        }
-                    )
-                ]
+                "partner_id": False,
+                "move_line_ids": [Command.clear()],
+                "amount": 0.0,
+                "reference": self.payment_line.name,
             }
         )
         self.payment_return.button_match()
