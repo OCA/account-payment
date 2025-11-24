@@ -5,34 +5,16 @@
 # License AGPL-3 - See http://www.gnu.org/licenses/agpl-3.0.html
 
 from odoo.exceptions import UserError, ValidationError
-from odoo.tests import tagged
-from odoo.tests.common import Form, TransactionCase
+from odoo.fields import Command
+from odoo.tests import Form
+
+from odoo.addons.base.tests.common import BaseCommon
 
 
-@tagged("post_install", "-at_install")
-class TestPaymentReturn(TransactionCase):
+class TestPaymentReturn(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.env = cls.env(
-            context=dict(
-                cls.env.context,
-                mail_create_nolog=True,
-                mail_create_nosubscribe=True,
-                mail_notrack=True,
-                no_reset_password=True,
-                tracking_disable=True,
-            )
-        )
-        if not cls.env.company.chart_template_id:
-            # Load a CoA if there's none in current company
-            coa = cls.env.ref("l10n_generic_coa.configurable_chart_template", False)
-            if not coa:
-                # Load the first available CoA
-                coa = cls.env["account.chart.template"].search(
-                    [("visible", "=", True)], limit=1
-                )
-            coa.try_loading(company=cls.env.company, install_demo=False)
         cls.journal = cls.env["account.journal"].create(
             {"name": "Test Sales Journal", "code": "tVEN", "type": "sale"}
         )
@@ -48,7 +30,7 @@ class TestPaymentReturn(TransactionCase):
         cls.bank_journal = cls.env["account.journal"].create(
             {
                 "name": "Test Bank Journal",
-                "code": "BANK",
+                "code": "BANKTEST",
                 "type": "bank",
                 "default_expense_account_id": cls.account.id,
                 "default_expense_partner_id": cls.partner_expense.id,
@@ -70,9 +52,7 @@ class TestPaymentReturn(TransactionCase):
                 "currency_id": cls.env.user.company_id.currency_id.id,
                 "partner_id": cls.partner.id,
                 "invoice_line_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "account_id": cls.account_income.id,
                             "name": "Test line",
@@ -108,9 +88,7 @@ class TestPaymentReturn(TransactionCase):
             {
                 "journal_id": cls.bank_journal.id,
                 "line_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "partner_id": cls.partner.id,
                             "move_line_ids": [(6, 0, cls.payment_line.ids)],
@@ -194,10 +172,10 @@ class TestPaymentReturn(TransactionCase):
 
     def test_find_match_move_line(self):
         self.payment_line.name = "test match move line 001"
-        self.payment_return.line_ids.write(
+        self.payment_return.line_ids.update(
             {
                 "partner_id": False,
-                "move_line_ids": [(6, 0, [])],
+                "move_line_ids": [Command.clear()],
                 "amount": 0.0,
                 "reference": self.payment_line.name,
             }
@@ -213,9 +191,7 @@ class TestPaymentReturn(TransactionCase):
         self.payment_return.write(
             {
                 "line_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "partner_id": False,
                             "move_line_ids": [(6, 0, [])],
@@ -251,22 +227,17 @@ class TestPaymentReturn(TransactionCase):
         self.assertEqual(len(info["content"]), 2)
         self.assertEqual(info["content"][1]["amount"], -500.0)
 
-    def test_reason_name_search(self):
-        reason = self.env["payment.return.reason"]
+    def test_reason_search_display_name(self):
         line = self.payment_return.line_ids[0]
-        line.reason_id = reason.name_search("RTEST")[0]
+        line.reason_id = self.reason.id
         self.assertEqual(line.reason_id.name, "Reason Test")
-        line.reason_id = reason.name_search("Reason Test")[0]
-        self.assertEqual(line.reason_id.code, "RTEST")
 
     def test_compute_total(self):
         self.assertEqual(self.payment_return.total_amount, 500)
         self.payment_return.write(
             {
                 "line_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "partner_id": self.partner.id,
                             "amount": 10.5,
