@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 ACSONE SA/NV
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record model="ir.ui.view" id="account_payment_term_form_view">
+        <field name="model">account.payment.term</field>
+        <field name="inherit_id" ref="account.view_payment_term_form" />
+        <field name="arch" type="xml">
+            <field name="company_id" position="after">
+                <field name="is_deferred" />
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="account_payment_term_tree_view">
+        <field name="model">account.payment.term</field>
+        <field name="inherit_id" ref="account.view_payment_term_tree" />
+        <field name="arch" type="xml">
+            <field name="name" position="after">
+                <field name="is_deferred" optional="show" />
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="account_payment_term_search_view">
+        <field name="model">account.payment.term</field>
+        <field name="inherit_id" ref="account.view_payment_term_search" />
+        <field name="arch" type="xml">
+            <filter name="archived" position="after">
+                <separator />
+                <filter
+                    name="is_deferred"
+                    string="Deferred"
+                    domain="[('is_deferred', '=', True)]"
+                />
+            </filter>
+        </field>
+    </record>
+</odoo>
