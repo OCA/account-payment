@@ -2,4 +2,3 @@
 - Invoicing users should be able too.
 - A good improvement would be to display *Next due date* in invoices views.
 - Also to allow somehow paying only overdue payments when using the register payment wizard.
-- This feature already exists in Odoo 17 under *Invoicing > Customers/Vendors > Amounts to settle*, so there's no need to forward-port this module.
