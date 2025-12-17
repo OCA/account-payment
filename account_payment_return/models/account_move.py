@@ -29,30 +29,49 @@ class AccountMove(models.Model):
         )
 
     def prepare_values_returned_widget(self, line_id, amount, is_return=False):
+        # TODO: Analyze another way in migration to 19.0
         try:
             payment_method_name = line_id.payment_method_line_id.name
         except AttributeError:
             payment_method_name = False
         ref = line_id.memo if hasattr(line_id, "memo") else line_id.ref
+        if (
+            line_id.amount_currency
+            and line_id.currency_id != line_id.company_id.currency_id
+        ):
+            foreign_currency = line_id.currency_id
+        else:
+            foreign_currency = False
+        # Sync keys from _compute_payments_widget_reconciled_info in migrations
         return {
             "name": line_id.name,
             "journal_name": line_id.journal_id.name,
+            "company_name": line_id.journal_id.company_id.name
+            if line_id.journal_id.company_id != line_id.move_id.company_id
+            else False,
             "amount": amount,
+            "currency_id": line_id.currency_id,
             "date": line_id.date,
             "partial_id": line_id.id,
-            "currency_id": line_id.currency_id,
-            "currency": line_id.currency_id.symbol,
-            "position": line_id.currency_id.position,
+            "account_payment_id": line_id.payment_id.id,
+            "payment_method_name": payment_method_name,
             "move_id": line_id.move_id.id,
-            "amount_company_currency": formatLang(
+            "is_refund": line_id.move_id.move_type in ["in_refund", "out_refund"],
+            "ref": f"{line_id.move_id.name} ({ref})",
+            "is_exchange": False,
+            "amount_company_currency": foreign_currency
+            and formatLang(
                 self.env,
                 abs(amount),
                 currency_obj=line_id.currency_id,
             ),
-            "payment_method_name": payment_method_name,
-            "ref": f"{line_id.move_id.name} ({ref})",
+            "amount_foreign_currency": foreign_currency
+            and formatLang(
+                self.env,
+                abs(line_id.amount_currency),
+                currency_obj=foreign_currency,
+            ),
             "returned": is_return,
-            "is_exchange": False,
         }
 
     def _compute_payments_widget_reconciled_info(self):
