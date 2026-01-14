@@ -46,41 +46,38 @@ class TestAccountPaymentTerm(BaseCommon):
         )
 
     def test_01_compute_terms(self):
-        delay_setting = self.env.company.payment_terms_delay_type
-        payment_terms_delay_type = delay_setting or False
-        if payment_terms_delay_type:
-            if payment_terms_delay_type == "weeks":
-                two_week_payterm = self.account_payment_term.create(
-                    {
-                        "name": "2 weeks",
-                        "line_ids": [
-                            fields.Command.create(
-                                {
-                                    "value": "percent",
-                                    "value_amount": 100.0,
-                                    "nb_days": 2,
-                                    "delay_type": "weeks_after",
-                                },
-                            ),
-                        ],
-                    }
-                )
-                res = two_week_payterm._compute_terms(
-                    currency=self.currency,
-                    company=self.company,
-                    date_ref="2015-03-02",
-                    tax_amount=0,
-                    tax_amount_currency=0,
-                    sign=1,
-                    untaxed_amount=100,
-                    untaxed_amount_currency=100,
-                )
-                payment_term_date = self._get_date_payment_term_line(res["line_ids"][0])
-                self.assertEqual(
-                    payment_term_date,
-                    "2015-03-16",
-                    "Error in the _compute_terms of payment terms with weeks",
-                )
+        self.env.company.payment_terms_delay_type = "weeks"
+        two_week_payterm = self.account_payment_term.create(
+            {
+                "name": "2 weeks",
+                "line_ids": [
+                    fields.Command.create(
+                        {
+                            "value": "percent",
+                            "value_amount": 100.0,
+                            "nb_days": 2,
+                            "delay_type": "weeks_after",
+                        },
+                    ),
+                ],
+            }
+        )
+        res = two_week_payterm._compute_terms(
+            currency=self.currency,
+            company=self.company,
+            date_ref="2015-03-02",
+            tax_amount=0,
+            tax_amount_currency=0,
+            sign=1,
+            untaxed_amount=100,
+            untaxed_amount_currency=100,
+        )
+        payment_term_date = self._get_date_payment_term_line(res["line_ids"][0])
+        self.assertEqual(
+            payment_term_date,
+            "2015-03-16",
+            "Error in the _compute_terms of payment terms with weeks",
+        )
 
     def test_02_compute_terms(self):
         # test for bug caused by bad use of precision_digits/precision_rounding
@@ -103,140 +100,129 @@ class TestAccountPaymentTerm(BaseCommon):
         )
 
     def test_03_compute_terms(self):
-        delay_setting = self.env.company.payment_terms_delay_type
-        payment_terms_delay_type = delay_setting or False
-        if payment_terms_delay_type:
-            if payment_terms_delay_type == "months":
-                two_month_payterm_after_invoice_month = (
-                    self.account_payment_term.create(
+        self.env.company.payment_terms_delay_type = "months"
+        two_month_payterm_after_invoice_month = self.account_payment_term.create(
+            {
+                "name": "2 months ",
+                "line_ids": [
+                    fields.Command.create(
                         {
-                            "name": "2 months ",
-                            "line_ids": [
-                                fields.Command.create(
-                                    {
-                                        "value": "percent",
-                                        "value_amount": 100.0,
-                                        "nb_days": 2,
-                                        "delay_type": "months_after_end_of_month",
-                                    },
-                                ),
-                            ],
-                        }
-                    )
-                )
-                res = two_month_payterm_after_invoice_month._compute_terms(
-                    currency=self.currency,
-                    company=self.company,
-                    date_ref="2015-03-02",
-                    tax_amount=0,
-                    tax_amount_currency=0,
-                    sign=1,
-                    untaxed_amount=10,
-                    untaxed_amount_currency=10,
-                )
-                payment_term_date = self._get_date_payment_term_line(res["line_ids"][0])
-                self.assertEqual(
-                    payment_term_date,
-                    "2015-05-31",
-                    "Error in the _compute_terms of payment terms with months after "
-                    "invoice month",
-                )
+                            "value": "percent",
+                            "value_amount": 100.0,
+                            "nb_days": 2,
+                            "delay_type": "months_after_end_of_month",
+                        },
+                    ),
+                ],
+            }
+        )
+        res = two_month_payterm_after_invoice_month._compute_terms(
+            currency=self.currency,
+            company=self.company,
+            date_ref="2015-02-02",
+            tax_amount=0,
+            tax_amount_currency=0,
+            sign=1,
+            untaxed_amount=10,
+            untaxed_amount_currency=10,
+        )
+        payment_term_date = self._get_date_payment_term_line(res["line_ids"][0])
+        self.assertEqual(
+            payment_term_date,
+            "2015-04-30",
+            "Error in the _compute_terms of payment terms with months after "
+            "invoice month",
+        )
 
     def test_postpone_holiday(self):
         str_date_invoice = "2015-03-02"
         str_date_holiday = "2015-03-16"
         str_date_postponed = "2015-03-17"
-        delay_setting = self.env.company.payment_terms_delay_type
-        payment_terms_delay_type = delay_setting or False
-        if payment_terms_delay_type:
-            if payment_terms_delay_type == "weeks":
-                two_week_payterm = self.account_payment_term.create(
-                    {
-                        "name": "2 weeks",
-                        "line_ids": [
-                            fields.Command.create(
-                                {
-                                    "value": "percent",
-                                    "value_amount": 100.0,
-                                    "nb_days": 2,
-                                    "delay_type": "weeks_after",
-                                },
-                            ),
-                        ],
-                        "holiday_ids": [
-                            fields.Command.create(
-                                {
-                                    "holiday": str_date_holiday,
-                                    "date_postponed": str_date_postponed,
-                                },
-                            ),
-                        ],
-                    }
-                )
-                res = two_week_payterm._compute_terms(
-                    date_ref=str_date_invoice,
-                    currency=self.currency,
-                    company=self.company,
-                    tax_amount=0,
-                    tax_amount_currency=0,
-                    sign=1,
-                    untaxed_amount=10,
-                    untaxed_amount_currency=10,
-                )
-                payment_term_date = self._get_date_payment_term_line(res["line_ids"][0])
-                self.assertEqual(
-                    payment_term_date,
-                    str_date_postponed,
-                    "Error in the _compute_terms of payment terms with weeks",
-                )
+        self.env.company.payment_terms_delay_type = "weeks"
+        two_week_payterm = self.account_payment_term.create(
+            {
+                "name": "2 weeks",
+                "line_ids": [
+                    fields.Command.create(
+                        {
+                            "value": "percent",
+                            "value_amount": 100.0,
+                            "nb_days": 2,
+                            "delay_type": "weeks_after",
+                        },
+                    ),
+                ],
+                "holiday_ids": [
+                    fields.Command.create(
+                        {
+                            "holiday": str_date_holiday,
+                            "date_postponed": str_date_postponed,
+                        },
+                    ),
+                ],
+            }
+        )
+        res = two_week_payterm._compute_terms(
+            date_ref=str_date_invoice,
+            currency=self.currency,
+            company=self.company,
+            tax_amount=0,
+            tax_amount_currency=0,
+            sign=1,
+            untaxed_amount=10,
+            untaxed_amount_currency=10,
+        )
+        payment_term_date = self._get_date_payment_term_line(res["line_ids"][0])
+        self.assertEqual(
+            payment_term_date,
+            str_date_postponed,
+            "Error in the _compute_terms of payment terms with weeks",
+        )
 
     def test_no_postpone_holiday(self):
         str_date_invoice = "2015-03-02"
         str_date_holiday = "2015-03-17"
         str_date_postponed = "2015-03-18"
-        delay_setting = self.env.company.payment_terms_delay_type
-        payment_terms_delay_type = delay_setting or False
-        if payment_terms_delay_type:
-            if payment_terms_delay_type == "weeks":
-                two_week_payterm = self.account_payment_term.create(
-                    {
-                        "name": "2 weeks",
-                        "line_ids": [
-                            fields.Command.create(
-                                {
-                                    "value": "percent",
-                                    "value_amount": 100.0,
-                                    "nb_days": 2,
-                                    "delay_type": "weeks_after",
-                                },
-                            ),
-                        ],
-                        "holiday_ids": [
-                            fields.Command.create(
-                                {
-                                    "holiday": str_date_holiday,
-                                    "date_postponed": str_date_postponed,
-                                },
-                            ),
-                        ],
-                    }
-                )
-                res = two_week_payterm._compute_terms(
-                    date_ref=str_date_invoice,
-                    currency=self.currency,
-                    company=self.company,
-                    tax_amount=0,
-                    tax_amount_currency=0,
-                    sign=1,
-                    untaxed_amount=10,
-                    untaxed_amount_currency=10,
-                )
-                payment_term_date = self._get_date_payment_term_line(res["line_ids"][0])
-                self.assertNotEqual(
-                    payment_term_date,
-                    str_date_postponed,
-                    "Error in the _compute_terms of payment terms with weeks",
-                )
+        self.env.company.payment_terms_delay_type = "weeks"
+        two_week_payterm = self.account_payment_term.create(
+            {
+                "name": "2 weeks",
+                "line_ids": [
+                    fields.Command.create(
+                        {
+                            "value": "percent",
+                            "value_amount": 100.0,
+                            "nb_days": 2,
+                            "delay_type": "weeks_after",
+                        },
+                    ),
+                ],
+                "holiday_ids": [
+                    fields.Command.create(
+                        {
+                            "holiday": str_date_holiday,
+                            "date_postponed": str_date_postponed,
+                        },
+                    ),
+                ],
+            }
+        )
+        res = two_week_payterm._compute_terms(
+            date_ref=str_date_invoice,
+            currency=self.currency,
+            company=self.company,
+            tax_amount=0,
+            tax_amount_currency=0,
+            sign=1,
+            untaxed_amount=10,
+            untaxed_amount_currency=10,
+        )
+        payment_term_date = self._get_date_payment_term_line(res["line_ids"][0])
+        self.assertNotEqual(
+            payment_term_date,
+            str_date_postponed,
+            "Error in the _compute_terms of payment terms with weeks",
+        )
 
     def test_check_holiday(self):
         with self.assertRaises(ValidationError):
@@ -264,3 +250,86 @@ class TestAccountPaymentTerm(BaseCommon):
             self.account_payment_term_holiday.create(
                 {"holiday": "2015-06-07", "date_postponed": "2015-06-08"}
             )
+
+    def test_delay_type_selection_weeks_only(self):
+        """Test that only weeks delay types are available when company is set
+        to weeks
+        """
+        self.env.company.payment_terms_delay_type = "weeks"
+        payment_term_line = self.env["account.payment.term.line"].new()
+        available_delay_types = payment_term_line._get_delay_type()
+        delay_type_keys = [dt[0] for dt in available_delay_types]
+
+        # Weeks delay types should be available
+        self.assertIn("weeks_after", delay_type_keys)
+        self.assertIn("weeks_after_end_of_month", delay_type_keys)
+        self.assertIn("weeks_after_end_of_next_month", delay_type_keys)
+
+        # Months delay types should NOT be available
+        self.assertNotIn("months_after", delay_type_keys)
+        self.assertNotIn("months_after_end_of_month", delay_type_keys)
+
+        # Default days delay types should always be available
+        self.assertIn("days_after", delay_type_keys)
+
+    def test_delay_type_selection_months_only(self):
+        """Test that only months delay types are available when company is set
+        to months
+        """
+        self.env.company.payment_terms_delay_type = "months"
+        payment_term_line = self.env["account.payment.term.line"].new()
+        available_delay_types = payment_term_line._get_delay_type()
+        delay_type_keys = [dt[0] for dt in available_delay_types]
+
+        # Months delay types should be available
+        self.assertIn("months_after", delay_type_keys)
+        self.assertIn("months_after_end_of_month", delay_type_keys)
+
+        # Weeks delay types should NOT be available
+        self.assertNotIn("weeks_after", delay_type_keys)
+        self.assertNotIn("weeks_after_end_of_month", delay_type_keys)
+        self.assertNotIn("weeks_after_end_of_next_month", delay_type_keys)
+
+        # Default days delay types should always be available
+        self.assertIn("days_after", delay_type_keys)
+
+    def test_delay_type_selection_no_setting(self):
+        """Test that only days delay types are available when company has no setting"""
+        self.env.company.payment_terms_delay_type = False
+        payment_term_line = self.env["account.payment.term.line"].new()
+        available_delay_types = payment_term_line._get_delay_type()
+        delay_type_keys = [dt[0] for dt in available_delay_types]
+
+        # Only default days delay types should be available
+        self.assertIn("days_after", delay_type_keys)
+        self.assertIn("days_after_end_of_month", delay_type_keys)
+
+        # Weeks delay types should NOT be available
+        self.assertNotIn("weeks_after", delay_type_keys)
+        self.assertNotIn("weeks_after_end_of_month", delay_type_keys)
+        self.assertNotIn("weeks_after_end_of_next_month", delay_type_keys)
+
+        # Months delay types should NOT be available
+        self.assertNotIn("months_after", delay_type_keys)
+        self.assertNotIn("months_after_end_of_month", delay_type_keys)
+
+    def test_delay_type_selection_weeks_and_months(self):
+        """Test that both weeks and months delay types are available with
+        weeks_and_months setting
+        """
+        self.env.company.payment_terms_delay_type = "weeks_and_months"
+        payment_term_line = self.env["account.payment.term.line"].new()
+        available_delay_types = payment_term_line._get_delay_type()
+        delay_type_keys = [dt[0] for dt in available_delay_types]
+
+        # Weeks delay types should be available
+        self.assertIn("weeks_after", delay_type_keys)
+        self.assertIn("weeks_after_end_of_month", delay_type_keys)
+        self.assertIn("weeks_after_end_of_next_month", delay_type_keys)
+
+        # Months delay types should be available
+        self.assertIn("months_after", delay_type_keys)
+        self.assertIn("months_after_end_of_month", delay_type_keys)
+
+        # Default days delay types should always be available
+        self.assertIn("days_after", delay_type_keys)
