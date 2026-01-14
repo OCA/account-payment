@@ -117,8 +117,8 @@ class AccountPaymentTermLine(models.Model):
         elif self.delay_type == "months_after":
             return due_date + relativedelta(months=self.nb_days)
         elif self.delay_type == "months_after_end_of_month":
-            return date_utils.end_of(due_date, "month") + relativedelta(
-                months=self.nb_days
+            return date_utils.end_of(
+                due_date + relativedelta(months=self.nb_days), "month"
             )
         return res
 
