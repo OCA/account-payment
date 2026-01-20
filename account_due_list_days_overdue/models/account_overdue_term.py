@@ -24,14 +24,14 @@ class AccountDaysOverdue(models.Model):
     @api.depends("from_day", "to_day")
     def _compute_technical_name(self):
         for rec in self:
-            rec.tech_name = "overdue_term_%d_%d" % (rec.from_day, rec.to_day)
+            rec.tech_name = "x_overdue_term_%d_%d" % (rec.from_day, rec.to_day)
 
-    @api.model
-    def create(self, vals):
-        res = super().create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        records = super().create(vals_list)
         if self.env["account.move.line"]._register_hook():
             Registry(self.env.cr.dbname).registry_invalidated = True
-        return res
+        return records
 
     def write(self, vals):
         res = super().write(vals)
