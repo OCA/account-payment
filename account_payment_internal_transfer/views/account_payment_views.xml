@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    Copyright 2026 ForgeFlow S.L.
+    License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
+-->
+<odoo>
+    <record id="view_account_payment_form_internal_transfer" model="ir.ui.view">
+        <field name="name">account.payment.form.internal.transfer</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='button_open_journal_entry']" position="after">
+                <button
+                    name="button_open_paired_payment"
+                    type="object"
+                    class="oe_stat_button"
+                    icon="fa-exchange"
+                    invisible="not paired_internal_transfer_payment_id"
+                >
+                    <div class="o_stat_info">
+                        <span class="o_stat_text">Paired Payment</span>
+                    </div>
+                </button>
+            </xpath>
+            <xpath expr="//sheet" position="before">
+                <div
+                    class="alert alert-info text-center"
+                    role="alert"
+                    invisible="not is_internal_transfer or state != 'draft'"
+                >
+                    A second payment will be created automatically in the destination journal.
+                </div>
+            </xpath>
+            <field name="payment_type" position="before">
+                <field name="is_internal_transfer" readonly="state != 'draft'" />
+            </field>
+            <field name="journal_id" position="after">
+                <field
+                    name="destination_journal_id"
+                    invisible="not is_internal_transfer"
+                    readonly="state != 'draft'"
+                    required="is_internal_transfer and state == 'draft'"
+                />
+            </field>
+        </field>
+    </record>
+</odoo>
