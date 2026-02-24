@@ -121,7 +121,7 @@ class AccountPayment(models.Model):
         filter_vals_list = [
             vals
             for vals in vals_list
-            if not (vals["debit"] == 0.0 and vals["credit"] == 0.0)
+            if not (vals.get("debit") == 0.0 and vals.get("credit") == 0.0)
         ]
         return filter_vals_list if filter_vals_list else vals_list
 
