@@ -4,11 +4,9 @@
         <field name="model">account.payment.register</field>
         <field name="inherit_id" ref="account.view_account_payment_register_form" />
         <field name="arch" type="xml">
+            <!-- Add analytic_distribution on wizard -->
             <xpath expr="//field[@name='writeoff_account_id']" position="after">
-                <div
-                    invisible="payment_difference_handling != 'reconcile'"
-                    groups="analytic.group_analytic_accounting"
-                >
+                <div invisible="payment_difference_handling != 'reconcile'">
                     <label for="analytic_distribution" class="oe_edit_only" />
                     <field
                         name="analytic_distribution"
@@ -18,15 +16,14 @@
                     />
                 </div>
             </xpath>
-            <xpath
-                expr="/form/group/group[@name='group3']/div/div"
-                position="attributes"
-            >
+            <!-- Hide write-off field when selected multi deduction -->
+            <xpath expr="//group[@name='group1']/div/div" position="attributes">
                 <attribute name="invisible">
                     hide_writeoff_section or payment_difference_handling != 'reconcile'
                 </attribute>
             </xpath>
-            <xpath expr="/form/group/group[@name='group3']" position="after">
+            <!-- Add multi deduction -->
+            <xpath expr="//group[@name='group2']" position="after">
                 <group
                     colspan="4"
                     invisible="payment_difference_handling != 'reconcile_multi_deduct'"
@@ -39,7 +36,7 @@
                         colspan="2"
                         context="{'default_amount': deduct_residual, 'default_analytic_distribution': deduct_analytic_distribution}"
                     >
-                        <tree editable="bottom">
+                        <list editable="bottom">
                             <field name="currency_id" column_invisible="1" />
                             <field name="is_open" />
                             <field name="account_id" required="is_open == False" />
@@ -51,7 +48,7 @@
                             />
                             <field name="name" />
                             <field name="amount" sum="Total Deduction" />
-                        </tree>
+                        </list>
                     </field>
                 </group>
             </xpath>

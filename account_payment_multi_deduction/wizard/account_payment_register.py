@@ -1,7 +1,7 @@
 # Copyright 2019 Ecosoft Co., Ltd (http://ecosoft.co.th/)
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl.html)
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import UserError
 from odoo.tools import float_compare
 
@@ -29,6 +29,8 @@ class AccountPaymentRegister(models.TransientModel):
     deduct_analytic_distribution = fields.Json()
 
     def _update_vals_deduction(self, moves):
+        """For case `Mark as fully paid`,
+        Hook this method to update field wizard write-off from move lines"""
         move_lines = moves.mapped("line_ids")
         analytic = {}
         [
@@ -39,6 +41,8 @@ class AccountPaymentRegister(models.TransientModel):
         self.analytic_distribution = analytic
 
     def _update_vals_multi_deduction(self, moves):
+        """For case `Mark invoice as fully paid (multi deduct)`,
+        Hook this method to update field wizard deduct from move lines"""
         move_lines = moves.mapped("line_ids")
         analytic = {}
         [
@@ -71,7 +75,9 @@ class AccountPaymentRegister(models.TransientModel):
                     != 0
                 ):
                     raise UserError(
-                        _("The total deduction should be %s") % rec.payment_difference
+                        self.env._(
+                            f"The total deduction should be {rec.payment_difference}"
+                        )
                     )
 
     @api.depends("payment_difference", "deduction_ids")
@@ -88,9 +94,13 @@ class AccountPaymentRegister(models.TransientModel):
             not self.currency_id.is_zero(self.payment_difference)
             and self.payment_difference_handling == "reconcile"
         ):
-            payment_vals["write_off_line_vals"][0]["analytic_distribution"] = (
-                self.analytic_distribution
+            payment_vals["write_off_line_vals"][0].update(
+                {
+                    "analytic_distribution": self.analytic_distribution,
+                    "is_writeoff": True,
+                }
             )
+
         # multi deduction
         elif (
             self.payment_difference
@@ -100,7 +110,6 @@ class AccountPaymentRegister(models.TransientModel):
                 self._prepare_deduct_move_line(deduct)
                 for deduct in self.deduction_ids.filtered(lambda line: not line.is_open)
             ]
-            payment_vals["is_multi_deduction"] = True
         return payment_vals
 
     def _prepare_deduct_move_line(self, deduct):
@@ -124,4 +133,5 @@ class AccountPaymentRegister(models.TransientModel):
             "amount_currency": write_off_amount_currency,
             "balance": write_off_balance,
             "analytic_distribution": deduct.analytic_distribution,
+            "is_writeoff": True,
         }
