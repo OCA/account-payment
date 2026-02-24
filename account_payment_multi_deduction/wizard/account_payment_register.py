@@ -88,9 +88,9 @@ class AccountPaymentRegister(models.TransientModel):
             not self.currency_id.is_zero(self.payment_difference)
             and self.payment_difference_handling == "reconcile"
         ):
-            payment_vals["write_off_line_vals"][0][
-                "analytic_distribution"
-            ] = self.analytic_distribution
+            payment_vals["write_off_line_vals"][0]["analytic_distribution"] = (
+                self.analytic_distribution
+            )
         # multi deduction
         elif (
             self.payment_difference
