@@ -21,7 +21,7 @@ class AccountPaymentRegister(models.TransientModel):
     )
     deduction_ids = fields.One2many(
         comodel_name="account.payment.deduction",
-        inverse_name="payment_id",
+        inverse_name="register_payment_id",
         string="Deductions",
         copy=False,
         help="Sum of deduction amount(s) must equal to the payment difference",
