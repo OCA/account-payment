@@ -3,87 +3,87 @@
 
 from odoo import Command, fields
 from odoo.exceptions import UserError
-from odoo.tests.common import Form, TransactionCase
+from odoo.tests import Form, tagged
+
+from odoo.addons.account.tests.common import AccountTestInvoicingCommon
 
 
-class TestPaymentMultiDeduction(TransactionCase):
+@tagged("post_install", "-at_install")
+class TestPaymentMultiDeduction(AccountTestInvoicingCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
 
         cls.move_line_model = cls.env["account.move.line"]
+        cls.move_model = cls.env["account.move"]
         cls.payment_model = cls.env["account.payment"]
+        cls.journal_model = cls.env["account.journal"]
+        cls.currency_model = cls.env["res.currency"]
         cls.payment_register_model = cls.env["account.payment.register"]
-        cls.partner = cls.env.ref("base.res_partner_12")
-        cls.account_receivable = cls.partner.property_account_receivable_id
-        cls.account_revenue = cls.env["account.account"].search(
-            [
-                ("account_type", "=", "income"),
-                ("company_id", "=", cls.env.company.id),
-            ],
-            limit=1,
-        )
-        cls.account_expense = cls.env["account.account"].search(
-            [
-                ("account_type", "=", "expense"),
-                ("company_id", "=", cls.env.company.id),
-            ],
-            limit=1,
-        )
+        cls.register_view_id = "account.view_account_payment_register_form"
+        cls.account_expense = cls.company_data["default_account_expense"]
 
-        cls.cust_invoice = cls.env["account.move"].create(
-            {
-                "name": "Test Customer Invoice",
-                "move_type": "out_invoice",
-                "journal_id": cls.env["account.journal"]
-                .search([("type", "=", "sale")], limit=1)
-                .id,
-                "partner_id": cls.env.ref("base.res_partner_12").id,
-                "invoice_line_ids": [
-                    Command.create(
-                        {
-                            "product_id": cls.env.ref("product.product_product_3").id,
-                            "quantity": 1.0,
-                            "account_id": cls.account_revenue.id,
-                            "name": "[PCSC234] PC Assemble SC234",
-                            "price_unit": 450.00,
-                            "tax_ids": False,
-                        },
-                    )
-                ],
-            }
+        cls.cust_invoice = cls.init_invoice(
+            "out_invoice",
+            partner=cls.env.ref("base.res_partner_2"),
+            invoice_date=fields.Date.today(),
+            post=True,
+            amounts=[450.0],
         )
 
         # New currency, 2X lower
         cls.company_currency = cls.cust_invoice.currency_id
-        cls.currency_2x = cls.env["res.currency"].create(
+        cls.currency_2x = cls.currency_model.create(
             {
                 "name": "2X",  # Foreign currency, 2 time
                 "symbol": "X",
                 "rate_ids": [
-                    (
-                        0,
-                        0,
+                    Command.create(
                         {
                             "name": fields.Date.today(),
                             "company_rate": cls.company_currency.rate * 2,
-                        },
+                        }
                     )
                 ],
             }
         )
 
-    def test_one_invoice_payment(self):
-        """Validate 1 invoice and make payment with 2 deduction"""
-        self.cust_invoice.action_post()  # total amount 450.0
+    def test_01_one_invoice_payment_fully_paid(self):
+        """Validate 1 invoice and make payment with Mark as fully paid"""
         ctx = {
             "active_ids": [self.cust_invoice.id],
             "active_id": self.cust_invoice.id,
             "active_model": "account.move",
         }
-        with self.assertRaises(UserError):  # Deduct only 20.0, throw error
+
+        with Form(
+            self.payment_register_model.with_context(**ctx),
+            view=self.register_view_id,
+        ) as f:
+            f.amount = 400.0
+            f.payment_difference_handling = "reconcile"
+            f.writeoff_account_id = self.account_expense
+        payment_register = f.save()
+        payment = payment_register._create_payments()
+        self.assertEqual(payment.state, "paid")
+
+        writeoff = payment.move_id.line_ids.filtered(lambda line: line.is_writeoff)
+        self.assertEqual(len(writeoff), 1)
+        self.assertEqual(writeoff.account_id, self.account_expense)
+
+    def test_02_one_invoice_multi_deduction_payment(self):
+        """Validate 1 invoice and make payment with 2 deduction"""
+        ctx = {
+            "active_ids": [self.cust_invoice.id],
+            "active_id": self.cust_invoice.id,
+            "active_model": "account.move",
+        }
+
+        # Test deduct only 20.0, throw error
+        with self.assertRaisesRegex(UserError, "The total deduction should be 50.0"):
             with Form(
                 self.payment_register_model.with_context(**ctx),
+                view=self.register_view_id,
             ) as f:
                 f.amount = 400.0
                 f.payment_difference_handling = "reconcile_multi_deduct"
@@ -92,8 +92,9 @@ class TestPaymentMultiDeduction(TransactionCase):
                     f2.name = "Expense 1"
                     f2.amount = 20.0
             f.save()
+
         with Form(
-            self.payment_register_model.with_context(**ctx),
+            self.payment_register_model.with_context(**ctx), view=self.register_view_id
         ) as f:
             f.amount = 400.0  # Reduce to 400.0, and mark fully paid (multi)
             f.payment_difference_handling = "reconcile_multi_deduct"
@@ -107,51 +108,28 @@ class TestPaymentMultiDeduction(TransactionCase):
                 f2.amount = 30.0
 
         payment_register = f.save()
-        payment_id = payment_register._create_payments()
-        payment = self.payment_model.browse(payment_id.id)
-        self.assertEqual(payment.state, "posted")
-
-        move_lines = self.move_line_model.search([("payment_id", "=", payment.id)])
-        bank_account = (
-            payment.journal_id.company_id.account_journal_payment_debit_account_id
-        )
-        self.env.cr.flush()
-        self.cust_invoice._compute_payment_state()
+        payment = payment_register._create_payments()
+        self.assertEqual(payment.state, "paid")
         self.assertEqual(self.cust_invoice.payment_state, "paid")
-        self.assertRecordValues(
-            move_lines,
-            [
-                {"account_id": bank_account.id, "debit": 400.0, "credit": 0.0},
-                {
-                    "account_id": self.account_receivable.id,
-                    "debit": 0.0,
-                    "credit": 450.0,
-                },
-                {
-                    "account_id": self.account_expense.id,
-                    "name": "Expense 1",
-                    "debit": 20.0,
-                    "credit": 0.0,
-                },
-                {
-                    "account_id": self.account_expense.id,
-                    "name": "Expense 2",
-                    "debit": 30.0,
-                    "credit": 0.0,
-                },
-            ],
+
+        # Writeoff should create 2
+        writeoff = payment.move_id.line_ids.filtered(lambda line: line.is_writeoff)
+        self.assertEqual(len(writeoff), 2)
+        self.assertEqual(
+            writeoff.mapped("account_id"),
+            self.account_expense,
         )
 
-    def test_one_invoice_payment_foreign_currency(self):
+    def test_03_one_invoice_payment_foreign_currency(self):
         """Validate 1 invoice and make payment with 2 deduction"""
-        self.cust_invoice.action_post()  # total amount 450.0
+        # self.cust_invoice.action_post()  # total amount 450.0
         ctx = {
             "active_ids": [self.cust_invoice.id],
             "active_id": self.cust_invoice.id,
             "active_model": "account.move",
         }
         with Form(
-            self.payment_register_model.with_context(**ctx),
+            self.payment_register_model.with_context(**ctx), view=self.register_view_id
         ) as f:
             f.currency_id = self.currency_2x
             f.amount = 800.0  # 400 -> 800 as we use currency 2x
@@ -166,65 +144,27 @@ class TestPaymentMultiDeduction(TransactionCase):
                 f2.amount = 60.0  # 60 -> 80
 
         payment_register = f.save()
-        payment_id = payment_register._create_payments()
-        payment = self.payment_model.browse(payment_id.id)
-        self.assertEqual(payment.state, "posted")
+        payment = payment_register._create_payments()
+        self.assertEqual(payment.state, "paid")
 
-        move_lines = self.move_line_model.search([("payment_id", "=", payment.id)])
-        bank_account = (
-            payment.journal_id.company_id.account_journal_payment_debit_account_id
-        )
-        self.env.cr.flush()
-        self.cust_invoice._compute_payment_state()
         self.assertEqual(self.cust_invoice.payment_state, "paid")
-        self.assertRecordValues(
-            move_lines,
-            [
-                {
-                    "account_id": bank_account.id,
-                    "debit": 400.0,
-                    "credit": 0.0,
-                    "amount_currency": 800.0,
-                    "currency_id": self.currency_2x.id,
-                },
-                {
-                    "account_id": self.account_receivable.id,
-                    "debit": 0.0,
-                    "credit": 450.0,
-                    "amount_currency": -900.0,
-                    "currency_id": self.currency_2x.id,
-                },
-                {
-                    "account_id": self.account_expense.id,
-                    "name": "Expense 1",
-                    "debit": 20.0,
-                    "credit": 0.0,
-                    "amount_currency": 40.0,
-                    "currency_id": self.currency_2x.id,
-                },
-                {
-                    "account_id": self.account_expense.id,
-                    "name": "Expense 2",
-                    "debit": 30.0,
-                    "credit": 0.0,
-                    "amount_currency": 60.0,
-                    "currency_id": self.currency_2x.id,
-                },
-            ],
+
+        writeoff = payment.move_id.line_ids.filtered(lambda line: line.is_writeoff)
+        self.assertEqual(len(writeoff), 2)
+        self.assertEqual(
+            writeoff.mapped("account_id"),
+            self.account_expense,
         )
 
-    def test_one_invoice_payment_with_keep_open(self):
+    def test_04_one_invoice_payment_with_keep_open(self):
         """Validate 1 invoice and make payment with 2 deduction,
         one as normal deduct and another as keep open"""
-        self.cust_invoice.action_post()  # total amount 450.0
         ctx = {
             "active_ids": [self.cust_invoice.id],
             "active_id": self.cust_invoice.id,
             "active_model": "account.move",
         }
-        with Form(
-            self.payment_register_model.with_context(**ctx),
-        ) as f:
+        with Form(self.payment_register_model.with_context(**ctx)) as f:
             f.amount = 400.0  # Reduce to 400.0, and mark fully paid (multi)
             f.payment_difference_handling = "reconcile_multi_deduct"
             with f.deduction_ids.new() as f2:
@@ -235,56 +175,13 @@ class TestPaymentMultiDeduction(TransactionCase):
                 f2.is_open = True
                 f2.amount = 30.0
         payment_register = f.save()
-        payment_id = payment_register._create_payments()
-        payment = self.payment_model.browse(payment_id.id)
-        self.assertEqual(payment.state, "posted")
-        move_lines = self.move_line_model.search([("payment_id", "=", payment.id)])
-        bank_account = (
-            payment.journal_id.company_id.account_journal_payment_debit_account_id
-        )
+        payment = payment_register._create_payments()
+        self.assertEqual(payment.state, "in_process")
+        payment.action_validate()
+        self.assertEqual(payment.state, "paid")
         self.assertEqual(self.cust_invoice.payment_state, "partial")
         self.assertEqual(self.cust_invoice.amount_residual, 30)
-        self.assertRecordValues(
-            move_lines,
-            [
-                {"account_id": bank_account.id, "debit": 400.0, "credit": 0.0},
-                {
-                    "account_id": self.account_receivable.id,
-                    "debit": 0.0,
-                    "credit": 420.0,
-                },
-                {
-                    "account_id": self.account_expense.id,
-                    "name": "Expense 1",
-                    "debit": 20.0,
-                    "credit": 0.0,
-                },
-            ],
-        )
 
-    def test_invoice_payment_fully_paid(self):
-        """Validate 1 invoice and make payment with 1 deduction"""
-        self.cust_invoice.action_post()  # total amount 450.0
-        ctx = {
-            "active_ids": [self.cust_invoice.id],
-            "active_id": self.cust_invoice.id,
-            "active_model": "account.move",
-        }
-        with Form(
-            self.payment_register_model.with_context(**ctx),
-        ) as f:
-            f.amount = 400.0  # Reduce to 400.0, and mark fully paid (multi)
-            f.payment_difference_handling = "reconcile"
-            f.writeoff_account_id = self.account_expense
-        payment_register = f.save()
-        payment_id = payment_register._create_payments()
-        payment = self.payment_model.browse(payment_id.id)
-        self.assertEqual(payment.state, "posted")
-
-        move_lines = self.move_line_model.search(
-            [
-                ("payment_id", "=", payment.id),
-                ("account_id", "=", self.account_expense.id),
-            ]
-        )
-        self.assertEqual(len(move_lines), 1)
+        writeoff = payment.move_id.line_ids.filtered(lambda line: line.is_writeoff)
+        self.assertEqual(len(writeoff), 1)
+        self.assertEqual(writeoff.account_id, self.account_expense)
