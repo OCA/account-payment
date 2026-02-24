@@ -46,9 +46,9 @@ class AccountPayment(models.Model):
             # update writeoff when edit value in payment
             writeoff_lines = self._seek_for_lines()[2]
             if not write_off_line_vals[0].get("analytic_distribution", False):
-                write_off_line_vals[0][
-                    "analytic_distribution"
-                ] = writeoff_lines.analytic_distribution
+                write_off_line_vals[0]["analytic_distribution"] = (
+                    writeoff_lines.analytic_distribution
+                )
             # add analytic on line_vals_list
             check_keys = self._get_check_key_list()
             update_keys = self._get_update_key_list()
