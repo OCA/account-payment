@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+SPDX-FileCopyrightText: 2025 Mael Panouillot <panouillot.mael@gmail.com>
+
+SPDX-License-Identifier: LGPL-3.0-or-later
+-->
+
+<odoo>
+    <template id="redirect_form">
+        <!--This form sends the odoo client out of the website, and to the Taler merchant payment url-->
+        <form t-att-action="taler_merchant_url" method="get"/>
+    </template>
+</odoo>

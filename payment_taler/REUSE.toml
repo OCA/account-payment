@@ -1,0 +1,20 @@
+# SPDX-FileCopyrightText: 2025 Mael Panouillot <panouillot.mael@gmail.com>
+#
+# SPDX-License-Identifier: LGPL-3.0-or-later
+
+version = 1
+SPDX-PackageName = "TOPS: Taler-Odoo Payment System"
+SPDX-PackageSupplier = "Mael Panouillot"
+SPDX-PackageDownloadLocation = "https://codeberg.org/Nemael/tops"
+
+[[annotations]]
+path = [ "Devlog/*.png", "README_Pictures/*.png", ".gitignore", "security/*.csv" ]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2025 Mael Panouillot"
+SPDX-License-Identifier = "CC0-1.0"
+
+[[annotations]]
+path = [ "static/description/*" ]
+precedence = "aggregate"
+SPDX-FileCopyrightText = "2025 Mael Panouillot"
+SPDX-License-Identifier = "CC-BY-SA-4.0"

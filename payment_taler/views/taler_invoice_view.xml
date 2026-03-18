@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+SPDX-FileCopyrightText: 2025 Mael Panouillot <panouillot.mael@gmail.com>
+
+SPDX-License-Identifier: LGPL-3.0-or-later
+-->
+
+<odoo>
+    <template id="taler_invoice_footer_logo"
+              inherit_id="account.report_invoice_document">
+        <xpath expr="//div[hasclass('invoice_main')]" position="inside">
+            <t t-if="o.is_taler_invoice">
+                <!--Encase the whole taler-relevant information, including the QR code, in a fixed-height div-->
+                <!--Otherwise, during the first load, WKHtmlToPdf ignores the loading of the QR code, and cuts the bottom of the invoice-->
+                <div style="min-height: 400px; max-height:400">
+                    <t t-if="o.taler_qr">
+                        <div class="text-center">
+                            Please scan this QR Code with your Taler wallet to complete the payment.
+                        </div>
+                        <div class="text-center">
+                            <img t-att-src="'data:image/png;base64,%s' % o.taler_qr"
+                                 style="max-height:200px;" aria-label="QR Code. Please use the URI below to pay without QR Code"/>
+                        </div>
+                    </t>
+
+                    <p style="margin-top:20px; font-size:12px;">
+                        <t t-if="o.taler_order_id">
+                            Taler payment information:
+                            <br/>
+                            Order ID: <t t-esc="o.taler_order_id"/>
+                            <br/>
+                        </t>
+                        <t t-if="o.taler_order_uri">
+                            Order URI: <a t-attf-href="{{o.taler_order_uri}}" t-esc="o.taler_order_uri" aria-label="Order URI"></a>
+                            <br/>
+                            Use above order URI if you are having an issue with the QR Code.
+                        </t>
+                    </p>
+                </div>
+            </t>
+        </xpath>
+    </template>
+</odoo>

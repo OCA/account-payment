@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+SPDX-FileCopyrightText: 2025 Mael Panouillot <panouillot.mael@gmail.com>
+
+SPDX-License-Identifier: LGPL-3.0-or-later
+-->
+
+<odoo>
+    <record id="payment_method_taler" model="payment.method">
+        <field name="name">Taler</field>
+        <field name="code">taler</field>
+        <field name="sequence">1</field>
+        <field name="active">True</field>
+        <field name="image" type="base64" file="payment_taler/static/description/icon.png"/>
+        <!--Edit this support_refund field to accurately reflect current refund functionality. Possible values: none, partial, full_only-->
+        <field name="support_refund">full_only</field>
+    </record>
+
+    <record id="account_payment_method_taler_in" model="account.payment.method">
+        <field name="name">Taler</field>
+        <field name="code">taler</field>
+        <field name="payment_type">inbound</field>
+    </record>
+</odoo>

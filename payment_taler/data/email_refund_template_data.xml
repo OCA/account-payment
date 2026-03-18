@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+SPDX-FileCopyrightText: 2025 Mael Panouillot <panouillot.mael@gmail.com>
+
+SPDX-License-Identifier: LGPL-3.0-or-later
+-->
+
+<odoo>
+    <!-- Mail template are declared in a NOUPDATE block so users can freely customize/delete them -->
+    <data noupdate="1">
+        <record id="email_refund" model="mail.template">
+            <field name="name">Odoo Taler refund email</field>
+            <field name="model_id" ref="payment.model_payment_transaction"/>
+            <field name="subject">Refund initiated for Taler payment, order {{ object.reference }}</field>
+            <field name="description">Sent to customers when a refund is triggered for Taler payments. It contains the QR code that the customer will have to scan to complete the refund.</field>
+            <field name="email_from">"{{ object.company_id.name }}"</field>
+            <field name="email_to">{{ object.partner_email }}</field>
+            <field name="body_html" type="html">
+<div style="font-family: 'Arial'; font-size: 14px;">
+    <p>
+        Dear <t t-out="object.partner_id.name or ''"/>
+    </p>
+    <p>
+        A refund for your order <t t-out="object.reference or ''"/> has been initiated for the amount of <t t-out="abs(object.amount) if object.amount else ''"/><t t-out="object.currency_id.symbol or ''"/>
+    </p>
+    <p>
+        To receive the refund, please scan the QR code below with your Taler wallet
+    </p>
+    <div style="text-align: center;">
+        <img t-att-src="'data:image/png;base64,%s' % object.taler_refund_qr" style="max-height:200px; max-width:200px" alt="Refund QR Code"/>
+    </div>
+    <p>
+        If you cannot use the QR code, please use the following URI:<br/>
+        <t t-out="object.taler_refund_uri or ''"/>
+    </p>
+    <p>
+        For any questions or requests, please contact us at <t t-out="object.company_id.email or ''"/>
+    </p>
+    <p>
+        Thank you,<br/>
+        <t t-out="object.company_id.name or ''"/>
+    </p>
+</div>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+SPDX-FileCopyrightText: 2025 Mael Panouillot <panouillot.mael@gmail.com>
+
+SPDX-License-Identifier: LGPL-3.0-or-later
+-->
+
+<odoo>
+    <record id="payment_provider_taler" model="payment.provider">
+        <field name="name">Taler</field>
+        <field name="code">taler</field>
+        <field name="module_id" ref="base.module_payment_taler"/>
+        <field name="redirect_form_view_id" ref="redirect_form"/>
+        <field name="image_128"
+               type="base64"
+               file="payment_taler/static/description/icon.png"
+        />
+        <field name="payment_method_ids" eval="[Command.set([
+                ref('payment_taler.payment_method_taler'),
+            ])]" />
+    </record>
+</odoo>
+

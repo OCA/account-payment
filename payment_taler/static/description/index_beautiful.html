@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Taler-Odoo Payment System</title>
+    <style>
+        body{
+            font-family: Arial, sans-serif;
+            margin:0;
+            background:#f7f7f7;
+            color:#333;
+        }
+
+        header{
+            background:#1d3557;
+            color:white;
+            padding:60px 20px;
+            text-align:center;
+        }
+
+        header h1{
+            margin:0;
+            font-size:42px;
+        }
+
+        header p{
+            font-size:18px;
+            margin-top:15px;
+        }
+
+        .cta-button{
+            display:inline-block;
+            margin-top:25px;
+            padding:14px 28px;
+            background:#2a9d8f;
+            color:white;
+            text-decoration:none;
+            border-radius:6px;
+            font-weight:bold;
+        }
+
+        .container{
+            max-width:1000px;
+            margin:auto;
+            padding:40px 20px;
+        }
+
+        .features{
+            display:grid;
+            grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+            gap:25px;
+        }
+
+        .feature{
+            background:white;
+            padding:25px;
+            border-radius:8px;
+            box-shadow:0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .feature h3{
+            margin-top:0;
+        }
+
+        .section-title{
+            text-align:center;
+            margin-bottom:40px;
+        }
+
+        footer{
+            text-align:center;
+            padding:30px;
+            font-size:14px;
+            color:#666;
+        }
+
+        .image-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .image-row img {
+            width: 100%;
+            flex: 1;
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>Taler-Odoo Payment System</h1>
+        <p>Integrate GNU Taler payments directly into your Odoo eCommerce and invoicing workflows.</p>
+    </header>
+
+    <div class="container">
+        <h2 class="section-title">Why use Taler payments in Odoo?</h2>
+        <div class="features">
+            <div class="feature">
+                <h3>Native Odoo Integration</h3>
+                <p>Accept Taler payments directly inside your Odoo install using existing Odoo modules
+                    <ul>
+                        <li>eCommerce</li>
+                        <li>Invoices</li>
+                        <li>Ticket sales</li>
+                        <li>Online payments</li>
+                        <li>And more...</li>
+                    </ul>
+            </div>
+
+            <div class="feature">
+                <h3>Privacy Friendly</h3>
+                <p>GNU Taler protects customer privacy while still allowing merchants to comply to taxability and auditing.</p>
+            </div>
+
+            <div class="feature">
+                <h3>Free software</h3>
+                <p>Both GNU Taler and the Taler-Odoo Payment System add-on are FOSS</p>
+            </div>
+
+            <div class="feature">
+                <h3>Documentation</h3>
+                <p>You can find an extensive documentation of this module <a href="https://codeberg.org/Nemael/tops/src/branch/18.0/README.md">on the main repository.</a></p>
+                <p>La documentation est <a href="https://codeberg.org/Nemael/tops/src/branch/18.0/README_FR.md">également disponible en Français.</a></p>
+            </div>
+
+            <div class="feature">
+                <h3>Easy Install</h3>
+                <p>Install the module like any other Odoo add-on and configure your Taler payment provider.</p>
+            </div>
+
+            <div class="feature">
+                <h3>Compatibility</h3>
+                <p>The module is compatible with Odoo 18.</p>
+                <p>Odoo 19 compatibility is coming soon.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2 class="section-title">See It in Action</h2>
+        <h3 class="section-title">Simple checkout with the Taler payment provider.</h3>
+        <p></p>
+        <div class="image-row">
+            <img src="taler_provider_for_index.png" alt="Odoo Taler provider example">
+            <img src="taler_order_confirmation_for_index.png" alt="Odoo Taler order confirmation example">
+            <img src="taler_order_paid_for_index.png" alt="Odoo Taler order paid example">
+        </div>
+        <h3 class="section-title">More screenshots are available <a href="https://codeberg.org/Nemael/tops/src/branch/18.0/README.md">in the documentation.</a></h3>
+        <p></p>
+    </div>
+
+    <footer>
+        <p>Taler-Odoo Payment System is FOSS. <a href="https://codeberg.org/Nemael/tops">The code is available here.</a></p>
+        <p><a href="https://www.taler.net/en/index.html">GNU Taler</a> is a free and open payment system.</p>
+    </footer>
+
+</body>
+</html>

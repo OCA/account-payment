@@ -1,0 +1,424 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* payment_taler
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-02-15 08:50+0000\n"
+"PO-Revision-Date: 2026-02-15 08:50+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: payment_taler
+#: model_terms:ir.ui.view,arch_db:payment_taler.taler_invoice_footer_logo
+msgid ""
+"<br/>\n"
+"                            Use above order URI if you are having an issue with the QR Code."
+msgstr ""
+
+#. module: payment_taler
+#: model:mail.template,body_html:payment_taler.email_refund
+msgid ""
+"<div style=\"font-family: 'Arial'; font-size: 14px;\">\n"
+"    <p>\n"
+"        Dear <t t-out=\"object.partner_id.name or ''\"/>\n"
+"    </p>\n"
+"    <p>\n"
+"        A refund for your order <t t-out=\"object.reference or ''\"/> has been initiated for the amount of <t t-out=\"abs(object.amount) if object.amount else ''\"/><t t-out=\"object.currency_id.symbol or ''\"/>\n"
+"    </p>\n"
+"    <p>\n"
+"        To receive the refund, please scan the QR code below with your Taler wallet\n"
+"    </p>\n"
+"    <div style=\"text-align: center;\">\n"
+"        <img t-att-src=\"'data:image/png;base64,%s' % object.taler_refund_qr\" style=\"max-height:200px; max-width:200px\" alt=\"Refund QR Code\"/>\n"
+"    </div>\n"
+"    <p>\n"
+"        If you cannot use the QR code, please use the following URI:<br/>\n"
+"        <t t-out=\"object.taler_refund_uri or ''\"/>\n"
+"    </p>\n"
+"    <p>\n"
+"        For any questions or requests, please contact us at <t t-out=\"object.company_id.email or ''\"/>\n"
+"    </p>\n"
+"    <p>\n"
+"        Thank you,<br/>\n"
+"        <t t-out=\"object.company_id.name or ''\"/>\n"
+"    </p>\n"
+"</div>\n"
+"            "
+msgstr ""
+
+#. module: payment_taler
+#: model_terms:ir.ui.view,arch_db:payment_taler.payment_provider_form
+msgid "<u>here</u>"
+msgstr ""
+
+#. module: payment_taler
+#. odoo-python
+#: code:addons/payment_taler/models/taler_api_methods.py:0
+msgid "Bad response code. The Taler order cannot be created."
+msgstr ""
+
+#. module: payment_taler
+#: model_terms:ir.ui.view,arch_db:payment_taler.payment_provider_form
+msgid "Check URL validity"
+msgstr ""
+
+#. module: payment_taler
+#: model_terms:ir.ui.view,arch_db:payment_taler.payment_provider_form
+msgid "Click here"
+msgstr ""
+
+#. module: payment_taler
+#: model:ir.model.fields,field_description:payment_taler.field_payment_provider__code
+msgid "Code"
+msgstr ""
+
+#. module: payment_taler
+#: model_terms:ir.ui.view,arch_db:payment_taler.payment_provider_form
+msgid ""
+"Demo data is currently used for the Taler merchant URL and password.<br/>\n"
+"                        <strong>Warning: Only use this demo data in a test mode or non-production setting!</strong><br/>\n"
+"                        You can find the sandbox demobank"
+msgstr ""
+
+#. module: payment_taler
+#: model:ir.model.fields,field_description:payment_taler.field_payment_provider__demo_warning_visibility
+msgid "Demo warning visibility"
+msgstr ""
+
+#. module: payment_taler
+#. odoo-python
+#: code:addons/payment_taler/models/taler_transaction.py:0
+msgid "Email template not found! Looking for: "
+msgstr ""
+
+#. module: payment_taler
+#. odoo-python
+#: code:addons/payment_taler/models/taler_transaction.py:0
+msgid "Error in refund response from Taler, see logs"
+msgstr ""
+
+#. module: payment_taler
+#. odoo-python
+#: code:addons/payment_taler/models/taler_api_methods.py:0
+msgid "Error while connecting to the Taler Merchant"
+msgstr ""
+
+#. module: payment_taler
+#: model:ir.model.fields,field_description:payment_taler.field_payment_provider__fulfillment_message
+msgid "Fulfillment message"
+msgstr ""
+
+#. module: payment_taler
+#: model:ir.model.fields,field_description:payment_taler.field_account_bank_statement_line__is_taler_invoice
+#: model:ir.model.fields,field_description:payment_taler.field_account_move__is_taler_invoice
+msgid "Is Taler Invoice"
+msgstr ""
+
+#. module: payment_taler
+#: model:ir.model,name:payment_taler.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: payment_taler
+#: model:ir.model.fields,field_description:payment_taler.field_payment_provider__taler_merchant_password
+msgid "Merchant password"
+msgstr ""
+
+#. module: payment_taler
+#: model:ir.model.fields,help:payment_taler.field_payment_provider__fulfillment_message
+msgid ""
+"Message shown on the Taler order after payment. Note: This message does not "
+"appear on Odoo itself, see the \"Messages\" tab for this purpose."
+msgstr ""
+
+#. module: payment_taler
+#. odoo-python
+#: code:addons/payment_taler/models/taler_api_methods.py:0
+msgid "Method called on wrong model"
+msgstr ""
+
+#. module: payment_taler
+#: model:mail.template,name:payment_taler.email_refund
+msgid "Odoo Taler refund email"
+msgstr ""
+
+#. module: payment_taler
+#: model_terms:ir.ui.view,arch_db:payment_taler.taler_invoice_footer_logo
+msgid "Order URI"
+msgstr ""
+
+#. module: payment_taler
+#: model_terms:ir.ui.view,arch_db:payment_taler.taler_invoice_footer_logo
+msgid "Order URI:"
+msgstr ""
+
+#. module: payment_taler
+#: model:ir.model.fields,help:payment_taler.field_payment_provider__taler_merchant_password
+msgid "Password to the chosen Taler merchant instance"
+msgstr ""
+
+#. module: payment_taler
+#: model:ir.model,name:payment_taler.model_payment_provider
+msgid "Payment Provider"
+msgstr ""
+
+#. module: payment_taler
+#: model:ir.model,name:payment_taler.model_payment_transaction
+msgid "Payment Transaction"
+msgstr ""
+
+#. module: payment_taler
+#: model_terms:ir.ui.view,arch_db:payment_taler.taler_invoice_footer_logo
+msgid ""
+"Please scan this QR Code with your Taler wallet to complete the payment."
+msgstr ""
+
+#. module: payment_taler
+#: model_terms:ir.ui.view,arch_db:payment_taler.taler_invoice_footer_logo
+msgid "QR Code. Please use the URI below to pay without QR Code"
+msgstr ""
+
+#. module: payment_taler
+#. odoo-python
+#: code:addons/payment_taler/models/taler_api_methods.py:0
+msgid "Received no Order ID from Taler. The order cannot be created."
+msgstr ""
+
+#. module: payment_taler
+#: model:mail.template,subject:payment_taler.email_refund
+msgid "Refund initiated for Taler payment, order {{ object.reference }}"
+msgstr ""
+
+#. module: payment_taler
+#: model:mail.template,description:payment_taler.email_refund
+msgid ""
+"Sent to customers when a refund is triggered for Taler payments. It contains"
+" the QR code that the customer will have to scan to complete the refund."
+msgstr ""
+
+#. module: payment_taler
+#: model:account.payment.method,name:payment_taler.account_payment_method_taler_in
+#: model:ir.model.fields.selection,name:payment_taler.selection__payment_provider__code__taler
+#: model:payment.method,name:payment_taler.payment_method_taler
+#: model:payment.provider,name:payment_taler.payment_provider_taler
+msgid "Taler"
+msgstr ""
+
+#. module: payment_taler
+#. odoo-python
+#: code:addons/payment_taler/models/taler_api_methods.py:0
+msgid ""
+"Taler Password is empty or incorrect. Did you set it correctly in the "
+"provider view?"
+msgstr ""
+
+#. module: payment_taler
+#: model:ir.model.fields,field_description:payment_taler.field_account_bank_statement_line__provider_id
+#: model:ir.model.fields,field_description:payment_taler.field_account_move__provider_id
+msgid "Taler Provider"
+msgstr ""
+
+#. module: payment_taler
+#: model:ir.model.fields,field_description:payment_taler.field_account_bank_statement_line__taler_qr
+#: model:ir.model.fields,field_description:payment_taler.field_account_move__taler_qr
+msgid "Taler QR"
+msgstr ""
+
+#. module: payment_taler
+#: model:ir.model.fields,field_description:payment_taler.field_payment_transaction__taler_refund_qr
+msgid "Taler Refund QR Code"
+msgstr ""
+
+#. module: payment_taler
+#: model:ir.model.fields,field_description:payment_taler.field_payment_transaction__taler_refund_uri
+msgid "Taler Refund URI"
+msgstr ""
+
+#. module: payment_taler
+#. odoo-python
+#: code:addons/payment_taler/models/taler_api_methods.py:0
+msgid "Taler Token is empty"
+msgstr ""
+
+#. module: payment_taler
+#. odoo-python
+#: code:addons/payment_taler/models/taler_api_methods.py:0
+msgid ""
+"Taler URL is empty or incorrect. Did you set it correctly in the provider "
+"view?"
+msgstr ""
+
+#. module: payment_taler
+#: model:ir.model.fields,field_description:payment_taler.field_account_bank_statement_line__taler_uuid
+#: model:ir.model.fields,field_description:payment_taler.field_account_move__taler_uuid
+#: model:ir.model.fields,field_description:payment_taler.field_payment_transaction__taler_uuid
+msgid "Taler UUID"
+msgstr ""
+
+#. module: payment_taler
+#: model:ir.model.fields,field_description:payment_taler.field_payment_provider__taler_token
+msgid "Taler merchant Token, you should not be able to see this parameter"
+msgstr ""
+
+#. module: payment_taler
+#: model:ir.model.fields,field_description:payment_taler.field_payment_provider__taler_merchant_url
+msgid "Taler merchant URL"
+msgstr ""
+
+#. module: payment_taler
+#: model:ir.model.fields,field_description:payment_taler.field_account_bank_statement_line__taler_order_id
+#: model:ir.model.fields,field_description:payment_taler.field_account_move__taler_order_id
+#: model:ir.model.fields,field_description:payment_taler.field_payment_transaction__taler_order_id
+msgid "Taler order ID"
+msgstr ""
+
+#. module: payment_taler
+#: model:ir.model.fields,field_description:payment_taler.field_account_bank_statement_line__taler_order_uri
+#: model:ir.model.fields,field_description:payment_taler.field_account_move__taler_order_uri
+#: model:ir.model.fields,field_description:payment_taler.field_payment_transaction__taler_order_uri
+msgid "Taler order URI"
+msgstr ""
+
+#. module: payment_taler
+#: model:ir.model.fields,field_description:payment_taler.field_account_bank_statement_line__taler_order_url
+#: model:ir.model.fields,field_description:payment_taler.field_account_move__taler_order_url
+#: model:ir.model.fields,field_description:payment_taler.field_payment_transaction__taler_order_url
+msgid "Taler order URL"
+msgstr ""
+
+#. module: payment_taler
+#: model_terms:ir.ui.view,arch_db:payment_taler.taler_invoice_footer_logo
+msgid ""
+"Taler payment information:\n"
+"                            <br/>\n"
+"                            Order ID:"
+msgstr ""
+
+#. module: payment_taler
+#. odoo-python
+#: code:addons/payment_taler/models/taler_transaction.py:0
+msgid "Taler: No transaction found matching reference "
+msgstr ""
+
+#. module: payment_taler
+#. odoo-python
+#: code:addons/payment_taler/models/taler_transaction.py:0
+msgid "Taler: Received data with missing reference."
+msgstr ""
+
+#. module: payment_taler
+#: model_terms:ir.ui.view,arch_db:payment_taler.payment_provider_form
+msgid "Test mode information"
+msgstr ""
+
+#. module: payment_taler
+#: model_terms:ir.ui.view,arch_db:payment_taler.payment_provider_form
+msgid ""
+"Test mode is enabled. This mode allows you to test the payment process by running test payments with Taler and the chosen Merchant.<br/>\n"
+"                    In the Odoo UI, these payments' information will be displayed with actual values (amount, currency, etc), but the currency will automatically be swapped to \"Kudos\" right before sending the order to the Taler merchant.<br/>\n"
+"                    KUDOS is an imaginary currency created for Taler. It can be used for free to test transactions with your order wallet. The selected merchant needs to be compatible with Kudos (most Taler merchants are compatible with Kudos).<br/>"
+msgstr ""
+
+#. module: payment_taler
+#. odoo-python
+#: code:addons/payment_taler/models/taler_provider.py:0
+msgid "The Taler Merchant URL is invalid"
+msgstr ""
+
+#. module: payment_taler
+#. odoo-python
+#: code:addons/payment_taler/models/taler_provider.py:0
+msgid ""
+"The Taler Merchant URL is invalid.\n"
+"Currencies supported on Odoo side: .\n"
+"Currencies supported on Taler merchant side: .\n"
+"Discrepancy: "
+msgstr ""
+
+#. module: payment_taler
+#. odoo-python
+#: code:addons/payment_taler/models/taler_api_methods.py:0
+msgid ""
+"The invoice due date is in the past, the Taler order cannot be created. "
+"Please see the logs for more details."
+msgstr ""
+
+#. module: payment_taler
+#. odoo-python
+#: code:addons/payment_taler/models/taler_api_methods.py:0
+msgid ""
+"The invoice due date is in the past. The Taler order cannot be created. "
+"Epoch time set for the invoice: "
+msgstr ""
+
+#. module: payment_taler
+#: model:ir.model.fields,help:payment_taler.field_payment_provider__code
+msgid "The technical code of this payment provider."
+msgstr ""
+
+#. module: payment_taler
+#. odoo-python
+#: code:addons/payment_taler/models/taler_api_methods.py:0
+msgid ""
+"There was an issue connecting to the Taler Merchant URL, please make sure "
+"the URL is correct and the service is up."
+msgstr ""
+
+#. module: payment_taler
+#: model:ir.model.fields,help:payment_taler.field_payment_provider__taler_merchant_url
+msgid "URL to the Taler merchant instance you'd like to use"
+msgstr ""
+
+#. module: payment_taler
+#: model_terms:ir.ui.view,arch_db:payment_taler.payment_provider_form
+msgid "Warning about merchant information"
+msgstr ""
+
+#. module: payment_taler
+#. odoo-python
+#: code:addons/payment_taler/models/taler_api_methods.py:0
+msgid "Wrong response code. The Taler order cannot be created."
+msgstr ""
+
+#. module: payment_taler
+#. odoo-python
+#: code:addons/payment_taler/models/taler_api_methods.py:0
+msgid ""
+"You are trying to pay in a currency that is not supported by the chosen "
+"Taler merchant. Please reach out to the shop administator."
+msgstr ""
+
+#. module: payment_taler
+#: model_terms:payment.provider,auth_msg:payment_taler.payment_provider_taler
+msgid "Your payment has been authorized."
+msgstr ""
+
+#. module: payment_taler
+#: model_terms:payment.provider,cancel_msg:payment_taler.payment_provider_taler
+msgid "Your payment has been cancelled."
+msgstr ""
+
+#. module: payment_taler
+#: model_terms:payment.provider,pending_msg:payment_taler.payment_provider_taler
+msgid ""
+"Your payment has been successfully processed but is waiting for approval."
+msgstr ""
+
+#. module: payment_taler
+#: model_terms:payment.provider,done_msg:payment_taler.payment_provider_taler
+msgid "Your payment has been successfully processed."
+msgstr ""
+
+#. module: payment_taler
+#: model_terms:ir.ui.view,arch_db:payment_taler.payment_provider_form
+msgid ""
+"for a tutorial on what to expect when using test mode.<br/>\n"
+"                    <strong>Warning: </strong>To avoid clients using Kudos to pay for their order, do not use this test mode in production.<br/>"
+msgstr ""

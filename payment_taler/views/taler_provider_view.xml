@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+SPDX-FileCopyrightText: 2025 Mael Panouillot <panouillot.mael@gmail.com>
+
+SPDX-License-Identifier: LGPL-3.0-or-later
+-->
+
+<odoo>
+    <record id="payment_provider_form" model="ir.ui.view">
+        <field name="name">Taler Provider Form</field>
+        <field name="model">payment.provider</field>
+        <field name="inherit_id" ref="payment.payment_provider_form"/>
+        <field name="arch" type="xml">
+            <group name="payment_state" position="inside">
+                <div invisible="code != 'taler' or state != 'test'" style="background-color: #FFFAA0; border-radius: 3px; padding: 10px" role="region" aria-label="Test mode information">
+                    Test mode is enabled. This mode allows you to test the payment process by running test payments with Taler and the chosen Merchant.<br/>
+                    In the Odoo UI, these payments' information will be displayed with actual values (amount, currency, etc), but the currency will automatically be swapped to "Kudos" right before sending the order to the Taler merchant.<br/>
+                    KUDOS is an imaginary currency created for Taler. It can be used for free to test transactions with your order wallet. The selected merchant needs to be compatible with Kudos (most Taler merchants are compatible with Kudos).<br/>
+                    <a href="https://codeberg.org/Nemael/tops/#merchant-test-mode">Click here</a> for a tutorial on what to expect when using test mode.<br/>
+                    <strong>Warning: </strong>To avoid clients using Kudos to pay for their order, do not use this test mode in production.<br/>
+                </div>
+            </group>
+            <group name="provider_credentials" position="inside">
+                <group invisible="code != 'taler'">
+                    <div invisible="not demo_warning_visibility" style="background-color: #FFFAA0; border-radius: 3px; padding: 10px" role="region" aria-label="Warning about merchant information">
+                        Demo data is currently used for the Taler merchant URL and password.<br/>
+                        <strong>Warning: Only use this demo data in a test mode or non-production setting!</strong><br/>
+                        You can find the sandbox demobank <a href="https://backend.demo.taler.net/instances/sandbox/"><u>here</u></a>
+                    </div>
+                    <field name="taler_merchant_url" required="code == 'taler' and state != 'disabled'" groups="base.group_system"/>
+                    <field name="taler_merchant_password" required="code == 'taler' and state != 'disabled'" password="True" groups="base.group_system"/>
+                    <button name="merchant_url_check_button" type="object" string="Check URL validity" class="btn-primary" tooltip="Check the merchant url validity and currency compatibility"/>
+                    <field name="fulfillment_message" required="code == 'taler' and state != 'disabled'"/>
+                </group>
+            </group>
+        </field>
+    </record>
+</odoo>
