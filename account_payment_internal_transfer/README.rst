@@ -52,10 +52,11 @@ payments + 2 bank statement reconciliations).
 
 - Create internal transfers directly from the Accounting Dashboard
 - A paired payment is automatically created in the destination journal
-- Both payments are linked via the
-  ``paired_internal_transfer_payment_id`` field
-- The transfer account lines are automatically reconciled
+- Their journal entries are automatically reconciled
 - Proper labels are set on journal items for easy identification
+- Cancel and reset to draft cascades to the paired payment
+- Deleting a transfer also deletes the paired payment
+- Search filter to easily find internal transfers in the payments list
 
 **Table of contents**
 
@@ -79,6 +80,12 @@ The system will automatically:
 - Create a paired payment in the destination journal
 - Use the company's transfer account for the counterpart
 - Reconcile both transfer lines automatically
+
+To find existing transfers, use the "Internal Transfers" filter in the
+payments search view.
+
+When cancelling, resetting to draft, or deleting one side of the
+transfer, the paired payment is automatically updated as well.
 
 Bug Tracker
 ===========

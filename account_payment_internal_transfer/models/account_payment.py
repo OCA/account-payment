@@ -2,6 +2,7 @@
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
 
 from odoo import _, api, fields, models
+from odoo.exceptions import UserError
 
 
 class AccountPayment(models.Model):
@@ -54,6 +55,42 @@ class AccountPayment(models.Model):
                     payment.destination_journal_id.bank_account_id
                 )
         return
+
+    def action_cancel(self):
+        res = super().action_cancel()
+        for payment in self:
+            paired = payment.paired_internal_transfer_payment_id
+            if paired and paired.state != "canceled":
+                paired.action_cancel()
+        return res
+
+    def action_draft(self):
+        res = super().action_draft()
+        for payment in self:
+            paired = payment.paired_internal_transfer_payment_id
+            if paired and paired.state != "draft":
+                paired.action_draft()
+        return res
+
+    @api.ondelete(at_uninstall=False)
+    def _unlink_except_non_draft_internal_transfer(self):
+        non_draft = self.filtered(
+            lambda p: p.is_internal_transfer and p.state != "draft"
+        )
+        if non_draft:
+            raise UserError(
+                _(
+                    "You can only delete internal transfers in draft state. "
+                    "Please reset to draft first."
+                )
+            )
+
+    def unlink(self):
+        paired = self.mapped("paired_internal_transfer_payment_id") - self
+        res = super().unlink()
+        if paired.exists():
+            paired.unlink()
+        return res
 
     def button_open_paired_payment(self):
         self.ensure_one()

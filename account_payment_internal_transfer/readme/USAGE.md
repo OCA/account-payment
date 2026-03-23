@@ -12,3 +12,9 @@ The system will automatically:
 - Create a paired payment in the destination journal
 - Use the company's transfer account for the counterpart
 - Reconcile both transfer lines automatically
+
+To find existing transfers, use the "Internal Transfers" filter in the
+payments search view.
+
+When cancelling, resetting to draft, or deleting one side of the transfer,
+the paired payment is automatically updated as well.

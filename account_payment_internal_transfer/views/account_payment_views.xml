@@ -44,4 +44,18 @@
             </field>
         </field>
     </record>
+    <record id="view_account_payment_search_internal_transfer" model="ir.ui.view">
+        <field name="name">account.payment.search.internal.transfer</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_search" />
+        <field name="arch" type="xml">
+            <filter name="outbound_filter" position="after">
+                <filter
+                    string="Internal Transfers"
+                    name="internal_transfer_filter"
+                    domain="[('is_internal_transfer', '=', True)]"
+                />
+            </filter>
+        </field>
+    </record>
 </odoo>

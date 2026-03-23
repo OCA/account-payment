@@ -23,3 +23,6 @@ statement reconciliations).
 - A paired payment is automatically created in the destination journal
 - Their journal entries are automatically reconciled
 - Proper labels are set on journal items for easy identification
+- Cancel and reset to draft cascades to the paired payment
+- Deleting a transfer also deletes the paired payment
+- Search filter to easily find internal transfers in the payments list

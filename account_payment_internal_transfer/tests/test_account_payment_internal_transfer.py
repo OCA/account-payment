@@ -1,6 +1,7 @@
 # Copyright 2026 ForgeFlow S.L.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
 
+from odoo.exceptions import UserError
 from odoo.tests import tagged
 from odoo.tests.common import TransactionCase
 
@@ -12,9 +13,13 @@ class TestAccountPaymentInternalTransfer(TransactionCase):
         super().setUpClass()
         cls.company = cls.env.company
         cls.transfer_account = cls.company.transfer_account_id
-        cls.outstanding_account = cls.env["account.account"].search(
-            [("account_type", "=", "asset_current")],
-            limit=1,
+        cls.outstanding_account = cls.env["account.account"].create(
+            {
+                "name": "Outstanding Payments",
+                "code": "XOUT",
+                "account_type": "asset_current",
+                "reconcile": True,
+            }
         )
         cls.bank_journal_1 = cls.env["account.journal"].search(
             [("type", "=", "bank"), ("company_id", "=", cls.company.id)], limit=1
@@ -50,8 +55,7 @@ class TestAccountPaymentInternalTransfer(TransactionCase):
                 journal.inbound_payment_method_line_ids
                 | journal.outbound_payment_method_line_ids
             ):
-                if not method_line.payment_account_id:
-                    method_line.payment_account_id = cls.outstanding_account
+                method_line.payment_account_id = cls.outstanding_account
 
     def test_internal_transfer_full_flow(self):
         payment = self.env["account.payment"].create(
@@ -105,6 +109,74 @@ class TestAccountPaymentInternalTransfer(TransactionCase):
             [("amount", "=", 1000.0), ("is_internal_transfer", "=", True)]
         )
         self.assertEqual(len(all_payments), 2)
+
+    def test_cancel_cascades_to_paired_payment(self):
+        payment = self.env["account.payment"].create(
+            {
+                "payment_type": "outbound",
+                "amount": 1000.0,
+                "journal_id": self.bank_journal_1.id,
+                "destination_journal_id": self.bank_journal_2.id,
+                "is_internal_transfer": True,
+            }
+        )
+        payment.action_post()
+        paired = payment.paired_internal_transfer_payment_id
+        payment.action_cancel()
+        self.assertEqual(payment.state, "canceled")
+        self.assertEqual(paired.state, "canceled")
+        self.assertEqual(payment.move_id.state, "cancel")
+        self.assertEqual(paired.move_id.state, "cancel")
+
+    def test_draft_cascades_to_paired_payment(self):
+        payment = self.env["account.payment"].create(
+            {
+                "payment_type": "outbound",
+                "amount": 1000.0,
+                "journal_id": self.bank_journal_1.id,
+                "destination_journal_id": self.bank_journal_2.id,
+                "is_internal_transfer": True,
+            }
+        )
+        payment.action_post()
+        paired = payment.paired_internal_transfer_payment_id
+        payment.action_cancel()
+        payment.action_draft()
+        self.assertEqual(payment.state, "draft")
+        self.assertEqual(paired.state, "draft")
+
+    def test_unlink_cascades_to_paired_payment(self):
+        payment = self.env["account.payment"].create(
+            {
+                "payment_type": "outbound",
+                "amount": 750.0,
+                "journal_id": self.bank_journal_1.id,
+                "destination_journal_id": self.bank_journal_2.id,
+                "is_internal_transfer": True,
+            }
+        )
+        payment.action_post()
+        paired = payment.paired_internal_transfer_payment_id
+        paired_id = paired.id
+        payment.action_cancel()
+        payment.action_draft()
+        payment.unlink()
+        self.assertFalse(self.env["account.payment"].search([("id", "=", paired_id)]))
+
+    def test_unlink_non_draft_raises_error(self):
+        payment = self.env["account.payment"].create(
+            {
+                "payment_type": "outbound",
+                "amount": 500.0,
+                "journal_id": self.bank_journal_1.id,
+                "destination_journal_id": self.bank_journal_2.id,
+                "is_internal_transfer": True,
+            }
+        )
+        payment.action_post()
+        self.assertEqual(payment.state, "in_process")
+        with self.assertRaises(UserError):
+            payment.unlink()
 
     def test_regular_payment_not_affected(self):
         vendor = self.env["res.partner"].create({"name": "Test Vendor"})
