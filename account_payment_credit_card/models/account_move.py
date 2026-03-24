@@ -38,4 +38,4 @@ class AccountMove(models.Model):
                     self.env["account.move.line"].with_context(
                         skip_account_move_synchronization=True
                     ).create(result)
-        return super(AccountMove, self)._post(soft)
+        return super()._post(soft)

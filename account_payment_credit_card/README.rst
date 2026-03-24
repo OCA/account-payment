@@ -17,34 +17,53 @@ Credit Card Payments
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--payment-lightgray.png?logo=github
-    :target: https://github.com/OCA/account-payment/tree/16.0/account_payment_credit_card
+    :target: https://github.com/OCA/account-payment/tree/18.0/account_payment_credit_card
     :alt: OCA/account-payment
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/account-payment-16-0/account-payment-16-0-account_payment_credit_card
+    :target: https://translation.odoo-community.org/projects/account-payment-18-0/account-payment-18-0-account_payment_credit_card
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/account-payment&target_branch=16.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/account-payment&target_branch=18.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
 
-This module provides a way to record Credit Card purchases and to pay them the same way regular purchases are recorded (via Vendor Bills) and paid (via Vendor Payments).
+This module provides a way to record Credit Card purchases and to pay
+them the same way regular purchases are recorded (via Vendor Bills) and
+paid (via Vendor Payments).
 
-By default, if vendor bills are used to record credit card purchases, the liability (AP) from the supplier/vendor must be moved to the credit card company via a manual journal entry.
+By default, if vendor bills are used to record credit card purchases,
+the liability (AP) from the supplier/vendor must be moved to the credit
+card company via a manual journal entry.
 
-Because a journal entry contains less information than a vendor bill, there may be a loss of information that affects book keeping accuracy and the ability to properly reconcile the AP amount when the credit card statement arrives and needs to be settled.
-This method also requires an additional step not needed when a vendor bill is paid via bank or cash.
+Because a journal entry contains less information than a vendor bill,
+there may be a loss of information that affects book keeping accuracy
+and the ability to properly reconcile the AP amount when the credit card
+statement arrives and needs to be settled. This method also requires an
+additional step not needed when a vendor bill is paid via bank or cash.
 
-This module automates the creation of the manual journal entry required to move the AP to the credit card company, retains all information about the purchase in an invoice document, and leverages the standard purchase and payment workflow already in place for bank and cash payments.
+This module automates the creation of the manual journal entry required
+to move the AP to the credit card company, retains all information about
+the purchase in an invoice document, and leverages the standard purchase
+and payment workflow already in place for bank and cash payments.
 
-It supports as many Credit Cards as are needed, configured in the same way an additional payment method would be (i.e. via the creation of a new journal).
+It supports as many Credit Cards as are needed, configured in the same
+way an additional payment method would be (i.e. via the creation of a
+new journal).
 
-To settle a Credit Card statement, the regular workflow to record a vendor payment is used – allowing the removal of charges not included in the statement.
-Non-purchase transactions like fees for annual membership, balance transfers, cash advances and foreign transactions; as well as charges for late payments and returned checks; can be entered either as Vendor Invoices or manual Journal Entries as users elect.
+To settle a Credit Card statement, the regular workflow to record a
+vendor payment is used – allowing the removal of charges not included in
+the statement. Non-purchase transactions like fees for annual
+membership, balance transfers, cash advances and foreign transactions;
+as well as charges for late payments and returned checks; can be entered
+either as Vendor Invoices or manual Journal Entries as users elect.
 
-Both of these methods will allow these items to be settled when making a payment to the credit card company.
+Both of these methods will allow these items to be settled when making a
+payment to the credit card company.
 
-This module also supports payment cancellation and re-entry (in the case a mistaken amount is entered) as well as refunds (where the purchase is returned and a credit from the credit card company will be issued).
+This module also supports payment cancellation and re-entry (in the case
+a mistaken amount is entered) as well as refunds (where the purchase is
+returned and a credit from the credit card company will be issued).
 
 **Table of contents**
 
@@ -54,18 +73,19 @@ This module also supports payment cancellation and re-entry (in the case a mista
 Configuration
 =============
 
-* Go to Accounting > Configuration > Journals
-* Create a new journal bank for your credit card
-* Check the box ‘Transfer AP to Credit Card Company’ and set the ‘Credit Card Company’ field
+- Go to Accounting > Configuration > Journals
+- Create a new journal bank for your credit card
+- Check the box ‘Transfer AP to Credit Card Company’ and set the ‘Credit
+  Card Company’ field
 
 Usage
 =====
 
 To use this module, you need to:
 
-#. Go to Accounting > Purchases > Vendors Bills
-#. Select an open bill and click on Register Payment
-#. Select the credit card journal and validate the payment
+1. Go to Accounting > Purchases > Vendors Bills
+2. Select an open bill and click on Register Payment
+3. Select the credit card journal and validate the payment
 
 Bug Tracker
 ===========
@@ -73,7 +93,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/account-payment/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/account-payment/issues/new?body=module:%20account_payment_credit_card%0Aversion:%2016.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/account-payment/issues/new?body=module:%20account_payment_credit_card%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -81,26 +101,26 @@ Credits
 =======
 
 Authors
-~~~~~~~
+-------
 
 * Open Source Integrators
 
 Contributors
-~~~~~~~~~~~~
+------------
 
-* `Open Source Integrators <https://www.opensourceintegrators.com>`_:
+- `Open Source Integrators <https://www.opensourceintegrators.com>`__:
 
-  * Ray Carnes <rcarnes@ursainfosystems.com>
-  * Balaji Kannan <bkannan@opensourceintegrators.com>
-  * Bhavesh Odedra <bodedra@opensourceintegrators.com>
-  * Sudarshan Kadalazhi <skadalazhi@opensourceintegrators.com>
-  * Freni Patel <fpatel@opensourceintegrators.com>
+  - Ray Carnes <rcarnes@ursainfosystems.com>
+  - Balaji Kannan <bkannan@opensourceintegrators.com>
+  - Bhavesh Odedra <bodedra@opensourceintegrators.com>
+  - Sudarshan Kadalazhi <skadalazhi@opensourceintegrators.com>
+  - Freni Patel <fpatel@opensourceintegrators.com>
 
-* Odoo Dev Team: DS, JA
-* Nikul Chaudhary <nikulchaudhary2112@gmail.com>
+- Odoo Dev Team: DS, JA
+- Nikul Chaudhary <nikulchaudhary2112@gmail.com>
 
 Maintainers
-~~~~~~~~~~~
+-----------
 
 This module is maintained by the OCA.
 
@@ -120,6 +140,6 @@ Current `maintainer <https://odoo-community.org/page/maintainer-role>`__:
 
 |maintainer-max3903| 
 
-This module is part of the `OCA/account-payment <https://github.com/OCA/account-payment/tree/16.0/account_payment_credit_card>`_ project on GitHub.
+This module is part of the `OCA/account-payment <https://github.com/OCA/account-payment/tree/18.0/account_payment_credit_card>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
