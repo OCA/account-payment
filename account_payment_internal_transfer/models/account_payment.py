@@ -72,8 +72,7 @@ class AccountPayment(models.Model):
                 paired.action_draft()
         return res
 
-    @api.ondelete(at_uninstall=False)
-    def _unlink_except_non_draft_internal_transfer(self):
+    def unlink(self):
         non_draft = self.filtered(
             lambda p: p.is_internal_transfer and p.state != "draft"
         )
@@ -84,8 +83,6 @@ class AccountPayment(models.Model):
                     "Please reset to draft first."
                 )
             )
-
-    def unlink(self):
         paired = self.mapped("paired_internal_transfer_payment_id") - self
         res = super().unlink()
         if paired.exists():

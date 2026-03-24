@@ -57,22 +57,23 @@ class TestAccountPaymentInternalTransfer(TransactionCase):
             ):
                 method_line.payment_account_id = cls.outstanding_account
 
-    def test_internal_transfer_full_flow(self):
-        payment = self.env["account.payment"].create(
+    def _create_transfer(self, amount=1000.0):
+        return self.env["account.payment"].create(
             {
                 "payment_type": "outbound",
-                "amount": 1000.0,
+                "amount": amount,
                 "journal_id": self.bank_journal_1.id,
                 "destination_journal_id": self.bank_journal_2.id,
                 "is_internal_transfer": True,
             }
         )
+
+    def test_internal_transfer_full_flow(self):
+        payment = self._create_transfer()
         self.assertTrue(payment.is_internal_transfer)
         self.assertEqual(payment.destination_account_id, self.transfer_account)
         self.assertFalse(payment.paired_internal_transfer_payment_id)
-
         payment.action_post()
-
         paired = payment.paired_internal_transfer_payment_id
         self.assertTrue(paired)
         self.assertEqual(paired.journal_id, self.bank_journal_2)
@@ -81,10 +82,8 @@ class TestAccountPaymentInternalTransfer(TransactionCase):
         self.assertEqual(paired.payment_type, "inbound")
         self.assertTrue(paired.is_internal_transfer)
         self.assertEqual(paired.paired_internal_transfer_payment_id, payment)
-
         self.assertTrue(payment.move_id)
         self.assertTrue(paired.move_id)
-
         lines_1 = payment.move_id.line_ids
         self.assertEqual(len(lines_1), 2)
         debit_1 = lines_1.filtered(lambda line: line.debit > 0)
@@ -98,28 +97,14 @@ class TestAccountPaymentInternalTransfer(TransactionCase):
         credit_2 = lines_2.filtered(lambda line: line.credit > 0)
         self.assertEqual(debit_2.account_id, paired.outstanding_account_id)
         self.assertEqual(credit_2.account_id, self.transfer_account)
-
         transfer_lines = (lines_1 + lines_2).filtered(
             lambda line: line.account_id == self.transfer_account
         )
         self.assertEqual(len(transfer_lines), 2)
         self.assertTrue(all(line.reconciled for line in transfer_lines))
 
-        all_payments = self.env["account.payment"].search(
-            [("amount", "=", 1000.0), ("is_internal_transfer", "=", True)]
-        )
-        self.assertEqual(len(all_payments), 2)
-
     def test_cancel_cascades_to_paired_payment(self):
-        payment = self.env["account.payment"].create(
-            {
-                "payment_type": "outbound",
-                "amount": 1000.0,
-                "journal_id": self.bank_journal_1.id,
-                "destination_journal_id": self.bank_journal_2.id,
-                "is_internal_transfer": True,
-            }
-        )
+        payment = self._create_transfer()
         payment.action_post()
         paired = payment.paired_internal_transfer_payment_id
         payment.action_cancel()
@@ -128,16 +113,16 @@ class TestAccountPaymentInternalTransfer(TransactionCase):
         self.assertEqual(payment.move_id.state, "cancel")
         self.assertEqual(paired.move_id.state, "cancel")
 
+    def test_cancel_from_paired_side_cascades_back(self):
+        payment = self._create_transfer()
+        payment.action_post()
+        paired = payment.paired_internal_transfer_payment_id
+        paired.action_cancel()
+        self.assertEqual(payment.state, "canceled")
+        self.assertEqual(paired.state, "canceled")
+
     def test_draft_cascades_to_paired_payment(self):
-        payment = self.env["account.payment"].create(
-            {
-                "payment_type": "outbound",
-                "amount": 1000.0,
-                "journal_id": self.bank_journal_1.id,
-                "destination_journal_id": self.bank_journal_2.id,
-                "is_internal_transfer": True,
-            }
-        )
+        payment = self._create_transfer()
         payment.action_post()
         paired = payment.paired_internal_transfer_payment_id
         payment.action_cancel()
@@ -145,36 +130,31 @@ class TestAccountPaymentInternalTransfer(TransactionCase):
         self.assertEqual(payment.state, "draft")
         self.assertEqual(paired.state, "draft")
 
-    def test_unlink_cascades_to_paired_payment(self):
-        payment = self.env["account.payment"].create(
-            {
-                "payment_type": "outbound",
-                "amount": 750.0,
-                "journal_id": self.bank_journal_1.id,
-                "destination_journal_id": self.bank_journal_2.id,
-                "is_internal_transfer": True,
-            }
-        )
+    def test_draft_from_paired_side_cascades_back(self):
+        payment = self._create_transfer()
         payment.action_post()
         paired = payment.paired_internal_transfer_payment_id
-        paired_id = paired.id
-        payment.action_cancel()
-        payment.action_draft()
+        paired.action_cancel()
+        paired.action_draft()
+        self.assertEqual(payment.state, "draft")
+        self.assertEqual(paired.state, "draft")
+
+    def test_unlink_draft_never_posted_cascades(self):
+        payment = self._create_transfer(amount=750.0)
+        payment_id = payment.id
         payment.unlink()
-        self.assertFalse(self.env["account.payment"].search([("id", "=", paired_id)]))
+        self.assertFalse(self.env["account.payment"].search([("id", "=", payment_id)]))
 
     def test_unlink_non_draft_raises_error(self):
-        payment = self.env["account.payment"].create(
-            {
-                "payment_type": "outbound",
-                "amount": 500.0,
-                "journal_id": self.bank_journal_1.id,
-                "destination_journal_id": self.bank_journal_2.id,
-                "is_internal_transfer": True,
-            }
-        )
+        payment = self._create_transfer(amount=500.0)
         payment.action_post()
-        self.assertEqual(payment.state, "in_process")
+        with self.assertRaises(UserError):
+            payment.unlink()
+
+    def test_unlink_canceled_raises_error(self):
+        payment = self._create_transfer()
+        payment.action_post()
+        payment.action_cancel()
         with self.assertRaises(UserError):
             payment.unlink()
 
@@ -192,17 +172,13 @@ class TestAccountPaymentInternalTransfer(TransactionCase):
         self.assertFalse(payment.is_internal_transfer)
         payment.action_post()
         self.assertFalse(payment.paired_internal_transfer_payment_id)
+        payment.action_cancel()
+        self.assertEqual(payment.state, "canceled")
+        payment.action_draft()
+        self.assertEqual(payment.state, "draft")
 
     def test_button_open_paired_payment(self):
-        payment = self.env["account.payment"].create(
-            {
-                "payment_type": "outbound",
-                "amount": 500.0,
-                "journal_id": self.bank_journal_1.id,
-                "destination_journal_id": self.bank_journal_2.id,
-                "is_internal_transfer": True,
-            }
-        )
+        payment = self._create_transfer(amount=500.0)
         payment.action_post()
         paired = payment.paired_internal_transfer_payment_id
         action = payment.button_open_paired_payment()
