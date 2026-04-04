@@ -14,36 +14,6 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: partner_aging
-#: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__days_due_121togr
-#: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_supplier__days_due_121togr
-msgid "+121"
-msgstr ""
-
-#. module: partner_aging
-#: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__days_due_01to30
-#: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_supplier__days_due_01to30
-msgid "1/30"
-msgstr ""
-
-#. module: partner_aging
-#: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__days_due_31to60
-#: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_supplier__days_due_31to60
-msgid "31/60"
-msgstr ""
-
-#. module: partner_aging
-#: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__days_due_61to90
-#: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_supplier__days_due_61to90
-msgid "61/90"
-msgstr ""
-
-#. module: partner_aging
-#: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_customer__days_due_91to120
-#: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_supplier__days_due_91to120
-msgid "91/120"
-msgstr ""
-
-#. module: partner_aging
 #: model:ir.model.fields,field_description:partner_aging.field_res_partner_aging_date__age_date
 msgid "Aging Date"
 msgstr ""
