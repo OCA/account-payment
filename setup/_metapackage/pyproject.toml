@@ -1,6 +1,6 @@
 [project]
 name = "odoo-addons-oca-account-payment"
-version = "17.0.20260404.0"
+version = "17.0.20260420.0"
 dependencies = [
     "odoo-addon-account_due_list>=17.0dev,<17.1dev",
     "odoo-addon-account_due_list_aging_comment>=17.0dev,<17.1dev",
@@ -11,6 +11,7 @@ dependencies = [
     "odoo-addon-account_payment_return_import>=17.0dev,<17.1dev",
     "odoo-addon-account_payment_return_import_iso20022>=17.0dev,<17.1dev",
     "odoo-addon-account_payment_term_extension>=17.0dev,<17.1dev",
+    "odoo-addon-account_payment_term_partner_paydays>=17.0dev,<17.1dev",
     "odoo-addon-account_payment_term_security>=17.0dev,<17.1dev",
     "odoo-addon-account_payment_widget_amount>=17.0dev,<17.1dev",
     "odoo-addon-partner_aging>=17.0dev,<17.1dev",

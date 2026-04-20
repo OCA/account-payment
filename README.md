@@ -30,6 +30,7 @@ addon | version | maintainers | summary
 [account_payment_return_import](account_payment_return_import/) | 17.0.1.0.0 |  | This module adds a generic wizard to import payment returnfile formats. Is only the base to be extended by anothermodules
 [account_payment_return_import_iso20022](account_payment_return_import_iso20022/) | 17.0.1.0.1 |  | This addon allows to import payment returns from ISO 20022 files like PAIN or CAMT.
 [account_payment_term_extension](account_payment_term_extension/) | 17.0.1.0.5 |  | Adds rounding, months, weeks and multiple payment days properties on payment term lines
+[account_payment_term_partner_paydays](account_payment_term_partner_paydays/) | 17.0.1.0.0 |  | Allows to define payment days for partners.
 [account_payment_term_security](account_payment_term_security/) | 17.0.1.0.0 | <a href='https://github.com/victoralmau'><img src='https://github.com/victoralmau.png' width='32' height='32' style='border-radius:50%;' alt='victoralmau'/></a> | Payment Term Security
 [account_payment_widget_amount](account_payment_widget_amount/) | 17.0.1.0.0 |  | Extends the payment widget to be able to choose the payment amount
 [partner_aging](partner_aging/) | 17.0.1.0.0 | <a href='https://github.com/Urvisha-OSI'><img src='https://github.com/Urvisha-OSI.png' width='32' height='32' style='border-radius:50%;' alt='Urvisha-OSI'/></a> | Aging as a view - invoices and credits
