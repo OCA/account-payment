@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="amazon_pay_redirect_form" name="Amazon Pay redirect form">
+        <form t-att-action="api_url" t-att-method="http_method or 'get'">
+            <button type="submit" id="o_amazon_pay_redirect_submit" style="display:none;"/>
+            <script>
+                document.addEventListener("DOMContentLoaded", function () {
+                    const button = document.getElementById("o_amazon_pay_redirect_submit");
+                    if (button) {
+                        button.click();
+                    }
+                });
+            </script>
+        </form>
+    </template>
+</odoo>

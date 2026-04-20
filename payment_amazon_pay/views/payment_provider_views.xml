@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_payment_provider_form_amazon_pay" model="ir.ui.view">
+        <field name="name">payment.provider.form.amazon.pay</field>
+        <field name="model">payment.provider</field>
+        <field name="inherit_id" ref="payment.payment_provider_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='provider_credentials']" position="inside">
+                <group invisible="code != 'amazon_pay'">
+                    <field name="amazon_pay_merchant_id" required="code == 'amazon_pay' and state != 'disabled'"/>
+                    <field name="amazon_pay_store_id" required="code == 'amazon_pay' and state != 'disabled'"/>
+                    <field name="amazon_pay_public_key_id" required="code == 'amazon_pay' and state != 'disabled'"/>
+                    <field name="amazon_pay_private_key" password="True" required="code == 'amazon_pay' and state != 'disabled'"/>
+                    <field name="amazon_pay_region"/>
+                    <field name="amazon_pay_checkout_language"/>
+                    <field name="amazon_pay_soft_descriptor"/>
+                    <field name="amazon_pay_sandbox_simulation_code" invisible="state != 'test'"/>
+                    <div colspan="2" class="text-muted">
+                        This provider uses Amazon Pay Checkout v2 in PayOnly mode.
+                    </div>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>
