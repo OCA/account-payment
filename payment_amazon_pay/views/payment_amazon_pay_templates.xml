@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="amazon_pay_redirect_form" name="Amazon Pay redirect form">
+        <t t-call="payment_amazon_pay.amazon_pay_checkout_button" />
+    </template>
+
+    <template id="amazon_pay_checkout_button" name="Amazon Pay Checkout Button">
+        <div class="o_amazon_pay_checkout">
+            <div id="o_amazon_pay_button" class="w-100" />
+            <small class="text-muted d-block text-center mt-2">
+                You will be redirected to Amazon to sign in and confirm your payment.
+            </small>
+        </div>
+    </template>
+</odoo>
