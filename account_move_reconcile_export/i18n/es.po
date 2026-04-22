@@ -1,0 +1,30 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_move_reconcile_export
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 17.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.9\n"
+
+#. module: account_move_reconcile_export
+#: model:ir.model,name:account_move_reconcile_export.model_account_move
+msgid "Journal Entry"
+msgstr "Asiento contable"
+
+#. module: account_move_reconcile_export
+#: model:ir.model.fields,field_description:account_move_reconcile_export.field_account_bank_statement_line__reconciled_move_ids
+#: model:ir.model.fields,field_description:account_move_reconcile_export.field_account_move__reconciled_move_ids
+#: model:ir.model.fields,field_description:account_move_reconcile_export.field_account_payment__reconciled_move_ids
+msgid "Reconciled Moves"
+msgstr "Apuntes conciliados"
