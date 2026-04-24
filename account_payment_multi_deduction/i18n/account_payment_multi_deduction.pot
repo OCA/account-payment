@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -25,15 +25,14 @@ msgid "Analytic Distribution"
 msgstr ""
 
 #. module: account_payment_multi_deduction
-#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__analytic_distribution_search
-#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_register__analytic_distribution_search
-msgid "Analytic Distribution Search"
-msgstr ""
-
-#. module: account_payment_multi_deduction
 #: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__analytic_precision
 #: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_register__analytic_precision
 msgid "Analytic Precision"
+msgstr ""
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__company_id
+msgid "Company"
 msgstr ""
 
 #. module: account_payment_multi_deduction
@@ -83,14 +82,18 @@ msgid "ID"
 msgstr ""
 
 #. module: account_payment_multi_deduction
-#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment__is_multi_deduction
-msgid "Is Multi Deduction"
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_move_line__is_writeoff
+msgid "Is Writeoff"
+msgstr ""
+
+#. module: account_payment_multi_deduction
+#: model:ir.model,name:account_payment_multi_deduction.model_account_move_line
+msgid "Journal Item"
 msgstr ""
 
 #. module: account_payment_multi_deduction
 #. odoo-python
 #: code:addons/account_payment_multi_deduction/wizard/account_payment_deduction.py:0
-#, python-format
 msgid "Keep open"
 msgstr ""
 
@@ -125,8 +128,8 @@ msgid "Open"
 msgstr ""
 
 #. module: account_payment_multi_deduction
-#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__payment_id
-msgid "Payment"
+#: model:ir.model,name:account_payment_multi_deduction.model_account_payment_register
+msgid "Pay"
 msgstr ""
 
 #. module: account_payment_multi_deduction
@@ -140,12 +143,7 @@ msgid "Payment Difference Handling"
 msgstr ""
 
 #. module: account_payment_multi_deduction
-#: model:ir.model,name:account_payment_multi_deduction.model_account_payment
-msgid "Payments"
-msgstr ""
-
-#. module: account_payment_multi_deduction
-#: model:ir.model,name:account_payment_multi_deduction.model_account_payment_register
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__register_payment_id
 msgid "Register Payment"
 msgstr ""
 
@@ -162,13 +160,6 @@ msgstr ""
 #. module: account_payment_multi_deduction
 #: model:ir.model.fields,help:account_payment_multi_deduction.field_account_payment_deduction__currency_id
 msgid "The payment's currency."
-msgstr ""
-
-#. module: account_payment_multi_deduction
-#. odoo-python
-#: code:addons/account_payment_multi_deduction/wizard/account_payment_register.py:0
-#, python-format
-msgid "The total deduction should be %s"
 msgstr ""
 
 #. module: account_payment_multi_deduction
