@@ -69,7 +69,7 @@ class AccountMoveLine(models.Model):
         result = super().get_view(view_id=view_id, view_type=view_type, **options)
 
         doc = etree.XML(result["arch"])
-        if view_type == "tree":
+        if view_type == "list":
             for placeholder in doc.xpath("//field[@name='days_overdue']"):
                 for overdue_term in self.env["account.overdue.term"].search(
                     [], order="from_day DESC"
