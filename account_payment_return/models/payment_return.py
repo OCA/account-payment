@@ -155,11 +155,8 @@ class PaymentReturn(models.Model):
         self.ensure_one()
         account = self.payment_method_line_id.payment_account_id
         if not account:
-            account = (
-                self.env["account.payment"]
-                .with_company(self.company_id)
-                ._get_outstanding_account("inbound")
-            )
+            payment = self.env["account.payment"].with_company(self.company_id).new()
+            account = payment._get_outstanding_account("inbound")
         return {
             "name": move.ref,
             "debit": 0.0,
