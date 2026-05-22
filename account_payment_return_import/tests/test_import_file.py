@@ -42,9 +42,7 @@ class TestPaymentReturnFile(BaseCommon):
             # We will get assertion error, but to solve we need to see
             # what transactions have been added:
             self.cr.execute(
-                "SELECT reference, amount "
-                "FROM payment_return_line "
-                "WHERE return_id=%s",
+                "SELECT reference, amount FROM payment_return_line WHERE return_id=%s",
                 (return_obj.id,),
             )
             _logger.error(f"Transaction not found in {self.cr.fetchall()}")
