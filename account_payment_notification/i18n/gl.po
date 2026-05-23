@@ -6,13 +6,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 15.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-05-23 06:42+0000\n"
+"Last-Translator: Pablo Castelo <pablocv@gmx.es>\n"
 "Language-Team: none\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_payment_notification
 #: model:mail.template,body_html:account_payment_notification.mail_template_notification
@@ -59,44 +61,47 @@ msgid ""
 "specific.\" aria-label=\"Values set here are company-specific.\" "
 "groups=\"base.group_multi_company\" role=\"img\"/>"
 msgstr ""
+"<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-"
+"specific.\" aria-label=\"Values set here are company-specific.\" "
+"groups=\"base.group_multi_company\" role=\"img\"/>"
 
 #. module: account_payment_notification
 #: model:ir.model.fields.selection,name:account_payment_notification.selection__res_company__account_payment_notification_method__sms_only
 msgid "By SMS"
-msgstr ""
+msgstr "Por SMS"
 
 #. module: account_payment_notification
 #: model:ir.model.fields.selection,name:account_payment_notification.selection__res_company__account_payment_notification_method__sms_or_email
 msgid "By SMS if possible, by email otherwise"
-msgstr ""
+msgstr "Por SMS se é posible, por correo electrónico se non"
 
 #. module: account_payment_notification
 #: model:ir.model.fields.selection,name:account_payment_notification.selection__res_company__account_payment_notification_method__all
 msgid "By all possible notification means"
-msgstr ""
+msgstr "Por todos os medios posibles de comunicación"
 
 #. module: account_payment_notification
 #: model:ir.model.fields.selection,name:account_payment_notification.selection__res_company__account_payment_notification_method__email_only
 msgid "By email"
-msgstr ""
+msgstr "Por correo electrónico"
 
 #. module: account_payment_notification
 #: model:ir.model.fields.selection,name:account_payment_notification.selection__res_company__account_payment_notification_method__email_or_sms
 msgid "By email if possible, by SMS otherwise"
-msgstr ""
+msgstr "Por correo electrónico se é posible, por SMS se non"
 
 #. module: account_payment_notification
 #: code:addons/account_payment_notification/models/account_payment.py:0
 #, python-format
 msgid "Cannot notify partners of these payments: %s"
-msgstr ""
+msgstr "Non se pode notificar aos contactos destes pagos: %s"
 
 #. module: account_payment_notification
 #: model:ir.model.fields,help:account_payment_notification.field_res_company__account_payment_notification_automatic
 #: model:ir.model.fields,help:account_payment_notification.field_res_config_settings__account_payment_notification_automatic
 #: model_terms:ir.ui.view,arch_db:account_payment_notification.res_config_settings_view_form
 msgid "Choose the automatism level when notifying sent payments."
-msgstr ""
+msgstr "Escolla o nivel de automatismo ao notificar os pagos enviados."
 
 #. module: account_payment_notification
 #: model:ir.model.fields,help:account_payment_notification.field_res_company__account_payment_notification_method
@@ -105,16 +110,18 @@ msgstr ""
 msgid ""
 "Choose the method to notify payments automatically when marked as sent."
 msgstr ""
+"Escolla o método para notificar os pagos automaticamente cando se marquen "
+"como enviados."
 
 #. module: account_payment_notification
 #: model:ir.model,name:account_payment_notification.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Compañías"
 
 #. module: account_payment_notification
 #: model:ir.model,name:account_payment_notification.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Opcións de configuración"
 
 #. module: account_payment_notification
 #: model:sms.template,body:account_payment_notification.sms_template_notification
@@ -128,6 +135,14 @@ msgid ""
 "object.partner_id.lang) }} was processed and sent to the bank. Thanks for "
 "your cooperation! -- {{ object.company_id.name }}"
 msgstr ""
+"Estimado/a {{ object.partner_id.name }}, a orde de {{ 'cobranza' if "
+"object.payment_type == 'inbound' else 'pago' }} do seu/s {{ 'factura/s' if "
+"object.reconciled_invoices_type == 'invoice' else 'factura/s rectificativa/"
+"s' }} ({{ \", \".join(object.reconciled_bill_ids.mapped(lambda rec: rec.ref "
+"or rec.name) + object.reconciled_invoice_ids.mapped(\"name\")) }}) polo "
+"importe total de {{ format_amount(object.amount, object.currency_id, "
+"object.partner_id.lang) }} foi procesado e enviado ao banco. Grazas! {{ "
+"object.company_id.name }}"
 
 #. module: account_payment_notification
 #: model:ir.model.fields,help:account_payment_notification.field_res_company__account_payment_notification_required
@@ -136,6 +151,8 @@ msgid ""
 "Enable to forbid marking payments as sent if they cannot be notified using "
 "the chosen method(s)."
 msgstr ""
+"Habilitar para prohibir marcar os pagos como enviados se non se poden "
+"notificar mediante o método ou métodos elixidos."
 
 #. module: account_payment_notification
 #: model_terms:ir.ui.view,arch_db:account_payment_notification.res_config_settings_view_form
@@ -143,85 +160,87 @@ msgid ""
 "Enable to forbid marking payments as sent if they cannot be notified using "
 "the chosen method."
 msgstr ""
+"Actíveo para impedir que se marquen os pagos como enviados se non poden "
+"notificarse usando o método elixido."
 
 #. module: account_payment_notification
 #: model_terms:ir.ui.view,arch_db:account_payment_notification.view_account_payment_search
 msgid "Has email"
-msgstr ""
+msgstr "Ten correo electrónico"
 
 #. module: account_payment_notification
 #: model_terms:ir.ui.view,arch_db:account_payment_notification.view_account_payment_search
 msgid "Has mobile phone"
-msgstr ""
+msgstr "Ten teléfono móbil"
 
 #. module: account_payment_notification
 #: model_terms:ir.ui.view,arch_db:account_payment_notification.view_account_payment_search
 msgid "Has no email"
-msgstr ""
+msgstr "Non ten correo electrónico"
 
 #. module: account_payment_notification
 #: model_terms:ir.ui.view,arch_db:account_payment_notification.view_account_payment_search
 msgid "Has no mobile phone"
-msgstr ""
+msgstr "Non ten teléfono móbil"
 
 #. module: account_payment_notification
 #: model:ir.model.fields,field_description:account_payment_notification.field_account_payment__mobile
 msgid "Mobile"
-msgstr ""
+msgstr "Móbil"
 
 #. module: account_payment_notification
 #: model:ir.actions.act_window,name:account_payment_notification.action_notifiy_sms_single
 msgid "Notifiy by SMS"
-msgstr ""
+msgstr "Notificar por SMS"
 
 #. module: account_payment_notification
 #: model:ir.actions.act_window,name:account_payment_notification.action_notifiy_mail_single
 msgid "Notifiy by email"
-msgstr ""
+msgstr "Notificar por correo electrónico"
 
 #. module: account_payment_notification
 #: model:ir.actions.server,name:account_payment_notification.action_notifiy_multi
 msgid "Notifiy partners"
-msgstr ""
+msgstr "Notificar aos contactos"
 
 #. module: account_payment_notification
 #: model:ir.model.fields.selection,name:account_payment_notification.selection__res_company__account_payment_notification_automatic__auto
 msgid "Notify automatically"
-msgstr ""
+msgstr "Notificar automaticamente"
 
 #. module: account_payment_notification
 #: model:ir.model.fields.selection,name:account_payment_notification.selection__res_company__account_payment_notification_automatic__manual
 msgid "Notify manually"
-msgstr ""
+msgstr "Notificar manualmente"
 
 #. module: account_payment_notification
 #: model:mail.template,name:account_payment_notification.mail_template_notification
 #: model:sms.template,name:account_payment_notification.sms_template_notification
 msgid "Payment notification"
-msgstr ""
+msgstr "Notificación de pago"
 
 #. module: account_payment_notification
 #: model:ir.model.fields,field_description:account_payment_notification.field_res_company__account_payment_notification_method
 #: model:ir.model.fields,field_description:account_payment_notification.field_res_config_settings__account_payment_notification_method
 msgid "Payment notification method"
-msgstr ""
+msgstr "Método para notificar os pagos"
 
 #. module: account_payment_notification
 #: model:ir.model.fields,field_description:account_payment_notification.field_res_company__account_payment_notification_automatic
 #: model:ir.model.fields,field_description:account_payment_notification.field_res_config_settings__account_payment_notification_automatic
 msgid "Payment notifications automatism"
-msgstr ""
+msgstr "Automatismo para notificar os pagos"
 
 #. module: account_payment_notification
 #: model:ir.model,name:account_payment_notification.model_account_payment
 msgid "Payments"
-msgstr ""
+msgstr "Pagos"
 
 #. module: account_payment_notification
 #: model:ir.model.fields,field_description:account_payment_notification.field_res_company__account_payment_notification_required
 #: model:ir.model.fields,field_description:account_payment_notification.field_res_config_settings__account_payment_notification_required
 msgid "Require payment notifications"
-msgstr ""
+msgstr "Requirir que os pagos poidan notificarse"
 
 #. module: account_payment_notification
 #: model:mail.template,subject:account_payment_notification.mail_template_notification
@@ -229,3 +248,5 @@ msgid ""
 "{{ object.company_id.name }} Payment Notification (Ref {{ object.name or "
 "'n/a' }})"
 msgstr ""
+"{{ object.company_id.name }} Notificación de pago (Ref {{ object.name or 'n/"
+"a' }})"
