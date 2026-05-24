@@ -25,6 +25,25 @@ class ReportCheckPrint(models.AbstractModel):
         amls = rec_lines.mapped("matched_credit_ids.credit_move_id") + rec_lines.mapped(
             "matched_debit_ids.debit_move_id"
         )
+        # Include direct refunds:
+        if payment.partner_type == "customer":
+            amls += rec_lines.mapped(
+                "matched_debit_ids.debit_move_id.matched_credit_ids."
+                "credit_move_id.full_reconcile_id.reconciled_line_ids"
+            ).filtered(
+                lambda line: line.id
+                not in rec_lines.mapped("matched_debit_ids.debit_move_id.id")
+                and line.move_id.date <= payment.date
+            )
+        else:
+            amls += rec_lines.mapped(
+                "matched_credit_ids.credit_move_id.matched_debit_ids."
+                "debit_move_id.full_reconcile_id.reconciled_line_ids"
+            ).filtered(
+                lambda line: line.id
+                not in rec_lines.mapped("matched_credit_ids.credit_move_id.id")
+                and line.move_id.date <= payment.date
+            )
         amls -= rec_lines
         # Here we need to handle a nasty corner case.
         # Sometimes we match a payment with invoices and refunds. Internally
@@ -36,54 +55,142 @@ class ReportCheckPrint(models.AbstractModel):
         # refunds. In order to solve that, we will just include all the move
         # lines associated to the invoices that the user intended to pay,
         # including refunds.
-        invoice_amls = payment.reconciled_invoice_ids.line_ids.filtered(
-            lambda x: x.account_id.reconcile
-            and x.account_id == payment.destination_account_id
-            and x.partner_id == payment.partner_id
-        )
-        amls |= invoice_amls
-        return amls
-
-    def _get_residual_amount(self, payment, line):
-        amt = line.amount_residual
-        if amt < 0.0:
-            amt *= -1
-        amt = payment.company_id.currency_id.with_context(date=payment.date).compute(
-            amt, payment.currency_id
-        )
-        return amt
-
-    def _get_paid_amount(self, payment, line):
-        amount = 0.0
-        total_amount_to_show = 0.0
-        # We pay out
-        if line.matched_credit_ids:
-            amount = -1 * sum(p.amount for p in line.matched_credit_ids)
-        # We receive payment
-        elif line.matched_debit_ids:
-            amount = sum(p.amount for p in line.matched_debit_ids)
-
-        # In case of customer payment, we reverse the amounts
         if payment.partner_type == "customer":
-            amount *= -1
+            invoice_amls = payment.reconciled_invoice_ids.line_ids.filtered(
+                lambda x: x.account_id.reconcile
+                and x.account_id == payment.destination_account_id
+                and x.partner_id == payment.partner_id
+            )
+        else:
+            invoice_amls = payment.reconciled_bill_ids.line_ids.filtered(
+                lambda x: x.account_id.reconcile
+                and x.account_id == payment.destination_account_id
+                and x.partner_id == payment.partner_id
+            )
+        amls |= invoice_amls
+        res = []
+        invoices_checked = []
+        # Another nasty corner case:
+        # avoid printing more than one line for invoice where the
+        # payable/receivable line is split. That happens when using
+        # payment terms with several lines
+        # I group the lines by invoice below
+        for aml in amls:
+            invoice = aml.move_id
+            if invoice in invoices_checked:
+                # prevent duplicated lines
+                continue
+            if invoice:
+                invoices_checked.append(invoice)
+                amls_inv = amls.filtered(lambda line: line.move_id == invoice)
+                res.append([line for line in amls_inv])
+            else:
+                res.append([aml])
+        return res
 
-        amount_to_show = payment.company_id.currency_id.with_context(
-            date=payment.date
-        ).compute(amount, payment.currency_id)
-        if not float_is_zero(
-            amount_to_show, precision_rounding=payment.currency_id.rounding
-        ):
-            total_amount_to_show = amount_to_show
-        return total_amount_to_show
-
-    def _get_total_amount(self, payment, line):
-        amt = line.balance
+    def _get_residual_amount(self, payment, lines):
+        amt = abs(lines[0].move_id.amount_total) - abs(
+            self._get_paid_amount(payment, lines)
+        )
         if amt < 0.0:
             amt *= -1
         amt = payment.company_id.currency_id.with_context(date=payment.date).compute(
             amt, payment.currency_id
         )
         return amt
+
+    def _get_paid_amount_this_payment(self, payment, lines):
+        "Get the paid amount for the payment at payment date"
+        agg_amt = 0
+        for line in lines:
+            amount = 0.0
+            total_paid_at_date = 0.0
+            payment.mapped("reconciled_invoice_ids")
+            # Considering the dates of the partial reconcile
+            if line.matched_credit_ids:
+                amount = -1 * sum(
+                    p.amount
+                    for p in line.matched_credit_ids.filtered(
+                        lambda line: line.credit_move_id.date <= payment.date
+                        and (
+                            line.credit_move_id.payment_id == payment
+                            or not line.credit_move_id.payment_id
+                        )
+                    )
+                )
+            # We receive payment
+            elif line.matched_debit_ids:
+                amount = sum(
+                    p.amount
+                    for p in line.matched_debit_ids.filtered(
+                        lambda line: line.debit_move_id.date <= payment.date
+                        and (
+                            line.debit_move_id.payment_id == payment
+                            or not line.debit_move_id.payment_id
+                        )
+                    )
+                )
+
+            # In case of customer payment, we reverse the amounts
+            if payment.partner_type == "customer":
+                amount *= -1
+            amount_to_show = payment.company_id.currency_id.with_context(
+                date=payment.date
+            ).compute(amount, payment.currency_id)
+            if not float_is_zero(
+                amount_to_show, precision_rounding=payment.currency_id.rounding
+            ):
+                total_paid_at_date = amount_to_show
+            agg_amt += total_paid_at_date
+        return agg_amt
+
+    def _get_paid_amount(self, payment, lines):
+        "Get the total paid amount for all payments at the payment date"
+        agg_amt = 0.0
+        for line in lines:
+            amount = 0.0
+            total_amount_to_show = 0.0
+            # Considering the dates of the partial reconcile
+            if line.matched_credit_ids:
+                amount = -1 * sum(
+                    p.amount
+                    for p in line.matched_credit_ids.filtered(
+                        lambda line: line.credit_move_id.date <= payment.date
+                    )
+                )
+            # We receive payment
+            elif line.matched_debit_ids:
+                amount = sum(
+                    p.amount
+                    for p in line.matched_debit_ids.filtered(
+                        lambda line: line.debit_move_id.date <= payment.date
+                    )
+                )
+
+            # In case of customer payment, we reverse the amounts
+            if payment.partner_type == "customer":
+                amount *= -1
+            amount_to_show = payment.company_id.currency_id.with_context(
+                date=payment.date
+            ).compute(amount, payment.currency_id)
+            if not float_is_zero(
+                amount_to_show, precision_rounding=payment.currency_id.rounding
+            ):
+                total_amount_to_show = amount_to_show
+            agg_amt += total_amount_to_show
+        return agg_amt
+
+    def _get_total_amount(self, payment, lines):
+        agg_amt = 0
+        for line in lines:
+            amt = line.balance
+            if amt < 0.0 or line.move_id.move_type in ("in_refund", "out_refund"):
+                amt *= -1
+            amt = payment.company_id.currency_id.with_context(
+                date=payment.date
+            ).compute(amt, payment.currency_id)
+            agg_amt += amt
+        return agg_amt
 
     @api.model
     def _get_report_values(self, docids, data=None):
@@ -96,7 +203,7 @@ class ReportCheckPrint(models.AbstractModel):
             "total_amount": self._get_total_amount,
             "paid_lines": self._get_paid_lines,
             "residual_amount": self._get_residual_amount,
-            "paid_amount": self._get_paid_amount,
+            "paid_amount": self._get_paid_amount_this_payment,
             "_format_date_to_partner_lang": self._format_date_to_partner_lang,
         }
         return docargs
