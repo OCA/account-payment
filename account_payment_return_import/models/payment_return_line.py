@@ -16,6 +16,6 @@ class PaymentReturnLine(models.Model):
     )
 
     _unique_import_id = models.Constraint(
-        'unique (unique_import_id)',
+        "unique (unique_import_id)",
         "A payment return transaction can be imported only once!",
     )
