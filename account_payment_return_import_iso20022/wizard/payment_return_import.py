@@ -47,16 +47,16 @@ class PaymentReturnImport(models.TransientModel):
         pain_parser = PainParser()
         try:
             _logger.debug(
-                "Try parsing as a CAMT Bank to Customer " "Debit Credit Notification."
+                "Try parsing as a CAMT Bank to Customer Debit Credit Notification."
             )
             return camt_parser.parse(data_file)
         except ValueError:
             try:
-                _logger.debug("Try parsing as a PAIN Direct Debit Unpaid " "Report.")
+                _logger.debug("Try parsing as a PAIN Direct Debit Unpaid Report.")
                 return pain_parser.parse(data_file)
             except ValueError:
                 _logger.debug(
-                    "Payment return file is not a ISO20022 " "supported file.",
+                    "Payment return file is not a ISO20022 supported file.",
                     exc_info=True,
                 )
                 return super()._parse_file(data_file)
