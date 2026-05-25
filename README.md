@@ -25,7 +25,7 @@ addon | version | maintainers | summary
 [account_due_list_aging_comment](account_due_list_aging_comment/) | 17.0.1.0.0 |  | Account Due List Aging Comment
 [account_due_list_payment_mode](account_due_list_payment_mode/) | 17.0.1.0.0 |  | Payment Due List Payment Mode
 [account_payment_multi_deduction](account_payment_multi_deduction/) | 17.0.1.0.0 | <a href='https://github.com/kittiu'><img src='https://github.com/kittiu.png' width='32' height='32' style='border-radius:50%;' alt='kittiu'/></a> | Payment Register with Multiple Deduction
-[account_payment_promissory_note](account_payment_promissory_note/) | 17.0.1.0.0 |  | Account Payment Promissory Note
+[account_payment_promissory_note](account_payment_promissory_note/) | 17.0.1.0.1 |  | Account Payment Promissory Note
 [account_payment_return](account_payment_return/) | 17.0.1.2.2 |  | Manage the return of your payments
 [account_payment_return_import](account_payment_return_import/) | 17.0.1.0.0 |  | This module adds a generic wizard to import payment returnfile formats. Is only the base to be extended by anothermodules
 [account_payment_return_import_iso20022](account_payment_return_import_iso20022/) | 17.0.1.0.1 |  | This addon allows to import payment returns from ISO 20022 files like PAIN or CAMT.
