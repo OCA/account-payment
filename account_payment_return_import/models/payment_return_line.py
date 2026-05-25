@@ -15,10 +15,7 @@ class PaymentReturnLine(models.Model):
         help="XML RAW data stored for debugging/check purposes"
     )
 
-    _sql_constraints = [
-        (
-            "unique_import_id",
-            "unique (unique_import_id)",
-            "A payment return transaction can be imported only once!",
-        )
-    ]
+    _unique_import_id = models.Constraint(
+        'unique (unique_import_id)',
+        "A payment return transaction can be imported only once!",
+    )
