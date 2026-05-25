@@ -215,7 +215,7 @@ class PaymentReturnImport(models.TransientModel):
             bank_account_id = self._find_bank_account_id(account_number)
             if not bank_account_id and account_number:
                 raise UserError(
-                    self.env._("Can not find the account number %s.") % account_number
+                    self.env._("Can not find the account number %s.", account_number)
                 )
             payret_vals.update(
                 {
@@ -278,9 +278,9 @@ class PaymentReturnImport(models.TransientModel):
                 {
                     "type": "warning",
                     "message": self.env._(
-                        "%d transactions had already been imported and were ignored."
+                        "%d transactions had already been imported and were ignored.",
+                        num_ignored,
                     )
-                    % num_ignored
                     if num_ignored > 1
                     else self.env._(
                         "1 transaction had already been imported and was ignored."
