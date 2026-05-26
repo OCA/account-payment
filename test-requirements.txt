@@ -1,0 +1,3 @@
+# account-payment
+odoo-addon-account_payment_return@ git+https://github.com/OCA/account-payment.git@refs/pull/905/head#subdirectory=account_payment_return
+odoo-addon-account_payment_return_import@ git+https://github.com/OCA/account-payment.git@refs/pull/945/head#subdirectory=account_payment_return_import
