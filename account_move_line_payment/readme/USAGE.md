@@ -1,6 +1,6 @@
 To find unmatched payments due today (or before):
 
-1. Go to *Accounting > Accounting > Journals > Journal Items*.
+1. Go to *Invoicing > Review > Control > Journal Items*.
 1. Go to *Filters > Overdue*.
 1. Filter also by *Filters > Receivable* or *Filters > Payable*. You can't mix
    both in the next step.
