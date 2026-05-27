@@ -20,14 +20,14 @@ class NotificationCase(AccountTestInvoicingCommon):
             context=dict(cls.env.context, allowed_company_ids=cls.company.ids),
         )
         # Partners with different communication methods
-        cls.partner_a.write({"email": "a@example.com", "mobile": "+1 111 111 111"})
-        cls.partner_b.write({"email": "b@example.com", "mobile": False})
+        cls.partner_a.write({"email": "a@example.com", "phone": "+1 111 111 111"})
+        cls.partner_b.write({"email": "b@example.com", "phone": False})
         cls.partner_c = cls.partner_a.copy(
-            {"email": False, "mobile": "+3 333 333 333", "name": "partner_c"}
+            {"email": False, "phone": "+3 333 333 333", "name": "partner_c"}
         )
         # Restricted accountant should be able to do the rest of stuff
 
-        cls.env.user.groups_id = cls.env.ref(
+        cls.env.user.group_ids = cls.env.ref(
             "account.group_account_manager"
         ) + cls.env.ref("base.group_partner_manager")
         # Create invoices
@@ -79,7 +79,7 @@ class NotificationCase(AccountTestInvoicingCommon):
                 {
                     "res_partner_id": payment.partner_id.id,
                     "notification_type": "email",
-                    "notification_status": ("ready" if len(partners) > 1 else "sent"),
+                    "notification_status": "ready",
                 }
             ]
         msgs = payments.message_ids.filtered(
@@ -114,7 +114,7 @@ class NotificationCase(AccountTestInvoicingCommon):
         for sms_notification, expected_body in zip(
             msgs, expected_sms_bodies, strict=True
         ):
-            self.assertHTMLEqual(sms_notification.body, expected_body)
+            self.assertHTMLEqual(sms_notification.body.striptags(), expected_body)
 
     def assert_notifications(self, partners, email=False, sms=False):
         """Assert the notifications are sent as expected."""
@@ -197,7 +197,7 @@ class NotificationCase(AccountTestInvoicingCommon):
     def test_no_contact(self):
         """Partners without contact means make it fail."""
         self.partner_b.email = False
-        self.partner_c.mobile = False
+        self.partner_c.phone = False
         self.company.sudo().account_payment_notification_required = True
         self.set_mode("all")
         with self.assertRaises(
@@ -238,5 +238,5 @@ class NotificationCase(AccountTestInvoicingCommon):
             ],
         )
         self.assertRecordValues(sms_msgs, [{"message_type": "sms"}] * 2)
-        self.assertHTMLEqual(sms_msgs[0].body, "English SMS")
-        self.assertHTMLEqual(sms_msgs[1].body, "Spanish SMS")
+        self.assertHTMLEqual(sms_msgs[0].body.striptags(), "English SMS")
+        self.assertHTMLEqual(sms_msgs[1].body.striptags(), "Spanish SMS")
