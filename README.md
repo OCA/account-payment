@@ -24,6 +24,7 @@ addon | version | maintainers | summary
 [account_due_list](account_due_list/) | 17.0.1.0.0 |  | List of open credits and debits, with due date
 [account_due_list_aging_comment](account_due_list_aging_comment/) | 17.0.1.0.0 |  | Account Due List Aging Comment
 [account_due_list_payment_mode](account_due_list_payment_mode/) | 17.0.1.0.0 |  | Payment Due List Payment Mode
+[account_move_reconcile_export](account_move_reconcile_export/) | 17.0.1.0.0 |  | Manage the export of reconciled moves linked to invoices
 [account_payment_multi_deduction](account_payment_multi_deduction/) | 17.0.1.0.0 | <a href='https://github.com/kittiu'><img src='https://github.com/kittiu.png' width='32' height='32' style='border-radius:50%;' alt='kittiu'/></a> | Payment Register with Multiple Deduction
 [account_payment_promissory_note](account_payment_promissory_note/) | 17.0.1.0.1 |  | Account Payment Promissory Note
 [account_payment_return](account_payment_return/) | 17.0.1.2.2 |  | Manage the return of your payments
