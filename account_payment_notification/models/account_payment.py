@@ -1,7 +1,7 @@
 # Copyright 2022 Moduon Team S.L.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
 
-from odoo import _, fields, models
+from odoo import fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -9,7 +9,7 @@ class AccountPayment(models.Model):
     _inherit = "account.payment"
 
     # Used by sms.composer to get default phone
-    mobile = fields.Char(related="partner_id.mobile")
+    mobile = fields.Char(related="partner_id.phone")
 
     def mark_as_sent(self):
         """Auto-notify when marking as sent."""
@@ -42,7 +42,7 @@ class AccountPayment(models.Model):
         not_notified = self - to_email - to_sms
         if not_notified and self.company_id.account_payment_notification_required:
             raise ValidationError(
-                _(
+                self.env._(
                     "Cannot notify partners of these payments: %s",
                     ", ".join(not_notified.mapped("display_name")),
                 )
