@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 Moduon Team S.L.
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl). -->
+<data>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">Settings for payment notification</field>
+        <field name="model">res.config.settings</field>
+        <field name="inherit_id" ref="account.res_config_settings_view_form" />
+        <field name="arch" type="xml">
+            <block id="pay_invoice_online_setting_container">
+                <setting
+                    id="account_payment_notification"
+                    company_dependent="1"
+                    help="Enable to forbid marking payments as sent if they cannot be notified using the chosen method."
+                >
+                    <field name="account_payment_notification_required" />
+                </setting>
+                <setting
+                    id="account_payment_notification_method"
+                    company_dependent="1"
+                    help="Choose the method to notify payments automatically when marked as sent."
+                >
+                    <field name="account_payment_notification_method" />
+                </setting>
+                <setting
+                    id="account_payment_notification_automatic"
+                    company_dependent="1"
+                    help="Choose the automatism level when notifying sent payments."
+                >
+                    <field name="account_payment_notification_automatic" />
+                </setting>
+            </block>
+        </field>
+    </record>
+</data>

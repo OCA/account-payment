@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 Moduon Team S.L.
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl). -->
+<data noupdate="1">
+    <record id="mail_template_notification" model="mail.template">
+        <field name="name">Payment notification</field>
+        <field name="auto_delete" eval="False" />
+        <field name="lang">{{ object.partner_id.lang }}</field>
+        <field name="model_id" ref="account.model_account_payment" />
+        <field name="partner_to">{{ object.partner_id.id }}</field>
+        <field
+            name="subject"
+        >{{ object.company_id.name }} Payment Notification (Ref {{ object.name or 'n/a' }})</field>
+        <field name="body_html" type="html">
+            <p>Dear <t t-out="object.partner_id.name or ''">Azure Interior</t>,</p>
+            <p t-if="object.payment_type == 'inbound'">
+                Your debit order was processed and sent to the bank.
+            </p>
+            <p t-else="">
+                Your payment order was processed and sent to the bank.
+            </p>
+            <p t-if="object.reconciled_invoices_type == 'invoice'">
+                It includes the following invoices:
+            </p>
+            <p t-else="">
+                It includes the following credit notes:
+            </p>
+            <ul>
+                <t t-foreach="object.reconciled_invoice_ids" t-as="invoice">
+                    <li t-out="invoice.name">INV/2022/00001</li>
+                </t>
+                <t t-foreach="object.reconciled_bill_ids" t-as="bill">
+                    <li t-out="bill.ref or bill.name">INV/2022/00002</li>
+                </t>
+            </ul>
+            <p>Total amount: <strong t-field="object.amount" /></p>
+            <div>
+                <p>Thanks for your cooperation!</p>
+                <p>--<br /><t t-out="object.company_id.name" /></p>
+                <p>
+                    <small
+                    >This is an automated notification. Replies will not be monitored nor answered. If you have questions, please contact us by the usual means.</small>
+                </p>
+            </div>
+        </field>
+    </record>
+</data>

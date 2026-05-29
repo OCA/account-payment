@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2022 Moduon Team S.L.
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl). -->
+<data noupdate="1">
+    <record id="sms_template_notification" model="sms.template">
+        <field name="name">Payment notification</field>
+        <field
+            name="body"
+        >Dear {{ object.partner_id.name }}, the {{ 'debit' if object.payment_type == 'inbound' else 'payment' }} order of your {{ 'invoice(s)' if object.reconciled_invoices_type == 'invoice' else 'credit note(s)' }} ({{ ", ".join(object.reconciled_bill_ids.mapped(lambda rec: rec.ref or rec.name) + object.reconciled_invoice_ids.mapped("name")) }}) for the total amount of {{ format_amount(object.amount, object.currency_id, object.partner_id.lang) }} was processed and sent to the bank. Thanks for your cooperation! -- {{ object.company_id.name }}</field>
+        <field name="lang">{{ object.partner_id.lang }}</field>
+        <field name="model_id" ref="account.model_account_payment" />
+    </record>
+</data>

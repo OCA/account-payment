@@ -1,0 +1,369 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_payment_notification
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2022-10-07 12:36+0000\n"
+"PO-Revision-Date: 2023-09-03 13:39+0000\n"
+"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: account_payment_notification
+#: model:mail.template,body_html:account_payment_notification.mail_template_notification
+msgid ""
+"<p>Dear <t t-out=\"object.partner_id.name or ''\">Azure Interior</t>,</p>\n"
+"            <p t-if=\"object.payment_type == 'inbound'\">\n"
+"                Your debit order was processed and sent to the bank.\n"
+"            </p>\n"
+"            <p t-else=\"\">\n"
+"                Your payment order was processed and sent to the bank.\n"
+"            </p>\n"
+"            <p t-if=\"object.reconciled_invoices_type == 'invoice'\">\n"
+"                It includes the following invoices:\n"
+"            </p>\n"
+"            <p t-else=\"\">\n"
+"                It includes the following credit notes:\n"
+"            </p>\n"
+"            <ul>\n"
+"                <t t-foreach=\"object.reconciled_invoice_ids\" t-as=\"invoice"
+"\">\n"
+"                    <li t-out=\"invoice.name\">INV/2022/00001</li>\n"
+"                </t>\n"
+"                <t t-foreach=\"object.reconciled_bill_ids\" t-as=\"bill\">\n"
+"                    <li t-out=\"bill.ref or bill.name\">INV/2022/00002</li>\n"
+"                </t>\n"
+"            </ul>\n"
+"            <p>Total amount: <strong t-field=\"object.amount\"></strong></"
+"p>\n"
+"            <div>\n"
+"                <p>Thanks for your cooperation!</p>\n"
+"                <p>--<br><t t-out=\"object.company_id.name\"></t></p>\n"
+"                <p>\n"
+"                    <small>This is an automated notification. Replies will "
+"not be monitored nor answered. If you have questions, please contact us by "
+"the usual means.</small>\n"
+"                </p>\n"
+"            </div>\n"
+"        "
+msgstr ""
+"<p>Querido <t t-out=\"object.partner_id.name or ''\">Azure Interior</t>,</"
+"p>\n"
+"            <p t-if=\"object.payment_type == 'inbound'\">\n"
+"                Su orden de débito ha sido procesada y enviada al banco.\n"
+"            </p>\n"
+"            <p t-else=\"\">\n"
+"                Su orden de pago ha sido procesada y enviada al banco.\n"
+"            </p>\n"
+"            <p t-if=\"object.reconciled_invoices_type == 'invoice'\">\n"
+"               Incluye las siguientes facturas :\n"
+"            </p>\n"
+"            <p t-else=\"\">\n"
+"                It includes the following credit notes:\n"
+"            </p>\n"
+"            <ul>\n"
+"                <t t-foreach=\"object.reconciled_invoice_ids\" t-as=\"invoice"
+"\">\n"
+"                    <li t-out=\"invoice.name\">INV/2022/00001</li>\n"
+"                </t>\n"
+"                <t t-foreach=\"object.reconciled_bill_ids\" t-as=\"bill\">\n"
+"                    <li t-out=\"bill.ref or bill.name\">INV/2022/00002</li>\n"
+"                </t>\n"
+"            </ul>\n"
+"            <p>Importe totalt: <strong t-field=\"object.amount\"></strong></"
+"p>\n"
+"            <div>\n"
+"                <p>¡Gracias por su cooperación!</p>\n"
+"                <p>--<br><t t-out=\"object.company_id.name\"></t></p>\n"
+"                <p>\n"
+"                    <small>Se trata de una notificación automática. Las "
+"respuestas no serán supervisadas ni contestadas. Si tiene alguna pregunta, "
+"póngase en contacto con nosotros por los medios habituales.</small>\n"
+"                </p>\n"
+"            </div>\n"
+"        "
+
+#. module: account_payment_notification
+#: model_terms:ir.ui.view,arch_db:account_payment_notification.res_config_settings_view_form
+msgid ""
+"<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-"
+"specific.\" aria-label=\"Values set here are company-specific.\" groups="
+"\"base.group_multi_company\" role=\"img\"/>"
+msgstr ""
+"<span class=\"fa fa-lg fa-building-o\" title=\"Values set here are company-"
+"specific.\" aria-label=\"Values set here are company-specific.\" groups="
+"\"base.group_multi_company\" role=\"img\"/>"
+
+#. module: account_payment_notification
+#: model:ir.model.fields.selection,name:account_payment_notification.selection__res_company__account_payment_notification_method__sms_only
+msgid "By SMS"
+msgstr "Por SMS"
+
+#. module: account_payment_notification
+#: model:ir.model.fields.selection,name:account_payment_notification.selection__res_company__account_payment_notification_method__sms_or_email
+msgid "By SMS if possible, by email otherwise"
+msgstr "Por SMS si es posible, por correo electrónico si no"
+
+#. module: account_payment_notification
+#: model:ir.model.fields.selection,name:account_payment_notification.selection__res_company__account_payment_notification_method__all
+msgid "By all possible notification means"
+msgstr "Por todos los medios posibles de comunicación"
+
+#. module: account_payment_notification
+#: model:ir.model.fields.selection,name:account_payment_notification.selection__res_company__account_payment_notification_method__email_only
+msgid "By email"
+msgstr "Por correo electrónico"
+
+#. module: account_payment_notification
+#: model:ir.model.fields.selection,name:account_payment_notification.selection__res_company__account_payment_notification_method__email_or_sms
+msgid "By email if possible, by SMS otherwise"
+msgstr "Por correo electrónico si es posible, por SMS si no"
+
+#. module: account_payment_notification
+#. odoo-python
+#: code:addons/account_payment_notification/models/account_payment.py:0
+#, python-format
+msgid "Cannot notify partners of these payments: %s"
+msgstr "No se puede notificar a los contactos de estos pagos: %s"
+
+#. module: account_payment_notification
+#: model:ir.model.fields,help:account_payment_notification.field_res_company__account_payment_notification_automatic
+#: model:ir.model.fields,help:account_payment_notification.field_res_config_settings__account_payment_notification_automatic
+#: model_terms:ir.ui.view,arch_db:account_payment_notification.res_config_settings_view_form
+msgid "Choose the automatism level when notifying sent payments."
+msgstr "Escoja el nivel de automatismo al notificar los pagos enviados."
+
+#. module: account_payment_notification
+#: model:ir.model.fields,help:account_payment_notification.field_res_company__account_payment_notification_method
+#: model:ir.model.fields,help:account_payment_notification.field_res_config_settings__account_payment_notification_method
+#: model_terms:ir.ui.view,arch_db:account_payment_notification.res_config_settings_view_form
+msgid "Choose the method to notify payments automatically when marked as sent."
+msgstr ""
+"Escoja el método para notificar los pagos automáticamente cuando se marquen "
+"como enviados."
+
+#. module: account_payment_notification
+#: model:ir.model,name:account_payment_notification.model_res_company
+msgid "Companies"
+msgstr "Compañías"
+
+#. module: account_payment_notification
+#: model:ir.model,name:account_payment_notification.model_res_config_settings
+msgid "Config Settings"
+msgstr "Opciones de configuración"
+
+#. module: account_payment_notification
+#: model:sms.template,body:account_payment_notification.sms_template_notification
+msgid ""
+"Dear {{ object.partner_id.name }}, the {{ 'debit' if object.payment_type == "
+"'inbound' else 'payment' }} order of your {{ 'invoice(s)' if object."
+"reconciled_invoices_type == 'invoice' else 'credit note(s)' }} ({{ \", \"."
+"join(object.reconciled_bill_ids.mapped(lambda rec: rec.ref or rec.name) + "
+"object.reconciled_invoice_ids.mapped(\"name\")) }}) for the total amount of "
+"{{ format_amount(object.amount, object.currency_id, object.partner_id."
+"lang) }} was processed and sent to the bank. Thanks for your cooperation! -- "
+"{{ object.company_id.name }}"
+msgstr ""
+"Estimado/a {{ object.partner_id.name }}, la orden de {{ 'cobro' if object."
+"payment_type == 'inbound' else 'pago' }} de su/s {{ 'factura/s' if object."
+"reconciled_invoices_type == 'invoice' else 'factura/s rectificativa/s' }} "
+"({{ \", \".join(object.reconciled_bill_ids.mapped(lambda rec: rec.ref or rec."
+"name) + object.reconciled_invoice_ids.mapped(\"name\")) }}) por el importe "
+"total de {{ format_amount(object.amount, object.currency_id, object."
+"partner_id.lang) }} ha sido procesado y enviado al banco. Gracias! {{ object."
+"company_id.name }}"
+
+#. module: account_payment_notification
+#: model:ir.model.fields,help:account_payment_notification.field_res_company__account_payment_notification_required
+#: model:ir.model.fields,help:account_payment_notification.field_res_config_settings__account_payment_notification_required
+msgid ""
+"Enable to forbid marking payments as sent if they cannot be notified using "
+"the chosen method(s)."
+msgstr ""
+"Habilitar para prohibir marcar los pagos como enviados si no se pueden "
+"notificar mediante el método o métodos elegidos."
+
+#. module: account_payment_notification
+#: model_terms:ir.ui.view,arch_db:account_payment_notification.res_config_settings_view_form
+msgid ""
+"Enable to forbid marking payments as sent if they cannot be notified using "
+"the chosen method."
+msgstr ""
+"Actívelo para impedir que se marquen los pagos como enviados si no pueden "
+"notificarse usando el método elegido."
+
+#. module: account_payment_notification
+#: model_terms:ir.ui.view,arch_db:account_payment_notification.view_account_payment_search
+msgid "Has email"
+msgstr "Tiene correo electrónico"
+
+#. module: account_payment_notification
+#: model_terms:ir.ui.view,arch_db:account_payment_notification.view_account_payment_search
+msgid "Has mobile phone"
+msgstr "Tiene teléfono móvil"
+
+#. module: account_payment_notification
+#: model_terms:ir.ui.view,arch_db:account_payment_notification.view_account_payment_search
+msgid "Has no email"
+msgstr "No tiene correo electrónico"
+
+#. module: account_payment_notification
+#: model_terms:ir.ui.view,arch_db:account_payment_notification.view_account_payment_search
+msgid "Has no mobile phone"
+msgstr "No tiene teléfono móvil"
+
+#. module: account_payment_notification
+#: model:ir.model.fields,field_description:account_payment_notification.field_account_payment__mobile
+msgid "Mobile"
+msgstr "Móvil"
+
+#. module: account_payment_notification
+#: model:ir.actions.act_window,name:account_payment_notification.action_notifiy_sms_single
+msgid "Notifiy by SMS"
+msgstr "Notificar por SMS"
+
+#. module: account_payment_notification
+#: model:ir.actions.act_window,name:account_payment_notification.action_notifiy_mail_single
+msgid "Notifiy by email"
+msgstr "Notificar por correo electrónico"
+
+#. module: account_payment_notification
+#: model:ir.actions.server,name:account_payment_notification.action_notifiy_multi
+msgid "Notifiy partners"
+msgstr "Notificar a los contactos"
+
+#. module: account_payment_notification
+#: model:ir.model.fields.selection,name:account_payment_notification.selection__res_company__account_payment_notification_automatic__auto
+msgid "Notify automatically"
+msgstr "Notificar automáticamente"
+
+#. module: account_payment_notification
+#: model:ir.model.fields.selection,name:account_payment_notification.selection__res_company__account_payment_notification_automatic__manual
+msgid "Notify manually"
+msgstr "Notificar manualmente"
+
+#. module: account_payment_notification
+#: model:mail.template,name:account_payment_notification.mail_template_notification
+#: model:sms.template,name:account_payment_notification.sms_template_notification
+msgid "Payment notification"
+msgstr "Notificación de pago"
+
+#. module: account_payment_notification
+#: model:ir.model.fields,field_description:account_payment_notification.field_res_company__account_payment_notification_method
+#: model:ir.model.fields,field_description:account_payment_notification.field_res_config_settings__account_payment_notification_method
+msgid "Payment notification method"
+msgstr "Método para notificar los pagos"
+
+#. module: account_payment_notification
+#: model:ir.model.fields,field_description:account_payment_notification.field_res_company__account_payment_notification_automatic
+#: model:ir.model.fields,field_description:account_payment_notification.field_res_config_settings__account_payment_notification_automatic
+msgid "Payment notifications automatism"
+msgstr "Automatismo para notificar los pagos"
+
+#. module: account_payment_notification
+#: model:ir.model,name:account_payment_notification.model_account_payment
+msgid "Payments"
+msgstr "Pagos"
+
+#. module: account_payment_notification
+#: model:ir.model.fields,field_description:account_payment_notification.field_res_company__account_payment_notification_required
+#: model:ir.model.fields,field_description:account_payment_notification.field_res_config_settings__account_payment_notification_required
+msgid "Require payment notifications"
+msgstr "Requerir que los pagos puedan notificarse"
+
+#. module: account_payment_notification
+#: model:mail.template,subject:account_payment_notification.mail_template_notification
+msgid ""
+"{{ object.company_id.name }} Payment Notification (Ref {{ object.name or 'n/"
+"a' }})"
+msgstr ""
+"{{ object.company_id.name }} Notificación de pago (Ref {{ object.name or 'n/"
+"a' }})"
+
+#~ msgid ""
+#~ "<p>Dear <t t-out=\"object.partner_id.name or ''\">Azure Interior</t>,</"
+#~ "p>\n"
+#~ "            <p t-if=\"object.payment_type == 'inbound'\">\n"
+#~ "                Your debit order was processed and sent to the bank.\n"
+#~ "            </p>\n"
+#~ "            <p t-else=\"\">\n"
+#~ "                Your payment order was processed and sent to the bank.\n"
+#~ "            </p>\n"
+#~ "            <p t-if=\"object.reconciled_invoices_type == 'invoice'\">\n"
+#~ "                It includes the following invoices:\n"
+#~ "            </p>\n"
+#~ "            <p t-else=\"\">\n"
+#~ "                It includes the following credit notes:\n"
+#~ "            </p>\n"
+#~ "            <ul>\n"
+#~ "                <t t-foreach=\"object.reconciled_invoice_ids\" t-as="
+#~ "\"invoice\">\n"
+#~ "                    <li t-out=\"invoice.name\">INV/2022/00001</li>\n"
+#~ "                </t>\n"
+#~ "                <t t-foreach=\"object.reconciled_bill_ids\" t-as=\"bill"
+#~ "\">\n"
+#~ "                    <li t-out=\"bill.ref or bill.name\">INV/2022/00002</"
+#~ "li>\n"
+#~ "                </t>\n"
+#~ "            </ul>\n"
+#~ "            <p>Total amount: <strong t-field=\"object.amount\"/></p>\n"
+#~ "            <div>\n"
+#~ "                <p>Thanks for your cooperation!</p>\n"
+#~ "                <p>--<br/><t t-out=\"object.company_id.name\"/></p>\n"
+#~ "                <p>\n"
+#~ "                    <small>This is an automated notification. Replies "
+#~ "will not be monitored nor answered. If you have questions, please contact "
+#~ "us by the usual means.</small>\n"
+#~ "                </p>\n"
+#~ "            </div>\n"
+#~ "        "
+#~ msgstr ""
+#~ "<p>Estimado/a <t t-out=\"object.partner_id.name or ''\">Azure Interior</"
+#~ "t>,</p>\n"
+#~ "            <p t-if=\"object.payment_type == 'inbound'\">\n"
+#~ "                Su orden de cobro ha sido procesada y enviada al banco.\n"
+#~ "            </p>\n"
+#~ "            <p t-else=\"\">\n"
+#~ "                Su orden de pago ha sido procesada y enviada al banco.\n"
+#~ "            </p>\n"
+#~ "            <p t-if=\"object.reconciled_invoices_type == 'invoice'\">\n"
+#~ "                Incluye las siguientes facturas:\n"
+#~ "            </p>\n"
+#~ "            <p t-else=\"\">\n"
+#~ "                Incluye las siguientes facturas rectificativas:\n"
+#~ "            </p>\n"
+#~ "            <ul>\n"
+#~ "\n"
+#~ "                <t t-foreach=\"object.reconciled_invoice_ids\" t-as="
+#~ "\"invoice\">\n"
+#~ "                    <li t-out=\"invoice.name\">INV/2022/00001</li>\n"
+#~ "                </t>\n"
+#~ "                <t t-foreach=\"object.reconciled_bill_ids\" t-as=\"bill"
+#~ "\">\n"
+#~ "                    <li t-out=\"bill.ref or bill.name\">INV/2022/00002</"
+#~ "li>\n"
+#~ "                </t>\n"
+#~ "\n"
+#~ "            </ul>\n"
+#~ "            <p>Importe total: <strong t-field=\"object.amount\"/></p>\n"
+#~ "            <div>\n"
+#~ "                <p>¡Gracias por su cooperación!</p>\n"
+#~ "                <p>--<br/><t t-out=\"object.company_id.name\"/></p>\n"
+#~ "                <p>\n"
+#~ "                    <small>Esta es una notificación automática. Las "
+#~ "respuestas no serán monitorizadas ni respondidas. Si tiene preguntas, por "
+#~ "favor contáctenos por los medios habituales.</small>\n"
+#~ "                </p>\n"
+#~ "            </div>\n"
+#~ "        "
+
+#~ msgid "Notify automatically, require a notification method"
+#~ msgstr "Notificar automáticamente, exigiendo un método de notificación"
