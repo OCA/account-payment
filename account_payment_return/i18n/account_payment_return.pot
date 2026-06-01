@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -135,6 +135,10 @@ msgid "Default partner for charge expenses"
 msgstr ""
 
 #. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_journal__display_name
+#: model:ir.model.fields,field_description:account_payment_return.field_account_move__display_name
+#: model:ir.model.fields,field_description:account_payment_return.field_account_move_line__display_name
+#: model:ir.model.fields,field_description:account_payment_return.field_account_partial_reconcile__display_name
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__display_name
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__display_name
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__display_name
@@ -163,16 +167,15 @@ msgid "Followers (Partners)"
 msgstr ""
 
 #. module: account_payment_return
-#: model_terms:ir.ui.view,arch_db:account_payment_return.payment_return_search_view
-msgid "Group By"
-msgstr ""
-
-#. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__has_message
 msgid "Has Message"
 msgstr ""
 
 #. module: account_payment_return
+#: model:ir.model.fields,field_description:account_payment_return.field_account_journal__id
+#: model:ir.model.fields,field_description:account_payment_return.field_account_move__id
+#: model:ir.model.fields,field_description:account_payment_return.field_account_move_line__id
+#: model:ir.model.fields,field_description:account_payment_return.field_account_partial_reconcile__id
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__id
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_line__id
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return_reason__id
@@ -275,13 +278,13 @@ msgstr ""
 #. module: account_payment_return
 #. odoo-python
 #: code:addons/account_payment_return/models/payment_return.py:0
-msgid "Move lines: %s"
+msgid "Move lines: %(move_names)s"
 msgstr ""
 
 #. module: account_payment_return
 #. odoo-python
 #: code:addons/account_payment_return/models/payment_return.py:0
-msgid "Move: %s"
+msgid "Move: %(move_ref)s"
 msgstr ""
 
 #. module: account_payment_return
@@ -409,6 +412,12 @@ msgstr ""
 #. module: account_payment_return
 #: model:ir.model.fields,field_description:account_payment_return.field_payment_return__move_id
 msgid "Reference to the created journal entry"
+msgstr ""
+
+#. module: account_payment_return
+#. odoo-python
+#: code:addons/account_payment_return/models/payment_return.py:0
+msgid "Return %(return_name)s"
 msgstr ""
 
 #. module: account_payment_return
