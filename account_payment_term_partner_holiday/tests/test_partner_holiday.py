@@ -4,8 +4,7 @@
 import psycopg2
 
 from odoo import fields
-from odoo.tests import common
-from odoo.tests.common import Form
+from odoo.tests import Form, common
 from odoo.tools.misc import mute_logger
 
 
@@ -71,8 +70,10 @@ class TestPartnerHoliday(common.TransactionCase):
                         0,
                         0,
                         {
-                            "value": "balance",
-                            "days": 0,
+                            "value": "percent",
+                            "value_amount": 100.0,
+                            "delay_type": "days_after",
+                            "nb_days": 0,
                         },
                     )
                 ],
@@ -86,8 +87,10 @@ class TestPartnerHoliday(common.TransactionCase):
                         0,
                         0,
                         {
-                            "value": "balance",
-                            "days": 10,
+                            "value": "percent",
+                            "value_amount": 100.0,
+                            "delay_type": "days_after",
+                            "nb_days": 10,
                         },
                     )
                 ],
@@ -101,8 +104,10 @@ class TestPartnerHoliday(common.TransactionCase):
                         0,
                         0,
                         {
-                            "value": "balance",
-                            "days": 0,
+                            "value": "percent",
+                            "value_amount": 100.0,
+                            "delay_type": "days_after",
+                            "nb_days": 0,
                         },
                     )
                 ],
@@ -119,8 +124,10 @@ class TestPartnerHoliday(common.TransactionCase):
                         0,
                         0,
                         {
-                            "value": "balance",
-                            "days": 0,
+                            "value": "percent",
+                            "value_amount": 100.0,
+                            "delay_type": "days_after",
+                            "nb_days": 0,
                             "payment_days": "5,10",
                         },
                     )

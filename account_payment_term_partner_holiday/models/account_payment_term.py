@@ -40,16 +40,33 @@ class AccountPaymentTerm(models.Model):
         )
         ctx = self.env.context
         partner_id = ctx.get("move_partner_id", ctx.get("default_partner_id"))
-        if partner_id:
-            partner = self.env["res.partner"].browse(partner_id)
-            result2 = []
-            for key, item in enumerate(result):
-                next_date = partner._get_valid_due_date(item["date"])
-                if next_date != item["date"]:
-                    line = self.line_ids.sorted(lambda x: x.value == "balance")[key]
-                    next_date = self.apply_payment_days(line, next_date)
-                    next_date = self.apply_holidays(next_date)
-                    item.update({"date": next_date})
-                result2.append(item)
-            result = result2
+
+        if not result or not partner_id:
+            return result
+
+        partner = self.env["res.partner"].browse(partner_id)
+
+        is_dict_structure = isinstance(result, dict) and "line_ids" in result
+        lines_to_iterate = result["line_ids"] if is_dict_structure else result
+
+        for key, item in enumerate(lines_to_iterate):
+            if isinstance(item, tuple) and len(item) == 3:
+                vals = item[2]
+            elif isinstance(item, dict):
+                vals = item
+            else:
+                vals = getattr(item, "_values", {})
+
+            if not vals or "date" not in vals:
+                continue
+
+            current_date = vals["date"]
+            next_date = partner._get_valid_due_date(current_date)
+
+            if next_date != current_date:
+                line = self.line_ids.sorted(lambda x: x.value == "percent")[key]
+                next_date = self.apply_payment_days(line, next_date)
+                next_date = self.apply_holidays(next_date)
+                vals["date"] = next_date
+
         return result

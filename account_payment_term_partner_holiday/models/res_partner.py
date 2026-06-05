@@ -6,7 +6,7 @@ import calendar
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -48,7 +48,7 @@ class ResPartner(models.Model):
         # When the user selects a date that does not exist, assume the last day
         # for that month
         days = (day, max(calendar.monthrange(year, month)))
-        return fields.Date.from_string("%s-%s-%s" % (year, month, min(days)))
+        return fields.Date.from_string(f"{year}-{month}-{min(days)}")
 
 
 class ResPartnerHoliday(models.Model):
@@ -63,18 +63,18 @@ class ResPartnerHoliday(models.Model):
     @api.model
     def _selection_months(self):
         return [
-            ("01", _("January")),
-            ("02", _("February")),
-            ("03", _("March")),
-            ("04", _("April")),
-            ("05", _("May")),
-            ("06", _("June")),
-            ("07", _("July")),
-            ("08", _("August")),
-            ("09", _("September")),
-            ("10", _("October")),
-            ("11", _("November")),
-            ("12", _("December")),
+            ("01", self.env._("January")),
+            ("02", self.env._("February")),
+            ("03", self.env._("March")),
+            ("04", self.env._("April")),
+            ("05", self.env._("May")),
+            ("06", self.env._("June")),
+            ("07", self.env._("July")),
+            ("08", self.env._("August")),
+            ("09", self.env._("September")),
+            ("10", self.env._("October")),
+            ("11", self.env._("November")),
+            ("12", self.env._("December")),
         ]
 
     partner_id = fields.Many2one(
@@ -118,5 +118,7 @@ class ResPartnerHoliday(models.Model):
                 and int(item.day_from) > int(item.day_to)
             ):
                 raise ValidationError(
-                    _("You can't set the ending holidays period before the beginning.")
+                    self.env._(
+                        "You can't set the ending holidays period before the beginning."
+                    )
                 )

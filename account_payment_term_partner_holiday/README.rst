@@ -71,7 +71,6 @@ Authors
 -------
 
 * Tecnativa
-* PlanetaTIC
 
 Contributors
 ------------
