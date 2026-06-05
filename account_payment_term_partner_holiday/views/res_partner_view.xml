@@ -8,7 +8,7 @@
             <field name="property_payment_term_id" position="after">
                 <field
                     name="holiday_ids"
-                    attrs="{'invisible': [('parent_id','!=', False)]}"
+                    invisible="parent_id != False"
                 >
                     <tree editable="bottom">
                         <field name="day_from" />
