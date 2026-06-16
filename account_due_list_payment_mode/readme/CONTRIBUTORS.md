@@ -1,8 +1,10 @@
 - Obertix Free Solutions \<<http://obertix.net>\>
-- Sergio Teruel \<<sergio.teruel@tecnativa.com>\>
 - Albert De La Fuente \<<info@haevas.com>\>
-- Vicent Cubells \<<vicent.cubells@tecnativa.com>\>
 - Miquel Raïch \<<miquel.raich@forgeflow.com>\>
 - Omar Castiñeira Saavedra \<<omar@comunitea.com>\>
-- Carolina Fernandez \<<carolina.fernandez@tecnativa.com>\>
-- Juan Carlos Oñate \<<juancarlos.onate@tecnativa.com>\>
+
+- [Tecnativa](https://www.tecnativa.com):
+  - Sergio Teruel
+  - Vicent Cubells
+  - Carolina Fernandez
+  - Juan Carlos Oñate
