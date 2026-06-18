@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-06-01 02:42+0000\n"
-"PO-Revision-Date: 2023-04-11 13:27+0000\n"
+"PO-Revision-Date: 2026-06-18 05:53+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: Slovenian (https://www.transifex.com/oca/teams/23907/sl/)\n"
 "Language: sl\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
 "n%100==4 ? 2 : 3;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_payment_term_extension
 #: model:account.payment.term,name:account_payment_term_extension.amount_untaxed_lines
 msgid "10% + 40% + Balance"
-msgstr ""
+msgstr "10% + 40% + saldo"
 
 #. module: account_payment_term_extension
 #: model:account.payment.term,name:account_payment_term_extension.sixty_days_end_of_month
@@ -34,7 +34,7 @@ msgstr "60 dni od konca meseca"
 #. module: account_payment_term_extension
 #: model:ir.model.fields,help:account_payment_term_extension.field_account_payment_term__sequential_lines
 msgid "Allows to apply a chronological order on lines."
-msgstr ""
+msgstr "Omogoči kronološki vrstni red postavk."
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__amount_round
@@ -45,22 +45,22 @@ msgstr "Zaokroževanje zneska"
 #: model:ir.model.fields,help:account_payment_term_extension.field_res_company__payment_terms_delay_type
 #: model:ir.model.fields,help:account_payment_term_extension.field_res_config_settings__payment_terms_delay_type
 msgid "Choose the type of delay when creating new payment terms."
-msgstr ""
+msgstr "Izberite vrsto odloga pri ustvarjanju novih plačilnih pogojev."
 
 #. module: account_payment_term_extension
 #: model:ir.model,name:account_payment_term_extension.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Družbe"
 
 #. module: account_payment_term_extension
 #: model:ir.model,name:account_payment_term_extension.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Nastavitve"
 
 #. module: account_payment_term_extension
 #: model_terms:ir.ui.view,arch_db:account_payment_term_extension.res_config_settings_view_form
 msgid "Configure the type of delay for payment terms."
-msgstr ""
+msgstr "Nastavite vrsto odloga za plačilne pogoje."
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__create_uid
@@ -77,32 +77,32 @@ msgstr "Ustvarjeno"
 #: code:addons/account_payment_term_extension/models/account_payment_term_holiday.py:0
 #, python-format
 msgid "Date %s cannot is both a holiday and a Postponed date"
-msgstr ""
+msgstr "Datum %s ne more biti oboje: praznik in datum odloga"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields.selection,name:account_payment_term_extension.selection__res_company__payment_terms_delay_type__days
 msgid "Days"
-msgstr ""
+msgstr "Dni"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields.selection,name:account_payment_term_extension.selection__res_company__payment_terms_delay_type__months
 msgid "Days and Months"
-msgstr ""
+msgstr "Dni in mesecev"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields.selection,name:account_payment_term_extension.selection__res_company__payment_terms_delay_type__weeks
 msgid "Days and Weeks"
-msgstr ""
+msgstr "Dni in tednov"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields.selection,name:account_payment_term_extension.selection__res_company__payment_terms_delay_type__weeks_and_months
 msgid "Days, Weeks and Months"
-msgstr ""
+msgstr "Dni, tednov in mesecev"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__delay_type
 msgid "Delay Type"
-msgstr ""
+msgstr "Tip odloga"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__display_name
@@ -112,27 +112,27 @@ msgstr "Prikazani naziv"
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__holiday
 msgid "Holiday"
-msgstr ""
+msgstr "Praznik"
 
 #. module: account_payment_term_extension
 #. odoo-python
 #: code:addons/account_payment_term_extension/models/account_payment_term_holiday.py:0
 #, python-format
 msgid "Holiday %s can only be postponed into the future"
-msgstr ""
+msgstr "Praznik %s se lahko prestavi le v prihodnost"
 
 #. module: account_payment_term_extension
 #. odoo-python
 #: code:addons/account_payment_term_extension/models/account_payment_term_holiday.py:0
 #, python-format
 msgid "Holiday %s is duplicated in current payment term"
-msgstr ""
+msgstr "Praznik %s je v trenutnem plačilnem pogoju podvojen"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term__holiday_ids
 #: model_terms:ir.ui.view,arch_db:account_payment_term_extension.view_payment_term_form
 msgid "Holidays"
-msgstr ""
+msgstr "Prazniki"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__id
@@ -152,70 +152,70 @@ msgstr "Zadnjič posodobljeno"
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__payment_id
 msgid "Payment"
-msgstr ""
+msgstr "Plačilo"
 
 #. module: account_payment_term_extension
 #: model:ir.model,name:account_payment_term_extension.model_account_payment_term_holiday
 msgid "Payment Term Holidays"
-msgstr ""
+msgstr "Plačilni pogoj praznik"
 
 #. module: account_payment_term_extension
 #: model:ir.model,name:account_payment_term_extension.model_account_payment_term
 #: model_terms:ir.ui.view,arch_db:account_payment_term_extension.res_config_settings_view_form
 msgid "Payment Terms"
-msgstr ""
+msgstr "Plačilni pogoji"
 
 #. module: account_payment_term_extension
 #: model_terms:ir.ui.view,arch_db:account_payment_term_extension.res_config_settings_view_form
 msgid "Payment Terms Delay Types"
-msgstr ""
+msgstr "Plačilni pogoji - tipi odlogov"
 
 #. module: account_payment_term_extension
 #: model:ir.model,name:account_payment_term_extension.model_account_payment_term_line
 msgid "Payment Terms Line"
-msgstr ""
+msgstr "Postavka plačilnih pogojev"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__payment_days
 msgid "Payment day(s)"
-msgstr ""
+msgstr "Plačilni dan (dnevi)"
 
 #. module: account_payment_term_extension
 #. odoo-python
 #: code:addons/account_payment_term_extension/models/account_payment_term_line.py:0
 #, python-format
 msgid "Payment days field format is not valid."
-msgstr ""
+msgstr "Format polja plačilni dnevi ni veljaven."
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_res_company__payment_terms_delay_type
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_res_config_settings__payment_terms_delay_type
 msgid "Payment terms Delay types"
-msgstr ""
+msgstr "Plačilni pogoji - tipi odlogov"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields.selection,name:account_payment_term_extension.selection__account_payment_term_line__value__percent_amount_untaxed
 msgid "Percent (Untaxed amount)"
-msgstr ""
+msgstr "Odstotek (neobdavčeno)"
 
 #. module: account_payment_term_extension
 #. odoo-python
 #: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "Percentage of amount untaxed can't be used with foreign currencies"
-msgstr ""
+msgstr "Odstotka neobdavčenega zneska ni mogoče uporabljati za tuje valute"
 
 #. module: account_payment_term_extension
 #. odoo-python
 #: code:addons/account_payment_term_extension/models/account_payment_term_line.py:0
 #, python-format
 msgid "Percentages on the Payment Terms lines must be between 0 and 100."
-msgstr ""
+msgstr "Odstotki v vrsticah plačilnih pogojev morajo biti med 0 in 100."
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__date_postponed
 msgid "Postponed date"
-msgstr ""
+msgstr "Odloženi datum"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,help:account_payment_term_extension.field_account_payment_term_line__payment_days
@@ -223,45 +223,48 @@ msgid ""
 "Put here the day or days when the partner makes the payment. Separate each "
 "possible payment day with dashes (-), commas (,) or spaces ( )."
 msgstr ""
+"Sem vpišite dneve, ko partner izvaja plačila. Ločite vsak mogoč dan plačila "
+"s črticami (-), vejicami (,) ali presledki ( )."
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,help:account_payment_term_extension.field_account_payment_term_line__value
 msgid "Select here the kind of valuation related to this payment terms line."
 msgstr ""
+"Tukaj izberite vrsto vrednotenja, povezano s to vrstico plačilnih pogojev."
 
 #. module: account_payment_term_extension
 #: model_terms:ir.ui.view,arch_db:account_payment_term_extension.res_config_settings_view_form
 msgid "Select the Delay Type options that will be available in Payment Terms."
-msgstr ""
+msgstr "Izberite opcije tipov zamika, ki bodo na voljo v plačilnih pogojih."
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term__sequential_lines
 msgid "Sequential Lines"
-msgstr ""
+msgstr "Zaporedne vrstice"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,help:account_payment_term_extension.field_account_payment_term_line__amount_round
 msgid "Sets the amount so that it is a multiple of this value."
-msgstr ""
+msgstr "Nastavi znesek tako, da je večkratnik te vrednosti."
 
 #. module: account_payment_term_extension
 #. odoo-python
 #: code:addons/account_payment_term_extension/models/account_payment_term.py:0
 #, python-format
 msgid "This module is not compatible with cash rounding"
-msgstr ""
+msgstr "Ta modul ni združljiv z zaokroževanjem gotovine"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__value
 msgid "Value"
-msgstr ""
+msgstr "Vrednost"
 
 #. module: account_payment_term_extension
 #: model_terms:ir.ui.view,arch_db:account_payment_term_extension.view_payment_term_form
 msgid ""
 "When a payment term coincides with a holiday, it is postponed to the chosen "
 "date."
-msgstr ""
+msgstr "Ko plačilni pogoj sovpada s praznikom, se prestavi na izbran datum."
 
 #~ msgid "Last Modified on"
 #~ msgstr "Zadnjič spremenjeno"
