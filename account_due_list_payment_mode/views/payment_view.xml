@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_payments_mode_tree" model="ir.ui.view">
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account_due_list.view_payments_tree" />
+        <field name="arch" type="xml">
+            <field name="partner_ref" position="after">
+                <field name="payment_mode_id" readonly="1" optional="show" />
+            </field>
+        </field>
+    </record>
+    <record id="view_payments_mode_filter" model="ir.ui.view">
+        <field name="model">account.move.line</field>
+        <field name="inherit_id" ref="account_due_list.view_payments_filter" />
+        <field name="arch" type="xml">
+            <field name="date_maturity" position="after">
+                <field name="payment_mode_id" />
+            </field>
+            <filter name="group_by_salesperson" position="after">
+                <filter
+                    name="payment_mode"
+                    string="Payment Mode"
+                    context="{'group_by':'payment_mode_id'}"
+                />
+            </filter>
+        </field>
+    </record>
+</odoo>
