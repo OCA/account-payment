@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2026-06-21 09:09+0000\n"
+"PO-Revision-Date: 2026-06-21 11:46+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: none\n"
 "Language: sl\n"
@@ -20,19 +20,19 @@ msgstr ""
 #. module: account_force_early_discount
 #: model:ir.model.fields,field_description:account_force_early_discount.field_account_payment_register__force_early_discount
 msgid "Apply Early Payment Discount Past Date"
-msgstr ""
+msgstr "Uveljavi popust za predčasno plačilo po izteku roka"
 
 #. module: account_force_early_discount
 #: model:ir.model.fields,field_description:account_force_early_discount.field_account_bank_statement_line__display_force_early_discount
 #: model:ir.model.fields,field_description:account_force_early_discount.field_account_move__display_force_early_discount
 msgid "Display Force Early Discount"
-msgstr ""
+msgstr "Prikaži prisilni popust za predčasno plačilo"
 
 #. module: account_force_early_discount
 #: model:ir.model.fields,field_description:account_force_early_discount.field_account_bank_statement_line__force_early_discount
 #: model:ir.model.fields,field_description:account_force_early_discount.field_account_move__force_early_discount
 msgid "Force early payment discount"
-msgstr ""
+msgstr "Prisili popust za predčasno plačilo"
 
 #. module: account_force_early_discount
 #: model:ir.model.fields,help:account_force_early_discount.field_account_payment_register__force_early_discount
@@ -40,6 +40,11 @@ msgid ""
 "Force early payment discount even if the date is past and the flag is not set on the invoices.\n"
 "Note that early payment discounts will be applied for invoices havingthe flag set, even if this checkbox is not marked."
 msgstr ""
+"Prisili popust za predčasno plačilo, tudi če je rok že potekel in zastavica "
+"na računih ni nastavljena.\n"
+"Upoštevajte, da se bodo popusti za predčasno plačilo uporabili za račune, "
+"pri katerih je zastavica nastavljena, tudi če to potrditveno polje ni "
+"označeno."
 
 #. module: account_force_early_discount
 #: model:ir.model.fields,help:account_force_early_discount.field_account_bank_statement_line__force_early_discount
@@ -48,6 +53,8 @@ msgid ""
 "If marked, early payment discount will be applied even if the discount date "
 "is passed"
 msgstr ""
+"Če je označeno, se bo popust za predčasno plačilo uporabil tudi, če je datum "
+"za popust že pretekel"
 
 #. module: account_force_early_discount
 #: model:ir.model,name:account_force_early_discount.model_account_move
@@ -62,9 +69,9 @@ msgstr "Plačaj"
 #. module: account_force_early_discount
 #: model:ir.model.fields,field_description:account_force_early_discount.field_account_payment_register__show_force_early_discount
 msgid "Show Force Early Discount"
-msgstr ""
+msgstr "Prikaži prisilitev popusta za predčasno plačilo"
 
 #. module: account_force_early_discount
 #: model:ir.model.fields,field_description:account_force_early_discount.field_account_payment_register__with_forced_early_discount
 msgid "With Forced Early Discount"
-msgstr ""
+msgstr "S prisilno uveljavljenim popustom za predčasno plačilo"
