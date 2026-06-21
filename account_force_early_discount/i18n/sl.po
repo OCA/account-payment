@@ -1,0 +1,68 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_force_early_discount
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: sl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=4; plural=n%100==1 ? 0 : n%100==2 ? 1 : n%100==3 || "
+"n%100==4 ? 2 : 3;\n"
+
+#. module: account_force_early_discount
+#: model:ir.model.fields,field_description:account_force_early_discount.field_account_payment_register__force_early_discount
+msgid "Apply Early Payment Discount Past Date"
+msgstr ""
+
+#. module: account_force_early_discount
+#: model:ir.model.fields,field_description:account_force_early_discount.field_account_bank_statement_line__display_force_early_discount
+#: model:ir.model.fields,field_description:account_force_early_discount.field_account_move__display_force_early_discount
+msgid "Display Force Early Discount"
+msgstr ""
+
+#. module: account_force_early_discount
+#: model:ir.model.fields,field_description:account_force_early_discount.field_account_bank_statement_line__force_early_discount
+#: model:ir.model.fields,field_description:account_force_early_discount.field_account_move__force_early_discount
+msgid "Force early payment discount"
+msgstr ""
+
+#. module: account_force_early_discount
+#: model:ir.model.fields,help:account_force_early_discount.field_account_payment_register__force_early_discount
+msgid ""
+"Force early payment discount even if the date is past and the flag is not set on the invoices.\n"
+"Note that early payment discounts will be applied for invoices havingthe flag set, even if this checkbox is not marked."
+msgstr ""
+
+#. module: account_force_early_discount
+#: model:ir.model.fields,help:account_force_early_discount.field_account_bank_statement_line__force_early_discount
+#: model:ir.model.fields,help:account_force_early_discount.field_account_move__force_early_discount
+msgid ""
+"If marked, early payment discount will be applied even if the discount date "
+"is passed"
+msgstr ""
+
+#. module: account_force_early_discount
+#: model:ir.model,name:account_force_early_discount.model_account_move
+msgid "Journal Entry"
+msgstr ""
+
+#. module: account_force_early_discount
+#: model:ir.model,name:account_force_early_discount.model_account_payment_register
+msgid "Pay"
+msgstr ""
+
+#. module: account_force_early_discount
+#: model:ir.model.fields,field_description:account_force_early_discount.field_account_payment_register__show_force_early_discount
+msgid "Show Force Early Discount"
+msgstr ""
+
+#. module: account_force_early_discount
+#: model:ir.model.fields,field_description:account_force_early_discount.field_account_payment_register__with_forced_early_discount
+msgid "With Forced Early Discount"
+msgstr ""
