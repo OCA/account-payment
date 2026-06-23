@@ -16,10 +16,17 @@ class PaymentReturnLine(models.Model):
                 continue
             payments = self.env["account.payment"].search(
                 [
-                    ("move_id", "=", int(line.reference)),
+                    ("id", "=", int(line.reference)),
                     ("payment_order_id", "!=", False),
                 ],
             )
+            if not payments:
+                payments = self.env["account.payment"].search(
+                    [
+                        ("move_id", "=", int(line.reference)),
+                        ("payment_order_id", "!=", False),
+                    ],
+                )
             if payments:
                 line.partner_id = payments[0].partner_id
                 for payment in payments:
