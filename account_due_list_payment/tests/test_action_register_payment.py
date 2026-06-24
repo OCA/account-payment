@@ -1,10 +1,10 @@
 # Copyright 2023 Engenere.one
 # License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).
 
-from odoo.tests import common
+from odoo.addons.base.tests.common import BaseCommon
 
 
-class TestAccountMoveLine(common.SavepointCase):
+class TestAccountMoveLine(BaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -14,7 +14,7 @@ class TestAccountMoveLine(common.SavepointCase):
 
         cls.move_line = cls.account_move_line_model.search(
             [
-                ("account_id.internal_type", "=", "receivable"),
+                ("account_id.account_type", "=", "asset_receivable"),
                 ("reconciled", "=", False),
             ],
             limit=1,

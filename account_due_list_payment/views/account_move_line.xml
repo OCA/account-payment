@@ -9,15 +9,12 @@
         <field name="arch" type="xml">
             <xpath expr="//sheet" position="before">
                 <header>
-                    <field name="parent_state" invisible="1" />
-                    <field name="reconciled" invisible="1" />
-                    <field name="account_internal_type" invisible="1" />
                     <button
                         name="action_register_payment"
                         id="account_invoice_payment_btn"
                         type="object"
                         class="oe_highlight"
-                        attrs="{'invisible': ['|', '|', ('parent_state', '!=', 'posted'), ('reconciled', '=', True), ('account_internal_type', 'not in', ('receivable', 'payable'))]}"
+                        invisible="parent_state != 'posted' or reconciled or account_type not in ['asset_receivable', 'liability_payable']"
                         context="{'dont_redirect_to_payments': True}"
                         string="Register Payment"
                         groups="account.group_account_invoice"
