@@ -7,7 +7,7 @@ from odoo.tests import common
 class TestAccountMoveLine(common.SavepointCase):
     @classmethod
     def setUpClass(cls):
-        super(TestAccountMoveLine, cls).setUpClass()
+        super().setUpClass()
 
         cls.account_move_line_model = cls.env["account.move.line"]
         cls.account_payment_register_model = cls.env["account.payment.register"]

@@ -2,7 +2,6 @@
 <!-- Copyright 2023 Engenere.one
      License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
 <odoo>
-
     <record model="ir.ui.view" id="account_move_line_form_view">
         <field name="name">account.move.line.form</field>
         <field name="model">account.move.line</field>
@@ -28,7 +27,6 @@
         </field>
     </record>
 
-
     <record model="ir.ui.view" id="account_move_line_tree_view">
         <field name="name">account.move.line.tree</field>
         <field name="model">account.move.line</field>
@@ -46,5 +44,4 @@
             </field>
         </field>
     </record>
-
 </odoo>

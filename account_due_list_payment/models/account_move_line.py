@@ -5,7 +5,6 @@ from odoo import _, models
 
 
 class AccountMoveLine(models.Model):
-
     _inherit = "account.move.line"
 
     def action_register_payment(self):
