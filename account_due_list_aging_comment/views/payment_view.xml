@@ -7,9 +7,9 @@
         <field name="model">account.move.line</field>
         <field name="inherit_id" ref="account_due_list.view_payments_tree" />
         <field name="arch" type="xml">
-            <tree position="attributes">
+            <list position="attributes">
                 <attribute name="editable">top</attribute>
-            </tree>
+            </list>
             <field name="reconciled" position="after">
                 <field name="aging_comments" />
             </field>
