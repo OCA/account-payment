@@ -1,0 +1,52 @@
+<?xml version="1.0" ?>
+<odoo>
+    <record id="account_payment_return_import_view" model="ir.ui.view">
+        <field name="name">Import Payment Returns</field>
+        <field name="model">payment.return.import</field>
+        <field name="priority">1</field>
+        <field name="arch" type="xml">
+            <form>
+                <div name="info_alert" class="alert alert-info" role="alert">
+                    How to import your payment return :<br />
+                    1. Download your Payment Return file from your bank website.<br />
+                    2. Make sure you have installed the right module to support the file format.<br
+                />
+                    3. Select the file and click 'Import'.
+                </div>
+                <group name="file">
+                    <field name="data_file" />
+                    <field name="match_after_import" />
+                </group>
+                <label for="journal_id" />
+                <field
+                    name="journal_id"
+                    domain="[('type', '=', 'bank')]"
+                    invisible="hide_journal_field"
+                    context="{'default_type':'bank'}"
+                />
+                <footer>
+                    <button
+                        name="import_file"
+                        string="Import"
+                        type="object"
+                        class="oe_highlight"
+                    />
+                    <button string="Cancel" class="oe_link" special="cancel" />
+                </footer>
+            </form>
+        </field>
+    </record>
+    <record id="action_account_payment_return_import" model="ir.actions.act_window">
+        <field name="name">Import Payment Return</field>
+        <field name="res_model">payment.return.import</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+        <field name="view_id" ref="account_payment_return_import_view" />
+    </record>
+    <menuitem
+        id="menu_account_payment_return_import"
+        parent="account.menu_finance_receivables"
+        action="action_account_payment_return_import"
+        sequence="22"
+    />
+</odoo>

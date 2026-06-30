@@ -1,0 +1,249 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_payment_return_import
+#
+# Translators:
+# Paolo Valier, 2016
+# Paolo Valier, 2016
+msgid ""
+msgstr ""
+"Project-Id-Version: account-payment (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-30 10:56+0000\n"
+"PO-Revision-Date: 2024-09-25 09:06+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: Italian (http://www.transifex.com/oca/OCA-account-payment-8-0/"
+"language/it/)\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
+#, python-format
+msgid "%d transactions had already been imported and were ignored."
+msgstr "%d operazioni sono state ignorate perché già importate."
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
+#, python-format
+msgid "1 transaction had already been imported and was ignored."
+msgstr "1 operazione è stata ignorata perché già importata."
+
+#. module: account_payment_return_import
+#: model:ir.model.constraint,message:account_payment_return_import.constraint_payment_return_line_unique_import_id
+msgid "A payment return transaction can be imported only once!"
+msgstr "Un'operazione di rimborso può essere importata una sola volta!"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,help:account_payment_return_import.field_payment_return_import__journal_id
+msgid ""
+"Accounting journal related to the bank payment return you're importing. It "
+"has be be manually chosen for payment return formats which doesn't allow "
+"automatic journal detection."
+msgstr ""
+"Registro contabile relativo al pagamento bancario rimborso che si sta "
+"importanto. È stato selezionato manualmente per i formati del pagamento "
+"rimborso che non consentono il rilevamento automatico del registro."
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
+#, python-format
+msgid "Already imported items"
+msgstr "Voci già importate"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return__imported_bank_account_id
+#: model_terms:ir.ui.view,arch_db:account_payment_return_import.payment_return_search_view
+msgid "Bank account"
+msgstr "Conto bancario"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,help:account_payment_return_import.field_payment_return__imported_bank_account_id
+msgid "Bank account from the imported file"
+msgstr "Conto bancario per il file importato"
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
+#, python-format
+msgid "Can not determine journal for import."
+msgstr "Non è possibile determinare il registro per l'importazione."
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
+#, python-format
+msgid "Can not find the account number %s."
+msgstr "Non si trova il conto numero %s."
+
+#. module: account_payment_return_import
+#: model_terms:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
+msgid "Cancel"
+msgstr "Annulla"
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
+#, python-format
+msgid ""
+"Could not make sense of the given file.\n"
+"Did you install the module to support this type of file?"
+msgstr ""
+"Il file fornito non è riconosciuto.\n"
+"È stato installato il modulo che supporta questo tipo di file?"
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/base_parser.py:0
+#, python-format
+msgid "Couldn't load file data"
+msgstr "Non si possono importare i dati"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,help:account_payment_return_import.field_payment_return_import__data_file
+msgid ""
+"Get you bank payment returns in electronic format from your bank and select "
+"them here."
+msgstr ""
+"Selezionare i pagamenti bancari dei rimborsi in formato elettronico ottenuti "
+"dalla banca."
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__hide_journal_field
+msgid "Hide the journal field in the view"
+msgstr "Nascondi il campo registro nella vista"
+
+#. module: account_payment_return_import
+#: model_terms:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
+msgid ""
+"How to import your payment return :<br/>\n"
+"                    1. Download your Payment Return file from your bank "
+"website.<br/>\n"
+"                    2. Make sure you have installed the right module to "
+"support the file format.<br/>\n"
+"                    3. Select the file and click 'Import'."
+msgstr ""
+"Come importare i pagamenti del rimborso :<br/>\n"
+"                    1. Scaricare il file pagamento rimborso dal sito web "
+"della banca.<br/>\n"
+"                    2. Assicurarsi di aver installato il modulo che supporta "
+"il formato del file.<br/>\n"
+"                    3. Selezionare il file e fare clic su 'Importa'."
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_payment_return_import
+#: model_terms:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
+msgid "Import"
+msgstr "Importa"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_line__unique_import_id
+msgid "Import ID"
+msgstr "ID importazione"
+
+#. module: account_payment_return_import
+#: model:ir.actions.act_window,name:account_payment_return_import.action_account_payment_return_import
+#: model:ir.model,name:account_payment_return_import.model_payment_return_import
+#: model:ir.ui.menu,name:account_payment_return_import.menu_account_payment_return_import
+msgid "Import Payment Return"
+msgstr "Importa rimborso pagamento"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__journal_id
+msgid "Journal"
+msgstr "Registro"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__match_after_import
+msgid "Match After Import"
+msgstr "Corrispondenza dopo l'importazione"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__data_file
+msgid "Payment Return File"
+msgstr "File pagamento rimborso"
+
+#. module: account_payment_return_import
+#: model:ir.model,name:account_payment_return_import.model_payment_return
+msgid "Payment return"
+msgstr "Rimborso pagamento"
+
+#. module: account_payment_return_import
+#: model:ir.model,name:account_payment_return_import.model_payment_return_line
+msgid "Payment return lines"
+msgstr "Righe rimborso pagamento"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_line__raw_import_data
+msgid "Raw Import Data"
+msgstr "Dati grezzi importati"
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
+#, python-format
+msgid "The account of this payment return is linked to another journal."
+msgstr ""
+"Il conto di questo pagamento rimborso è collegato ad un altro registro."
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
+#, python-format
+msgid "This file doesn't contain any payment return."
+msgstr "Questo file non contiene un pagamento rimborso."
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
+#, python-format
+msgid "This file doesn't contain any transaction."
+msgstr "Questo file non contiene nessuna transizione."
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,help:account_payment_return_import.field_payment_return_line__raw_import_data
+msgid "XML RAW data stored for debugging/check purposes"
+msgstr "Dati grezzi XML salvati per attività di debug/controllo"
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
+#, python-format
+msgid "You have already imported this file."
+msgstr "Questo file è già stato importato."

@@ -1,0 +1,242 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_payment_return_import
+#
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: account-payment (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-30 10:56+0000\n"
+"PO-Revision-Date: 2018-10-11 13:48+0000\n"
+"Last-Translator: Rudolf Schnapka <rs@techno-flex.de>\n"
+"Language-Team: German (http://www.transifex.com/oca/OCA-account-payment-8-0/"
+"language/de/)\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.1.1\n"
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
+#, python-format
+msgid "%d transactions had already been imported and were ignored."
+msgstr "%d Geschäftsvorfälle waren bereits importiert und wurden ignoriert."
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
+#, python-format
+msgid "1 transaction had already been imported and was ignored."
+msgstr "1 Geschäftsvorfall war bereits importiert und wurde ignoriert."
+
+#. module: account_payment_return_import
+#: model:ir.model.constraint,message:account_payment_return_import.constraint_payment_return_line_unique_import_id
+#, fuzzy
+msgid "A payment return transaction can be imported only once!"
+msgstr "Ein Bank-Geschäftsvorfall darf nur ein Mal importiert werden!"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,help:account_payment_return_import.field_payment_return_import__journal_id
+msgid ""
+"Accounting journal related to the bank payment return you're importing. It "
+"has be be manually chosen for payment return formats which doesn't allow "
+"automatic journal detection."
+msgstr ""
+"Buchhaltungsjournal, das sich auf die Rücklast der Bankzahlung bezieht, die "
+"Sie importieren. Es muss manuell für Zahlungsrücklast-Format ausgewählt "
+"werden, welches keine automatische Journalerkennung ermöglicht."
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
+#, python-format
+msgid "Already imported items"
+msgstr "Bereits importierte Positionen"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return__imported_bank_account_id
+#: model_terms:ir.ui.view,arch_db:account_payment_return_import.payment_return_search_view
+msgid "Bank account"
+msgstr ""
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,help:account_payment_return_import.field_payment_return__imported_bank_account_id
+msgid "Bank account from the imported file"
+msgstr ""
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
+#, python-format
+msgid "Can not determine journal for import."
+msgstr "Kann das Journal für den Import nicht bestimmen."
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
+#, python-format
+msgid "Can not find the account number %s."
+msgstr "Kann das Konto %s nicht finden."
+
+#. module: account_payment_return_import
+#: model_terms:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
+#, python-format
+msgid ""
+"Could not make sense of the given file.\n"
+"Did you install the module to support this type of file?"
+msgstr ""
+"Kann die angegebene Datei nicht so ganz verstehen.\n"
+"Haben Sie das zugehörige Modul für diesen Dateityp installiert?"
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/base_parser.py:0
+#, python-format
+msgid "Couldn't load file data"
+msgstr "Konnte die Dateidaten nicht laden"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__create_uid
+msgid "Created by"
+msgstr "Erstellt von"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__create_date
+msgid "Created on"
+msgstr "Erstellt am:"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__display_name
+msgid "Display Name"
+msgstr "Anzeigename"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,help:account_payment_return_import.field_payment_return_import__data_file
+msgid ""
+"Get you bank payment returns in electronic format from your bank and select "
+"them here."
+msgstr ""
+"Holen Sie die Rücklasten als Datei von Ihrer Bank und wählen diese Datei "
+"hier aus."
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__hide_journal_field
+msgid "Hide the journal field in the view"
+msgstr "Das Journalfeld in der Sicht verbergen"
+
+#. module: account_payment_return_import
+#: model_terms:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
+msgid ""
+"How to import your payment return :<br/>\n"
+"                    1. Download your Payment Return file from your bank "
+"website.<br/>\n"
+"                    2. Make sure you have installed the right module to "
+"support the file format.<br/>\n"
+"                    3. Select the file and click 'Import'."
+msgstr ""
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_payment_return_import
+#: model_terms:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
+msgid "Import"
+msgstr "Importieren"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_line__unique_import_id
+msgid "Import ID"
+msgstr "Import-ID"
+
+#. module: account_payment_return_import
+#: model:ir.actions.act_window,name:account_payment_return_import.action_account_payment_return_import
+#: model:ir.model,name:account_payment_return_import.model_payment_return_import
+#: model:ir.ui.menu,name:account_payment_return_import.menu_account_payment_return_import
+msgid "Import Payment Return"
+msgstr "Importiere Rücklasten"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__journal_id
+msgid "Journal"
+msgstr "Journal"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__write_uid
+msgid "Last Updated by"
+msgstr "Zuletzt aktualisiert von"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__write_date
+msgid "Last Updated on"
+msgstr "Zuletzt aktualisiert am"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__match_after_import
+msgid "Match After Import"
+msgstr "Nach Import abstimmen"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__data_file
+msgid "Payment Return File"
+msgstr "Rücklasten-Datei"
+
+#. module: account_payment_return_import
+#: model:ir.model,name:account_payment_return_import.model_payment_return
+#, fuzzy
+msgid "Payment return"
+msgstr "Rückbuchungszeilen"
+
+#. module: account_payment_return_import
+#: model:ir.model,name:account_payment_return_import.model_payment_return_line
+msgid "Payment return lines"
+msgstr "Rückbuchungszeilen"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_line__raw_import_data
+msgid "Raw Import Data"
+msgstr "Import Rohdaten"
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
+#, python-format
+msgid "The account of this payment return is linked to another journal."
+msgstr "Das Konto dieser Rücklast ist mit einem anderen Journal verknüpft."
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
+#, python-format
+msgid "This file doesn't contain any payment return."
+msgstr "Diese Datei enthält keine Rücklast."
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
+#, python-format
+msgid "This file doesn't contain any transaction."
+msgstr "Diese Datei enthält keinen Vorgang."
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,help:account_payment_return_import.field_payment_return_line__raw_import_data
+msgid "XML RAW data stored for debugging/check purposes"
+msgstr "XML-Rohdaten sind zur Fehler-/Prüfung abgespeichert"
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
+#, python-format
+msgid "You have already imported this file."
+msgstr "Sie haben diese Datei bereits importiert."

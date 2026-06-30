@@ -1,0 +1,247 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_payment_return_import
+#
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: account-payment (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-01-30 10:56+0000\n"
+"PO-Revision-Date: 2025-09-08 09:43+0000\n"
+"Last-Translator: Tamer Sezgin <tamer.sezgin@gmail.com>\n"
+"Language-Team: Turkish (http://www.transifex.com/oca/OCA-account-payment-8-0/"
+"language/tr/)\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Weblate 5.10.4\n"
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
+#, python-format
+msgid "%d transactions had already been imported and were ignored."
+msgstr "%d işlemi zaten içe aktarılmış ve gözardı edildi."
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
+#, python-format
+msgid "1 transaction had already been imported and was ignored."
+msgstr "1 işlem zaten içe aktarılmış ve gözardı edildi."
+
+#. module: account_payment_return_import
+#: model:ir.model.constraint,message:account_payment_return_import.constraint_payment_return_line_unique_import_id
+msgid "A payment return transaction can be imported only once!"
+msgstr "Bir ödeme iade işlemi sadece bir defa içeriye aktarılabilir!"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,help:account_payment_return_import.field_payment_return_import__journal_id
+msgid ""
+"Accounting journal related to the bank payment return you're importing. It "
+"has be be manually chosen for payment return formats which doesn't allow "
+"automatic journal detection."
+msgstr ""
+"İçeriye aktardığınız banka ödemesine ilişkin muhasebe günlüğü. Ödeme iade "
+"formatları için manuel olarak seçilmesi gerekiyor, bu nedenle otomatik "
+"muhasebe günlüğü belirleme yapılamıyor."
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
+#, python-format
+msgid "Already imported items"
+msgstr "Zaten İçe Aktarılmış Kalemler"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return__imported_bank_account_id
+#: model_terms:ir.ui.view,arch_db:account_payment_return_import.payment_return_search_view
+msgid "Bank account"
+msgstr "Banka Hesabı"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,help:account_payment_return_import.field_payment_return__imported_bank_account_id
+msgid "Bank account from the imported file"
+msgstr "İçeri aktarılan dosyadan gelen banka hesabı"
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
+#, python-format
+msgid "Can not determine journal for import."
+msgstr "İçeri aktarım için muhasebe günlüğü belirlenemedi."
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
+#, python-format
+msgid "Can not find the account number %s."
+msgstr "Hesap numarası bulunamadı %s."
+
+#. module: account_payment_return_import
+#: model_terms:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
+msgid "Cancel"
+msgstr "İptal"
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
+#, python-format
+msgid ""
+"Could not make sense of the given file.\n"
+"Did you install the module to support this type of file?"
+msgstr ""
+"Verilen dosya anlaşılamadı.\n"
+"Bu dosya tipini destekleyen modülü kurdunuz mu?"
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/base_parser.py:0
+#, python-format
+msgid "Couldn't load file data"
+msgstr "Dosya yüklenemedi"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__create_uid
+msgid "Created by"
+msgstr "Oluşturan"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__create_date
+msgid "Created on"
+msgstr "Oluşturulma Tarihi"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__display_name
+msgid "Display Name"
+msgstr "Görünen Ad"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,help:account_payment_return_import.field_payment_return_import__data_file
+msgid ""
+"Get you bank payment returns in electronic format from your bank and select "
+"them here."
+msgstr ""
+"Banka ödeme iadelerinizi bankanızdan elektronik ortamda alın ve buradan "
+"seçin."
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__hide_journal_field
+msgid "Hide the journal field in the view"
+msgstr "Görüntüde günlük alanını gizle"
+
+#. module: account_payment_return_import
+#: model_terms:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
+msgid ""
+"How to import your payment return :<br/>\n"
+"                    1. Download your Payment Return file from your bank "
+"website.<br/>\n"
+"                    2. Make sure you have installed the right module to "
+"support the file format.<br/>\n"
+"                    3. Select the file and click 'Import'."
+msgstr ""
+"Ödeme iadenizi nasıl içeriye aktarabilirsiniz :<br/>\n"
+"                    1. Ödeme İade dosyanızı bankanızın web sitesinden "
+"indirin.<br/>\n"
+"                    2. Dosya formatını desteklemek için doğru modülü "
+"kurduğunuzdan emin olun.<br/>\n"
+"                    3. Dosyayı seçin ve 'İçe Aktar'a tıklayın."
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_payment_return_import
+#: model_terms:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
+msgid "Import"
+msgstr "İçe Aktar"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_line__unique_import_id
+msgid "Import ID"
+msgstr "İçe Aktarım ID"
+
+#. module: account_payment_return_import
+#: model:ir.actions.act_window,name:account_payment_return_import.action_account_payment_return_import
+#: model:ir.model,name:account_payment_return_import.model_payment_return_import
+#: model:ir.ui.menu,name:account_payment_return_import.menu_account_payment_return_import
+msgid "Import Payment Return"
+msgstr "Ödeme İadesini İçe Aktar"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__journal_id
+msgid "Journal"
+msgstr "Yevmiye (Günlük)"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__write_uid
+msgid "Last Updated by"
+msgstr "Son Güncelleyen"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__write_date
+msgid "Last Updated on"
+msgstr "Son Güncellenme"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__match_after_import
+msgid "Match After Import"
+msgstr "İçe Aktarma Sonrasında Eşleştir"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__data_file
+msgid "Payment Return File"
+msgstr "Ödeme İade Dosyası"
+
+#. module: account_payment_return_import
+#: model:ir.model,name:account_payment_return_import.model_payment_return
+msgid "Payment return"
+msgstr "Ödeme iade"
+
+#. module: account_payment_return_import
+#: model:ir.model,name:account_payment_return_import.model_payment_return_line
+msgid "Payment return lines"
+msgstr "Ödeme iade satırları"
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_line__raw_import_data
+msgid "Raw Import Data"
+msgstr "Ham İçeri Aktarım Verileri"
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
+#, python-format
+msgid "The account of this payment return is linked to another journal."
+msgstr ""
+"Bu ödeme iadesinin hesabı başka bir günlüğe (yevmiye defterine) bağlanmıştır."
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
+#, python-format
+msgid "This file doesn't contain any payment return."
+msgstr "Bu dosya hiç ödeme iadesi içermiyor."
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
+#, python-format
+msgid "This file doesn't contain any transaction."
+msgstr "Bu dosya hiç işlem içermiyor."
+
+#. module: account_payment_return_import
+#: model:ir.model.fields,help:account_payment_return_import.field_payment_return_line__raw_import_data
+msgid "XML RAW data stored for debugging/check purposes"
+msgstr "XML RAW ham verileri hata ayıklama/kontrol amacıyla kaydedildi"
+
+#. module: account_payment_return_import
+#. odoo-python
+#: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
+#, python-format
+msgid "You have already imported this file."
+msgstr "Bu dosyayı zaten içe aktardınız."
