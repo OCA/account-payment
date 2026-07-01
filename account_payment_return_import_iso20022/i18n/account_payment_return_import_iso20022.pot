@@ -1,0 +1,1256 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_payment_return_import_iso20022
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC09
+msgid "Account currency is invalid or missing"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC01
+msgid "Account number is invalid or missing."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC04
+msgid ""
+"Account number specified has been closed on the bank of account's books."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC06
+msgid ""
+"Account specified is blocked, prohibiting posting of transactions against "
+"it."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC12
+msgid "Account type missing or invalid."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AG04
+msgid "Agent country code is missing or invalid."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AGNT
+msgid "Agent in the payment workflow is incorrect"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AB07
+msgid "Agent of message is not online."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AG10
+msgid "Agent of message is suspended from the Real Time Payment system."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS07
+msgid ""
+"All actions concerning the order could be done by the EBICS bank server"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM12
+msgid "Amount is invalid or missing"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM04
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM07
+msgid ""
+"Amount of funds available to cover specified message amount is insufficient."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM09
+msgid "Amount received is not the amount agreed or expected"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS02
+msgid "An authorized user has cancelled the order"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DT05
+msgid ""
+"Associated message, payment information block or transaction was received "
+"after agreed processing cut-off date, i.e., date in the past."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_TM01
+msgid ""
+"Associated message, payment information block, or transaction was received "
+"after agreed processing cut-off time."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RC05
+msgid "BIC identifier is invalid or missing."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_ED03
+msgid "Balance of payments complementary info is requested"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AG02
+msgid "Bank Operation code specified in the message is not valid for receiver"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RC01
+msgid ""
+"Bank identifier code specified in the message has an incorrect format "
+"(formerly IncorrectFormatForRoutingCode)."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RC02
+msgid "Bank identifier is invalid or missing."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_SL12
+msgid ""
+"Blacklisting service offered by the Debtor Agent, Debtor included the "
+"Creditor on his “Blacklist”. In the Blacklist the Debtor may list all "
+"Creditors not allowed to debit Debtor bank account"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC08
+msgid "Branch code is invalid or missing"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CUST
+msgid "Cancellation requested by the Debtor"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_FF06
+msgid "Category Purpose code is missing or invalid"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RR10
+msgid "Character set supplied not valid for the country and payment type."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE19
+msgid "Charge bearer code for transaction type is invalid"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_FF09
+msgid "Cheque number missing or invalid"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AB02
+msgid "Clearing process aborted due to a fatal error.   "
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AB01
+msgid "Clearing process aborted due to timeout."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_FF11
+msgid "Clearing request rejected due it being subject to an abort operation."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RC08
+msgid "ClearingSystemMemberidentifier is invalid or missing."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RCON
+msgid "Conflict with R-Message"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE18
+msgid "Contact details missing or invalid"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH15
+msgid ""
+"Content Remittance Information/Structured includes more than 140 characters"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH16
+msgid "Content is incorrect"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM16
+msgid "Control Sum at the Group level is invalid"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM17
+msgid "Control Sum at the Payment Information level is invalid"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_ED01
+msgid "Correspondent bank not possible."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE09
+msgid "Country code is missing or Invalid."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE14
+msgid "Country code of creditor's residence is missing or Invalid"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE13
+msgid "Country code of debtor's residence is missing or Invalid"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE12
+msgid "Country code of residence is missing or Invalid."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CERI
+msgid ""
+"Credit transfer is not tagged as an Extended Remittance Information (ERI) "
+"transaction but contains ERI."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_NERI
+msgid ""
+"Credit transfer is tagged as an Extended Remittance Information (ERI) "
+"transaction but does not contain ERI."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AB08
+msgid "Creditor Agent is not online."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AG11
+msgid ""
+"Creditor Agent of message is suspended from the Real Time Payment system."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RC07
+msgid "Creditor BIC identifier is invalid or missing"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RC10
+msgid "Creditor ClearingSystemMember identifier is invalid or missing"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH12
+msgid "Creditor Identifier is ambiguous at Transaction Level"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RC12
+msgid "Creditor Scheme Id is invalid or  missing"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC11
+msgid "Creditor account currency is invalid or missing"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC07
+msgid "Creditor account number closed"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC03
+msgid "Creditor account number invalid or missing"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC14
+msgid "Creditor account type missing or invalid"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AG06
+msgid "Creditor agent country code is missing or invalid"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RC04
+msgid "Creditor bank identifier is invalid or missing"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CNOR
+msgid "Creditor bank is not registered under this BIC in the CSM"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE11
+msgid "Creditor country code is missing or invalid"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE22
+msgid "Creditor name is missing"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE17
+msgid "Creditor or Ultimate Creditor identification code missing or invalid"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_MD05
+msgid ""
+"Creditor or creditor's agent should not have collected the direct debit"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CURR
+msgid "Currency of the payment is incorrect"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS0B
+msgid "Data signature for the format is not available or invalid."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS0A
+msgid "Data signature is required."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RC06
+msgid "Debtor BIC identifier is invalid or missing"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RC09
+msgid "Debtor ClearingSystemMember identifier is invalid or missing"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AG07
+msgid "Debtor account cannot be debited for a generic reason."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC10
+msgid "Debtor account currency is invalid or missing"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC05
+msgid "Debtor account number closed"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC02
+msgid "Debtor account number invalid or missing"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC13
+msgid "Debtor account type missing or invalid"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AG05
+msgid "Debtor agent country code is missing or invalid"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RC03
+msgid "Debtor bank identifier is invalid or missing"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DNOR
+msgid "Debtor bank is not registered under this BIC in the CSM"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE10
+msgid "Debtor country code is missing or invalid"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE08
+msgid "Debtor name is missing"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE16
+msgid "Debtor or Ultimate Debtor identification code missing or invalid"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_SL14
+msgid ""
+"Due to Maximum allowed Direct Debit Transaction amount service offered by "
+"the Debtor Agent."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_SL13
+msgid ""
+"Due to Maximum allowed Direct Debit Transactions per period service offered "
+"by the Debtor Agent."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_SL02
+msgid "Due to specific service offered by the Creditor Agent"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_SL01
+msgid "Due to specific service offered by the Debtor Agent"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM05
+msgid "Duplication"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH17
+msgid "Element is not allowed"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH07
+msgid "Element is not to be used at B- and C-Level"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DU04
+msgid "End To End ID is not unique."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_MD07
+msgid "End customer is deceased."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE06
+msgid ""
+"End customer specified is not known at associated Sort/National Bank Code or"
+" does no longer exist in the books"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_FF08
+msgid "End to End Id missing or invalid"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DT06
+msgid ""
+"Execution Date has been modified in order for transaction to be processed"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_ERIN
+msgid "Extended Remittance Information (ERI) option is not supported."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_FF01
+msgid "File Format incomplete or invalid"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS18
+msgid ""
+"File cannot be tested, the complete order has to be repeated. This code is "
+"returned in the event of a malfunction during the signature check, e.g. not "
+"enough storage space."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_FF10
+msgid ""
+"File or transaction cannot be processed due to technical issues at the bank "
+"side"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DT04
+msgid "Future date not supported"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE15
+msgid "Identification code missing or invalid."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE01
+msgid ""
+"Identification of end customer is not consistent with associated account "
+"number. (formerly CreditorConsistency)."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:ir.model,name:account_payment_return_import_iso20022.model_payment_return_import
+msgid "Import Payment Return"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_G003
+msgid ""
+"In a FIToFI Customer Credit Transfer: Credit to creditor’s account is "
+"pending receipt of required documents. The Status Originator has requested "
+"creditor to provide additional documentation. Update will follow from the "
+"Status Originator."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_G004
+msgid ""
+"In a FIToFI Customer Credit Transfer: Credit to the creditor’s account is "
+"pending, status Originator is waiting for funds provided via a cover. Update"
+" will follow from the Status Originator."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_G001
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_G002
+msgid ""
+"In a FIToFI Customer Credit Transfer: Credit to the creditor’s account may "
+"not be confirmed same day. Update will follow from the Status Originator."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_G000
+msgid ""
+"In a FIToFI Customer Credit Transfer: The Status Originator transferred the "
+"payment to the next Agent or to a Market Infrastructure. The payment "
+"transfer is not tracked. No further updates will follow from the Status "
+"Originator."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH10
+msgid "Information on mandate changes are missing"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DU05
+msgid "Instruction ID is not unique."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_ED06
+msgid "Interbank settlement system not available."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RC11
+msgid "Intermediary Agent is invalid or missing"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DT02
+msgid "Invalid creation date and time in Group Header (eg, historic date)"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DT01
+msgid "Invalid date (eg, wrong or missing settlement date)"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DT03
+msgid "Invalid non bank processing date (eg, weekend or local public holiday)"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RR11
+msgid "Invalid or missing identification of a bank proprietary service."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RR12
+msgid ""
+"Invalid or missing identification required within a particular country or "
+"payment type."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_FF05
+msgid "Local Instrument code is missing or invalid"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH09
+msgid "Mandate changes are not allowed"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_MD02
+msgid "Mandate related information data required by the scheme is missing."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH21
+msgid "Mandatory element is missing"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DU01
+msgid "Message Identification is not unique."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE20
+msgid "Name length exceeds local rules for payment type."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE21
+msgid ""
+"Name missing or invalid.  Generic usage if cannot specifically identify "
+"debtor or creditor."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_MD01
+msgid "No Mandate"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH20
+msgid "Number of decimal points not compatible with the currency"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM19
+msgid "Number of transactions at the Group level is invalid or missing"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM20
+msgid "Number of transactions at the Payment Information level is invalid"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM18
+msgid "Number of transactions is invalid or missing."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS17
+msgid "Order data and signatures don’t match"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH13
+msgid "Original Debtor Account is not to be used"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH14
+msgid "Original Debtor Agent  is not to be used"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AG09
+msgid "Original payment never received."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE05
+msgid "Party who initiated the message is not recognised by the end customer"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DU02
+msgid "Payment Information Block is not unique."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_FF03
+msgid "Payment Type Information is missing or invalid."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_G005
+msgid "Payment has been delivered to creditor agent with service level."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_G006
+msgid "Payment has been delivered to creditor agent without service level."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DUPL
+msgid "Payment is a duplicate of another payment"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:ir.model,name:account_payment_return_import_iso20022.model_payment_return_line
+msgid "Payment return lines"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_FF07
+msgid "Purpose is missing or invalid"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_MS03
+msgid "Reason has not been specified by agent."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_MS02
+msgid "Reason has not been specified by end customer"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_NARR
+msgid ""
+"Reason is provided as narrative information in the additional reason "
+"information."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RR04
+msgid "Regulatory Reason"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RR05
+msgid ""
+"Regulatory or Central Bank Reporting information missing, incomplete or "
+"invalid."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RR07
+msgid ""
+"Remittance information structure does not comply with rules for payment "
+"type."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RR08
+msgid ""
+"Remittance information truncated to comply with rules for payment type."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_S004
+msgid ""
+"Request for Cancellation has been acknowledged as delivered to payment "
+"processing/last payment processing agent."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_S003
+msgid ""
+"Request for Cancellation has been forwarded to the payment processing/last "
+"payment processing agent."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_S000
+msgid "Request for Cancellation is acknowledged following validation."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_MD06
+msgid "Return of funds requested by end customer"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH22
+msgid "SDD CORE and B2B not permitted within one message"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_FF04
+msgid "Service Level code is missing or invalid"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AB03
+msgid "Settlement aborted due to timeout.   "
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_ED05
+msgid "Settlement of the transaction has failed."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AB04
+msgid "Settlement process aborted due to a fatal error.   "
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_ID01
+msgid ""
+"Signature file was sent to the bank but the corresponding original file has "
+"not been sent yet."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS0H
+msgid "Signer is not allowed to sign for this account."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS0G
+msgid "Signer is not allowed to sign this operation type."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM02
+msgid "Specific transaction/message amount is greater than allowed maximum"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE04
+msgid ""
+"Specification of creditor's address, which is required for payment, is "
+"missing/not correct (formerly IncorrectCreditorAddress)."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_BE07
+msgid ""
+"Specification of debtor's address, which is required for payment, is "
+"missing/not correct."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RR03
+msgid ""
+"Specification of the creditor’s name and/or address needed for regulatory "
+"requirements is insufficient or missing."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RR01
+msgid ""
+"Specification of the debtor’s account or unique identification needed for "
+"reasons of regulatory requirements is insufficient or missing"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RR02
+msgid ""
+"Specification of the debtor’s name and/or address needed for regulatory "
+"requirements is insufficient or missing."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM03
+msgid ""
+"Specified message amount is an non processable currency outside of existing "
+"agreement"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM01
+msgid "Specified message amount is equal to zero"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM06
+msgid "Specified transaction amount is less than agreed minimum."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RR09
+msgid "Structured creditor reference invalid or missing."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM10
+msgid "Sum of instructed amounts does not equal the control sum."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_FF02
+msgid ""
+"Syntax error reason is provided as narrative information in the additional "
+"reason information."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RR06
+msgid "Tax information missing, incomplete or invalid."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_TS01
+msgid "The (technical) transmission of the file was successful."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC15
+msgid "The account details for the counterparty have changed."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS13
+msgid ""
+"The authority of signer certification sending the certificate is unknown for"
+" the first signer."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS23
+msgid ""
+"The authority of signer certification sending the certificate is unknown for"
+" the second signer."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS0F
+msgid ""
+"The authority of the signer certification sending the certificate is "
+"unknown."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS12
+msgid "The certificate is not present for the first signer."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS22
+msgid "The certificate is not present for the second signer."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS11
+msgid ""
+"The certificate is not valid (revoked or not active) for the first signer."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS21
+msgid ""
+"The certificate is not valid (revoked or not active) for the second signer."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS10
+msgid "The certificate is revoked for the first signer."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS20
+msgid "The certificate is revoked for the second signer."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS08
+msgid "The decompression of the file was not successful"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS09
+msgid "The decryption of the file was not successful"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS01
+msgid "The electronic signature(s) is/are correct"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_TD02
+msgid "The file cannot be read (e.g. unknown format)"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_TD03
+msgid "The file format is incomplete or invalid"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS0K
+msgid "The number of transaction is over the number allowed for this signer."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS25
+msgid "The order file was deleted by the bank server"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS05
+msgid "The order was correct and could be forwarded for postprocessing"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS04
+msgid ""
+"The order was rejected by the bank side (for reasons concerning content)"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS06
+msgid "The order was transferred to VEU"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_TS04
+msgid "The order was transferred to pass by accompanying note signed by hand"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS16
+msgid ""
+"The public key version is not correct. This code is returned when a customer"
+" sends signature files to the financial institution after conversion from an"
+" older program version (old ES format) to a new program version (new ES "
+"format) without having carried out re-initialisation with regard to a public"
+" key change."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS15
+msgid "The same signature has already been sent to the bank"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS26
+msgid "The same user has signed multiple times"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS0E
+msgid "The signer certificate is not present."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS0D
+msgid "The signer certificate is not valid (revoked or not active)."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS0C
+msgid "The signer certificate is revoked."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_TA01
+msgid ""
+"The transmission of the file was not successful – it had to be aborted (for "
+"technical reasons)"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS27
+msgid "The user is not yet activated (technically)"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS14
+msgid "The user is unknown on the server"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS03
+msgid "The user’s attempt to cancel the order was not successful"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS19
+msgid ""
+"The user’s rights (concerning his signature) are insufficient to execute the"
+" order"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_TD01
+msgid "There is no data available (for download)"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM15
+msgid "Transaction amount below minimum set by clearing system"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM14
+msgid "Transaction amount exceeds limits agreed between bank and client"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM21
+msgid "Transaction amount exceeds limits agreed between bank and client."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM13
+msgid "Transaction amount exceeds limits set by clearing system"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM23
+msgid "Transaction amount exceeds settlement limit."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM11
+msgid "Transaction currency is invalid or missing"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AG08
+msgid "Transaction failed due to invalid or missing user or access right"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AG01
+msgid "Transaction forbidden on this type of account (formerly NoAgreement)"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DU03
+msgid "Transaction is not unique."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RF01
+msgid "Transaction reference is not unique within the message."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AB09
+msgid "Transaction stopped due to error at the Creditor Agent."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AB10
+msgid "Transaction stopped due to error at the Instructed Agent."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AB05
+msgid "Transaction stopped due to timeout at the Creditor Agent."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AB06
+msgid "Transaction stopped due to timeout at the Instructed Agent."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AG03
+msgid "Transaction type not supported/authorized on this account"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM22
+msgid ""
+"Unable to apply zero amount to designated account. For example, where the "
+"rules of a service allow the use of zero amount payments, however the back-"
+"office system is unable to apply the funds to the account. If the rules of a"
+" service prohibit the use of zero amount payments, then code AM01 is used to"
+" report the error condition."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_S001
+msgid ""
+"Unique End-to-end Transaction Reference (UETR) relating to a payment has "
+"been identified as being associated with a Request for Cancellation."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_S002
+msgid ""
+"Unique End-to-end Transaction Reference (UETR) relating to a payment has "
+"been prevent from traveling across a messaging network."
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH11
+msgid "Value in Creditor Identifier is incorrect"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH03
+msgid ""
+"Value in Requested Execution Date or Requested Collection Date is too far in"
+" the future"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH04
+msgid ""
+"Value in Requested Execution Date or Requested Collection Date is too far in"
+" the past"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH19
+msgid ""
+"Values in Interbank Settlement Date or Requested Collection Date will be set"
+" to the next TARGET day"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS24
+msgid "Waiting time expired due to incomplete order"
+msgstr ""
+
+#. module: account_payment_return_import_iso20022
+#: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_SL11
+msgid ""
+"Whitelisting service offered by the Debtor Agent, Debtor has not included "
+"the Creditor on its “Whitelist” (yet). In the Whitelist the Debtor may list "
+"all allowed Creditors to debit Debtor bank account"
+msgstr ""

@@ -1,0 +1,226 @@
+id,code,name
+unpaid_reason_AB01,AB01,Clearing process aborted due to timeout.
+unpaid_reason_AB02,AB02,Clearing process aborted due to a fatal error.   
+unpaid_reason_AB03,AB03,Settlement aborted due to timeout.   
+unpaid_reason_AB04,AB04,Settlement process aborted due to a fatal error.   
+unpaid_reason_AB05,AB05,Transaction stopped due to timeout at the Creditor Agent.
+unpaid_reason_AB06,AB06,Transaction stopped due to timeout at the Instructed Agent.
+unpaid_reason_AB07,AB07,Agent of message is not online.
+unpaid_reason_AB08,AB08,Creditor Agent is not online.
+unpaid_reason_AB09,AB09,Transaction stopped due to error at the Creditor Agent.
+unpaid_reason_AB10,AB10,Transaction stopped due to error at the Instructed Agent.
+unpaid_reason_AC01,AC01,Account number is invalid or missing.
+unpaid_reason_AC02,AC02,Debtor account number invalid or missing
+unpaid_reason_AC03,AC03,Creditor account number invalid or missing
+unpaid_reason_AC04,AC04,Account number specified has been closed on the bank of account's books.
+unpaid_reason_AC05,AC05,Debtor account number closed
+unpaid_reason_AC06,AC06,"Account specified is blocked, prohibiting posting of transactions against it."
+unpaid_reason_AC07,AC07,Creditor account number closed
+unpaid_reason_AC08,AC08,Branch code is invalid or missing
+unpaid_reason_AC09,AC09,Account currency is invalid or missing
+unpaid_reason_AC10,AC10,Debtor account currency is invalid or missing
+unpaid_reason_AC11,AC11,Creditor account currency is invalid or missing
+unpaid_reason_AC12,AC12,Account type missing or invalid.
+unpaid_reason_AC13,AC13,Debtor account type missing or invalid
+unpaid_reason_AC14,AC14,Creditor account type missing or invalid
+unpaid_reason_AC15,AC15,The account details for the counterparty have changed.
+unpaid_reason_AG01,AG01,Transaction forbidden on this type of account (formerly NoAgreement)
+unpaid_reason_AG02,AG02,Bank Operation code specified in the message is not valid for receiver
+unpaid_reason_AG03,AG03,Transaction type not supported/authorized on this account
+unpaid_reason_AG04,AG04,Agent country code is missing or invalid.
+unpaid_reason_AG05,AG05,Debtor agent country code is missing or invalid
+unpaid_reason_AG06,AG06,Creditor agent country code is missing or invalid
+unpaid_reason_AG07,AG07,Debtor account cannot be debited for a generic reason.
+unpaid_reason_AG08,AG08,Transaction failed due to invalid or missing user or access right
+unpaid_reason_AG09,AG09,Original payment never received.
+unpaid_reason_AG10,AG10,Agent of message is suspended from the Real Time Payment system.
+unpaid_reason_AG11,AG11,Creditor Agent of message is suspended from the Real Time Payment system.
+unpaid_reason_AGNT,AGNT,Agent in the payment workflow is incorrect
+unpaid_reason_AM01,AM01,Specified message amount is equal to zero
+unpaid_reason_AM02,AM02,Specific transaction/message amount is greater than allowed maximum
+unpaid_reason_AM03,AM03,Specified message amount is an non processable currency outside of existing agreement
+unpaid_reason_AM04,AM04,Amount of funds available to cover specified message amount is insufficient.
+unpaid_reason_AM05,AM05,Duplication
+unpaid_reason_AM06,AM06,Specified transaction amount is less than agreed minimum.
+unpaid_reason_AM07,AM07,Amount of funds available to cover specified message amount is insufficient.
+unpaid_reason_AM09,AM09,Amount received is not the amount agreed or expected
+unpaid_reason_AM10,AM10,Sum of instructed amounts does not equal the control sum.
+unpaid_reason_AM11,AM11,Transaction currency is invalid or missing
+unpaid_reason_AM12,AM12,Amount is invalid or missing
+unpaid_reason_AM13,AM13,Transaction amount exceeds limits set by clearing system
+unpaid_reason_AM14,AM14,Transaction amount exceeds limits agreed between bank and client
+unpaid_reason_AM15,AM15,Transaction amount below minimum set by clearing system
+unpaid_reason_AM16,AM16,Control Sum at the Group level is invalid
+unpaid_reason_AM17,AM17,Control Sum at the Payment Information level is invalid
+unpaid_reason_AM18,AM18,Number of transactions is invalid or missing.
+unpaid_reason_AM19,AM19,Number of transactions at the Group level is invalid or missing
+unpaid_reason_AM20,AM20,Number of transactions at the Payment Information level is invalid
+unpaid_reason_AM21,AM21,Transaction amount exceeds limits agreed between bank and client.
+unpaid_reason_AM22,AM22,"Unable to apply zero amount to designated account. For example, where the rules of a service allow the use of zero amount payments, however the back-office system is unable to apply the funds to the account. If the rules of a service prohibit the use of zero amount payments, then code AM01 is used to report the error condition."
+unpaid_reason_AM23,AM23,Transaction amount exceeds settlement limit.
+unpaid_reason_BE01,BE01,Identification of end customer is not consistent with associated account number. (formerly CreditorConsistency).
+unpaid_reason_BE04,BE04,"Specification of creditor's address, which is required for payment, is missing/not correct (formerly IncorrectCreditorAddress)."
+unpaid_reason_BE05,BE05,Party who initiated the message is not recognised by the end customer
+unpaid_reason_BE06,BE06,End customer specified is not known at associated Sort/National Bank Code or does no longer exist in the books
+unpaid_reason_BE07,BE07,"Specification of debtor's address, which is required for payment, is missing/not correct."
+unpaid_reason_BE08,BE08,Debtor name is missing
+unpaid_reason_BE09,BE09,Country code is missing or Invalid.
+unpaid_reason_BE10,BE10,Debtor country code is missing or invalid
+unpaid_reason_BE11,BE11,Creditor country code is missing or invalid
+unpaid_reason_BE12,BE12,Country code of residence is missing or Invalid.
+unpaid_reason_BE13,BE13,Country code of debtor's residence is missing or Invalid
+unpaid_reason_BE14,BE14,Country code of creditor's residence is missing or Invalid
+unpaid_reason_BE15,BE15,Identification code missing or invalid.
+unpaid_reason_BE16,BE16,Debtor or Ultimate Debtor identification code missing or invalid
+unpaid_reason_BE17,BE17,Creditor or Ultimate Creditor identification code missing or invalid
+unpaid_reason_BE18,BE18,Contact details missing or invalid
+unpaid_reason_BE19,BE19,Charge bearer code for transaction type is invalid
+unpaid_reason_BE20,BE20,Name length exceeds local rules for payment type.
+unpaid_reason_BE21,BE21,Name missing or invalid.  Generic usage if cannot specifically identify debtor or creditor.
+unpaid_reason_BE22,BE22,Creditor name is missing
+unpaid_reason_CERI,CERI,Credit transfer is not tagged as an Extended Remittance Information (ERI) transaction but contains ERI.
+unpaid_reason_CH03,CH03,Value in Requested Execution Date or Requested Collection Date is too far in the future
+unpaid_reason_CH04,CH04,Value in Requested Execution Date or Requested Collection Date is too far in the past
+unpaid_reason_CH07,CH07,Element is not to be used at B- and C-Level
+unpaid_reason_CH09,CH09,Mandate changes are not allowed
+unpaid_reason_CH10,CH10,Information on mandate changes are missing
+unpaid_reason_CH11,CH11,Value in Creditor Identifier is incorrect
+unpaid_reason_CH12,CH12,Creditor Identifier is ambiguous at Transaction Level
+unpaid_reason_CH13,CH13,Original Debtor Account is not to be used
+unpaid_reason_CH14,CH14,Original Debtor Agent  is not to be used
+unpaid_reason_CH15,CH15,Content Remittance Information/Structured includes more than 140 characters
+unpaid_reason_CH16,CH16,Content is incorrect
+unpaid_reason_CH17,CH17,Element is not allowed
+unpaid_reason_CH19,CH19,Values in Interbank Settlement Date or Requested Collection Date will be set to the next TARGET day
+unpaid_reason_CH20,CH20,Number of decimal points not compatible with the currency
+unpaid_reason_CH21,CH21,Mandatory element is missing
+unpaid_reason_CH22,CH22,SDD CORE and B2B not permitted within one message
+unpaid_reason_CNOR,CNOR,Creditor bank is not registered under this BIC in the CSM
+unpaid_reason_CURR,CURR,Currency of the payment is incorrect
+unpaid_reason_CUST,CUST,Cancellation requested by the Debtor
+unpaid_reason_DNOR,DNOR,Debtor bank is not registered under this BIC in the CSM
+unpaid_reason_DS01,DS01,The electronic signature(s) is/are correct
+unpaid_reason_DS02,DS02,An authorized user has cancelled the order
+unpaid_reason_DS03,DS03,The user’s attempt to cancel the order was not successful
+unpaid_reason_DS04,DS04,The order was rejected by the bank side (for reasons concerning content)
+unpaid_reason_DS05,DS05,The order was correct and could be forwarded for postprocessing
+unpaid_reason_DS06,DS06,The order was transferred to VEU
+unpaid_reason_DS07,DS07,All actions concerning the order could be done by the EBICS bank server
+unpaid_reason_DS08,DS08,The decompression of the file was not successful
+unpaid_reason_DS09,DS09,The decryption of the file was not successful
+unpaid_reason_DS0A,DS0A,Data signature is required.
+unpaid_reason_DS0B,DS0B,Data signature for the format is not available or invalid.
+unpaid_reason_DS0C,DS0C,The signer certificate is revoked.
+unpaid_reason_DS0D,DS0D,The signer certificate is not valid (revoked or not active).
+unpaid_reason_DS0E,DS0E,The signer certificate is not present.
+unpaid_reason_DS0F,DS0F,The authority of the signer certification sending the certificate is unknown.
+unpaid_reason_DS0G,DS0G,Signer is not allowed to sign this operation type.
+unpaid_reason_DS0H,DS0H,Signer is not allowed to sign for this account.
+unpaid_reason_DS0K,DS0K,The number of transaction is over the number allowed for this signer.
+unpaid_reason_DS10,DS10,The certificate is revoked for the first signer.
+unpaid_reason_DS11,DS11,The certificate is not valid (revoked or not active) for the first signer.
+unpaid_reason_DS12,DS12,The certificate is not present for the first signer.
+unpaid_reason_DS13,DS13,The authority of signer certification sending the certificate is unknown for the first signer.
+unpaid_reason_DS14,DS14,The user is unknown on the server
+unpaid_reason_DS15,DS15,The same signature has already been sent to the bank
+unpaid_reason_DS16,DS16,The public key version is not correct. This code is returned when a customer sends signature files to the financial institution after conversion from an older program version (old ES format) to a new program version (new ES format) without having carried out re-initialisation with regard to a public key change.
+unpaid_reason_DS17,DS17,Order data and signatures don’t match
+unpaid_reason_DS18,DS18,"File cannot be tested, the complete order has to be repeated. This code is returned in the event of a malfunction during the signature check, e.g. not enough storage space."
+unpaid_reason_DS19,DS19,The user’s rights (concerning his signature) are insufficient to execute the order
+unpaid_reason_DS20,DS20,The certificate is revoked for the second signer.
+unpaid_reason_DS21,DS21,The certificate is not valid (revoked or not active) for the second signer.
+unpaid_reason_DS22,DS22,The certificate is not present for the second signer.
+unpaid_reason_DS23,DS23,The authority of signer certification sending the certificate is unknown for the second signer.
+unpaid_reason_DS24,DS24,Waiting time expired due to incomplete order
+unpaid_reason_DS25,DS25,The order file was deleted by the bank server
+unpaid_reason_DS26,DS26,The same user has signed multiple times
+unpaid_reason_DS27,DS27,The user is not yet activated (technically)
+unpaid_reason_DT01,DT01,"Invalid date (eg, wrong or missing settlement date)"
+unpaid_reason_DT02,DT02,"Invalid creation date and time in Group Header (eg, historic date)"
+unpaid_reason_DT03,DT03,"Invalid non bank processing date (eg, weekend or local public holiday)"
+unpaid_reason_DT04,DT04,Future date not supported
+unpaid_reason_DT05,DT05,"Associated message, payment information block or transaction was received after agreed processing cut-off date, i.e., date in the past."
+unpaid_reason_DT06,DT06,Execution Date has been modified in order for transaction to be processed
+unpaid_reason_DU01,DU01,Message Identification is not unique.
+unpaid_reason_DU02,DU02,Payment Information Block is not unique.
+unpaid_reason_DU03,DU03,Transaction is not unique.
+unpaid_reason_DU04,DU04,End To End ID is not unique.
+unpaid_reason_DU05,DU05,Instruction ID is not unique.
+unpaid_reason_DUPL,DUPL,Payment is a duplicate of another payment
+unpaid_reason_ED01,ED01,Correspondent bank not possible.
+unpaid_reason_ED03,ED03,Balance of payments complementary info is requested
+unpaid_reason_ED05,ED05,Settlement of the transaction has failed.
+unpaid_reason_ED06,ED06,Interbank settlement system not available.
+unpaid_reason_ERIN,ERIN,Extended Remittance Information (ERI) option is not supported.
+unpaid_reason_FF01,FF01,File Format incomplete or invalid
+unpaid_reason_FF02,FF02,Syntax error reason is provided as narrative information in the additional reason information.
+unpaid_reason_FF03,FF03,Payment Type Information is missing or invalid.
+unpaid_reason_FF04,FF04,Service Level code is missing or invalid
+unpaid_reason_FF05,FF05,Local Instrument code is missing or invalid
+unpaid_reason_FF06,FF06,Category Purpose code is missing or invalid
+unpaid_reason_FF07,FF07,Purpose is missing or invalid
+unpaid_reason_FF08,FF08,End to End Id missing or invalid
+unpaid_reason_FF09,FF09,Cheque number missing or invalid
+unpaid_reason_FF10,FF10,File or transaction cannot be processed due to technical issues at the bank side
+unpaid_reason_FF11,FF11,Clearing request rejected due it being subject to an abort operation.
+unpaid_reason_G000,G000,In a FIToFI Customer Credit Transfer: The Status Originator transferred the payment to the next Agent or to a Market Infrastructure. The payment transfer is not tracked. No further updates will follow from the Status Originator.
+unpaid_reason_G001,G001,In a FIToFI Customer Credit Transfer: Credit to the creditor’s account may not be confirmed same day. Update will follow from the Status Originator.
+unpaid_reason_G002,G002,In a FIToFI Customer Credit Transfer: Credit to the creditor’s account may not be confirmed same day. Update will follow from the Status Originator.
+unpaid_reason_G003,G003,In a FIToFI Customer Credit Transfer: Credit to creditor’s account is pending receipt of required documents. The Status Originator has requested creditor to provide additional documentation. Update will follow from the Status Originator.
+unpaid_reason_G004,G004,"In a FIToFI Customer Credit Transfer: Credit to the creditor’s account is pending, status Originator is waiting for funds provided via a cover. Update will follow from the Status Originator."
+unpaid_reason_G005,G005,Payment has been delivered to creditor agent with service level.
+unpaid_reason_G006,G006,Payment has been delivered to creditor agent without service level.
+unpaid_reason_ID01,ID01,Signature file was sent to the bank but the corresponding original file has not been sent yet.
+unpaid_reason_MD01,MD01,No Mandate
+unpaid_reason_MD02,MD02,Mandate related information data required by the scheme is missing.
+unpaid_reason_MD05,MD05,Creditor or creditor's agent should not have collected the direct debit
+unpaid_reason_MD06,MD06,Return of funds requested by end customer
+unpaid_reason_MD07,MD07,End customer is deceased.
+unpaid_reason_MS02,MS02,Reason has not been specified by end customer
+unpaid_reason_MS03,MS03,Reason has not been specified by agent.
+unpaid_reason_NARR,NARR,Reason is provided as narrative information in the additional reason information.
+unpaid_reason_NERI,NERI,Credit transfer is tagged as an Extended Remittance Information (ERI) transaction but does not contain ERI.
+unpaid_reason_RC01,RC01,Bank identifier code specified in the message has an incorrect format (formerly IncorrectFormatForRoutingCode).
+unpaid_reason_RC02,RC02,Bank identifier is invalid or missing.
+unpaid_reason_RC03,RC03,Debtor bank identifier is invalid or missing
+unpaid_reason_RC04,RC04,Creditor bank identifier is invalid or missing
+unpaid_reason_RC05,RC05,BIC identifier is invalid or missing.
+unpaid_reason_RC06,RC06,Debtor BIC identifier is invalid or missing
+unpaid_reason_RC07,RC07,Creditor BIC identifier is invalid or missing
+unpaid_reason_RC08,RC08,ClearingSystemMemberidentifier is invalid or missing.
+unpaid_reason_RC09,RC09,Debtor ClearingSystemMember identifier is invalid or missing
+unpaid_reason_RC10,RC10,Creditor ClearingSystemMember identifier is invalid or missing
+unpaid_reason_RC11,RC11,Intermediary Agent is invalid or missing
+unpaid_reason_RC12,RC12,Creditor Scheme Id is invalid or  missing
+unpaid_reason_RCON,RCON,Conflict with R-Message
+unpaid_reason_RF01,RF01,Transaction reference is not unique within the message.
+unpaid_reason_RR01,RR01,Specification of the debtor’s account or unique identification needed for reasons of regulatory requirements is insufficient or missing
+unpaid_reason_RR02,RR02,Specification of the debtor’s name and/or address needed for regulatory requirements is insufficient or missing.
+unpaid_reason_RR03,RR03,Specification of the creditor’s name and/or address needed for regulatory requirements is insufficient or missing.
+unpaid_reason_RR04,RR04,Regulatory Reason
+unpaid_reason_RR05,RR05,"Regulatory or Central Bank Reporting information missing, incomplete or invalid."
+unpaid_reason_RR06,RR06,"Tax information missing, incomplete or invalid."
+unpaid_reason_RR07,RR07,Remittance information structure does not comply with rules for payment type.
+unpaid_reason_RR08,RR08,Remittance information truncated to comply with rules for payment type.
+unpaid_reason_RR09,RR09,Structured creditor reference invalid or missing.
+unpaid_reason_RR10,RR10,Character set supplied not valid for the country and payment type.
+unpaid_reason_RR11,RR11,Invalid or missing identification of a bank proprietary service.
+unpaid_reason_RR12,RR12,Invalid or missing identification required within a particular country or payment type.
+unpaid_reason_S000,S000,Request for Cancellation is acknowledged following validation.
+unpaid_reason_S001,S001,Unique End-to-end Transaction Reference (UETR) relating to a payment has been identified as being associated with a Request for Cancellation.
+unpaid_reason_S002,S002,Unique End-to-end Transaction Reference (UETR) relating to a payment has been prevent from traveling across a messaging network.
+unpaid_reason_S003,S003,Request for Cancellation has been forwarded to the payment processing/last payment processing agent.
+unpaid_reason_S004,S004,Request for Cancellation has been acknowledged as delivered to payment processing/last payment processing agent.
+unpaid_reason_SL01,SL01,Due to specific service offered by the Debtor Agent
+unpaid_reason_SL02,SL02,Due to specific service offered by the Creditor Agent
+unpaid_reason_SL11,SL11,"Whitelisting service offered by the Debtor Agent, Debtor has not included the Creditor on its “Whitelist” (yet). In the Whitelist the Debtor may list all allowed Creditors to debit Debtor bank account"
+unpaid_reason_SL12,SL12,"Blacklisting service offered by the Debtor Agent, Debtor included the Creditor on his “Blacklist”. In the Blacklist the Debtor may list all Creditors not allowed to debit Debtor bank account"
+unpaid_reason_SL13,SL13,Due to Maximum allowed Direct Debit Transactions per period service offered by the Debtor Agent.
+unpaid_reason_SL14,SL14,Due to Maximum allowed Direct Debit Transaction amount service offered by the Debtor Agent.
+unpaid_reason_TA01,TA01,The transmission of the file was not successful – it had to be aborted (for technical reasons)
+unpaid_reason_TD01,TD01,There is no data available (for download)
+unpaid_reason_TD02,TD02,The file cannot be read (e.g. unknown format)
+unpaid_reason_TD03,TD03,The file format is incomplete or invalid
+unpaid_reason_TM01,TM01,"Associated message, payment information block, or transaction was received after agreed processing cut-off time."
+unpaid_reason_TS01,TS01,The (technical) transmission of the file was successful.
+unpaid_reason_TS04,TS04,The order was transferred to pass by accompanying note signed by hand
