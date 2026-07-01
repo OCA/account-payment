@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-30 10:56+0000\n"
-"PO-Revision-Date: 2026-01-22 18:18+0000\n"
+"PO-Revision-Date: 2026-07-01 12:46+0000\n"
 "Last-Translator: Matjaz Mozetic <matjaz@luxim.si>\n"
 "Language-Team: Slovenian (http://www.transifex.com/oca/OCA-account-payment-8-"
 "0/language/sl/)\n"
@@ -37,9 +37,8 @@ msgstr "1 transakcija je bila že uvožena in je bila spregledana."
 
 #. module: account_payment_return_import
 #: model:ir.model.constraint,message:account_payment_return_import.constraint_payment_return_line_unique_import_id
-#, fuzzy
 msgid "A payment return transaction can be imported only once!"
-msgstr "Transakcije bančnega računa se lahko uvozi le enkrat!"
+msgstr "Transakcijo vračila plačila se lahko uvozi le enkrat!"
 
 #. module: account_payment_return_import
 #: model:ir.model.fields,help:account_payment_return_import.field_payment_return_import__journal_id
@@ -63,12 +62,12 @@ msgstr "Že uvožene postavke"
 #: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return__imported_bank_account_id
 #: model_terms:ir.ui.view,arch_db:account_payment_return_import.payment_return_search_view
 msgid "Bank account"
-msgstr ""
+msgstr "Bančni račun"
 
 #. module: account_payment_return_import
 #: model:ir.model.fields,help:account_payment_return_import.field_payment_return__imported_bank_account_id
 msgid "Bank account from the imported file"
-msgstr ""
+msgstr "Bančni račun iz uvožene datoteke"
 
 #. module: account_payment_return_import
 #. odoo-python
@@ -105,7 +104,7 @@ msgstr ""
 #: code:addons/account_payment_return_import/wizard/base_parser.py:0
 #, python-format
 msgid "Couldn't load file data"
-msgstr ""
+msgstr "Ni bilo mogoče naložiti podatkovne datoteke"
 
 #. module: account_payment_return_import
 #: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__create_uid
@@ -146,6 +145,12 @@ msgid ""
 "support the file format.<br/>\n"
 "                    3. Select the file and click 'Import'."
 msgstr ""
+"Kako uvoziti podatke o vračilih plačil:<br/>\n"
+"                    1. S spletne strani svoje banke prenesite datoteko z "
+"vračili plačil.<br/>\n"
+"                    2. Preverite, ali imate nameščen ustrezen modul, ki "
+"podpira ta format datoteke.<br/>\n"
+"                    3. Izberite datoteko in kliknite na »Uvozi«."
 
 #. module: account_payment_return_import
 #: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__id
@@ -154,9 +159,8 @@ msgstr "ID"
 
 #. module: account_payment_return_import
 #: model_terms:ir.ui.view,arch_db:account_payment_return_import.account_payment_return_import_view
-#, fuzzy
 msgid "Import"
-msgstr "_Uvozi"
+msgstr "Uvozi"
 
 #. module: account_payment_return_import
 #: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_line__unique_import_id
@@ -188,7 +192,7 @@ msgstr "Zadnjič posodobljeno"
 #. module: account_payment_return_import
 #: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__match_after_import
 msgid "Match After Import"
-msgstr ""
+msgstr "Primerjaj po uvozu"
 
 #. module: account_payment_return_import
 #: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_import__data_file
@@ -197,9 +201,8 @@ msgstr "Datoteka vračila plačila"
 
 #. module: account_payment_return_import
 #: model:ir.model,name:account_payment_return_import.model_payment_return
-#, fuzzy
 msgid "Payment return"
-msgstr "Postavke vračil plačil"
+msgstr "Vračilo plačila"
 
 #. module: account_payment_return_import
 #: model:ir.model,name:account_payment_return_import.model_payment_return_line
@@ -208,7 +211,6 @@ msgstr "Postavke vračil plačil"
 
 #. module: account_payment_return_import
 #: model:ir.model.fields,field_description:account_payment_return_import.field_payment_return_line__raw_import_data
-#, fuzzy
 msgid "Raw Import Data"
 msgstr "Surovi uvozni podatki"
 
@@ -243,4 +245,4 @@ msgstr "XML RAW podatki shranjeni za namene razhroščevanja/kontrole"
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "You have already imported this file."
-msgstr "To datoteko ste že uvozili"
+msgstr "To datoteko ste že uvozili."
