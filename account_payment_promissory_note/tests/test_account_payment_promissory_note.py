@@ -18,6 +18,23 @@ class TestAccountPaymentPromissoryNote(TransactionCase):
             self.default_journal_cash.inbound_payment_method_line_ids[0]
         )
         self.company = self.env.ref("base.main_company")
+        if not self.company.batch_payment_sequence_id:
+            # Odoo 18 computes the payment communication when initializing the
+            # register payment wizard, and grouped payments need this sequence.
+            self.company.sudo().batch_payment_sequence_id = (
+                self.env["ir.sequence"]
+                .sudo()
+                .create(
+                    {
+                        "name": "Batch Payment Number Sequence",
+                        "implementation": "no_gap",
+                        "padding": 5,
+                        "use_date_range": True,
+                        "company_id": self.company.id,
+                        "prefix": "BATCH/%(range_year)s/",
+                    }
+                )
+            )
         partner = self.env.ref("base.partner_demo")
         self.invoice_1 = self.env["account.move"].create(
             {
