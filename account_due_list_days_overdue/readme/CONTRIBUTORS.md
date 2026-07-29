@@ -1,0 +1,8 @@
+- Jordi Ballester Alomar \<<jordi.ballester@forgeflow.com>\>
+- Holger Brunn \<<hbrunn@therp.nl>\>
+- [Sygel](https://www.sygel.es):
+  - Valentin Vinagre \<<valentin.vinagre@sygel.es>\>
+- [Tecnativa](https://www.tecnativa.com):
+  - Víctor Martínez
+- [SDi](https://www.sdi.es):
+  - Fernando La Chica
