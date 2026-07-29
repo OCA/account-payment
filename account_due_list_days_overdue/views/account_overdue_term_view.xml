@@ -26,20 +26,20 @@
         </field>
     </record>
     <record id="view_account_overdue_term_tree" model="ir.ui.view">
-        <field name="name">account.overdue.term.list</field>
+        <field name="name">account.overdue.term.tree</field>
         <field name="model">account.overdue.term</field>
         <field name="arch" type="xml">
-            <list>
+            <tree>
                 <field name="name" />
                 <field name="from_day" />
                 <field name="to_day" />
-            </list>
+            </tree>
         </field>
     </record>
     <record id="action_account_overdue_term_form" model="ir.actions.act_window">
         <field name="name">Overdue Terms</field>
         <field name="res_model">account.overdue.term</field>
-        <field name="view_mode">list,form</field>
+        <field name="view_mode">tree,form</field>
         <field name="search_view_id" ref="view_account_overdue_term_search" />
     </record>
     <menuitem
