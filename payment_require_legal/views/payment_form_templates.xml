@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2026 Tecnativa - Pilar Vargas
+     License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <template id="payment_form" inherit_id="payment.form">
+        <xpath expr="//t[@t-call='payment.submit_button']/.." position="before">
+            <div t-if="display_submit_button" class="form-check mt-3 mb-2">
+                <input
+                    id="payment_require_legal"
+                    class="form-check-input"
+                    type="checkbox"
+                    required="required"
+                />
+                <label class="form-check-label" for="payment_require_legal">
+                    I accept the
+                    <a href="/terms" target="_blank">terms and conditions</a>.
+                </label>
+            </div>
+        </xpath>
+    </template>
+</odoo>
