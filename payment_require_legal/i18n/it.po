@@ -1,0 +1,35 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* payment_require_legal
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: payment_require_legal
+#: model_terms:ir.ui.view,arch_db:payment_require_legal.payment_form
+msgid "I accept the"
+msgstr ""
+
+#. module: payment_require_legal
+#: model:ir.model.fields,field_description:payment_require_legal.field_payment_transaction__legal_terms_acceptance_metadata
+msgid "Legal Terms Acceptance Metadata"
+msgstr ""
+
+#. module: payment_require_legal
+#: model:ir.model,name:payment_require_legal.model_payment_transaction
+msgid "Payment Transaction"
+msgstr ""
+
+#. module: payment_require_legal
+#: model_terms:ir.ui.view,arch_db:payment_require_legal.payment_form
+msgid "terms and conditions"
+msgstr ""
