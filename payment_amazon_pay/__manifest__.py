@@ -15,7 +15,7 @@
     ],
     "assets": {
         "web.assets_frontend": [
-            "payment_amazon_pay/static/src/js/payment_form.js",
+            "payment_amazon_pay/static/src/js/payment_form.esm.js",
         ],
     },
     "installable": True,

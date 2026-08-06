@@ -152,7 +152,7 @@ const config = [{
         strict: ["error", "function"],
         "use-isnan": "error",
 
-        "jsdoc/check-tag-names": ["warn", { definedTags: ["odoo-module"] }],
+        "jsdoc/check-tag-names": "warn",
         "jsdoc/check-types": "warn",
         "jsdoc/require-param-description": "off",
         "jsdoc/require-return": "off",
@@ -191,7 +191,7 @@ const config = [{
     },
 
 }, {
-    files: ["**/*.esm.js", "payment_amazon_pay/static/src/js/payment_form.js"],
+    files: ["**/*.esm.js"],
 
     languageOptions: {
         ecmaVersion: 2024,
