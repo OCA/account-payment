@@ -191,7 +191,7 @@ const config = [{
     },
 
 }, {
-    files: ["**/*.esm.js", "payment_amazon_pay/static/src/js/payment_form.js"],
+    files: ["**/*.esm.js"],
 
     languageOptions: {
         ecmaVersion: 2024,

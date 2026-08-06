@@ -330,6 +330,30 @@ class PaymentProvider(models.Model):
             "signature": base64.b64encode(signature).decode(),
         }
 
+    def _amazon_pay_get_inline_form_values(self, currency=None):
+        """Return the public values required to render the Amazon Pay button."""
+        self.ensure_one()
+        checkout_js_url = {
+            "eu": "https://static-eu.payments-amazon.com/checkout.js",
+            "na": "https://static-na.payments-amazon.com/checkout.js",
+            "jp": "https://static-fe.payments-amazon.com/checkout.js",
+        }[self.amazon_pay_region]
+        return json.dumps(
+            {
+                "checkout_js_url": checkout_js_url,
+                "amazon_pay_cfg": {
+                    "merchantId": self.amazon_pay_merchant_id,
+                    "publicKeyId": self.amazon_pay_public_key_id,
+                    "ledgerCurrency": currency and currency.name,
+                    "checkoutLanguage": self.amazon_pay_checkout_language or "en_US",
+                    "productType": "PayOnly",
+                    "placement": "Checkout",
+                    "buttonColor": "Gold",
+                    "sandbox": self.state == "test",
+                },
+            }
+        )
+
     def _amazon_pay_create_checkout_session(self, tx):
         self.ensure_one()
         return self._amazon_pay_request(
