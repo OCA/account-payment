@@ -35,7 +35,7 @@ addon | version | maintainers | summary
 [account_payment_promissory_note](account_payment_promissory_note/) | 18.0.1.0.2 |  | Account Payment Promissory Note
 [account_payment_return](account_payment_return/) | 18.0.1.0.9 |  | Manage the return of your payments
 [account_payment_return_import](account_payment_return_import/) | 18.0.1.0.1 |  | This module adds a generic wizard to import payment returnfile formats. Is only the base to be extended by anothermodules
-[account_payment_return_import_iso20022](account_payment_return_import_iso20022/) | 18.0.1.1.1 |  | This addon allows to import payment returns from ISO 20022 files like PAIN or CAMT.
+[account_payment_return_import_iso20022](account_payment_return_import_iso20022/) | 18.0.1.1.2 |  | This addon allows to import payment returns from ISO 20022 files like PAIN or CAMT.
 [account_payment_show_invoice](account_payment_show_invoice/) | 18.0.1.0.0 |  | Extends the tree view of payments to show the paid invoices related to the payments using the vendor reference by default
 [account_payment_term_extension](account_payment_term_extension/) | 18.0.1.0.1 |  | Adds rounding, months, weeks and multiple payment days properties on payment term lines
 [account_payment_tier_validation](account_payment_tier_validation/) | 18.0.1.0.1 |  | Extends the functionality of Payment to support a tier validation process.
