@@ -1,0 +1,31 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_due_list_aging_comments
+#
+# Translators:
+# Magno <magno.costa@akretion.com.br>, 2017
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-07-29 12:02+0000\n"
+"PO-Revision-Date: 2019-09-23 15:24+0000\n"
+"Last-Translator: Rodrigo Macedo <rmsolucoeseminformatic4@gmail.com>\n"
+"Language-Team: Portuguese (Brazil) (https://www.transifex.com/oca/"
+"teams/23907/pt_BR/)\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 3.8\n"
+
+#. module: account_due_list_aging_comment
+#: model:ir.model.fields,field_description:account_due_list_aging_comment.field_account_move_line__aging_comments
+msgid "Aging Comments"
+msgstr "Comentários sobre envelhecimento"
+
+#. module: account_due_list_aging_comment
+#: model:ir.model,name:account_due_list_aging_comment.model_account_move_line
+msgid "Journal Item"
+msgstr "Item do diário"
