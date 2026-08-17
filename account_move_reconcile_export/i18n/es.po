@@ -23,8 +23,18 @@ msgid "Journal Entry"
 msgstr "Asiento contable"
 
 #. module: account_move_reconcile_export
+#: model:ir.model.fields,help:account_move_reconcile_export.field_account_bank_statement_line__reconciled_move_ids
+#: model:ir.model.fields,help:account_move_reconcile_export.field_account_move__reconciled_move_ids
+msgid ""
+"Journal entries reconciled with this invoice (payments, credit notes, write-"
+"offs...). Exportable counterpart of the read-only payments widget."
+msgstr ""
+"Asientos contables conciliados con esta factura (pagos, facturas "
+"rectificativas, ajustes...). Equivalente exportable del widget de pagos, que "
+"es de solo lectura."
+
+#. module: account_move_reconcile_export
 #: model:ir.model.fields,field_description:account_move_reconcile_export.field_account_bank_statement_line__reconciled_move_ids
 #: model:ir.model.fields,field_description:account_move_reconcile_export.field_account_move__reconciled_move_ids
-#: model:ir.model.fields,field_description:account_move_reconcile_export.field_account_payment__reconciled_move_ids
 msgid "Reconciled Moves"
 msgstr "Apuntes conciliados"

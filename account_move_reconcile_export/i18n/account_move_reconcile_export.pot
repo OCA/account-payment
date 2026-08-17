@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: Odoo Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -19,8 +19,15 @@ msgid "Journal Entry"
 msgstr ""
 
 #. module: account_move_reconcile_export
+#: model:ir.model.fields,help:account_move_reconcile_export.field_account_bank_statement_line__reconciled_move_ids
+#: model:ir.model.fields,help:account_move_reconcile_export.field_account_move__reconciled_move_ids
+msgid ""
+"Journal entries reconciled with this invoice (payments, credit notes, write-"
+"offs...). Exportable counterpart of the read-only payments widget."
+msgstr ""
+
+#. module: account_move_reconcile_export
 #: model:ir.model.fields,field_description:account_move_reconcile_export.field_account_bank_statement_line__reconciled_move_ids
 #: model:ir.model.fields,field_description:account_move_reconcile_export.field_account_move__reconciled_move_ids
-#: model:ir.model.fields,field_description:account_move_reconcile_export.field_account_payment__reconciled_move_ids
 msgid "Reconciled Moves"
 msgstr ""

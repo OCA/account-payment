@@ -3,10 +3,10 @@
 
 {
     "name": "Account Move Reconcile Export",
-    "version": "17.0.1.0.0",
+    "version": "19.0.1.0.0",
     "summary": "Manage the export of reconciled moves linked to invoices",
     "license": "AGPL-3",
-    "depends": ["mail", "account"],
+    "depends": ["account"],
     "author": "Tecnativa, Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-payment",
     "installable": True,

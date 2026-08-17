@@ -5,3 +5,7 @@ of each payment linked to an invoice.
 
 Out of the box, Odoo does not expose an easily exportable field for this data —
 the existing payments widget is explicitly marked as ``exportable=False``.
+
+The standard `reconciled_payment_ids` field is not enough either, as it only
+returns `account.payment` records, leaving out any other reconciled entry such
+as credit notes, write-offs or manual journal entries.

@@ -374,7 +374,7 @@ ul.auto-toc {
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !! source digest: sha256:b62d54b2cc7c515ae2b45f5448aa392dee3f68dfc228a4fc42fb26532064aa95
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/license-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/account-payment/tree/17.0/account_move_reconcile_export"><img alt="OCA/account-payment" src="https://img.shields.io/badge/github-OCA%2Faccount--payment-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/account-payment-17-0/account-payment-17-0-account_move_reconcile_export"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/account-payment&amp;target_branch=17.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
+<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Beta" src="https://img.shields.io/badge/maturity-Beta-yellow.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/license-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/account-payment/tree/19.0/account_move_reconcile_export"><img alt="OCA/account-payment" src="https://img.shields.io/badge/github-OCA%2Faccount--payment-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/account-payment-19-0/account-payment-19-0-account_move_reconcile_export"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/account-payment&amp;target_branch=19.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
 <p>This module adds a computed field <tt class="docutils literal">reconciled_move_ids</tt> (“Reconciled
 Moves”) on journal entries, which allows you to export information
 related to the moves reconciled against an invoice. For example, you can
@@ -382,6 +382,10 @@ export the dates and amounts of each payment linked to an invoice.</p>
 <p>Out of the box, Odoo does not expose an easily exportable field for this
 data — the existing payments widget is explicitly marked as
 <tt class="docutils literal">exportable=False</tt>.</p>
+<p>The standard <tt class="docutils literal">reconciled_payment_ids</tt> field is not enough either, as
+it only returns <tt class="docutils literal">account.payment</tt> records, leaving out any other
+reconciled entry such as credit notes, write-offs or manual journal
+entries.</p>
 <p><strong>Table of contents</strong></p>
 <div class="contents local topic" id="contents">
 <ul class="simple">
@@ -411,15 +415,16 @@ data — the existing payments widget is explicitly marked as
 <table border="1" class="docutils">
 <colgroup>
 <col width="18%" />
-<col width="13%" />
+<col width="11%" />
 <col width="17%" />
 <col width="13%" />
 <col width="16%" />
-<col width="23%" />
+<col width="24%" />
 </colgroup>
 <thead valign="bottom">
 <tr><th class="head"><strong>Number</strong></th>
-<th class="head"><strong>Due Date</strong></th>
+<th class="head"><strong>Due
+Date</strong></th>
 <th class="head"><strong>Reconciled
 Moves</strong></th>
 <th class="head"><strong>Reconciled
@@ -455,7 +460,7 @@ Moves/Payments/Amount</strong></th>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/account-payment/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-<a class="reference external" href="https://github.com/OCA/account-payment/issues/new?body=module:%20account_move_reconcile_export%0Aversion:%2017.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
+<a class="reference external" href="https://github.com/OCA/account-payment/issues/new?body=module:%20account_move_reconcile_export%0Aversion:%2019.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
@@ -484,7 +489,7 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <p>OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.</p>
-<p>This module is part of the <a class="reference external" href="https://github.com/OCA/account-payment/tree/17.0/account_move_reconcile_export">OCA/account-payment</a> project on GitHub.</p>
+<p>This module is part of the <a class="reference external" href="https://github.com/OCA/account-payment/tree/19.0/account_move_reconcile_export">OCA/account-payment</a> project on GitHub.</p>
 <p>You are welcome to contribute. To learn how please visit <a class="reference external" href="https://odoo-community.org/page/Contribute">https://odoo-community.org/page/Contribute</a>.</p>
 </div>
 </div>
