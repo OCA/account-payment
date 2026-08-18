@@ -18,6 +18,7 @@
     "data": [
         "data/mail_template.xml",
         "data/sms_template.xml",
+        "data/ir_cron.xml",
         "security/sms_template.xml",
         "views/account_payment_views.xml",
         "wizards/res_config_settings_views.xml",

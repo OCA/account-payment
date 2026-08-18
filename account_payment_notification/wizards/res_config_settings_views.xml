@@ -29,6 +29,25 @@
                 >
                     <field name="account_payment_notification_automatic" />
                 </setting>
+                <setting
+                    id="account_payment_notification_domain"
+                    company_dependent="1"
+                    help="Domain used to select payments for automatic notification."
+                >
+                    <field
+                        name="account_payment_notification_domain"
+                        placeholder="[('payment_type', '=', 'outbound')]"
+                        widget="domain"
+                        options="{'foldable': True, 'model': 'account.payment', 'in_dialog': True}"
+                    />
+                </setting>
+                <setting
+                    id="account_payment_notification_start_date"
+                    company_dependent="1"
+                    help="Only payments from this date onwards will be notified."
+                >
+                    <field name="account_payment_notification_start_date" />
+                </setting>
             </block>
         </field>
     </record>

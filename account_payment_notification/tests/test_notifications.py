@@ -26,7 +26,6 @@ class NotificationCase(AccountTestInvoicingCommon):
             {"email": False, "mobile": "+3 333 333 333", "name": "partner_c"}
         )
         # Restricted accountant should be able to do the rest of stuff
-
         cls.env.user.groups_id = cls.env.ref(
             "account.group_account_manager"
         ) + cls.env.ref("base.group_partner_manager")
@@ -240,3 +239,22 @@ class NotificationCase(AccountTestInvoicingCommon):
         self.assertRecordValues(sms_msgs, [{"message_type": "sms"}] * 2)
         self.assertHTMLEqual(sms_msgs[0].body, "English SMS")
         self.assertHTMLEqual(sms_msgs[1].body, "Spanish SMS")
+
+    def test_cron_notify_payments(self):
+        """Notify matching unsent payments."""
+        sent_payment = self.payments[0]
+        sent_payment.mark_as_sent()
+        sent_message_count = len(sent_payment.message_ids)
+        self.company.sudo().account_payment_notification_domain = (
+            "[('state', '=', 'paid')]"
+        )
+        self.env["account.payment"]._cron_notify_payments()
+        sent_payment.invalidate_recordset()
+        other_payments = self.payments - sent_payment
+        other_payments.invalidate_recordset()
+        self.assertTrue(sent_payment.is_sent)
+        self.assertEqual(
+            len(sent_payment.message_ids),
+            sent_message_count,
+        )
+        self.assertTrue(other_payments.mapped("is_sent"))
