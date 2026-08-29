@@ -25,7 +25,7 @@ class TestPaymentMultiDeduction(AccountTestInvoicingCommon):
 
         cls.cust_invoice = cls.init_invoice(
             "out_invoice",
-            partner=cls.env.ref("base.res_partner_2"),
+            partner=cls.partner_a,
             invoice_date=fields.Date.today(),
             post=True,
             amounts=[450.0],

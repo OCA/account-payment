@@ -76,7 +76,8 @@ class AccountPaymentRegister(models.TransientModel):
                 ):
                     raise UserError(
                         self.env._(
-                            f"The total deduction should be {rec.payment_difference}"
+                            "The total deduction should be %(amount)s",
+                            amount=rec.payment_difference,
                         )
                     )
 
