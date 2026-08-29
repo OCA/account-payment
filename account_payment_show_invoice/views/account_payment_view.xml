@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 ForgeFlow
+     License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl). -->
+<odoo>
+    <record id="view_account_payment_tree" model="ir.ui.view">
+        <field name="name">account.supplier.payment.tree - show invoice</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_tree" />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="invoice_ids" widget="many2many_tags" />
+            </field>
+        </field>
+    </record>
+
+    <record id="view_payment_invoice_search" model="ir.ui.view">
+        <field name="name">account.payment.invoice.search</field>
+        <field name="model">account.payment</field>
+        <field name="inherit_id" ref="account.view_account_payment_search" />
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='journal_id']" position="after">
+                <field name="invoice_ids" />
+            </xpath>
+        </field>
+    </record>
+</odoo>
