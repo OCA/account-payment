@@ -25,7 +25,6 @@ class AccountPaymentDeduction(models.TransientModel):
     )
     account_id = fields.Many2one(
         comodel_name="account.account",
-        domain=[("deprecated", "=", False)],
         check_company=True,
     )
     is_open = fields.Boolean(string="Open", help="Keep this line open")
