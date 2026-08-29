@@ -1,0 +1,199 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_payment_term_partner_holiday
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2025-07-17 17:25+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.10.4\n"
+
+#. module: account_payment_term_partner_holiday
+#. odoo-python
+#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
+#, python-format
+msgid "April"
+msgstr "Aprile"
+
+#. module: account_payment_term_partner_holiday
+#. odoo-python
+#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
+#, python-format
+msgid "August"
+msgstr "Agosto"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model,name:account_payment_term_partner_holiday.model_res_partner
+msgid "Contact"
+msgstr "Contatto"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__day_from
+msgid "Day From"
+msgstr "Dal giorno"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__day_to
+msgid "Day To"
+msgstr "Al giorno"
+
+#. module: account_payment_term_partner_holiday
+#. odoo-python
+#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
+#, python-format
+msgid "December"
+msgstr "Dicembre"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: account_payment_term_partner_holiday
+#. odoo-python
+#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
+#, python-format
+msgid "February"
+msgstr "Febbraio"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_payment_term_partner_holiday
+#. odoo-python
+#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
+#, python-format
+msgid "January"
+msgstr "Gennaio"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model,name:account_payment_term_partner_holiday.model_account_move
+msgid "Journal Entry"
+msgstr "Registrazione contabile"
+
+#. module: account_payment_term_partner_holiday
+#. odoo-python
+#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
+#, python-format
+msgid "July"
+msgstr "Luglio"
+
+#. module: account_payment_term_partner_holiday
+#. odoo-python
+#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
+#, python-format
+msgid "June"
+msgstr "Giugno"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday____last_update
+msgid "Last Modified on"
+msgstr "Ultima modifica il"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: account_payment_term_partner_holiday
+#. odoo-python
+#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
+#, python-format
+msgid "March"
+msgstr "Marzo"
+
+#. module: account_payment_term_partner_holiday
+#. odoo-python
+#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
+#, python-format
+msgid "May"
+msgstr "Maggio"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__month_from
+msgid "Month From"
+msgstr "Dal mese"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__month_to
+msgid "Month To"
+msgstr "Al mese"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model.constraint,message:account_payment_term_partner_holiday.constraint_res_partner_holiday_month_consistency
+msgid "Month from should be higher than month from"
+msgstr "Il mese iniziale dovrebbe essere successivo del mese finale"
+
+#. module: account_payment_term_partner_holiday
+#. odoo-python
+#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
+#, python-format
+msgid "November"
+msgstr "Novembre"
+
+#. module: account_payment_term_partner_holiday
+#. odoo-python
+#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
+#, python-format
+msgid "October"
+msgstr "Ottobre"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__partner_id
+msgid "Partner"
+msgstr "Partner"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model,name:account_payment_term_partner_holiday.model_res_partner_holiday
+msgid "Partner Holidays"
+msgstr "Festività del partner"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model,name:account_payment_term_partner_holiday.model_account_payment_term
+msgid "Payment Terms"
+msgstr "Termini di pagamento"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner__holiday_ids
+#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_users__holiday_ids
+msgid "Payment Terms Holidays"
+msgstr "Festività termini di pagamento"
+
+#. module: account_payment_term_partner_holiday
+#. odoo-python
+#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
+#, python-format
+msgid "September"
+msgstr "Settembre"
+
+#. module: account_payment_term_partner_holiday
+#. odoo-python
+#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
+#, python-format
+msgid "You can't set the ending holidays period before the beginning."
+msgstr "Non si può impostare la fine del periodo delle ferie prima dell'inizio."
