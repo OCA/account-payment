@@ -1,0 +1,2 @@
+- Go to Accounting > Configuration > Payment Terms
+- Check the 'Is Deferred' box concerned payment terms
