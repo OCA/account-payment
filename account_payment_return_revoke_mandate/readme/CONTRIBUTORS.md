@@ -1,0 +1,3 @@
+- Quentin Groulard \<quentin.groulard@acsone.eu\>
+- Hughes Damry \<hughes.damry@acsone.eu\>
+- Bilel Jouini \<bilel.jouini@acsone.eu\>
