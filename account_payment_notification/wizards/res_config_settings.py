@@ -17,3 +17,7 @@ class ResConfigSettings(models.TransientModel):
     account_payment_notification_required = fields.Boolean(
         related="company_id.account_payment_notification_required", readonly=False
     )
+    account_payment_notification_domain = fields.Char(
+        related="company_id.account_payment_notification_domain",
+        readonly=False,
+    )

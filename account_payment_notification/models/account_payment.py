@@ -1,7 +1,7 @@
 # Copyright 2022 Moduon Team S.L.
 # License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl).
 
-from odoo import _, fields, models
+from odoo import _, api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -65,5 +65,18 @@ class AccountPayment(models.Model):
         for payment in self:
             # TODO Batch per lang if possible
             payment._message_sms_with_template(
-                tpl, partner_ids=payment.partner_id.ids, put_in_queue=True
+                tpl,
+                partner_ids=payment.partner_id.ids,
+                put_in_queue=True,
             )
+
+    @api.model
+    def _cron_notify_payments(self):
+        """Notify payments matching the configured domain."""
+        companies = self.env["res.company"].search(
+            [("account_payment_notification_automatic", "=", "auto")]
+        )
+        for company in companies:
+            domain = company._get_account_payment_notification_domain()
+            payments = self.env["account.payment"].with_company(company).search(domain)
+            payments.mark_as_sent()
