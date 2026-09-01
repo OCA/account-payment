@@ -62,6 +62,9 @@ class TestAccountPaymentLines(AccountTestInvoicingCommon):
                 ],
             }
         )
+        # The analytic distribution field is behind the analytic accounting
+        # group, so the test user needs it to see the field in the view.
+        cls.env.user.groups_id |= cls.env.ref("analytic.group_analytic_accounting")
 
     def setUp(self):
         super().setUp()
@@ -150,6 +153,10 @@ class TestAccountPaymentLines(AccountTestInvoicingCommon):
                 if line.get("writeoff_account_id", False):
                     line_form.writeoff_account_id = line.get(
                         "writeoff_account_id", False
+                    )
+                if line.get("analytic_distribution", False):
+                    line_form.analytic_distribution = line.get(
+                        "analytic_distribution", False
                     )
         payment = payment_form.save()
         if suggest_payment_distribution:
@@ -894,6 +901,32 @@ class TestAccountPaymentLines(AccountTestInvoicingCommon):
         self.assertEqual(
             new_payment4.reconciled_bill_ids,
             new_in_refund2 + new_in_invoice2,
+        )
+
+    def test_12_analytic_distribution(self):
+        analytic_plan = self.env["account.analytic.plan"].create(
+            {"name": "Payment Line Plan"}
+        )
+        analytic_account = self.env["account.analytic.account"].create(
+            {"name": "Payment Line Analytic", "plan_id": analytic_plan.id}
+        )
+        distribution = {str(analytic_account.id): 100}
+        new_invoice = self._create_invoice("out_invoice", self.customer, 100.0)
+        new_payment = self._create_payment(
+            self.customer,
+            100.0,
+            "inbound",
+            "customer",
+            [{"move_id": new_invoice, "analytic_distribution": distribution}],
+            post=True,
+        )
+        counterpart_line = new_payment.line_payment_counterpart_ids
+        self.assertIn(str(analytic_account.id), counterpart_line.analytic_distribution)
+        move_lines = counterpart_line.move_ids
+        self.assertTrue(move_lines)
+        self.assertEqual(
+            move_lines.analytic_distribution,
+            counterpart_line.analytic_distribution,
         )
 
     def test_11_exceptions(self):
