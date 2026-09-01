@@ -1,0 +1,6 @@
+DEFAULT_PAYMENT_METHOD_CODES = {
+    "pp3",
+}
+SUPPORTED_CURRENCIES = [
+    "EUR",
+]
