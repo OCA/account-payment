@@ -105,6 +105,28 @@ class PaymentTransaction(models.Model):
                     return
             notification_data.update(data)
 
+        received_ref = (notification_data.get("merchantMetadata") or {}).get(
+            "merchantReferenceId"
+        )
+        if received_ref and received_ref != self.reference:
+            self._set_error(
+                self.env._("Amazon Pay: the payment does not match this order.")
+            )
+            return
+        charge_amount = (notification_data.get("paymentDetails") or {}).get(
+            "chargeAmount"
+        ) or {}
+        received_amount = charge_amount.get("amount")
+        received_currency = charge_amount.get("currencyCode")
+        if received_amount is not None and (
+            self.currency_id.compare_amounts(float(received_amount), self.amount) != 0
+            or (received_currency and received_currency != self.currency_id.name)
+        ):
+            self._set_error(
+                self.env._("Amazon Pay: the paid amount does not match this order.")
+            )
+            return
+
         self.amazon_pay_checkout_session_id = (
             notification_data.get("checkoutSessionId")
             or self.amazon_pay_checkout_session_id
