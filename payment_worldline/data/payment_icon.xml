@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="payment.payment_icon_cc_visa" model="payment.icon">
+        <field name="worldline_code">visa</field>
+    </record>
+
+    <record id="payment.payment_icon_cc_mastercard" model="payment.icon">
+        <field name="worldline_code">mastercard</field>
+    </record>
+
+    <record id="payment.payment_icon_cc_american_express" model="payment.icon">
+        <field name="worldline_code">amex</field>
+    </record>
+
+    <record id="payment.payment_icon_cc_discover" model="payment.icon">
+        <field name="worldline_code">discover</field>
+    </record>
+
+    <record id="payment.payment_icon_cc_diners_club_intl" model="payment.icon">
+        <field name="worldline_code">diners</field>
+    </record>
+
+    <record id="payment.payment_icon_paypal" model="payment.icon">
+        <field name="worldline_code">paypal</field>
+    </record>
+
+    <record id="payment.payment_icon_cc_jcb" model="payment.icon">
+        <field name="worldline_code">jcb</field>
+    </record>
+
+    <record id="payment.payment_icon_cc_maestro" model="payment.icon">
+        <field name="worldline_code">maestro</field>
+    </record>
+
+    <record id="payment.payment_icon_cc_bancontact" model="payment.icon">
+        <field name="worldline_code">bancontact</field>
+    </record>
+
+    <record id="payment.payment_icon_cc_ideal" model="payment.icon">
+        <field name="worldline_code">ideal</field>
+    </record>
+
+    <record id="payment.payment_icon_cc_eps" model="payment.icon">
+        <field name="worldline_code">eps</field>
+    </record>
+
+    <record id="payment.payment_icon_cc_p24" model="payment.icon">
+        <field name="worldline_code">p24</field>
+    </record>
+
+</odoo>

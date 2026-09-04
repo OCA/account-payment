@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+
+    <record id="payment_icon_form" model="ir.ui.view">
+        <field name="model">payment.icon</field>
+        <field name="inherit_id" ref="payment.payment_icon_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//notebook" position="before">
+                <group>
+                    <field name="worldline_code" />
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+</odoo>
