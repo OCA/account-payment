@@ -49,6 +49,7 @@ addon | version | maintainers | summary
 [account_payment_widget_amount](account_payment_widget_amount/) | 16.0.1.0.0 | <a href='https://github.com/ChrisOForgeFlow'><img src='https://github.com/ChrisOForgeFlow.png' width='32' height='32' style='border-radius:50%;' alt='ChrisOForgeFlow'/></a> | Extends the payment widget to be able to choose the payment amount
 [partner_aging](partner_aging/) | 16.0.1.0.0 | <a href='https://github.com/Urvisha-OSI'><img src='https://github.com/Urvisha-OSI.png' width='32' height='32' style='border-radius:50%;' alt='Urvisha-OSI'/></a> | Aging as a view - invoices and credits
 [payment_partner](payment_partner/) | 16.0.1.0.0 |  | Filter Payments by Partner
+[payment_worldline](payment_worldline/) | 16.0.1.0.0 |  | A French payment provider covering several European countries.
 
 [//]: # (end addons)
 
