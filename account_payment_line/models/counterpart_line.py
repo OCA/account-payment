@@ -11,6 +11,7 @@ dict_payment_type = dict(
 
 class AccountPaymentCounterLinesAbstract(models.AbstractModel):
     _name = "account.payment.counterpart.line.abstract"
+    _inherit = "analytic.mixin"
     _description = "Counterpart line payment Abstract"
 
     company_id = fields.Many2one(
@@ -21,12 +22,6 @@ class AccountPaymentCounterLinesAbstract(models.AbstractModel):
         "account.account",
         string="Account",
         required=True,
-        ondelete="restrict",
-        check_company=True,
-    )
-    analytic_account_id = fields.Many2one(
-        comodel_name="account.analytic.account",
-        string="Analytic Account",
         ondelete="restrict",
         check_company=True,
     )
