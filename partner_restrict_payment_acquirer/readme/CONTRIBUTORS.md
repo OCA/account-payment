@@ -1,0 +1,2 @@
+- Cetmix
+- Data Dance s. r. o. \<<https://www.datadance.eu>\> (migration to 19.0)
