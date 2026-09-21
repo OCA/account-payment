@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_payment_term_form" model="ir.ui.view">
+        <field
+            name="name"
+        >account.payment.term.form.inherit.customer.early.payment</field>
+        <field name="model">account.payment.term</field>
+        <field name="inherit_id" ref="account.view_payment_term_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//field[@name='early_pay_discount_computation']/ancestor::div[1]"
+                position="after"
+            >
+                <div invisible="not early_discount">
+                    <field name="early_discount_credit_note" />
+                    <label for="early_discount_credit_note" />
+                </div>
+                <div invisible="not early_discount or not early_discount_credit_note">
+                    <field name="early_discount_business_days" />
+                    <label for="early_discount_business_days" />
+                </div>
+                <div invisible="not early_discount or not early_discount_credit_note">
+                    <field name="early_discount_goods_only" />
+                    <label for="early_discount_goods_only" />
+                </div>
+            </xpath>
+        </field>
+    </record>
+</odoo>
