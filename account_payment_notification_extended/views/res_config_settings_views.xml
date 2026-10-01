@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">
+            res.config.settings.view.form.account.payment.notification.extended
+        </field>
+        <field name="model">res.config.settings</field>
+        <field
+            name="inherit_id"
+            ref="account_payment_notification.res_config_settings_view_form"
+        />
+        <field name="arch" type="xml">
+            <block id="pay_invoice_online_setting_container" position="inside">
+                <setting
+                    id="account_payment_notification_extended_domain"
+                    company_dependent="1"
+                    help="Additional domain used to select payments for automatic notification."
+                >
+                    <field
+                        name="account_payment_notification_domain"
+                        widget="domain"
+                        options="{
+                            'foldable': True,
+                            'model': 'account.payment',
+                            'in_dialog': True
+                        }"
+                    />
+                </setting>
+
+                <setting
+                    id="account_payment_notification_start_date"
+                    company_dependent="1"
+                    help="Only payments from this date onwards will be notified."
+                >
+                    <field name="account_payment_notification_start_date" />
+                </setting>
+            </block>
+        </field>
+    </record>
+</odoo>
