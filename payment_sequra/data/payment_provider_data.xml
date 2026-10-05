@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record id="payment_method_pp3" model="payment.method">
+        <field name="name">Part payments</field>
+        <field name="code">pp3</field>
+        <field
+            name="image"
+            type="base64"
+            file="payment_sequra/static/description/pp3.png"
+        />
+    </record>
+    <record id="payment_provider_sequra" model="payment.provider">
+        <field name="name">SeQura</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="payment_sequra/static/description/icon.png"
+        />
+        <field name="code">sequra</field>
+        <field name="company_id" ref="base.main_company" />
+        <field name="redirect_form_view_id" ref="sequra_form" />
+        <field name="sequra_merchant_id">sequra_merchant_id</field>
+        <field name="sequra_account_key">sequra_account_key</field>
+        <field name="sequra_account_secret">sequra_account_secret</field>
+        <field name="module_id" ref="base.module_payment_sequra" />
+        <field
+            name="payment_method_ids"
+            eval="[Command.set([
+                         ref('payment_sequra.payment_method_pp3'),
+                     ])]"
+        />
+    </record>
+</odoo>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="action_server_sequra_notify_shipment" model="ir.actions.server">
+        <field name="name">Send Shipment Notification to SeQura</field>
+        <field name="model_id" ref="stock.model_stock_picking" />
+        <field name="binding_model_id" ref="stock.model_stock_picking" />
+        <field name="binding_view_types">form,list</field>
+        <field name="state">code</field>
+        <field name="code">records._sequra_notify_shipment()</field>
+    </record>
+</odoo>
