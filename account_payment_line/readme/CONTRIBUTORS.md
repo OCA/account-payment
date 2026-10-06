@@ -1,2 +1,3 @@
 - Christopher Ormaza. \<<chris.ormaza@forgeflow.com>\>
 - Do Anh Duy \<<duyda@trobz.com>\>
+- Ricardo Jara (Spearhead) \<<rvjaraj@gmail.com>\>

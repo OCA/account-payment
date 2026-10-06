@@ -1,7 +1,3 @@
-.. image:: https://odoo-community.org/readme-banner-image
-   :target: https://odoo-community.org/get-involved?utm_source=readme
-   :alt: Odoo Community Association
-
 =========================
 Payment Counterpart Lines
 =========================
@@ -17,7 +13,7 @@ Payment Counterpart Lines
 .. |badge1| image:: https://img.shields.io/badge/maturity-Beta-yellow.png
     :target: https://odoo-community.org/page/development-status
     :alt: Beta
-.. |badge2| image:: https://img.shields.io/badge/license-AGPL--3-blue.png
+.. |badge2| image:: https://img.shields.io/badge/licence-AGPL--3-blue.png
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--payment-lightgray.png?logo=github
@@ -42,6 +38,21 @@ Add tool to proposal of payment distributions, ordering by due date
 
 .. contents::
    :local:
+
+Configuration
+=============
+
+By default, counterpart lines let you pick any partner, so you can move
+balances between partners.
+
+If you want to forbid that and make sure a payment only applies invoices
+of the partner set on its header, go to **Invoicing / Settings** and
+enable **Restrict counterpart lines to payment partner**.
+
+The setting is company dependent and disabled by default, so it does not
+change the current behavior unless you activate it. Once enabled, the
+partner of the counterpart lines is limited to the commercial entity of
+the payment partner, both in the interface and on save.
 
 Usage
 =====
@@ -76,6 +87,7 @@ Contributors
 
 - Christopher Ormaza. <chris.ormaza@forgeflow.com>
 - Do Anh Duy <duyda@trobz.com>
+- Ricardo Jara (Spearhead) <rvjaraj@gmail.com>
 
 Maintainers
 -----------
