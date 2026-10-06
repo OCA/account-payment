@@ -1,0 +1,166 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* payment_sequra
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: payment_sequra
+#. odoo-python
+#: code:addons/payment_sequra/models/payment_transaction.py:0
+msgid "Cancelled by SeQura: the financing was not granted."
+msgstr ""
+
+#. module: payment_sequra
+#: model:ir.model.fields,field_description:payment_sequra.field_payment_provider__code
+msgid "Code"
+msgstr ""
+
+#. module: payment_sequra
+#. odoo-python
+#: code:addons/payment_sequra/models/payment_provider.py:0
+msgid "Could not reach SeQura API: %s"
+msgstr ""
+
+#. module: payment_sequra
+#: model:payment.method,name:payment_sequra.payment_method_pp3
+msgid "Part payments"
+msgstr ""
+
+#. module: payment_sequra
+#: model:ir.model,name:payment_sequra.model_payment_provider
+msgid "Payment Provider"
+msgstr ""
+
+#. module: payment_sequra
+#: model:ir.model,name:payment_sequra.model_payment_transaction
+msgid "Payment Transaction"
+msgstr ""
+
+#. module: payment_sequra
+#: model:ir.model.fields.selection,name:payment_sequra.selection__payment_provider__code__sequra
+#: model:payment.provider,name:payment_sequra.payment_provider_sequra
+msgid "SeQura"
+msgstr ""
+
+#. module: payment_sequra
+#. odoo-python
+#: code:addons/payment_sequra/models/payment_provider.py:0
+msgid "SeQura API request failed (%s): %s"
+msgstr ""
+
+#. module: payment_sequra
+#. odoo-python
+#: code:addons/payment_sequra/models/payment_transaction.py:0
+msgid "SeQura did not return a Location header. Response: %s"
+msgstr ""
+
+#. module: payment_sequra
+#. odoo-python
+#: code:addons/payment_sequra/models/payment_transaction.py:0
+msgid "SeQura update failed (%s %s): %s"
+msgstr ""
+
+#. module: payment_sequra
+#. odoo-python
+#: code:addons/payment_sequra/models/stock_picking.py:0
+msgid ""
+"SeQura: Cannot send shipment notification for transaction %s - missing "
+"provider_reference"
+msgstr ""
+
+#. module: payment_sequra
+#. odoo-python
+#: code:addons/payment_sequra/models/payment_transaction.py:0
+msgid "SeQura: Missing payment status."
+msgstr ""
+
+#. module: payment_sequra
+#. odoo-python
+#: code:addons/payment_sequra/models/payment_transaction.py:0
+msgid "SeQura: No transaction found matching reference %s."
+msgstr ""
+
+#. module: payment_sequra
+#. odoo-python
+#: code:addons/payment_sequra/models/payment_transaction.py:0
+msgid "SeQura: Received data with missing reference."
+msgstr ""
+
+#. module: payment_sequra
+#. odoo-python
+#: code:addons/payment_sequra/models/stock_picking.py:0
+msgid "SeQura: Shipment notification failed for %s. Status: %s, Response: %s"
+msgstr ""
+
+#. module: payment_sequra
+#: model:ir.actions.server,name:payment_sequra.action_server_sequra_notify_shipment
+msgid "Send Shipment Notification to SeQura"
+msgstr ""
+
+#. module: payment_sequra
+#: model:ir.model.fields,field_description:payment_sequra.field_payment_provider__sequra_account_key
+msgid "Sequra Account Key"
+msgstr ""
+
+#. module: payment_sequra
+#: model:ir.model.fields,field_description:payment_sequra.field_payment_provider__sequra_account_secret
+msgid "Sequra Account Secret"
+msgstr ""
+
+#. module: payment_sequra
+#: model:ir.model.fields,field_description:payment_sequra.field_payment_provider__sequra_merchant_id
+msgid "Sequra Merchant"
+msgstr ""
+
+#. module: payment_sequra
+#. odoo-python
+#: code:addons/payment_sequra/models/payment_transaction.py:0
+msgid "Standard delivery"
+msgstr ""
+
+#. module: payment_sequra
+#: model:ir.model.fields,help:payment_sequra.field_payment_provider__code
+msgid "The technical code of this payment provider."
+msgstr ""
+
+#. module: payment_sequra
+#: model:ir.model,name:payment_sequra.model_stock_picking
+msgid "Transfer"
+msgstr ""
+
+#. module: payment_sequra
+#. odoo-python
+#: code:addons/payment_sequra/models/payment_transaction.py:0
+msgid "Unknown SeQura payment status: %s"
+msgstr ""
+
+#. module: payment_sequra
+#: model_terms:payment.provider,auth_msg:payment_sequra.payment_provider_sequra
+msgid "Your payment has been authorized."
+msgstr ""
+
+#. module: payment_sequra
+#: model_terms:payment.provider,cancel_msg:payment_sequra.payment_provider_sequra
+msgid "Your payment has been cancelled."
+msgstr ""
+
+#. module: payment_sequra
+#: model_terms:payment.provider,pending_msg:payment_sequra.payment_provider_sequra
+msgid ""
+"Your payment has been successfully processed but is waiting for approval."
+msgstr ""
+
+#. module: payment_sequra
+#: model_terms:payment.provider,done_msg:payment_sequra.payment_provider_sequra
+msgid "Your payment has been successfully processed."
+msgstr ""
