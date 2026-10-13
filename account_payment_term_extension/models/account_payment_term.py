@@ -184,13 +184,13 @@ class AccountPaymentTerm(models.Model):
                 term_vals["foreign_amount"] = line_amount
             else:
                 # Percentage amounts
-                line_amount = line.compute_line_amount(
-                    total_amount, remaining_amount, precision_digits
-                )
                 company_line_amount = line.compute_line_amount(
+                    total_amount, remaining_amount, company_precision_digits
+                )
+                line_amount = line.compute_line_amount(
                     total_amount_currency,
                     remaining_amount_currency,
-                    company_precision_digits,
+                    precision_digits,
                 )
                 term_vals["company_amount"] = company_line_amount
                 term_vals["foreign_amount"] = line_amount
