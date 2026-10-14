@@ -14,6 +14,11 @@
                 position="after"
             >
                 <field name="returned_payment" readonly="True" />
+                <field
+                    name="last_returned_payment_reason_id"
+                    readonly="True"
+                    invisible="not returned_payment"
+                />
             </xpath>
         </field>
     </record>
