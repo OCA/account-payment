@@ -1,0 +1,1 @@
+This module adds the ability to define a number of installments on a payment term. Whenever the installment count or the interval between installments is changed, the payment term lines are regenerated automatically as equal installments separated by the configured interval, with the last line set as the balance.
