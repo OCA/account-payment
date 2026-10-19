@@ -45,14 +45,12 @@ class AccountPaymentTerm(models.Model):
                 days_in_month = calendar.monthrange(date.year, date.month)[1]
                 for day in payment_days:
                     if date.day <= day:
-                        if day > days_in_month:
-                            day = days_in_month
+                        day = min(day, days_in_month)
                         new_date = date + relativedelta(day=day)
                         break
                 if not new_date:
                     day = payment_days[0]
-                    if day > days_in_month:
-                        day = days_in_month
+                    day = min(day, days_in_month)
                     new_date = date + relativedelta(day=day, months=1)
                 return new_date
         return date

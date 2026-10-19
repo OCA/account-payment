@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo noupdate="1">
     <record id="sixty_days_end_of_month" model="account.payment.term">
         <field name="name">60 Days End of Month</field>
