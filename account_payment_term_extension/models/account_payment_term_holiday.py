@@ -31,18 +31,16 @@ class AccountPaymentTermHoliday(models.Model):
                     Domain("holiday", "=", record.holiday),
                 ]
             )
-            date_postponed_domain = (
-                Domain.AND(
-                    [
-                        Domain("payment_id", "=", record.payment_id.id),
-                        Domain.OR(
-                            [
-                                Domain("date_postponed", "=", record.holiday),
-                                Domain("holiday", "=", record.date_postponed),
-                            ]
-                        ),
-                    ]
-                ),
+            date_postponed_domain = Domain.AND(
+                [
+                    Domain("payment_id", "=", record.payment_id.id),
+                    Domain.OR(
+                        [
+                            Domain("date_postponed", "=", record.holiday),
+                            Domain("holiday", "=", record.date_postponed),
+                        ]
+                    ),
+                ]
             )
             if record.date_postponed <= record.holiday:
                 raise ValidationError(

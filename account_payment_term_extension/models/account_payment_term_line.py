@@ -68,14 +68,12 @@ class AccountPaymentTermLine(models.Model):
             ("months_after_end_of_month", "Months after end of month"),
         ]
 
-        if payment_terms_delay_type:
-            if payment_terms_delay_type:
-                if payment_terms_delay_type == "months":
-                    delay_type += months_delay_type
-                elif payment_terms_delay_type == "weeks":
-                    delay_type += weeks_delay_type
-                elif payment_terms_delay_type == "weeks_and_months":
-                    delay_type += weeks_delay_type + months_delay_type
+        if payment_terms_delay_type == "months":
+            delay_type += months_delay_type
+        elif payment_terms_delay_type == "weeks":
+            delay_type += weeks_delay_type
+        elif payment_terms_delay_type == "weeks_and_months":
+            delay_type += weeks_delay_type + months_delay_type
         return delay_type
 
     def _decode_payment_days(self, days_char):
@@ -94,7 +92,7 @@ class AccountPaymentTermLine(models.Model):
             try:
                 payment_days = record._decode_payment_days(record.payment_days)
                 error = any(day <= 0 or day > 31 for day in payment_days)
-            except Exception:
+            except (AttributeError, TypeError, ValueError):
                 error = True
             if error:
                 raise exceptions.UserError(
