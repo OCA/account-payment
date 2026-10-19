@@ -5,7 +5,7 @@
 
 {
     "name": "Payment Term Extension",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "category": "Accounting & Finance",
     "summary": "Adds rounding, months, weeks and multiple payment days "
     "properties on payment term lines",
@@ -18,7 +18,7 @@
     "license": "AGPL-3",
     "depends": ["account", "purchase"],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "views/account_payment_term.xml",
         "views/res_config_settings_view.xml",
     ],
