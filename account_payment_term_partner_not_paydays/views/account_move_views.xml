@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Binhex <https://www.binhex.cloud>
+ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).-->
+<odoo>
+    <record id="view_move_form" model="ir.ui.view">
+        <field name="name">account.move.form.account_payment_term_extension</field>
+        <field name="model">account.move</field>
+        <field name="inherit_id" ref="account.view_move_form" />
+        <field name="arch" type="xml">
+            <xpath expr="//sheet" position="before">
+                <div
+                    role="alert"
+                    class="alert alert-warning"
+                    invisible="not message_range_not_pay"
+                >
+                    <field name="message_range_not_pay" readonly="1" />
+                </div>
+            </xpath>
+            <xpath
+                expr="//div[hasclass('o_td_label')]//label[@for='invoice_payment_term_id']"
+                position="attributes"
+            >
+                <attribute
+                    name="invisible"
+                    add="(invoice_payment_term_id and message_range_not_pay)"
+                    separator=" or "
+                />
+            </xpath>
+            <xpath
+                expr="//div[hasclass('o_td_label')]//label[@for='invoice_date_due']"
+                position="attributes"
+            >
+                <attribute
+                    name="invisible"
+                    add="not message_range_not_pay"
+                    separator=" and "
+                />
+            </xpath>
+            <xpath
+                expr="//div[@name='due_date']//field[@name='invoice_date_due']"
+                position="attributes"
+            >
+                <attribute
+                    name="invisible"
+                    add="not message_range_not_pay"
+                    separator=" and "
+                />
+            </xpath>
+        </field>
+    </record>
+</odoo>
