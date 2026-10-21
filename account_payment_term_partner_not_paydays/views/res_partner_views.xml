@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="view_partner_property_form" model="ir.ui.view">
+        <field name="name">res.partner.form.extension</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.view_partner_property_form" />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//page[@name='accounting']//group[@name='banks']"
+                position="after"
+            >
+                <group
+                    string="Days not pay"
+                    name="days_not_pay"
+                    invisible="not days_not_pay"
+                >
+                    <field name="days_not_pay" invisible="1" />
+                    <field name="partner_not_pay_ids" nolabel="1" colspan="2">
+                        <tree editable="bottom">
+                            <field name="type" />
+                            <field name="date_start" />
+                            <field name="date_end" />
+                        </tree>
+                    </field>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

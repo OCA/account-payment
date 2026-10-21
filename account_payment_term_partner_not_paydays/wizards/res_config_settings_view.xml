@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2025 Binhex <https://www.binhex.cloud>
+ License AGPL-3.0 or later (https://www.gnu.org/licenses/agpl).-->
+<data>
+
+    <record id="res_config_settings_view_form" model="ir.ui.view">
+        <field name="name">res.config.settings.view.form.inherit.not.paydays</field>
+        <field name="model">res.config.settings</field>
+        <field
+            name="inherit_id"
+            ref="account_payment_term_extension.res_config_settings_view_form"
+        />
+        <field name="arch" type="xml">
+            <xpath
+                expr="//block[@name='payment_terms_setting_container']"
+                position="inside"
+            >
+                <setting
+                    id="payment_days_not_pay"
+                    string="Days not pay"
+                    help="Configure non-payment ranges."
+                >
+                    <field name="days_not_pay" />
+                </setting>
+            </xpath>
+        </field>
+    </record>
+</data>
