@@ -1,0 +1,275 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* payment_amazon_pay
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-30 08:04+0000\n"
+"PO-Revision-Date: 2026-04-30 08:04+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields.selection,name:payment_amazon_pay.selection__payment_provider__code__amazon_pay
+#: model:payment.method,name:payment_amazon_pay.payment_method_amazon_pay
+#: model:payment.provider,name:payment_amazon_pay.payment_provider_amazon_pay
+msgid "Amazon Pay"
+msgstr "Amazon Pay"
+
+#. module: payment_amazon_pay
+#. odoo-python
+#: code:addons/payment_amazon_pay/models/payment_provider.py:0
+msgid "Amazon Pay API error: %s"
+msgstr "Error de la API de Amazon Pay: %s"
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields,field_description:payment_amazon_pay.field_payment_transaction__amazon_pay_charge_id
+msgid "Amazon Pay Charge"
+msgstr "Cargo de Amazon Pay"
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields,field_description:payment_amazon_pay.field_payment_transaction__amazon_pay_charge_permission_id
+msgid "Amazon Pay Charge Permission"
+msgstr "Permiso de cargo de Amazon Pay"
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields,field_description:payment_amazon_pay.field_payment_transaction__amazon_pay_checkout_session_id
+msgid "Amazon Pay Checkout Session"
+msgstr "Sesión de pago de Amazon Pay"
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields,help:payment_amazon_pay.field_payment_provider__amazon_pay_private_key
+msgid "Amazon Pay Checkout v2 private key in PEM format."
+msgstr "Clave privada de Amazon Pay Checkout v2 en formato PEM."
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields,help:payment_amazon_pay.field_payment_provider__amazon_pay_store_id
+msgid "Amazon Pay Checkout v2 store identifier."
+msgstr "Identificador de tienda de Amazon Pay Checkout v2."
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields,field_description:payment_amazon_pay.field_payment_transaction__amazon_pay_refund_id
+msgid "Amazon Pay Refund"
+msgstr "Reembolso de Amazon Pay"
+
+#. module: payment_amazon_pay
+#. odoo-python
+#: code:addons/payment_amazon_pay/models/payment_transaction.py:0
+msgid "Amazon Pay charge ID is missing on the source transaction."
+msgstr "Falta el ID de cargo de Amazon Pay en la transacción de origen."
+
+#. module: payment_amazon_pay
+#. odoo-python
+#: code:addons/payment_amazon_pay/models/payment_transaction.py:0
+msgid "Amazon Pay declined the payment."
+msgstr "Amazon Pay ha rechazado el pago."
+
+#. module: payment_amazon_pay
+#. odoo-python
+#: code:addons/payment_amazon_pay/models/payment_transaction.py:0
+msgid "Amazon Pay did not accept the refund request."
+msgstr "Amazon Pay no ha aceptado la solicitud de reembolso."
+
+#. module: payment_amazon_pay
+#. odoo-python
+#: code:addons/payment_amazon_pay/models/payment_transaction.py:0
+msgid "Amazon Pay did not return a checkout session id."
+msgstr "Amazon Pay no ha devuelto un ID de sesión de pago."
+
+#. module: payment_amazon_pay
+#. odoo-python
+#: code:addons/payment_amazon_pay/models/payment_transaction.py:0
+msgid "Amazon Pay: could not retrieve the payment status."
+msgstr "Amazon Pay: no se ha podido obtener el estado del pago."
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields,help:payment_amazon_pay.field_payment_provider__amazon_pay_merchant_id
+msgid "Amazon Pay merchant identifier."
+msgstr "Identificador de comerciante de Amazon Pay."
+
+#. module: payment_amazon_pay
+#. odoo-python
+#: code:addons/payment_amazon_pay/models/payment_provider.py:0
+msgid "Amazon Pay private key is missing."
+msgstr "Falta la clave privada de Amazon Pay."
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields,help:payment_amazon_pay.field_payment_provider__amazon_pay_public_key_id
+msgid "Amazon Pay public key ID used to sign requests."
+msgstr "ID de clave pública de Amazon Pay utilizado para firmar solicitudes."
+
+#. module: payment_amazon_pay
+#. odoo-python
+#: code:addons/payment_amazon_pay/models/payment_transaction.py:0
+msgid "Amazon Pay returned an unexpected state: %s"
+msgstr "Amazon Pay ha devuelto un estado inesperado: %s"
+
+#. module: payment_amazon_pay
+#. odoo-python
+#: code:addons/payment_amazon_pay/models/payment_transaction.py:0
+msgid "Amazon Pay: no transaction found for the received data."
+msgstr "Amazon Pay: no se ha encontrado ninguna transacción para los datos recibidos."
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields,field_description:payment_amazon_pay.field_payment_provider__amazon_pay_checkout_language
+msgid "Checkout Language"
+msgstr "Idioma de pago"
+
+#. module: payment_amazon_pay
+#: model_terms:ir.ui.view,arch_db:payment_amazon_pay.amazon_pay_checkout_button
+msgid "You will be redirected to Amazon to sign in and confirm your payment."
+msgstr "Serás redirigido a Amazon para iniciar sesión y confirmar el pago."
+
+#. module: payment_amazon_pay
+#: model_terms:ir.ui.view,arch_db:payment_amazon_pay.amazon_pay_checkout_page
+msgid "Click the button to complete your payment with Amazon Pay."
+msgstr "Haga clic en el botón para completar su pago con Amazon Pay."
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields,field_description:payment_amazon_pay.field_payment_provider__code
+msgid "Code"
+msgstr "Código"
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields.selection,name:payment_amazon_pay.selection__payment_provider__amazon_pay_checkout_language__en_gb
+msgid "English (UK)"
+msgstr "Inglés (Reino Unido)"
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields.selection,name:payment_amazon_pay.selection__payment_provider__amazon_pay_checkout_language__en_us
+msgid "English (US)"
+msgstr "Inglés (EE. UU.)"
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields.selection,name:payment_amazon_pay.selection__payment_provider__amazon_pay_region__eu
+msgid "Europe"
+msgstr "Europa"
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields.selection,name:payment_amazon_pay.selection__payment_provider__amazon_pay_checkout_language__fr_fr
+msgid "French"
+msgstr "Francés"
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields.selection,name:payment_amazon_pay.selection__payment_provider__amazon_pay_checkout_language__de_de
+msgid "German"
+msgstr "Alemán"
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields.selection,name:payment_amazon_pay.selection__payment_provider__amazon_pay_checkout_language__it_it
+msgid "Italian"
+msgstr "Italiano"
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields.selection,name:payment_amazon_pay.selection__payment_provider__amazon_pay_region__jp
+msgid "Japan"
+msgstr "Japón"
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields.selection,name:payment_amazon_pay.selection__payment_provider__amazon_pay_checkout_language__ja_jp
+msgid "Japanese"
+msgstr "Japonés"
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields,field_description:payment_amazon_pay.field_payment_provider__amazon_pay_merchant_id
+msgid "Merchant ID"
+msgstr "ID de comerciante"
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields.selection,name:payment_amazon_pay.selection__payment_provider__amazon_pay_region__na
+msgid "North America"
+msgstr "Norteamérica"
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields,help:payment_amazon_pay.field_payment_provider__amazon_pay_sandbox_simulation_code
+msgid "Optional sandbox simulation code used by Amazon Pay."
+msgstr "Código de simulación de entorno de pruebas opcional utilizado por Amazon Pay."
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields,help:payment_amazon_pay.field_payment_provider__amazon_pay_soft_descriptor
+msgid "Optional text displayed on the buyer statement when supported."
+msgstr "Texto opcional que se muestra en el extracto del comprador cuando es compatible."
+
+#. module: payment_amazon_pay
+#: model:ir.model,name:payment_amazon_pay.model_payment_provider
+msgid "Payment Provider"
+msgstr "Proveedor de pago"
+
+#. module: payment_amazon_pay
+#: model:ir.model,name:payment_amazon_pay.model_payment_transaction
+msgid "Payment Transaction"
+msgstr "Transacción de pago"
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields,field_description:payment_amazon_pay.field_payment_provider__amazon_pay_private_key
+msgid "Private Key"
+msgstr "Clave privada"
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields,field_description:payment_amazon_pay.field_payment_provider__amazon_pay_public_key_id
+msgid "Public Key ID"
+msgstr "ID de clave pública"
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields,field_description:payment_amazon_pay.field_payment_provider__amazon_pay_region
+msgid "Region"
+msgstr "Región"
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields,field_description:payment_amazon_pay.field_payment_provider__amazon_pay_sandbox_simulation_code
+msgid "Sandbox Simulation Code"
+msgstr "Código de simulación de entorno de pruebas"
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields,field_description:payment_amazon_pay.field_payment_provider__amazon_pay_soft_descriptor
+msgid "Soft Descriptor"
+msgstr "Descriptor suave"
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields.selection,name:payment_amazon_pay.selection__payment_provider__amazon_pay_checkout_language__es_es
+msgid "Spanish"
+msgstr "Español"
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields,field_description:payment_amazon_pay.field_payment_provider__amazon_pay_store_id
+msgid "Store ID"
+msgstr "ID de tienda"
+
+#. module: payment_amazon_pay
+#: model:ir.model.fields,help:payment_amazon_pay.field_payment_provider__code
+msgid "The technical code of this payment provider."
+msgstr "El código técnico de este proveedor de pago."
+
+#. module: payment_amazon_pay
+#: model_terms:ir.ui.view,arch_db:payment_amazon_pay.view_payment_provider_form_amazon_pay
+msgid "This provider uses Amazon Pay Checkout v2 in PayOnly mode."
+msgstr "Este proveedor utiliza Amazon Pay Checkout v2 en modo PayOnly."
+
+#. module: payment_amazon_pay
+#: model_terms:payment.provider,auth_msg:payment_amazon_pay.payment_provider_amazon_pay
+msgid "Your payment has been authorized."
+msgstr "Su pago ha sido autorizado."
+
+#. module: payment_amazon_pay
+#: model_terms:payment.provider,cancel_msg:payment_amazon_pay.payment_provider_amazon_pay
+msgid "Your payment has been cancelled."
+msgstr "Su pago ha sido cancelado."
+
+#. module: payment_amazon_pay
+#: model_terms:payment.provider,pending_msg:payment_amazon_pay.payment_provider_amazon_pay
+msgid ""
+"Your payment has been successfully processed but is waiting for approval."
+msgstr ""
+"Su pago se ha procesado correctamente pero está pendiente de aprobación."
+
+#. module: payment_amazon_pay
+#: model_terms:payment.provider,done_msg:payment_amazon_pay.payment_provider_amazon_pay
+msgid "Your payment has been successfully processed."
+msgstr "Su pago se ha procesado correctamente."
