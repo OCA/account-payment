@@ -1,0 +1,31 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_payment_link_currency
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2026-10-26 09:00+0000\n"
+"Last-Translator: volkantasci\n"
+"Language-Team: \n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+
+#. module: account_payment_link_currency
+#: model:ir.model,name:account_payment_link_currency.model_payment_link_wizard
+msgid "Generate Payment Link"
+msgstr "Ödeme Bağlantısı Oluştur"
+
+#. module: account_payment_link_currency
+#: model:ir.model,name:account_payment_link_currency.model_payment_transaction
+msgid "Payment Transaction"
+msgstr "Ödeme İşlemi"
+
+#. module: account_payment_link_currency
+#: model:ir.model.fields,field_description:account_payment_link_currency.field_payment_link_wizard__previous_currency_id
+msgid "Previous Currency"
+msgstr "Önceki Para Birimi"

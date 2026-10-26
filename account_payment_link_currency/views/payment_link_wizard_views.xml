@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="payment_link_wizard_view_form_inherit_currency" model="ir.ui.view">
+        <field name="name">payment.link.wizard.form.inherit.currency</field>
+        <field name="model">payment.link.wizard</field>
+        <field name="inherit_id" ref="payment.payment_link_wizard_view_form" />
+        <field name="arch" type="xml">
+            <field name="currency_id" position="attributes">
+                <attribute name="invisible">0</attribute>
+                <attribute name="required">1</attribute>
+                <attribute
+                    name="options"
+                >{'no_create': True, 'no_open': True}</attribute>
+            </field>
+            <field name="currency_id" position="after">
+                <field name="previous_currency_id" invisible="1" />
+            </field>
+        </field>
+    </record>
+</odoo>
