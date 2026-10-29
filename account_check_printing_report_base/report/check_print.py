@@ -77,8 +77,9 @@ class ReportCheckPrint(models.AbstractModel):
             lines[payment.id] = []
             pay_acc = payment.outstanding_account_id
             rec_lines = payment.move_id.line_ids.filtered(
-                lambda x, pay_acc=pay_acc: x.account_id.reconcile
-                and x.account_id != pay_acc
+                lambda x, pay_acc=pay_acc: (
+                    x.account_id.reconcile and x.account_id != pay_acc
+                )
             )
             amls = rec_lines.mapped(
                 "matched_credit_ids.credit_move_id"

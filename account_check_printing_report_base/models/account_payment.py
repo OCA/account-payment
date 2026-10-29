@@ -23,8 +23,10 @@ class AccountPayment(models.Model):
     def action_post(self):
         res = super().action_post()
         recs = self.filtered(
-            lambda x: x.journal_id.check_print_auto
-            and x.payment_method_line_id.code == "check_printing"
+            lambda x: (
+                x.journal_id.check_print_auto
+                and x.payment_method_line_id.code == "check_printing"
+            )
         )
         if recs:
             return recs.do_print_checks()

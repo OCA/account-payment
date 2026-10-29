@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
     <template id="report_check_base">
         <t t-call="web.html_container">
@@ -12,14 +12,14 @@
                                     t-field="o.partner_id"
                                     t-options='{"widget": "contact", "fields": ["address", "name"], "no_marker": true, "no_tag_br": true}'
                                 />
-                                <span t-esc="o.date" />
+                                <span t-out="o.date" />
                                 <br />
                                 <span
                                     t-field="o.amount"
                                     t-options='{"widget": "monetary", "display_currency": o.currency_id}'
                                 />
                                 <br />
-                                <span t-esc="fill_stars(o.check_amount_in_words)" />
+                                <span t-out="fill_stars(o.check_amount_in_words)" />
                             </div>
                         </div>
                         <br />
@@ -49,28 +49,28 @@
                                     <t t-foreach="paid_lines[o.id]" t-as="line">
                                         <tr>
                                             <td>
-                                                <span t-esc="line['date_due']" />
+                                                <span t-out="line['date_due']" />
                                             </td>
                                             <td>
                                                 <span
-                                                    t-esc="line['reference'] or line['number']"
+                                                    t-out="line['reference'] or line['number']"
                                                 />
                                             </td>
                                             <td class="text-right">
                                                 <span
-                                                    t-esc="line['amount_total']"
+                                                    t-out="line['amount_total']"
                                                     t-options='{"widget": "monetary", "display_currency": o.currency_id}'
                                                 />
                                             </td>
                                             <td class="text-right">
                                                 <span
-                                                    t-esc="line['residual']"
+                                                    t-out="line['residual']"
                                                     t-options='{"widget": "monetary", "display_currency": o.currency_id}'
                                                 />
                                             </td>
                                             <td class="text-right">
                                                 <span
-                                                    t-esc="line['paid_amount']"
+                                                    t-out="line['paid_amount']"
                                                     t-options='{"widget": "monetary", "display_currency": o.currency_id}'
                                                 />
                                             </td>
@@ -133,30 +133,30 @@
                                     <tr>
                                         <td>
                                             <span
-                                                t-esc="line['reference'] or line['number']"
+                                                t-out="line['reference'] or line['number']"
                                             />
                                         </td>
                                         <td>
-                                            <span t-esc="line['date']" />
+                                            <span t-out="line['date']" />
                                         </td>
                                         <td>
-                                            <span t-esc="line['date_due']" />
+                                            <span t-out="line['date_due']" />
                                         </td>
                                         <td class="text-right">
                                             <span
-                                                t-esc="line['amount_total']"
+                                                t-out="line['amount_total']"
                                                 t-options='{"widget": "monetary", "display_currency": o.currency_id}'
                                             />
                                         </td>
                                         <td class="text-right">
                                             <span
-                                                t-esc="line['residual']"
+                                                t-out="line['residual']"
                                                 t-options='{"widget": "monetary", "display_currency": o.currency_id}'
                                             />
                                         </td>
                                         <td class="text-right">
                                             <span
-                                                t-esc="line['paid_amount']"
+                                                t-out="line['paid_amount']"
                                                 t-options='{"widget": "monetary", "display_currency": o.currency_id}'
                                             />
                                         </td>
