@@ -13,7 +13,7 @@ class AccountPayment(models.Model):
         """Re-expand multi deduction write-off lines collapsed by core resync."""
         if write_off_line_vals and len(write_off_line_vals) == 1:
             deduct_lines = self.move_id.line_ids.filtered("is_writeoff")
-            if len(deduct_lines) > 1:
+            if deduct_lines:
                 write_off_line_vals = [
                     {
                         "name": line.name,

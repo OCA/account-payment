@@ -243,3 +243,40 @@ class TestPaymentMultiDeduction(AccountTestInvoicingCommon):
         self.assertEqual(len(writeoff), 2)
         self.assertEqual(writeoff.mapped("account_id"), self.account_expense)
         self.assertEqual(sum(writeoff.mapped("balance")), original_total)
+
+    def test_06_reset_and_edit_keeps_single_writeoff(self):
+        """A single write-off line must keep is_writeoff and analytic
+        after editing a draft payment"""
+        plan = self.env["account.analytic.plan"].create({"name": "Plan"})
+        analytic = self.env["account.analytic.account"].create(
+            {"name": "Analytic", "plan_id": plan.id}
+        )
+        ctx = {
+            "active_ids": [self.cust_invoice.id],
+            "active_id": self.cust_invoice.id,
+            "active_model": "account.move",
+        }
+        payment_register = self.payment_register_model.with_context(**ctx).create(
+            {
+                "amount": 400.0,
+                "payment_difference_handling": "reconcile",
+                "writeoff_account_id": self.account_expense.id,
+                "writeoff_label": "Deduction",
+                "analytic_distribution": {str(analytic.id): 100},
+            }
+        )
+        payment = payment_register._create_payments()
+        expected = [
+            {
+                "account_id": self.account_expense.id,
+                "balance": 50.0,
+                "analytic_distribution": {str(analytic.id): 100.0},
+            }
+        ]
+        writeoff = payment.move_id.line_ids.filtered("is_writeoff")
+        self.assertRecordValues(writeoff, expected)
+
+        payment.action_draft()
+        payment.write({"date": fields.Date.add(payment.date, days=1)})
+        writeoff = payment.move_id.line_ids.filtered("is_writeoff")
+        self.assertRecordValues(writeoff, expected)
