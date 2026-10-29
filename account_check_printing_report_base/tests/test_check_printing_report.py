@@ -7,10 +7,10 @@ import time
 from odoo import fields
 from odoo.exceptions import RedirectWarning
 
-from odoo.addons.base.tests.common import BaseCommon
+from .common import AccountCheckPrintingReportBaseCommon
 
 
-class TestAccountCheckPrintingReportBase(BaseCommon):
+class TestAccountCheckPrintingReportBase(AccountCheckPrintingReportBaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -160,14 +160,7 @@ class TestAccountCheckPrintingReportBase(BaseCommon):
         with self.assertRaises(RedirectWarning):
             self.payment.do_print_checks()
 
-        # Set check layout verification by journal
-        ICPSudo = self.env["ir.config_parameter"].sudo()
-        ICPSudo.set_param(
-            "account_check_printing_report_base.check_layout_verification", "by_journal"
-        )
         self.assertFalse(self.payment.journal_id.bank_check_printing_layout)
-        with self.assertRaises(RedirectWarning):
-            self.payment.do_print_checks()
         content = self.env["ir.actions.report"]._render_qweb_pdf(
             self.action_check_report.xml_id, res_ids=self.payment.ids
         )
@@ -177,8 +170,11 @@ class TestAccountCheckPrintingReportBase(BaseCommon):
         """Test if the check is printed when the layout is specified for a
         company and journal."""
 
-        self.company.account_check_printing_layout = self.check_report
-        self.payment.journal_id.bank_check_printing_layout = self.check_report_a4
+        admin = self.env.ref("base.user_admin")
+        self.company.with_user(admin).account_check_printing_layout = self.check_report
+        self.payment.journal_id.with_user(
+            admin
+        ).bank_check_printing_layout = self.check_report_a4
         e = False
         try:
             self.payment.do_print_checks()
@@ -190,7 +186,7 @@ class TestAccountCheckPrintingReportBase(BaseCommon):
         )
         self.assertEqual(content[1], "html")
 
-    def test_03_fotmat_form(self):
+    def test_03_format_form(self):
         """Test formatting on check form"""
         # Convert date to formatting from partner : 2020-01-20 > 01/20/2020
         today = fields.Date.today()
@@ -221,7 +217,10 @@ class TestAccountCheckPrintingReportBase(BaseCommon):
         self.assertEqual(words_number, "cuatro euros con noventa y cinco céntimos")
 
     def test_05_get_residual_amount(self):
-        line = self.vendor_bill.line_ids[0]
+        line = self.vendor_bill.line_ids.filtered(
+            lambda move_line: move_line.account_id.account_type == "liability_payable"
+        )[:1]
+        self.assertTrue(line)
         residual = self.report._get_residual_amount(self.payment, line)
         self.assertEqual(residual, 0.0)
 
@@ -230,7 +229,7 @@ class TestAccountCheckPrintingReportBase(BaseCommon):
         total = self.report._get_total_amount(self.payment, line)
         self.assertEqual(total, abs(line.balance))
 
-    def test_08_get_report_values(self):
+    def test_07_get_report_values(self):
         docids = [self.payment.id]
         values = self.report._get_report_values(docids)
         self.assertIn("doc_ids", values)

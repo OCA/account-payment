@@ -1,8 +1,8 @@
 # Copyright 2017 Tecnativa - Carlos Roca
-from odoo.addons.base.tests.common import BaseCommon
+from .common import AccountCheckPrintingReportBaseCommon
 
 
-class TestNum2WordsLangSolution(BaseCommon):
+class TestNum2WordsLangSolution(AccountCheckPrintingReportBaseCommon):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
@@ -11,7 +11,7 @@ class TestNum2WordsLangSolution(BaseCommon):
         ]
         cls.amount = 3.09
 
-    def test_num2words_es_correction(self):
+    def test_01_num2words_es_correction(self):
         amount_in_word = self.propissory_note_amount.with_context(
             lang="es"
         ).amount2words(self.amount)
@@ -20,7 +20,7 @@ class TestNum2WordsLangSolution(BaseCommon):
         stars = "*" * (100 - len(amount_in_word))
         self.assertEqual(amount_in_word_stars, amount_in_word + " " + stars)
 
-    def test_num2words_normal_flux(self):
+    def test_02_num2words_normal_flux(self):
         amount_in_word = self.propissory_note_amount.amount2words(self.amount)
         self.assertEqual("three euro, nine cents", amount_in_word)
         amount_in_word_stars = self.propissory_note_amount.fill_stars(amount_in_word)

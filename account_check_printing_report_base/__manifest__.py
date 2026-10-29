@@ -7,7 +7,7 @@
 
 {
     "name": "Account Check Printing Report Base",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "license": "AGPL-3",
     "author": "ForgeFlow,"
     "Serpent Consulting Services Pvt. Ltd.,"
@@ -18,7 +18,7 @@
     "depends": ["account_check_printing"],
     "external_dependencies": {"python": ["num2words"]},
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
         "data/report_paperformat.xml",
         "views/account_journal_view.xml",
         "views/report_check_base.xml",
