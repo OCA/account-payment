@@ -195,6 +195,7 @@ class PaymentReturn(models.Model):
                 # payment_aml: credit on customer account (from payment move)
                 # invoice_amls: debit on customer account (from invoice move)
                 invoice_amls = payment_aml.matched_debit_ids.mapped("debit_move_id")
+                invoice_amls._payment_returned(return_line)
                 all_move_lines |= payment_aml
                 invoices |= invoice_amls.mapped("move_id")
                 payment_aml.remove_move_reconcile()
@@ -227,7 +228,6 @@ class PaymentReturn(models.Model):
                     ]
                 }
             )
-        invoices.write(self._prepare_invoice_returned_vals())
         self.write({"state": "done", "move_id": move.id})
         return True
 
@@ -421,6 +421,10 @@ class PaymentReturnLine(models.Model):
             "journal_id": self.return_id.journal_id.id,
             "move_id": move.id,
         }
+
+    def _prepare_invoice_returned_vals(self):
+        res = self.return_id._prepare_invoice_returned_vals()
+        return res
 
     def _prepare_expense_lines_vals(self, move):
         self.ensure_one()

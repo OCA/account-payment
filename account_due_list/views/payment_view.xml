@@ -64,7 +64,6 @@
                 <field name="date_maturity" optional="show" />
                 <field name="reconciled" readonly="1" optional="hide" />
                 <field name="full_reconcile_id" readonly="1" optional="hide" />
-                <field name="parent_state" column_invisible="1" />
             </list>
         </field>
     </record>
