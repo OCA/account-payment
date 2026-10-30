@@ -317,6 +317,77 @@ class TestAccountPaymentTermMultiDay(BaseCommon):
             "15 and 20 then 5 and 10 (round)",
         )
 
+    def test_invoice_foreign_currency_payment_terms(self):
+        term = self.payment_term_model.create(
+            {
+                "name": "30% and 70% foreign currency",
+                "line_ids": [
+                    fields.Command.clear(),
+                    fields.Command.create(
+                        {"value": "percent", "value_amount": 30, "nb_days": 0}
+                    ),
+                    fields.Command.create(
+                        {"value": "percent", "value_amount": 70, "nb_days": 30}
+                    ),
+                ],
+            }
+        )
+        currency = self.env.ref("base.USD")
+        if currency == self.env.company.currency_id:
+            currency = self.env.ref("base.EUR")
+        currency.active = True
+        invoice = self._create_invoice(
+            term, "2026-01-01", 1, 100, move_type="out_invoice"
+        )
+        invoice.write({"currency_id": currency.id, "invoice_currency_rate": 0.5})
+        invoice.action_post()
+        installments = invoice.line_ids.filtered(
+            lambda line: line.display_type == "payment_term"
+        ).sorted("date_maturity")
+        self.assertEqual(installments.mapped("balance"), [60, 140])
+        self.assertEqual(installments.mapped("amount_currency"), [30, 70])
+
+    def test_invoice_automatic_cash_rounding(self):
+        category = self.env["res.partner.category"].create({"name": "Cash customer"})
+        self.partner.category_id = category
+        rounding = self.env["account.cash.rounding"].create(
+            {
+                "name": "Customer cash rounding",
+                "rounding": 0.05,
+                "partner_category_ids": [fields.Command.link(category.id)],
+                "profit_account_id": self.env["account.account"]
+                .search([("account_type", "=", "income")], limit=1)
+                .id,
+                "loss_account_id": self.env["account.account"]
+                .search([("account_type", "=", "expense")], limit=1)
+                .id,
+            }
+        )
+        term = self.payment_term_model.create(
+            {
+                "name": "30% and 70% cash payment",
+                "line_ids": [
+                    fields.Command.clear(),
+                    fields.Command.create(
+                        {"value": "percent", "value_amount": 30, "nb_days": 0}
+                    ),
+                    fields.Command.create(
+                        {"value": "percent", "value_amount": 70, "nb_days": 30}
+                    ),
+                ],
+            }
+        )
+        invoice = self._create_invoice(
+            term, "2026-01-01", 1, 100.02, move_type="out_invoice"
+        )
+        self.assertEqual(invoice.invoice_cash_rounding_id, rounding)
+        invoice.action_post()
+        installments = invoice.line_ids.filtered(
+            lambda line: line.display_type == "payment_term"
+        ).sorted("date_maturity")
+        self.assertEqual(installments.mapped("balance"), [30, 70])
+        self.assertAlmostEqual(invoice.amount_total, 100.0, places=2)
+
     def test_decode_payment_days(self):
         expected_days = [5, 10]
         model = self.env["account.payment.term.line"]
