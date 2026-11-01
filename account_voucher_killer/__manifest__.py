@@ -5,7 +5,7 @@
 {
     "name": "Accounting Payment Access",
     "summary": "Prevent the usage of payments from invoices",
-    "version": "12.0.1.0.0",
+    "version": "16.0.1.0.0",
     "category": "other",
     "author": "Camptocamp,Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-payment",
