@@ -7,11 +7,13 @@
         <field name="arch" type="xml">
             <list editable="top">
                 <field name="currency_id" column_invisible="1" />
+                <field name="counterpart_partner_domain" column_invisible="1" />
                 <field name="name" />
                 <field
                     name="partner_id"
                     optional="show"
                     options="{'no_create': True}"
+                    domain="counterpart_partner_domain"
                 />
                 <field name="account_id" options="{'no_create': True}" />
                 <field
