@@ -150,7 +150,8 @@ class AccountPaymentTermLine(models.Model):
         if self.value == "fixed":
             return float_round(self.value_amount, precision_digits=precision_digits)
         elif self.value in ("percent", "percent_amount_untaxed"):
-            amt = total_amount * self.value_amount / 100.0
+            # Use remaining_amount to correctly handle fixed amounts on previous lines
+            amt = remaining_amount * self.value_amount / 100.0
             if self.amount_round:
                 amt = float_round(amt, precision_rounding=self.amount_round)
             return float_round(amt, precision_digits=precision_digits)
