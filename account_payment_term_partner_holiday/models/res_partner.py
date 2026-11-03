@@ -6,7 +6,7 @@ import calendar
 
 from dateutil.relativedelta import relativedelta
 
-from odoo import _, api, fields, models
+from odoo import api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -18,12 +18,12 @@ class ResPartner(models.Model):
         inverse_name="partner_id",
         string="Payment Terms Holidays",
         copy=True,
-        auto_join=True,
+        bypass_search_access=True,
     )
 
     def _get_valid_due_date(self, date):
         if isinstance(date, str):
-            date = fields.Date.from_string(date)
+            date = fields.Date.to_date(date)
         is_date_in_holiday = self.is_date_in_holiday(date)
         while is_date_in_holiday:
             date = is_date_in_holiday[1] + relativedelta(days=1)
@@ -32,7 +32,7 @@ class ResPartner(models.Model):
 
     def is_date_in_holiday(self, date):
         if isinstance(date, str):
-            date = fields.Date.from_string(date)
+            date = fields.Date.to_date(date)
         for holiday in self.commercial_partner_id.holiday_ids:
             holiday_start_date = self._generate_field_date(
                 date.year, int(holiday.month_from), int(holiday.day_from)
@@ -48,7 +48,7 @@ class ResPartner(models.Model):
         # When the user selects a date that does not exist, assume the last day
         # for that month
         days = (day, max(calendar.monthrange(year, month)))
-        return fields.Date.from_string("%s-%s-%s" % (year, month, min(days)))
+        return fields.Date.to_date(f"{year}-{month}-{min(days)}")
 
 
 class ResPartnerHoliday(models.Model):
@@ -63,18 +63,18 @@ class ResPartnerHoliday(models.Model):
     @api.model
     def _selection_months(self):
         return [
-            ("01", _("January")),
-            ("02", _("February")),
-            ("03", _("March")),
-            ("04", _("April")),
-            ("05", _("May")),
-            ("06", _("June")),
-            ("07", _("July")),
-            ("08", _("August")),
-            ("09", _("September")),
-            ("10", _("October")),
-            ("11", _("November")),
-            ("12", _("December")),
+            ("01", self.env._("January")),
+            ("02", self.env._("February")),
+            ("03", self.env._("March")),
+            ("04", self.env._("April")),
+            ("05", self.env._("May")),
+            ("06", self.env._("June")),
+            ("07", self.env._("July")),
+            ("08", self.env._("August")),
+            ("09", self.env._("September")),
+            ("10", self.env._("October")),
+            ("11", self.env._("November")),
+            ("12", self.env._("December")),
         ]
 
     partner_id = fields.Many2one(
@@ -102,13 +102,10 @@ class ResPartnerHoliday(models.Model):
         required=True,
     )
 
-    _sql_constraints = [
-        (
-            "month_consistency",
-            "CHECK(month_from <= month_to)",
-            "Month from should be higher than month from",
-        ),
-    ]
+    _month_consistency = models.Constraint(
+        "CHECK(month_from <= month_to)",
+        "Month from should be higher than month from",
+    )
 
     @api.constrains("day_from", "month_from", "day_to", "month_to")
     def _check_from_end_dates(self):
@@ -118,5 +115,7 @@ class ResPartnerHoliday(models.Model):
                 and int(item.day_from) > int(item.day_to)
             ):
                 raise ValidationError(
-                    _("You can't set the ending holidays period before the beginning.")
+                    self.env._(
+                        "You can't set the ending holidays period before the beginning."
+                    )
                 )

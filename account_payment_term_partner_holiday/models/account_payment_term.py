@@ -42,14 +42,11 @@ class AccountPaymentTerm(models.Model):
         partner_id = ctx.get("move_partner_id", ctx.get("default_partner_id"))
         if partner_id:
             partner = self.env["res.partner"].browse(partner_id)
-            result2 = []
-            for key, item in enumerate(result):
+            for key, item in enumerate(result["line_ids"]):
                 next_date = partner._get_valid_due_date(item["date"])
                 if next_date != item["date"]:
                     line = self.line_ids.sorted(lambda x: x.value == "balance")[key]
                     next_date = self.apply_payment_days(line, next_date)
                     next_date = self.apply_holidays(next_date)
                     item.update({"date": next_date})
-                result2.append(item)
-            result = result2
         return result
