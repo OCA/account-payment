@@ -53,6 +53,8 @@ class AccountPayment(models.Model):
 
     def _notify_sent_payments_email(self):
         """Notify sent payments by email."""
+        if not self:
+            return
         mt_comment = self.env.ref("mail.mt_comment")
         tpl = self.env.ref("account_payment_notification.mail_template_notification")
         assert tpl.model == self._name, "Template has wrong model!?"

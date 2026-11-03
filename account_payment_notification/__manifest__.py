@@ -3,7 +3,7 @@
 {
     "name": "Account payment notification",
     "summary": "Notifiy upcoming payments",
-    "version": "19.0.1.0.1",
+    "version": "20.0.1.0.0",
     "development_status": "Beta",
     "category": "Accounting",
     "website": "https://github.com/OCA/account-payment",
@@ -18,7 +18,6 @@
     "data": [
         "data/mail_template.xml",
         "data/sms_template.xml",
-        "security/sms_template.xml",
         "views/account_payment_views.xml",
         "views/res_config_settings_views.xml",
     ],
