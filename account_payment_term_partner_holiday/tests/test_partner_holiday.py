@@ -231,6 +231,28 @@ class TestPartnerHoliday(common.TransactionCase):
         invoice = invoice_form.save()
         self.assertEqual(invoice.invoice_date_due, fields.Date.to_date("2021-04-11"))
 
+    def test_invoice_created_without_default_partner_context(self):
+        invoice = self.env["account.move"].create(
+            {
+                "move_type": "out_invoice",
+                "journal_id": self.journal.id,
+                "partner_id": self.partner_1.id,
+                "invoice_date": "2021-02-01",
+                "invoice_payment_term_id": self.payment_term_immediate.id,
+                "invoice_line_ids": [
+                    Command.create(
+                        {
+                            "product_id": self.product.id,
+                            "quantity": 1,
+                            "price_unit": 1,
+                        }
+                    )
+                ],
+            }
+        )
+        due_dates = {key["date_maturity"] for key in invoice.needed_terms}
+        self.assertIn(fields.Date.to_date("2021-04-02"), due_dates)
+
     def test_invoice_payment_term_custom_partner_1(self):
         invoice_form = self._set_invoice_form(self.partner_1.id, "2021-06-12")
         invoice_form.invoice_payment_term_id = self.payment_term_with_holidays
