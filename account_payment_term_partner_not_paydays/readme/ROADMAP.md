@@ -1,0 +1,1 @@
+- On a draft invoice, when the payment terms are set before adding any line, the due date shown is not updated from the payment terms, so the warning is not displayed. The due date is checked again when the invoice is confirmed.
