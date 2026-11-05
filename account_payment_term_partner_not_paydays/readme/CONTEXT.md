@@ -1,0 +1,1 @@
+Some partners do not pay, or are not paid, during certain periods, such as holidays or a closing period agreed with them. This module keeps those periods on the partner, per type of document, and moves the due date out of them when the invoice is posted, using the partner's payment days from Payment Term - Partner Payment Days (account_payment_term_partner_paydays).
