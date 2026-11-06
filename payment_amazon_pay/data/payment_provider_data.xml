@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <record id="payment_provider_amazon_pay" model="payment.provider">
+        <field name="name">Amazon Pay</field>
+        <field name="code">amazon_pay</field>
+        <field
+            name="image_128"
+            type="base64"
+            file="payment_amazon_pay/static/img/amazon_pay.png"
+        />
+        <field name="module_id" ref="base.module_payment_amazon_pay" />
+        <field
+            name="payment_method_ids"
+            eval="[Command.set([ref('payment.payment_method_amazon_pay')])]"
+        />
+    </record>
+</odoo>
