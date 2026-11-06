@@ -6,8 +6,6 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-04-30 08:04+0000\n"
-"PO-Revision-Date: 2026-04-30 08:04+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,8 +14,15 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: payment_amazon_pay
+#: model_terms:ir.ui.view,arch_db:payment_amazon_pay.amazon_pay_checkout_button
+msgid ""
+"<small class=\"text-muted d-block text-center mt-2\">\n"
+"                You will be redirected to Amazon to sign in and confirm your payment.\n"
+"            </small>"
+msgstr ""
+
+#. module: payment_amazon_pay
 #: model:ir.model.fields.selection,name:payment_amazon_pay.selection__payment_provider__code__amazon_pay
-#: model:payment.method,name:payment_amazon_pay.payment_method_amazon_pay
 #: model:payment.provider,name:payment_amazon_pay.payment_provider_amazon_pay
 msgid "Amazon Pay"
 msgstr ""
@@ -83,12 +88,6 @@ msgid "Amazon Pay did not return a checkout session id."
 msgstr ""
 
 #. module: payment_amazon_pay
-#. odoo-python
-#: code:addons/payment_amazon_pay/models/payment_transaction.py:0
-msgid "Amazon Pay: could not retrieve the payment status."
-msgstr ""
-
-#. module: payment_amazon_pay
 #: model:ir.model.fields,help:payment_amazon_pay.field_payment_provider__amazon_pay_merchant_id
 msgid "Amazon Pay merchant identifier."
 msgstr ""
@@ -113,22 +112,30 @@ msgstr ""
 #. module: payment_amazon_pay
 #. odoo-python
 #: code:addons/payment_amazon_pay/models/payment_transaction.py:0
+msgid "Amazon Pay: could not retrieve the payment status."
+msgstr ""
+
+#. module: payment_amazon_pay
+#. odoo-python
+#: code:addons/payment_amazon_pay/models/payment_transaction.py:0
 msgid "Amazon Pay: no transaction found for the received data."
+msgstr ""
+
+#. module: payment_amazon_pay
+#. odoo-python
+#: code:addons/payment_amazon_pay/models/payment_transaction.py:0
+msgid "Amazon Pay: the paid amount does not match this order."
+msgstr ""
+
+#. module: payment_amazon_pay
+#. odoo-python
+#: code:addons/payment_amazon_pay/models/payment_transaction.py:0
+msgid "Amazon Pay: the payment does not match this order."
 msgstr ""
 
 #. module: payment_amazon_pay
 #: model:ir.model.fields,field_description:payment_amazon_pay.field_payment_provider__amazon_pay_checkout_language
 msgid "Checkout Language"
-msgstr ""
-
-#. module: payment_amazon_pay
-#: model_terms:ir.ui.view,arch_db:payment_amazon_pay.amazon_pay_checkout_button
-msgid "You will be redirected to Amazon to sign in and confirm your payment."
-msgstr ""
-
-#. module: payment_amazon_pay
-#: model_terms:ir.ui.view,arch_db:payment_amazon_pay.amazon_pay_checkout_page
-msgid "Click the button to complete your payment with Amazon Pay."
 msgstr ""
 
 #. module: payment_amazon_pay
