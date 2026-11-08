@@ -6,35 +6,39 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-11-08 17:46+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_payment_internal_transfer
 #: model_terms:ir.ui.view,arch_db:account_payment_internal_transfer.view_account_payment_form_internal_transfer
 msgid "<span class=\"o_stat_text\">Paired Payment</span>"
-msgstr ""
+msgstr "<span class=\"o_stat_text\">Pagamento abbinato</span>"
 
 #. module: account_payment_internal_transfer
 #. odoo-python
 #: code:addons/account_payment_internal_transfer/models/account_payment.py:0
 msgid "A paired payment has been created: %(payment)s"
-msgstr ""
+msgstr "È stato creato un pagamento abbinato: %(payment)s"
 
 #. module: account_payment_internal_transfer
 #: model_terms:ir.ui.view,arch_db:account_payment_internal_transfer.view_account_payment_form_internal_transfer
 msgid ""
 "A second payment will be created automatically in the destination journal."
 msgstr ""
+"Verrà creato automaticamente un secondo pagamento nel registro di "
+"destinazione."
 
 #. module: account_payment_internal_transfer
 #: model:ir.model.fields,field_description:account_payment_internal_transfer.field_account_payment__destination_journal_id
 msgid "Destination Journal"
-msgstr ""
+msgstr "Registro di destinazione"
 
 #. module: account_payment_internal_transfer
 #. odoo-python
@@ -42,46 +46,46 @@ msgstr ""
 #: model:ir.model.fields,field_description:account_payment_internal_transfer.field_account_payment__is_internal_transfer
 #: model_terms:ir.ui.view,arch_db:account_payment_internal_transfer.account_journal_dashboard_kanban_view_internal_transfer
 msgid "Internal Transfer"
-msgstr ""
+msgstr "Trasferimento interno"
 
 #. module: account_payment_internal_transfer
 #: model_terms:ir.ui.view,arch_db:account_payment_internal_transfer.view_account_payment_search_internal_transfer
 msgid "Internal Transfers"
-msgstr ""
+msgstr "Trasferimento interno"
 
 #. module: account_payment_internal_transfer
 #: model:ir.model,name:account_payment_internal_transfer.model_account_journal
 msgid "Journal"
-msgstr ""
+msgstr "Registro"
 
 #. module: account_payment_internal_transfer
 #. odoo-python
 #: code:addons/account_payment_internal_transfer/models/account_payment.py:0
 msgid "Paired Payment"
-msgstr ""
+msgstr "Pagamento abbinato"
 
 #. module: account_payment_internal_transfer
 #: model:ir.model,name:account_payment_internal_transfer.model_account_payment
 msgid "Payments"
-msgstr ""
+msgstr "Pagamenti"
 
 #. module: account_payment_internal_transfer
 #. odoo-python
 #: code:addons/account_payment_internal_transfer/models/account_payment.py:0
 msgid "This payment has been created from: %(payment)s"
-msgstr ""
+msgstr "Questo pagamento è stato creato a partire da: %(payment)s"
 
 #. module: account_payment_internal_transfer
 #. odoo-python
 #: code:addons/account_payment_internal_transfer/models/account_payment.py:0
 msgid "Transfer from %s"
-msgstr ""
+msgstr "Trasferimento da %s"
 
 #. module: account_payment_internal_transfer
 #. odoo-python
 #: code:addons/account_payment_internal_transfer/models/account_payment.py:0
 msgid "Transfer to %s"
-msgstr ""
+msgstr "Trasferimento a %s"
 
 #. module: account_payment_internal_transfer
 #. odoo-python
@@ -90,3 +94,5 @@ msgid ""
 "You can only delete internal transfers in draft state. Please reset to draft"
 " first."
 msgstr ""
+"È possibile eliminare i trasferimenti interni solo se si trovano nello stato "
+"di bozza. Per procedere, è necessario riportarli allo stato di bozza."
