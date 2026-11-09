@@ -11,7 +11,7 @@
 
 {
     "name": "Account Payment Returns",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "summary": "Manage the return of your payments",
     "license": "AGPL-3",
     "depends": ["mail", "account"],
@@ -22,8 +22,7 @@
     "initOS GmbH & Co., ",
     "website": "https://github.com/OCA/account-payment",
     "data": [
-        "security/ir.model.access.csv",
-        "security/account_payment_return_security.xml",
+        "security/ir.access.csv",
         "views/payment_return_view.xml",
         "views/account_journal_view.xml",
         "data/ir_sequence_data.xml",

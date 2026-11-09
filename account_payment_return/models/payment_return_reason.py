@@ -1,6 +1,8 @@
 # Copyright 2016 Tecnativa - Carlos Dauden
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
 
+from typing import ClassVar
+
 from odoo import api, fields, models
 from odoo.fields import Domain
 
@@ -8,7 +10,7 @@ from odoo.fields import Domain
 class PaymentReturnReason(models.Model):
     _name = "payment.return.reason"
     _description = "Payment return reason"
-    _rec_names_search = ["name", "code"]
+    _rec_names_search: ClassVar[list[str]] = ["name", "code"]
 
     code = fields.Char()
     name = fields.Char(string="Reason", translate=True)

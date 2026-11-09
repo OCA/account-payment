@@ -8,17 +8,17 @@
 
 from odoo import api, fields, models
 from odoo.exceptions import UserError, ValidationError
+from odoo.fields import Command
 
 
 class PaymentReturn(models.Model):
     _name = "payment.return"
-    _inherit = ["mail.thread"]
+    _inherit = "mail.thread"
     _description = "Payment return"
     _order = "date DESC, id DESC"
 
     company_id = fields.Many2one(
         comodel_name="res.company",
-        string="Company",
         required=True,
         default=lambda self: self.env.company,
     )
@@ -69,40 +69,10 @@ class PaymentReturn(models.Model):
 
     @api.constrains("line_ids")
     def _check_duplicate_move_line(self):
-        def append_error(error_line):
-            error_list.append(
-                self.env._(
-                    "Payment Line: %(move_names)s (%(partner_name)s) "
-                    "in Payment Return: %(return_name)s",
-                    move_names=", ".join(error_line.mapped("move_line_ids.name")),
-                    partner_name=error_line.partner_id.name,
-                    return_name=error_line.return_id.name,
-                )
-            )
-
-        error_list = []
-        all_move_lines = self.env["account.move.line"]
-        for line in self.mapped("line_ids"):
-            for move_line in line.move_line_ids:
-                if move_line in all_move_lines:
-                    append_error(line)
-                all_move_lines |= move_line
-        if (not error_list) and all_move_lines:
-            duplicate_lines = self.env["payment.return.line"].search(
-                [
-                    ("move_line_ids", "in", all_move_lines.ids),
-                    ("return_id.state", "=", "done"),
-                ]
-            )
-            if duplicate_lines:
-                for line in duplicate_lines:
-                    append_error(line)
-        if error_list:
-            raise ValidationError(
-                self.env._(
-                    "Payment reference must be unique\n%s", "\n".join(error_list)
-                )
-            )
+        used_move_line_ids = set()
+        for line in self.line_ids:
+            line._check_matching_move_lines(line.move_line_ids, used_move_line_ids)
+            used_move_line_ids.update(line.move_line_ids.ids)
 
     @api.depends("line_ids.amount")
     def _compute_total_amount(self):
@@ -138,11 +108,14 @@ class PaymentReturn(models.Model):
         self._check_can_unlink()
         return super().unlink()
 
+    def _get_lines_to_match(self):
+        """Return the lines eligible for automatic matching."""
+        return self.mapped("line_ids").filtered(
+            lambda x: (not x.move_line_ids) and x.reference
+        )
+
     def button_match(self):
-        self.mapped("line_ids").filtered(
-            lambda x: ((not x.move_line_ids) and x.reference)
-        )._find_match()
-        self._check_duplicate_move_line()
+        self._get_lines_to_match()._find_match()
 
     def _prepare_return_move_vals(self):
         """Prepare the values for the journal entry created from the return.
@@ -227,6 +200,11 @@ class PaymentReturn(models.Model):
                     ]
                 }
             )
+            # Keep the remaining amount of a partial return reconciled with
+            # the invoice while retaining the returned part's traceability.
+            payment_aml = to_reconcile_aml_dic["payment_aml"]
+            if not payment_aml.company_currency_id.is_zero(payment_aml.amount_residual):
+                (payment_aml | to_reconcile_aml_dic["invoice_amls"]).reconcile()
         invoices.write(self._prepare_invoice_returned_vals())
         self.write({"state": "done", "move_id": move.id})
         return True
@@ -302,16 +280,6 @@ class PaymentReturnLine(models.Model):
         for line in self:
             line.amount = sum(line.move_line_ids.mapped("credit"))
 
-    def _get_partner_from_move(self):
-        for line in self.filtered(lambda x: not x.partner_id):
-            partners = line.move_line_ids.mapped("partner_id")
-            if len(partners) > 1:
-                raise UserError(
-                    self.env._("All payments must be owned by the same partner")
-                )
-            line.partner_id = partners[:1].id
-            line.partner_name = partners[:1].name
-
     @api.onchange("move_line_ids")
     def _onchange_move_line(self):
         self._compute_amount()
@@ -323,89 +291,103 @@ class PaymentReturnLine(models.Model):
             self.expense_account = journal.default_expense_account_id
             self.expense_partner_id = journal.default_expense_partner_id
 
-    def match_invoice(self):
-        for line in self:
-            domain = line.partner_id and [("partner_id", "=", line.partner_id.id)] or []
-            domain += [("name", "=", line.reference), ("move_type", "=", "out_invoice")]
-            invoice = self.env["account.move"].search(domain)
-            if invoice:
-                invoice_line_ids = invoice.line_ids.filtered(
-                    lambda line: line.account_id.account_type == "asset_receivable"
-                )
-                payment_lines = invoice_line_ids.mapped(
-                    "matched_debit_ids.debit_move_id"
-                )
-                payment_lines |= invoice_line_ids.mapped(
-                    "matched_credit_ids.credit_move_id"
-                )
-                if payment_lines:
-                    # Get last payment if several payments
-                    line.move_line_ids = payment_lines[-1].ids
-                    if not line.concept:
-                        line.concept = self.env._(
-                            "Invoice: %s",
-                            invoice.name,
-                        )
-
-    def match_move_lines(self):
-        for line in self:
-            domain = line.partner_id and [("partner_id", "=", line.partner_id.id)] or []
-            if line.return_id.journal_id:
-                domain += [
-                    ("credit", ">", 0.0),
-                    ("move_id.move_type", "=", "entry"),
-                ]
-            domain.extend(
-                [
-                    ("account_id.account_type", "=", "asset_receivable"),
-                    ("reconciled", "=", True),
-                    "|",
-                    ("name", "=", line.reference),
-                    ("ref", "=", line.reference),
-                ]
+    def _get_matching_move_lines_domain(
+        self, amount_field="credit", account_type="asset_receivable"
+    ):
+        """Build the reference lookup domain, reusable for either payment direction."""
+        self.ensure_one()
+        domain = (
+            fields.Domain("company_id", "=", self.return_id.company_id.id)
+            & fields.Domain("account_id.account_type", "=", account_type)
+            & fields.Domain(amount_field, ">", 0.0)
+            & (
+                fields.Domain("move_id.ref", "=", self.reference)
+                | fields.Domain("move_id.payment_reference", "=", self.reference)
             )
-            move_lines = self.env["account.move.line"].search(domain)
-            if move_lines:
-                line.move_line_ids = move_lines.ids
-                if not line.concept:
-                    line.concept = self.env._(
-                        "Move lines: %(move_names)s",
-                        move_names=", ".join(move_lines.mapped("name")),
-                    )
+        )
+        if self.partner_id:
+            domain &= fields.Domain("partner_id", "=", self.partner_id.id)
+        return domain
 
-    def match_move(self):
-        for line in self:
-            domain = line.partner_id and [("partner_id", "=", line.partner_id.id)] or []
-            domain += [("name", "=", line.reference), ("move_type", "=", "entry")]
-            move = self.env["account.move"].search(domain)
-            if move:
-                line.move_line_ids = move.line_ids.filtered(
-                    lambda aml: (
-                        aml.account_type == "asset_receivable" and aml.reconciled
-                    )
-                ).ids
-                if not line.concept:
-                    line.concept = self.env._(
-                        "Move: %(move_ref)s",
-                        move_ref=move.ref or "",
-                    )
+    def _get_matching_move_lines(self):
+        """Find payment candidates using the overridable reference domain."""
+        self.ensure_one()
+        return self.env["account.move.line"].search(
+            self._get_matching_move_lines_domain()
+        )
+
+    def _check_matching_move_lines(self, move_lines, used_move_line_ids):
+        """Validate one allocation against preceding lines and confirmed returns."""
+        self.ensure_one()
+        if not move_lines:
+            return
+        if used_move_line_ids.intersection(move_lines.ids) or self.search_count(
+            [
+                ("move_line_ids", "in", move_lines.ids),
+                ("return_id.state", "=", "done"),
+            ],
+            limit=1,
+        ):
+            raise ValidationError(
+                self.env._(
+                    "Payment reference must be unique\n"
+                    "Payment Line: %(move_names)s (%(partner_name)s) "
+                    "in Payment Return: %(return_name)s",
+                    move_names=", ".join(move_lines.mapped("name")),
+                    partner_name=self.partner_id.name
+                    or ", ".join(move_lines.partner_id.mapped("name")),
+                    return_name=self.return_id.name,
+                )
+            )
+
+    def _prepare_match_vals(self, move_lines):
+        """Prepare the values to apply to one matched return line."""
+        self.ensure_one()
+        values = {"move_line_ids": [Command.set(move_lines.ids)]}
+        if not self.concept:
+            values["concept"] = self.env._(
+                "Move lines: %(move_names)s",
+                move_names=", ".join(move_lines.mapped("name")),
+            )
+        if not self.partner_id:
+            partner = move_lines.partner_id[:1]
+            values.update(partner_id=partner.id, partner_name=partner.name)
+        if not self.amount:
+            values["amount"] = sum(move_lines.mapped("credit"))
+        return values
+
+    def _apply_match_vals(self, values_by_line):
+        """Apply the prepared values after all matches have been validated."""
+        for line, values in values_by_line.items():
+            line.write(values)
 
     def _find_match(self):
-        # we filter again to remove all ready matched lines in inheritance
-        lines2match = self.filtered(lambda x: ((not x.move_line_ids) and x.reference))
-        lines2match.match_invoice()
+        """Resolve the supplied lines and apply their pending values centrally."""
+        values_by_line = {}
+        used_move_line_ids = set((self.return_id.line_ids - self).move_line_ids.ids)
+        for line in self:
+            move_lines = line._get_matching_move_lines()
+            if not move_lines:
+                continue
+            partners = move_lines.mapped("partner_id")
+            if len(partners) > 1:
+                raise UserError(
+                    self.env._("All payments must be owned by the same partner")
+                )
+            if len(move_lines) > 1:
+                raise UserError(
+                    self.env._(
+                        "Reference %(reference)s matches several payment lines. "
+                        "Select the payment reference manually "
+                        "or use a unique reference.",
+                        reference=line.reference,
+                    )
+                )
+            line._check_matching_move_lines(move_lines, used_move_line_ids)
+            used_move_line_ids.update(move_lines.ids)
+            values_by_line[line] = line._prepare_match_vals(move_lines)
 
-        lines2match = lines2match.filtered(
-            lambda x: ((not x.move_line_ids) and x.reference)
-        )
-        lines2match.match_move_lines()
-
-        lines2match = lines2match.filtered(
-            lambda x: ((not x.move_line_ids) and x.reference)
-        )
-        lines2match.match_move()
-        self._get_partner_from_move()
-        self.filtered(lambda x: not x.amount)._compute_amount()
+        self._apply_match_vals(values_by_line)
 
     def _prepare_return_move_line_vals(self, move):
         self.ensure_one()

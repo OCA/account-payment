@@ -21,13 +21,13 @@ Account Payment Returns
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--payment-lightgray.png?logo=github
-    :target: https://github.com/OCA/account-payment/tree/19.0/account_payment_return
+    :target: https://github.com/OCA/account-payment/tree/20.0/account_payment_return
     :alt: OCA/account-payment
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/account-payment-19-0/account-payment-19-0-account_payment_return
+    :target: https://translation.odoo-community.org/projects/account-payment-20-0/account-payment-20-0-account_payment_return
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/account-payment&target_branch=19.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/account-payment&target_branch=20.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
@@ -52,9 +52,17 @@ Usage
    journal item, and input the amount that is going to be returned.
 
    Another option to fill info is setting references and click match
-   button to find matches with invoices, move lines or moves. This
-   functionality is extended by other modules as
+   button to find matching payment journal items. This functionality is
+   extended by other modules as
    *account_payment_return_import_sepa_pain*
+
+   Matching looks for the reference or payment reference on the journal
+   entry, within the return's company and for the selected customer, if
+   any. An invoice number only matches when it is recorded in one of
+   these payment references. Unmatched lines remain pending for manual
+   selection or an importer extension. When several payment lines match,
+   select the payment reference manually or use a unique reference; the
+   module does not choose a payment arbitrarily.
 
 2. It's possible to add bank charges amount on each line.
 
@@ -71,7 +79,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/account-payment/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/account-payment/issues/new?body=module:%20account_payment_return%0Aversion:%2019.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/account-payment/issues/new?body=module:%20account_payment_return%0Aversion:%2020.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -115,6 +123,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/account-payment <https://github.com/OCA/account-payment/tree/19.0/account_payment_return>`_ project on GitHub.
+This module is part of the `OCA/account-payment <https://github.com/OCA/account-payment/tree/20.0/account_payment_return>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.

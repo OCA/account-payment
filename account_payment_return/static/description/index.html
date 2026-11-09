@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <meta name="generator" content="Docutils: https://docutils.sourceforge.io/" />
-<title>README.rst</title>
+<title>Account Payment Returns</title>
 <style type="text/css">
 
 /*
@@ -374,7 +374,7 @@ ul.auto-toc {
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !! source digest: sha256:ca4a1234a8edd6af7826b59eab29f024fe6219d3c40144379827a69f7350a65d
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
-<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Mature" src="https://img.shields.io/badge/maturity-Mature-brightgreen.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/license-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/account-payment/tree/19.0/account_payment_return"><img alt="OCA/account-payment" src="https://img.shields.io/badge/github-OCA%2Faccount--payment-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/account-payment-19-0/account-payment-19-0-account_payment_return"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/account-payment&amp;target_branch=19.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
+<p><a class="reference external image-reference" href="https://odoo-community.org/page/development-status"><img alt="Mature" src="https://img.shields.io/badge/maturity-Mature-brightgreen.png" /></a> <a class="reference external image-reference" href="http://www.gnu.org/licenses/agpl-3.0-standalone.html"><img alt="License: AGPL-3" src="https://img.shields.io/badge/license-AGPL--3-blue.png" /></a> <a class="reference external image-reference" href="https://github.com/OCA/account-payment/tree/20.0/account_payment_return"><img alt="OCA/account-payment" src="https://img.shields.io/badge/github-OCA%2Faccount--payment-lightgray.png?logo=github" /></a> <a class="reference external image-reference" href="https://translation.odoo-community.org/projects/account-payment-20-0/account-payment-20-0-account_payment_return"><img alt="Translate me on Weblate" src="https://img.shields.io/badge/weblate-Translate%20me-F47D42.png" /></a> <a class="reference external image-reference" href="https://runboat.odoo-community.org/builds?repo=OCA/account-payment&amp;target_branch=20.0"><img alt="Try me on Runboat" src="https://img.shields.io/badge/runboat-Try%20me-875A7B.png" /></a></p>
 <p>This module implements customer receivables returns and allows to send
 related reconciled account move lines back to a state where the debt is
 still open, and letting history of it.</p>
@@ -400,9 +400,16 @@ the full returned payment record.</p>
 new record, register on each line a paid (reconciled) receivable
 journal item, and input the amount that is going to be returned.</p>
 <p>Another option to fill info is setting references and click match
-button to find matches with invoices, move lines or moves. This
-functionality is extended by other modules as
+button to find matching payment journal items. This functionality is
+extended by other modules as
 <em>account_payment_return_import_sepa_pain</em></p>
+<p>Matching looks for the reference or payment reference on the journal
+entry, within the return’s company and for the selected customer, if
+any. An invoice number only matches when it is recorded in one of
+these payment references. Unmatched lines remain pending for manual
+selection or an importer extension. When several payment lines match,
+select the payment reference manually or use a unique reference; the
+module does not choose a payment arbitrarily.</p>
 </li>
 <li><p class="first">It’s possible to add bank charges amount on each line.</p>
 </li>
@@ -420,7 +427,7 @@ move created.</p>
 <p>Bugs are tracked on <a class="reference external" href="https://github.com/OCA/account-payment/issues">GitHub Issues</a>.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-<a class="reference external" href="https://github.com/OCA/account-payment/issues/new?body=module:%20account_payment_return%0Aversion:%2019.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
+<a class="reference external" href="https://github.com/OCA/account-payment/issues/new?body=module:%20account_payment_return%0Aversion:%2020.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**">feedback</a>.</p>
 <p>Do not contact contributors directly about support or help with technical issues.</p>
 </div>
 <div class="section" id="credits">
@@ -461,7 +468,7 @@ If you spotted it first, help us to smash it by providing a detailed and welcome
 <p>OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.</p>
-<p>This module is part of the <a class="reference external" href="https://github.com/OCA/account-payment/tree/19.0/account_payment_return">OCA/account-payment</a> project on GitHub.</p>
+<p>This module is part of the <a class="reference external" href="https://github.com/OCA/account-payment/tree/20.0/account_payment_return">OCA/account-payment</a> project on GitHub.</p>
 <p>You are welcome to contribute. To learn how please visit <a class="reference external" href="https://odoo-community.org/page/Contribute">https://odoo-community.org/page/Contribute</a>.</p>
 </div>
 </div>
