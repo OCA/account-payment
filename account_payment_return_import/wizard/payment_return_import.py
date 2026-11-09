@@ -29,7 +29,6 @@ class PaymentReturnImport(models.TransientModel):
 
     journal_id = fields.Many2one(
         comodel_name="account.journal",
-        string="Journal",
         help="Accounting journal related to the bank payment return you're "
         "importing. It has be be manually chosen for payment return formats "
         "which doesn't allow automatic journal detection.",
