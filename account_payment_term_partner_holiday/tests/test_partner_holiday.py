@@ -377,3 +377,64 @@ class TestPartnerHoliday(common.TransactionCase):
             self.partner_1._get_valid_due_date(fields.Date.from_string("2021-06-14")),
             fields.Date.from_string("2021-06-14"),
         )
+
+    def test_invoice_form_partner_without_default_context(self):
+        """Partner holidays are applied when the partner is set in the form,
+        not only when it comes from a default_partner_id context."""
+        move_form = Form(
+            self.env["account.move"].with_context(
+                default_journal_id=self.journal.id,
+                default_move_type="out_invoice",
+                default_invoice_date="2021-02-01",
+            ),
+        )
+        move_form.partner_id = self.partner_1
+        move_form.invoice_payment_term_id = self.payment_term_10_days
+        with move_form.invoice_line_ids.new() as line_form:
+            line_form.product_id = self.product
+        invoice = move_form.save()
+        term_line = invoice.line_ids.filtered(
+            lambda line: line.display_type == "payment_term"
+        )
+        self.assertEqual(term_line.date_maturity, fields.Date.from_string("2021-04-02"))
+        invoice.action_post()
+        self.assertEqual(
+            invoice.invoice_date_due, fields.Date.from_string("2021-04-02")
+        )
+
+    def _create_invoice(self, partner):
+        return self.env["account.move"].create(
+            {
+                "move_type": "out_invoice",
+                "journal_id": self.journal.id,
+                "partner_id": partner.id,
+                "invoice_date": "2021-02-01",
+                "invoice_payment_term_id": self.payment_term_10_days.id,
+                "invoice_line_ids": [
+                    (0, 0, {"product_id": self.product.id, "price_unit": 100.0})
+                ],
+            }
+        )
+
+    def test_invoice_create_without_default_context(self):
+        """Invoices created programmatically (e.g. from sale orders) also
+        take into account the partner holidays."""
+        invoice = self._create_invoice(self.partner_1)
+        self.assertEqual(
+            invoice.invoice_date_due, fields.Date.from_string("2021-04-02")
+        )
+        invoice.action_post()
+        self.assertEqual(
+            invoice.invoice_date_due, fields.Date.from_string("2021-04-02")
+        )
+
+    def test_invoice_change_partner_recompute_due_date(self):
+        self.partner_1.property_payment_term_id = self.payment_term_10_days
+        invoice = self._create_invoice(self.partner_2)
+        self.assertEqual(
+            invoice.invoice_date_due, fields.Date.from_string("2021-02-11")
+        )
+        invoice.partner_id = self.partner_1
+        self.assertEqual(
+            invoice.invoice_date_due, fields.Date.from_string("2021-04-02")
+        )
