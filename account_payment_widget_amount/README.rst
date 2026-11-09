@@ -21,13 +21,13 @@ Account Payment Widget Amount
     :target: http://www.gnu.org/licenses/agpl-3.0-standalone.html
     :alt: License: AGPL-3
 .. |badge3| image:: https://img.shields.io/badge/github-OCA%2Faccount--payment-lightgray.png?logo=github
-    :target: https://github.com/OCA/account-payment/tree/18.0/account_payment_widget_amount
+    :target: https://github.com/OCA/account-payment/tree/19.0/account_payment_widget_amount
     :alt: OCA/account-payment
 .. |badge4| image:: https://img.shields.io/badge/weblate-Translate%20me-F47D42.png
-    :target: https://translation.odoo-community.org/projects/account-payment-18-0/account-payment-18-0-account_payment_widget_amount
+    :target: https://translation.odoo-community.org/projects/account-payment-19-0/account-payment-19-0-account_payment_widget_amount
     :alt: Translate me on Weblate
 .. |badge5| image:: https://img.shields.io/badge/runboat-Try%20me-875A7B.png
-    :target: https://runboat.odoo-community.org/builds?repo=OCA/account-payment&target_branch=18.0
+    :target: https://runboat.odoo-community.org/builds?repo=OCA/account-payment&target_branch=19.0
     :alt: Try me on Runboat
 
 |badge1| |badge2| |badge3| |badge4| |badge5|
@@ -38,7 +38,7 @@ the selected payment that wants to assign to the invoice.
 
 |Payment Widget|
 
-.. |Payment Widget| image:: https://raw.githubusercontent.com/OCA/account-payment/18.0/account_payment_widget_amount/static/description/payment_widget.png
+.. |Payment Widget| image:: https://raw.githubusercontent.com/OCA/account-payment/19.0/account_payment_widget_amount/static/description/payment_widget.png
 
 **Table of contents**
 
@@ -58,7 +58,7 @@ To use this module, you need to:
 
 |Payment Widget Amount Reconciled|
 
-.. |Payment Widget Amount Reconciled| image:: https://raw.githubusercontent.com/OCA/account-payment/18.0/account_payment_widget_amount/static/description/payment_widget_amount_reconciled.png
+.. |Payment Widget Amount Reconciled| image:: https://raw.githubusercontent.com/OCA/account-payment/19.0/account_payment_widget_amount/static/description/payment_widget_amount_reconciled.png
 
 Bug Tracker
 ===========
@@ -66,7 +66,7 @@ Bug Tracker
 Bugs are tracked on `GitHub Issues <https://github.com/OCA/account-payment/issues>`_.
 In case of trouble, please check there if your issue has already been reported.
 If you spotted it first, help us to smash it by providing a detailed and welcomed
-`feedback <https://github.com/OCA/account-payment/issues/new?body=module:%20account_payment_widget_amount%0Aversion:%2018.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
+`feedback <https://github.com/OCA/account-payment/issues/new?body=module:%20account_payment_widget_amount%0Aversion:%2019.0%0A%0A**Steps%20to%20reproduce**%0A-%20...%0A%0A**Current%20behavior**%0A%0A**Expected%20behavior**>`_.
 
 Do not contact contributors directly about support or help with technical issues.
 
@@ -101,6 +101,6 @@ OCA, or the Odoo Community Association, is a nonprofit organization whose
 mission is to support the collaborative development of Odoo features and
 promote its widespread use.
 
-This module is part of the `OCA/account-payment <https://github.com/OCA/account-payment/tree/18.0/account_payment_widget_amount>`_ project on GitHub.
+This module is part of the `OCA/account-payment <https://github.com/OCA/account-payment/tree/19.0/account_payment_widget_amount>`_ project on GitHub.
 
 You are welcome to contribute. To learn how please visit https://odoo-community.org/page/Contribute.
