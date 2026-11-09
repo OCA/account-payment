@@ -1,0 +1,6 @@
+id,name,model_id,group_id/id,operation,domain
+access_payment_return,payment.return,payment.return,account.group_account_invoice,crud,
+access_payment_return_line,payment.return.line,payment.return.line,account.group_account_invoice,crud,
+access_payment_return_reason,payment.return.reason,payment.return.reason,account.group_account_invoice,crud,
+account_payment_return_comp_rule,Payment return mapping company rule,payment.return,,crud,"[('company_id', 'in', company_ids + [False])]"
+account_payment_return_line_comp_rule,Payment return line company rule,payment.return.line,,crud,"[('return_id.company_id', 'in', company_ids + [False])]"

@@ -3,9 +3,16 @@
     journal item, and input the amount that is going to be returned.
 
     Another option to fill info is setting references and click match
-    button to find matches with invoices, move lines or moves. This
+    button to find matching payment journal items. This
     functionality is extended by other modules as
     *account_payment_return_import_sepa_pain*
+
+    Matching looks for the reference or payment reference on the journal entry,
+    within the return's company and for the selected customer, if any. An invoice
+    number only matches when it is recorded in one of these payment references.
+    Unmatched lines remain pending for manual selection or an importer extension.
+    When several payment lines match, select the payment reference manually or
+    use a unique reference; the module does not choose a payment arbitrarily.
 
 2.  It's possible to add bank charges amount on each line.
 
