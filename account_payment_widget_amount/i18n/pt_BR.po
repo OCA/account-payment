@@ -1,0 +1,42 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+#	* account_payment_widget_amount
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 12.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2022-10-12 02:35+0000\n"
+"Last-Translator: Douglas Custódio <douglascstd@yahoo.com>\n"
+"Language-Team: none\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: Weblate 4.3.2\n"
+
+#. module: account_payment_widget_amount
+#. openerp-web
+#: code:addons/account_payment_widget_amount/static/src/xml/account_payment.xml:19
+#, python-format
+msgid "Apply"
+msgstr "Aplicar"
+
+#. module: account_payment_widget_amount
+#: model:ir.model,name:account_payment_widget_amount.model_account_move_line
+msgid "Journal Item"
+msgstr "Item de Diário"
+
+#. module: account_payment_widget_amount
+#. openerp-web
+#: code:addons/account_payment_widget_amount/static/src/xml/account_payment.xml:9
+#, python-format
+msgid "Paid Amount:"
+msgstr "Montante Pago:"
+
+#. module: account_payment_widget_amount
+#: code:addons/account_payment_widget_amount/models/account_move_line.py:25
+#, python-format
+msgid "The specified amount has to be strictly positive"
+msgstr "O montante especificado deve ser terminantemente positivo"

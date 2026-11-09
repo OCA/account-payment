@@ -1,0 +1,48 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_payment_widget_amount
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-06-05 12:40+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.17\n"
+
+#. module: account_payment_widget_amount
+#. odoo-javascript
+#: code:addons/account_payment_widget_amount/static/src/xml/account_payment.xml:0
+#, python-format
+msgid "Apply"
+msgstr "Applica"
+
+#. module: account_payment_widget_amount
+#. odoo-javascript
+#: code:addons/account_payment_widget_amount/static/src/js/account_payment_field.esm.js:0
+#, python-format
+msgid "Enter the payment amount"
+msgstr "Inserire il valore pagamento"
+
+#. module: account_payment_widget_amount
+#: model:ir.model,name:account_payment_widget_amount.model_account_move
+msgid "Journal Entry"
+msgstr "Registrazione contabile"
+
+#. module: account_payment_widget_amount
+#: model:ir.model,name:account_payment_widget_amount.model_account_move_line
+msgid "Journal Item"
+msgstr "Movimento contabile"
+
+#. module: account_payment_widget_amount
+#. odoo-javascript
+#: code:addons/account_payment_widget_amount/static/src/xml/account_payment.xml:0
+#, python-format
+msgid "Paid Amount:"
+msgstr "Importo pagato:"
