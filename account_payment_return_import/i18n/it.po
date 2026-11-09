@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: account-payment (8.0)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-01-30 10:56+0000\n"
-"PO-Revision-Date: 2024-09-25 09:06+0000\n"
+"PO-Revision-Date: 2026-11-09 13:46+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: Italian (http://www.transifex.com/oca/OCA-account-payment-8-0/"
 "language/it/)\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_payment_return_import
 #. odoo-python
@@ -234,7 +234,7 @@ msgstr "Questo file non contiene un pagamento rimborso."
 #: code:addons/account_payment_return_import/wizard/payment_return_import.py:0
 #, python-format
 msgid "This file doesn't contain any transaction."
-msgstr "Questo file non contiene nessuna transizione."
+msgstr "Questo file non contiene nessuna transazione."
 
 #. module: account_payment_return_import
 #: model:ir.model.fields,help:account_payment_return_import.field_payment_return_line__raw_import_data
