@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2025-02-14 14:34+0000\n"
+"PO-Revision-Date: 2026-11-09 13:46+0000\n"
 "Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
 "Language-Team: none\n"
 "Language: it\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.6.2\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC09
@@ -39,7 +39,7 @@ msgid ""
 "Account specified is blocked, prohibiting posting of transactions against "
 "it."
 msgstr ""
-"Il conto indicato è bloccato, è proibito fare registrazioni o transizioni."
+"Il conto indicato è bloccato, è proibito fare registrazioni o transazioni."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC12
@@ -275,7 +275,7 @@ msgid ""
 "Credit transfer is not tagged as an Extended Remittance Information (ERI) "
 "transaction but contains ERI."
 msgstr ""
-"Il trasferimento di credito non è etichettato come transizione Informazione "
+"Il trasferimento di credito non è etichettato come transazione Informazione "
 "Rimessa Estesa (ERI) ma contiene ERI."
 
 #. module: account_payment_return_import_iso20022
@@ -284,7 +284,7 @@ msgid ""
 "Credit transfer is tagged as an Extended Remittance Information (ERI) "
 "transaction but does not contain ERI."
 msgstr ""
-"Il trasferimento di credito è etichettato come transizione Informazione "
+"Il trasferimento di credito è etichettato come transazione Informazione "
 "Rimessa Estesa (ERI) ma non contiene ERI."
 
 #. module: account_payment_return_import_iso20022
@@ -741,18 +741,18 @@ msgstr "Numero di cifre decimali non compatibile con la valuta"
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM19
 msgid "Number of transactions at the Group level is invalid or missing"
-msgstr "Il numero di transizioni a livello di gruppo manca o è errato"
+msgstr "Il numero di transazioni a livello di gruppo manca o è errato"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM20
 msgid "Number of transactions at the Payment Information level is invalid"
 msgstr ""
-"Il numero di transizioni a livello di informazione pagamento non è valido"
+"Il numero di transazioni a livello di informazione pagamento non è valido"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM18
 msgid "Number of transactions is invalid or missing."
-msgstr "Il numero di transizioni manca o è errato."
+msgstr "Il numero di transazioni manca o è errato."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS17
@@ -914,7 +914,7 @@ msgstr "Liquidazione abortita a causa del timeout.   "
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_ED05
 msgid "Settlement of the transaction has failed."
-msgstr "La liquidazione della transizione è fallita."
+msgstr "La liquidazione della transazione è fallita."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AB04
@@ -944,7 +944,7 @@ msgstr "Il firmatario non è autorizzato a firmare questo tipo di operazione."
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM02
 msgid "Specific transaction/message amount is greater than allowed maximum"
 msgstr ""
-"Il valore specifico della transizione/messaggio è superiore al massimo "
+"Il valore specifico della transazione /messaggio è superiore al massimo "
 "consentito"
 
 #. module: account_payment_return_import_iso20022
@@ -1009,7 +1009,7 @@ msgstr "Il valore indicato nel messaggio è zero"
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM06
 msgid "Specified transaction amount is less than agreed minimum."
-msgstr "Il valore indicato nella transizione è inferiore al minimo consentito."
+msgstr "Il valore indicato nella transazione è inferiore al minimo consentito."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RR09
@@ -1136,7 +1136,7 @@ msgstr "Il formato del file è incompleto o non valido"
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS0K
 msgid "The number of transaction is over the number allowed for this signer."
 msgstr ""
-"Il numero di transizione è superiore al numero consentito per questo "
+"Il numero di transazione è superiore al numero consentito per questo "
 "firmatario."
 
 #. module: account_payment_return_import_iso20022
@@ -1282,7 +1282,7 @@ msgstr "L'importo della transazione supera il limite della liquidazione."
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM11
 msgid "Transaction currency is invalid or missing"
-msgstr "La valuta della transizione è errata o mancante"
+msgstr "La valuta della transazione è errata o mancante"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AG08
@@ -1299,7 +1299,7 @@ msgstr "Transazione vietata su questo tipo di conto (ex NoAgreement)"
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DU03
 msgid "Transaction is not unique."
-msgstr "La transizione non è univoca."
+msgstr "La transazione non è univoca."
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_RF01
