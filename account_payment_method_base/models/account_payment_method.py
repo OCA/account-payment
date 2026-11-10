@@ -8,7 +8,7 @@ from odoo import api, fields, models
 class AccountPaymentMethod(models.Model):
     _inherit = "account.payment.method"
     _order = "code, payment_type"  # no native _order
-    _rec_names_search = ["name", "code"]
+    _rec_names_search = ("name", "code")
 
     # Add the one2many field, which should be native but is missing
     # in the 'account' module
