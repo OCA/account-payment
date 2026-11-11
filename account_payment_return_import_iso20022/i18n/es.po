@@ -6,20 +6,20 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Odoo Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
-"PO-Revision-Date: 2023-08-07 17:11+0000\n"
-"Last-Translator: Ivorra78 <informatica@totmaterial.es>\n"
+"PO-Revision-Date: 2026-11-11 12:46+0000\n"
+"Last-Translator: Carlos Dauden <carlos.dauden@tecnativa.com>\n"
 "Language-Team: none\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.17\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC09
 msgid "Account currency is invalid or missing"
-msgstr "La divisa de la cuenta no es válida o falta"
+msgstr "La moneda de la cuenta no es válida o falta"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC01
@@ -325,7 +325,7 @@ msgstr "El identificador del régimen de acreedores no es válido o no existe"
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC11
 msgid "Creditor account currency is invalid or missing"
-msgstr "La divisa de la cuenta acreedora no es válida o falta"
+msgstr "La moneda de la cuenta acreedora no es válida o falta"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC07
@@ -382,7 +382,7 @@ msgstr "El acreedor o su agente no deberían haber cobrado el adeudo directo"
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CURR
 msgid "Currency of the payment is incorrect"
-msgstr "La divisa del pago es incorrecta"
+msgstr "La moneda del pago es incorrecta"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_DS0B
@@ -412,7 +412,7 @@ msgstr "La cuenta deudora no puede cargarse por un motivo genérico."
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC10
 msgid "Debtor account currency is invalid or missing"
-msgstr "La divisa de la cuenta del deudor no es válida o falta"
+msgstr "La moneda de la cuenta del deudor no es válida o falta"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AC05
@@ -741,7 +741,7 @@ msgstr "Sin mandato"
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_CH20
 msgid "Number of decimal points not compatible with the currency"
-msgstr "Número de decimales no compatible con la divisa"
+msgstr "Número de decimales no compatible con la moneda"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM19
@@ -996,7 +996,7 @@ msgid ""
 "Specified message amount is an non processable currency outside of existing "
 "agreement"
 msgstr ""
-"El importe del mensaje especificado es una divisa no procesable fuera del "
+"El importe del mensaje especificado es una moneda no procesable fuera del "
 "acuerdo existente"
 
 #. module: account_payment_return_import_iso20022
@@ -1277,7 +1277,7 @@ msgstr "El importe de la operación supera el límite de liquidación."
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AM11
 msgid "Transaction currency is invalid or missing"
-msgstr "La divisa de la transacción no es válida o falta"
+msgstr "La moneda de la transacción no es válida o falta"
 
 #. module: account_payment_return_import_iso20022
 #: model:payment.return.reason,name:account_payment_return_import_iso20022.unpaid_reason_AG08
