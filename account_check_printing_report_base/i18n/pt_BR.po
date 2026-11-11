@@ -1,0 +1,153 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_check_printing_report_base
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0\n"
+"Report-Msgid-Bugs-To: \n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: pt_BR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+
+#. module: account_check_printing_report_base
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
+msgid "<b>Check Amount:</b>"
+msgstr ""
+
+#. module: account_check_printing_report_base
+#: model:ir.model.fields,field_description:account_check_printing_report_base.field_account_journal__check_print_auto
+msgid "Automatic check printing"
+msgstr ""
+
+#. module: account_check_printing_report_base
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4_document
+msgid "Balance Due"
+msgstr ""
+
+#. module: account_check_printing_report_base
+#: model:ir.model.fields,field_description:account_check_printing_report_base.field_res_company__account_check_printing_layout
+msgid "Check Layout"
+msgstr ""
+
+#. module: account_check_printing_report_base
+#: model:ir.model,name:account_check_printing_report_base.model_res_company
+msgid "Companies"
+msgstr ""
+
+#. module: account_check_printing_report_base
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4_document
+msgid "Dear partner"
+msgstr ""
+
+#. module: account_check_printing_report_base
+#: model:ir.model.fields,help:account_check_printing_report_base.field_account_journal__check_print_auto
+msgid ""
+"Default check for the company is printed automatically when invoice payment "
+"is validated"
+msgstr ""
+
+#. module: account_check_printing_report_base
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
+msgid "Description"
+msgstr ""
+
+#. module: account_check_printing_report_base
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4_document
+msgid "Due Date"
+msgstr ""
+
+#. module: account_check_printing_report_base
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4_document
+msgid "Invoice / Reference"
+msgstr ""
+
+#. module: account_check_printing_report_base
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4_document
+msgid "Invoice date"
+msgstr ""
+
+#. module: account_check_printing_report_base
+#: model:ir.model,name:account_check_printing_report_base.model_account_journal
+msgid "Journal"
+msgstr ""
+
+#. module: account_check_printing_report_base
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4_document
+msgid "Original Amount"
+msgstr ""
+
+#. module: account_check_printing_report_base
+#: model:ir.model,name:account_check_printing_report_base.model_account_payment_register
+msgid "Pay"
+msgstr ""
+
+#. module: account_check_printing_report_base
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4_document
+msgid "Payment"
+msgstr ""
+
+#. module: account_check_printing_report_base
+#: model:ir.actions.report,name:account_check_printing_report_base.action_report_check_base
+msgid "Payment Check Base"
+msgstr ""
+
+#. module: account_check_printing_report_base
+#: model:ir.actions.report,name:account_check_printing_report_base.action_report_check_base_a4
+msgid "Payment Check Base A4"
+msgstr ""
+
+#. module: account_check_printing_report_base
+#: model:ir.model,name:account_check_printing_report_base.model_account_payment
+msgid "Payments"
+msgstr ""
+
+#. module: account_check_printing_report_base
+#: model:ir.model.fields.selection,name:account_check_printing_report_base.selection__res_company__account_check_printing_layout__account_check_printing_report_base_action_report_check_base
+msgid "Print Check Base"
+msgstr ""
+
+#. module: account_check_printing_report_base
+#: model:ir.model.fields.selection,name:account_check_printing_report_base.selection__res_company__account_check_printing_layout__account_check_printing_report_base_action_report_check_base_a4
+msgid "Print Check Base A4"
+msgstr ""
+
+#. module: account_check_printing_report_base
+#: model:ir.model,name:account_check_printing_report_base.model_report_account_check_printing_report_base_report_check_base
+msgid "Report Check Print"
+msgstr ""
+
+#. module: account_check_printing_report_base
+#: model:ir.model,name:account_check_printing_report_base.model_report_account_check_printing_report_base_report_check_base_a4
+msgid "Report Check Print for A4"
+msgstr ""
+
+#. module: account_check_printing_report_base
+#: model:ir.model,name:account_check_printing_report_base.model_report_account_check_printing_report_base_promissory_footer_a4
+msgid "Report Promissory Note Print for A4"
+msgstr ""
+
+#. module: account_check_printing_report_base
+#: model:ir.model.fields,help:account_check_printing_report_base.field_res_company__account_check_printing_layout
+msgid ""
+"Select the format corresponding to the check paper you will be printing your checks on.\n"
+"In order to disable the printing feature, select 'None'."
+msgstr ""
+
+#. module: account_check_printing_report_base
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4_document
+msgid "Waiting for your agreement, regards."
+msgstr ""
+
+#. module: account_check_printing_report_base
+#: model_terms:ir.ui.view,arch_db:account_check_printing_report_base.report_check_base_a4_document
+msgid "We attach the list of invoices paid with this check with amount of"
+msgstr ""
