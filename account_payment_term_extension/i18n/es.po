@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: Odoo Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-01-08 07:29+0000\n"
-"PO-Revision-Date: 2023-04-12 11:33+0000\n"
-"Last-Translator: gelo joga Rodríguez <gelo.joga@factorlibre.com>\n"
+"PO-Revision-Date: 2026-11-11 12:46+0000\n"
+"Last-Translator: Carlos Dauden <carlos.dauden@tecnativa.com>\n"
 "Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 4.14.1\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_payment_term_extension
 #: model:account.payment.term,name:account_payment_term_extension.amount_untaxed_lines
@@ -201,7 +201,7 @@ msgstr "Porcentaje (Base imponible)"
 #, python-format
 msgid "Percentage of amount untaxed can't be used with foreign currencies"
 msgstr ""
-"Porcentaje de base imponible que no puede usarse con divisas extranjeras"
+"Porcentaje de base imponible que no puede usarse con monedas extranjeras"
 
 #. module: account_payment_term_extension
 #. odoo-python
