@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: Odoo Server 10.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2018-03-30 02:46+0000\n"
-"PO-Revision-Date: 2018-03-30 02:46+0000\n"
-"Last-Translator: OCA Transbot <transbot@odoo-community.org>, 2018\n"
+"PO-Revision-Date: 2026-11-11 12:46+0000\n"
+"Last-Translator: leszekszczepkowski <leszekszczepkowski@gmail.com>\n"
 "Language-Team: Polish (https://www.transifex.com/oca/teams/23907/pl/)\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -19,6 +19,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && "
 "(n%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && "
 "n%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #. module: account_payment_term_extension
 #: model:account.payment.term,name:account_payment_term_extension.amount_untaxed_lines
@@ -50,12 +51,12 @@ msgstr ""
 #. module: account_payment_term_extension
 #: model:ir.model,name:account_payment_term_extension.model_res_company
 msgid "Companies"
-msgstr ""
+msgstr "Firmy"
 
 #. module: account_payment_term_extension
 #: model:ir.model,name:account_payment_term_extension.model_res_config_settings
 msgid "Config Settings"
-msgstr ""
+msgstr "Konfiguracja ustawień"
 
 #. module: account_payment_term_extension
 #: model_terms:ir.ui.view,arch_db:account_payment_term_extension.res_config_settings_view_form
@@ -65,7 +66,7 @@ msgstr ""
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__create_uid
 msgid "Created by"
-msgstr "Utworzone przez"
+msgstr "Utworzył(a)"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__create_date
@@ -107,7 +108,7 @@ msgstr ""
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__display_name
 msgid "Display Name"
-msgstr "Wyświetlana nazwa "
+msgstr "Nazwa wyświetlana"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__holiday
@@ -142,12 +143,12 @@ msgstr "ID"
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__write_uid
 msgid "Last Updated by"
-msgstr "Ostatnio modyfikowane przez"
+msgstr "Ostatnio aktualizowane przez"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__write_date
 msgid "Last Updated on"
-msgstr "Data ostatniej modyfikacji"
+msgstr "Data ostatniej aktualizacji"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__payment_id
@@ -163,7 +164,7 @@ msgstr ""
 #: model:ir.model,name:account_payment_term_extension.model_account_payment_term
 #: model_terms:ir.ui.view,arch_db:account_payment_term_extension.res_config_settings_view_form
 msgid "Payment Terms"
-msgstr ""
+msgstr "Warunki płatności"
 
 #. module: account_payment_term_extension
 #: model_terms:ir.ui.view,arch_db:account_payment_term_extension.res_config_settings_view_form
@@ -173,7 +174,7 @@ msgstr ""
 #. module: account_payment_term_extension
 #: model:ir.model,name:account_payment_term_extension.model_account_payment_term_line
 msgid "Payment Terms Line"
-msgstr ""
+msgstr "Pozycja warunków płatności"
 
 #. module: account_payment_term_extension
 #: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__payment_days
