@@ -1,6 +1,8 @@
 import json
 import logging
 
+import requests
+
 from odoo import http
 from odoo.exceptions import ValidationError
 from odoo.http import request
@@ -50,6 +52,38 @@ class AmazonPayController(http.Controller):
             },
         )
         return request.redirect("/payment/status")
+
+    @http.route("/payment/amazon_pay/finalize", type="json", auth="public")
+    def amazon_pay_finalize(self, reference, checkout_session_id, shipping_address):
+        tx_sudo = (
+            request.env["payment.transaction"]
+            .sudo()
+            .search(
+                [
+                    ("reference", "=", reference),
+                    ("provider_code", "=", "amazon_pay"),
+                    ("state", "=", "draft"),
+                ],
+                limit=1,
+            )
+        )
+        if not tx_sudo:
+            raise ValidationError(request.env._("Amazon Pay: transaction not found."))
+        provider_sudo = tx_sudo.provider_id
+        try:
+            data = provider_sudo._amazon_pay_finalize_checkout_session(
+                tx_sudo, checkout_session_id, shipping_address
+            )
+        except requests.exceptions.RequestException:
+            _logger.exception(
+                "Amazon Pay: finalize failed for transaction %s", tx_sudo.reference
+            )
+            data = provider_sudo._amazon_pay_get_checkout_session(checkout_session_id)
+            if (data.get("statusDetails") or {}).get("state") != "Completed":
+                raise
+        tx_sudo._handle_notification_data(
+            "amazon_pay", {**data, "reference": tx_sudo.reference}
+        )
 
     @http.route(
         "/payment/amazon_pay/ipn",

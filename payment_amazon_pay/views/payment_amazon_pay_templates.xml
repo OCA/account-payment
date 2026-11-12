@@ -20,4 +20,21 @@
             </small>
         </div>
     </template>
+
+    <template id="express_checkout_form">
+        <div
+            name="o_express_checkout_container"
+            t-attf-id="o_amazon_pay_express_checkout_container_{{provider_sudo.id}}"
+            t-att-data-provider-id="provider_sudo.id"
+            t-att-data-provider-code="provider_sudo.code"
+            t-att-data-amazon-pay-checkout-js-url="provider_sudo._amazon_pay_get_checkout_js_url()"
+            t-att-data-amazon-pay-merchant-id="provider_sudo.amazon_pay_merchant_id"
+            t-att-data-amazon-pay-store-id="provider_sudo.amazon_pay_store_id"
+            t-att-data-amazon-pay-checkout-language="provider_sudo.amazon_pay_checkout_language"
+            t-att-data-amazon-pay-sandbox="provider_sudo.state == 'test'"
+            t-att-data-amazon-pay-decimal-places="currency.decimal_places"
+            t-att-data-amazon-pay-ledger-currency="currency.name"
+            class="w-100 mt-2"
+        />
+    </template>
 </odoo>
