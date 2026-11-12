@@ -1,7 +1,7 @@
 # Copyright 2022 ForgeFlow, S.L.
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl)
 
-from odoo import Command, fields, models
+from odoo import Command, api, fields, models
 from odoo.exceptions import ValidationError
 
 
@@ -19,6 +19,9 @@ class AccountPayment(models.Model):
         "account.account",
         string="Write-off Account",
         domain="[('deprecated', '=', False), ('company_ids', '=', company_id)]",
+    )
+    restrict_counterpart_partner = fields.Boolean(
+        related="company_id.payment_line_restrict_counterpart_partner",
     )
 
     def _process_post_reconcile(self):
@@ -290,7 +293,51 @@ class AccountPaymentCounterLine(models.Model):
     payment_id = fields.Many2one(
         "account.payment", string="Payment", ondelete="cascade"
     )
+    counterpart_partner_domain = fields.Binary(
+        compute="_compute_counterpart_partner_domain",
+        help="Technical field holding the domain applied to the partner of the "
+        "counterpart line.",
+    )
 
     def _get_onchange_fields(self):
         res = super()._get_onchange_fields()
         return res + ("payment_id.currency_id", "payment_id.date")
+
+    @api.depends("payment_id.partner_id", "payment_id.restrict_counterpart_partner")
+    def _compute_counterpart_partner_domain(self):
+        for rec in self:
+            payment = rec.payment_id
+            if not payment.restrict_counterpart_partner:
+                rec.counterpart_partner_domain = []
+            elif payment.partner_id:
+                commercial_partner = payment.partner_id.commercial_partner_id
+                rec.counterpart_partner_domain = [
+                    ("commercial_partner_id", "=", commercial_partner.id)
+                ]
+            else:
+                # Restriction is on but no partner is set yet: forbid selection
+                # instead of offering every partner.
+                rec.counterpart_partner_domain = [("id", "=", False)]
+
+    @api.constrains("partner_id", "move_id", "aml_id", "payment_id")
+    def _check_counterpart_partner(self):
+        for rec in self:
+            payment = rec.payment_id
+            if not payment or not payment.restrict_counterpart_partner:
+                continue
+            payment_partner = payment.partner_id.commercial_partner_id
+            if not payment_partner:
+                continue
+            line_partners = (
+                rec.partner_id.commercial_partner_id
+                | rec.move_id.commercial_partner_id
+                | rec.aml_id.partner_id.commercial_partner_id
+            )
+            if line_partners and line_partners != payment_partner:
+                raise ValidationError(
+                    self.env._(
+                        "You can only apply counterpart lines of %(partner)s, "
+                        "the partner set on the payment.",
+                        partner=payment_partner.display_name,
+                    )
+                )
