@@ -79,7 +79,6 @@ class ResPartnerHoliday(models.Model):
 
     partner_id = fields.Many2one(
         comodel_name="res.partner",
-        string="Partner",
         required=True,
         ondelete="cascade",
         index=True,

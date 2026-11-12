@@ -43,10 +43,14 @@ class AccountPaymentTerm(models.Model):
         if partner_id:
             partner = self.env["res.partner"].browse(partner_id)
             for key, item in enumerate(result["line_ids"]):
-                next_date = partner._get_valid_due_date(item["date"])
-                if next_date != item["date"]:
-                    line = self.line_ids.sorted(lambda x: x.value == "balance")[key]
-                    next_date = self.apply_payment_days(line, next_date)
-                    next_date = self.apply_holidays(next_date)
-                    item.update({"date": next_date})
+                line = self.line_ids.sorted(lambda x: x.value == "balance")[key]
+                next_date = item["date"]
+                while True:
+                    valid_date = partner._get_valid_due_date(next_date)
+                    valid_date = self.apply_payment_days(line, valid_date)
+                    valid_date = self.apply_holidays(valid_date)
+                    if valid_date == next_date:
+                        break
+                    next_date = valid_date
+                item.update({"date": next_date})
         return result

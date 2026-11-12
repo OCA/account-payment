@@ -324,6 +324,37 @@ class TestPartnerHoliday(common.TransactionCase):
             invoice_form.invoice_date_due, fields.Date.to_date("2021-02-05")
         )
 
+    def test_invoice_payment_days_and_partner_holidays(self):
+        partner = self.env["res.partner"].create(
+            {
+                "name": "Partner with overlapping payment days and holidays",
+                "holiday_ids": [
+                    Command.create(
+                        {
+                            "day_from": "1",
+                            "month_from": "12",
+                            "day_to": "6",
+                            "month_to": "12",
+                        }
+                    ),
+                    Command.create(
+                        {
+                            "day_from": "10",
+                            "month_from": "12",
+                            "day_to": "15",
+                            "month_to": "12",
+                        }
+                    ),
+                ],
+            }
+        )
+        invoice_form = self._set_invoice_form(partner.id, "2026-12-01")
+        invoice_form.invoice_payment_term_id = self.payment_term_immediate_custom
+
+        self.assertEqual(
+            invoice_form.invoice_date_due, fields.Date.to_date("2027-01-05")
+        )
+
     def test_partner_1_invoice_date_june_13(self):
         invoice_form = self._set_invoice_form(self.partner_1.id, "2021-06-13")
         invoice_form.invoice_payment_term_id = self.payment_term_immediate
