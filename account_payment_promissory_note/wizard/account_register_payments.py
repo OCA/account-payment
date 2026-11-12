@@ -12,6 +12,9 @@ class AccountRegisterPayments(models.TransientModel):
     def _create_payments(self):
         payments = super()._create_payments()
         for payment in payments:
+            # The payment can belong to a company that is not among the selected
+            # ones (e.g. the parent company of the invoices' branches)
+            payment = payment.with_company(payment.company_id)
             if not self.date_due:
                 invoices = payment.reconciled_invoice_ids
                 if invoices:
