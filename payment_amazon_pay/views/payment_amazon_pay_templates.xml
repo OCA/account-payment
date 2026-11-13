@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <template id="amazon_pay_method_form" inherit_id="payment.method_form">
+        <input name="o_payment_radio" position="attributes">
+            <attribute name="t-att-data-amazon-pay-inline-form-values">
+                provider_sudo._amazon_pay_get_inline_form_values(currency)
+            </attribute>
+        </input>
+    </template>
+
+    <template id="amazon_pay_redirect_form" name="Amazon Pay redirect form">
+        <t t-call="payment_amazon_pay.amazon_pay_checkout_button" />
+    </template>
+
+    <template id="amazon_pay_checkout_button" name="Amazon Pay Checkout Button">
+        <div class="o_amazon_pay_checkout">
+            <div id="o_amazon_pay_button" class="w-100" />
+            <small class="text-muted d-block text-center mt-2">
+                You will be redirected to Amazon to sign in and confirm your payment.
+            </small>
+        </div>
+    </template>
+
+    <template id="express_checkout_form">
+        <div
+            name="o_express_checkout_container"
+            t-attf-id="o_amazon_pay_express_checkout_container_{{provider_sudo.id}}"
+            t-att-data-provider-id="provider_sudo.id"
+            t-att-data-provider-code="provider_sudo.code"
+            t-att-data-amazon-pay-checkout-js-url="provider_sudo._amazon_pay_get_checkout_js_url()"
+            t-att-data-amazon-pay-merchant-id="provider_sudo.amazon_pay_merchant_id"
+            t-att-data-amazon-pay-store-id="provider_sudo.amazon_pay_store_id"
+            t-att-data-amazon-pay-checkout-language="provider_sudo.amazon_pay_checkout_language"
+            t-att-data-amazon-pay-sandbox="provider_sudo.state == 'test'"
+            t-att-data-amazon-pay-decimal-places="currency.decimal_places"
+            t-att-data-amazon-pay-ledger-currency="currency.name"
+            class="w-100 mt-2"
+        />
+    </template>
+</odoo>
