@@ -74,6 +74,9 @@ class AmazonPayController(http.Controller):
             data = provider_sudo._amazon_pay_finalize_checkout_session(
                 tx_sudo, checkout_session_id, shipping_address
             )
+        except ValidationError as error:
+            tx_sudo._set_error(error.args[0])
+            return
         except requests.exceptions.RequestException:
             _logger.exception(
                 "Amazon Pay: finalize failed for transaction %s", tx_sudo.reference

@@ -4,6 +4,7 @@ import requests
 from cryptography.hazmat.primitives import serialization
 from cryptography.hazmat.primitives.asymmetric import rsa
 
+from odoo.exceptions import ValidationError
 from odoo.tests import JsonRpcException, tagged
 from odoo.tools import mute_logger
 
@@ -163,6 +164,16 @@ class TestPaymentAmazonPay(PaymentHttpCommon):
         ):
             self._finalize(tx)
         self.assertEqual(tx.state, "draft")
+
+    def test_finalize_rejected_sets_the_amazon_error(self):
+        tx = self._create_transaction("direct", reference="REJECTED")
+        with patch(
+            PROVIDER + "._amazon_pay_request",
+            side_effect=ValidationError("Shipping Address provided does not match"),
+        ):
+            self._finalize(tx)
+        self.assertEqual(tx.state, "error")
+        self.assertIn("Shipping Address", tx.state_message)
 
     def test_finalize_ignores_processed_transactions(self):
         tx = self._create_transaction("direct", reference="PAID", state="done")
