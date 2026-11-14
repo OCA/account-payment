@@ -1,0 +1,181 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_payment_multi_deduction
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 16.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2024-11-06 14:06+0000\n"
+"Last-Translator: mymage <stefano.consolaro@mymage.it>\n"
+"Language-Team: none\n"
+"Language: it\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.6.2\n"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__account_id
+msgid "Account"
+msgstr "Conto"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__analytic_distribution
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_register__analytic_distribution
+msgid "Analytic"
+msgstr "Analitica"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__analytic_distribution_search
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_register__analytic_distribution_search
+msgid "Analytic Distribution Search"
+msgstr "Ricerca distribuzione analitica"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__analytic_precision
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_register__analytic_precision
+msgid "Analytic Precision"
+msgstr "Precisione analitica"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__create_uid
+msgid "Created by"
+msgstr "Creato da"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__create_date
+msgid "Created on"
+msgstr "Creato il"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__currency_id
+msgid "Currency"
+msgstr "Valuta"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_register__deduct_analytic_distribution
+msgid "Deduct Analytic Distribution"
+msgstr "Detrai distribuzione analitica"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__amount
+msgid "Deduction Amount"
+msgstr "Valore detrazione"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_register__deduction_ids
+msgid "Deductions"
+msgstr "Detrazioni"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__display_name
+msgid "Display Name"
+msgstr "Nome visualizzato"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment__is_multi_deduction
+msgid "Is Multi Deduction"
+msgstr "È detrazione multipla"
+
+#. module: account_payment_multi_deduction
+#. odoo-python
+#: code:addons/account_payment_multi_deduction/wizard/account_payment_deduction.py:0
+#, python-format
+msgid "Keep open"
+msgstr "Mantenere aperto"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,help:account_payment_multi_deduction.field_account_payment_deduction__is_open
+msgid "Keep this line open"
+msgstr "Mantenere aperta questa riga"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__name
+msgid "Label"
+msgstr "Etichetta"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction____last_update
+msgid "Last Modified on"
+msgstr "Ultima modifica il"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__write_uid
+msgid "Last Updated by"
+msgstr "Ultimo aggiornamento di"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__write_date
+msgid "Last Updated on"
+msgstr "Ultimo aggiornamento il"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields.selection,name:account_payment_multi_deduction.selection__account_payment_register__payment_difference_handling__reconcile_multi_deduct
+msgid "Mark invoice as fully paid (multi deduct)"
+msgstr "Segna fattura come completamente pagata (detrazione multipla)"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__is_open
+msgid "Open"
+msgstr "Apri"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_deduction__payment_id
+msgid "Payment"
+msgstr "Pagamento"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model,name:account_payment_multi_deduction.model_account_payment_deduction
+msgid "Payment Deduction"
+msgstr "Detrazione pagamento"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_register__payment_difference_handling
+msgid "Payment Difference Handling"
+msgstr "Gestione differenza pagamento"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model,name:account_payment_multi_deduction.model_account_payment
+msgid "Payments"
+msgstr "Pagamenti"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model,name:account_payment_multi_deduction.model_account_payment_register
+msgid "Register Payment"
+msgstr "Registra pagamento"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,field_description:account_payment_multi_deduction.field_account_payment_register__deduct_residual
+msgid "Remainings"
+msgstr "Residuo"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,help:account_payment_multi_deduction.field_account_payment_register__deduction_ids
+msgid "Sum of deduction amount(s) must equal to the payment difference"
+msgstr ""
+"La somma degli importi dedotti deve essere uguale alla differenza di "
+"pagamento"
+
+#. module: account_payment_multi_deduction
+#: model:ir.model.fields,help:account_payment_multi_deduction.field_account_payment_deduction__currency_id
+msgid "The payment's currency."
+msgstr "La valuta del pagamento."
+
+#. module: account_payment_multi_deduction
+#. odoo-python
+#: code:addons/account_payment_multi_deduction/wizard/account_payment_register.py:0
+#, python-format
+msgid "The total deduction should be %s"
+msgstr "La detrazione totale dovrebbe essere %s"
+
+#. module: account_payment_multi_deduction
+#: model_terms:ir.ui.view,arch_db:account_payment_multi_deduction.view_account_payment_register_form
+msgid "Total Deduction"
+msgstr "Detrazione totale"
