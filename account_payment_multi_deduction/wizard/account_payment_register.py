@@ -3,12 +3,11 @@
 
 from odoo import api, fields, models
 from odoo.exceptions import UserError
-from odoo.tools import float_compare
 
 
 class AccountPaymentRegister(models.TransientModel):
     _name = "account.payment.register"
-    _inherit = ["account.payment.register", "analytic.mixin"]
+    _inherit = ("account.payment.register", "analytic.mixin")
 
     payment_difference_handling = fields.Selection(
         selection_add=[
@@ -63,23 +62,20 @@ class AccountPaymentRegister(models.TransientModel):
 
     @api.constrains("deduction_ids", "payment_difference_handling")
     def _check_deduction_amount(self):
-        prec_digits = self.env.user.company_id.currency_id.decimal_places
         for rec in self:
-            if rec.payment_difference_handling == "reconcile_multi_deduct":
-                if (
-                    float_compare(
-                        rec.payment_difference,
-                        sum(rec.deduction_ids.mapped("amount")),
-                        precision_digits=prec_digits,
+            if (
+                rec.payment_difference_handling == "reconcile_multi_deduct"
+                and rec.currency_id.compare_amounts(
+                    rec.payment_difference, sum(rec.deduction_ids.mapped("amount"))
+                )
+                != 0
+            ):
+                raise UserError(
+                    self.env._(
+                        "The total deduction should be %(amount)s",
+                        amount=rec.payment_difference,
                     )
-                    != 0
-                ):
-                    raise UserError(
-                        self.env._(
-                            "The total deduction should be %(amount)s",
-                            amount=rec.payment_difference,
-                        )
-                    )
+                )
 
     @api.depends("payment_difference", "deduction_ids")
     def _compute_deduct_residual(self):

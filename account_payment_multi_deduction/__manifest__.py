@@ -3,14 +3,15 @@
 
 {
     "name": "Payment Register with Multiple Deduction",
-    "version": "19.0.1.0.0",
+    "version": "20.0.1.0.0",
     "author": "Ecosoft, Odoo Community Association (OCA)",
     "license": "AGPL-3",
     "website": "https://github.com/OCA/account-payment",
     "category": "Accounting",
     "depends": ["account"],
     "data": [
-        "security/ir.model.access.csv",
+        "security/ir.access.csv",
+        "views/account_move_views.xml",
         "wizard/account_payment_register_views.xml",
     ],
     "installable": True,
