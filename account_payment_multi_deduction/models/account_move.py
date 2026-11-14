@@ -7,4 +7,7 @@ from odoo import fields, models
 class AccountMoveLine(models.Model):
     _inherit = "account.move.line"
 
-    is_writeoff = fields.Boolean()
+    is_writeoff = fields.Boolean(
+        string="Write-off",
+        help="Journal item created from a payment difference deduction",
+    )

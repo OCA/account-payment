@@ -65,7 +65,7 @@ class TestPaymentMultiDeduction(AccountTestInvoicingCommon):
             f.writeoff_account_id = self.account_expense
         payment_register = f.save()
         payment = payment_register._create_payments()
-        self.assertEqual(payment.state, "paid")
+        self.assertEqual(payment.state, "reconciled")
 
         writeoff = payment.move_id.line_ids.filtered(lambda line: line.is_writeoff)
         self.assertEqual(len(writeoff), 1)
@@ -109,7 +109,7 @@ class TestPaymentMultiDeduction(AccountTestInvoicingCommon):
 
         payment_register = f.save()
         payment = payment_register._create_payments()
-        self.assertEqual(payment.state, "paid")
+        self.assertEqual(payment.state, "reconciled")
         self.assertEqual(self.cust_invoice.payment_state, "paid")
 
         # Writeoff should create 2
@@ -145,7 +145,7 @@ class TestPaymentMultiDeduction(AccountTestInvoicingCommon):
 
         payment_register = f.save()
         payment = payment_register._create_payments()
-        self.assertEqual(payment.state, "paid")
+        self.assertEqual(payment.state, "reconciled")
 
         self.assertEqual(self.cust_invoice.payment_state, "paid")
 
@@ -176,9 +176,9 @@ class TestPaymentMultiDeduction(AccountTestInvoicingCommon):
                 f2.amount = 30.0
         payment_register = f.save()
         payment = payment_register._create_payments()
-        self.assertEqual(payment.state, "in_process")
-        payment.action_validate()
         self.assertEqual(payment.state, "paid")
+        payment.action_validate()
+        self.assertEqual(payment.state, "reconciled")
         self.assertEqual(self.cust_invoice.payment_state, "partial")
         self.assertEqual(self.cust_invoice.amount_residual, 30)
 
