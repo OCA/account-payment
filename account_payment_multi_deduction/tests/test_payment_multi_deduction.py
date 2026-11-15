@@ -280,3 +280,93 @@ class TestPaymentMultiDeduction(AccountTestInvoicingCommon):
         payment.write({"date": fields.Date.add(payment.date, days=1)})
         writeoff = payment.move_id.line_ids.filtered("is_writeoff")
         self.assertRecordValues(writeoff, expected)
+
+    def test_07_fully_paid_payment_with_withholding_tax(self):
+        """Write-off must be kept on a payment with withholding tax.
+
+        Core drops the write-off lines of a payment with withholding lines
+        (see ``account.payment._prepare_move_lines_per_type``), the payment
+        difference then stays open on the invoice.
+        """
+        if "withholding_line_ids" not in self.payment_model._fields:
+            self.skipTest("l10n_account_withholding_tax is not installed")
+        company = self.company_data["company"]
+        company.withholding_tax_base_account_id = self.env["account.account"].create(
+            {
+                "name": "Withholding Tax Base",
+                "code": "WHTBASE",
+                "account_type": "asset_current",
+            }
+        )
+        withholding_account = self.env["account.account"].create(
+            {"name": "Withholding Tax", "code": "WHT", "account_type": "asset_current"}
+        )
+        repartition_lines = [
+            Command.create({"repartition_type": "base"}),
+            Command.create(
+                {"repartition_type": "tax", "account_id": withholding_account.id}
+            ),
+        ]
+        withholding_tax = self.env["account.tax"].create(
+            {
+                "name": "Withholding Tax 1%",
+                "amount": -1.0,
+                "amount_type": "percent",
+                "type_tax_use": "sale",
+                "is_withholding_tax": True,
+                "invoice_repartition_line_ids": repartition_lines,
+                "refund_repartition_line_ids": repartition_lines,
+            }
+        )
+        invoice = self.init_invoice(
+            "out_invoice",
+            partner=self.partner_a,
+            invoice_date=fields.Date.today(),
+            post=True,
+            amounts=[450.0],
+            taxes=withholding_tax,
+        )
+        self.assertEqual(invoice.amount_total, 450.0)
+
+        ctx = {
+            "active_ids": [invoice.id],
+            "active_id": invoice.id,
+            "active_model": "account.move",
+        }
+        with Form(
+            self.payment_register_model.with_context(**ctx),
+            view=self.register_view_id,
+        ) as f:
+            self.assertEqual(f.withhold, "withhold_pay")
+            f.amount = 400.0
+            f.payment_difference_handling = "reconcile"
+            f.writeoff_account_id = self.account_expense
+        payment_register = f.save()
+        # Withholding tax of 1% on the paid amount
+        self.assertRecordValues(
+            payment_register.withholding_line_ids,
+            [{"base_amount": 400.0, "amount": 4.0}],
+        )
+        payment = payment_register._create_payments()
+
+        def _check_writeoff_lines():
+            lines = payment.move_id.line_ids
+            self.assertRecordValues(
+                lines.filtered("is_writeoff"),
+                [{"account_id": self.account_expense.id, "balance": 50.0}],
+            )
+            _liquidity_lines, counterpart_lines, _other = payment._seek_for_lines()
+            self.assertRecordValues(counterpart_lines, [{"balance": -450.0}])
+
+        _check_writeoff_lines()
+        self.assertRecordValues(
+            payment.move_id.line_ids.filtered("tax_line_id"),
+            [{"account_id": withholding_account.id, "balance": 4.0}],
+        )
+        self.assertEqual(invoice.payment_state, "paid")
+        self.assertFalse(invoice.amount_residual)
+
+        # Write-off must survive the edit of the draft payment
+        payment.action_draft()
+        payment.write({"date": fields.Date.add(payment.date, days=1)})
+        _check_writeoff_lines()

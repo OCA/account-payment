@@ -10,7 +10,13 @@ class AccountPayment(models.Model):
     def _prepare_move_lines_per_type(
         self, write_off_line_vals=None, force_balance=None
     ):
-        """Re-expand multi deduction write-off lines collapsed by core resync."""
+        """Keep the deductions on the journal entry of the payment.
+
+        - Core resync collapses the write-off lines into one: re-expand them.
+        - Core drops the write-off lines of a payment with withholding lines,
+          so the deducted amount stays open on the invoice: keep them and
+          settle them on the counterpart line.
+        """
         # A single dict means core resync collapsed the write-off lines;
         # several dicts are explicit caller values and must be kept.
         if write_off_line_vals and len(write_off_line_vals) == 1:
@@ -29,6 +35,18 @@ class AccountPayment(models.Model):
                     }
                     for line in deduct_lines
                 ]
-        return super()._prepare_move_lines_per_type(
-            write_off_line_vals=write_off_line_vals, force_balance=force_balance
+        deduct_line_vals = [
+            vals for vals in write_off_line_vals or [] if vals.get("is_writeoff")
+        ]
+        if not deduct_line_vals or not self._prepare_move_withholding_lines({}):
+            return super()._prepare_move_lines_per_type(
+                write_off_line_vals=write_off_line_vals, force_balance=force_balance
+            )
+        res = super()._prepare_move_lines_per_type()
+        counterpart_vals = res["counterpart_lines"][0]
+        counterpart_vals["amount_currency"] -= sum(
+            vals["amount_currency"] for vals in deduct_line_vals
         )
+        counterpart_vals["balance"] -= sum(vals["balance"] for vals in deduct_line_vals)
+        res["write_off_lines"] = deduct_line_vals
+        return res
