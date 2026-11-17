@@ -1,0 +1,270 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_payment_term_extension
+#
+# Translators:
+# OCA Transbot <transbot@odoo-community.org>, 2018
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 10.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-03-30 02:46+0000\n"
+"PO-Revision-Date: 2025-09-08 09:43+0000\n"
+"Last-Translator: Tamer Sezgin <tamer.sezgin@gmail.com>\n"
+"Language-Team: Turkish (https://www.transifex.com/oca/teams/23907/tr/)\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Weblate 5.10.4\n"
+
+#. module: account_payment_term_extension
+#: model:account.payment.term,name:account_payment_term_extension.amount_untaxed_lines
+msgid "10% + 40% + Balance"
+msgstr "%10 + %40 + Bakiye"
+
+#. module: account_payment_term_extension
+#: model:account.payment.term,name:account_payment_term_extension.sixty_days_end_of_month
+#: model_terms:account.payment.term,note:account_payment_term_extension.sixty_days_end_of_month
+msgid "60 Days End of Month"
+msgstr "60 Gün Ay Sonu"
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields,help:account_payment_term_extension.field_account_payment_term__sequential_lines
+msgid "Allows to apply a chronological order on lines."
+msgstr "Satırlar üzerinde zamansal sıralama yapmaya izin verir."
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__amount_round
+msgid "Amount Rounding"
+msgstr "Tutar Yuvarlama"
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields,help:account_payment_term_extension.field_res_company__payment_terms_delay_type
+#: model:ir.model.fields,help:account_payment_term_extension.field_res_config_settings__payment_terms_delay_type
+msgid "Choose the type of delay when creating new payment terms."
+msgstr "Yeni ödeme koşulu oluştururken gecikme türünü seçin."
+
+#. module: account_payment_term_extension
+#: model:ir.model,name:account_payment_term_extension.model_res_company
+msgid "Companies"
+msgstr "Şirketler"
+
+#. module: account_payment_term_extension
+#: model:ir.model,name:account_payment_term_extension.model_res_config_settings
+msgid "Config Settings"
+msgstr "Yapılandırma Ayarları"
+
+#. module: account_payment_term_extension
+#: model_terms:ir.ui.view,arch_db:account_payment_term_extension.res_config_settings_view_form
+msgid "Configure the type of delay for payment terms."
+msgstr "Ödeme koşulları için gecikme türünü yapılandırın."
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__create_uid
+msgid "Created by"
+msgstr "Oluşturan"
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__create_date
+msgid "Created on"
+msgstr "Oluşturuldu"
+
+#. module: account_payment_term_extension
+#. odoo-python
+#: code:addons/account_payment_term_extension/models/account_payment_term_holiday.py:0
+#, python-format
+msgid "Date %s cannot is both a holiday and a Postponed date"
+msgstr "%s tarihi hem tatil hem de Ertelendiği tarih olamaz"
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields.selection,name:account_payment_term_extension.selection__res_company__payment_terms_delay_type__days
+msgid "Days"
+msgstr "Günler"
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields.selection,name:account_payment_term_extension.selection__res_company__payment_terms_delay_type__months
+msgid "Days and Months"
+msgstr "Günler ve Aylar"
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields.selection,name:account_payment_term_extension.selection__res_company__payment_terms_delay_type__weeks
+msgid "Days and Weeks"
+msgstr "Günler ve Haftalar"
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields.selection,name:account_payment_term_extension.selection__res_company__payment_terms_delay_type__weeks_and_months
+msgid "Days, Weeks and Months"
+msgstr "Günler, Haftalar ve Aylar"
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__delay_type
+msgid "Delay Type"
+msgstr "Gecikme Türü"
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__display_name
+msgid "Display Name"
+msgstr "Görünen İsim"
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__holiday
+msgid "Holiday"
+msgstr "Tatil"
+
+#. module: account_payment_term_extension
+#. odoo-python
+#: code:addons/account_payment_term_extension/models/account_payment_term_holiday.py:0
+#, python-format
+msgid "Holiday %s can only be postponed into the future"
+msgstr "%s tatili sadece gelecekte bir zamana ertelenebilir"
+
+#. module: account_payment_term_extension
+#. odoo-python
+#: code:addons/account_payment_term_extension/models/account_payment_term_holiday.py:0
+#, python-format
+msgid "Holiday %s is duplicated in current payment term"
+msgstr "%s tatili mevcut ödeme koşulunda çoklanmış"
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term__holiday_ids
+#: model_terms:ir.ui.view,arch_db:account_payment_term_extension.view_payment_term_form
+msgid "Holidays"
+msgstr "Tatiller"
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__write_uid
+msgid "Last Updated by"
+msgstr "Son Güncelleyen"
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__write_date
+msgid "Last Updated on"
+msgstr "Son Güncellenme"
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__payment_id
+msgid "Payment"
+msgstr "Ödeme"
+
+#. module: account_payment_term_extension
+#: model:ir.model,name:account_payment_term_extension.model_account_payment_term_holiday
+msgid "Payment Term Holidays"
+msgstr "Ödeme Koşulu Tatilleri"
+
+#. module: account_payment_term_extension
+#: model:ir.model,name:account_payment_term_extension.model_account_payment_term
+#: model_terms:ir.ui.view,arch_db:account_payment_term_extension.res_config_settings_view_form
+msgid "Payment Terms"
+msgstr "Ödeme Koşulları"
+
+#. module: account_payment_term_extension
+#: model_terms:ir.ui.view,arch_db:account_payment_term_extension.res_config_settings_view_form
+msgid "Payment Terms Delay Types"
+msgstr "Ödeme Koşulları Gecikme Türleri"
+
+#. module: account_payment_term_extension
+#: model:ir.model,name:account_payment_term_extension.model_account_payment_term_line
+msgid "Payment Terms Line"
+msgstr "Ödeme Koşulları Satırı"
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__payment_days
+msgid "Payment day(s)"
+msgstr "Ödeme Günleri"
+
+#. module: account_payment_term_extension
+#. odoo-python
+#: code:addons/account_payment_term_extension/models/account_payment_term_line.py:0
+#, python-format
+msgid "Payment days field format is not valid."
+msgstr "Ödeme günleri alanı formatı geçerli değil."
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_res_company__payment_terms_delay_type
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_res_config_settings__payment_terms_delay_type
+msgid "Payment terms Delay types"
+msgstr "Ödeme koşulları Gecikme türleri"
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields.selection,name:account_payment_term_extension.selection__account_payment_term_line__value__percent_amount_untaxed
+msgid "Percent (Untaxed amount)"
+msgstr "Yüzde (Vergilendirilmemiş tutar)"
+
+#. module: account_payment_term_extension
+#. odoo-python
+#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
+#, python-format
+msgid "Percentage of amount untaxed can't be used with foreign currencies"
+msgstr ""
+"Yabancı para birimleri ile vergilendirilmemiş tutar yüzdesi kullanılamaz"
+
+#. module: account_payment_term_extension
+#. odoo-python
+#: code:addons/account_payment_term_extension/models/account_payment_term_line.py:0
+#, python-format
+msgid "Percentages on the Payment Terms lines must be between 0 and 100."
+msgstr "Ödeme Koşulları satırlarındaki yüzdeler 0 ve 100 arasında olmalı."
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_holiday__date_postponed
+msgid "Postponed date"
+msgstr "Ertelendiği tarih"
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields,help:account_payment_term_extension.field_account_payment_term_line__payment_days
+msgid ""
+"Put here the day or days when the partner makes the payment. Separate each "
+"possible payment day with dashes (-), commas (,) or spaces ( )."
+msgstr ""
+"İş ortağının ödemeyi yaptığı günü veya günleri buraya yazın. Her olası ödeme "
+"gününü tire (-), virgül (,) veya boşluk ( ) ile ayırın."
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields,help:account_payment_term_extension.field_account_payment_term_line__value
+msgid "Select here the kind of valuation related to this payment terms line."
+msgstr "Bu ödeme koşulları satırına ilişkin değerleme türünü buradan seçin."
+
+#. module: account_payment_term_extension
+#: model_terms:ir.ui.view,arch_db:account_payment_term_extension.res_config_settings_view_form
+msgid "Select the Delay Type options that will be available in Payment Terms."
+msgstr "Ödeme Koşulları'nda yer alacak Gecikme Türü seçeneklerini belirtin."
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term__sequential_lines
+msgid "Sequential Lines"
+msgstr "Ardışık Satırlar"
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields,help:account_payment_term_extension.field_account_payment_term_line__amount_round
+msgid "Sets the amount so that it is a multiple of this value."
+msgstr "Miktarı bu değerin katı olacak şekilde ayarlar."
+
+#. module: account_payment_term_extension
+#. odoo-python
+#: code:addons/account_payment_term_extension/models/account_payment_term.py:0
+#, python-format
+msgid "This module is not compatible with cash rounding"
+msgstr "Bu modül nakit yuvarlama ile uyumlu değil"
+
+#. module: account_payment_term_extension
+#: model:ir.model.fields,field_description:account_payment_term_extension.field_account_payment_term_line__value
+msgid "Value"
+msgstr "Değer"
+
+#. module: account_payment_term_extension
+#: model_terms:ir.ui.view,arch_db:account_payment_term_extension.view_payment_term_form
+msgid ""
+"When a payment term coincides with a holiday, it is postponed to the chosen "
+"date."
+msgstr ""
+"Bir ödeme koşulu/tarihi tatile denk geldiğinde, seçilen tarihe ertelenir."
+
+#~ msgid "Last Modified on"
+#~ msgstr "Son değişiklik"
