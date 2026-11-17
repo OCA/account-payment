@@ -46,6 +46,7 @@ addon | version | maintainers | summary
 [account_refund_early_payment_discount](account_refund_early_payment_discount/) | 18.0.1.0.0 | <a href='https://github.com/grindtildeath'><img src='https://github.com/grindtildeath.png' width='32' height='32' style='border-radius:50%;' alt='grindtildeath'/></a> | Suppoprt early payment discount on credit notes
 [account_voucher_killer](account_voucher_killer/) | 18.0.1.0.0 |  | Prevent the usage of payments from invoices
 [partner_aging](partner_aging/) | 18.0.1.0.0 | <a href='https://github.com/Urvisha-OSI'><img src='https://github.com/Urvisha-OSI.png' width='32' height='32' style='border-radius:50%;' alt='Urvisha-OSI'/></a> | Aging as a view - invoices and credits
+[payment_amazon_pay](payment_amazon_pay/) | 18.0.1.0.0 |  | Amazon Pay payment provider for Odoo
 [payment_partner](payment_partner/) | 18.0.1.0.0 |  | Filter Payments by Partner
 [payment_require_legal](payment_require_legal/) | 18.0.1.0.0 |  | Require legal terms acceptance before submitting a payment
 [payment_sequra](payment_sequra/) | 18.0.1.0.0 | <a href='https://github.com/juancarlosonate-tecnativa'><img src='https://github.com/juancarlosonate-tecnativa.png' width='32' height='32' style='border-radius:50%;' alt='juancarlosonate-tecnativa'/></a> | Integrates SeQura as a payment provider
