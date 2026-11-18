@@ -234,7 +234,7 @@ class PaymentProvider(models.Model):
         response = requests.request(
             method=method.upper(),
             url=self._amazon_pay_get_api_url(endpoint),
-            data=payload_text or None,
+            data=payload_text.encode("utf-8") or None,
             headers=headers,
             timeout=60,
         )

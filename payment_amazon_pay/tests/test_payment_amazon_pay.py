@@ -175,6 +175,18 @@ class TestPaymentAmazonPay(PaymentHttpCommon):
         self.assertEqual(tx.state, "error")
         self.assertIn("Shipping Address", tx.state_message)
 
+    def test_request_payload_is_sent_as_utf8(self):
+        for name in ("Peña", "Muñoz García", "Łukasz Żółć", "Café 10 €"):
+            with self.subTest(name=name), patch.object(requests, "request") as request:
+                request.return_value.text = ""
+                request.return_value.status_code = 200
+                self.provider._amazon_pay_request(
+                    "POST", "checkoutSessions/S/finalize", payload={"name": name}
+                )
+                self.assertEqual(
+                    request.call_args.kwargs["data"], f'{{"name":"{name}"}}'.encode()
+                )
+
     def test_finalize_ignores_processed_transactions(self):
         tx = self._create_transaction("direct", reference="PAID", state="done")
         with (
