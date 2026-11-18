@@ -9,13 +9,14 @@
     "depends": ["payment"],
     "external_dependencies": {"python": ["cryptography", "requests"]},
     "data": [
+        "views/payment_amazon_pay_templates.xml",
         "data/payment_provider_data.xml",
         "views/payment_provider_views.xml",
-        "views/payment_amazon_pay_templates.xml",
     ],
     "assets": {
         "web.assets_frontend": [
             "payment_amazon_pay/static/src/js/payment_form.esm.js",
+            "payment_amazon_pay/static/src/js/express_checkout_form.esm.js",
         ],
     },
     "installable": True,

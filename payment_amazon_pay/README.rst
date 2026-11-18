@@ -39,6 +39,9 @@ Supports the EU, NA, and JP regions. Uses the Amazon Pay v2 API (RSA-PSS
 signed requests) for checkout session creation, completion, and refunds.
 Handles IPN notifications via a dedicated webhook endpoint.
 
+Also supports express checkout (Amazon Pay Buy Now) from the cart:
+enable *Allow Express Checkout* on the provider.
+
 **Table of contents**
 
 .. contents::
@@ -69,6 +72,7 @@ Contributors
 
   - Pilar Vargas
   - Cristina Hidalgo
+  - Juan Carlos Oñate
 
 Maintainers
 -----------
