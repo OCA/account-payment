@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_res_partner_not_pay_manager,res.partner.not.pay,model_res_partner_not_pay,account.group_account_manager,1,1,1,1
+access_res_partner_not_pay_invoice,res.partner.not.pay invoice,model_res_partner_not_pay,account.group_account_invoice,1,0,0,0
+access_res_partner_not_pay_readonly,res.partner.not.pay readonly,model_res_partner_not_pay,account.group_account_readonly,1,0,0,0
