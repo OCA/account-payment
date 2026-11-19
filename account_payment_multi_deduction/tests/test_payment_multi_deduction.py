@@ -185,3 +185,98 @@ class TestPaymentMultiDeduction(AccountTestInvoicingCommon):
         writeoff = payment.move_id.line_ids.filtered(lambda line: line.is_writeoff)
         self.assertEqual(len(writeoff), 1)
         self.assertEqual(writeoff.account_id, self.account_expense)
+
+    def test_05_reset_and_change_journal_keeps_writeoff_lines(self):
+        """Multi deduction write-off lines must survive a reset + journal change"""
+        ctx = {
+            "active_ids": [self.cust_invoice.id],
+            "active_id": self.cust_invoice.id,
+            "active_model": "account.move",
+        }
+        with Form(
+            self.payment_register_model.with_context(**ctx), view=self.register_view_id
+        ) as f:
+            f.amount = 400.0  # Reduce to 400.0, and mark fully paid (multi)
+            f.payment_difference_handling = "reconcile_multi_deduct"
+            with f.deduction_ids.new() as f2:
+                f2.account_id = self.account_expense
+                f2.name = "Expense 1"
+                f2.amount = 20.0
+            with f.deduction_ids.new() as f2:
+                f2.account_id = self.account_expense
+                f2.name = "Expense 2"
+                f2.amount = 30.0
+        payment_register = f.save()
+        payment = payment_register._create_payments()
+
+        # Sanity check: 2 write-off lines created.
+        writeoff = payment.move_id.line_ids.filtered(lambda line: line.is_writeoff)
+        self.assertEqual(len(writeoff), 2)
+        original_total = sum(writeoff.mapped("balance"))
+
+        # Reset the payment to draft and switch its journal.
+        payment.action_draft()
+        # Setup a second bank journal with a valid outstanding account, so the
+        # resynchronization triggered by the journal change can rebuild the
+        # liquidity lines.
+        other_journal = self.journal_model.create(
+            {
+                "name": "Bank Other",
+                "type": "bank",
+                "code": "BNK2",
+                "company_id": self.company_data["company"].id,
+            }
+        )
+        outstanding = self.env["account.chart.template"].ref(
+            "account_journal_payment_debit_account_id"
+        )
+        other_journal.inbound_payment_method_line_ids[
+            :1
+        ].payment_account_id = outstanding
+        other_journal.outbound_payment_method_line_ids[
+            :1
+        ].payment_account_id = outstanding
+        payment.journal_id = other_journal
+
+        # The write-off lines must still be there, line by line.
+        writeoff = payment.move_id.line_ids.filtered(lambda line: line.is_writeoff)
+        self.assertEqual(len(writeoff), 2)
+        self.assertEqual(writeoff.mapped("account_id"), self.account_expense)
+        self.assertEqual(sum(writeoff.mapped("balance")), original_total)
+
+    def test_06_reset_and_edit_keeps_single_writeoff(self):
+        """A single write-off line must keep is_writeoff and analytic
+        after editing a draft payment"""
+        plan = self.env["account.analytic.plan"].create({"name": "Plan"})
+        analytic = self.env["account.analytic.account"].create(
+            {"name": "Analytic", "plan_id": plan.id}
+        )
+        ctx = {
+            "active_ids": [self.cust_invoice.id],
+            "active_id": self.cust_invoice.id,
+            "active_model": "account.move",
+        }
+        payment_register = self.payment_register_model.with_context(**ctx).create(
+            {
+                "amount": 400.0,
+                "payment_difference_handling": "reconcile",
+                "writeoff_account_id": self.account_expense.id,
+                "writeoff_label": "Deduction",
+                "analytic_distribution": {str(analytic.id): 100},
+            }
+        )
+        payment = payment_register._create_payments()
+        expected = [
+            {
+                "account_id": self.account_expense.id,
+                "balance": 50.0,
+                "analytic_distribution": {str(analytic.id): 100.0},
+            }
+        ]
+        writeoff = payment.move_id.line_ids.filtered("is_writeoff")
+        self.assertRecordValues(writeoff, expected)
+
+        payment.action_draft()
+        payment.write({"date": fields.Date.add(payment.date, days=1)})
+        writeoff = payment.move_id.line_ids.filtered("is_writeoff")
+        self.assertRecordValues(writeoff, expected)
