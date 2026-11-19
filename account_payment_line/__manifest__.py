@@ -7,7 +7,7 @@
     "author": "ForgeFlow S.L., Odoo Community Association (OCA)",
     "website": "https://github.com/OCA/account-payment",
     "category": "Account",
-    "version": "18.0.1.0.2",
+    "version": "18.0.1.1.0",
     "license": "AGPL-3",
     "depends": ["account_payment"],
     "data": [
