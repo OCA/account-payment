@@ -26,9 +26,9 @@ class AccountDaysOverdue(models.Model):
         for rec in self:
             rec.tech_name = "overdue_term_%d_%d" % (rec.from_day, rec.to_day)
 
-    @api.model
-    def create(self, vals):
-        res = super().create(vals)
+    @api.model_create_multi
+    def create(self, vals_list):
+        res = super().create(vals_list)
         if self.env["account.move.line"]._register_hook():
             Registry(self.env.cr.dbname).registry_invalidated = True
         return res
