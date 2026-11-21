@@ -1,0 +1,1 @@
+odoo-addon-account_early_payment_base @ git+https://github.com/OCA/account-payment.git@refs/pull/978/head#subdirectory=account_early_payment_base

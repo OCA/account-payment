@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <!-- Its members are the users of the follow-up group, synced every time
+         a credit note is chased, so the group is the only thing to maintain. -->
+    <record
+        id="mail_activity_team_early_payment_credit_note"
+        model="mail.activity.team"
+    >
+        <field name="name">Early Payment Credit Notes</field>
+        <field name="res_model_ids" eval="[(4, ref('account.model_account_move'))]" />
+    </record>
+</odoo>

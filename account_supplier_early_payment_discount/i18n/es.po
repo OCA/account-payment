@@ -1,0 +1,138 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_supplier_early_payment_discount
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 19.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-09-18 15:09+0000\n"
+"PO-Revision-Date: 2026-09-18 15:09+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#. module: account_supplier_early_payment_discount
+#. odoo-python
+#: code:addons/account_supplier_early_payment_discount/models/account_move.py:0
+msgid ""
+"%(supplier)s owes a credit note for %(amount)s of early payment discount on "
+"%(bill)s, taken with this internal credit note. When its credit note "
+"arrives, attach it here and close this activity."
+msgstr ""
+"%(supplier)s debe una nota de crédito por %(amount)s de descuento por pronto"
+" pago sobre %(bill)s, tomado con esta nota de crédito interna. Cuando llegue"
+" su nota de crédito, adjúntala aquí y cierra esta actividad."
+
+#. module: account_supplier_early_payment_discount
+#. odoo-python
+#: code:addons/account_supplier_early_payment_discount/models/account_move.py:0
+msgid "%s has no early payment discount."
+msgstr "%s no tiene descuento por pronto pago."
+
+#. module: account_supplier_early_payment_discount
+#: model:ir.model,name:account_supplier_early_payment_discount.model_res_partner
+msgid "Contact"
+msgstr "Contacto"
+
+#. module: account_supplier_early_payment_discount
+#: model:ir.model.fields,help:account_supplier_early_payment_discount.field_res_partner__early_payment_days
+#: model:ir.model.fields,help:account_supplier_early_payment_discount.field_res_users__early_payment_days
+msgid "Days to pay within to earn the discount."
+msgstr "Días en los que hay que pagar para ganar el descuento."
+
+#. module: account_supplier_early_payment_discount
+#: model:ir.model.fields,help:account_supplier_early_payment_discount.field_res_partner__early_payment_percent
+#: model:ir.model.fields,help:account_supplier_early_payment_discount.field_res_users__early_payment_percent
+msgid ""
+"Discount the supplier grants when its bills are paid within the early "
+"payment days."
+msgstr ""
+"Descuento que otorga el proveedor cuando sus facturas se pagan dentro de los"
+" días de pronto pago."
+
+#. module: account_supplier_early_payment_discount
+#: model:ir.model.fields,field_description:account_supplier_early_payment_discount.field_account_move__display_name
+#: model:ir.model.fields,field_description:account_supplier_early_payment_discount.field_res_partner__display_name
+msgid "Display Name"
+msgstr "Nombre en pantalla"
+
+#. module: account_supplier_early_payment_discount
+#: model_terms:ir.ui.view,arch_db:account_supplier_early_payment_discount.res_partner_view_form
+msgid "Early Payment"
+msgstr "Pronto pago"
+
+#. module: account_supplier_early_payment_discount
+#: model:ir.model.fields,field_description:account_supplier_early_payment_discount.field_res_partner__early_payment_base
+#: model:ir.model.fields,field_description:account_supplier_early_payment_discount.field_res_users__early_payment_base
+msgid "Early Payment Counted From"
+msgstr "Pronto pago contado desde"
+
+#. module: account_supplier_early_payment_discount
+#: model:mail.activity.team,name:account_supplier_early_payment_discount.mail_activity_team_early_payment_credit_note
+msgid "Early Payment Credit Notes"
+msgstr "Notas de crédito de pronto pago"
+
+#. module: account_supplier_early_payment_discount
+#: model:ir.model.fields,field_description:account_supplier_early_payment_discount.field_res_partner__early_payment_days
+#: model:ir.model.fields,field_description:account_supplier_early_payment_discount.field_res_users__early_payment_days
+msgid "Early Payment Days"
+msgstr "Días de pronto pago"
+
+#. module: account_supplier_early_payment_discount
+#: model:ir.model.fields,field_description:account_supplier_early_payment_discount.field_res_partner__early_payment_percent
+#: model:ir.model.fields,field_description:account_supplier_early_payment_discount.field_res_users__early_payment_percent
+msgid "Early Payment Discount (%)"
+msgstr "Descuento por pronto pago (%)"
+
+#. module: account_supplier_early_payment_discount
+#. odoo-python
+#: code:addons/account_supplier_early_payment_discount/models/account_move.py:0
+msgid "Early payment credit note pending"
+msgstr "Nota de crédito de pronto pago pendiente"
+
+#. module: account_supplier_early_payment_discount
+#: model:res.groups,name:account_supplier_early_payment_discount.account_move_group_early_payment_credit_note
+msgid "Follow Up Early Payment Credit Notes"
+msgstr "Seguimiento de notas de crédito de pronto pago"
+
+#. module: account_supplier_early_payment_discount
+#: model:ir.model.fields,field_description:account_supplier_early_payment_discount.field_account_move__id
+#: model:ir.model.fields,field_description:account_supplier_early_payment_discount.field_res_partner__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_supplier_early_payment_discount
+#: model:ir.model.fields.selection,name:account_supplier_early_payment_discount.selection__res_partner__early_payment_base__invoice
+msgid "Invoice Date"
+msgstr "Fecha de factura"
+
+#. module: account_supplier_early_payment_discount
+#: model:ir.model,name:account_supplier_early_payment_discount.model_account_move
+msgid "Journal Entry"
+msgstr "Asiento contable"
+
+#. module: account_supplier_early_payment_discount
+#: model:ir.model.fields.selection,name:account_supplier_early_payment_discount.selection__res_partner__early_payment_base__receipt
+msgid "Receipt Date"
+msgstr "Fecha de recepción"
+
+#. module: account_supplier_early_payment_discount
+#: model:ir.model.fields,field_description:account_supplier_early_payment_discount.field_res_partner__early_payment_percent_2
+#: model:ir.model.fields,field_description:account_supplier_early_payment_discount.field_res_users__early_payment_percent_2
+msgid "Second Early Payment Discount (%)"
+msgstr "Segundo descuento por pronto pago (%)"
+
+#. module: account_supplier_early_payment_discount
+#: model:ir.model.fields,help:account_supplier_early_payment_discount.field_res_partner__early_payment_percent_2
+#: model:ir.model.fields,help:account_supplier_early_payment_discount.field_res_users__early_payment_percent_2
+msgid ""
+"Some suppliers grant a second discount on top of the first one. It applies "
+"to what is left after the first: 2 and then 1 take 2.98, not 3."
+msgstr ""
+"Algunos proveedores dan un segundo descuento encima del primero. Se aplica "
+"sobre lo que queda tras el primero: 2 y luego 1 descuentan 2.98, no 3."
