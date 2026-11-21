@@ -15,6 +15,11 @@ class AccountMove(models.Model):
         copy=False,
     )
 
+    def _payment_returned(self, return_line):
+        vals = return_line._prepare_invoice_returned_vals()
+        if vals:
+            self.write(vals)
+
     def check_payment_return(self):
         returned_invoices = (
             self.env["account.partial.reconcile"]
@@ -129,6 +134,9 @@ class AccountMoveLine(models.Model):
         column2="partial_reconcile_id",
         copy=False,
     )
+
+    def _payment_returned(self, return_line):
+        self.mapped("move_id")._payment_returned(return_line)
 
 
 class AccountPartialReconcile(models.Model):
