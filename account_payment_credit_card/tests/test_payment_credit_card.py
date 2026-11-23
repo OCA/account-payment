@@ -17,8 +17,9 @@ class TestPaymentCreditCard(common.TransactionCase):
         cls.account_move_line_obj = cls.env["account.move.line"]
         cls.account_account_obj = cls.env["account.account"]
         cls.account_journal_obj = cls.env["account.journal"]
-        cls.partner_12 = cls.env.ref("base.res_partner_12")
+        cls.partner_12 = cls.env["res.partner"].create({"name": "Test Partner"})
 
+        cls.product = cls.env["product.product"].create({"name": "Test Product"})
         cls.journal_sale = cls.account_journal_obj.create(
             {"name": "sale_0", "code": "SALE0", "type": "sale", "credit_card": True}
         )
@@ -48,7 +49,7 @@ class TestPaymentCreditCard(common.TransactionCase):
             )
             self.account_move_line_obj.create(
                 {
-                    "product_id": self.env.ref("product.product_product_4").id,
+                    "product_id": self.product.id,
                     "quantity": 1.0,
                     "price_unit": 0,
                     "move_id": invoice.id,
