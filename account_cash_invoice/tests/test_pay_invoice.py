@@ -68,12 +68,16 @@ class TestSessionPayInvoice(BaseCommon):
         )
         cls.invoice_in.action_post()
         cls.invoice_in.name = "2999/99999"
-        cls.journal = (
-            cls.env["account.journal"]
-            .search(
-                [("company_id", "=", cls.company.id), ("type", "=", "cash")], limit=1
-            )
-            .ensure_one()
+        # Since 19.0 charts of accounts no longer create a cash journal
+        cls.journal = cls.env["account.journal"].search(
+            [("company_id", "=", cls.company.id), ("type", "=", "cash")], limit=1
+        ) or cls.env["account.journal"].create(
+            {
+                "name": "Cash",
+                "type": "cash",
+                "code": "TCSH",
+                "company_id": cls.company.id,
+            }
         )
 
     def test_bank_statement(self):
