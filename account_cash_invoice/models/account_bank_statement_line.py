@@ -9,7 +9,6 @@ class AccountBankStatementLine(models.Model):
 
     invoice_id = fields.Many2one(
         comodel_name="account.move",
-        string="Invoice",
         readonly=True,
         index=True,
     )

@@ -27,7 +27,6 @@ class CashPayInvoice(models.TransientModel):
 
     invoice_id = fields.Many2one(
         comodel_name="account.move",
-        string="Invoice",
         required=True,
         compute="_compute_invoice_id",
         store=True,
@@ -52,7 +51,6 @@ class CashPayInvoice(models.TransientModel):
         required=True,
         readonly=True,
         default=lambda self: self.env.context.get("active_ids")[0],
-        string="Journal",
         check_company=True,
     )
     amount = fields.Monetary(compute="_compute_amount", store=True, readonly=False)

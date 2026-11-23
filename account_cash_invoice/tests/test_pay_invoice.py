@@ -23,8 +23,8 @@ class TestSessionPayInvoice(BaseCommon):
             coa.try_loading(company=cls.env.company, install_demo=False)
         cls.AccountMove = cls.env["account.move"]
         cls.company = cls.env.ref("base.main_company")
-        partner = cls.env.ref("base.partner_demo")
-        cls.product = cls.env.ref("product.product_delivery_02")
+        partner = cls.env["res.partner"].create({"name": "Test Partner"})
+        cls.product = cls.env["product.product"].create({"name": "Test Product"})
         cls.invoice_out = cls.AccountMove.create(
             {
                 "company_id": cls.company.id,
