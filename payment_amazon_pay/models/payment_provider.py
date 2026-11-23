@@ -77,7 +77,7 @@ class PaymentProvider(models.Model):
         amazon_providers = self.filtered(lambda provider: provider.code == "amazon_pay")
         amazon_providers.update(
             {
-                "support_express_checkout": False,
+                "support_express_checkout": True,
                 "support_manual_capture": False,
                 "support_refund": "partial",
                 "support_tokenization": False,
@@ -234,7 +234,7 @@ class PaymentProvider(models.Model):
         response = requests.request(
             method=method.upper(),
             url=self._amazon_pay_get_api_url(endpoint),
-            data=payload_text or None,
+            data=payload_text.encode("utf-8") or None,
             headers=headers,
             timeout=60,
         )
@@ -330,6 +330,14 @@ class PaymentProvider(models.Model):
             "signature": base64.b64encode(signature).decode(),
         }
 
+    def _amazon_pay_get_checkout_js_url(self):
+        self.ensure_one()
+        return {
+            "eu": "https://static-eu.payments-amazon.com/checkout.js",
+            "na": "https://static-na.payments-amazon.com/checkout.js",
+            "jp": "https://static-fe.payments-amazon.com/checkout.js",
+        }[self.amazon_pay_region]
+
     def _amazon_pay_get_inline_form_values(self, currency=None):
         """Return the public values required to render the Amazon Pay button."""
         self.ensure_one()
@@ -378,6 +386,24 @@ class PaymentProvider(models.Model):
             "POST",
             f"checkoutSessions/{checkout_session_id}/complete",
             payload=payload,
+            idempotency_key=uuid.uuid4().hex,
+        )
+
+    def _amazon_pay_finalize_checkout_session(self, tx, checkout_session_id, address):
+        self.ensure_one()
+        tx.ensure_one()
+        return self._amazon_pay_request(
+            "POST",
+            f"checkoutSessions/{checkout_session_id}/finalize",
+            payload={
+                "chargeAmount": {
+                    "amount": self._amazon_pay_format_amount(tx.amount),
+                    "currencyCode": tx.currency_id.name,
+                },
+                "paymentIntent": "AuthorizeWithCapture",
+                "canHandlePendingAuthorization": False,
+                "shippingAddress": address,
+            },
             idempotency_key=uuid.uuid4().hex,
         )
 

@@ -1,3 +1,4 @@
 - [Tecnativa](https://www.tecnativa.com):
   - Pilar Vargas
   - Cristina Hidalgo
+  - Juan Carlos Oñate
