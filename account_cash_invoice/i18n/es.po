@@ -1,0 +1,153 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_cash_invoice
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 14.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2026-11-11 12:46+0000\n"
+"Last-Translator: Carlos Dauden <carlos.dauden@tecnativa.com>\n"
+"Language-Team: none\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 5.15.2\n"
+
+#. module: account_cash_invoice
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_pay_invoice__amount
+msgid "Amount"
+msgstr "Importe"
+
+#. module: account_cash_invoice
+#: model:ir.model,name:account_cash_invoice.model_account_bank_statement_line
+msgid "Bank Statement Line"
+msgstr "Línea del Extracto Bancario"
+
+#. module: account_cash_invoice
+#: model_terms:ir.ui.view,arch_db:account_cash_invoice.view_cash_pay_invoice_form
+msgid "Cancel"
+msgstr "Cancelar"
+
+#. module: account_cash_invoice
+#: model:ir.model,name:account_cash_invoice.model_cash_pay_invoice
+msgid "Cash Pay invoice from bank statement"
+msgstr ""
+
+#. module: account_cash_invoice
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_pay_invoice__company_id
+msgid "Company"
+msgstr "Companía"
+
+#. module: account_cash_invoice
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_pay_invoice__create_uid
+msgid "Created by"
+msgstr "Creado por"
+
+#. module: account_cash_invoice
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_pay_invoice__create_date
+msgid "Created on"
+msgstr "Creado el"
+
+#. module: account_cash_invoice
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_pay_invoice__currency_id
+msgid "Currency"
+msgstr "Moneda"
+
+#. module: account_cash_invoice
+#: model:ir.model.fields.selection,name:account_cash_invoice.selection__cash_pay_invoice__invoice_type__customer
+msgid "Customer"
+msgstr ""
+
+#. module: account_cash_invoice
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_pay_invoice__display_name
+msgid "Display Name"
+msgstr "Mostrar Nombre"
+
+#. module: account_cash_invoice
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_pay_invoice__id
+msgid "ID"
+msgstr "ID (identificación)"
+
+#. module: account_cash_invoice
+#: model:ir.model.fields,field_description:account_cash_invoice.field_account_bank_statement_line__invoice_id
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_pay_invoice__invoice_id
+msgid "Invoice"
+msgstr "Factura"
+
+#. module: account_cash_invoice
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_pay_invoice__invoice_domain
+msgid "Invoice Domain"
+msgstr ""
+
+#. module: account_cash_invoice
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_pay_invoice__invoice_type
+msgid "Invoice Type"
+msgstr ""
+
+#. module: account_cash_invoice
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_pay_invoice__journal_id
+msgid "Journal"
+msgstr "Diario"
+
+#. module: account_cash_invoice
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_pay_invoice____last_update
+msgid "Last Modified on"
+msgstr "Última Modificación el"
+
+#. module: account_cash_invoice
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_pay_invoice__write_uid
+msgid "Last Updated by"
+msgstr "Última actualización por"
+
+#. module: account_cash_invoice
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_pay_invoice__write_date
+msgid "Last Updated on"
+msgstr "Última Actualización el"
+
+#. module: account_cash_invoice
+#: model:ir.model.fields,field_description:account_cash_invoice.field_cash_pay_invoice__name
+msgid "Number"
+msgstr ""
+
+#. module: account_cash_invoice
+#: model_terms:ir.ui.view,arch_db:account_cash_invoice.account_journal_dashboard_kanban_view
+msgid "Pay Invoice"
+msgstr ""
+
+#. module: account_cash_invoice
+#: model:ir.actions.act_window,name:account_cash_invoice.action_cash_pay_invoice_from_statement
+#: model_terms:ir.ui.view,arch_db:account_cash_invoice.view_cash_pay_invoice_form
+msgid "Pay invoice"
+msgstr "Factura de pago"
+
+#. module: account_cash_invoice
+#: model:ir.model.fields.selection,name:account_cash_invoice.selection__cash_pay_invoice__invoice_type__vendor
+msgid "Vendor"
+msgstr ""
+
+#~ msgid "Bank Statement"
+#~ msgstr "Extracto Bancario"
+
+#~ msgid "Cash invoice in"
+#~ msgstr "Factura al contado en"
+
+#~ msgid "Cash invoice out"
+#~ msgstr "Factura al contado"
+
+#~ msgid "Collect Payment from Invoice"
+#~ msgstr "Cobrar el pago de la factura"
+
+#~ msgid "Journal Count"
+#~ msgstr "Recuento de Diario"
+
+#~ msgid "Journals"
+#~ msgstr "Diarios"
+
+#~ msgid "Reason"
+#~ msgstr "Motivo"
+
+#~ msgid "Register"
+#~ msgstr "Registro"
