@@ -1,0 +1,66 @@
+# Copyright 2019 Open Source Integrators
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl).
+
+from datetime import datetime, timedelta
+
+# from odoo import fields
+from odoo.tests import common, tagged
+from odoo.tools import DEFAULT_SERVER_DATE_FORMAT
+
+
+@tagged("-at_install", "post_install")
+class TestPaymentCreditCard(common.TransactionCase):
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+        cls.account_invoice_obj = cls.env["account.move"]
+        cls.account_move_line_obj = cls.env["account.move.line"]
+        cls.account_account_obj = cls.env["account.account"]
+        cls.account_journal_obj = cls.env["account.journal"]
+        cls.partner_12 = cls.env["res.partner"].create({"name": "Test Partner"})
+
+        cls.product = cls.env["product.product"].create({"name": "Test Product"})
+        cls.journal_sale = cls.account_journal_obj.create(
+            {"name": "sale_0", "code": "SALE0", "type": "sale", "credit_card": True}
+        )
+
+        cls.invoice_data_list = [
+            # Customer Invoice Data
+            [
+                "out_invoice",
+                cls.get_date(set_days=30),
+                cls.partner_12.id,
+                cls.journal_sale.id,
+            ],
+        ]
+
+    def test_create_invoice_with_cc(self):
+        for invoice_data in self.invoice_data_list:
+            invoice = self.account_invoice_obj.with_context(
+                default_journal_id=invoice_data[3]
+            ).create(
+                {
+                    "ref": "reference",
+                    "move_type": invoice_data[0],
+                    "invoice_date": invoice_data[1],
+                    "invoice_date_due": invoice_data[1],
+                    "partner_id": invoice_data[2],
+                }
+            )
+            self.account_move_line_obj.create(
+                {
+                    "product_id": self.product.id,
+                    "quantity": 1.0,
+                    "price_unit": 0,
+                    "move_id": invoice.id,
+                    "name": "product that cost 100",
+                }
+            )
+            invoice._post(soft=False)
+            return invoice
+
+    @classmethod
+    def get_date(cls, set_days):
+        return (datetime.now() - timedelta(days=-set_days)).strftime(
+            DEFAULT_SERVER_DATE_FORMAT
+        )
