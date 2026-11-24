@@ -89,10 +89,12 @@ class AccountPaymentRegister(models.TransientModel):
 
     def _create_payment_vals_from_wizard(self, batch_result):
         payment_vals = super()._create_payment_vals_from_wizard(batch_result)
-        # payment difference
+        # payment difference (with an exchange difference account, the core adds no
+        # write-off line: the difference goes to the exchange difference)
         if (
             not self.currency_id.is_zero(self.payment_difference)
             and self.payment_difference_handling == "reconcile"
+            and not self.writeoff_is_exchange_account
         ):
             payment_vals["write_off_line_vals"][0].update(
                 {

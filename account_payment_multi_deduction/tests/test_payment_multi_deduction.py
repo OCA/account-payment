@@ -71,6 +71,40 @@ class TestPaymentMultiDeduction(AccountTestInvoicingCommon):
         self.assertEqual(len(writeoff), 1)
         self.assertEqual(writeoff.account_id, self.account_expense)
 
+    def test_01b_fully_paid_with_exchange_difference_account(self):
+        """Mark as fully paid with the exchange difference account
+
+        On a foreign currency invoice paid in the company currency, the core puts
+        the difference on the exchange difference instead of a write-off line.
+        """
+        invoice = self.init_invoice(
+            "out_invoice",
+            partner=self.env.ref("base.res_partner_2"),
+            invoice_date=fields.Date.today(),
+            post=True,
+            amounts=[450.0],
+            currency=self.currency_2x,
+        )
+        ctx = {
+            "active_ids": [invoice.id],
+            "active_id": invoice.id,
+            "active_model": "account.move",
+        }
+        with Form(
+            self.payment_register_model.with_context(**ctx),
+            view=self.register_view_id,
+        ) as f:
+            f.currency_id = self.company_currency
+            f.amount = 200.0
+            f.payment_difference_handling = "reconcile"
+            f.writeoff_account_id = (
+                self.env.company.expense_currency_exchange_account_id
+            )
+        payment_register = f.save()
+        self.assertTrue(payment_register.writeoff_is_exchange_account)
+        payment_register._create_payments()
+        self.assertIn(invoice.payment_state, ("paid", "in_payment"))
+
     def test_02_one_invoice_multi_deduction_payment(self):
         """Validate 1 invoice and make payment with 2 deduction"""
         ctx = {
