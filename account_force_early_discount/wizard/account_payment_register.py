@@ -51,10 +51,6 @@ class AccountPaymentRegister(models.TransientModel):
                 and li.discount_date < wizard.payment_date  # noqa: B023
             )
 
-    @api.depends("with_forced_early_discount", "force_early_discount")
-    def _compute_from_lines(self):
-        return super()._compute_from_lines()
-
     @api.depends(
         "with_forced_early_discount",
     )
