@@ -131,6 +131,22 @@ class TestAccountFinancialDiscountManualPayment(TestAccountFinancialDiscountComm
         payment_wizard.action_create_payments()
         self.assertIn(self.invoice3.payment_state, ("paid", "in_payment"))
 
+    def test_payment_date_keeps_user_currency_and_amount(self):
+        """Changing the payment date keeps the currency and amount of the user"""
+        self.invoice3.action_post()
+        payment_wizard_form = Form(
+            self.env["account.payment.register"].with_context(
+                active_model="account.move",
+                active_ids=self.invoice3.ids,
+                active_id=self.invoice3.id,
+            )
+        )
+        payment_wizard_form.currency_id = self.eur_currency
+        payment_wizard_form.amount = 1000.0
+        payment_wizard_form.payment_date = "2019-05-01"
+        self.assertEqual(payment_wizard_form.currency_id, self.eur_currency)
+        self.assertEqual(payment_wizard_form.amount, 1000.0)
+
     @classmethod
     def _get_payment_lines(cls, invoice):
         """Returns payment lines match with the invoice"""
