@@ -1,0 +1,204 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# * account_due_list
+#
+# Translators:
+msgid ""
+msgstr ""
+"Project-Id-Version: account-payment (8.0)\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2016-11-02 06:22+0000\n"
+"PO-Revision-Date: 2025-09-11 19:42+0000\n"
+"Last-Translator: Tamer Sezgin <tamer.sezgin@gmail.com>\n"
+"Language-Team: Turkish (http://www.transifex.com/oca/OCA-account-payment-8-0/"
+"language/tr/)\n"
+"Language: tr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Weblate 5.10.4\n"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Account"
+msgstr "Hesap"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Date"
+msgstr "Tarih"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Date due"
+msgstr "Vade Tarihi"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Date invoice"
+msgstr "Fatura Tarihi"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "From invoices"
+msgstr "Faturalardan"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Full reconciled"
+msgstr "Tam Uzlaştı"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Group By"
+msgstr "Grupla"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Incoming"
+msgstr "Gelen"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
+msgid "Invoice"
+msgstr "Fatura"
+
+#. module: account_due_list
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line__invoice_date
+msgid "Invoice Date"
+msgstr "Fatura Tarihi"
+
+#. module: account_due_list
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line__invoice_user_id
+msgid "Invoice salesperson"
+msgstr "Fatura satıcı personeli"
+
+#. module: account_due_list
+#: model:ir.model,name:account_due_list.model_account_move_line
+msgid "Journal Item"
+msgstr "Yevmiye Kalemi"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Not Full Reconciled"
+msgstr "Tam Uzlaşmadı"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Outgoing"
+msgstr "Giden"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Overdue"
+msgstr "Vadesi Geçmiş"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Partial reconciled"
+msgstr "Kısmen uzlaştı"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Partner"
+msgstr "Ortak"
+
+#. module: account_due_list
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line__partner_ref
+msgid "Partner Ref"
+msgstr "İş Ortağı Ref"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Payable"
+msgstr "Borç"
+
+#. module: account_due_list
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line__payment_term_id
+msgid "Payment Terms"
+msgstr "Ödeme Koşulları"
+
+#. module: account_due_list
+#: model:ir.actions.act_window,name:account_due_list.action_invoice_payments
+#: model:ir.ui.menu,name:account_due_list.menu_action_invoice_payments
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_graph
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_pivot
+msgid "Payments and due list"
+msgstr "Ödemeler ve Vade listesi"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Posted"
+msgstr "İşlenmiş"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Receivable"
+msgstr "Alacak"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Reconciled"
+msgstr "Uzlaştırıldı"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Salesperson"
+msgstr "Satış Elemanı"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Search Payments"
+msgstr "Ödemeleri Ara"
+
+#. module: account_due_list
+#: model:ir.model.fields,field_description:account_due_list.field_account_move_line__invoice_origin
+msgid "Source Doc"
+msgstr "Kaynak Belgesi"
+
+#. module: account_due_list
+#: model:ir.model.fields,help:account_due_list.field_account_move_line__invoice_origin
+msgid "The document(s) that generated the invoice."
+msgstr "Faturayı Oluşturan Belge(ler)."
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
+msgid "Total Balance"
+msgstr "Toplam Bakiye"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
+msgid "Total Credit"
+msgstr "Toplam Alacak"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
+msgid "Total Debit"
+msgstr "Toplam Borç"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
+msgid "Total Residual"
+msgstr "Toplam Kalan"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
+msgid "Total Residual Currency"
+msgstr "Toplam Kalan Para Birimi"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_tree
+msgid "Total amount currency"
+msgstr "Toplam Tutar Para Birimi"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Unposted"
+msgstr "Gönderilmemiş"
+
+#. module: account_due_list
+#: model_terms:ir.ui.view,arch_db:account_due_list.view_payments_filter
+msgid "Unreconciled"
+msgstr "Uzlaşmamış"
