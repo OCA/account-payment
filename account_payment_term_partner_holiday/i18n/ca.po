@@ -1,0 +1,186 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* account_payment_term_partner_holiday
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 15.0\n"
+"Report-Msgid-Bugs-To: \n"
+"PO-Revision-Date: 2022-07-26 17:06+0000\n"
+"Last-Translator: jabelchi <jabelchi@gmail.com>\n"
+"Language-Team: none\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 4.3.2\n"
+
+#. module: account_payment_term_partner_holiday
+#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
+#, python-format
+msgid "April"
+msgstr "Abril"
+
+#. module: account_payment_term_partner_holiday
+#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
+#, python-format
+msgid "August"
+msgstr "Agost"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model,name:account_payment_term_partner_holiday.model_res_partner
+msgid "Contact"
+msgstr "Contacte"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__create_uid
+msgid "Created by"
+msgstr "Creat per"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__create_date
+msgid "Created on"
+msgstr "Creat el"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__day_from
+msgid "Day From"
+msgstr "Dia inicial"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__day_to
+msgid "Day To"
+msgstr "Dia final"
+
+#. module: account_payment_term_partner_holiday
+#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
+#, python-format
+msgid "December"
+msgstr "Desembre"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__display_name
+msgid "Display Name"
+msgstr "Nom a mostrar"
+
+#. module: account_payment_term_partner_holiday
+#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
+#, python-format
+msgid "February"
+msgstr "Febrer"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__id
+msgid "ID"
+msgstr "ID"
+
+#. module: account_payment_term_partner_holiday
+#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
+#, python-format
+msgid "January"
+msgstr "Gener"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model,name:account_payment_term_partner_holiday.model_account_move
+msgid "Journal Entry"
+msgstr "Apunt comptable"
+
+#. module: account_payment_term_partner_holiday
+#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
+#, python-format
+msgid "July"
+msgstr "Juliol"
+
+#. module: account_payment_term_partner_holiday
+#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
+#, python-format
+msgid "June"
+msgstr "Juny"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday____last_update
+msgid "Last Modified on"
+msgstr "Darrera modificació el"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__write_uid
+msgid "Last Updated by"
+msgstr "Darrera actualització per"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__write_date
+msgid "Last Updated on"
+msgstr "Darrera actualització el"
+
+#. module: account_payment_term_partner_holiday
+#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
+#, python-format
+msgid "March"
+msgstr "Març"
+
+#. module: account_payment_term_partner_holiday
+#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
+#, python-format
+msgid "May"
+msgstr "Maig"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__month_from
+msgid "Month From"
+msgstr "Mes inicial"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__month_to
+msgid "Month To"
+msgstr "Mes final"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model.constraint,message:account_payment_term_partner_holiday.constraint_res_partner_holiday_month_consistency
+msgid "Month from should be higher than month from"
+msgstr "El mes final ha de ser més gran que el més inicial"
+
+#. module: account_payment_term_partner_holiday
+#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
+#, python-format
+msgid "November"
+msgstr "Novembre"
+
+#. module: account_payment_term_partner_holiday
+#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
+#, python-format
+msgid "October"
+msgstr "Octubre"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner_holiday__partner_id
+msgid "Partner"
+msgstr "Partner"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model,name:account_payment_term_partner_holiday.model_res_partner_holiday
+msgid "Partner Holidays"
+msgstr "Festius del partner"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model,name:account_payment_term_partner_holiday.model_account_payment_term
+msgid "Payment Terms"
+msgstr "Terminis de pagament"
+
+#. module: account_payment_term_partner_holiday
+#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_partner__holiday_ids
+#: model:ir.model.fields,field_description:account_payment_term_partner_holiday.field_res_users__holiday_ids
+msgid "Payment Terms Holidays"
+msgstr "Festius dels terminis de pagament"
+
+#. module: account_payment_term_partner_holiday
+#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
+#, python-format
+msgid "September"
+msgstr "Setembre"
+
+#. module: account_payment_term_partner_holiday
+#: code:addons/account_payment_term_partner_holiday/models/res_partner.py:0
+#, python-format
+msgid "You can't set the ending holidays period before the beginning."
+msgstr "No podeu establir el final d'un període festiu abans del començament."
