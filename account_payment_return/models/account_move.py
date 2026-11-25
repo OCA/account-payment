@@ -14,6 +14,10 @@ class AccountMove(models.Model):
         help="Invoice has been included on a payment that has been returned later.",
         copy=False,
     )
+    last_returned_payment_reason_id = fields.Many2one(
+        comodel_name="payment.return.reason",
+        string="Last Returned Payment Reason",
+    )
 
     def _payment_returned(self, return_line):
         vals = return_line._prepare_invoice_returned_vals()
