@@ -39,6 +39,20 @@ class TestAccountPaymentLines(AccountTestInvoicingCommon):
                 ],
             }
         )
+        cls.currency_half = cls.env["res.currency"].create(
+            {
+                "name": "HX",  # Foreign currency, worth 2 company currency units
+                "symbol": "H",
+                "rate_ids": [
+                    Command.create(
+                        {
+                            "name": fields.Date.context_today(cls.env.user),
+                            "rate": cls.env.company.currency_id.rate / 2,
+                        },
+                    )
+                ],
+            }
+        )
         cls.payment_terms_split = cls.env["account.payment.term"].create(
             {
                 "name": "50% Advance End of Following Month",
@@ -581,6 +595,34 @@ class TestAccountPaymentLines(AccountTestInvoicingCommon):
             new_payment.reconciled_invoice_ids,
             new_invoice,
         )
+
+    def test_07_payment_multi_currency_stronger_than_company(self):
+        """Pay in full an invoice in a currency worth more than the company one
+
+        The residual of the invoice in its currency is smaller than the payment
+        converted to the company currency, but the amount is not exceeded.
+        """
+        new_invoice = self._create_invoice(
+            "out_invoice", self.customer, 100.0, currency=self.currency_half
+        )
+        self.assertEqual(new_invoice.amount_total, 100.0)
+        new_payment = self._create_payment(
+            self.customer,
+            100.0,
+            "inbound",
+            "customer",
+            [
+                {
+                    "move_id": new_invoice,
+                    "amount": 100.0,
+                },
+            ],
+            post=True,
+            currency=self.currency_half,
+        )
+        self.assertIn(new_invoice.payment_state, ["paid", "in_payment"])
+        self.assertEqual(new_invoice.amount_residual, 0.0)
+        self.assertEqual(new_payment.reconciled_invoice_ids, new_invoice)
 
     def test_08_payment_term_split(self):
         new_invoice = self._create_invoice("out_invoice", self.customer, 100.0)

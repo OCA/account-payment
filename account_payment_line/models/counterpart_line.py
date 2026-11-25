@@ -174,10 +174,8 @@ class AccountPaymentCounterLinesAbstract(models.AbstractModel):
     @api.constrains("amount")
     def constrains_amount_residual(self):
         for rec in self:
-            if (
-                rec.aml_id
-                and 0 < rec.aml_amount_residual_currency < rec.amount_currency
-            ):
+            # Both amounts are in the company currency
+            if rec.aml_id and 0 < rec.aml_amount_residual < rec.amount_currency:
                 move_name = rec.aml_id.move_id.name or rec.aml_id.name
                 raise ValidationError(
                     self.env._(
