@@ -1,8 +1,9 @@
 [project]
 name = "odoo-addons-oca-account-payment"
-version = "20.0.20261111.0"
+version = "20.0.20261125.0"
 dependencies = [
     "odoo-addon-account_payment_method_base==20.0.*",
+    "odoo-addon-account_payment_notification==20.0.*",
 ]
 classifiers=[
     "Programming Language :: Python",
