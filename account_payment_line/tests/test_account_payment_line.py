@@ -931,3 +931,66 @@ class TestAccountPaymentLines(AccountTestInvoicingCommon):
                 ],
                 post=True,
             )
+
+    def test_12_restrict_counterpart_partner(self):
+        # Without the restriction (default) the domain is empty and lines of
+        # a different partner can be added.
+        self.assertFalse(self.env.company.payment_line_restrict_counterpart_partner)
+        other_invoice = self._create_invoice("out_invoice", self.customer2, 100.0)
+        payment = self._create_payment(
+            self.customer,
+            100.0,
+            "inbound",
+            "customer",
+            [{"move_id": other_invoice}],
+        )
+        self.assertEqual(
+            payment.line_payment_counterpart_ids.counterpart_partner_domain, []
+        )
+        payment.line_payment_counterpart_ids.unlink()
+
+        # Enable the restriction at company level.
+        self.env.company.payment_line_restrict_counterpart_partner = True
+
+        own_invoice = self._create_invoice("out_invoice", self.customer, 100.0)
+        payment = self._create_payment(
+            self.customer,
+            100.0,
+            "inbound",
+            "customer",
+            [{"move_id": own_invoice}],
+            post=True,
+        )
+        self.assertEqual(
+            payment.line_payment_counterpart_ids.counterpart_partner_domain,
+            [("commercial_partner_id", "=", self.customer.commercial_partner_id.id)],
+        )
+        self.assertEqual(payment.state, "paid")
+
+        # Restriction enabled but no partner on the header yet: the selection
+        # is forbidden instead of falling back to every partner.
+        payment_without_partner = self.env["account.payment"].create(
+            {
+                "journal_id": self.bank_journal.id,
+                "payment_type": "inbound",
+                "partner_type": "customer",
+                "amount": 100.0,
+            }
+        )
+        self.assertFalse(payment_without_partner.partner_id)
+        line_without_partner = self.env["account.payment.counterpart.line"].new(
+            {"payment_id": payment_without_partner.id}
+        )
+        self.assertEqual(
+            line_without_partner.counterpart_partner_domain, [("id", "=", False)]
+        )
+
+        # Applying an invoice of a different partner must be forbidden.
+        with self.assertRaises(ValidationError):
+            self._create_payment(
+                self.customer,
+                100.0,
+                "inbound",
+                "customer",
+                [{"move_id": other_invoice}],
+            )
