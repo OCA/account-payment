@@ -7,6 +7,15 @@ from odoo import api, models
 class AccountMove(models.Model):
     _inherit = "account.move"
 
+    @api.depends("partner_id")
+    def _compute_needed_terms(self):  # pylint: disable=missing-return
+        """Inject the partner in the context for computing the payment terms,
+        so the partner holidays are taken into account."""
+        for move in self:
+            super(
+                AccountMove, move.with_context(move_partner_id=move.partner_id.id)
+            )._compute_needed_terms()
+
     @api.onchange("invoice_date_due")
     def _onchange_invoice_date_due_account_payment_term_partner_holiday(self):
         """Recompute the due date to the next available date according to
