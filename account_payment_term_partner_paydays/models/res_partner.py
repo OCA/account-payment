@@ -6,7 +6,7 @@ from odoo import fields, models
 
 
 class Partner(models.Model):
-    _inherit = ["res.partner"]
+    _inherit = "res.partner"
 
     customer_payment_days = fields.Char(
         string="Customer Payment day(s)",
