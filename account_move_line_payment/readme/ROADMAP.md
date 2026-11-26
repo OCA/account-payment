@@ -1,0 +1,4 @@
+- To use this new feature, you need full accounting permissions (a.k.a. Bookkeeper).
+- Invoicing users should be able too.
+- A good improvement would be to display *Next due date* in invoices views.
+- Also to allow somehow paying only overdue payments when using the register payment wizard.
