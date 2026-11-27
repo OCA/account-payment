@@ -148,6 +148,10 @@ class AccountPaymentTerm(models.Model):
                     residual_amount_currency,
                     currency.decimal_places,
                 )
+                if line.value == "percent" and line.amount_round and rate:
+                    term_vals["company_amount"] = company_currency.round(
+                        term_vals["foreign_amount"] / rate
+                    )
                 if cash_rounding:
                     difference = cash_rounding.compute_difference(
                         currency, term_vals["foreign_amount"]

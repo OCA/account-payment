@@ -6,11 +6,7 @@ from odoo.addons.base.tests.common import BaseCommon
 
 
 class TestPaymentTermRegressions(BaseCommon):
-    _test_user_groups = (
-        "base.group_user",
-        "account.group_account_manager",
-        "base.group_system",
-    )
+    _test_user_groups = None
 
     @classmethod
     def setUpClass(cls):
@@ -120,7 +116,7 @@ class TestPaymentTermRegressions(BaseCommon):
             ]
         )
         result = self._compute(term, untaxed_amount=202, untaxed_amount_currency=101)
-        self._assert_amounts(result, [(61, 30), (40.40, 20.20), (100.60, 50.80)])
+        self._assert_amounts(result, [(60, 30), (40.40, 20.20), (101.60, 50.80)])
 
     def test_untaxed_percentage_with_cash_rounding(self):
         term = self._create_term(

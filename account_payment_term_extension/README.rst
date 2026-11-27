@@ -91,7 +91,7 @@ You must see the due date based on this payment term.
 Known issues / Roadmap
 ======================
 
-This module is not compatible with cash rounding
+Cash rounding is supported.
 
 Bug Tracker
 ===========

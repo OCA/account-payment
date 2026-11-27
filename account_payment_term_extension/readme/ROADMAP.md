@@ -1,1 +1,1 @@
-This module is not compatible with cash rounding
+Cash rounding is supported.
