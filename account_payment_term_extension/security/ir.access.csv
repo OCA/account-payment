@@ -1,0 +1,4 @@
+id,name,model_id,group_id/id,operation,domain
+access_account_payment_term_holiday_partner_manager,account.payment.term.line partner manager,account.payment.term.holiday,base.group_user,r,
+access_account_payment_term_holiday,account.payment.term.line,account.payment.term.holiday,account.group_account_user,r,
+access_account_payment_term_holiday_manager,account.payment.term.line,account.payment.term.holiday,account.group_account_manager,crud,

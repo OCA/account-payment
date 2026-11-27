@@ -1,0 +1,1 @@
+Cash rounding is supported.
